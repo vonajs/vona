@@ -345,6 +345,9 @@ importers:
       '@types/node':
         specifier: ^22.10.2
         version: 22.19.3
+      '@types/react':
+        specifier: ^19.2.7
+        version: 19.2.7
       '@types/retry':
         specifier: ^0.12.5
         version: 0.12.5
@@ -626,7 +629,7 @@ importers:
     devDependencies:
       vitepress:
         specifier: ^1.1.4
-        version: 1.6.4(@algolia/client-search@5.46.2)(@types/node@22.19.3)(axios@1.13.2)(change-case@5.4.4)(postcss@8.5.6)(react@19.2.3)(search-insights@2.17.3)(terser@5.44.1)(typescript@5.9.3)
+        version: 1.6.4(@algolia/client-search@5.46.2)(@types/node@22.19.3)(@types/react@19.2.7)(axios@1.13.2)(change-case@5.4.4)(postcss@8.5.6)(react@19.2.3)(search-insights@2.17.3)(terser@5.44.1)(typescript@5.9.3)
 
   packages-utils/babel-plugin-vona-bean-module:
     dependencies:
@@ -1561,6 +1564,9 @@ importers:
       mutate-on-copy:
         specifier: ^1.0.1
         version: 1.0.1
+      react:
+        specifier: ^19.2.3
+        version: 19.2.3
       retry:
         specifier: ^0.13.1
         version: 0.13.1
@@ -1598,6 +1604,9 @@ importers:
       '@types/node':
         specifier: ^22.10.2
         version: 22.19.3
+      '@types/react':
+        specifier: ^19.2.7
+        version: 19.2.7
       '@types/retry':
         specifier: ^0.12.5
         version: 0.12.5
@@ -4163,6 +4172,9 @@ packages:
 
   '@types/range-parser@1.2.7':
     resolution: {integrity: sha512-hKormJbkJqzQGhziax5PItDUTMAM9uE2XXQmM37dyd4hVM+5aVl7oVxMVUiVQn2oCQFN/LKCZdvSM0pFRqbSmQ==}
+
+  '@types/react@19.2.7':
+    resolution: {integrity: sha512-MWtvHrGZLFttgeEj28VXHxpmwYbor/ATPYbBfSFZEIRK0ecCFLl2Qo55z52Hss+UV9CRN7trSeq1zbgx7YDWWg==}
 
   '@types/resolve@1.20.2':
     resolution: {integrity: sha512-60BCwRFOZCQhDncwQdxxeOEEkbc5dIMccYLwbxsS4TUNeVECQ/pBJ0j09mrHOl/JJvpRPGwO9SvE4nR2Nb/a4Q==}
@@ -10077,9 +10089,9 @@ snapshots:
 
   '@docsearch/css@3.8.2': {}
 
-  '@docsearch/js@3.8.2(@algolia/client-search@5.46.2)(react@19.2.3)(search-insights@2.17.3)':
+  '@docsearch/js@3.8.2(@algolia/client-search@5.46.2)(@types/react@19.2.7)(react@19.2.3)(search-insights@2.17.3)':
     dependencies:
-      '@docsearch/react': 3.8.2(@algolia/client-search@5.46.2)(react@19.2.3)(search-insights@2.17.3)
+      '@docsearch/react': 3.8.2(@algolia/client-search@5.46.2)(@types/react@19.2.7)(react@19.2.3)(search-insights@2.17.3)
       preact: 10.28.1
     transitivePeerDependencies:
       - '@algolia/client-search'
@@ -10088,13 +10100,14 @@ snapshots:
       - react-dom
       - search-insights
 
-  '@docsearch/react@3.8.2(@algolia/client-search@5.46.2)(react@19.2.3)(search-insights@2.17.3)':
+  '@docsearch/react@3.8.2(@algolia/client-search@5.46.2)(@types/react@19.2.7)(react@19.2.3)(search-insights@2.17.3)':
     dependencies:
       '@algolia/autocomplete-core': 1.17.7(@algolia/client-search@5.46.2)(algoliasearch@5.46.2)(search-insights@2.17.3)
       '@algolia/autocomplete-preset-algolia': 1.17.7(@algolia/client-search@5.46.2)(algoliasearch@5.46.2)
       '@docsearch/css': 3.8.2
       algoliasearch: 5.46.2
     optionalDependencies:
+      '@types/react': 19.2.7
       react: 19.2.3
       search-insights: 2.17.3
     transitivePeerDependencies:
@@ -11823,6 +11836,10 @@ snapshots:
   '@types/qs@6.14.0': {}
 
   '@types/range-parser@1.2.7': {}
+
+  '@types/react@19.2.7':
+    dependencies:
+      csstype: 3.2.3
 
   '@types/resolve@1.20.2': {}
 
@@ -17336,10 +17353,10 @@ snapshots:
       fsevents: 2.3.3
       terser: 5.44.1
 
-  vitepress@1.6.4(@algolia/client-search@5.46.2)(@types/node@22.19.3)(axios@1.13.2)(change-case@5.4.4)(postcss@8.5.6)(react@19.2.3)(search-insights@2.17.3)(terser@5.44.1)(typescript@5.9.3):
+  vitepress@1.6.4(@algolia/client-search@5.46.2)(@types/node@22.19.3)(@types/react@19.2.7)(axios@1.13.2)(change-case@5.4.4)(postcss@8.5.6)(react@19.2.3)(search-insights@2.17.3)(terser@5.44.1)(typescript@5.9.3):
     dependencies:
       '@docsearch/css': 3.8.2
-      '@docsearch/js': 3.8.2(@algolia/client-search@5.46.2)(react@19.2.3)(search-insights@2.17.3)
+      '@docsearch/js': 3.8.2(@algolia/client-search@5.46.2)(@types/react@19.2.7)(react@19.2.3)(search-insights@2.17.3)
       '@iconify-json/simple-icons': 1.2.64
       '@shikijs/core': 2.5.0
       '@shikijs/transformers': 2.5.0
