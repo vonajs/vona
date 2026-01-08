@@ -6,6 +6,7 @@ import type { z } from 'zod';
 import type { TypeResourceActionRowRecordRender } from './actions.ts';
 import type { ISchemaObjectExtensionFieldCaptcha } from './captcha.ts';
 import type { IComponentRecord, ITableCellComponentRecord } from './component.ts';
+import type { TypeDateFormat } from './date.ts';
 import 'openapi3-ts/oas30';
 import 'openapi3-ts/oas31';
 
@@ -32,6 +33,7 @@ export interface ISchemaObjectExtensionFieldRestProps {
   inputType?: HTMLInputElementType;
   //
   currency?: CurrencyOptions;
+  dateFormat?: TypeDateFormat;
 }
 
 export interface ISchemaObjectExtensionFieldRest extends ISchemaObjectExtensionFieldRestProps {

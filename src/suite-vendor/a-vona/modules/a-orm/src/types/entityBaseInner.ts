@@ -7,7 +7,7 @@ export class EntityBaseInner extends EntityBaseEmpty {
     v.title($locale('CreatedAt')),
     v.order(-2, 'max'),
     v.filterDateRange(),
-    v.render('date'),
+    v.date(),
   )
   createdAt: Date;
 
@@ -15,7 +15,7 @@ export class EntityBaseInner extends EntityBaseEmpty {
     v.title($locale('UpdatedAt')),
     v.order(-1, 'max'),
     v.filterDateRange(),
-    v.render('date'),
+    v.date(),
   )
   updatedAt: Date;
 
