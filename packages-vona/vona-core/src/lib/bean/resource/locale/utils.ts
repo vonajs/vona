@@ -25,7 +25,8 @@ export function $makeLocaleMagic<T extends string>(str: T, ...args: any[]): ILoc
   } as any;
 }
 
-export function text(strings: any, ...expressions: any): ILocaleMagic {
+// not use : ILocaleMagic
+export function text(strings: any, ...expressions: any): any {
   return {
     toString() {
       let result = '';
