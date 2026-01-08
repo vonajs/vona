@@ -37,7 +37,7 @@
     "postpack": "clean-package restore && npm run clean"
   },
   "dependencies": {
-    "ioredis": "^5.7.0"
+    "ioredis": "^5.9.0"
   },
   "clean-package": {
     "indent": 2,
