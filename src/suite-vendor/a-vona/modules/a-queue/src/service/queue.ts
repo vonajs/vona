@@ -149,15 +149,15 @@ export class ServiceQueue extends BeanBase {
     const queueOptions = queueConfig?.options?.queue;
 
     // create queue
-    const connectionQueue: Bull.ConnectionOptions = app.bean.redis.get('queue');
+    const connectionQueue = app.bean.redis.get('queue');
     const _queueOptions = Object.assign({}, queueOptions, { prefix, connection: connectionQueue });
     _queue.config = queueConfig;
     _queue.options = _queueOptions;
     _queue.queue = new Bull.Queue(queueKey, _queueOptions);
 
     // create events
-    const connectionEvents: Bull.ConnectionOptions = app.bean.redis.get('queue');
-    const _queueEventsOptions = { prefix, connection: connectionEvents };
+    const connectionEvents = app.bean.redis.get('queue');
+    const _queueEventsOptions = { prefix, connection: connectionEvents } as Bull.QueueEventsOptions;
     _queue.queueEventsOptions = _queueEventsOptions;
     _queue.queueEvents = new Bull.QueueEvents(queueKey, _queueEventsOptions);
     _queue.queueEvents.on('completed', ({ jobId, returnvalue }) => {
