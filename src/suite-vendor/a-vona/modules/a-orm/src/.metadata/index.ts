@@ -296,7 +296,7 @@ export * from '../config/config.ts';
 import type { config } from '../config/config.ts';
 /** config: end */
 /** locale: begin */
-import { locales } from './locales.ts'
+import { locales } from './locales.ts';
 /** locale: end */
 /** error: begin */
 export * from '../config/errors.ts';

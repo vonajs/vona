@@ -420,7 +420,7 @@ declare module 'vona-module-a-version' {
 }
 /** hmr: end */
 /** locale: begin */
-import { locales } from './locales.ts'
+import { locales } from './locales.ts';
 /** locale: end */
 /** error: begin */
 export * from '../config/errors.ts';

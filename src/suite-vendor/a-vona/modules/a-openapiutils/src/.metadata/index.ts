@@ -1,6 +1,6 @@
 /* eslint-disable */
 /** locale: begin */
-import { locales } from './locales.ts'
+import { locales } from './locales.ts';
 /** locale: end */
 /** scope: begin */
 import { BeanScopeBase, type BeanScopeUtil, type TypeModuleLocales, type TypeLocaleBase } from 'vona';
