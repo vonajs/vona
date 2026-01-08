@@ -7,10 +7,16 @@ export class EntityBaseInner extends EntityBaseEmpty {
     v.title($locale('CreatedAt')),
     v.order(-2, 'max'),
     v.filterDateRange(),
+    v.render('date'),
   )
   createdAt: Date;
 
-  @Api.field(v.title($locale('UpdatedAt')), v.order(-1, 'max'))
+  @Api.field(
+    v.title($locale('UpdatedAt')),
+    v.order(-1, 'max'),
+    v.filterDateRange(),
+    v.render('date'),
+  )
   updatedAt: Date;
 
   @Api.field(v.title($locale('Deleted')), v.visible(false), v.default(false))

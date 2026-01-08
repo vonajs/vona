@@ -75,7 +75,7 @@ export interface TypeRenderComponentJsx {
 
 export type TypeSchemaScene = 'table' | 'form' | 'filter';
 
-export type TypeRenderComponentPreset = keyof TypeResourceActionRowRecordRender | 'text' | 'currency' | 'dateRange' | 'textarea' | 'select' | 'checkbox' | 'radio' | 'switch' | 'image' | 'file' | 'color' | 'password' | 'email' | 'url';
+export type TypeRenderComponentPreset = keyof TypeResourceActionRowRecordRender | 'text' | 'currency' | 'date' | 'dateRange' | 'textarea' | 'select' | 'checkbox' | 'radio' | 'switch' | 'image' | 'file' | 'color' | 'password' | 'email' | 'url';
 export type TypeRenderComponent = TypeRenderComponentPreset | TypeRenderComponentJsx;
 
 // form
