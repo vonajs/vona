@@ -28,6 +28,11 @@ export function schemaFilterDateRange(options?: Partial<IFilterTransformOptionsD
       filter: {
         transform: ['a-web:dateRange', options],
       },
+      rest: {
+        filter: {
+          render: 'dateRange',
+        },
+      },
     });
   };
 }

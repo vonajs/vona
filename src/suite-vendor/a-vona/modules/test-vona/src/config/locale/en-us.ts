@@ -16,4 +16,5 @@ export default {
   Price: 'Price',
   Quantity: 'Quantity',
   Amount: 'Amount',
+  Title: 'Title',
 };

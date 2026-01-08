@@ -14,4 +14,5 @@ export default {
   Price: '单价',
   Quantity: '数量',
   Amount: '金额',
+  Title: '标题',
 };

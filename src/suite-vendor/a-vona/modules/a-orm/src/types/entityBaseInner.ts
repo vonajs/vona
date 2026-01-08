@@ -3,7 +3,11 @@ import { $locale } from '../.metadata/locales.ts';
 import { EntityBaseEmpty } from './entityBaseEmpty.ts';
 
 export class EntityBaseInner extends EntityBaseEmpty {
-  @Api.field(v.title($locale('CreatedAt')), v.order(-2, 'max'))
+  @Api.field(
+    v.title($locale('CreatedAt')),
+    v.order(-2, 'max'),
+    v.filterDateRange(),
+  )
   createdAt: Date;
 
   @Api.field(v.title($locale('UpdatedAt')), v.order(-1, 'max'))

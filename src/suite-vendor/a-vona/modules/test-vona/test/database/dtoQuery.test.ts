@@ -26,7 +26,7 @@ describe('dtoQuery.test.ts', () => {
           pageSize: 30,
           title: 'ai',
           userName: 'tom',
-          createdAt: '2025-12-01 - 2025-12-02',
+          createdAt: '2025-12-01~2025-12-02',
         },
       });
       assert.deepEqual(resEcho.columns, ['id', 'title']);

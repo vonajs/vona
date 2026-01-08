@@ -38,6 +38,7 @@ export interface ISchemaObjectExtensionFieldRest extends ISchemaObjectExtensionF
   render?: TypeRenderComponentPreset;
   table?: ISchemaObjectExtensionFieldRestScene;
   form?: ISchemaObjectExtensionFieldRestScene;
+  filter?: ISchemaObjectExtensionFieldRestScene;
 }
 
 export interface ISchemaObjectExtensionFieldRestScene extends ISchemaObjectExtensionFieldRestProps {
@@ -72,9 +73,9 @@ export interface TypeRenderComponentJsx {
   props?: TypeRenderComponentJsxProps;
 };
 
-export type TypeSchemaScene = 'table' | 'form';
+export type TypeSchemaScene = 'table' | 'form' | 'filter';
 
-export type TypeRenderComponentPreset = keyof TypeResourceActionRowRecordRender | 'text' | 'currency' | 'textarea' | 'select' | 'checkbox' | 'radio' | 'switch' | 'image' | 'file' | 'color' | 'password' | 'email' | 'url';
+export type TypeRenderComponentPreset = keyof TypeResourceActionRowRecordRender | 'text' | 'currency' | 'dateRange' | 'textarea' | 'select' | 'checkbox' | 'radio' | 'switch' | 'image' | 'file' | 'color' | 'password' | 'email' | 'url';
 export type TypeRenderComponent = TypeRenderComponentPreset | TypeRenderComponentJsx;
 
 // form
