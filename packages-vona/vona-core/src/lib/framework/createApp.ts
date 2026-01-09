@@ -4,6 +4,7 @@ import type { VonaConfigEnv } from '../../types/utils/env.ts';
 import { sleep } from '@cabloy/utils';
 import { cast } from '../../types/utils/cast.ts';
 import { VonaApplication } from '../core/application.ts';
+import { jsxEnhance } from '../utils/jsx-enhance.ts';
 import { prepareEnv } from '../utils/util.ts';
 import { zodEnhance } from '../utils/zod-enhance.ts';
 import { Start } from './start.ts';
@@ -49,6 +50,7 @@ export async function createApp(bootstrapOptions: BootstrapOptions) {
 function __createApp({ modulesMeta, locales, config, env, AppMonkey }: BootstrapOptions) {
   // patch zod, should before config
   zodEnhance();
+  jsxEnhance();
   // env
   const env2 = prepareEnv(env);
   // appInfo
