@@ -59,7 +59,7 @@ export class BeanExecutor extends BeanBase {
     // isolate
     const isolate = !ctxRef || options.instanceName !== undefined;
     const ctxCaller = (!isolate && ctxRef) ? ctxRef : undefined;
-    // locale/instanceName
+    // locale/tz/instanceName
     if (ctxRef) {
       options.locale = options.locale === undefined ? ctxRef.locale : options.locale;
       options.tz = options.tz === undefined ? ctxRef.tz : options.tz;

@@ -12,6 +12,9 @@ import 'openapi3-ts/oas31';
 
 export type HTMLInputElementType = 'text' | 'password' | 'number' | 'file' | 'hidden' | 'tel' | 'email';
 
+export type TypeFormFieldOnDisplayValueUpdate = (value: any) => any;
+export type TypeFormFieldOnhandleDisplayValueUpdateMode = 'input' | 'change';
+
 export interface ISchemaObjectExtensionFieldRestProps {
   visible?: boolean;
   order?: number;
@@ -27,6 +30,8 @@ export interface ISchemaObjectExtensionFieldRestProps {
   footer?: TypeRenderComponentJsx | string;
   //
   displayValue?: any;
+  onDisplayValueUpdate?: TypeFormFieldOnDisplayValueUpdate;
+  handleDisplayValueUpdateMode?: TypeFormFieldOnhandleDisplayValueUpdateMode;
   class?: any;
   placeholder?: string;
   readonly?: boolean;
