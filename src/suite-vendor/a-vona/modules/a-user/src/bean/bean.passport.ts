@@ -101,7 +101,8 @@ export class BeanPassport extends BeanBase {
     const user = await this.bean.user.findOneByName(name ?? 'admin');
     if (!user) return this.app.throw(401);
     const auth = { id: $getAuthIdSystem(authName, authId) };
-    const passport = { user, auth };
+    const roles = await this.bean.role.findAllByUserId(user.id);
+    const passport = { user, auth, roles };
     return await this.signin(passport, options);
   }
 
