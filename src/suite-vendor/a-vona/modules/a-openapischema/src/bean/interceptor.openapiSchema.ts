@@ -19,10 +19,8 @@ export class InterceptorOpenapiSchema extends BeanBase implements IInterceptorEx
       const resource = this.ctx.request.params.resource;
       const routePathInfo: IRecordResourceNameToRoutePathItem = recordResourceNameToRoutePath[resource];
       if (!routePathInfo) throw new Error(`not found routePath of resource: ${resource}`);
-      const authToken = this.bean.jwt.extractAuthTokenFromAllWays();
       const data = await this.bean.executor.performAction('get', routePathInfo.routePathRaw as any, {
         innerAccess: false,
-        authToken,
         headers: {
           [$customKey('x-vona-openapi-schema')]: true,
         },
