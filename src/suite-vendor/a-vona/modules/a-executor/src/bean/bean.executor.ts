@@ -54,16 +54,17 @@ export class BeanExecutor extends BeanBase {
     options = Object.assign({}, options);
     // innerAccess
     const innerAccess = options.innerAccess !== false;
-    // ctx ref
-    const ctxRef = innerAccess ? this.ctx : undefined;
     // isolate
-    const isolate = !ctxRef || options.instanceName !== undefined;
-    const ctxCaller = (!isolate && ctxRef) ? ctxRef : undefined;
+    const isolate = !this.ctx || options.instanceName !== undefined || (!innerAccess && this.ctx?.instanceName === null);
+    const ctxCaller = (!isolate && this.ctx) ? this.ctx : undefined;
     // locale/tz/instanceName
-    if (this.ctx) {
+    if (!isolate && this.ctx) {
       options.locale = options.locale === undefined ? this.ctx.locale : options.locale;
       options.tz = options.tz === undefined ? this.ctx.tz : options.tz;
-      options.instanceName = options.instanceName === undefined ? this.ctx.instanceName : options.instanceName;
+      options.instanceName =
+        options.instanceName === undefined
+          ? (!innerAccess && this.ctx.instanceName === null ? undefined : this.ctx.instanceName)
+          : options.instanceName;
     }
     // run
     const ctx = this.app.createAnonymousContext(options.req, options.res);

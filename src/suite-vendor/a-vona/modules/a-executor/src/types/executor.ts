@@ -28,9 +28,10 @@ export interface INewCtxBaseOptions {
   res?: any;
 }
 
+// cannot provide instanceName/locale/tz for safety
+//   can newCtx/newCtxIsolate for using new instanceName/locale/tz
 export interface IPerformActionOptions {
   innerAccess?: boolean;
-  // instanceName, deprecated
   params?: object;
   query?: object;
   headers?: object;
