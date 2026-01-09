@@ -494,7 +494,7 @@ importers:
         specifier: ^7.6.2
         version: 7.7.3
       vona-cli-set-api:
-        specifier: ^1.0.486
+        specifier: ^1.0.487
         version: link:../cli-set-api
     devDependencies:
       clean-package:
