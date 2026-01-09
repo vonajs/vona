@@ -1,4 +1,4 @@
-import { schemaFilter, schemaFilterDateRange, schemaFilterTransform } from './v/filter.ts';
+import { schemaFilter, schemaFilterDateRange, schemaFilterTransform } from './v/filter.tsx';
 import { schemaCaptcha, schemaEmail, schemaIPv4, schemaIPv6, schemaLowercase, schemaMax, schemaMin, schemaRegex, schemaTableIdentity, schemaToLowerCase, schemaToUpperCase, schemaTrim, schemaUppercase, schemaUrl, schemaUuid } from './v/helpers.ts';
 import { schemaDescription, schemaExample, schemaOpenapi, schemaTitle } from './v/openapi.ts';
 import { schemaCurrency, schemaDate, schemaOrder, schemaRender, schemaVisible } from './v/rest.ts';
