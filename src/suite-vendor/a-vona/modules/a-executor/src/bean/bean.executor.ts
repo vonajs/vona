@@ -60,10 +60,10 @@ export class BeanExecutor extends BeanBase {
     const isolate = !ctxRef || options.instanceName !== undefined;
     const ctxCaller = (!isolate && ctxRef) ? ctxRef : undefined;
     // locale/tz/instanceName
-    if (ctxRef) {
-      options.locale = options.locale === undefined ? ctxRef.locale : options.locale;
-      options.tz = options.tz === undefined ? ctxRef.tz : options.tz;
-      options.instanceName = options.instanceName === undefined ? ctxRef.instanceName : options.instanceName;
+    if (this.ctx) {
+      options.locale = options.locale === undefined ? this.ctx.locale : options.locale;
+      options.tz = options.tz === undefined ? this.ctx.tz : options.tz;
+      options.instanceName = options.instanceName === undefined ? this.ctx.instanceName : options.instanceName;
     }
     // run
     const ctx = this.app.createAnonymousContext(options.req, options.res);
