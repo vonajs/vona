@@ -8,8 +8,11 @@ export interface IDtoOptions<%=argv.resourceNameCapitalize%>Query extends IDecor
 
 @Dto<IDtoOptions<%=argv.resourceNameCapitalize%>Query>({
   openapi: { filter: { table: '<%=argv.moduleResourceName%>' } },
+  fields: {
+    createdAt: z.string().optional(),
+  },
 })
-export class Dto<%=argv.resourceNameCapitalize%>Query extends $Dto.queryPage(Entity<%=argv.resourceNameCapitalize%>, ['name']) {
+export class Dto<%=argv.resourceNameCapitalize%>Query extends $Dto.queryPage(Entity<%=argv.resourceNameCapitalize%>, ['name', 'createdAt']) {
   @Api.field(v.optional())
   name?: string;
 }
