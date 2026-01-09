@@ -17,7 +17,6 @@ import { SymbolRequestMappingHandler } from 'vona-module-a-web';
 import { z } from 'zod';
 
 const __ArgumentTypes = ['param', 'query', 'body', 'headers', 'fields', 'field', 'files', 'file'];
-const symbolJsxRenderTranslated = Symbol('symbolJsxRenderTranslated');
 
 @Service()
 export class ServiceOpenapi extends BeanBase {
@@ -84,8 +83,6 @@ export class ServiceOpenapi extends BeanBase {
     }
     // errorMessage
     this._translateErrorMessages(schema);
-    // jsxRender
-    this._translateJsxRenders(schema);
     // properties
     const properties = cast<SchemaObject30 | SchemaObject31>(schema).properties;
     if (properties && typeof properties === 'object') {
@@ -121,39 +118,6 @@ export class ServiceOpenapi extends BeanBase {
         return this.app.meta.text(text, ...args);
       }, error, scope);
     }
-  }
-
-  private _translateJsxRenders(obj: any) {
-    this._translateJsxRendersInner(obj.rest);
-    this._translateJsxRendersInner(obj.rest?.table);
-    this._translateJsxRendersInner(obj.rest?.form);
-  }
-
-  private _translateJsxRendersInner(obj: any) {
-    if (!obj) return;
-    for (const key in obj) {
-      obj[key] = this._translateJsxRender(obj[key]);
-    }
-  }
-
-  private _translateJsxRender(component: any) {
-    if (typeof component !== 'object' || !component.$$typeof) return component;
-    if (component[symbolJsxRenderTranslated] === true) return component;
-    const componentNew: any = {};
-    componentNew[symbolJsxRenderTranslated] = true;
-    componentNew.$$typeof = 'zova-jsx';
-    componentNew.type = typeof component.type === 'function' ? component.type() : component.type;
-    componentNew.key = component.key;
-    componentNew.props = { ...component.props };
-    const children = componentNew.props.children;
-    if (children) {
-      if (Array.isArray(children)) {
-        componentNew.props.children = children.map(item => this._translateJsxRender(item));
-      } else if (typeof children === 'object' && !children.toJSON) {
-        componentNew.props.children = this._translateJsxRender(children);
-      }
-    }
-    return componentNew;
   }
 
   public collectRegistry() {
