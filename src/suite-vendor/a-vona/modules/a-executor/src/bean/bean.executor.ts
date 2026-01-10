@@ -30,6 +30,10 @@ export class BeanExecutor extends BeanBase {
     options = Object.assign({}, options);
     // instanceName !== undefined means isolate
     options.instanceName = options.instanceName === undefined ? this.ctx?.instanceName : options.instanceName;
+    if (options.instanceName === this.ctx?.instanceName) {
+      options.locale = options.locale === undefined ? this.ctx?.locale : options.locale;
+      options.tz = options.tz === undefined ? this.ctx?.tz : options.tz;
+    }
     return this.newCtx(fn, options);
   }
 
