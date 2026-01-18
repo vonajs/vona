@@ -4,6 +4,7 @@ import { rules } from '../common/rules.js';
 
 export default function eslintConfig(config, ...args) {
   config = Object.assign({
+    // isInEditor: false,
     stylistic: {
       indent: 2,
       quotes: 'single',
@@ -20,6 +21,7 @@ export default function eslintConfig(config, ...args) {
       parserOptions: {
         emitDecoratorMetadata: true,
         experimentalDecorators: true,
+        projectService: true,
       },
       globals: {
         ...globals.node,
