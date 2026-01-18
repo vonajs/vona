@@ -8,7 +8,7 @@ export class BeanMail extends BeanBase {
   async send(mail: IMailOptions, clientName?: keyof IMailClientRecord) {
     const mailNew = await this.scope.model.mail.insert({
       client: clientName,
-      from: __parseFrom(mail.from),
+      from: __parseFrom(mail.from as string | Address | undefined),
       to: __parseTo(mail.to),
       subject: mail.subject,
       message: mail,

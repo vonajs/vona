@@ -6,23 +6,23 @@ settings:
 
 overrides:
   '@types/mime': 3.0.4
-  '@types/react': npm:@cabloy/types-react@^19.2.7
+  '@types/react': npm:@cabloy/types-react@^19.2.8
 
 importers:
 
   .:
     dependencies:
       '@babel/core':
-        specifier: ^7.28.6
+        specifier: ^7.28.0
         version: 7.28.6
       '@babel/traverse':
-        specifier: ^7.28.6
+        specifier: ^7.28.0
         version: 7.28.6
       '@cabloy/deps':
-        specifier: workspace:^
+        specifier: ^1.0.20
         version: link:packages-utils/deps
       '@cabloy/json5':
-        specifier: workspace:^
+        specifier: ^1.0.19
         version: link:packages-utils/json5
       '@cabloy/socket':
         specifier: workspace:^
@@ -31,13 +31,13 @@ importers:
         specifier: ^5.3.1
         version: 5.3.1
       '@cabloy/utils':
-        specifier: workspace:^
+        specifier: ^2.0.16
         version: link:packages-utils/utils
       '@cabloy/word-utils':
         specifier: ^2.0.2
         version: 2.0.2
       '@cabloy/zod-openapi':
-        specifier: workspace:^
+        specifier: ^1.0.8
         version: link:packages-utils/zod-openapi
       '@cabloy/zod-to-openapi':
         specifier: ^8.1.5
@@ -46,7 +46,7 @@ importers:
         specifier: ^1.4.0
         version: 1.4.0(ioredis@5.9.2)
       better-sqlite3:
-        specifier: ^12.6.2
+        specifier: ^12.5.0
         version: 12.6.2
       bignumber.js:
         specifier: ^9.3.1
@@ -55,7 +55,7 @@ importers:
         specifier: ^8.0.1
         version: 8.0.1
       bullmq:
-        specifier: ^5.66.5
+        specifier: ^5.66.4
         version: 5.66.5
       chalk:
         specifier: ^5.6.2
@@ -64,10 +64,10 @@ importers:
         specifier: ^0.6.5
         version: 0.6.5
       fs-extra:
-        specifier: ^11.3.3
+        specifier: ^11.2.0
         version: 11.3.3
       ioredis:
-        specifier: ^5.9.2
+        specifier: ^5.9.0
         version: 5.9.2
       knex:
         specifier: ^3.1.0
@@ -88,10 +88,10 @@ importers:
         specifier: ^0.13.1
         version: 0.13.1
       table-identity:
-        specifier: workspace:^
+        specifier: ^1.0.13
         version: link:packages-utils/table-identity
       uuid:
-        specifier: ^11.1.0
+        specifier: ^11.0.3
         version: 11.1.0
       vona:
         specifier: workspace:^
@@ -301,41 +301,41 @@ importers:
         specifier: workspace:^
         version: link:src/suite/a-home/modules/home-user
       vona-shared:
-        specifier: workspace:^
+        specifier: ^1.0.18
         version: link:packages-vona/vona-shared
       winston:
-        specifier: ^3.19.0
+        specifier: ^3.18.3
         version: 3.19.0
       winston-transport:
         specifier: ^4.9.0
         version: 4.9.0
       zod:
-        specifier: ^4.3.5
+        specifier: ^4.1.13
         version: 4.3.5
       zova-rest-vona-cabloy:
-        specifier: file:.zova-rest/vona-cabloy
+        specifier: file:./.zova-rest/vona-cabloy
         version: file:.zova-rest/vona-cabloy
       zova-rest-vona-home:
-        specifier: file:.zova-rest/vona-home
+        specifier: file:./.zova-rest/vona-home
         version: file:.zova-rest/vona-home
     devDependencies:
       '@cabloy/cli':
-        specifier: workspace:^
+        specifier: ^3.0.94
         version: link:packages-cli/cabloy-cli
       '@cabloy/lint':
         specifier: workspace:^
         version: link:packages-utils/lint
       '@swc/core':
-        specifier: ^1.15.8
+        specifier: ^1.14.0
         version: 1.15.8(@swc/helpers@0.5.18)
       '@swc/helpers':
-        specifier: ^0.5.18
+        specifier: ^0.5.17
         version: 0.5.18
       '@types/babel__core':
         specifier: ^7.20.5
         version: 7.20.5
       '@types/babel__traverse':
-        specifier: ^7.28.0
+        specifier: ^7.20.5
         version: 7.28.0
       '@types/koa':
         specifier: ^2.15.0
@@ -344,11 +344,11 @@ importers:
         specifier: ^3.7.1
         version: 3.7.1
       '@types/node':
-        specifier: ^22.19.7
+        specifier: ^22.10.2
         version: 22.19.7
       '@types/react':
-        specifier: npm:@cabloy/types-react@^19.2.7
-        version: '@cabloy/types-react@19.2.7'
+        specifier: npm:@cabloy/types-react@^19.2.8
+        version: '@cabloy/types-react@19.2.8'
       '@types/retry':
         specifier: ^0.12.5
         version: 0.12.5
@@ -359,7 +359,7 @@ importers:
         specifier: ^9.39.2
         version: 9.39.2
       gogocode:
-        specifier: ^1.0.55
+        specifier: ^1.0.53
         version: 1.0.55(vue@3.5.26(typescript@5.9.3))
       lerna:
         specifier: ^9.0.3
@@ -380,7 +380,7 @@ importers:
         specifier: ^5.9.3
         version: 5.9.3
       vona-mock:
-        specifier: workspace:^
+        specifier: ^6.0.130
         version: link:packages-vona/vona-mock
       vona-module-a-hmr:
         specifier: workspace:^
@@ -630,7 +630,7 @@ importers:
     devDependencies:
       vitepress:
         specifier: ^1.1.4
-        version: 1.6.4(@algolia/client-search@5.46.3)(@cabloy/types-react@19.2.7)(@types/node@22.19.7)(axios@1.13.2)(change-case@5.4.4)(postcss@8.5.6)(react@19.2.3)(search-insights@2.17.3)(terser@5.46.0)(typescript@5.9.3)
+        version: 1.6.4(@algolia/client-search@5.46.3)(@cabloy/types-react@19.2.8)(@types/node@22.19.7)(axios@1.13.2)(change-case@5.4.4)(postcss@8.5.6)(react@19.2.3)(search-insights@2.17.3)(terser@5.46.0)(typescript@5.9.3)
 
   packages-utils/babel-plugin-vona-bean-module:
     dependencies:
@@ -972,8 +972,8 @@ importers:
         specifier: ^8.1.5
         version: 8.1.5(zod@4.3.5)
       '@types/react':
-        specifier: npm:@cabloy/types-react@^19.2.7
-        version: '@cabloy/types-react@19.2.7'
+        specifier: npm:@cabloy/types-react@^19.2.8
+        version: '@cabloy/types-react@19.2.8'
       chalk:
         specifier: ^5.3.0
         version: 5.6.2
@@ -1612,8 +1612,8 @@ importers:
         specifier: ^22.10.2
         version: 22.19.7
       '@types/react':
-        specifier: npm:@cabloy/types-react@^19.2.7
-        version: '@cabloy/types-react@19.2.7'
+        specifier: npm:@cabloy/types-react@^19.2.8
+        version: '@cabloy/types-react@19.2.8'
       '@types/retry':
         specifier: ^0.12.5
         version: 0.12.5
@@ -2645,8 +2645,8 @@ packages:
     resolution: {integrity: sha512-oiG+8jGoKigRKUd51wKIn7FVZHNpfap7vgMWzmjJdVv0HGKZa3XR7sRfZvUSOcLW7tu9Y+GT/aWuJvM0gQiNxg==}
     engines: {node: '>=20'}
 
-  '@cabloy/types-react@19.2.7':
-    resolution: {integrity: sha512-ZS/lqdat2U8bBc5U8rPjJGHoCd55yJe0X0Kz8hSFQaCenK+e1cAaMnZ+DkNYI2Vn71iStsg35YI931nOsrDD2w==}
+  '@cabloy/types-react@19.2.8':
+    resolution: {integrity: sha512-vTKbP4frDewaLBwQUUzuHNGDrRKRrE4rB+p+2uqSeKbhh8P4bXdKg68dAjWjQDi2y02v+JRI4gDQ/7UW6+UX0Q==}
 
   '@cabloy/word-utils@2.0.2':
     resolution: {integrity: sha512-F1GCOWhhusSTLU6YtpuNqPZ6ixcV2cLASltRg/eqeLKrOCjgUA65BEqMw6luBrsxFUlrnnYhKdzTp1z1XkRUTw==}
@@ -10080,7 +10080,7 @@ snapshots:
     dependencies:
       tagged-tag: 1.0.0
 
-  '@cabloy/types-react@19.2.7':
+  '@cabloy/types-react@19.2.8':
     dependencies:
       csstype: 3.2.3
 
@@ -10131,9 +10131,9 @@ snapshots:
 
   '@docsearch/css@3.8.2': {}
 
-  '@docsearch/js@3.8.2(@algolia/client-search@5.46.3)(@cabloy/types-react@19.2.7)(react@19.2.3)(search-insights@2.17.3)':
+  '@docsearch/js@3.8.2(@algolia/client-search@5.46.3)(@cabloy/types-react@19.2.8)(react@19.2.3)(search-insights@2.17.3)':
     dependencies:
-      '@docsearch/react': 3.8.2(@algolia/client-search@5.46.3)(@cabloy/types-react@19.2.7)(react@19.2.3)(search-insights@2.17.3)
+      '@docsearch/react': 3.8.2(@algolia/client-search@5.46.3)(@cabloy/types-react@19.2.8)(react@19.2.3)(search-insights@2.17.3)
       preact: 10.28.2
     transitivePeerDependencies:
       - '@algolia/client-search'
@@ -10142,14 +10142,14 @@ snapshots:
       - react-dom
       - search-insights
 
-  '@docsearch/react@3.8.2(@algolia/client-search@5.46.3)(@cabloy/types-react@19.2.7)(react@19.2.3)(search-insights@2.17.3)':
+  '@docsearch/react@3.8.2(@algolia/client-search@5.46.3)(@cabloy/types-react@19.2.8)(react@19.2.3)(search-insights@2.17.3)':
     dependencies:
       '@algolia/autocomplete-core': 1.17.7(@algolia/client-search@5.46.3)(algoliasearch@5.46.3)(search-insights@2.17.3)
       '@algolia/autocomplete-preset-algolia': 1.17.7(@algolia/client-search@5.46.3)(algoliasearch@5.46.3)
       '@docsearch/css': 3.8.2
       algoliasearch: 5.46.3
     optionalDependencies:
-      '@types/react': '@cabloy/types-react@19.2.7'
+      '@types/react': '@cabloy/types-react@19.2.8'
       react: 19.2.3
       search-insights: 2.17.3
     transitivePeerDependencies:
@@ -17427,10 +17427,10 @@ snapshots:
       fsevents: 2.3.3
       terser: 5.46.0
 
-  vitepress@1.6.4(@algolia/client-search@5.46.3)(@cabloy/types-react@19.2.7)(@types/node@22.19.7)(axios@1.13.2)(change-case@5.4.4)(postcss@8.5.6)(react@19.2.3)(search-insights@2.17.3)(terser@5.46.0)(typescript@5.9.3):
+  vitepress@1.6.4(@algolia/client-search@5.46.3)(@cabloy/types-react@19.2.8)(@types/node@22.19.7)(axios@1.13.2)(change-case@5.4.4)(postcss@8.5.6)(react@19.2.3)(search-insights@2.17.3)(terser@5.46.0)(typescript@5.9.3):
     dependencies:
       '@docsearch/css': 3.8.2
-      '@docsearch/js': 3.8.2(@algolia/client-search@5.46.3)(@cabloy/types-react@19.2.7)(react@19.2.3)(search-insights@2.17.3)
+      '@docsearch/js': 3.8.2(@algolia/client-search@5.46.3)(@cabloy/types-react@19.2.8)(react@19.2.3)(search-insights@2.17.3)
       '@iconify-json/simple-icons': 1.2.66
       '@shikijs/core': 2.5.0
       '@shikijs/transformers': 2.5.0
