@@ -1,15 +1,4 @@
 export const rules = {
-  // '@typescript-eslint/no-deprecated': [
-  //   'error',
-  //   {
-  //     allow: [
-  //       {
-  //         from: 'lib',
-  //         name: 'event',
-  //       },
-  //     ],
-  //   },
-  // ],
   'test/no-only-tests': 'off',
   'test/no-import-node-test': 'off',
   'jsdoc/check-alignment': 'off',
