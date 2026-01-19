@@ -6,7 +6,7 @@ settings:
 
 overrides:
   '@types/mime': 3.0.4
-  '@types/react': npm:@cabloy/types-react@^19.2.9
+  '@types/react': npm:@cabloy/types-react@^19.2.10
 
 importers:
 
@@ -347,8 +347,8 @@ importers:
         specifier: ^22.10.2
         version: 22.19.7
       '@types/react':
-        specifier: npm:@cabloy/types-react@^19.2.9
-        version: '@cabloy/types-react@19.2.9'
+        specifier: npm:@cabloy/types-react@^19.2.10
+        version: '@cabloy/types-react@19.2.10'
       '@types/retry':
         specifier: ^0.12.5
         version: 0.12.5
@@ -630,7 +630,7 @@ importers:
     devDependencies:
       vitepress:
         specifier: ^1.1.4
-        version: 1.6.4(@algolia/client-search@5.46.3)(@cabloy/types-react@19.2.9)(@types/node@22.19.7)(axios@1.13.2)(change-case@5.4.4)(postcss@8.5.6)(react@19.2.3)(search-insights@2.17.3)(terser@5.46.0)(typescript@5.9.3)
+        version: 1.6.4(@algolia/client-search@5.46.3)(@cabloy/types-react@19.2.10)(@types/node@22.19.7)(axios@1.13.2)(change-case@5.4.4)(postcss@8.5.6)(react@19.2.3)(search-insights@2.17.3)(terser@5.46.0)(typescript@5.9.3)
 
   packages-utils/babel-plugin-vona-bean-module:
     dependencies:
@@ -972,8 +972,8 @@ importers:
         specifier: ^8.1.5
         version: 8.1.5(zod@4.3.5)
       '@types/react':
-        specifier: npm:@cabloy/types-react@^19.2.9
-        version: '@cabloy/types-react@19.2.9'
+        specifier: npm:@cabloy/types-react@^19.2.10
+        version: '@cabloy/types-react@19.2.10'
       chalk:
         specifier: ^5.3.0
         version: 5.6.2
@@ -1612,8 +1612,8 @@ importers:
         specifier: ^22.10.2
         version: 22.19.7
       '@types/react':
-        specifier: npm:@cabloy/types-react@^19.2.9
-        version: '@cabloy/types-react@19.2.9'
+        specifier: npm:@cabloy/types-react@^19.2.10
+        version: '@cabloy/types-react@19.2.10'
       '@types/retry':
         specifier: ^0.12.5
         version: 0.12.5
@@ -2645,8 +2645,8 @@ packages:
     resolution: {integrity: sha512-oiG+8jGoKigRKUd51wKIn7FVZHNpfap7vgMWzmjJdVv0HGKZa3XR7sRfZvUSOcLW7tu9Y+GT/aWuJvM0gQiNxg==}
     engines: {node: '>=20'}
 
-  '@cabloy/types-react@19.2.9':
-    resolution: {integrity: sha512-r3t07SBmmy7BKuSnXSnAwSuKaGt2wtSgcwpCJdSgezG+mF26r5eMtvfgXAAZ6LgRv66lxeSzr/5BjWgkitmI/w==}
+  '@cabloy/types-react@19.2.10':
+    resolution: {integrity: sha512-gfY4OC2rBVWsWgehqSZVdNz5F9IyBb91IQ+UQbEakGrzYdAU+glqN7Uj8SLZlXRJqsf2GQj97oAva3o/gJqqQA==}
 
   '@cabloy/word-utils@2.0.2':
     resolution: {integrity: sha512-F1GCOWhhusSTLU6YtpuNqPZ6ixcV2cLASltRg/eqeLKrOCjgUA65BEqMw6luBrsxFUlrnnYhKdzTp1z1XkRUTw==}
@@ -10086,7 +10086,7 @@ snapshots:
     dependencies:
       tagged-tag: 1.0.0
 
-  '@cabloy/types-react@19.2.9':
+  '@cabloy/types-react@19.2.10':
     dependencies:
       csstype: 3.2.3
 
@@ -10137,9 +10137,9 @@ snapshots:
 
   '@docsearch/css@3.8.2': {}
 
-  '@docsearch/js@3.8.2(@algolia/client-search@5.46.3)(@cabloy/types-react@19.2.9)(react@19.2.3)(search-insights@2.17.3)':
+  '@docsearch/js@3.8.2(@algolia/client-search@5.46.3)(@cabloy/types-react@19.2.10)(react@19.2.3)(search-insights@2.17.3)':
     dependencies:
-      '@docsearch/react': 3.8.2(@algolia/client-search@5.46.3)(@cabloy/types-react@19.2.9)(react@19.2.3)(search-insights@2.17.3)
+      '@docsearch/react': 3.8.2(@algolia/client-search@5.46.3)(@cabloy/types-react@19.2.10)(react@19.2.3)(search-insights@2.17.3)
       preact: 10.28.2
     transitivePeerDependencies:
       - '@algolia/client-search'
@@ -10148,14 +10148,14 @@ snapshots:
       - react-dom
       - search-insights
 
-  '@docsearch/react@3.8.2(@algolia/client-search@5.46.3)(@cabloy/types-react@19.2.9)(react@19.2.3)(search-insights@2.17.3)':
+  '@docsearch/react@3.8.2(@algolia/client-search@5.46.3)(@cabloy/types-react@19.2.10)(react@19.2.3)(search-insights@2.17.3)':
     dependencies:
       '@algolia/autocomplete-core': 1.17.7(@algolia/client-search@5.46.3)(algoliasearch@5.46.3)(search-insights@2.17.3)
       '@algolia/autocomplete-preset-algolia': 1.17.7(@algolia/client-search@5.46.3)(algoliasearch@5.46.3)
       '@docsearch/css': 3.8.2
       algoliasearch: 5.46.3
     optionalDependencies:
-      '@types/react': '@cabloy/types-react@19.2.9'
+      '@types/react': '@cabloy/types-react@19.2.10'
       react: 19.2.3
       search-insights: 2.17.3
     transitivePeerDependencies:
@@ -17440,10 +17440,10 @@ snapshots:
       fsevents: 2.3.3
       terser: 5.46.0
 
-  vitepress@1.6.4(@algolia/client-search@5.46.3)(@cabloy/types-react@19.2.9)(@types/node@22.19.7)(axios@1.13.2)(change-case@5.4.4)(postcss@8.5.6)(react@19.2.3)(search-insights@2.17.3)(terser@5.46.0)(typescript@5.9.3):
+  vitepress@1.6.4(@algolia/client-search@5.46.3)(@cabloy/types-react@19.2.10)(@types/node@22.19.7)(axios@1.13.2)(change-case@5.4.4)(postcss@8.5.6)(react@19.2.3)(search-insights@2.17.3)(terser@5.46.0)(typescript@5.9.3):
     dependencies:
       '@docsearch/css': 3.8.2
-      '@docsearch/js': 3.8.2(@algolia/client-search@5.46.3)(@cabloy/types-react@19.2.9)(react@19.2.3)(search-insights@2.17.3)
+      '@docsearch/js': 3.8.2(@algolia/client-search@5.46.3)(@cabloy/types-react@19.2.10)(react@19.2.3)(search-insights@2.17.3)
       '@iconify-json/simple-icons': 1.2.66
       '@shikijs/core': 2.5.0
       '@shikijs/transformers': 2.5.0
