@@ -11,8 +11,9 @@ export function jsxEnhance() {
 function _translateJsxRender(component: any) {
   if (typeof component !== 'object' || !component.$$typeof) return component;
   const componentNew: any = {};
-  componentNew.$$typeof = 'zova-jsx:component';
-  componentNew.type = typeof component.type === 'function' ? component.type() : component.type;
+  const type = typeof component.type === 'function' ? component.type() : component.type;
+  componentNew.$$typeof = type === 'action' ? 'zova-jsx:action' : 'zova-jsx:component';
+  componentNew.type = type;
   componentNew.key = component.key;
   componentNew.props = { ...component.props };
   const children = componentNew.props.children;
