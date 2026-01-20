@@ -111,6 +111,7 @@ async function __loadPackage(context: IModuleGlobContext, modules: Record<string
       onions: module.package[moduleNode]?.onions,
       metas: module.package[moduleNode]?.metas,
       onionsConfig: module.package[moduleNode]?.onionsConfig,
+      beansPreload: module.package[moduleNode]?.beansPreload,
     };
   }
 }
