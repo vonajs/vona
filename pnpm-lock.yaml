@@ -774,8 +774,8 @@ importers:
   packages-utils/module-glob:
     dependencies:
       '@cabloy/module-info':
-        specifier: ^1.3.37
-        version: 1.3.37
+        specifier: ^1.3.40
+        version: 1.3.40
       '@cabloy/utils':
         specifier: ^2.0.16
         version: link:../utils
@@ -2640,6 +2640,9 @@ packages:
 
   '@cabloy/module-info@1.3.37':
     resolution: {integrity: sha512-7gwbacwugWbf+IEnOLTOLVGMAWpDxajdj4tR+JITj4kMK+XC6vS1DQZsxFqo4BApEIMqU57bcOCP3tK4Ny6SYQ==}
+
+  '@cabloy/module-info@1.3.40':
+    resolution: {integrity: sha512-puth4kgQ+LJMpqB+ya60jXrr0Qc1dsnxzDewpPUvJW14pBZOCJtQSI4weE/D1q4L+vauvM48IoTc7wQQ9BqQNQ==}
 
   '@cabloy/type-fest@5.3.1':
     resolution: {integrity: sha512-oiG+8jGoKigRKUd51wKIn7FVZHNpfap7vgMWzmjJdVv0HGKZa3XR7sRfZvUSOcLW7tu9Y+GT/aWuJvM0gQiNxg==}
@@ -10081,6 +10084,8 @@ snapshots:
       - supports-color
 
   '@cabloy/module-info@1.3.37': {}
+
+  '@cabloy/module-info@1.3.40': {}
 
   '@cabloy/type-fest@5.3.1':
     dependencies:
