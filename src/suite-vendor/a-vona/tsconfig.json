@@ -169,6 +169,9 @@
     },
     {
       "path": "modules/a-ormutils/tsconfig.build.json"
+    },
+    {
+      "path": "modules/a-actions/tsconfig.build.json"
     }
   ],
   "exclude": [
