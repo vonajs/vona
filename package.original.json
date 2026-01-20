@@ -41,12 +41,6 @@
     "lint": "eslint",
     "lint:fix": "eslint --fix"
   },
-  "pnpm": {
-    "overrides": {
-      "@types/mime": "3.0.4",
-      "@types/react": "npm:@cabloy/types-react@^19.2.12"
-    }
-  },
   "dependencies": {
     "vona": "workspace:^"
   },

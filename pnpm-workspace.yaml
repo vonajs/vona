@@ -37,3 +37,7 @@ onlyBuiltDependencies:
   - esbuild
   - msgpackr-extract
   - nx
+
+overrides:
+  "@types/mime": "3.0.4"
+  "@types/react": "npm:@cabloy/types-react@^19.2.7"
