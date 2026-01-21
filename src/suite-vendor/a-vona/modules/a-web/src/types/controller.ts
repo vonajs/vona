@@ -1,5 +1,6 @@
 import type { OmitNever } from 'vona';
 import type { ServiceOnion, TypeOnionOptionsEnableSimple } from 'vona-module-a-onion';
+import type { IOpenApiOptionsResourceMeta } from 'vona-module-a-openapi';
 
 export interface IApiPathRecordMethodMap {
   get: IApiPathGetRecord;
@@ -27,6 +28,7 @@ export interface IDecoratorControllerOptions extends TypeOnionOptionsEnableSimpl
   path?: string;
   exclude?: boolean;
   tags?: string[];
+  resourceMeta?: IOpenApiOptionsResourceMeta;
 }
 
 declare module 'vona-module-a-onion' {

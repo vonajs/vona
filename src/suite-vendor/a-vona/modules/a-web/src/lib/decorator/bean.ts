@@ -20,9 +20,9 @@ export function Controller<T extends IDecoratorControllerOptions>(path?: T | str
     const beanOptions = appResource.getBean(target)!;
     // IOpenApiOptions
     const optionsMeta = appMetadata.getOwnMetadataMap(false, SymbolOpenApiOptions, target) as IOpenApiOptions;
-    for (const key of ['exclude', 'tags']) {
-      const option = cast(beanOptions.options)[key];
-      if (option !== undefined) optionsMeta[key] = option;
+    for (const key in cast(beanOptions.options)) {
+      if (key === 'path') continue;
+      optionsMeta[key] = cast(beanOptions.options)[key];
     }
     // IOpenApiOptions
     mergeActionsOpenapiMetadata(target);
