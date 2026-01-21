@@ -1,14 +1,15 @@
 import type { Next } from 'vona';
 import type { IDecoratorMiddlewareOptionsGlobal, IMiddlewareExecute } from 'vona-module-a-aspect';
 import type { IOnionOptionsMeta } from 'vona-module-a-onion';
-import { BeanBase } from 'vona';
+import { BeanBase, Global } from 'vona';
 import { Middleware } from 'vona-module-a-aspect';
 
 export interface IMiddlewareOptionsGate extends IDecoratorMiddlewareOptionsGlobal {
   gate?: IOnionOptionsMeta;
 }
 
-@Middleware<IMiddlewareOptionsGate>({ global: true })
+@Middleware<IMiddlewareOptionsGate>()
+@Global()
 export class MiddlewareGate extends BeanBase implements IMiddlewareExecute {
   async execute(options: IMiddlewareOptionsGate, next: Next) {
     // check gate

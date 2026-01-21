@@ -85,7 +85,7 @@ export function extractBeanInfo(sceneName: string, fileContent: string, sceneMet
   }
   // isGlobal
   const isGlobal = sceneMeta.hasLocal
-    ? fileContent.match(/@.*?\(\{([\s\S]*?)global: true([\s\S]*?)\}([\s\S]*?)\)\s*export class/)
+    ? (fileContent.includes('@Global()') || fileContent.match(/@.*?\(\{([\s\S]*?)global: true([\s\S]*?)\}([\s\S]*?)\)\s*export class/))
     : true;
   return { optionsCustomInterface, optionsCustomInterfaceFrom, isGlobal };
 }
