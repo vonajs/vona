@@ -4,7 +4,7 @@ import type { SchemaLike, SchemaLikeCreate } from '../../types/decorator.ts';
 import { isClass } from '@cabloy/utils';
 import { appMetadata, appResource, cast } from 'vona';
 import { z } from 'zod';
-import { SymbolDecoratorRule } from '../../types/decorator.ts';
+import { SymbolDecoratorRule } from '../const/decorator.ts';
 import { prepareClassType } from '../utils.ts';
 import { SymbolSchemaDynamicRefId } from './schemaDynamic.ts';
 
