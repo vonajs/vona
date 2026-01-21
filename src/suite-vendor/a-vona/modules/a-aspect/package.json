@@ -13,7 +13,7 @@
         "optionsGlobalInterfaceName": "IDecoratorFilterOptionsGlobal",
         "optionsGlobalInterfaceFrom": "vona-module-a-aspect",
         "boilerplate": "filter/boilerplate",
-        "boilerplateGlobal": "cli/filterGlobal/boilerplate"
+        "boilerplateGlobal": "filterGlobal/boilerplate"
       },
       "pipe": {
         "hasLocal": true,
@@ -23,7 +23,7 @@
         "optionsGlobalInterfaceName": "IDecoratorPipeOptionsGlobal",
         "optionsGlobalInterfaceFrom": "vona-module-a-aspect",
         "boilerplate": "pipe/boilerplate",
-        "boilerplateGlobal": "cli/pipeGlobal/boilerplate"
+        "boilerplateGlobal": "pipeGlobal/boilerplate"
       },
       "interceptor": {
         "hasLocal": true,
@@ -32,7 +32,7 @@
         "optionsGlobalInterfaceName": "IDecoratorInterceptorOptionsGlobal",
         "optionsGlobalInterfaceFrom": "vona-module-a-aspect",
         "boilerplate": "interceptor/boilerplate",
-        "boilerplateGlobal": "cli/interceptorGlobal/boilerplate"
+        "boilerplateGlobal": "interceptorGlobal/boilerplate"
       },
       "guard": {
         "hasLocal": true,
@@ -41,7 +41,7 @@
         "optionsGlobalInterfaceName": "IDecoratorGuardOptionsGlobal",
         "optionsGlobalInterfaceFrom": "vona-module-a-aspect",
         "boilerplate": "guard/boilerplate",
-        "boilerplateGlobal": "cli/guardGlobal/boilerplate"
+        "boilerplateGlobal": "guardGlobal/boilerplate"
       },
       "middleware": {
         "hasLocal": true,
@@ -50,7 +50,7 @@
         "optionsGlobalInterfaceName": "IDecoratorMiddlewareOptionsGlobal",
         "optionsGlobalInterfaceFrom": "vona-module-a-aspect",
         "boilerplate": "middleware/boilerplate",
-        "boilerplateGlobal": "cli/middlewareGlobal/boilerplate"
+        "boilerplateGlobal": "middlewareGlobal/boilerplate"
       },
       "middlewareSystem": {
         "optionsGlobalInterfaceName": "IDecoratorMiddlewareSystemOptions",
