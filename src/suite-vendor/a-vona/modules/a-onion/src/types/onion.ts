@@ -10,7 +10,7 @@ export type TypeOnionsNormal<ONIONRECORD> = {
 
 export type IOnionExecuteCustom = (beanInstance: any, data: any, options: any, next: Function) => any;
 
-export type TypeUseOnionOmitOptionsGlobal<T> = Omit<T, 'global' | 'dependencies' | 'dependents' | 'ignore' | 'match'>;
+export type TypeUseOnionOmitOptionsGlobal<T> = Omit<T, 'dependencies' | 'dependents' | 'ignore' | 'match'>;
 export type TypeUseOnionOmitOptionsEnable<T> = Omit<T, 'enable' | 'meta'>;
 
 export interface IOnionOptionsEnable<OmitMetaFields extends string = never> {
