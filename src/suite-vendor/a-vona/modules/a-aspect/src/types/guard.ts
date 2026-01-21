@@ -14,9 +14,7 @@ export interface IDecoratorGuardOptions extends TypeOnionOptionsEnableSimple {}
 
 export interface IDecoratorGuardOptionsGlobal
   extends TypeOnionOptionsBaseSimple<keyof IApiPathRecord>,
-  IOnionOptionsDeps<keyof IGuardRecordGlobal> {
-  global: true;
-}
+  IOnionOptionsDeps<keyof IGuardRecordGlobal> {}
 
 declare module 'vona-module-a-onion' {
   export interface BeanOnion {

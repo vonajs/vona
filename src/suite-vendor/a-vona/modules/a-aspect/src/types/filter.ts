@@ -22,9 +22,7 @@ export interface IDecoratorFilterOptions extends TypeOnionOptionsEnableSimple {}
 
 export interface IDecoratorFilterOptionsGlobal
   extends TypeOnionOptionsBaseSimple<keyof IApiPathRecord>,
-  IOnionOptionsDeps<keyof IFilterRecordGlobal> {
-  global: true;
-}
+  IOnionOptionsDeps<keyof IFilterRecordGlobal> {}
 
 export interface IFilterComposeData {
   err: Error;

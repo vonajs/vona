@@ -14,9 +14,7 @@ export interface IDecoratorInterceptorOptions extends TypeOnionOptionsEnableSimp
 
 export interface IDecoratorInterceptorOptionsGlobal
   extends TypeOnionOptionsBaseSimple<keyof IApiPathRecord>,
-  IOnionOptionsDeps<keyof IInterceptorRecordGlobal> {
-  global: true;
-}
+  IOnionOptionsDeps<keyof IInterceptorRecordGlobal> {}
 
 declare module 'vona-module-a-onion' {
   export interface BeanOnion {
