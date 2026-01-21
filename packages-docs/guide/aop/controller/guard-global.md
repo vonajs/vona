@@ -21,7 +21,8 @@ Context Menu - [Module Path]: `Vona Aspect/Guard Global`
 ``` typescript
 export interface IGuardOptionsAdmin extends IDecoratorGuardOptionsGlobal {}
 
-@Guard<IGuardOptionsAdmin>({ global: true })
+@Guard<IGuardOptionsAdmin>()
+@Global()
 export class GuardAdmin {
   async execute(_options: IGuardOptionsAdmin, next: Next): Promise<boolean> {
     const user = this.ctx.user;
@@ -56,7 +57,6 @@ export interface IGuardOptionsAdmin extends IDecoratorGuardOptionsGlobal {
 
 ``` diff
 @Guard<IGuardOptionsAdmin>({
-  global: true,
 + name: 'admin',
 })
 ```
@@ -69,7 +69,6 @@ export interface IGuardOptionsAdmin extends IDecoratorGuardOptionsGlobal {
 }
 
 @Guard<IGuardOptionsAdmin>({
-  global: true,
   name: 'admin',
 })
 export class GuardAdmin extends BeanBase implements IGuardExecute {
@@ -128,7 +127,6 @@ For example, the system has a built-in global guard `a-user:passport`, and we ho
 
 ``` diff
 @Guard({
-  global: true,
 + dependencies: 'a-user:passport',
   name: 'admin',
 })
@@ -141,7 +139,6 @@ The order of `dependents` is just the opposite of `dependencies`. We hope that t
 
 ``` diff
 @Guard({
-  global: true,
 + dependents: 'a-user:passport',
   name: 'admin',
 })
@@ -192,7 +189,6 @@ Allows global guard to take effect in a specified operating environment
 
 ``` diff
 @Guard({
-  global: true,
 + meta: {
 +   flavor: 'normal',
 +   mode: 'dev',

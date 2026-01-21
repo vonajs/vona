@@ -21,7 +21,8 @@ Context Menu - [Module Path]: `Vona Aspect/Middleware Global`
 ``` typescript
 export interface IMiddlewareOptionsLogger extends IDecoratorMiddlewareOptionsGlobal {}
 
-@Middleware<IMiddlewareOptionsLogger>({ global: true })
+@Middleware<IMiddlewareOptionsLogger>()
+@Global()
 export class MiddlewareLogger extends BeanBase implements IMiddlewareExecute {
   async execute(_options: IMiddlewareOptionsLogger, next: Next) {
     const timeBegin = Date.now();
@@ -58,7 +59,6 @@ export interface IMiddlewareOptionsLogger extends IDecoratorMiddlewareOptionsGlo
 
 ``` diff
 @Middleware<IMiddlewareOptionsLogger>({
-  global: true,
 + prefix: 'time',
 })
 ```
@@ -71,7 +71,6 @@ export interface IMiddlewareOptionsLogger extends IDecoratorMiddlewareOptionsGlo
 }
 
 @Middleware<IMiddlewareOptionsLogger>({
-  global: true,
   prefix: 'time',
 })
 class MiddlewareLogger {
@@ -131,7 +130,6 @@ For example, the system has a built-in global middleware `a-core:gate`, and we h
 
 ``` diff
 @Middleware({
-  global: true,
 + dependencies: 'a-core:gate',
   prefix: 'time',
 })
@@ -144,7 +142,6 @@ The order of `dependents` is just the opposite of `dependencies`. We hope that t
 
 ``` diff
 @Middleware({
-  global: true,
 + dependents: 'a-core:gate',
   prefix: 'time',
 })
@@ -195,7 +192,6 @@ Allows global middleware to take effect in a specified operating environment
 
 ``` diff
 @Middleware({
-  global: true,
 + meta: {
 +   flavor: 'normal',
 +   mode: 'dev',

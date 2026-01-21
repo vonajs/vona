@@ -21,7 +21,8 @@ Context Menu - [Module Path]: `Vona Aspect/Interceptor Global`
 ``` typescript
 export interface IInterceptorOptionsLogger extends IDecoratorInterceptorOptionsGlobal {}
 
-@Interceptor<IInterceptorOptionsLogger>({ global: true })
+@Interceptor<IInterceptorOptionsLogger>()
+@Global()
 export class InterceptorLogger extends BeanBase implements IInterceptorExecute {
   async execute(_options: IInterceptorOptionsLogger, next: Next) {
     const timeBegin = Date.now();
@@ -58,7 +59,6 @@ export interface IInterceptorOptionsLogger extends IDecoratorInterceptorOptionsG
 
 ``` diff
 @Interceptor<IInterceptorOptionsLogger>({
-  global: true,
 + prefix: 'time',
 })
 ```
@@ -71,7 +71,6 @@ export interface IInterceptorOptionsLogger extends IDecoratorInterceptorOptionsG
 }
 
 @Interceptor<IInterceptorOptionsLogger>({
-  global: true,
   prefix: 'time',
 })
 class InterceptorLogger {
@@ -131,7 +130,6 @@ For example, the system has a built-in global interceptor `a-body:bodyRes`, and 
 
 ``` diff
 @Interceptor({
-  global: true,
 + dependencies: 'a-body:bodyRes',
   prefix: 'time',
 })
@@ -144,7 +142,6 @@ The order of `dependents` is just the opposite of `dependencies`. We hope that t
 
 ``` diff
 @Interceptor({
-  global: true,
 + dependents: 'a-body:bodyRes',
   prefix: 'time',
 })
@@ -195,7 +192,6 @@ Allows global interceptor to take effect in a specified operating environment
 
 ``` diff
 @Interceptor({
-  global: true,
 + meta: {
 +   flavor: 'normal',
 +   mode: 'dev',
