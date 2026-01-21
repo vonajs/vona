@@ -1,22 +1,11 @@
 import type { Constructable } from 'vona';
-import type { IOpenApiOptionsResourceMeta } from 'vona-module-a-openapi';
 import type { IOpenApiOptions } from 'vona-module-a-openapiutils';
 import type { IDecoratorControllerOptions } from '../../types/controller.ts';
 import type { IDecoratorDtoOptions } from '../../types/dto.ts';
 import { appMetadata, appResource, cast, createBeanDecorator, deepExtend, onionNameFromBeanFullName, useApp } from 'vona';
-import { mergeFieldsOpenapiMetadata } from 'vona-module-a-openapiutils';
+import { mergeFieldsOpenapiMetadata, SymbolControllerResource } from 'vona-module-a-openapiutils';
 import { SymbolOpenApiOptions } from 'vona-module-a-openapiutils';
-import { recordResourceNameToRoutePath, SymbolControllerOptionsResource } from '../const.ts';
-
-export function Resource(resourceMeta?: IOpenApiOptionsResourceMeta): ClassDecorator {
-  return function (target: object) {
-    // IOpenApiOptions
-    const optionsMeta = appMetadata.getOwnMetadataMap(false, SymbolOpenApiOptions, target) as IOpenApiOptions;
-    optionsMeta.resourceMeta = resourceMeta;
-    // controller options: resource
-    appMetadata.defineMetadata(SymbolControllerOptionsResource, true, target);
-  };
-}
+import { recordResourceNameToRoutePath } from '../const.ts';
 
 export function Controller<T extends IDecoratorControllerOptions>(options?: T): ClassDecorator;
 export function Controller<T extends IDecoratorControllerOptions>(path?: string, options?: Omit<T, 'path'>): ClassDecorator;
@@ -39,8 +28,8 @@ export function Controller<T extends IDecoratorControllerOptions>(path?: T | str
     mergeActionsOpenapiMetadata(target);
     // map: resourceName->api path
     const onionName = onionNameFromBeanFullName(beanOptions.beanFullName);
-    const optionsResource = appMetadata.getOwnMetadata(SymbolControllerOptionsResource, target);
-    if (optionsResource) {
+    const controllerResource = appMetadata.getOwnMetadata(SymbolControllerResource, target);
+    if (controllerResource) {
       const app = useApp();
       const apiPath = app.util.combineApiPathControllerAndAction(
         beanOptions.module,

@@ -222,9 +222,6 @@ importers:
       vona-module-a-redlock:
         specifier: workspace:^
         version: link:src/suite-vendor/a-vona/modules/a-redlock
-      vona-module-a-rest:
-        specifier: workspace:^
-        version: link:src/suite-vendor/a-cabloy/modules/a-rest
       vona-module-a-runtime:
         specifier: workspace:^
         version: link:src/suite-vendor/a-vona/modules/a-runtime
@@ -1089,15 +1086,6 @@ importers:
         version: 6.1.2
 
   src/suite-vendor/a-cabloy/modules/a-datasource:
-    devDependencies:
-      clean-package:
-        specifier: ^2.2.0
-        version: 2.2.0
-      rimraf:
-        specifier: ^6.0.1
-        version: 6.1.2
-
-  src/suite-vendor/a-cabloy/modules/a-rest:
     devDependencies:
       clean-package:
         specifier: ^2.2.0

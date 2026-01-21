@@ -9,7 +9,6 @@ export interface IRecordResourceNameToRoutePathItem {
 }
 
 export const SymbolCacheControllerRoutes = Symbol('SymbolCacheControllerRoutes');
-export const SymbolControllerOptionsResource = Symbol('SymbolControllerOptionsResource');
 export const recordResourceNameToRoutePath: Record<keyof IControllerRecord, IRecordResourceNameToRoutePathItem> = {} as any;
 
 export function getCacheControllerRoutes(app: VonaApplication): Record<string, ContextRoute[]> {

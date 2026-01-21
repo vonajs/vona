@@ -3,3 +3,4 @@ export const SymbolRouteHandlersArgumentsValue = Symbol('SymbolRouteHandlersArgu
 
 export const SymbolOpenApiOptions = Symbol('SymbolOpenApiOptions');
 export const SymbolDecoratorRule = Symbol('SymbolDecoratorRule');
+export const SymbolControllerResource = Symbol('SymbolControllerResource');
