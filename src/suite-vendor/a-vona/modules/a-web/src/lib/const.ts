@@ -1,10 +1,11 @@
-import type { VonaApplication } from 'vona';
+import type { Constructable, VonaApplication } from 'vona';
 import type { IControllerRecord } from '../types/controller.ts';
 import type { ContextRoute } from '../types/router.ts';
 
 export interface IRecordResourceNameToRoutePathItem {
   apiPath: string;
   routePathRaw: string;
+  target: Constructable;
 }
 
 export const SymbolCacheControllerRoutes = Symbol('SymbolCacheControllerRoutes');

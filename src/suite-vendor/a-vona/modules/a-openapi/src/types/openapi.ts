@@ -10,9 +10,3 @@ declare module 'vona-module-a-openapiutils' {
     resourceMeta?: IOpenApiOptionsResourceMeta;
   }
 }
-
-declare module 'vona-module-a-openapischema' {
-  export interface IOpenapiSchemaMeta {
-    resourceMeta?: IOpenApiOptionsResourceMeta;
-  }
-}

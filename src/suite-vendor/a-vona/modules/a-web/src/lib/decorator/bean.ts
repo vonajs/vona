@@ -50,7 +50,7 @@ export function Controller<T extends IDecoratorControllerOptions>(path?: T | str
         true,
       );
       const routePathRaw = app.util.combineApiPathControllerAndActionRaw(beanOptions.module, cast(beanOptions.options).path, undefined, true);
-      recordResourceNameToRoutePath[onionName] = { apiPath, routePathRaw };
+      recordResourceNameToRoutePath[onionName] = { apiPath, routePathRaw, target };
     } else {
       // for hmr
       delete recordResourceNameToRoutePath[onionName];

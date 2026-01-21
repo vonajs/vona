@@ -1,5 +1,6 @@
 /* eslint-disable */
-import type { TypeControllerOptionsActions } from 'vona-module-a-openapi';
+import type { TypeSymbolKeyFieldsMore } from 'vona-module-a-orm';
+import type { TypeEntityOptionsFields,TypeControllerOptionsActions } from 'vona-module-a-openapi';
 /** interceptor: begin */
 export * from '../bean/interceptor.openapiSchema.ts';
 import type { IInterceptorOptionsOpenapiSchema } from '../bean/interceptor.openapiSchema.ts';
@@ -26,43 +27,31 @@ declare module 'vona-module-a-openapischema' {
           } 
 }
 /** interceptor: end */
-/** event: begin */
-export * from '../bean/event.retrieveOpenapiSchema.ts';
-
-import 'vona';
-declare module 'vona' {
+/** dto: begin */
+export * from '../dto/bootstrap.tsx';
+import type { IDtoOptionsBootstrap } from '../dto/bootstrap.tsx';
+import 'vona-module-a-web';
+declare module 'vona-module-a-web' {
   
+    export interface IDtoRecord {
+      'a-openapischema:bootstrap': IDtoOptionsBootstrap;
+    }
+
   
 }
 declare module 'vona-module-a-openapischema' {
+   
+}
+/** dto: end */
+/** dto: begin */
+import type { DtoBootstrap } from '../dto/bootstrap.tsx'; 
+declare module 'vona-module-a-openapischema' {
   
-        export interface EventRetrieveOpenapiSchema {
-          /** @internal */
-          get scope(): ScopeModuleAOpenapischema;
-        }
-
-          export interface EventRetrieveOpenapiSchema {
-            get $beanFullName(): 'a-openapischema.event.retrieveOpenapiSchema';
-            get $onionName(): 'a-openapischema:retrieveOpenapiSchema';
-            
-          } 
+    export interface IDtoOptionsBootstrap {
+      fields?: TypeEntityOptionsFields<DtoBootstrap, IDtoOptionsBootstrap[TypeSymbolKeyFieldsMore]>;
+    }
 }
-/** event: end */
-/** event: begin */
-import type { EventRetrieveOpenapiSchema } from '../bean/event.retrieveOpenapiSchema.ts';
-export interface IModuleEvent {
-  'retrieveOpenapiSchema': EventRetrieveOpenapiSchema;
-}
-/** event: end */
-/** event: begin */
-import type { TypeEventRetrieveOpenapiSchemaData, TypeEventRetrieveOpenapiSchemaResult } from '../bean/event.retrieveOpenapiSchema.ts';
-import type { EventOn } from 'vona-module-a-event'; 
-declare module 'vona-module-a-event' {
-  export interface IEventRecord {
-    'a-openapischema:retrieveOpenapiSchema': EventOn<TypeEventRetrieveOpenapiSchemaData, TypeEventRetrieveOpenapiSchemaResult>;
-  }
-}
-/** event: end */
+/** dto: end */
 /** controller: begin */
 export * from '../controller/resource.ts';
 import type { IControllerOptionsResource } from '../controller/resource.ts';
@@ -105,8 +94,12 @@ declare module 'vona-module-a-web' {
 
 }
 /** controller: end */
+/** config: begin */
+export * from '../config/config.ts';
+import type { config } from '../config/config.ts';
+/** config: end */
 /** scope: begin */
-import { BeanScopeBase, type BeanScopeUtil } from 'vona';
+import { BeanScopeBase, type BeanScopeUtil, type TypeModuleConfig } from 'vona';
 import { Scope } from 'vona-module-a-bean';
 
 @Scope()
@@ -114,7 +107,7 @@ export class ScopeModuleAOpenapischema extends BeanScopeBase {}
 
 export interface ScopeModuleAOpenapischema {
   util: BeanScopeUtil;
-event: IModuleEvent;
+config: TypeModuleConfig<typeof config>;
 }
 
 import 'vona';
@@ -127,7 +120,9 @@ declare module 'vona' {
     openapischema: ScopeModuleAOpenapischema;
   }
   
-  
+  export interface IBeanScopeConfig {
+    'a-openapischema': ReturnType<typeof config>;
+  }
 
   
 
