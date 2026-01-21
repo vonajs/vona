@@ -5,7 +5,7 @@ import { isClass, isEmptyObject } from '@cabloy/utils';
 import { ZodMetadata } from '@cabloy/zod-openapi';
 import { appMetadata, appResource, cast, deepExtend, registerMappedClassMetadataKey } from 'vona';
 import { z } from 'zod';
-import { SymbolDecoratorRule } from '../types/decorator.ts';
+import { SymbolDecoratorRule } from './const/decorator.ts';
 
 export function getTargetDecoratorRules(target: object, disableRegisterMetadata?: boolean): TypeDecoratorRules {
   if (!disableRegisterMetadata) {
