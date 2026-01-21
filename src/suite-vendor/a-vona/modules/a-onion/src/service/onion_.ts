@@ -8,7 +8,7 @@ import type { IOnionExecuteCustom, IOnionOptionsDeps, IOnionOptionsEnable, IOnio
 import { isRegExp } from 'node:util/types';
 import { swapDeps } from '@cabloy/deps';
 import { getOnionScenesMeta } from '@cabloy/module-info';
-import { appMetadata, appResource, BeanBase, cast, compose, deepExtend, ProxyDisable } from 'vona';
+import { appMetadata, appResource, BeanBase, cast, compose, deepExtend, ProxyDisable, SymbolDecoratorGlobal } from 'vona';
 import { Service } from 'vona-module-a-bean';
 import { SymbolUseOnionLocal } from '../types/onion.ts';
 
@@ -265,7 +265,7 @@ export class ServiceOnion<ONIONRECORD> extends BeanBase {
       // normal
       this.onionsNormal[item.name] = item;
       // global
-      if (!this.sceneMeta.hasLocal || cast(item.beanOptions.options)?.global) {
+      if (!this.sceneMeta.hasLocal || appMetadata.getMetadata<boolean>(SymbolDecoratorGlobal, item.beanOptions.beanClass)) {
         this.onionsGlobal.push(item);
       }
     }
