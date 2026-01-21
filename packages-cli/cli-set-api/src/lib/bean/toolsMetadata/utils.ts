@@ -46,6 +46,7 @@ export async function globBeanFiles(
     const beanName = parts[parts.length - 1];
     const beanNameFull = `${moduleName}:${beanName}`;
     const beanNameCapitalize = toUpperCaseFirstChar(beanName);
+    const beanFullName = sceneName === 'bean' ? beanName : `${moduleName}.${sceneName}.${beanName}`;
     const fileContent = isIgnore ? '' : fse.readFileSync(filePath).toString();
     const isVirtual = fileContent.includes('@Virtual()');
     result.push({
@@ -60,6 +61,7 @@ export async function globBeanFiles(
       beanName,
       beanNameFull,
       beanNameCapitalize,
+      beanFullName,
       isIgnore,
       isVirtual,
     });

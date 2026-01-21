@@ -33,7 +33,7 @@
     "postpack": "clean-package restore"
   },
   "dependencies": {
-    "@cabloy/module-info": "^1.3.37",
+    "@cabloy/module-info": "^1.3.41",
     "@cabloy/module-info-pro": "^1.0.44",
     "vona-core": "^5.0.130"
   },
