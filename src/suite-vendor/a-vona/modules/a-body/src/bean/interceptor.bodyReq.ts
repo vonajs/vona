@@ -1,7 +1,7 @@
 import type { Next } from 'vona';
 import type { IDecoratorInterceptorOptionsGlobal, IInterceptorExecute } from 'vona-module-a-aspect';
 import type { BodyParserOptions } from '../types/bodyParser.ts';
-import { BeanBase } from 'vona';
+import { BeanBase, Global } from 'vona';
 import { Interceptor } from 'vona-module-a-aspect';
 
 export interface IInterceptorOptionsBodyReq extends IDecoratorInterceptorOptionsGlobal {
@@ -9,7 +9,6 @@ export interface IInterceptorOptionsBodyReq extends IDecoratorInterceptorOptions
 }
 
 @Interceptor<IInterceptorOptionsBodyReq>({
-  global: true,
   dependencies: 'a-openapischema:openapiSchema',
   parser: {
     enableTypes: ['json', 'form'],
@@ -24,6 +23,7 @@ export interface IInterceptorOptionsBodyReq extends IDecoratorInterceptorOptions
     extendTypes: {},
   },
 })
+@Global()
 export class InterceptorBodyReq extends BeanBase implements IInterceptorExecute {
   async execute(options: IInterceptorOptionsBodyReq, next: Next) {
     // parse

@@ -1,7 +1,7 @@
 import type { Next } from 'vona';
 import type { IDecoratorGuardOptionsGlobal, IGuardExecute } from 'vona-module-a-aspect';
 import { catchError } from '@cabloy/utils';
-import { BeanBase } from 'vona';
+import { BeanBase, Global } from 'vona';
 import { Guard } from 'vona-module-a-aspect';
 
 export interface IGuardOptionsPassport extends IDecoratorGuardOptionsGlobal {
@@ -10,7 +10,8 @@ export interface IGuardOptionsPassport extends IDecoratorGuardOptionsGlobal {
   checkAuthToken: boolean; // default is true
 }
 
-@Guard<IGuardOptionsPassport>({ global: true, public: false, activated: true, checkAuthToken: true })
+@Guard<IGuardOptionsPassport>({ public: false, activated: true, checkAuthToken: true })
+@Global()
 export class GuardPassport extends BeanBase implements IGuardExecute {
   async execute(options: IGuardOptionsPassport, next: Next): Promise<boolean> {
     // auth token
