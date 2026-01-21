@@ -25,7 +25,8 @@ export type TypePipeNumberResult = number;
 
 export interface IPipeOptionsNumber extends IDecoratorPipeOptionsGlobal {}
 
-@Pipe<IPipeOptionsNumber>({ global: true })
+@Pipe<IPipeOptionsNumber>()
+@Global()
 class PipeNumber {
   async transform(value: TypePipeNumberData, _metadata: RouteHandlerArgumentMeta, _options: IPipeOptionsNumber): Promise<TypePipeNumberResult> {
     const valueNew = Number(value);
@@ -74,7 +75,6 @@ export interface IPipeOptionsNumber extends IDecoratorPipeOptionsGlobal {
 }
 
 @Pipe<IPipeOptionsNumber>({
-  global: true,
   errorCode: 400,
 })
 export class PipeNumber extends BeanBase implements IPipeTransform<TypePipeNumberData, TypePipeNumberResult> {
@@ -132,7 +132,6 @@ For example, the system has a built-in global pipe `a-xxx:yyy`, and we hope that
 
 ``` diff
 @Pipe({
-  global: true,
 + dependencies: 'a-xxx:yyy',
   errorCode: 400,
 })
@@ -145,7 +144,6 @@ The order of `dependents` is just the opposite of `dependencies`. We hope that t
 
 ``` diff
 @Pipe({
-  global: true,
 + dependents: 'a-xxx:yyy',
   errorCode: 400,
 })
@@ -196,7 +194,6 @@ Allows global pipe to take effect in a specified operating environment
 
 ``` diff
 @Pipe({
-  global: true,
 + meta: {
 +   flavor: 'normal',
 +   mode: 'dev',

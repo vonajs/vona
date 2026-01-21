@@ -21,7 +21,8 @@ $ vona :create:bean filter test --module=demo-student --boilerplate=global
 ``` typescript
 export interface IFilterOptionsTest extends IDecoratorFilterOptionsGlobal {}
 
-@Filter<IFilterOptionsTest>({ global: true })
+@Filter<IFilterOptionsTest>()
+@Global()
 class FilterTest {
   async log(err: Error, _options: IFilterOptionsTest, next: Next): Promise<boolean> {
     // next
@@ -61,7 +62,6 @@ export interface IFilterOptionsTest extends IDecoratorFilterOptionsGlobal {
 
 ``` diff
 @Filter<IFilterOptionsTest>({
-  global: true,
 + prefix: 'Custom Error',
 })
 ```
@@ -74,7 +74,6 @@ export interface IFilterOptionsTest extends IDecoratorFilterOptionsGlobal {
 }
 
 @Filter<IFilterOptionsTest>({
-  global: true,
   prefix: 'Custom Error',
 })
 export class FilterTest extends BeanBase implements IFilterLog {
@@ -137,7 +136,6 @@ config.onions = {
 
 ``` diff
 @Filter({
-  global: true,
 + dependencies: 'a-error:error',
   prefix: 'Custom Error',
 })
@@ -150,7 +148,6 @@ class FilterTest {}
 
 ``` diff
 @Filter({
-  global: true,
 + dependents: 'a-error:error',
   prefix: 'Custom Error',
 })
@@ -201,7 +198,6 @@ config.onions = {
 
 ``` diff
 @Filter({
-  global: true,
 + meta: {
 +   flavor: 'normal',
 +   mode: 'dev',

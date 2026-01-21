@@ -24,9 +24,9 @@ Context Menu - [Module Path]: `Vona Aspect/Middleware System`
 ## Middleware Definition
 
 ``` typescript
-export interface IMiddlewareOptionsLogger extends IDecoratorMiddlewareOptionsGlobal {}
+export interface IMiddlewareOptionsLogger extends IDecoratorMiddlewareOptions {}
 
-@Middleware<IMiddlewareOptionsLogger>({ global: true })
+@Middleware<IMiddlewareOptionsLogger>()
 export class MiddlewareLogger extends BeanBase implements IMiddlewareExecute {
   async execute(_options: IMiddlewareOptionsLogger, next: Next) {
     const timeBegin = Date.now();

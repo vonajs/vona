@@ -25,7 +25,8 @@ export type TypePipeNumberResult = number;
 
 export interface IPipeOptionsNumber extends IDecoratorPipeOptionsGlobal {}
 
-@Pipe<IPipeOptionsNumber>({ global: true })
+@Pipe<IPipeOptionsNumber>()
+@Global()
 class PipeNumber {
   async transform(value: TypePipeNumberData, _metadata: RouteHandlerArgumentMeta, _options: IPipeOptionsNumber): Promise<TypePipeNumberResult> {
     const valueNew = Number(value);
@@ -74,7 +75,6 @@ export interface IPipeOptionsNumber extends IDecoratorPipeOptionsGlobal {
 }
 
 @Pipe<IPipeOptionsNumber>({
-  global: true,
   errorCode: 400,
 })
 export class PipeNumber extends BeanBase implements IPipeTransform<TypePipeNumberData, TypePipeNumberResult> {
@@ -132,7 +132,6 @@ config.onions = {
 
 ``` diff
 @Pipe({
-  global: true,
 + dependencies: 'a-xxx:yyy',
   errorCode: 400,
 })
@@ -145,7 +144,6 @@ class PipeNumber {}
 
 ``` diff
 @Pipe({
-  global: true,
 + dependents: 'a-xxx:yyy',
   errorCode: 400,
 })
@@ -196,7 +194,6 @@ config.onions = {
 
 ``` diff
 @Pipe({
-  global: true,
 + meta: {
 +   flavor: 'normal',
 +   mode: 'dev',

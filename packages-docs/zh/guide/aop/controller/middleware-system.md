@@ -24,9 +24,9 @@ $ vona :create:bean middlewareSystem logger --module=demo-student
 ## 中间件定义
 
 ``` typescript
-export interface IMiddlewareOptionsLogger extends IDecoratorMiddlewareOptionsGlobal {}
+export interface IMiddlewareOptionsLogger extends IDecoratorMiddlewareOptions {}
 
-@Middleware<IMiddlewareOptionsLogger>({ global: true })
+@Middleware<IMiddlewareOptionsLogger>()
 export class MiddlewareLogger extends BeanBase implements IMiddlewareExecute {
   async execute(_options: IMiddlewareOptionsLogger, next: Next) {
     const timeBegin = Date.now();

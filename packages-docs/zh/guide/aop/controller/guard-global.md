@@ -21,7 +21,8 @@ $ vona :create:bean guard admin --module=demo-student --boilerplate=global
 ``` typescript
 export interface IGuardOptionsAdmin extends IDecoratorGuardOptionsGlobal {}
 
-@Guard<IGuardOptionsAdmin>({ global: true })
+@Guard<IGuardOptionsAdmin>()
+@Global()
 export class GuardAdmin {
   async execute(_options: IGuardOptionsAdmin, next: Next): Promise<boolean> {
     const user = this.ctx.user;
@@ -56,7 +57,6 @@ export interface IGuardOptionsAdmin extends IDecoratorGuardOptionsGlobal {
 
 ``` diff
 @Guard<IGuardOptionsAdmin>({
-  global: true,
 + name: 'admin',
 })
 ```
@@ -69,7 +69,6 @@ export interface IGuardOptionsAdmin extends IDecoratorGuardOptionsGlobal {
 }
 
 @Guard<IGuardOptionsAdmin>({
-  global: true,
   name: 'admin',
 })
 export class GuardAdmin extends BeanBase implements IGuardExecute {
@@ -128,7 +127,6 @@ config.onions = {
 
 ``` diff
 @Guard({
-  global: true,
 + dependencies: 'a-user:passport',
   name: 'admin',
 })
@@ -141,7 +139,6 @@ class GuardAdmin {}
 
 ``` diff
 @Guard({
-  global: true,
 + dependents: 'a-user:passport',
   name: 'admin',
 })
@@ -192,7 +189,6 @@ config.onions = {
 
 ``` diff
 @Guard({
-  global: true,
 + meta: {
 +   flavor: 'normal',
 +   mode: 'dev',

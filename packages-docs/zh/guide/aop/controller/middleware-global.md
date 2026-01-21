@@ -21,7 +21,8 @@ $ vona :create:bean middleware logger --module=demo-student --boilerplate=global
 ``` typescript
 export interface IMiddlewareOptionsLogger extends IDecoratorMiddlewareOptionsGlobal {}
 
-@Middleware<IMiddlewareOptionsLogger>({ global: true })
+@Middleware<IMiddlewareOptionsLogger>()
+@Global()
 export class MiddlewareLogger extends BeanBase implements IMiddlewareExecute {
   async execute(_options: IMiddlewareOptionsLogger, next: Next) {
     const timeBegin = Date.now();
@@ -58,7 +59,6 @@ export interface IMiddlewareOptionsLogger extends IDecoratorMiddlewareOptionsGlo
 
 ``` diff
 @Middleware<IMiddlewareOptionsLogger>({
-  global: true,
 + prefix: 'time',
 })
 ```
@@ -71,7 +71,6 @@ export interface IMiddlewareOptionsLogger extends IDecoratorMiddlewareOptionsGlo
 }
 
 @Middleware<IMiddlewareOptionsLogger>({
-  global: true,
   prefix: 'time',
 })
 class MiddlewareLogger {
@@ -131,7 +130,6 @@ config.onions = {
 
 ``` diff
 @Middleware({
-  global: true,
 + dependencies: 'a-core:gate',
   prefix: 'time',
 })
@@ -144,7 +142,6 @@ class MiddlewareLogger {}
 
 ``` diff
 @Middleware({
-  global: true,
 + dependents: 'a-core:gate',
   prefix: 'time',
 })
@@ -195,7 +192,6 @@ config.onions = {
 
 ``` diff
 @Middleware({
-  global: true,
 + meta: {
 +   flavor: 'normal',
 +   mode: 'dev',
