@@ -1,4 +1,5 @@
 import type { Constructable } from 'vona';
+import type { IOpenApiOptionsResourceMeta } from 'vona-module-a-openapi';
 import type { IOpenApiOptions } from 'vona-module-a-openapiutils';
 import type { IDecoratorControllerOptions } from '../../types/controller.ts';
 import type { IDecoratorDtoOptions } from '../../types/dto.ts';
@@ -6,6 +7,16 @@ import { appMetadata, appResource, cast, createBeanDecorator, deepExtend, onionN
 import { mergeFieldsOpenapiMetadata } from 'vona-module-a-openapiutils';
 import { SymbolOpenApiOptions } from 'vona-module-a-openapiutils';
 import { recordResourceNameToRoutePath, SymbolControllerOptionsResource } from '../const.ts';
+
+export function Resource(resourceMeta?: IOpenApiOptionsResourceMeta): ClassDecorator {
+  return function (target: object) {
+    // IOpenApiOptions
+    const optionsMeta = appMetadata.getOwnMetadataMap(false, SymbolOpenApiOptions, target) as IOpenApiOptions;
+    optionsMeta.resourceMeta = resourceMeta;
+    // controller options: resource
+    appMetadata.defineMetadata(SymbolControllerOptionsResource, true, target);
+  };
+}
 
 export function Controller<T extends IDecoratorControllerOptions>(options?: T): ClassDecorator;
 export function Controller<T extends IDecoratorControllerOptions>(path?: string, options?: Omit<T, 'path'>): ClassDecorator;
