@@ -4,7 +4,7 @@ import type { ILocaleMagic, VonaApplication } from 'vona';
 import type z from 'zod';
 import type { SchemaLikeCreate } from './decorator.ts';
 
-export interface IOpenApiHeader {
+export interface IOpenapiHeader {
   name: string;
   description?: string;
 }
@@ -25,7 +25,7 @@ export interface IOpenapiSchemaObject {
 
 export type TypeSecuritySchemes = Record<string, ((this: VonaApplication) => object) | object>;
 
-export interface IOpenApiOptions {
+export interface IOpenapiOptions {
   public?: boolean;
   description?: string | ILocaleMagic;
   summary?: string | ILocaleMagic;
@@ -36,7 +36,7 @@ export interface IOpenApiOptions {
   exclude?: boolean;
   tags?: string[];
   operationId?: string;
-  headers?: IOpenApiHeader[];
+  headers?: IOpenapiHeader[];
   setHeaders?: IResponseHeaders;
 }
 

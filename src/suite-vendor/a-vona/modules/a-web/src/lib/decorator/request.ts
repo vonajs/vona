@@ -1,4 +1,4 @@
-import type { IOpenApiOptions } from 'vona-module-a-openapiutils';
+import type { IOpenapiOptions } from 'vona-module-a-openapiutils';
 import type { TypeRequestMethod } from '../../types/request.ts';
 import { appMetadata } from 'vona';
 import { SymbolOpenApiOptions } from 'vona-module-a-openapiutils';
@@ -7,7 +7,7 @@ import { SymbolRequestMappingHandler } from '../../types/request.ts';
 export interface RequestMappingMetadata {
   path?: string;
   method?: TypeRequestMethod;
-  options?: IOpenApiOptions;
+  options?: IOpenapiOptions;
 }
 
 const defaultMetadata: RequestMappingMetadata = {
@@ -24,7 +24,7 @@ export function RequestMapping(metadata: RequestMappingMetadata = defaultMetadat
   return (target: object, prop: string | symbol, descriptor: TypedPropertyDescriptor<any>) => {
     appMetadata.defineMetadata(SymbolRequestMappingHandler, { path, method }, target, prop);
     if (options) {
-      const optionsMeta = appMetadata.getOwnMetadataMap(false, SymbolOpenApiOptions, target, prop) as IOpenApiOptions;
+      const optionsMeta = appMetadata.getOwnMetadataMap(false, SymbolOpenApiOptions, target, prop) as IOpenapiOptions;
       Object.assign(optionsMeta, options);
     }
     return descriptor;
@@ -32,7 +32,7 @@ export function RequestMapping(metadata: RequestMappingMetadata = defaultMetadat
 }
 
 function createMappingDecorator(method: TypeRequestMethod) {
-  return (path?: IOpenApiOptions | string, options?: IOpenApiOptions): MethodDecorator => {
+  return (path?: IOpenapiOptions | string, options?: IOpenapiOptions): MethodDecorator => {
     if (path && typeof path === 'object') {
       options = path;
       path = undefined;

@@ -1,5 +1,5 @@
 import type { Constructable } from 'vona';
-import type { IOpenApiOptions } from 'vona-module-a-openapiutils';
+import type { IOpenapiOptions } from 'vona-module-a-openapiutils';
 import type { IDecoratorControllerOptions } from '../../types/controller.ts';
 import type { IDecoratorDtoOptions } from '../../types/dto.ts';
 import { appMetadata, appResource, cast, createBeanDecorator, deepExtend, onionNameFromBeanFullName, useApp } from 'vona';
@@ -18,13 +18,13 @@ export function Controller<T extends IDecoratorControllerOptions>(path?: T | str
   return createBeanDecorator('controller', options, false, target => {
     // beanOptions
     const beanOptions = appResource.getBean(target)!;
-    // IOpenApiOptions
-    const optionsMeta = appMetadata.getOwnMetadataMap(false, SymbolOpenApiOptions, target) as IOpenApiOptions;
+    // IOpenapiOptions
+    const optionsMeta = appMetadata.getOwnMetadataMap(false, SymbolOpenApiOptions, target) as IOpenapiOptions;
     for (const key in cast(beanOptions.options)) {
       if (key === 'path') continue;
       optionsMeta[key] = cast(beanOptions.options)[key];
     }
-    // IOpenApiOptions
+    // IOpenapiOptions
     mergeActionsOpenapiMetadata(target);
     // map: resourceName->api path
     const onionName = onionNameFromBeanFullName(beanOptions.beanFullName);
@@ -59,9 +59,9 @@ export function mergeActionsOpenapiMetadata(target: Constructable) {
   const actions = cast(beanOptions?.options)?.actions;
   if (!actions) return;
   for (const key in actions) {
-    const action: IOpenApiOptions = actions[key];
+    const action: IOpenapiOptions = actions[key];
     if (!action) continue;
-    const options = appMetadata.getOwnMetadataMap(false, SymbolOpenApiOptions, target.prototype, key) as IOpenApiOptions;
+    const options = appMetadata.getOwnMetadataMap(false, SymbolOpenApiOptions, target.prototype, key) as IOpenapiOptions;
     deepExtend(options, action);
   }
 }

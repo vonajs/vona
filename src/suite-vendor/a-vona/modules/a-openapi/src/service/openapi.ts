@@ -1,7 +1,7 @@
 import type { OpenAPIObject as OpenAPIObject30, SchemaObject as SchemaObject30, SecurityRequirementObject } from 'openapi3-ts/oas30';
 import type { OpenAPIObject as OpenAPIObject31, SchemaObject as SchemaObject31 } from 'openapi3-ts/oas31';
 import type { Constructable, IDecoratorBeanOptionsBase } from 'vona';
-import type { IOpenApiHeader, IOpenApiOptions, TypeGenerateJsonScene } from 'vona-module-a-openapiutils';
+import type { IOpenapiHeader, IOpenapiOptions, TypeGenerateJsonScene } from 'vona-module-a-openapiutils';
 import type { IDecoratorControllerOptions, RequestMappingMetadata, TypeRequestMethod } from 'vona-module-a-web';
 import type { RouteHandlerArgumentMetaDecorator } from '../types/decorator.ts';
 import * as ModuleInfo from '@cabloy/module-info';
@@ -157,7 +157,7 @@ export class ServiceOpenapi extends BeanBase {
     const controllerBeanFullName = beanOptions.beanFullName;
     const controllerOptions = beanOptions.options as IDecoratorControllerOptions;
     const controllerPath = controllerOptions.path;
-    const controllerOpenApiOptions = appMetadata.getMetadata<IOpenApiOptions>(SymbolOpenApiOptions, controller);
+    const controllerOpenApiOptions = appMetadata.getMetadata<IOpenapiOptions>(SymbolOpenApiOptions, controller);
     if (controllerOpenApiOptions?.exclude) return;
     // descs
     const descs = Object.getOwnPropertyDescriptors(controller.prototype);
@@ -187,7 +187,7 @@ export class ServiceOpenapi extends BeanBase {
     beanOptions: IDecoratorBeanOptionsBase,
     _controllerBeanFullName: string,
     controllerPath: string | undefined,
-    controllerOpenApiOptions: IOpenApiOptions | undefined,
+    controllerOpenApiOptions: IOpenapiOptions | undefined,
     actionKey: string,
     _desc: PropertyDescriptor,
   ) {
@@ -195,7 +195,7 @@ export class ServiceOpenapi extends BeanBase {
     const app = this.app;
 
     // action options: should not extend controllerOpenApiOptions
-    const actionOpenApiOptions = appMetadata.getMetadata<IOpenApiOptions>(
+    const actionOpenApiOptions = appMetadata.getMetadata<IOpenapiOptions>(
       SymbolOpenApiOptions,
       controller.prototype,
       actionKey,
@@ -259,8 +259,8 @@ export class ServiceOpenapi extends BeanBase {
     info: ModuleInfo.IModuleInfo,
     controller: Constructable,
     actionKey: string,
-    actionOpenApiOptions: IOpenApiOptions | undefined,
-    controllerOpenApiOptions: IOpenApiOptions | undefined,
+    actionOpenApiOptions: IOpenapiOptions | undefined,
+    controllerOpenApiOptions: IOpenapiOptions | undefined,
   ) {
     // meta
     const argsMeta = this._prepareArgsMeta(controller, actionKey, actionOpenApiOptions, controllerOpenApiOptions);
@@ -346,7 +346,7 @@ export class ServiceOpenapi extends BeanBase {
   private _collectResponses(
     controller: Constructable,
     actionKey: string,
-    actionOpenApiOptions: IOpenApiOptions | undefined,
+    actionOpenApiOptions: IOpenapiOptions | undefined,
   ) {
     // contentType
     const contentType = actionOpenApiOptions?.contentType || 'application/json';
@@ -369,7 +369,7 @@ export class ServiceOpenapi extends BeanBase {
   private _parseBodySchema(
     controller: Constructable,
     actionKey: string,
-    actionOpenApiOptions: IOpenApiOptions | undefined,
+    actionOpenApiOptions: IOpenapiOptions | undefined,
     contentType: string,
   ) {
     // bodySchema
@@ -390,8 +390,8 @@ export class ServiceOpenapi extends BeanBase {
   private _prepareArgsMeta(
     controller: Constructable,
     actionKey: string,
-    actionOpenApiOptions: IOpenApiOptions | undefined,
-    controllerOpenApiOptions: IOpenApiOptions | undefined,
+    actionOpenApiOptions: IOpenapiOptions | undefined,
+    controllerOpenApiOptions: IOpenapiOptions | undefined,
   ) {
     // meta
     let argsMeta = appMetadata.getMetadata<RouteHandlerArgumentMetaDecorator[]>(
@@ -419,7 +419,7 @@ export class ServiceOpenapi extends BeanBase {
     return argsMeta;
   }
 
-  private _combineArgHeaders(headers?: IOpenApiHeader[] | undefined) {
+  private _combineArgHeaders(headers?: IOpenapiHeader[] | undefined) {
     if (!headers) return;
     const objHeaders = {};
     for (const header of headers) {

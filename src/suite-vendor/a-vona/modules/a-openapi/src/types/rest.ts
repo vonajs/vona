@@ -1,7 +1,7 @@
 import type { ZodOpenAPIMetadata } from '@cabloy/zod-to-openapi';
 import type { CurrencyOptions } from '@zhennann/currency';
 import type { ILocaleMagic } from 'vona';
-import type { IOpenApiOptions } from 'vona-module-a-openapiutils';
+import type { IOpenapiOptions } from 'vona-module-a-openapiutils';
 import type { z } from 'zod';
 import type { TypeResourceActionRowRecordRender } from './actions.ts';
 import type { ISchemaObjectExtensionFieldCaptcha } from './captcha.ts';
@@ -101,5 +101,5 @@ export type TypeEntityOptionsFields<T extends {}, More extends string | undefine
 };
 
 export type TypeControllerOptionsActions<T extends {}> = {
-  [key in (keyof T)]?: IOpenApiOptions;
+  [key in (keyof T)]?: IOpenapiOptions;
 };
