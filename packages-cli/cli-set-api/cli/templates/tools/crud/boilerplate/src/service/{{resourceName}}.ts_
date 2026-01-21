@@ -14,11 +14,11 @@ export class Service<%=argv.resourceNameCapitalize%> extends BeanBase {
     return await this.scope.model.<%=argv.resourceName%>.insert(<%=argv.resourceName%>);
   }
 
-  async findMany(params?: IQueryParams<Model<%=argv.resourceNameCapitalize%>>): Promise<Dto<%=argv.resourceNameCapitalize%>QueryRes> {
+  async select(params?: IQueryParams<Model<%=argv.resourceNameCapitalize%>>): Promise<Dto<%=argv.resourceNameCapitalize%>QueryRes> {
     return await this.scope.model.<%=argv.resourceName%>.selectAndCount(params);
   }
 
-  async findOne(id: TableIdentity): Promise<Entity<%=argv.resourceNameCapitalize%> | undefined> {
+  async view(id: TableIdentity): Promise<Entity<%=argv.resourceNameCapitalize%> | undefined> {
     return await this.scope.model.<%=argv.resourceName%>.getById(id);
   }
 
@@ -26,7 +26,7 @@ export class Service<%=argv.resourceNameCapitalize%> extends BeanBase {
     return await this.scope.model.<%=argv.resourceName%>.updateById(id, <%=argv.resourceName%>);
   }
 
-  async remove(id: TableIdentity) {
+  async delete(id: TableIdentity) {
     return await this.scope.model.<%=argv.resourceName%>.deleteById(id);
   }
 }

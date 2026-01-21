@@ -23,14 +23,14 @@ export class Controller<%=argv.resourceNameCapitalize%> extends BeanBase {
 
   @Web.get()
   @Api.body(Dto<%=argv.resourceNameCapitalize%>QueryRes)
-  async findMany(@Arg.filter(Dto<%=argv.resourceNameCapitalize%>Query) params: IQueryParams<Model<%=argv.resourceNameCapitalize%>>): Promise<Dto<%=argv.resourceNameCapitalize%>QueryRes> {
-    return await this.scope.service.<%=argv.resourceName%>.findMany(params);
+  async select(@Arg.filter(Dto<%=argv.resourceNameCapitalize%>Query) params: IQueryParams<Model<%=argv.resourceNameCapitalize%>>): Promise<Dto<%=argv.resourceNameCapitalize%>QueryRes> {
+    return await this.scope.service.<%=argv.resourceName%>.select(params);
   }
 
   @Web.get(':id')
   @Api.body(v.optional(), v.object(Entity<%=argv.resourceNameCapitalize%>))
-  async findOne(@Arg.param('id', v.tableIdentity()) id: TableIdentity): Promise<Entity<%=argv.resourceNameCapitalize%> | undefined> {
-    return await this.scope.service.<%=argv.resourceName%>.findOne(id);
+  async view(@Arg.param('id', v.tableIdentity()) id: TableIdentity): Promise<Entity<%=argv.resourceNameCapitalize%> | undefined> {
+    return await this.scope.service.<%=argv.resourceName%>.view(id);
   }
 
   @Web.patch(':id')
@@ -39,7 +39,7 @@ export class Controller<%=argv.resourceNameCapitalize%> extends BeanBase {
   }
 
   @Web.delete(':id')
-  async remove(@Arg.param('id', v.tableIdentity()) id: TableIdentity) {
-    return await this.scope.service.<%=argv.resourceName%>.remove(id);
+  async delete(@Arg.param('id', v.tableIdentity()) id: TableIdentity) {
+    return await this.scope.service.<%=argv.resourceName%>.delete(id);
   }
 }
