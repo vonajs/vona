@@ -91,7 +91,7 @@ export class ServiceWatch extends BeanBase {
       // eslint-disable-next-line
       console.log(chalk.cyan(message));
       // only reload
-      this.app.bean.worker.reload();
+      this.app.bean.worker.reloadAll();
       return;
     }
     const timeBegin = new Date();
