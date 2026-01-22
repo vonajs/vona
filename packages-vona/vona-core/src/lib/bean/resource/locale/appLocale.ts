@@ -7,7 +7,7 @@ import { isLocaleMagic } from './utils.ts';
 
 export class AppLocale extends BeanSimple {
   get current(): keyof ILocaleRecord {
-    return this.ctx.locale;
+    return this.ctx ? this.ctx.locale : 'en-us';
   }
 
   set current(value: keyof ILocaleRecord) {

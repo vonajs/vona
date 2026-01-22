@@ -11,6 +11,7 @@ import { Service } from 'vona-module-a-bean';
 type TypePathWatchStrict = [TypeHmrWatchScene, RegExp];
 
 const __pathesWatch = [
+  'src/backend/config/config/*.tsx',
   '**/src/config/errors.ts',
   '**/src/config/locale/*.ts',
   '**/src/config/config.ts',
@@ -18,9 +19,9 @@ const __pathesWatch = [
   '**/src/controller/*.ts(x)?',
   '**/src/model/*.ts',
   '**/src/service/*.ts',
-  '**/src/bean/*.*.ts',
   '**/src/dto/*.ts(x)?',
   '**/src/entity/*.ts(x)?',
+  '**/src/bean/*.*.ts',
 ];
 
 const __pathesWatchStrict: TypePathWatchStrict[] = [
@@ -84,7 +85,15 @@ export class ServiceWatch extends BeanBase {
   protected async _onChangeInner(file: string) {
     const file2 = file.replace(/\\/g, '/');
     const item = __pathesWatchStrict.find(item => item[1].test(file2));
-    if (!item) return;
+    if (!item) {
+      // log
+      const message = `[hmr] reload: ${file}`;
+      // eslint-disable-next-line
+      console.log(chalk.cyan(message));
+      // only reload
+      this.app.bean.worker.reload();
+      return;
+    }
     const timeBegin = new Date();
     await this._reloadFile({
       sceneName: item[0],
