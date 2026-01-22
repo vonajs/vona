@@ -55,6 +55,13 @@ export default async function (options: IMetadataCustomGenerateOptions): Promise
   ${contentRecord}
 }`
     : '';
+  let contentResources2 = contentResources.length > 0 ? `import 'vona-module-a-openapi';
+  declare module 'vona-module-a-openapi' {
+    export interface IResourceRecord {
+      ${contentResources.join('\n')}
+    }
+  }
+  `: '';
   // combine
   const content = `/** ${sceneName}: begin */
 ${contentImports.join('\n')}
@@ -62,6 +69,7 @@ declare module 'vona-module-${moduleName}' {
   ${contentActions.join('\n')}
 }
 ${contentRecord2}
+${contentResources2}
 /** ${sceneName}: end */
 `;
   return content;
