@@ -41,7 +41,7 @@ export async function generateEntryFiles(
     // meta
     const meta = getEnvMeta(configMeta);
     configDir = path.join(configOptions.appDir, 'src/backend/config/config');
-    const files = getEnvFiles(meta, configDir, 'config', '.ts')!;
+    const files = getEnvFiles(meta, configDir, 'config', ['.ts', '.tsx'])!;
     const filenames = files.map(item => path.basename(item));
     const imports: string[] = [];
     const constNames: string[] = [];

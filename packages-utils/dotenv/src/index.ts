@@ -9,10 +9,10 @@ export function loadEnvs(
   meta: object,
   dir: string,
   prefix: string = '.env',
-  postfix?: string,
+  postfixes?: string | string[],
 ): DotenvParseOutput | undefined {
   // envfiles
-  const envFiles = getEnvFiles(meta, dir, prefix, postfix);
+  const envFiles = getEnvFiles(meta, dir, prefix, postfixes);
   if (!envFiles) return undefined;
   // dotenv
   const result = dotenv.config({ path: envFiles.reverse() });
@@ -33,19 +33,21 @@ export function metaToScope(meta: object) {
   return scope;
 }
 
-export function getEnvFiles(meta: object, dir: string, prefix: string, postfix?: string): string[] | undefined {
+export function getEnvFiles(meta: object, dir: string, prefix: string, postfixes?: string | string[]): string[] | undefined {
+  if (typeof postfixes === 'string') postfixes = [postfixes];
   // files
   let files: string[] = globbySync(`${prefix}*`, { cwd: dir });
-  const fileNames = files.map(item => {
-    if (postfix) {
-      item = item.substring(0, item.length - postfix.length);
-    }
-    return item;
-  });
   // source
   const source = {};
-  for (const fileName of fileNames) {
-    source[fileName] = true;
+  for (const file of files) {
+    if (!postfixes) {
+      source[file] = undefined;
+    } else {
+      const postfix = postfixes.find(postfix => file.endsWith(postfix));
+      if (postfix) {
+        source[file] = postfix;
+      }
+    }
   }
   // scope
   const scope = metaToScope(meta);
@@ -57,8 +59,8 @@ export function getEnvFiles(meta: object, dir: string, prefix: string, postfix?:
   // files
   files = keys.map(key => {
     let file = path.join(dir, key);
-    if (postfix) {
-      file = `${file}${postfix}`;
+    if (source[file]) {
+      file = `${file}${source[file]}`;
     }
     return file;
   });
