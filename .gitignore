@@ -29,6 +29,7 @@ miniprogram_npm
 # mine .env files
 env/.env*.mine
 /src/backend/config/config/config*.mine.ts
+/src/backend/config/config/config*.mine.tsx
 /src/backend/typing/modules.d.ts
 **/.metadata/modules.d.ts
 src/backend/typing/mine.d.ts
