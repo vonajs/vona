@@ -1,4 +1,4 @@
-import type { IControllerRecord } from 'vona-module-a-web';
+import type { IResourceRecord } from 'vona-module-a-openapi';
 
 export interface IActionOptionsBase {
   res?: string;
@@ -20,6 +20,6 @@ export interface IActionLogOptions extends IActionOptionsNone {
 }
 
 export interface IActionViewOptions extends IActionOptionsNone {
-  resource?: keyof IControllerRecord;
+  resource?: keyof IResourceRecord;
   id?: string;
 }
