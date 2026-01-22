@@ -148,6 +148,7 @@ export class BeanRouter extends BeanBase {
       routeMethod: actionMethod,
       routePath,
       routePathRaw,
+      routePathOriginal: actionPath,
     };
 
     // fn
