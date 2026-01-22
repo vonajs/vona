@@ -3,21 +3,21 @@ import type { IFormProvider } from './formProvider.ts';
 import type { ITableProvider } from './tableProvider.ts';
 
 export interface IOpenapiOptionsResourceMeta {
-  permissions?: IOpenapiOptionsRestResourcePermissions;
-  provider?: IOpenapiOptionsRestResourceProvider;
-  form?: IOpenapiOptionsRestResourceForm;
-  table?: IOpenapiOptionsRestResourceTable;
+  permissions?: IOpenapiOptionsResourceMetaPermissions;
+  provider?: IOpenapiOptionsResourceMetaProvider;
+  form?: IOpenapiOptionsResourceMetaForm;
+  table?: IOpenapiOptionsResourceMetaTable;
 }
 
-export interface IOpenapiOptionsRestResourceForm {
+export interface IOpenapiOptionsResourceMetaForm {
   provider?: IFormProvider;
 }
 
-export interface IOpenapiOptionsRestResourceTable {
+export interface IOpenapiOptionsResourceMetaTable {
   provider?: ITableProvider;
 }
 
-export interface IOpenapiOptionsRestResourcePermissions {
+export interface IOpenapiOptionsResourceMetaPermissions {
   table?: TypeOpenApiOptionsRestResourcePermissionsTable;
   row?: TypeOpenApiOptionsRestResourcePermissionsRow;
 }
@@ -30,11 +30,11 @@ export type TypeOpenApiOptionsRestResourcePermissionsRow = {
   [key in keyof TypeResourceActionRowRecord]?: boolean;
 };
 
-export interface IOpenapiOptionsRestResourceProvider {
-  components?: IOpenapiOptionsRestResourceProviderComponents;
+export interface IOpenapiOptionsResourceMetaProvider {
+  components?: IOpenapiOptionsResourceMetaProviderComponents;
 }
 
-export interface IOpenapiOptionsRestResourceProviderComponents {
+export interface IOpenapiOptionsResourceMetaProviderComponents {
   restPage?: TypeComponentRecordSelectorKeysStrict<'restPage'>;
   table?: TypeComponentRecordSelectorKeysStrict<'table'>;
   form?: TypeComponentRecordSelectorKeysStrict<'form'>;
