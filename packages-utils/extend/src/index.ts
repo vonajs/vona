@@ -84,6 +84,10 @@ export function extend(...args) {
     options = args[i];
     // Only deal with non-null/undefined values
     if (options != null) {
+      if (options.$$typeof) {
+        target = options;
+        continue;
+      }
       // Extend the base object
       for (name in options) {
         src = getProperty(target, name);
