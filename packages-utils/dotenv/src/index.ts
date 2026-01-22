@@ -45,7 +45,7 @@ export function getEnvFiles(meta: object, dir: string, prefix: string, postfixes
     } else {
       const postfix = postfixes.find(postfix => file.endsWith(postfix));
       if (postfix) {
-        source[file] = postfix;
+        source[file.substring(0, file.length - postfix.length)] = postfix;
       }
     }
   }
@@ -59,8 +59,8 @@ export function getEnvFiles(meta: object, dir: string, prefix: string, postfixes
   // files
   files = keys.map(key => {
     let file = path.join(dir, key);
-    if (source[file]) {
-      file = `${file}${source[file]}`;
+    if (source[key]) {
+      file = `${file}${source[key]}`;
     }
     return file;
   });
