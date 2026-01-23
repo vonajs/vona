@@ -1,5 +1,7 @@
 import { isNil } from './check.ts';
 
+export interface IParamsAndQuery { params?: Record<string, any>; query?: Record<string, any> }
+
 export function deprecated(oldUsage, newUsage) {
   const message = '`'
     .concat(oldUsage, '` is deprecated and will be removed in a later version. Use `')
@@ -137,7 +139,7 @@ export function getRandomInt(size: number, start: number = 0) {
   return Math.floor(Math.random() * size) + start;
 }
 
-export function combineParamsAndQuery(path: string, options?: { params?: object; query?: object }): string {
+export function combineParamsAndQuery(path?: string, options?: IParamsAndQuery): string {
   return combineQueries(defaultPathSerializer(path, options?.params), options?.query);
 }
 
@@ -175,18 +177,22 @@ export function combineQueries(pagePath?: string, queries?: Record<string, any>)
 
 const PATH_PARAM_RE = /\{([^{}/]+)\}/g;
 const PATH_PARAM_RE2 = /:([^/]+)/g;
-export function defaultPathSerializer(pathName: string, pathParams?: Record<string, any>): string {
+export function defaultPathSerializer<T extends string | undefined>(
+  pathName?: T,
+  pathParams?: Record<string, any>,
+): T extends string ? string : undefined {
+  if (!pathName) return undefined as any;
   pathParams = pathParams ?? {};
   for (const item of [PATH_PARAM_RE, PATH_PARAM_RE2]) {
-    pathName = pathName.replace(item, (_, _part: string) => {
+    pathName = pathName!.replace(item, (_, _part: string) => {
       if (_part.includes('?'))_part = _part.substring(0, _part.length - 1);
       const value = pathParams?.[_part];
       if (value === undefined || value === null) return '';
       if (typeof value === 'object') return encodeURIComponent(JSON.stringify(value));
       return encodeURIComponent(value);
-    });
+    }) as any;
   }
-  return pathName;
+  return pathName as any;
 }
 
 export function ensureArray(arr: any, sep?: string) {
