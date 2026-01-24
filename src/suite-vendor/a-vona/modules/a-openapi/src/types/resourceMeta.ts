@@ -1,4 +1,4 @@
-import type { TypeComponentRecordSelectorKeysStrict, TypeResourceActionRowRecord, TypeResourceActionTableRecord } from 'vona-module-a-openapi';
+import type { TypeComponentRecordSelectorKeysStrict, TypeRenderComponentJsx, TypeResourceActionRowRecord, TypeResourceActionTableRecord } from 'vona-module-a-openapi';
 import type { IFormProvider } from './formProvider.ts';
 import type { ITableProvider } from './tableProvider.ts';
 
@@ -35,7 +35,7 @@ export interface IOpenapiOptionsResourceMetaProvider {
 }
 
 export interface IOpenapiOptionsResourceMetaProviderComponents {
-  restPage?: TypeComponentRecordSelectorKeysStrict<'restPage'>;
+  restPage?: TypeComponentRecordSelectorKeysStrict<'restPage'> | TypeRenderComponentJsx;
   table?: TypeComponentRecordSelectorKeysStrict<'table'>;
   form?: TypeComponentRecordSelectorKeysStrict<'form'>;
 }
