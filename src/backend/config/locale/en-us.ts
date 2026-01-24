@@ -1,8 +1,6 @@
 import type { VonaLocaleOptional } from 'vona';
 
-const localeDefault = {
-  Home: 'Home',
-};
+const localeDefault = {};
 
 const localeModules: VonaLocaleOptional = {};
 localeModules.modules = {};
