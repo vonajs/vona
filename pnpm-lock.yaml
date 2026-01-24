@@ -162,9 +162,6 @@ importers:
       vona-module-a-executor:
         specifier: workspace:^
         version: link:src/suite-vendor/a-vona/modules/a-executor
-      vona-module-a-i18n:
-        specifier: workspace:^
-        version: link:src/suite-vendor/a-vona/modules/a-i18n
       vona-module-a-index:
         specifier: workspace:^
         version: link:src/suite-vendor/a-vona/modules/a-index
@@ -174,6 +171,9 @@ importers:
       vona-module-a-jwt:
         specifier: workspace:^
         version: link:src/suite-vendor/a-vona/modules/a-jwt
+      vona-module-a-locale:
+        specifier: workspace:^
+        version: link:src/suite-vendor/a-vona/modules/a-locale
       vona-module-a-logger:
         specifier: workspace:^
         version: link:src/suite-vendor/a-vona/modules/a-logger
@@ -1270,9 +1270,6 @@ importers:
       vona-module-a-hmr:
         specifier: ^5.0.10
         version: link:modules/a-hmr
-      vona-module-a-i18n:
-        specifier: ^5.0.22
-        version: link:modules/a-i18n
       vona-module-a-index:
         specifier: ^5.0.22
         version: link:modules/a-index
@@ -1282,6 +1279,9 @@ importers:
       vona-module-a-jwt:
         specifier: ^5.0.29
         version: link:modules/a-jwt
+      vona-module-a-locale:
+        specifier: ^5.0.22
+        version: link:modules/a-locale
       vona-module-a-logger:
         specifier: ^5.0.33
         version: link:modules/a-logger
@@ -1720,15 +1720,6 @@ importers:
         specifier: ^6.0.1
         version: 6.1.2
 
-  src/suite-vendor/a-vona/modules/a-i18n:
-    devDependencies:
-      clean-package:
-        specifier: ^2.2.0
-        version: 2.2.0
-      rimraf:
-        specifier: ^6.0.1
-        version: 6.1.2
-
   src/suite-vendor/a-vona/modules/a-index:
     devDependencies:
       clean-package:
@@ -1765,6 +1756,15 @@ importers:
       ms:
         specifier: ^2.1.3
         version: 2.1.3
+    devDependencies:
+      clean-package:
+        specifier: ^2.2.0
+        version: 2.2.0
+      rimraf:
+        specifier: ^6.0.1
+        version: 6.1.2
+
+  src/suite-vendor/a-vona/modules/a-locale:
     devDependencies:
       clean-package:
         specifier: ^2.2.0

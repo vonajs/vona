@@ -96,9 +96,6 @@
       "path": "modules/a-security/tsconfig.build.json"
     },
     {
-      "path": "modules/a-i18n/tsconfig.build.json"
-    },
-    {
       "path": "modules/a-error/tsconfig.build.json"
     },
     {
@@ -106,6 +103,9 @@
     },
     {
       "path": "modules/a-worker/tsconfig.build.json"
+    },
+     {
+      "path": "modules/a-locale/tsconfig.build.json"
     },
     {
       "path": "modules/a-logger/tsconfig.build.json"

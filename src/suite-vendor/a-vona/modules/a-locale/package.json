@@ -1,8 +1,8 @@
 {
-  "name": "vona-module-a-i18n",
+  "name": "vona-module-a-locale",
   "type": "module",
   "version": "5.0.22",
-  "title": "a-i18n",
+  "title": "a-locale",
   "vonaModule": {
     "dependencies": {},
     "capabilities": {
