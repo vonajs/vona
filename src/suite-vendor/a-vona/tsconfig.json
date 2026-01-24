@@ -104,7 +104,7 @@
     {
       "path": "modules/a-worker/tsconfig.build.json"
     },
-     {
+    {
       "path": "modules/a-locale/tsconfig.build.json"
     },
     {
@@ -172,6 +172,9 @@
     },
     {
       "path": "modules/a-actions/tsconfig.build.json"
+    },
+    {
+      "path": "modules/a-localeutils/tsconfig.build.json"
     }
   ],
   "exclude": [
