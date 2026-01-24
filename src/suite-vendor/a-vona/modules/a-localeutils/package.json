@@ -1,7 +1,7 @@
 {
   "name": "vona-module-a-localeutils",
   "type": "module",
-  "version": "5.0.0",
+  "version": "5.0.1",
   "title": "a-localeutils",
   "vonaModule": {
     "dependencies": {
@@ -20,7 +20,9 @@
     "./package.json": "./package.json"
   },
   "description": "",
-  "keywords": ["Vona Module"],
+  "keywords": [
+    "Vona Module"
+  ],
   "author": "",
   "files": [
     "assets",
@@ -41,7 +43,6 @@
       "exports.\\..import"
     ]
   },
-  "dependencies": {},
   "devDependencies": {
     "clean-package": "^2.2.0",
     "rimraf": "^6.0.1"
