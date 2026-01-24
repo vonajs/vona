@@ -173,9 +173,6 @@
     {
       "path": "modules/a-actions/tsconfig.build.json"
     },
-    {
-      "path": "modules/a-localeutils/tsconfig.build.json"
-    }
   ],
   "exclude": [
     "modules"

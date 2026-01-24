@@ -30,7 +30,6 @@
     "vona-module-a-instance": "^5.0.52",
     "vona-module-a-jwt": "^5.0.29",
     "vona-module-a-locale": "^5.0.23",
-    "vona-module-a-localeutils": "^5.0.1",
     "vona-module-a-logger": "^5.0.33",
     "vona-module-a-mail": "^5.0.16",
     "vona-module-a-mailconfirm": "^5.0.15",

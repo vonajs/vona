@@ -31,7 +31,7 @@ importers:
         specifier: ^5.3.1
         version: 5.3.1
       '@cabloy/utils':
-        specifier: ^2.0.17
+        specifier: ^2.0.18
         version: link:packages-utils/utils
       '@cabloy/word-utils':
         specifier: ^2.0.2
@@ -174,9 +174,6 @@ importers:
       vona-module-a-locale:
         specifier: workspace:^
         version: link:src/suite-vendor/a-vona/modules/a-locale
-      vona-module-a-localeutils:
-        specifier: workspace:^
-        version: link:src/suite-vendor/a-vona/modules/a-localeutils
       vona-module-a-logger:
         specifier: workspace:^
         version: link:src/suite-vendor/a-vona/modules/a-logger
@@ -323,7 +320,7 @@ importers:
         version: file:.zova-rest/vona-home
     devDependencies:
       '@cabloy/cli':
-        specifier: ^3.0.95
+        specifier: ^3.0.96
         version: link:packages-cli/cabloy-cli
       '@cabloy/lint':
         specifier: workspace:^
@@ -383,7 +380,7 @@ importers:
         specifier: ^5.9.3
         version: 5.9.3
       vona-mock:
-        specifier: ^6.0.131
+        specifier: ^6.0.132
         version: link:packages-vona/vona-mock
       vona-module-a-hmr:
         specifier: workspace:^
@@ -1285,9 +1282,6 @@ importers:
       vona-module-a-locale:
         specifier: ^5.0.23
         version: link:modules/a-locale
-      vona-module-a-localeutils:
-        specifier: ^5.0.1
-        version: link:modules/a-localeutils
       vona-module-a-logger:
         specifier: ^5.0.33
         version: link:modules/a-logger
@@ -1771,15 +1765,6 @@ importers:
         version: 6.1.2
 
   src/suite-vendor/a-vona/modules/a-locale:
-    devDependencies:
-      clean-package:
-        specifier: ^2.2.0
-        version: 2.2.0
-      rimraf:
-        specifier: ^6.0.1
-        version: 6.1.2
-
-  src/suite-vendor/a-vona/modules/a-localeutils:
     devDependencies:
       clean-package:
         specifier: ^2.2.0
