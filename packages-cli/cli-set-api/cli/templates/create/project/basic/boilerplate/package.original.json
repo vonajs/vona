@@ -41,7 +41,7 @@
     "lint:fix": "eslint --fix"
   },
   "dependencies": {
-    "vona": "^5.0.277"
+    "vona": "^5.0.278"
   },
   "devDependencies": {
     "@cabloy/lint": "^5.0.16",
