@@ -10,9 +10,14 @@ export interface VonaModulesMeta {
   moduleNames: string[];
 }
 
+export interface IBootstrapOptionsLocales {
+  localesDefault: {};
+  localesModules: VonaLocaleOptionalMap;
+}
+
 export type TypeBootstrapOptionsModulesMeta = () => Promise<{ modulesMeta: VonaModulesMeta }>;
 export type TypeBootstrapOptionsConfig = () => Promise<{ default: TypeAppInfoConfig[] }>;
-export type TypeBootstrapOptionsLocales = () => Promise<{ locales: VonaLocaleOptionalMap }>;
+export type TypeBootstrapOptionsLocales = () => Promise<IBootstrapOptionsLocales>;
 
 export interface KoaApplicationOptions {
   env?: string | undefined;

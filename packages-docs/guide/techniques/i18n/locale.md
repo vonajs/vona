@@ -122,7 +122,7 @@ this.ctx.locale = 'en-us';
 ### 3. Get Default Locale
 
 ``` typescript
-const localeDefault = this.$scope.i18n.config.locale.defaultLocale;
+const localeDefault = this.$scope.locale.config.locale.defaultLocale;
 ```
 
 ## Rules for Getting the Current Locale
