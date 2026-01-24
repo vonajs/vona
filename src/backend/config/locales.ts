@@ -14,5 +14,5 @@ export const localesModules: VonaLocaleOptionalMap = {
 };
 
 export function $localeDefault<K extends keyof (typeof localesDefault)[TypeLocaleBase]>(key: K, ...args: any[]): any {
-  return $makeLocaleMagic(`${key}`, ...args);
+  return $makeLocaleMagic(`::${key}`, ...args);
 }
