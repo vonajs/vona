@@ -232,3 +232,17 @@ export function forEachSync<T>(arr: T[], order: boolean, fn: (item: T, index: nu
     }
   }
 }
+
+// for hold on CustomRefImpl
+export function objectAssign<T = any>(...args): T {
+  const target = args[0];
+  for (let i = 1; i < args.length; i++) {
+    const source = args[i];
+    const keys = Object.getOwnPropertyNames(source);
+    for (const key of keys) {
+      const desc = Object.getOwnPropertyDescriptor(source, key);
+      target[key] = desc?.value;
+    }
+  }
+  return target;
+}
