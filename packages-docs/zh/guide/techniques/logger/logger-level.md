@@ -75,7 +75,7 @@ config.logger = {
 };
 ```
 
-### 3. makeTransportConsole 
+### 3. makeTransportConsole
 
 对于控制台通道，有一个特殊约定：凡是`silly`分级的日志，都会输出到控制台。因此，通过`makeTransportConsole`方法实现此策略
 
@@ -103,7 +103,7 @@ config.logger = {
 ### 1. Client: `default`
 
 ``` typescript
-LOGGER_CLIENT_DEFAULT = 
+LOGGER_CLIENT_DEFAULT =
 ```
 
 支持如下值：`(empty)/true/false/{level}`
@@ -136,11 +136,11 @@ LOGGER_CLIENT_ORDER = verbose
 class ControllerStudent {
   async test() {
     // logger: default
-    const levelDefault = this.bean.logger.getLevel();
+    const levelDefault = this.bean.logger.getFilterLevel();
     // logger: order
-    const levelOrder = this.bean.logger.getLevel('order');
+    const levelOrder = this.bean.logger.getFilterLevel('order');
   }
-}  
+}
 ```
 
 ## 动态修改分级
@@ -153,22 +153,22 @@ class ControllerStudent {
 class ControllerStudent {
   async test() {
     // level: info
-    let levelDefault = this.bean.logger.getLevel();
+    let levelDefault = this.bean.logger.getFilterLevel();
     assert.equal(levelDefault, 'info');
     this.$logger.debug('1: this line will not output');
     // level: debug
-    this.bean.logger.setLevel('debug');
-    levelDefault = this.bean.logger.getLevel();
+    this.bean.logger.setFilterLevel('debug');
+    levelDefault = this.bean.logger.getFilterLevel();
     assert.equal(levelDefault, 'debug');
     this.$logger.debug('2: this line will output');
     // disable
-    this.bean.logger.setLevel(false);
-    levelDefault = this.bean.logger.getLevel();
+    this.bean.logger.setFilterLevel(false);
+    levelDefault = this.bean.logger.getFilterLevel();
     assert.equal(levelDefault, false);
     this.$logger.info('3: this line will not output');
     this.$logger.debug('4: this line will not output');
     // enable
-    this.bean.logger.setLevel(true);
+    this.bean.logger.setFilterLevel(true);
   }
 }
 ```

@@ -103,7 +103,7 @@ Since multiple Clients can be configured, each Client can configure its own defa
 ### 1. Client: `default`
 
 ``` typescript
-LOGGER_CLIENT_DEFAULT = 
+LOGGER_CLIENT_DEFAULT =
 ```
 
 The following values ​​are supported: `(empty)/true/false/{level}`
@@ -136,11 +136,11 @@ The current level can be obtained during system running:
 class ControllerStudent {
   async test() {
     // logger: default
-    const levelDefault = this.bean.logger.getLevel();
+    const levelDefault = this.bean.logger.getFilterLevel();
     // logger: order
-    const levelOrder = this.bean.logger.getLevel('order');
+    const levelOrder = this.bean.logger.getFilterLevel('order');
   }
-}  
+}
 ```
 
 ## Dynamically Modifying the Level
@@ -153,22 +153,22 @@ When the `setLevel` method is called, the system automatically broadcasts it to 
 class ControllerStudent {
   async test() {
     // level: info
-    let levelDefault = this.bean.logger.getLevel();
+    let levelDefault = this.bean.logger.getFilterLevel();
     assert.equal(levelDefault, 'info');
     this.$logger.debug('1: this line will not output');
     // level: debug
-    this.bean.logger.setLevel('debug');
-    levelDefault = this.bean.logger.getLevel();
+    this.bean.logger.setFilterLevel('debug');
+    levelDefault = this.bean.logger.getFilterLevel();
     assert.equal(levelDefault, 'debug');
     this.$logger.debug('2: this line will output');
     // disable
-    this.bean.logger.setLevel(false);
-    levelDefault = this.bean.logger.getLevel();
+    this.bean.logger.setFilterLevel(false);
+    levelDefault = this.bean.logger.getFilterLevel();
     assert.equal(levelDefault, false);
     this.$logger.info('3: this line will not output');
     this.$logger.debug('4: this line will not output');
     // enable
-    this.bean.logger.setLevel(true);
+    this.bean.logger.setFilterLevel(true);
   }
 }
 ```
