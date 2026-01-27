@@ -6,13 +6,13 @@ import * as Winston from 'winston';
 
 @Bean()
 export class BeanLogger extends BeanBase {
-  public getLevel(clientName?: keyof ILoggerClientRecord): LoggerLevel | false {
-    return this.app.meta.logger.getLevel(clientName);
+  public getFilterLevel(clientName?: keyof ILoggerClientRecord): LoggerLevel | false {
+    return this.app.meta.logger.getFilterLevel(clientName);
   }
 
-  public setLevel(level: LoggerLevel | boolean, clientName?: keyof ILoggerClientRecord) {
-    this.app.meta.logger.setLevel(level, clientName);
-    this.scope.broadcast.setLevel.emit({ level, clientName });
+  public setFilterLevel(level: LoggerLevel | boolean, clientName?: keyof ILoggerClientRecord) {
+    this.app.meta.logger.setFilterLevel(level, clientName);
+    this.scope.broadcast.setFilterLevel.emit({ level, clientName });
   }
 
   public getFilterChild(clientName?: keyof ILoggerClientRecord): string[] | undefined {

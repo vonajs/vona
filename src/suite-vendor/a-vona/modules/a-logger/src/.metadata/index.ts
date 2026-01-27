@@ -78,14 +78,14 @@ declare module 'vona' {
 /** bean: end */
 /** broadcast: begin */
 export * from '../bean/broadcast.setFilterChild.ts';
-export * from '../bean/broadcast.setLevel.ts';
+export * from '../bean/broadcast.setFilterLevel.ts';
 
 import { type IDecoratorBroadcastOptions } from 'vona-module-a-broadcast';
 declare module 'vona-module-a-broadcast' {
   
     export interface IBroadcastRecord {
       'a-logger:setFilterChild': IDecoratorBroadcastOptions;
-'a-logger:setLevel': IDecoratorBroadcastOptions;
+'a-logger:setFilterLevel': IDecoratorBroadcastOptions;
     }
 
   
@@ -103,24 +103,24 @@ declare module 'vona-module-a-logger' {
             get $onionOptions(): IDecoratorBroadcastOptions;
           }
 
-        export interface BroadcastSetLevel {
+        export interface BroadcastSetFilterLevel {
           /** @internal */
           get scope(): ScopeModuleALogger;
         }
 
-          export interface BroadcastSetLevel {
-            get $beanFullName(): 'a-logger.broadcast.setLevel';
-            get $onionName(): 'a-logger:setLevel';
+          export interface BroadcastSetFilterLevel {
+            get $beanFullName(): 'a-logger.broadcast.setFilterLevel';
+            get $onionName(): 'a-logger:setFilterLevel';
             get $onionOptions(): IDecoratorBroadcastOptions;
           } 
 }
 /** broadcast: end */
 /** broadcast: begin */
 import type { BroadcastSetFilterChild } from '../bean/broadcast.setFilterChild.ts';
-import type { BroadcastSetLevel } from '../bean/broadcast.setLevel.ts';
+import type { BroadcastSetFilterLevel } from '../bean/broadcast.setFilterLevel.ts';
 export interface IModuleBroadcast {
   'setFilterChild': BroadcastSetFilterChild;
-'setLevel': BroadcastSetLevel;
+'setFilterLevel': BroadcastSetFilterLevel;
 }
 /** broadcast: end */
 /** main: begin */

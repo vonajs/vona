@@ -32,7 +32,7 @@ export class AppLogger extends BeanSimple {
     return logger.child({ name: childName });
   }
 
-  getLevel(clientName?: keyof ILoggerClientRecord): LoggerLevel | false {
+  getFilterLevel(clientName?: keyof ILoggerClientRecord): LoggerLevel | false {
     clientName = clientName || 'default';
     const envName = `LOGGER_CLIENT_${clientName.toUpperCase()}`;
     const level = this.app.meta.env[envName];
@@ -41,7 +41,7 @@ export class AppLogger extends BeanSimple {
     return level as LoggerLevel;
   }
 
-  setLevel(level: LoggerLevel | boolean, clientName?: keyof ILoggerClientRecord) {
+  setFilterLevel(level: LoggerLevel | boolean, clientName?: keyof ILoggerClientRecord) {
     clientName = clientName || 'default';
     const envName = `LOGGER_CLIENT_${clientName.toUpperCase()}`;
     this.app.meta.env[envName] = level.toString();
