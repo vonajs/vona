@@ -43,9 +43,12 @@ export const formatLoggerDummy = Winston.format(info => {
 });
 
 export const formatLoggerFilter = Winston.format(((info: any, opts: ILoggerFormatFilterOpts) => {
+  // check client
+  const child = typeof opts.child === 'function' ? opts.child() : opts.child;
+  if (child && !child.includes(info.name)) return false;
+  // check level
   const level = typeof opts.level === 'function' ? opts.level() : opts.level;
   if (!level) return false;
-  // check level
   if (opts.strict) {
     if (Winston.config.npm.levels[info.level] === Winston.config.npm.levels[level]) return __formatLoggerFilterCheckInfo(info);
     return false;
