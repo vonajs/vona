@@ -67,7 +67,7 @@ export class ServiceJwtClient extends BeanBase {
     const [res, error] = await catchError(() => {
       return this._verifyInner(token, options);
     });
-    this.$loggerChild('jwt').debug(() => `jwt.verify: client:${this._clientName}, token:${token}, error:${error?.message ?? ''}`);
+    this.$loggerChild('jwt').debug(() => `jwt.verify: client:${this._clientName}, token:${token}${error ? `, error: ${error.message}` : ''}`);
     if (error) throw error;
     return res;
   }
