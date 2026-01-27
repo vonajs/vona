@@ -1,4 +1,5 @@
 import type { IJwtClientOptions, IJwtClientRecord, IJwtPayload, IJwtSignOptions, IJwtVerifyOptions, IPayloadData } from '../types/jwt.ts';
+import { catchError } from '@cabloy/utils';
 import jwt from 'jsonwebtoken';
 import { BeanBase, cast, deepExtend } from 'vona';
 import { Service } from 'vona-module-a-bean';
@@ -63,11 +64,19 @@ export class ServiceJwtClient extends BeanBase {
 
   async verify(token?: string, options?: IJwtVerifyOptions): Promise<IPayloadData | undefined> {
     if (!token && this._clientName === 'access') token = this.scope.service.jwtExtract.fromAllWays();
+    const [res, error] = await catchError(() => {
+      return this._verifyInner(token, options);
+    });
+    this.$loggerChild('jwt').debug(() => `jwt.verify: client:${this._clientName}, token:${token}, error:${error?.message ?? ''}`);
+    if (error) throw error;
+    return res;
+  }
+
+  private async _verifyInner(token?: string, options?: IJwtVerifyOptions): Promise<IPayloadData | undefined> {
     if (!token) return undefined;
     return new Promise((resolve, reject) => {
       this._jwtInstance.verify(token, this._clientOptions.secret!, this._clientOptions.verifyOptions, (err, decoded) => {
         if (err) {
-          this.$loggerChild('jwt').debug(() => `jwt.verify: client:${this._clientName}, token:${token}, error:${err.message}`);
           return reject(err);
         }
         const payload = cast<IJwtPayload>(decoded);
