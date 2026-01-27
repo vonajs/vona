@@ -56,13 +56,18 @@ export class BeanCaptcha extends BeanBase {
   }
 
   async verify(id: string, token: unknown, sceneName: keyof ICaptchaSceneRecord): Promise<boolean> {
-    const verified = await this._verifyInner(id, token, sceneName);
-    this.$loggerChild('captcha').debug(() => `captcha.verify: id:${id}, sceneName:${sceneName}, token:${token}`);
+    const captchaData = await this.getCaptchaData(id);
+    const verified = await this._verifyInner(captchaData, id, token, sceneName);
+    this.$loggerChild('captcha').debug(() => `captcha.verify: id:${id}, sceneName:${sceneName}, provider:${captchaData?.provider}, token:${token}, tokenWanted:${captchaData?.token}`);
     return verified;
   }
 
-  private async _verifyInner(id: string, token: unknown, sceneName: keyof ICaptchaSceneRecord): Promise<boolean> {
-    let captchaData = await this.getCaptchaData(id);
+  private async _verifyInner(
+    captchaData: ICaptchaDataCache | undefined,
+    id: string,
+    token: unknown,
+    sceneName: keyof ICaptchaSceneRecord,
+  ): Promise<boolean> {
     if (!captchaData) return false;
     // scene
     if (captchaData.scene !== sceneName) return false;
