@@ -21,6 +21,7 @@ export class BeanCaptcha extends BeanBase {
     const captchaData: ICaptchaDataCache = { scene: sceneName, provider: provider.name, token: captcha.token };
     // cache
     await this.scope.cacheRedis.captcha.set(captchaData, id, { ttl: provider.options.ttl ?? this.scope.config.captchaProvider.ttl });
+    this.$loggerChild('captcha').debug(() => `captcha.create: sceneName:${sceneName}, provider:${provider.name}, token:${captcha.token}`);
     // result
     const result: ICaptchaData = { id, provider: provider.name, payload: captcha.payload };
     if (this.scope.config.captcha.showToken) {
@@ -45,6 +46,7 @@ export class BeanCaptcha extends BeanBase {
     captchaData = { scene: sceneName, provider: captchaData.provider, token: captcha.token };
     // cache
     await this.scope.cacheRedis.captcha.set(captchaData, id, { ttl: providerOptions.ttl ?? this.scope.config.captchaProvider.ttl });
+    this.$loggerChild('captcha').debug(() => `captcha.refresh: sceneName:${sceneName}, provider:${captchaData.provider}, token:${captcha.token}`);
     // result
     const result: ICaptchaData = { id, provider: captchaData.provider, payload: captcha.payload };
     if (this.scope.config.captcha.showToken) {
