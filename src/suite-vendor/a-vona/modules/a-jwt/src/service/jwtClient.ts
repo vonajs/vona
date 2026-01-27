@@ -42,6 +42,15 @@ export class ServiceJwtClient extends BeanBase {
   }
 
   async sign(payloadData: IPayloadData, options?: IJwtSignOptions): Promise<string> {
+    const [res, error] = await catchError(() => {
+      return this._signInner(payloadData, options);
+    });
+    this.$loggerChild('jwt').debug(() => `jwt.sign: client:${this._clientName}, token:${res}${error ? `, error: ${error.message}` : ''}`);
+    if (error) throw error;
+    return res;
+  }
+
+  private async _signInner(payloadData: IPayloadData, options?: IJwtSignOptions): Promise<string> {
     return new Promise((resolve, reject) => {
       const payload: IJwtPayload = {
         [this.fieldClient]: this._clientName,
