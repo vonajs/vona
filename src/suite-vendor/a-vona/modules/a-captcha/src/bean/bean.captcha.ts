@@ -21,7 +21,7 @@ export class BeanCaptcha extends BeanBase {
     const captchaData: ICaptchaDataCache = { scene: sceneName, provider: provider.name, token: captcha.token };
     // cache
     await this.scope.cacheRedis.captcha.set(captchaData, id, { ttl: provider.options.ttl ?? this.scope.config.captchaProvider.ttl });
-    this.$loggerChild('captcha').debug(() => `captcha.create: sceneName:${sceneName}, provider:${provider.name}, token:${captcha.token}`);
+    this.$loggerChild('captcha').debug(() => `captcha.create: id:${id}, sceneName:${sceneName}, provider:${provider.name}, token:${captcha.token}`);
     // result
     const result: ICaptchaData = { id, provider: provider.name, payload: captcha.payload };
     if (this.scope.config.captcha.showToken) {
@@ -46,7 +46,7 @@ export class BeanCaptcha extends BeanBase {
     captchaData = { scene: sceneName, provider: captchaData.provider, token: captcha.token };
     // cache
     await this.scope.cacheRedis.captcha.set(captchaData, id, { ttl: providerOptions.ttl ?? this.scope.config.captchaProvider.ttl });
-    this.$loggerChild('captcha').debug(() => `captcha.refresh: sceneName:${sceneName}, provider:${captchaData.provider}, token:${captcha.token}`);
+    this.$loggerChild('captcha').debug(() => `captcha.refresh: id:${id}, sceneName:${sceneName}, provider:${captchaData.provider}, token:${captcha.token}`);
     // result
     const result: ICaptchaData = { id, provider: captchaData.provider, payload: captcha.payload };
     if (this.scope.config.captcha.showToken) {
@@ -56,6 +56,12 @@ export class BeanCaptcha extends BeanBase {
   }
 
   async verify(id: string, token: unknown, sceneName: keyof ICaptchaSceneRecord): Promise<boolean> {
+    const verified = await this._verifyInner(id, token, sceneName);
+    this.$loggerChild('captcha').debug(() => `captcha.verify: id:${id}, sceneName:${sceneName}, token:${token}`);
+    return verified;
+  }
+
+  private async _verifyInner(id: string, token: unknown, sceneName: keyof ICaptchaSceneRecord): Promise<boolean> {
     let captchaData = await this.getCaptchaData(id);
     if (!captchaData) return false;
     // scene
