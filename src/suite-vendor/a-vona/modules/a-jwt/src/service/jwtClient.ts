@@ -66,7 +66,10 @@ export class ServiceJwtClient extends BeanBase {
     if (!token) return undefined;
     return new Promise((resolve, reject) => {
       this._jwtInstance.verify(token, this._clientOptions.secret!, this._clientOptions.verifyOptions, (err, decoded) => {
-        if (err) return reject(err);
+        if (err) {
+          this.$loggerChild('jwt').debug(() => `jwt.verify: client:${this._clientName}, token:${token}, error:${err.message}`);
+          return reject(err);
+        }
         const payload = cast<IJwtPayload>(decoded);
         // check field client
         if (payload[this.fieldClient] !== this._clientName) return this.app.throw(401);

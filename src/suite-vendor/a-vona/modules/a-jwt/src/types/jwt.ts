@@ -1,6 +1,8 @@
 import type { SignOptions, VerifyOptions } from 'jsonwebtoken';
 import type { StringValue } from 'ms';
 
+import 'vona';
+
 export const ErrorMessageJwtExpired = 'jwt expired';
 
 export interface IJwtToken {
@@ -58,3 +60,9 @@ export interface ConfigJwt {
 export interface IPayloadData {}
 
 export interface IJwtPayload {}
+
+declare module 'vona' {
+  export interface ILoggerChildRecord {
+    jwt: never;
+  }
+}
