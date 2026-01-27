@@ -15,6 +15,15 @@ export class BeanLogger extends BeanBase {
     this.scope.broadcast.setLevel.emit({ level, clientName });
   }
 
+  public getFilterChild(clientName?: keyof ILoggerClientRecord): string[] | undefined {
+    return this.app.meta.logger.getFilterChild(clientName);
+  }
+
+  public setFilterChild(child: string | string[], clientName?: keyof ILoggerClientRecord) {
+    this.app.meta.logger.setFilterChild(child, clientName);
+    this.scope.broadcast.setFilterChild.emit({ child, clientName });
+  }
+
   public get default(): Winston.Logger {
     return this.app.meta.logger.get();
   }

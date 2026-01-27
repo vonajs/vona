@@ -47,7 +47,7 @@ export class AppLogger extends BeanSimple {
     this.app.meta.env[envName] = level.toString();
   }
 
-  getChild(clientName?: keyof ILoggerClientRecord): string[] | undefined {
+  getFilterChild(clientName?: keyof ILoggerClientRecord): string[] | undefined {
     clientName = clientName || 'default';
     const envName = `LOGGER_CHILD_${clientName.toUpperCase()}`;
     let child: string | undefined = this.app.meta.env[envName];
@@ -59,7 +59,7 @@ export class AppLogger extends BeanSimple {
     return child.split(',');
   }
 
-  setChild(child: string | string[], clientName?: keyof ILoggerClientRecord) {
+  setFilterChild(child: string | string[], clientName?: keyof ILoggerClientRecord) {
     if (Array.isArray(child)) child = child.join(',');
     clientName = clientName || 'default';
     const envName = `LOGGER_CHILD_${clientName.toUpperCase()}`;
