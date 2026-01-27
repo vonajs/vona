@@ -27,11 +27,16 @@ export class BeanLogger extends BeanBase {
     return this.app.meta.logger.get(clientName).child({ name: childName });
   }
 
-  public makeTransportFile(clientInfo: ILoggerOptionsClientInfo, fileName: string, levelStrict?: LoggerLevel): Transport {
+  public makeTransportFile(
+    clientInfo: ILoggerOptionsClientInfo,
+    fileName: string,
+    levelStrict?: LoggerLevel,
+    childStrict?: string | string[],
+  ): Transport {
     return this.app.meta.logger.createTransportFile(fileName, clientInfo, {
       level: levelStrict ?? 'silly',
       format: Winston.format.combine(
-        formatLoggerFilter({ level: levelStrict ?? clientInfo.level, strict: !!levelStrict }),
+        formatLoggerFilter({ child: childStrict ?? clientInfo.child, level: levelStrict ?? clientInfo.level, strict: !!levelStrict }),
         Winston.format.json(),
       ),
     });
@@ -42,7 +47,7 @@ export class BeanLogger extends BeanBase {
       level: 'silly',
       format: Winston.format.combine(
         formatLoggerDummy(),
-        formatLoggerFilter({ level: clientInfo.level, silly: true }),
+        formatLoggerFilter({ child: clientInfo.child, level: clientInfo.level, silly: true }),
         Winston.format.colorize(),
         formatLoggerConsole(clientInfo),
       ),

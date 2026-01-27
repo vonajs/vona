@@ -47,6 +47,25 @@ export class AppLogger extends BeanSimple {
     this.app.meta.env[envName] = level.toString();
   }
 
+  getChild(clientName?: keyof ILoggerClientRecord): string[] | undefined {
+    clientName = clientName || 'default';
+    const envName = `LOGGER_CHILD_${clientName.toUpperCase()}`;
+    let child: string | undefined = this.app.meta.env[envName];
+    if (!child) {
+      const envName = 'LOGGER_CHILD';
+      child = this.app.meta.env[envName];
+    }
+    if (!child) return;
+    return child.split(',');
+  }
+
+  setChild(child: string | string[], clientName?: keyof ILoggerClientRecord) {
+    if (Array.isArray(child)) child = child.join(',');
+    clientName = clientName || 'default';
+    const envName = `LOGGER_CHILD_${clientName.toUpperCase()}`;
+    this.app.meta.env[envName] = child;
+  }
+
   private _createClient(clientName: keyof ILoggerClientRecord): Winston.Logger {
     const configClient = this.app.config.logger.clients[clientName];
     if (!configClient) throw new Error(`logger client not found: ${clientName}`);
@@ -67,6 +86,7 @@ export class AppLogger extends BeanSimple {
     return configClient.call(this.app, {
       clientName,
       level: () => this.getLevel(clientName),
+      child: () => this.getChild(clientName),
     }, Winston);
   }
 

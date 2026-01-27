@@ -1,4 +1,4 @@
-import type { ILoggerOptionsClientInfo } from '../../../types/interface/logger.ts';
+import type { ILoggerFormatFilterOpts, ILoggerOptionsClientInfo } from '../../../types/interface/logger.ts';
 import { isEmptyObject } from '@cabloy/utils';
 import chalk from 'chalk';
 import { LEVEL, MESSAGE } from 'triple-beam';
@@ -42,16 +42,17 @@ export const formatLoggerDummy = Winston.format(info => {
   return info;
 });
 
-export const formatLoggerFilter = Winston.format((info, opts: any) => {
+export const formatLoggerFilter = Winston.format(((info: any, opts: ILoggerFormatFilterOpts) => {
   const level = typeof opts.level === 'function' ? opts.level() : opts.level;
   if (!level) return false;
+  // check level
   if (opts.strict) {
     if (Winston.config.npm.levels[info.level] === Winston.config.npm.levels[level]) return __formatLoggerFilterCheckInfo(info);
     return false;
   }
   if (Winston.config.npm.levels[info.level] <= Winston.config.npm.levels[level] || (opts.silly && info.level === 'silly')) return __formatLoggerFilterCheckInfo(info);
   return false;
-});
+}) as any);
 
 export const formatLoggerConsole = (clientInfo: ILoggerOptionsClientInfo) => {
   return Winston.format.printf(({ timestamp, level, stack, message, name, beanFullName, durationMs, ...meta }) => {
