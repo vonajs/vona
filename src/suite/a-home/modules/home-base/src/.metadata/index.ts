@@ -2,12 +2,14 @@
 import type { TypeControllerOptionsActions } from 'vona-module-a-openapi';
 /** service: begin */
 export * from '../service/menu.ts';
+export * from '../service/permission.ts';
 
 import 'vona-module-a-bean';
 declare module 'vona-module-a-bean' {
   
     export interface IServiceRecord {
       'home-base:menu': never;
+'home-base:permission': never;
     }
 
   
@@ -23,13 +25,26 @@ declare module 'vona-module-home-base' {
             get $beanFullName(): 'home-base.service.menu';
             get $onionName(): 'home-base:menu';
             
+          }
+
+        export interface ServicePermission {
+          /** @internal */
+          get scope(): ScopeModuleHomeBase;
+        }
+
+          export interface ServicePermission {
+            get $beanFullName(): 'home-base.service.permission';
+            get $onionName(): 'home-base:permission';
+            
           } 
 }
 /** service: end */
 /** service: begin */
 import type { ServiceMenu } from '../service/menu.ts';
+import type { ServicePermission } from '../service/permission.ts';
 export interface IModuleService {
   'menu': ServiceMenu;
+'permission': ServicePermission;
 }
 /** service: end */
 /** service: begin */
@@ -38,6 +53,7 @@ import 'vona';
 declare module 'vona' {
   export interface IBeanRecordGeneral {
     'home-base.service.menu': ServiceMenu;
+'home-base.service.permission': ServicePermission;
   }
 }
 /** service: end */
@@ -99,6 +115,7 @@ declare module 'vona-module-home-base' {
 declare module 'vona-module-a-web' {
   export interface IApiPathGetRecord{
         '/home/base/menu/:publicPath?': undefined;
+'/home/base/permission/:resource': undefined;
     }
 
 }

@@ -27,14 +27,42 @@ declare module 'vona-module-a-openapischema' {
           } 
 }
 /** interceptor: end */
+/** bean: begin */
+export * from '../bean/bean.permission.ts';
+
+import 'vona';
+declare module 'vona' {
+  
+  
+}
+declare module 'vona-module-a-openapischema' {
+  
+        export interface BeanPermission {
+          /** @internal */
+          get scope(): ScopeModuleAOpenapischema;
+        } 
+}
+/** bean: end */
+/** bean: begin */
+import type { BeanPermission } from '../bean/bean.permission.ts';
+import 'vona';  
+declare module 'vona' {
+  export interface IBeanRecordGlobal {
+    'permission': BeanPermission;
+  }
+}
+/** bean: end */
 /** dto: begin */
 export * from '../dto/bootstrap.tsx';
+export * from '../dto/permissions.tsx';
 import type { IDtoOptionsBootstrap } from '../dto/bootstrap.tsx';
+import type { IDtoOptionsPermissions } from '../dto/permissions.tsx';
 import 'vona-module-a-web';
 declare module 'vona-module-a-web' {
   
     export interface IDtoRecord {
       'a-openapischema:bootstrap': IDtoOptionsBootstrap;
+'a-openapischema:permissions': IDtoOptionsPermissions;
     }
 
   
@@ -44,11 +72,16 @@ declare module 'vona-module-a-openapischema' {
 }
 /** dto: end */
 /** dto: begin */
-import type { DtoBootstrap } from '../dto/bootstrap.tsx'; 
+import type { DtoBootstrap } from '../dto/bootstrap.tsx';
+import type { DtoPermissions } from '../dto/permissions.tsx'; 
 declare module 'vona-module-a-openapischema' {
   
     export interface IDtoOptionsBootstrap {
       fields?: TypeEntityOptionsFields<DtoBootstrap, IDtoOptionsBootstrap[TypeSymbolKeyFieldsMore]>;
+    }
+
+    export interface IDtoOptionsPermissions {
+      fields?: TypeEntityOptionsFields<DtoPermissions, IDtoOptionsPermissions[TypeSymbolKeyFieldsMore]>;
     }
 }
 /** dto: end */
@@ -93,6 +126,7 @@ declare module 'vona-module-a-web' {
     }
 
 }
+
 /** controller: end */
 /** config: begin */
 export * from '../config/config.ts';
