@@ -10,7 +10,7 @@ export class BeanPermission extends BeanBase {
     });
   }
 
-  async getPermissionsDefault(resource: keyof IResourceRecord): Promise<IOpenapiPermissions> {
-
+  async getPermissionsDefault(_resource: keyof IResourceRecord): Promise<IOpenapiPermissions> {
+    return {};
   }
 }
