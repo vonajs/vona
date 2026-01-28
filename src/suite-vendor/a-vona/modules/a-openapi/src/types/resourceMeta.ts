@@ -2,6 +2,8 @@ import type { IOpenapiPermissions, TypeComponentRecordSelectorKeysStrict, TypeRe
 import type { IFormProvider } from './formProvider.ts';
 import type { ITableProvider } from './tableProvider.ts';
 
+export type TypeOpenapiPermissions = IOpenapiPermissions | boolean;
+
 export interface IOpenapiOptionsResourceMeta {
   /**
    * false: disallow
@@ -9,7 +11,7 @@ export interface IOpenapiOptionsResourceMeta {
    * undefined: by api
    * IOpenapiPermissions: specific
    */
-  permissions?: IOpenapiPermissions | boolean;
+  permissions?: TypeOpenapiPermissions;
   provider?: IOpenapiOptionsResourceMetaProvider;
   form?: IOpenapiOptionsResourceMetaForm;
   table?: IOpenapiOptionsResourceMetaTable;
@@ -22,19 +24,6 @@ export interface IOpenapiOptionsResourceMetaForm {
 export interface IOpenapiOptionsResourceMetaTable {
   provider?: ITableProvider;
 }
-
-// export interface IOpenapiOptionsResourceMetaPermissions {
-//   table?: TypeOpenApiOptionsRestResourcePermissionsTable;
-//   row?: TypeOpenApiOptionsRestResourcePermissionsRow;
-// }
-
-// export type TypeOpenApiOptionsRestResourcePermissionsTable = {
-//   [key in keyof TypeResourceActionTableRecord]?: boolean;
-// };
-
-// export type TypeOpenApiOptionsRestResourcePermissionsRow = {
-//   [key in keyof TypeResourceActionRowRecord]?: boolean;
-// };
 
 export interface IOpenapiOptionsResourceMetaProvider {
   components?: IOpenapiOptionsResourceMetaProviderComponents;
