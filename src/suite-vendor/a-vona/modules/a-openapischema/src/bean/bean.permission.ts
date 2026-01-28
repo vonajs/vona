@@ -1,5 +1,6 @@
 import type { IOpenapiPermissionModeActionActions, IOpenapiPermissions, IResourceRecord } from 'vona-module-a-openapi';
 import type { ContextRouteBase, IRecordResourceNameToRoutePathItem } from 'vona-module-a-web';
+import { catchError } from '@cabloy/utils';
 import { appResource, BeanBase } from 'vona';
 import { Bean } from 'vona-module-a-bean';
 import { composeGuards, recordResourceNameToRoutePath } from 'vona-module-a-web';
@@ -42,7 +43,9 @@ export class BeanPermission extends BeanBase {
 
   private async _getPermissionOfAction(route: ContextRouteBase) {
     const composer = composeGuards(this.app, route);
-    console.log('----------------:', composer);
-    return true;
+    const [_, error] = await catchError(() => {
+      return composer(this.ctx);
+    });
+    return !error;
   }
 }
