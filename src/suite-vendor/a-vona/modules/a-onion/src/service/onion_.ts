@@ -3,7 +3,7 @@ import type { IModule, OnionSceneMeta } from '@cabloy/module-info';
 import type { Next, VonaContext } from 'vona';
 import type { IEventRecord } from 'vona-module-a-event';
 import type { IMetaNameRecord } from 'vona-module-a-meta';
-import type { ContextRoute } from 'vona-module-a-web';
+import type { ContextRouteBase } from 'vona-module-a-web';
 import type { IOnionExecuteCustom, IOnionOptionsDeps, IOnionOptionsEnable, IOnionOptionsMatch, IOnionSlice, TypeOnionOptionsMatchRule, TypeOnionsNormal } from '../types/onion.ts';
 import { isRegExp } from 'node:util/types';
 import { swapDeps } from '@cabloy/deps';
@@ -49,7 +49,7 @@ export class ServiceOnion<ONIONRECORD> extends BeanBase {
   }
 
   compose(
-    route: ContextRoute | undefined,
+    route: ContextRouteBase | undefined,
     fnStart?: Function | Function[],
     fnMid?: Function | Function[],
     fnEnd?: Function | Function[],
@@ -133,7 +133,7 @@ export class ServiceOnion<ONIONRECORD> extends BeanBase {
   }
 
   private _composeOnionsHandler(
-    route: ContextRoute | undefined,
+    route: ContextRouteBase | undefined,
     fnStart?: Function | Function[],
     fnMid?: Function | Function[],
     fnEnd?: Function | Function[],
@@ -159,7 +159,7 @@ export class ServiceOnion<ONIONRECORD> extends BeanBase {
     return this._cacheOnionsHandler[key];
   }
 
-  public _collectOnionsHandler(route: ContextRoute | undefined) {
+  public _collectOnionsHandler(route: ContextRouteBase | undefined) {
     if (!route?.controller) return [];
     // onionsLocal: controller
     const controllerOnionsLocal = appMetadata.getMetadata<Record<string, string[]>>(

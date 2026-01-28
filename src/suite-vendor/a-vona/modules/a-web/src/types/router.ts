@@ -6,11 +6,14 @@ export interface ContextRouteMetadata {
   meta: any;
 }
 
-export interface ContextRoute {
+export interface ContextRouteBase {
   controller: Constructable;
-  actionDescriptor: PropertyDescriptor;
   controllerBeanFullName: string;
   action: string;
+}
+
+export interface ContextRoute extends ContextRouteBase {
+  actionDescriptor: PropertyDescriptor;
   route: ContextRouteMetadata;
   routeMethod: TypeRequestMethod;
   routePath: string;

@@ -1,9 +1,8 @@
-import type { Constructable } from 'vona';
 import type { IOpenapiPermissionModeActionActions, IOpenapiPermissions, IResourceRecord } from 'vona-module-a-openapi';
-import type { IRecordResourceNameToRoutePathItem } from 'vona-module-a-web';
-import { BeanBase } from 'vona';
+import type { ContextRouteBase, IRecordResourceNameToRoutePathItem } from 'vona-module-a-web';
+import { appResource, BeanBase } from 'vona';
 import { Bean } from 'vona-module-a-bean';
-import { recordResourceNameToRoutePath } from 'vona-module-a-web';
+import { composeGuards, recordResourceNameToRoutePath } from 'vona-module-a-web';
 
 @Bean()
 export class BeanPermission extends BeanBase {
@@ -18,6 +17,10 @@ export class BeanPermission extends BeanBase {
     if (!routePathInfo) throw new Error(`not found routePath of resource: ${resource}`);
     // controller options
     const controller = routePathInfo.controller;
+    // controller options
+    const beanOptions = appResource.getBean(controller);
+    if (!beanOptions) throw new Error('invalid controller');
+    const controllerBeanFullName = beanOptions.beanFullName;
     // descs
     const descs = Object.getOwnPropertyDescriptors(controller.prototype);
     const actionsIgnore = this.scope.config.permission.actionsIgnore;
@@ -27,13 +30,19 @@ export class BeanPermission extends BeanBase {
     for (const actionKey of actionKeys) {
       const desc = descs[actionKey];
       if (!desc.value || typeof desc.value !== 'function') continue;
-      permissionsActions[actionKey] = await this._getPermissionOfAction(controller, actionKey);
+      const route: ContextRouteBase = {
+        controller,
+        controllerBeanFullName,
+        action: actionKey,
+      };
+      permissionsActions[actionKey] = await this._getPermissionOfAction(route);
     }
     return { actions: permissionsActions };
   }
 
-  private async _getPermissionOfAction(_controller: Constructable, _actionKey: string) {
-    // composeGuards
+  private async _getPermissionOfAction(route: ContextRouteBase) {
+    const composer = composeGuards(this.app, route);
+    console.log('----------------:', composer);
     return true;
   }
 }

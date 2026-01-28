@@ -1,8 +1,8 @@
 import type { VonaApplication } from 'vona';
-import type { ContextRoute } from '../../types/router.ts';
+import type { ContextRouteBase } from '../../types/router.ts';
 import { SymbolCacheComposeGuards } from 'vona-module-a-aspect';
 
-export function composeGuards(app: VonaApplication, route: ContextRoute) {
+export function composeGuards(app: VonaApplication, route: ContextRouteBase) {
   // compose
   if (!app.meta[SymbolCacheComposeGuards]) app.meta[SymbolCacheComposeGuards] = {};
   const cacheComposeGuards: Record<string, Function> = app.meta[SymbolCacheComposeGuards];
