@@ -1,6 +1,8 @@
 import type { IOpenapiPermissions, IResourceRecord } from 'vona-module-a-openapi';
+import type { IRecordResourceNameToRoutePathItem } from 'vona-module-a-web';
 import { BeanBase } from 'vona';
 import { Bean } from 'vona-module-a-bean';
+import { recordResourceNameToRoutePath } from 'vona-module-a-web';
 
 @Bean()
 export class BeanPermission extends BeanBase {
@@ -10,7 +12,10 @@ export class BeanPermission extends BeanBase {
     });
   }
 
-  async getPermissionsDefault(_resource: keyof IResourceRecord): Promise<IOpenapiPermissions> {
+  async getPermissionsDefault(resource: keyof IResourceRecord): Promise<IOpenapiPermissions> {
+    const routePathInfo: IRecordResourceNameToRoutePathItem = recordResourceNameToRoutePath[resource];
+    if (!routePathInfo) throw new Error(`not found routePath of resource: ${resource}`);
+    // routePathInfo.controller;
     return {};
   }
 }

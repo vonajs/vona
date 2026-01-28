@@ -5,7 +5,7 @@ import type { ContextRoute } from '../types/router.ts';
 export interface IRecordResourceNameToRoutePathItem {
   apiPath: string;
   routePathRaw: string;
-  target: Constructable;
+  controller: Constructable;
 }
 
 export const SymbolCacheControllerRoutes = Symbol('SymbolCacheControllerRoutes');

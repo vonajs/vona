@@ -2,6 +2,7 @@ import type { Constructable } from 'vona';
 import type { IOpenapiOptions } from 'vona-module-a-openapiutils';
 import type { IDecoratorControllerOptions } from '../../types/controller.ts';
 import type { IDecoratorDtoOptions } from '../../types/dto.ts';
+import type { IRecordResourceNameToRoutePathItem } from '../const.ts';
 import { appMetadata, appResource, cast, createBeanDecorator, deepExtend, onionNameFromBeanFullName, useApp } from 'vona';
 import { mergeFieldsOpenapiMetadata, SymbolControllerResource } from 'vona-module-a-openapiutils';
 import { SymbolOpenApiOptions } from 'vona-module-a-openapiutils';
@@ -39,7 +40,7 @@ export function Controller<T extends IDecoratorControllerOptions>(path?: T | str
         true,
       );
       const routePathRaw = app.util.combineApiPathControllerAndActionRaw(beanOptions.module, cast(beanOptions.options).path, undefined, true);
-      recordResourceNameToRoutePath[onionName] = { apiPath, routePathRaw, target };
+      recordResourceNameToRoutePath[onionName] = { apiPath, routePathRaw, controller: target } as IRecordResourceNameToRoutePathItem;
     } else {
       // for hmr
       delete recordResourceNameToRoutePath[onionName];

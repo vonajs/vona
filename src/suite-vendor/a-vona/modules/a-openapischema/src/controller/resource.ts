@@ -18,7 +18,7 @@ export class ControllerResource extends BeanBase {
     if (!routePathInfo) throw new Error(`not found routePath of resource: ${resource}`);
     const apiPath = routePathInfo.apiPath;
     // resourceMeta
-    const openApiOptions = appMetadata.getMetadata<IOpenapiOptions>(SymbolOpenApiOptions, routePathInfo.target);
+    const openApiOptions = appMetadata.getMetadata<IOpenapiOptions>(SymbolOpenApiOptions, routePathInfo.controller);
     const resourceMeta = deepExtend({}, this.scope.config.resourceMeta, openApiOptions?.resourceMeta);
     return { apiPath, resourceMeta };
   }
