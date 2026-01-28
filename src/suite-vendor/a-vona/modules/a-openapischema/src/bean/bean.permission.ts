@@ -1,8 +1,9 @@
 import type { IOpenapiPermissionModeActionActions, IOpenapiPermissions, IResourceRecord } from 'vona-module-a-openapi';
-import type { ContextRouteBase, IRecordResourceNameToRoutePathItem } from 'vona-module-a-web';
+import type { ContextRouteBase, ContextRouteMetadata, IRecordResourceNameToRoutePathItem } from 'vona-module-a-web';
 import { catchError } from '@cabloy/utils';
-import { appResource, BeanBase } from 'vona';
+import { appMetadata, appResource, BeanBase } from 'vona';
 import { Bean } from 'vona-module-a-bean';
+import { SymbolUseOnionOptionsRouteReal } from 'vona-module-a-onion';
 import { composeGuards, recordResourceNameToRoutePath } from 'vona-module-a-web';
 
 @Bean()
@@ -42,10 +43,14 @@ export class BeanPermission extends BeanBase {
   }
 
   private async _getPermissionOfAction(route: ContextRouteBase) {
+    const routeReal: ContextRouteMetadata = appMetadata.getMetadata(SymbolUseOnionOptionsRouteReal, route.controller.prototype, route.action)!;
+    const routeRealPrev = this.ctx.route.route;
+    this.ctx.route.route = routeReal;
     const composer = composeGuards(this.app, route);
     const [_, error] = await catchError(() => {
       return composer(this.ctx);
     });
+    this.ctx.route.route = routeRealPrev;
     return !error;
   }
 }

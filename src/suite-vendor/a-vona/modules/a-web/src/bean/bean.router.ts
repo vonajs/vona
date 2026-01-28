@@ -8,7 +8,7 @@ import Router from 'find-my-way';
 import { appMetadata, appResource, BeanBase, deepExtend } from 'vona';
 import { SymbolCacheComposeMiddlewares } from 'vona-module-a-aspect';
 import { Bean } from 'vona-module-a-bean';
-import { SymbolUseOnionOptions } from 'vona-module-a-onion';
+import { SymbolUseOnionOptions, SymbolUseOnionOptionsRouteReal } from 'vona-module-a-onion';
 import { SymbolRouteHandlersArgumentsValue } from 'vona-module-a-openapiutils';
 import { getCacheControllerRoutes } from '../lib/const.ts';
 import { middlewareGuard } from '../lib/middleware/middlewareGuard.ts';
@@ -137,6 +137,7 @@ export class BeanRouter extends BeanBase {
     const route = {
       meta: deepExtend({}, controllerMiddlewaresOptions, actionMiddlewaresOptions),
     };
+    appMetadata.defineMetadata(SymbolUseOnionOptionsRouteReal, route, controller.prototype, actionKey);
 
     // route
     const _route: ContextRoute = {

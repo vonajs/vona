@@ -3,6 +3,7 @@ import type { IDecoratorBeanOptionsBase, IHostRecord, IInstanceRecord, PowerPart
 
 export const SymbolUseOnionLocal = Symbol('SymbolUseOnionLocal');
 export const SymbolUseOnionOptions = Symbol('SymbolUseOnionOptions');
+export const SymbolUseOnionOptionsRouteReal = Symbol('SymbolUseOnionOptionsRouteReal');
 
 export type TypeOnionsNormal<ONIONRECORD> = {
   [KEY in keyof ONIONRECORD]: IOnionSlice<ONIONRECORD, KEY>;
