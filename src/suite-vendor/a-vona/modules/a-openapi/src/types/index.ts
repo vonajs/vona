@@ -8,6 +8,7 @@ export * from './date.ts';
 export * from './decorator.ts';
 export * from './formProvider.ts';
 export * from './openapi.ts';
+export * from './permissions.ts';
 export * from './resource.ts';
 export * from './resourceMeta.ts';
 export * from './rest.ts';

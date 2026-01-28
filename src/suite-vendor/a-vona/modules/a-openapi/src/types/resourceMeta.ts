@@ -1,9 +1,15 @@
-import type { TypeComponentRecordSelectorKeysStrict, TypeRenderComponentJsx, TypeResourceActionRowRecord, TypeResourceActionTableRecord } from 'vona-module-a-openapi';
+import type { IOpenapiPermissions, TypeComponentRecordSelectorKeysStrict, TypeRenderComponentJsx } from 'vona-module-a-openapi';
 import type { IFormProvider } from './formProvider.ts';
 import type { ITableProvider } from './tableProvider.ts';
 
 export interface IOpenapiOptionsResourceMeta {
-  permissions?: IOpenapiOptionsResourceMetaPermissions;
+  /**
+   * false: disallow
+   * true: public
+   * undefined: by api
+   * IOpenapiPermissions: specific
+   */
+  permissions?: IOpenapiPermissions | boolean;
   provider?: IOpenapiOptionsResourceMetaProvider;
   form?: IOpenapiOptionsResourceMetaForm;
   table?: IOpenapiOptionsResourceMetaTable;
@@ -17,18 +23,18 @@ export interface IOpenapiOptionsResourceMetaTable {
   provider?: ITableProvider;
 }
 
-export interface IOpenapiOptionsResourceMetaPermissions {
-  table?: TypeOpenApiOptionsRestResourcePermissionsTable;
-  row?: TypeOpenApiOptionsRestResourcePermissionsRow;
-}
+// export interface IOpenapiOptionsResourceMetaPermissions {
+//   table?: TypeOpenApiOptionsRestResourcePermissionsTable;
+//   row?: TypeOpenApiOptionsRestResourcePermissionsRow;
+// }
 
-export type TypeOpenApiOptionsRestResourcePermissionsTable = {
-  [key in keyof TypeResourceActionTableRecord]?: boolean;
-};
+// export type TypeOpenApiOptionsRestResourcePermissionsTable = {
+//   [key in keyof TypeResourceActionTableRecord]?: boolean;
+// };
 
-export type TypeOpenApiOptionsRestResourcePermissionsRow = {
-  [key in keyof TypeResourceActionRowRecord]?: boolean;
-};
+// export type TypeOpenApiOptionsRestResourcePermissionsRow = {
+//   [key in keyof TypeResourceActionRowRecord]?: boolean;
+// };
 
 export interface IOpenapiOptionsResourceMetaProvider {
   components?: IOpenapiOptionsResourceMetaProviderComponents;
