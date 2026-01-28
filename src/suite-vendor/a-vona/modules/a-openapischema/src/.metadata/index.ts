@@ -52,6 +52,43 @@ declare module 'vona' {
   }
 }
 /** bean: end */
+/** event: begin */
+export * from '../bean/event.retrievePermissions.ts';
+
+import 'vona';
+declare module 'vona' {
+  
+  
+}
+declare module 'vona-module-a-openapischema' {
+  
+        export interface EventRetrievePermissions {
+          /** @internal */
+          get scope(): ScopeModuleAOpenapischema;
+        }
+
+          export interface EventRetrievePermissions {
+            get $beanFullName(): 'a-openapischema.event.retrievePermissions';
+            get $onionName(): 'a-openapischema:retrievePermissions';
+            
+          } 
+}
+/** event: end */
+/** event: begin */
+import type { EventRetrievePermissions } from '../bean/event.retrievePermissions.ts';
+export interface IModuleEvent {
+  'retrievePermissions': EventRetrievePermissions;
+}
+/** event: end */
+/** event: begin */
+import type { TypeEventRetrievePermissionsData, TypeEventRetrievePermissionsResult } from '../bean/event.retrievePermissions.ts';
+import type { EventOn } from 'vona-module-a-event'; 
+declare module 'vona-module-a-event' {
+  export interface IEventRecord {
+    'a-openapischema:retrievePermissions': EventOn<TypeEventRetrievePermissionsData, TypeEventRetrievePermissionsResult>;
+  }
+}
+/** event: end */
 /** dto: begin */
 export * from '../dto/bootstrap.tsx';
 export * from '../dto/permissions.tsx';
@@ -142,6 +179,7 @@ export class ScopeModuleAOpenapischema extends BeanScopeBase {}
 export interface ScopeModuleAOpenapischema {
   util: BeanScopeUtil;
 config: TypeModuleConfig<typeof config>;
+event: IModuleEvent;
 }
 
 import 'vona';
