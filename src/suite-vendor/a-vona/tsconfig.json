@@ -172,7 +172,7 @@
     },
     {
       "path": "modules/a-actions/tsconfig.build.json"
-    },
+    }
   ],
   "exclude": [
     "modules"
