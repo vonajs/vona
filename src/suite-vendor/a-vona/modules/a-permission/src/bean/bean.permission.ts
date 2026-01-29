@@ -1,5 +1,5 @@
 import type { IOpenapiPermissionModeActionActions, IOpenapiPermissions, IResourceRecord } from 'vona-module-a-openapi';
-import type { ContextRouteBase, ContextRouteMetadata, IRecordResourceNameToRoutePathItem } from 'vona-module-a-web';
+import type { ContextRoute, ContextRouteBase, ContextRouteMetadata, IRecordResourceNameToRoutePathItem } from 'vona-module-a-web';
 import { catchError } from '@cabloy/utils';
 import { appMetadata, appResource, BeanBase } from 'vona';
 import { Bean } from 'vona-module-a-bean';
@@ -32,25 +32,26 @@ export class BeanPermission extends BeanBase {
     for (const actionKey of actionKeys) {
       const desc = descs[actionKey];
       if (!desc.value || typeof desc.value !== 'function') continue;
-      const route: ContextRouteBase = {
+      const routeReal: ContextRouteMetadata = appMetadata.getMetadata(SymbolUseOnionOptionsRouteReal, controller.prototype, actionKey)!;
+      const route: Partial<ContextRoute> = {
         controller,
         controllerBeanFullName,
         action: actionKey,
+        route: routeReal,
       };
       permissionsActions[actionKey] = await this._getPermissionOfAction(route);
     }
     return { actions: permissionsActions };
   }
 
-  private async _getPermissionOfAction(route: ContextRouteBase) {
-    const routeReal: ContextRouteMetadata = appMetadata.getMetadata(SymbolUseOnionOptionsRouteReal, route.controller.prototype, route.action)!;
-    const routeRealPrev = this.ctx.route.route;
-    this.ctx.route.route = routeReal;
-    const composer = composeGuards(this.app, route);
+  private async _getPermissionOfAction(route: Partial<ContextRoute>) {
+    const routePrev = this.ctx.route;
+    this.ctx.route = route as ContextRoute;
+    const composer = composeGuards(this.app, route as ContextRouteBase);
     const [_, error] = await catchError(() => {
       return composer(this.ctx);
     });
-    this.ctx.route.route = routeRealPrev;
+    this.ctx.route = routePrev;
     return !error;
   }
 }
