@@ -1,8 +1,8 @@
 import type { IOpenapiPermissions, IResourceRecord } from 'vona-module-a-openapi';
 import type { IDecoratorControllerOptions } from 'vona-module-a-web';
 import { BeanBase } from 'vona';
-import { DtoPermissions } from 'vona-module-a-openapischema';
 import { Api, v } from 'vona-module-a-openapiutils';
+import { DtoPermissions } from 'vona-module-a-permission';
 import { Arg, Controller, Web } from 'vona-module-a-web';
 import z from 'zod';
 
