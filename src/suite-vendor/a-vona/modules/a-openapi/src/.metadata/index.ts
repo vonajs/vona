@@ -65,43 +65,6 @@ declare module 'vona' {
   }
 }
 /** service: end */
-/** event: begin */
-export * from '../bean/event.clearAllCaches.ts';
-
-import 'vona';
-declare module 'vona' {
-  
-  
-}
-declare module 'vona-module-a-openapi' {
-  
-        export interface EventClearAllCaches {
-          /** @internal */
-          get scope(): ScopeModuleAOpenapi;
-        }
-
-          export interface EventClearAllCaches {
-            get $beanFullName(): 'a-openapi.event.clearAllCaches';
-            get $onionName(): 'a-openapi:clearAllCaches';
-            
-          } 
-}
-/** event: end */
-/** event: begin */
-import type { EventClearAllCaches } from '../bean/event.clearAllCaches.ts';
-export interface IModuleEvent {
-  'clearAllCaches': EventClearAllCaches;
-}
-/** event: end */
-/** event: begin */
-import type { TypeEventClearAllCachesData, TypeEventClearAllCachesResult } from '../bean/event.clearAllCaches.ts';
-import type { EventOn } from 'vona-module-a-event'; 
-declare module 'vona-module-a-event' {
-  export interface IEventRecord {
-    'a-openapi:clearAllCaches': EventOn<TypeEventClearAllCachesData, TypeEventClearAllCachesResult>;
-  }
-}
-/** event: end */
 /** summerCache: begin */
 export * from '../bean/summerCache.json.ts';
 
@@ -152,7 +115,6 @@ export interface ScopeModuleAOpenapi {
   util: BeanScopeUtil;
 config: TypeModuleConfig<typeof config>;
 service: IModuleService;
-event: IModuleEvent;
 summerCache: IModuleSummerCache;
 }
 
