@@ -1,13 +1,22 @@
+import type { ICachingActionKeyInfo } from 'vona-module-a-caching';
 import type { IOpenapiPermissionModeActionActions, IOpenapiPermissions, IResourceRecord } from 'vona-module-a-openapi';
 import type { ContextRoute, ContextRouteBase, ContextRouteMetadata, IRecordResourceNameToRoutePathItem } from 'vona-module-a-web';
 import { catchError } from '@cabloy/utils';
 import { appMetadata, appResource, BeanBase } from 'vona';
 import { Bean } from 'vona-module-a-bean';
+import { Caching } from 'vona-module-a-caching';
 import { SymbolUseOnionOptionsRouteReal } from 'vona-module-a-onion';
 import { composeGuards, recordResourceNameToRoutePath } from 'vona-module-a-web';
 
 @Bean()
 export class BeanPermission extends BeanBase {
+  protected retrievePermissionsCacheKey(info: ICachingActionKeyInfo) {
+    const resource = info.args[0];
+    const userId = this.ctx.passport.user?.id;
+    return `${resource}_${userId}`;
+  }
+
+  @Caching.get({ cacheName: 'a-permission:permission', cacheKeyFn: 'retrievePermissionsCacheKey' })
   async retrievePermissions(resource: keyof IResourceRecord): Promise<IOpenapiPermissions> {
     return await this.scope.event.retrievePermissions.emit({ resource }, async () => {
       return await this.getPermissionsDefault(resource);

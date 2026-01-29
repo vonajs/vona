@@ -63,6 +63,38 @@ declare module 'vona-module-a-event' {
   }
 }
 /** event: end */
+/** summerCache: begin */
+export * from '../bean/summerCache.permission.ts';
+
+import { type IDecoratorSummerCacheOptions } from 'vona-module-a-summer';
+declare module 'vona-module-a-summer' {
+  
+    export interface ISummerCacheRecord {
+      'a-permission:permission': IDecoratorSummerCacheOptions;
+    }
+
+  
+}
+declare module 'vona-module-a-permission' {
+  
+        export interface SummerCachePermission {
+          /** @internal */
+          get scope(): ScopeModuleAPermission;
+        }
+
+          export interface SummerCachePermission {
+            get $beanFullName(): 'a-permission.summerCache.permission';
+            get $onionName(): 'a-permission:permission';
+            get $onionOptions(): IDecoratorSummerCacheOptions;
+          } 
+}
+/** summerCache: end */
+/** summerCache: begin */
+import type { SummerCachePermission } from '../bean/summerCache.permission.ts';
+export interface IModuleSummerCache {
+  'permission': SummerCachePermission;
+}
+/** summerCache: end */
 /** dto: begin */
 export * from '../dto/permissions.tsx';
 import type { IDtoOptionsPermissions } from '../dto/permissions.tsx';
@@ -103,6 +135,7 @@ export interface ScopeModuleAPermission {
   util: BeanScopeUtil;
 config: TypeModuleConfig<typeof config>;
 event: IModuleEvent;
+summerCache: IModuleSummerCache;
 }
 
 import 'vona';
