@@ -172,6 +172,9 @@
     },
     {
       "path": "modules/a-actions/tsconfig.build.json"
+    },
+    {
+      "path": "modules/a-permission/tsconfig.build.json"
     }
   ],
   "exclude": [
