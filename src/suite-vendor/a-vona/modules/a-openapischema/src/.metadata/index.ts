@@ -27,79 +27,14 @@ declare module 'vona-module-a-openapischema' {
           } 
 }
 /** interceptor: end */
-/** bean: begin */
-export * from '../bean/bean.permission.ts';
-
-import 'vona';
-declare module 'vona' {
-  
-  
-}
-declare module 'vona-module-a-openapischema' {
-  
-        export interface BeanPermission {
-          /** @internal */
-          get scope(): ScopeModuleAOpenapischema;
-        } 
-}
-/** bean: end */
-/** bean: begin */
-import type { BeanPermission } from '../bean/bean.permission.ts';
-import 'vona';  
-declare module 'vona' {
-  export interface IBeanRecordGlobal {
-    'permission': BeanPermission;
-  }
-}
-/** bean: end */
-/** event: begin */
-export * from '../bean/event.retrievePermissions.ts';
-
-import 'vona';
-declare module 'vona' {
-  
-  
-}
-declare module 'vona-module-a-openapischema' {
-  
-        export interface EventRetrievePermissions {
-          /** @internal */
-          get scope(): ScopeModuleAOpenapischema;
-        }
-
-          export interface EventRetrievePermissions {
-            get $beanFullName(): 'a-openapischema.event.retrievePermissions';
-            get $onionName(): 'a-openapischema:retrievePermissions';
-            
-          } 
-}
-/** event: end */
-/** event: begin */
-import type { EventRetrievePermissions } from '../bean/event.retrievePermissions.ts';
-export interface IModuleEvent {
-  'retrievePermissions': EventRetrievePermissions;
-}
-/** event: end */
-/** event: begin */
-import type { TypeEventRetrievePermissionsData, TypeEventRetrievePermissionsResult } from '../bean/event.retrievePermissions.ts';
-import type { EventOn } from 'vona-module-a-event'; 
-declare module 'vona-module-a-event' {
-  export interface IEventRecord {
-    'a-openapischema:retrievePermissions': EventOn<TypeEventRetrievePermissionsData, TypeEventRetrievePermissionsResult>;
-  }
-}
-/** event: end */
 /** dto: begin */
 export * from '../dto/bootstrap.tsx';
-export * from '../dto/permissions.tsx';
 import type { IDtoOptionsBootstrap } from '../dto/bootstrap.tsx';
-import type { IDtoOptionsPermissions } from '../dto/permissions.tsx';
 import 'vona-module-a-web';
 declare module 'vona-module-a-web' {
   
     export interface IDtoRecord {
       'a-openapischema:bootstrap': IDtoOptionsBootstrap;
-'a-openapischema:permissions': IDtoOptionsPermissions;
     }
 
   
@@ -109,16 +44,11 @@ declare module 'vona-module-a-openapischema' {
 }
 /** dto: end */
 /** dto: begin */
-import type { DtoBootstrap } from '../dto/bootstrap.tsx';
-import type { DtoPermissions } from '../dto/permissions.tsx'; 
+import type { DtoBootstrap } from '../dto/bootstrap.tsx'; 
 declare module 'vona-module-a-openapischema' {
   
     export interface IDtoOptionsBootstrap {
       fields?: TypeEntityOptionsFields<DtoBootstrap, IDtoOptionsBootstrap[TypeSymbolKeyFieldsMore]>;
-    }
-
-    export interface IDtoOptionsPermissions {
-      fields?: TypeEntityOptionsFields<DtoPermissions, IDtoOptionsPermissions[TypeSymbolKeyFieldsMore]>;
     }
 }
 /** dto: end */
@@ -179,7 +109,6 @@ export class ScopeModuleAOpenapischema extends BeanScopeBase {}
 export interface ScopeModuleAOpenapischema {
   util: BeanScopeUtil;
 config: TypeModuleConfig<typeof config>;
-event: IModuleEvent;
 }
 
 import 'vona';
