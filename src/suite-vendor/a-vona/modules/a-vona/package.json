@@ -39,6 +39,7 @@
       "a-orm": "5.0.0",
       "a-ormdialect": "5.0.0",
       "a-ormutils": "5.0.0",
+      "a-permission": "5.0.0",
       "a-printtip": "5.0.0",
       "a-queue": "5.0.0",
       "a-redis": "5.0.0",

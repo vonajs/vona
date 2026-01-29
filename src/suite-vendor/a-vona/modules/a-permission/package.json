@@ -4,9 +4,7 @@
   "version": "5.0.0",
   "title": "a-permission",
   "vonaModule": {
-    "dependencies": {
-      "a-vona": "5.0.0"
-    }
+    "dependencies": {}
   },
   "exports": {
     ".": {
