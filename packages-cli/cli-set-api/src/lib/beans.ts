@@ -24,6 +24,7 @@ import { CliInitMonkey } from './bean/cli.init.monkey.ts';
 import { CliInitStatic } from './bean/cli.init.static.ts';
 import { CliInitTypes } from './bean/cli.init.types.ts';
 import { CliToolsCrud } from './bean/cli.tools.crud.ts';
+import { CliToolsCrudCabloy } from './bean/cli.tools.crudCabloy.ts';
 import { CliToolsDeps } from './bean/cli.tools.deps.ts';
 import { CliToolsMetadata } from './bean/cli.tools.metadata.ts';
 
@@ -56,4 +57,5 @@ export const beans = {
   'tools.deps': CliToolsDeps,
   'tools.metadata': CliToolsMetadata,
   'tools.crud': CliToolsCrud,
+  'tools.crudCabloy': CliToolsCrudCabloy,
 };
