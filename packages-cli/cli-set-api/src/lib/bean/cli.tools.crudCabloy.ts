@@ -2,7 +2,6 @@ import type { IModuleInfo } from '@cabloy/module-info';
 import fs from 'node:fs';
 import path from 'node:path';
 import { BeanCliBase } from '@cabloy/cli';
-import { combineApiPathControllerAndActionRaw } from '@cabloy/utils';
 import { __ThisSetName__ } from '../this.ts';
 
 declare module '@cabloy/cli' {
@@ -11,8 +10,6 @@ declare module '@cabloy/cli' {
     moduleInfo: IModuleInfo;
     resourceName: string;
     resourceNameCapitalize: string;
-    moduleResourceName: string;
-    moduleActionPathRaw: string;
   }
 }
 
@@ -36,20 +33,24 @@ export class CliToolsCrudCabloy extends BeanCliBase {
     // resourceName
     const resourceName = argv.resourceName;
     argv.resourceNameCapitalize = this.helper.firstCharToUpperCase(resourceName);
-    // moduleResourceName
-    argv.moduleResourceName = this.helper.combineModuleNameAndResource(argv.moduleInfo.relativeName, argv.resourceName);
-    argv.moduleActionPathRaw = combineApiPathControllerAndActionRaw(moduleName, resourceName, '', true);
     // controller
     const controllerFile = path.join(targetDir, 'src/controller', `${resourceName}.ts`);
     if (fs.existsSync(controllerFile)) {
       throw new Error(`resource exists: ${resourceName}`);
     }
+    // tools:crud
+    await this.helper.invokeCli([
+      ':tools:crud',
+      resourceName,
+      `--module=${argv.module}`,
+      '--nometadata',
+    ], { cwd: argv.projectPath });
     // render
     await this.template.renderBoilerplateAndSnippets({
       targetDir,
       setName: __ThisSetName__,
-      snippetsPath: 'tools/crud/snippets',
-      boilerplatePath: 'tools/crud/boilerplate',
+      snippetsPath: null,
+      boilerplatePath: 'tools/crudCabloy/boilerplate',
     });
     // tools.metadata
     if (!argv.nometadata) {
