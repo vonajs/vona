@@ -17,7 +17,7 @@ export class BeanBodyRes extends BeanBase {
     if (!httpCode) httpCode = this.getResponseHttpCode(200);
     if (!contentType) contentType = this.getResponseContentType();
     if (contentType === 'application/json') {
-      this.app.success(body);
+      this.app.success(body ?? null);
       this.ctx.response.status = httpCode;
     } else {
       this.ctx.response.status = httpCode;
