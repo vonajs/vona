@@ -45,7 +45,7 @@ export class ServiceHmr extends BeanBase {
       this.app.meta.hmrCacheLocaleModules[moduleName]?.[locale],
     );
     // openapi
-    await this.$scope.openapi.service.openapi.clearAllCaches();
+    await this.bean.openapi.clearAllCaches();
   }
 
   private async _reloadConfig(moduleName: string, config: TypeModuleResourceConfig) {
