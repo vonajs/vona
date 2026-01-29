@@ -10,7 +10,7 @@ import { toUpperCaseFirstChar } from '@cabloy/word-utils';
 import { translateError } from '@cabloy/zod-errors-custom';
 import { getInnerTypeName } from '@cabloy/zod-query';
 import { OpenAPIRegistry } from '@cabloy/zod-to-openapi';
-import { appMetadata, appResource, BeanBase, beanFullNameFromOnionName, cast } from 'vona';
+import { appMetadata, appResource, BeanBase, cast } from 'vona';
 import { Service } from 'vona-module-a-bean';
 import { $schema, bodySchemaWrapperDefault, SymbolOpenApiOptions, SymbolRouteHandlersArgumentsMeta } from 'vona-module-a-openapiutils';
 import { SymbolRequestMappingHandler } from 'vona-module-a-web';
@@ -20,17 +20,6 @@ const __ArgumentTypes = ['param', 'query', 'body', 'headers', 'fields', 'field',
 
 @Service()
 export class ServiceOpenapi extends BeanBase {
-  public async clearAllCaches() {
-    const cacheOpenapiSchema = this.bean.summer.cache(beanFullNameFromOnionName('a-openapi:json', 'summerCache'));
-    await cacheOpenapiSchema.clear();
-    const cacheSwagger = this.bean.summer.cache(beanFullNameFromOnionName('a-swagger:swagger', 'summerCache'));
-    await cacheSwagger.clear();
-    const cacheRapidoc = this.bean.summer.cache(beanFullNameFromOnionName('a-swagger:rapidoc', 'summerCache'));
-    await cacheRapidoc.clear();
-    // event
-    await this.scope.event.clearAllCaches.emit();
-  }
-
   public translate(apiObj: OpenAPIObject30 | OpenAPIObject31, generateJsonScene: TypeGenerateJsonScene) {
     // paths
     if (apiObj.paths) {

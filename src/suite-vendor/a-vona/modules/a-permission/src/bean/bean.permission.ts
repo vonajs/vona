@@ -2,7 +2,7 @@ import type { ICachingActionKeyInfo } from 'vona-module-a-caching';
 import type { IOpenapiPermissionModeActionActions, IOpenapiPermissions, IResourceRecord } from 'vona-module-a-openapi';
 import type { ContextRoute, ContextRouteBase, ContextRouteMetadata, IRecordResourceNameToRoutePathItem } from 'vona-module-a-web';
 import { catchError } from '@cabloy/utils';
-import { appMetadata, appResource, BeanBase } from 'vona';
+import { appMetadata, appResource, BeanBase, beanFullNameFromOnionName } from 'vona';
 import { Bean } from 'vona-module-a-bean';
 import { Caching } from 'vona-module-a-caching';
 import { SymbolUseOnionOptionsRouteReal } from 'vona-module-a-onion';
@@ -10,6 +10,11 @@ import { composeGuards, recordResourceNameToRoutePath } from 'vona-module-a-web'
 
 @Bean()
 export class BeanPermission extends BeanBase {
+  public async clearAllCaches() {
+    const cacheOpenapiSchema = this.bean.summer.cache(beanFullNameFromOnionName('a-permission:permission', 'summerCache'));
+    await cacheOpenapiSchema.clear();
+  }
+
   protected retrievePermissionsCacheKey(info: ICachingActionKeyInfo) {
     const resource = info.args[0];
     const userId = this.ctx.passport.user?.id;

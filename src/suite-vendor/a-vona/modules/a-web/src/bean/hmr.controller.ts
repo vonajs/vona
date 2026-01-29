@@ -9,6 +9,7 @@ export class HmrController extends BeanBase implements IHmrReload {
   async reload(beanOptions: IDecoratorBeanOptionsBase) {
     clearCacheComposesRouter(this.app);
     this.bean.router.reRegisterController(beanOptions.beanFullName);
-    await this.$scope.openapi.service.openapi.clearAllCaches();
+    await this.bean.openapi.clearAllCaches();
+    await this.bean.permission.clearAllCaches();
   }
 }

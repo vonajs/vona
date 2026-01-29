@@ -2,13 +2,22 @@ import type { Constructable } from 'vona';
 import type { ICachingActionKeyInfo } from 'vona-module-a-caching';
 import type { IOpenapiObject } from 'vona-module-a-openapiutils';
 import { OpenApiGeneratorV3, OpenApiGeneratorV31, OpenAPIRegistry } from '@cabloy/zod-to-openapi';
-import { appResource, BeanBase } from 'vona';
+import { appResource, BeanBase, beanFullNameFromOnionName } from 'vona';
 import { Bean } from 'vona-module-a-bean';
 import { Caching } from 'vona-module-a-caching';
 import { $schema } from 'vona-module-a-openapiutils';
 
 @Bean()
 export class BeanOpenapi extends BeanBase {
+  public async clearAllCaches() {
+    const cacheOpenapiSchema = this.bean.summer.cache(beanFullNameFromOnionName('a-openapi:json', 'summerCache'));
+    await cacheOpenapiSchema.clear();
+    const cacheSwagger = this.bean.summer.cache(beanFullNameFromOnionName('a-swagger:swagger', 'summerCache'));
+    await cacheSwagger.clear();
+    const cacheRapidoc = this.bean.summer.cache(beanFullNameFromOnionName('a-swagger:rapidoc', 'summerCache'));
+    await cacheRapidoc.clear();
+  }
+
   // need not cache
   async generateJsonOfClass<K extends keyof IOpenapiObject>(schemaClass: Constructable, version: K = 'V31' as any): Promise<IOpenapiObject[K]> {
     return await this.generateJsonOfClasses([schemaClass], version);
