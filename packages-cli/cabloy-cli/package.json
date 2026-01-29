@@ -1,7 +1,7 @@
 {
   "name": "@cabloy/cli",
   "type": "module",
-  "version": "3.0.97",
+  "version": "3.0.98",
   "description": "@cabloy/cli",
   "publishConfig": {
     "access": "public"
@@ -43,10 +43,10 @@
   },
   "dependencies": {
     "@babel/parser": "^7.26.5",
-    "@cabloy/module-glob": "^5.2.55",
+    "@cabloy/module-glob": "^5.2.56",
     "@cabloy/module-info": "^1.3.41",
     "@cabloy/process-helper": "^2.0.25",
-    "@cabloy/utils": "^2.0.22",
+    "@cabloy/utils": "^2.0.24",
     "@cabloy/word-utils": "^2.0.2",
     "@npmcli/config": "^10.4.2",
     "@zhennann/common-bin": "^4.0.0",
