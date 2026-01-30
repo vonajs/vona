@@ -4,7 +4,7 @@ import type { ILocaleMagic } from 'vona';
 import type { IOpenapiOptions } from 'vona-module-a-openapiutils';
 import type { z } from 'zod';
 import type { TypeResourceActionRowRecordRender } from './actions.ts';
-import type { ISchemaObjectExtensionFieldCaptcha } from './captcha.ts';
+import type { ICaptchaOptions } from './captcha.ts';
 import type { IComponentRecord, ITableCellComponentRecord } from './component.ts';
 import type { TypeDateFormat } from './date.ts';
 import 'openapi3-ts/oas30';
@@ -37,6 +37,7 @@ export interface ISchemaObjectExtensionFieldRestProps {
   readonly?: boolean;
   inputType?: HTMLInputElementType;
   //
+  captcha?: ICaptchaOptions;
   currency?: CurrencyOptions;
   dateFormat?: TypeDateFormat;
 }
@@ -54,7 +55,6 @@ export interface ISchemaObjectExtensionFieldRestScene extends ISchemaObjectExten
 
 export interface ISchemaObjectExtensionField {
   rest?: ISchemaObjectExtensionFieldRest;
-  captcha?: ISchemaObjectExtensionFieldCaptcha;
 }
 
 declare module 'openapi3-ts/oas30' {
@@ -82,7 +82,7 @@ export interface TypeRenderComponentJsx {
 
 export type TypeSchemaScene = 'table' | 'form' | 'filter';
 
-export type TypeRenderComponentPreset = keyof TypeResourceActionRowRecordRender | 'text' | 'currency' | 'date' | 'dateRange' | 'textarea' | 'select' | 'checkbox' | 'radio' | 'switch' | 'image' | 'file' | 'color' | 'password' | 'email' | 'url';
+export type TypeRenderComponentPreset = keyof TypeResourceActionRowRecordRender | 'text' | 'captcha' | 'currency' | 'date' | 'dateRange' | 'textarea' | 'select' | 'checkbox' | 'radio' | 'switch' | 'image' | 'file' | 'color' | 'password' | 'email' | 'url';
 export type TypeRenderComponent = TypeRenderComponentPreset | TypeRenderComponentJsx;
 
 // form

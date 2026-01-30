@@ -1,5 +1,5 @@
 import type { ICaptchaSceneRecord } from 'vona-module-a-captcha';
 
-export interface ISchemaObjectExtensionFieldCaptcha {
+export interface ICaptchaOptions {
   scene?: keyof ICaptchaSceneRecord;
 }

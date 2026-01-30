@@ -1,5 +1,5 @@
 import type { CurrencyOptions } from '@zhennann/currency';
-import type { ISchemaObjectExtensionFieldCaptcha, TypeDateFormat, TypeRenderComponent, TypeSchemaScene } from 'vona-module-a-openapi';
+import type { ICaptchaOptions, TypeDateFormat, TypeRenderComponent, TypeSchemaScene } from 'vona-module-a-openapi';
 import type z from 'zod';
 import type { TypeSchemaOrderLevel } from '../../../types/order.ts';
 import { OrderLevelBaseMap } from '../../const/database.ts';
@@ -49,7 +49,7 @@ export function schemaDate<T extends z.ZodType>(dateFormat?: TypeDateFormat, sce
   };
 }
 
-export function schemaCaptcha<T extends z.ZodType>(captcha?: ISchemaObjectExtensionFieldCaptcha, scene?: TypeSchemaScene) {
+export function schemaCaptcha<T extends z.ZodType>(captcha?: ICaptchaOptions, scene?: TypeSchemaScene) {
   return function (schema: T): T {
     const options = captcha !== undefined ? { render: 'captcha', captcha } : { render: 'captcha' };
     return schema.openapi(scene
