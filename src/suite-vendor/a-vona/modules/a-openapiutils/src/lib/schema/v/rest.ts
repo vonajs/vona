@@ -1,5 +1,5 @@
 import type { CurrencyOptions } from '@zhennann/currency';
-import type { TypeDateFormat, TypeRenderComponent, TypeSchemaScene } from 'vona-module-a-openapi';
+import type { ISchemaObjectExtensionFieldCaptcha, TypeDateFormat, TypeRenderComponent, TypeSchemaScene } from 'vona-module-a-openapi';
 import type z from 'zod';
 import type { TypeSchemaOrderLevel } from '../../../types/order.ts';
 import { OrderLevelBaseMap } from '../../const/database.ts';
@@ -43,6 +43,15 @@ export function schemaCurrency<T extends z.ZodType>(currency?: CurrencyOptions, 
 export function schemaDate<T extends z.ZodType>(dateFormat?: TypeDateFormat, scene?: TypeSchemaScene) {
   return function (schema: T): T {
     const options = dateFormat !== undefined ? { render: 'date', dateFormat } : { render: 'date' };
+    return schema.openapi(scene
+      ? { rest: { [scene]: options as any } }
+      : { rest: options as any });
+  };
+}
+
+export function schemaCaptcha<T extends z.ZodType>(captcha?: ISchemaObjectExtensionFieldCaptcha, scene?: TypeSchemaScene) {
+  return function (schema: T): T {
+    const options = captcha !== undefined ? { render: 'captcha', captcha } : { render: 'captcha' };
     return schema.openapi(scene
       ? { rest: { [scene]: options as any } }
       : { rest: options as any });

@@ -1,5 +1,4 @@
 import type { ILocaleMagic } from 'vona';
-import type { ISchemaObjectExtensionFieldCaptcha } from 'vona-module-a-openapi';
 import { useApp } from 'vona';
 import { z } from 'zod';
 import { normalizeErrorParams } from '../../utils.ts';
@@ -105,11 +104,5 @@ export function schemaTableIdentity() {
         throw new Error('not support');
       }
     });
-  };
-}
-
-export function schemaCaptcha(options: ISchemaObjectExtensionFieldCaptcha) {
-  return function (schema: z.ZodType): z.ZodType {
-    return schema.openapi({ captcha: options });
   };
 }
