@@ -1,14 +1,14 @@
 import type { IDecoratorDtoOptions } from 'vona-module-a-web';
-import { Api } from 'vona-module-a-openapiutils';
+import { Api, v } from 'vona-module-a-openapiutils';
 import { Dto } from 'vona-module-a-web';
 
 export interface IDtoOptionsCaptchaVerify extends IDecoratorDtoOptions {}
 
 @Dto<IDtoOptionsCaptchaVerify>()
 export class DtoCaptchaVerify {
-  @Api.field()
+  @Api.field(v.required())
   id: string;
 
-  @Api.field()
-  token: unknown;
+  @Api.field(v.required())
+  token: string; // must set string, so as to let v.required take effect
 }

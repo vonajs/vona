@@ -7,12 +7,12 @@ export interface IDtoOptionsLogin extends IDecoratorDtoOptions {}
 
 @Dto<IDtoOptionsLogin>()
 export class DtoLogin {
-  @Api.field(v.min(3), v.trim())
+  @Api.field(v.required(), v.min(3), v.trim())
   username: string;
 
-  @Api.field(v.min(6))
+  @Api.field(v.required(), v.min(6))
   password: string;
 
-  @Api.field(v.captcha())
+  @Api.field(v.required(), v.captcha())
   captcha: DtoCaptchaVerify;
 }
