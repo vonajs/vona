@@ -1,8 +1,19 @@
 import type { CurrencyOptions } from '@zhennann/currency';
-import type { ICaptchaOptions, TypeDateFormat, TypeRenderComponent, TypeSchemaScene } from 'vona-module-a-openapi';
+import type { ICaptchaOptions, ISchemaObjectExtensionFieldRest, ISchemaObjectExtensionFieldRestScene, TypeDateFormat, TypeRenderComponent, TypeSchemaScene } from 'vona-module-a-openapi';
 import type z from 'zod';
 import type { TypeSchemaOrderLevel } from '../../../types/order.ts';
 import { OrderLevelBaseMap } from '../../const/database.ts';
+
+export function schemaRest<T extends z.ZodType>(
+  rest?: ISchemaObjectExtensionFieldRestScene | ISchemaObjectExtensionFieldRest,
+  scene?: TypeSchemaScene,
+) {
+  return function (schema: T): T {
+    return schema.openapi(scene
+      ? { rest: { [scene]: rest } }
+      : { rest: rest as any });
+  };
+}
 
 export function schemaOrder<T extends z.ZodType>(order: number, level?: TypeSchemaOrderLevel, scene?: TypeSchemaScene) {
   const levelBase = OrderLevelBaseMap[level ?? 'business'];
