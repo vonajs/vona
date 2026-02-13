@@ -117,6 +117,7 @@ export class ServicePost extends BeanBase {
         },
       },
     );
+    // eslint-disable-next-line no-console
     console.log(post?.postContent?.id);
   }
 
