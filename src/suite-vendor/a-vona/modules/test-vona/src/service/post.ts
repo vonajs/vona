@@ -55,6 +55,7 @@ export class ServicePost extends BeanBase {
         }),
       },
     });
+    // eslint-disable-next-line no-console
     console.log(postContent[0]?.post?.title);
   }
 

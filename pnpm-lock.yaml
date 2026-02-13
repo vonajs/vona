@@ -303,6 +303,9 @@ importers:
       vona-module-home-user:
         specifier: workspace:^
         version: link:src/suite/a-home/modules/home-user
+      vona-module-start-home:
+        specifier: workspace:^
+        version: link:src/suite/cabloy-start/modules/start-home
       vona-shared:
         specifier: ^1.0.18
         version: link:packages-vona/vona-shared
@@ -2244,6 +2247,21 @@ importers:
         version: 6.1.2
 
   src/suite/a-home/modules/home-user:
+    devDependencies:
+      clean-package:
+        specifier: ^2.2.0
+        version: 2.2.0
+      rimraf:
+        specifier: ^6.0.1
+        version: 6.1.2
+
+  src/suite/cabloy-start:
+    dependencies:
+      vona-module-start-home:
+        specifier: ^5.0.0
+        version: link:modules/start-home
+
+  src/suite/cabloy-start/modules/start-home:
     devDependencies:
       clean-package:
         specifier: ^2.2.0
