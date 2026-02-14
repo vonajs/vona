@@ -10,7 +10,8 @@ export interface ISsrMenuOptions<%=argv.resourceNameCapitalize%> extends IDecora
   items: {
     <%=argv.resourceName%>: {
       title: $locale('<%=argv.resourceNameCapitalize%>'),
-      group: 'a-ssrhome:admin',
+      // group: 'a-ssrhome:management',
+      // group: 'start-home:management',
       link: 'presetResource',
       meta: {
         params: {
@@ -19,6 +20,5 @@ export interface ISsrMenuOptions<%=argv.resourceNameCapitalize%> extends IDecora
       },
     },
   },
-  site: 'a-ssrhome:home',
 })
 export class SsrMenu<%=argv.resourceNameCapitalize%> extends BeanBase {}
