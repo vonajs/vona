@@ -1,6 +1,7 @@
 import type { IDecoratorSsrMenuOptions } from 'vona-module-a-ssr';
 import type { ISsrSiteOptionsHome } from 'vona-module-a-ssrhome';
 import { BeanBase } from 'vona';
+import { $order } from 'vona-module-a-openapiutils';
 import { SsrMenu } from 'vona-module-a-ssr';
 import { $locale } from '../.metadata/locales.ts';
 
@@ -13,6 +14,7 @@ export interface ISsrMenuOptions<%=argv.resourceNameCapitalize%> extends IDecora
       // group: 'a-ssrhome:management',
       // group: 'start-home:management',
       link: 'presetResource',
+      order: $order(1),
       meta: {
         params: {
           resource: '<%=argv.module%>:<%=argv.resourceName%>',

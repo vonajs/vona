@@ -1,10 +1,12 @@
 import type { Constructable, ILocaleMagic } from 'vona';
 import type { TypeOpenapiMetadata } from 'vona-module-a-openapi';
 import type { TypeDecoratorRules } from '../types/decorator.ts';
+import type { TypeSchemaOrderLevel } from '../types/order.ts';
 import { isClass, isEmptyObject } from '@cabloy/utils';
 import { ZodMetadata } from '@cabloy/zod-openapi';
 import { appMetadata, appResource, cast, deepExtend, registerMappedClassMetadataKey } from 'vona';
 import { z } from 'zod';
+import { OrderLevelBaseMap } from './const/database.ts';
 import { SymbolDecoratorRule } from './const/decorator.ts';
 
 export function getTargetDecoratorRules(target: object, disableRegisterMetadata?: boolean): TypeDecoratorRules {
@@ -87,4 +89,9 @@ export function normalizeErrorParams(params?: string | ILocaleMagic | any, error
     return { error: () => params2 };
   }
   return z.util.normalizeParams(params2);
+}
+
+export function $order(order: number, level?: TypeSchemaOrderLevel) {
+  const levelBase = OrderLevelBaseMap[level ?? 'business'];
+  return levelBase + order;
 }
