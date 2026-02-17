@@ -249,6 +249,9 @@ importers:
       vona-module-a-ssrhmr:
         specifier: workspace:^
         version: link:src/suite-vendor/a-cabloy/modules/a-ssrhmr
+      vona-module-a-ssrhome:
+        specifier: workspace:^
+        version: link:src/suite-vendor/a-cabloy/modules/a-ssrhome
       vona-module-a-startup:
         specifier: workspace:^
         version: link:src/suite-vendor/a-vona/modules/a-startup
