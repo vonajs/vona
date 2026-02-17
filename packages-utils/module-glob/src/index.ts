@@ -65,6 +65,9 @@ export async function glob(options: IModuleGlobOptions) {
   // check suites
   __checkSuites(context, suites);
 
+  // check disables
+  __checkModulesDisables(context);
+
   // order
   __orderModules(context, modules);
 
@@ -89,6 +92,22 @@ export async function glob(options: IModuleGlobOptions) {
 
 function getPackageModuleNode(projectMode) {
   return ['zova', 'vona'].includes(projectMode) ? `${projectMode}Module` : 'cabloyModule';
+}
+
+function __checkModulesDisables(context: IModuleGlobContext) {
+  for (const key of Object.keys(context.modules)) {
+    const module = context.modules[key];
+    if (!module) continue;
+    const disables = module.package.zovaModule?.disables ?? module.package.vonaModule?.disables;
+    if (!disables) return;
+    for (const name of disables) {
+      delete context.modules[name];
+      const index = context.modulesArray.findIndex(item => item.info.relativeName === name);
+      if (index > -1) {
+        context.modulesArray.splice(index, 1);
+      }
+    }
+  }
 }
 
 async function __loadPackage(context: IModuleGlobContext, modules: Record<string, ISuiteModuleBase>) {
