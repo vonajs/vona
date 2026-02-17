@@ -65,11 +65,11 @@ export async function glob(options: IModuleGlobOptions) {
   // check suites
   __checkSuites(context, suites);
 
-  // check disables
-  __checkModulesDisables(context);
-
   // order
   __orderModules(context, modules);
+
+  // check disables, after __orderModules
+  __checkModulesDisables(context);
 
   // log
   __logModules(context, log);
@@ -99,7 +99,7 @@ function __checkModulesDisables(context: IModuleGlobContext) {
     const module = context.modules[key];
     if (!module) continue;
     const disables = module.package.zovaModule?.disables ?? module.package.vonaModule?.disables;
-    if (!disables) return;
+    if (!disables) continue;
     for (const name of disables) {
       delete context.modules[name];
       const index = context.modulesArray.findIndex(item => item.info.relativeName === name);
