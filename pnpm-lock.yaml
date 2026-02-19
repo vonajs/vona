@@ -306,6 +306,9 @@ importers:
       vona-module-start-home:
         specifier: workspace:^
         version: link:src/suite/cabloy-start/modules/start-home
+      vona-module-start-test:
+        specifier: workspace:^
+        version: link:src/suite/cabloy-start/modules/start-test
       vona-shared:
         specifier: ^1.0.18
         version: link:packages-vona/vona-shared
@@ -2260,8 +2263,24 @@ importers:
       vona-module-start-home:
         specifier: ^5.0.0
         version: link:modules/start-home
+      vona-module-start-test:
+        specifier: ^5.0.0
+        version: link:modules/start-test
 
   src/suite/cabloy-start/modules/start-home:
+    devDependencies:
+      clean-package:
+        specifier: ^2.2.0
+        version: 2.2.0
+      rimraf:
+        specifier: ^6.0.1
+        version: 6.1.2
+
+  src/suite/cabloy-start/modules/start-test:
+    dependencies:
+      '@faker-js/faker':
+        specifier: ^10.0.0
+        version: 10.2.0
     devDependencies:
       clean-package:
         specifier: ^2.2.0
