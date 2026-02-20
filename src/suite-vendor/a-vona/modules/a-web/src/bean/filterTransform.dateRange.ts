@@ -18,13 +18,21 @@ export class FilterTransformDateRange extends BeanBase implements IFilterTransfo
     //
     const where: any = {};
     if (dateStartStr) {
-      const dateStart = DateTime.fromISO(dateStartStr, { zone: this.ctx.tz });
+      const dateStart = this._parseDate(dateStartStr);
       where._gte_ = dateStart.toJSDate();
     }
     if (dateEndStr) {
-      const dateEnd = DateTime.fromISO(dateEndStr, { zone: this.ctx.tz }).plus({ day: 1 });
+      const dateEnd = this._parseDate(dateEndStr).plus({ day: 1 });
       where._lt_ = dateEnd.toJSDate();
     }
     return where;
+  }
+
+  private _parseDate(str: string) {
+    let date = DateTime.fromISO(str, { zone: this.ctx.tz });
+    if (!date.isValid) {
+      date = DateTime.fromFormat(str, 'M/dd/yyyy', { zone: this.ctx.tz });
+    }
+    return date;
   }
 }
