@@ -1,0 +1,12 @@
+{
+  "name": "vona-suite-cabloy-start",
+  "type": "module",
+  "version": "5.0.0",
+  "title": "cabloy-start",
+  "files": [],
+  "description": "",
+  "author": "",
+  "dependencies": {
+    "vona-module-start-home": "^5.0.0"
+  }
+}

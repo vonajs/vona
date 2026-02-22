@@ -56,18 +56,15 @@ src/backend/typing/mine.d.ts
 
 /src/suite/*
 !/src/suite/.gitkeep
-!/src/suite/a-base
-!/src/suite/a-cms
-!/src/suite/a-flow
 !/src/suite/a-home
-!/src/suite/test-party
+!/src/suite/cabloy-start
+src/suite/cabloy-start/modules/start-home/assets
+src/suite/cabloy-start/modules/start-home/zovaRest
 
 /src/suite-vendor/*
 !/src/suite-vendor/.gitkeep
 !/src/suite-vendor/a-cabloy
 !/src/suite-vendor/a-vona
-!/src/suite-vendor/test-vona
-
 
 /src/module/*
 !/src/module/.gitkeep
