@@ -4,7 +4,7 @@ import { fileURLToPath } from 'node:url';
 import fse from 'fs-extra';
 
 async function versionTemplate() {
-  // cp a-home
+  // cp cabloy-start
   const suiteHomeSrc = path.resolve(fileURLToPath(import.meta.url), '../../src/suite/cabloy-start');
   const suiteHomeDest = path.resolve(fileURLToPath(import.meta.url), '../../packages-cli/cli-set-api/cli/templates/create/project/basic/boilerplate/src/suite/cabloy-start');
   await fse.remove(suiteHomeDest);
