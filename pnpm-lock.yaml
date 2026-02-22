@@ -243,9 +243,6 @@ importers:
       vona-module-a-ssr:
         specifier: workspace:^
         version: link:src/suite-vendor/a-cabloy/modules/a-ssr
-      vona-module-a-ssrcabloy:
-        specifier: workspace:^
-        version: link:src/suite-vendor/a-cabloy/modules/a-ssrcabloy
       vona-module-a-ssrhmr:
         specifier: workspace:^
         version: link:src/suite-vendor/a-cabloy/modules/a-ssrhmr
@@ -321,9 +318,6 @@ importers:
       zod:
         specifier: ^4.1.13
         version: 4.3.5
-      zova-rest-vona-cabloy:
-        specifier: file:./.zova-rest/vona-cabloy
-        version: file:.zova-rest/vona-cabloy
       zova-rest-vona-home:
         specifier: file:./.zova-rest/vona-home
         version: file:.zova-rest/vona-home
@@ -1146,15 +1140,6 @@ importers:
       '@types/http-proxy':
         specifier: ^1.17.16
         version: 1.17.17
-      clean-package:
-        specifier: ^2.2.0
-        version: 2.2.0
-      rimraf:
-        specifier: ^6.0.1
-        version: 6.1.2
-
-  src/suite-vendor/a-cabloy/modules/a-ssrcabloy:
-    devDependencies:
       clean-package:
         specifier: ^2.2.0
         version: 2.2.0
@@ -2263,9 +2248,6 @@ importers:
       vona-module-start-home:
         specifier: ^5.0.0
         version: link:modules/start-home
-      vona-module-start-test:
-        specifier: ^5.0.0
-        version: link:modules/start-test
 
   src/suite/cabloy-start/modules/start-home:
     devDependencies:
@@ -9365,9 +9347,6 @@ packages:
 
   zod@4.3.5:
     resolution: {integrity: sha512-k7Nwx6vuWx1IJ9Bjuf4Zt1PEllcwe7cls3VNzm4CQ1/hgtFUK2bRNG3rvnpPUhFjmqJKAKtjV576KnUkHocg/g==}
-
-  zova-rest-vona-cabloy@file:.zova-rest/vona-cabloy:
-    resolution: {directory: .zova-rest/vona-cabloy, type: directory}
 
   zova-rest-vona-home@file:.zova-rest/vona-home:
     resolution: {directory: .zova-rest/vona-home, type: directory}
@@ -17827,8 +17806,6 @@ snapshots:
   zod@3.25.76: {}
 
   zod@4.3.5: {}
-
-  zova-rest-vona-cabloy@file:.zova-rest/vona-cabloy: {}
 
   zova-rest-vona-home@file:.zova-rest/vona-home: {}
 
