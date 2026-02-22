@@ -36,7 +36,8 @@
     "tsc:publish": "npm run clean && vona :bin:buildModule && tsc -p tsconfig.build.json",
     "prepublishOnly": "npm run tsc:publish",
     "prepack": "clean-package",
-    "postpack": "clean-package restore && npm run clean"
+    "postpack": "clean-package restore && npm run clean",
+    "version": "node ../../../../../scripts/version-cabloy-start.ts"
   },
   "clean-package": {
     "indent": 2,
