@@ -1,0 +1,79 @@
+{
+  "name": "vona-module-a-socket",
+  "type": "module",
+  "version": "5.0.0",
+  "title": "a-socket",
+  "vonaModule": {
+    "dependencies": {
+      "a-vona": "5.0.0"
+    },
+    "globalDependencies": {
+      "@cabloy/socket": true
+    },
+    "onions": {
+      "socketNamespace": {
+        "optionsGlobalInterfaceName": "IDecoratorSocketNamespaceOptions",
+        "optionsGlobalInterfaceFrom": "vona-module-a-socket",
+        "scopeResource": true,
+        "boilerplate": "socketNamespace/boilerplate"
+      },
+      "socketConnection": {
+        "optionsGlobalInterfaceName": "IDecoratorSocketConnectionOptions",
+        "optionsGlobalInterfaceFrom": "vona-module-a-socket",
+        "boilerplate": "socketConnection/boilerplate"
+      },
+      "socketPacket": {
+        "optionsGlobalInterfaceName": "IDecoratorSocketPacketOptions",
+        "optionsGlobalInterfaceFrom": "vona-module-a-socket",
+        "boilerplate": "socketPacket/boilerplate"
+      }
+    },
+    "capabilities": {
+      "monkey": true
+    }
+  },
+  "description": "",
+  "author": "",
+  "keywords": [
+    "Vona Module"
+  ],
+  "exports": {
+    ".": {
+      "types": [
+        "./src/index.ts",
+        "./dist/index.d.ts"
+      ],
+      "import": "./src/index.ts",
+      "default": "./dist/index.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "assets",
+    "cli",
+    "dist"
+  ],
+  "scripts": {
+    "clean": "rimraf dist tsconfig.build.tsbuildinfo",
+    "tsc:publish": "npm run clean && vona :bin:buildModule && tsc -p tsconfig.build.json",
+    "prepublishOnly": "npm run tsc:publish",
+    "prepack": "clean-package",
+    "postpack": "clean-package restore && npm run clean"
+  },
+  "dependencies": {
+    "@cabloy/socket": "workspace:^",
+    "@types/ws": "^8.18.0",
+    "ws": "^8.18.1"
+  },
+  "clean-package": {
+    "indent": 2,
+    "remove": [
+      "clean-package",
+      "exports.\\..import"
+    ]
+  },
+  "devDependencies": {
+    "clean-package": "^2.2.0",
+    "rimraf": "^6.0.1"
+  }
+}

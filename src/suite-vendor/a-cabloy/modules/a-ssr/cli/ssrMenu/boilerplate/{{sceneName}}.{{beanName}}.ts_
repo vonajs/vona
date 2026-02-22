@@ -1,0 +1,8 @@
+import type { IDecoratorSsrMenuOptions } from 'vona-module-a-ssr';
+import { BeanBase } from 'vona';
+import { SsrMenu } from 'vona-module-a-ssr';
+
+export interface ISsrMenuOptions<%=argv.beanNameCapitalize%> extends IDecoratorSsrMenuOptions {}
+
+@SsrMenu<ISsrMenuOptions<%=argv.beanNameCapitalize%>>()
+export class SsrMenu<%=argv.beanNameCapitalize%> extends BeanBase {}

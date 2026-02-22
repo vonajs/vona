@@ -1,0 +1,25 @@
+import type { IDecoratorSsrSiteOptions } from 'vona-module-a-ssr';
+import type { IPagePathRecord } from 'zova-rest-vona-home';
+import type { DtoTestResult } from '../dto/testResult.tsx';
+import { BeanSsrSiteBase, SsrSite } from 'vona-module-a-ssr';
+
+declare module 'vona-module-a-ssr' {
+  export interface ISsrSitePublicPathRecord {
+    second: never;
+  }
+}
+
+export interface ISsrSiteOptionsSecondPages extends IPagePathRecord {}
+
+export interface ISsrSiteOptionsSecondPagesData {
+  '/demo/basic/toolOne/:id?': unknown;
+  '/demo/basic/toolTwo/:id?': DtoTestResult;
+}
+
+export interface ISsrSiteOptionsSecond extends IDecoratorSsrSiteOptions<ISsrSiteOptionsSecondPages, ISsrSiteOptionsSecondPagesData> {}
+
+@SsrSite<ISsrSiteOptionsSecond>({
+  publicPath: 'second',
+  assetPath: 'ssr-vonaHome-5.0.17',
+})
+export class SsrSiteSecond extends BeanSsrSiteBase<ISsrSiteOptionsSecond> {}

@@ -1,0 +1,20 @@
+import type { IDecoratorSsrSiteOptions } from 'vona-module-a-ssr';
+import { BeanSsrSiteBase, SsrSite } from 'vona-module-a-ssr';
+
+declare module 'vona-module-a-ssr' {
+  export interface ISsrSitePublicPathRecord {
+    some: never;
+  }
+}
+
+export interface ISsrSiteOptions<%=argv.beanNameCapitalize%>Pages {}
+
+export interface ISsrSiteOptions<%=argv.beanNameCapitalize%>PagesData {}
+
+export interface ISsrSiteOptions<%=argv.beanNameCapitalize%> extends IDecoratorSsrSiteOptions<ISsrSiteOptions<%=argv.beanNameCapitalize%>Pages, ISsrSiteOptions<%=argv.beanNameCapitalize%>PagesData> {}
+
+@SsrSite<ISsrSiteOptions<%=argv.beanNameCapitalize%>>({
+  publicPath: 'some',
+  assetPath: 'front-bundle-path',
+})
+export class SsrSite<%=argv.beanNameCapitalize%> extends BeanSsrSiteBase<ISsrSiteOptions<%=argv.beanNameCapitalize%>> {}

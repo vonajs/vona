@@ -1,0 +1,61 @@
+{
+  "name": "vona-module-test-rest",
+  "type": "module",
+  "version": "5.0.0",
+  "title": "test-rest",
+  "vonaModule": {
+    "fileVersion": 1,
+    "dependencies": {
+      "a-cabloy": "5.0.0"
+    },
+    "capabilities": {
+      "meta": {
+        "mode": [
+          "dev",
+          "test"
+        ]
+      }
+    }
+  },
+  "description": "",
+  "author": "",
+  "keywords": [
+    "Vona Module"
+  ],
+  "exports": {
+    ".": {
+      "types": [
+        "./src/index.ts",
+        "./dist/index.d.ts"
+      ],
+      "import": "./src/index.ts",
+      "default": "./dist/index.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "assets",
+    "dist"
+  ],
+  "scripts": {
+    "clean": "rimraf dist tsconfig.build.tsbuildinfo",
+    "tsc:publish": "npm run clean && vona :bin:buildModule && tsc -p tsconfig.build.json",
+    "prepublishOnly": "npm run tsc:publish",
+    "prepack": "clean-package",
+    "postpack": "clean-package restore && npm run clean"
+  },
+  "clean-package": {
+    "indent": 2,
+    "remove": [
+      "clean-package",
+      "exports.\\..import"
+    ]
+  },
+  "dependencies": {
+    "@faker-js/faker": "^10.0.0"
+  },
+  "devDependencies": {
+    "clean-package": "^2.2.0",
+    "rimraf": "^6.0.1"
+  }
+}
