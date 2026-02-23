@@ -321,6 +321,9 @@ importers:
       zova-rest-vona-home:
         specifier: file:./.zova-rest/vona-home
         version: file:.zova-rest/vona-home
+      zova-rest-vona-start:
+        specifier: file:./.zova-rest/vona-start
+        version: file:.zova-rest/vona-start
     devDependencies:
       '@cabloy/cli':
         specifier: ^3.0.98
@@ -9351,6 +9354,9 @@ packages:
   zova-rest-vona-home@file:.zova-rest/vona-home:
     resolution: {directory: .zova-rest/vona-home, type: directory}
 
+  zova-rest-vona-start@file:.zova-rest/vona-start:
+    resolution: {directory: .zova-rest/vona-start, type: directory}
+
   zwitch@1.0.5:
     resolution: {integrity: sha512-V50KMwwzqJV0NpZIZFwfOD5/lyny3WlSzRiXgA0G7VUnRlqttta1L6UQIHzd6EuBY/cHGfwTIck7w1yH6Q5zUw==}
 
@@ -17808,6 +17814,8 @@ snapshots:
   zod@4.3.5: {}
 
   zova-rest-vona-home@file:.zova-rest/vona-home: {}
+
+  zova-rest-vona-start@file:.zova-rest/vona-start: {}
 
   zwitch@1.0.5: {}
 
