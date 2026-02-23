@@ -1,11 +1,11 @@
-//#region node_modules/.pnpm/@vue+shared@3.5.27/node_modules/@vue/shared/dist/shared.d.ts
+//#region node_modules/.pnpm/@vue+shared@3.5.13/node_modules/@vue/shared/dist/shared.d.ts
 
 type Prettify$1<T$1> = { [K in keyof T$1]: T$1[K] } & {};
 type UnionToIntersection<U$1> = (U$1 extends any ? (k: U$1) => void : never) extends ((k: infer I) => void) ? I : never;
 type LooseRequired<T$1> = { [P in keyof (T$1 & Required<T$1>)]: T$1[P] };
 type IfAny<T$1, Y, N$1> = 0 extends 1 & T$1 ? Y : N$1;
 //#endregion
-//#region node_modules/.pnpm/@vue+reactivity@3.5.27/node_modules/@vue/reactivity/dist/reactivity.d.ts
+//#region node_modules/.pnpm/@cabloy+vue-reactivity@3.5.16/node_modules/@cabloy/vue-reactivity/dist/reactivity.d.ts
 declare enum TrackOpTypes {
   GET = "get",
   HAS = "has",
@@ -154,7 +154,7 @@ interface WatchHandle extends WatchStopHandle {
   stop: () => void;
 }
 //#endregion
-//#region node_modules/.pnpm/@vue+runtime-core@3.5.27/node_modules/@vue/runtime-core/dist/runtime-core.d.ts
+//#region node_modules/.pnpm/@cabloy+vue-runtime-core@3.5.51/node_modules/@cabloy/vue-runtime-core/dist/runtime-core.d.ts
 type Slot<T$1 extends any = any> = (...args: IfAny<T$1, any[], [T$1] | (T$1 extends undefined ? [] : never)>) => VNode[];
 type InternalSlots = {
   [name: string]: Slot | undefined;
@@ -204,8 +204,7 @@ interface SchedulerJob extends Function {
    */
   i?: ComponentInternalInstance;
 }
-declare function nextTick(): Promise<void>;
-declare function nextTick<T$1, R$1>(this: T$1, fn: (this: T$1) => R$1 | Promise<R$1>): Promise<R$1>;
+declare function nextTick<T$1 = void, R$1 = void>(this: T$1, fn?: (this: T$1) => R$1): Promise<Awaited<R$1>>;
 type ComponentPropsOptions<P$1 = Data> = ComponentObjectPropsOptions<P$1> | string[];
 type ComponentObjectPropsOptions<P$1 = Data> = { [K in keyof P$1]: Prop<P$1[K]> | null };
 type Prop<T$1, D$1 = T$1> = PropOptions<T$1, D$1> | PropType<T$1>;
@@ -265,9 +264,7 @@ type InferPropType<T$1, NullAsAny = true> = [T$1] extends [null] ? NullAsAny ext
  *
  * To extract accepted props from the parent, use {@link ExtractPublicPropTypes}.
  */
-type ExtractPropTypes<O> = { [K in keyof Pick<O, RequiredKeys$1<O>>]: O[K] extends {
-  default: any;
-} ? Exclude<InferPropType<O[K]>, undefined> : InferPropType<O[K]> } & { [K in keyof Pick<O, OptionalKeys<O>>]?: InferPropType<O[K]> };
+type ExtractPropTypes<O> = { [K in keyof Pick<O, RequiredKeys$1<O>>]: InferPropType<O[K]> } & { [K in keyof Pick<O, OptionalKeys<O>>]?: InferPropType<O[K]> };
 type ExtractDefaultPropTypes<O> = O extends object ? { [K in keyof Pick<O, DefaultKeys<O>>]: InferPropType<O[K]> } : {};
 /**
  * Vue `<script setup>` compiler macro for declaring component props. The
@@ -305,7 +302,7 @@ declare function defineProps<PropNames extends string = string>(props: PropNames
 declare function defineProps<PP extends ComponentObjectPropsOptions = ComponentObjectPropsOptions>(props: PP): Prettify$1<Readonly<ExtractPropTypes<PP>>>;
 declare function defineProps<TypeProps>(): DefineProps<LooseRequired<TypeProps>, BooleanKey<TypeProps>>;
 type DefineProps<T$1, BKeys extends keyof T$1> = Readonly<T$1> & { readonly [K in BKeys]-?: boolean };
-type BooleanKey<T$1, K$1 extends keyof T$1 = keyof T$1> = K$1 extends any ? T$1[K$1] extends boolean | undefined ? T$1[K$1] extends never | undefined ? never : K$1 : never : never;
+type BooleanKey<T$1, K$1 extends keyof T$1 = keyof T$1> = K$1 extends any ? [T$1[K$1]] extends [boolean | undefined] ? K$1 : never : never;
 /**
  * Vue `<script setup>` compiler macro for declaring a component's emitted
  * events. The expected argument is the same as the component `emits` option.
@@ -432,7 +429,7 @@ declare function defineModel<T$1, M$1 extends PropertyKey = string, G = T$1, S =
 type NotUndefined<T$1> = T$1 extends undefined ? never : T$1;
 type MappedOmit<T$1, K$1 extends keyof any> = { [P in keyof T$1 as P extends K$1 ? never : P]: T$1[P] };
 type InferDefaults<T$1> = { [K in keyof T$1]?: InferDefault<T$1, T$1[K]> };
-type NativeType = null | undefined | number | string | boolean | symbol | Function;
+type NativeType = null | number | string | boolean | symbol | Function;
 type InferDefault<P$1, T$1> = ((props: P$1) => T$1 & {}) | (T$1 extends NativeType ? T$1 : never);
 type PropsWithDefaults<T$1, Defaults$1 extends InferDefaults<T$1>, BKeys extends keyof T$1> = T$1 extends unknown ? Readonly<MappedOmit<T$1, keyof Defaults$1>> & { readonly [K in keyof Defaults$1 as K extends keyof T$1 ? K : never]-?: K extends keyof T$1 ? Defaults$1[K] extends undefined ? IfAny<Defaults$1[K], NotUndefined<T$1[K]>, T$1[K]> : NotUndefined<T$1[K]> : never } & { readonly [K in BKeys]-?: K extends keyof Defaults$1 ? Defaults$1[K] extends undefined ? boolean | undefined : boolean : boolean } : never;
 /**
@@ -474,17 +471,17 @@ return withDirectives(h(comp), [
 ])
 */
 
-interface DirectiveBinding<Value = any, Modifiers extends string = string, Arg = any> {
+interface DirectiveBinding<Value = any, Modifiers extends string = string, Arg extends string = string> {
   instance: ComponentPublicInstance | Record<string, any> | null;
   value: Value;
   oldValue: Value | null;
   arg?: Arg;
   modifiers: DirectiveModifiers<Modifiers>;
-  dir: ObjectDirective<any, Value, Modifiers, Arg>;
+  dir: ObjectDirective<any, Value>;
 }
-type DirectiveHook<HostElement = any, Prev = VNode<any, HostElement> | null, Value = any, Modifiers extends string = string, Arg = any> = (el: HostElement, binding: DirectiveBinding<Value, Modifiers, Arg>, vnode: VNode<any, HostElement>, prevVNode: Prev) => void;
-type SSRDirectiveHook<Value = any, Modifiers extends string = string, Arg = any> = (binding: DirectiveBinding<Value, Modifiers, Arg>, vnode: VNode) => Data | undefined;
-interface ObjectDirective<HostElement = any, Value = any, Modifiers extends string = string, Arg = any> {
+type DirectiveHook<HostElement = any, Prev = VNode<any, HostElement> | null, Value = any, Modifiers extends string = string, Arg extends string = string> = (el: HostElement, binding: DirectiveBinding<Value, Modifiers, Arg>, vnode: VNode<any, HostElement>, prevVNode: Prev) => void;
+type SSRDirectiveHook<Value = any, Modifiers extends string = string, Arg extends string = string> = (binding: DirectiveBinding<Value, Modifiers, Arg>, vnode: VNode) => Data | undefined;
+interface ObjectDirective<HostElement = any, Value = any, Modifiers extends string = string, Arg extends string = string> {
   created?: DirectiveHook<HostElement, null, Value, Modifiers, Arg>;
   beforeMount?: DirectiveHook<HostElement, null, Value, Modifiers, Arg>;
   mounted?: DirectiveHook<HostElement, null, Value, Modifiers, Arg>;
@@ -495,9 +492,9 @@ interface ObjectDirective<HostElement = any, Value = any, Modifiers extends stri
   getSSRProps?: SSRDirectiveHook<Value, Modifiers, Arg>;
   deep?: boolean;
 }
-type FunctionDirective<HostElement = any, V$1 = any, Modifiers extends string = string, Arg = any> = DirectiveHook<HostElement, any, V$1, Modifiers, Arg>;
-type Directive<HostElement = any, Value = any, Modifiers extends string = string, Arg = any> = ObjectDirective<HostElement, Value, Modifiers, Arg> | FunctionDirective<HostElement, Value, Modifiers, Arg>;
-type DirectiveModifiers<K$1 extends string = string> = Partial<Record<K$1, boolean>>;
+type FunctionDirective<HostElement = any, V$1 = any, Modifiers extends string = string, Arg extends string = string> = DirectiveHook<HostElement, any, V$1, Modifiers, Arg>;
+type Directive<HostElement = any, Value = any, Modifiers extends string = string, Arg extends string = string> = ObjectDirective<HostElement, Value, Modifiers, Arg> | FunctionDirective<HostElement, Value, Modifiers, Arg>;
+type DirectiveModifiers<K$1 extends string = string> = Record<K$1, boolean>;
 /**
  * Custom properties added to component instances in any way and can be accessed through `this`
  *
@@ -550,7 +547,7 @@ type ComponentPublicInstanceConstructor<T$1 extends ComponentPublicInstance<Prop
  * inference everywhere internally, but it has to be a new type to avoid
  * breaking types that relies on previous arguments order (#10842)
  */
-type CreateComponentPublicInstanceWithMixins<P$1 = {}, B$1 = {}, D$1 = {}, C$1 extends ComputedOptions = {}, M$1 extends MethodOptions = {}, Mixin$1 extends ComponentOptionsMixin = ComponentOptionsMixin, Extends$1 extends ComponentOptionsMixin = ComponentOptionsMixin, E extends EmitsOptions = {}, PublicProps$1 = P$1, Defaults$1 = {}, MakeDefaultsOptional extends boolean = false, I extends ComponentInjectOptions = {}, S extends SlotsType = {}, LC extends Record<string, Component$1> = {}, Directives extends Record<string, Directive> = {}, Exposed extends string = string, TypeRefs extends Data = {}, TypeEl extends Element = any, Provide extends ComponentProvideOptions = ComponentProvideOptions, PublicMixin = IntersectionMixin<Mixin$1> & IntersectionMixin<Extends$1>, PublicP = UnwrapMixinsType<PublicMixin, 'P'> & EnsureNonVoid<P$1>, PublicB = UnwrapMixinsType<PublicMixin, 'B'> & EnsureNonVoid<B$1>, PublicD = UnwrapMixinsType<PublicMixin, 'D'> & EnsureNonVoid<D$1>, PublicC extends ComputedOptions = UnwrapMixinsType<PublicMixin, 'C'> & EnsureNonVoid<C$1>, PublicM extends MethodOptions = UnwrapMixinsType<PublicMixin, 'M'> & EnsureNonVoid<M$1>, PublicDefaults = UnwrapMixinsType<PublicMixin, 'Defaults'> & EnsureNonVoid<Defaults$1>> = ComponentPublicInstance<PublicP, PublicB, PublicD, PublicC, PublicM, E, PublicProps$1, PublicDefaults, MakeDefaultsOptional, ComponentOptionsBase<P$1, B$1, D$1, C$1, M$1, Mixin$1, Extends$1, E, string, Defaults$1, {}, string, S, LC, Directives, Exposed, Provide>, I, S, Exposed, TypeRefs, TypeEl>;
+type CreateComponentPublicInstanceWithMixins<P$1 = {}, B$1 = {}, D$1 = {}, C$1 extends ComputedOptions = {}, M$1 extends MethodOptions = {}, Mixin$1 extends ComponentOptionsMixin = ComponentOptionsMixin, Extends$1 extends ComponentOptionsMixin = ComponentOptionsMixin, E extends EmitsOptions = {}, PublicProps$1 = P$1, Defaults$1 = {}, MakeDefaultsOptional extends boolean = false, I extends ComponentInjectOptions = {}, S extends SlotsType = {}, LC extends Record<string, Component> = {}, Directives extends Record<string, Directive> = {}, Exposed extends string = string, TypeRefs extends Data = {}, TypeEl extends Element = any, Provide extends ComponentProvideOptions = ComponentProvideOptions, PublicMixin = IntersectionMixin<Mixin$1> & IntersectionMixin<Extends$1>, PublicP = UnwrapMixinsType<PublicMixin, 'P'> & EnsureNonVoid<P$1>, PublicB = UnwrapMixinsType<PublicMixin, 'B'> & EnsureNonVoid<B$1>, PublicD = UnwrapMixinsType<PublicMixin, 'D'> & EnsureNonVoid<D$1>, PublicC extends ComputedOptions = UnwrapMixinsType<PublicMixin, 'C'> & EnsureNonVoid<C$1>, PublicM extends MethodOptions = UnwrapMixinsType<PublicMixin, 'M'> & EnsureNonVoid<M$1>, PublicDefaults = UnwrapMixinsType<PublicMixin, 'Defaults'> & EnsureNonVoid<Defaults$1>> = ComponentPublicInstance<PublicP, PublicB, PublicD, PublicC, PublicM, E, PublicProps$1, PublicDefaults, MakeDefaultsOptional, ComponentOptionsBase<P$1, B$1, D$1, C$1, M$1, Mixin$1, Extends$1, E, string, Defaults$1, {}, string, S, LC, Directives, Exposed, Provide>, I, S, Exposed, TypeRefs, TypeEl>;
 type ExposedKeys<T$1, Exposed extends string & keyof T$1> = '' extends Exposed ? T$1 : Pick<T$1, Exposed>;
 type ComponentPublicInstance<P$1 = {},
 // props type extracted from props option
@@ -779,7 +776,7 @@ declare enum DeprecationTypes$1 {
   PRIVATE_APIS = "PRIVATE_APIS",
 }
 type CompatConfig = Partial<Record<DeprecationTypes$1, boolean | 'suppress-warning'>> & {
-  MODE?: 2 | 3 | ((comp: Component$1 | null) => 2 | 3);
+  MODE?: 2 | 3 | ((comp: Component | null) => 2 | 3);
 };
 /**
  * Interface for declaring custom options.
@@ -799,14 +796,14 @@ type CompatConfig = Partial<Record<DeprecationTypes$1, boolean | 'suppress-warni
  */
 interface ComponentCustomOptions {}
 type RenderFunction = () => VNodeChild;
-interface ComponentOptionsBase<Props$1, RawBindings, D$1, C$1 extends ComputedOptions, M$1 extends MethodOptions, Mixin$1 extends ComponentOptionsMixin, Extends$1 extends ComponentOptionsMixin, E extends EmitsOptions, EE extends string = string, Defaults$1 = {}, I extends ComponentInjectOptions = {}, II extends string = string, S extends SlotsType = {}, LC extends Record<string, Component$1> = {}, Directives extends Record<string, Directive> = {}, Exposed extends string = string, Provide extends ComponentProvideOptions = ComponentProvideOptions> extends LegacyOptions<Props$1, D$1, C$1, M$1, Mixin$1, Extends$1, I, II, Provide>, ComponentInternalOptions, ComponentCustomOptions {
+interface ComponentOptionsBase<Props$1, RawBindings, D$1, C$1 extends ComputedOptions, M$1 extends MethodOptions, Mixin$1 extends ComponentOptionsMixin, Extends$1 extends ComponentOptionsMixin, E extends EmitsOptions, EE extends string = string, Defaults$1 = {}, I extends ComponentInjectOptions = {}, II extends string = string, S extends SlotsType = {}, LC extends Record<string, Component> = {}, Directives extends Record<string, Directive> = {}, Exposed extends string = string, Provide extends ComponentProvideOptions = ComponentProvideOptions> extends LegacyOptions<Props$1, D$1, C$1, M$1, Mixin$1, Extends$1, I, II, Provide>, ComponentInternalOptions, ComponentCustomOptions {
   setup?: (this: void, props: LooseRequired<Props$1 & Prettify$1<UnwrapMixinsType<IntersectionMixin<Mixin$1> & IntersectionMixin<Extends$1>, 'P'>>>, ctx: SetupContext<E, S>) => Promise<RawBindings> | RawBindings | RenderFunction | void;
   name?: string;
   template?: string | object;
   render?: Function;
-  components?: LC & Record<string, Component$1>;
+  components?: LC & Record<string, Component>;
   directives?: Directives & Record<string, Directive>;
-  inheritAttrs?: boolean;
+  inheritAttrs?: boolean | string[];
   emits?: (E | EE[]) & ThisType<void>;
   slots?: S;
   expose?: Exposed[];
@@ -827,7 +824,7 @@ interface RuntimeCompilerOptions {
   comments?: boolean;
   delimiters?: [string, string];
 }
-type ComponentOptions<Props$1 = {}, RawBindings = any, D$1 = any, C$1 extends ComputedOptions = any, M$1 extends MethodOptions = any, Mixin$1 extends ComponentOptionsMixin = any, Extends$1 extends ComponentOptionsMixin = any, E extends EmitsOptions = any, EE extends string = string, Defaults$1 = {}, I extends ComponentInjectOptions = {}, II extends string = string, S extends SlotsType = {}, LC extends Record<string, Component$1> = {}, Directives extends Record<string, Directive> = {}, Exposed extends string = string, Provide extends ComponentProvideOptions = ComponentProvideOptions> = ComponentOptionsBase<Props$1, RawBindings, D$1, C$1, M$1, Mixin$1, Extends$1, E, EE, Defaults$1, I, II, S, LC, Directives, Exposed, Provide> & ThisType<CreateComponentPublicInstanceWithMixins<{}, RawBindings, D$1, C$1, M$1, Mixin$1, Extends$1, E, Readonly<Props$1>, Defaults$1, false, I, S, LC, Directives>>;
+type ComponentOptions<Props$1 = {}, RawBindings = any, D$1 = any, C$1 extends ComputedOptions = any, M$1 extends MethodOptions = any, Mixin$1 extends ComponentOptionsMixin = any, Extends$1 extends ComponentOptionsMixin = any, E extends EmitsOptions = any, EE extends string = string, Defaults$1 = {}, I extends ComponentInjectOptions = {}, II extends string = string, S extends SlotsType = {}, LC extends Record<string, Component> = {}, Directives extends Record<string, Directive> = {}, Exposed extends string = string, Provide extends ComponentProvideOptions = ComponentProvideOptions> = ComponentOptionsBase<Props$1, RawBindings, D$1, C$1, M$1, Mixin$1, Extends$1, E, EE, Defaults$1, I, II, S, LC, Directives, Exposed, Provide> & ThisType<CreateComponentPublicInstanceWithMixins<{}, RawBindings, D$1, C$1, M$1, Mixin$1, Extends$1, E, Readonly<Props$1>, Defaults$1, false, I, S, LC, Directives>>;
 type ComponentOptionsMixin = ComponentOptionsBase<any, any, any, any, any, any, any, any, any, any, any, any, any, any, any, any, any>;
 type ComputedOptions = Record<string, ComputedGetter<any> | WritableComputedOptions<any>>;
 interface MethodOptions {
@@ -888,8 +885,8 @@ interface LegacyOptions<Props$1, D$1, C$1 extends ComputedOptions, M$1 extends M
    * #3468
    *
    * type-only, used to assist Mixin's type inference,
-   * TypeScript will try to simplify the inferred `Mixin` type,
-   * with the `__differentiator`, TypeScript won't be able to combine different mixins,
+   * typescript will try to simplify the inferred `Mixin` type,
+   * with the `__differentiator`, typescript won't be able to combine different mixins,
    * because the `__differentiator` will be different
    */
   __differentiator?: keyof D$1 | keyof C$1 | keyof M$1;
@@ -931,18 +928,18 @@ interface InjectionConstraint<T$1> {}
 type InjectionKey<T$1> = symbol & InjectionConstraint<T$1>;
 type PublicProps = VNodeProps & AllowedComponentProps & ComponentCustomProps;
 type ResolveProps<PropsOrPropOptions, E extends EmitsOptions> = Readonly<PropsOrPropOptions extends ComponentPropsOptions ? ExtractPropTypes<PropsOrPropOptions> : PropsOrPropOptions> & ({} extends E ? {} : EmitsToProps<E>);
-type DefineComponent<PropsOrPropOptions = {}, RawBindings = {}, D$1 = {}, C$1 extends ComputedOptions = ComputedOptions, M$1 extends MethodOptions = MethodOptions, Mixin$1 extends ComponentOptionsMixin = ComponentOptionsMixin, Extends$1 extends ComponentOptionsMixin = ComponentOptionsMixin, E extends EmitsOptions = {}, EE extends string = string, PP = PublicProps, Props$1 = ResolveProps<PropsOrPropOptions, E>, Defaults$1 = ExtractDefaultPropTypes<PropsOrPropOptions>, S extends SlotsType = {}, LC extends Record<string, Component$1> = {}, Directives extends Record<string, Directive> = {}, Exposed extends string = string, Provide extends ComponentProvideOptions = ComponentProvideOptions, MakeDefaultsOptional extends boolean = true, TypeRefs extends Record<string, unknown> = {}, TypeEl extends Element = any> = ComponentPublicInstanceConstructor<CreateComponentPublicInstanceWithMixins<Props$1, RawBindings, D$1, C$1, M$1, Mixin$1, Extends$1, E, PP, Defaults$1, MakeDefaultsOptional, {}, S, LC & GlobalComponents, Directives & GlobalDirectives, Exposed, TypeRefs, TypeEl>> & ComponentOptionsBase<Props$1, RawBindings, D$1, C$1, M$1, Mixin$1, Extends$1, E, EE, Defaults$1, {}, string, S, LC & GlobalComponents, Directives & GlobalDirectives, Exposed, Provide> & PP;
+type DefineComponent<PropsOrPropOptions = {}, RawBindings = {}, D$1 = {}, C$1 extends ComputedOptions = ComputedOptions, M$1 extends MethodOptions = MethodOptions, Mixin$1 extends ComponentOptionsMixin = ComponentOptionsMixin, Extends$1 extends ComponentOptionsMixin = ComponentOptionsMixin, E extends EmitsOptions = {}, EE extends string = string, PP = PublicProps, Props$1 = ResolveProps<PropsOrPropOptions, E>, Defaults$1 = ExtractDefaultPropTypes<PropsOrPropOptions>, S extends SlotsType = {}, LC extends Record<string, Component> = {}, Directives extends Record<string, Directive> = {}, Exposed extends string = string, Provide extends ComponentProvideOptions = ComponentProvideOptions, MakeDefaultsOptional extends boolean = true, TypeRefs extends Record<string, unknown> = {}, TypeEl extends Element = any> = ComponentPublicInstanceConstructor<CreateComponentPublicInstanceWithMixins<Props$1, RawBindings, D$1, C$1, M$1, Mixin$1, Extends$1, E, PP, Defaults$1, MakeDefaultsOptional, {}, S, LC & GlobalComponents, Directives & GlobalDirectives, Exposed, TypeRefs, TypeEl>> & ComponentOptionsBase<Props$1, RawBindings, D$1, C$1, M$1, Mixin$1, Extends$1, E, EE, Defaults$1, {}, string, S, LC & GlobalComponents, Directives & GlobalDirectives, Exposed, Provide> & PP;
 type DefineSetupFnComponent<P$1 extends Record<string, any>, E extends EmitsOptions = {}, S extends SlotsType = SlotsType, Props$1 = P$1 & EmitsToProps<E>, PP = PublicProps> = new (props: Props$1 & PP) => CreateComponentPublicInstanceWithMixins<Props$1, {}, {}, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, E, PP, {}, false, {}, S>;
 interface App<HostElement = any> {
   version: string;
   config: AppConfig;
-  use<Options extends unknown[]>(plugin: Plugin<Options>, ...options: NoInfer<Options>): this;
-  use<Options>(plugin: Plugin<Options>, options: NoInfer<Options>): this;
+  use<Options extends unknown[]>(plugin: Plugin<Options>, ...options: Options): this;
+  use<Options>(plugin: Plugin<Options>, options: Options): this;
   mixin(mixin: ComponentOptions): this;
-  component(name: string): Component$1 | undefined;
-  component<T$1 extends Component$1 | DefineComponent>(name: string, component: T$1): this;
-  directive<HostElement = any, Value = any, Modifiers extends string = string, Arg = any>(name: string): Directive<HostElement, Value, Modifiers, Arg> | undefined;
-  directive<HostElement = any, Value = any, Modifiers extends string = string, Arg = any>(name: string, directive: Directive<HostElement, Value, Modifiers, Arg>): this;
+  component(name: string): Component | undefined;
+  component<T$1 extends Component | DefineComponent>(name: string, component: T$1): this;
+  directive<HostElement = any, Value = any, Modifiers extends string = string, Arg extends string = string>(name: string): Directive<HostElement, Value, Modifiers, Arg> | undefined;
+  directive<HostElement = any, Value = any, Modifiers extends string = string, Arg extends string = string>(name: string, directive: Directive<HostElement, Value, Modifiers, Arg>): this;
   mount(rootContainer: HostElement | string,
   /**
    * @internal
@@ -1015,7 +1012,7 @@ interface AppContext {
   app: App;
   config: AppConfig;
   mixins: ComponentOptions[];
-  components: Record<string, Component$1>;
+  components: Record<string, Component>;
   directives: Record<string, Directive>;
   provides: Record<string | symbol, any>;
 }
@@ -1024,7 +1021,7 @@ type ObjectPlugin<Options = any[]> = {
   install: PluginInstallFunction<Options>;
 };
 type FunctionPlugin<Options = any[]> = PluginInstallFunction<Options> & Partial<ObjectPlugin<Options>>;
-type Plugin<Options = any[], P$1 extends unknown[] = (Options extends unknown[] ? Options : [Options])> = FunctionPlugin<P$1> | ObjectPlugin<P$1>;
+type Plugin<Options = any[]> = FunctionPlugin<Options> | ObjectPlugin<Options>;
 type TeleportVNode = VNode<RendererNode, RendererElement, TeleportProps>;
 interface TeleportProps {
   to: string | RendererElement | null | undefined;
@@ -1083,7 +1080,7 @@ declare const Fragment: {
 declare const Text: unique symbol;
 declare const Comment: unique symbol;
 declare const Static: unique symbol;
-type VNodeTypes = string | VNode | Component$1 | typeof Text | typeof Static | typeof Comment | typeof Fragment | typeof Teleport | typeof TeleportImpl | typeof Suspense | typeof SuspenseImpl;
+type VNodeTypes = string | VNode | Component | typeof Text | typeof Static | typeof Comment | typeof Fragment | typeof Teleport | typeof TeleportImpl | typeof Suspense | typeof SuspenseImpl;
 type VNodeRef = string | Ref | ((ref: Element | ComponentPublicInstance | null, refs: Record<string, any>) => void);
 type VNodeNormalizedRefAtom = {
   /**
@@ -1139,7 +1136,6 @@ interface VNode<HostNode = RendererNode, HostElement = RendererElement, ExtraPro
   dirs: DirectiveBinding[] | null;
   transition: TransitionHooks<HostElement> | null;
   el: HostNode | null;
-  placeholder: HostNode | null;
   anchor: HostNode | null;
   target: HostElement | null;
   targetStart: HostNode | null;
@@ -1230,7 +1226,7 @@ interface FunctionalComponent<P$1 = {}, E extends EmitsOptions | Record<string, 
   props?: ComponentPropsOptions<P$1>;
   emits?: EE | (keyof EE)[];
   slots?: IfAny<S, Slots, SlotsType<S>>;
-  inheritAttrs?: boolean;
+  inheritAttrs?: boolean | string[];
   displayName?: string;
   compatConfig?: CompatConfig;
 }
@@ -1245,7 +1241,7 @@ type ConcreteComponent<Props$1 = {}, RawBindings = any, D$1 = any, C$1 extends C
  * A type used in public APIs where a component type is expected.
  * The constructor type is an artificial type returned by defineComponent().
  */
-type Component$1<PropsOrInstance = any, RawBindings = any, D$1 = any, C$1 extends ComputedOptions = ComputedOptions, M$1 extends MethodOptions = MethodOptions, E extends EmitsOptions | Record<string, any[]> = {}, S extends Record<string, any> = any> = ConcreteComponent<PropsOrInstance, RawBindings, D$1, C$1, M$1, E, S> | ComponentPublicInstanceConstructor<PropsOrInstance>;
+type Component<Props$1 = any, RawBindings = any, D$1 = any, C$1 extends ComputedOptions = ComputedOptions, M$1 extends MethodOptions = MethodOptions, E extends EmitsOptions | Record<string, any[]> = {}, S extends Record<string, any> = any> = ConcreteComponent<Props$1, RawBindings, D$1, C$1, M$1, E, S> | ComponentPublicInstanceConstructor<Props$1>;
 type SetupContext<E = EmitsOptions, S extends SlotsType = {}> = E extends any ? {
   attrs: Data;
   slots: UnwrapSlotsType<S>;
@@ -21513,7 +21509,7 @@ declare namespace DataType {
   type VisualBox = "border-box" | "content-box" | "padding-box";
 }
 //#endregion
-//#region node_modules/.pnpm/@vue+runtime-dom@3.5.27/node_modules/@vue/runtime-dom/dist/runtime-dom.d.ts
+//#region node_modules/.pnpm/@cabloy+vue-runtime-dom@3.5.13/node_modules/@cabloy/vue-runtime-dom/dist/runtime-dom.d.ts
 declare const TRANSITION = "transition";
 declare const ANIMATION = "animation";
 type AnimationTypes = typeof TRANSITION | typeof ANIMATION;
@@ -21546,7 +21542,7 @@ interface VShowElement extends HTMLElement {
   [vShowHidden]: boolean;
 }
 declare const vShow: ObjectDirective<VShowElement> & {
-  name: 'show';
+  name?: 'show';
 };
 declare const systemModifiers: readonly ["ctrl", "shift", "alt", "meta"];
 type SystemModifiers = (typeof systemModifiers)[number];
@@ -21590,920 +21586,894 @@ type Booleanish = boolean | 'true' | 'false';
 type Numberish = number | string;
 interface AriaAttributes {
   /** Identifies the currently active element when DOM focus is on a composite widget, textbox, group, or application. */
-  'aria-activedescendant'?: string | undefined;
+  'aria-activedescendant'?: string;
   /** Indicates whether assistive technologies will present all, or only parts of, the changed region based on the change notifications defined by the aria-relevant attribute. */
-  'aria-atomic'?: Booleanish | undefined;
+  'aria-atomic'?: Booleanish;
   /**
    * Indicates whether inputting text could trigger display of one or more predictions of the user's intended value for an input and specifies how predictions would be
    * presented if they are made.
    */
-  'aria-autocomplete'?: 'none' | 'inline' | 'list' | 'both' | undefined;
+  'aria-autocomplete'?: 'none' | 'inline' | 'list' | 'both';
   /** Indicates an element is being modified and that assistive technologies MAY want to wait until the modifications are complete before exposing them to the user. */
-  'aria-busy'?: Booleanish | undefined;
+  'aria-busy'?: Booleanish;
   /**
    * Indicates the current "checked" state of checkboxes, radio buttons, and other widgets.
    * @see aria-pressed @see aria-selected.
    */
-  'aria-checked'?: Booleanish | 'mixed' | undefined;
+  'aria-checked'?: Booleanish | 'mixed';
   /**
    * Defines the total number of columns in a table, grid, or treegrid.
    * @see aria-colindex.
    */
-  'aria-colcount'?: Numberish | undefined;
+  'aria-colcount'?: Numberish;
   /**
    * Defines an element's column index or position with respect to the total number of columns within a table, grid, or treegrid.
    * @see aria-colcount @see aria-colspan.
    */
-  'aria-colindex'?: Numberish | undefined;
+  'aria-colindex'?: Numberish;
   /**
    * Defines the number of columns spanned by a cell or gridcell within a table, grid, or treegrid.
    * @see aria-colindex @see aria-rowspan.
    */
-  'aria-colspan'?: Numberish | undefined;
+  'aria-colspan'?: Numberish;
   /**
    * Identifies the element (or elements) whose contents or presence are controlled by the current element.
    * @see aria-owns.
    */
-  'aria-controls'?: string | undefined;
+  'aria-controls'?: string;
   /** Indicates the element that represents the current item within a container or set of related elements. */
-  'aria-current'?: Booleanish | 'page' | 'step' | 'location' | 'date' | 'time' | undefined;
+  'aria-current'?: Booleanish | 'page' | 'step' | 'location' | 'date' | 'time';
   /**
    * Identifies the element (or elements) that describes the object.
    * @see aria-labelledby
    */
-  'aria-describedby'?: string | undefined;
+  'aria-describedby'?: string;
   /**
    * Identifies the element that provides a detailed, extended description for the object.
    * @see aria-describedby.
    */
-  'aria-details'?: string | undefined;
+  'aria-details'?: string;
   /**
    * Indicates that the element is perceivable but disabled, so it is not editable or otherwise operable.
    * @see aria-hidden @see aria-readonly.
    */
-  'aria-disabled'?: Booleanish | undefined;
+  'aria-disabled'?: Booleanish;
   /**
    * Indicates what functions can be performed when a dragged object is released on the drop target.
    * @deprecated in ARIA 1.1
    */
-  'aria-dropeffect'?: 'none' | 'copy' | 'execute' | 'link' | 'move' | 'popup' | undefined;
+  'aria-dropeffect'?: 'none' | 'copy' | 'execute' | 'link' | 'move' | 'popup';
   /**
    * Identifies the element that provides an error message for the object.
    * @see aria-invalid @see aria-describedby.
    */
-  'aria-errormessage'?: string | undefined;
+  'aria-errormessage'?: string;
   /** Indicates whether the element, or another grouping element it controls, is currently expanded or collapsed. */
-  'aria-expanded'?: Booleanish | undefined;
+  'aria-expanded'?: Booleanish;
   /**
    * Identifies the next element (or elements) in an alternate reading order of content which, at the user's discretion,
    * allows assistive technology to override the general default of reading in document source order.
    */
-  'aria-flowto'?: string | undefined;
+  'aria-flowto'?: string;
   /**
    * Indicates an element's "grabbed" state in a drag-and-drop operation.
    * @deprecated in ARIA 1.1
    */
-  'aria-grabbed'?: Booleanish | undefined;
+  'aria-grabbed'?: Booleanish;
   /** Indicates the availability and type of interactive popup element, such as menu or dialog, that can be triggered by an element. */
-  'aria-haspopup'?: Booleanish | 'menu' | 'listbox' | 'tree' | 'grid' | 'dialog' | undefined;
+  'aria-haspopup'?: Booleanish | 'menu' | 'listbox' | 'tree' | 'grid' | 'dialog';
   /**
    * Indicates whether the element is exposed to an accessibility API.
    * @see aria-disabled.
    */
-  'aria-hidden'?: Booleanish | undefined;
+  'aria-hidden'?: Booleanish;
   /**
    * Indicates the entered value does not conform to the format expected by the application.
    * @see aria-errormessage.
    */
-  'aria-invalid'?: Booleanish | 'grammar' | 'spelling' | undefined;
+  'aria-invalid'?: Booleanish | 'grammar' | 'spelling';
   /** Indicates keyboard shortcuts that an author has implemented to activate or give focus to an element. */
-  'aria-keyshortcuts'?: string | undefined;
+  'aria-keyshortcuts'?: string;
   /**
    * Defines a string value that labels the current element.
    * @see aria-labelledby.
    */
-  'aria-label'?: string | undefined;
+  'aria-label'?: string;
   /**
    * Identifies the element (or elements) that labels the current element.
    * @see aria-describedby.
    */
-  'aria-labelledby'?: string | undefined;
+  'aria-labelledby'?: string;
   /** Defines the hierarchical level of an element within a structure. */
-  'aria-level'?: Numberish | undefined;
+  'aria-level'?: Numberish;
   /** Indicates that an element will be updated, and describes the types of updates the user agents, assistive technologies, and user can expect from the live region. */
-  'aria-live'?: 'off' | 'assertive' | 'polite' | undefined;
+  'aria-live'?: 'off' | 'assertive' | 'polite';
   /** Indicates whether an element is modal when displayed. */
-  'aria-modal'?: Booleanish | undefined;
+  'aria-modal'?: Booleanish;
   /** Indicates whether a text box accepts multiple lines of input or only a single line. */
-  'aria-multiline'?: Booleanish | undefined;
+  'aria-multiline'?: Booleanish;
   /** Indicates that the user may select more than one item from the current selectable descendants. */
-  'aria-multiselectable'?: Booleanish | undefined;
+  'aria-multiselectable'?: Booleanish;
   /** Indicates whether the element's orientation is horizontal, vertical, or unknown/ambiguous. */
-  'aria-orientation'?: 'horizontal' | 'vertical' | undefined;
+  'aria-orientation'?: 'horizontal' | 'vertical';
   /**
    * Identifies an element (or elements) in order to define a visual, functional, or contextual parent/child relationship
    * between DOM elements where the DOM hierarchy cannot be used to represent the relationship.
    * @see aria-controls.
    */
-  'aria-owns'?: string | undefined;
+  'aria-owns'?: string;
   /**
    * Defines a short hint (a word or short phrase) intended to aid the user with data entry when the control has no value.
    * A hint could be a sample value or a brief description of the expected format.
    */
-  'aria-placeholder'?: string | undefined;
+  'aria-placeholder'?: string;
   /**
    * Defines an element's number or position in the current set of listitems or treeitems. Not required if all elements in the set are present in the DOM.
    * @see aria-setsize.
    */
-  'aria-posinset'?: Numberish | undefined;
+  'aria-posinset'?: Numberish;
   /**
    * Indicates the current "pressed" state of toggle buttons.
    * @see aria-checked @see aria-selected.
    */
-  'aria-pressed'?: Booleanish | 'mixed' | undefined;
+  'aria-pressed'?: Booleanish | 'mixed';
   /**
    * Indicates that the element is not editable, but is otherwise operable.
    * @see aria-disabled.
    */
-  'aria-readonly'?: Booleanish | undefined;
+  'aria-readonly'?: Booleanish;
   /**
    * Indicates what notifications the user agent will trigger when the accessibility tree within a live region is modified.
    * @see aria-atomic.
    */
-  'aria-relevant'?: 'additions' | 'additions removals' | 'additions text' | 'all' | 'removals' | 'removals additions' | 'removals text' | 'text' | 'text additions' | 'text removals' | undefined;
+  'aria-relevant'?: 'additions' | 'additions removals' | 'additions text' | 'all' | 'removals' | 'removals additions' | 'removals text' | 'text' | 'text additions' | 'text removals';
   /** Indicates that user input is required on the element before a form may be submitted. */
-  'aria-required'?: Booleanish | undefined;
+  'aria-required'?: Booleanish;
   /** Defines a human-readable, author-localized description for the role of an element. */
-  'aria-roledescription'?: string | undefined;
+  'aria-roledescription'?: string;
   /**
    * Defines the total number of rows in a table, grid, or treegrid.
    * @see aria-rowindex.
    */
-  'aria-rowcount'?: Numberish | undefined;
+  'aria-rowcount'?: Numberish;
   /**
    * Defines an element's row index or position with respect to the total number of rows within a table, grid, or treegrid.
    * @see aria-rowcount @see aria-rowspan.
    */
-  'aria-rowindex'?: Numberish | undefined;
+  'aria-rowindex'?: Numberish;
   /**
    * Defines the number of rows spanned by a cell or gridcell within a table, grid, or treegrid.
    * @see aria-rowindex @see aria-colspan.
    */
-  'aria-rowspan'?: Numberish | undefined;
+  'aria-rowspan'?: Numberish;
   /**
    * Indicates the current "selected" state of various widgets.
    * @see aria-checked @see aria-pressed.
    */
-  'aria-selected'?: Booleanish | undefined;
+  'aria-selected'?: Booleanish;
   /**
    * Defines the number of items in the current set of listitems or treeitems. Not required if all elements in the set are present in the DOM.
    * @see aria-posinset.
    */
-  'aria-setsize'?: Numberish | undefined;
+  'aria-setsize'?: Numberish;
   /** Indicates if items in a table or grid are sorted in ascending or descending order. */
-  'aria-sort'?: 'none' | 'ascending' | 'descending' | 'other' | undefined;
+  'aria-sort'?: 'none' | 'ascending' | 'descending' | 'other';
   /** Defines the maximum allowed value for a range widget. */
-  'aria-valuemax'?: Numberish | undefined;
+  'aria-valuemax'?: Numberish;
   /** Defines the minimum allowed value for a range widget. */
-  'aria-valuemin'?: Numberish | undefined;
+  'aria-valuemin'?: Numberish;
   /**
    * Defines the current value for a range widget.
    * @see aria-valuetext.
    */
-  'aria-valuenow'?: Numberish | undefined;
+  'aria-valuenow'?: Numberish;
   /** Defines the human readable text alternative of aria-valuenow for a range widget. */
-  'aria-valuetext'?: string | undefined;
+  'aria-valuetext'?: string;
 }
 type StyleValue = false | null | undefined | string | CSSProperties | Array<StyleValue>;
 interface HTMLAttributes extends AriaAttributes, EventHandlers<Events> {
-  innerHTML?: string | undefined;
+  innerHTML?: string;
   class?: any;
-  style?: StyleValue | undefined;
-  accesskey?: string | undefined;
-  contenteditable?: Booleanish | 'inherit' | 'plaintext-only' | undefined;
-  contextmenu?: string | undefined;
-  dir?: string | undefined;
-  draggable?: Booleanish | undefined;
-  enterkeyhint?: 'enter' | 'done' | 'go' | 'next' | 'previous' | 'search' | 'send' | undefined;
-  /**
-   * @deprecated Use `enterkeyhint` instead.
-   */
-  enterKeyHint?: HTMLAttributes['enterkeyhint'];
-  hidden?: Booleanish | '' | 'hidden' | 'until-found' | undefined;
-  id?: string | undefined;
-  inert?: Booleanish | undefined;
-  lang?: string | undefined;
-  placeholder?: string | undefined;
-  spellcheck?: Booleanish | undefined;
-  tabindex?: Numberish | undefined;
-  title?: string | undefined;
-  translate?: 'yes' | 'no' | undefined;
-  radiogroup?: string | undefined;
-  role?: string | undefined;
-  about?: string | undefined;
-  datatype?: string | undefined;
+  style?: StyleValue;
+  accesskey?: string;
+  contenteditable?: Booleanish | 'inherit' | 'plaintext-only';
+  contextmenu?: string;
+  dir?: string;
+  draggable?: Booleanish;
+  hidden?: Booleanish | '' | 'hidden' | 'until-found';
+  id?: string;
+  inert?: Booleanish;
+  lang?: string;
+  placeholder?: string;
+  spellcheck?: Booleanish;
+  tabindex?: Numberish;
+  title?: string;
+  translate?: 'yes' | 'no';
+  radiogroup?: string;
+  role?: string;
+  about?: string;
+  datatype?: string;
   inlist?: any;
-  prefix?: string | undefined;
-  property?: string | undefined;
-  resource?: string | undefined;
-  typeof?: string | undefined;
-  vocab?: string | undefined;
-  autocapitalize?: string | undefined;
-  autocorrect?: string | undefined;
-  autosave?: string | undefined;
-  color?: string | undefined;
-  itemprop?: string | undefined;
-  itemscope?: Booleanish | undefined;
-  itemtype?: string | undefined;
-  itemid?: string | undefined;
-  itemref?: string | undefined;
-  results?: Numberish | undefined;
-  security?: string | undefined;
-  unselectable?: 'on' | 'off' | undefined;
+  prefix?: string;
+  property?: string;
+  resource?: string;
+  typeof?: string;
+  vocab?: string;
+  autocapitalize?: string;
+  autocorrect?: string;
+  autosave?: string;
+  color?: string;
+  itemprop?: string;
+  itemscope?: Booleanish;
+  itemtype?: string;
+  itemid?: string;
+  itemref?: string;
+  results?: Numberish;
+  security?: string;
+  unselectable?: 'on' | 'off';
   /**
    * Hints at the type of data that might be entered by the user while editing the element or its contents
    * @see https://html.spec.whatwg.org/multipage/interaction.html#input-modalities:-the-inputmode-attribute
    */
-  inputmode?: 'none' | 'text' | 'tel' | 'url' | 'email' | 'numeric' | 'decimal' | 'search' | undefined;
+  inputmode?: 'none' | 'text' | 'tel' | 'url' | 'email' | 'numeric' | 'decimal' | 'search';
   /**
    * Specify that a standard HTML element should behave like a defined custom built-in element
    * @see https://html.spec.whatwg.org/multipage/custom-elements.html#attr-is
    */
-  is?: string | undefined;
-  /**
-   * @see https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/exportparts
-   */
-  exportparts?: string;
-  /**
-   * @see https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/part
-   */
-  part?: string;
+  is?: string;
 }
 type HTMLAttributeReferrerPolicy = '' | 'no-referrer' | 'no-referrer-when-downgrade' | 'origin' | 'origin-when-cross-origin' | 'same-origin' | 'strict-origin' | 'strict-origin-when-cross-origin' | 'unsafe-url';
 interface AnchorHTMLAttributes extends HTMLAttributes {
   download?: any;
-  href?: string | undefined;
-  hreflang?: string | undefined;
-  media?: string | undefined;
-  ping?: string | undefined;
-  rel?: string | undefined;
-  target?: string | undefined;
-  type?: string | undefined;
-  referrerpolicy?: HTMLAttributeReferrerPolicy | undefined;
+  href?: string;
+  hreflang?: string;
+  media?: string;
+  ping?: string;
+  rel?: string;
+  target?: string;
+  type?: string;
+  referrerpolicy?: HTMLAttributeReferrerPolicy;
 }
 interface AreaHTMLAttributes extends HTMLAttributes {
-  alt?: string | undefined;
-  coords?: string | undefined;
+  alt?: string;
+  coords?: string;
   download?: any;
-  href?: string | undefined;
-  hreflang?: string | undefined;
-  media?: string | undefined;
-  referrerpolicy?: HTMLAttributeReferrerPolicy | undefined;
-  rel?: string | undefined;
-  shape?: string | undefined;
-  target?: string | undefined;
+  href?: string;
+  hreflang?: string;
+  media?: string;
+  referrerpolicy?: HTMLAttributeReferrerPolicy;
+  rel?: string;
+  shape?: string;
+  target?: string;
 }
 interface AudioHTMLAttributes extends MediaHTMLAttributes {}
 interface BaseHTMLAttributes extends HTMLAttributes {
-  href?: string | undefined;
-  target?: string | undefined;
+  href?: string;
+  target?: string;
 }
 interface BlockquoteHTMLAttributes extends HTMLAttributes {
-  cite?: string | undefined;
+  cite?: string;
 }
 interface ButtonHTMLAttributes extends HTMLAttributes {
-  autofocus?: Booleanish | undefined;
-  disabled?: Booleanish | undefined;
-  form?: string | undefined;
-  formaction?: string | undefined;
-  formenctype?: string | undefined;
-  formmethod?: string | undefined;
-  formnovalidate?: Booleanish | undefined;
-  formtarget?: string | undefined;
-  name?: string | undefined;
-  type?: 'submit' | 'reset' | 'button' | undefined;
-  value?: string | ReadonlyArray<string> | number | undefined;
+  autofocus?: Booleanish;
+  disabled?: Booleanish;
+  form?: string;
+  formaction?: string;
+  formenctype?: string;
+  formmethod?: string;
+  formnovalidate?: Booleanish;
+  formtarget?: string;
+  name?: string;
+  type?: 'submit' | 'reset' | 'button';
+  value?: string | ReadonlyArray<string> | number;
 }
 interface CanvasHTMLAttributes extends HTMLAttributes {
-  height?: Numberish | undefined;
-  width?: Numberish | undefined;
+  height?: Numberish;
+  width?: Numberish;
 }
 interface ColHTMLAttributes extends HTMLAttributes {
-  span?: Numberish | undefined;
-  width?: Numberish | undefined;
+  span?: Numberish;
+  width?: Numberish;
 }
 interface ColgroupHTMLAttributes extends HTMLAttributes {
-  span?: Numberish | undefined;
+  span?: Numberish;
 }
 interface DataHTMLAttributes extends HTMLAttributes {
-  value?: string | ReadonlyArray<string> | number | undefined;
+  value?: string | ReadonlyArray<string> | number;
 }
 interface DetailsHTMLAttributes extends HTMLAttributes {
-  name?: string | undefined;
-  open?: Booleanish | undefined;
+  name?: string;
+  open?: Booleanish;
+  onToggle?: (payload: ToggleEvent) => void;
 }
 interface DelHTMLAttributes extends HTMLAttributes {
-  cite?: string | undefined;
-  datetime?: string | undefined;
+  cite?: string;
+  datetime?: string;
 }
 interface DialogHTMLAttributes extends HTMLAttributes {
-  open?: Booleanish | undefined;
-  onClose?: ((payload: Event) => void) | undefined;
-  onCancel?: ((payload: Event) => void) | undefined;
+  open?: Booleanish;
+  onClose?: (payload: Event) => void;
 }
 interface EmbedHTMLAttributes extends HTMLAttributes {
-  height?: Numberish | undefined;
-  src?: string | undefined;
-  type?: string | undefined;
-  width?: Numberish | undefined;
+  height?: Numberish;
+  src?: string;
+  type?: string;
+  width?: Numberish;
 }
 interface FieldsetHTMLAttributes extends HTMLAttributes {
-  disabled?: Booleanish | undefined;
-  form?: string | undefined;
-  name?: string | undefined;
+  disabled?: Booleanish;
+  form?: string;
+  name?: string;
 }
 interface FormHTMLAttributes extends HTMLAttributes {
-  acceptcharset?: string | undefined;
-  action?: string | undefined;
-  autocomplete?: string | undefined;
-  enctype?: string | undefined;
-  method?: string | undefined;
-  name?: string | undefined;
-  novalidate?: Booleanish | undefined;
-  target?: string | undefined;
+  acceptcharset?: string;
+  action?: string;
+  autocomplete?: string;
+  enctype?: string;
+  method?: string;
+  name?: string;
+  novalidate?: Booleanish;
+  target?: string;
 }
 interface HtmlHTMLAttributes extends HTMLAttributes {
-  manifest?: string | undefined;
+  manifest?: string;
 }
 interface IframeHTMLAttributes extends HTMLAttributes {
-  allow?: string | undefined;
-  allowfullscreen?: Booleanish | undefined;
-  allowtransparency?: Booleanish | undefined;
+  allow?: string;
+  allowfullscreen?: Booleanish;
+  allowtransparency?: Booleanish;
   /** @deprecated */
-  frameborder?: Numberish | undefined;
-  height?: Numberish | undefined;
-  loading?: 'eager' | 'lazy' | undefined;
+  frameborder?: Numberish;
+  height?: Numberish;
+  loading?: 'eager' | 'lazy';
   /** @deprecated */
-  marginheight?: Numberish | undefined;
+  marginheight?: Numberish;
   /** @deprecated */
-  marginwidth?: Numberish | undefined;
-  name?: string | undefined;
-  referrerpolicy?: HTMLAttributeReferrerPolicy | undefined;
-  sandbox?: string | undefined;
+  marginwidth?: Numberish;
+  name?: string;
+  referrerpolicy?: HTMLAttributeReferrerPolicy;
+  sandbox?: string;
   /** @deprecated */
-  scrolling?: string | undefined;
-  seamless?: Booleanish | undefined;
-  src?: string | undefined;
-  srcdoc?: string | undefined;
-  width?: Numberish | undefined;
+  scrolling?: string;
+  seamless?: Booleanish;
+  src?: string;
+  srcdoc?: string;
+  width?: Numberish;
 }
 interface ImgHTMLAttributes extends HTMLAttributes {
-  alt?: string | undefined;
-  crossorigin?: 'anonymous' | 'use-credentials' | '' | undefined;
-  decoding?: 'async' | 'auto' | 'sync' | undefined;
-  fetchpriority?: 'high' | 'low' | 'auto' | undefined;
-  height?: Numberish | undefined;
-  loading?: 'eager' | 'lazy' | undefined;
-  referrerpolicy?: HTMLAttributeReferrerPolicy | undefined;
-  sizes?: string | undefined;
-  src?: string | undefined;
-  srcset?: string | undefined;
-  usemap?: string | undefined;
-  width?: Numberish | undefined;
+  alt?: string;
+  crossorigin?: 'anonymous' | 'use-credentials' | '';
+  decoding?: 'async' | 'auto' | 'sync';
+  height?: Numberish;
+  loading?: 'eager' | 'lazy';
+  referrerpolicy?: HTMLAttributeReferrerPolicy;
+  sizes?: string;
+  src?: string;
+  srcset?: string;
+  usemap?: string;
+  width?: Numberish;
 }
 interface InsHTMLAttributes extends HTMLAttributes {
-  cite?: string | undefined;
-  datetime?: string | undefined;
+  cite?: string;
+  datetime?: string;
 }
 type InputTypeHTMLAttribute = 'button' | 'checkbox' | 'color' | 'date' | 'datetime-local' | 'email' | 'file' | 'hidden' | 'image' | 'month' | 'number' | 'password' | 'radio' | 'range' | 'reset' | 'search' | 'submit' | 'tel' | 'text' | 'time' | 'url' | 'week' | (string & {});
-type AutoFillAddressKind = 'billing' | 'shipping';
-type AutoFillBase = '' | 'off' | 'on';
-type AutoFillContactField = 'email' | 'tel' | 'tel-area-code' | 'tel-country-code' | 'tel-extension' | 'tel-local' | 'tel-local-prefix' | 'tel-local-suffix' | 'tel-national';
-type AutoFillContactKind = 'home' | 'mobile' | 'work';
-type AutoFillCredentialField = 'webauthn';
-type AutoFillNormalField = 'additional-name' | 'address-level1' | 'address-level2' | 'address-level3' | 'address-level4' | 'address-line1' | 'address-line2' | 'address-line3' | 'bday-day' | 'bday-month' | 'bday-year' | 'cc-csc' | 'cc-exp' | 'cc-exp-month' | 'cc-exp-year' | 'cc-family-name' | 'cc-given-name' | 'cc-name' | 'cc-number' | 'cc-type' | 'country' | 'country-name' | 'current-password' | 'family-name' | 'given-name' | 'honorific-prefix' | 'honorific-suffix' | 'name' | 'new-password' | 'one-time-code' | 'organization' | 'postal-code' | 'street-address' | 'transaction-amount' | 'transaction-currency' | 'username';
-type OptionalPrefixToken<T$1 extends string> = `${T$1} ` | '';
-type OptionalPostfixToken<T$1 extends string> = ` ${T$1}` | '';
-type AutoFillField = AutoFillNormalField | `${OptionalPrefixToken<AutoFillContactKind>}${AutoFillContactField}`;
-type AutoFillSection = `section-${string}`;
-type AutoFill = AutoFillBase | `${OptionalPrefixToken<AutoFillSection>}${OptionalPrefixToken<AutoFillAddressKind>}${AutoFillField}${OptionalPostfixToken<AutoFillCredentialField>}`;
-type InputAutoCompleteAttribute = AutoFill | (string & {});
 interface InputHTMLAttributes extends HTMLAttributes {
-  accept?: string | undefined;
-  alt?: string | undefined;
-  autocomplete?: InputAutoCompleteAttribute | undefined;
-  autofocus?: Booleanish | undefined;
-  capture?: boolean | 'user' | 'environment' | undefined;
-  checked?: Booleanish | any[] | Set<any> | undefined;
-  crossorigin?: string | undefined;
-  disabled?: Booleanish | undefined;
-  form?: string | undefined;
-  formaction?: string | undefined;
-  formenctype?: string | undefined;
-  formmethod?: string | undefined;
-  formnovalidate?: Booleanish | undefined;
-  formtarget?: string | undefined;
-  height?: Numberish | undefined;
-  indeterminate?: boolean | undefined;
-  list?: string | undefined;
-  max?: Numberish | undefined;
-  maxlength?: Numberish | undefined;
-  min?: Numberish | undefined;
-  minlength?: Numberish | undefined;
-  multiple?: Booleanish | undefined;
-  name?: string | undefined;
-  pattern?: string | undefined;
-  placeholder?: string | undefined;
-  readonly?: Booleanish | undefined;
-  required?: Booleanish | undefined;
-  size?: Numberish | undefined;
-  src?: string | undefined;
-  step?: Numberish | undefined;
-  type?: InputTypeHTMLAttribute | undefined;
+  accept?: string;
+  alt?: string;
+  autocomplete?: string;
+  autofocus?: Booleanish;
+  capture?: boolean | 'user' | 'environment';
+  checked?: Booleanish | any[] | Set<any>;
+  crossorigin?: string;
+  disabled?: Booleanish;
+  enterKeyHint?: 'enter' | 'done' | 'go' | 'next' | 'previous' | 'search' | 'send';
+  form?: string;
+  formaction?: string;
+  formenctype?: string;
+  formmethod?: string;
+  formnovalidate?: Booleanish;
+  formtarget?: string;
+  height?: Numberish;
+  indeterminate?: boolean;
+  list?: string;
+  max?: Numberish;
+  maxlength?: Numberish;
+  min?: Numberish;
+  minlength?: Numberish;
+  multiple?: Booleanish;
+  name?: string;
+  pattern?: string;
+  placeholder?: string;
+  readonly?: Booleanish;
+  required?: Booleanish;
+  size?: Numberish;
+  src?: string;
+  step?: Numberish;
+  type?: InputTypeHTMLAttribute;
   value?: any;
-  width?: Numberish | undefined;
-  onCancel?: ((payload: Event) => void) | undefined;
+  width?: Numberish;
 }
 interface KeygenHTMLAttributes extends HTMLAttributes {
-  autofocus?: Booleanish | undefined;
-  challenge?: string | undefined;
-  disabled?: Booleanish | undefined;
-  form?: string | undefined;
-  keytype?: string | undefined;
-  keyparams?: string | undefined;
-  name?: string | undefined;
+  autofocus?: Booleanish;
+  challenge?: string;
+  disabled?: Booleanish;
+  form?: string;
+  keytype?: string;
+  keyparams?: string;
+  name?: string;
 }
 interface LabelHTMLAttributes extends HTMLAttributes {
-  for?: string | undefined;
-  form?: string | undefined;
+  for?: string;
+  form?: string;
 }
 interface LiHTMLAttributes extends HTMLAttributes {
-  value?: string | ReadonlyArray<string> | number | undefined;
+  value?: string | ReadonlyArray<string> | number;
 }
 interface LinkHTMLAttributes extends HTMLAttributes {
-  as?: string | undefined;
-  crossorigin?: string | undefined;
-  href?: string | undefined;
-  hreflang?: string | undefined;
-  integrity?: string | undefined;
-  media?: string | undefined;
-  referrerpolicy?: HTMLAttributeReferrerPolicy | undefined;
-  rel?: string | undefined;
-  sizes?: string | undefined;
-  type?: string | undefined;
-  charset?: string | undefined;
+  as?: string;
+  crossorigin?: string;
+  href?: string;
+  hreflang?: string;
+  integrity?: string;
+  media?: string;
+  referrerpolicy?: HTMLAttributeReferrerPolicy;
+  rel?: string;
+  sizes?: string;
+  type?: string;
+  charset?: string;
 }
 interface MapHTMLAttributes extends HTMLAttributes {
-  name?: string | undefined;
+  name?: string;
 }
 interface MenuHTMLAttributes extends HTMLAttributes {
-  type?: string | undefined;
+  type?: string;
 }
 interface MediaHTMLAttributes extends HTMLAttributes {
-  autoplay?: Booleanish | undefined;
-  controls?: Booleanish | undefined;
-  controlslist?: string | undefined;
-  crossorigin?: string | undefined;
-  loop?: Booleanish | undefined;
-  mediagroup?: string | undefined;
-  muted?: Booleanish | undefined;
-  playsinline?: Booleanish | undefined;
-  preload?: string | undefined;
-  src?: string | undefined;
+  autoplay?: Booleanish;
+  controls?: Booleanish;
+  controlslist?: string;
+  crossorigin?: string;
+  loop?: Booleanish;
+  mediagroup?: string;
+  muted?: Booleanish;
+  playsinline?: Booleanish;
+  preload?: string;
+  src?: string;
 }
 interface MetaHTMLAttributes extends HTMLAttributes {
-  charset?: string | undefined;
-  content?: string | undefined;
-  httpequiv?: string | undefined;
-  name?: string | undefined;
+  charset?: string;
+  content?: string;
+  httpequiv?: string;
+  name?: string;
 }
 interface MeterHTMLAttributes extends HTMLAttributes {
-  form?: string | undefined;
-  high?: Numberish | undefined;
-  low?: Numberish | undefined;
-  max?: Numberish | undefined;
-  min?: Numberish | undefined;
-  optimum?: Numberish | undefined;
-  value?: string | ReadonlyArray<string> | number | undefined;
+  form?: string;
+  high?: Numberish;
+  low?: Numberish;
+  max?: Numberish;
+  min?: Numberish;
+  optimum?: Numberish;
+  value?: string | ReadonlyArray<string> | number;
 }
 interface QuoteHTMLAttributes extends HTMLAttributes {
-  cite?: string | undefined;
+  cite?: string;
 }
 interface ObjectHTMLAttributes extends HTMLAttributes {
-  classid?: string | undefined;
-  data?: string | undefined;
-  form?: string | undefined;
-  height?: Numberish | undefined;
-  name?: string | undefined;
-  type?: string | undefined;
-  usemap?: string | undefined;
-  width?: Numberish | undefined;
-  wmode?: string | undefined;
+  classid?: string;
+  data?: string;
+  form?: string;
+  height?: Numberish;
+  name?: string;
+  type?: string;
+  usemap?: string;
+  width?: Numberish;
+  wmode?: string;
 }
 interface OlHTMLAttributes extends HTMLAttributes {
-  reversed?: Booleanish | undefined;
-  start?: Numberish | undefined;
-  type?: '1' | 'a' | 'A' | 'i' | 'I' | undefined;
+  reversed?: Booleanish;
+  start?: Numberish;
+  type?: '1' | 'a' | 'A' | 'i' | 'I';
 }
 interface OptgroupHTMLAttributes extends HTMLAttributes {
-  disabled?: Booleanish | undefined;
-  label?: string | undefined;
+  disabled?: Booleanish;
+  label?: string;
 }
 interface OptionHTMLAttributes extends HTMLAttributes {
-  disabled?: Booleanish | undefined;
-  label?: string | undefined;
-  selected?: Booleanish | undefined;
+  disabled?: Booleanish;
+  label?: string;
+  selected?: Booleanish;
   value?: any;
 }
 interface OutputHTMLAttributes extends HTMLAttributes {
-  for?: string | undefined;
-  form?: string | undefined;
-  name?: string | undefined;
+  for?: string;
+  form?: string;
+  name?: string;
 }
 interface ParamHTMLAttributes extends HTMLAttributes {
-  name?: string | undefined;
-  value?: string | ReadonlyArray<string> | number | undefined;
+  name?: string;
+  value?: string | ReadonlyArray<string> | number;
 }
 interface ProgressHTMLAttributes extends HTMLAttributes {
-  max?: Numberish | undefined;
-  value?: string | ReadonlyArray<string> | number | undefined;
+  max?: Numberish;
+  value?: string | ReadonlyArray<string> | number;
 }
 interface ScriptHTMLAttributes extends HTMLAttributes {
-  async?: Booleanish | undefined;
+  async?: Booleanish;
   /** @deprecated */
-  charset?: string | undefined;
-  crossorigin?: string | undefined;
-  defer?: Booleanish | undefined;
-  integrity?: string | undefined;
-  nomodule?: Booleanish | undefined;
-  referrerpolicy?: HTMLAttributeReferrerPolicy | undefined;
-  nonce?: string | undefined;
-  src?: string | undefined;
-  type?: string | undefined;
+  charset?: string;
+  crossorigin?: string;
+  defer?: Booleanish;
+  integrity?: string;
+  nomodule?: Booleanish;
+  referrerpolicy?: HTMLAttributeReferrerPolicy;
+  nonce?: string;
+  src?: string;
+  type?: string;
 }
 interface SelectHTMLAttributes extends HTMLAttributes {
-  autocomplete?: string | undefined;
-  autofocus?: Booleanish | undefined;
-  disabled?: Booleanish | undefined;
-  form?: string | undefined;
-  multiple?: Booleanish | undefined;
-  name?: string | undefined;
-  required?: Booleanish | undefined;
-  size?: Numberish | undefined;
+  autocomplete?: string;
+  autofocus?: Booleanish;
+  disabled?: Booleanish;
+  form?: string;
+  multiple?: Booleanish;
+  name?: string;
+  required?: Booleanish;
+  size?: Numberish;
   value?: any;
 }
 interface SourceHTMLAttributes extends HTMLAttributes {
-  media?: string | undefined;
-  sizes?: string | undefined;
-  src?: string | undefined;
-  srcset?: string | undefined;
-  type?: string | undefined;
+  media?: string;
+  sizes?: string;
+  src?: string;
+  srcset?: string;
+  type?: string;
 }
 interface StyleHTMLAttributes extends HTMLAttributes {
-  media?: string | undefined;
-  nonce?: string | undefined;
-  scoped?: Booleanish | undefined;
-  type?: string | undefined;
+  media?: string;
+  nonce?: string;
+  scoped?: Booleanish;
+  type?: string;
 }
 interface TableHTMLAttributes extends HTMLAttributes {
-  cellpadding?: Numberish | undefined;
-  cellspacing?: Numberish | undefined;
-  summary?: string | undefined;
-  width?: Numberish | undefined;
+  cellpadding?: Numberish;
+  cellspacing?: Numberish;
+  summary?: string;
+  width?: Numberish;
 }
 interface TextareaHTMLAttributes extends HTMLAttributes {
-  autocomplete?: string | undefined;
-  autofocus?: Booleanish | undefined;
-  cols?: Numberish | undefined;
-  dirname?: string | undefined;
-  disabled?: Booleanish | undefined;
-  form?: string | undefined;
-  maxlength?: Numberish | undefined;
-  minlength?: Numberish | undefined;
-  name?: string | undefined;
-  placeholder?: string | undefined;
-  readonly?: Booleanish | undefined;
-  required?: Booleanish | undefined;
-  rows?: Numberish | undefined;
-  value?: string | ReadonlyArray<string> | number | null | undefined;
-  wrap?: string | undefined;
+  autocomplete?: string;
+  autofocus?: Booleanish;
+  cols?: Numberish;
+  dirname?: string;
+  disabled?: Booleanish;
+  form?: string;
+  maxlength?: Numberish;
+  minlength?: Numberish;
+  name?: string;
+  placeholder?: string;
+  readonly?: Booleanish;
+  required?: Booleanish;
+  rows?: Numberish;
+  value?: string | ReadonlyArray<string> | number | null;
+  wrap?: string;
 }
 interface TdHTMLAttributes extends HTMLAttributes {
-  align?: 'left' | 'center' | 'right' | 'justify' | 'char' | undefined;
-  colspan?: Numberish | undefined;
-  headers?: string | undefined;
-  rowspan?: Numberish | undefined;
-  scope?: string | undefined;
-  abbr?: string | undefined;
-  height?: Numberish | undefined;
-  width?: Numberish | undefined;
-  valign?: 'top' | 'middle' | 'bottom' | 'baseline' | undefined;
+  align?: 'left' | 'center' | 'right' | 'justify' | 'char';
+  colspan?: Numberish;
+  headers?: string;
+  rowspan?: Numberish;
+  scope?: string;
+  abbr?: string;
+  height?: Numberish;
+  width?: Numberish;
+  valign?: 'top' | 'middle' | 'bottom' | 'baseline';
 }
 interface ThHTMLAttributes extends HTMLAttributes {
-  align?: 'left' | 'center' | 'right' | 'justify' | 'char' | undefined;
-  colspan?: Numberish | undefined;
-  headers?: string | undefined;
-  rowspan?: Numberish | undefined;
-  scope?: string | undefined;
-  abbr?: string | undefined;
+  align?: 'left' | 'center' | 'right' | 'justify' | 'char';
+  colspan?: Numberish;
+  headers?: string;
+  rowspan?: Numberish;
+  scope?: string;
+  abbr?: string;
 }
 interface TimeHTMLAttributes extends HTMLAttributes {
-  datetime?: string | undefined;
+  datetime?: string;
 }
 interface TrackHTMLAttributes extends HTMLAttributes {
-  default?: Booleanish | undefined;
-  kind?: string | undefined;
-  label?: string | undefined;
-  src?: string | undefined;
-  srclang?: string | undefined;
+  default?: Booleanish;
+  kind?: string;
+  label?: string;
+  src?: string;
+  srclang?: string;
 }
 interface VideoHTMLAttributes extends MediaHTMLAttributes {
-  height?: Numberish | undefined;
-  playsinline?: Booleanish | undefined;
-  poster?: string | undefined;
-  width?: Numberish | undefined;
-  disablePictureInPicture?: Booleanish | undefined;
-  disableRemotePlayback?: Booleanish | undefined;
+  height?: Numberish;
+  playsinline?: Booleanish;
+  poster?: string;
+  width?: Numberish;
+  disablePictureInPicture?: Booleanish;
+  disableRemotePlayback?: Booleanish;
 }
 interface WebViewHTMLAttributes extends HTMLAttributes {
-  allowfullscreen?: Booleanish | undefined;
-  allowpopups?: Booleanish | undefined;
-  autoFocus?: Booleanish | undefined;
-  autosize?: Booleanish | undefined;
-  blinkfeatures?: string | undefined;
-  disableblinkfeatures?: string | undefined;
-  disableguestresize?: Booleanish | undefined;
-  disablewebsecurity?: Booleanish | undefined;
-  guestinstance?: string | undefined;
-  httpreferrer?: string | undefined;
-  nodeintegration?: Booleanish | undefined;
-  partition?: string | undefined;
-  plugins?: Booleanish | undefined;
-  preload?: string | undefined;
-  src?: string | undefined;
-  useragent?: string | undefined;
-  webpreferences?: string | undefined;
+  allowfullscreen?: Booleanish;
+  allowpopups?: Booleanish;
+  autoFocus?: Booleanish;
+  autosize?: Booleanish;
+  blinkfeatures?: string;
+  disableblinkfeatures?: string;
+  disableguestresize?: Booleanish;
+  disablewebsecurity?: Booleanish;
+  guestinstance?: string;
+  httpreferrer?: string;
+  nodeintegration?: Booleanish;
+  partition?: string;
+  plugins?: Booleanish;
+  preload?: string;
+  src?: string;
+  useragent?: string;
+  webpreferences?: string;
 }
 interface SVGAttributes extends AriaAttributes, EventHandlers<Events> {
-  innerHTML?: string | undefined;
+  innerHTML?: string;
   /**
    * SVG Styling Attributes
    * @see https://www.w3.org/TR/SVG/styling.html#ElementSpecificStyling
    */
   class?: any;
-  style?: StyleValue | undefined;
-  color?: string | undefined;
-  height?: Numberish | undefined;
-  id?: string | undefined;
-  lang?: string | undefined;
-  max?: Numberish | undefined;
-  media?: string | undefined;
-  method?: string | undefined;
-  min?: Numberish | undefined;
-  name?: string | undefined;
-  target?: string | undefined;
-  type?: string | undefined;
-  width?: Numberish | undefined;
-  role?: string | undefined;
-  tabindex?: Numberish | undefined;
-  crossOrigin?: 'anonymous' | 'use-credentials' | '' | undefined;
-  'accent-height'?: Numberish | undefined;
-  accumulate?: 'none' | 'sum' | undefined;
-  additive?: 'replace' | 'sum' | undefined;
-  'alignment-baseline'?: 'auto' | 'baseline' | 'before-edge' | 'text-before-edge' | 'middle' | 'central' | 'after-edge' | 'text-after-edge' | 'ideographic' | 'alphabetic' | 'hanging' | 'mathematical' | 'inherit' | undefined;
-  allowReorder?: 'no' | 'yes' | undefined;
-  alphabetic?: Numberish | undefined;
-  amplitude?: Numberish | undefined;
-  'arabic-form'?: 'initial' | 'medial' | 'terminal' | 'isolated' | undefined;
-  ascent?: Numberish | undefined;
-  attributeName?: string | undefined;
-  attributeType?: string | undefined;
-  autoReverse?: Numberish | undefined;
-  azimuth?: Numberish | undefined;
-  baseFrequency?: Numberish | undefined;
-  'baseline-shift'?: Numberish | undefined;
-  baseProfile?: Numberish | undefined;
-  bbox?: Numberish | undefined;
-  begin?: Numberish | undefined;
-  bias?: Numberish | undefined;
-  by?: Numberish | undefined;
-  calcMode?: Numberish | undefined;
-  'cap-height'?: Numberish | undefined;
-  clip?: Numberish | undefined;
-  'clip-path'?: string | undefined;
-  clipPathUnits?: Numberish | undefined;
-  'clip-rule'?: Numberish | undefined;
-  'color-interpolation'?: Numberish | undefined;
-  'color-interpolation-filters'?: 'auto' | 'sRGB' | 'linearRGB' | 'inherit' | undefined;
-  'color-profile'?: Numberish | undefined;
-  'color-rendering'?: Numberish | undefined;
-  contentScriptType?: Numberish | undefined;
-  contentStyleType?: Numberish | undefined;
-  cursor?: Numberish | undefined;
-  cx?: Numberish | undefined;
-  cy?: Numberish | undefined;
-  d?: string | undefined;
-  decelerate?: Numberish | undefined;
-  descent?: Numberish | undefined;
-  diffuseConstant?: Numberish | undefined;
-  direction?: Numberish | undefined;
-  display?: Numberish | undefined;
-  divisor?: Numberish | undefined;
-  'dominant-baseline'?: Numberish | undefined;
-  dur?: Numberish | undefined;
-  dx?: Numberish | undefined;
-  dy?: Numberish | undefined;
-  edgeMode?: Numberish | undefined;
-  elevation?: Numberish | undefined;
-  'enable-background'?: Numberish | undefined;
-  end?: Numberish | undefined;
-  exponent?: Numberish | undefined;
-  externalResourcesRequired?: Numberish | undefined;
-  fill?: string | undefined;
-  'fill-opacity'?: Numberish | undefined;
-  'fill-rule'?: 'nonzero' | 'evenodd' | 'inherit' | undefined;
-  filter?: string | undefined;
-  filterRes?: Numberish | undefined;
-  filterUnits?: Numberish | undefined;
-  'flood-color'?: Numberish | undefined;
-  'flood-opacity'?: Numberish | undefined;
-  focusable?: Numberish | undefined;
-  'font-family'?: string | undefined;
-  'font-size'?: Numberish | undefined;
-  'font-size-adjust'?: Numberish | undefined;
-  'font-stretch'?: Numberish | undefined;
-  'font-style'?: Numberish | undefined;
-  'font-variant'?: Numberish | undefined;
-  'font-weight'?: Numberish | undefined;
-  format?: Numberish | undefined;
-  from?: Numberish | undefined;
-  fx?: Numberish | undefined;
-  fy?: Numberish | undefined;
-  g1?: Numberish | undefined;
-  g2?: Numberish | undefined;
-  'glyph-name'?: Numberish | undefined;
-  'glyph-orientation-horizontal'?: Numberish | undefined;
-  'glyph-orientation-vertical'?: Numberish | undefined;
-  glyphRef?: Numberish | undefined;
-  gradientTransform?: string | undefined;
-  gradientUnits?: string | undefined;
-  hanging?: Numberish | undefined;
-  'horiz-adv-x'?: Numberish | undefined;
-  'horiz-origin-x'?: Numberish | undefined;
-  href?: string | undefined;
-  ideographic?: Numberish | undefined;
-  'image-rendering'?: Numberish | undefined;
-  in2?: Numberish | undefined;
-  in?: string | undefined;
-  intercept?: Numberish | undefined;
-  k1?: Numberish | undefined;
-  k2?: Numberish | undefined;
-  k3?: Numberish | undefined;
-  k4?: Numberish | undefined;
-  k?: Numberish | undefined;
-  kernelMatrix?: Numberish | undefined;
-  kernelUnitLength?: Numberish | undefined;
-  kerning?: Numberish | undefined;
-  keyPoints?: Numberish | undefined;
-  keySplines?: Numberish | undefined;
-  keyTimes?: Numberish | undefined;
-  lengthAdjust?: Numberish | undefined;
-  'letter-spacing'?: Numberish | undefined;
-  'lighting-color'?: Numberish | undefined;
-  limitingConeAngle?: Numberish | undefined;
-  local?: Numberish | undefined;
-  'marker-end'?: string | undefined;
-  markerHeight?: Numberish | undefined;
-  'marker-mid'?: string | undefined;
-  'marker-start'?: string | undefined;
-  markerUnits?: Numberish | undefined;
-  markerWidth?: Numberish | undefined;
-  mask?: string | undefined;
-  maskContentUnits?: Numberish | undefined;
-  maskUnits?: Numberish | undefined;
-  mathematical?: Numberish | undefined;
-  mode?: Numberish | undefined;
-  numOctaves?: Numberish | undefined;
-  offset?: Numberish | undefined;
-  opacity?: Numberish | undefined;
-  operator?: Numberish | undefined;
-  order?: Numberish | undefined;
-  orient?: Numberish | undefined;
-  orientation?: Numberish | undefined;
-  origin?: Numberish | undefined;
-  overflow?: Numberish | undefined;
-  'overline-position'?: Numberish | undefined;
-  'overline-thickness'?: Numberish | undefined;
-  'paint-order'?: Numberish | undefined;
-  'panose-1'?: Numberish | undefined;
-  pathLength?: Numberish | undefined;
-  patternContentUnits?: string | undefined;
-  patternTransform?: Numberish | undefined;
-  patternUnits?: string | undefined;
-  'pointer-events'?: Numberish | undefined;
-  points?: string | undefined;
-  pointsAtX?: Numberish | undefined;
-  pointsAtY?: Numberish | undefined;
-  pointsAtZ?: Numberish | undefined;
-  preserveAlpha?: Numberish | undefined;
-  preserveAspectRatio?: string | undefined;
-  primitiveUnits?: Numberish | undefined;
-  r?: Numberish | undefined;
-  radius?: Numberish | undefined;
-  refX?: Numberish | undefined;
-  refY?: Numberish | undefined;
-  renderingIntent?: Numberish | undefined;
-  repeatCount?: Numberish | undefined;
-  repeatDur?: Numberish | undefined;
-  requiredExtensions?: Numberish | undefined;
-  requiredFeatures?: Numberish | undefined;
-  restart?: Numberish | undefined;
-  result?: string | undefined;
-  rotate?: Numberish | undefined;
-  rx?: Numberish | undefined;
-  ry?: Numberish | undefined;
-  scale?: Numberish | undefined;
-  seed?: Numberish | undefined;
-  'shape-rendering'?: Numberish | undefined;
-  slope?: Numberish | undefined;
-  spacing?: Numberish | undefined;
-  specularConstant?: Numberish | undefined;
-  specularExponent?: Numberish | undefined;
-  speed?: Numberish | undefined;
-  spreadMethod?: string | undefined;
-  startOffset?: Numberish | undefined;
-  stdDeviation?: Numberish | undefined;
-  stemh?: Numberish | undefined;
-  stemv?: Numberish | undefined;
-  stitchTiles?: Numberish | undefined;
-  'stop-color'?: string | undefined;
-  'stop-opacity'?: Numberish | undefined;
-  'strikethrough-position'?: Numberish | undefined;
-  'strikethrough-thickness'?: Numberish | undefined;
-  string?: Numberish | undefined;
-  stroke?: string | undefined;
-  'stroke-dasharray'?: Numberish | undefined;
-  'stroke-dashoffset'?: Numberish | undefined;
-  'stroke-linecap'?: 'butt' | 'round' | 'square' | 'inherit' | undefined;
-  'stroke-linejoin'?: 'miter' | 'round' | 'bevel' | 'inherit' | undefined;
-  'stroke-miterlimit'?: Numberish | undefined;
-  'stroke-opacity'?: Numberish | undefined;
-  'stroke-width'?: Numberish | undefined;
-  surfaceScale?: Numberish | undefined;
-  systemLanguage?: Numberish | undefined;
-  tableValues?: Numberish | undefined;
-  targetX?: Numberish | undefined;
-  targetY?: Numberish | undefined;
-  'text-anchor'?: string | undefined;
-  'text-decoration'?: Numberish | undefined;
-  textLength?: Numberish | undefined;
-  'text-rendering'?: Numberish | undefined;
-  to?: Numberish | undefined;
-  transform?: string | undefined;
-  u1?: Numberish | undefined;
-  u2?: Numberish | undefined;
-  'underline-position'?: Numberish | undefined;
-  'underline-thickness'?: Numberish | undefined;
-  unicode?: Numberish | undefined;
-  'unicode-bidi'?: Numberish | undefined;
-  'unicode-range'?: Numberish | undefined;
-  'unitsPer-em'?: Numberish | undefined;
-  'v-alphabetic'?: Numberish | undefined;
-  values?: string | undefined;
-  'vector-effect'?: Numberish | undefined;
-  version?: string | undefined;
-  'vert-adv-y'?: Numberish | undefined;
-  'vert-origin-x'?: Numberish | undefined;
-  'vert-origin-y'?: Numberish | undefined;
-  'v-hanging'?: Numberish | undefined;
-  'v-ideographic'?: Numberish | undefined;
-  viewBox?: string | undefined;
-  viewTarget?: Numberish | undefined;
-  visibility?: Numberish | undefined;
-  'v-mathematical'?: Numberish | undefined;
-  widths?: Numberish | undefined;
-  'word-spacing'?: Numberish | undefined;
-  'writing-mode'?: Numberish | undefined;
-  x1?: Numberish | undefined;
-  x2?: Numberish | undefined;
-  x?: Numberish | undefined;
-  xChannelSelector?: string | undefined;
-  'x-height'?: Numberish | undefined;
-  xlinkActuate?: string | undefined;
-  xlinkArcrole?: string | undefined;
-  xlinkHref?: string | undefined;
-  xlinkRole?: string | undefined;
-  xlinkShow?: string | undefined;
-  xlinkTitle?: string | undefined;
-  xlinkType?: string | undefined;
-  xmlns?: string | undefined;
-  xmlnsXlink?: string | undefined;
-  y1?: Numberish | undefined;
-  y2?: Numberish | undefined;
-  y?: Numberish | undefined;
-  yChannelSelector?: string | undefined;
-  z?: Numberish | undefined;
-  zoomAndPan?: string | undefined;
+  style?: StyleValue;
+  color?: string;
+  height?: Numberish;
+  id?: string;
+  lang?: string;
+  max?: Numberish;
+  media?: string;
+  method?: string;
+  min?: Numberish;
+  name?: string;
+  target?: string;
+  type?: string;
+  width?: Numberish;
+  role?: string;
+  tabindex?: Numberish;
+  crossOrigin?: 'anonymous' | 'use-credentials' | '';
+  'accent-height'?: Numberish;
+  accumulate?: 'none' | 'sum';
+  additive?: 'replace' | 'sum';
+  'alignment-baseline'?: 'auto' | 'baseline' | 'before-edge' | 'text-before-edge' | 'middle' | 'central' | 'after-edge' | 'text-after-edge' | 'ideographic' | 'alphabetic' | 'hanging' | 'mathematical' | 'inherit';
+  allowReorder?: 'no' | 'yes';
+  alphabetic?: Numberish;
+  amplitude?: Numberish;
+  'arabic-form'?: 'initial' | 'medial' | 'terminal' | 'isolated';
+  ascent?: Numberish;
+  attributeName?: string;
+  attributeType?: string;
+  autoReverse?: Numberish;
+  azimuth?: Numberish;
+  baseFrequency?: Numberish;
+  'baseline-shift'?: Numberish;
+  baseProfile?: Numberish;
+  bbox?: Numberish;
+  begin?: Numberish;
+  bias?: Numberish;
+  by?: Numberish;
+  calcMode?: Numberish;
+  'cap-height'?: Numberish;
+  clip?: Numberish;
+  'clip-path'?: string;
+  clipPathUnits?: Numberish;
+  'clip-rule'?: Numberish;
+  'color-interpolation'?: Numberish;
+  'color-interpolation-filters'?: 'auto' | 'sRGB' | 'linearRGB' | 'inherit';
+  'color-profile'?: Numberish;
+  'color-rendering'?: Numberish;
+  contentScriptType?: Numberish;
+  contentStyleType?: Numberish;
+  cursor?: Numberish;
+  cx?: Numberish;
+  cy?: Numberish;
+  d?: string;
+  decelerate?: Numberish;
+  descent?: Numberish;
+  diffuseConstant?: Numberish;
+  direction?: Numberish;
+  display?: Numberish;
+  divisor?: Numberish;
+  'dominant-baseline'?: Numberish;
+  dur?: Numberish;
+  dx?: Numberish;
+  dy?: Numberish;
+  edgeMode?: Numberish;
+  elevation?: Numberish;
+  'enable-background'?: Numberish;
+  end?: Numberish;
+  exponent?: Numberish;
+  externalResourcesRequired?: Numberish;
+  fill?: string;
+  'fill-opacity'?: Numberish;
+  'fill-rule'?: 'nonzero' | 'evenodd' | 'inherit';
+  filter?: string;
+  filterRes?: Numberish;
+  filterUnits?: Numberish;
+  'flood-color'?: Numberish;
+  'flood-opacity'?: Numberish;
+  focusable?: Numberish;
+  'font-family'?: string;
+  'font-size'?: Numberish;
+  'font-size-adjust'?: Numberish;
+  'font-stretch'?: Numberish;
+  'font-style'?: Numberish;
+  'font-variant'?: Numberish;
+  'font-weight'?: Numberish;
+  format?: Numberish;
+  from?: Numberish;
+  fx?: Numberish;
+  fy?: Numberish;
+  g1?: Numberish;
+  g2?: Numberish;
+  'glyph-name'?: Numberish;
+  'glyph-orientation-horizontal'?: Numberish;
+  'glyph-orientation-vertical'?: Numberish;
+  glyphRef?: Numberish;
+  gradientTransform?: string;
+  gradientUnits?: string;
+  hanging?: Numberish;
+  'horiz-adv-x'?: Numberish;
+  'horiz-origin-x'?: Numberish;
+  href?: string;
+  ideographic?: Numberish;
+  'image-rendering'?: Numberish;
+  in2?: Numberish;
+  in?: string;
+  intercept?: Numberish;
+  k1?: Numberish;
+  k2?: Numberish;
+  k3?: Numberish;
+  k4?: Numberish;
+  k?: Numberish;
+  kernelMatrix?: Numberish;
+  kernelUnitLength?: Numberish;
+  kerning?: Numberish;
+  keyPoints?: Numberish;
+  keySplines?: Numberish;
+  keyTimes?: Numberish;
+  lengthAdjust?: Numberish;
+  'letter-spacing'?: Numberish;
+  'lighting-color'?: Numberish;
+  limitingConeAngle?: Numberish;
+  local?: Numberish;
+  'marker-end'?: string;
+  markerHeight?: Numberish;
+  'marker-mid'?: string;
+  'marker-start'?: string;
+  markerUnits?: Numberish;
+  markerWidth?: Numberish;
+  mask?: string;
+  maskContentUnits?: Numberish;
+  maskUnits?: Numberish;
+  mathematical?: Numberish;
+  mode?: Numberish;
+  numOctaves?: Numberish;
+  offset?: Numberish;
+  opacity?: Numberish;
+  operator?: Numberish;
+  order?: Numberish;
+  orient?: Numberish;
+  orientation?: Numberish;
+  origin?: Numberish;
+  overflow?: Numberish;
+  'overline-position'?: Numberish;
+  'overline-thickness'?: Numberish;
+  'paint-order'?: Numberish;
+  'panose-1'?: Numberish;
+  pathLength?: Numberish;
+  patternContentUnits?: string;
+  patternTransform?: Numberish;
+  patternUnits?: string;
+  'pointer-events'?: Numberish;
+  points?: string;
+  pointsAtX?: Numberish;
+  pointsAtY?: Numberish;
+  pointsAtZ?: Numberish;
+  preserveAlpha?: Numberish;
+  preserveAspectRatio?: string;
+  primitiveUnits?: Numberish;
+  r?: Numberish;
+  radius?: Numberish;
+  refX?: Numberish;
+  refY?: Numberish;
+  renderingIntent?: Numberish;
+  repeatCount?: Numberish;
+  repeatDur?: Numberish;
+  requiredExtensions?: Numberish;
+  requiredFeatures?: Numberish;
+  restart?: Numberish;
+  result?: string;
+  rotate?: Numberish;
+  rx?: Numberish;
+  ry?: Numberish;
+  scale?: Numberish;
+  seed?: Numberish;
+  'shape-rendering'?: Numberish;
+  slope?: Numberish;
+  spacing?: Numberish;
+  specularConstant?: Numberish;
+  specularExponent?: Numberish;
+  speed?: Numberish;
+  spreadMethod?: string;
+  startOffset?: Numberish;
+  stdDeviation?: Numberish;
+  stemh?: Numberish;
+  stemv?: Numberish;
+  stitchTiles?: Numberish;
+  'stop-color'?: string;
+  'stop-opacity'?: Numberish;
+  'strikethrough-position'?: Numberish;
+  'strikethrough-thickness'?: Numberish;
+  string?: Numberish;
+  stroke?: string;
+  'stroke-dasharray'?: Numberish;
+  'stroke-dashoffset'?: Numberish;
+  'stroke-linecap'?: 'butt' | 'round' | 'square' | 'inherit';
+  'stroke-linejoin'?: 'miter' | 'round' | 'bevel' | 'inherit';
+  'stroke-miterlimit'?: Numberish;
+  'stroke-opacity'?: Numberish;
+  'stroke-width'?: Numberish;
+  surfaceScale?: Numberish;
+  systemLanguage?: Numberish;
+  tableValues?: Numberish;
+  targetX?: Numberish;
+  targetY?: Numberish;
+  'text-anchor'?: string;
+  'text-decoration'?: Numberish;
+  textLength?: Numberish;
+  'text-rendering'?: Numberish;
+  to?: Numberish;
+  transform?: string;
+  u1?: Numberish;
+  u2?: Numberish;
+  'underline-position'?: Numberish;
+  'underline-thickness'?: Numberish;
+  unicode?: Numberish;
+  'unicode-bidi'?: Numberish;
+  'unicode-range'?: Numberish;
+  'unitsPer-em'?: Numberish;
+  'v-alphabetic'?: Numberish;
+  values?: string;
+  'vector-effect'?: Numberish;
+  version?: string;
+  'vert-adv-y'?: Numberish;
+  'vert-origin-x'?: Numberish;
+  'vert-origin-y'?: Numberish;
+  'v-hanging'?: Numberish;
+  'v-ideographic'?: Numberish;
+  viewBox?: string;
+  viewTarget?: Numberish;
+  visibility?: Numberish;
+  'v-mathematical'?: Numberish;
+  widths?: Numberish;
+  'word-spacing'?: Numberish;
+  'writing-mode'?: Numberish;
+  x1?: Numberish;
+  x2?: Numberish;
+  x?: Numberish;
+  xChannelSelector?: string;
+  'x-height'?: Numberish;
+  xlinkActuate?: string;
+  xlinkArcrole?: string;
+  xlinkHref?: string;
+  xlinkRole?: string;
+  xlinkShow?: string;
+  xlinkTitle?: string;
+  xlinkType?: string;
+  xmlns?: string;
+  xmlnsXlink?: string;
+  y1?: Numberish;
+  y2?: Numberish;
+  y?: Numberish;
+  yChannelSelector?: string;
+  z?: Numberish;
+  zoomAndPan?: string;
 }
 interface IntrinsicElementAttributes {
   a: AnchorHTMLAttributes;
@@ -22670,7 +22640,6 @@ interface IntrinsicElementAttributes {
   polyline: SVGAttributes;
   radialGradient: SVGAttributes;
   rect: SVGAttributes;
-  set: SVGAttributes;
   stop: SVGAttributes;
   switch: SVGAttributes;
   symbol: SVGAttributes;
@@ -22700,19 +22669,19 @@ interface Events {
   onFocusout: FocusEvent;
   onBlur: FocusEvent;
   onChange: Event;
-  onBeforeinput: InputEvent;
-  onFormdata: FormDataEvent;
-  onInput: InputEvent;
+  onBeforeinput: Event;
+  onInput: Event;
   onReset: Event;
-  onSubmit: SubmitEvent;
+  onSubmit: Event;
   onInvalid: Event;
-  onFullscreenchange: Event;
-  onFullscreenerror: Event;
   onLoad: Event;
   onError: Event;
   onKeydown: KeyboardEvent;
   onKeypress: KeyboardEvent;
   onKeyup: KeyboardEvent;
+  onAuxclick: MouseEvent;
+  onClick: MouseEvent;
+  onContextmenu: MouseEvent;
   onDblclick: MouseEvent;
   onMousedown: MouseEvent;
   onMouseenter: MouseEvent;
@@ -22721,12 +22690,12 @@ interface Events {
   onMouseout: MouseEvent;
   onMouseover: MouseEvent;
   onMouseup: MouseEvent;
-  onAbort: UIEvent;
+  onAbort: Event;
   onCanplay: Event;
   onCanplaythrough: Event;
   onDurationchange: Event;
   onEmptied: Event;
-  onEncrypted: MediaEncryptedEvent;
+  onEncrypted: Event;
   onEnded: Event;
   onLoadeddata: Event;
   onLoadedmetadata: Event;
@@ -22734,7 +22703,7 @@ interface Events {
   onPause: Event;
   onPlay: Event;
   onPlaying: Event;
-  onProgress: ProgressEvent;
+  onProgress: Event;
   onRatechange: Event;
   onSeeked: Event;
   onSeeking: Event;
@@ -22750,11 +22719,6 @@ interface Events {
   onTouchend: TouchEvent;
   onTouchmove: TouchEvent;
   onTouchstart: TouchEvent;
-  onAuxclick: PointerEvent;
-  onClick: PointerEvent;
-  onContextmenu: PointerEvent;
-  onGotpointercapture: PointerEvent;
-  onLostpointercapture: PointerEvent;
   onPointerdown: PointerEvent;
   onPointermove: PointerEvent;
   onPointerup: PointerEvent;
@@ -22763,35 +22727,30 @@ interface Events {
   onPointerleave: PointerEvent;
   onPointerover: PointerEvent;
   onPointerout: PointerEvent;
-  onBeforetoggle: ToggleEvent;
-  onToggle: ToggleEvent;
   onWheel: WheelEvent;
-  onAnimationcancel: AnimationEvent;
   onAnimationstart: AnimationEvent;
   onAnimationend: AnimationEvent;
   onAnimationiteration: AnimationEvent;
-  onSecuritypolicyviolation: SecurityPolicyViolationEvent;
-  onTransitioncancel: TransitionEvent;
   onTransitionend: TransitionEvent;
-  onTransitionrun: TransitionEvent;
   onTransitionstart: TransitionEvent;
 }
 type EventHandlers<E> = { [K in keyof E]?: E[K] extends ((...args: any) => any) ? E[K] : (payload: E[K]) => void };
-interface ReservedProps {
-  key?: PropertyKey | undefined;
-  ref?: VNodeRef | undefined;
-  ref_for?: boolean | undefined;
-  ref_key?: string | undefined;
-}
+type ReservedProps = {
+  key?: PropertyKey;
+  ref?: VNodeRef;
+  ref_for?: boolean;
+  ref_key?: string;
+};
 type NativeElements = { [K in keyof IntrinsicElementAttributes]: IntrinsicElementAttributes[K] & ReservedProps };
 /**
  * This is a stub implementation to prevent the need to use dom types.
  *
  * To enable proper types, add `"dom"` to `"lib"` in your `tsconfig.json`.
  */
+type DomStub = {};
 type DomType<T$1> = typeof globalThis extends {
   window: unknown;
-} ? T$1 : never;
+} ? T$1 : DomStub;
 declare module '@vue/reactivity' {
   interface RefUnwrapBailTypes {
     runtimeDOMBailTypes: DomType<Node | Window>;
@@ -22807,8 +22766,8 @@ declare module '@vue/runtime-core' {
     vOn: VOnDirective;
     vBind: VModelDirective;
     vIf: Directive<any, boolean>;
-    vOnce: Directive;
-    vSlot: Directive;
+    VOnce: Directive;
+    VSlot: Directive;
   }
 }
 //#endregion
@@ -22908,7 +22867,7 @@ declare class AppError extends ErrorClass {
   private _handleError;
 }
 //#endregion
-//#region node_modules/.pnpm/vue@3.5.27_typescript@5.7.3/node_modules/vue/jsx-runtime/index.d.ts
+//#region node_modules/.pnpm/vue@3.5.28_typescript@5.9.3/node_modules/vue/jsx-runtime/index.d.ts
 declare namespace JSX {
   export interface Element extends VNode {}
   export interface ElementClass {
@@ -22986,7 +22945,7 @@ interface CookieOptions {
 //#region packages-zova/zova-core/src/types/interface/inject.d.ts
 interface IInjectRecord {}
 //#endregion
-//#region node_modules/.pnpm/@cabloy+module-info@1.3.41/node_modules/@cabloy/module-info/dist/index.d.mts
+//#region node_modules/.pnpm/@cabloy+module-info@1.3.42/node_modules/@cabloy/module-info/dist/index.d.mts
 //#region src/vona.d.ts
 type VonaMetaFlavor = 'normal' | 'play' | 'demo' | 'docker' | 'ci' | keyof VonaMetaFlavorExtend;
 type VonaMetaMode = 'test' | 'dev' | 'prod';
@@ -23108,6 +23067,7 @@ interface IModulePackage {
     dependencies?: Record<string, string>;
     globalDependencies?: Record<string, string | boolean>;
     globalDependenciesDev?: Record<string, string | boolean>;
+    disables?: string[];
     onions?: OnionScenesMeta;
     metas?: OnionMetasMeta;
   };
@@ -23116,6 +23076,7 @@ interface IModulePackage {
     dependencies?: Record<string, string>;
     globalDependencies?: Record<string, string | boolean>;
     globalDependenciesDev?: Record<string, string | boolean>;
+    disables?: string[];
     onions?: OnionScenesMeta;
     metas?: OnionMetasMeta;
     onionsConfig?: TypeOnionsConfig;
@@ -23153,6 +23114,7 @@ interface ZovaConfigEnv {
   SSR_PROD_PROTOCOL: string | undefined;
   SSR_PROD_HOST: string | undefined;
   SSR_HMR: string | undefined;
+  SSR_COOKIE_LOCALE: string | undefined;
   OPENAPI_BASE_URL_DEFAULT: string | undefined;
   OPENAPI_BASE_URL_HOME_API: string | undefined;
   MOCK_ENABLED: string | undefined;
@@ -23888,6 +23850,7 @@ interface ZovaConfig {
   logger: ConfigLogger;
   locale: {
     default: keyof ILocaleRecord;
+    cookieLocale: boolean;
     storeKey: string;
     items: Record<keyof ILocaleRecord, string>;
   };
@@ -23933,10 +23896,10 @@ declare class SysLogger extends BeanSimple {
 declare const SymbolZovaComponents: unique symbol;
 declare class SysComponent extends BeanSimple {
   private [SymbolZovaComponents];
-  createAsyncComponent(module: string, name?: string): () => Promise<Component$1>;
+  createAsyncComponent(module: string, name?: string): () => Promise<Component>;
   getZovaComponent<K$1 extends keyof IZovaComponentRecord>(componentName: K$1): IZovaComponentRecord[K$1];
   getZovaComponent(module: string, name: string): any;
-  use(module: string, name?: string): Promise<Component$1>;
+  use(module: string, name?: string): Promise<Component>;
 }
 //#endregion
 //#region packages-zova/zova-core/src/core/sys/error.d.ts
@@ -23995,6 +23958,7 @@ interface IApiActionConfigPrepareOptions {
   query?: {};
   authToken?: TypeAuthToken;
   openapiSchema?: boolean;
+  headers?: {};
 }
 declare class SysUtil extends BeanSimple {
   getAbsoluteUrlFromPagePath(path?: string, ignoreHost?: boolean, ignorePublicPath?: boolean): string;
@@ -24055,12 +24019,13 @@ declare class CtxHooks extends BeanSimple {
 //#region packages-zova/zova-core/src/utils/stateLock.d.ts
 declare class StateLock {
   private _state;
+  private _resolve?;
   static create(): StateLock;
   protected constructor();
   get state(): boolean;
-  set state(value: boolean);
   touch(): void;
-  wait(): Promise<unknown>;
+  wait(): Promise<any>;
+  private _waitInner;
 }
 //#endregion
 //#region packages-zova/zova-core/src/core/context/state.d.ts
@@ -24181,7 +24146,7 @@ type TypeModuleResourceIcons = Record<string, string>;
 type TypeModuleResourceLocales = Record<string, object>;
 type TypeModuleResourceLocaleModules = Record<string, TypeModuleResourceLocales>;
 type TypeModuleResourceErrors = Record<string, number>;
-type TypeModuleResourceComponents = Record<string, Component$1>;
+type TypeModuleResourceComponents = Record<string, Component>;
 type TypeModuleResourceConfig = (sys: ZovaSys, meta?: ZovaConfigMeta) => object | Promise<object>;
 interface IModuleResource {
   MainSys: Constructable<IModuleMainSys>;
@@ -24202,14 +24167,14 @@ declare module '@cabloy/module-info' {
   }
 }
 //#endregion
-//#region node_modules/.pnpm/@cabloy+vue-router@4.4.16_vue@3.5.27_typescript@5.7.3_/node_modules/@cabloy/vue-router/dist/vue-router.d.ts
-declare type Awaitable$1<T$1> = T$1 | Promise<T$1>;
+//#region node_modules/.pnpm/@cabloy+vue-router@4.4.16_vue@3.5.28_typescript@5.9.3_/node_modules/@cabloy/vue-router/dist/vue-router.d.ts
+declare type Awaitable<T$1> = T$1 | Promise<T$1>;
 
 /**
  * Maybe a promise maybe not
  * @internal
  */
-declare type _Awaitable$1<T$1> = T$1 | PromiseLike<T$1>;
+declare type _Awaitable<T$1> = T$1 | PromiseLike<T$1>;
 /**
  * Internal type to define an ErrorHandler
  *
@@ -24218,8 +24183,8 @@ declare type _Awaitable$1<T$1> = T$1 | PromiseLike<T$1>;
  * @param from - location we were navigating from when the error happened
  * @internal
  */
-declare interface _ErrorListener$1 {
-  (error: any, to: RouteLocationNormalized$1, from: RouteLocationNormalizedLoaded$1): any;
+declare interface _ErrorListener {
+  (error: any, to: RouteLocationNormalized, from: RouteLocationNormalizedLoaded): any;
 }
 
 /**
@@ -24228,28 +24193,28 @@ declare interface _ErrorListener$1 {
  *
  * @internal
  */
-declare const enum ErrorTypes$1 {
+declare const enum ErrorTypes {
   MATCHER_NOT_FOUND = 1,
   NAVIGATION_GUARD_REDIRECT = 2,
   NAVIGATION_ABORTED = 4,
   NAVIGATION_CANCELLED = 8,
   NAVIGATION_DUPLICATED = 16,
 }
-declare type HistoryLocation$1 = string;
+declare type HistoryLocation = string;
 
 /**
  * Allowed HTML history.state
  */
-declare interface HistoryState$1 {
-  [x: number]: HistoryStateValue$1;
-  [x: string]: HistoryStateValue$1;
+declare interface HistoryState {
+  [x: number]: HistoryStateValue;
+  [x: string]: HistoryStateValue;
 }
 /**
  * Allowed arrays for history.state.
  *
  * @internal
  */
-declare interface HistoryStateArray$1 extends Array<HistoryStateValue$1> {}
+declare interface HistoryStateArray extends Array<HistoryStateValue> {}
 
 /**
  * Allowed variables in HTML5 history state. Note that pushState clones the state
@@ -24258,7 +24223,7 @@ declare interface HistoryStateArray$1 extends Array<HistoryStateValue$1> {}
  *
  * @internal
  */
-declare type HistoryStateValue$1 = string | number | boolean | null | undefined | HistoryState$1 | HistoryStateArray$1;
+declare type HistoryStateValue = string | number | boolean | null | undefined | HistoryState | HistoryStateArray;
 
 /**
  * Check if an object is a {@link NavigationFailure}.
@@ -24287,13 +24252,13 @@ declare type HistoryStateValue$1 = string | number | boolean | null | undefined 
  * ```
  */
 
-declare type Lazy$2<T$1> = () => Promise<T$1>;
+declare type Lazy$1<T$1> = () => Promise<T$1>;
 
 /**
  * Creates a union type that still allows autocompletion for strings.
  * @internal
  */
-declare type _LiteralUnion$1<LiteralType, BaseType extends string = string> = LiteralType | (BaseType & Record<never, never>);
+declare type _LiteralUnion<LiteralType, BaseType extends string = string> = LiteralType | (BaseType & Record<never, never>);
 
 /**
  * Ensures a route is loaded, so it can be passed as o prop to `<RouterView>`.
@@ -24306,7 +24271,7 @@ declare type _LiteralUnion$1<LiteralType, BaseType extends string = string> = Li
  *
  * @public
  */
-declare type LocationQuery$1 = Record<string, LocationQueryValue$1 | LocationQueryValue$1[]>;
+declare type LocationQuery = Record<string, LocationQueryValue | LocationQueryValue[]>;
 /**
  * Loose {@link LocationQuery} object that can be passed to functions like
  * {@link Router.push} and {@link Router.replace} or anywhere when creating a
@@ -24314,7 +24279,7 @@ declare type LocationQuery$1 = Record<string, LocationQueryValue$1 | LocationQue
  *
  * @public
  */
-declare type LocationQueryRaw$1 = Record<string | number, LocationQueryValueRaw$1 | LocationQueryValueRaw$1[]>;
+declare type LocationQueryRaw = Record<string | number, LocationQueryValueRaw | LocationQueryValueRaw[]>;
 /**
  * Possible values in normalized {@link LocationQuery}. `null` renders the query
  * param but without an `=`.
@@ -24328,21 +24293,21 @@ declare type LocationQueryRaw$1 = Record<string | number, LocationQueryValueRaw$
  *
  * @internal
  */
-declare type LocationQueryValue$1 = string | null;
+declare type LocationQueryValue = string | null;
 /**
  * Possible values when defining a query.
  *
  * @internal
  */
-declare type LocationQueryValueRaw$1 = LocationQueryValue$1 | number | undefined;
+declare type LocationQueryValueRaw = LocationQueryValue | number | undefined;
 /**
  * Normalized/resolved Route location that returned by the matcher.
  */
-declare interface MatcherLocation$1 {
+declare interface MatcherLocation {
   /**
    * Name of the matched record
    */
-  name: RouteRecordNameGeneric$1 | null | undefined;
+  name: RouteRecordNameGeneric | null | undefined;
   /**
    * Percentage encoded pathname section of the URL.
    */
@@ -24350,28 +24315,28 @@ declare interface MatcherLocation$1 {
   /**
    * Object of decoded params extracted from the `path`.
    */
-  params: RouteParamsGeneric$1;
+  params: RouteParamsGeneric;
   /**
    * Merged `meta` properties from all the matched route records.
    */
-  meta: RouteMeta$1;
+  meta: RouteMeta;
   /**
    * Array of {@link RouteRecord} containing components as they were
    * passed when adding records. It can also contain redirect records. This
    * can't be used directly
    */
-  matched: RouteRecord$1[];
+  matched: RouteRecord[];
 }
 /**
  * @internal
  */
 declare interface MatcherLocationAsName {
-  name: RouteRecordNameGeneric$1;
+  name: RouteRecordNameGeneric;
   /**
    * Ignored path property since we are dealing with a relative location. Only `undefined` is allowed.
    */
   path?: undefined;
-  params?: RouteParamsGeneric$1;
+  params?: RouteParamsGeneric;
 }
 
 /**
@@ -24388,17 +24353,17 @@ declare interface MatcherLocationAsRelative {
    * Ignored path property since we are dealing with a relative location. Only `undefined` is allowed.
    */
   path?: undefined;
-  params?: RouteParamsGeneric$1;
+  params?: RouteParamsGeneric;
 }
 
 /**
  * Route location that can be passed to the matcher.
  */
 declare type MatcherLocationRaw = MatcherLocationAsPath | MatcherLocationAsName | MatcherLocationAsRelative;
-declare interface NavigationCallback$1 {
-  (to: HistoryLocation$1, from: HistoryLocation$1, information: NavigationInformation$1): void;
+declare interface NavigationCallback {
+  (to: HistoryLocation, from: HistoryLocation, information: NavigationInformation): void;
 }
-declare enum NavigationDirection$1 {
+declare enum NavigationDirection {
   back = "back",
   forward = "forward",
   unknown = "",
@@ -24407,62 +24372,62 @@ declare enum NavigationDirection$1 {
 /**
  * Extended Error that contains extra information regarding a failed navigation.
  */
-declare interface NavigationFailure$1 extends Error {
+declare interface NavigationFailure extends Error {
   /**
    * Type of the navigation. One of {@link NavigationFailureType}
    */
-  type: ErrorTypes$1.NAVIGATION_CANCELLED | ErrorTypes$1.NAVIGATION_ABORTED | ErrorTypes$1.NAVIGATION_DUPLICATED;
+  type: ErrorTypes.NAVIGATION_CANCELLED | ErrorTypes.NAVIGATION_ABORTED | ErrorTypes.NAVIGATION_DUPLICATED;
   /**
    * Route location we were navigating from
    */
-  from: RouteLocationNormalized$1;
+  from: RouteLocationNormalized;
   /**
    * Route location we were navigating to
    */
-  to: RouteLocationNormalized$1;
+  to: RouteLocationNormalized;
 }
 /**
  * Navigation Guard.
  */
-declare interface NavigationGuard$1 {
-  (to: RouteLocationNormalized$1, from: RouteLocationNormalizedLoaded$1, next: NavigationGuardNext$1): _Awaitable$1<NavigationGuardReturn$1>;
+declare interface NavigationGuard {
+  (to: RouteLocationNormalized, from: RouteLocationNormalizedLoaded, next: NavigationGuardNext): _Awaitable<NavigationGuardReturn>;
 }
 /**
  * `next()` callback passed to navigation guards.
  */
-declare interface NavigationGuardNext$1 {
+declare interface NavigationGuardNext {
   (): void;
   (error: Error): void;
-  (location: RouteLocationRaw$1): void;
+  (location: RouteLocationRaw): void;
   (valid: boolean | undefined): void;
-  (cb: NavigationGuardNextCallback$1): void;
+  (cb: NavigationGuardNextCallback): void;
 }
 /**
  * Callback that can be passed to `next()` in `beforeRouteEnter()` guards.
  */
-declare type NavigationGuardNextCallback$1 = (vm: ComponentPublicInstance) => unknown;
+declare type NavigationGuardNextCallback = (vm: ComponentPublicInstance) => unknown;
 /**
  * Return types for a Navigation Guard. Based on `TypesConfig`
  *
  * @see {@link TypesConfig}
  */
-declare type NavigationGuardReturn$1 = void | Error | boolean | RouteLocationRaw$1;
+declare type NavigationGuardReturn = void | Error | boolean | RouteLocationRaw;
 /**
  * Navigation Guard with a type parameter for `this`.
  * @see {@link TypesConfig}
  */
-declare interface NavigationGuardWithThis$1<T$1> {
-  (this: T$1, to: RouteLocationNormalized$1, from: RouteLocationNormalizedLoaded$1, next: NavigationGuardNext$1): _Awaitable$1<NavigationGuardReturn$1>;
+declare interface NavigationGuardWithThis<T$1> {
+  (this: T$1, to: RouteLocationNormalized, from: RouteLocationNormalizedLoaded, next: NavigationGuardNext): _Awaitable<NavigationGuardReturn>;
 }
 /**
  * Navigation hook triggered after a navigation is settled.
  */
-declare interface NavigationHookAfter$1 {
-  (to: RouteLocationNormalized$1, from: RouteLocationNormalizedLoaded$1, failure?: NavigationFailure$1 | void): unknown;
+declare interface NavigationHookAfter {
+  (to: RouteLocationNormalized, from: RouteLocationNormalizedLoaded, failure?: NavigationFailure | void): unknown;
 }
-declare interface NavigationInformation$1 {
-  type: NavigationType$1;
-  direction: NavigationDirection$1;
+declare interface NavigationInformation {
+  type: NavigationType;
+  direction: NavigationDirection;
   delta: number;
 }
 
@@ -24472,7 +24437,7 @@ declare interface NavigationInformation$1 {
  * @internal
  */
 
-declare enum NavigationType$1 {
+declare enum NavigationType {
   pop = "pop",
   push = "push",
 }
@@ -24494,7 +24459,7 @@ declare enum NavigationType$1 {
  * @param search - search string to parse
  * @returns a query object
  */
-declare function parseQuery$1(search: string): LocationQuery$1;
+declare function parseQuery(search: string): LocationQuery;
 declare type PathParams = Record<string, string | string[]>;
 declare interface PathParser {
   /**
@@ -24527,11 +24492,11 @@ declare interface PathParser {
    */
   stringify(params: PathParams): string;
 }
-declare type PathParserOptions$1 = Pick<_PathParserOptions$1, 'end' | 'sensitive' | 'strict'>;
+declare type PathParserOptions = Pick<_PathParserOptions, 'end' | 'sensitive' | 'strict'>;
 /**
  * @internal
  */
-declare interface _PathParserOptions$1 {
+declare interface _PathParserOptions {
   /**
    * Makes the RegExp case-sensitive.
    *
@@ -24570,27 +24535,27 @@ declare interface PathParserParamKey {
 /**
  * Allowed Component definitions in route records provided by the user
  */
-declare type RawRouteComponent$1 = RouteComponent$1 | Lazy$2<RouteComponent$1>;
+declare type RawRouteComponent = RouteComponent | Lazy$1<RouteComponent>;
 
 /**
  * Allowed Component in {@link RouteLocationMatched}
  */
-declare type RouteComponent$1 = Component$1 | DefineComponent;
+declare type RouteComponent = Component | DefineComponent;
 /**
  * Type safe versions of types that are exposed by vue-router. We have to use a generic check to allow for names to be `undefined` when no `RouteMap` is provided.
  */
 /**
  * {@link RouteLocationRaw} resolved using the matcher
  */
-declare type RouteLocation$1<Name extends keyof RouteMap$1 = keyof RouteMap$1> = RouteMapGeneric$1 extends RouteMap$1 ? RouteLocationGeneric$1 : RouteLocationTypedList$1<RouteMap$1>[Name];
+declare type RouteLocation<Name extends keyof RouteMap = keyof RouteMap> = RouteMapGeneric extends RouteMap ? RouteLocationGeneric : RouteLocationTypedList<RouteMap>[Name];
 /**
  * Route location as an object with a `path` property.
  */
-declare type RouteLocationAsPath$1<Name extends keyof RouteMap$1 = keyof RouteMap$1> = RouteMapGeneric$1 extends RouteMap$1 ? RouteLocationAsPathGeneric$1 : RouteLocationAsPathTypedList$1<RouteMap$1>[Name];
+declare type RouteLocationAsPath<Name extends keyof RouteMap = keyof RouteMap> = RouteMapGeneric extends RouteMap ? RouteLocationAsPathGeneric : RouteLocationAsPathTypedList<RouteMap>[Name];
 /**
  * Generic version of {@link RouteLocationAsPath}. It is used when no {@link RouteMap} is provided.
  */
-declare interface RouteLocationAsPathGeneric$1 extends RouteQueryAndHash$1, RouteLocationOptions$1 {
+declare interface RouteLocationAsPathGeneric extends RouteQueryAndHash, RouteLocationOptions {
   /**
    * Percentage encoded pathname section of the URL.
    */
@@ -24599,25 +24564,25 @@ declare interface RouteLocationAsPathGeneric$1 extends RouteQueryAndHash$1, Rout
 /**
  * Helper to generate a type safe version of the {@link RouteLocationAsPath} type.
  */
-declare interface RouteLocationAsPathTyped$1<RouteMap$2 extends RouteMapGeneric$1 = RouteMapGeneric$1, Name extends keyof RouteMap$2 = keyof RouteMap$2> extends RouteLocationAsPathGeneric$1 {
-  path: _LiteralUnion$1<RouteMap$2[Name]['path']>;
+declare interface RouteLocationAsPathTyped<RouteMap$1 extends RouteMapGeneric = RouteMapGeneric, Name extends keyof RouteMap$1 = keyof RouteMap$1> extends RouteLocationAsPathGeneric {
+  path: _LiteralUnion<RouteMap$1[Name]['path']>;
 }
 /**
  * List of all possible {@link RouteLocationAsPath} indexed by the route name.
  * @internal
  */
-declare type RouteLocationAsPathTypedList$1<RouteMap$2 extends RouteMapGeneric$1 = RouteMapGeneric$1> = { [N in keyof RouteMap$2]: RouteLocationAsPathTyped$1<RouteMap$2, N> };
+declare type RouteLocationAsPathTypedList<RouteMap$1 extends RouteMapGeneric = RouteMapGeneric> = { [N in keyof RouteMap$1]: RouteLocationAsPathTyped<RouteMap$1, N> };
 /**
  * Route location relative to the current location. It accepts other properties than `path` like `params`, `query` and
  * `hash` to conveniently change them.
  */
-declare type RouteLocationAsRelative$1<Name extends keyof RouteMap$1 = keyof RouteMap$1> = RouteMapGeneric$1 extends RouteMap$1 ? RouteLocationAsRelativeGeneric$1 : RouteLocationAsRelativeTypedList$1<RouteMap$1>[Name];
+declare type RouteLocationAsRelative<Name extends keyof RouteMap = keyof RouteMap> = RouteMapGeneric extends RouteMap ? RouteLocationAsRelativeGeneric : RouteLocationAsRelativeTypedList<RouteMap>[Name];
 /**
  * Generic version of {@link RouteLocationAsRelative}. It is used when no {@link RouteMap} is provided.
  */
-declare interface RouteLocationAsRelativeGeneric$1 extends RouteQueryAndHash$1, RouteLocationOptions$1 {
-  name?: RouteRecordNameGeneric$1;
-  params?: RouteParamsRawGeneric$1;
+declare interface RouteLocationAsRelativeGeneric extends RouteQueryAndHash, RouteLocationOptions {
+  name?: RouteRecordNameGeneric;
+  params?: RouteParamsRawGeneric;
   /**
    * A relative path to the current location. This property should be removed
    */
@@ -24626,34 +24591,34 @@ declare interface RouteLocationAsRelativeGeneric$1 extends RouteQueryAndHash$1, 
 /**
  * Helper to generate a type safe version of the {@link RouteLocationAsRelative} type.
  */
-declare interface RouteLocationAsRelativeTyped$1<RouteMap$2 extends RouteMapGeneric$1 = RouteMapGeneric$1, Name extends keyof RouteMap$2 = keyof RouteMap$2> extends RouteLocationAsRelativeGeneric$1 {
+declare interface RouteLocationAsRelativeTyped<RouteMap$1 extends RouteMapGeneric = RouteMapGeneric, Name extends keyof RouteMap$1 = keyof RouteMap$1> extends RouteLocationAsRelativeGeneric {
   name?: Extract<Name, string | symbol>;
-  params?: RouteMap$2[Name]['paramsRaw'];
+  params?: RouteMap$1[Name]['paramsRaw'];
 }
 /**
  * List of all possible {@link RouteLocationAsRelative} indexed by the route name.
  * @internal
  */
-declare type RouteLocationAsRelativeTypedList$1<RouteMap$2 extends RouteMapGeneric$1 = RouteMapGeneric$1> = { [N in keyof RouteMap$2]: RouteLocationAsRelativeTyped$1<RouteMap$2, N> };
+declare type RouteLocationAsRelativeTypedList<RouteMap$1 extends RouteMapGeneric = RouteMapGeneric> = { [N in keyof RouteMap$1]: RouteLocationAsRelativeTyped<RouteMap$1, N> };
 /**
  * Same as {@link RouteLocationAsPath} but as a string literal.
  */
-declare type RouteLocationAsString$1<Name extends keyof RouteMap$1 = keyof RouteMap$1> = RouteMapGeneric$1 extends RouteMap$1 ? string : _LiteralUnion$1<RouteLocationAsStringTypedList$1<RouteMap$1>[Name], string>;
+declare type RouteLocationAsString<Name extends keyof RouteMap = keyof RouteMap> = RouteMapGeneric extends RouteMap ? string : _LiteralUnion<RouteLocationAsStringTypedList<RouteMap>[Name], string>;
 /**
  * Helper to generate a type safe version of the {@link RouteLocationAsString} type.
  */
-declare type RouteLocationAsStringTyped$1<RouteMap$2 extends RouteMapGeneric$1 = RouteMapGeneric$1, Name extends keyof RouteMap$2 = keyof RouteMap$2> = RouteMap$2[Name]['path'];
+declare type RouteLocationAsStringTyped<RouteMap$1 extends RouteMapGeneric = RouteMapGeneric, Name extends keyof RouteMap$1 = keyof RouteMap$1> = RouteMap$1[Name]['path'];
 /**
  * List of all possible {@link RouteLocationAsString} indexed by the route name.
  * @internal
  */
-declare type RouteLocationAsStringTypedList$1<RouteMap$2 extends RouteMapGeneric$1 = RouteMapGeneric$1> = { [N in keyof RouteMap$2]: RouteLocationAsStringTyped$1<RouteMap$2, N> };
+declare type RouteLocationAsStringTypedList<RouteMap$1 extends RouteMapGeneric = RouteMapGeneric> = { [N in keyof RouteMap$1]: RouteLocationAsStringTyped<RouteMap$1, N> };
 /**
  * Base properties for a normalized route location.
  *
  * @internal
  */
-declare interface _RouteLocationBase$1 extends Pick<MatcherLocation$1, 'name' | 'path' | 'params' | 'meta'> {
+declare interface _RouteLocationBase extends Pick<MatcherLocation, 'name' | 'path' | 'params' | 'meta'> {
   /**
    * The whole location including the `search` and `hash`. This string is
    * percentage encoded.
@@ -24662,7 +24627,7 @@ declare interface _RouteLocationBase$1 extends Pick<MatcherLocation$1, 'name' | 
   /**
    * Object representation of the `search` property of the current location.
    */
-  query: LocationQuery$1;
+  query: LocationQuery;
   /**
    * Hash of the current location. If present, starts with a `#`.
    */
@@ -24671,87 +24636,87 @@ declare interface _RouteLocationBase$1 extends Pick<MatcherLocation$1, 'name' | 
    * Contains the location we were initially trying to access before ending up
    * on the current location.
    */
-  redirectedFrom: RouteLocation$1 | undefined;
+  redirectedFrom: RouteLocation | undefined;
 }
 /**
  * Generic version of {@link RouteLocation}. It is used when no {@link RouteMap} is provided.
  */
-declare interface RouteLocationGeneric$1 extends _RouteLocationBase$1 {
+declare interface RouteLocationGeneric extends _RouteLocationBase {
   /**
    * Array of {@link RouteRecord} containing components as they were
    * passed when adding records. It can also contain redirect records. This
    * can't be used directly. **This property is non-enumerable**.
    */
-  matched: RouteRecord$1[];
+  matched: RouteRecord[];
 }
-declare interface RouteLocationMatched$1 extends RouteRecordNormalized$1 {
-  components: Record<string, RouteComponent$1> | null | undefined;
+declare interface RouteLocationMatched extends RouteRecordNormalized {
+  components: Record<string, RouteComponent> | null | undefined;
 }
 /**
  * Similar to {@link RouteLocation} but its
  * {@link RouteLocationNormalizedTyped.matched | `matched` property} cannot contain redirect records
  */
-declare type RouteLocationNormalized$1<Name extends keyof RouteMap$1 = keyof RouteMap$1> = RouteMapGeneric$1 extends RouteMap$1 ? RouteLocationNormalizedGeneric$1 : RouteLocationNormalizedTypedList$1<RouteMap$1>[Name];
+declare type RouteLocationNormalized<Name extends keyof RouteMap = keyof RouteMap> = RouteMapGeneric extends RouteMap ? RouteLocationNormalizedGeneric : RouteLocationNormalizedTypedList<RouteMap>[Name];
 /**
  * Generic version of {@link RouteLocationNormalized} that is used when no {@link RouteMap} is provided.
  */
-declare interface RouteLocationNormalizedGeneric$1 extends _RouteLocationBase$1 {
-  name: RouteRecordNameGeneric$1;
-  params: RouteParamsGeneric$1;
+declare interface RouteLocationNormalizedGeneric extends _RouteLocationBase {
+  name: RouteRecordNameGeneric;
+  params: RouteParamsGeneric;
   /**
    * Array of {@link RouteRecordNormalized}
    */
-  matched: RouteRecordNormalized$1[];
+  matched: RouteRecordNormalized[];
 }
 /**
  * Similar to {@link RouteLocationNormalized} but its `components` do not contain any function to lazy load components.
  * In other words, it's ready to be rendered by `<RouterView>`.
  */
-declare type RouteLocationNormalizedLoaded$1<Name extends keyof RouteMap$1 = keyof RouteMap$1> = RouteMapGeneric$1 extends RouteMap$1 ? RouteLocationNormalizedLoadedGeneric$1 : RouteLocationNormalizedLoadedTypedList$1<RouteMap$1>[Name];
+declare type RouteLocationNormalizedLoaded<Name extends keyof RouteMap = keyof RouteMap> = RouteMapGeneric extends RouteMap ? RouteLocationNormalizedLoadedGeneric : RouteLocationNormalizedLoadedTypedList<RouteMap>[Name];
 /**
  * Generic version of {@link RouteLocationNormalizedLoaded} that is used when no {@link RouteMap} is provided.
  */
-declare interface RouteLocationNormalizedLoadedGeneric$1 extends RouteLocationNormalizedGeneric$1 {
+declare interface RouteLocationNormalizedLoadedGeneric extends RouteLocationNormalizedGeneric {
   /**
    * Array of {@link RouteLocationMatched} containing only plain components (any
    * lazy-loaded components have been loaded and were replaced inside the
    * `components` object) so it can be directly used to display routes. It
    * cannot contain redirect records either. **This property is non-enumerable**.
    */
-  matched: RouteLocationMatched$1[];
+  matched: RouteLocationMatched[];
 }
 /**
  * Helper to generate a type safe version of the {@link RouteLocationNormalizedLoaded} type.
  */
-declare interface RouteLocationNormalizedLoadedTyped$1<RouteMap$2 extends RouteMapGeneric$1 = RouteMapGeneric$1, Name extends keyof RouteMap$2 = keyof RouteMap$2> extends RouteLocationNormalizedLoadedGeneric$1 {
+declare interface RouteLocationNormalizedLoadedTyped<RouteMap$1 extends RouteMapGeneric = RouteMapGeneric, Name extends keyof RouteMap$1 = keyof RouteMap$1> extends RouteLocationNormalizedLoadedGeneric {
   name: Extract<Name, string | symbol>;
-  params: RouteMap$2[Name]['params'];
+  params: RouteMap$1[Name]['params'];
 }
 /**
  * List of all possible {@link RouteLocationNormalizedLoaded} indexed by the route name.
  * @internal
  */
-declare type RouteLocationNormalizedLoadedTypedList$1<RouteMap$2 extends RouteMapGeneric$1 = RouteMapGeneric$1> = { [N in keyof RouteMap$2]: RouteLocationNormalizedLoadedTyped$1<RouteMap$2, N> };
+declare type RouteLocationNormalizedLoadedTypedList<RouteMap$1 extends RouteMapGeneric = RouteMapGeneric> = { [N in keyof RouteMap$1]: RouteLocationNormalizedLoadedTyped<RouteMap$1, N> };
 /**
  * Helper to generate a type safe version of the {@link RouteLocationNormalized} type.
  */
-declare interface RouteLocationNormalizedTyped$1<RouteMap$2 extends RouteMapGeneric$1 = RouteMapGeneric$1, Name extends keyof RouteMap$2 = keyof RouteMap$2> extends RouteLocationNormalizedGeneric$1 {
+declare interface RouteLocationNormalizedTyped<RouteMap$1 extends RouteMapGeneric = RouteMapGeneric, Name extends keyof RouteMap$1 = keyof RouteMap$1> extends RouteLocationNormalizedGeneric {
   name: Extract<Name, string | symbol>;
-  params: RouteMap$2[Name]['params'];
+  params: RouteMap$1[Name]['params'];
   /**
    * Array of {@link RouteRecordNormalized}
    */
-  matched: RouteRecordNormalized$1[];
+  matched: RouteRecordNormalized[];
 }
 /**
  * List of all possible {@link RouteLocationNormalized} indexed by the route name.
  * @internal
  */
-declare type RouteLocationNormalizedTypedList$1<RouteMap$2 extends RouteMapGeneric$1 = RouteMapGeneric$1> = { [N in keyof RouteMap$2]: RouteLocationNormalizedTyped$1<RouteMap$2, N> };
+declare type RouteLocationNormalizedTypedList<RouteMap$1 extends RouteMapGeneric = RouteMapGeneric> = { [N in keyof RouteMap$1]: RouteLocationNormalizedTyped<RouteMap$1, N> };
 /**
  * Common options for all navigation methods.
  */
-declare interface RouteLocationOptions$1 {
+declare interface RouteLocationOptions {
   /**
    * Replace the entry in the history instead of pushing a new entry
    */
@@ -24767,20 +24732,20 @@ declare interface RouteLocationOptions$1 {
    * values and some primitives like Symbols are forbidden. More info at
    * https://developer.mozilla.org/en-US/docs/Web/API/History/state
    */
-  state?: HistoryState$1;
+  state?: HistoryState;
 }
 /**
  * Route location that can be passed to `router.push()` and other user-facing APIs.
  */
-declare type RouteLocationRaw$1<Name extends keyof RouteMap$1 = keyof RouteMap$1> = RouteMapGeneric$1 extends RouteMap$1 ? RouteLocationAsString$1 | RouteLocationAsRelativeGeneric$1 | RouteLocationAsPathGeneric$1 : _LiteralUnion$1<RouteLocationAsStringTypedList$1<RouteMap$1>[Name], string> | RouteLocationAsRelativeTypedList$1<RouteMap$1>[Name] | RouteLocationAsPathTypedList$1<RouteMap$1>[Name];
+declare type RouteLocationRaw<Name extends keyof RouteMap = keyof RouteMap> = RouteMapGeneric extends RouteMap ? RouteLocationAsString | RouteLocationAsRelativeGeneric | RouteLocationAsPathGeneric : _LiteralUnion<RouteLocationAsStringTypedList<RouteMap>[Name], string> | RouteLocationAsRelativeTypedList<RouteMap>[Name] | RouteLocationAsPathTypedList<RouteMap>[Name];
 /**
  * Route location resolved with {@link Router | `router.resolve()`}.
  */
-declare type RouteLocationResolved$1<Name extends keyof RouteMap$1 = keyof RouteMap$1> = RouteMapGeneric$1 extends RouteMap$1 ? RouteLocationResolvedGeneric$1 : RouteLocationResolvedTypedList$1<RouteMap$1>[Name];
+declare type RouteLocationResolved<Name extends keyof RouteMap = keyof RouteMap> = RouteMapGeneric extends RouteMap ? RouteLocationResolvedGeneric : RouteLocationResolvedTypedList<RouteMap>[Name];
 /**
  * Generic version of {@link RouteLocationResolved}. It is used when no {@link RouteMap} is provided.
  */
-declare interface RouteLocationResolvedGeneric$1 extends RouteLocationGeneric$1 {
+declare interface RouteLocationResolvedGeneric extends RouteLocationGeneric {
   /**
    * Resolved `href` for the route location that will be set on the `<a href="...">`.
    */
@@ -24789,7 +24754,7 @@ declare interface RouteLocationResolvedGeneric$1 extends RouteLocationGeneric$1 
 /**
  * Helper to generate a type safe version of the {@link RouteLocationResolved} type.
  */
-declare interface RouteLocationResolvedTyped$1<RouteMap$2 extends RouteMapGeneric$1, Name extends keyof RouteMap$2> extends RouteLocationTyped$1<RouteMap$2, Name> {
+declare interface RouteLocationResolvedTyped<RouteMap$1 extends RouteMapGeneric, Name extends keyof RouteMap$1> extends RouteLocationTyped<RouteMap$1, Name> {
   /**
    * Resolved `href` for the route location that will be set on the `<a href="...">`.
    */
@@ -24799,27 +24764,27 @@ declare interface RouteLocationResolvedTyped$1<RouteMap$2 extends RouteMapGeneri
  * List of all possible {@link RouteLocationResolved} indexed by the route name.
  * @internal
  */
-declare type RouteLocationResolvedTypedList$1<RouteMap$2 extends RouteMapGeneric$1 = RouteMapGeneric$1> = { [N in keyof RouteMap$2]: RouteLocationResolvedTyped$1<RouteMap$2, N> };
+declare type RouteLocationResolvedTypedList<RouteMap$1 extends RouteMapGeneric = RouteMapGeneric> = { [N in keyof RouteMap$1]: RouteLocationResolvedTyped<RouteMap$1, N> };
 /**
  * Helper to generate a type safe version of the {@link RouteLocation} type.
  */
-declare interface RouteLocationTyped$1<RouteMap$2 extends RouteMapGeneric$1, Name extends keyof RouteMap$2> extends RouteLocationGeneric$1 {
+declare interface RouteLocationTyped<RouteMap$1 extends RouteMapGeneric, Name extends keyof RouteMap$1> extends RouteLocationGeneric {
   name: Extract<Name, string | symbol>;
-  params: RouteMap$2[Name]['params'];
+  params: RouteMap$1[Name]['params'];
 }
 /**
  * List of all possible {@link RouteLocation} indexed by the route name.
  * @internal
  */
-declare type RouteLocationTypedList$1<RouteMap$2 extends RouteMapGeneric$1 = RouteMapGeneric$1> = { [N in keyof RouteMap$2]: RouteLocationTyped$1<RouteMap$2, N> };
+declare type RouteLocationTypedList<RouteMap$1 extends RouteMapGeneric = RouteMapGeneric> = { [N in keyof RouteMap$1]: RouteLocationTyped<RouteMap$1, N> };
 /**
  * Convenience type to get the typed RouteMap or a generic one if not provided. It is extracted from the {@link TypesConfig} if it exists, it becomes {@link RouteMapGeneric} otherwise.
  */
-declare type RouteMap$1 = TypesConfig$1 extends Record<'RouteNamedMap', infer RouteNamedMap> ? RouteNamedMap : RouteMapGeneric$1;
+declare type RouteMap = TypesConfig extends Record<'RouteNamedMap', infer RouteNamedMap> ? RouteNamedMap : RouteMapGeneric;
 /**
  * Generic version of the `RouteMap`.
  */
-declare type RouteMapGeneric$1 = Record<string | symbol, RouteRecordInfo$1>;
+declare type RouteMapGeneric = Record<string | symbol, RouteRecordInfo>;
 /**
  * Interface to type `meta` fields in route records.
  *
@@ -24836,28 +24801,28 @@ declare type RouteMapGeneric$1 = Record<string | symbol, RouteRecordInfo$1>;
  * }
  * ```
  */
-declare interface RouteMeta$1 extends Record<string | number | symbol, unknown> {}
-declare type RouteParamsGeneric$1 = Record<string, RouteParamValue$1 | RouteParamValue$1[]>;
-declare type RouteParamsRawGeneric$1 = Record<string, RouteParamValueRaw$1 | Exclude<RouteParamValueRaw$1, null | undefined>[]>;
+declare interface RouteMeta extends Record<string | number | symbol, unknown> {}
+declare type RouteParamsGeneric = Record<string, RouteParamValue | RouteParamValue[]>;
+declare type RouteParamsRawGeneric = Record<string, RouteParamValueRaw | Exclude<RouteParamValueRaw, null | undefined>[]>;
 /**
  * @internal
  */
-declare type RouteParamValue$1 = string;
+declare type RouteParamValue = string;
 /**
  * @internal
  */
-declare type RouteParamValueRaw$1 = RouteParamValue$1 | number | null | undefined;
+declare type RouteParamValueRaw = RouteParamValue | number | null | undefined;
 /**
  * @internal
  */
-declare interface RouteQueryAndHash$1 {
-  query?: LocationQueryRaw$1;
+declare interface RouteQueryAndHash {
+  query?: LocationQueryRaw;
   hash?: string;
 }
 /**
  * Router instance.
  */
-declare interface Router$1 {
+declare interface Router {
   matcher: RouterMatcher;
   /**
    * @internal
@@ -24865,11 +24830,11 @@ declare interface Router$1 {
   /**
    * Current {@link RouteLocationNormalized}
    */
-  readonly currentRoute: Ref<RouteLocationNormalizedLoaded$1>;
+  readonly currentRoute: Ref<RouteLocationNormalizedLoaded>;
   /**
    * Original options object passed to create the Router
    */
-  readonly options: RouterOptions$1;
+  readonly options: RouterOptions;
   /**
    * Allows turning off the listening of history events. This is a low level api for micro-frontend.
    */
@@ -24880,29 +24845,29 @@ declare interface Router$1 {
    * @param parentName - Parent Route Record where `route` should be appended at
    * @param route - Route Record to add
    */
-  addRoute(parentName: NonNullable<RouteRecordNameGeneric$1>, route: RouteRecordRaw$1): () => void;
+  addRoute(parentName: NonNullable<RouteRecordNameGeneric>, route: RouteRecordRaw): () => void;
   /**
    * Add a new {@link RouteRecordRaw | route record} to the router.
    *
    * @param route - Route Record to add
    */
-  addRoute(route: RouteRecordRaw$1): () => void;
+  addRoute(route: RouteRecordRaw): () => void;
   /**
    * Remove an existing route by its name.
    *
    * @param name - Name of the route to remove
    */
-  removeRoute(name: NonNullable<RouteRecordNameGeneric$1>): void;
+  removeRoute(name: NonNullable<RouteRecordNameGeneric>): void;
   /**
    * Checks if a route with a given name exists
    *
    * @param name - Name of the route to check
    */
-  hasRoute(name: NonNullable<RouteRecordNameGeneric$1>): boolean;
+  hasRoute(name: NonNullable<RouteRecordNameGeneric>): boolean;
   /**
    * Get a full list of all the {@link RouteRecord | route records}.
    */
-  getRoutes(): RouteRecord$1[];
+  getRoutes(): RouteRecord[];
   /**
    * Delete all routes from the router matcher.
    */
@@ -24916,32 +24881,32 @@ declare interface Router$1 {
    * @param to - Raw route location to resolve
    * @param currentLocation - Optional current location to resolve against
    */
-  resolve<Name extends keyof RouteMap$1 = keyof RouteMap$1>(to: RouteLocationAsRelativeTyped$1<RouteMap$1, Name>, currentLocation?: RouteLocationNormalizedLoaded$1): RouteLocationResolved$1<Name>;
-  resolve(to: RouteLocationAsString$1 | RouteLocationAsRelative$1 | RouteLocationAsPath$1, currentLocation?: RouteLocationNormalizedLoaded$1): RouteLocationResolved$1;
+  resolve<Name extends keyof RouteMap = keyof RouteMap>(to: RouteLocationAsRelativeTyped<RouteMap, Name>, currentLocation?: RouteLocationNormalizedLoaded): RouteLocationResolved<Name>;
+  resolve(to: RouteLocationAsString | RouteLocationAsRelative | RouteLocationAsPath, currentLocation?: RouteLocationNormalizedLoaded): RouteLocationResolved;
   /**
    * Programmatically navigate to a new URL by pushing an entry in the history
    * stack.
    *
    * @param to - Route location to navigate to
    */
-  push(to: RouteLocationRaw$1): Promise<NavigationFailure$1 | void | undefined>;
+  push(to: RouteLocationRaw): Promise<NavigationFailure | void | undefined>;
   /**
    * Programmatically navigate to a new URL by replacing the current entry in
    * the history stack.
    *
    * @param to - Route location to navigate to
    */
-  replace(to: RouteLocationRaw$1): Promise<NavigationFailure$1 | void | undefined>;
+  replace(to: RouteLocationRaw): Promise<NavigationFailure | void | undefined>;
   /**
    * Go back in history if possible by calling `history.back()`. Equivalent to
    * `router.go(-1)`.
    */
-  back(): ReturnType<Router$1['go']>;
+  back(): ReturnType<Router['go']>;
   /**
    * Go forward in history if possible by calling `history.forward()`.
    * Equivalent to `router.go(1)`.
    */
-  forward(): ReturnType<Router$1['go']>;
+  forward(): ReturnType<Router['go']>;
   /**
    * Allows you to move forward or backward through the history. Calls
    * `history.go()`.
@@ -24956,7 +24921,7 @@ declare interface Router$1 {
    *
    * @param guard - navigation guard to add
    */
-  beforeEach(guard: NavigationGuardWithThis$1<undefined>): () => void;
+  beforeEach(guard: NavigationGuardWithThis<undefined>): () => void;
   /**
    * Add a navigation guard that executes before navigation is about to be
    * resolved. At this state all component have been fetched and other
@@ -24974,7 +24939,7 @@ declare interface Router$1 {
    * ```
    *
    */
-  beforeResolve(guard: NavigationGuardWithThis$1<undefined>): () => void;
+  beforeResolve(guard: NavigationGuardWithThis<undefined>): () => void;
   /**
    * Add a navigation hook that is executed after every navigation. Returns a
    * function that removes the registered hook.
@@ -24991,7 +24956,7 @@ declare interface Router$1 {
    * })
    * ```
    */
-  afterEach(guard: NavigationHookAfter$1): () => void;
+  afterEach(guard: NavigationHookAfter): () => void;
   /**
    * Adds an error handler that is called every time a non caught error happens
    * during navigation. This includes errors thrown synchronously and
@@ -25001,7 +24966,7 @@ declare interface Router$1 {
    *
    * @param handler - error handler to register
    */
-  onError(handler: _ErrorListener$1): () => void;
+  onError(handler: _ErrorListener): () => void;
   /**
    * Returns a Promise that resolves when the router has completed the initial
    * navigation, which means it has resolved all async enter hooks and async
@@ -25026,11 +24991,11 @@ declare interface Router$1 {
 /**
  * {@inheritDoc RouteRecordNormalized}
  */
-declare type RouteRecord$1 = RouteRecordNormalized$1;
+declare type RouteRecord = RouteRecordNormalized;
 /**
  * Internal type for common properties among all kind of {@link RouteRecordRaw}.
  */
-declare interface _RouteRecordBase$1 extends PathParserOptions$1 {
+declare interface _RouteRecordBase extends PathParserOptions {
   /**
    * Path of the record. Should start with `/` unless the record is the child of
    * another record.
@@ -25043,7 +25008,7 @@ declare interface _RouteRecordBase$1 extends PathParserOptions$1 {
    * before any navigation guard and triggers a new navigation with the new
    * target location.
    */
-  redirect?: RouteRecordRedirectOption$1;
+  redirect?: RouteRecordRedirectOption;
   /**
    * Aliases for the record. Allows defining extra paths that will behave like a
    * copy of the record. Allows having paths shorthands like `/users/:id` and
@@ -25053,30 +25018,30 @@ declare interface _RouteRecordBase$1 extends PathParserOptions$1 {
   /**
    * Name for the route record. Must be unique.
    */
-  name?: RouteRecordNameGeneric$1;
+  name?: RouteRecordNameGeneric;
   /**
    * Before Enter guard specific to this record. Note `beforeEnter` has no
    * effect if the record has a `redirect` property.
    */
-  beforeEnter?: NavigationGuardWithThis$1<undefined> | NavigationGuardWithThis$1<undefined>[];
+  beforeEnter?: NavigationGuardWithThis<undefined> | NavigationGuardWithThis<undefined>[];
   /**
    * Arbitrary data attached to the record.
    */
-  meta?: RouteMeta$1;
+  meta?: RouteMeta;
   /**
    * Array of nested routes.
    */
-  children?: RouteRecordRaw$1[];
+  children?: RouteRecordRaw[];
   /**
    * Allow passing down params as props to the component rendered by `router-view`.
    */
-  props?: _RouteRecordProps$1 | Record<string, _RouteRecordProps$1>;
+  props?: _RouteRecordProps | Record<string, _RouteRecordProps>;
 }
 /**
  * Helper type to define a Typed `RouteRecord`
  * @see {@link RouteRecord}
  */
-declare interface RouteRecordInfo$1<Name extends string | symbol = string, Path extends string = string, ParamsRaw extends RouteParamsRawGeneric$1 = RouteParamsRawGeneric$1, Params$1 extends RouteParamsGeneric$1 = RouteParamsGeneric$1, Meta extends RouteMeta$1 = RouteMeta$1> {
+declare interface RouteRecordInfo<Name extends string | symbol = string, Path extends string = string, ParamsRaw extends RouteParamsRawGeneric = RouteParamsRawGeneric, Params$1 extends RouteParamsGeneric = RouteParamsGeneric, Meta extends RouteMeta = RouteMeta> {
   name: Name;
   path: Path;
   paramsRaw: ParamsRaw;
@@ -25084,7 +25049,7 @@ declare interface RouteRecordInfo$1<Name extends string | symbol = string, Path 
   meta: Meta;
 }
 declare interface RouteRecordMatcher extends PathParser {
-  record: RouteRecord$1;
+  record: RouteRecord;
   parent: RouteRecordMatcher | undefined;
   children: RouteRecordMatcher[];
   alias: RouteRecordMatcher[];
@@ -25093,11 +25058,11 @@ declare interface RouteRecordMatcher extends PathParser {
 /**
  * Route Record defining multiple named components with the `components` option.
  */
-declare interface RouteRecordMultipleViews$1 extends _RouteRecordBase$1 {
+declare interface RouteRecordMultipleViews extends _RouteRecordBase {
   /**
    * Components to display when the URL matches this route. Allow using named views.
    */
-  components: Record<string, RawRouteComponent$1>;
+  components: Record<string, RawRouteComponent>;
   component?: never;
   children?: never;
   redirect?: never;
@@ -25106,49 +25071,49 @@ declare interface RouteRecordMultipleViews$1 extends _RouteRecordBase$1 {
    * `router-view`. Should be an object with the same keys as `components` or a
    * boolean to be applied to every component.
    */
-  props?: Record<string, _RouteRecordProps$1> | boolean;
+  props?: Record<string, _RouteRecordProps> | boolean;
 }
 /**
  * Route Record defining multiple named components with the `components` option and children.
  */
-declare interface RouteRecordMultipleViewsWithChildren$1 extends _RouteRecordBase$1 {
+declare interface RouteRecordMultipleViewsWithChildren extends _RouteRecordBase {
   /**
    * Components to display when the URL matches this route. Allow using named views.
    */
-  components?: Record<string, RawRouteComponent$1> | null | undefined;
+  components?: Record<string, RawRouteComponent> | null | undefined;
   component?: never;
-  children: RouteRecordRaw$1[];
+  children: RouteRecordRaw[];
   /**
    * Allow passing down params as props to the component rendered by
    * `router-view`. Should be an object with the same keys as `components` or a
    * boolean to be applied to every component.
    */
-  props?: Record<string, _RouteRecordProps$1> | boolean;
+  props?: Record<string, _RouteRecordProps> | boolean;
 }
 /**
  * Generic version of {@link RouteRecordName}.
  */
-declare type RouteRecordNameGeneric$1 = string | symbol | undefined;
+declare type RouteRecordNameGeneric = string | symbol | undefined;
 /**
  * Normalized version of a {@link RouteRecord | route record}.
  */
-declare interface RouteRecordNormalized$1 {
+declare interface RouteRecordNormalized {
   /**
    * {@inheritDoc _RouteRecordBase.path}
    */
-  path: _RouteRecordBase$1['path'];
+  path: _RouteRecordBase['path'];
   /**
    * {@inheritDoc _RouteRecordBase.redirect}
    */
-  redirect: _RouteRecordBase$1['redirect'] | undefined;
+  redirect: _RouteRecordBase['redirect'] | undefined;
   /**
    * {@inheritDoc _RouteRecordBase.name}
    */
-  name: _RouteRecordBase$1['name'];
+  name: _RouteRecordBase['name'];
   /**
    * {@inheritDoc RouteRecordMultipleViews.components}
    */
-  components: RouteRecordMultipleViews$1['components'] | null | undefined;
+  components: RouteRecordMultipleViews['components'] | null | undefined;
   /**
    * Contains the original modules for lazy loaded components.
    * @internal
@@ -25157,37 +25122,37 @@ declare interface RouteRecordNormalized$1 {
   /**
    * Nested route records.
    */
-  children: RouteRecordRaw$1[];
+  children: RouteRecordRaw[];
   /**
    * {@inheritDoc _RouteRecordBase.meta}
    */
-  meta: Exclude<_RouteRecordBase$1['meta'], void>;
+  meta: Exclude<_RouteRecordBase['meta'], void>;
   /**
    * {@inheritDoc RouteRecordMultipleViews.props}
    */
-  props: Record<string, _RouteRecordProps$1>;
+  props: Record<string, _RouteRecordProps>;
   /**
    * Registered beforeEnter guards
    */
-  beforeEnter: _RouteRecordBase$1['beforeEnter'];
+  beforeEnter: _RouteRecordBase['beforeEnter'];
   /**
    * Registered leave guards
    *
    * @internal
    */
-  leaveGuards: Set<NavigationGuard$1>;
+  leaveGuards: Set<NavigationGuard>;
   /**
    * Registered update guards
    *
    * @internal
    */
-  updateGuards: Set<NavigationGuard$1>;
+  updateGuards: Set<NavigationGuard>;
   /**
    * Registered beforeRouteEnter callbacks passed to `next` or returned in guards
    *
    * @internal
    */
-  enterCallbacks: Record<string, NavigationGuardNextCallback$1[]>;
+  enterCallbacks: Record<string, NavigationGuardNextCallback[]>;
   /**
    * Mounted route component instances
    * Having the instances on the record mean beforeRouteUpdate and
@@ -25202,19 +25167,19 @@ declare interface RouteRecordNormalized$1 {
    * Defines if this record is the alias of another one. This property is
    * `undefined` if the record is the original one.
    */
-  aliasOf: RouteRecordNormalized$1 | undefined;
+  aliasOf: RouteRecordNormalized | undefined;
 }
 /**
  * @internal
  */
-declare type _RouteRecordProps$1<Name extends keyof RouteMap$1 = keyof RouteMap$1> = boolean | Record<string, any> | ((to: RouteLocationNormalized$1<Name>) => Record<string, any>);
-declare type RouteRecordRaw$1 = RouteRecordSingleView$1 | RouteRecordSingleViewWithChildren$1 | RouteRecordMultipleViews$1 | RouteRecordMultipleViewsWithChildren$1 | RouteRecordRedirect$1;
+declare type _RouteRecordProps<Name extends keyof RouteMap = keyof RouteMap> = boolean | Record<string, any> | ((to: RouteLocationNormalized<Name>) => Record<string, any>);
+declare type RouteRecordRaw = RouteRecordSingleView | RouteRecordSingleViewWithChildren | RouteRecordMultipleViews | RouteRecordMultipleViewsWithChildren | RouteRecordRedirect;
 /**
  * Route Record that defines a redirect. Cannot have `component` or `components`
  * as it is never rendered.
  */
-declare interface RouteRecordRedirect$1 extends _RouteRecordBase$1 {
-  redirect: RouteRecordRedirectOption$1;
+declare interface RouteRecordRedirect extends _RouteRecordBase {
+  redirect: RouteRecordRedirectOption;
   component?: never;
   components?: never;
   props?: never;
@@ -25222,37 +25187,37 @@ declare interface RouteRecordRedirect$1 extends _RouteRecordBase$1 {
 /**
  * @internal
  */
-declare type RouteRecordRedirectOption$1 = RouteLocationRaw$1 | ((to: RouteLocation$1) => RouteLocationRaw$1);
+declare type RouteRecordRedirectOption = RouteLocationRaw | ((to: RouteLocation) => RouteLocationRaw);
 /**
  * Route Record defining one single component with the `component` option.
  */
-declare interface RouteRecordSingleView$1 extends _RouteRecordBase$1 {
+declare interface RouteRecordSingleView extends _RouteRecordBase {
   /**
    * Component to display when the URL matches this route.
    */
-  component: RawRouteComponent$1;
+  component: RawRouteComponent;
   components?: never;
   children?: never;
   redirect?: never;
   /**
    * Allow passing down params as props to the component rendered by `router-view`.
    */
-  props?: _RouteRecordProps$1;
+  props?: _RouteRecordProps;
 }
 /**
  * Route Record defining one single component with a nested view.
  */
-declare interface RouteRecordSingleViewWithChildren$1 extends _RouteRecordBase$1 {
+declare interface RouteRecordSingleViewWithChildren extends _RouteRecordBase {
   /**
    * Component to display when the URL matches this route.
    */
-  component?: RawRouteComponent$1 | null | undefined;
+  component?: RawRouteComponent | null | undefined;
   components?: never;
-  children: RouteRecordRaw$1[];
+  children: RouteRecordRaw[];
   /**
    * Allow passing down params as props to the component rendered by `router-view`.
    */
-  props?: _RouteRecordProps$1;
+  props?: _RouteRecordProps;
 }
 /**
  * Interface implemented by History implementations that can be passed to the
@@ -25260,7 +25225,7 @@ declare interface RouteRecordSingleViewWithChildren$1 extends _RouteRecordBase$1
  *
  * @alpha
  */
-declare interface RouterHistory$1 {
+declare interface RouterHistory {
   /**
    * Base path that is prepended to every url. This allows hosting an SPA at a
    * sub-folder of a domain like `example.com/sub-folder` by having a `base` of
@@ -25270,11 +25235,11 @@ declare interface RouterHistory$1 {
   /**
    * Current History location
    */
-  readonly location: HistoryLocation$1;
+  readonly location: HistoryLocation;
   /**
    * Current History state
    */
-  readonly state: HistoryState$1;
+  readonly state: HistoryState;
   /**
    * Navigates to a location. In the case of an HTML5 History implementation,
    * this will call `history.pushState` to effectively change the URL.
@@ -25283,7 +25248,7 @@ declare interface RouterHistory$1 {
    * @param data - optional {@link HistoryState} to be associated with the
    * navigation entry
    */
-  push(to: HistoryLocation$1, data?: HistoryState$1): void;
+  push(to: HistoryLocation, data?: HistoryState): void;
   /**
    * Same as {@link RouterHistory.push} but performs a `history.replaceState`
    * instead of `history.pushState`
@@ -25292,7 +25257,7 @@ declare interface RouterHistory$1 {
    * @param data - optional {@link HistoryState} to be associated with the
    * navigation entry
    */
-  replace(to: HistoryLocation$1, data?: HistoryState$1): void;
+  replace(to: HistoryLocation, data?: HistoryState): void;
   /**
    * Traverses history in a given direction.
    *
@@ -25317,13 +25282,13 @@ declare interface RouterHistory$1 {
    * @param callback - listener to attach
    * @returns a callback to remove the listener
    */
-  listen(callback: NavigationCallback$1): () => void;
+  listen(callback: NavigationCallback): () => void;
   /**
    * Generates the corresponding href to be used in an anchor tag.
    *
    * @param location - history location that should create an href
    */
-  createHref(location: HistoryLocation$1): string;
+  createHref(location: HistoryLocation): string;
   /**
    * Clears any event listener attached by the history implementation.
    */
@@ -25332,16 +25297,16 @@ declare interface RouterHistory$1 {
 /**
  * Component to render a link that triggers a navigation on click.
  */
-declare const RouterLink$1: _RouterLinkI$1;
+declare const RouterLink: _RouterLinkI;
 /**
  * Typed version of the `RouterLink` component. Its generic defaults to the typed router, so it can be inferred
  * automatically for JSX.
  *
  * @internal
  */
-declare interface _RouterLinkI$1 {
+declare interface _RouterLinkI {
   new (): {
-    $props: AllowedComponentProps & ComponentCustomProps & VNodeProps & RouterLinkProps$1;
+    $props: AllowedComponentProps & ComponentCustomProps & VNodeProps & RouterLinkProps;
     $slots: {
       default?: ({
         route,
@@ -25349,7 +25314,7 @@ declare interface _RouterLinkI$1 {
         isActive,
         isExactActive,
         navigate
-      }: UnwrapRef<UseLinkReturn$1>) => VNode[];
+      }: UnwrapRef<UseLinkReturn>) => VNode[];
     };
   };
   /**
@@ -25357,19 +25322,19 @@ declare interface _RouterLinkI$1 {
    *
    * @internal
    */
-  useLink: typeof useLink$1;
+  useLink: typeof useLink;
 }
-declare interface RouterLinkOptions$1 {
+declare interface RouterLinkOptions {
   /**
    * Route Location the link should navigate to when clicked on.
    */
-  to: RouteLocationRaw$1;
+  to: RouteLocationRaw;
   /**
    * Calls `router.replace` instead of `router.push`.
    */
   replace?: boolean;
 }
-declare interface RouterLinkProps$1 extends RouterLinkOptions$1 {
+declare interface RouterLinkProps extends RouterLinkOptions {
   /**
    * Whether RouterLink should not wrap its content in an `a` tag. Useful when
    * using `v-slot` to create a custom RouterLink
@@ -25396,24 +25361,24 @@ declare interface RouterLinkProps$1 extends RouterLinkOptions$1 {
  * @internal
  */
 declare interface RouterMatcher {
-  addRoute: (record: RouteRecordRaw$1, parent?: RouteRecordMatcher) => () => void;
+  addRoute: (record: RouteRecordRaw, parent?: RouteRecordMatcher) => () => void;
   removeRoute(matcher: RouteRecordMatcher): void;
-  removeRoute(name: NonNullable<RouteRecordNameGeneric$1>): void;
+  removeRoute(name: NonNullable<RouteRecordNameGeneric>): void;
   clearRoutes: () => void;
   getRoutes: () => RouteRecordMatcher[];
-  getRecordMatcher: (name: NonNullable<RouteRecordNameGeneric$1>) => RouteRecordMatcher | undefined;
+  getRecordMatcher: (name: NonNullable<RouteRecordNameGeneric>) => RouteRecordMatcher | undefined;
   /**
    * Resolves a location. Gives access to the route record that corresponds to the actual path as well as filling the corresponding params objects
    *
    * @param location - MatcherLocationRaw to resolve to a url
    * @param currentLocation - MatcherLocation of the current location
    */
-  resolve: (location: MatcherLocationRaw, currentLocation: MatcherLocation$1) => MatcherLocation$1;
+  resolve: (location: MatcherLocationRaw, currentLocation: MatcherLocation) => MatcherLocation;
 }
 /**
  * Options to initialize a {@link Router} instance.
  */
-declare interface RouterOptions$1 extends PathParserOptions$1 {
+declare interface RouterOptions extends PathParserOptions {
   matcher?: RouterMatcher;
   /**
    * History implementation used by the router. Most web applications should use
@@ -25430,11 +25395,11 @@ declare interface RouterOptions$1 extends PathParserOptions$1 {
    * })
    * ```
    */
-  history: RouterHistory$1;
+  history: RouterHistory;
   /**
    * Initial list of routes that should be added to the router.
    */
-  routes: Readonly<RouteRecordRaw$1[]>;
+  routes: Readonly<RouteRecordRaw[]>;
   /**
    * Function to control scrolling when navigating between pages. Can return a
    * Promise to delay scrolling. Check {@link ScrollBehavior}.
@@ -25447,7 +25412,7 @@ declare interface RouterOptions$1 extends PathParserOptions$1 {
    * }
    * ```
    */
-  scrollBehavior?: RouterScrollBehavior$1;
+  scrollBehavior?: RouterScrollBehavior;
   /**
    * Custom implementation to parse a query. See its counterpart,
    * {@link RouterOptions.stringifyQuery}.
@@ -25465,12 +25430,12 @@ declare interface RouterOptions$1 extends PathParserOptions$1 {
    * })
    * ```
    */
-  parseQuery?: typeof parseQuery$1;
+  parseQuery?: typeof parseQuery;
   /**
    * Custom implementation to stringify a query object. Should not prepend a leading `?`.
    * {@link RouterOptions.parseQuery | parseQuery} counterpart to handle query parsing.
    */
-  stringifyQuery?: typeof stringifyQuery$1;
+  stringifyQuery?: typeof stringifyQuery;
   /**
    * Default class applied to active {@link RouterLink}. If none is provided,
    * `router-link-active` will be applied.
@@ -25485,46 +25450,46 @@ declare interface RouterOptions$1 extends PathParserOptions$1 {
 /**
  * Type of the `scrollBehavior` option that can be passed to `createRouter`.
  */
-declare interface RouterScrollBehavior$1 {
+declare interface RouterScrollBehavior {
   /**
    * @param to - Route location where we are navigating to
    * @param from - Route location where we are navigating from
    * @param savedPosition - saved position if it exists, `null` otherwise
    */
-  (to: RouteLocationNormalized$1, from: RouteLocationNormalizedLoaded$1, savedPosition: _ScrollPositionNormalized$1 | null): Awaitable$1<ScrollPosition$1 | false | void>;
+  (to: RouteLocationNormalized, from: RouteLocationNormalizedLoaded, savedPosition: _ScrollPositionNormalized | null): Awaitable<ScrollPosition | false | void>;
 }
 /**
  * Component to display the current route the user is at.
  */
-declare const RouterView$1: new () => {
-  $props: AllowedComponentProps & ComponentCustomProps & VNodeProps & RouterViewProps$1;
+declare const RouterView: new () => {
+  $props: AllowedComponentProps & ComponentCustomProps & VNodeProps & RouterViewProps;
   $slots: {
     default?: (({
-      Component: Component$1,
+      Component,
       route
     }: {
       Component: VNode;
-      route: RouteLocationNormalizedLoaded$1;
+      route: RouteLocationNormalizedLoaded;
     }) => VNode[]) | undefined;
   };
 };
-declare interface RouterViewProps$1 {
+declare interface RouterViewProps {
   name?: string;
-  route?: RouteLocationNormalized$1;
+  route?: RouteLocationNormalized;
 }
-declare type ScrollPosition$1 = ScrollPositionCoordinates$1 | ScrollPositionElement$1;
+declare type ScrollPosition = ScrollPositionCoordinates | ScrollPositionElement;
 
 /**
  * Scroll position similar to
  * {@link https://developer.mozilla.org/en-US/docs/Web/API/ScrollToOptions | `ScrollToOptions`}.
  * Note that not all browsers support `behavior`.
  */
-declare type ScrollPositionCoordinates$1 = {
+declare type ScrollPositionCoordinates = {
   behavior?: ScrollOptions['behavior'];
   left?: number;
   top?: number;
 };
-declare interface ScrollPositionElement$1 extends ScrollToOptions {
+declare interface ScrollPositionElement extends ScrollToOptions {
   /**
    * A valid CSS selector. Note some characters must be escaped in id selectors (https://mathiasbynens.be/notes/css-escapes).
    * @example
@@ -25546,7 +25511,7 @@ declare interface ScrollPositionElement$1 extends ScrollToOptions {
  *
  * @internal
  */
-declare type _ScrollPositionNormalized$1 = {
+declare type _ScrollPositionNormalized = {
   behavior?: ScrollOptions['behavior'];
   left: number;
   top: number;
@@ -25577,7 +25542,7 @@ declare type _ScrollPositionNormalized$1 = {
  * @param query - query object to stringify
  * @returns string version of the query without the leading `?`
  */
-declare function stringifyQuery$1(query: LocationQueryRaw$1): string;
+declare function stringifyQuery(query: LocationQueryRaw): string;
 /**
  * Allows customizing existing types of the router that are used globally like `$router`, `<RouterLink>`, etc. **ONLY FOR INTERNAL USAGE**.
  *
@@ -25591,30 +25556,30 @@ declare function stringifyQuery$1(query: LocationQueryRaw$1): string;
  *
  * @internal
  */
-declare interface TypesConfig$1 {}
+declare interface TypesConfig {}
 /**
  * Returns the internal behavior of a {@link RouterLink} without the rendering part.
  *
  * @param props - a `to` location and an optional `replace` flag
  */
-declare function useLink$1<Name extends keyof RouteMap$1 = keyof RouteMap$1>(props: UseLinkOptions$1<Name>): UseLinkReturn$1<Name>;
+declare function useLink<Name extends keyof RouteMap = keyof RouteMap>(props: UseLinkOptions<Name>): UseLinkReturn<Name>;
 /**
  * Options passed to {@link useLink}.
  */
-declare interface UseLinkOptions$1<Name extends keyof RouteMap$1 = keyof RouteMap$1> {
-  to: MaybeRef$2<RouteLocationAsString$1 | RouteLocationAsRelativeTyped$1<RouteMap$1, Name> | RouteLocationAsPath$1 | RouteLocationRaw$1>;
+declare interface UseLinkOptions<Name extends keyof RouteMap = keyof RouteMap> {
+  to: MaybeRef$2<RouteLocationAsString | RouteLocationAsRelativeTyped<RouteMap, Name> | RouteLocationAsPath | RouteLocationRaw>;
   replace?: MaybeRef$2<boolean | undefined>;
 }
 /**
  * Return type of {@link useLink}.
  * @internal
  */
-declare interface UseLinkReturn$1<Name extends keyof RouteMap$1 = keyof RouteMap$1> {
-  route: ComputedRef<RouteLocationResolved$1<Name>>;
+declare interface UseLinkReturn<Name extends keyof RouteMap = keyof RouteMap> {
+  route: ComputedRef<RouteLocationResolved<Name>>;
   href: ComputedRef<string>;
   isActive: ComputedRef<boolean>;
   isExactActive: ComputedRef<boolean>;
-  navigate(e?: MouseEvent): Promise<void | NavigationFailure$1>;
+  navigate(e?: MouseEvent): Promise<void | NavigationFailure>;
 }
 /**
  * NOTE: this used to be `@vue/runtime-core` but it should have been `vue` for a long time. Using both declaration at
@@ -25634,7 +25599,7 @@ declare module 'vue' {
      * @param next - function to validate, cancel or modify (by redirecting) the
      * navigation
      */
-    beforeRouteEnter?: TypesConfig$1 extends Record<'beforeRouteEnter', infer T> ? T : NavigationGuardWithThis$1<undefined>;
+    beforeRouteEnter?: TypesConfig extends Record<'beforeRouteEnter', infer T> ? T : NavigationGuardWithThis<undefined>;
 
     /**
      * Guard called whenever the route that renders this component has changed, but
@@ -25646,7 +25611,7 @@ declare module 'vue' {
      * @param next - function to validate, cancel or modify (by redirecting) the
      * navigation
      */
-    beforeRouteUpdate?: TypesConfig$1 extends Record<'beforeRouteUpdate', infer T> ? T : NavigationGuard$1;
+    beforeRouteUpdate?: TypesConfig extends Record<'beforeRouteUpdate', infer T> ? T : NavigationGuard;
 
     /**
      * Guard called when the router is navigating away from the current route that
@@ -25657,21 +25622,21 @@ declare module 'vue' {
      * @param next - function to validate, cancel or modify (by redirecting) the
      * navigation
      */
-    beforeRouteLeave?: TypesConfig$1 extends Record<'beforeRouteLeave', infer T> ? T : NavigationGuard$1;
+    beforeRouteLeave?: TypesConfig extends Record<'beforeRouteLeave', infer T> ? T : NavigationGuard;
   }
   export interface ComponentCustomProperties {
     /**
      * Normalized current location. See {@link RouteLocationNormalizedLoaded}.
      */
-    $route: TypesConfig$1 extends Record<'$route', infer T> ? T : RouteLocationNormalizedLoaded$1;
+    $route: TypesConfig extends Record<'$route', infer T> ? T : RouteLocationNormalizedLoaded;
     /**
      * {@link Router} instance used by the application.
      */
-    $router: TypesConfig$1 extends Record<'$router', infer T> ? T : Router$1;
+    $router: TypesConfig extends Record<'$router', infer T> ? T : Router;
   }
   export interface GlobalComponents {
-    RouterView: TypesConfig$1 extends Record<'RouterView', infer T> ? T : typeof RouterView$1;
-    RouterLink: TypesConfig$1 extends Record<'RouterLink', infer T> ? T : typeof RouterLink$1;
+    RouterView: TypesConfig extends Record<'RouterView', infer T> ? T : typeof RouterView;
+    RouterLink: TypesConfig extends Record<'RouterLink', infer T> ? T : typeof RouterLink;
   }
 }
 //#endregion
@@ -28124,7 +28089,7 @@ type TypeRenderComponentNormal = Constructable<ComponentPublicInstance> | string
 type TypeRenderComponent = TypeRenderComponentNormal | TypeRenderComponentJsx;
 interface IFormProviderComponents$1 {}
 //#endregion
-//#region node_modules/.pnpm/@marcbachmann+cel-js@7.2.1/node_modules/@marcbachmann/cel-js/lib/functions.d.ts
+//#region node_modules/.pnpm/@marcbachmann+cel-js@7.5.1/node_modules/@marcbachmann/cel-js/lib/functions.d.ts
 /**
  * Represents an unsigned integer value in CEL.
  * Used for uint type values.
@@ -28147,7 +28112,7 @@ declare class UnsignedInt {
   toString(): string;
 }
 //#endregion
-//#region node_modules/.pnpm/@marcbachmann+cel-js@7.2.1/node_modules/@marcbachmann/cel-js/lib/index.d.ts
+//#region node_modules/.pnpm/@marcbachmann+cel-js@7.5.1/node_modules/@marcbachmann/cel-js/lib/index.d.ts
 /**
  * Represents a CEL expression AST node produced by the parser.
  * Each node stores its operator, operands, type metadata, and helpers for
@@ -28443,7 +28408,7 @@ declare class Environment {
   evaluate(expression: string, context?: Context): any;
 }
 //#endregion
-//#region node_modules/.pnpm/@cabloy+utils@2.0.23/node_modules/@cabloy/utils/dist/celjs/base.d.ts
+//#region node_modules/.pnpm/@cabloy+utils@2.0.24/node_modules/@cabloy/utils/dist/celjs/base.d.ts
 declare const celEnvBase: Environment;
 //#endregion
 //#region packages-utils/zova-jsx/src/lib/zovaJsx.d.ts
@@ -28678,7 +28643,7 @@ interface IServiceRecord {}
 //#region src/suite-vendor/a-zova/modules/a-behavior/src/types/behavior.d.ts
 type NextBehavior<PROPS_OUTPUT = unknown> = (props?: PROPS_OUTPUT) => VNode;
 interface IBehaviorTag {
-  component: string | Component$1;
+  component: string | Component;
   name?: string;
 }
 type IBehaviorItem = { [prop in keyof IBehaviorRecord]?: Partial<IBehaviorRecord[prop]> };
@@ -28787,7 +28752,7 @@ interface CurrencyOptions {
   zero?: number;
 }
 //#endregion
-//#region node_modules/.pnpm/@tanstack+store@0.7.7/node_modules/@tanstack/store/dist/esm/types.d.ts
+//#region node_modules/.pnpm/@tanstack+store@0.8.1/node_modules/@tanstack/store/dist/esm/types.d.ts
 /**
  * @private
  */
@@ -28804,7 +28769,7 @@ interface ListenerValue<T$1> {
  */
 type Listener<T$1> = (value: ListenerValue<T$1>) => void;
 //#endregion
-//#region node_modules/.pnpm/@tanstack+store@0.7.7/node_modules/@tanstack/store/dist/esm/store.d.ts
+//#region node_modules/.pnpm/@tanstack+store@0.8.1/node_modules/@tanstack/store/dist/esm/store.d.ts
 interface StoreOptions<TState, TUpdater extends AnyUpdater = (cb: TState) => TState> {
   /**
    * Replace the default update function with a custom one.
@@ -28836,7 +28801,7 @@ declare class Store<TState, TUpdater extends AnyUpdater = (cb: TState) => TState
   setState(updater: TUpdater): void;
 }
 //#endregion
-//#region node_modules/.pnpm/@tanstack+store@0.7.7/node_modules/@tanstack/store/dist/esm/derived.d.ts
+//#region node_modules/.pnpm/@tanstack+store@0.8.1/node_modules/@tanstack/store/dist/esm/derived.d.ts
 type UnwrapDerivedOrStore<T$1> = T$1 extends Derived<infer InnerD> ? InnerD : T$1 extends Store<infer InnerS> ? InnerS : never;
 type UnwrapReadonlyDerivedOrStoreArray<TArr extends ReadonlyArray<Derived<any> | Store<any>>> = TArr extends readonly [] ? [] : TArr extends readonly [infer Head, ...infer Tail] ? Head extends Derived<any> | Store<any> ? Tail extends ReadonlyArray<Derived<any> | Store<any>> ? [UnwrapDerivedOrStore<Head>, ...UnwrapReadonlyDerivedOrStoreArray<Tail>] : [UnwrapDerivedOrStore<Head>] : [] : TArr extends ReadonlyArray<Derived<any> | Store<any>> ? Array<UnwrapDerivedOrStore<TArr[number]>> : [];
 interface DerivedFnProps<TArr extends ReadonlyArray<Derived<any> | Store<any>> = ReadonlyArray<any>, TUnwrappedArr extends UnwrapReadonlyDerivedOrStoreArray<TArr> = UnwrapReadonlyDerivedOrStoreArray<TArr>> {
@@ -28882,7 +28847,7 @@ declare class Derived<TState, const TArr extends ReadonlyArray<Derived<any> | St
   subscribe: (listener: Listener<TState>) => () => void;
 }
 //#endregion
-//#region node_modules/.pnpm/@tanstack+form-core@1.28.0/node_modules/@tanstack/form-core/dist/esm/ValidationLogic.d.ts
+//#region node_modules/.pnpm/@tanstack+form-core@1.28.3/node_modules/@tanstack/form-core/dist/esm/ValidationLogic.d.ts
 interface ValidationLogicValidatorsFn {
   fn: FormValidators<any, any, any, any, any, any, any, any, any, any>[keyof FormValidators<any, any, any, any, any, any, any, any, any, any>];
   cause: 'change' | 'blur' | 'submit' | 'mount' | 'server' | 'dynamic';
@@ -28902,7 +28867,7 @@ interface ValidationLogicProps {
 }
 type ValidationLogicFn = (props: ValidationLogicProps) => void;
 //#endregion
-//#region node_modules/.pnpm/@tanstack+form-core@1.28.0/node_modules/@tanstack/form-core/dist/esm/util-types.d.ts
+//#region node_modules/.pnpm/@tanstack+form-core@1.28.3/node_modules/@tanstack/form-core/dist/esm/util-types.d.ts
 /**
  * @private
  */
@@ -28954,11 +28919,11 @@ type DeepValue<TValue, TAccessor> = unknown extends TValue ? TValue : TAccessor 
  */
 type DeepKeysOfType<TData$1, TValue> = Extract<DeepKeysAndValues<TData$1>, AnyDeepKeyAndValue<string, TValue>>['key'];
 //#endregion
-//#region node_modules/.pnpm/@tanstack+form-core@1.28.0/node_modules/@tanstack/form-core/dist/esm/utils.d.ts
+//#region node_modules/.pnpm/@tanstack+form-core@1.28.3/node_modules/@tanstack/form-core/dist/esm/utils.d.ts
 type UpdaterFn<TInput, TOutput = TInput> = (input: TInput) => TOutput;
 type Updater$2<TInput, TOutput = TInput> = TOutput | UpdaterFn<TInput, TOutput>;
 //#endregion
-//#region node_modules/.pnpm/@tanstack+form-core@1.28.0/node_modules/@tanstack/form-core/dist/esm/FieldApi.d.ts
+//#region node_modules/.pnpm/@tanstack+form-core@1.28.3/node_modules/@tanstack/form-core/dist/esm/FieldApi.d.ts
 /**
  * @private
  */
@@ -29351,7 +29316,7 @@ declare class FieldApi<in out TParentData, in out TName extends DeepKeys<TParent
   triggerOnChangeListener: () => void;
 }
 //#endregion
-//#region node_modules/.pnpm/@tanstack+form-core@1.28.0/node_modules/@tanstack/form-core/dist/esm/types.d.ts
+//#region node_modules/.pnpm/@tanstack+form-core@1.28.3/node_modules/@tanstack/form-core/dist/esm/types.d.ts
 type ValidationError = unknown;
 type ValidationSource = 'form' | 'field';
 /**
@@ -29511,7 +29476,7 @@ interface FieldManipulator<TFormData, TSubmitMeta> {
   resetField: <TField extends DeepKeys<TFormData>>(field: TField) => void;
 }
 //#endregion
-//#region node_modules/.pnpm/@tanstack+form-core@1.28.0/node_modules/@tanstack/form-core/dist/esm/standardSchemaValidator.d.ts
+//#region node_modules/.pnpm/@tanstack+form-core@1.28.3/node_modules/@tanstack/form-core/dist/esm/standardSchemaValidator.d.ts
 type TStandardSchemaValidatorValue<TData$1, TSource extends ValidationSource = ValidationSource> = {
   value: TData$1;
   validationSource: TSource;
@@ -29608,7 +29573,7 @@ interface StandardSchemaV1Types<Input = unknown, Output = Input> {
   readonly output: Output;
 }
 //#endregion
-//#region node_modules/.pnpm/@tanstack+form-core@1.28.0/node_modules/@tanstack/form-core/dist/esm/FormApi.d.ts
+//#region node_modules/.pnpm/@tanstack+form-core@1.28.3/node_modules/@tanstack/form-core/dist/esm/FormApi.d.ts
 /**
  * @private
  */
@@ -29669,13 +29634,6 @@ interface FormValidators<TFormData, TOnMount extends undefined | FormValidateOrF
   onDynamic?: TOnDynamic;
   onDynamicAsync?: TOnDynamicAsync;
   onDynamicAsyncDebounceMs?: number;
-}
-/**
- * @private
- */
-interface FormTransform<TFormData, TOnMount extends undefined | FormValidateOrFn<TFormData>, TOnChange extends undefined | FormValidateOrFn<TFormData>, TOnChangeAsync extends undefined | FormAsyncValidateOrFn<TFormData>, TOnBlur extends undefined | FormValidateOrFn<TFormData>, TOnBlurAsync extends undefined | FormAsyncValidateOrFn<TFormData>, TOnSubmit extends undefined | FormValidateOrFn<TFormData>, TOnSubmitAsync extends undefined | FormAsyncValidateOrFn<TFormData>, TOnDynamic extends undefined | FormValidateOrFn<TFormData>, TOnDynamicAsync extends undefined | FormAsyncValidateOrFn<TFormData>, TOnServer extends undefined | FormAsyncValidateOrFn<TFormData>, TSubmitMeta = never> {
-  fn: (formBase: FormApi<TFormData, TOnMount, TOnChange, TOnChangeAsync, TOnBlur, TOnBlurAsync, TOnSubmit, TOnSubmitAsync, TOnDynamic, TOnDynamicAsync, TOnServer, TSubmitMeta>) => FormApi<TFormData, TOnMount, TOnChange, TOnChangeAsync, TOnBlur, TOnBlurAsync, TOnSubmit, TOnSubmitAsync, TOnDynamic, TOnDynamicAsync, TOnServer, TSubmitMeta>;
-  deps: unknown[];
 }
 interface FormListeners<TFormData, TOnMount extends undefined | FormValidateOrFn<TFormData>, TOnChange extends undefined | FormValidateOrFn<TFormData>, TOnChangeAsync extends undefined | FormAsyncValidateOrFn<TFormData>, TOnBlur extends undefined | FormValidateOrFn<TFormData>, TOnBlurAsync extends undefined | FormAsyncValidateOrFn<TFormData>, TOnSubmit extends undefined | FormValidateOrFn<TFormData>, TOnSubmitAsync extends undefined | FormAsyncValidateOrFn<TFormData>, TOnDynamic extends undefined | FormValidateOrFn<TFormData>, TOnDynamicAsync extends undefined | FormAsyncValidateOrFn<TFormData>, TOnServer extends undefined | FormAsyncValidateOrFn<TFormData>, TSubmitMeta = never> {
   onChange?: (props: {
@@ -29758,7 +29716,7 @@ interface FormOptions<in out TFormData, in out TOnMount extends undefined | Form
     formApi: FormApi<TFormData, TOnMount, TOnChange, TOnChangeAsync, TOnBlur, TOnBlurAsync, TOnSubmit, TOnSubmitAsync, TOnDynamic, TOnDynamicAsync, TOnServer, TSubmitMeta>;
     meta: TSubmitMeta;
   }) => void;
-  transform?: FormTransform<NoInfer<TFormData>, NoInfer<TOnMount>, NoInfer<TOnChange>, NoInfer<TOnChangeAsync>, NoInfer<TOnBlur>, NoInfer<TOnBlurAsync>, NoInfer<TOnSubmit>, NoInfer<TOnSubmitAsync>, NoInfer<TOnDynamic>, NoInfer<TOnDynamicAsync>, NoInfer<TOnServer>, NoInfer<TSubmitMeta>>;
+  transform?: (data: unknown) => unknown;
 }
 /**
  * An object representing the validation metadata for a field. Not intended for public usage.
@@ -29925,10 +29883,6 @@ declare class FormApi<in out TFormData, in out TOnMount extends undefined | Form
    */
   fieldInfo: Record<DeepKeys<TFormData>, FieldInfo<TFormData>>;
   get state(): FormState<TFormData, TOnMount, TOnChange, TOnChangeAsync, TOnBlur, TOnBlurAsync, TOnSubmit, TOnSubmitAsync, TOnDynamic, TOnDynamicAsync, TOnServer>;
-  /**
-   * @private
-   */
-  prevTransformArray: unknown[];
   /**
    * @private
    */
@@ -30105,20 +30059,20 @@ declare global {
   var __TANSTACK_EVENT_TARGET__: EventTarget | null;
 }
 //#endregion
-//#region node_modules/.pnpm/@tanstack+vue-store@0.7.7_vue@3.5.27_typescript@5.7.3_/node_modules/@tanstack/vue-store/dist/esm/index.d.ts
+//#region node_modules/.pnpm/@tanstack+vue-store@0.8.1_vue@3.5.28_typescript@5.9.3_/node_modules/@tanstack/vue-store/dist/esm/index.d.ts
 /**
  * @private
  */
 type NoInfer$3<T$1> = [T$1][T$1 extends any ? 0 : never];
 //#endregion
-//#region node_modules/.pnpm/@tanstack+vue-form@1.28.0_vue@3.5.27_typescript@5.7.3_/node_modules/@tanstack/vue-form/dist/esm/types.d.ts
+//#region node_modules/.pnpm/@tanstack+vue-form@1.28.3_vue@3.5.28_typescript@5.9.3_/node_modules/@tanstack/vue-form/dist/esm/types.d.ts
 interface FieldOptionsMode {
   mode?: 'value' | 'array';
 }
 interface UseFieldOptions<TParentData, TName extends DeepKeys<TParentData>, TData$1 extends DeepValue<TParentData, TName>, TOnMount extends undefined | FieldValidateOrFn<TParentData, TName, TData$1>, TOnChange extends undefined | FieldValidateOrFn<TParentData, TName, TData$1>, TOnChangeAsync extends undefined | FieldAsyncValidateOrFn<TParentData, TName, TData$1>, TOnBlur extends undefined | FieldValidateOrFn<TParentData, TName, TData$1>, TOnBlurAsync extends undefined | FieldAsyncValidateOrFn<TParentData, TName, TData$1>, TOnSubmit extends undefined | FieldValidateOrFn<TParentData, TName, TData$1>, TOnSubmitAsync extends undefined | FieldAsyncValidateOrFn<TParentData, TName, TData$1>, TOnDynamic extends undefined | FieldValidateOrFn<TParentData, TName, TData$1>, TOnDynamicAsync extends undefined | FieldAsyncValidateOrFn<TParentData, TName, TData$1>, TFormOnMount extends undefined | FormValidateOrFn<TParentData>, TFormOnChange extends undefined | FormValidateOrFn<TParentData>, TFormOnChangeAsync extends undefined | FormAsyncValidateOrFn<TParentData>, TFormOnBlur extends undefined | FormValidateOrFn<TParentData>, TFormOnBlurAsync extends undefined | FormAsyncValidateOrFn<TParentData>, TFormOnSubmit extends undefined | FormValidateOrFn<TParentData>, TFormOnSubmitAsync extends undefined | FormAsyncValidateOrFn<TParentData>, TFormOnDynamic extends undefined | FormValidateOrFn<TParentData>, TFormOnDynamicAsync extends undefined | FormAsyncValidateOrFn<TParentData>, TFormOnServer extends undefined | FormAsyncValidateOrFn<TParentData>, TSubmitMeta> extends FieldApiOptions<TParentData, TName, TData$1, TOnMount, TOnChange, TOnChangeAsync, TOnBlur, TOnBlurAsync, TOnSubmit, TOnSubmitAsync, TOnDynamic, TOnDynamicAsync, TFormOnMount, TFormOnChange, TFormOnChangeAsync, TFormOnBlur, TFormOnBlurAsync, TFormOnSubmit, TFormOnSubmitAsync, TFormOnDynamic, TFormOnDynamicAsync, TFormOnServer, TSubmitMeta>, FieldOptionsMode {}
 interface UseFieldOptionsBound<TParentData, TName extends DeepKeys<TParentData>, TData$1 extends DeepValue<TParentData, TName>, TOnMount extends undefined | FieldValidateOrFn<TParentData, TName, TData$1>, TOnChange extends undefined | FieldValidateOrFn<TParentData, TName, TData$1>, TOnChangeAsync extends undefined | FieldAsyncValidateOrFn<TParentData, TName, TData$1>, TOnBlur extends undefined | FieldValidateOrFn<TParentData, TName, TData$1>, TOnBlurAsync extends undefined | FieldAsyncValidateOrFn<TParentData, TName, TData$1>, TOnSubmit extends undefined | FieldValidateOrFn<TParentData, TName, TData$1>, TOnSubmitAsync extends undefined | FieldAsyncValidateOrFn<TParentData, TName, TData$1>, TOnDynamic extends undefined | FieldValidateOrFn<TParentData, TName, TData$1>, TOnDynamicAsync extends undefined | FieldAsyncValidateOrFn<TParentData, TName, TData$1>> extends FieldOptions<TParentData, TName, TData$1, TOnMount, TOnChange, TOnChangeAsync, TOnBlur, TOnBlurAsync, TOnSubmit, TOnSubmitAsync, TOnDynamic, TOnDynamicAsync>, FieldOptionsMode {}
 //#endregion
-//#region node_modules/.pnpm/@tanstack+vue-form@1.28.0_vue@3.5.27_typescript@5.7.3_/node_modules/@tanstack/vue-form/dist/esm/useField.d.ts
+//#region node_modules/.pnpm/@tanstack+vue-form@1.28.3_vue@3.5.28_typescript@5.9.3_/node_modules/@tanstack/vue-form/dist/esm/useField.d.ts
 type FieldComponent<TParentData, TFormOnMount extends undefined | FormValidateOrFn<TParentData>, TFormOnChange extends undefined | FormValidateOrFn<TParentData>, TFormOnChangeAsync extends undefined | FormAsyncValidateOrFn<TParentData>, TFormOnBlur extends undefined | FormValidateOrFn<TParentData>, TFormOnBlurAsync extends undefined | FormAsyncValidateOrFn<TParentData>, TFormOnSubmit extends undefined | FormValidateOrFn<TParentData>, TFormOnSubmitAsync extends undefined | FormAsyncValidateOrFn<TParentData>, TFormOnDynamic extends undefined | FormValidateOrFn<TParentData>, TFormOnDynamicAsync extends undefined | FormAsyncValidateOrFn<TParentData>, TFormOnServer extends undefined | FormAsyncValidateOrFn<TParentData>, TParentSubmitMeta> = new <TName extends DeepKeys<TParentData>, TData$1 extends DeepValue<TParentData, TName>, TOnMount extends undefined | FieldValidateOrFn<TParentData, TName, TData$1>, TOnChange extends undefined | FieldValidateOrFn<TParentData, TName, TData$1>, TOnChangeAsync extends undefined | FieldAsyncValidateOrFn<TParentData, TName, TData$1>, TOnBlur extends undefined | FieldValidateOrFn<TParentData, TName, TData$1>, TOnBlurAsync extends undefined | FieldAsyncValidateOrFn<TParentData, TName, TData$1>, TOnSubmit extends undefined | FieldValidateOrFn<TParentData, TName, TData$1>, TOnSubmitAsync extends undefined | FieldAsyncValidateOrFn<TParentData, TName, TData$1>, TOnDynamic extends undefined | FieldValidateOrFn<TParentData, TName, TData$1>, TOnDynamicAsync extends undefined | FieldAsyncValidateOrFn<TParentData, TName, TData$1>>(props: FieldComponentBoundProps<TParentData, TName, TData$1, TOnMount, TOnChange, TOnChangeAsync, TOnBlur, TOnBlurAsync, TOnSubmit, TOnSubmitAsync, TOnDynamic, TOnDynamicAsync> & EmitsToProps<EmitsOptions> & PublicProps) => CreateComponentPublicInstanceWithMixins<FieldComponentBoundProps<TParentData, TName, TData$1, TOnMount, TOnChange, TOnChangeAsync, TOnBlur, TOnBlurAsync, TOnSubmit, TOnSubmitAsync, TOnDynamic, TOnDynamicAsync>, {}, {}, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, EmitsOptions, PublicProps, {}, false, {}, SlotsType<{
   default: {
     field: FieldApi<TParentData, TName, TData$1, TOnMount, TOnChange, TOnChangeAsync, TOnBlur, TOnBlurAsync, TOnSubmit, TOnSubmitAsync, TOnDynamic, TOnDynamicAsync, TFormOnMount, TFormOnChange, TFormOnChangeAsync, TFormOnBlur, TFormOnBlurAsync, TFormOnSubmit, TFormOnSubmitAsync, TFormOnDynamic, TFormOnDynamicAsync, TFormOnServer, TParentSubmitMeta>;
@@ -30138,7 +30092,7 @@ declare function useField<TParentData, TName extends DeepKeys<TParentData>, TDat
 };
 type FieldComponentBoundProps<TParentData, TName extends DeepKeys<TParentData>, TData$1 extends DeepValue<TParentData, TName>, TOnMount extends undefined | FieldValidateOrFn<TParentData, TName, TData$1>, TOnChange extends undefined | FieldValidateOrFn<TParentData, TName, TData$1>, TOnChangeAsync extends undefined | FieldAsyncValidateOrFn<TParentData, TName, TData$1>, TOnBlur extends undefined | FieldValidateOrFn<TParentData, TName, TData$1>, TOnBlurAsync extends undefined | FieldAsyncValidateOrFn<TParentData, TName, TData$1>, TOnSubmit extends undefined | FieldValidateOrFn<TParentData, TName, TData$1>, TOnSubmitAsync extends undefined | FieldAsyncValidateOrFn<TParentData, TName, TData$1>, TOnDynamic extends undefined | FieldValidateOrFn<TParentData, TName, TData$1>, TOnDynamicAsync extends undefined | FieldAsyncValidateOrFn<TParentData, TName, TData$1>> = UseFieldOptionsBound<TParentData, TName, TData$1, TOnMount, TOnChange, TOnChangeAsync, TOnBlur, TOnBlurAsync, TOnSubmit, TOnSubmitAsync, TOnDynamic, TOnDynamicAsync>;
 //#endregion
-//#region node_modules/.pnpm/@tanstack+vue-form@1.28.0_vue@3.5.27_typescript@5.7.3_/node_modules/@tanstack/vue-form/dist/esm/useForm.d.ts
+//#region node_modules/.pnpm/@tanstack+vue-form@1.28.3_vue@3.5.28_typescript@5.9.3_/node_modules/@tanstack/vue-form/dist/esm/useForm.d.ts
 type SubscribeComponent<TParentData, TFormOnMount extends undefined | FormValidateOrFn<TParentData>, TFormOnChange extends undefined | FormValidateOrFn<TParentData>, TFormOnChangeAsync extends undefined | FormAsyncValidateOrFn<TParentData>, TFormOnBlur extends undefined | FormValidateOrFn<TParentData>, TFormOnBlurAsync extends undefined | FormAsyncValidateOrFn<TParentData>, TFormOnSubmit extends undefined | FormValidateOrFn<TParentData>, TFormOnSubmitAsync extends undefined | FormAsyncValidateOrFn<TParentData>, TFormOnDynamic extends undefined | FormValidateOrFn<TParentData>, TFormOnDynamicAsync extends undefined | FormAsyncValidateOrFn<TParentData>, TFormOnServer extends undefined | FormAsyncValidateOrFn<TParentData>> = new <TSelected = NoInfer$3<FormState<TParentData, TFormOnMount, TFormOnChange, TFormOnChangeAsync, TFormOnBlur, TFormOnBlurAsync, TFormOnSubmit, TFormOnSubmitAsync, TFormOnDynamic, TFormOnDynamicAsync, TFormOnServer>>>(props: {
   selector?: (state: NoInfer$3<FormState<TParentData, TFormOnMount, TFormOnChange, TFormOnChangeAsync, TFormOnBlur, TFormOnBlurAsync, TFormOnSubmit, TFormOnSubmitAsync, TFormOnDynamic, TFormOnDynamicAsync, TFormOnServer>>) => TSelected;
 } & EmitsToProps<EmitsOptions> & PublicProps) => CreateComponentPublicInstanceWithMixins<{
@@ -31639,7 +31593,7 @@ interface DehydratedState {
   queries: Array<DehydratedQuery>;
 }
 //#endregion
-//#region node_modules/.pnpm/@tanstack+vue-query@5.92.9_vue@3.5.27_typescript@5.7.3_/node_modules/@tanstack/vue-query/build/modern/types.d.ts
+//#region node_modules/.pnpm/@tanstack+vue-query@5.92.9_vue@3.5.28_typescript@5.9.3_/node_modules/@tanstack/vue-query/build/modern/types.d.ts
 type Primitive = string | number | boolean | bigint | symbol | undefined | null;
 type UnwrapLeaf = Primitive | Function | Date | Error | RegExp | Map<any, any> | WeakMap<any, any> | Set<any> | WeakSet<any>;
 type MaybeRef$1<T$1> = Ref<T$1> | ComputedRef<T$1> | T$1;
@@ -31666,7 +31620,7 @@ interface QueryClientConfig {
   defaultOptions?: DefaultOptions;
 }
 //#endregion
-//#region node_modules/.pnpm/@tanstack+vue-query@5.92.9_vue@3.5.27_typescript@5.7.3_/node_modules/@tanstack/vue-query/build/modern/queryClient-CcE04-Qt.d.ts
+//#region node_modules/.pnpm/@tanstack+vue-query@5.92.9_vue@3.5.28_typescript@5.9.3_/node_modules/@tanstack/vue-query/build/modern/queryClient-CcE04-Qt.d.ts
 type UseBaseQueryReturnType<TData$1, TError$1, TResult = QueryObserverResult<TData$1, TError$1>> = { [K in keyof TResult]: K extends 'fetchNextPage' | 'fetchPreviousPage' | 'refetch' ? TResult[K] : Ref<Readonly<TResult>[K]> } & {
   suspense: () => Promise<TResult>;
 };
@@ -31707,10 +31661,10 @@ declare class QueryClient extends QueryClient$1 {
   getMutationDefaults(mutationKey: MaybeRefDeep$1<MutationKey>): MutationObserverOptions<any, any, any, any>;
 }
 //#endregion
-//#region node_modules/.pnpm/@tanstack+vue-query@5.92.9_vue@3.5.27_typescript@5.7.3_/node_modules/@tanstack/vue-query/build/modern/useQueryClient.d.ts
+//#region node_modules/.pnpm/@tanstack+vue-query@5.92.9_vue@3.5.28_typescript@5.9.3_/node_modules/@tanstack/vue-query/build/modern/useQueryClient.d.ts
 declare function useQueryClient(id?: string): QueryClient;
 //#endregion
-//#region node_modules/.pnpm/@tanstack+vue-query@5.92.9_vue@3.5.27_typescript@5.7.3_/node_modules/@tanstack/vue-query/build/modern/useMutation.d.ts
+//#region node_modules/.pnpm/@tanstack+vue-query@5.92.9_vue@3.5.28_typescript@5.9.3_/node_modules/@tanstack/vue-query/build/modern/useMutation.d.ts
 type MutationResult<TData$1, TError$1, TVariables, TOnMutateResult> = DistributiveOmit<MutationObserverResult<TData$1, TError$1, TVariables, TOnMutateResult>, 'mutate' | 'reset'>;
 type UseMutationOptionsBase<TData$1, TError$1, TVariables, TOnMutateResult> = MutationObserverOptions<TData$1, TError$1, TVariables, TOnMutateResult> & ShallowOption;
 type UseMutationOptions<TData$1 = unknown, TError$1 = DefaultError, TVariables = void, TOnMutateResult = unknown> = MaybeRefDeep$1<UseMutationOptionsBase<TData$1, TError$1, TVariables, TOnMutateResult>> | (() => MaybeRefDeep$1<UseMutationOptionsBase<TData$1, TError$1, TVariables, TOnMutateResult>>);
@@ -31722,7 +31676,7 @@ type UseMutationReturnType<TData$1, TError$1, TVariables, TOnMutateResult, TResu
 };
 declare function useMutation<TData$1 = unknown, TError$1 = DefaultError, TVariables = void, TOnMutateResult = unknown>(mutationOptions: UseMutationOptions<TData$1, TError$1, TVariables, TOnMutateResult>, queryClient?: QueryClient): UseMutationReturnType<TData$1, TError$1, TVariables, TOnMutateResult>;
 //#endregion
-//#region node_modules/.pnpm/@tanstack+vue-query@5.92.9_vue@3.5.27_typescript@5.7.3_/node_modules/@tanstack/vue-query/build/modern/useIsFetching.d.ts
+//#region node_modules/.pnpm/@tanstack+vue-query@5.92.9_vue@3.5.28_typescript@5.9.3_/node_modules/@tanstack/vue-query/build/modern/useIsFetching.d.ts
 type QueryFilters = MaybeRefDeep$1<QueryFilters$1> | (() => MaybeRefDeep$1<QueryFilters$1>);
 //#endregion
 //#region src/suite-vendor/a-zova/modules/a-model/src/common/types.d.ts
@@ -31994,7 +31948,7 @@ declare class ServiceStorage extends BeanBase {
 }
 //#endregion
 //#region src/suite-vendor/a-zova/modules/a-model/src/config/config.d.ts
-declare const config$9: (_sys: ZovaSys) => {
+declare const config$10: (_sys: ZovaSys) => {
   persister: {
     maxAge: {
       cookie: number | undefined;
@@ -32056,19 +32010,19 @@ declare module 'zova' {
 declare class ScopeModuleAModel extends BeanScopeBase {}
 interface ScopeModuleAModel {
   util: BeanScopeUtil;
-  config: TypeModuleConfig<typeof config$9>;
+  config: TypeModuleConfig<typeof config$10>;
 }
 declare module 'zova' {
   interface IBeanScopeRecord {
     'a-model': ScopeModuleAModel;
   }
   interface IBeanScopeConfig {
-    'a-model': ReturnType<typeof config$9>;
+    'a-model': ReturnType<typeof config$10>;
   }
 }
 /** scope: end */
 //#endregion
-//#region node_modules/.pnpm/axios@1.13.3/node_modules/axios/index.d.ts
+//#region node_modules/.pnpm/axios@1.13.5/node_modules/axios/index.d.ts
 // TypeScript Version: 4.7
 type StringLiteralsOrString<Literals extends string> = Literals | (string & {});
 type AxiosHeaderValue = AxiosHeaders | string | string[] | number | boolean | null;
@@ -32123,13 +32077,13 @@ declare class AxiosHeaders {
   getSetCookie(): string[];
   [Symbol.iterator](): IterableIterator<[string, AxiosHeaderValue]>;
 }
-type CommonRequestHeadersList = 'Accept' | 'Content-Length' | 'User-Agent' | 'Content-Encoding' | 'Authorization';
-type ContentType = AxiosHeaderValue | 'text/html' | 'text/plain' | 'multipart/form-data' | 'application/json' | 'application/x-www-form-urlencoded' | 'application/octet-stream';
+type CommonRequestHeadersList = "Accept" | "Content-Length" | "User-Agent" | "Content-Encoding" | "Authorization";
+type ContentType = AxiosHeaderValue | "text/html" | "text/plain" | "multipart/form-data" | "application/json" | "application/x-www-form-urlencoded" | "application/octet-stream";
 type RawAxiosRequestHeaders = Partial<RawAxiosHeaders & { [Key in CommonRequestHeadersList]: AxiosHeaderValue } & {
-  'Content-Type': ContentType;
+  "Content-Type": ContentType;
 }>;
 type AxiosRequestHeaders = RawAxiosRequestHeaders & AxiosHeaders;
-type CommonResponseHeadersList = 'Server' | 'Content-Type' | 'Content-Length' | 'Cache-Control' | 'Content-Encoding';
+type CommonResponseHeadersList = "Server" | "Content-Type" | "Content-Length" | "Cache-Control" | "Content-Encoding";
 type RawCommonResponseHeaders = { [Key in CommonResponseHeadersList]: AxiosHeaderValue } & {
   "set-cookie": string[];
 };
@@ -32219,13 +32173,14 @@ declare enum HttpStatusCode {
   NotExtended = 510,
   NetworkAuthenticationRequired = 511,
 }
-type Method = 'get' | 'GET' | 'delete' | 'DELETE' | 'head' | 'HEAD' | 'options' | 'OPTIONS' | 'post' | 'POST' | 'put' | 'PUT' | 'patch' | 'PATCH' | 'purge' | 'PURGE' | 'link' | 'LINK' | 'unlink' | 'UNLINK';
-type ResponseType = 'arraybuffer' | 'blob' | 'document' | 'json' | 'text' | 'stream' | 'formdata';
-type responseEncoding = 'ascii' | 'ASCII' | 'ansi' | 'ANSI' | 'binary' | 'BINARY' | 'base64' | 'BASE64' | 'base64url' | 'BASE64URL' | 'hex' | 'HEX' | 'latin1' | 'LATIN1' | 'ucs-2' | 'UCS-2' | 'ucs2' | 'UCS2' | 'utf-8' | 'UTF-8' | 'utf8' | 'UTF8' | 'utf16le' | 'UTF16LE';
+type Method = "get" | "GET" | "delete" | "DELETE" | "head" | "HEAD" | "options" | "OPTIONS" | "post" | "POST" | "put" | "PUT" | "patch" | "PATCH" | "purge" | "PURGE" | "link" | "LINK" | "unlink" | "UNLINK";
+type ResponseType = "arraybuffer" | "blob" | "document" | "json" | "text" | "stream" | "formdata";
+type responseEncoding = "ascii" | "ASCII" | "ansi" | "ANSI" | "binary" | "BINARY" | "base64" | "BASE64" | "base64url" | "BASE64URL" | "hex" | "HEX" | "latin1" | "LATIN1" | "ucs-2" | "UCS-2" | "ucs2" | "UCS2" | "utf-8" | "UTF-8" | "utf8" | "UTF8" | "utf16le" | "UTF16LE";
 interface TransitionalOptions {
   silentJSONParsing?: boolean;
   forcedJSONParsing?: boolean;
   clarifyTimeoutError?: boolean;
+  legacyInterceptorReqResOrdering?: boolean;
 }
 interface GenericAbortSignal {
   readonly aborted: boolean;
@@ -32275,7 +32230,7 @@ interface AxiosProgressEvent {
   lengthComputable: boolean;
 }
 type Milliseconds = number;
-type AxiosAdapterName = StringLiteralsOrString<'xhr' | 'http' | 'fetch'>;
+type AxiosAdapterName = StringLiteralsOrString<"xhr" | "http" | "fetch">;
 type AxiosAdapterConfig = AxiosAdapter | AxiosAdapterName;
 type AddressFamily = 4 | 6 | undefined;
 interface LookupAddressEntry {
@@ -32335,7 +32290,7 @@ interface AxiosRequestConfig<D$1 = any> {
   lookup?: ((hostname: string, options: object, cb: (err: Error | null, address: LookupAddress | LookupAddress[], family?: AddressFamily) => void) => void) | ((hostname: string, options: object) => Promise<[address: LookupAddressEntry | LookupAddressEntry[], family?: AddressFamily] | LookupAddress>);
   withXSRFToken?: boolean | ((config: InternalAxiosRequestConfig) => boolean | undefined);
   parseReviver?: (this: any, key: string, value: any) => any;
-  fetchOptions?: Omit<RequestInit, 'body' | 'headers' | 'method' | 'signal'> | Record<string, any>;
+  fetchOptions?: Omit<RequestInit, "body" | "headers" | "method" | "signal"> | Record<string, any>;
   httpVersion?: 1 | 2;
   http2Options?: Record<string, any> & {
     sessionTimeout?: number;
@@ -32357,17 +32312,17 @@ interface HeadersDefaults {
   link?: RawAxiosRequestHeaders;
   unlink?: RawAxiosRequestHeaders;
 }
-interface AxiosDefaults<D$1 = any> extends Omit<AxiosRequestConfig<D$1>, 'headers'> {
+interface AxiosDefaults<D$1 = any> extends Omit<AxiosRequestConfig<D$1>, "headers"> {
   headers: HeadersDefaults;
 }
-interface CreateAxiosDefaults<D$1 = any> extends Omit<AxiosRequestConfig<D$1>, 'headers'> {
+interface CreateAxiosDefaults<D$1 = any> extends Omit<AxiosRequestConfig<D$1>, "headers"> {
   headers?: RawAxiosRequestHeaders | AxiosHeaders | Partial<HeadersDefaults>;
 }
 interface AxiosResponse<T$1 = any, D$1 = any, H = {}> {
   data: T$1;
   status: number;
   statusText: string;
-  headers: H & RawAxiosResponseHeaders | AxiosResponseHeaders;
+  headers: (H & RawAxiosResponseHeaders) | AxiosResponseHeaders;
   config: InternalAxiosRequestConfig<D$1>;
   request?: any;
 }
@@ -32449,7 +32404,7 @@ interface AxiosInstance extends Axios {
   <T$1 = any, R$1 = AxiosResponse<T$1>, D$1 = any>(config: AxiosRequestConfig<D$1>): Promise<R$1>;
   <T$1 = any, R$1 = AxiosResponse<T$1>, D$1 = any>(url: string, config?: AxiosRequestConfig<D$1>): Promise<R$1>;
   create(config?: CreateAxiosDefaults): AxiosInstance;
-  defaults: Omit<AxiosDefaults, 'headers'> & {
+  defaults: Omit<AxiosDefaults, "headers"> & {
     headers: HeadersDefaults & {
       [key: string]: AxiosHeaderValue;
     };
@@ -32541,7 +32496,7 @@ declare class ServiceComposer extends BeanBase {
 }
 //#endregion
 //#region src/suite-vendor/a-zova/modules/a-fetch/src/config/config.d.ts
-declare const config$8: (_sys: ZovaSys) => {
+declare const config$9: (_sys: ZovaSys) => {
   axios: {
     config: CreateAxiosDefaults<any>;
   };
@@ -32594,14 +32549,14 @@ declare module 'zova' {
 declare class ScopeModuleAFetch extends BeanScopeBase {}
 interface ScopeModuleAFetch {
   util: BeanScopeUtil;
-  config: TypeModuleConfig<typeof config$8>;
+  config: TypeModuleConfig<typeof config$9>;
 }
 declare module 'zova' {
   interface IBeanScopeRecord {
     'a-fetch': ScopeModuleAFetch;
   }
   interface IBeanScopeConfig {
-    'a-fetch': ReturnType<typeof config$8>;
+    'a-fetch': ReturnType<typeof config$9>;
   }
 }
 /** scope: end */
@@ -32749,6 +32704,77 @@ declare class SysSdk extends BeanBase {
   prepareApiMeta(api: string, apiMethod?: string): string[];
 }
 //#endregion
+//#region src/suite-vendor/a-zova/modules/a-openapi/src/types/actions.d.ts
+interface IResourceActionTableOptions {}
+interface IResourceActionRowOptions {}
+interface TypeResourceActionTableRecord {
+  create: IResourceActionTableOptions;
+  operationsTable: IResourceActionTableOptions;
+}
+interface TypeResourceActionRowRecord {
+  view: IResourceActionRowOptions;
+  update: IResourceActionRowOptions;
+  delete: IResourceActionRowOptions;
+  operationsRow: IResourceActionRowOptions;
+}
+type TypeResourceActionRowRecordRender = { [key in keyof TypeResourceActionRowRecord as `action${Capitalize<key>}`]: TypeResourceActionRowRecord[key] };
+//#endregion
+//#region src/suite-vendor/a-zova/modules/a-openapi/src/types/captcha.d.ts
+interface ICaptchaSceneRecord {
+  'a-captchasimple:simple': never;
+}
+interface ICaptchaOptions {
+  scene?: keyof ICaptchaSceneRecord;
+}
+//#endregion
+//#region src/suite-vendor/a-zova/modules/a-openapi/src/types/date.d.ts
+type TypeDateFormatPreset = 'DATE_SHORT' | 'DATE_MED' | 'DATE_MED_WITH_WEEKDAY' | 'DATE_FULL' | 'DATE_HUGE' | 'TIME_SIMPLE' | 'TIME_WITH_SECONDS' | 'TIME_WITH_SHORT_OFFSET' | 'TIME_WITH_LONG_OFFSET' | 'TIME_24_SIMPLE' | 'TIME_24_WITH_SECONDS' | 'TIME_24_WITH_SHORT_OFFSET' | 'TIME_24_WITH_LONG_OFFSET' | 'DATETIME_SHORT' | 'DATETIME_MED' | 'DATETIME_MED_WITH_WEEKDAY' | 'DATETIME_FULL' | 'DATETIME_HUGE' | 'DATETIME_SHORT_WITH_SECONDS' | 'DATETIME_MED_WITH_SECONDS' | 'DATETIME_FULL_WITH_SECONDS' | 'DATETIME_HUGE_WITH_SECONDS';
+type TypeDateFormat = {
+  preset: TypeDateFormatPreset;
+} | string;
+//#endregion
+//#region src/suite-vendor/a-zova/modules/a-openapi/src/types/rest.d.ts
+interface ISchemaObjectExtensionFieldRest {
+  render?: TypeFormFieldRenderComponentNormal | TypeTableCellRenderComponentNormal;
+  captcha?: ICaptchaOptions;
+  currency?: CurrencyOptions;
+  dateFormat?: TypeDateFormat;
+  visible?: boolean;
+  displayValue?: any;
+  order?: number;
+  table?: Omit<ISchemaObjectExtensionFieldRest, TypeSchemaScene>;
+  form?: Omit<ISchemaObjectExtensionFieldRest, TypeSchemaScene>;
+  filter?: Omit<ISchemaObjectExtensionFieldRest, TypeSchemaScene>;
+}
+interface ISchemaObjectExtensionFieldFilterCapabilities {
+  where?: boolean;
+  order?: boolean;
+}
+interface ISchemaObjectExtensionFieldFilter {
+  capabilities?: ISchemaObjectExtensionFieldFilterCapabilities;
+}
+interface ISchemaObjectExtensionField {
+  key?: string;
+  rest?: ISchemaObjectExtensionFieldRest;
+  filter?: ISchemaObjectExtensionFieldFilter;
+}
+declare module 'openapi3-ts/oas30' {
+  interface SchemaObject extends ISchemaObjectExtensionField {}
+}
+declare module 'openapi3-ts/oas31' {
+  interface SchemaObject extends ISchemaObjectExtensionField {}
+}
+type TypeSchemaScene = 'table' | 'form' | 'filter';
+type TypeFormSchemaScene = 'form' | 'filter';
+type TypeRenderComponentPreset = keyof TypeResourceActionRowRecordRender | 'text' | 'captcha' | 'currency' | 'date' | 'dateRange' | 'textarea' | 'select' | 'checkbox' | 'radio' | 'switch' | 'image' | 'file' | 'color' | 'password' | 'email' | 'url';
+type TypeFormFieldRenderComponentNormal = Constructable<ComponentPublicInstance> | (keyof IComponentRecord) | TypeRenderComponentPreset;
+type TypeFormFieldRenderComponent = TypeFormFieldRenderComponentNormal | TypeRenderComponentJsx;
+type TypeFormFieldRenderComponentProvider = Constructable | Constructable<ComponentPublicInstance> | (keyof IComponentRecord) | 'input' | 'textarea' | 'select';
+type TypeTableCellRenderComponentNormal = Constructable<ComponentPublicInstance> | (keyof IComponentRecord) | (keyof TypeBeanRecordGeneralSelector<'tableCell'>) | TypeRenderComponentPreset;
+type TypeTableCellRenderComponent = TypeTableCellRenderComponentNormal | TypeRenderComponentJsx;
+type TypeTableCellRenderComponentProvider = Constructable<ComponentPublicInstance> | (keyof IComponentRecord) | (keyof TypeBeanRecordGeneralSelector<'tableCell'>) | 'text';
+type TypeTableRenderComponentProvider = Constructable<ComponentPublicInstance> | (keyof IComponentRecord) | TypeRenderComponentJsx;
+//#endregion
 //#region src/suite-vendor/a-zova/modules/a-openapi/src/model/sdk.d.ts
 interface IModelOptionsSdk extends IDecoratorModelOptions {}
 declare class ModelSdk extends BeanModelBase {
@@ -32763,10 +32789,11 @@ declare class ModelSdk extends BeanModelBase {
   getZodSchema(schemaName: string): ZodType<unknown, unknown, $ZodTypeInternals<unknown, unknown>> | null;
   getSchemaDefaultValue(schemaName: string): {} | null;
   createApiSchemas(api: string, apiMethod?: TypeRequestMethod): IOpenapiSchemas;
+  loadSchemaProperties(schema: SchemaObject | undefined, scene: TypeSchemaScene): SchemaObject[] | undefined;
 }
 //#endregion
 //#region src/suite-vendor/a-zova/modules/a-openapi/src/config/config.d.ts
-declare const config$7: (_sys: ZovaSys) => {
+declare const config$8: (_sys: ZovaSys) => {
   base: IOpenapiOptionsResourceMeta;
   resourceMeta: IOpenapiOptionsResourceMeta;
   api: {
@@ -32822,79 +32849,17 @@ declare module 'zova' {
 declare class ScopeModuleAOpenapi extends BeanScopeBase {}
 interface ScopeModuleAOpenapi {
   util: BeanScopeUtil;
-  config: TypeModuleConfig<typeof config$7>;
+  config: TypeModuleConfig<typeof config$8>;
 }
 declare module 'zova' {
   interface IBeanScopeRecord {
     'a-openapi': ScopeModuleAOpenapi;
   }
   interface IBeanScopeConfig {
-    'a-openapi': ReturnType<typeof config$7>;
+    'a-openapi': ReturnType<typeof config$8>;
   }
 }
 /** scope: end */
-//#endregion
-//#region src/suite-vendor/a-zova/modules/a-openapi/src/types/actions.d.ts
-interface IResourceActionTableOptions {}
-interface IResourceActionRowOptions {}
-interface TypeResourceActionTableRecord {
-  create: IResourceActionTableOptions;
-  operationsTable: IResourceActionTableOptions;
-}
-interface TypeResourceActionRowRecord {
-  view: IResourceActionRowOptions;
-  update: IResourceActionRowOptions;
-  delete: IResourceActionRowOptions;
-  operationsRow: IResourceActionRowOptions;
-}
-type TypeResourceActionRowRecordRender = { [key in keyof TypeResourceActionRowRecord as `action${Capitalize<key>}`]: TypeResourceActionRowRecord[key] };
-//#endregion
-//#region src/suite-vendor/a-zova/modules/a-openapi/src/types/date.d.ts
-type TypeDateFormatPreset = 'DATE_SHORT' | 'DATE_MED' | 'DATE_MED_WITH_WEEKDAY' | 'DATE_FULL' | 'DATE_HUGE' | 'TIME_SIMPLE' | 'TIME_WITH_SECONDS' | 'TIME_WITH_SHORT_OFFSET' | 'TIME_WITH_LONG_OFFSET' | 'TIME_24_SIMPLE' | 'TIME_24_WITH_SECONDS' | 'TIME_24_WITH_SHORT_OFFSET' | 'TIME_24_WITH_LONG_OFFSET' | 'DATETIME_SHORT' | 'DATETIME_MED' | 'DATETIME_MED_WITH_WEEKDAY' | 'DATETIME_FULL' | 'DATETIME_HUGE' | 'DATETIME_SHORT_WITH_SECONDS' | 'DATETIME_MED_WITH_SECONDS' | 'DATETIME_FULL_WITH_SECONDS' | 'DATETIME_HUGE_WITH_SECONDS';
-type TypeDateFormat = {
-  preset: TypeDateFormatPreset;
-} | string;
-//#endregion
-//#region src/suite-vendor/a-zova/modules/a-openapi/src/types/rest.d.ts
-interface ISchemaObjectExtensionFieldRest {
-  render?: TypeFormFieldRenderComponentNormal | TypeTableCellRenderComponentNormal;
-  currency?: CurrencyOptions;
-  dateFormat?: TypeDateFormat;
-  visible?: boolean;
-  displayValue?: any;
-  order?: number;
-  table?: Omit<ISchemaObjectExtensionFieldRest, TypeSchemaScene>;
-  form?: Omit<ISchemaObjectExtensionFieldRest, TypeSchemaScene>;
-  filter?: Omit<ISchemaObjectExtensionFieldRest, TypeSchemaScene>;
-}
-interface ISchemaObjectExtensionFieldFilterCapabilities {
-  where?: boolean;
-  order?: boolean;
-}
-interface ISchemaObjectExtensionFieldFilter {
-  capabilities?: ISchemaObjectExtensionFieldFilterCapabilities;
-}
-interface ISchemaObjectExtensionField {
-  key?: string;
-  rest?: ISchemaObjectExtensionFieldRest;
-  filter?: ISchemaObjectExtensionFieldFilter;
-}
-declare module 'openapi3-ts/oas30' {
-  interface SchemaObject extends ISchemaObjectExtensionField {}
-}
-declare module 'openapi3-ts/oas31' {
-  interface SchemaObject extends ISchemaObjectExtensionField {}
-}
-type TypeSchemaScene = 'table' | 'form' | 'filter';
-type TypeFormSchemaScene = 'form' | 'filter';
-type TypeRenderComponentPreset = keyof TypeResourceActionRowRecordRender | 'text' | 'currency' | 'date' | 'dateRange' | 'textarea' | 'select' | 'checkbox' | 'radio' | 'switch' | 'image' | 'file' | 'color' | 'password' | 'email' | 'url';
-type TypeFormFieldRenderComponentNormal = Constructable<ComponentPublicInstance> | (keyof IComponentRecord) | TypeRenderComponentPreset;
-type TypeFormFieldRenderComponent = TypeFormFieldRenderComponentNormal | TypeRenderComponentJsx;
-type TypeFormFieldRenderComponentProvider = Constructable<ComponentPublicInstance> | (keyof IComponentRecord) | 'input' | 'textarea' | 'select';
-type TypeTableCellRenderComponentNormal = Constructable<ComponentPublicInstance> | (keyof IComponentRecord) | (keyof TypeBeanRecordGeneralSelector<'tableCell'>) | TypeRenderComponentPreset;
-type TypeTableCellRenderComponent = TypeTableCellRenderComponentNormal | TypeRenderComponentJsx;
-type TypeTableCellRenderComponentProvider = Constructable<ComponentPublicInstance> | (keyof IComponentRecord) | (keyof TypeBeanRecordGeneralSelector<'tableCell'>) | 'text';
-type TypeTableRenderComponentProvider = Constructable<ComponentPublicInstance> | (keyof IComponentRecord) | TypeRenderComponentJsx;
 //#endregion
 //#region src/suite-vendor/a-zova/modules/a-openapi/src/types/action.d.ts
 interface IJsxRenderContextBase {
@@ -32906,7 +32871,9 @@ interface IJsxRenderContextBase {
   $jsx: ZovaJsx;
 }
 interface IJsxRenderSceneRecord {
+  pageWrapper: never;
   page: never;
+  pageEntryWrapper: never;
   pageEntry: never;
   tableColumn: never;
   tableCell: never;
@@ -32961,7 +32928,7 @@ declare module 'zova' {
     };
   }
 }
-interface IFormCelScope {}
+interface IFormScope {}
 //#endregion
 //#region src/suite-vendor/a-zova/modules/a-behavior/src/bean/bean.behaviorBase.d.ts
 declare class BeanBehaviorBase<OPTIONS extends IDecoratorBehaviorOptions = IDecoratorBehaviorOptions, PROPS_INPUT = unknown, PROPS_OUTPUT = PROPS_INPUT> extends BeanBase {
@@ -32978,15 +32945,19 @@ declare class BeanBehaviorBase<OPTIONS extends IDecoratorBehaviorOptions = IDeco
 type TypeControllerBehaviorPublicProps = {
   controllerRef?: (ref: ControllerBehavior) => void;
 } & ControllerBehaviorProps;
-type ControllerInnerProps$8 = TypeControllerInnerProps<ControllerBehaviorProps, keyof typeof ControllerBehavior.$propsDefault>;
+type ControllerInnerProps$9 = TypeControllerInnerProps<ControllerBehaviorProps, keyof typeof ControllerBehavior.$propsDefault>;
 declare module 'zova-module-a-behavior' {
   interface ControllerBehavior {
-    $props: ControllerInnerProps$8;
+    $props: ControllerInnerProps$9;
   }
 }
-declare const ZBehavior: DefineSetupFnComponent<TypeControllerBehaviorPublicProps, {}, {}, {
+declare const ZBehavior: DefineSetupFnComponent<TypeControllerBehaviorPublicProps, EmitsOptions, SlotsType<Record<string, any>>, {
   controllerRef?: ((ref: ControllerBehavior) => void) | undefined;
-} & ControllerBehaviorProps & {}, PublicProps>;
+} & ControllerBehaviorProps & ({
+  [x: `on${Capitalize<string>}`]: ((...args: any[]) => any) | undefined;
+} | {
+  [x: `on${Capitalize<string>}`]: ((...args: never) => any) | undefined;
+}), PublicProps>;
 //#endregion
 //#region src/suite-vendor/a-zova/modules/a-behavior/src/.metadata/index.d.ts
 declare module 'zova' {}
@@ -33170,18 +33141,22 @@ declare class ControllerIcon extends BeanControllerBase {
 type TypeControllerIconPublicProps$1 = {
   controllerRef?: (ref: ControllerIcon) => void;
 } & ControllerIconProps;
-type ControllerInnerProps$7 = TypeControllerInnerProps<ControllerIconProps, keyof typeof ControllerIcon.$propsDefault>;
+type ControllerInnerProps$8 = TypeControllerInnerProps<ControllerIconProps, keyof typeof ControllerIcon.$propsDefault>;
 declare module 'zova-module-a-icon' {
   interface ControllerIcon {
-    $props: ControllerInnerProps$7;
+    $props: ControllerInnerProps$8;
   }
 }
-declare const ZIcon: DefineSetupFnComponent<TypeControllerIconPublicProps$1, {}, {}, {
+declare const ZIcon: DefineSetupFnComponent<TypeControllerIconPublicProps$1, EmitsOptions, SlotsType<Record<string, any>>, {
   controllerRef?: ((ref: ControllerIcon) => void) | undefined;
-} & ControllerIconProps & {}, PublicProps>;
+} & ControllerIconProps & ({
+  [x: `on${Capitalize<string>}`]: ((...args: any[]) => any) | undefined;
+} | {
+  [x: `on${Capitalize<string>}`]: ((...args: never) => any) | undefined;
+}), PublicProps>;
 //#endregion
 //#region src/suite-vendor/a-zova/modules/a-icon/src/config/config.d.ts
-declare const config$6: (_sys: ZovaSys) => {
+declare const config$7: (_sys: ZovaSys) => {
   defaultModule: keyof IBeanScopeRecord;
   icon: {
     size: number;
@@ -33256,14 +33231,14 @@ declare module 'zova' {
 declare class ScopeModuleAIcon extends BeanScopeBase {}
 interface ScopeModuleAIcon {
   util: BeanScopeUtil;
-  config: TypeModuleConfig<typeof config$6>;
+  config: TypeModuleConfig<typeof config$7>;
 }
 declare module 'zova' {
   interface IBeanScopeRecord {
     'a-icon': ScopeModuleAIcon;
   }
   interface IBeanScopeConfig {
-    'a-icon': ReturnType<typeof config$6>;
+    'a-icon': ReturnType<typeof config$7>;
   }
 }
 /** scope: end */
@@ -33299,7 +33274,7 @@ declare class ControllerFormField<TParentData extends {} = {}> extends BeanContr
 //#endregion
 //#region src/suite-vendor/a-zova/modules/a-form/src/types/formField.d.ts
 type HTMLInputElementType = 'text' | 'password' | 'number' | 'file' | 'hidden' | 'tel' | 'email';
-interface IFormFieldCelScope<TParentData = {}> {
+interface IFormFieldScope<TParentData = {}> {
   name: string;
   value: any;
   property?: SchemaObject;
@@ -33331,9 +33306,9 @@ interface IFormFieldOptionsBase {
   validateOnDynamic?: boolean | ZodType;
   validateOnChange?: boolean | ZodType;
   validateOnBlur?: boolean | ZodType;
-  onChange?: ((e: Event) => void) | null;
-  onInput?: ((e: Event) => void) | null;
-  onBlur?: ((e: Event) => void) | null;
+  onChange?: (e: Event) => void;
+  onInput?: (e: Event) => void;
+  onBlur?: (e: Event) => void;
 }
 interface IFormFieldOptions<TParentData = {}> extends TypeBehaviorFormFieldOptions<TParentData>, IFormFieldOptionsBase, IFormFieldLayoutOptionsBase {
   behaviors?: IBehaviorItem;
@@ -33342,7 +33317,7 @@ interface IFormFieldOptions<TParentData = {}> extends TypeBehaviorFormFieldOptio
 interface IFormFieldRenderContextProps {
   name?: string;
   value?: any;
-  type?: string;
+  type?: any;
   readonly?: boolean;
   placeholder?: string;
   class?: any;
@@ -33358,11 +33333,11 @@ interface IFormFieldRenderContextPropsBucket<TParentData = {}> extends Omit<IFor
 interface IFormFieldRenderContext<TParentData = {}> {
   propsBucket: IFormFieldRenderContextPropsBucket<TParentData>;
   props: IFormFieldRenderContextProps;
-  celScope: IFormFieldCelScope<TParentData>;
+  celScope: IFormFieldScope<TParentData>;
   jsxRenderContext: {};
 }
 interface IJsxRenderContextFormField<TParentData extends {} = {}, TSubmitMeta = never> extends IJsxRenderContextBase {
-  $celScope: IFormFieldCelScope<TParentData>;
+  $celScope: IFormFieldScope<TParentData>;
   $$formField: ControllerFormField<TParentData> | undefined;
   $$form: ControllerForm<TParentData, TSubmitMeta>;
 }
@@ -33386,6 +33361,7 @@ interface IFormProviderComponents {
   formField?: TypeComponentRecordSelectorKeysStrict<'formField'>;
   text?: TypeFormFieldRenderComponentProvider;
   password?: TypeFormFieldRenderComponentProvider;
+  captcha?: TypeFormFieldRenderComponentProvider;
   currency?: TypeFormFieldRenderComponentProvider;
   date?: TypeFormFieldRenderComponentProvider;
   dateRange?: TypeFormFieldRenderComponentProvider;
@@ -33413,16 +33389,17 @@ interface ControllerFormProps<TFormData extends {} = {}, TSubmitMeta = never> {
   validateOnDynamicLogic?: RevalidateLogicProps;
   formMeta?: IFormMeta;
   formProvider?: IFormProvider;
-  formScope?: IFormCelScope;
+  formScope?: IFormScope;
   formFieldLayout?: IFormFieldLayoutOptionsBase;
   onFormSubmit?: (e: SubmitEvent, form: ControllerForm<TFormData, TSubmitMeta>) => any;
   onSubmitInvalid?: TypeFormOnSubmitInvalid<TFormData, TSubmitMeta>;
-  onSubmit?: TypeFormOnSubmit<TFormData, TSubmitMeta>;
+  onSubmitData?: TypeFormOnSubmit<TFormData, TSubmitMeta>;
   onShowError?: TypeFormOnShowError<TFormData, TSubmitMeta>;
   slotDefault?: (form: ControllerForm<TFormData, TSubmitMeta>) => VNode;
   slotHeader?: (form: ControllerForm<TFormData, TSubmitMeta>) => VNode;
   slotBody?: (children: VNode, form: ControllerForm<TFormData, TSubmitMeta>) => VNode;
   slotFooter?: (form: ControllerForm<TFormData, TSubmitMeta>) => VNode;
+  slotWrapper?: (children: (VNode | undefined)[], form: ControllerForm<TFormData, TSubmitMeta>) => VNode;
 }
 declare class ControllerForm<TFormData extends {} = {}, TSubmitMeta = never> extends BeanControllerFormBase {
   static $propsDefault: {
@@ -33450,16 +33427,41 @@ declare class ControllerForm<TFormData extends {} = {}, TSubmitMeta = never> ext
   getFieldProperty<K$1 extends DeepKeys<TFormData>>(name: K$1): SchemaObject | undefined;
   getFieldZodSchema<K$1 extends DeepKeys<TFormData>>(name: K$1): ZodType<unknown, unknown, $ZodTypeInternals<unknown, unknown>> | undefined;
   private _getFieldCelEnv;
-  getFieldCelScope<K$1 extends DeepKeys<TFormData>>(name: K$1, scopeExtra?: {}): IFormFieldCelScope<TFormData>;
-  getFieldJsxRenderContext($$formField: ControllerFormField<TFormData> | undefined, celScope: IFormFieldCelScope<TFormData>): IJsxRenderContextFormField<TFormData, TSubmitMeta>;
-  getFieldComponentPropsTop<K$1 extends DeepKeys<TFormData>>(name: K$1, celScope: IFormFieldCelScope<TFormData>, jsxRenderContext: {}): IFormFieldRenderContextPropsBucket;
+  getFieldScope<K$1 extends DeepKeys<TFormData>>(name: K$1, scopeExtra?: {}): IFormFieldScope<TFormData>;
+  getFieldJsxRenderContext($$formField: ControllerFormField<TFormData> | undefined, celScope: IFormFieldScope<TFormData>): IJsxRenderContextFormField<TFormData, TSubmitMeta>;
+  getFieldComponentPropsTop<K$1 extends DeepKeys<TFormData>>(name: K$1, celScope: IFormFieldScope<TFormData>, jsxRenderContext: {}): IFormFieldRenderContextPropsBucket;
   private _getFieldComponentPropsTopInner;
   getRenderFlattern(render: TypeFormFieldRenderComponent): TypeFormFieldRenderComponent;
   getRenderProvider(render: TypeFormFieldRenderComponent): TypeFormFieldRenderComponentProvider;
   private _getZodSchema;
   private _patchZodSchema;
   private _createForm;
+  renderField<K$1 extends DeepKeys<TFormData>>(name: K$1): VNode<RendererNode, RendererElement, {
+    [key: string]: any;
+  }>[] | VNode<RendererNode, RendererElement, {
+    [key: string]: any;
+  }> | undefined;
+  protected _renderField(property: SchemaObject): VNode<RendererNode, RendererElement, {
+    [key: string]: any;
+  }>[] | VNode<RendererNode, RendererElement, {
+    [key: string]: any;
+  }> | undefined;
+  private _getFieldComponentOptionsTop;
   private _handleError422;
+}
+//#endregion
+//#region src/suite-vendor/a-zova/modules/a-form/src/component/formFieldWrapper/controller.d.ts
+interface ControllerFormFieldWrapperProps<TParentData extends {} = {}> extends IFormFieldOptions<TParentData> {}
+declare class ControllerFormFieldWrapper<TParentData extends {} = {}> extends BeanControllerBase {
+  static $propsDefault: {};
+  static $componentOptions: IComponentOptions;
+  $$form: ControllerForm<TParentData>;
+  protected __init__(): Promise<void>;
+  protected render(): VNode<RendererNode, RendererElement, {
+    [key: string]: any;
+  }>[] | VNode<RendererNode, RendererElement, {
+    [key: string]: any;
+  }> | undefined;
 }
 //#endregion
 //#region src/suite-vendor/a-zova/modules/a-form/src/component/formSubscribe/controller.d.ts
@@ -33475,54 +33477,112 @@ declare class ControllerFormSubscribe extends BeanControllerBase {
 }
 //#endregion
 //#region src/suite-vendor/a-zova/modules/a-form/src/.metadata/component/form.d.ts
-type ControllerInnerProps$6<TFormData extends {} = {}, TSubmitMeta = never> = TypeControllerInnerProps<ControllerFormProps<TFormData, TSubmitMeta>, keyof typeof ControllerForm.$propsDefault>;
+type ControllerInnerProps$7<TFormData extends {} = {}, TSubmitMeta = never> = TypeControllerInnerProps<ControllerFormProps<TFormData, TSubmitMeta>, keyof typeof ControllerForm.$propsDefault>;
 declare module 'zova-module-a-form' {
   interface ControllerForm<TFormData extends {} = {}, TSubmitMeta = never> {
-    $props: ControllerInnerProps$6<TFormData, TSubmitMeta>;
+    $props: ControllerInnerProps$7<TFormData, TSubmitMeta>;
   }
 }
 declare module 'zova-module-a-form' {
   interface RenderForm<TFormData extends {} = {}, TSubmitMeta = never> extends ControllerForm<TFormData, TSubmitMeta> {}
 }
-declare const ZForm: new <TFormData extends {} = {}, TSubmitMeta = never>(props: {
+declare const ZForm: new <TFormData extends {} = {}, TSubmitMeta = never>(props: ({
   controllerRef?: ((ref: ControllerForm<TFormData, TSubmitMeta>) => void) | undefined;
-} & ControllerFormProps<TFormData, TSubmitMeta> & {} & VNodeProps & AllowedComponentProps & ComponentCustomProps) => CreateComponentPublicInstanceWithMixins<{
+} & ControllerFormProps<TFormData, TSubmitMeta> & ({
+  [x: `on${Capitalize<string>}`]: ((...args: any[]) => any) | undefined;
+} | {
+  [x: `on${Capitalize<string>}`]: ((...args: never) => any) | undefined;
+})) & VNodeProps & AllowedComponentProps & ComponentCustomProps) => CreateComponentPublicInstanceWithMixins<{
   controllerRef?: ((ref: ControllerForm<TFormData, TSubmitMeta>) => void) | undefined;
-} & ControllerFormProps<TFormData, TSubmitMeta> & {}, {}, {}, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, {}, PublicProps, {}, false, {}, {}, {}, {}, string, {}, any, ComponentProvideOptions, {
+} & ControllerFormProps<TFormData, TSubmitMeta> & ({
+  [x: `on${Capitalize<string>}`]: ((...args: any[]) => any) | undefined;
+} | {
+  [x: `on${Capitalize<string>}`]: ((...args: never) => any) | undefined;
+}), {}, {}, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, EmitsOptions, PublicProps, {}, false, {}, SlotsType<Record<string, any>>, {}, {}, string, {}, any, ComponentProvideOptions, {
   P: {};
   B: {};
   D: {};
   C: {};
   M: {};
   Defaults: {};
-}, {
+}, {} & ({
   controllerRef?: ((ref: ControllerForm<TFormData, TSubmitMeta>) => void) | undefined;
-} & ControllerFormProps<TFormData, TSubmitMeta> & {}, {}, {}, {}, {}, {}>;
+} & ControllerFormProps<TFormData, TSubmitMeta> & ({
+  [x: `on${Capitalize<string>}`]: ((...args: any[]) => any) | undefined;
+} | {
+  [x: `on${Capitalize<string>}`]: ((...args: never) => any) | undefined;
+})), {}, {}, {}, {}, {}>;
 //#endregion
 //#region src/suite-vendor/a-zova/modules/a-form/src/.metadata/component/formField.d.ts
-type ControllerInnerProps$5<TParentData extends {} = {}> = TypeControllerInnerProps<ControllerFormFieldProps<TParentData>, keyof typeof ControllerFormField.$propsDefault>;
+type ControllerInnerProps$6<TParentData extends {} = {}> = TypeControllerInnerProps<ControllerFormFieldProps<TParentData>, keyof typeof ControllerFormField.$propsDefault>;
 declare module 'zova-module-a-form' {
   interface ControllerFormField<TParentData extends {} = {}> {
-    $props: ControllerInnerProps$5<TParentData>;
+    $props: ControllerInnerProps$6<TParentData>;
   }
 }
 declare module 'zova-module-a-form' {
   interface RenderFormField<TParentData extends {} = {}> extends ControllerFormField<TParentData> {}
 }
-declare const ZFormField: new <TParentData extends {} = {}>(props: {
+declare const ZFormField: new <TParentData extends {} = {}>(props: ({
   controllerRef?: ((ref: ControllerFormField<TParentData>) => void) | undefined;
-} & ControllerFormFieldProps<TParentData> & {} & VNodeProps & AllowedComponentProps & ComponentCustomProps) => CreateComponentPublicInstanceWithMixins<{
+} & ControllerFormFieldProps<TParentData> & ({
+  [x: `on${Capitalize<string>}`]: ((...args: any[]) => any) | undefined;
+} | {
+  [x: `on${Capitalize<string>}`]: ((...args: never) => any) | undefined;
+})) & VNodeProps & AllowedComponentProps & ComponentCustomProps) => CreateComponentPublicInstanceWithMixins<{
   controllerRef?: ((ref: ControllerFormField<TParentData>) => void) | undefined;
-} & ControllerFormFieldProps<TParentData> & {}, {}, {}, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, {}, PublicProps, {}, false, {}, {}, {}, {}, string, {}, any, ComponentProvideOptions, {
+} & ControllerFormFieldProps<TParentData> & ({
+  [x: `on${Capitalize<string>}`]: ((...args: any[]) => any) | undefined;
+} | {
+  [x: `on${Capitalize<string>}`]: ((...args: never) => any) | undefined;
+}), {}, {}, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, EmitsOptions, PublicProps, {}, false, {}, SlotsType<Record<string, any>>, {}, {}, string, {}, any, ComponentProvideOptions, {
   P: {};
   B: {};
   D: {};
   C: {};
   M: {};
   Defaults: {};
-}, {
+}, {} & ({
   controllerRef?: ((ref: ControllerFormField<TParentData>) => void) | undefined;
-} & ControllerFormFieldProps<TParentData> & {}, {}, {}, {}, {}, {}>;
+} & ControllerFormFieldProps<TParentData> & ({
+  [x: `on${Capitalize<string>}`]: ((...args: any[]) => any) | undefined;
+} | {
+  [x: `on${Capitalize<string>}`]: ((...args: never) => any) | undefined;
+})), {}, {}, {}, {}, {}>;
+//#endregion
+//#region src/suite-vendor/a-zova/modules/a-form/src/.metadata/component/formFieldWrapper.d.ts
+type ControllerInnerProps$5<TParentData extends {} = {}> = TypeControllerInnerProps<ControllerFormFieldWrapperProps<TParentData>, keyof typeof ControllerFormFieldWrapper.$propsDefault>;
+declare module 'zova-module-a-form' {
+  interface ControllerFormFieldWrapper<TParentData extends {} = {}> {
+    $props: ControllerInnerProps$5<TParentData>;
+  }
+}
+declare const ZFormFieldWrapper: new <TParentData extends {} = {}>(props: ({
+  controllerRef?: ((ref: ControllerFormFieldWrapper<TParentData>) => void) | undefined;
+} & ControllerFormFieldWrapperProps<TParentData> & ({
+  [x: `on${Capitalize<string>}`]: ((...args: any[]) => any) | undefined;
+} | {
+  [x: `on${Capitalize<string>}`]: ((...args: never) => any) | undefined;
+})) & VNodeProps & AllowedComponentProps & ComponentCustomProps) => CreateComponentPublicInstanceWithMixins<{
+  controllerRef?: ((ref: ControllerFormFieldWrapper<TParentData>) => void) | undefined;
+} & ControllerFormFieldWrapperProps<TParentData> & ({
+  [x: `on${Capitalize<string>}`]: ((...args: any[]) => any) | undefined;
+} | {
+  [x: `on${Capitalize<string>}`]: ((...args: never) => any) | undefined;
+}), {}, {}, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, EmitsOptions, PublicProps, {}, false, {}, SlotsType<Record<string, any>>, {}, {}, string, {}, any, ComponentProvideOptions, {
+  P: {};
+  B: {};
+  D: {};
+  C: {};
+  M: {};
+  Defaults: {};
+}, {} & ({
+  controllerRef?: ((ref: ControllerFormFieldWrapper<TParentData>) => void) | undefined;
+} & ControllerFormFieldWrapperProps<TParentData> & ({
+  [x: `on${Capitalize<string>}`]: ((...args: any[]) => any) | undefined;
+} | {
+  [x: `on${Capitalize<string>}`]: ((...args: never) => any) | undefined;
+})), {}, {}, {}, {}, {}>;
 //#endregion
 //#region src/suite-vendor/a-zova/modules/a-form/src/.metadata/component/formSubscribe.d.ts
 type ControllerInnerProps$4<TFormData extends {} = {}, TSubmitMeta = never> = TypeControllerInnerProps<ControllerFormSubscribeProps<TFormData, TSubmitMeta>, keyof typeof ControllerFormSubscribe.$propsDefault>;
@@ -33531,26 +33591,36 @@ declare module 'zova-module-a-form' {
     $props: ControllerInnerProps$4<TFormData, TSubmitMeta>;
   }
 }
-declare const ZFormSubscribe: new <TFormData extends {} = {}, TSubmitMeta = never>(props: {
+declare const ZFormSubscribe: new <TFormData extends {} = {}, TSubmitMeta = never>(props: ({
   controllerRef?: ((ref: ControllerFormSubscribe<TFormData, TSubmitMeta>) => void) | undefined;
-} & ControllerFormSubscribeProps<TFormData, TSubmitMeta> & {} & VNodeProps & AllowedComponentProps & ComponentCustomProps) => CreateComponentPublicInstanceWithMixins<{
+} & ControllerFormSubscribeProps<TFormData, TSubmitMeta> & ({
+  [x: `on${Capitalize<string>}`]: ((...args: any[]) => any) | undefined;
+} | {
+  [x: `on${Capitalize<string>}`]: ((...args: never) => any) | undefined;
+})) & VNodeProps & AllowedComponentProps & ComponentCustomProps) => CreateComponentPublicInstanceWithMixins<{
   controllerRef?: ((ref: ControllerFormSubscribe<TFormData, TSubmitMeta>) => void) | undefined;
-} & ControllerFormSubscribeProps<TFormData, TSubmitMeta> & {}, {}, {}, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, {}, PublicProps, {}, false, {}, {}, {}, {}, string, {}, any, ComponentProvideOptions, {
+} & ControllerFormSubscribeProps<TFormData, TSubmitMeta> & ({
+  [x: `on${Capitalize<string>}`]: ((...args: any[]) => any) | undefined;
+} | {
+  [x: `on${Capitalize<string>}`]: ((...args: never) => any) | undefined;
+}), {}, {}, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, EmitsOptions, PublicProps, {}, false, {}, SlotsType<Record<string, any>>, {}, {}, string, {}, any, ComponentProvideOptions, {
   P: {};
   B: {};
   D: {};
   C: {};
   M: {};
   Defaults: {};
-}, {
+}, {} & ({
   controllerRef?: ((ref: ControllerFormSubscribe<TFormData, TSubmitMeta>) => void) | undefined;
-} & ControllerFormSubscribeProps<TFormData, TSubmitMeta> & {}, {}, {}, {}, {}, {}>;
+} & ControllerFormSubscribeProps<TFormData, TSubmitMeta> & ({
+  [x: `on${Capitalize<string>}`]: ((...args: any[]) => any) | undefined;
+} | {
+  [x: `on${Capitalize<string>}`]: ((...args: never) => any) | undefined;
+})), {}, {}, {}, {}, {}>;
 //#endregion
 //#region src/suite-vendor/a-zova/modules/a-form/src/component/form/render.d.ts
 declare class RenderForm extends BeanRenderBase {
   private _renderSchema;
-  private _renderField;
-  private _getFieldComponentOptionsTop;
   private _renderChildren;
   private _renderBodyInner;
   private _renderProps;
@@ -33567,20 +33637,8 @@ declare class RenderFormField<TParentData extends {} = {}> extends BeanRenderBas
   private _renderSlotDefault;
 }
 //#endregion
-//#region src/suite-vendor/a-zova/modules/a-form/src/bean/behavior.formField.d.ts
-interface IBehaviorPropsInputFormField extends IFormFieldRenderContext {}
-interface IBehaviorPropsOutputFormField extends IBehaviorPropsInputFormField {}
-interface IBehaviorOptionsFormField extends IDecoratorBehaviorOptions {}
-declare class BehaviorFormField extends BeanBehaviorBase<IBehaviorOptionsFormField, IBehaviorPropsInputFormField, IBehaviorPropsOutputFormField> {
-  $$formField: ControllerFormField;
-  protected render(renderContext: IFormFieldRenderContext, next: NextBehavior<IBehaviorPropsOutputFormField>): VNode;
-  private _patchProps;
-  private _patchProps_general;
-  private _patchProps_input;
-}
-//#endregion
 //#region src/suite-vendor/a-zova/modules/a-form/src/config/config.d.ts
-declare const config$5: (_sys: ZovaSys) => {
+declare const config$6: (_sys: ZovaSys) => {
   formFieldLayout: {
     bordered: boolean;
   };
@@ -33591,6 +33649,7 @@ declare module 'zova' {}
 declare module 'zova-module-a-form' {
   interface ControllerForm {}
   interface ControllerFormField {}
+  interface ControllerFormFieldWrapper {}
   interface ControllerFormSubscribe {}
 }
 /** controller: end */
@@ -33600,6 +33659,7 @@ declare module 'zova' {
   interface IBeanRecordLocal {
     'a-form.controller.form': ControllerForm;
     'a-form.controller.formField': ControllerFormField;
+    'a-form.controller.formFieldWrapper': ControllerFormFieldWrapper;
     'a-form.controller.formSubscribe': ControllerFormSubscribe;
   }
 }
@@ -33610,11 +33670,13 @@ declare module 'zova' {
   interface IComponentRecord {
     'a-form:form': ControllerForm;
     'a-form:formField': ControllerFormField;
+    'a-form:formFieldWrapper': ControllerFormFieldWrapper;
     'a-form:formSubscribe': ControllerFormSubscribe;
   }
   interface IZovaComponentRecord {
     'a-form:form': typeof ZForm;
     'a-form:formField': typeof ZFormField;
+    'a-form:formFieldWrapper': typeof ZFormFieldWrapper;
     'a-form:formSubscribe': typeof ZFormSubscribe;
   }
 }
@@ -33636,58 +33698,19 @@ declare module 'zova' {
   }
 }
 /** render: end */
-/** behavior: begin */
-
-declare module 'zova-module-a-behavior' {
-  interface IBehaviorRecord {
-    'a-form:formField': IBehaviorOptionsFormField;
-  }
-}
-declare module 'zova-module-a-form' {
-  interface BehaviorFormField {}
-  interface BehaviorFormField {
-    get $beanFullName(): 'a-form.behavior.formField';
-    get $onionName(): 'a-form:formField';
-    get $onionOptions(): IBehaviorOptionsFormField;
-  }
-}
-/** behavior: end */
-/** behavior: begin */
-
-declare module 'zova' {
-  interface IBeanRecordLocal {
-    'a-form.behavior.formField': BehaviorFormField;
-  }
-}
-/** behavior: end */
-/** behaviors: begin */
-
-declare module 'vue' {
-  interface InputHTMLAttributes {
-    'bs-formField'?: IBehaviorOptionsFormField | '' | boolean;
-  }
-}
-declare module 'vue/jsx-runtime' {
-  namespace JSX {
-    interface IntrinsicAttributes {
-      'bs-formField'?: IBehaviorOptionsFormField | '' | boolean;
-    }
-  }
-}
-/** behaviors: end */
 /** config: begin */
 
 declare class ScopeModuleAForm extends BeanScopeBase {}
 interface ScopeModuleAForm {
   util: BeanScopeUtil;
-  config: TypeModuleConfig<typeof config$5>;
+  config: TypeModuleConfig<typeof config$6>;
 }
 declare module 'zova' {
   interface IBeanScopeRecord {
     'a-form': ScopeModuleAForm;
   }
   interface IBeanScopeConfig {
-    'a-form': ReturnType<typeof config$5>;
+    'a-form': ReturnType<typeof config$6>;
   }
 }
 /** scope: end */
@@ -36229,7 +36252,7 @@ interface Cell<TData$1 extends RowData, TValue> extends CoreCell<TData$1, TValue
 interface Header<TData$1 extends RowData, TValue> extends CoreHeader<TData$1, TValue>, ColumnSizingHeader {}
 interface HeaderGroup<TData$1 extends RowData> extends CoreHeaderGroup<TData$1> {}
 //#endregion
-//#region node_modules/.pnpm/@tanstack+vue-table@8.21.3_vue@3.5.27_typescript@5.7.3_/node_modules/@tanstack/vue-table/build/lib/index.d.ts
+//#region node_modules/.pnpm/@tanstack+vue-table@8.21.3_vue@3.5.28_typescript@5.9.3_/node_modules/@tanstack/vue-table/build/lib/index.d.ts
 type TableOptionsWithReactiveData<TData$1 extends RowData> = Omit<TableOptions<TData$1>, 'data'> & {
   data: MaybeRef$2<TData$1[]>;
 };
@@ -36262,7 +36285,7 @@ declare module 'zova-module-a-openapi' {
 //#region src/suite-vendor/a-zova/modules/a-table/src/types/tableColumn.d.ts
 type TypeTableCellRender<TData$1 extends RowData = RowData, TValue = any> = (props?: CellContext<TData$1, TValue>) => any;
 interface IJsxRenderContextTableColumn<TData$1 extends {} = any> extends IJsxRenderContextBase {
-  $celScope: ITableColumnCelScope;
+  $celScope: ITableColumnScope;
   $$table: ControllerTable<TData$1>;
 }
 interface ITableCellRenderColumnProps {
@@ -36271,12 +36294,12 @@ interface ITableCellRenderColumnProps {
   visible?: boolean;
   render: TypeTableCellRenderComponent;
 }
-interface ITableCelScope {}
-interface ITableColumnCelScope extends ITableCelScope {
+interface ITableScope {}
+interface ITableColumnScope extends ITableScope {
   name: string;
   property?: SchemaObject;
 }
-interface ITableCellCelScope extends ITableColumnCelScope {
+interface ITableCellScope extends ITableColumnScope {
   value: any;
   displayValue?: any;
 }
@@ -36310,15 +36333,11 @@ type TypeTableGetColumnsNext<TData$1 extends RowData = RowData> = (properties?: 
 //#endregion
 //#region src/suite-vendor/a-zova/modules/a-table/src/types/tableCell.d.ts
 interface IJsxRenderContextTableCell<TData$1 extends {} = any> extends IJsxRenderContextBase {
-  $celScope: ITableCellCelScope;
+  $celScope: ITableCellScope;
   $$table: ControllerTable<TData$1>;
   cellContext: CellContext<TData$1, any>;
 }
-type NextTableCellRender = () => any;
 interface ITableCellRecord {}
-interface ITableCellRender {
-  render(options: IDecoratorTableCellOptions, renderContext: IJsxRenderContextTableCell, next: NextTableCellRender): any;
-}
 interface IDecoratorTableCellOptions {}
 declare module 'zova-module-a-bean' {
   interface SysOnion {
@@ -36339,7 +36358,7 @@ interface ControllerTableProps$1<TData$1 extends {} = {}> {
   data?: TData$1[];
   schema?: SchemaObject;
   tableProvider?: ITableProvider;
-  tableScope?: ITableCelScope;
+  tableScope?: ITableScope;
   getColumns?: (next: TypeTableGetColumnsNext<TData$1>, table: ControllerTable<TData$1>) => Promise<TypeColumn<TData$1>[]>;
   slotDefault?: (table: ControllerTable<TData$1>) => VNode;
 }
@@ -36361,15 +36380,15 @@ declare class ControllerTable<TData$1 extends {} = {}> extends BeanControllerTab
   private _createColumnsMiddle;
   private _createProperties;
   private _createTableMeta;
-  getColumnJsxRenderContext(celScope: ITableColumnCelScope): IJsxRenderContextTableColumn;
-  getCellJsxRenderContext(celScope: ITableCellCelScope, cellContext: CellContext<TData$1, any>): IJsxRenderContextTableCell;
+  getColumnJsxRenderContext(celScope: ITableColumnScope): IJsxRenderContextTableColumn;
+  getCellJsxRenderContext(celScope: ITableCellScope, cellContext: CellContext<TData$1, any>): IJsxRenderContextTableCell;
   createColumnRender(key: string, render: TypeTableCellRenderComponent): Promise<TypeTableCellRender<TData$1, any>>;
   private _createColumnRender;
   private _cellRender;
   private _cellRenderInner;
   getColumnProperty(name: string): SchemaObject | undefined;
   private _getColumnCelEnv;
-  getColumnScope(name: string, scopeExtra?: {}): ITableColumnCelScope;
+  getColumnScope(name: string, scopeExtra?: {}): ITableColumnScope;
   getColumnComponentPropsTop(name: string, celScope: {}, renderContext: {}): ITableCellRenderColumnProps;
   getRenderFlattern(render: TypeTableCellRenderComponent): TypeTableCellRenderComponent;
   getRenderProvider(render: TypeTableCellRenderComponent): TypeTableCellRenderComponentProvider;
@@ -36385,20 +36404,32 @@ declare module 'zova-module-a-table' {
 declare module 'zova-module-a-table' {
   interface RenderTable<TData$1 extends {} = {}> extends ControllerTable<TData$1> {}
 }
-declare const ZTable: new <TData$1 extends {} = {}>(props: {
+declare const ZTable: new <TData$1 extends {} = {}>(props: ({
   controllerRef?: ((ref: ControllerTable<TData$1>) => void) | undefined;
-} & ControllerTableProps$1<TData$1> & {} & VNodeProps & AllowedComponentProps & ComponentCustomProps) => CreateComponentPublicInstanceWithMixins<{
+} & ControllerTableProps$1<TData$1> & ({
+  [x: `on${Capitalize<string>}`]: ((...args: any[]) => any) | undefined;
+} | {
+  [x: `on${Capitalize<string>}`]: ((...args: never) => any) | undefined;
+})) & VNodeProps & AllowedComponentProps & ComponentCustomProps) => CreateComponentPublicInstanceWithMixins<{
   controllerRef?: ((ref: ControllerTable<TData$1>) => void) | undefined;
-} & ControllerTableProps$1<TData$1> & {}, {}, {}, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, {}, PublicProps, {}, false, {}, {}, {}, {}, string, {}, any, ComponentProvideOptions, {
+} & ControllerTableProps$1<TData$1> & ({
+  [x: `on${Capitalize<string>}`]: ((...args: any[]) => any) | undefined;
+} | {
+  [x: `on${Capitalize<string>}`]: ((...args: never) => any) | undefined;
+}), {}, {}, {}, {}, ComponentOptionsMixin, ComponentOptionsMixin, EmitsOptions, PublicProps, {}, false, {}, SlotsType<Record<string, any>>, {}, {}, string, {}, any, ComponentProvideOptions, {
   P: {};
   B: {};
   D: {};
   C: {};
   M: {};
   Defaults: {};
-}, {
+}, {} & ({
   controllerRef?: ((ref: ControllerTable<TData$1>) => void) | undefined;
-} & ControllerTableProps$1<TData$1> & {}, {}, {}, {}, {}, {}>;
+} & ControllerTableProps$1<TData$1> & ({
+  [x: `on${Capitalize<string>}`]: ((...args: any[]) => any) | undefined;
+} | {
+  [x: `on${Capitalize<string>}`]: ((...args: never) => any) | undefined;
+})), {}, {}, {}, {}, {}>;
 //#endregion
 //#region src/suite-vendor/a-zova/modules/a-table/src/component/table/render.d.ts
 declare class RenderTable extends BeanRenderBase {
@@ -36407,7 +36438,7 @@ declare class RenderTable extends BeanRenderBase {
 }
 //#endregion
 //#region src/suite-vendor/a-zova/modules/a-table/src/config/config.d.ts
-declare const config$4: (_sys: ZovaSys) => {
+declare const config$5: (_sys: ZovaSys) => {
   renderFallbackValue: string;
 };
 //#endregion
@@ -36456,14 +36487,14 @@ declare module 'zova' {
 declare class ScopeModuleATable extends BeanScopeBase {}
 interface ScopeModuleATable {
   util: BeanScopeUtil;
-  config: TypeModuleConfig<typeof config$4>;
+  config: TypeModuleConfig<typeof config$5>;
 }
 declare module 'zova' {
   interface IBeanScopeRecord {
     'a-table': ScopeModuleATable;
   }
   interface IBeanScopeConfig {
-    'a-table': ReturnType<typeof config$4>;
+    'a-table': ReturnType<typeof config$5>;
   }
 }
 /** scope: end */
@@ -36480,151 +36511,9 @@ declare function TTCurrency(_props: ITableCellOptionsCurrency): string;
 interface ITableCellOptionsDate extends IDecoratorTableCellOptions {
   dateFormat?: TypeDateFormat;
 }
-declare class TableCellDate extends BeanBase implements ITableCellRender {
-  render(options: ITableCellOptionsDate, _renderContext: IJsxRenderContextTableCell, next: NextTableCellRender): any;
-}
 //#endregion
 //#region src/suite-vendor/a-zova/modules/a-date/rest/tableCell/date.d.ts
 declare function TTDate(_props: ITableCellOptionsDate): string;
-//#endregion
-//#region src/suite-vendor/a-zova/modules/a-date/src/component/dateRange/controller.d.ts
-interface ControllerDateRangeProps {
-  separator?: string;
-}
-interface ControllerDateRangeModels {
-  vModel?: string | undefined;
-}
-declare class ControllerDateRange extends BeanControllerBase {
-  static $propsDefault: {
-    separator: string;
-  };
-  private cSeparator;
-  modelValue: string | undefined;
-  protected __init__(): Promise<void>;
-  protected render(): JSX.Element;
-  _parseValue(value?: string): string[];
-  _combineValue(dateStartStr: string | undefined, dateEndStr: string | undefined): string | undefined;
-}
-//#endregion
-//#region src/suite-vendor/a-zova/modules/a-date/rest/component/dateRange.d.ts
-type TypeControllerDateRangePublicProps$1 = TypeRenderComponentJsxPropsPublic & ControllerDateRangeProps & ControllerDateRangeModels & { [KEY in keyof ControllerDateRangeModels as TypePropValueFromModel<KEY>]: ControllerDateRangeModels[KEY] } & { [KEY in keyof ControllerDateRangeModels as TypePropUpdateFromModel<KEY>]: (value: ControllerDateRangeModels[KEY]) => void };
-declare function ZZDateRange(_props: TypeControllerDateRangePublicProps$1): string;
-//#endregion
-//#region src/suite-vendor/a-zova/modules/a-date/src/.metadata/component/dateRange.d.ts
-type TypeControllerDateRangePublicProps = {
-  controllerRef?: (ref: ControllerDateRange) => void;
-} & ControllerDateRangeProps & ControllerDateRangeModels & { [KEY in keyof ControllerDateRangeModels as TypePropValueFromModel<KEY>]: ControllerDateRangeModels[KEY] } & { [KEY in keyof ControllerDateRangeModels as TypePropUpdateFromModel<KEY>]: (value: ControllerDateRangeModels[KEY]) => void };
-type TypeModelArguments = { [KEY in keyof ControllerDateRangeModels as TypePropValueFromModel<KEY>]: ControllerDateRangeModels[KEY] };
-type ControllerInnerProps$2 = TypeControllerInnerProps<ControllerDateRangeProps & { [KEY in keyof ControllerDateRangeModels as TypePropValueFromModel<KEY>]: ControllerDateRangeModels[KEY] }, keyof typeof ControllerDateRange.$propsDefault>;
-declare module 'zova-module-a-date' {
-  interface ControllerDateRange {
-    $props: ControllerInnerProps$2;
-    $useModel<K$1 extends keyof TypeModelArguments>(name: K$1, options?: DefineModelOptions<TypeModelArguments[K$1]>): ControllerInnerProps$2[K$1];
-  }
-}
-declare const ZDateRange: DefineSetupFnComponent<TypeControllerDateRangePublicProps, {}, {}, {
-  controllerRef?: ((ref: ControllerDateRange) => void) | undefined;
-} & ControllerDateRangeProps & ControllerDateRangeModels & {
-  modelValue?: string | undefined;
-} & {
-  "onUpdate:modelValue"?: ((value: string | undefined) => void) | undefined;
-} & {}, PublicProps>;
-//#endregion
-//#region src/suite-vendor/a-zova/modules/a-date/src/.metadata/component/formFieldDateRange.d.ts
-type TypeControllerFormFieldDateRangePublicProps$1 = {
-  controllerRef?: (ref: ControllerFormFieldDateRange) => void;
-} & ControllerFormFieldDateRangeProps;
-type ControllerInnerProps$1 = TypeControllerInnerProps<ControllerFormFieldDateRangeProps, keyof typeof ControllerFormFieldDateRange.$propsDefault>;
-declare module 'zova-module-a-date' {
-  interface ControllerFormFieldDateRange {
-    $props: ControllerInnerProps$1;
-  }
-}
-declare const ZFormFieldDateRange: DefineSetupFnComponent<TypeControllerFormFieldDateRangePublicProps$1, {}, {}, {
-  controllerRef?: ((ref: ControllerFormFieldDateRange) => void) | undefined;
-} & ControllerFormFieldDateRangeProps & {}, PublicProps>;
-//#endregion
-//#region src/suite-vendor/a-zova/modules/a-date/src/.metadata/index.d.ts
-declare module 'zova' {}
-declare module 'zova-module-a-date' {
-  interface ControllerDateRange {}
-  interface ControllerFormFieldDateRange {}
-}
-/** controller: end */
-/** controller: begin */
-
-declare module 'zova' {
-  interface IBeanRecordLocal {
-    'a-date.controller.dateRange': ControllerDateRange;
-    'a-date.controller.formFieldDateRange': ControllerFormFieldDateRange;
-  }
-}
-/** controller: end */
-/** components: begin */
-
-declare module 'zova' {
-  interface IComponentRecord {
-    'a-date:dateRange': ControllerDateRange;
-    'a-date:formFieldDateRange': ControllerFormFieldDateRange;
-  }
-  interface IZovaComponentRecord {
-    'a-date:dateRange': typeof ZDateRange;
-    'a-date:formFieldDateRange': typeof ZFormFieldDateRange;
-  }
-}
-/** components: end */
-/** tableCell: begin */
-
-declare module 'zova-module-a-table' {
-  interface ITableCellRecord {
-    'a-date:date': ITableCellOptionsDate;
-  }
-}
-declare module 'zova-module-a-date' {
-  interface TableCellDate {}
-  interface TableCellDate {
-    get $beanFullName(): 'a-date.tableCell.date';
-    get $onionName(): 'a-date:date';
-    get $onionOptions(): ITableCellOptionsDate;
-  }
-}
-/** tableCell: end */
-/** tableCell: begin */
-
-declare module 'zova' {
-  interface IBeanRecordGeneral {
-    'a-date.tableCell.date': TableCellDate;
-  }
-}
-/** tableCell: end */
-/** scope: begin */
-
-declare class ScopeModuleADate extends BeanScopeBase {}
-interface ScopeModuleADate {
-  util: BeanScopeUtil;
-}
-declare module 'zova' {
-  interface IBeanScopeRecord {
-    'a-date': ScopeModuleADate;
-  }
-}
-/** scope: end */
-//#endregion
-//#region src/suite-vendor/a-zova/modules/a-date/src/component/formFieldDateRange/controller.d.ts
-interface ControllerFormFieldDateRangeProps extends IFormFieldOptions {
-  separator?: string;
-}
-declare class ControllerFormFieldDateRange extends BeanControllerBase {
-  static $propsDefault: {};
-  static $componentOptions: IComponentOptions;
-  cContainer: string;
-  protected __init__(): Promise<void>;
-  protected render(): JSX.Element;
-}
-//#endregion
-//#region src/suite-vendor/a-zova/modules/a-date/rest/component/formFieldDateRange.d.ts
-type TypeControllerFormFieldDateRangePublicProps = TypeRenderComponentJsxPropsPublic & ControllerFormFieldDateRangeProps;
-declare function FFDateRange(_props: TypeControllerFormFieldDateRangePublicProps): string;
 //#endregion
 //#region src/suite-vendor/a-zova/modules/a-form/rest/component/form.d.ts
 type TypeControllerFormPublicProps<TFormData extends {} = {}, TSubmitMeta = never> = TypeRenderComponentJsxPropsPublic & ControllerFormProps<TFormData, TSubmitMeta>;
@@ -36637,6 +36526,10 @@ declare function ZZFormField<TParentData extends {} = {}>(_props: TypeController
 //#region src/suite-vendor/a-zova/modules/a-form/rest/component/formSubscribe.d.ts
 type TypeControllerFormSubscribePublicProps<TFormData extends {} = {}, TSubmitMeta = never> = TypeRenderComponentJsxPropsPublic & ControllerFormSubscribeProps<TFormData, TSubmitMeta>;
 declare function ZZFormSubscribe<TFormData extends {} = {}, TSubmitMeta = never>(_props: TypeControllerFormSubscribePublicProps<TFormData, TSubmitMeta>): string;
+//#endregion
+//#region src/suite-vendor/a-zova/modules/a-form/rest/component/formFieldWrapper.d.ts
+type TypeControllerFormFieldWrapperPublicProps<TParentData extends {} = {}> = TypeRenderComponentJsxPropsPublic & ControllerFormFieldWrapperProps<TParentData>;
+declare function FFFormWrapper<TParentData extends {} = {}>(_props: TypeControllerFormFieldWrapperPublicProps<TParentData>): string;
 //#endregion
 //#region src/suite-vendor/a-zova/modules/a-icon/rest/component/icon.d.ts
 type TypeControllerIconPublicProps = TypeRenderComponentJsxPropsPublic & ControllerIconProps;
@@ -36765,6 +36658,227 @@ interface ControllerEssentialLinkProps {
 type TypeControllerEssentialLinkPublicProps = TypeRenderComponentJsxPropsPublic & ControllerEssentialLinkProps;
 declare function ZZHomeLayoutEssentialLink(_props: TypeControllerEssentialLinkPublicProps): string;
 //#endregion
+//#region src/suite-vendor/a-zova/modules/a-ssr/src/lib/ssrMetaStore.d.ts
+declare class CtxSSRMetaStore extends BeanSimple {
+  private _updateId;
+  private _currentClientMeta?;
+  private _clientList;
+  protected __init__(): void;
+  private _onRenderedLast;
+  addMetaOptions(metaOptionsWrapper: SSRMetaOptionsWrapper): void;
+  removeMetaOptions(metaOptionsWrapper: SSRMetaOptionsWrapper): void;
+  planClientUpdate(): void;
+  private _updateClientMeta;
+  private _injectServerMeta;
+  private _injectContextState;
+  private _injectContextStateDefer;
+}
+//#endregion
+//#region src/suite-vendor/a-zova/modules/a-ssr/src/lib/ssr.d.ts
+declare const SymbolIsRuntimeSsrPreHydration: unique symbol;
+declare const SymbolSSRContext: unique symbol;
+declare const SymbolSSRState$1: unique symbol;
+declare const SymbolOnHydrateds: unique symbol;
+declare const SymbolOnHydratePropHasMismatches: unique symbol;
+declare const SymbolInstanceUpdates: unique symbol;
+declare const SymbolHydratingCounter: unique symbol;
+declare class CtxSSR extends BeanSimple {
+  private [SymbolIsRuntimeSsrPreHydration];
+  private [SymbolSSRContext];
+  private [SymbolSSRState$1];
+  private [SymbolOnHydrateds];
+  private [SymbolOnHydratePropHasMismatches];
+  private [SymbolInstanceUpdates];
+  private [SymbolHydratingCounter];
+  metaStore: CtxSSRMetaStore;
+  get isRuntimeSsrPreHydration(): boolean;
+  set isRuntimeSsrPreHydration(value: boolean);
+  get context(): SSRContext;
+  get state(): SSRContextState;
+  get stateDefer(): SSRContextStateDefer;
+  getPerformAction(baseURL?: string): TypeSsrSitePerformAction | undefined;
+  private _initContext;
+  onHydrated(fn: Functionable): void;
+  onHydratePropHasMismatch(fn: OnHydratePropHasMismatch): void;
+  handleDirectOrOnHydrated(fn: Functionable): void;
+  private _onHydratePropHasMismatchDefault;
+  private _hydrated;
+}
+//#endregion
+//#region src/suite-vendor/a-zova/modules/a-ssr/src/types/ssr.d.ts
+interface ErrorSSR extends Error {
+  pagePath?: string;
+  url?: string;
+}
+interface SSRContext {
+  _meta: SSRContextMeta;
+  state: SSRContextState;
+  stateDefer: SSRContextStateDefer;
+  req: Request;
+  res: Response;
+  pagePath?: string;
+  pageData?: any;
+  performAction?: TypeSsrSitePerformAction;
+  /** The global "nonce" attribute to use */
+  nonce?: string;
+  /**
+   * Registers a function to be executed server-side after
+   * app has been rendered with Vue. You might need this
+   * to access ssrContext again after it has been fully processed.
+   * Example: ssrContext.onRendered(() => { ... })
+   */
+  onRendered: (fn: (err?: Error) => void) => void;
+  rendered: () => void;
+  __qMetaList: SSRMetaOptions[];
+  modules: Set<string>;
+}
+interface SSRContextMeta {
+  htmlAttrs: string;
+  headTags: string;
+  endingHeadTags: string;
+  bodyClasses: string;
+  bodyAttrs: string;
+  bodyTags: string;
+  endingBodyTags: string;
+  baseUrl: string;
+  renderError: ErrorSSR | string;
+}
+interface SSRContextState {
+  envClient?: ZovaConfigEnv;
+  pagePathFull?: string;
+  pagePath?: string;
+  pageData?: unknown;
+}
+interface SSRContextStateDefer {}
+type SSRMetaTagOptions = Record<string, any> & {
+  template?: (attributeValue: string) => string;
+};
+interface SSRMetaOptions {
+  title?: string;
+  titleTemplate?(title: string): string;
+  meta?: {
+    [name: string]: SSRMetaTagOptions;
+  };
+  link?: {
+    [name: string]: Record<string, string>;
+  };
+  script?: {
+    [name: string]: Record<string, string>;
+  };
+  htmlAttr?: {
+    [name: string]: string | undefined;
+  };
+  bodyAttr?: {
+    [name: string]: string | undefined;
+  };
+  bodyStyle?: {
+    [name: string]: string | undefined;
+  };
+  bodyClass?: {
+    [name: string]: boolean;
+  };
+  noscript?: {
+    [name: string]: string;
+  };
+}
+interface SSRMetaOptionsWrapper {
+  active: boolean;
+  val?: SSRMetaOptions;
+}
+interface OnHydratePropHasMismatchResult {
+  ignore?: boolean;
+  clientValue?: any;
+}
+type OnHydratePropHasMismatch = (el: Element, key: string, clientValue: any, vnode: VNode, instance: ComponentInternalInstance | null) => OnHydratePropHasMismatchResult;
+type TypeSsrSitePerformAction = (data: ISsrSitePerformActionOptions) => Promise<any>;
+type TypeSsrSitePerformActionMethod = 'get' | 'post' | 'delete' | 'put' | 'patch';
+interface ISsrSitePerformActionOptions {
+  method: TypeSsrSitePerformActionMethod;
+  path: string;
+  query?: object;
+  body?: any;
+  headers?: object;
+}
+declare module 'zova' {
+  interface CtxMeta {
+    $ssr: CtxSSR;
+  }
+  interface BeanBase {
+    $ssr: CtxSSR;
+    $useMeta(options: SSRMetaOptions | (() => SSRMetaOptions)): void;
+  }
+  interface ZovaConfigEnv {
+    SSR_COOKIE_THEME: string | undefined;
+    SSR_COOKIE_THEMEDARK_DEFAULT: string | undefined;
+    SSR_BODYREADYOBSERVER: string | undefined;
+  }
+}
+declare global {
+  interface Window {
+    ssr_load_local<T$1>(key: string): T$1 | undefined;
+    ssr_themedark: boolean;
+    ssr_cookie_themedark: boolean;
+    ssr_local_themedark: boolean;
+    ssr_local_themename?: string;
+  }
+}
+//#endregion
+//#region src/suite-vendor/a-zova/modules/a-ssr/src/bean/sys.ssrState.d.ts
+declare const SymbolSSRState: unique symbol;
+declare const SymbolSSRStateDefer: unique symbol;
+declare class SysSsrState extends BeanBase {
+  protected [SymbolSSRState]: SSRContextState;
+  protected [SymbolSSRStateDefer]: SSRContextStateDefer;
+  protected __init__(): Promise<void>;
+  private _patchEnvConfig;
+  get state(): SSRContextState;
+  get stateDefer(): SSRContextStateDefer;
+}
+//#endregion
+//#region src/suite-vendor/a-zova/modules/a-ssr/src/config/config.d.ts
+declare const config$4: (sys: ZovaSys) => {
+  cookieTheme: boolean;
+  cookieThemeDarkDefault: boolean;
+  optimization: {
+    bodyReadyObserver: boolean;
+  };
+};
+//#endregion
+//#region src/suite-vendor/a-zova/modules/a-ssr/src/.metadata/index.d.ts
+declare module 'zova' {}
+declare module 'zova-module-a-ssr' {
+  interface SysSsrState {}
+  interface SysSsrState {
+    get $beanFullName(): 'a-ssr.sys.ssrState';
+    get $onionName(): 'a-ssr:ssrState';
+  }
+}
+/** sys: end */
+/** sys: begin */
+
+declare module 'zova' {
+  interface IBeanRecordGeneral {
+    'a-ssr.sys.ssrState': SysSsrState;
+  }
+}
+/** sys: end */
+/** config: begin */
+
+declare class ScopeModuleASsr extends BeanScopeBase {}
+interface ScopeModuleASsr {
+  util: BeanScopeUtil;
+  config: TypeModuleConfig<typeof config$4>;
+}
+declare module 'zova' {
+  interface IBeanScopeRecord {
+    'a-ssr': ScopeModuleASsr;
+  }
+  interface IBeanScopeConfig {
+    'a-ssr': ReturnType<typeof config$4>;
+  }
+}
+/** scope: end */
+//#endregion
 //#region src/suite/a-home/modules/home-layout/src/component/layoutEmpty/controller.d.ts
 interface ControllerLayoutEmptyProps {}
 //#endregion
@@ -36799,9 +36913,9 @@ interface IRouterViewPropsBase {}
 declare class BeanRouterViewBase extends BeanControllerBase implements IRouterViewPropsBase {
   protected __init__(): Promise<void>;
   protected __dispose__(): void;
-  backRoute(_route: RouteLocationNormalizedLoadedGeneric$1): boolean;
-  forwardRoute(_route: RouteLocationNormalizedLoadedGeneric$1): boolean;
-  protected prepareRouteMeta(_route: RouteLocationNormalizedLoadedGeneric$1): IRouteViewRouteMeta;
+  backRoute(_route: RouteLocationNormalizedLoadedGeneric): boolean;
+  forwardRoute(_route: RouteLocationNormalizedLoadedGeneric): boolean;
+  protected prepareRouteMeta(_route: RouteLocationNormalizedLoadedGeneric): IRouteViewRouteMeta;
   protected getKeepAliveInclude(): string[] | undefined;
   protected render(): JSX.Element;
 }
@@ -36814,17 +36928,17 @@ declare class BeanRouter extends BeanBase {
   private _routerViews;
   $$sysRouter: SysRouter;
   $$modelPageData: ModelPageData;
-  get router(): Router$1;
+  get router(): Router;
   protected __dispose__(): void;
   protected __get__(prop: string): any;
   protected __init__(mainRouter?: boolean): Promise<void>;
   addRouterView(routerView: BeanRouterViewBase): void;
   removeRouterView(routerView: BeanRouterViewBase): void;
-  afterEachBackRoute(route: RouteLocationNormalizedLoadedGeneric$1): void;
-  afterEachForwardRoute(route: RouteLocationNormalizedLoadedGeneric$1): void;
-  beforeEach(guard: NavigationGuardWithThis$1<undefined>): () => void;
-  beforeResolve(guard: NavigationGuardWithThis$1<undefined>): () => void;
-  afterEach(guard: NavigationHookAfter$1): () => void;
+  afterEachBackRoute(route: RouteLocationNormalizedLoadedGeneric): void;
+  afterEachForwardRoute(route: RouteLocationNormalizedLoadedGeneric): void;
+  beforeEach(guard: NavigationGuardWithThis<undefined>): () => void;
+  beforeResolve(guard: NavigationGuardWithThis<undefined>): () => void;
+  afterEach(guard: NavigationHookAfter): () => void;
   onError(handler: TypeErrorListener): () => void;
 }
 //#endregion
@@ -36835,1456 +36949,21 @@ interface IGotoPageOptions {
   forceRedirect?: boolean;
 }
 //#endregion
-//#region node_modules/.pnpm/vue-router@4.6.4_vue@3.5.27_typescript@5.7.3_/node_modules/vue-router/dist/router-CWoNjPRp.d.mts
-//#region src/query.d.ts
-
-/**
- * Possible values in normalized {@link LocationQuery}. `null` renders the query
- * param but without an `=`.
- *
- * @example
- * ```
- * ?isNull&isEmpty=&other=other
- * gives
- * `{ isNull: null, isEmpty: '', other: 'other' }`.
- * ```
- *
- * @internal
- */
-type LocationQueryValue = string | null;
-/**
- * Possible values when defining a query. `undefined` allows to remove a value.
- *
- * @internal
- */
-type LocationQueryValueRaw = LocationQueryValue | number | undefined;
-/**
- * Normalized query object that appears in {@link RouteLocationNormalized}
- *
- * @public
- */
-type LocationQuery = Record<string, LocationQueryValue | LocationQueryValue[]>;
-/**
- * Loose {@link LocationQuery} object that can be passed to functions like
- * {@link Router.push} and {@link Router.replace} or anywhere when creating a
- * {@link RouteLocationRaw}
- *
- * @public
- */
-type LocationQueryRaw = Record<string | number, LocationQueryValueRaw | LocationQueryValueRaw[]>;
-/**
- * Transforms a queryString into a {@link LocationQuery} object. Accept both, a
- * version with the leading `?` and without Should work as URLSearchParams
-
- * @internal
- *
- * @param search - search string to parse
- * @returns a query object
- */
-declare function parseQuery(search: string): LocationQuery;
-/**
- * Stringifies a {@link LocationQueryRaw} object. Like `URLSearchParams`, it
- * doesn't prepend a `?`
- *
- * @internal
- *
- * @param query - query object to stringify
- * @returns string version of the query without the leading `?`
- */
-declare function stringifyQuery(query: LocationQueryRaw | undefined): string;
-//#endregion
-//#region src/config.d.ts
-/**
- * Allows customizing existing types of the router that are used globally like `$router`, `<RouterLink>`, etc. **ONLY FOR INTERNAL USAGE**.
- *
- * - `$router` - the router instance
- * - `$route` - the current route location
- * - `beforeRouteEnter` - Page component option
- * - `beforeRouteUpdate` - Page component option
- * - `beforeRouteLeave` - Page component option
- * - `RouterLink` - RouterLink Component
- * - `RouterView` - RouterView Component
- *
- * @internal
- */
-interface TypesConfig {}
-//#endregion
-//#region src/typed-routes/route-map.d.ts
-/**
- * Helper type to define a Typed `RouteRecord`
- * @see {@link RouteRecord}
- */
-interface RouteRecordInfo<Name extends string | symbol = string, Path extends string = string, ParamsRaw extends RouteParamsRawGeneric = RouteParamsRawGeneric, Params$1 extends RouteParamsGeneric = RouteParamsGeneric, ChildrenNames extends string | symbol = never> {
-  name: Name;
-  path: Path;
-  paramsRaw: ParamsRaw;
-  params: Params$1;
-  childrenNames: ChildrenNames;
-}
-type RouteRecordInfoGeneric = RouteRecordInfo<string | symbol, string, RouteParamsRawGeneric, RouteParamsGeneric, string | symbol>;
-/**
- * Convenience type to get the typed RouteMap or a generic one if not provided. It is extracted from the {@link TypesConfig} if it exists, it becomes {@link RouteMapGeneric} otherwise.
- */
-type RouteMap = TypesConfig extends Record<'RouteNamedMap', infer RouteNamedMap> ? RouteNamedMap : RouteMapGeneric;
-/**
- * Generic version of the `RouteMap`.
- */
-type RouteMapGeneric = Record<string | symbol, RouteRecordInfoGeneric>;
-//#endregion
-//#region src/typed-routes/params.d.ts
-/**
- * Utility type for raw and non raw params like :id+
- *
- */
-
-//#endregion
-//#region src/types/utils.d.ts
-/**
- * Creates a union type that still allows autocompletion for strings.
- * @internal
- */
-type _LiteralUnion<LiteralType, BaseType extends string = string> = LiteralType | (BaseType & Record<never, never>);
-/**
- * Maybe a promise maybe not
- * @internal
- */
-type _Awaitable<T$1> = T$1 | PromiseLike<T$1>;
-/**
- * @internal
- */
-
-//#endregion
-//#region src/typed-routes/route-records.d.ts
-/**
- * @internal
- */
-type RouteRecordRedirectOption = RouteLocationRaw | ((to: RouteLocation, from: RouteLocationNormalizedLoaded) => RouteLocationRaw);
-/**
- * Generic version of {@link RouteRecordName}.
- */
-type RouteRecordNameGeneric = string | symbol | undefined;
-/**
- * Possible values for a route record **after normalization**
- *
- * NOTE: since `RouteRecordName` is a type, it evaluates too early and it's often the generic version {@link RouteRecordNameGeneric}. If you need a typed version of all of the names of routes, use {@link RouteMap | `keyof RouteMap`}
- */
-
-/**
- * @internal
- */
-type _RouteRecordProps<Name extends keyof RouteMap = keyof RouteMap> = boolean | Record<string, any> | ((to: RouteLocationNormalized<Name>) => Record<string, any>);
-//#endregion
-//#region src/typed-routes/route-location.d.ts
-/**
- * Generic version of {@link RouteLocation}. It is used when no {@link RouteMap} is provided.
- */
-interface RouteLocationGeneric extends _RouteLocationBase, RouteLocationOptions {
-  /**
-   * Array of {@link RouteRecord} containing components as they were
-   * passed when adding records. It can also contain redirect records. This
-   * can't be used directly. **This property is non-enumerable**.
-   */
-  matched: RouteRecord[];
-}
-/**
- * Helper to generate a type safe version of the {@link RouteLocation} type.
- */
-interface RouteLocationTyped<RouteMap$1$1 extends RouteMapGeneric, Name extends keyof RouteMap$1$1> extends RouteLocationGeneric {
-  name: Extract<Name, string | symbol>;
-  params: RouteMap$1$1[Name]['params'];
-}
-/**
- * List of all possible {@link RouteLocation} indexed by the route name.
- * @internal
- */
-type RouteLocationTypedList<RouteMap$1$1 extends RouteMapGeneric = RouteMapGeneric> = { [N in keyof RouteMap$1$1]: RouteLocationTyped<RouteMap$1$1, N> };
-/**
- * Generic version of {@link RouteLocationNormalized} that is used when no {@link RouteMap} is provided.
- */
-interface RouteLocationNormalizedGeneric extends _RouteLocationBase {
-  name: RouteRecordNameGeneric;
-  /**
-   * Array of {@link RouteRecordNormalized}
-   */
-  matched: RouteRecordNormalized[];
-}
-/**
- * Helper to generate a type safe version of the {@link RouteLocationNormalized} type.
- */
-interface RouteLocationNormalizedTyped<RouteMap$1$1 extends RouteMapGeneric = RouteMapGeneric, Name extends keyof RouteMap$1$1 = keyof RouteMap$1$1> extends RouteLocationNormalizedGeneric {
-  name: Extract<Name, string | symbol>;
-  params: RouteMap$1$1[Name]['params'];
-  /**
-   * Array of {@link RouteRecordNormalized}
-   */
-  matched: RouteRecordNormalized[];
-}
-/**
- * List of all possible {@link RouteLocationNormalized} indexed by the route name.
- * @internal
- */
-type RouteLocationNormalizedTypedList<RouteMap$1$1 extends RouteMapGeneric = RouteMapGeneric> = { [N in keyof RouteMap$1$1]: RouteLocationNormalizedTyped<RouteMap$1$1, N> };
-/**
- * Generic version of {@link RouteLocationNormalizedLoaded} that is used when no {@link RouteMap} is provided.
- */
-interface RouteLocationNormalizedLoadedGeneric extends RouteLocationNormalizedGeneric {
-  /**
-   * Array of {@link RouteLocationMatched} containing only plain components (any
-   * lazy-loaded components have been loaded and were replaced inside the
-   * `components` object) so it can be directly used to display routes. It
-   * cannot contain redirect records either. **This property is non-enumerable**.
-   */
-  matched: RouteLocationMatched[];
-}
-/**
- * Helper to generate a type safe version of the {@link RouteLocationNormalizedLoaded} type.
- */
-interface RouteLocationNormalizedLoadedTyped<RouteMap$1$1 extends RouteMapGeneric = RouteMapGeneric, Name extends keyof RouteMap$1$1 = keyof RouteMap$1$1> extends RouteLocationNormalizedLoadedGeneric {
-  name: Extract<Name, string | symbol>;
-  params: RouteMap$1$1[Name]['params'];
-}
-/**
- * List of all possible {@link RouteLocationNormalizedLoaded} indexed by the route name.
- * @internal
- */
-type RouteLocationNormalizedLoadedTypedList<RouteMap$1$1 extends RouteMapGeneric = RouteMapGeneric> = { [N in keyof RouteMap$1$1]: RouteLocationNormalizedLoadedTyped<RouteMap$1$1, N> };
-/**
- * Generic version of {@link RouteLocationAsRelative}. It is used when no {@link RouteMap} is provided.
- */
-interface RouteLocationAsRelativeGeneric extends RouteQueryAndHash, RouteLocationOptions {
-  name?: RouteRecordNameGeneric;
-  params?: RouteParamsRawGeneric;
-  /**
-   * A relative path to the current location. This property should be removed
-   */
-  path?: undefined;
-}
-/**
- * Helper to generate a type safe version of the {@link RouteLocationAsRelative} type.
- */
-interface RouteLocationAsRelativeTyped<RouteMap$1$1 extends RouteMapGeneric = RouteMapGeneric, Name extends keyof RouteMap$1$1 = keyof RouteMap$1$1> extends RouteLocationAsRelativeGeneric {
-  name?: Extract<Name, string | symbol>;
-  params?: RouteMap$1$1[Name]['paramsRaw'];
-}
-/**
- * List of all possible {@link RouteLocationAsRelative} indexed by the route name.
- * @internal
- */
-type RouteLocationAsRelativeTypedList<RouteMap$1$1 extends RouteMapGeneric = RouteMapGeneric> = { [N in keyof RouteMap$1$1]: RouteLocationAsRelativeTyped<RouteMap$1$1, N> };
-/**
- * Generic version of {@link RouteLocationAsPath}. It is used when no {@link RouteMap} is provided.
- */
-interface RouteLocationAsPathGeneric extends RouteQueryAndHash, RouteLocationOptions {
-  /**
-   * Percentage encoded pathname section of the URL.
-   */
-  path: string;
-}
-/**
- * Helper to generate a type safe version of the {@link RouteLocationAsPath} type.
- */
-interface RouteLocationAsPathTyped<RouteMap$1$1 extends RouteMapGeneric = RouteMapGeneric, Name extends keyof RouteMap$1$1 = keyof RouteMap$1$1> extends RouteLocationAsPathGeneric {
-  path: _LiteralUnion<RouteMap$1$1[Name]['path']>;
-}
-/**
- * List of all possible {@link RouteLocationAsPath} indexed by the route name.
- * @internal
- */
-type RouteLocationAsPathTypedList<RouteMap$1$1 extends RouteMapGeneric = RouteMapGeneric> = { [N in keyof RouteMap$1$1]: RouteLocationAsPathTyped<RouteMap$1$1, N> };
-/**
- * Helper to generate a type safe version of the {@link RouteLocationAsString} type.
- */
-type RouteLocationAsStringTyped<RouteMap$1$1 extends RouteMapGeneric = RouteMapGeneric, Name extends keyof RouteMap$1$1 = keyof RouteMap$1$1> = RouteMap$1$1[Name]['path'];
-/**
- * List of all possible {@link RouteLocationAsString} indexed by the route name.
- * @internal
- */
-type RouteLocationAsStringTypedList<RouteMap$1$1 extends RouteMapGeneric = RouteMapGeneric> = { [N in keyof RouteMap$1$1]: RouteLocationAsStringTyped<RouteMap$1$1, N> };
-/**
- * Generic version of {@link RouteLocationResolved}. It is used when no {@link RouteMap} is provided.
- */
-interface RouteLocationResolvedGeneric extends RouteLocationGeneric {
-  /**
-   * Resolved `href` for the route location that will be set on the `<a href="...">`.
-   */
-  href: string;
-}
-/**
- * Helper to generate a type safe version of the {@link RouteLocationResolved} type.
- */
-interface RouteLocationResolvedTyped<RouteMap$1$1 extends RouteMapGeneric, Name extends keyof RouteMap$1$1> extends RouteLocationTyped<RouteMap$1$1, Name> {
-  /**
-   * Resolved `href` for the route location that will be set on the `<a href="...">`.
-   */
-  href: string;
-}
-/**
- * List of all possible {@link RouteLocationResolved} indexed by the route name.
- * @internal
- */
-type RouteLocationResolvedTypedList<RouteMap$1$1 extends RouteMapGeneric = RouteMapGeneric> = { [N in keyof RouteMap$1$1]: RouteLocationResolvedTyped<RouteMap$1$1, N> };
-/**
- * Type safe versions of types that are exposed by vue-router. We have to use a generic check to allow for names to be `undefined` when no `RouteMap` is provided.
- */
-/**
- * {@link RouteLocationRaw} resolved using the matcher
- */
-type RouteLocation<Name extends keyof RouteMap = keyof RouteMap> = RouteMapGeneric extends RouteMap ? RouteLocationGeneric : RouteLocationTypedList<RouteMap>[Name];
-/**
- * Similar to {@link RouteLocation} but its
- * {@link RouteLocationNormalizedTyped.matched | `matched` property} cannot contain redirect records
- */
-type RouteLocationNormalized<Name extends keyof RouteMap = keyof RouteMap> = RouteMapGeneric extends RouteMap ? RouteLocationNormalizedGeneric : RouteLocationNormalizedTypedList<RouteMap>[Name];
-/**
- * Similar to {@link RouteLocationNormalized} but its `components` do not contain any function to lazy load components.
- * In other words, it's ready to be rendered by `<RouterView>`.
- */
-type RouteLocationNormalizedLoaded<Name extends keyof RouteMap = keyof RouteMap> = RouteMapGeneric extends RouteMap ? RouteLocationNormalizedLoadedGeneric : RouteLocationNormalizedLoadedTypedList<RouteMap>[Name];
-/**
- * Route location relative to the current location. It accepts other properties than `path` like `params`, `query` and
- * `hash` to conveniently change them.
- */
-type RouteLocationAsRelative<Name extends keyof RouteMap = keyof RouteMap> = RouteMapGeneric extends RouteMap ? RouteLocationAsRelativeGeneric : RouteLocationAsRelativeTypedList<RouteMap>[Name];
-/**
- * Route location resolved with {@link Router | `router.resolve()`}.
- */
-type RouteLocationResolved<Name extends keyof RouteMap = keyof RouteMap> = RouteMapGeneric extends RouteMap ? RouteLocationResolvedGeneric : RouteLocationResolvedTypedList<RouteMap>[Name];
-/**
- * Same as {@link RouteLocationAsPath} but as a string literal.
- */
-type RouteLocationAsString<Name extends keyof RouteMap = keyof RouteMap> = RouteMapGeneric extends RouteMap ? string : _LiteralUnion<RouteLocationAsStringTypedList<RouteMap>[Name], string>;
-/**
- * Route location as an object with a `path` property.
- */
-type RouteLocationAsPath<Name extends keyof RouteMap = keyof RouteMap> = RouteMapGeneric extends RouteMap ? RouteLocationAsPathGeneric : RouteLocationAsPathTypedList<RouteMap>[Name];
-/**
- * Route location that can be passed to `router.push()` and other user-facing APIs.
- */
-type RouteLocationRaw<Name extends keyof RouteMap = keyof RouteMap> = RouteMapGeneric extends RouteMap ? RouteLocationAsString | RouteLocationAsRelativeGeneric | RouteLocationAsPathGeneric : _LiteralUnion<RouteLocationAsStringTypedList<RouteMap>[Name], string> | RouteLocationAsRelativeTypedList<RouteMap>[Name] | RouteLocationAsPathTypedList<RouteMap>[Name];
-//#endregion
-//#region src/typed-routes/navigation-guards.d.ts
-/**
- * Return types for a Navigation Guard. Based on `TypesConfig`
- *
- * @see {@link TypesConfig}
- */
-type NavigationGuardReturn = void | Error | boolean | RouteLocationRaw;
-/**
- * Navigation Guard with a type parameter for `this`.
- * @see {@link TypesConfig}
- */
-interface NavigationGuardWithThis<T$1> {
-  (this: T$1, to: RouteLocationNormalized, from: RouteLocationNormalizedLoaded, next: NavigationGuardNext): _Awaitable<NavigationGuardReturn>;
-}
-/**
- * Navigation Guard.
- */
-interface NavigationGuard {
-  (to: RouteLocationNormalized, from: RouteLocationNormalizedLoaded, next: NavigationGuardNext): _Awaitable<NavigationGuardReturn>;
-}
-/**
- * Navigation hook triggered after a navigation is settled.
- */
-interface NavigationHookAfter {
-  (to: RouteLocationNormalized, from: RouteLocationNormalizedLoaded, failure?: NavigationFailure | void): unknown;
-}
-/**
- * `next()` callback passed to navigation guards.
- */
-interface NavigationGuardNext {
-  (): void;
-  (error: Error): void;
-  (location: RouteLocationRaw): void;
-  (valid: boolean | undefined): void;
-  (cb: NavigationGuardNextCallback): void;
-}
-/**
- * Callback that can be passed to `next()` in `beforeRouteEnter()` guards.
- */
-type NavigationGuardNextCallback = (vm: ComponentPublicInstance) => unknown;
-//#endregion
-//#region src/matcher/types.d.ts
-/**
- * Normalized version of a {@link RouteRecord | route record}.
- */
-interface RouteRecordNormalized {
-  /**
-   * {@inheritDoc _RouteRecordBase.path}
-   */
-  path: _RouteRecordBase['path'];
-  /**
-   * {@inheritDoc _RouteRecordBase.redirect}
-   */
-  redirect: _RouteRecordBase['redirect'] | undefined;
-  /**
-   * {@inheritDoc _RouteRecordBase.name}
-   */
-  name: _RouteRecordBase['name'];
-  /**
-   * {@inheritDoc RouteRecordMultipleViews.components}
-   */
-  components: RouteRecordMultipleViews['components'] | null | undefined;
-  /**
-   * Contains the original modules for lazy loaded components.
-   * @internal
-   */
-  mods: Record<string, unknown>;
-  /**
-   * Nested route records.
-   */
-  children: RouteRecordRaw[];
-  /**
-   * {@inheritDoc _RouteRecordBase.meta}
-   */
-  meta: Exclude<_RouteRecordBase['meta'], void>;
-  /**
-   * {@inheritDoc RouteRecordMultipleViews.props}
-   */
-  props: Record<string, _RouteRecordProps>;
-  /**
-   * Registered beforeEnter guards
-   */
-  beforeEnter: _RouteRecordBase['beforeEnter'];
-  /**
-   * Registered leave guards
-   *
-   * @internal
-   */
-  leaveGuards: Set<NavigationGuard>;
-  /**
-   * Registered update guards
-   *
-   * @internal
-   */
-  updateGuards: Set<NavigationGuard>;
-  /**
-   * Registered beforeRouteEnter callbacks passed to `next` or returned in guards
-   *
-   * @internal
-   */
-  enterCallbacks: Record<string, NavigationGuardNextCallback[]>;
-  /**
-   * Mounted route component instances
-   * Having the instances on the record mean beforeRouteUpdate and
-   * beforeRouteLeave guards can only be invoked with the latest mounted app
-   * instance if there are multiple application instances rendering the same
-   * view, basically duplicating the content on the page, which shouldn't happen
-   * in practice. It will work if multiple apps are rendering different named
-   * views.
-   */
-  instances: Record<string, ComponentPublicInstance | undefined | null>;
-  /**
-   * Defines if this record is the alias of another one. This property is
-   * `undefined` if the record is the original one.
-   */
-  aliasOf: RouteRecordNormalized | undefined;
-}
-/**
- * {@inheritDoc RouteRecordNormalized}
- */
-type RouteRecord = RouteRecordNormalized;
-//#endregion
-//#region src/matcher/pathParserRanker.d.ts
-
-/**
- * @internal
- */
-interface _PathParserOptions {
-  /**
-   * Makes the RegExp case-sensitive.
-   *
-   * @defaultValue `false`
-   */
-  sensitive?: boolean;
-  /**
-   * Whether to disallow a trailing slash or not.
-   *
-   * @defaultValue `false`
-   */
-  strict?: boolean;
-  /**
-   * Should the RegExp match from the beginning by prepending a `^` to it.
-   * @internal
-   *
-   * @defaultValue `true`
-   */
-  start?: boolean;
-  /**
-   * Should the RegExp match until the end by appending a `$` to it.
-   *
-   * @deprecated this option will alsways be `true` in the future. Open a discussion in vuejs/router if you need this to be `false`
-   *
-   * @defaultValue `true`
-   */
-  end?: boolean;
-}
-type PathParserOptions = Pick<_PathParserOptions, 'end' | 'sensitive' | 'strict'>;
-//#endregion
-//#region src/matcher/pathMatcher.d.ts
-
-//#endregion
-//#region src/history/common.d.ts
-type HistoryLocation = string;
-/**
- * Allowed variables in HTML5 history state. Note that pushState clones the state
- * passed and does not accept everything: e.g.: it doesn't accept symbols, nor
- * functions as values. It also ignores Symbols as keys.
- *
- * @internal
- */
-type HistoryStateValue = string | number | boolean | null | undefined | HistoryState | HistoryStateArray;
-/**
- * Allowed HTML history.state
- */
-interface HistoryState {
-  [x: number]: HistoryStateValue;
-  [x: string]: HistoryStateValue;
-}
-/**
- * Allowed arrays for history.state.
- *
- * @internal
- */
-interface HistoryStateArray extends Array<HistoryStateValue> {}
-declare enum NavigationType {
-  pop = "pop",
-  push = "push",
-}
-declare enum NavigationDirection {
-  back = "back",
-  forward = "forward",
-  unknown = "",
-}
-interface NavigationInformation {
-  type: NavigationType;
-  direction: NavigationDirection;
-  delta: number;
-}
-interface NavigationCallback {
-  (to: HistoryLocation, from: HistoryLocation, information: NavigationInformation): void;
-}
-/**
- * Interface implemented by History implementations that can be passed to the
- * router as {@link Router.history}
- *
- * @alpha
- */
-interface RouterHistory {
-  /**
-   * Base path that is prepended to every url. This allows hosting an SPA at a
-   * sub-folder of a domain like `example.com/sub-folder` by having a `base` of
-   * `/sub-folder`
-   */
-  readonly base: string;
-  /**
-   * Current History location
-   */
-  readonly location: HistoryLocation;
-  /**
-   * Current History state
-   */
-  readonly state: HistoryState;
-  /**
-   * Navigates to a location. In the case of an HTML5 History implementation,
-   * this will call `history.pushState` to effectively change the URL.
-   *
-   * @param to - location to push
-   * @param data - optional {@link HistoryState} to be associated with the
-   * navigation entry
-   */
-  push(to: HistoryLocation, data?: HistoryState): void;
-  /**
-   * Same as {@link RouterHistory.push} but performs a `history.replaceState`
-   * instead of `history.pushState`
-   *
-   * @param to - location to set
-   * @param data - optional {@link HistoryState} to be associated with the
-   * navigation entry
-   */
-  replace(to: HistoryLocation, data?: HistoryState): void;
-  /**
-   * Traverses history in a given direction.
-   *
-   * @example
-   * ```js
-   * myHistory.go(-1) // equivalent to window.history.back()
-   * myHistory.go(1) // equivalent to window.history.forward()
-   * ```
-   *
-   * @param delta - distance to travel. If delta is \< 0, it will go back,
-   * if it's \> 0, it will go forward by that amount of entries.
-   * @param triggerListeners - whether this should trigger listeners attached to
-   * the history
-   */
-  go(delta: number, triggerListeners?: boolean): void;
-  /**
-   * Attach a listener to the History implementation that is triggered when the
-   * navigation is triggered from outside (like the Browser back and forward
-   * buttons) or when passing `true` to {@link RouterHistory.back} and
-   * {@link RouterHistory.forward}
-   *
-   * @param callback - listener to attach
-   * @returns a callback to remove the listener
-   */
-  listen(callback: NavigationCallback): () => void;
-  /**
-   * Generates the corresponding href to be used in an anchor tag.
-   *
-   * @param location - history location that should create an href
-   */
-  createHref(location: HistoryLocation): string;
-  /**
-   * Clears any event listener attached by the history implementation.
-   */
-  destroy(): void;
-}
-//#endregion
-//#region src/types/index.d.ts
-type Lazy$1<T$1> = () => Promise<T$1>;
-/**
- * @internal
- */
-type RouteParamValue = string;
-/**
- * @internal
- */
-type RouteParamValueRaw = RouteParamValue | number | null | undefined;
-type RouteParamsGeneric = Record<string, RouteParamValue | RouteParamValue[]>;
-type RouteParamsRawGeneric = Record<string, RouteParamValueRaw | Exclude<RouteParamValueRaw, null | undefined>[]>;
-/**
- * @internal
- */
-interface RouteQueryAndHash {
-  query?: LocationQueryRaw;
-  hash?: string;
-}
-/**
- * @internal
- */
-
-/**
- * Common options for all navigation methods.
- */
-interface RouteLocationOptions {
-  /**
-   * Replace the entry in the history instead of pushing a new entry
-   */
-  replace?: boolean;
-  /**
-   * Triggers the navigation even if the location is the same as the current one.
-   * Note this will also add a new entry to the history unless `replace: true`
-   * is passed.
-   */
-  force?: boolean;
-  /**
-   * State to save using the History API. This cannot contain any reactive
-   * values and some primitives like Symbols are forbidden. More info at
-   * https://developer.mozilla.org/en-US/docs/Web/API/History/state
-   */
-  state?: HistoryState;
-}
-/**
- * Route Location that can infer the necessary params based on the name.
- *
- * @internal
- */
-
-interface RouteLocationMatched extends RouteRecordNormalized {
-  components: Record<string, RouteComponent> | null | undefined;
-}
-/**
- * Base properties for a normalized route location.
- *
- * @internal
- */
-interface _RouteLocationBase extends Pick<MatcherLocation, 'name' | 'path' | 'params' | 'meta'> {
-  /**
-   * The whole location including the `search` and `hash`. This string is
-   * percentage encoded.
-   */
-  fullPath: string;
-  /**
-   * Object representation of the `search` property of the current location.
-   */
-  query: LocationQuery;
-  /**
-   * Hash of the current location. If present, starts with a `#`.
-   */
-  hash: string;
-  /**
-   * Contains the location we were initially trying to access before ending up
-   * on the current location.
-   */
-  redirectedFrom: RouteLocation | undefined;
-}
-/**
- * Allowed Component in {@link RouteLocationMatched}
- */
-type RouteComponent = Component$1 | DefineComponent;
-/**
- * Allowed Component definitions in route records provided by the user
- */
-type RawRouteComponent = RouteComponent | Lazy$1<RouteComponent>;
-/**
- * Internal type for common properties among all kind of {@link RouteRecordRaw}.
- */
-interface _RouteRecordBase extends PathParserOptions {
-  /**
-   * Path of the record. Should start with `/` unless the record is the child of
-   * another record.
-   *
-   * @example `/users/:id` matches `/users/1` as well as `/users/posva`.
-   */
-  path: string;
-  /**
-   * Where to redirect if the route is directly matched. The redirection happens
-   * before any navigation guard and triggers a new navigation with the new
-   * target location.
-   */
-  redirect?: RouteRecordRedirectOption;
-  /**
-   * Aliases for the record. Allows defining extra paths that will behave like a
-   * copy of the record. Allows having paths shorthands like `/users/:id` and
-   * `/u/:id`. All `alias` and `path` values must share the same params.
-   */
-  alias?: string | string[];
-  /**
-   * Name for the route record. Must be unique.
-   */
-  name?: RouteRecordNameGeneric;
-  /**
-   * Before Enter guard specific to this record. Note `beforeEnter` has no
-   * effect if the record has a `redirect` property.
-   */
-  beforeEnter?: NavigationGuardWithThis<undefined> | NavigationGuardWithThis<undefined>[];
-  /**
-   * Arbitrary data attached to the record.
-   */
-  meta?: RouteMeta;
-  /**
-   * Array of nested routes.
-   */
-  children?: RouteRecordRaw[];
-  /**
-   * Allow passing down params as props to the component rendered by `router-view`.
-   */
-  props?: _RouteRecordProps | Record<string, _RouteRecordProps>;
-}
-/**
- * Interface to type `meta` fields in route records.
- *
- * @example
- *
- * ```ts
- * // typings.d.ts or router.ts
- * import 'vue-router';
- *
- * declare module 'vue-router' {
- *   interface RouteMeta {
- *     requiresAuth?: boolean
- *   }
- * }
- * ```
- */
-interface RouteMeta extends Record<PropertyKey, unknown> {}
-/**
- * Route Record defining one single component with the `component` option.
- */
-interface RouteRecordSingleView extends _RouteRecordBase {
-  /**
-   * Component to display when the URL matches this route.
-   */
-  component: RawRouteComponent;
-  components?: never;
-  children?: never;
-  redirect?: never;
-  /**
-   * Allow passing down params as props to the component rendered by `router-view`.
-   */
-  props?: _RouteRecordProps;
-}
-/**
- * Route Record defining one single component with a nested view. Differently
- * from {@link RouteRecordSingleView}, this record has children and allows a
- * `redirect` option.
- */
-interface RouteRecordSingleViewWithChildren extends _RouteRecordBase {
-  /**
-   * Component to display when the URL matches this route.
-   */
-  component?: RawRouteComponent | null | undefined;
-  components?: never;
-  children: RouteRecordRaw[];
-  /**
-   * Allow passing down params as props to the component rendered by `router-view`.
-   */
-  props?: _RouteRecordProps;
-}
-/**
- * Route Record defining multiple named components with the `components` option.
- */
-interface RouteRecordMultipleViews extends _RouteRecordBase {
-  /**
-   * Components to display when the URL matches this route. Allow using named views.
-   */
-  components: Record<string, RawRouteComponent>;
-  component?: never;
-  children?: never;
-  redirect?: never;
-  /**
-   * Allow passing down params as props to the component rendered by
-   * `router-view`. Should be an object with the same keys as `components` or a
-   * boolean to be applied to every component.
-   */
-  props?: Record<string, _RouteRecordProps> | boolean;
-}
-/**
- * Route Record defining multiple named components with the `components` option and children.
- */
-interface RouteRecordMultipleViewsWithChildren extends _RouteRecordBase {
-  /**
-   * Components to display when the URL matches this route. Allow using named views.
-   */
-  components?: Record<string, RawRouteComponent> | null | undefined;
-  component?: never;
-  children: RouteRecordRaw[];
-  /**
-   * Allow passing down params as props to the component rendered by
-   * `router-view`. Should be an object with the same keys as `components` or a
-   * boolean to be applied to every component.
-   */
-  props?: Record<string, _RouteRecordProps> | boolean;
-}
-/**
- * Route Record that defines a redirect. Cannot have `component` or `components`
- * as it is never rendered.
- */
-interface RouteRecordRedirect extends _RouteRecordBase {
-  redirect: RouteRecordRedirectOption;
-  component?: never;
-  components?: never;
-  props?: never;
-}
-type RouteRecordRaw = RouteRecordSingleView | RouteRecordSingleViewWithChildren | RouteRecordMultipleViews | RouteRecordMultipleViewsWithChildren | RouteRecordRedirect;
-/**
- * Route location that can be passed to the matcher.
- */
-
-/**
- * Normalized/resolved Route location that returned by the matcher.
- */
-interface MatcherLocation {
-  /**
-   * Name of the matched record
-   */
-  name: RouteRecordNameGeneric | null | undefined;
-  /**
-   * Percentage encoded pathname section of the URL.
-   */
-  path: string;
-  /**
-   * Object of decoded params extracted from the `path`.
-   */
-  params: RouteParamsGeneric;
-  /**
-   * Merged `meta` properties from all the matched route records.
-   */
-  meta: RouteMeta;
-  /**
-   * Array of {@link RouteRecord} containing components as they were
-   * passed when adding records. It can also contain redirect records. This
-   * can't be used directly
-   */
-  matched: RouteRecord[];
-}
-//#endregion
-//#region src/errors.d.ts
-/**
- * Flags so we can combine them when checking for multiple errors. This is the internal version of
- * {@link NavigationFailureType}.
- *
- * @internal
- */
-declare const enum ErrorTypes {
-  MATCHER_NOT_FOUND = 1,
-  NAVIGATION_GUARD_REDIRECT = 2,
-  NAVIGATION_ABORTED = 4,
-  NAVIGATION_CANCELLED = 8,
-  NAVIGATION_DUPLICATED = 16,
-}
-/**
- * Enumeration with all possible types for navigation failures. Can be passed to
- * {@link isNavigationFailure} to check for specific failures.
- */
-
-/**
- * Extended Error that contains extra information regarding a failed navigation.
- */
-interface NavigationFailure extends Error {
-  /**
-   * Type of the navigation. One of {@link NavigationFailureType}
-   */
-  type: ErrorTypes.NAVIGATION_CANCELLED | ErrorTypes.NAVIGATION_ABORTED | ErrorTypes.NAVIGATION_DUPLICATED;
-  /**
-   * Route location we were navigating from
-   */
-  from: RouteLocationNormalized;
-  /**
-   * Route location we were navigating to
-   */
-  to: RouteLocationNormalized;
-}
-/**
- * Internal error used to detect a redirection.
- *
- * @internal
- */
-
-/**
- * Internal type to define an ErrorHandler
- *
- * @param error - error thrown
- * @param to - location we were navigating to when the error happened
- * @param from - location we were navigating from when the error happened
- * @internal
- */
-interface _ErrorListener {
-  (error: any, to: RouteLocationNormalized, from: RouteLocationNormalizedLoaded): any;
-}
-//#endregion
-//#region src/scrollBehavior.d.ts
-/**
- * Scroll position similar to
- * {@link https://developer.mozilla.org/en-US/docs/Web/API/ScrollToOptions | `ScrollToOptions`}.
- * Note that not all browsers support `behavior`.
- */
-type ScrollPositionCoordinates = {
-  behavior?: ScrollOptions['behavior'];
-  left?: number;
-  top?: number;
-};
-/**
- * Internal normalized version of {@link ScrollPositionCoordinates} that always
- * has `left` and `top` coordinates. Must be a type to be assignable to HistoryStateValue.
- *
- * @internal
- */
-type _ScrollPositionNormalized = {
-  behavior?: ScrollOptions['behavior'];
-  left: number;
-  top: number;
-};
-/**
- * Type of the `scrollBehavior` option that can be passed to `createRouter`.
- */
-interface RouterScrollBehavior {
-  /**
-   * @param to - Route location where we are navigating to
-   * @param from - Route location where we are navigating from
-   * @param savedPosition - saved position if it exists, `null` otherwise
-   */
-  (to: RouteLocationNormalized, from: RouteLocationNormalizedLoaded, savedPosition: _ScrollPositionNormalized | null): Awaitable<ScrollPosition | false | void>;
-}
-interface ScrollPositionElement extends ScrollToOptions {
-  /**
-   * A valid CSS selector. Note some characters must be escaped in id selectors (https://mathiasbynens.be/notes/css-escapes).
-   * @example
-   * Here are a few examples:
-   *
-   * - `.title`
-   * - `.content:first-child`
-   * - `#marker`
-   * - `#marker\~with\~symbols`
-   * - `#marker.with.dot`: selects `class="with dot" id="marker"`, not `id="marker.with.dot"`
-   *
-   */
-  el: string | Element;
-}
-type ScrollPosition = ScrollPositionCoordinates | ScrollPositionElement;
-type Awaitable<T$1> = T$1 | PromiseLike<T$1>;
-//#endregion
-//#region src/experimental/route-resolver/matchers/param-parsers/types.d.ts
-/**
- * Defines a parser that can read a param from the url (string-based) and
- * transform it into a more complex type, or vice versa.
- *
- * @see MatcherPattern
- */
-
-//#endregion
-//#region src/experimental/router.d.ts
-/**
- * Options to initialize a {@link Router} instance.
- */
-interface EXPERIMENTAL_RouterOptions_Base extends PathParserOptions {
-  /**
-   * History implementation used by the router. Most web applications should use
-   * `createWebHistory` but it requires the server to be properly configured.
-   * You can also use a _hash_ based history with `createWebHashHistory` that
-   * does not require any configuration on the server but isn't handled at all
-   * by search engines and does poorly on SEO.
-   *
-   * @example
-   * ```js
-   * createRouter({
-   *   history: createWebHistory(),
-   *   // other options...
-   * })
-   * ```
-   */
-  history: RouterHistory;
-  /**
-   * Function to control scrolling when navigating between pages. Can return a
-   * Promise to delay scrolling.
-   *
-   * @see {@link RouterScrollBehavior}.
-   *
-   * @example
-   * ```js
-   * function scrollBehavior(to, from, savedPosition) {
-   *   // `to` and `from` are both route locations
-   *   // `savedPosition` can be null if there isn't one
-   * }
-   * ```
-   */
-  scrollBehavior?: RouterScrollBehavior;
-  /**
-   * Custom implementation to parse a query. See its counterpart,
-   * {@link EXPERIMENTAL_RouterOptions_Base.stringifyQuery}.
-   *
-   * @example
-   * Let's say you want to use the [qs package](https://github.com/ljharb/qs)
-   * to parse queries, you can provide both `parseQuery` and `stringifyQuery`:
-   * ```js
-   * import qs from 'qs'
-   *
-   * createRouter({
-   *   // other options...
-   *   parseQuery: qs.parse,
-   *   stringifyQuery: qs.stringify,
-   * })
-   * ```
-   */
-  parseQuery?: typeof parseQuery;
-  /**
-   * Custom implementation to stringify a query object. Should not prepend a leading `?`.
-   * {@link parseQuery} counterpart to handle query parsing.
-   */
-  stringifyQuery?: typeof stringifyQuery;
-  /**
-   * Default class applied to active {@link RouterLink}. If none is provided,
-   * `router-link-active` will be applied.
-   */
-  linkActiveClass?: string;
-  /**
-   * Default class applied to exact active {@link RouterLink}. If none is provided,
-   * `router-link-exact-active` will be applied.
-   */
-  linkExactActiveClass?: string;
-}
-/**
- * Internal type for common properties among all kind of {@link RouteRecordRaw}.
- */
-
-/**
- * Router base instance.
- *
- * @experimental This version is not stable, it's meant to replace {@link Router} in the future.
- */
-interface EXPERIMENTAL_Router_Base<TRecord$1> {
-  /**
-   * Current {@link RouteLocationNormalized}
-   */
-  readonly currentRoute: ShallowRef<RouteLocationNormalizedLoaded>;
-  /**
-   * Allows turning off the listening of history events. This is a low level api for micro-frontend.
-   */
-  listening: boolean;
-  /**
-   * Checks if a route with a given name exists
-   *
-   * @param name - Name of the route to check
-   */
-  hasRoute(name: NonNullable<RouteRecordNameGeneric>): boolean;
-  /**
-   * Get a full list of all the {@link RouteRecord | route records}.
-   */
-  getRoutes(): TRecord$1[];
-  /**
-   * Returns the {@link RouteLocation | normalized version} of a
-   * {@link RouteLocationRaw | route location}. Also includes an `href` property
-   * that includes any existing `base`. By default, the `currentLocation` used is
-   * `router.currentRoute` and should only be overridden in advanced use cases.
-   *
-   * @param to - Raw route location to resolve
-   * @param currentLocation - Optional current location to resolve against
-   */
-  resolve<Name extends keyof RouteMap = keyof RouteMap>(to: RouteLocationAsRelativeTyped<RouteMap, Name>, currentLocation?: RouteLocationNormalizedLoaded): RouteLocationResolved<Name>;
-  resolve(to: RouteLocationAsString | RouteLocationAsRelative | RouteLocationAsPath, currentLocation?: RouteLocationNormalizedLoaded): RouteLocationResolved;
-  /**
-   * Programmatically navigate to a new URL by pushing an entry in the history
-   * stack.
-   *
-   * @param to - Route location to navigate to
-   */
-  push(to: RouteLocationRaw): Promise<NavigationFailure | void | undefined>;
-  /**
-   * Programmatically navigate to a new URL by replacing the current entry in
-   * the history stack.
-   *
-   * @param to - Route location to navigate to
-   */
-  replace(to: RouteLocationRaw): Promise<NavigationFailure | void | undefined>;
-  /**
-   * Go back in history if possible by calling `history.back()`. Equivalent to
-   * `router.go(-1)`.
-   */
-  back(): void;
-  /**
-   * Go forward in history if possible by calling `history.forward()`.
-   * Equivalent to `router.go(1)`.
-   */
-  forward(): void;
-  /**
-   * Allows you to move forward or backward through the history. Calls
-   * `history.go()`.
-   *
-   * @param delta - The position in the history to which you want to move,
-   * relative to the current page
-   */
-  go(delta: number): void;
-  /**
-   * Add a navigation guard that executes before any navigation. Returns a
-   * function that removes the registered guard.
-   *
-   * @param guard - navigation guard to add
-   */
-  beforeEach(guard: NavigationGuardWithThis<undefined>): () => void;
-  /**
-   * Add a navigation guard that executes before navigation is about to be
-   * resolved. At this state all component have been fetched and other
-   * navigation guards have been successful. Returns a function that removes the
-   * registered guard.
-   *
-   * @param guard - navigation guard to add
-   * @returns a function that removes the registered guard
-   *
-   * @example
-   * ```js
-   * router.beforeResolve(to => {
-   *   if (to.meta.requiresAuth && !isAuthenticated) return false
-   * })
-   * ```
-   *
-   */
-  beforeResolve(guard: NavigationGuardWithThis<undefined>): () => void;
-  /**
-   * Add a navigation hook that is executed after every navigation. Returns a
-   * function that removes the registered hook.
-   *
-   * @param guard - navigation hook to add
-   * @returns a function that removes the registered hook
-   *
-   * @example
-   * ```js
-   * router.afterEach((to, from, failure) => {
-   *   if (isNavigationFailure(failure)) {
-   *     console.log('failed navigation', failure)
-   *   }
-   * })
-   * ```
-   */
-  afterEach(guard: NavigationHookAfter): () => void;
-  /**
-   * Adds an error handler that is called every time a non caught error happens
-   * during navigation. This includes errors thrown synchronously and
-   * asynchronously, errors returned or passed to `next` in any navigation
-   * guard, and errors occurred when trying to resolve an async component that
-   * is required to render a route.
-   *
-   * @param handler - error handler to register
-   */
-  onError(handler: _ErrorListener): () => void;
-  /**
-   * Returns a Promise that resolves when the router has completed the initial
-   * navigation, which means it has resolved all async enter hooks and async
-   * components that are associated with the initial route. If the initial
-   * navigation already happened, the promise resolves immediately.
-   *
-   * This is useful in server-side rendering to ensure consistent output on both
-   * the server and the client. Note that on server side, you need to manually
-   * push the initial location while on client side, the router automatically
-   * picks it up from the URL.
-   */
-  isReady(): Promise<void>;
-  /**
-   * Called automatically by `app.use(router)`. Should not be called manually by
-   * the user. This will trigger the initial navigation when on client side.
-   *
-   * @internal
-   * @param app - Application that uses the router
-   */
-  install(app: App): void;
-}
-//#endregion
-//#region node_modules/.pnpm/vue-router@4.6.4_vue@3.5.27_typescript@5.7.3_/node_modules/vue-router/dist/vue-router.d.mts
-//#endregion
-//#region src/router.d.ts
-/**
- * Options to initialize a {@link Router} instance.
- */
-interface RouterOptions extends EXPERIMENTAL_RouterOptions_Base {
-  /**
-   * Initial list of routes that should be added to the router.
-   */
-  routes: Readonly<RouteRecordRaw[]>;
-}
-/**
- * Router instance.
- */
-interface Router extends EXPERIMENTAL_Router_Base<RouteRecordNormalized> {
-  /**
-   * Original options object passed to create the Router
-   */
-  readonly options: RouterOptions;
-  /**
-   * Add a new {@link RouteRecordRaw | route record} as the child of an existing route.
-   *
-   * @param parentName - Parent Route Record where `route` should be appended at
-   * @param route - Route Record to add
-   */
-  addRoute(parentName: NonNullable<RouteRecordNameGeneric>, route: RouteRecordRaw): () => void;
-  /**
-   * Add a new {@link RouteRecordRaw | route record} to the router.
-   *
-   * @param route - Route Record to add
-   */
-  addRoute(route: RouteRecordRaw): () => void;
-  /**
-   * Remove an existing route by its name.
-   *
-   * @param name - Name of the route to remove
-   */
-  removeRoute(name: NonNullable<RouteRecordNameGeneric>): void;
-  /**
-   * Delete all routes from the router.
-   */
-  clearRoutes(): void;
-}
-/**
- * Creates a Router instance that can be used by a Vue app.
- *
- * @param options - {@link RouterOptions}
- */
-
-//#endregion
-//#region src/RouterLink.d.ts
-interface RouterLinkOptions {
-  /**
-   * Route Location the link should navigate to when clicked on.
-   */
-  to: RouteLocationRaw;
-  /**
-   * Calls `router.replace` instead of `router.push`.
-   */
-  replace?: boolean;
-}
-interface RouterLinkProps extends RouterLinkOptions {
-  /**
-   * Whether RouterLink should not wrap its content in an `a` tag. Useful when
-   * using `v-slot` to create a custom RouterLink
-   */
-  custom?: boolean;
-  /**
-   * Class to apply when the link is active
-   */
-  activeClass?: string;
-  /**
-   * Class to apply when the link is exact active
-   */
-  exactActiveClass?: string;
-  /**
-   * Value passed to the attribute `aria-current` when the link is exact active.
-   *
-   * @defaultValue `'page'`
-   */
-  ariaCurrentValue?: 'page' | 'step' | 'location' | 'date' | 'time' | 'true' | 'false';
-  /**
-   * Pass the returned promise of `router.push()` to `document.startViewTransition()` if supported.
-   */
-  viewTransition?: boolean;
-}
-/**
- * Options passed to {@link useLink}.
- */
-interface UseLinkOptions<Name extends keyof RouteMap = keyof RouteMap> {
-  to: MaybeRef$2<RouteLocationAsString | RouteLocationAsRelativeTyped<RouteMap, Name> | RouteLocationAsPath | RouteLocationRaw>;
-  replace?: MaybeRef$2<boolean | undefined>;
-  /**
-   * Pass the returned promise of `router.push()` to `document.startViewTransition()` if supported.
-   */
-  viewTransition?: boolean;
-}
-/**
- * Return type of {@link useLink}.
- * @internal
- */
-interface UseLinkReturn<Name extends keyof RouteMap = keyof RouteMap> {
-  route: ComputedRef<RouteLocationResolved<Name>>;
-  href: ComputedRef<string>;
-  isActive: ComputedRef<boolean>;
-  isExactActive: ComputedRef<boolean>;
-  navigate(e?: MouseEvent): Promise<void | NavigationFailure>;
-}
-/**
- * Returns the internal behavior of a {@link RouterLink} without the rendering part.
- *
- * @param props - a `to` location and an optional `replace` flag
- */
-declare function useLink<Name extends keyof RouteMap = keyof RouteMap>(props: UseLinkOptions<Name>): UseLinkReturn<Name>;
-/**
- * Component to render a link that triggers a navigation on click.
- */
-declare const RouterLink: _RouterLinkI;
-/**
- * @internal
- */
-type _RouterLinkPropsTypedBase = AllowedComponentProps & ComponentCustomProps & VNodeProps & RouterLinkProps;
-/**
- * @internal
- */
-type RouterLinkPropsTyped<Custom extends boolean | undefined> = Custom extends true ? _RouterLinkPropsTypedBase & {
-  custom: true;
-} : _RouterLinkPropsTypedBase & {
-  custom?: false | undefined;
-} & Omit<AnchorHTMLAttributes, 'href'>;
-/**
- * Typed version of the `RouterLink` component. Its generic defaults to the typed router, so it can be inferred
- * automatically for JSX.
- *
- * @internal
- */
-interface _RouterLinkI {
-  new <Custom extends boolean | undefined = boolean | undefined>(): {
-    $props: RouterLinkPropsTyped<Custom>;
-    $slots: {
-      default?: ({
-        route,
-        href,
-        isActive,
-        isExactActive,
-        navigate
-      }: UnwrapRef<UseLinkReturn>) => VNode[];
-    };
-  };
-  /**
-   * Access to `useLink()` without depending on using vue-router
-   *
-   * @internal
-   */
-  useLink: typeof useLink;
-}
-//#endregion
-//#region src/RouterView.d.ts
-interface RouterViewProps {
-  name?: string;
-  route?: RouteLocationNormalized;
-}
-/**
- * Component to display the current route the user is at.
- */
-declare const RouterView: {
-  new (): {
-    $props: AllowedComponentProps & ComponentCustomProps & VNodeProps & RouterViewProps;
-    $slots: {
-      default?: ({
-        Component,
-        route
-      }: {
-        Component: VNode;
-        route: RouteLocationNormalizedLoaded;
-      }) => VNode[];
-    };
-  };
-};
-//#endregion
-//#region src/useApi.d.ts
-/**
- * Returns the router instance. Equivalent to using `$router` inside
- * templates.
- */
-
-//#endregion
-//#region src/index.d.ts
-declare module 'vue' {
-  interface ComponentCustomOptions {
-    /**
-     * Guard called when the router is navigating to the route that is rendering
-     * this component from a different route. Differently from `beforeRouteUpdate`
-     * and `beforeRouteLeave`, `beforeRouteEnter` does not have access to the
-     * component instance through `this` because it triggers before the component
-     * is even mounted.
-     *
-     * @param to - RouteLocationRaw we are navigating to
-     * @param from - RouteLocationRaw we are navigating from
-     * @param next - function to validate, cancel or modify (by redirecting) the
-     * navigation
-     */
-    beforeRouteEnter?: TypesConfig extends Record<'beforeRouteEnter', infer T> ? T : NavigationGuardWithThis<undefined>;
-    /**
-     * Guard called whenever the route that renders this component has changed, but
-     * it is reused for the new route. This allows you to guard for changes in
-     * params, the query or the hash.
-     *
-     * @param to - RouteLocationRaw we are navigating to
-     * @param from - RouteLocationRaw we are navigating from
-     * @param next - function to validate, cancel or modify (by redirecting) the
-     * navigation
-     */
-    beforeRouteUpdate?: TypesConfig extends Record<'beforeRouteUpdate', infer T> ? T : NavigationGuard;
-    /**
-     * Guard called when the router is navigating away from the current route that
-     * is rendering this component.
-     *
-     * @param to - RouteLocationRaw we are navigating to
-     * @param from - RouteLocationRaw we are navigating from
-     * @param next - function to validate, cancel or modify (by redirecting) the
-     * navigation
-     */
-    beforeRouteLeave?: TypesConfig extends Record<'beforeRouteLeave', infer T> ? T : NavigationGuard;
-  }
-  interface ComponentCustomProperties {
-    /**
-     * Normalized current location. See {@link RouteLocationNormalizedLoaded}.
-     */
-    $route: TypesConfig extends Record<'$route', infer T> ? T : RouteLocationNormalizedLoaded;
-    /**
-     * {@link Router} instance used by the application.
-     */
-    $router: TypesConfig extends Record<'$router', infer T> ? T : Router;
-  }
-  interface GlobalComponents {
-    RouterView: TypesConfig extends Record<'RouterView', infer T> ? T : typeof RouterView;
-    RouterLink: TypesConfig extends Record<'RouterLink', infer T> ? T : typeof RouterLink;
-  }
-}
-//#endregion
-//#endregion
 //#region src/suite-vendor/a-zova/modules/a-router/src/types/router.d.ts
 type Lazy<T$1> = () => Promise<T$1>;
-type IModuleRouteComponent = RouteComponent$1 | Lazy<RouteComponent$1>;
-type IModuleRoute = RouteRecordRaw$1;
+type IModuleRouteComponent = RouteComponent | Lazy<RouteComponent>;
+type IModuleRoute = RouteRecordRaw;
 type TypeComponentKeyMode = 'nameOnly' | 'withParams';
-type TypeGotoPageResult = void | Promise<NavigationFailure$1 | void | undefined>;
+type TypeGotoPageResult = void | Promise<NavigationFailure | void | undefined>;
 declare module '@cabloy/vue-router' {
   interface RouteMeta {
     absolute?: boolean;
     layout?: keyof TypeComponentLayoutRecord | keyof ILayoutRecord | false | IModuleRouteComponent;
     requiresAuth?: boolean;
     componentKeyMode?: TypeComponentKeyMode;
-    componentKey?: ((this: ZovaApplication, route: RouteLocationNormalizedLoaded$1) => string) | string;
-    tabKey?: ((this: ZovaApplication, route: RouteLocationNormalizedLoaded$1) => string) | string;
-    keepAlive?: ((this: ZovaApplication, route: RouteLocationNormalizedLoaded$1) => boolean) | boolean;
+    componentKey?: ((this: ZovaApplication, route: RouteLocationNormalizedLoaded) => string) | string;
+    tabKey?: ((this: ZovaApplication, route: RouteLocationNormalizedLoaded) => string) | string;
+    keepAlive?: ((this: ZovaApplication, route: RouteLocationNormalizedLoaded) => boolean) | boolean;
   }
 }
 declare module 'zova' {
@@ -38302,13 +36981,14 @@ declare module 'zova' {
   interface BeanBase {
     $router: BeanRouter;
     $routerView: BeanRouterViewBase;
-    $pageRoute: RouteLocationNormalizedLoadedGeneric$1 | undefined;
+    $pageRoute: RouteLocationNormalizedLoadedGeneric | undefined;
+    $currentRoute: RouteLocationNormalizedLoadedGeneric | undefined;
   }
   interface IModuleResource {
     routes: IModuleRoute[];
   }
   interface IControllerDataContext {
-    route?: RouteLocationNormalizedLoaded$1;
+    route?: RouteLocationNormalizedLoaded;
   }
   interface IModuleResource {
     pagePathSchemas?: TypePageSchemas;
@@ -38331,8 +37011,8 @@ declare module 'zova' {
     ROUTER_KEY_RETURNTO: string;
   }
   interface BeanControllerPageBase {
-    $route: RouteLocationNormalizedLoaded$1;
-    $routeMatched: RouteLocationMatched$1;
+    $route: RouteLocationNormalizedLoaded;
+    $routeMatched: RouteLocationMatched;
   }
 }
 interface IPageNameRecord {}
@@ -38347,26 +37027,26 @@ interface TypePagePathSchema$1<PARAMS = unknown, QUERY = unknown> {
   query?: QUERY;
 }
 interface TypeErrorListener {
-  (error: any, to: RouteLocationNormalized$1, from: RouteLocationNormalizedLoaded$1): any;
+  (error: any, to: RouteLocationNormalized, from: RouteLocationNormalizedLoaded): any;
 }
 //#endregion
 //#region src/suite-vendor/a-zova/modules/a-router/src/bean/sys.router.d.ts
-interface SysRouter extends Router$1 {}
+interface SysRouter extends Router {}
 declare class SysRouter extends BeanBase {
   private _vueRouterSys;
-  get router(): Router$1;
+  get router(): Router;
   protected __get__(prop: string): any;
   protected __init__(): Promise<void>;
-  createRouter(options?: RouterOptions$1): Router$1;
+  createRouter(options?: RouterOptions): Router;
   createAsyncComponent(component: string | IModuleRouteComponent): IModuleRouteComponent;
   getPagePath<K$1 extends keyof IPagePathRecord$1>(path: K$1, options?: IPagePathRecord$1[K$1], absolute?: boolean): string;
-  resolveRoute(url: string, check404?: boolean, checkAliasOf?: boolean): Promise<RouteLocationResolvedGeneric$1 | undefined>;
+  resolveRoute(url: string, check404?: boolean, checkAliasOf?: boolean): Promise<RouteLocationResolvedGeneric | undefined>;
   checkPathValid(to?: {
     name?: string;
     path?: string | null | undefined;
   } | string | null | undefined): boolean;
-  ensureRoute(pagePath: string): Promise<RouteLocationResolvedGeneric$1>;
-  getRouteMatched(route: RouteLocationNormalizedLoaded$1): RouteLocationMatched$1 | undefined;
+  ensureRoute(pagePath: string): Promise<RouteLocationResolvedGeneric>;
+  getRouteMatched(route: RouteLocationNormalizedLoaded): RouteLocationMatched | undefined;
   getRealRouteName(name?: string | symbol | null): string | undefined;
   isRouterName(name?: string | null | undefined): boolean;
   resolveName<K$1 extends keyof IPageNameRecord>(name: K$1, options?: IPageNameRecord[K$1]): string;
@@ -38405,11 +37085,15 @@ declare class ControllerRouterViewEmpty extends BeanRouterViewBase {
 interface TypeControllerRouterViewEmptyPublicProps {
   controllerRef?: (ref: ControllerRouterViewEmpty) => void;
 }
-declare const ZRouterViewEmpty: DefineSetupFnComponent<TypeControllerRouterViewEmptyPublicProps, {}, {}, TypeControllerRouterViewEmptyPublicProps & {}, PublicProps>;
+declare const ZRouterViewEmpty: DefineSetupFnComponent<TypeControllerRouterViewEmptyPublicProps, EmitsOptions, SlotsType<Record<string, any>>, TypeControllerRouterViewEmptyPublicProps & ({
+  [x: `on${Capitalize<string>}`]: ((...args: any[]) => any) | undefined;
+} | {
+  [x: `on${Capitalize<string>}`]: ((...args: never) => any) | undefined;
+}), PublicProps>;
 //#endregion
 //#region src/suite-vendor/a-zova/modules/a-router/src/config/config.d.ts
 declare const config$3: (_sys: ZovaSys) => {
-  scrollBehavior: RouterScrollBehavior$1;
+  scrollBehavior: RouterScrollBehavior;
 };
 //#endregion
 //#region src/suite-vendor/a-zova/modules/a-router/src/.metadata/index.d.ts
@@ -38580,10 +37264,14 @@ declare class ModelTabs extends BeanModelBase {
   tabCurrentIndex: number;
   tabCurrent?: RouteTab;
   keepAliveInclude: string[];
+  private _eventSsrHmrReload;
   protected __init__(scene: string, options?: ModelTabsOptions): Promise<void>;
+  protected __dispose__(): void;
   get cache(): boolean | undefined;
   addTab(tab: RouteTabTransient, affix?: boolean): boolean;
   _addTab(tab: Partial<RouteTabTransient>, affix?: boolean): boolean;
+  updateAllTabInfos(): void;
+  updateTabInfo(tabKey?: string): void;
   deleteTab(tabKey?: string, noActiveNext?: boolean): Promise<void>;
   deleteTabItem(tabKey?: string, componentKey?: string, noActiveNext?: boolean): Promise<boolean>;
   findTabItemByFullPath(fullPath: string): string[];
@@ -38595,9 +37283,9 @@ declare class ModelTabs extends BeanModelBase {
   private _checkIfTabNeedUpdate;
   private _getKeepAliveInclude;
   private _getInitialTabs;
-  backRoute(route: RouteLocationNormalizedLoadedGeneric$1): void;
-  forwardRoute(route: RouteLocationNormalizedLoadedGeneric$1): void;
-  prepareRouteMeta(route: RouteLocationNormalizedLoadedGeneric$1): IRouteViewRouteMeta;
+  backRoute(route: RouteLocationNormalizedLoadedGeneric): void;
+  forwardRoute(route: RouteLocationNormalizedLoadedGeneric): void;
+  prepareRouteMeta(route: RouteLocationNormalizedLoadedGeneric): IRouteViewRouteMeta;
   private _handleRouteProp;
   private __handleRoutePropComponentKey;
 }
@@ -38607,9 +37295,9 @@ interface ControllerRouterViewTabsProps extends IRouterViewPropsBase {}
 declare class ControllerRouterViewTabs extends BeanRouterViewBase {
   static $propsDefault: {};
   $$modelTabs: ModelTabs;
-  backRoute(route: RouteLocationNormalizedLoadedGeneric$1): boolean;
-  forwardRoute(route: RouteLocationNormalizedLoadedGeneric$1): boolean;
-  protected prepareRouteMeta(route: RouteLocationNormalizedLoadedGeneric$1): IRouteViewRouteMeta;
+  backRoute(route: RouteLocationNormalizedLoadedGeneric): boolean;
+  forwardRoute(route: RouteLocationNormalizedLoadedGeneric): boolean;
+  protected prepareRouteMeta(route: RouteLocationNormalizedLoadedGeneric): IRouteViewRouteMeta;
   protected getKeepAliveInclude(): string[] | undefined;
 }
 //#endregion
@@ -38617,15 +37305,19 @@ declare class ControllerRouterViewTabs extends BeanRouterViewBase {
 type TypeControllerRouterViewTabsPublicProps$1 = {
   controllerRef?: (ref: ControllerRouterViewTabs) => void;
 } & ControllerRouterViewTabsProps;
-type ControllerInnerProps = TypeControllerInnerProps<ControllerRouterViewTabsProps, keyof typeof ControllerRouterViewTabs.$propsDefault>;
+type ControllerInnerProps$2 = TypeControllerInnerProps<ControllerRouterViewTabsProps, keyof typeof ControllerRouterViewTabs.$propsDefault>;
 declare module 'zova-module-a-routertabs' {
   interface ControllerRouterViewTabs {
-    $props: ControllerInnerProps;
+    $props: ControllerInnerProps$2;
   }
 }
-declare const ZRouterViewTabs: DefineSetupFnComponent<TypeControllerRouterViewTabsPublicProps$1, {}, {}, {
+declare const ZRouterViewTabs: DefineSetupFnComponent<TypeControllerRouterViewTabsPublicProps$1, EmitsOptions, SlotsType<Record<string, any>>, {
   controllerRef?: ((ref: ControllerRouterViewTabs) => void) | undefined;
-} & ControllerRouterViewTabsProps & {}, PublicProps>;
+} & ControllerRouterViewTabsProps & ({
+  [x: `on${Capitalize<string>}`]: ((...args: any[]) => any) | undefined;
+} | {
+  [x: `on${Capitalize<string>}`]: ((...args: never) => any) | undefined;
+}), PublicProps>;
 //#endregion
 //#region src/suite-vendor/a-zova/modules/a-routertabs/src/.metadata/index.d.ts
 declare module 'zova-module-a-model' {
@@ -38993,6 +37685,38 @@ interface paths {
     options?: never;
     head?: never;
     patch: operations['DemoStudent_update'];
+    trace?: never;
+  };
+  '/api/demo/student/teacher': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get: operations['DemoStudentTeacher_select'];
+    put?: never;
+    post: operations['DemoStudentTeacher_create'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/demo/student/teacher/{id}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get: operations['DemoStudentTeacher_view'];
+    put?: never;
+    post?: never;
+    delete: operations['DemoStudentTeacher_delete'];
+    options?: never;
+    head?: never;
+    patch: operations['DemoStudentTeacher_update'];
     trace?: never;
   };
   '/api/home/base/menu/{publicPath?}': {
@@ -39860,16 +38584,16 @@ interface components {
       email: string;
       password: string;
       passwordConfirm: string;
-      captcha: components['schemas']['a-captcha.dto.captchaVerify_3e0e56cc9823311c05e4ea2412c0f05ef604f668'];
+      captcha: components['schemas']['a-captcha.dto.captchaVerify_c3cd80b1eeafe39bfe4433491bb081d68e84797e'];
     };
-    'a-captcha.dto.captchaVerify_3e0e56cc9823311c05e4ea2412c0f05ef604f668': {
+    'a-captcha.dto.captchaVerify_c3cd80b1eeafe39bfe4433491bb081d68e84797e': {
       id: string;
       token?: unknown;
     };
     'home-user.dto.login': {
       username: string;
       password: string;
-      captcha: components['schemas']['a-captcha.dto.captchaVerify_3e0e56cc9823311c05e4ea2412c0f05ef604f668'];
+      captcha: components['schemas']['a-captcha.dto.captchaVerify_c3cd80b1eeafe39bfe4433491bb081d68e84797e'];
     };
     'a-captcha.dto.captchaData': {
       id: string;
@@ -40027,6 +38751,81 @@ interface components {
       /** @description Description */
       description?: string | undefined;
     };
+    'demo-student.dto.teacherCreate': {
+      /** @description Name */
+      name: string;
+      /** @description Description */
+      description?: string | undefined;
+    };
+    'demo-student.dto.teacherQueryRes': {
+      list: {
+        /**
+                 * Format: date
+                 * @description Created At
+                 */
+        createdAt: string;
+        /**
+                 * Format: date
+                 * @description Updated At
+                 */
+        updatedAt: string;
+        /**
+                 * @description Deleted
+                 * @default false
+                 */
+        deleted?: boolean;
+        /**
+                 * @description Instance ID
+                 * @default 0
+                 */
+        iid?: number;
+        /** @description ID */
+        id: number | string;
+        /** @description Name */
+        name: string;
+        /** @description Description */
+        description?: string | undefined;
+      }[];
+      total: string;
+      pageCount: number;
+      pageSize: number;
+      pageNo: number;
+    };
+    /** @description Teacher */
+    'demo-student.entity.teacher': {
+      /**
+             * Format: date
+             * @description Created At
+             */
+      createdAt: string;
+      /**
+             * Format: date
+             * @description Updated At
+             */
+      updatedAt: string;
+      /**
+             * @description Deleted
+             * @default false
+             */
+      deleted?: boolean;
+      /**
+             * @description Instance ID
+             * @default 0
+             */
+      iid?: number;
+      /** @description ID */
+      id: number | string;
+      /** @description Name */
+      name: string;
+      /** @description Description */
+      description?: string | undefined;
+    } | undefined;
+    'demo-student.dto.teacherUpdate': {
+      /** @description Name */
+      name: string;
+      /** @description Description */
+      description?: string | undefined;
+    };
     'a-menu.dto.menus': {
       menus?: components['schemas']['a-menu.dto.menuItem'][] | undefined;
       groups?: components['schemas']['a-menu.dto.menuGroup'][] | undefined;
@@ -40057,7 +38856,7 @@ interface components {
       group?: string | string[] | undefined;
       collapsed?: boolean | undefined;
     };
-    'a-openapischema.dto.permissions': {
+    'a-permission.dto.permissions': {
       roleIds?: (number | string)[] | undefined;
       roleNames?: string[] | undefined;
       actions?: unknown;
@@ -41280,6 +40079,150 @@ interface operations {
     };
     authToken: true;
   };
+  DemoStudentTeacher_select: {
+    parameters: {
+      query?: {
+        columns?: string[] | undefined;
+        where?: {
+          [key: string]: unknown;
+        } | undefined;
+        orders?: string | string[][] | undefined;
+        pageNo?: number;
+        pageSize?: number;
+        createdAt?: string | undefined;
+        name?: string | undefined;
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            code: string;
+            message: string;
+            data: components['schemas']['demo-student.dto.teacherQueryRes'];
+          };
+        };
+      };
+    };
+    authToken: true;
+  };
+  DemoStudentTeacher_create: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['demo-student.dto.teacherCreate'];
+      };
+    };
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            code: string;
+            message: string;
+            data: number | string;
+          };
+        };
+      };
+    };
+    authToken: true;
+  };
+  DemoStudentTeacher_view: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number | string;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            code: string;
+            message: string;
+            data?: components['schemas']['demo-student.entity.teacher'];
+          };
+        };
+      };
+    };
+    authToken: true;
+  };
+  DemoStudentTeacher_delete: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number | string;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            code: string;
+            message: string;
+            data?: unknown;
+          };
+        };
+      };
+    };
+    authToken: true;
+  };
+  DemoStudentTeacher_update: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number | string;
+      };
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['demo-student.dto.teacherUpdate'];
+      };
+    };
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            code: string;
+            message: string;
+            data?: unknown;
+          };
+        };
+      };
+    };
+    authToken: true;
+  };
   HomeBaseMenu_retrieveMenus: {
     parameters: {
       query?: never;
@@ -41325,7 +40268,7 @@ interface operations {
           'application/json': {
             code: string;
             message: string;
-            data: components['schemas']['a-openapischema.dto.permissions'];
+            data: components['schemas']['a-permission.dto.permissions'];
           };
         };
       };
@@ -43185,12 +42128,6 @@ declare class ApiTestSsrToolOne extends BeanApiBase {
   }>;
 }
 //#endregion
-//#region src/suite/a-home/modules/home-api/src/api/testVonaCaptcha.d.ts
-type ApiApiTestVonaCaptchasigninRequestBody = components['schemas']['test-vona.dto.signin'];
-declare class ApiTestVonaCaptcha extends BeanApiBase {
-  signin(body: ApiApiTestVonaCaptchasigninRequestBody, options?: IApiActionOptions): Promise<unknown>;
-}
-//#endregion
 //#region src/suite/a-home/modules/home-api/src/apiSchema/captcha.d.ts
 declare class ApiSchemaCaptcha extends BeanBase {
   get create(): IOpenapiSchemas;
@@ -43233,11 +42170,6 @@ declare class ApiSchemaTestSsrToolOne extends BeanBase {
   get test(): IOpenapiSchemas;
 }
 //#endregion
-//#region src/suite/a-home/modules/home-api/src/apiSchema/testVonaCaptcha.d.ts
-declare class ApiSchemaTestVonaCaptcha extends BeanBase {
-  get signin(): IOpenapiSchemas;
-}
-//#endregion
 //#region src/suite-vendor/a-zova/modules/a-interceptor/src/bean/interceptor.body.d.ts
 interface IInterceptorOptionsBody extends IDecoratorInterceptorOptions {}
 declare class InterceptorBody extends BeanInterceptorBase<IInterceptorOptionsBody> implements IInterceptorResponse, IInterceptorResponseError {
@@ -43263,7 +42195,7 @@ declare class InterceptorJwt extends BeanInterceptorBase<IInterceptorOptionsJwt>
   private _refreshAuthTokenPromise?;
   protected __init__(_beanFetch: BeanFetch, options: IInterceptorOptionsJwt): Promise<void>;
   onRequest(config: AxiosRequestConfig, options: IInterceptorOptionsJwt, next: NextInterceptorRequest): Promise<AxiosRequestConfig>;
-  prepareAccessToken(authToken: string | boolean | undefined): Promise<string | undefined>;
+  prepareAccessToken(config: AxiosRequestConfig, authToken: string | boolean | undefined): Promise<string | undefined>;
   private _refreshAuthToken;
   private _refreshAuthTokenInner;
 }
@@ -43412,11 +42344,6 @@ declare module 'zova-module-home-api' {
     get $beanFullName(): 'home-api.api.testSsrToolOne';
     get $onionName(): 'home-api:testSsrToolOne';
   }
-  interface ApiTestVonaCaptcha {}
-  interface ApiTestVonaCaptcha {
-    get $beanFullName(): 'home-api.api.testVonaCaptcha';
-    get $onionName(): 'home-api:testVonaCaptcha';
-  }
 }
 /** api: end */
 /** api: begin */
@@ -43428,7 +42355,6 @@ interface IModuleApi$1 {
   'homeBasePermission': ApiHomeBasePermission;
   'homeUserPassport': ApiHomeUserPassport;
   'testSsrToolOne': ApiTestSsrToolOne;
-  'testVonaCaptcha': ApiTestVonaCaptcha;
 }
 declare module 'zova' {
   interface IBeanRecordGeneral {
@@ -43438,7 +42364,6 @@ declare module 'zova' {
     'home-api.api.homeBasePermission': ApiHomeBasePermission;
     'home-api.api.homeUserPassport': ApiHomeUserPassport;
     'home-api.api.testSsrToolOne': ApiTestSsrToolOne;
-    'home-api.api.testVonaCaptcha': ApiTestVonaCaptcha;
   }
 }
 /** api: end */
@@ -43476,11 +42401,6 @@ declare module 'zova-module-home-api' {
     get $beanFullName(): 'home-api.apiSchema.testSsrToolOne';
     get $onionName(): 'home-api:testSsrToolOne';
   }
-  interface ApiSchemaTestVonaCaptcha {}
-  interface ApiSchemaTestVonaCaptcha {
-    get $beanFullName(): 'home-api.apiSchema.testVonaCaptcha';
-    get $onionName(): 'home-api:testVonaCaptcha';
-  }
 }
 /** apiSchema: end */
 /** apiSchema: begin */
@@ -43492,7 +42412,6 @@ interface IModuleApiSchema {
   'homeBasePermission': ApiSchemaHomeBasePermission;
   'homeUserPassport': ApiSchemaHomeUserPassport;
   'testSsrToolOne': ApiSchemaTestSsrToolOne;
-  'testVonaCaptcha': ApiSchemaTestVonaCaptcha;
 }
 declare module 'zova' {
   interface IBeanRecordGeneral {
@@ -43502,7 +42421,6 @@ declare module 'zova' {
     'home-api.apiSchema.homeBasePermission': ApiSchemaHomeBasePermission;
     'home-api.apiSchema.homeUserPassport': ApiSchemaHomeUserPassport;
     'home-api.apiSchema.testSsrToolOne': ApiSchemaTestSsrToolOne;
-    'home-api.apiSchema.testVonaCaptcha': ApiSchemaTestVonaCaptcha;
   }
 }
 /** apiSchema: end */
@@ -43558,65 +42476,6 @@ interface ControllerLayoutTabsProps {}
 //#region src/suite/a-home/modules/home-layout/rest/component/layoutTabs.d.ts
 type TypeControllerLayoutTabsPublicProps = TypeRenderComponentJsxPropsPublic & ControllerLayoutTabsProps;
 declare function ZZHomeLayoutTabs(_props: TypeControllerLayoutTabsPublicProps): string;
-//#endregion
-//#region src/suite-vendor/a-zova/modules/a-zod/src/bean/tool.v.d.ts
-declare class ToolV extends BeanBase {
-  protected __init__(): Promise<void>;
-  required<T$1 extends ZodType>(schema: T$1, params?: string | $ZodStringParams): T$1;
-}
-//#endregion
-//#region src/suite-vendor/a-zova/modules/a-zod/src/.metadata/locales.d.ts
-declare const locales$1: {
-  'en-us': {
-    ZodErrorRequired: string;
-  };
-  'zh-cn': {
-    ZodErrorRequired: string;
-  };
-};
-//#endregion
-//#region src/suite-vendor/a-zova/modules/a-zod/src/.metadata/index.d.ts
-declare module 'zova' {}
-declare module 'zova-module-a-zod' {
-  interface ToolV {}
-  interface ToolV {
-    get $beanFullName(): 'a-zod.tool.v';
-    get $onionName(): 'a-zod:v';
-  }
-}
-/** tool: end */
-/** tool: begin */
-
-declare module 'zova' {
-  interface IBeanRecordGeneral {
-    'a-zod.tool.v': ToolV;
-  }
-}
-/** tool: end */
-/** locale: begin */
-
-declare class ScopeModuleAZod extends BeanScopeBase {}
-interface ScopeModuleAZod {
-  util: BeanScopeUtil;
-  locale: TypeModuleLocales<(typeof locales$1)[TypeLocaleBase]>;
-}
-declare module 'zova' {
-  interface IBeanScopeRecord {
-    'a-zod': ScopeModuleAZod;
-  }
-  interface IBeanScopeLocale {
-    'a-zod': (typeof locales$1)[TypeLocaleBase];
-  }
-}
-//#endregion
-//#region src/suite/a-home/modules/home-user/src/component/formFieldCaptcha/controller.d.ts
-interface ControllerFormFieldCaptchaProps extends IFormFieldOptions {
-  scene: string;
-}
-//#endregion
-//#region src/suite/a-home/modules/home-user/rest/component/formFieldCaptcha.d.ts
-type TypeControllerFormFieldCaptchaPublicProps = TypeRenderComponentJsxPropsPublic & ControllerFormFieldCaptchaProps;
-declare function FFHomeUserCaptcha(_props: TypeControllerFormFieldCaptchaPublicProps): string;
 //#endregion
 //#region src/suite-vendor/a-cabloy/modules/rest-actions/src/bean/action.view.d.ts
 type TypeActionViewResult = unknown;
@@ -43694,6 +42553,188 @@ interface IActionOptionsCopy extends IDecoratorActionOptions<TypeActionCopyResul
 //#region src/suite-vendor/a-cabloy/modules/rest-actions/rest/action/copy.d.ts
 declare function AARestActionsCopy(_props: TypeActionOptionsRest<IActionOptionsCopy>): string;
 //#endregion
+//#region src/suite-vendor/a-devui/modules/devui-date/src/component/dateRange/controller.d.ts
+interface ControllerDateRangeProps {
+  separator?: string;
+}
+interface ControllerDateRangeModels {
+  vModel?: string | undefined;
+}
+declare class ControllerDateRange extends BeanControllerBase {
+  static $propsDefault: {
+    separator: string;
+  };
+  private cSeparator;
+  modelValue: string | undefined;
+  protected __init__(): Promise<void>;
+  protected render(): JSX.Element;
+  _parseValue(value?: string): string[];
+  _combineValue(dateStartStr: string | undefined, dateEndStr: string | undefined): string | undefined;
+}
+//#endregion
+//#region src/suite-vendor/a-devui/modules/devui-date/rest/component/dateRange.d.ts
+type TypeControllerDateRangePublicProps$1 = TypeRenderComponentJsxPropsPublic & ControllerDateRangeProps & ControllerDateRangeModels & { [KEY in keyof ControllerDateRangeModels as TypePropValueFromModel<KEY>]: ControllerDateRangeModels[KEY] } & { [KEY in keyof ControllerDateRangeModels as TypePropUpdateFromModel<KEY>]: (value: ControllerDateRangeModels[KEY]) => void };
+declare function ZZDevuiDateRange(_props: TypeControllerDateRangePublicProps$1): string;
+//#endregion
+//#region src/suite-vendor/a-devui/modules/devui-date/src/.metadata/component/dateRange.d.ts
+type TypeControllerDateRangePublicProps = {
+  controllerRef?: (ref: ControllerDateRange) => void;
+} & ControllerDateRangeProps & ControllerDateRangeModels & { [KEY in keyof ControllerDateRangeModels as TypePropValueFromModel<KEY>]: ControllerDateRangeModels[KEY] } & { [KEY in keyof ControllerDateRangeModels as TypePropUpdateFromModel<KEY>]: (value: ControllerDateRangeModels[KEY]) => void };
+type TypeModelArguments = { [KEY in keyof ControllerDateRangeModels as TypePropValueFromModel<KEY>]: ControllerDateRangeModels[KEY] };
+type ControllerInnerProps$1 = TypeControllerInnerProps<ControllerDateRangeProps & { [KEY in keyof ControllerDateRangeModels as TypePropValueFromModel<KEY>]: ControllerDateRangeModels[KEY] }, keyof typeof ControllerDateRange.$propsDefault>;
+declare module 'zova-module-devui-date' {
+  interface ControllerDateRange {
+    $props: ControllerInnerProps$1;
+    $useModel<K$1 extends keyof TypeModelArguments>(name: K$1, options?: DefineModelOptions<TypeModelArguments[K$1]>): ControllerInnerProps$1[K$1];
+  }
+}
+declare const ZDateRange: DefineSetupFnComponent<TypeControllerDateRangePublicProps, EmitsOptions, SlotsType<Record<string, any>>, {
+  controllerRef?: ((ref: ControllerDateRange) => void) | undefined;
+} & ControllerDateRangeProps & ControllerDateRangeModels & {
+  modelValue?: string | undefined;
+} & {
+  "onUpdate:modelValue"?: ((value: string | undefined) => void) | undefined;
+} & ({
+  [x: `on${Capitalize<string>}`]: ((...args: any[]) => any) | undefined;
+} | {
+  [x: `on${Capitalize<string>}`]: ((...args: never) => any) | undefined;
+}), PublicProps>;
+//#endregion
+//#region src/suite-vendor/a-devui/modules/devui-date/src/.metadata/component/formFieldDateRange.d.ts
+type TypeControllerFormFieldDateRangePublicProps$1 = {
+  controllerRef?: (ref: ControllerFormFieldDateRange) => void;
+} & ControllerFormFieldDateRangeProps;
+type ControllerInnerProps = TypeControllerInnerProps<ControllerFormFieldDateRangeProps, keyof typeof ControllerFormFieldDateRange.$propsDefault>;
+declare module 'zova-module-devui-date' {
+  interface ControllerFormFieldDateRange {
+    $props: ControllerInnerProps;
+  }
+}
+declare const ZFormFieldDateRange: DefineSetupFnComponent<TypeControllerFormFieldDateRangePublicProps$1, EmitsOptions, SlotsType<Record<string, any>>, {
+  controllerRef?: ((ref: ControllerFormFieldDateRange) => void) | undefined;
+} & ControllerFormFieldDateRangeProps & ({
+  [x: `on${Capitalize<string>}`]: ((...args: any[]) => any) | undefined;
+} | {
+  [x: `on${Capitalize<string>}`]: ((...args: never) => any) | undefined;
+}), PublicProps>;
+//#endregion
+//#region src/suite-vendor/a-devui/modules/devui-date/src/.metadata/index.d.ts
+declare module 'zova' {}
+declare module 'zova-module-devui-date' {
+  interface ControllerDateRange {}
+  interface ControllerFormFieldDateRange {}
+}
+/** controller: end */
+/** controller: begin */
+
+declare module 'zova' {
+  interface IBeanRecordLocal {
+    'devui-date.controller.dateRange': ControllerDateRange;
+    'devui-date.controller.formFieldDateRange': ControllerFormFieldDateRange;
+  }
+}
+/** controller: end */
+/** components: begin */
+
+declare module 'zova' {
+  interface IComponentRecord {
+    'devui-date:dateRange': ControllerDateRange;
+    'devui-date:formFieldDateRange': ControllerFormFieldDateRange;
+  }
+  interface IZovaComponentRecord {
+    'devui-date:dateRange': typeof ZDateRange;
+    'devui-date:formFieldDateRange': typeof ZFormFieldDateRange;
+  }
+}
+/** components: end */
+/** scope: begin */
+
+declare class ScopeModuleDevuiDate extends BeanScopeBase {}
+interface ScopeModuleDevuiDate {
+  util: BeanScopeUtil;
+}
+declare module 'zova' {
+  interface IBeanScopeRecord {
+    'devui-date': ScopeModuleDevuiDate;
+  }
+}
+/** scope: end */
+//#endregion
+//#region src/suite-vendor/a-devui/modules/devui-date/src/component/formFieldDateRange/controller.d.ts
+interface ControllerFormFieldDateRangeProps extends IFormFieldOptions {
+  separator?: string;
+}
+declare class ControllerFormFieldDateRange extends BeanControllerBase {
+  static $propsDefault: {};
+  static $componentOptions: IComponentOptions;
+  cContainer: string;
+  protected __init__(): Promise<void>;
+  protected render(): JSX.Element;
+}
+//#endregion
+//#region src/suite-vendor/a-devui/modules/devui-date/rest/component/formFieldDateRange.d.ts
+type TypeControllerFormFieldDateRangePublicProps = TypeRenderComponentJsxPropsPublic & ControllerFormFieldDateRangeProps;
+declare function FFDevuiDateRange(_props: TypeControllerFormFieldDateRangePublicProps): string;
+//#endregion
+//#region src/suite-vendor/a-zova/modules/a-zod/src/bean/tool.v.d.ts
+declare class ToolV extends BeanBase {
+  protected __init__(): Promise<void>;
+  required<T$1 extends ZodType>(schema: T$1, params?: string | $ZodStringParams): T$1;
+}
+//#endregion
+//#region src/suite-vendor/a-zova/modules/a-zod/src/.metadata/locales.d.ts
+declare const locales$1: {
+  'en-us': {
+    ZodErrorRequired: string;
+  };
+  'zh-cn': {
+    ZodErrorRequired: string;
+  };
+};
+//#endregion
+//#region src/suite-vendor/a-zova/modules/a-zod/src/.metadata/index.d.ts
+declare module 'zova' {}
+declare module 'zova-module-a-zod' {
+  interface ToolV {}
+  interface ToolV {
+    get $beanFullName(): 'a-zod.tool.v';
+    get $onionName(): 'a-zod:v';
+  }
+}
+/** tool: end */
+/** tool: begin */
+
+declare module 'zova' {
+  interface IBeanRecordGeneral {
+    'a-zod.tool.v': ToolV;
+  }
+}
+/** tool: end */
+/** locale: begin */
+
+declare class ScopeModuleAZod extends BeanScopeBase {}
+interface ScopeModuleAZod {
+  util: BeanScopeUtil;
+  locale: TypeModuleLocales<(typeof locales$1)[TypeLocaleBase]>;
+}
+declare module 'zova' {
+  interface IBeanScopeRecord {
+    'a-zod': ScopeModuleAZod;
+  }
+  interface IBeanScopeLocale {
+    'a-zod': (typeof locales$1)[TypeLocaleBase];
+  }
+}
+//#endregion
+//#region src/suite-vendor/a-devui/modules/devui-form/src/component/formFieldCaptcha/controller.d.ts
+interface ControllerFormFieldCaptchaProps extends IFormFieldOptions {
+  captcha?: ICaptchaOptions;
+}
+//#endregion
+//#region src/suite-vendor/a-devui/modules/devui-form/rest/component/formFieldCaptcha.d.ts
+type TypeControllerFormFieldCaptchaPublicProps = TypeRenderComponentJsxPropsPublic & ControllerFormFieldCaptchaProps;
+declare function FFDevuiFormCaptcha(_props: TypeControllerFormFieldCaptchaPublicProps): string;
+//#endregion
 //#region src/suite-vendor/a-cabloy/modules/rest-resource/src/model/resource.d.ts
 interface IModelOptionsResource extends IDecoratorModelOptions {}
 declare class ModelResource<Entity = any, EntityCreate = Partial<Entity>, EntityUpdate = Partial<Entity>> extends BeanModelBase {
@@ -43732,33 +42773,17 @@ declare class ModelResource<Entity = any, EntityCreate = Partial<Entity>, Entity
   private _bootstrap;
 }
 //#endregion
-//#region src/suite-vendor/a-cabloy/modules/rest-resource/src/page/resource/controller.d.ts
-declare const ControllerPageResourceSchemaParams: ZodObject<{
-  resource: ZodString;
-}, $strip>;
-declare class ControllerPageResource extends BeanControllerPageBase {
-  tableProvider: ITableProvider;
-  tableScope: ITableCelScope;
-  zovaJsx: ZovaJsx;
-  pageCelEnv: typeof celEnvBase;
-  get $$modelResource(): ModelResource;
-  protected __init__(): Promise<void>;
-  onActionTable(_action: keyof TypeResourceActionTableRecord): Promise<void>;
-  onActionRow(action: keyof TypeResourceActionRowRecord, id: string): Promise<void>;
-  private _getTableScope;
-  private _getPageCelEnv;
-  getPageJsxRenderContext(celScope: ITableCelScope): IJsxRenderContextPage;
-  render(): JSX.Element;
+//#region src/suite-vendor/a-cabloy/modules/rest-resource/src/types/pageEntryWrapper.d.ts
+interface IPageEntryWrapperScope {
+  resource?: string;
+  id?: TableIdentity;
+  permissions?: TypeOpenapiPermissions;
+  onActionTable?: (action: keyof TypeResourceActionTableRecord) => Promise<any> | any;
+  onActionRow?: (action: keyof TypeResourceActionRowRecord) => Promise<any> | any;
 }
-//#endregion
-//#region src/suite-vendor/a-cabloy/modules/rest-resource/src/types/page.d.ts
-interface IJsxRenderContextPage extends IJsxRenderContextBase {
-  $celScope: ITableCelScope;
-  $$page: ControllerPageResource;
-}
-interface IJsxRenderContextPageEntry extends IJsxRenderContextBase {
-  $celScope: IFormCelScope;
-  $$pageEntry: ControllerPageEntry;
+interface IJsxRenderContextPageEntryWrapper extends IJsxRenderContextBase {
+  $celScope: IPageEntryWrapperScope;
+  $$pageEntryWrapper: ControllerPageEntry;
 }
 //#endregion
 //#region src/suite-vendor/a-cabloy/modules/rest-resource/src/page/entry/controller.d.ts
@@ -43770,18 +42795,19 @@ declare const ControllerPageEntrySchemaParams: ZodObject<{
 declare class ControllerPageEntry extends BeanControllerPageBase {
   formMeta: IFormMeta;
   formProvider: IFormProvider;
-  formScope: IFormCelScope;
+  pageEntryWrapperScope: IPageEntryWrapperScope;
   zovaJsx: ZovaJsx;
-  pageCelEnv: typeof celEnvBase;
+  pageEntryWrapperCelEnv: typeof celEnvBase;
   get $$modelResource(): ModelResource;
+  get resource(): string;
   get entryId(): string | undefined;
   get formScene(): TypeFormScene;
   protected __init__(): Promise<void>;
   onActionTable(_action: keyof TypeResourceActionTableRecord): Promise<void>;
   onActionRow(action: keyof TypeResourceActionRowRecord): Promise<void>;
-  private _getFormScope;
-  private _getPageCelEnv;
-  getPageEntryJsxRenderContext(celScope: IFormCelScope): IJsxRenderContextPageEntry;
+  private _getPageEntryWrapperScope;
+  private _getPageEntryWrapperCelEnv;
+  getJsxRenderContextPageEntryWrapper(celScope: IPageEntryWrapperScope): IJsxRenderContextPageEntryWrapper;
   protected render(): JSX.Element;
 }
 //#endregion
@@ -43792,6 +42818,38 @@ declare const ControllerPageEntryCreateSchemaParams: ZodObject<{
   formScene: ZodOptional<ZodString>;
 }, $strip>;
 declare class ControllerPageEntryCreate extends ControllerPageEntry {}
+//#endregion
+//#region src/suite-vendor/a-cabloy/modules/rest-resource/src/types/pageWrapper.d.ts
+interface IPageWrapperScope {
+  resource?: string;
+  permissions?: TypeOpenapiPermissions;
+  onActionTable?: (action: keyof TypeResourceActionTableRecord) => Promise<any> | any;
+  onActionRow?: (action: keyof TypeResourceActionRowRecord, id: string) => Promise<any> | any;
+}
+interface IJsxRenderContextPageWrapper extends IJsxRenderContextBase {
+  $celScope: IPageWrapperScope;
+  $$pageWrapper: ControllerPageResource;
+}
+//#endregion
+//#region src/suite-vendor/a-cabloy/modules/rest-resource/src/page/resource/controller.d.ts
+declare const ControllerPageResourceSchemaParams: ZodObject<{
+  resource: ZodString;
+}, $strip>;
+declare class ControllerPageResource extends BeanControllerPageBase {
+  tableProvider: ITableProvider;
+  pageWrapperScope: IPageWrapperScope;
+  zovaJsx: ZovaJsx;
+  pageWrapperCelEnv: typeof celEnvBase;
+  get $$modelResource(): ModelResource;
+  protected __init__(): Promise<void>;
+  get resource(): string;
+  onActionTable(_action: keyof TypeResourceActionTableRecord): Promise<void>;
+  onActionRow(action: keyof TypeResourceActionRowRecord, id: string): Promise<void>;
+  private _getPageWrapperScope;
+  private _getPageWrapperCelEnv;
+  getJsxRenderContextPageWrapper(celScope: IPageWrapperScope): IJsxRenderContextPageWrapper;
+  render(): JSX.Element;
+}
 //#endregion
 //#region src/suite-vendor/a-cabloy/modules/rest-resource/src/.metadata/page/entry.d.ts
 declare namespace NSControllerPageEntry {
@@ -43904,23 +42962,10 @@ declare module 'zova' {
 }
 /** scope: end */
 //#endregion
-//#region src/suite-vendor/a-cabloy/modules/rest-resource/src/types/resource.d.ts
+//#region src/suite-vendor/a-devui/modules/devui-restpage/src/types/page.d.ts
+interface IPageScope extends IPageWrapperScope {}
 declare module 'zova-module-a-table' {
-  interface ITableCelScope {
-    resource?: string;
-    permissions?: TypeOpenapiPermissions;
-    onActionTable?: (action: keyof TypeResourceActionTableRecord) => Promise<any> | any;
-    onActionRow?: (action: keyof TypeResourceActionRowRecord, id: string) => Promise<any> | any;
-  }
-}
-declare module 'zova-module-a-form' {
-  interface IFormCelScope {
-    resource?: string;
-    id?: TableIdentity;
-    permissions?: TypeOpenapiPermissions;
-    onActionTable?: (action: keyof TypeResourceActionTableRecord) => Promise<any> | any;
-    onActionRow?: (action: keyof TypeResourceActionRowRecord) => Promise<any> | any;
-  }
+  interface ITableScope extends IPageScope {}
 }
 //#endregion
 //#region src/suite-vendor/a-devui/modules/devui-restpage/src/component/restPage/controller.d.ts
@@ -43942,6 +42987,12 @@ interface ControllerWrapperFilterProps {
 //#region src/suite-vendor/a-devui/modules/devui-restpage/rest/component/wrapperFilter.d.ts
 type TypeControllerWrapperFilterPublicProps = TypeRenderComponentJsxPropsPublic & ControllerWrapperFilterProps;
 declare function ZZDevuiRestpageWrapperFilter(_props: TypeControllerWrapperFilterPublicProps): string;
+//#endregion
+//#region src/suite-vendor/a-devui/modules/devui-restpage/src/types/pageEntry.d.ts
+interface IPageEntryScope extends IPageEntryWrapperScope {}
+declare module 'zova-module-a-form' {
+  interface IFormScope extends IPageEntryScope {}
+}
 //#endregion
 //#region src/suite-vendor/a-devui/modules/devui-restpage/src/component/restPageEntry/controller.d.ts
 interface ControllerRestPageEntryProps<TData$1 extends {} = {}> {
@@ -44708,4 +43759,4 @@ interface IPagePathRecord {
   presetResource: TypePagePathSchema<undefined, undefined>;
 }
 //#endregion
-export { $iconName, AAActionsLog, AARestActionsAlert, AARestActionsConfirm, AARestActionsCopy, AARestActionsCreate, AARestActionsDelete, AARestActionsEdit, AARestActionsSetValue, AARestActionsView, FFBTest, FFBTest3, FFCurrency, FFDateRange, FFDemoBasicTest, FFHomeUserCaptcha, IIconRecord, IPagePathRecord, PPDevuiRestpage, PPDevuiRestpageEntry, TTCurrency, TTDate, TTDemoBasicTest, TTDevuiTableActionOperationsRow, TTDevuiTableActionView, TypePagePathSchema, ZZApp, ZZBCard, ZZBCard3, ZZBehavior, ZZDateRange, ZZDemoBasicActionView, ZZDemoBasicCard, ZZDemoBasicTableCellTest, ZZDevuiRestpageWrapperFilter, ZZDevuiTable, ZZDevuiTableActionOperationsTable, ZZDevuiTableOperationsTable, ZZForm, ZZFormField, ZZFormSubscribe, ZZHomeBasePage, ZZHomeLayoutEmpty, ZZHomeLayoutEssentialLink, ZZHomeLayoutTabs, ZZIcon, ZZRouterViewEmpty, ZZRouterstackRouterViewStack, ZZRoutertabsRouterViewTabs, ZZTable };
+export { $iconName, AAActionsLog, AARestActionsAlert, AARestActionsConfirm, AARestActionsCopy, AARestActionsCreate, AARestActionsDelete, AARestActionsEdit, AARestActionsSetValue, AARestActionsView, FFBTest, FFBTest3, FFCurrency, FFDemoBasicTest, FFDevuiDateRange, FFDevuiFormCaptcha, FFFormWrapper, IIconRecord, IPagePathRecord, PPDevuiRestpage, PPDevuiRestpageEntry, TTCurrency, TTDate, TTDemoBasicTest, TTDevuiTableActionOperationsRow, TTDevuiTableActionView, TypePagePathSchema, ZZApp, ZZBCard, ZZBCard3, ZZBehavior, ZZDemoBasicActionView, ZZDemoBasicCard, ZZDemoBasicTableCellTest, ZZDevuiDateRange, ZZDevuiRestpageWrapperFilter, ZZDevuiTable, ZZDevuiTableActionOperationsTable, ZZDevuiTableOperationsTable, ZZForm, ZZFormField, ZZFormSubscribe, ZZHomeBasePage, ZZHomeLayoutEmpty, ZZHomeLayoutEssentialLink, ZZHomeLayoutTabs, ZZIcon, ZZRouterViewEmpty, ZZRouterstackRouterViewStack, ZZRoutertabsRouterViewTabs, ZZTable };

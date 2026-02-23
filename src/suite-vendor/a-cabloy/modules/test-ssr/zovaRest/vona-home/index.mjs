@@ -28,18 +28,6 @@ function TTDate(_props) {
 }
 
 //#endregion
-//#region src/suite-vendor/a-zova/modules/a-date/rest/component/dateRange.ts
-function ZZDateRange(_props) {
-	return "a-date:dateRange";
-}
-
-//#endregion
-//#region src/suite-vendor/a-zova/modules/a-date/rest/component/formFieldDateRange.ts
-function FFDateRange(_props) {
-	return "a-date:formFieldDateRange";
-}
-
-//#endregion
 //#region src/suite-vendor/a-zova/modules/a-form/rest/component/form.ts
 function ZZForm(_props) {
 	return "a-form:form";
@@ -55,6 +43,12 @@ function ZZFormField(_props) {
 //#region src/suite-vendor/a-zova/modules/a-form/rest/component/formSubscribe.ts
 function ZZFormSubscribe(_props) {
 	return "a-form:formSubscribe";
+}
+
+//#endregion
+//#region src/suite-vendor/a-zova/modules/a-form/rest/component/formFieldWrapper.ts
+function FFFormWrapper(_props) {
+	return "a-form:formFieldWrapper";
 }
 
 //#endregion
@@ -154,12 +148,6 @@ function ZZHomeLayoutTabs(_props) {
 }
 
 //#endregion
-//#region src/suite/a-home/modules/home-user/rest/component/formFieldCaptcha.ts
-function FFHomeUserCaptcha(_props) {
-	return "home-user:formFieldCaptcha";
-}
-
-//#endregion
 //#region src/suite-vendor/a-cabloy/modules/rest-actions/rest/action/view.ts
 function AARestActionsView(_props) {
 	return "rest-actions:view";
@@ -205,6 +193,24 @@ function AARestActionsConfirm(_props) {
 //#region src/suite-vendor/a-cabloy/modules/rest-actions/rest/action/copy.ts
 function AARestActionsCopy(_props) {
 	return "rest-actions:copy";
+}
+
+//#endregion
+//#region src/suite-vendor/a-devui/modules/devui-date/rest/component/dateRange.ts
+function ZZDevuiDateRange(_props) {
+	return "devui-date:dateRange";
+}
+
+//#endregion
+//#region src/suite-vendor/a-devui/modules/devui-date/rest/component/formFieldDateRange.ts
+function FFDevuiDateRange(_props) {
+	return "devui-date:formFieldDateRange";
+}
+
+//#endregion
+//#region src/suite-vendor/a-devui/modules/devui-form/rest/component/formFieldCaptcha.ts
+function FFDevuiFormCaptcha(_props) {
+	return "devui-form:formFieldCaptcha";
 }
 
 //#endregion
@@ -280,4 +286,4 @@ function $iconName(name) {
 }
 
 //#endregion
-export { $iconName, AAActionsLog, AARestActionsAlert, AARestActionsConfirm, AARestActionsCopy, AARestActionsCreate, AARestActionsDelete, AARestActionsEdit, AARestActionsSetValue, AARestActionsView, FFBTest, FFBTest3, FFCurrency, FFDateRange, FFDemoBasicTest, FFHomeUserCaptcha, PPDevuiRestpage, PPDevuiRestpageEntry, TTCurrency, TTDate, TTDemoBasicTest, TTDevuiTableActionOperationsRow, TTDevuiTableActionView, ZZApp, ZZBCard, ZZBCard3, ZZBehavior, ZZDateRange, ZZDemoBasicActionView, ZZDemoBasicCard, ZZDemoBasicTableCellTest, ZZDevuiRestpageWrapperFilter, ZZDevuiTable, ZZDevuiTableActionOperationsTable, ZZDevuiTableOperationsTable, ZZForm, ZZFormField, ZZFormSubscribe, ZZHomeBasePage, ZZHomeLayoutEmpty, ZZHomeLayoutEssentialLink, ZZHomeLayoutTabs, ZZIcon, ZZRouterViewEmpty, ZZRouterstackRouterViewStack, ZZRoutertabsRouterViewTabs, ZZTable };
+export { $iconName, AAActionsLog, AARestActionsAlert, AARestActionsConfirm, AARestActionsCopy, AARestActionsCreate, AARestActionsDelete, AARestActionsEdit, AARestActionsSetValue, AARestActionsView, FFBTest, FFBTest3, FFCurrency, FFDemoBasicTest, FFDevuiDateRange, FFDevuiFormCaptcha, FFFormWrapper, PPDevuiRestpage, PPDevuiRestpageEntry, TTCurrency, TTDate, TTDemoBasicTest, TTDevuiTableActionOperationsRow, TTDevuiTableActionView, ZZApp, ZZBCard, ZZBCard3, ZZBehavior, ZZDemoBasicActionView, ZZDemoBasicCard, ZZDemoBasicTableCellTest, ZZDevuiDateRange, ZZDevuiRestpageWrapperFilter, ZZDevuiTable, ZZDevuiTableActionOperationsTable, ZZDevuiTableOperationsTable, ZZForm, ZZFormField, ZZFormSubscribe, ZZHomeBasePage, ZZHomeLayoutEmpty, ZZHomeLayoutEssentialLink, ZZHomeLayoutTabs, ZZIcon, ZZRouterViewEmpty, ZZRouterstackRouterViewStack, ZZRoutertabsRouterViewTabs, ZZTable };
