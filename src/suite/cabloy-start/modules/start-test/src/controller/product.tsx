@@ -2,13 +2,11 @@ import type { TableIdentity } from 'table-identity';
 import type { IQueryParams } from 'vona-module-a-orm';
 import type { IDecoratorControllerOptions } from 'vona-module-a-web';
 import type { ModelProduct } from '../model/product.ts';
-// import React from 'react';
 import { BeanBase } from 'vona';
 import { Api, Resource, v } from 'vona-module-a-openapiutils';
 import { Ssr } from 'vona-module-a-ssr';
 import { Passport } from 'vona-module-a-user';
 import { Arg, Controller, Web } from 'vona-module-a-web';
-// import { PPDevuiRestpage, PPDevuiRestpageEntry } from 'zova-rest-vona-home';
 import { DtoProductCreate } from '../dto/productCreate.ts';
 import { DtoProductQuery } from '../dto/productQuery.ts';
 import { DtoProductQueryRes } from '../dto/productQueryRes.ts';
@@ -17,18 +15,7 @@ import { EntityProduct } from '../entity/product.tsx';
 
 export interface IControllerOptionsProduct extends IDecoratorControllerOptions {}
 
-@Controller<IControllerOptionsProduct>('product', {
-  resourceMeta: {
-    provider: {
-      components: {
-        // restPage: <PPDevuiRestpage showFilter={true}></PPDevuiRestpage>,
-        // restPageEntry: <PPDevuiRestpageEntry toolbarPosition="bottom"></PPDevuiRestpageEntry>,
-      },
-    },
-    // permissions: true,
-    // permissions: false,
-  },
-})
+@Controller<IControllerOptionsProduct>('product')
 @Resource()
 export class ControllerProduct extends BeanBase {
   @Web.post()
