@@ -49,7 +49,7 @@
     "postpack": "clean-package restore && npm run clean"
   },
   "dependencies": {
-    "bullmq": "^5.66.4"
+    "bullmq": "^5.70.1"
   },
   "clean-package": {
     "indent": 2,
