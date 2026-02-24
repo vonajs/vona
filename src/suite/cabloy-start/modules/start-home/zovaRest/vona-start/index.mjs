@@ -112,6 +112,18 @@ function AAStartActionsAlert(_props) {
 }
 
 //#endregion
+//#region src/suite/cabloy-start/modules/start-actions/rest/action/confirm.ts
+function AAStartActionsConfirm(_props) {
+	return "start-actions:confirm";
+}
+
+//#endregion
+//#region src/suite/cabloy-start/modules/start-actions/rest/action/prompt.ts
+function AAStartActionsPrompt(_props) {
+	return "start-actions:prompt";
+}
+
+//#endregion
 //#region src/suite/cabloy-start/modules/start-date/rest/component/formFieldDateRange.ts
 function FFStartDateRange(_props) {
 	return "start-date:formFieldDateRange";
@@ -244,4 +256,4 @@ function $iconName(name) {
 }
 
 //#endregion
-export { $iconName, AAActionsLog, AARestActionsAlert, AARestActionsConfirm, AARestActionsCopy, AARestActionsCreate, AARestActionsDelete, AARestActionsEdit, AARestActionsSetValue, AARestActionsView, AAStartActionsAlert, FFCurrency, FFFormWrapper, FFStartDateRange, FFStartFormCaptcha, FFVuetifyFormCaptcha, PPStartRestpage, PPStartRestpageEntry, TTCurrency, TTDate, TTStartTableActionOperationsRow, TTStartTableActionView, ZZApp, ZZBehavior, ZZDemoBasicCard, ZZForm, ZZFormField, ZZFormSubscribe, ZZHomeBasePage, ZZHomeLayoutDefault, ZZHomeLayoutEmpty, ZZHomeLayoutItemLink, ZZHomeLayoutTabs, ZZIcon, ZZRouterViewEmpty, ZZRouterstackRouterViewStack, ZZRoutertabsRouterViewTabs, ZZStartRestpageWrapperFilter, ZZStartTable, ZZStartTableActionOperationsTable, ZZTable };
+export { $iconName, AAActionsLog, AARestActionsAlert, AARestActionsConfirm, AARestActionsCopy, AARestActionsCreate, AARestActionsDelete, AARestActionsEdit, AARestActionsSetValue, AARestActionsView, AAStartActionsAlert, AAStartActionsConfirm, AAStartActionsPrompt, FFCurrency, FFFormWrapper, FFStartDateRange, FFStartFormCaptcha, FFVuetifyFormCaptcha, PPStartRestpage, PPStartRestpageEntry, TTCurrency, TTDate, TTStartTableActionOperationsRow, TTStartTableActionView, ZZApp, ZZBehavior, ZZDemoBasicCard, ZZForm, ZZFormField, ZZFormSubscribe, ZZHomeBasePage, ZZHomeLayoutDefault, ZZHomeLayoutEmpty, ZZHomeLayoutItemLink, ZZHomeLayoutTabs, ZZIcon, ZZRouterViewEmpty, ZZRouterstackRouterViewStack, ZZRoutertabsRouterViewTabs, ZZStartRestpageWrapperFilter, ZZStartTable, ZZStartTableActionOperationsTable, ZZTable };
