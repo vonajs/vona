@@ -16,6 +16,6 @@ export interface ISsrSiteOptionsHome extends IDecoratorSsrSiteOptions<ISsrSiteOp
 
 @SsrSite<ISsrSiteOptionsHome>({
   publicPath: '',
-  assetPath: 'ssr-vonaStart-1.0.0',
+  assetPath: 'ssr-vonaStart-5.0.0',
 })
 export class SsrSiteHome extends BeanSsrSiteBase<ISsrSiteOptionsHome> {}
