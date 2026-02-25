@@ -13,6 +13,7 @@ async function versionTemplate() {
     await fse.remove(path.join(suiteHomeDest, `modules/${moduleName}/dist`));
     await fse.remove(path.join(suiteHomeDest, `modules/${moduleName}/tsconfig.build.tsbuildinfo`));
   }
+  await fse.remove(path.join(suiteHomeDest, 'modules/start-home/assets'));
 }
 
 versionTemplate();
