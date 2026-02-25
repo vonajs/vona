@@ -2253,6 +2253,13 @@ importers:
         version: link:modules/start-home
 
   src/suite/cabloy-start/modules/start-home:
+    dependencies:
+      vona-module-a-ssr:
+        specifier: ^5.0.0
+        version: link:../../../../suite-vendor/a-cabloy/modules/a-ssr
+      vona-module-a-ssrhome:
+        specifier: ^5.0.0
+        version: link:../../../../suite-vendor/a-cabloy/modules/a-ssrhome
     devDependencies:
       clean-package:
         specifier: ^2.2.0
