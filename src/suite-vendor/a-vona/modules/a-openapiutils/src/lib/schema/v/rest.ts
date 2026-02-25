@@ -1,5 +1,5 @@
 import type { CurrencyOptions } from '@zhennann/currency';
-import type { ICaptchaOptions, ISchemaObjectExtensionFieldRest, ISchemaObjectExtensionFieldRestScene, TypeDateFormat, TypeRenderComponent, TypeSchemaScene } from 'vona-module-a-openapi';
+import type { ICaptchaOptions, ISchemaObjectExtensionFieldRest, ISchemaObjectExtensionFieldRestScene, IToggleOptions, TypeDateFormat, TypeRenderComponent, TypeSchemaScene } from 'vona-module-a-openapi';
 import type z from 'zod';
 import type { TypeSchemaOrderLevel } from '../../../types/order.ts';
 import { $order } from '../../utils.ts';
@@ -62,6 +62,15 @@ export function schemaDate<T extends z.ZodType>(dateFormat?: TypeDateFormat, sce
 export function schemaCaptcha<T extends z.ZodType>(captcha?: ICaptchaOptions, scene?: TypeSchemaScene) {
   return function (schema: T): T {
     const options = captcha !== undefined ? { render: 'captcha', captcha } : { render: 'captcha' };
+    return schema.openapi(scene
+      ? { rest: { [scene]: options as any } }
+      : { rest: options as any });
+  };
+}
+
+export function schemaToggle<T extends z.ZodType>(toggle?: IToggleOptions, scene?: TypeSchemaScene) {
+  return function (schema: T): T {
+    const options = toggle !== undefined ? { render: 'toggle', toggle } : { render: 'toggle' };
     return schema.openapi(scene
       ? { rest: { [scene]: options as any } }
       : { rest: options as any });

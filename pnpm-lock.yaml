@@ -288,6 +288,9 @@ importers:
       vona-module-a-zod:
         specifier: workspace:^
         version: link:src/suite-vendor/a-vona/modules/a-zod
+      vona-module-cabloy-store:
+        specifier: workspace:^
+        version: link:src/suite/cabloy-store/modules/cabloy-store
       vona-module-demo-student:
         specifier: workspace:^
         version: link:src/module/demo-student
@@ -2273,6 +2276,21 @@ importers:
       '@faker-js/faker':
         specifier: ^10.0.0
         version: 10.2.0
+    devDependencies:
+      clean-package:
+        specifier: ^2.2.0
+        version: 2.2.0
+      rimraf:
+        specifier: ^6.0.1
+        version: 6.1.2
+
+  src/suite/cabloy-store:
+    dependencies:
+      vona-module-cabloy-store:
+        specifier: ^5.0.0
+        version: link:modules/cabloy-store
+
+  src/suite/cabloy-store/modules/cabloy-store:
     devDependencies:
       clean-package:
         specifier: ^2.2.0

@@ -1,7 +1,7 @@
 import { schemaFilter, schemaFilterDateRange, schemaFilterTransform } from './v/filter.tsx';
 import { schemaEmail, schemaIPv4, schemaIPv6, schemaLowercase, schemaMax, schemaMin, schemaRegex, schemaTableIdentity, schemaToLowerCase, schemaToUpperCase, schemaTrim, schemaUppercase, schemaUrl, schemaUuid } from './v/helpers.ts';
 import { schemaDescription, schemaExample, schemaOpenapi, schemaTitle } from './v/openapi.ts';
-import { schemaCaptcha, schemaCurrency, schemaDate, schemaOrder, schemaRender, schemaRest, schemaVisible } from './v/rest.ts';
+import { schemaCaptcha, schemaCurrency, schemaDate, schemaOrder, schemaRender, schemaRest, schemaToggle, schemaVisible } from './v/rest.ts';
 import { schemaSerializerCustom, schemaSerializerExclude, schemaSerializerGetter, schemaSerializerReplace, schemaSerializerTransform } from './v/serializer.ts';
 import { schemaArray, schemaDefault, schemaLazy, schemaLooseObject, schemaObject, schemaOptional, schemaRequired, schemaStrictObject } from './v/system.ts';
 import { schemaZodRefine, schemaZodTransform } from './v/zod.ts';
@@ -48,6 +48,7 @@ export const v = {
   captcha: schemaCaptcha,
   currency: schemaCurrency,
   date: schemaDate,
+  toggle: schemaToggle,
   order: schemaOrder,
   render: schemaRender,
   visible: schemaVisible,
