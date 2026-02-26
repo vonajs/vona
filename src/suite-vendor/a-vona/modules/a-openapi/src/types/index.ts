@@ -12,5 +12,6 @@ export * from './permissions.ts';
 export * from './resource.ts';
 export * from './resourceMeta.ts';
 export * from './rest.ts';
+export * from './select.ts';
 export * from './tableProvider.ts';
 export * from './toggle.ts';

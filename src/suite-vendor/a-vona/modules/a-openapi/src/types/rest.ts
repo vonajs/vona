@@ -7,6 +7,7 @@ import type { TypeResourceActionRowRecordRender } from './actions.ts';
 import type { ICaptchaOptions } from './captcha.ts';
 import type { IComponentRecord, ITableCellComponentRecord } from './component.ts';
 import type { TypeDateFormat } from './date.ts';
+import type { ISelectOptions } from './select.ts';
 import type { IToggleOptions } from './toggle.ts';
 import 'openapi3-ts/oas30';
 import 'openapi3-ts/oas31';
@@ -42,6 +43,7 @@ export interface ISchemaObjectExtensionFieldRestProps {
   currency?: CurrencyOptions;
   dateFormat?: TypeDateFormat;
   toggle?: IToggleOptions;
+  select?: ISelectOptions;
 }
 
 export interface ISchemaObjectExtensionFieldRest extends ISchemaObjectExtensionFieldRestProps {
