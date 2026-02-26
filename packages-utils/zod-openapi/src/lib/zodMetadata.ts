@@ -41,6 +41,16 @@ export class ZodMetadata {
 
   static getFieldSchema(zodSchema: z.ZodType | undefined, key: string): z.ZodType | undefined {
     if (!zodSchema) return;
+    const parts = key.split('.');
+    for (const part of parts) {
+      zodSchema = this._getFieldSchemaInner(zodSchema, part);
+      if (!zodSchema) break;
+    }
+    return zodSchema;
+  }
+
+  static _getFieldSchemaInner(zodSchema: z.ZodType | undefined, key: string): z.ZodType | undefined {
+    if (!zodSchema) return;
     let schema;
     if (zodSchema.def.type === 'object') {
       schema = zodSchema;
