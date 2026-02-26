@@ -15,6 +15,14 @@ export function schemaRest<T extends z.ZodType>(
   };
 }
 
+export function schemaCustomKey<T extends z.ZodType>(customKey: string, scene?: TypeSchemaScene) {
+  return function (schema: T): T {
+    return schema.openapi(scene
+      ? { rest: { [scene]: { customKey } } }
+      : { rest: { customKey } });
+  };
+}
+
 export function schemaOrder<T extends z.ZodType>(order: number, level?: TypeSchemaOrderLevel, scene?: TypeSchemaScene) {
   const orderReal = $order(order, level);
   return function (schema: T): T {

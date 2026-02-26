@@ -18,6 +18,7 @@ export type TypeFormFieldOnSetDisplayValue = (value: any) => any;
 export type TypeFormFieldDisplayValueUpdateTiming = 'input' | 'change';
 
 export interface ISchemaObjectExtensionFieldRestProps {
+  customKey?: string;
   visible?: boolean;
   order?: number;
   //
