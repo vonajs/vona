@@ -296,7 +296,7 @@ export class ServiceRelations extends BeanBase {
         const entityResult = result[index];
         const entity = entities[index];
         if (entity[relationName]) {
-          entityResult[relationName] = children.find(item => item[key] === cast(entity).id);
+          entityResult[relationName] = children.find(item => String(item[key]) === String(cast(entity).id));
         }
       }
       return result;
