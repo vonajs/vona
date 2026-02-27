@@ -78,7 +78,7 @@ function _DtoGet_relation_handle<TRecord extends {}>(
       schema = v.array(z.object({ id: (v.tableIdentity())(), deleted: z.boolean().optional() }));
     } else if (type === 'hasOne') {
       const schemaLazy = _DtoGet_relation_handle_schemaLazy(modelTarget, optionsReal, autoload, mutateTypeTopLevel, relation);
-      schema = v.lazy(schemaLazy);
+      schema = v.lazy(v.visible(false), schemaLazy);
       // optional = true;
     } else {
       // hasMany
@@ -91,7 +91,7 @@ function _DtoGet_relation_handle<TRecord extends {}>(
     let schema;
     let optional = false;
     if ((type === 'hasOne' || type === 'belongsTo')) {
-      schema = v.lazy(schemaLazy);
+      schema = v.lazy(v.visible(false), schemaLazy);
       optional = true;
     } else {
       if (optionsReal.groups) {

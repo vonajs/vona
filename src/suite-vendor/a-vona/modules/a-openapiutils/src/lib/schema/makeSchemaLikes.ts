@@ -8,7 +8,7 @@ import { SymbolDecoratorRule } from '../const/decorator.ts';
 import { prepareClassType } from '../utils.ts';
 import { SymbolSchemaDynamicRefId } from './schemaDynamic.ts';
 
-export function $makeSchema(...schemaLikes: SchemaLike[]): z.ZodType {
+export function $makeSchema<T>(...schemaLikes: SchemaLike<T>[]): z.ZodType<T> {
   return makeSchemaLikes(schemaLikes, undefined);
 }
 
