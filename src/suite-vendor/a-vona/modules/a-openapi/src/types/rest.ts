@@ -8,6 +8,7 @@ import type { ICaptchaOptions } from './captcha.ts';
 import type { IComponentRecord, ITableCellComponentRecord } from './component.ts';
 import type { TypeDateFormat } from './date.ts';
 import type { ISelectOptions } from './select.ts';
+import type { ITextareaOptions } from './textarea.ts';
 import type { IToggleOptions } from './toggle.ts';
 import 'openapi3-ts/oas30';
 import 'openapi3-ts/oas31';
@@ -45,6 +46,7 @@ export interface ISchemaObjectExtensionFieldRestProps {
   dateFormat?: TypeDateFormat;
   toggle?: IToggleOptions;
   select?: ISelectOptions;
+  textarea?: ITextareaOptions;
 }
 
 export interface ISchemaObjectExtensionFieldRest extends ISchemaObjectExtensionFieldRestProps {

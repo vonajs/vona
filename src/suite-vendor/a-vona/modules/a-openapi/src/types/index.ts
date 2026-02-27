@@ -14,4 +14,5 @@ export * from './resourceMeta.ts';
 export * from './rest.ts';
 export * from './select.ts';
 export * from './tableProvider.ts';
+export * from './textarea.ts';
 export * from './toggle.ts';
