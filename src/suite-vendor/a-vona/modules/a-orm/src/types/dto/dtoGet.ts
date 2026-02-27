@@ -28,8 +28,8 @@ export type TypeDtoGetResult<
   ModelLike extends BeanModelMeta | (keyof IModelClassRecord),
   TOptionsRelation,
 > =
-TypeModelRelationResult<
-  TypeModelOfModelLike<ModelLike>[TypeSymbolKeyEntity],
-  TypeModelOfModelLike<ModelLike>,
-  TOptionsRelation
->;
+  TypeModelRelationResult<
+    TypeModelOfModelLike<ModelLike>[TypeSymbolKeyEntity],
+    TypeModelOfModelLike<ModelLike>,
+    TOptionsRelation
+  >;
