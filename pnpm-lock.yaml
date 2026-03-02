@@ -327,6 +327,9 @@ importers:
       zova-rest-cabloy-store-admin:
         specifier: file:./.zova-rest/cabloy-store-admin
         version: file:.zova-rest/cabloy-store-admin
+      zova-rest-cabloy-store-front:
+        specifier: file:./.zova-rest/cabloy-store-front
+        version: file:.zova-rest/cabloy-store-front
       zova-rest-vona-home:
         specifier: file:./.zova-rest/vona-home
         version: file:.zova-rest/vona-home
@@ -9054,6 +9057,9 @@ packages:
   zova-rest-cabloy-store-admin@file:.zova-rest/cabloy-store-admin:
     resolution: {directory: .zova-rest/cabloy-store-admin, type: directory}
 
+  zova-rest-cabloy-store-front@file:.zova-rest/cabloy-store-front:
+    resolution: {directory: .zova-rest/cabloy-store-front, type: directory}
+
   zova-rest-vona-home@file:.zova-rest/vona-home:
     resolution: {directory: .zova-rest/vona-home, type: directory}
 
@@ -16752,6 +16758,8 @@ snapshots:
   zod@4.3.6: {}
 
   zova-rest-cabloy-store-admin@file:.zova-rest/cabloy-store-admin: {}
+
+  zova-rest-cabloy-store-front@file:.zova-rest/cabloy-store-front: {}
 
   zova-rest-vona-home@file:.zova-rest/vona-home: {}
 
