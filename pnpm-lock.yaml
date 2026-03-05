@@ -315,6 +315,9 @@ importers:
       vona-module-store-homefront:
         specifier: workspace:^
         version: link:src/suite/cabloy-store/modules/store-homefront
+      vona-module-store-purchase:
+        specifier: workspace:^
+        version: link:src/suite/cabloy-store/modules/store-purchase
       vona-module-store-test:
         specifier: workspace:^
         version: link:src/suite/cabloy-store/modules/store-test
@@ -2310,6 +2313,9 @@ importers:
       vona-module-store-homefront:
         specifier: ^5.0.0
         version: link:modules/store-homefront
+      vona-module-store-purchase:
+        specifier: ^5.0.0
+        version: link:modules/store-purchase
       vona-module-store-test:
         specifier: ^5.0.0
         version: link:modules/store-test
@@ -2376,6 +2382,15 @@ importers:
         version: 6.1.3
 
   src/suite/cabloy-store/modules/store-homefront:
+    devDependencies:
+      clean-package:
+        specifier: ^2.2.0
+        version: 2.2.0
+      rimraf:
+        specifier: ^6.0.1
+        version: 6.1.3
+
+  src/suite/cabloy-store/modules/store-purchase:
     devDependencies:
       clean-package:
         specifier: ^2.2.0
