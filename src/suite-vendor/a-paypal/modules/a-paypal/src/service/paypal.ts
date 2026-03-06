@@ -54,9 +54,11 @@ export class ServicePaypal extends BeanBase {
     // raise event
     await this.scope.event.paypalCaptureOrder.emit({
       record,
-      grossAmount,
-      payFee,
-      netAmount,
+      breakdown: {
+        grossAmount,
+        payFee,
+        netAmount,
+      },
       orderResult,
     });
   }

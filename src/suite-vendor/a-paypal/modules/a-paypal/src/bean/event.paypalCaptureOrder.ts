@@ -1,11 +1,14 @@
 import type { EntityPaypalRecord } from '../entity/paypalRecord.tsx';
 import { BeanEventBase, Event } from 'vona-module-a-event';
 
-export interface TypeEventPaypalCaptureOrderData {
-  record: EntityPaypalRecord;
+export interface IPaypalCaptureOrderBreakdown {
   grossAmount: number;
   payFee: number;
   netAmount: number;
+}
+export interface TypeEventPaypalCaptureOrderData {
+  record: EntityPaypalRecord;
+  breakdown: IPaypalCaptureOrderBreakdown;
   orderResult?: {};
 }
 
