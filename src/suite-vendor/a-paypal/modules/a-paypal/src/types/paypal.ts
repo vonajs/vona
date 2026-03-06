@@ -1,3 +1,7 @@
+import type { TableIdentity } from 'table-identity';
+
+export interface IPaypalOrderSceneRecord {}
+
 export interface IPaypalOrderCreatePayload {
   remark: string;
   total: string;
@@ -8,4 +12,7 @@ export interface IPaypalOrderCreateOptions {
   brandName: string;
   returnUrl: string;
   cancelUrl: string;
+  returnTo: string;
+  scene: keyof IPaypalOrderSceneRecord;
+  bussinessId: TableIdentity;
 }
