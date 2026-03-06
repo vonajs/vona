@@ -1,6 +1,7 @@
 import type { IUser } from 'vona-module-a-user';
 import type { IPaypalOrderCreateOptions, IPaypalOrderCreatePayload } from '../types/paypal.ts';
-import { CheckoutPaymentIntent, Client, Environment, LogLevel, OrdersController, OrderStatus } from '@paypal/paypal-server-sdk';
+import { Client, OrdersController } from '@paypal/paypal-server-sdk';
+import { CheckoutPaymentIntent, Environment, LogLevel, OrderStatus } from '@paypal/paypal-server-sdk';
 import { BeanBase } from 'vona';
 import { Bean } from 'vona-module-a-bean';
 
@@ -13,7 +14,7 @@ export class BeanPaypal extends BeanBase {
         oAuthClientSecret: this.scope.config.client.clientSecret,
       },
       timeout: 0,
-      environment: this.app.meta.isLocal ? Environment.Sandbox : Environment.Production,
+      environment: this.app.meta.isLocal ? Environment.Sandbox as any : Environment.Production as any,
       logging: this.scope.config.client.logging
         ? {
             logLevel: LogLevel.Info,
@@ -28,12 +29,12 @@ export class BeanPaypal extends BeanBase {
     });
   }
 
-  async createOrder(payload: IPaypalOrderCreatePayload, options: IPaypalOrderCreateOptions, user: IUser) {
+  async createOrder(payload: IPaypalOrderCreatePayload, options: IPaypalOrderCreateOptions, _user: IUser) {
     // create order
     const ordersController = new OrdersController(this.createClient());
     const res = await ordersController.createOrder({
       body: {
-        intent: CheckoutPaymentIntent.Capture,
+        intent: CheckoutPaymentIntent.Capture as any,
         applicationContext: {
           brandName: options.brandName,
           returnUrl: options.returnUrl,
@@ -52,7 +53,7 @@ export class BeanPaypal extends BeanBase {
       this.scope.error.TransactionException.throw();
     }
     // prepayId
-    const prepayId = res.result.id;
-    const approveUrl = res.result.links?.find(item => item.rel === 'approve')?.href;
+    // const prepayId = res.result.id;
+    // const approveUrl = res.result.links?.find(item => item.rel === 'approve')?.href;
   }
 }
