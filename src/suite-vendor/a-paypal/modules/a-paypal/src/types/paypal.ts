@@ -14,5 +14,5 @@ export interface IPaypalOrderCreateOptions {
   cancelUrl: string;
   returnTo: string;
   scene: keyof IPaypalOrderSceneRecord;
-  bussinessId: TableIdentity;
+  orderId: TableIdentity;
 }
