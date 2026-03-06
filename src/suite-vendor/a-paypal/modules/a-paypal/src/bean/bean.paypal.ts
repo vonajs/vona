@@ -40,6 +40,13 @@ export class BeanPaypal extends BeanBase {
       options,
     });
     const recordId = record.id;
+    // test
+    if (this.app.meta.isTest) {
+      this.ctx.commit(async () => {
+        await this.scope.service.paypal.captureOrder(userId, recordId);
+      });
+      return { recordId, approveUrl: undefined };
+    }
     // url
     const returnUrl = combineQueries(options.returnUrl, { recordId });
     const cancelUrl = combineQueries(options.cancelUrl, { recordId });

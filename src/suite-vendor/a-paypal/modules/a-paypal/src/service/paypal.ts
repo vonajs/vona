@@ -28,8 +28,6 @@ export class ServicePaypal extends BeanBase {
     let netAmount: number;
     let orderResult: {} | undefined;
     if (this.app.meta.isTest) {
-      // 测试环境
-      // todo: pay_fee需要修改为真实的费率
       grossAmount = Number.parseInt(Number.parseFloat(record.payload.total) * 100 as any);
       payFee = grossAmount * this.scope.config.paypal.payFeeRate;
       netAmount = grossAmount - payFee;
