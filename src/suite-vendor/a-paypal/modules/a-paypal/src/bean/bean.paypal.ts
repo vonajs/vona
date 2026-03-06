@@ -1,5 +1,6 @@
 import type { IUser } from 'vona-module-a-user';
 import type { IPaypalOrderCreateOptions, IPaypalOrderCreatePayload } from '../types/paypal.ts';
+import { combineQueries } from '@cabloy/utils';
 import { Client, OrdersController } from '@paypal/paypal-server-sdk';
 import { CheckoutPaymentIntent, Environment, LogLevel, OrderStatus } from '@paypal/paypal-server-sdk';
 import { BeanBase } from 'vona';
@@ -29,7 +30,19 @@ export class BeanPaypal extends BeanBase {
     });
   }
 
-  async createOrder(payload: IPaypalOrderCreatePayload, options: IPaypalOrderCreateOptions, _user: IUser) {
+  async createOrder(payload: IPaypalOrderCreatePayload, options: IPaypalOrderCreateOptions, user: IUser) {
+    // create record
+    const record = await this.scope.model.paypalRecord.insert({
+      userId: user.id,
+      status: 0,
+      prepayId: undefined,
+      payload,
+      options,
+    });
+    const recordId = record.id;
+    // url
+    const returnUrl = combineQueries(options.returnUrl, { recordId });
+    const cancelUrl = combineQueries(options.cancelUrl, { recordId });
     // create order
     const ordersController = new OrdersController(this.createClient());
     const res = await ordersController.createOrder({
@@ -37,8 +50,8 @@ export class BeanPaypal extends BeanBase {
         intent: CheckoutPaymentIntent.Capture,
         applicationContext: {
           brandName: options.brandName,
-          returnUrl: options.returnUrl,
-          cancelUrl: options.cancelUrl,
+          returnUrl,
+          cancelUrl,
         },
         purchaseUnits: [{
           description: payload.remark,
@@ -53,7 +66,14 @@ export class BeanPaypal extends BeanBase {
       this.scope.error.TransactionException.throw();
     }
     // prepayId
-    // const prepayId = res.result.id;
-    // const approveUrl = res.result.links?.find(item => item.rel === 'approve')?.href;
+    const prepayId = res.result.id;
+    const approveUrl = res.result.links?.find(item => item.rel === 'approve')?.href;
+    // save prepayId
+    await this.scope.model.paypalRecord.update({
+      id: recordId,
+      prepayId,
+    });
+    // ok
+    return { approveUrl };
   }
 }

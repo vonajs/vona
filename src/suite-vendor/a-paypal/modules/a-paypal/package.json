@@ -43,7 +43,7 @@
     ]
   },
   "dependencies": {
-    "@paypal/paypal-server-sdk": "^2.2.0"
+    "@cabloy/paypal-server-sdk": "^2.2.1"
   },
   "devDependencies": {
     "clean-package": "^2.2.0",

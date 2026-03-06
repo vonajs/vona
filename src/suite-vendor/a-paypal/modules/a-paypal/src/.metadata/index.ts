@@ -1,6 +1,7 @@
 /* eslint-disable */
-import type { TypeEntityMeta,TypeSymbolKeyFieldsMore } from 'vona-module-a-orm';
+import type { TypeEntityMeta,TypeModelsClassLikeGeneral,TypeSymbolKeyFieldsMore } from 'vona-module-a-orm';
 import type { TypeEntityOptionsFields } from 'vona-module-a-openapi';
+import type { TableIdentity } from 'table-identity';
 /** entity: begin */
 export * from '../entity/paypalRecord.tsx';
 import type { IEntityOptionsPaypalRecord } from '../entity/paypalRecord.tsx';
@@ -38,6 +39,82 @@ declare module 'vona-module-a-paypal' {
     }
 }
 /** entity: end */
+/** model: begin */
+export * from '../model/paypalRecord.ts';
+import type { IModelOptionsPaypalRecord } from '../model/paypalRecord.ts';
+import 'vona-module-a-orm';
+declare module 'vona-module-a-orm' {
+  
+    export interface IModelRecord {
+      'a-paypal:paypalRecord': IModelOptionsPaypalRecord;
+    }
+
+  
+}
+declare module 'vona-module-a-paypal' {
+  
+        export interface ModelPaypalRecord {
+          /** @internal */
+          get scope(): ScopeModuleAPaypal;
+        }
+
+          export interface ModelPaypalRecord {
+            get $beanFullName(): 'a-paypal.model.paypalRecord';
+            get $onionName(): 'a-paypal:paypalRecord';
+            get $onionOptions(): IModelOptionsPaypalRecord;
+          } 
+}
+/** model: end */
+/** model: begin */
+import type { ModelPaypalRecord } from '../model/paypalRecord.ts';
+export interface IModuleModel {
+  'paypalRecord': ModelPaypalRecord;
+}
+/** model: end */
+/** model: begin */
+
+import 'vona';
+declare module 'vona' {
+  export interface IBeanRecordGeneral {
+    'a-paypal.model.paypalRecord': ModelPaypalRecord;
+  }
+}
+/** model: end */
+/** model: begin */
+import type { IModelGetOptions, IModelMethodOptions, IModelSelectParams, TypeModelSelectAndCount, TypeModelRelationResult, TypeModelWhere, IModelInsertOptions, TypeModelMutateRelationData, IModelDeleteOptions, IModelUpdateOptions, IModelMutateOptions, IModelSelectCountParams, IModelSelectAggrParams, TypeModelAggrRelationResult, IModelSelectGroupParams, TypeModelGroupRelationResult } from 'vona-module-a-orm';
+import { SymbolKeyEntity, SymbolKeyEntityMeta, SymbolKeyModelOptions } from 'vona-module-a-orm';
+declare module 'vona-module-a-paypal' {
+  
+  export interface ModelPaypalRecord {
+      [SymbolKeyEntity]: EntityPaypalRecord;
+      [SymbolKeyEntityMeta]: EntityPaypalRecordMeta;
+      [SymbolKeyModelOptions]: IModelOptionsPaypalRecord;
+      get<T extends IModelGetOptions<EntityPaypalRecord,ModelPaypalRecord>>(where: TypeModelWhere<EntityPaypalRecord>, options?: T): Promise<TypeModelRelationResult<EntityPaypalRecord, ModelPaypalRecord, T> | undefined>;
+      mget<T extends IModelGetOptions<EntityPaypalRecord,ModelPaypalRecord>>(ids: TableIdentity[], options?: T): Promise<TypeModelRelationResult<EntityPaypalRecord, ModelPaypalRecord, T>[]>;
+      selectAndCount<T extends IModelSelectParams<EntityPaypalRecord,ModelPaypalRecord,ModelJoins>, ModelJoins extends TypeModelsClassLikeGeneral | undefined = undefined>(params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<TypeModelSelectAndCount<EntityPaypalRecord, ModelPaypalRecord, T>>;
+      select<T extends IModelSelectParams<EntityPaypalRecord,ModelPaypalRecord,ModelJoins>, ModelJoins extends TypeModelsClassLikeGeneral | undefined = undefined>(params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<TypeModelRelationResult<EntityPaypalRecord, ModelPaypalRecord, T>[]>;
+      insert<T extends IModelInsertOptions<EntityPaypalRecord,ModelPaypalRecord>>(data?: TypeModelMutateRelationData<EntityPaypalRecord,ModelPaypalRecord, T>, options?: T): Promise<TypeModelMutateRelationData<EntityPaypalRecord,ModelPaypalRecord, T, true>>;
+      insertBulk<T extends IModelInsertOptions<EntityPaypalRecord,ModelPaypalRecord>>(items: TypeModelMutateRelationData<EntityPaypalRecord,ModelPaypalRecord, T>[], options?: T): Promise<TypeModelMutateRelationData<EntityPaypalRecord,ModelPaypalRecord, T, true>[]>;
+      update<T extends IModelUpdateOptions<EntityPaypalRecord,ModelPaypalRecord>>(data: TypeModelMutateRelationData<EntityPaypalRecord,ModelPaypalRecord, T>, options?: T): Promise<TypeModelMutateRelationData<EntityPaypalRecord,ModelPaypalRecord, T>>;
+      updateBulk<T extends IModelUpdateOptions<EntityPaypalRecord,ModelPaypalRecord>>(items: TypeModelMutateRelationData<EntityPaypalRecord,ModelPaypalRecord, T>[], options?: T): Promise<TypeModelMutateRelationData<EntityPaypalRecord,ModelPaypalRecord, T>[]>;
+      delete<T extends IModelDeleteOptions<EntityPaypalRecord,ModelPaypalRecord>>(where?: TypeModelWhere<EntityPaypalRecord>, options?: T): Promise<void>;
+      deleteBulk<T extends IModelDeleteOptions<EntityPaypalRecord,ModelPaypalRecord>>(ids: TableIdentity[], options?: T): Promise<void>;
+      mutate<T extends IModelMutateOptions<EntityPaypalRecord,ModelPaypalRecord>>(data?: TypeModelMutateRelationData<EntityPaypalRecord,ModelPaypalRecord, T>, options?: T): Promise<TypeModelMutateRelationData<EntityPaypalRecord,ModelPaypalRecord, T>>;
+      mutateBulk<T extends IModelMutateOptions<EntityPaypalRecord,ModelPaypalRecord>>(items: TypeModelMutateRelationData<EntityPaypalRecord,ModelPaypalRecord, T>[], options?: T): Promise<TypeModelMutateRelationData<EntityPaypalRecord,ModelPaypalRecord, T>[]>;
+      count<T extends IModelSelectCountParams<EntityPaypalRecord,ModelPaypalRecord,ModelJoins>, ModelJoins extends TypeModelsClassLikeGeneral | undefined = undefined>(params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<string | undefined>;
+      aggregate<T extends IModelSelectAggrParams<EntityPaypalRecord,ModelPaypalRecord,ModelJoins>, ModelJoins extends TypeModelsClassLikeGeneral | undefined = undefined>(params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<TypeModelAggrRelationResult<T>>;
+      group<T extends IModelSelectGroupParams<EntityPaypalRecord,ModelPaypalRecord,ModelJoins>, ModelJoins extends TypeModelsClassLikeGeneral | undefined = undefined>(params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<TypeModelGroupRelationResult<EntityPaypalRecord, T>[]>;
+      getById<T extends IModelGetOptions<EntityPaypalRecord,ModelPaypalRecord>>(id: TableIdentity, options?: T): Promise<TypeModelRelationResult<EntityPaypalRecord, ModelPaypalRecord, T> | undefined>;
+updateById<T extends IModelUpdateOptions<EntityPaypalRecord,ModelPaypalRecord>>(id: TableIdentity, data: TypeModelMutateRelationData<EntityPaypalRecord,ModelPaypalRecord, T>, options?: T): Promise<TypeModelMutateRelationData<EntityPaypalRecord,ModelPaypalRecord, T>>;
+deleteById<T extends IModelDeleteOptions<EntityPaypalRecord,ModelPaypalRecord>>(id: TableIdentity, options?: T): Promise<void>;
+    }
+}
+declare module 'vona-module-a-orm' {
+  export interface IModelClassRecord {
+    'a-paypal:paypalRecord': ModelPaypalRecord;
+  }
+}
+/** model: end */
 /** bean: begin */
 export * from '../bean/bean.paypal.ts';
 
@@ -113,6 +190,7 @@ config: TypeModuleConfig<typeof config>;
 error: TypeModuleErrors<typeof errors>;
 locale: TypeModuleLocales<(typeof locales)[TypeLocaleBase]>;
 entity: IModuleEntity;
+model: IModuleModel;
 }
 
 import 'vona';
