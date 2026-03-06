@@ -210,6 +210,9 @@ importers:
       vona-module-a-ormutils:
         specifier: workspace:^
         version: link:src/suite-vendor/a-vona/modules/a-ormutils
+      vona-module-a-paypal:
+        specifier: workspace:^
+        version: link:src/suite-vendor/a-paypal/modules/a-paypal
       vona-module-a-permission:
         specifier: workspace:^
         version: link:src/suite-vendor/a-vona/modules/a-permission
@@ -1218,6 +1221,21 @@ importers:
         version: 6.1.3
 
   src/suite-vendor/a-cabloy/modules/test-ssr:
+    devDependencies:
+      clean-package:
+        specifier: ^2.2.0
+        version: 2.2.0
+      rimraf:
+        specifier: ^6.0.1
+        version: 6.1.3
+
+  src/suite-vendor/a-paypal:
+    dependencies:
+      vona-module-a-paypal:
+        specifier: ^5.0.0
+        version: link:modules/a-paypal
+
+  src/suite-vendor/a-paypal/modules/a-paypal:
     devDependencies:
       clean-package:
         specifier: ^2.2.0

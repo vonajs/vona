@@ -1,6 +1,12 @@
 {
   "extends": "./tsconfig.base",
   "compilerOptions": {},
-  "references": [],
-  "exclude": ["modules"]
+  "references": [
+    {
+      "path": "modules/a-paypal/tsconfig.build.json"
+    }
+  ],
+  "exclude": [
+    "modules"
+  ]
 }
