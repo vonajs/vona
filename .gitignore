@@ -64,6 +64,7 @@ src/backend/typing/mine.d.ts
 /src/suite-vendor/*
 !/src/suite-vendor/.gitkeep
 !/src/suite-vendor/a-cabloy
+!/src/suite-vendor/a-paypal
 !/src/suite-vendor/a-vona
 
 /src/module/*
