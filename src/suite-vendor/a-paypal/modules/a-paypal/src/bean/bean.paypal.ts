@@ -14,7 +14,7 @@ export class BeanPaypal extends BeanBase {
         oAuthClientSecret: this.scope.config.client.clientSecret,
       },
       timeout: 0,
-      environment: this.app.meta.isLocal ? Environment.Sandbox as any : Environment.Production as any,
+      environment: this.app.meta.isLocal ? Environment.Sandbox : Environment.Production,
       logging: this.scope.config.client.logging
         ? {
             logLevel: LogLevel.Info,
@@ -34,7 +34,7 @@ export class BeanPaypal extends BeanBase {
     const ordersController = new OrdersController(this.createClient());
     const res = await ordersController.createOrder({
       body: {
-        intent: CheckoutPaymentIntent.Capture as any,
+        intent: CheckoutPaymentIntent.Capture,
         applicationContext: {
           brandName: options.brandName,
           returnUrl: options.returnUrl,
