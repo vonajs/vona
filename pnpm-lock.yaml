@@ -1237,7 +1237,7 @@ importers:
 
   src/suite-vendor/a-paypal/modules/a-paypal:
     dependencies:
-      '@paypal/paypal-server-sdk':
+      '@cabloy/paypal-server-sdk':
         specifier: ^2.2.0
         version: 2.2.0
     devDependencies:
@@ -2764,6 +2764,10 @@ packages:
   '@cabloy/module-info@1.3.42':
     resolution: {integrity: sha512-ZVM8qIgkisn8xCDpvaNYAg6Wp3R7TZgbppXJZw11rqxT/agxrZ7PTrvKtZaqRCere9K4lrq333y8c8/01kA7sQ==}
 
+  '@cabloy/paypal-server-sdk@2.2.0':
+    resolution: {integrity: sha512-c3FG/Zmra8dg2Q1V/DvI47o81jHLYRon9zEX3XiURnRzVbUKisqckozVcivkr2rWJRkiStZ9FtIApnH7Cj7JWQ==}
+    engines: {node: '>=14.17.0'}
+
   '@cabloy/type-fest@5.3.1':
     resolution: {integrity: sha512-oiG+8jGoKigRKUd51wKIn7FVZHNpfap7vgMWzmjJdVv0HGKZa3XR7sRfZvUSOcLW7tu9Y+GT/aWuJvM0gQiNxg==}
     engines: {node: '>=20'}
@@ -3594,10 +3598,6 @@ packages:
   '@ota-meshi/ast-token-store@0.3.0':
     resolution: {integrity: sha512-XRO0zi2NIUKq2lUk3T1ecFSld1fMWRKE6naRFGkgkdeosx7IslyUKNv5Dcb5PJTja9tHJoFu0v/7yEpAkrkrTg==}
     engines: {node: ^20.19.0 || ^22.13.0 || >=24}
-
-  '@paypal/paypal-server-sdk@2.2.0':
-    resolution: {integrity: sha512-ubdF3rkVT6msi+eXFiGSuJGO1nVR4BS60nb594KUdg+eB1nK9hSblmKnDWJb4PRroa5AR8R5vQWv3pHnzCEC6A==}
-    engines: {node: '>=14.17.0'}
 
   '@pkgjs/parseargs@0.11.0':
     resolution: {integrity: sha512-+1VkjdD0QBLPodGrJUeqarH8VAIvQODIbwh9XpP5Syisf7YoQgsJKPNFoqqLQlu+VQ/tVSshMR6loPMn8U+dPg==}
@@ -9991,6 +9991,17 @@ snapshots:
 
   '@cabloy/module-info@1.3.42': {}
 
+  '@cabloy/paypal-server-sdk@2.2.0':
+    dependencies:
+      '@apimatic/authentication-adapters': 0.5.14
+      '@apimatic/axios-client-adapter': 0.3.21
+      '@apimatic/core': 0.10.29
+      '@apimatic/oauth-adapters': 0.4.18
+      '@apimatic/schema': 0.7.21
+    transitivePeerDependencies:
+      - debug
+      - supports-color
+
   '@cabloy/type-fest@5.3.1':
     dependencies:
       tagged-tag: 1.0.0
@@ -10913,17 +10924,6 @@ snapshots:
       '@octokit/openapi-types': 24.2.0
 
   '@ota-meshi/ast-token-store@0.3.0': {}
-
-  '@paypal/paypal-server-sdk@2.2.0':
-    dependencies:
-      '@apimatic/authentication-adapters': 0.5.14
-      '@apimatic/axios-client-adapter': 0.3.21
-      '@apimatic/core': 0.10.29
-      '@apimatic/oauth-adapters': 0.4.18
-      '@apimatic/schema': 0.7.21
-    transitivePeerDependencies:
-      - debug
-      - supports-color
 
   '@pkgjs/parseargs@0.11.0':
     optional: true

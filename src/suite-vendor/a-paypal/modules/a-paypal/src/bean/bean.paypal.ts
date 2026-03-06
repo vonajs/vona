@@ -1,8 +1,8 @@
 import type { IUser } from 'vona-module-a-user';
 import type { IPaypalOrderCreateOptions, IPaypalOrderCreatePayload } from '../types/paypal.ts';
+import { Client, OrdersController } from '@cabloy/paypal-server-sdk';
+import { CheckoutPaymentIntent, Environment, LogLevel, OrderStatus } from '@cabloy/paypal-server-sdk';
 import { combineQueries } from '@cabloy/utils';
-import { Client, OrdersController } from '@paypal/paypal-server-sdk';
-import { CheckoutPaymentIntent, Environment, LogLevel, OrderStatus } from '@paypal/paypal-server-sdk';
 import { BeanBase } from 'vona';
 import { Bean } from 'vona-module-a-bean';
 
