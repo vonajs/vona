@@ -18,6 +18,8 @@ export class ServicePaypal extends BeanBase {
   async captureOrder(userId: TableIdentity, recordId: TableIdentity) {
     const record = await this.getRecord(userId, recordId);
     if (!record) this.app.throw(403);
+    // check if handled
+    if (record.status !== 0) this.app.throw(403);
     // prepayId
     const prepayId = record.prepayId;
     // process
@@ -56,6 +58,19 @@ export class ServicePaypal extends BeanBase {
       payFee,
       netAmount,
       orderResult,
+    });
+  }
+
+  async cancelOrder(userId: TableIdentity, recordId: TableIdentity) {
+    const record = await this.getRecord(userId, recordId);
+    if (!record) this.app.throw(403);
+    // check if handled
+    if (record.status !== 0) this.app.throw(403);
+    // update status
+    await this.scope.model.paypalRecord.update({ id: recordId, status: -1 });
+    // raise event
+    await this.scope.event.paypalCancelOrder.emit({
+      record,
     });
   }
 }

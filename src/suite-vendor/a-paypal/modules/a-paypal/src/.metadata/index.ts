@@ -182,6 +182,7 @@ declare module 'vona' {
 }
 /** service: end */
 /** event: begin */
+export * from '../bean/event.paypalCancelOrder.ts';
 export * from '../bean/event.paypalCaptureOrder.ts';
 
 import 'vona';
@@ -191,6 +192,17 @@ declare module 'vona' {
 }
 declare module 'vona-module-a-paypal' {
   
+        export interface EventPaypalCancelOrder {
+          /** @internal */
+          get scope(): ScopeModuleAPaypal;
+        }
+
+          export interface EventPaypalCancelOrder {
+            get $beanFullName(): 'a-paypal.event.paypalCancelOrder';
+            get $onionName(): 'a-paypal:paypalCancelOrder';
+            
+          }
+
         export interface EventPaypalCaptureOrder {
           /** @internal */
           get scope(): ScopeModuleAPaypal;
@@ -204,17 +216,21 @@ declare module 'vona-module-a-paypal' {
 }
 /** event: end */
 /** event: begin */
+import type { EventPaypalCancelOrder } from '../bean/event.paypalCancelOrder.ts';
 import type { EventPaypalCaptureOrder } from '../bean/event.paypalCaptureOrder.ts';
 export interface IModuleEvent {
-  'paypalCaptureOrder': EventPaypalCaptureOrder;
+  'paypalCancelOrder': EventPaypalCancelOrder;
+'paypalCaptureOrder': EventPaypalCaptureOrder;
 }
 /** event: end */
 /** event: begin */
+import type { TypeEventPaypalCancelOrderData, TypeEventPaypalCancelOrderResult } from '../bean/event.paypalCancelOrder.ts';
 import type { TypeEventPaypalCaptureOrderData, TypeEventPaypalCaptureOrderResult } from '../bean/event.paypalCaptureOrder.ts';
 import type { EventOn } from 'vona-module-a-event'; 
 declare module 'vona-module-a-event' {
   export interface IEventRecord {
-    'a-paypal:paypalCaptureOrder': EventOn<TypeEventPaypalCaptureOrderData, TypeEventPaypalCaptureOrderResult>;
+    'a-paypal:paypalCancelOrder': EventOn<TypeEventPaypalCancelOrderData, TypeEventPaypalCancelOrderResult>;
+'a-paypal:paypalCaptureOrder': EventOn<TypeEventPaypalCaptureOrderData, TypeEventPaypalCaptureOrderResult>;
   }
 }
 /** event: end */
@@ -318,6 +334,7 @@ declare module 'vona-module-a-web' {
     }
 export interface IApiPathPostRecord{
         '/paypal/captureOrder/:recordId': undefined;
+'/paypal/cancelOrder/:recordId': undefined;
     }
 
 }

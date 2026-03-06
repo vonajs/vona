@@ -26,4 +26,12 @@ export class ControllerPaypal extends BeanBase {
   ): Promise<void> {
     return await this.scope.service.paypal.captureOrder(user.id, recordId);
   }
+
+  @Web.post('cancelOrder/:recordId')
+  async cancelOrder(
+    @Arg.user() user: IUser,
+    @Arg.param('recordId', v.tableIdentity()) recordId: TableIdentity,
+  ): Promise<void> {
+    return await this.scope.service.paypal.cancelOrder(user.id, recordId);
+  }
 }
