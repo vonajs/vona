@@ -3,6 +3,7 @@ import type { IQueryParams } from 'vona-module-a-orm';
 import type { DtoProductCreate } from '../dto/productCreate.ts';
 import type { DtoProductQueryRes } from '../dto/productQueryRes.ts';
 import type { DtoProductUpdate } from '../dto/productUpdate.ts';
+import type { DtoProductView } from '../dto/productView.ts';
 import type { EntityProduct } from '../entity/product.tsx';
 import type { ModelProduct } from '../model/product.ts';
 import { BeanBase } from 'vona';
@@ -20,7 +21,7 @@ export class ServiceProduct extends BeanBase {
     });
   }
 
-  async view(id: TableIdentity): Promise<EntityProduct | undefined> {
+  async view(id: TableIdentity): Promise<DtoProductView | undefined> {
     return await this.scope.model.product.getById(id);
   }
 

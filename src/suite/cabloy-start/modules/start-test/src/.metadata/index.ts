@@ -191,10 +191,12 @@ export * from '../dto/productCreate.ts';
 export * from '../dto/productQuery.ts';
 export * from '../dto/productQueryRes.ts';
 export * from '../dto/productUpdate.ts';
+export * from '../dto/productView.ts';
 import type { IDtoOptionsProductCreate } from '../dto/productCreate.ts';
 import type { IDtoOptionsProductQuery } from '../dto/productQuery.ts';
 import type { IDtoOptionsProductQueryRes } from '../dto/productQueryRes.ts';
 import type { IDtoOptionsProductUpdate } from '../dto/productUpdate.ts';
+import type { IDtoOptionsProductView } from '../dto/productView.ts';
 import 'vona-module-a-web';
 declare module 'vona-module-a-web' {
   
@@ -203,6 +205,7 @@ declare module 'vona-module-a-web' {
 'start-test:productQuery': IDtoOptionsProductQuery;
 'start-test:productQueryRes': IDtoOptionsProductQueryRes;
 'start-test:productUpdate': IDtoOptionsProductUpdate;
+'start-test:productView': IDtoOptionsProductView;
     }
 
   
@@ -215,7 +218,8 @@ declare module 'vona-module-start-test' {
 import type { DtoProductCreate } from '../dto/productCreate.ts';
 import type { DtoProductQuery } from '../dto/productQuery.ts';
 import type { DtoProductQueryRes } from '../dto/productQueryRes.ts';
-import type { DtoProductUpdate } from '../dto/productUpdate.ts'; 
+import type { DtoProductUpdate } from '../dto/productUpdate.ts';
+import type { DtoProductView } from '../dto/productView.ts'; 
 declare module 'vona-module-start-test' {
   
     export interface IDtoOptionsProductCreate {
@@ -232,6 +236,10 @@ declare module 'vona-module-start-test' {
 
     export interface IDtoOptionsProductUpdate {
       fields?: TypeEntityOptionsFields<DtoProductUpdate, IDtoOptionsProductUpdate[TypeSymbolKeyFieldsMore]>;
+    }
+
+    export interface IDtoOptionsProductView {
+      fields?: TypeEntityOptionsFields<DtoProductView, IDtoOptionsProductView[TypeSymbolKeyFieldsMore]>;
     }
 }
 /** dto: end */
