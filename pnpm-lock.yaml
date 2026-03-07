@@ -291,6 +291,9 @@ importers:
       vona-module-a-zod:
         specifier: workspace:^
         version: link:src/suite-vendor/a-vona/modules/a-zod
+      vona-module-base-siteadmin:
+        specifier: workspace:^
+        version: link:src/suite/cabloy-base/modules/base-siteadmin
       vona-module-cabloy-store:
         specifier: workspace:^
         version: link:src/suite/cabloy-store/modules/cabloy-store
@@ -2306,6 +2309,21 @@ importers:
         version: 6.1.3
 
   src/suite/a-home/modules/home-user:
+    devDependencies:
+      clean-package:
+        specifier: ^2.2.0
+        version: 2.2.0
+      rimraf:
+        specifier: ^6.0.1
+        version: 6.1.3
+
+  src/suite/cabloy-base:
+    dependencies:
+      vona-module-base-siteadmin:
+        specifier: ^5.0.0
+        version: link:modules/base-siteadmin
+
+  src/suite/cabloy-base/modules/base-siteadmin:
     devDependencies:
       clean-package:
         specifier: ^2.2.0
