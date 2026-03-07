@@ -1,11 +1,12 @@
 {
-  "name": "vona-module-test-ssr",
+  "name": "vona-module-test-rest",
   "type": "module",
   "version": "5.0.0",
-  "title": "test-ssr",
+  "title": "test-rest",
   "vonaModule": {
+    "fileVersion": 1,
     "dependencies": {
-      "cabloy-base": "5.0.0"
+      "a-cabloy": "5.0.0"
     },
     "capabilities": {
       "meta": {
@@ -34,8 +35,7 @@
   },
   "files": [
     "assets",
-    "dist",
-    "zovaRest"
+    "dist"
   ],
   "scripts": {
     "clean": "rimraf dist tsconfig.build.tsbuildinfo",
@@ -51,7 +51,9 @@
       "exports.\\..import"
     ]
   },
-  "dependencies": {},
+  "dependencies": {
+    "@faker-js/faker": "^10.0.0"
+  },
   "devDependencies": {
     "clean-package": "^2.2.0",
     "rimraf": "^6.0.1"

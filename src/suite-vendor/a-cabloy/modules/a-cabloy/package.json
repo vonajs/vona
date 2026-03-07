@@ -1,20 +1,20 @@
 {
-  "name": "vona-module-test-cabloy",
+  "name": "vona-module-a-cabloy",
   "type": "module",
   "version": "5.0.3",
-  "title": "test-cabloy",
+  "title": "a-cabloy",
   "vonaModule": {
     "dependencies": {
       "a-vona": "5.0.0",
-      "cabloy-base": "5.0.0"
-    },
-    "capabilities": {
-      "meta": {
-        "mode": [
-          "dev",
-          "test"
-        ]
-      }
+      "a-auth": "5.0.0",
+      "a-authsimple": "5.0.0",
+      "a-authgithub": "5.0.0",
+      "a-datasharding": "5.0.0",
+      "a-datasource": "5.0.0",
+      "a-socket": "5.0.0",
+      "a-ssr": "5.0.0",
+      "a-ssrhmr": "5.0.0",
+      "a-status": "5.0.0"
     }
   },
   "description": "",
