@@ -1,0 +1,17 @@
+import type { IDecoratorSsrMenuOptions } from 'vona-module-a-ssr';
+import type { ISsrSiteOptionsAdmin } from './ssrSite.admin.ts';
+import { BeanBase } from 'vona';
+import { SsrMenu } from 'vona-module-a-ssr';
+import { $locale } from '../.metadata/locales.ts';
+
+export interface ISsrMenuOptionsHome extends IDecoratorSsrMenuOptions<ISsrSiteOptionsAdmin> {}
+
+@SsrMenu<ISsrMenuOptionsHome>({
+  item: {
+    title: $locale('Home'),
+    icon: '::home',
+    link: '/',
+  },
+  site: ['base-siteadmin:admin'],
+})
+export class SsrMenuHome extends BeanBase {}

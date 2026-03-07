@@ -1,0 +1,1 @@
+import{l as o,e,c as a}from"./zova-CSpwtzG4.js";import{Scope as t}from"./a-bean-CBHTeyUD.js";import"./vue-B__qjIZ6.js";import"./commonjsHelper-CLPN-Npl.js";import"./zod-Bs5_amKe.js";var m;let r=t()(m=e({module:"a-meta"})(m=class ScopeModuleAMeta2 extends o{})||m)||m;function s(o){return a("meta","app",void 0,o)}export{s as Meta,r as ScopeModuleAMeta};
