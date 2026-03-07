@@ -9,9 +9,12 @@ async function _versionTemplate(templateName: string) {
   const suiteHomeDest = path.resolve(fileURLToPath(import.meta.url), `../../packages-cli/cli-set-api/cli/templates/create/project/${templateName}/boilerplate/src/suite/cabloy-basic`);
   await fse.remove(suiteHomeDest);
   await fse.copy(suiteHomeSrc, suiteHomeDest);
+  await fse.remove(path.join(suiteHomeDest, 'node_modules'));
   for (const moduleName of ['basic-siteadmin']) {
     await fse.remove(path.join(suiteHomeDest, `modules/${moduleName}/dist`));
     await fse.remove(path.join(suiteHomeDest, `modules/${moduleName}/tsconfig.build.tsbuildinfo`));
+    await fse.remove(path.join(suiteHomeDest, `modules/${moduleName}/node_modules`));
+    await fse.remove(path.join(suiteHomeDest, `modules/${moduleName}/.rollup.cache`));
   }
 }
 
