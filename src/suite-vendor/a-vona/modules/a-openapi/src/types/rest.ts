@@ -36,6 +36,7 @@ export interface ISchemaObjectExtensionFieldRestProps {
   displayValue?: any;
   displayValueUpdateTiming?: TypeFormFieldDisplayValueUpdateTiming;
   onSetDisplayValue?: TypeFormFieldOnSetDisplayValue;
+  disableNotifyChanged?: boolean;
   class?: any;
   placeholder?: string;
   readonly?: boolean;
