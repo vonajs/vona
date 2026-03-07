@@ -1,2 +1,2 @@
-export const __ThisModule__ = 'a-cabloy';
-export { ScopeModuleACabloy as ScopeModule } from './index.ts';
+export const __ThisModule__ = 'cabloy-base';
+export { ScopeModuleCabloyBase as ScopeModule } from './index.ts';

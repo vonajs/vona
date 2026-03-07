@@ -6,7 +6,7 @@
   "vonaModule": {
     "dependencies": {
       "a-vona": "5.0.0",
-      "a-cabloy": "5.0.0"
+      "cabloy-base": "5.0.0"
     },
     "capabilities": {
       "meta": {

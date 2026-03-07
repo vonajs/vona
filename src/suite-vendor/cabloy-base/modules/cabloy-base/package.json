@@ -1,8 +1,8 @@
 {
-  "name": "vona-module-a-cabloy",
+  "name": "vona-module-cabloy-base",
   "type": "module",
   "version": "5.0.3",
-  "title": "a-cabloy",
+  "title": "cabloy-base",
   "vonaModule": {
     "dependencies": {
       "a-vona": "5.0.0",

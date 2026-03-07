@@ -110,7 +110,7 @@ importers:
         version: link:src/suite-vendor/a-vona/modules/a-auth
       vona-module-a-authgithub:
         specifier: workspace:^
-        version: link:src/suite-vendor/a-cabloy/modules/a-authgithub
+        version: link:src/suite-vendor/cabloy-base/modules/a-authgithub
       vona-module-a-authsimple:
         specifier: workspace:^
         version: link:src/suite-vendor/a-vona/modules/a-authsimple
@@ -126,9 +126,6 @@ importers:
       vona-module-a-broadcast:
         specifier: workspace:^
         version: link:src/suite-vendor/a-vona/modules/a-broadcast
-      vona-module-a-cabloy:
-        specifier: workspace:^
-        version: link:src/suite-vendor/a-cabloy/modules/a-cabloy
       vona-module-a-cache:
         specifier: workspace:^
         version: link:src/suite-vendor/a-vona/modules/a-cache
@@ -146,10 +143,10 @@ importers:
         version: link:src/suite-vendor/a-vona/modules/a-core
       vona-module-a-datasharding:
         specifier: workspace:^
-        version: link:src/suite-vendor/a-cabloy/modules/a-datasharding
+        version: link:src/suite-vendor/cabloy-base/modules/a-datasharding
       vona-module-a-datasource:
         specifier: workspace:^
-        version: link:src/suite-vendor/a-cabloy/modules/a-datasource
+        version: link:src/suite-vendor/cabloy-base/modules/a-datasource
       vona-module-a-election:
         specifier: workspace:^
         version: link:src/suite-vendor/a-vona/modules/a-election
@@ -242,16 +239,16 @@ importers:
         version: link:src/suite-vendor/a-vona/modules/a-serialization
       vona-module-a-socket:
         specifier: workspace:^
-        version: link:src/suite-vendor/a-cabloy/modules/a-socket
+        version: link:src/suite-vendor/cabloy-base/modules/a-socket
       vona-module-a-ssr:
         specifier: workspace:^
-        version: link:src/suite-vendor/a-cabloy/modules/a-ssr
+        version: link:src/suite-vendor/cabloy-base/modules/a-ssr
       vona-module-a-ssrhmr:
         specifier: workspace:^
-        version: link:src/suite-vendor/a-cabloy/modules/a-ssrhmr
+        version: link:src/suite-vendor/cabloy-base/modules/a-ssrhmr
       vona-module-a-ssrhome:
         specifier: workspace:^
-        version: link:src/suite-vendor/a-cabloy/modules/a-ssrhome
+        version: link:src/suite-vendor/cabloy-base/modules/a-ssrhome
       vona-module-a-startup:
         specifier: workspace:^
         version: link:src/suite-vendor/a-vona/modules/a-startup
@@ -260,7 +257,7 @@ importers:
         version: link:src/suite-vendor/a-vona/modules/a-static
       vona-module-a-status:
         specifier: workspace:^
-        version: link:src/suite-vendor/a-cabloy/modules/a-status
+        version: link:src/suite-vendor/cabloy-base/modules/a-status
       vona-module-a-summer:
         specifier: workspace:^
         version: link:src/suite-vendor/a-vona/modules/a-summer
@@ -291,6 +288,9 @@ importers:
       vona-module-a-zod:
         specifier: workspace:^
         version: link:src/suite-vendor/a-vona/modules/a-zod
+      vona-module-cabloy-base:
+        specifier: workspace:^
+        version: link:src/suite-vendor/cabloy-base/modules/cabloy-base
       vona-module-cabloy-store:
         specifier: workspace:^
         version: link:src/suite/cabloy-store/modules/cabloy-store
@@ -426,13 +426,13 @@ importers:
         version: link:src/suite-vendor/a-vona/modules/a-play
       vona-module-test-cabloy:
         specifier: workspace:^
-        version: link:src/suite-vendor/a-cabloy/modules/test-cabloy
+        version: link:src/suite-vendor/cabloy-base/modules/test-cabloy
       vona-module-test-rest:
         specifier: workspace:^
-        version: link:src/suite-vendor/a-cabloy/modules/test-rest
+        version: link:src/suite-vendor/cabloy-base/modules/test-rest
       vona-module-test-ssr:
         specifier: workspace:^
-        version: link:src/suite-vendor/a-cabloy/modules/test-ssr
+        version: link:src/suite-vendor/cabloy-base/modules/test-ssr
       vona-module-test-vona:
         specifier: workspace:^
         version: link:src/suite-vendor/a-vona/modules/test-vona
@@ -1080,147 +1080,6 @@ importers:
         version: 6.1.3
 
   packages-vona/vona-shared:
-    devDependencies:
-      clean-package:
-        specifier: ^2.2.0
-        version: 2.2.0
-      rimraf:
-        specifier: ^6.0.1
-        version: 6.1.3
-
-  src/suite-vendor/a-cabloy: {}
-
-  src/suite-vendor/a-cabloy/modules/a-authgithub:
-    dependencies:
-      passport-github:
-        specifier: ^1.1.0
-        version: 1.1.0
-      passport-oauth2:
-        specifier: ^1.8.0
-        version: 1.8.0
-    devDependencies:
-      clean-package:
-        specifier: ^2.2.0
-        version: 2.2.0
-      rimraf:
-        specifier: ^6.0.1
-        version: 6.1.3
-
-  src/suite-vendor/a-cabloy/modules/a-cabloy:
-    devDependencies:
-      clean-package:
-        specifier: ^2.2.0
-        version: 2.2.0
-      rimraf:
-        specifier: ^6.0.1
-        version: 6.1.3
-
-  src/suite-vendor/a-cabloy/modules/a-datasharding:
-    devDependencies:
-      clean-package:
-        specifier: ^2.2.0
-        version: 2.2.0
-      rimraf:
-        specifier: ^6.0.1
-        version: 6.1.3
-
-  src/suite-vendor/a-cabloy/modules/a-datasource:
-    devDependencies:
-      clean-package:
-        specifier: ^2.2.0
-        version: 2.2.0
-      rimraf:
-        specifier: ^6.0.1
-        version: 6.1.3
-
-  src/suite-vendor/a-cabloy/modules/a-socket:
-    dependencies:
-      '@cabloy/socket':
-        specifier: workspace:^
-        version: link:../../../../../packages-utils/socket
-      '@types/ws':
-        specifier: ^8.18.0
-        version: 8.18.1
-      ws:
-        specifier: ^8.18.1
-        version: 8.19.0
-    devDependencies:
-      clean-package:
-        specifier: ^2.2.0
-        version: 2.2.0
-      rimraf:
-        specifier: ^6.0.1
-        version: 6.1.3
-
-  src/suite-vendor/a-cabloy/modules/a-ssr:
-    dependencies:
-      http-proxy:
-        specifier: ^1.18.1
-        version: 1.18.1
-      vona-module-a-socket:
-        specifier: workspace:^
-        version: link:../a-socket
-    devDependencies:
-      '@types/http-proxy':
-        specifier: ^1.17.16
-        version: 1.17.17
-      clean-package:
-        specifier: ^2.2.0
-        version: 2.2.0
-      rimraf:
-        specifier: ^6.0.1
-        version: 6.1.3
-
-  src/suite-vendor/a-cabloy/modules/a-ssrhmr:
-    devDependencies:
-      clean-package:
-        specifier: ^2.2.0
-        version: 2.2.0
-      rimraf:
-        specifier: ^6.0.1
-        version: 6.1.3
-
-  src/suite-vendor/a-cabloy/modules/a-ssrhome:
-    devDependencies:
-      clean-package:
-        specifier: ^2.2.0
-        version: 2.2.0
-      rimraf:
-        specifier: ^6.0.1
-        version: 6.1.3
-
-  src/suite-vendor/a-cabloy/modules/a-status:
-    devDependencies:
-      clean-package:
-        specifier: ^2.2.0
-        version: 2.2.0
-      rimraf:
-        specifier: ^6.0.1
-        version: 6.1.3
-
-  src/suite-vendor/a-cabloy/modules/test-cabloy:
-    devDependencies:
-      clean-package:
-        specifier: ^2.2.0
-        version: 2.2.0
-      rimraf:
-        specifier: ^6.0.1
-        version: 6.1.3
-
-  src/suite-vendor/a-cabloy/modules/test-rest:
-    dependencies:
-      '@faker-js/faker':
-        specifier: ^10.0.0
-        version: 10.3.0
-    devDependencies:
-      clean-package:
-        specifier: ^2.2.0
-        version: 2.2.0
-      rimraf:
-        specifier: ^6.0.1
-        version: 6.1.3
-
-  src/suite-vendor/a-cabloy/modules/test-ssr:
     devDependencies:
       clean-package:
         specifier: ^2.2.0
@@ -2247,6 +2106,147 @@ importers:
         specifier: ^6.0.1
         version: 6.1.3
 
+  src/suite-vendor/cabloy-base: {}
+
+  src/suite-vendor/cabloy-base/modules/a-authgithub:
+    dependencies:
+      passport-github:
+        specifier: ^1.1.0
+        version: 1.1.0
+      passport-oauth2:
+        specifier: ^1.8.0
+        version: 1.8.0
+    devDependencies:
+      clean-package:
+        specifier: ^2.2.0
+        version: 2.2.0
+      rimraf:
+        specifier: ^6.0.1
+        version: 6.1.3
+
+  src/suite-vendor/cabloy-base/modules/a-datasharding:
+    devDependencies:
+      clean-package:
+        specifier: ^2.2.0
+        version: 2.2.0
+      rimraf:
+        specifier: ^6.0.1
+        version: 6.1.3
+
+  src/suite-vendor/cabloy-base/modules/a-datasource:
+    devDependencies:
+      clean-package:
+        specifier: ^2.2.0
+        version: 2.2.0
+      rimraf:
+        specifier: ^6.0.1
+        version: 6.1.3
+
+  src/suite-vendor/cabloy-base/modules/a-socket:
+    dependencies:
+      '@cabloy/socket':
+        specifier: workspace:^
+        version: link:../../../../../packages-utils/socket
+      '@types/ws':
+        specifier: ^8.18.0
+        version: 8.18.1
+      ws:
+        specifier: ^8.18.1
+        version: 8.19.0
+    devDependencies:
+      clean-package:
+        specifier: ^2.2.0
+        version: 2.2.0
+      rimraf:
+        specifier: ^6.0.1
+        version: 6.1.3
+
+  src/suite-vendor/cabloy-base/modules/a-ssr:
+    dependencies:
+      http-proxy:
+        specifier: ^1.18.1
+        version: 1.18.1
+      vona-module-a-socket:
+        specifier: workspace:^
+        version: link:../a-socket
+    devDependencies:
+      '@types/http-proxy':
+        specifier: ^1.17.16
+        version: 1.17.17
+      clean-package:
+        specifier: ^2.2.0
+        version: 2.2.0
+      rimraf:
+        specifier: ^6.0.1
+        version: 6.1.3
+
+  src/suite-vendor/cabloy-base/modules/a-ssrhmr:
+    devDependencies:
+      clean-package:
+        specifier: ^2.2.0
+        version: 2.2.0
+      rimraf:
+        specifier: ^6.0.1
+        version: 6.1.3
+
+  src/suite-vendor/cabloy-base/modules/a-ssrhome:
+    devDependencies:
+      clean-package:
+        specifier: ^2.2.0
+        version: 2.2.0
+      rimraf:
+        specifier: ^6.0.1
+        version: 6.1.3
+
+  src/suite-vendor/cabloy-base/modules/a-status:
+    devDependencies:
+      clean-package:
+        specifier: ^2.2.0
+        version: 2.2.0
+      rimraf:
+        specifier: ^6.0.1
+        version: 6.1.3
+
+  src/suite-vendor/cabloy-base/modules/cabloy-base:
+    devDependencies:
+      clean-package:
+        specifier: ^2.2.0
+        version: 2.2.0
+      rimraf:
+        specifier: ^6.0.1
+        version: 6.1.3
+
+  src/suite-vendor/cabloy-base/modules/test-cabloy:
+    devDependencies:
+      clean-package:
+        specifier: ^2.2.0
+        version: 2.2.0
+      rimraf:
+        specifier: ^6.0.1
+        version: 6.1.3
+
+  src/suite-vendor/cabloy-base/modules/test-rest:
+    dependencies:
+      '@faker-js/faker':
+        specifier: ^10.0.0
+        version: 10.3.0
+    devDependencies:
+      clean-package:
+        specifier: ^2.2.0
+        version: 2.2.0
+      rimraf:
+        specifier: ^6.0.1
+        version: 6.1.3
+
+  src/suite-vendor/cabloy-base/modules/test-ssr:
+    devDependencies:
+      clean-package:
+        specifier: ^2.2.0
+        version: 2.2.0
+      rimraf:
+        specifier: ^6.0.1
+        version: 6.1.3
+
   src/suite/a-home:
     dependencies:
       vona-module-home-base:
@@ -2296,10 +2296,10 @@ importers:
     dependencies:
       vona-module-a-ssr:
         specifier: ^5.0.0
-        version: link:../../../../suite-vendor/a-cabloy/modules/a-ssr
+        version: link:../../../../suite-vendor/cabloy-base/modules/a-ssr
       vona-module-a-ssrhome:
         specifier: ^5.0.0
-        version: link:../../../../suite-vendor/a-cabloy/modules/a-ssrhome
+        version: link:../../../../suite-vendor/cabloy-base/modules/a-ssrhome
     devDependencies:
       clean-package:
         specifier: ^2.2.0

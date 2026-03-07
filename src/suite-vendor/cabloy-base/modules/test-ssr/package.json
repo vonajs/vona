@@ -5,7 +5,7 @@
   "title": "test-ssr",
   "vonaModule": {
     "dependencies": {
-      "a-cabloy": "5.0.0"
+      "cabloy-base": "5.0.0"
     },
     "capabilities": {
       "meta": {

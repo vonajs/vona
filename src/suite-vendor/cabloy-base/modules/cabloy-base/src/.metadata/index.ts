@@ -4,20 +4,20 @@ import { BeanScopeBase, type BeanScopeUtil } from 'vona';
 import { Scope } from 'vona-module-a-bean';
 
 @Scope()
-export class ScopeModuleACabloy extends BeanScopeBase {}
+export class ScopeModuleCabloyBase extends BeanScopeBase {}
 
-export interface ScopeModuleACabloy {
+export interface ScopeModuleCabloyBase {
   util: BeanScopeUtil;
 }
 
 import 'vona';
 declare module 'vona' {
   export interface IBeanScopeRecord {
-    'a-cabloy': ScopeModuleACabloy;
+    'cabloy-base': ScopeModuleCabloyBase;
   }
 
   export interface IBeanScopeContainer {
-    cabloy: ScopeModuleACabloy;
+    cabloyBase: ScopeModuleCabloyBase;
   }
   
   
