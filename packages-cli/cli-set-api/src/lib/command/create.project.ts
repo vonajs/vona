@@ -22,7 +22,8 @@ export default {
           type: 'select',
           message: 'Specify the project template',
           choices: [
-            { name: 'basic', message: 'basic' },
+            { name: 'cabloy-basic', message: 'Cabloy Basic' },
+            { name: 'cabloy-start', message: 'Cabloy Start' },
           ],
         },
       },
