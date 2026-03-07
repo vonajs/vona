@@ -3,9 +3,6 @@
   "compilerOptions": {},
   "references": [
     {
-      "path": "modules/start-home/tsconfig.build.json"
-    },
-    {
       "path": "modules/start-siteadmin/tsconfig.build.json"
     },
     {

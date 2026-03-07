@@ -9,11 +9,12 @@ async function _versionTemplate(templateName: string) {
   const suiteHomeDest = path.resolve(fileURLToPath(import.meta.url), `../../packages-cli/cli-set-api/cli/templates/create/project/${templateName}/boilerplate/src/suite/cabloy-start`);
   await fse.remove(suiteHomeDest);
   await fse.copy(suiteHomeSrc, suiteHomeDest);
-  for (const moduleName of ['start-home', 'start-test']) {
+  for (const moduleName of ['start-siteadmin', 'start-sitefront']) {
     await fse.remove(path.join(suiteHomeDest, `modules/${moduleName}/dist`));
     await fse.remove(path.join(suiteHomeDest, `modules/${moduleName}/tsconfig.build.tsbuildinfo`));
+    await fse.remove(path.join(suiteHomeDest, `modules/${moduleName}/assets`));
+    await fse.remove(path.join(suiteHomeDest, `modules/${moduleName}/zovaRest`));
   }
-  await fse.remove(path.join(suiteHomeDest, 'modules/start-home/assets'));
 }
 
 async function versionTemplates() {
