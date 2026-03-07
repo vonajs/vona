@@ -1,16 +1,16 @@
 import type { IDecoratorSsrMenuOptions } from 'vona-module-a-ssr';
-import type { ISsrSiteOptionsHome } from 'vona-module-a-ssrhome';
+import type { ISsrSiteOptionsAdmin } from 'vona-module-base-siteadmin';
 import { BeanBase } from 'vona';
 import { SsrMenu } from 'vona-module-a-ssr';
 import { $locale } from '../.metadata/locales.ts';
 
-export interface ISsrMenuOptionsProduct extends IDecoratorSsrMenuOptions<ISsrSiteOptionsHome> {}
+export interface ISsrMenuOptionsProduct extends IDecoratorSsrMenuOptions<ISsrSiteOptionsAdmin> {}
 
 @SsrMenu<ISsrMenuOptionsProduct>({
   items: {
     product: {
       title: $locale('Product'),
-      group: 'a-ssrhome:management',
+      group: 'base-siteadmin:management',
       link: 'presetResource',
       meta: {
         params: {
@@ -19,6 +19,6 @@ export interface ISsrMenuOptionsProduct extends IDecoratorSsrMenuOptions<ISsrSit
       },
     },
   },
-  site: 'a-ssrhome:home',
+  site: 'base-siteadmin:admin',
 })
 export class SsrMenuProduct extends BeanBase {}

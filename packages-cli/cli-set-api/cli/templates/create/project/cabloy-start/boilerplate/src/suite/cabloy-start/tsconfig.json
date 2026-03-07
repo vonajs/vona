@@ -4,9 +4,6 @@
   "references": [
     {
       "path": "modules/start-home/tsconfig.build.json"
-    },
-    {
-      "path": "modules/start-test/tsconfig.build.json"
     }
   ],
   "exclude": [

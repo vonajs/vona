@@ -36,7 +36,6 @@ In 2025, ZovaJS V5 and VonaJS V5 have been released. CabloyJS V5, building on th
 |a-rest|--||
 |a-socket|WebSocket||
 |a-ssr|SSR||
-|a-ssrhome|--||
 |a-status|Status Management||
 
 ## License

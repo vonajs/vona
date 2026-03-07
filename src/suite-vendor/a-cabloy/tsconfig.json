@@ -18,9 +18,6 @@
       "path": "modules/a-ssr/tsconfig.build.json"
     },
     {
-      "path": "modules/a-ssrhome/tsconfig.build.json"
-    },
-    {
       "path": "modules/a-datasource/tsconfig.build.json"
     },
     {

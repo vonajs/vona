@@ -20,6 +20,6 @@ export interface ISsrSiteOptionsSecond extends IDecoratorSsrSiteOptions<ISsrSite
 
 @SsrSite<ISsrSiteOptionsSecond>({
   publicPath: 'second',
-  assetPath: 'ssr-vonaHome-5.0.17',
+  assetPath: 'ssr-cabloyBaseAdmin-5.0.17',
 })
 export class SsrSiteSecond extends BeanSsrSiteBase<ISsrSiteOptionsSecond> {}
