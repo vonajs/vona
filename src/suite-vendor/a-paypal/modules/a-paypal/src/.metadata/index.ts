@@ -181,6 +181,43 @@ declare module 'vona' {
   }
 }
 /** service: end */
+/** event: begin */
+export * from '../bean/event.paypalCaptureOrder.ts';
+
+import 'vona';
+declare module 'vona' {
+  
+  
+}
+declare module 'vona-module-a-paypal' {
+  
+        export interface EventPaypalCaptureOrder {
+          /** @internal */
+          get scope(): ScopeModuleAPaypal;
+        }
+
+          export interface EventPaypalCaptureOrder {
+            get $beanFullName(): 'a-paypal.event.paypalCaptureOrder';
+            get $onionName(): 'a-paypal:paypalCaptureOrder';
+            
+          } 
+}
+/** event: end */
+/** event: begin */
+import type { EventPaypalCaptureOrder } from '../bean/event.paypalCaptureOrder.ts';
+export interface IModuleEvent {
+  'paypalCaptureOrder': EventPaypalCaptureOrder;
+}
+/** event: end */
+/** event: begin */
+import type { TypeEventPaypalCaptureOrderData, TypeEventPaypalCaptureOrderResult } from '../bean/event.paypalCaptureOrder.ts';
+import type { EventOn } from 'vona-module-a-event'; 
+declare module 'vona-module-a-event' {
+  export interface IEventRecord {
+    'a-paypal:paypalCaptureOrder': EventOn<TypeEventPaypalCaptureOrderData, TypeEventPaypalCaptureOrderResult>;
+  }
+}
+/** event: end */
 /** meta: begin */
 export * from '../bean/meta.version.ts';
 
@@ -277,7 +314,10 @@ declare module 'vona-module-a-paypal' {
 }
 declare module 'vona-module-a-web' {
   export interface IApiPathGetRecord{
-        '/paypal/getRecord/:id': undefined;
+        '/paypal/getRecord/:recordId': undefined;
+    }
+export interface IApiPathPostRecord{
+        '/paypal/captureOrder/:recordId': undefined;
     }
 
 }
@@ -309,6 +349,7 @@ locale: TypeModuleLocales<(typeof locales)[TypeLocaleBase]>;
 entity: IModuleEntity;
 model: IModuleModel;
 service: IModuleService;
+event: IModuleEvent;
 }
 
 import 'vona';

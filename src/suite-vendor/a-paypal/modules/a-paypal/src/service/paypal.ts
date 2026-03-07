@@ -8,7 +8,6 @@ export class ServicePaypal extends BeanBase {
   async getRecord(userId: TableIdentity, recordId: TableIdentity) {
     // get record
     const record = await this.scope.model.paypalRecord.getById(recordId);
-    console.log(record);
     // check user
     if (!record || record.userId !== userId) {
       this.app.throw(403);
@@ -25,14 +24,14 @@ export class ServicePaypal extends BeanBase {
     let grossAmount: number;
     let payFee: number;
     let netAmount: number;
-    let orderResult: string;
+    let orderResult: {} | undefined;
     if (this.app.meta.isTest) {
       // 测试环境
       // todo: pay_fee需要修改为真实的费率
       grossAmount = Number.parseInt(Number.parseFloat(record.payload.total) * 100 as any);
       payFee = grossAmount * this.scope.config.paypal.payFeeRate;
       netAmount = grossAmount - payFee;
-      orderResult = '';
+      orderResult = undefined;
     } else {
       // capture order
       const ordersController = new OrdersController(this.bean.paypal.createClient());
@@ -46,23 +45,17 @@ export class ServicePaypal extends BeanBase {
       grossAmount = Number.parseInt(Number.parseFloat(sellerReceivableBreakdown.grossAmount.value) * 100 as any);
       payFee = Number.parseInt(Number.parseFloat(sellerReceivableBreakdown.paypalFee!.value) * 100 as any);
       netAmount = Number.parseInt(Number.parseFloat(sellerReceivableBreakdown.netAmount!.value) * 100 as any);
-      orderResult = JSON.stringify(res.result);
+      orderResult = res.result;
     }
     // update status
     await this.scope.model.paypalRecord.update({ id: recordId, status: 1 });
     // raise event
-    const payload = {
-      _cash: {
-        gross_amount,
-        pay_fee,
-        net_amount,
-      },
+    await this.scope.event.paypalCaptureOrder.emit({
+      record,
+      grossAmount,
+      payFee,
+      netAmount,
       orderResult,
-    };
-    await this.ctx.bean.event.invoke({
-      module: moduleInfo.relativeName,
-      name: 'paypalNotify',
-      data: { record, payload },
     });
   }
 }
