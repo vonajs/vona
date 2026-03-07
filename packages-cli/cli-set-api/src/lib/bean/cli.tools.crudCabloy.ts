@@ -10,6 +10,7 @@ declare module '@cabloy/cli' {
     moduleInfo: IModuleInfo;
     resourceName: string;
     resourceNameCapitalize: string;
+    ssrSiteModuleName: string;
   }
 }
 
@@ -18,6 +19,10 @@ export class CliToolsCrudCabloy extends BeanCliBase {
     const { argv } = this.context;
     // super
     await super.execute();
+    // ssrSiteModuleName
+    argv.ssrSiteModuleName = fs.existsSync(path.join(argv.projectPath, 'src/suite/cabloy-start'))
+      ? 'vona-module-start-siteadmin'
+      : 'vona-module-base-siteadmin';
     // noformat
     argv.noformat = true;
     // module name/info
