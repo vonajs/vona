@@ -51,8 +51,37 @@ declare module 'vona-module-start-siteadmin' {
           } 
 }
 /** ssrMenu: end */
+/** ssrMenuGroup: begin */
+export * from '../bean/ssrMenuGroup.management.ts';
+import type { ISsrMenuGroupOptionsManagement } from '../bean/ssrMenuGroup.management.ts';
+import 'vona-module-a-ssr';
+declare module 'vona-module-a-ssr' {
+  
+    export interface ISsrMenuGroupRecord {
+      'start-siteadmin:management': ISsrMenuGroupOptionsManagement;
+    }
+
+  
+}
+declare module 'vona-module-start-siteadmin' {
+  
+        export interface SsrMenuGroupManagement {
+          /** @internal */
+          get scope(): ScopeModuleStartSiteadmin;
+        }
+
+          export interface SsrMenuGroupManagement {
+            get $beanFullName(): 'start-siteadmin.ssrMenuGroup.management';
+            get $onionName(): 'start-siteadmin:management';
+            get $onionOptions(): ISsrMenuGroupOptionsManagement;
+          } 
+}
+/** ssrMenuGroup: end */
+/** locale: begin */
+import { locales } from './locales.ts';
+/** locale: end */
 /** scope: begin */
-import { BeanScopeBase, type BeanScopeUtil } from 'vona';
+import { BeanScopeBase, type BeanScopeUtil, type TypeModuleLocales, type TypeLocaleBase } from 'vona';
 import { Scope } from 'vona-module-a-bean';
 
 @Scope()
@@ -60,6 +89,7 @@ export class ScopeModuleStartSiteadmin extends BeanScopeBase {}
 
 export interface ScopeModuleStartSiteadmin {
   util: BeanScopeUtil;
+locale: TypeModuleLocales<(typeof locales)[TypeLocaleBase]>;
 }
 
 import 'vona';
@@ -74,7 +104,9 @@ declare module 'vona' {
   
   
 
-  
+  export interface IBeanScopeLocale {
+    'start-siteadmin': (typeof locales)[TypeLocaleBase];
+  }
 
   
 }
