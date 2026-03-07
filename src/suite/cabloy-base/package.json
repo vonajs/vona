@@ -6,6 +6,9 @@
   "files": [],
   "description": "",
   "author": "",
+  "scripts": {
+    "version": "node ../../../scripts/version-cabloy-basic.ts"
+  },
   "dependencies": {
     "vona-module-a-ssr": "^5.0.0",
     "vona-module-base-siteadmin": "^5.0.0"
