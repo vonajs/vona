@@ -10,12 +10,20 @@ export interface IControllerOptionsPaypal extends IDecoratorControllerOptions {}
 
 @Controller<IControllerOptionsPaypal>('paypal')
 export class ControllerPaypal extends BeanBase {
-  @Web.get('getRecord/:id')
+  @Web.get('getRecord/:recordId')
   @Api.body(EntityPaypalRecord)
   async getRecord(
     @Arg.user() user: IUser,
-    @Arg.param('id', v.tableIdentity()) recordId: TableIdentity,
+    @Arg.param('recordId', v.tableIdentity()) recordId: TableIdentity,
   ): Promise<EntityPaypalRecord> {
-    return this.scope.service.paypal.getRecord(user.id, recordId);
+    return await this.scope.service.paypal.getRecord(user.id, recordId);
+  }
+
+  @Web.post('captureOrder/:recordId')
+  async captureOrder(
+    @Arg.user() user: IUser,
+    @Arg.param('recordId', v.tableIdentity()) recordId: TableIdentity,
+  ): Promise<void> {
+    return await this.scope.service.paypal.captureOrder(user.id, recordId);
   }
 }

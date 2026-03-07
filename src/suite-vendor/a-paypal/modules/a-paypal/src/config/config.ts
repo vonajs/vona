@@ -7,5 +7,8 @@ export function config(_app: VonaApplication) {
       clientSecret: '',
       logging: false,
     },
+    paypal: {
+      payFeeRate: 0.1,
+    },
   };
 }

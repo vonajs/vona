@@ -1,4 +1,5 @@
 import type { TableIdentity } from 'table-identity';
+import { OrdersController, OrderStatus } from '@cabloy/paypal-server-sdk';
 import { BeanBase } from 'vona';
 import { Service } from 'vona-module-a-bean';
 
@@ -13,5 +14,55 @@ export class ServicePaypal extends BeanBase {
       this.app.throw(403);
     }
     return record;
+  }
+
+  async captureOrder(userId: TableIdentity, recordId: TableIdentity) {
+    const record = await this.getRecord(userId, recordId);
+    if (!record) this.app.throw(403);
+    // prepayId
+    const prepayId = record.prepayId;
+    // process
+    let grossAmount: number;
+    let payFee: number;
+    let netAmount: number;
+    let orderResult: string;
+    if (this.app.meta.isTest) {
+      // 测试环境
+      // todo: pay_fee需要修改为真实的费率
+      grossAmount = Number.parseInt(Number.parseFloat(record.payload.total) * 100 as any);
+      payFee = grossAmount * this.scope.config.paypal.payFeeRate;
+      netAmount = grossAmount - payFee;
+      orderResult = '';
+    } else {
+      // capture order
+      const ordersController = new OrdersController(this.bean.paypal.createClient());
+      const res = await ordersController.captureOrder({ id: prepayId });
+      if (!res.result || res.result.status !== OrderStatus.Completed) {
+        this.scope.error.TransactionException.throw();
+      }
+      // update
+      const sellerReceivableBreakdown =
+        res.result.purchaseUnits![0].payments!.captures![0].sellerReceivableBreakdown!;
+      grossAmount = Number.parseInt(Number.parseFloat(sellerReceivableBreakdown.grossAmount.value) * 100 as any);
+      payFee = Number.parseInt(Number.parseFloat(sellerReceivableBreakdown.paypalFee!.value) * 100 as any);
+      netAmount = Number.parseInt(Number.parseFloat(sellerReceivableBreakdown.netAmount!.value) * 100 as any);
+      orderResult = JSON.stringify(res.result);
+    }
+    // update status
+    await this.scope.model.paypalRecord.update({ id: recordId, status: 1 });
+    // raise event
+    const payload = {
+      _cash: {
+        gross_amount,
+        pay_fee,
+        net_amount,
+      },
+      orderResult,
+    };
+    await this.ctx.bean.event.invoke({
+      module: moduleInfo.relativeName,
+      name: 'paypalNotify',
+      data: { record, payload },
+    });
   }
 }
