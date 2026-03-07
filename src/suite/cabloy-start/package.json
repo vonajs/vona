@@ -10,6 +10,7 @@
     "version": "node ../../../scripts/version-cabloy-start.ts"
   },
   "dependencies": {
+    "vona-suite-a-cabloy": "^5.0.0",
     "vona-module-start-home": "^5.0.0"
   }
 }
