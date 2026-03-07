@@ -36946,8 +36946,8 @@ declare class SysSsrState extends BeanBase {
   protected [SymbolSSRStateDefer]: SSRContextStateDefer;
   protected __init__(): Promise<void>;
   private _patchEnvConfig;
-  get state(): SSRContextState;
-  get stateDefer(): SSRContextStateDefer;
+  get state(): any;
+  get stateDefer(): any;
 }
 //#endregion
 //#region src/suite-vendor/a-zova/modules/a-ssr/src/config/config.d.ts
