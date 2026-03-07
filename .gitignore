@@ -59,9 +59,9 @@ src/backend/typing/mine.d.ts
 !/src/suite/a-home
 !/src/suite/cabloy-base
 !/src/suite/cabloy-start
-!/src/suite/cabloy-start/modules/start-siteadmin/zovaRest
+/src/suite/cabloy-start/modules/start-siteadmin/zovaRest
 /src/suite/cabloy-start/modules/start-siteadmin/assets
-!/src/suite/cabloy-start/modules/start-sitefront/zovaRest
+/src/suite/cabloy-start/modules/start-sitefront/zovaRest
 /src/suite/cabloy-start/modules/start-siteafront/assets
 
 /src/suite-vendor/*

@@ -306,6 +306,12 @@ importers:
       vona-module-start-home:
         specifier: workspace:^
         version: link:src/suite/cabloy-start/modules/start-home
+      vona-module-start-siteadmin:
+        specifier: workspace:^
+        version: link:src/suite/cabloy-start/modules/start-siteadmin
+      vona-module-start-sitefront:
+        specifier: workspace:^
+        version: link:src/suite/cabloy-start/modules/start-sitefront
       vona-module-store-base:
         specifier: workspace:^
         version: link:src/suite/cabloy-store/modules/store-base
@@ -2325,11 +2331,35 @@ importers:
       vona-module-start-home:
         specifier: ^5.0.0
         version: link:modules/start-home
+      vona-module-start-siteadmin:
+        specifier: ^5.0.0
+        version: link:modules/start-siteadmin
+      vona-module-start-sitefront:
+        specifier: ^5.0.0
+        version: link:modules/start-sitefront
       vona-suite-a-cabloy:
         specifier: ^5.0.0
         version: link:../../suite-vendor/a-cabloy
 
   src/suite/cabloy-start/modules/start-home:
+    devDependencies:
+      clean-package:
+        specifier: ^2.2.0
+        version: 2.2.0
+      rimraf:
+        specifier: ^6.0.1
+        version: 6.1.3
+
+  src/suite/cabloy-start/modules/start-siteadmin:
+    devDependencies:
+      clean-package:
+        specifier: ^2.2.0
+        version: 2.2.0
+      rimraf:
+        specifier: ^6.0.1
+        version: 6.1.3
+
+  src/suite/cabloy-start/modules/start-sitefront:
     devDependencies:
       clean-package:
         specifier: ^2.2.0

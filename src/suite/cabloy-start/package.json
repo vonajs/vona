@@ -11,6 +11,8 @@
   },
   "dependencies": {
     "vona-suite-a-cabloy": "^5.0.0",
-    "vona-module-start-home": "^5.0.0"
+    "vona-module-start-home": "^5.0.0",
+    "vona-module-start-siteadmin": "^5.0.0",
+    "vona-module-start-sitefront": "^5.0.0"
   }
 }

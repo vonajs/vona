@@ -1,1 +1,0 @@
-import{ad as o,am as s}from"./zova-CSpwtzG4.js";import{g as a}from"./index-CJazVdHf.js";import"./vue-B__qjIZ6.js";import"./commonjsHelper-CLPN-Npl.js";import"./zod-Bs5_amKe.js";import"./date-io-luxon-D6PISalu.js";import"./vuetify-C9R2soV4.js";const t=o(async({app:o})=>{await s(o,a())});export{t as default};
