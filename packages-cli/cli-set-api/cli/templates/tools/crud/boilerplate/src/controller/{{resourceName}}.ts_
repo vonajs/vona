@@ -9,7 +9,7 @@ import { Dto<%=argv.resourceNameCapitalize%>Create } from '../dto/<%=argv.resour
 import { Dto<%=argv.resourceNameCapitalize%>Query } from '../dto/<%=argv.resourceName%>Query.tsx';
 import { Dto<%=argv.resourceNameCapitalize%>QueryRes } from '../dto/<%=argv.resourceName%>QueryRes.tsx';
 import { Dto<%=argv.resourceNameCapitalize%>Update } from '../dto/<%=argv.resourceName%>Update.tsx';
-import { Entity<%=argv.resourceNameCapitalize%> } from '../entity/<%=argv.resourceName%>.tsx';
+import { Dto<%=argv.resourceNameCapitalize%>View } from '../dto/<%=argv.resourceName%>View.tsx';
 
 export interface IControllerOptions<%=argv.resourceNameCapitalize%> extends IDecoratorControllerOptions {}
 
@@ -29,8 +29,8 @@ export class Controller<%=argv.resourceNameCapitalize%> extends BeanBase {
   }
 
   @Web.get(':id')
-  @Api.body(v.optional(), v.object(Entity<%=argv.resourceNameCapitalize%>))
-  async view(@Arg.param('id', v.tableIdentity()) id: TableIdentity): Promise<Entity<%=argv.resourceNameCapitalize%> | undefined> {
+  @Api.body(v.optional(), v.object(Dto<%=argv.resourceNameCapitalize%>View))
+  async view(@Arg.param('id', v.tableIdentity()) id: TableIdentity): Promise<Dto<%=argv.resourceNameCapitalize%>View | undefined> {
     return await this.scope.service.<%=argv.resourceName%>.view(id);
   }
 

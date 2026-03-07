@@ -3,6 +3,7 @@ import type { IQueryParams } from 'vona-module-a-orm';
 import type { Dto<%=argv.resourceNameCapitalize%>Create } from '../dto/<%=argv.resourceName%>Create.tsx';
 import type { Dto<%=argv.resourceNameCapitalize%>QueryRes } from '../dto/<%=argv.resourceName%>QueryRes.tsx';
 import type { Dto<%=argv.resourceNameCapitalize%>Update } from '../dto/<%=argv.resourceName%>Update.tsx';
+import type { Dto<%=argv.resourceNameCapitalize%>View } from '../dto/<%=argv.resourceName%>View.tsx';
 import type { Entity<%=argv.resourceNameCapitalize%> } from '../entity/<%=argv.resourceName%>.tsx';
 import type { Model<%=argv.resourceNameCapitalize%> } from '../model/<%=argv.resourceName%>.ts';
 import { BeanBase } from 'vona';
@@ -18,7 +19,7 @@ export class Service<%=argv.resourceNameCapitalize%> extends BeanBase {
     return await this.scope.model.<%=argv.resourceName%>.selectAndCount(params);
   }
 
-  async view(id: TableIdentity): Promise<Entity<%=argv.resourceNameCapitalize%> | undefined> {
+  async view(id: TableIdentity): Promise<Dto<%=argv.resourceNameCapitalize%>View | undefined> {
     return await this.scope.model.<%=argv.resourceName%>.getById(id);
   }
 
