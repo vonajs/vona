@@ -1,6 +1,6 @@
 /* eslint-disable */
 import type { TypeEntityMeta,TypeModelsClassLikeGeneral,TypeSymbolKeyFieldsMore } from 'vona-module-a-orm';
-import type { TypeEntityOptionsFields } from 'vona-module-a-openapi';
+import type { TypeEntityOptionsFields,TypeControllerOptionsActions } from 'vona-module-a-openapi';
 import type { TableIdentity } from 'table-identity';
 /** entity: begin */
 export * from '../entity/paypalRecord.tsx';
@@ -140,6 +140,47 @@ declare module 'vona' {
   }
 }
 /** bean: end */
+/** service: begin */
+export * from '../service/paypal.ts';
+
+import 'vona-module-a-bean';
+declare module 'vona-module-a-bean' {
+  
+    export interface IServiceRecord {
+      'a-paypal:paypal': never;
+    }
+
+  
+}
+declare module 'vona-module-a-paypal' {
+  
+        export interface ServicePaypal {
+          /** @internal */
+          get scope(): ScopeModuleAPaypal;
+        }
+
+          export interface ServicePaypal {
+            get $beanFullName(): 'a-paypal.service.paypal';
+            get $onionName(): 'a-paypal:paypal';
+            
+          } 
+}
+/** service: end */
+/** service: begin */
+import type { ServicePaypal } from '../service/paypal.ts';
+export interface IModuleService {
+  'paypal': ServicePaypal;
+}
+/** service: end */
+/** service: begin */
+
+import 'vona';
+declare module 'vona' {
+  export interface IBeanRecordGeneral {
+    'a-paypal.service.paypal': ServicePaypal;
+  }
+}
+/** service: end */
 /** meta: begin */
 export * from '../bean/meta.version.ts';
 
@@ -166,6 +207,82 @@ declare module 'vona-module-a-paypal' {
           } 
 }
 /** meta: end */
+/** dto: begin */
+export * from '../dto/paypalOrderRecordOptions.tsx';
+export * from '../dto/paypalOrderRecordPayload.tsx';
+import type { IDtoOptionsPaypalOrderRecordOptions } from '../dto/paypalOrderRecordOptions.tsx';
+import type { IDtoOptionsPaypalOrderRecordPayload } from '../dto/paypalOrderRecordPayload.tsx';
+import 'vona-module-a-web';
+declare module 'vona-module-a-web' {
+  
+    export interface IDtoRecord {
+      'a-paypal:paypalOrderRecordOptions': IDtoOptionsPaypalOrderRecordOptions;
+'a-paypal:paypalOrderRecordPayload': IDtoOptionsPaypalOrderRecordPayload;
+    }
+
+  
+}
+declare module 'vona-module-a-paypal' {
+   
+}
+/** dto: end */
+/** dto: begin */
+import type { DtoPaypalOrderRecordOptions } from '../dto/paypalOrderRecordOptions.tsx';
+import type { DtoPaypalOrderRecordPayload } from '../dto/paypalOrderRecordPayload.tsx'; 
+declare module 'vona-module-a-paypal' {
+  
+    export interface IDtoOptionsPaypalOrderRecordOptions {
+      fields?: TypeEntityOptionsFields<DtoPaypalOrderRecordOptions, IDtoOptionsPaypalOrderRecordOptions[TypeSymbolKeyFieldsMore]>;
+    }
+
+    export interface IDtoOptionsPaypalOrderRecordPayload {
+      fields?: TypeEntityOptionsFields<DtoPaypalOrderRecordPayload, IDtoOptionsPaypalOrderRecordPayload[TypeSymbolKeyFieldsMore]>;
+    }
+}
+/** dto: end */
+/** controller: begin */
+export * from '../controller/paypal.ts';
+import type { IControllerOptionsPaypal } from '../controller/paypal.ts';
+import 'vona-module-a-web';
+declare module 'vona-module-a-web' {
+  
+    export interface IControllerRecord {
+      'a-paypal:paypal': IControllerOptionsPaypal;
+    }
+
+  
+}
+declare module 'vona-module-a-paypal' {
+  
+        export interface ControllerPaypal {
+          /** @internal */
+          get scope(): ScopeModuleAPaypal;
+        }
+
+          export interface ControllerPaypal {
+            get $beanFullName(): 'a-paypal.controller.paypal';
+            get $onionName(): 'a-paypal:paypal';
+            get $onionOptions(): IControllerOptionsPaypal;
+          } 
+}
+/** controller: end */
+/** controller: begin */
+// @ts-ignore ignore
+import type { ControllerPaypal } from '../controller/paypal.ts';
+declare module 'vona-module-a-paypal' {
+  
+    export interface IControllerOptionsPaypal {
+      actions?: TypeControllerOptionsActions<ControllerPaypal>;
+    }
+}
+declare module 'vona-module-a-web' {
+  export interface IApiPathGetRecord{
+        '/paypal/getRecord/:id': undefined;
+    }
+
+}
+
+/** controller: end */
 /** config: begin */
 export * from '../config/config.ts';
 import type { config } from '../config/config.ts';
@@ -191,6 +308,7 @@ error: TypeModuleErrors<typeof errors>;
 locale: TypeModuleLocales<(typeof locales)[TypeLocaleBase]>;
 entity: IModuleEntity;
 model: IModuleModel;
+service: IModuleService;
 }
 
 import 'vona';

@@ -1,5 +1,5 @@
 import type { TableIdentity } from 'table-identity';
-import type { IPaypalOrderCreateOptions, IPaypalOrderCreatePayload } from '../types/paypal.ts';
+import type { IPaypalOrderRecordOptions, IPaypalOrderRecordPayload } from '../types/paypal.ts';
 import { Client, OrdersController } from '@cabloy/paypal-server-sdk';
 import { CheckoutPaymentIntent, Environment, LogLevel, OrderStatus } from '@cabloy/paypal-server-sdk';
 import { combineQueries } from '@cabloy/utils';
@@ -30,7 +30,7 @@ export class BeanPaypal extends BeanBase {
     });
   }
 
-  async createOrder(userId: TableIdentity, payload: IPaypalOrderCreatePayload, options: IPaypalOrderCreateOptions) {
+  async createOrder(userId: TableIdentity, payload: IPaypalOrderRecordPayload, options: IPaypalOrderRecordOptions) {
     // create record
     const record = await this.scope.model.paypalRecord.insert({
       userId,

@@ -2,13 +2,13 @@ import type { TableIdentity } from 'table-identity';
 
 export interface IPaypalOrderSceneRecord {}
 
-export interface IPaypalOrderCreatePayload {
+export interface IPaypalOrderRecordPayload {
   remark: string;
   total: string;
   currencyCode: string;
 }
 
-export interface IPaypalOrderCreateOptions {
+export interface IPaypalOrderRecordOptions {
   brandName: string;
   returnUrl: string;
   cancelUrl: string;
