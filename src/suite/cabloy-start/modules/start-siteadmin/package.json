@@ -8,6 +8,11 @@
       "a-vona": "5.0.0"
     }
   },
+  "description": "",
+  "author": "",
+  "keywords": [
+    "Vona Module"
+  ],
   "exports": {
     ".": {
       "types": [
@@ -19,12 +24,10 @@
     },
     "./package.json": "./package.json"
   },
-  "description": "",
-  "keywords": ["Vona Module"],
-  "author": "",
   "files": [
     "assets",
-    "dist"
+    "dist",
+    "zovaRest"
   ],
   "scripts": {
     "clean": "rimraf dist tsconfig.build.tsbuildinfo",
