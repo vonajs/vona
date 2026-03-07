@@ -74,6 +74,6 @@ export class BeanPaypal extends BeanBase {
       prepayId,
     });
     // ok
-    return { approveUrl };
+    return { recordId, approveUrl };
   }
 }
