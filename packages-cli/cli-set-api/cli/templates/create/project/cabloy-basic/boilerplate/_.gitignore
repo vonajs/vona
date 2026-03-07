@@ -57,7 +57,7 @@ src/backend/typing/mine.d.ts
 /src/suite/*
 !/src/suite/.gitkeep
 !/src/suite/a-home
-!/src/suite/cabloy-base
+!/src/suite/cabloy-basic
 !/src/suite/cabloy-start
 
 /src/suite-vendor/*

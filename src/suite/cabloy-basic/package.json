@@ -1,8 +1,8 @@
 {
-  "name": "vona-suite-cabloy-base",
+  "name": "vona-suite-cabloy-basic",
   "type": "module",
   "version": "5.0.0",
-  "title": "cabloy-base",
+  "title": "cabloy-basic",
   "files": [],
   "description": "",
   "author": "",
@@ -11,6 +11,6 @@
   },
   "dependencies": {
     "vona-module-a-ssr": "^5.0.0",
-    "vona-module-base-siteadmin": "^5.0.0"
+    "vona-module-basic-siteadmin": "^5.0.0"
   }
 }
