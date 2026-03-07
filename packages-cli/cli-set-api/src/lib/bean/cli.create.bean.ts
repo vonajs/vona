@@ -17,6 +17,8 @@ declare module '@cabloy/cli' {
     beanNameCapitalize: string;
     moduleResourceName: string;
     boilerplate: string;
+    ssrSiteModuleName: string;
+    ssrSiteOnionName: string;
   }
 }
 
@@ -29,6 +31,13 @@ export class CliCreateBean extends BeanCliBase {
     await super.execute();
     // noformat
     argv.noformat = true;
+    // ssrSiteModuleName
+    argv.ssrSiteModuleName = fs.existsSync(path.join(argv.projectPath, 'src/suite/cabloy-start'))
+      ? 'vona-module-start-siteadmin'
+      : 'vona-module-base-siteadmin';
+    argv.ssrSiteOnionName = fs.existsSync(path.join(argv.projectPath, 'src/suite/cabloy-start'))
+      ? 'start-siteadmin:admin'
+      : 'base-siteadmin:admin';
     // module name/info
     const moduleName = argv.module;
     argv.moduleInfo = this.helper.parseModuleInfo(moduleName);

@@ -25,6 +25,32 @@ declare module 'vona-module-start-siteadmin' {
           } 
 }
 /** ssrSite: end */
+/** ssrMenu: begin */
+export * from '../bean/ssrMenu.home.ts';
+import type { ISsrMenuOptionsHome } from '../bean/ssrMenu.home.ts';
+import 'vona-module-a-ssr';
+declare module 'vona-module-a-ssr' {
+  
+    export interface ISsrMenuRecord {
+      'start-siteadmin:home': ISsrMenuOptionsHome;
+    }
+
+  
+}
+declare module 'vona-module-start-siteadmin' {
+  
+        export interface SsrMenuHome {
+          /** @internal */
+          get scope(): ScopeModuleStartSiteadmin;
+        }
+
+          export interface SsrMenuHome {
+            get $beanFullName(): 'start-siteadmin.ssrMenu.home';
+            get $onionName(): 'start-siteadmin:home';
+            get $onionOptions(): ISsrMenuOptionsHome;
+          } 
+}
+/** ssrMenu: end */
 /** scope: begin */
 import { BeanScopeBase, type BeanScopeUtil } from 'vona';
 import { Scope } from 'vona-module-a-bean';
