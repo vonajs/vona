@@ -11,16 +11,17 @@ export interface ISsrMenuOptions<%=argv.resourceNameCapitalize%> extends IDecora
   items: {
     <%=argv.resourceName%>: {
       title: $locale('<%=argv.resourceNameCapitalize%>'),
-      // group: 'base-siteadmin:management',
-      // group: 'start-siteadmin:management',
-      link: 'presetResource',
       order: $order(1),
+      icon: undefined,
+      link: 'presetResource',
       meta: {
         params: {
           resource: '<%=argv.module%>:<%=argv.resourceName%>',
         },
       },
+      group: undefined,
     },
   },
+  site: ['<%=argv.ssrSiteOnionName%>'],
 })
 export class SsrMenu<%=argv.resourceNameCapitalize%> extends BeanBase {}
