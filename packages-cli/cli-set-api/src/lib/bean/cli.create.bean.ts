@@ -34,10 +34,10 @@ export class CliCreateBean extends BeanCliBase {
     // ssrSiteModuleName
     argv.ssrSiteModuleName = fs.existsSync(path.join(argv.projectPath, 'src/suite/cabloy-start'))
       ? 'vona-module-start-siteadmin'
-      : 'vona-module-base-siteadmin';
+      : 'vona-module-basic-siteadmin';
     argv.ssrSiteOnionName = fs.existsSync(path.join(argv.projectPath, 'src/suite/cabloy-start'))
       ? 'start-siteadmin:admin'
-      : 'base-siteadmin:admin';
+      : 'basic-siteadmin:admin';
     // module name/info
     const moduleName = argv.module;
     argv.moduleInfo = this.helper.parseModuleInfo(moduleName);

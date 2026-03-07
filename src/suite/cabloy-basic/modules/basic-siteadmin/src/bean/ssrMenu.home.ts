@@ -14,6 +14,6 @@ export interface ISsrMenuOptionsHome extends IDecoratorSsrMenuOptions<ISsrSiteOp
     icon: '::home',
     link: '/',
   },
-  site: ['base-siteadmin:admin'],
+  site: ['basic-siteadmin:admin'],
 })
 export class SsrMenuHome extends BeanBase {}

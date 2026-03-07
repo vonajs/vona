@@ -11,6 +11,6 @@ export interface ISsrMenuGroupOptionsManagement extends IDecoratorSsrMenuGroupOp
     title: $locale('Management'),
     order: $order(2),
   },
-  site: ['base-siteadmin:admin'],
+  site: ['basic-siteadmin:admin'],
 })
 export class SsrMenuGroupManagement extends BeanBase {}

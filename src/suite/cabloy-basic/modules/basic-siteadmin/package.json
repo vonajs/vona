@@ -1,8 +1,8 @@
 {
-  "name": "vona-module-base-siteadmin",
+  "name": "vona-module-basic-siteadmin",
   "type": "module",
   "version": "5.0.0",
-  "title": "base-siteadmin",
+  "title": "basic-siteadmin",
   "vonaModule": {
     "dependencies": {
       "a-vona": "5.0.0",

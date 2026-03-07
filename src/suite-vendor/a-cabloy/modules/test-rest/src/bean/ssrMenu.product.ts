@@ -1,5 +1,5 @@
 import type { IDecoratorSsrMenuOptions } from 'vona-module-a-ssr';
-import type { ISsrSiteOptionsAdmin } from 'vona-module-base-siteadmin';
+import type { ISsrSiteOptionsAdmin } from 'vona-module-basic-siteadmin';
 import { BeanBase } from 'vona';
 import { SsrMenu } from 'vona-module-a-ssr';
 import { $locale } from '../.metadata/locales.ts';
@@ -10,7 +10,7 @@ export interface ISsrMenuOptionsProduct extends IDecoratorSsrMenuOptions<ISsrSit
   items: {
     product: {
       title: $locale('Product'),
-      group: 'base-siteadmin:management',
+      group: 'basic-siteadmin:management',
       link: 'presetResource',
       meta: {
         params: {
@@ -19,6 +19,6 @@ export interface ISsrMenuOptionsProduct extends IDecoratorSsrMenuOptions<ISsrSit
       },
     },
   },
-  site: 'base-siteadmin:admin',
+  site: 'basic-siteadmin:admin',
 })
 export class SsrMenuProduct extends BeanBase {}

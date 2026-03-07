@@ -40,7 +40,7 @@ export class ControllerProduct extends BeanBase {
 
   @Web.get()
   @Api.body(DtoProductQueryRes)
-  @Ssr.redirect('base-siteadmin:admin', '/rest/resource/:resource', { params: { resource: 'test-rest:product' } })
+  @Ssr.redirect('basic-siteadmin:admin', '/rest/resource/:resource', { params: { resource: 'test-rest:product' } })
   async select(@Arg.filter(DtoProductQuery) params: IQueryParams<ModelProduct>): Promise<DtoProductQueryRes> {
     return await this.scope.service.product.select(params);
   }

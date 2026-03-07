@@ -9,5 +9,5 @@ export const locales = {
 };
 
 export function $locale<K extends keyof (typeof locales)[TypeLocaleBase]>(key: K, ...args: any[]): any {
-  return $makeLocaleMagic(`base-siteadmin::${key}`, ...args);
+  return $makeLocaleMagic(`basic-siteadmin::${key}`, ...args);
 }
