@@ -1,0 +1,12 @@
+{
+  "extends": "./tsconfig.base",
+  "compilerOptions": {},
+  "references": [
+    {
+      "path": "modules/basic-siteadmin/tsconfig.build.json"
+    }
+  ],
+  "exclude": [
+    "modules"
+  ]
+}
