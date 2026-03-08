@@ -67,6 +67,7 @@ declare module 'vona-module-a-web' {
     }
 
 }
+
 /** controller: end */
 /** scope: begin */
 import { BeanScopeBase, type BeanScopeUtil } from 'vona';

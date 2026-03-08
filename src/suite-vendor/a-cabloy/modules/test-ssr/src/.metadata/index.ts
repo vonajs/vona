@@ -123,6 +123,7 @@ export interface IApiPathPostRecord{
     }
 
 }
+
 /** controller: end */
 /** ssrSite: begin */
 export * from '../bean/ssrSite.second.ts';

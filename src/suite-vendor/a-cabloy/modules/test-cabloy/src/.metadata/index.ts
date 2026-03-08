@@ -94,6 +94,7 @@ export interface IApiPathPostRecord{
     }
 
 }
+
 /** controller: end */
 /** scope: begin */
 import { BeanScopeBase, type BeanScopeUtil } from 'vona';
