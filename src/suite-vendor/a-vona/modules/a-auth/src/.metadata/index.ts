@@ -422,6 +422,7 @@ declare module 'vona-module-a-web' {
     }
 
 }
+
 /** controller: end */
 /** config: begin */
 export * from '../config/config.ts';

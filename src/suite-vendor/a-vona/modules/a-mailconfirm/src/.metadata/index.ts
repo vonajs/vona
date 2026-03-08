@@ -167,6 +167,7 @@ declare module 'vona-module-a-web' {
     }
 
 }
+
 /** controller: end */
 /** locale: begin */
 import { locales } from './locales.ts';

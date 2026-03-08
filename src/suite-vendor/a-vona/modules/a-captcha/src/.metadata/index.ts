@@ -160,6 +160,7 @@ declare module 'vona-module-a-web' {
     }
 
 }
+
 /** controller: end */
 /** hmr: begin */
 export * from '../bean/hmr.captchaProvider.ts';
