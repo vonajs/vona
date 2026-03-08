@@ -12,6 +12,7 @@ declare module '@cabloy/cli' {
     resourceNameCapitalize: string;
     ssrSiteModuleName: string;
     ssrSiteOnionName: string;
+    ssrSiteGroupName: string;
   }
 }
 
@@ -29,6 +30,9 @@ export class CliToolsCrudCabloy extends BeanCliBase {
     argv.ssrSiteOnionName = fs.existsSync(path.join(argv.projectPath, 'src/suite/cabloy-start'))
       ? 'start-siteadmin:admin'
       : 'basic-siteadmin:admin';
+    argv.ssrSiteGroupName = fs.existsSync(path.join(argv.projectPath, 'src/suite/cabloy-start'))
+      ? 'start-siteadmin:management'
+      : 'basic-siteadmin:management';
     // module name/info
     const moduleName = argv.module;
     argv.moduleInfo = this.helper.parseModuleInfo(moduleName);

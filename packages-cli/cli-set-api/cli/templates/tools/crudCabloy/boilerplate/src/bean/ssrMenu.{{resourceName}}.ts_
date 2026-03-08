@@ -19,7 +19,7 @@ export interface ISsrMenuOptions<%=argv.resourceNameCapitalize%> extends IDecora
           resource: '<%=argv.module%>:<%=argv.resourceName%>',
         },
       },
-      group: undefined,
+      group: '<%=argv.ssrSiteGroupName%>',
     },
   },
   site: ['<%=argv.ssrSiteOnionName%>'],

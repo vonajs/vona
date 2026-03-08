@@ -12,7 +12,7 @@ export interface ISsrMenuOptions<%=argv.beanNameCapitalize%> extends IDecoratorS
     order: $order(1),
     icon: undefined,
     link: undefined,
-    group: undefined,
+    group: '<%=argv.ssrSiteGroupName%>',
   },
   site: ['<%=argv.ssrSiteOnionName%>'],
 })
