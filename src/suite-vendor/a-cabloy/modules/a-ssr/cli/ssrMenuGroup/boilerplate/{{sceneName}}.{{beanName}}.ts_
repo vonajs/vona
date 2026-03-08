@@ -7,7 +7,7 @@ export interface ISsrMenuGroupOptions<%=argv.beanNameCapitalize%> extends IDecor
 
 @SsrMenuGroup<ISsrMenuGroupOptions<%=argv.beanNameCapitalize%>>({
   item: {
-    title: '',
+    title: '<%=argv.beanNameCapitalize%>',
     order: $order(2),
   },
   site: ['<%=argv.ssrSiteOnionName%>'],
