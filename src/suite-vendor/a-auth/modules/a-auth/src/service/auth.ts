@@ -214,7 +214,7 @@ export class ServiceAuth extends BeanBase {
           );
           // code
           const code = await this.bean.passport.createOauthCodeFromOauthAuthToken(jwt.accessToken);
-          if (strategy.name === 'mock' && !strategyState.redirect) {
+          if (this.app.meta.isTest) {
             // mock
             const jwt2 = await this.bean.passport.createAuthTokenFromOauthCode(code);
             return resolve(jwt2);
