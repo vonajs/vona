@@ -3,6 +3,7 @@ import type { IDecoratorControllerOptions } from 'vona-module-a-web';
 import type { StrategyBase } from '../lib/strategyBase.ts';
 import type { IAuthenticateStrategyState } from '../types/auth.ts';
 import type { IAuthProviderStrategy, IAuthProviderVerify, TypeStrategyOptions, TypeStrategyVerifyArgs } from '../types/authProvider.ts';
+import { combineQueries } from '@cabloy/utils';
 import { BeanBase, cast, deepExtend } from 'vona';
 import { Aspect } from 'vona-module-a-aspect';
 import { Api } from 'vona-module-a-openapiutils';
@@ -77,7 +78,8 @@ export class ControllerPassport extends BeanBase {
           } else {
             // redirect
             if (!strategyState.redirect) return reject(new Error('redirect not specified'));
-            return this.ctx.redirect(`${strategyState.redirect}?${this.scope.config.oauthCodeField}=${encodeURIComponent(code)}`);
+            const redirectUrl = combineQueries(strategyState.redirect, { [this.scope.config.oauthCodeField]: code });
+            return this.ctx.redirect(redirectUrl);
           }
         } catch (err) {
           reject(err);
