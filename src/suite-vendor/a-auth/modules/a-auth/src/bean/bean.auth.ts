@@ -70,28 +70,23 @@ export class BeanAuth extends BeanBase {
     const strategy = new Strategy(strategyOptions, () => {});
     // strategy.authenticate
     return new Promise((resolve, reject) => {
-      strategy.redirect = async (location: string) => {
+      strategy.redirect = (location: string) => {
         // real
         if (!this.app.meta.isTest) {
           return this.ctx.redirect(location);
         }
         // mock
-        try {
-          const res = await this.bean.executor.performAction('get', callbackURLRelative as any, {
-            query: {
-              code: uuidv4(),
-              state: strategyStateString,
-            },
-          });
-          resolve(res);
-        } catch (err) {
-          reject(err);
-        }
+        return this.bean.executor.performAction('get', callbackURLRelative as any, {
+          query: {
+            code: uuidv4(),
+            state: strategyStateString,
+          },
+        }).then(resolve).catch(reject);
       };
       strategy.error = (err: Error) => {
         reject(err);
       };
-      strategy.authenticate(this.ctx.req, strategyOptions);
+      return strategy.authenticate(this.ctx.req, strategyOptions);
     });
   }
 
