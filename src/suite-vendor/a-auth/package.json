@@ -7,6 +7,7 @@
   "description": "",
   "author": "",
   "dependencies": {
-    "vona-module-a-auth": "^5.0.0"
+    "vona-module-a-auth": "^5.0.0",
+    "vona-module-a-authsimple": "^5.0.0"
   }
 }

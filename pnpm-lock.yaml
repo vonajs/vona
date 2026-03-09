@@ -107,13 +107,13 @@ importers:
         version: link:src/suite-vendor/a-vona/modules/a-aspectutils
       vona-module-a-auth:
         specifier: workspace:^
-        version: link:src/suite-vendor/a-vona/modules/a-auth3
+        version: link:src/suite-vendor/a-auth/modules/a-auth
       vona-module-a-authgithub:
         specifier: workspace:^
         version: link:src/suite-vendor/a-cabloy/modules/a-authgithub
       vona-module-a-authsimple:
         specifier: workspace:^
-        version: link:src/suite-vendor/a-vona/modules/a-authsimple
+        version: link:src/suite-vendor/a-auth/modules/a-authsimple3
       vona-module-a-bean:
         specifier: workspace:^
         version: link:src/suite-vendor/a-vona/modules/a-bean
@@ -1110,9 +1110,34 @@ importers:
     dependencies:
       vona-module-a-auth:
         specifier: ^5.0.0
-        version: link:../a-vona/modules/a-auth3
+        version: link:modules/a-auth
+      vona-module-a-authsimple:
+        specifier: ^5.0.0
+        version: link:modules/a-authsimple3
 
   src/suite-vendor/a-auth/modules/a-auth:
+    devDependencies:
+      clean-package:
+        specifier: ^2.2.0
+        version: 2.2.0
+      rimraf:
+        specifier: ^6.0.1
+        version: 6.1.3
+
+  src/suite-vendor/a-auth/modules/a-authsimple:
+    devDependencies:
+      clean-package:
+        specifier: ^2.2.0
+        version: 2.2.0
+      rimraf:
+        specifier: ^6.0.1
+        version: 6.1.3
+
+  src/suite-vendor/a-auth/modules/a-authsimple3:
+    dependencies:
+      password-hash-salt:
+        specifier: ^1.0.12
+        version: link:../../../../../packages-utils/password-hash-salt
     devDependencies:
       clean-package:
         specifier: ^2.2.0
@@ -1308,12 +1333,6 @@ importers:
       vona-module-a-aspectutils:
         specifier: ^5.0.12
         version: link:modules/a-aspectutils
-      vona-module-a-auth:
-        specifier: ^5.0.53
-        version: link:modules/a-auth3
-      vona-module-a-authsimple:
-        specifier: ^5.0.41
-        version: link:modules/a-authsimple
       vona-module-a-bean:
         specifier: ^5.0.20
         version: link:modules/a-bean
@@ -1490,28 +1509,6 @@ importers:
         version: 6.1.3
 
   src/suite-vendor/a-vona/modules/a-aspectutils:
-    devDependencies:
-      clean-package:
-        specifier: ^2.2.0
-        version: 2.2.0
-      rimraf:
-        specifier: ^6.0.1
-        version: 6.1.3
-
-  src/suite-vendor/a-vona/modules/a-auth3:
-    devDependencies:
-      clean-package:
-        specifier: ^2.2.0
-        version: 2.2.0
-      rimraf:
-        specifier: ^6.0.1
-        version: 6.1.3
-
-  src/suite-vendor/a-vona/modules/a-authsimple:
-    dependencies:
-      password-hash-salt:
-        specifier: ^1.0.12
-        version: link:../../../../../packages-utils/password-hash-salt
     devDependencies:
       clean-package:
         specifier: ^2.2.0
