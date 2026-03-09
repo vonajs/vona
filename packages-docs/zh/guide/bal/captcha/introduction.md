@@ -13,17 +13,17 @@
 
 模块`a-captcha`提供了全局 Bean `bean.captcha`，可以通过统一的方式使用所有 Provider/Scene 提供的验证码能力
 
-模块`a-captchasimple`提供了一个 Provider `a-captchasimple:imageText`，基于[svg-captcha](https://github.com/produck/svg-captcha)实现文字图片的验证码能力
+模块`captcha-simple`提供了一个 Provider `captcha-simple:imageText`，基于[svg-captcha](https://github.com/produck/svg-captcha)实现文字图片的验证码能力
 
-模块`a-captchasimple`提供了一个 Scene `a-captchasimple:simple`。该 Scene 只使用一个 Provider，即`a-captchasimple:imageText`
+模块`captcha-simple`提供了一个 Scene `captcha-simple:simple`。该 Scene 只使用一个 Provider，即`captcha-simple:imageText`
 
-下面演示如何使用模块`a-captchasimple`提供的验证码能力
+下面演示如何使用模块`captcha-simple`提供的验证码能力
 
 ### 1. create
 
 ``` typescript
 // create captcha
-const captcha = await this.bean.captcha.create('a-captchasimple:simple');
+const captcha = await this.bean.captcha.create('captcha-simple:simple');
 ```
 
 * 返回值类型：`ICaptchaData`
@@ -48,7 +48,7 @@ export interface ICaptchaData {
 
 ``` typescript
 // refresh captcha
-const captchaNew = await this.bean.captcha.refresh(captchaId, 'a-captchasimple:simple');
+const captchaNew = await this.bean.captcha.refresh(captchaId, 'captcha-simple:simple');
 ```
 
 - 如果一个 Scene 配置了多个 Provider，那么在刷新 capthca 时可以基于策略选取不同的 Provider
@@ -57,7 +57,7 @@ const captchaNew = await this.bean.captcha.refresh(captchaId, 'a-captchasimple:s
 
 ``` typescript
 // verify captcha
-const passed = await this.bean.captcha.verify(captchaId, '1234', 'a-captchasimple:simple');
+const passed = await this.bean.captcha.verify(captchaId, '1234', 'captcha-simple:simple');
 ```
 
 ### 4. verifyImmediate
@@ -84,9 +84,9 @@ import { Core } from 'vona-module-a-core';
 
 class ControllerPassport {
   @Web.post('login')
-+ @Core.captchaVerify({ scene: 'a-captchasimple:simple' })
++ @Core.captchaVerify({ scene: 'captcha-simple:simple' })
   async login(@Arg.body() data) {}
-}  
+}
 ```
 
 - `@Core.captchaVerify`: 用于使用局部拦截器`a-captcha:captchaVerify`，传入需要使用的 Scene 名称

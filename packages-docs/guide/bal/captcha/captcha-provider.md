@@ -1,15 +1,15 @@
 # Captcha Provider
 
-This section analyzes the core source code of the module `a-captchasimple` to illustrate how to develop a new Captcha Provider
+This section analyzes the core source code of the module `captcha-simple` to illustrate how to develop a new Captcha Provider
 
 ## Creating a Captcha Provider
 
-For example, creating a Captcha Provider: `imageText` within the module `a-captchasimple`
+For example, creating a Captcha Provider: `imageText` within the module `captcha-simple`
 
 ### 1. CLI Command
 
 ``` bash
-$ vona :create:bean captchaProvider imageText --module=a-captchasimple
+$ vona :create:bean captchaProvider imageText --module=captcha-simple
 ```
 
 ### 2. Menu Command
@@ -80,7 +80,7 @@ Captcha Provider parameters can be configured in the App Config
 // onions
 config.onions = {
   captchaProvider: {
-    'a-captchasimple:imageText': {
+    'captcha-simple:imageText': {
       type: 'char',
       opts: {
         size: 4,

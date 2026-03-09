@@ -2,16 +2,16 @@
 
 使用`Captcha Scene`支持不同场景的验证码使用策略。比如，在某个场景下，可以在多个 Captcha Provider 中进行轮替，或者根据用户状态使用不同难度的 Captcha Provider，等等
 
-这里对模块`a-captchasimple`的核心源码进行解析，从而说明如何开发一个新的 Captcha Scene
+这里对模块`captcha-simple`的核心源码进行解析，从而说明如何开发一个新的 Captcha Scene
 
 ## 创建Captcha Scene
 
-比如，在模块`a-captchasimple`中创建一个 Captcha Scene: `simple`
+比如，在模块`captcha-simple`中创建一个 Captcha Scene: `simple`
 
 ### 1. Cli命令
 
 ``` bash
-$ vona :create:bean captchaScene simple --module=a-captchasimple
+$ vona :create:bean captchaScene simple --module=captcha-simple
 ```
 
 ### 2. 菜单命令
@@ -25,10 +25,10 @@ $ vona :create:bean captchaScene simple --module=a-captchasimple
 ``` typescript
 @CaptchaScene({
   resolver: async (_ctx, _providers) => {
-    return 'a-captchasimple:imageText';
+    return 'captcha-simple:imageText';
   },
   providers: {
-    'a-captchasimple:imageText': true,
+    'captcha-simple:imageText': true,
   },
 })
 export class CaptchaSceneSimple extends BeanBase {}
@@ -55,9 +55,9 @@ export class CaptchaSceneSimple extends BeanBase {}
 // onions
 config.onions = {
   captchaScene: {
-    'a-captchasimple:simple': {
+    'captcha-simple:simple': {
       providers: {
-        'a-captchasimple:imageText': {
+        'captcha-simple:imageText': {
           opts: {
             size: 4,
             color: true,

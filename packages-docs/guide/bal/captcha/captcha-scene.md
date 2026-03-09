@@ -2,16 +2,16 @@
 
 Use `Captcha Scene` to support different captcha usage strategies in different scenarios. For example, in a given scenario, you can rotate between multiple Captcha Providers, or use Captcha Providers of varying difficulty based on the user's state, etc.
 
-This section analyzes the core source code of the module `a-captchasimple` to illustrate how to develop a new Captcha Scene
+This section analyzes the core source code of the module `captcha-simple` to illustrate how to develop a new Captcha Scene
 
 ## Creating a Captcha Scene
 
-For example, creating a Captcha Scene in the module `a-captchasimple`: `simple`
+For example, creating a Captcha Scene in the module `captcha-simple`: `simple`
 
 ### 1. CLI Command
 
 ``` bash
-$ vona :create:bean captchaScene simple --module=a-captchasimple
+$ vona :create:bean captchaScene simple --module=captcha-simple
 ```
 
 ### 2. Menu Command
@@ -25,10 +25,10 @@ Context Menu - [Module Path]: `Vona Bean/Captcha Scene`
 ``` typescript
 @CaptchaScene({
   resolver: async (_ctx, _providers) => {
-    return 'a-captchasimple:imageText';
+    return 'captcha-simple:imageText';
   },
   providers: {
-    'a-captchasimple:imageText': true,
+    'captcha-simple:imageText': true,
   },
 })
 export class CaptchaSceneSimple extends BeanBase {}
@@ -55,9 +55,9 @@ Captcha Scene parameters can be configured in the App Config
 // onions
 config.onions = {
   captchaScene: {
-    'a-captchasimple:simple': {
+    'captcha-simple:simple': {
       providers: {
-        'a-captchasimple:imageText': {
+        'captcha-simple:imageText': {
           opts: {
             size: 4,
             color: true,

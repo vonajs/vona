@@ -1,15 +1,15 @@
 # Captcha Provider
 
-这里对模块`a-captchasimple`的核心源码进行解析，从而说明如何开发一个新的 Captcha Provider
+这里对模块`captcha-simple`的核心源码进行解析，从而说明如何开发一个新的 Captcha Provider
 
 ## 创建Captcha Provider
 
-比如，在模块`a-captchasimple`中创建一个 Captcha Provider: `imageText`
+比如，在模块`captcha-simple`中创建一个 Captcha Provider: `imageText`
 
 ### 1. Cli命令
 
 ``` bash
-$ vona :create:bean captchaProvider imageText --module=a-captchasimple
+$ vona :create:bean captchaProvider imageText --module=captcha-simple
 ```
 
 ### 2. 菜单命令
@@ -77,7 +77,7 @@ class CaptchaProviderImageText {
 // onions
 config.onions = {
   captchaProvider: {
-    'a-captchasimple:imageText': {
+    'captcha-simple:imageText': {
       type: 'char',
       opts: {
         size: 4,

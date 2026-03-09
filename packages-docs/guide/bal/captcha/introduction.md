@@ -16,17 +16,17 @@ The `a-captcha` module provides a general Captcha system. It uses `Captcha Provi
 
 The module `a-captcha` provides a global Bean `bean.captcha`, which allows for unified use of Captcha capabilities provided by all Providers/Scenes
 
-The module `a-captchasimple` provides a Provider `a-captchasimple:imageText`, which implements image-text Captcha capabilities based on [svg-captcha](https://github.com/produck/svg-captcha)
+The module `captcha-simple` provides a Provider `captcha-simple:imageText`, which implements image-text Captcha capabilities based on [svg-captcha](https://github.com/produck/svg-captcha)
 
-The module `a-captchasimple` provides a Scene `a-captchasimple:simple`. This scene uses only one Provider, `a-captchasimple:imageText`
+The module `captcha-simple` provides a Scene `captcha-simple:simple`. This scene uses only one Provider, `captcha-simple:imageText`
 
-The following demonstrates how to use the Captcha capability provided by the module `a-captchasimple`
+The following demonstrates how to use the Captcha capability provided by the module `captcha-simple`
 
 ### 1. create
 
 ``` typescript
 // create captcha
-const captcha = await this.bean.captcha.create('a-captchasimple:simple');
+const captcha = await this.bean.captcha.create('captcha-simple:simple');
 ```
 
 * Return value type: `ICaptchaData`
@@ -51,7 +51,7 @@ export interface ICaptchaData {
 
 ``` typescript
 // refresh captcha
-const captchaNew = await this.bean.captcha.refresh(captchaId, 'a-captchasimple:simple');
+const captchaNew = await this.bean.captcha.refresh(captchaId, 'captcha-simple:simple');
 ```
 
 - If a Scene has multiple Providers configured, different Providers can be selected based on a strategy when refreshing the captcha
@@ -60,7 +60,7 @@ const captchaNew = await this.bean.captcha.refresh(captchaId, 'a-captchasimple:s
 
 ``` typescript
 // verify captcha
-const passed = await this.bean.captcha.verify(captchaId, '1234', 'a-captchasimple:simple');
+const passed = await this.bean.captcha.verify(captchaId, '1234', 'captcha-simple:simple');
 ```
 
 ### 4. verifyImmediate
@@ -87,9 +87,9 @@ import { Core } from 'vona-module-a-core';
 
 class ControllerPassport {
   @Web.post('login')
-+ @Core.captchaVerify({ scene: 'a-captchasimple:simple' })
++ @Core.captchaVerify({ scene: 'captcha-simple:simple' })
   async login(@Arg.body() data) {}
-}  
+}
 ```
 
 - `@Core.captchaVerify`: Used to apply the local interceptor `a-captcha:captchaVerify`, passing in the Scene name to be used
