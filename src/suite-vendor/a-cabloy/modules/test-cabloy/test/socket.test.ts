@@ -34,7 +34,7 @@ async function test(app: VonaApplication) {
 
 async function testReady(ws: WebSocketClient, resolve: Function) {
   // performAction: success
-  const res = await ws.performAction('get', '/api/test/cabloy/passport/isAuthenticated');
+  const res = await ws.performAction('get', '/api/test/auth/passport/isAuthenticated');
   assert.equal(res, true);
   // performAction: fail
   const [_, err] = await catchError(() => {

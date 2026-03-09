@@ -26,13 +26,13 @@ describe('authSimple.test.ts', () => {
       // isAuthenticated: isolate
       const [isAuthenticated2, _err] = await catchError(async () => {
         return await app.bean.executor.newCtxIsolate(async () => {
-          return await app.bean.executor.performAction('get', '/test/vona/passport/isAuthenticated');
+          return await app.bean.executor.performAction('get', '/test/auth/passport/isAuthenticated');
         });
       });
       assert.equal(isAuthenticated2, undefined);
       // isAuthenticated: isolate + header
       const isAuthenticated = await app.bean.executor.newCtxIsolate(async () => {
-        return await app.bean.executor.performAction('get', '/test/vona/passport/isAuthenticated', { authToken: jwt?.accessToken });
+        return await app.bean.executor.performAction('get', '/test/auth/passport/isAuthenticated', { authToken: jwt?.accessToken });
       });
       assert.equal(isAuthenticated, true);
       // login again

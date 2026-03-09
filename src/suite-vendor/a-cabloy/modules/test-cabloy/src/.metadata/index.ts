@@ -30,33 +30,19 @@ declare module 'vona-module-test-cabloy' {
 import type { MetaStatus } from '../bean/meta.status.ts';
 /** meta status: end */
 /** controller: begin */
-export * from '../controller/passport.ts';
 export * from '../controller/status.ts';
-import type { IControllerOptionsPassport } from '../controller/passport.ts';
 import type { IControllerOptionsStatus } from '../controller/status.ts';
 import 'vona-module-a-web';
 declare module 'vona-module-a-web' {
   
     export interface IControllerRecord {
-      'test-cabloy:passport': IControllerOptionsPassport;
-'test-cabloy:status': IControllerOptionsStatus;
+      'test-cabloy:status': IControllerOptionsStatus;
     }
 
   
 }
 declare module 'vona-module-test-cabloy' {
   
-        export interface ControllerPassport {
-          /** @internal */
-          get scope(): ScopeModuleTestCabloy;
-        }
-
-          export interface ControllerPassport {
-            get $beanFullName(): 'test-cabloy.controller.passport';
-            get $onionName(): 'test-cabloy:passport';
-            get $onionOptions(): IControllerOptionsPassport;
-          }
-
         export interface ControllerStatus {
           /** @internal */
           get scope(): ScopeModuleTestCabloy;
@@ -71,25 +57,15 @@ declare module 'vona-module-test-cabloy' {
 /** controller: end */
 /** controller: begin */
 // @ts-ignore ignore
-import type { ControllerPassport } from '../controller/passport.ts';
-// @ts-ignore ignore
 import type { ControllerStatus } from '../controller/status.ts';
 declare module 'vona-module-test-cabloy' {
   
-    export interface IControllerOptionsPassport {
-      actions?: TypeControllerOptionsActions<ControllerPassport>;
-    }
-
     export interface IControllerOptionsStatus {
       actions?: TypeControllerOptionsActions<ControllerStatus>;
     }
 }
 declare module 'vona-module-a-web' {
-  export interface IApiPathGetRecord{
-        '/test/cabloy/passport/isAuthenticated': undefined;
-'/test/cabloy/passport/current': undefined;
-    }
-export interface IApiPathPostRecord{
+  export interface IApiPathPostRecord{
         '/test/cabloy/status': undefined;
     }
 
