@@ -10,6 +10,21 @@ export class ControllerMock extends BeanBase {
   @Web.get('authorize')
   @Passport.public()
   async authorize() {
-    return '<div>test</div>';
+    return `<html>
+<head>
+  <title>GitHub Mock</title>
+  <style>
+    body, input {
+      font-size: 18px;
+    }
+  </style>
+</head>
+<body>
+  <form method="post">
+    <lable>Username: </label><input size="40" name="username" placeholder="Please input your mock username" />
+    <button type="submit">Submit</button>
+  </form>
+</body>
+</html>`;
   }
 }
