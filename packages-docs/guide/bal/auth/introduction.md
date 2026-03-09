@@ -4,7 +4,7 @@ The module `a-auth` provides a general authentication system, using `Auth Provid
 
 ## Features
 
-* `Auth Provider`: Supports various authentication methods, such as username/password authentication, OAuth authentication (Github), etc.
+* `Auth Provider`: Supports various authentication methods, such as username/password authentication, OAuth authentication (GitHub), etc.
 
 * `Clients`: A single provider can provide multiple credentials
 
@@ -46,9 +46,9 @@ class ControllerStudent {
 }
 ```
 
-* Example: `Github` Authentication
+* Example: `GitHub` Authentication
 
-`Github` authentication is a separate module and needs to be installed in the project:
+`GitHub` authentication is a separate module and needs to be installed in the project:
 
 ``` bash
 $ pnpm add vona-module-auth-github -w
@@ -69,7 +69,7 @@ class ControllerStudent {
 
 ## OAuth Credentials
 
-Using `Github` as an example, set the authentication credentials in the App Config
+Using `GitHub` as an example, set the authentication credentials in the App Config
 
 `src/backend/config/config/config.ts`
 

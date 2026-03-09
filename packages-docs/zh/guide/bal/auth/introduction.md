@@ -43,9 +43,9 @@ class ControllerStudent {
 }
 ```
 
-* 举例：`Github`认证
+* 举例：`GitHub`认证
 
-`Github`认证是独立的模块，需要安装到项目中：
+`GitHub`认证是独立的模块，需要安装到项目中：
 
 ``` bash
 $ pnpm add vona-module-auth-github -w
@@ -66,7 +66,7 @@ class ControllerStudent {
 
 ## 设置OAuth认证凭据
 
-仍以`Github`为例，在 App Config 中设置认证凭据
+仍以`GitHub`为例，在 App Config 中设置认证凭据
 
 `src/backend/config/config/config.ts`
 

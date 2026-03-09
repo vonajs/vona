@@ -11,7 +11,7 @@ hero:
       text: 快速开始
       link: /zh/guide/start/introduction
     - theme: alt
-      text: Github
+      text: GitHub
       link: https://github.com/vonajs/vona
 
 features:
@@ -30,7 +30,7 @@ features:
   - title: SSR 整合
     details: 提供了开箱即用的 SSR 渲染能力，同时支持前台网站和后台 admin 系统
   - title: 菜单命令
-    details: 通过菜单来执行 Cli 命令，从而显著降低心智负担，提升开发体验  
+    details: 通过菜单来执行 Cli 命令，从而显著降低心智负担，提升开发体验
 ---
 
 ::: tip

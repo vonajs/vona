@@ -1,6 +1,6 @@
-# Github Authentication
+# GitHub Authentication
 
-This module provides `Github Authentication` and supports mock user login in the development environment, making development and debugging very convenient
+This module provides `GitHub Authentication` and supports mock user login in the development environment, making development and debugging very convenient
 
 ## How to Use
 

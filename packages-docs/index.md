@@ -11,7 +11,7 @@ hero:
       text: Get Started
       link: /guide/start/introduction
     - theme: alt
-      text: Github
+      text: GitHub
       link: https://github.com/vonajs/vona
 
 features:

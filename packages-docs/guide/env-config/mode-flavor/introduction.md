@@ -73,7 +73,7 @@ For out-of-the-box, Vona provides several built-in flavors:
 |normal|The default flavor|
 |play|For use in [Playground](../../start/play.md)|
 |docker|For use in Docker environments|
-|ci|For use in CI environments, such as Github Actions|
+|ci|For use in CI environments, such as GitHub Actions|
 
 ### 2. Enabling a Flavor
 
