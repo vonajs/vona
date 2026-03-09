@@ -32796,7 +32796,7 @@ type TypeResourceActionRowRecordRender = { [key in keyof TypeResourceActionRowRe
 //#endregion
 //#region src/suite-vendor/a-zova/modules/a-openapi/src/types/captcha.d.ts
 interface ICaptchaSceneRecord {
-  'a-captchasimple:simple': never;
+  'captcha-simple:simple': never;
 }
 interface ICaptchaOptions {
   scene?: keyof ICaptchaSceneRecord;
@@ -36946,8 +36946,8 @@ declare class SysSsrState extends BeanBase {
   protected [SymbolSSRStateDefer]: SSRContextStateDefer;
   protected __init__(): Promise<void>;
   private _patchEnvConfig;
-  get state(): any;
-  get stateDefer(): any;
+  get state(): SSRContextState;
+  get stateDefer(): SSRContextStateDefer;
 }
 //#endregion
 //#region src/suite-vendor/a-zova/modules/a-ssr/src/config/config.d.ts
@@ -37097,6 +37097,7 @@ declare module 'zova' {
     $gotoHome(): TypeGotoPageResult;
     $gotoLogin(returnTo?: string, cause?: string): TypeGotoPageResult;
     $gotoReturnTo(returnTo?: string): TypeGotoPageResult;
+    $getReturnTo(returnTo?: string): string;
     $getCurrentPagePath(): string | undefined;
   }
   interface AppMeta {
@@ -43739,6 +43740,22 @@ declare namespace NSControllerPageItem {
   type QueryOutput = output<typeof ControllerPageItemSchemaQuery>;
 }
 //#endregion
+//#region src/suite/a-home/modules/home-base/src/page/authCallback/controller.d.ts
+declare const ControllerPageAuthCallbackSchemaQuery: ZodObject<{
+  returnTo: ZodOptional<ZodString>;
+  'x-vona-oauth-code': ZodOptional<ZodString>;
+}, $strip>;
+//#endregion
+//#region src/suite/a-home/modules/home-base/src/.metadata/page/authCallback.d.ts
+declare namespace NSControllerPageAuthCallback {
+  const querySchema: ZodObject<{
+    returnTo: ZodOptional<ZodString>;
+    'x-vona-oauth-code': ZodOptional<ZodString>;
+  }, $strip>;
+  type QueryInput = input<typeof ControllerPageAuthCallbackSchemaQuery>;
+  type QueryOutput = output<typeof ControllerPageAuthCallbackSchemaQuery>;
+}
+//#endregion
 //#region src/suite/a-home/modules/home-base/src/page/errorExpired/controller.d.ts
 declare const ControllerPageErrorExpiredSchemaQuery: ZodObject<{
   returnTo: ZodOptional<ZodString>;
@@ -44013,10 +44030,11 @@ interface IPagePathRecord {
   '/demo/basic/toolTwo/:id?': TypePagePathSchema<NSControllerPageToolTwo.ParamsInput, NSControllerPageToolTwo.QueryInput>;
   '/demo/todo/item/:id': TypePagePathSchema<NSControllerPageItem.ParamsInput, NSControllerPageItem.QueryInput>;
   '/demo/todo/todo': TypePagePathSchema<undefined, undefined>;
+  '/home/base/authCallback': TypePagePathSchema<undefined, NSControllerPageAuthCallback.QueryInput>;
   '/home/base/errorExpired': TypePagePathSchema<undefined, NSControllerPageErrorExpired.QueryInput>;
   '/home/base//:catchAll(.*)*': TypePagePathSchema<undefined, undefined>;
   '/home/index': TypePagePathSchema<undefined, undefined>;
-  '/home/user/login': TypePagePathSchema<undefined, undefined>;
+  '/home/login': TypePagePathSchema<undefined, undefined>;
   '/rest/resource/:resource/:id/:formScene?': TypePagePathSchema<NSControllerPageEntry.ParamsInput, undefined>;
   '/rest/resource/:resource/create': TypePagePathSchema<NSControllerPageEntryCreate.ParamsInput, undefined>;
   '/rest/resource/:resource': TypePagePathSchema<NSControllerPageResource.ParamsInput, undefined>;
