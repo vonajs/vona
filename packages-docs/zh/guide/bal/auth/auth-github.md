@@ -12,7 +12,7 @@ class ControllerStudent {
   @Passport.public()
   async login() {
     await this.bean.auth.authenticate(
-      'a-authgithub:github',
+      'auth-github:github',
       { state: { redirect: '/' } },
     );
   }
@@ -35,7 +35,7 @@ await this.bean.passport.signout();
 // onions
 config.onions = {
   authProvider: {
-    'a-authgithub:github': {
+    'auth-github:github': {
       clients: {
         default: {
           clientID: 'xxxxxx',
@@ -66,7 +66,7 @@ declare module 'vona-module-x-x' {
 调整代码:
 
 ``` typescript
-declare module 'vona-module-a-authgithub' {
+declare module 'vona-module-auth-github' {
   export interface IAuthProviderGithubClientRecord {
     another: never;
   }
@@ -79,7 +79,7 @@ declare module 'vona-module-a-authgithub' {
 // onions
 config.onions = {
   authProvider: {
-    'a-authgithub:github': {
+    'auth-github:github': {
       clients: {
         default: {
           clientID: 'xxxxxx',
@@ -115,7 +115,7 @@ VonaJS 提供了统一的 Callback URL 值，并且在开发阶段直接输出�
 // onions
 config.onions = {
   authProvider: {
-    'a-authgithub:github': {
+    'auth-github:github': {
       useMockForDev: false,
     },
   },
@@ -124,14 +124,14 @@ config.onions = {
 
 ## 源码解析
 
-这里对模块`a-authgithub`的核心源码进行解析，从而说明如何开发一个新的 Auth Provider
+这里对模块`auth-github`的核心源码进行解析，从而说明如何开发一个新的 Auth Provider
 
-比如，在模块`a-authgithub`中创建一个 Auth Provider: `github`
+比如，在模块`auth-github`中创建一个 Auth Provider: `github`
 
 ### 1. Cli命令
 
 ``` bash
-$ vona :create:bean authProvider github --module=a-authgithub
+$ vona :create:bean authProvider github --module=auth-github
 ```
 
 ### 2. 菜单命令

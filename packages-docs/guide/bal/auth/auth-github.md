@@ -12,7 +12,7 @@ class ControllerStudent {
   @Passport.public()
   async login() {
     await this.bean.auth.authenticate(
-      'a-authgithub:github',
+      'auth-github:github',
       { state: { redirect: '/' } },
     );
   }
@@ -35,7 +35,7 @@ In App Config Setting Authentication Credentials
 // onions
 config.onions = {
   authProvider: {
-    'a-authgithub:github': {
+    'auth-github:github': {
       clients: {
         default: {
           clientID: 'xxxxxx',
@@ -66,7 +66,7 @@ declare module 'vona-module-x-x' {
 Adjust the code:
 
 ``` typescript
-declare module 'vona-module-a-authgithub' {
+declare module 'vona-module-auth-github' {
   export interface IAuthProviderGithubClientRecord {
     another: never;
   }
@@ -79,7 +79,7 @@ declare module 'vona-module-a-authgithub' {
 // onions
 config.onions = {
   authProvider: {
-    'a-authgithub:github': {
+    'auth-github:github': {
       clients: {
         default: {
           clientID: 'xxxxxx',
@@ -115,7 +115,7 @@ By default, mocking user login is allowed in the development environment
 // onions
 config.onions = {
   authProvider: {
-    'a-authgithub:github': {
+    'auth-github:github': {
       useMockForDev: false,
     },
   },
@@ -124,14 +124,14 @@ config.onions = {
 
 ## Source Code Analysis
 
-This section analyzes the core source code of the module `a-authgithub` to illustrate how to develop a new Auth Provider
+This section analyzes the core source code of the module `auth-github` to illustrate how to develop a new Auth Provider
 
-For example, creating an Auth Provider: `github` in the module `a-authgithub`
+For example, creating an Auth Provider: `github` in the module `auth-github`
 
 ### 1. Cli command
 
 ``` bash
-$ vona :create:bean authProvider github --module=a-authgithub
+$ vona :create:bean authProvider github --module=auth-github
 ```
 
 ### 2. Menu command
