@@ -30,7 +30,6 @@ function sidebarCabloy(): DefaultTheme.SidebarItem[] {
     { text: 'Introduction', link: 'introduction' },
     { text: 'Dynamic Datasource', link: 'dynamic-datasource' },
     { text: 'Sharding', link: 'sharding' },
-    { text: 'Github Authentication', link: 'auth-github' },
   ];
 }
 
