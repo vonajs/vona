@@ -132,12 +132,6 @@
       "path": "modules/test-vona/tsconfig.build.json"
     },
     {
-      "path": "modules/a-captcha/tsconfig.build.json"
-    },
-    {
-      "path": "modules/a-captchasimple/tsconfig.build.json"
-    },
-    {
       "path": "modules/a-mail/tsconfig.build.json"
     },
     {

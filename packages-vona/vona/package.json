@@ -48,6 +48,7 @@
   "dependencies": {
     "vona-core": "^5.0.134",
     "vona-suite-a-auth": "^5.0.0",
+    "vona-suite-a-captcha": "^5.0.0",
     "vona-suite-a-vona": "^5.0.275"
   },
   "clean-package": {
