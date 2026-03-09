@@ -2,6 +2,7 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import fse from 'fs-extra';
+import { removeSpecialFiles } from './utils.ts';
 
 async function _versionTemplate(templateName: string) {
   // cp cabloy-start
@@ -11,18 +12,12 @@ async function _versionTemplate(templateName: string) {
   await fse.copy(suiteHomeSrc, suiteHomeDest);
   await fse.remove(path.join(suiteHomeDest, 'node_modules'));
   for (const moduleName of ['start-siteadmin', 'start-sitefront']) {
-    await fse.remove(path.join(suiteHomeDest, `modules/${moduleName}/dist`));
-    await fse.remove(path.join(suiteHomeDest, `modules/${moduleName}/tsconfig.build.tsbuildinfo`));
-    await fse.remove(path.join(suiteHomeDest, `modules/${moduleName}/node_modules`));
-    await fse.remove(path.join(suiteHomeDest, `modules/${moduleName}/.rollup.cache`));
-    await fse.remove(path.join(suiteHomeDest, `modules/${moduleName}/assets`));
-    await fse.remove(path.join(suiteHomeDest, `modules/${moduleName}/zovaRest`));
+    await removeSpecialFiles(suiteHomeDest,moduleName,['assets','zovaRest']);
   }
 }
 
 async function versionTemplates() {
    await _versionTemplate('cabloy-start');
 }
-
 
 versionTemplates();
