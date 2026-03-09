@@ -11,6 +11,7 @@ export interface IAuthProviderClientRecord {
 
 export interface IAuthProviderClientOptions {
   confirmed?: boolean;
+  mockUsername?: string;
 }
 
 export interface IAuthProviderOauth2ClientOptions extends IAuthProviderClientOptions {
