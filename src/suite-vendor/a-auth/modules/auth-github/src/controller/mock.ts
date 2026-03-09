@@ -1,7 +1,8 @@
 import type { IDecoratorControllerOptions } from 'vona-module-a-web';
+import { combineQueries } from '@cabloy/utils';
 import { BeanBase } from 'vona';
 import { Passport } from 'vona-module-a-user';
-import { Controller, Web } from 'vona-module-a-web';
+import { Arg, Controller, Web } from 'vona-module-a-web';
 
 export interface IControllerOptionsMock extends IDecoratorControllerOptions {}
 
@@ -26,5 +27,16 @@ export class ControllerMock extends BeanBase {
   </form>
 </body>
 </html>`;
+  }
+
+  @Web.post('authorize')
+  @Passport.public()
+  async authorizePost(
+    @Arg.query('redirect_uri') redirect_uri: string,
+    @Arg.query('state') state: string,
+    @Arg.body('username') username: string,
+  ) {
+    const url = combineQueries(redirect_uri, { code: username, state });
+    this.ctx.redirect(url);
   }
 }

@@ -30,15 +30,15 @@ export class StrategyMock extends OAuth2Strategy {
     self._userProfileURL = options.userProfileURL || 'https://api.github.com/user';
     self._oauth2.useAuthorizationHeaderforGET(true);
 
-    self._oauth2.getOAuthAccessToken = function (_code, params, callback) {
-      const accessToken = uuidv4();
+    self._oauth2.getOAuthAccessToken = function (code, params, callback) {
+      const accessToken = code;
       const refreshToken = uuidv4();
       callback(null, accessToken, refreshToken, params);
     };
   }
 
-  userProfile(_accessToken, done) {
-    const mockId = 'mock-github-user';
+  userProfile(accessToken, done) {
+    const mockId = accessToken;
     const profile = {
       id: mockId,
       username: mockId,

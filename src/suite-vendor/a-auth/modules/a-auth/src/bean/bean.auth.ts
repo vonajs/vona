@@ -5,7 +5,7 @@ import type { EntityAuth } from '../entity/auth.ts';
 import type { StrategyBase } from '../lib/strategyBase.ts';
 import type { IAuthenticateOptions, IAuthenticateStrategyState } from '../types/auth.ts';
 import type { IAuthProviderRecord, IAuthProviderStrategy, IAuthProviderVerify, TypeStrategyOptions } from '../types/authProvider.ts';
-import { BeanBase, deepExtend, uuidv4 } from 'vona';
+import { BeanBase, deepExtend } from 'vona';
 import { Bean } from 'vona-module-a-bean';
 import { $apiPath } from 'vona-module-a-openapiutils';
 
@@ -78,7 +78,7 @@ export class BeanAuth extends BeanBase {
         // mock
         return this.bean.executor.performAction('get', callbackURLRelative as any, {
           query: {
-            code: uuidv4(),
+            code: this.scope.config.mock.username,
             state: strategyStateString,
           },
         }).then(resolve).catch(reject);
