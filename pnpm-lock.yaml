@@ -108,6 +108,9 @@ importers:
       vona-module-a-auth:
         specifier: workspace:^
         version: link:src/suite-vendor/a-auth/modules/a-auth
+      vona-module-a-authgithub:
+        specifier: workspace:^
+        version: link:src/suite-vendor/a-cabloy/modules/a-authgithub
       vona-module-a-bean:
         specifier: workspace:^
         version: link:src/suite-vendor/a-vona/modules/a-bean
@@ -120,6 +123,9 @@ importers:
       vona-module-a-broadcast:
         specifier: workspace:^
         version: link:src/suite-vendor/a-vona/modules/a-broadcast
+      vona-module-a-cabloy:
+        specifier: workspace:^
+        version: link:src/suite-vendor/a-cabloy/modules/a-cabloy
       vona-module-a-cache:
         specifier: workspace:^
         version: link:src/suite-vendor/a-vona/modules/a-cache
@@ -135,6 +141,12 @@ importers:
       vona-module-a-core:
         specifier: workspace:^
         version: link:src/suite-vendor/a-vona/modules/a-core
+      vona-module-a-datasharding:
+        specifier: workspace:^
+        version: link:src/suite-vendor/a-cabloy/modules/a-datasharding
+      vona-module-a-datasource:
+        specifier: workspace:^
+        version: link:src/suite-vendor/a-cabloy/modules/a-datasource
       vona-module-a-election:
         specifier: workspace:^
         version: link:src/suite-vendor/a-vona/modules/a-election
@@ -195,6 +207,9 @@ importers:
       vona-module-a-ormutils:
         specifier: workspace:^
         version: link:src/suite-vendor/a-vona/modules/a-ormutils
+      vona-module-a-paypal:
+        specifier: workspace:^
+        version: link:src/suite-vendor/a-paypal/modules/a-paypal
       vona-module-a-permission:
         specifier: workspace:^
         version: link:src/suite-vendor/a-vona/modules/a-permission
@@ -222,12 +237,24 @@ importers:
       vona-module-a-serialization:
         specifier: workspace:^
         version: link:src/suite-vendor/a-vona/modules/a-serialization
+      vona-module-a-socket:
+        specifier: workspace:^
+        version: link:src/suite-vendor/a-cabloy/modules/a-socket
+      vona-module-a-ssr:
+        specifier: workspace:^
+        version: link:src/suite-vendor/a-cabloy/modules/a-ssr
+      vona-module-a-ssrhmr:
+        specifier: workspace:^
+        version: link:src/suite-vendor/a-cabloy/modules/a-ssrhmr
       vona-module-a-startup:
         specifier: workspace:^
         version: link:src/suite-vendor/a-vona/modules/a-startup
       vona-module-a-static:
         specifier: workspace:^
         version: link:src/suite-vendor/a-vona/modules/a-static
+      vona-module-a-status:
+        specifier: workspace:^
+        version: link:src/suite-vendor/a-cabloy/modules/a-status
       vona-module-a-summer:
         specifier: workspace:^
         version: link:src/suite-vendor/a-vona/modules/a-summer
@@ -246,6 +273,9 @@ importers:
       vona-module-a-version:
         specifier: workspace:^
         version: link:src/suite-vendor/a-vona/modules/a-version
+      vona-module-a-vona:
+        specifier: workspace:^
+        version: link:src/suite-vendor/a-vona/modules/a-vona
       vona-module-a-web:
         specifier: workspace:^
         version: link:src/suite-vendor/a-vona/modules/a-web
@@ -258,6 +288,45 @@ importers:
       vona-module-auth-simple:
         specifier: workspace:^
         version: link:src/suite-vendor/a-auth/modules/auth-simple
+      vona-module-basic-siteadmin:
+        specifier: workspace:^
+        version: link:src/suite/cabloy-basic/modules/basic-siteadmin
+      vona-module-cabloy-store:
+        specifier: workspace:^
+        version: link:src/suite/cabloy-store/modules/cabloy-store
+      vona-module-demo-student:
+        specifier: workspace:^
+        version: link:src/module/demo-student
+      vona-module-home-base:
+        specifier: workspace:^
+        version: link:src/suite/a-home/modules/home-base
+      vona-module-home-index:
+        specifier: workspace:^
+        version: link:src/suite/a-home/modules/home-index
+      vona-module-home-user:
+        specifier: workspace:^
+        version: link:src/suite/a-home/modules/home-user
+      vona-module-start-siteadmin:
+        specifier: workspace:^
+        version: link:src/suite/cabloy-start/modules/start-siteadmin
+      vona-module-start-sitefront:
+        specifier: workspace:^
+        version: link:src/suite/cabloy-start/modules/start-sitefront
+      vona-module-store-base:
+        specifier: workspace:^
+        version: link:src/suite/cabloy-store/modules/store-base
+      vona-module-store-purchase:
+        specifier: workspace:^
+        version: link:src/suite/cabloy-store/modules/store-purchase
+      vona-module-store-sitefront:
+        specifier: workspace:^
+        version: link:src/suite/cabloy-store/modules/store-sitefront
+      vona-module-store-test:
+        specifier: workspace:^
+        version: link:src/suite/cabloy-store/modules/store-test
+      vona-module-test-auth:
+        specifier: workspace:^
+        version: link:src/suite-vendor/a-auth/modules/test-auth
       vona-shared:
         specifier: ^1.0.18
         version: link:packages-vona/vona-shared
@@ -364,6 +433,18 @@ importers:
       vona-module-a-play:
         specifier: workspace:^
         version: link:src/suite-vendor/a-vona/modules/a-play
+      vona-module-test-cabloy:
+        specifier: workspace:^
+        version: link:src/suite-vendor/a-cabloy/modules/test-cabloy
+      vona-module-test-rest:
+        specifier: workspace:^
+        version: link:src/suite-vendor/a-cabloy/modules/test-rest
+      vona-module-test-ssr:
+        specifier: workspace:^
+        version: link:src/suite-vendor/a-cabloy/modules/test-ssr
+      vona-module-test-vona:
+        specifier: workspace:^
+        version: link:src/suite-vendor/a-vona/modules/test-vona
       why-is-node-running:
         specifier: ^3.2.2
         version: 3.2.2

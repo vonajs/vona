@@ -1,13 +1,13 @@
 # Username/Password Authentication
 
-The module `a-authsimple` provides out-of-the-box username/password authentication
+The module `auth-simple` provides out-of-the-box username/password authentication
 
 ## How to Use
 
 ### 1. Register a New User
 
 ``` typescript
-const jwt = await this.bean.auth.authenticate('a-authsimple:simple', {
+const jwt = await this.bean.auth.authenticate('auth-simple:simple', {
   clientOptions: {
     username: 'tom',
     password: '123456',
@@ -38,7 +38,7 @@ const jwt = await this.bean.authSimple.authenticate({
 ### 2. Login
 
 ``` typescript
-const jwt = await this.bean.auth.authenticate('a-authsimple:simple', {
+const jwt = await this.bean.auth.authenticate('auth-simple:simple', {
   clientOptions: {
     username: 'tom',
     password: '123456',
@@ -66,7 +66,7 @@ await this.bean.passport.signout();
 
 ### 4. Configuration
 
-The module `a-authsimple` uses [password-hash-salt](https://www.npmjs.com/package/password-hash-salt) to hash the password
+The module `auth-simple` uses [password-hash-salt](https://www.npmjs.com/package/password-hash-salt) to hash the password
 
 Configuration can be modified in App Config
 
@@ -75,7 +75,7 @@ Configuration can be modified in App Config
 ``` typescript
 // modules
 config.modules = {
-  'a-authsimple': {
+  'auth-simple': {
     passwordHash: {
       saltlen: 64,
       iterations: 10000,
@@ -88,14 +88,14 @@ config.modules = {
 
 ## Source Code Analysis
 
-This section analyzes the core source code of the module `a-authsimple` to explain how to develop a new Auth Provider
+This section analyzes the core source code of the module `auth-simple` to explain how to develop a new Auth Provider
 
-For example, create an Auth Provider in the module `a-authsimple`: `simple`
+For example, create an Auth Provider in the module `auth-simple`: `simple`
 
 ### 1. CLI Command
 
 ``` bash
-$ vona :create:bean authProvider simple --module=a-authsimple
+$ vona :create:bean authProvider simple --module=auth-simple
 ```
 
 ### 2. Menu Command
