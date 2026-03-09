@@ -1529,7 +1529,6 @@ export * from '../dto/roleLazy.ts';
 export * from '../dto/serializerArray.ts';
 export * from '../dto/serializerLazy.ts';
 export * from '../dto/serializerSimple.ts';
-export * from '../dto/signin.ts';
 export * from '../dto/user.ts';
 export * from '../dto/userCreate.ts';
 export * from '../dto/userLazy.ts';
@@ -1551,7 +1550,6 @@ import type { IDtoOptionsRoleLazy } from '../dto/roleLazy.ts';
 import type { IDtoOptionsSerializerArray } from '../dto/serializerArray.ts';
 import type { IDtoOptionsSerializerLazy } from '../dto/serializerLazy.ts';
 import type { IDtoOptionsSerializerSimple } from '../dto/serializerSimple.ts';
-import type { IDtoOptionsSignin } from '../dto/signin.ts';
 import type { IDtoOptionsUser } from '../dto/user.ts';
 import type { IDtoOptionsUserCreate } from '../dto/userCreate.ts';
 import type { IDtoOptionsUserLazy } from '../dto/userLazy.ts';
@@ -1577,7 +1575,6 @@ declare module 'vona-module-a-web' {
 'test-vona:serializerArray': IDtoOptionsSerializerArray;
 'test-vona:serializerLazy': IDtoOptionsSerializerLazy;
 'test-vona:serializerSimple': IDtoOptionsSerializerSimple;
-'test-vona:signin': IDtoOptionsSignin;
 'test-vona:user': IDtoOptionsUser;
 'test-vona:userCreate': IDtoOptionsUserCreate;
 'test-vona:userLazy': IDtoOptionsUserLazy;
@@ -1608,7 +1605,6 @@ import type { DtoRoleLazy } from '../dto/roleLazy.ts';
 import type { DtoSerializerArray } from '../dto/serializerArray.ts';
 import type { DtoSerializerLazy } from '../dto/serializerLazy.ts';
 import type { DtoSerializerSimple } from '../dto/serializerSimple.ts';
-import type { DtoSignin } from '../dto/signin.ts';
 import type { DtoUser } from '../dto/user.ts';
 import type { DtoUserCreate } from '../dto/userCreate.ts';
 import type { DtoUserLazy } from '../dto/userLazy.ts';
@@ -1683,10 +1679,6 @@ declare module 'vona-module-test-vona' {
       fields?: TypeEntityOptionsFields<DtoSerializerSimple, IDtoOptionsSerializerSimple[TypeSymbolKeyFieldsMore]>;
     }
 
-    export interface IDtoOptionsSignin {
-      fields?: TypeEntityOptionsFields<DtoSignin, IDtoOptionsSignin[TypeSymbolKeyFieldsMore]>;
-    }
-
     export interface IDtoOptionsUser {
       fields?: TypeEntityOptionsFields<DtoUser, IDtoOptionsUser[TypeSymbolKeyFieldsMore]>;
     }
@@ -1708,7 +1700,6 @@ declare module 'vona-module-test-vona' {
 export * from '../controller/bean.ts';
 export * from '../controller/cacheMem.ts';
 export * from '../controller/cacheRedis.ts';
-export * from '../controller/captcha.ts';
 export * from '../controller/dtoTest.ts';
 export * from '../controller/guardPassport.ts';
 export * from '../controller/onion.ts';
@@ -1725,7 +1716,6 @@ export * from '../controller/upload.ts';
 import type { IControllerOptionsBean } from '../controller/bean.ts';
 import type { IControllerOptionsCacheMem } from '../controller/cacheMem.ts';
 import type { IControllerOptionsCacheRedis } from '../controller/cacheRedis.ts';
-import type { IControllerOptionsCaptcha } from '../controller/captcha.ts';
 import type { IControllerOptionsDtoTest } from '../controller/dtoTest.ts';
 import type { IControllerOptionsGuardPassport } from '../controller/guardPassport.ts';
 import type { IControllerOptionsOnion } from '../controller/onion.ts';
@@ -1746,7 +1736,6 @@ declare module 'vona-module-a-web' {
       'test-vona:bean': IControllerOptionsBean;
 'test-vona:cacheMem': IControllerOptionsCacheMem;
 'test-vona:cacheRedis': IControllerOptionsCacheRedis;
-'test-vona:captcha': IControllerOptionsCaptcha;
 'test-vona:dtoTest': IControllerOptionsDtoTest;
 'test-vona:guardPassport': IControllerOptionsGuardPassport;
 'test-vona:onion': IControllerOptionsOnion;
@@ -1797,17 +1786,6 @@ declare module 'vona-module-test-vona' {
             get $beanFullName(): 'test-vona.controller.cacheRedis';
             get $onionName(): 'test-vona:cacheRedis';
             get $onionOptions(): IControllerOptionsCacheRedis;
-          }
-
-        export interface ControllerCaptcha {
-          /** @internal */
-          get scope(): ScopeModuleTestVona;
-        }
-
-          export interface ControllerCaptcha {
-            get $beanFullName(): 'test-vona.controller.captcha';
-            get $onionName(): 'test-vona:captcha';
-            get $onionOptions(): IControllerOptionsCaptcha;
           }
 
         export interface ControllerDtoTest {
@@ -1962,8 +1940,6 @@ import type { ControllerCacheMem } from '../controller/cacheMem.ts';
 // @ts-ignore ignore
 import type { ControllerCacheRedis } from '../controller/cacheRedis.ts';
 // @ts-ignore ignore
-import type { ControllerCaptcha } from '../controller/captcha.ts';
-// @ts-ignore ignore
 import type { ControllerDtoTest } from '../controller/dtoTest.ts';
 // @ts-ignore ignore
 import type { ControllerGuardPassport } from '../controller/guardPassport.ts';
@@ -2001,10 +1977,6 @@ declare module 'vona-module-test-vona' {
 
     export interface IControllerOptionsCacheRedis {
       actions?: TypeControllerOptionsActions<ControllerCacheRedis>;
-    }
-
-    export interface IControllerOptionsCaptcha {
-      actions?: TypeControllerOptionsActions<ControllerCaptcha>;
     }
 
     export interface IControllerOptionsDtoTest {
@@ -2089,7 +2061,6 @@ declare module 'vona-module-a-web' {
 export interface IApiPathPostRecord{
         '/test/vona/cacheMem': undefined;
 '/test/vona/cacheRedis': undefined;
-'/test/vona/captcha/signin': undefined;
 '/test/vona/dtoTest/createUser': undefined;
 '//echo': undefined;
 '/test/vona/onion/echo2/:userId/:userName': undefined;
