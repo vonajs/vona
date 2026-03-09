@@ -20,7 +20,7 @@ class ControllerStudent {
   @Web.get('login')
   @Passport.public()
   async login() {
-    const jwt = await this.bean.auth.authenticate('a-authsimple:simple', {
+    const jwt = await this.bean.auth.authenticate('auth-simple:simple', {
       clientOptions: { username: 'admin', password:'123456' },
     });
     return jwt;
@@ -164,7 +164,7 @@ async authenticate<T extends keyof IAuthProviderRecord>(
 |--|--|
 |authProviderName|Provider名称|
 |options.clientName|Client名称，缺省为`default`|
-|options.clientOptions|Client选项，不同的Provider有各自不同的Options定义| 
+|options.clientOptions|Client选项，不同的Provider有各自不同的Options定义|
 |options.state|本次认证的状态值|
 
 * options.clientOptions

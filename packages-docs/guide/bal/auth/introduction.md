@@ -23,7 +23,7 @@ class ControllerStudent {
   @Web.get('login')
   @Passport.public()
   async login() {
-    const jwt = await this.bean.auth.authenticate('a-authsimple:simple', {
+    const jwt = await this.bean.auth.authenticate('auth-simple:simple', {
       clientOptions: { username: 'admin', password:'123456' },
     });
     return jwt;

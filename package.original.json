@@ -42,7 +42,8 @@
     "lint:fix": "eslint --fix"
   },
   "dependencies": {
-    "vona": "workspace:^"
+    "vona": "workspace:^",
+    "@cabloy/socket": "workspace:^"
   },
   "devDependencies": {
     "@cabloy/lint": "workspace:^",

@@ -8,6 +8,7 @@
   "author": "",
   "dependencies": {
     "vona-module-a-auth": "^5.0.0",
-    "vona-module-a-authsimple": "^5.0.0"
+    "vona-module-auth-simple": "^5.0.0",
+    "vona-module-test-auth": "^5.0.0"
   }
 }

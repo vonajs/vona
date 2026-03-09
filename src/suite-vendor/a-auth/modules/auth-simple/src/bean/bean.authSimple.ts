@@ -11,6 +11,6 @@ export class BeanAuthSimple extends BeanBase {
     intention?: TypeAuthenticateIntention,
     clientName?: keyof IAuthProviderSimpleClientRecord,
   ) {
-    return await this.bean.auth.authenticate('a-authsimple:simple', { clientName, clientOptions, state: { intention } });
+    return await this.bean.auth.authenticate('auth-simple:simple', { clientName, clientOptions, state: { intention } });
   }
 }

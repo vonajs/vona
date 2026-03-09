@@ -244,8 +244,8 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
           collapsed: false,
           items: [
             { text: '介绍', link: 'introduction' },
-            { text: 'a-authsimple', link: 'a-authsimple' },
-            { text: 'a-authgithub', link: 'a-authgithub' },
+            { text: 'auth-simple', link: 'auth-simple' },
+            { text: 'auth-github', link: 'auth-github' },
           ],
         },
         {

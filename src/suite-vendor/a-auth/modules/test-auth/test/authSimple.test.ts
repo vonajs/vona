@@ -5,7 +5,7 @@ import { app } from 'vona-mock';
 
 describe('authSimple.test.ts', () => {
   it('action:passwordHash', async () => {
-    const scope = app.scope('a-authsimple');
+    const scope = app.scope('auth-simple');
     const password = '12344##1xxaasDFQ,.$';
     const hash = await scope.service.authSimple.calcPasswordHash(password);
     let verified = await scope.service.authSimple.verifyPasswordHash(password, hash);
@@ -18,7 +18,7 @@ describe('authSimple.test.ts', () => {
     await app.bean.executor.mockCtx(async () => {
       const password = app.scope('home-user').config.passwordDefault.admin;
       // login
-      const jwt = await app.bean.auth.authenticate('a-authsimple:simple', {
+      const jwt = await app.bean.auth.authenticate('auth-simple:simple', {
         clientName: 'default',
         clientOptions: { username: 'admin', password },
       });

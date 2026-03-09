@@ -1,24 +1,13 @@
 {
-  "name": "vona-module-a-cabloy",
+  "name": "vona-module-test-auth",
   "type": "module",
-  "version": "5.0.3",
-  "title": "a-cabloy",
+  "version": "5.0.0",
+  "title": "test-auth",
   "vonaModule": {
     "dependencies": {
-      "a-vona": "5.0.0",
-      "a-datasharding": "5.0.0",
-      "a-datasource": "5.0.0",
-      "a-socket": "5.0.0",
-      "a-ssr": "5.0.0",
-      "a-ssrhmr": "5.0.0",
-      "a-status": "5.0.0"
+      "a-vona": "5.0.0"
     }
   },
-  "description": "",
-  "author": "",
-  "keywords": [
-    "Vona Module"
-  ],
   "exports": {
     ".": {
       "types": [
@@ -30,6 +19,9 @@
     },
     "./package.json": "./package.json"
   },
+  "description": "",
+  "keywords": ["Vona Module"],
+  "author": "",
   "files": [
     "assets",
     "dist"
@@ -45,9 +37,11 @@
     "indent": 2,
     "remove": [
       "clean-package",
+      "devDependencies",
       "exports.\\..import"
     ]
   },
+  "dependencies": {},
   "devDependencies": {
     "clean-package": "^2.2.0",
     "rimraf": "^6.0.1"
