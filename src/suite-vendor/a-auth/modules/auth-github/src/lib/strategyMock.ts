@@ -1,7 +1,8 @@
 import type { TypeStrategyOptions } from 'vona-module-a-auth';
 import type { IAuthProviderGithubClientOptions } from '../bean/authProvider.github.ts';
 import OAuth2Strategy from 'passport-oauth2';
-import { uuidv4 } from 'vona';
+import { useApp, uuidv4 } from 'vona';
+import { $apiPath } from 'vona-module-a-openapiutils';
 
 export class StrategyMock extends OAuth2Strategy {
   // name: string;
@@ -10,7 +11,10 @@ export class StrategyMock extends OAuth2Strategy {
 
   constructor(options: TypeStrategyOptions<IAuthProviderGithubClientOptions>, verify: Function) {
     options = options || {};
-    options.authorizationURL = options.authorizationURL || 'https://github.com/login/oauth/authorize';
+    const app = useApp();
+    const callbackURLRelative = $apiPath('/auth/passport/callback');
+    const callbackURL = app.util.combineApiPath(callbackURLRelative, '', true, true);
+    options.authorizationURL = options.authorizationURL || callbackURL;
     options.tokenURL = options.tokenURL || 'https://github.com/login/oauth/access_token';
     options.scopeSeparator = options.scopeSeparator || ',';
     options.customHeaders = options.customHeaders || {};
