@@ -114,7 +114,7 @@ export class ServiceAuth extends BeanBase {
       }
       if (!entityUser) {
         // register user
-        entityUser = await this.bean.user.registerByProfile(profileUser);
+        entityUser = await this.bean.user.registerByProfile(profileUser, true);
         // update auth's userId
         await this.scope.model.auth.update({
           id: entityAuth.id,

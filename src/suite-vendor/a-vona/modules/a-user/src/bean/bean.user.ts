@@ -22,13 +22,22 @@ export class BeanUser extends BeanBase {
     });
   }
 
-  async register(user: Partial<IUser>, confirmed?: boolean): Promise<IUser> {
+  async register(user: Partial<IUser>, confirmed?: boolean, randomUsername?: boolean): Promise<IUser> {
     // config.user.autoActivate > confirmed
     const autoActivate = this.scope.config.user.autoActivate ? true : confirmed;
     const data = { user, confirmed, autoActivate };
     return await this.scope.event.register.emit(data, async data => {
+      let name = data.user.name;
+      if (!name) this.app.throw(403);
+      // check if exists
+      const userCheck = await this.userAdapter.findOneByName(name);
+      if (userCheck) {
+        if (!randomUsername) this.scope.error.UserExists.throw();
+        name = `name_${userCheck.id}${Date.now().toString().substring(8)}`;
+      }
       // user
-      const userNew = await this.userAdapter.create(data.user);
+      const userData = { ...data.user, name };
+      const userNew = await this.userAdapter.create(userData);
       if (data.autoActivate) {
         await this.activate(userNew);
       }
@@ -36,9 +45,9 @@ export class BeanUser extends BeanBase {
     }) as IUser;
   }
 
-  async registerByProfile(profile: IAuthUserProfile): Promise<IUser> {
+  async registerByProfile(profile: IAuthUserProfile, randomUsername?: boolean): Promise<IUser> {
     const user = await this.userAdapter.userOfProfile(profile);
-    return await this.register(user, profile.confirmed);
+    return await this.register(user, profile.confirmed, randomUsername);
   }
 
   async createAnonymous(): Promise<IUser> {

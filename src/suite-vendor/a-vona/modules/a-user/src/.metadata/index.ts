@@ -330,11 +330,18 @@ declare module 'vona-module-a-user' {
 export * from '../config/config.ts';
 import type { config } from '../config/config.ts';
 /** config: end */
+/** locale: begin */
+import { locales } from './locales.ts';
+/** locale: end */
+/** error: begin */
+export * from '../config/errors.ts';
+import type { errors } from '../config/errors.ts';
+/** error: end */
 /** main: begin */
 export * from '../main.ts';
 /** main: end */
 /** scope: begin */
-import { BeanScopeBase, type BeanScopeUtil, type TypeModuleConfig } from 'vona';
+import { BeanScopeBase, type BeanScopeUtil, type TypeModuleConfig, type TypeModuleErrors, type TypeModuleLocales, type TypeLocaleBase } from 'vona';
 import { Scope } from 'vona-module-a-bean';
 
 @Scope()
@@ -343,6 +350,8 @@ export class ScopeModuleAUser extends BeanScopeBase {}
 export interface ScopeModuleAUser {
   util: BeanScopeUtil;
 config: TypeModuleConfig<typeof config>;
+error: TypeModuleErrors<typeof errors>;
+locale: TypeModuleLocales<(typeof locales)[TypeLocaleBase]>;
 service: IModuleService;
 cacheRedis: IModuleCacheRedis;
 event: IModuleEvent;
@@ -362,8 +371,12 @@ declare module 'vona' {
     'a-user': ReturnType<typeof config>;
   }
 
-  
+  export interface IBeanScopeLocale {
+    'a-user': (typeof locales)[TypeLocaleBase];
+  }
 
-  
+  export interface IBeanScopeErrors {
+    'a-user': typeof errors;
+  }
 }
 /** scope: end */

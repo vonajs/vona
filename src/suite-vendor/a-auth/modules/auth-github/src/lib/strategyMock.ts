@@ -13,7 +13,7 @@ export class StrategyMock extends OAuth2Strategy {
     options = options || {};
     const app = useApp();
     const callbackURLRelative = $apiPath('/auth/github/mock/authorize');
-    const callbackURL = app.util.getAbsoluteUrlByApiPath(callbackURLRelative);
+    const callbackURL = app.util.combineApiPath(callbackURLRelative, '', true, true);
     options.authorizationURL = options.authorizationURL || callbackURL;
     options.tokenURL = options.tokenURL || 'https://github.com/login/oauth/access_token';
     options.scopeSeparator = options.scopeSeparator || ',';
