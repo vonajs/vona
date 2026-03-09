@@ -4,7 +4,7 @@ import type { DtoAuth } from '../dto/auth.ts';
 import type { EntityAuth } from '../entity/auth.ts';
 import type { StrategyBase } from '../lib/strategyBase.ts';
 import type { IAuthenticateOptions, IAuthenticateStrategyState } from '../types/auth.ts';
-import type { IAuthProviderRecord, IAuthProviderStrategy, IAuthProviderVerify, TypeStrategyOptions } from '../types/authProvider.ts';
+import type { IAuthProviderOauth2ClientOptions, IAuthProviderRecord, IAuthProviderStrategy, IAuthProviderVerify, TypeStrategyOptions } from '../types/authProvider.ts';
 import { BeanBase, deepExtend } from 'vona';
 import { Bean } from 'vona-module-a-bean';
 import { $apiPath } from 'vona-module-a-openapiutils';
@@ -28,7 +28,7 @@ export class BeanAuth extends BeanBase {
     if (!entityAuthProvider || entityAuthProvider?.disabled) return this.app.throw(403);
     // clientOptions
     const optionsMeta = onionSlice.beanOptions.options;
-    const clientOptions = deepExtend(
+    const clientOptions: IAuthProviderOauth2ClientOptions = deepExtend(
       {},
       optionsMeta?.default,
       optionsMeta?.clients?.[clientName as any],
@@ -76,7 +76,7 @@ export class BeanAuth extends BeanBase {
           return this.ctx.redirect(location);
         }
         // mock
-        this.ctx.request.query.code = this.scope.config.mock.username;
+        this.ctx.request.query.code = clientOptions.mockUsername ?? this.scope.config.mock.username;
         this.ctx.request.query.state = strategyStateString;
         return this.scope.service.auth.authCallback(strategyState).then(resolve).catch(reject);
         // return this.bean.executor.performAction('get', callbackURLRelative as any, {
