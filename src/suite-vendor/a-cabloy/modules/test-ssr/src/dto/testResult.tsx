@@ -7,7 +7,7 @@ import { ActionExpr, ActionLog } from 'vona-module-a-actions';
 import { $makeSchema, Api, v } from 'vona-module-a-openapiutils';
 import { Dto } from 'vona-module-a-web';
 import z from 'zod';
-import { $iconName, AARestActionsCopy, AARestActionsSetValue, ZZIcon } from 'zova-rest-vona-home';
+import { $iconName, AARestActionsCopy, AARestActionsSetValue, ZZIcon } from 'zova-rest-cabloy-basic-admin';
 import { $locale } from '../.metadata/locales.ts';
 import { DtoTestDetail } from './testDetail.ts';
 

@@ -132,9 +132,6 @@ importers:
       vona-module-a-captcha:
         specifier: workspace:^
         version: link:src/suite-vendor/a-captcha/modules/a-captcha
-      vona-module-a-captchasimple:
-        specifier: workspace:^
-        version: link:src/suite-vendor/a-vona/modules/a-captchasimple
       vona-module-a-core:
         specifier: workspace:^
         version: link:src/suite-vendor/a-vona/modules/a-core
@@ -357,18 +354,6 @@ importers:
       zova-rest-cabloy-start-front:
         specifier: file:./.zova-rest/cabloy-start-front
         version: file:.zova-rest/cabloy-start-front
-      zova-rest-cabloy-store-admin:
-        specifier: file:./.zova-rest/cabloy-store-admin
-        version: file:.zova-rest/cabloy-store-admin
-      zova-rest-cabloy-store-front:
-        specifier: file:./.zova-rest/cabloy-store-front
-        version: file:.zova-rest/cabloy-store-front
-      zova-rest-vona-home:
-        specifier: file:./.zova-rest/vona-home
-        version: file:.zova-rest/vona-home
-      zova-rest-vona-start:
-        specifier: file:./.zova-rest/vona-start
-        version: file:.zova-rest/vona-start
     devDependencies:
       '@cabloy/cli':
         specifier: ^3.0.98
@@ -1340,6 +1325,16 @@ importers:
         version: 6.1.3
 
   src/suite-vendor/a-captcha/modules/captcha-simple:
+    dependencies:
+      '@zhennann/svg-captcha':
+        specifier: ^1.5.0
+        version: 1.5.0
+      opentype.js:
+        specifier: ^1.3.4
+        version: 1.3.4
+      svg64:
+        specifier: ^2.0.0
+        version: 2.0.0
     devDependencies:
       clean-package:
         specifier: ^2.2.0
@@ -1622,25 +1617,6 @@ importers:
         version: 6.1.3
 
   src/suite-vendor/a-vona/modules/a-caching:
-    devDependencies:
-      clean-package:
-        specifier: ^2.2.0
-        version: 2.2.0
-      rimraf:
-        specifier: ^6.0.1
-        version: 6.1.3
-
-  src/suite-vendor/a-vona/modules/a-captchasimple:
-    dependencies:
-      '@zhennann/svg-captcha':
-        specifier: ^1.5.0
-        version: 1.5.0
-      opentype.js:
-        specifier: ^1.3.4
-        version: 1.3.4
-      svg64:
-        specifier: ^2.0.0
-        version: 2.0.0
     devDependencies:
       clean-package:
         specifier: ^2.2.0
@@ -9607,18 +9583,6 @@ packages:
 
   zova-rest-cabloy-start-front@file:.zova-rest/cabloy-start-front:
     resolution: {directory: .zova-rest/cabloy-start-front, type: directory}
-
-  zova-rest-cabloy-store-admin@file:.zova-rest/cabloy-store-admin:
-    resolution: {directory: .zova-rest/cabloy-store-admin, type: directory}
-
-  zova-rest-cabloy-store-front@file:.zova-rest/cabloy-store-front:
-    resolution: {directory: .zova-rest/cabloy-store-front, type: directory}
-
-  zova-rest-vona-home@file:.zova-rest/vona-home:
-    resolution: {directory: .zova-rest/vona-home, type: directory}
-
-  zova-rest-vona-start@file:.zova-rest/vona-start:
-    resolution: {directory: .zova-rest/vona-start, type: directory}
 
   zwitch@1.0.5:
     resolution: {integrity: sha512-V50KMwwzqJV0NpZIZFwfOD5/lyny3WlSzRiXgA0G7VUnRlqttta1L6UQIHzd6EuBY/cHGfwTIck7w1yH6Q5zUw==}
@@ -17758,14 +17722,6 @@ snapshots:
   zova-rest-cabloy-start-admin@file:.zova-rest/cabloy-start-admin: {}
 
   zova-rest-cabloy-start-front@file:.zova-rest/cabloy-start-front: {}
-
-  zova-rest-cabloy-store-admin@file:.zova-rest/cabloy-store-admin: {}
-
-  zova-rest-cabloy-store-front@file:.zova-rest/cabloy-store-front: {}
-
-  zova-rest-vona-home@file:.zova-rest/vona-home: {}
-
-  zova-rest-vona-start@file:.zova-rest/vona-start: {}
 
   zwitch@1.0.5: {}
 
