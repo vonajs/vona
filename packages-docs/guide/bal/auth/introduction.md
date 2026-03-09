@@ -51,7 +51,7 @@ class ControllerStudent {
 `Github` authentication is a separate module and needs to be installed in the project:
 
 ``` bash
-$ pnpm add vona-module-a-authgithub -w
+$ pnpm add vona-module-auth-github -w
 ```
 
 ``` typescript
@@ -60,7 +60,7 @@ class ControllerStudent {
   @Passport.public()
   async login() {
     await this.bean.auth.authenticate(
-      'a-authgithub:github',
+      'auth-github:github',
       { state: { redirect: '/' } },
     );
   }
@@ -77,7 +77,7 @@ Using `Github` as an example, set the authentication credentials in the App Conf
 // onions
 config.onions = {
   authProvider: {
-    'a-authgithub:github': {
+    'auth-github:github': {
       clients: {
         default: {
           clientID: 'xxxxxx',
@@ -108,7 +108,7 @@ declare module 'vona-module-x-x' {
 Adjust the code:
 
 ``` typescript
-declare module 'vona-module-a-authgithub' {
+declare module 'vona-module-auth-github' {
   export interface IAuthProviderGithubClientRecord {
     another: never;
   }
@@ -121,7 +121,7 @@ declare module 'vona-module-a-authgithub' {
 // onions
 config.onions = {
   authProvider: {
-    'a-authgithub:github': {
+    'auth-github:github': {
       clients: {
         default: {
           clientID: 'xxxxxx',

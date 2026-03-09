@@ -48,7 +48,7 @@ class ControllerStudent {
 `Github`认证是独立的模块，需要安装到项目中：
 
 ``` bash
-$ pnpm add vona-module-a-authgithub -w
+$ pnpm add vona-module-auth-github -w
 ```
 
 ``` typescript
@@ -57,7 +57,7 @@ class ControllerStudent {
   @Passport.public()
   async login() {
     await this.bean.auth.authenticate(
-      'a-authgithub:github',
+      'auth-github:github',
       { state: { redirect: '/' } },
     );
   }
@@ -74,7 +74,7 @@ class ControllerStudent {
 // onions
 config.onions = {
   authProvider: {
-    'a-authgithub:github': {
+    'auth-github:github': {
       clients: {
         default: {
           clientID: 'xxxxxx',
@@ -105,7 +105,7 @@ declare module 'vona-module-x-x' {
 调整代码:
 
 ``` typescript
-declare module 'vona-module-a-authgithub' {
+declare module 'vona-module-auth-github' {
   export interface IAuthProviderGithubClientRecord {
     another: never;
   }
@@ -118,7 +118,7 @@ declare module 'vona-module-a-authgithub' {
 // onions
 config.onions = {
   authProvider: {
-    'a-authgithub:github': {
+    'auth-github:github': {
       clients: {
         default: {
           clientID: 'xxxxxx',

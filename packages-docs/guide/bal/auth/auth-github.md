@@ -2,4 +2,4 @@
 
 `Github Authentication` is provided by the `a-cabloy` suite
 
-- See: [Github Authentication](../../../cabloy/a-authgithub.md)
+- See: [Github Authentication](../../../cabloy/auth-github.md)

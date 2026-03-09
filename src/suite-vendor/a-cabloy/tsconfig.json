@@ -9,9 +9,6 @@
       "path": "modules/a-status/tsconfig.build.json"
     },
     {
-      "path": "modules/a-authgithub/tsconfig.build.json"
-    },
-    {
       "path": "modules/a-socket/tsconfig.build.json"
     },
     {

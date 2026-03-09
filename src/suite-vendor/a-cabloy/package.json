@@ -7,7 +7,6 @@
   "author": "",
   "files": [],
   "dependencies": {
-    "vona-module-a-authgithub": "workspace:^",
     "vona-module-a-cabloy": "workspace:^",
     "vona-module-a-datasharding": "workspace:^",
     "vona-module-a-datasource": "workspace:^",

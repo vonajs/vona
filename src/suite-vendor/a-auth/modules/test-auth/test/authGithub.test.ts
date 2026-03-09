@@ -9,7 +9,7 @@ describe('authGithub.test.ts', () => {
     await app.bean.executor.mockCtx(
       async () => {
         // login
-        const jwt = await app.bean.auth.authenticate('a-authgithub:github', {
+        const jwt = await app.bean.auth.authenticate('auth-github:github', {
         // state: { redirect: 'xxxxx' },
           clientName: 'default',
         });

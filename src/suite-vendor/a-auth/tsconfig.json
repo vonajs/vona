@@ -10,6 +10,9 @@
     },
     {
       "path": "modules/test-auth/tsconfig.build.json"
+    },
+    {
+      "path": "modules/auth-github/tsconfig.build.json"
     }
   ],
   "exclude": [

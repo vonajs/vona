@@ -1,8 +1,8 @@
 {
-  "name": "vona-module-a-authgithub",
+  "name": "vona-module-auth-github",
   "type": "module",
   "version": "5.0.5",
-  "title": "a-authgithub",
+  "title": "auth-github",
   "vonaModule": {
     "dependencies": {
       "a-vona": "5.0.0"

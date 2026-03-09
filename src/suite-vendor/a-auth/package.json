@@ -9,6 +9,7 @@
   "dependencies": {
     "vona-module-a-auth": "^5.0.0",
     "vona-module-auth-simple": "^5.0.0",
-    "vona-module-test-auth": "^5.0.0"
+    "vona-module-test-auth": "^5.0.0",
+    "vona-module-auth-github": "^5.0.0"
   }
 }
