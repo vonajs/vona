@@ -2,12 +2,6 @@
 
 This module allows us to provide a set of `write-datasources` and a set of `read-datasources`. When a user accesses the backend API, the system automatically selects a `write-datasource` or a `read-datasource` based on the rules and accesses the corresponding database, thereby allocating workloads and improving system performance
 
-## Installing the module
-
-``` bash
-$ pnpm add vona-module-a-datasharding -w
-```
-
 ## Adding datasources
 
 First, you need to add a set of datasources
@@ -71,7 +65,7 @@ config.modules = {
       randomWrite: undefined,
     },
   },
-};    
+};
 ```
 
 |Name|Description|
