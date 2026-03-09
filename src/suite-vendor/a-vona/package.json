@@ -10,8 +10,6 @@
     "vona-module-a-actions": "^5.0.1",
     "vona-module-a-aspect": "^5.0.31",
     "vona-module-a-aspectutils": "^5.0.12",
-    "vona-module-a-auth": "^5.0.53",
-    "vona-module-a-authsimple": "^5.0.41",
     "vona-module-a-bean": "^5.0.20",
     "vona-module-a-beanmutate": "^5.0.8",
     "vona-module-a-body": "^5.0.27",
