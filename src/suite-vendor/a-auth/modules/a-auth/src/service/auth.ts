@@ -1,10 +1,13 @@
+import type { Constructable } from 'vona';
+import type { IJwtToken } from 'vona-module-a-jwt';
 import type { IAuthUserProfile, IPassport, IUser } from 'vona-module-a-user';
 import type { EntityAuthProvider } from '../entity/authProvider.ts';
+import type { StrategyBase } from '../lib/strategyBase.ts';
 import type { IAuthenticateStrategyState } from '../types/auth.ts';
-import type { IAuthProviderClientOptions, IAuthProviderVerify, IDecoratorAuthProviderOptions, TypeStrategyVerifyArgs } from '../types/authProvider.ts';
-import { isNil } from '@cabloy/utils';
+import type { IAuthProviderClientOptions, IAuthProviderStrategy, IAuthProviderVerify, IDecoratorAuthProviderOptions, TypeStrategyOptions, TypeStrategyVerifyArgs } from '../types/authProvider.ts';
+import { combineQueries, isNil } from '@cabloy/utils';
 import { TableIdentity } from 'table-identity';
-import { BeanBase } from 'vona';
+import { BeanBase, deepExtend } from 'vona';
 import { Service } from 'vona-module-a-bean';
 
 @Service()
@@ -170,5 +173,65 @@ export class ServiceAuth extends BeanBase {
     );
     // remove user
     await this.bean.user.removeById(userIdFrom);
+  }
+
+  public async authCallback(strategyState: IAuthenticateStrategyState): Promise<IJwtToken> {
+    // authProvider
+    const entityAuthProvider = await this.bean.authProvider.get({ id: strategyState.authProviderId });
+    if (!entityAuthProvider || entityAuthProvider?.disabled) return this.app.throw(403);
+    const authProviderName = entityAuthProvider.providerName;
+    // clientName
+    const clientName = entityAuthProvider.clientName ?? 'default';
+    // onionSlice
+    const onionSlice = this.bean.onion.authProvider.getOnionSliceEnabled(true, authProviderName as any);
+    if (!onionSlice) throw new Error(`Auth provider not found: ${authProviderName}`);
+    const onionOptions = onionSlice.beanOptions.options!;
+    // clientOptions
+    const optionsMeta = onionSlice.beanOptions.options;
+    const clientOptions = deepExtend(
+      {},
+      optionsMeta?.default,
+      optionsMeta?.clients?.[clientName as any],
+      entityAuthProvider.clientOptions,
+    );
+    // execute
+    const beanAuthProvider = this.app.bean._getBean<IAuthProviderVerify & IAuthProviderStrategy>(onionSlice.beanOptions.beanFullName as any);
+    // strategy
+    if (!beanAuthProvider.strategy) return this.app.throw(401);
+    const strategyOptions: TypeStrategyOptions = clientOptions;
+    const Strategy: Constructable<StrategyBase> = await beanAuthProvider.strategy(clientOptions, onionOptions) as Constructable<StrategyBase>;
+    // strategy.authenticate
+    return new Promise((resolve, reject) => {
+      const strategy = new Strategy(strategyOptions, async (...args: TypeStrategyVerifyArgs) => {
+        try {
+          const jwt = await this.scope.service.auth.authenticateCallback(
+            entityAuthProvider,
+            beanAuthProvider,
+            clientOptions,
+            onionOptions,
+            strategyState,
+            args,
+          );
+          // code
+          const code = await this.bean.passport.createOauthCodeFromOauthAuthToken(jwt.accessToken);
+          if (strategy.name === 'mock' && !strategyState.redirect) {
+            // mock
+            const jwt2 = await this.bean.passport.createAuthTokenFromOauthCode(code);
+            return resolve(jwt2);
+          } else {
+            // redirect
+            if (!strategyState.redirect) return reject(new Error('redirect not specified'));
+            const redirectUrl = combineQueries(strategyState.redirect, { [this.scope.config.oauthCodeField]: code });
+            return this.ctx.redirect(redirectUrl);
+          }
+        } catch (err) {
+          reject(err);
+        }
+      });
+      strategy.error = (err: Error) => {
+        reject(err);
+      };
+      strategy.authenticate(this.ctx.request, strategyOptions);
+    });
   }
 }

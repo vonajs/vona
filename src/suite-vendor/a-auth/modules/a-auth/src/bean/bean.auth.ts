@@ -76,17 +76,20 @@ export class BeanAuth extends BeanBase {
           return this.ctx.redirect(location);
         }
         // mock
-        return this.bean.executor.performAction('get', callbackURLRelative as any, {
-          query: {
-            code: this.scope.config.mock.username,
-            state: strategyStateString,
-          },
-        }).then(resolve).catch(reject);
+        this.ctx.request.query.code = this.scope.config.mock.username;
+        this.ctx.request.query.state = strategyStateString;
+        return this.scope.service.auth.authCallback(strategyState).then(resolve).catch(reject);
+        // return this.bean.executor.performAction('get', callbackURLRelative as any, {
+        //   query: {
+        //     code: this.scope.config.mock.username,
+        //     state: strategyStateString,
+        //   },
+        // }).then(resolve).catch(reject);
       };
       strategy.error = (err: Error) => {
         reject(err);
       };
-      return strategy.authenticate(this.ctx.req, strategyOptions);
+      return strategy.authenticate(this.ctx.request, strategyOptions);
     });
   }
 
