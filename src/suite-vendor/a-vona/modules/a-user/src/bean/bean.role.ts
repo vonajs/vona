@@ -30,4 +30,8 @@ export class BeanRole extends BeanBase {
   findAllByUserId(userId: TableIdentity): Promise<IRole[] | undefined> {
     return this.roleAdapter.findAllByUserId(userId);
   }
+
+  addUserId(id: TableIdentity, userId: TableIdentity): Promise<TableIdentity> {
+    return this.roleAdapter.addUserId(id, userId);
+  }
 }
