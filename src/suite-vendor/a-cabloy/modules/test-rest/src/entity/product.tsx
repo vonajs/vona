@@ -3,7 +3,7 @@ import type { IDecoratorEntityOptions } from 'vona-module-a-orm';
 // import React from 'react';
 import { Api, v } from 'vona-module-a-openapiutils';
 import { Entity, EntityBase } from 'vona-module-a-orm';
-// import { ZZDemoBasicActionView } from 'zova-rest-vona-home';
+// import { ZZDemoBasicActionView } from 'zova-rest-cabloy-basic-admin';
 import { $locale } from '../.metadata/locales.ts';
 
 export interface IEntityOptionsProduct extends IDecoratorEntityOptions<'_custom'> {}

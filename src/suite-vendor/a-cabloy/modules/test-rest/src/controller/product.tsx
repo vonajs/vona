@@ -8,7 +8,7 @@ import { Api, Resource, v } from 'vona-module-a-openapiutils';
 import { Ssr } from 'vona-module-a-ssr';
 import { Passport } from 'vona-module-a-user';
 import { Arg, Controller, Web } from 'vona-module-a-web';
-// import { PPDevuiRestpage, PPDevuiRestpageEntry } from 'zova-rest-vona-home';
+// import { PPDevuiRestpage, PPDevuiRestpageEntry } from 'zova-rest-cabloy-basic-admin';
 import { DtoProductCreate } from '../dto/productCreate.ts';
 import { DtoProductQuery } from '../dto/productQuery.ts';
 import { DtoProductQueryRes } from '../dto/productQueryRes.ts';
