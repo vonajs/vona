@@ -33,7 +33,7 @@ export class BeanUser extends BeanBase {
       const userCheck = await this.userAdapter.findOneByName(name);
       if (userCheck) {
         if (!randomUsername) this.scope.error.UserExists.throw();
-        name = `name_${userCheck.id}${Date.now().toString().substring(8)}`;
+        name = `${name}_${userCheck.id}${Date.now().toString().substring(8)}`;
       }
       // user
       const userData = { ...data.user, name };
