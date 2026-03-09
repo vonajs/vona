@@ -6,5 +6,7 @@
   "files": [],
   "description": "",
   "author": "",
-  "dependencies": {}
+  "dependencies": {
+    "vona-module-a-auth": "^5.0.0"
+  }
 }

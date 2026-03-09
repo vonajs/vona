@@ -107,7 +107,7 @@ importers:
         version: link:src/suite-vendor/a-vona/modules/a-aspectutils
       vona-module-a-auth:
         specifier: workspace:^
-        version: link:src/suite-vendor/a-vona/modules/a-auth
+        version: link:src/suite-vendor/a-vona/modules/a-auth3
       vona-module-a-authgithub:
         specifier: workspace:^
         version: link:src/suite-vendor/a-cabloy/modules/a-authgithub
@@ -958,6 +958,9 @@ importers:
       vona-core:
         specifier: ^5.0.134
         version: link:../vona-core
+      vona-suite-a-auth:
+        specifier: ^5.0.0
+        version: link:../../src/suite-vendor/a-auth
       vona-suite-a-vona:
         specifier: ^5.0.275
         version: link:../../src/suite-vendor/a-vona
@@ -1095,6 +1098,21 @@ importers:
         version: 6.1.3
 
   src/module/demo-student:
+    devDependencies:
+      clean-package:
+        specifier: ^2.2.0
+        version: 2.2.0
+      rimraf:
+        specifier: ^6.0.1
+        version: 6.1.3
+
+  src/suite-vendor/a-auth:
+    dependencies:
+      vona-module-a-auth:
+        specifier: ^5.0.0
+        version: link:../a-vona/modules/a-auth3
+
+  src/suite-vendor/a-auth/modules/a-auth:
     devDependencies:
       clean-package:
         specifier: ^2.2.0
@@ -1292,7 +1310,7 @@ importers:
         version: link:modules/a-aspectutils
       vona-module-a-auth:
         specifier: ^5.0.53
-        version: link:modules/a-auth
+        version: link:modules/a-auth3
       vona-module-a-authsimple:
         specifier: ^5.0.41
         version: link:modules/a-authsimple
@@ -1480,7 +1498,7 @@ importers:
         specifier: ^6.0.1
         version: 6.1.3
 
-  src/suite-vendor/a-vona/modules/a-auth:
+  src/suite-vendor/a-vona/modules/a-auth3:
     devDependencies:
       clean-package:
         specifier: ^2.2.0
