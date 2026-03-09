@@ -72,7 +72,7 @@ export class BeanAuth extends BeanBase {
     return new Promise((resolve, reject) => {
       strategy.redirect = async (location: string) => {
         // real
-        if (strategy.name !== 'mock') {
+        if (!this.app.meta.isTest) {
           return this.ctx.redirect(location);
         }
         // mock
