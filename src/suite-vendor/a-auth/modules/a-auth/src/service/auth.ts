@@ -194,6 +194,7 @@ export class ServiceAuth extends BeanBase {
       optionsMeta?.default,
       optionsMeta?.clients?.[clientName as any],
       entityAuthProvider.clientOptions,
+      strategyState.clientOptions,
     );
     // execute
     const beanAuthProvider = this.app.bean._getBean<IAuthProviderVerify & IAuthProviderStrategy>(onionSlice.beanOptions.beanFullName as any);

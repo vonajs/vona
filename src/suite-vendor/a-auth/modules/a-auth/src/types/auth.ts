@@ -1,5 +1,5 @@
 import type { IInstanceRecord, ILocaleRecord, PowerPartial } from 'vona';
-import type { IDecoratorAuthProviderOptions } from './authProvider.ts';
+import type { IAuthProviderClientOptions, IDecoratorAuthProviderOptions } from './authProvider.ts';
 
 export type TypeAuthenticateIntention = 'register' | 'login' | 'associate' | 'migrate';
 
@@ -14,6 +14,7 @@ export interface IAuthenticateStrategyState extends IAuthenticateState {
   instanceName: keyof IInstanceRecord;
   locale: keyof ILocaleRecord;
   tz?: string;
+  clientOptions?: IAuthProviderClientOptions;
 }
 
 export interface IAuthenticateOptions<T extends IDecoratorAuthProviderOptions = IDecoratorAuthProviderOptions> {

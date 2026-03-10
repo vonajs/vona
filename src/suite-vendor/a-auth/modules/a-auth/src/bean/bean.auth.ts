@@ -57,7 +57,11 @@ export class BeanAuth extends BeanBase {
       instanceName: this.ctx.instanceName!,
       locale: this.ctx.locale,
       tz: this.ctx.tz,
-    });
+      clientOptions: {
+        confirmed: clientOptions.confirmed,
+        mockUsername: clientOptions.mockUsername,
+      },
+    } satisfies IAuthenticateStrategyState);
     const strategyStateString = await this.bean.jwt.createOauthState(strategyState);
     // strategy
     const strategyOptions: TypeStrategyOptions = Object.assign({}, clientOptions, {
