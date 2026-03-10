@@ -1,37 +1,29 @@
 import type { IAuthProviderOauth2ClientOptions, TypeStrategyOptions } from '../types/authProvider.ts';
-import OAuth2Strategy from 'passport-oauth2';
 import { useApp, uuidv4 } from 'vona';
 import { $apiPath } from 'vona-module-a-openapiutils';
+import { StrategyBase } from './strategyBase.ts';
 
-export class StrategyMock extends OAuth2Strategy {
-  // name: string;
-  // _userProfileURL: string;
-  // _oauth2: any;
-
+export class StrategyMock extends StrategyBase {
   constructor(options: TypeStrategyOptions<IAuthProviderOauth2ClientOptions>, verify: Function) {
     options = options || {};
     const app = useApp();
     const callbackURLRelative = $apiPath('/auth/github/mock/authorize');
     const callbackURL = app.util.combineApiPath(callbackURLRelative, '', true, true);
     options.authorizationURL = options.authorizationURL || callbackURL;
-    options.tokenURL = options.tokenURL || 'https://github.com/login/oauth/access_token';
-    options.scopeSeparator = options.scopeSeparator || ',';
-    options.customHeaders = options.customHeaders || {};
 
     super(options, verify);
 
     const self = this as any;
     self.name = 'mock';
-    self._oauth2.useAuthorizationHeaderforGET(true);
 
-    self._oauth2.getOAuthAccessToken = function (code, params, callback) {
+    self._oauth2.getOAuthAccessToken = function (code: string, params: unknown, callback: Function) {
       const accessToken = code;
       const refreshToken = uuidv4();
       callback(null, accessToken, refreshToken, params);
     };
   }
 
-  userProfile(accessToken, done) {
+  userProfile(accessToken: string, done: Function) {
     const mockId = accessToken;
     const profile = {
       id: mockId,
