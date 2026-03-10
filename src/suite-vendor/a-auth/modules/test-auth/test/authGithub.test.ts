@@ -10,8 +10,11 @@ describe('authGithub.test.ts', () => {
       async () => {
         // login
         const jwt = await app.bean.auth.authenticate('auth-github:github', {
-        // state: { redirect: 'xxxxx' },
+          // state: { redirect: 'xxxxx' },
           clientName: 'default',
+          clientOptions: {
+            mockUsername: 'mock-user',
+          },
         });
         assert.equal(!!jwt?.accessToken, true);
         // isAuthenticated: isolate
