@@ -39,6 +39,7 @@ export interface IDecoratorAuthProviderOptions<
   extends TypeOnionOptionsEnableSimple {
   default?: T;
   clients?: { [prop in K]?: T }; // Record<K, T>;
+  useMockForDev?: boolean;
 }
 
 export interface IAuthProviderStrategy {

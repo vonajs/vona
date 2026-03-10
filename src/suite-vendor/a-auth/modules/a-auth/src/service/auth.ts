@@ -9,6 +9,7 @@ import { combineQueries, isNil } from '@cabloy/utils';
 import { TableIdentity } from 'table-identity';
 import { BeanBase, deepExtend } from 'vona';
 import { Service } from 'vona-module-a-bean';
+import { StrategyMock } from '../lib/strategyMock.ts';
 
 @Service()
 export class ServiceAuth extends BeanBase {
@@ -188,7 +189,7 @@ export class ServiceAuth extends BeanBase {
     const onionOptions = onionSlice.beanOptions.options!;
     // clientOptions
     const optionsMeta = onionSlice.beanOptions.options;
-    const clientOptions = deepExtend(
+    const clientOptions: IAuthProviderClientOptions = deepExtend(
       {},
       optionsMeta?.default,
       optionsMeta?.clients?.[clientName as any],
@@ -199,7 +200,7 @@ export class ServiceAuth extends BeanBase {
     // strategy
     if (!beanAuthProvider.strategy) return this.app.throw(401);
     const strategyOptions: TypeStrategyOptions = clientOptions;
-    const Strategy: Constructable<StrategyBase> = await beanAuthProvider.strategy(clientOptions, onionOptions) as Constructable<StrategyBase>;
+    const Strategy = await this.getStrategyConstructable(beanAuthProvider, clientOptions, onionOptions);
     // strategy.authenticate
     return new Promise((resolve, reject) => {
       const strategy = new Strategy(strategyOptions, async (...args: TypeStrategyVerifyArgs) => {
@@ -233,5 +234,16 @@ export class ServiceAuth extends BeanBase {
       };
       strategy.authenticate(this.ctx.request, strategyOptions);
     });
+  }
+
+  public async getStrategyConstructable(
+    beanAuthProvider: IAuthProviderVerify & IAuthProviderStrategy,
+    clientOptions: IAuthProviderClientOptions,
+    onionOptions: IDecoratorAuthProviderOptions,
+  ): Promise<Constructable<StrategyBase>> {
+    const Strategy: Constructable<StrategyBase> = (clientOptions.mockUsername || (this.app.meta.isDev && onionOptions.useMockForDev !== false))
+      ? StrategyMock as unknown as Constructable<StrategyBase>
+      : await beanAuthProvider.strategy(clientOptions, onionOptions) as Constructable<StrategyBase>;
+    return Strategy;
   }
 }

@@ -1,8 +1,6 @@
-import type { Constructable } from 'vona';
 import type { IJwtToken } from 'vona-module-a-jwt';
 import type { DtoAuth } from '../dto/auth.ts';
 import type { EntityAuth } from '../entity/auth.ts';
-import type { StrategyBase } from '../lib/strategyBase.ts';
 import type { IAuthenticateOptions, IAuthenticateStrategyState } from '../types/auth.ts';
 import type { IAuthProviderClientOptions, IAuthProviderRecord, IAuthProviderStrategy, IAuthProviderVerify, TypeStrategyOptions } from '../types/authProvider.ts';
 import { BeanBase, deepExtend } from 'vona';
@@ -66,7 +64,7 @@ export class BeanAuth extends BeanBase {
       callbackURL,
       state: strategyStateString,
     });
-    const Strategy: Constructable<StrategyBase> = await beanAuthProvider.strategy(clientOptions, onionOptions) as Constructable<StrategyBase>;
+    const Strategy = await this.scope.service.auth.getStrategyConstructable(beanAuthProvider, clientOptions, onionOptions);
     const strategy = new Strategy(strategyOptions, () => {});
     // strategy.authenticate
     return new Promise((resolve, reject) => {
