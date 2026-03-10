@@ -4,7 +4,7 @@ import type { DtoAuth } from '../dto/auth.ts';
 import type { EntityAuth } from '../entity/auth.ts';
 import type { StrategyBase } from '../lib/strategyBase.ts';
 import type { IAuthenticateOptions, IAuthenticateStrategyState } from '../types/auth.ts';
-import type { IAuthProviderOauth2ClientOptions, IAuthProviderRecord, IAuthProviderStrategy, IAuthProviderVerify, TypeStrategyOptions } from '../types/authProvider.ts';
+import type { IAuthProviderClientOptions, IAuthProviderRecord, IAuthProviderStrategy, IAuthProviderVerify, TypeStrategyOptions } from '../types/authProvider.ts';
 import { BeanBase, deepExtend } from 'vona';
 import { Bean } from 'vona-module-a-bean';
 import { $apiPath } from 'vona-module-a-openapiutils';
@@ -28,7 +28,7 @@ export class BeanAuth extends BeanBase {
     if (!entityAuthProvider || entityAuthProvider?.disabled) return this.app.throw(403);
     // clientOptions
     const optionsMeta = onionSlice.beanOptions.options;
-    const clientOptions: IAuthProviderOauth2ClientOptions = deepExtend(
+    const clientOptions: IAuthProviderClientOptions = deepExtend(
       {},
       optionsMeta?.default,
       optionsMeta?.clients?.[clientName as any],
