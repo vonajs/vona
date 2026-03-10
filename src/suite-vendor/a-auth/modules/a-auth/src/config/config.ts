@@ -4,8 +4,5 @@ import { $customKey } from 'vona';
 export function config(_app: VonaApplication) {
   return {
     oauthCodeField: $customKey('x-vona-oauth-code'),
-    mock: {
-      username: 'mock-user',
-    },
   };
 }

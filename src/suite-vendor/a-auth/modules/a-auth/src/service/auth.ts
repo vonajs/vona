@@ -213,18 +213,15 @@ export class ServiceAuth extends BeanBase {
             strategyState,
             args,
           );
+          if (clientOptions.mockUsername) {
+            return resolve(jwt);
+          }
           // code
           const code = await this.bean.passport.createOauthCodeFromOauthAuthToken(jwt.accessToken);
-          if (this.app.meta.isTest) {
-            // mock
-            const jwt2 = await this.bean.passport.createAuthTokenFromOauthCode(code);
-            return resolve(jwt2);
-          } else {
-            // redirect
-            if (!strategyState.redirect) return reject(new Error('redirect not specified'));
-            const redirectUrl = combineQueries(strategyState.redirect, { [this.scope.config.oauthCodeField]: code });
-            return this.ctx.redirect(redirectUrl);
-          }
+          // redirect
+          if (!strategyState.redirect) return reject(new Error('redirect not specified'));
+          const redirectUrl = combineQueries(strategyState.redirect, { [this.scope.config.oauthCodeField]: code });
+          return this.ctx.redirect(redirectUrl);
         } catch (err) {
           reject(err);
         }

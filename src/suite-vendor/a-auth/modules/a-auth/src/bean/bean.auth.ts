@@ -70,11 +70,11 @@ export class BeanAuth extends BeanBase {
     return new Promise((resolve, reject) => {
       strategy.redirect = (location: string) => {
         // real
-        if (!this.app.meta.isTest) {
+        if (!clientOptions.mockUsername) {
           return this.ctx.redirect(location);
         }
         // mock
-        this.ctx.request.query.code = clientOptions.mockUsername ?? this.scope.config.mock.username;
+        this.ctx.request.query.code = clientOptions.mockUsername;
         this.ctx.request.query.state = strategyStateString;
         return this.scope.service.auth.authCallback(strategyState).then(resolve).catch(reject);
       };
