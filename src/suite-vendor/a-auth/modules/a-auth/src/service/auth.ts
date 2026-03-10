@@ -239,9 +239,9 @@ export class ServiceAuth extends BeanBase {
     clientOptions: IAuthProviderClientOptions,
     onionOptions: IDecoratorAuthProviderOptions,
   ): Promise<Constructable<StrategyBase>> {
-    const Strategy: Constructable<StrategyBase> = (clientOptions.mockUsername || (this.app.meta.isDev && onionOptions.useMockForDev !== false))
-      ? StrategyMock as unknown as Constructable<StrategyBase>
-      : await beanAuthProvider.strategy(clientOptions, onionOptions) as Constructable<StrategyBase>;
+    const Strategy = (clientOptions.mockUsername || (this.app.meta.isDev && onionOptions.useMockForDev !== false))
+      ? StrategyMock
+      : await beanAuthProvider.strategy(clientOptions, onionOptions);
     return Strategy;
   }
 }
