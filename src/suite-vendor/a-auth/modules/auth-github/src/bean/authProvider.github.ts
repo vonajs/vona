@@ -3,7 +3,7 @@ import type { IAuthenticateStrategyState, IAuthProviderClientRecord, IAuthProvid
 import type { IAuthUserProfile } from 'vona-module-a-user';
 import StrategyGithub from 'passport-github';
 import { BeanBase } from 'vona';
-import { AuthProvider, getStrategyOauth2Profile, StrategyMock } from 'vona-module-a-auth';
+import { AuthProvider, getStrategyOauth2Profile } from 'vona-module-a-auth';
 
 export interface IAuthProviderGithubClientRecord extends IAuthProviderClientRecord {}
 
@@ -19,8 +19,8 @@ export interface IAuthProviderOptionsGithub extends IDecoratorAuthProviderOption
 
 @AuthProvider<IAuthProviderOptionsGithub>({ default: { confirmed: true, clientID: 'xxxxxx', clientSecret: 'xxxxxx' } })
 export class AuthProviderGithub extends BeanBase implements IAuthProviderStrategy, IAuthProviderVerify {
-  async strategy(_clientOptions: IAuthProviderGithubClientOptions, options: IAuthProviderOptionsGithub): Promise<Constructable> {
-    return (this.app.meta.isTest || this.app.meta.isDev) && options.useMockForDev ? StrategyMock : StrategyGithub;
+  async strategy(_clientOptions: IAuthProviderGithubClientOptions, _options: IAuthProviderOptionsGithub): Promise<Constructable> {
+    return StrategyGithub;
   }
 
   async verify(
