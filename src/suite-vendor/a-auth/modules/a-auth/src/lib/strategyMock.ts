@@ -7,7 +7,7 @@ export class StrategyMock extends StrategyBase {
   constructor(options: TypeStrategyOptions<IAuthProviderOauth2ClientOptions>, verify: Function) {
     options = options || {};
     const app = useApp();
-    const callbackURLRelative = $apiPath('/auth/github/mock/authorize');
+    const callbackURLRelative = $apiPath('/auth/mock/authorize');
     const callbackURL = app.util.combineApiPath(callbackURLRelative, '', true, true);
     options.authorizationURL = options.authorizationURL || callbackURL;
 

@@ -382,19 +382,33 @@ declare module 'vona-module-a-auth' {
 }
 /** dto: end */
 /** controller: begin */
+export * from '../controller/mock.ts';
 export * from '../controller/passport.ts';
+import type { IControllerOptionsMock } from '../controller/mock.ts';
 import type { IControllerOptionsPassport } from '../controller/passport.ts';
 import 'vona-module-a-web';
 declare module 'vona-module-a-web' {
   
     export interface IControllerRecord {
-      'a-auth:passport': IControllerOptionsPassport;
+      'a-auth:mock': IControllerOptionsMock;
+'a-auth:passport': IControllerOptionsPassport;
     }
 
   
 }
 declare module 'vona-module-a-auth' {
   
+        export interface ControllerMock {
+          /** @internal */
+          get scope(): ScopeModuleAAuth;
+        }
+
+          export interface ControllerMock {
+            get $beanFullName(): 'a-auth.controller.mock';
+            get $onionName(): 'a-auth:mock';
+            get $onionOptions(): IControllerOptionsMock;
+          }
+
         export interface ControllerPassport {
           /** @internal */
           get scope(): ScopeModuleAAuth;
@@ -409,16 +423,26 @@ declare module 'vona-module-a-auth' {
 /** controller: end */
 /** controller: begin */
 // @ts-ignore ignore
+import type { ControllerMock } from '../controller/mock.ts';
+// @ts-ignore ignore
 import type { ControllerPassport } from '../controller/passport.ts';
 declare module 'vona-module-a-auth' {
   
+    export interface IControllerOptionsMock {
+      actions?: TypeControllerOptionsActions<ControllerMock>;
+    }
+
     export interface IControllerOptionsPassport {
       actions?: TypeControllerOptionsActions<ControllerPassport>;
     }
 }
 declare module 'vona-module-a-web' {
   export interface IApiPathGetRecord{
-        '/auth/passport/callback': undefined;
+        '/auth/mock/authorize': undefined;
+'/auth/passport/callback': undefined;
+    }
+export interface IApiPathPostRecord{
+        '/auth/mock/authorize': undefined;
     }
 
 }
