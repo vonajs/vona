@@ -1104,6 +1104,10 @@ importers:
         version: link:modules/test-auth
 
   src/suite-vendor/a-auth/modules/a-auth:
+    dependencies:
+      passport-oauth2:
+        specifier: ^1.8.0
+        version: 1.8.0
     devDependencies:
       clean-package:
         specifier: ^2.2.0
@@ -1117,9 +1121,6 @@ importers:
       passport-github:
         specifier: ^1.1.0
         version: 1.1.0
-      passport-oauth2:
-        specifier: ^1.8.0
-        version: 1.8.0
     devDependencies:
       clean-package:
         specifier: ^2.2.0

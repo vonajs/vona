@@ -1,5 +1,4 @@
-import type { TypeStrategyOptions } from 'vona-module-a-auth';
-import type { IAuthProviderGithubClientOptions } from '../bean/authProvider.github.ts';
+import type { IAuthProviderOauth2ClientOptions, TypeStrategyOptions } from '../types/authProvider.ts';
 import OAuth2Strategy from 'passport-oauth2';
 import { useApp, uuidv4 } from 'vona';
 import { $apiPath } from 'vona-module-a-openapiutils';
@@ -9,7 +8,7 @@ export class StrategyMock extends OAuth2Strategy {
   // _userProfileURL: string;
   // _oauth2: any;
 
-  constructor(options: TypeStrategyOptions<IAuthProviderGithubClientOptions>, verify: Function) {
+  constructor(options: TypeStrategyOptions<IAuthProviderOauth2ClientOptions>, verify: Function) {
     options = options || {};
     const app = useApp();
     const callbackURLRelative = $apiPath('/auth/github/mock/authorize');
@@ -19,15 +18,10 @@ export class StrategyMock extends OAuth2Strategy {
     options.scopeSeparator = options.scopeSeparator || ',';
     options.customHeaders = options.customHeaders || {};
 
-    if (!options.customHeaders['User-Agent']) {
-      options.customHeaders['User-Agent'] = options.userAgent || 'passport-github';
-    }
-
     super(options, verify);
 
     const self = this as any;
     self.name = 'mock';
-    self._userProfileURL = options.userProfileURL || 'https://api.github.com/user';
     self._oauth2.useAuthorizationHeaderforGET(true);
 
     self._oauth2.getOAuthAccessToken = function (code, params, callback) {
