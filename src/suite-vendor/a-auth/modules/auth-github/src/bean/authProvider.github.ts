@@ -3,8 +3,7 @@ import type { IAuthenticateStrategyState, IAuthProviderClientRecord, IAuthProvid
 import type { IAuthUserProfile } from 'vona-module-a-user';
 import StrategyGithub from 'passport-github';
 import { BeanBase } from 'vona';
-import { AuthProvider, getStrategyOauth2Profile } from 'vona-module-a-auth';
-import { StrategyMock } from '../lib/strategyMock.ts';
+import { AuthProvider, getStrategyOauth2Profile, StrategyMock } from 'vona-module-a-auth';
 
 export interface IAuthProviderGithubClientRecord extends IAuthProviderClientRecord {}
 
