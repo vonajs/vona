@@ -10,6 +10,7 @@ export class StrategyMock extends StrategyBase {
     const callbackURLRelative = $apiPath('/auth/mock/authorize');
     const callbackURL = app.util.combineApiPath(callbackURLRelative, '', true, true);
     options.authorizationURL = options.authorizationURL || callbackURL;
+    options.tokenURL = 'xxx';
 
     super(options, verify);
 
