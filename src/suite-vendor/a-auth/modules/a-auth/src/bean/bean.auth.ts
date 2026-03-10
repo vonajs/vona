@@ -77,12 +77,6 @@ export class BeanAuth extends BeanBase {
         this.ctx.request.query.code = clientOptions.mockUsername ?? this.scope.config.mock.username;
         this.ctx.request.query.state = strategyStateString;
         return this.scope.service.auth.authCallback(strategyState).then(resolve).catch(reject);
-        // return this.bean.executor.performAction('get', callbackURLRelative as any, {
-        //   query: {
-        //     code: this.scope.config.mock.username,
-        //     state: strategyStateString,
-        //   },
-        // }).then(resolve).catch(reject);
       };
       strategy.error = (err: Error) => {
         reject(err);
