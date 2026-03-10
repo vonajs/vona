@@ -20,5 +20,5 @@ export interface IAuthenticateStrategyState extends IAuthenticateState {
 export interface IAuthenticateOptions<T extends IDecoratorAuthProviderOptions = IDecoratorAuthProviderOptions> {
   state?: IAuthenticateState;
   clientName?: Extract<keyof T['clients'], 'string'> | 'default' | undefined;
-  clientOptions?: PowerPartial<T['default']>;
+  clientOptions?: PowerPartial<T['base']>;
 }

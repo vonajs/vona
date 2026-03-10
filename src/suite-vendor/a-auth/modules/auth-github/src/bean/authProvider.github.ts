@@ -15,7 +15,7 @@ export interface IAuthProviderOptionsGithub extends IDecoratorAuthProviderOption
   IAuthProviderGithubClientOptions
 > {}
 
-@AuthProvider<IAuthProviderOptionsGithub>({ default: { confirmed: true, clientID: 'xxxxxx', clientSecret: 'xxxxxx' } })
+@AuthProvider<IAuthProviderOptionsGithub>({ base: { confirmed: true, clientID: 'xxxxxx', clientSecret: 'xxxxxx' } })
 export class AuthProviderGithub extends BeanAuthProviderOauth2Base {
   async strategy(_clientOptions: IAuthProviderGithubClientOptions, _options: IAuthProviderOptionsGithub): Promise<Constructable<StrategyBase>> {
     return StrategyGithub;

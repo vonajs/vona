@@ -28,7 +28,7 @@ export class BeanAuth extends BeanBase {
     const optionsMeta = onionSlice.beanOptions.options;
     const clientOptions: IAuthProviderClientOptions = deepExtend(
       {},
-      optionsMeta?.default,
+      optionsMeta?.base,
       optionsMeta?.clients?.[clientName as any],
       entityAuthProvider.clientOptions,
       options?.clientOptions,
