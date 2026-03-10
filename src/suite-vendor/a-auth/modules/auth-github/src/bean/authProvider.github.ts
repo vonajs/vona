@@ -1,9 +1,7 @@
 import type { Constructable } from 'vona';
-import type { IAuthenticateStrategyState, IAuthProviderClientRecord, IAuthProviderOauth2ClientOptions, IAuthProviderStrategy, IAuthProviderVerify, IDecoratorAuthProviderOptions, TypeStrategyOauth2VerifyArgs } from 'vona-module-a-auth';
-import type { IAuthUserProfile } from 'vona-module-a-user';
+import type { IAuthProviderClientRecord, IAuthProviderOauth2ClientOptions, IDecoratorAuthProviderOptions, StrategyBase } from 'vona-module-a-auth';
 import StrategyGithub from 'passport-github';
-import { BeanBase } from 'vona';
-import { AuthProvider, getStrategyOauth2Profile } from 'vona-module-a-auth';
+import { AuthProvider, BeanAuthProviderOauth2Base } from 'vona-module-a-auth';
 
 export interface IAuthProviderGithubClientRecord extends IAuthProviderClientRecord {}
 
@@ -18,17 +16,8 @@ export interface IAuthProviderOptionsGithub extends IDecoratorAuthProviderOption
 > {}
 
 @AuthProvider<IAuthProviderOptionsGithub>({ default: { confirmed: true, clientID: 'xxxxxx', clientSecret: 'xxxxxx' } })
-export class AuthProviderGithub extends BeanBase implements IAuthProviderStrategy, IAuthProviderVerify {
-  async strategy(_clientOptions: IAuthProviderGithubClientOptions, _options: IAuthProviderOptionsGithub): Promise<Constructable> {
+export class AuthProviderGithub extends BeanAuthProviderOauth2Base {
+  async strategy(_clientOptions: IAuthProviderGithubClientOptions, _options: IAuthProviderOptionsGithub): Promise<Constructable<StrategyBase>> {
     return StrategyGithub;
-  }
-
-  async verify(
-    args: TypeStrategyOauth2VerifyArgs,
-    _clientOptions: IAuthProviderGithubClientOptions,
-    _options: IAuthProviderOptionsGithub,
-    _state?: IAuthenticateStrategyState,
-  ): Promise<IAuthUserProfile> {
-    return getStrategyOauth2Profile(args);
   }
 }

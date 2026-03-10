@@ -1,6 +1,7 @@
 import type { Constructable, OmitNever } from 'vona';
 import type { ServiceOnion, TypeOnionOptionsEnableSimple } from 'vona-module-a-onion';
 import type { IAuthUserProfile } from 'vona-module-a-user';
+import type { StrategyBase } from '../lib/strategyBase.ts';
 import type { IAuthenticateStrategyState } from './auth.ts';
 
 export interface IAuthProviderRecord {}
@@ -43,7 +44,7 @@ export interface IDecoratorAuthProviderOptions<
 }
 
 export interface IAuthProviderStrategy {
-  strategy(clientOptions: IAuthProviderClientOptions, options: IDecoratorAuthProviderOptions): Promise<Constructable>;
+  strategy(clientOptions: IAuthProviderClientOptions, options: IDecoratorAuthProviderOptions): Promise<Constructable<StrategyBase>>;
 }
 
 export interface IAuthProviderVerify {
