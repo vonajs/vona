@@ -21,6 +21,7 @@ import type {
   TypeModelColumn,
   TypeModelColumns,
   TypeModelGroupRelationResult,
+  TypeModelIncrementParamsColumns,
   TypeModelsClassLikeGeneral,
   TypeModelWhere,
 } from '../../types/index.ts';
@@ -222,9 +223,9 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
     options?: IModelMethodOptions,
     _modelJoins?: ModelJoins,
   ): Promise<number> {
-    const columns = {};
-    for (const key in columns) {
-      columns[key] = -columns[key];
+    const columns = {} as TypeModelIncrementParamsColumns<TRecord>;
+    for (const key in params.columns) {
+      columns[key] = -params.columns[key]!;
     }
     const params2 = Object.assign({}, params, { columns });
     return await this.__increment_raw(undefined, params2, options);
