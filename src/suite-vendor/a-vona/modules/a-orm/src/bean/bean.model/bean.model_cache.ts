@@ -207,11 +207,27 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
     T extends IModelIncrementParams<TRecord>,
     ModelJoins extends TypeModelsClassLikeGeneral | undefined,
   >(
-    params?: T,
+    params: T,
     options?: IModelMethodOptions,
     _modelJoins?: ModelJoins,
   ): Promise<number> {
     return await this.__increment_raw(undefined, params, options);
+  }
+
+  async decrement<
+    T extends IModelIncrementParams<TRecord>,
+    ModelJoins extends TypeModelsClassLikeGeneral | undefined,
+  >(
+    params: T,
+    options?: IModelMethodOptions,
+    _modelJoins?: ModelJoins,
+  ): Promise<number> {
+    const columns = {};
+    for (const key in columns) {
+      columns[key] = -columns[key];
+    }
+    const params2 = Object.assign({}, params, { columns });
+    return await this.__increment_raw(undefined, params2, options);
   }
 
   private async __increment_raw(
