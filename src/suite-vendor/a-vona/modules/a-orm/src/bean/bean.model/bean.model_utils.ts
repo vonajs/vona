@@ -123,9 +123,7 @@ export class BeanModelUtils<TRecord extends {}> extends BeanModelMeta<TRecord> {
   }
 
   buildIncrement(builder: Knex.QueryBuilder, columns: TypeModelIncrementParamsColumns<TRecord>) {
-    for (const columnName in columns) {
-      builder.increment(columnName, columns[columnName]);
-    }
+    builder.increment(columns as any);
   }
 
   buildOrders(builder: Knex.QueryBuilder, orders) {

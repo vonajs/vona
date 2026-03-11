@@ -172,7 +172,7 @@ export class BeanModelCrudInner<TRecord extends {}> extends BeanModelView<TRecor
     // ready
     this.$loggerChild('model').debug(() => `model.increment: ${builder.toQuery()}`);
     const res = await builder;
-    console.log('model.increment', res);
+    return res as unknown as number;
   }
 
   protected async _insertBulk(
