@@ -4,6 +4,7 @@ import type {
   IDatabaseClientRecord,
   IModelDeleteOptions,
   IModelGetOptions,
+  IModelIncrementParams,
   IModelInsertOptions,
   IModelMethodOptions,
   IModelMethodOptionsGeneral,
@@ -200,6 +201,29 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
     const params2 = Object.assign({}, params, { aggrs: { count: column }, column: undefined });
     const item = await this.aggregate(params2, options);
     return this.extractFirstValue(item);
+  }
+
+  async increment<
+    T extends IModelIncrementParams<TRecord>,
+    ModelJoins extends TypeModelsClassLikeGeneral | undefined,
+  >(
+    params?: T,
+    options?: IModelMethodOptions,
+    _modelJoins?: ModelJoins,
+  ): Promise<number> {
+    return await this.__increment_raw(undefined, params, options);
+  }
+
+  private async __increment_raw(
+    table: keyof ITableRecord | undefined,
+    params?: IModelIncrementParams<TRecord>,
+    options?: IModelMethodOptions,
+  ): Promise<number> {
+    // table
+    table = table || this.getTable(params?.where);
+    if (!table) return this.scopeOrm.error.ShouldSpecifyTable.throw();
+    const items = await this.__select_cache(table, params, options);
+    return items;
   }
 
   async aggregate<
@@ -738,6 +762,41 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
         const where = __combineMagicWhere(fieldName, op!, fieldValue);
         return this.delete(where as any, options);
       };
+    }
+  }
+
+  protected _prepareIdsForUpdate(table: keyof ITableRecord | undefined, data: Partial<TRecord>, options?: IModelUpdateOptions<TRecord>) {
+    let id = this.__checkCacheKeyValid(data, table, true);
+    if (!options?.where) {
+      if (isNil(id)) {
+        throw new Error('id should be specified for update method');
+      }
+      if (Array.isArray(id) && id.length === 0) return;
+      const id2 = this.__checkCacheKeyValid(data, table, false);
+      if (!isNil(id2)) {
+        // donothing
+
+      }
+    } else {
+      const id2 = this.__checkCacheKeyValid(options?.where, table, false);
+      if (id2) {
+        id = id2;
+      } else {
+        const where = !isNil(id) ? Object.assign({}, options?.where, { id }) : options?.where;
+        const options2 = deepExtend({}, options, { where: undefined });
+        const items = await this.__select_raw(table, { where, columns: ['id'] as any }, options2);
+        if (items.length === 0) {
+        // donothing
+          return;
+        }
+        if (items.length === 1) {
+          id = cast(items[0]).id;
+        } else {
+          id = items.map(item => cast(item).id);
+        }
+        // update by id/ids
+        options = Object.assign({}, options, { where: { id } });
+      }
     }
   }
 }

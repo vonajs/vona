@@ -15,6 +15,7 @@ export * from './modelAggr.ts';
 export * from './modelCount.ts';
 export * from './modelGeneral.ts';
 export * from './modelGroup.ts';
+export * from './modelIncrement.ts';
 export * from './modelWhere.ts';
 export * from './onion/index.ts';
 export * from './relations.ts';
