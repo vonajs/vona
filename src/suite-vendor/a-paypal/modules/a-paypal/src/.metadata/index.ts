@@ -81,7 +81,7 @@ declare module 'vona' {
 }
 /** model: end */
 /** model: begin */
-import type { IModelGetOptions, IModelMethodOptions, IModelSelectParams, TypeModelSelectAndCount, TypeModelRelationResult, TypeModelWhere, IModelInsertOptions, TypeModelMutateRelationData, IModelDeleteOptions, IModelUpdateOptions, IModelMutateOptions, IModelSelectCountParams, IModelSelectAggrParams, TypeModelAggrRelationResult, IModelSelectGroupParams, TypeModelGroupRelationResult } from 'vona-module-a-orm';
+import type { IModelGetOptions, IModelMethodOptions, IModelSelectParams, TypeModelSelectAndCount, TypeModelRelationResult, TypeModelWhere, IModelInsertOptions, TypeModelMutateRelationData, IModelDeleteOptions, IModelUpdateOptions, IModelMutateOptions, IModelSelectCountParams, IModelIncrementParams, IModelSelectAggrParams, TypeModelAggrRelationResult, IModelSelectGroupParams, TypeModelGroupRelationResult } from 'vona-module-a-orm';
 import { SymbolKeyEntity, SymbolKeyEntityMeta, SymbolKeyModelOptions } from 'vona-module-a-orm';
 declare module 'vona-module-a-paypal' {
   
@@ -102,6 +102,8 @@ declare module 'vona-module-a-paypal' {
       mutate<T extends IModelMutateOptions<EntityPaypalRecord,ModelPaypalRecord>>(data?: TypeModelMutateRelationData<EntityPaypalRecord,ModelPaypalRecord, T>, options?: T): Promise<TypeModelMutateRelationData<EntityPaypalRecord,ModelPaypalRecord, T>>;
       mutateBulk<T extends IModelMutateOptions<EntityPaypalRecord,ModelPaypalRecord>>(items: TypeModelMutateRelationData<EntityPaypalRecord,ModelPaypalRecord, T>[], options?: T): Promise<TypeModelMutateRelationData<EntityPaypalRecord,ModelPaypalRecord, T>[]>;
       count<T extends IModelSelectCountParams<EntityPaypalRecord,ModelPaypalRecord,ModelJoins>, ModelJoins extends TypeModelsClassLikeGeneral | undefined = undefined>(params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<string | undefined>;
+      increment<T extends IModelIncrementParams<EntityPaypalRecord,ModelPaypalRecord,ModelJoins>, ModelJoins extends TypeModelsClassLikeGeneral | undefined = undefined>(params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<number>;
+      decrement<T extends IModelIncrementParams<EntityPaypalRecord,ModelPaypalRecord,ModelJoins>, ModelJoins extends TypeModelsClassLikeGeneral | undefined = undefined>(params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<number>;
       aggregate<T extends IModelSelectAggrParams<EntityPaypalRecord,ModelPaypalRecord,ModelJoins>, ModelJoins extends TypeModelsClassLikeGeneral | undefined = undefined>(params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<TypeModelAggrRelationResult<T>>;
       group<T extends IModelSelectGroupParams<EntityPaypalRecord,ModelPaypalRecord,ModelJoins>, ModelJoins extends TypeModelsClassLikeGeneral | undefined = undefined>(params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<TypeModelGroupRelationResult<EntityPaypalRecord, T>[]>;
       getById<T extends IModelGetOptions<EntityPaypalRecord,ModelPaypalRecord>>(id: TableIdentity, options?: T): Promise<TypeModelRelationResult<EntityPaypalRecord, ModelPaypalRecord, T> | undefined>;

@@ -81,7 +81,7 @@ declare module 'vona' {
 }
 /** model: end */
 /** model: begin */
-import type { IModelGetOptions, IModelMethodOptions, IModelSelectParams, TypeModelSelectAndCount, TypeModelRelationResult, TypeModelWhere, IModelInsertOptions, TypeModelMutateRelationData, IModelDeleteOptions, IModelUpdateOptions, IModelMutateOptions, IModelSelectCountParams, IModelSelectAggrParams, TypeModelAggrRelationResult, IModelSelectGroupParams, TypeModelGroupRelationResult } from 'vona-module-a-orm';
+import type { IModelGetOptions, IModelMethodOptions, IModelSelectParams, TypeModelSelectAndCount, TypeModelRelationResult, TypeModelWhere, IModelInsertOptions, TypeModelMutateRelationData, IModelDeleteOptions, IModelUpdateOptions, IModelMutateOptions, IModelSelectCountParams, IModelIncrementParams, IModelSelectAggrParams, TypeModelAggrRelationResult, IModelSelectGroupParams, TypeModelGroupRelationResult } from 'vona-module-a-orm';
 import { SymbolKeyEntity, SymbolKeyEntityMeta, SymbolKeyModelOptions } from 'vona-module-a-orm';
 declare module 'vona-module-a-status' {
   
@@ -102,6 +102,8 @@ declare module 'vona-module-a-status' {
       mutate<T extends IModelMutateOptions<EntityStatus,ModelStatus>>(data?: TypeModelMutateRelationData<EntityStatus,ModelStatus, T>, options?: T): Promise<TypeModelMutateRelationData<EntityStatus,ModelStatus, T>>;
       mutateBulk<T extends IModelMutateOptions<EntityStatus,ModelStatus>>(items: TypeModelMutateRelationData<EntityStatus,ModelStatus, T>[], options?: T): Promise<TypeModelMutateRelationData<EntityStatus,ModelStatus, T>[]>;
       count<T extends IModelSelectCountParams<EntityStatus,ModelStatus,ModelJoins>, ModelJoins extends TypeModelsClassLikeGeneral | undefined = undefined>(params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<string | undefined>;
+      increment<T extends IModelIncrementParams<EntityStatus,ModelStatus,ModelJoins>, ModelJoins extends TypeModelsClassLikeGeneral | undefined = undefined>(params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<number>;
+      decrement<T extends IModelIncrementParams<EntityStatus,ModelStatus,ModelJoins>, ModelJoins extends TypeModelsClassLikeGeneral | undefined = undefined>(params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<number>;
       aggregate<T extends IModelSelectAggrParams<EntityStatus,ModelStatus,ModelJoins>, ModelJoins extends TypeModelsClassLikeGeneral | undefined = undefined>(params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<TypeModelAggrRelationResult<T>>;
       group<T extends IModelSelectGroupParams<EntityStatus,ModelStatus,ModelJoins>, ModelJoins extends TypeModelsClassLikeGeneral | undefined = undefined>(params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<TypeModelGroupRelationResult<EntityStatus, T>[]>;
       getById<T extends IModelGetOptions<EntityStatus,ModelStatus>>(id: number, options?: T): Promise<TypeModelRelationResult<EntityStatus, ModelStatus, T> | undefined>;

@@ -81,7 +81,7 @@ declare module 'vona' {
 }
 /** model: end */
 /** model: begin */
-import type { IModelGetOptions, IModelMethodOptions, IModelSelectParams, TypeModelSelectAndCount, TypeModelRelationResult, TypeModelWhere, IModelInsertOptions, TypeModelMutateRelationData, IModelDeleteOptions, IModelUpdateOptions, IModelMutateOptions, IModelSelectCountParams, IModelSelectAggrParams, TypeModelAggrRelationResult, IModelSelectGroupParams, TypeModelGroupRelationResult } from 'vona-module-a-orm';
+import type { IModelGetOptions, IModelMethodOptions, IModelSelectParams, TypeModelSelectAndCount, TypeModelRelationResult, TypeModelWhere, IModelInsertOptions, TypeModelMutateRelationData, IModelDeleteOptions, IModelUpdateOptions, IModelMutateOptions, IModelSelectCountParams, IModelIncrementParams, IModelSelectAggrParams, TypeModelAggrRelationResult, IModelSelectGroupParams, TypeModelGroupRelationResult } from 'vona-module-a-orm';
 import { SymbolKeyEntity, SymbolKeyEntityMeta, SymbolKeyModelOptions } from 'vona-module-a-orm';
 declare module 'vona-module-a-datasource' {
   
@@ -102,6 +102,8 @@ declare module 'vona-module-a-datasource' {
       mutate<T extends IModelMutateOptions<EntityDatasource,ModelDatasource>>(data?: TypeModelMutateRelationData<EntityDatasource,ModelDatasource, T>, options?: T): Promise<TypeModelMutateRelationData<EntityDatasource,ModelDatasource, T>>;
       mutateBulk<T extends IModelMutateOptions<EntityDatasource,ModelDatasource>>(items: TypeModelMutateRelationData<EntityDatasource,ModelDatasource, T>[], options?: T): Promise<TypeModelMutateRelationData<EntityDatasource,ModelDatasource, T>[]>;
       count<T extends IModelSelectCountParams<EntityDatasource,ModelDatasource,ModelJoins>, ModelJoins extends TypeModelsClassLikeGeneral | undefined = undefined>(params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<string | undefined>;
+      increment<T extends IModelIncrementParams<EntityDatasource,ModelDatasource,ModelJoins>, ModelJoins extends TypeModelsClassLikeGeneral | undefined = undefined>(params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<number>;
+      decrement<T extends IModelIncrementParams<EntityDatasource,ModelDatasource,ModelJoins>, ModelJoins extends TypeModelsClassLikeGeneral | undefined = undefined>(params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<number>;
       aggregate<T extends IModelSelectAggrParams<EntityDatasource,ModelDatasource,ModelJoins>, ModelJoins extends TypeModelsClassLikeGeneral | undefined = undefined>(params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<TypeModelAggrRelationResult<T>>;
       group<T extends IModelSelectGroupParams<EntityDatasource,ModelDatasource,ModelJoins>, ModelJoins extends TypeModelsClassLikeGeneral | undefined = undefined>(params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<TypeModelGroupRelationResult<EntityDatasource, T>[]>;
       getById<T extends IModelGetOptions<EntityDatasource,ModelDatasource>>(id: number, options?: T): Promise<TypeModelRelationResult<EntityDatasource, ModelDatasource, T> | undefined>;
