@@ -1,5 +1,5 @@
 import type { Knex } from 'knex';
-import type { IModelMethodOptionsGeneral, IModelSelectParamsJoin, IModelSelectParamsPage, ITableColumns, ITableRecord, TypeModelColumn, TypeModelColumns, TypeModelColumnsStrict, TypeModelSelectAggrParamsAggrs, TypeModelSelectGroupParamsColumns, TypeModelWhere } from '../../types/index.ts';
+import type { IModelMethodOptionsGeneral, IModelSelectParamsJoin, IModelSelectParamsPage, ITableColumns, ITableRecord, TypeModelColumn, TypeModelColumns, TypeModelColumnsStrict, TypeModelIncrementParamsColumns, TypeModelSelectAggrParamsAggrs, TypeModelSelectGroupParamsColumns, TypeModelWhere } from '../../types/index.ts';
 import { ensureArray, isNil } from '@cabloy/utils';
 import { cast } from 'vona';
 import { $tableDefaults } from 'vona-module-a-ormutils';
@@ -119,6 +119,12 @@ export class BeanModelUtils<TRecord extends {}> extends BeanModelMeta<TRecord> {
       builder.count(this.raw(`distinct ${this.toIdentifier(distinct as any)}`));
     } else {
       builder.count();
+    }
+  }
+
+  buildIncrement(builder: Knex.QueryBuilder, columns: TypeModelIncrementParamsColumns<TRecord>) {
+    for (const columnName in columns) {
+      builder.increment(columnName, columns[columnName]);
     }
   }
 

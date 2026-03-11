@@ -3,6 +3,7 @@ import type { TableIdentity } from 'table-identity';
 import type {
   IModelCountParams,
   IModelGetOptionsGeneral,
+  IModelIncrementParams,
   IModelMethodOptionsGeneral,
   IModelSelectGeneralParams,
   IModelSelectParams,
@@ -148,6 +149,30 @@ export class BeanModelCrudInner<TRecord extends {}> extends BeanModelView<TRecor
     this.$loggerChild('model').debug(() => `model.count: ${builder.toQuery()}`);
     const res = await builder;
     return this.extractFirstNumber(res);
+  }
+
+  protected async _increment(
+    table?: keyof ITableRecord,
+    params?: IModelIncrementParams<TRecord>,
+    options?: IModelMethodOptionsGeneral,
+  ): Promise<number> {
+    // table
+    table = table || this.getTable(params?.where);
+    if (!table) return this.scopeOrm.error.ShouldSpecifyTable.throw();
+    // params
+    params = params || {} as unknown as IModelIncrementParams<TRecord>;
+    // builder
+    const builder = this.builder<TRecord>(table);
+    // count
+    this.buildIncrement(builder, params.columns);
+    // joins
+    this.buildJoins(builder, params.joins);
+    // where
+    this.prepareWhere(builder, table, params.where, options);
+    // ready
+    this.$loggerChild('model').debug(() => `model.increment: ${builder.toQuery()}`);
+    const res = await builder;
+    console.log('model.increment', res);
   }
 
   protected async _insertBulk(

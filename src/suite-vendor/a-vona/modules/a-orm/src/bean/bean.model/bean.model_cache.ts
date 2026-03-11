@@ -222,8 +222,28 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
     // table
     table = table || this.getTable(params?.where);
     if (!table) return this.scopeOrm.error.ShouldSpecifyTable.throw();
-    const items = await this.__select_cache(table, params, options);
-    return items;
+    // check if cache
+    if (this._checkDisableCacheEntityByOptions(options)) {
+      return await super._increment(table, params, options);
+    }
+    const where = params?.where;
+    const items = await this.__select_raw(table, { where, columns: ['id'] as any }, options);
+    if (items.length === 0) {
+      // donothing
+      return 0;
+    }
+    let id;
+    if (items.length === 1) {
+      id = cast(items[0]).id;
+    } else {
+      id = items.map(item => cast(item).id);
+    }
+    // update by id/ids
+    params = Object.assign({}, params, { where: { id } });
+    const res = await this._increment(table, params, options);
+    // delete cache
+    await this.cacheEntityDel(id, table);
+    return res;
   }
 
   async aggregate<
