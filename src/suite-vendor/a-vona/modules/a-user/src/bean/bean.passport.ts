@@ -2,7 +2,7 @@ import type { IJwtClientRecord, IJwtSignOptions, IJwtToken, IJwtVerifyOptions, I
 import type { IAuth, IAuthIdRecord, ISigninOptions } from '../types/auth.ts';
 import type { IAuthTokenAdapter } from '../types/authToken.ts';
 import type { IPassport, IPassportAdapter } from '../types/passport.ts';
-import type { IRole } from '../types/role.ts';
+import type { IRole, IRoleNameRecord } from '../types/role.ts';
 import type { IUser, IUserNameRecord } from '../types/user.ts';
 import { catchError, isNil } from '@cabloy/utils';
 import { BeanBase, beanFullNameFromOnionName } from 'vona';
@@ -197,6 +197,26 @@ export class BeanPassport extends BeanBase {
     if (!payloadData) return this.app.throw(401);
     // jwt token
     return await this.bean.jwt.create(payloadData);
+  }
+
+  public checkRoleName(name: keyof IRoleNameRecord | (keyof IRoleNameRecord)[]) {
+    const user = this.bean.passport.currentUser;
+    if (!user || user.anonymous) return false;
+    const roles = this.bean.passport.currentRoles;
+    if (!roles) return false;
+    const roleNames = roles?.map(item => item.name as keyof IRoleNameRecord);
+    const optionsName = Array.isArray(name) ? name : [name];
+    if (!roleNames.some(roleName => optionsName.includes(roleName))) return false;
+    return true;
+  }
+
+  public checkUserName(name: keyof IUserNameRecord | (keyof IUserNameRecord)[]) {
+    const user = this.bean.passport.currentUser;
+    if (!user || user.anonymous) return false;
+    const userName = user.name as keyof IUserNameRecord;
+    const optionsName = Array.isArray(name) ? name : [name];
+    if (!optionsName.includes(userName)) return false;
+    return true;
   }
 
   private async _passportSerialize(passport: IPassport, options?: ISigninOptions) {

@@ -28,13 +28,6 @@ export class GuardRoleName extends BeanBase implements IGuardExecute {
 
   private async _check(options: IGuardOptionsRoleName) {
     if (!options.name) return false;
-    const user = this.bean.passport.currentUser;
-    if (!user || user.anonymous) return false;
-    const roles = this.bean.passport.currentRoles;
-    if (!roles) return false;
-    const roleNames = roles?.map(item => item.name as keyof IRoleNameRecord);
-    const optionsName = Array.isArray(options.name) ? options.name : [options.name];
-    if (!roleNames.some(roleName => optionsName.includes(roleName))) return false;
-    return true;
+    return this.bean.passport.checkRoleName(options.name);
   }
 }
