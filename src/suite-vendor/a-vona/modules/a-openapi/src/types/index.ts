@@ -11,6 +11,7 @@ export * from './openapi.ts';
 export * from './permissions.ts';
 export * from './resource.ts';
 export * from './resourceMeta.ts';
+export * from './resourcePicker.ts';
 export * from './rest.ts';
 export * from './select.ts';
 export * from './tableProvider.ts';

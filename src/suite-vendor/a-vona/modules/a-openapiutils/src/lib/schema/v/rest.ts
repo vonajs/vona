@@ -1,5 +1,5 @@
 import type { CurrencyOptions } from '@zhennann/currency';
-import type { ICaptchaOptions, ISchemaObjectExtensionFieldRest, ISchemaObjectExtensionFieldRestScene, ISelectOptions, ITextareaOptions, IToggleOptions, TypeDateFormat, TypeRenderComponent, TypeSchemaScene } from 'vona-module-a-openapi';
+import type { ICaptchaOptions, IResourcePickerOptions, ISchemaObjectExtensionFieldRest, ISchemaObjectExtensionFieldRestScene, ISelectOptions, ITextareaOptions, IToggleOptions, TypeDateFormat, TypeRenderComponent, TypeSchemaScene } from 'vona-module-a-openapi';
 import type z from 'zod';
 import type { TypeSchemaOrderLevel } from '../../../types/order.ts';
 import { $order } from '../../utils.ts';
@@ -88,6 +88,15 @@ export function schemaToggle<T extends z.ZodType>(toggle?: IToggleOptions, scene
 export function schemaSelect<T extends z.ZodType>(select?: ISelectOptions, scene?: TypeSchemaScene) {
   return function (schema: T): T {
     const options = select !== undefined ? { render: 'select', select } : { render: 'select' };
+    return schema.openapi(scene
+      ? { rest: { [scene]: options as any } }
+      : { rest: options as any });
+  };
+}
+
+export function schemaResourcePicker<T extends z.ZodType>(resourcePicker?: IResourcePickerOptions, scene?: TypeSchemaScene) {
+  return function (schema: T): T {
+    const options = resourcePicker !== undefined ? { render: 'resourcePicker', resourcePicker } : { render: 'resourcePicker' };
     return schema.openapi(scene
       ? { rest: { [scene]: options as any } }
       : { rest: options as any });
