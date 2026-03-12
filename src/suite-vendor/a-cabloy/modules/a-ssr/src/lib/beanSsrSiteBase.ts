@@ -9,7 +9,7 @@ import type { IDecoratorSsrSiteOptions, ISsrHandlerRenderOptions, ISsrHandlerRen
 import path from 'node:path';
 import { catchError, combineParamsAndQuery, combineQueries, defaultPathSerializer } from '@cabloy/utils';
 import { BeanBase, cast, deepExtend, SymbolModuleName } from 'vona';
-import { ErrorMessageJwtExpired } from 'vona-module-a-jwt';
+import { checkErrorJwtExpired } from 'vona-module-a-jwt';
 import { ServiceDevProxy } from '../service/devProxy.ts';
 import { ServiceSsrHandler } from '../service/ssrHandler.ts';
 import { SymbolCacheMenus } from './const.ts';
@@ -181,7 +181,7 @@ export class BeanSsrSiteBase<SsrSiteOptions extends IDecoratorSsrSiteOptions = I
             return this.bean.passport.checkAuthToken(accessToken);
           });
           // throw error only when ErrorMessageJwtExpired
-          if (err && err.message === ErrorMessageJwtExpired && headers['x-vona-jwt-authtoken'] === true) throw err;
+          checkErrorJwtExpired(err, headers);
         }
         // check current
         if (!this.bean.passport.current) {
