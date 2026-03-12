@@ -23,6 +23,7 @@ export class GuardPassport extends BeanBase implements IGuardExecute {
           return this.bean.passport.checkAuthToken();
         });
         if (err && !options.public) throw err;
+        // throw error only when ErrorMessageJwtExpired
         checkErrorJwtExpired(err, this.ctx.headers);
       }
     }
