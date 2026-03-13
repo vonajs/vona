@@ -7,6 +7,7 @@ import type { TypeResourceActionRowRecordRender } from './actions.ts';
 import type { ICaptchaOptions } from './captcha.ts';
 import type { IComponentRecord, ITableCellComponentRecord } from './component.ts';
 import type { TypeDateFormat } from './date.ts';
+import type { IResourcePickerOptions } from './resourcePicker.ts';
 import type { ISelectOptions } from './select.ts';
 import type { ITextareaOptions } from './textarea.ts';
 import type { IToggleOptions } from './toggle.ts';
@@ -48,6 +49,7 @@ export interface ISchemaObjectExtensionFieldRestProps {
   toggle?: IToggleOptions;
   select?: ISelectOptions;
   textarea?: ITextareaOptions;
+  resourcePicker?: IResourcePickerOptions;
 }
 
 export interface ISchemaObjectExtensionFieldRest extends ISchemaObjectExtensionFieldRestProps {

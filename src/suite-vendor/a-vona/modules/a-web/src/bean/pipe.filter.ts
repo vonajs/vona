@@ -1,5 +1,5 @@
 import type { IDecoratorPipeOptions, IDecoratorPipeOptionsArgument, IPipeTransform } from 'vona-module-a-aspect';
-import type { ISchemaObjectExtensionField, RouteHandlerArgumentMeta } from 'vona-module-a-openapi';
+import type { ISchemaObjectExtensionField, ITableQuery, RouteHandlerArgumentMeta } from 'vona-module-a-openapi';
 import type { ValidatorOptions } from 'vona-module-a-validation';
 import type { IFilterTransformRecord, IFilterTransformWhere, TypeQueryParamsPatch } from '../types/filterTransform.ts';
 import { isNil, isNilOrEmptyString } from '@cabloy/utils';
@@ -7,9 +7,9 @@ import { ZodMetadata } from '@cabloy/zod-openapi';
 import { BeanBase, beanFullNameFromOnionName, cast } from 'vona';
 import { createArgumentPipe, Pipe } from 'vona-module-a-aspect';
 
-export type TypePipeFilterData = unknown;
+export type TypePipeFilterData = ITableQuery;
 
-export type TypePipeFilterResult = TypePipeFilterData;
+export type TypePipeFilterResult = TypeQueryParamsPatch;
 
 export interface IPipeOptionsFilter extends IDecoratorPipeOptions, IDecoratorPipeOptionsArgument, ValidatorOptions {}
 
@@ -26,14 +26,14 @@ export class PipeFilter extends BeanBase implements IPipeTransform<TypePipeFilte
   async transform(value: TypePipeFilterData, metadata: RouteHandlerArgumentMeta, options: IPipeOptionsFilter): Promise<TypePipeFilterResult> {
     if (!options.schema) throw new Error(`should specify the schema of pipeFilter: ${metadata.controller.name}.${metadata.method}#${metadata.index}`);
     // validateSchema
-    value = await this.bean.validator.validateSchema(options.schema, value, options, metadata.field);
+    value = await this.bean.validator.validateSchema(options.schema, value, options, metadata.field) as TypePipeFilterData;
     // transform
-    value = await this._transform(value, options);
+    const params = await this._transform(value, options);
     // ok
-    return value;
+    return params;
   }
 
-  private async _transform(value: any, options: IPipeOptionsFilter) {
+  private async _transform(value: TypePipeFilterData, options: IPipeOptionsFilter) {
     // 1. system: columns/where/orders/pageNo/pageSize
     const params = this._transformSystem(value);
     // 2. fields
@@ -45,10 +45,10 @@ export class PipeFilter extends BeanBase implements IPipeTransform<TypePipeFilte
   }
 
   // system: columns/where/orders/pageNo/pageSize
-  private _transformSystem(value: any) {
+  private _transformSystem(value: TypePipeFilterData) {
     const params = {} as TypeQueryParamsPatch;
     // columns
-    if (!isNil(value.columns)) params.columns = value.columns;
+    if (!isNil(value.columns)) params.columns = value.columns as any;
     // where
     params.where = value.where ?? {};
     // orders
@@ -57,10 +57,10 @@ export class PipeFilter extends BeanBase implements IPipeTransform<TypePipeFilte
         if (value.orders.startsWith('[') && value.orders.endsWith(']')) {
           params.orders = JSON.parse(value.orders);
         } else {
-          params.orders = [value.orders.split(',')];
+          params.orders = [cast(value.orders).split(',')];
         }
       } else {
-        params.orders = value.orders;
+        params.orders = value.orders as any;
       }
     }
     // pageNo/pageSize
