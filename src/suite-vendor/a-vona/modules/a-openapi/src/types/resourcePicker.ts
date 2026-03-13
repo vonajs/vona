@@ -3,7 +3,7 @@ import type { ISelectOptions } from './select.ts';
 import type { ITableQuery } from './table.ts';
 
 export interface IResourcePickerOptions {
-  resource: keyof IResourceRecord;
+  resource?: keyof IResourceRecord;
   actionPath?: string;
   query?: ITableQuery;
   selectOptions?: ISelectOptions;
