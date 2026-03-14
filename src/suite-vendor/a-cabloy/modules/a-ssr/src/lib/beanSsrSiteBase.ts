@@ -134,6 +134,8 @@ export class BeanSsrSiteBase<SsrSiteOptions extends IDecoratorSsrSiteOptions = I
           SSR_HMR,
         },
         envClient: {
+          SSR_PROD_PROTOCOL: this.app.util.protocol,
+          SSR_PROD_HOST: this.app.util.host,
           APP_PUBLIC_PATH,
           SSR_HMR,
         },
