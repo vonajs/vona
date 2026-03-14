@@ -210,6 +210,7 @@ export function stringLazy(fn: () => string) {
 }
 
 export async function forEach<T>(arr: T[], order: boolean, fn: (item: T, index: number) => Promise<void>) {
+  if (!arr) return;
   if (order) {
     for (let index = 0; index < arr.length; index++) {
       await fn(arr[index], index);
