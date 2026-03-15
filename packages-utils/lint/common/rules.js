@@ -4,6 +4,7 @@ export const rules = {
   'e18e/prefer-static-regex': 'off',
   'e18e/prefer-array-at': 'off',
   'e18e/prefer-regex-test': 'off',
+  'regexp/no-unused-capturing-group': 'off',
   'test/no-only-tests': 'off',
   'test/no-import-node-test': 'off',
   'jsdoc/check-alignment': 'off',
