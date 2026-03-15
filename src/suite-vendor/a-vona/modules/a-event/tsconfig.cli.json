@@ -1,10 +1,10 @@
 {
   "extends": "../../tsconfig.base",
   "compilerOptions": {
-    "rootDir": "cli",
-    "outDir": "dist-cli",
     "composite": false,
-    "declaration": false
+    "rootDir": "cli",
+    "declaration": false,
+    "outDir": "dist-cli"
   },
   "include": ["cli"]
 }
