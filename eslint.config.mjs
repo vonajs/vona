@@ -7,6 +7,7 @@ export default EslintConfig({
     '**/node_modules/**',
     '**/dist/**',
     '**/static/**',
+    '**/.rollup.cache/**',
     '.vona',
     '.assets',
     'coverage',

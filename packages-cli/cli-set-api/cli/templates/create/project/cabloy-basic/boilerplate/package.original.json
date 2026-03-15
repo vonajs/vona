@@ -45,6 +45,6 @@
   },
   "devDependencies": {
     "@cabloy/lint": "^5.0.16",
-    "eslint": "^9.39.2"
+    "eslint": "^10.0.3"
   }
 }
