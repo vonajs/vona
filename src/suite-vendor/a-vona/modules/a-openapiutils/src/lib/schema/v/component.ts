@@ -5,21 +5,21 @@ import type { ISchemaComponentRecord } from '../../../types/component.ts';
 import { _generalSchemaRest } from './utils.ts';
 
 const __schemaComponents = {
-  captcha: schemaCaptcha,
   currency: schemaCurrency,
   date: schemaDate,
+  captcha: schemaCaptcha,
   toggle: schemaToggle,
   select: schemaSelect,
   resourcePicker: schemaResourcePicker,
   textarea: schemaTextarea,
-};
+} as const;
 
 export function schemaComponent<K extends keyof ISchemaComponentRecord>(
   name: K,
   options?: ISchemaComponentRecord[K],
   scene?: TypeSchemaScene,
 ) {
-  return __schemaComponents[name](options, scene);
+  return __schemaComponents[name](options as any, scene);
 }
 
 function schemaCurrency<T extends z.ZodType>(currency?: CurrencyOptions, scene?: TypeSchemaScene) {
