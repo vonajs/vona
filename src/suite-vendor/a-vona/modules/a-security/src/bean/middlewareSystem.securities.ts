@@ -7,15 +7,15 @@ import { MiddlewareSystem } from 'vona-module-a-aspect';
 import securityMiddlewares from '../lib/middlewares/index.ts';
 
 export type SecurityMiddlewareName =
-  | 'csrf'
-  | 'hsts'
-  | 'methodnoallow'
-  | 'noopen'
-  | 'nosniff'
-  | 'csp'
-  | 'xssProtection'
-  | 'xframe'
-  | 'dta';
+  'csrf' |
+  'hsts' |
+  'methodnoallow' |
+  'noopen' |
+  'nosniff' |
+  'csp' |
+  'xssProtection' |
+  'xframe' |
+  'dta';
 
 export interface IMiddlewareSystemOptionsSecurities extends IDecoratorMiddlewareSystemOptions {
   domainWhiteList: string[];
