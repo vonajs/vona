@@ -2,7 +2,11 @@ English | [简体中文](./README.zh-CN.md)
 
 # Vona
 
-Vona is an intuitive, elegant and powerful Node.js web framework for rapidly developing enterprise applications of any size. It pioneers dynamic DTO inference and generation capabilities, significantly improving development efficiency and experience
+Vona is a fullstack meta-framework for building SSR/SPA/Admin/Front all in one codebase
+
+* Pioneered the ability to dynamically infer and generate DTOs, freeing our hands and significantly improving productivity. It can even be said that being able to dynamically infer and generate DTOs is a very important `milestone` for building a more elegant Node.js backend framework
+* Pioneering dual-layer tabs navigation design, allowing more convenient switching between multiple pages
+* Can dynamically render CRUD list pages, item pages, and search forms, and provides the best practices of Tanstack Table/Tanstack Form/Tanstack Query
 
 [![LICENSE MIT][license-image]][license-url]
 [![NPM version][npm-image]][npm-url]
@@ -18,56 +22,22 @@ Vona is an intuitive, elegant and powerful Node.js web framework for rapidly dev
 [download-image]: https://img.shields.io/npm/dm/vona?color=orange&label=npm%20downloads
 [download-url]: https://npmjs.com/package/vona
 
-## Philosophy
-
-### 1. About Coding
-
-Many frameworks use the simplest use cases to demonstrate design elegance, ignoring the coding challenges presented by business complexity. As business grows and changes, project code quickly degrades and becomes difficult to maintain. Vona, however, addresses the complexity of large-scale businesses and proposes a series of engineering solutions. This allows us to maintain elegant and intuitive code even when developing large-scale business systems, improving development efficiency and experience while facilitating subsequent code iteration and maintenance
-
-### 2. About Performance
-
-Many frameworks use the simplest use cases to demonstrate high performance, ignoring the performance challenges presented by business complexity. As business grows and changes, project performance plummets, and various optimization and mitigation measures lead to cumbersome and lengthy code. Vona, however, addresses the complexity of large-scale businesses and incorporates caching strategies into the framework's core, implementing mechanisms such as `two-layer cache`, `query cache`, and `entity cache`. This makes it easy to develop large-scale business systems, ensuring that code remains elegant and intuitive
-
 ## Documentation
 
-- [Quick Start](https://vona.js.org/guide/start/quick-start.html)
+- [Docs](https://vona.js.org/guide/start/introduction.html)
 
-## Features
+## Demo online
 
-* `Developed in TypeScript`: Provides comprehensive TypeScript type hints
-* `Using ESM modules throughout`: Faster project startup
-* `File-level precise HMR`: Makes the development experience smoother and more efficient
-* `Complete modular system`: Module-based business segmentation makes code more cohesive and easier to reuse and share
-* `IOC container and dependency lookup`: We recommend using `dependency lookup` to obtain bean instances directly from the container, making code writing more intuitive and elegant
-* `Universal bean configuration capabilities`: All options of bean classes can be modified in App Config, significantly improving the scalability of the entire system and saving a large amount of configuration-related code
-* `Bean global singleton`: `Async Local Storage` is used under the hood to implement a complete global singleton mechanism, ensuring very low memory usage and significantly improving garbage collection performance
-* `Multi-tenancy`: Supports the development of multi-tenancy SaaS systems with a shared database schema, but data generated during operation is isolated
-* `Multi-database and multi-datasource`: Supports multi-database and multi-datasource, and provides out-of-the-box read-write splitting and dynamic datasource capabilities
-* `Database Transaction`: Built-in database transaction capabilities and support for transaction propagation mechanisms
-* `Dynamic DTO Inference and Generation`: Pioneers dynamic DTO inference and generation capabilities, significantly improving development efficiency and experience
-* `Cli Commands`: Provides a large number of Cli commands for generating code skeletons for various resources
-* `Menu Commands`: Execute Cli commands through the menus, significantly reducing mental overhead and improving the development experience
-* `Configuration Capabilities Based on Multi-Dimensional Variables`: Loads env/config files based on multi-dimensional variables, providing a more flexible configuration mechanism and supporting more complex business scenarios
-* `More Comprehensive AOP Programming`: Provides more comprehensive AOP programming capabilities, including controller aspect, internal aspect, and external aspect
-* `SSR Integration`: Provides out-of-the-box SSR rendering capabilities, supporting both the frontend website and the backend admin system
-* `Playground`: Provides a Playground, which allows us to test the code and verify the ideas very conveniently and quickly
+The Admin/Front websites of `Cabloy Store` are built by one codebase
 
-## Technology Stack
+* Front: [https://cabloy.com](https://cabloy.com)
+* Admin: [https://cabloy.com/admin](https://cabloy.com/admin)
 
-|Name|Version|
-|--|--|
-|pnpm| >=10.19.0 |
-|Nodejs| >=24.8.0 |
-|Typescript| >=5.7.3 |
-|Koa|>=3.0.0|
-|Redis|>=7.2.6|
-|Sqlite3|Built-in|
-|MySQL|>=8|
-|Postgresql|>=17|
+## Gif
 
-* `Redis`: VonaJS provides the following capabilities based on Redis:
-  - `Queue, Schedule, Startup, Broadcast, Caching, Two-layer cache, and Redlock`
-* `Sqlite3`: You need to set up the node-gyp environment in advance to ensure that `better_sqlite3.node` can be compiled properly when installing dependencies
+* Pioneering dual-layer tabs navigation design
+
+![](./packages-docs/zh/assets/img/start/cabloy-start-two-level-tabs.gif)
 
 ## Stay In Touch
 
