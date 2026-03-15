@@ -1,7 +1,8 @@
+import { schemaComponent } from './v/component.ts';
 import { schemaFilter, schemaFilterDateRange, schemaFilterTransform } from './v/filter.tsx';
 import { schemaEmail, schemaIPv4, schemaIPv6, schemaLowercase, schemaMax, schemaMin, schemaRegex, schemaTableIdentity, schemaToLowerCase, schemaToUpperCase, schemaTrim, schemaUppercase, schemaUrl, schemaUuid } from './v/helpers.ts';
 import { schemaDescription, schemaExample, schemaOpenapi, schemaTitle } from './v/openapi.ts';
-import { schemaCaptcha, schemaCurrency, schemaCustomKey, schemaDate, schemaOrder, schemaRender, schemaResourcePicker, schemaRest, schemaSelect, schemaTextarea, schemaToggle, schemaVisible } from './v/rest.ts';
+import { schemaCustomKey, schemaOrder, schemaRender, schemaRest, schemaVisible } from './v/rest.ts';
 import { schemaSerializerCustom, schemaSerializerExclude, schemaSerializerGetter, schemaSerializerReplace, schemaSerializerTransform } from './v/serializer.ts';
 import { schemaArray, schemaDefault, schemaLazy, schemaLooseObject, schemaObject, schemaOptional, schemaRequired, schemaStrictObject } from './v/system.ts';
 import { schemaZodRefine, schemaZodTransform } from './v/zod.ts';
@@ -46,16 +47,11 @@ export const v = {
   // rest
   rest: schemaRest,
   customKey: schemaCustomKey,
-  captcha: schemaCaptcha,
-  currency: schemaCurrency,
-  date: schemaDate,
-  toggle: schemaToggle,
-  select: schemaSelect,
-  resourcePicker: schemaResourcePicker,
-  textarea: schemaTextarea,
   order: schemaOrder,
   render: schemaRender,
   visible: schemaVisible,
+  // component
+  component: schemaComponent,
   // zod
   refine: schemaZodRefine,
   transform: schemaZodTransform,
