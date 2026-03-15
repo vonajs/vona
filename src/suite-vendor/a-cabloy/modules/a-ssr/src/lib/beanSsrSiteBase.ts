@@ -123,20 +123,17 @@ export class BeanSsrSiteBase<SsrSiteOptions extends IDecoratorSsrSiteOptions = I
   public get siteOptions() {
     if (!this._siteOptions) {
       const onionOptions = this.$onionOptions as IDecoratorSsrSiteOptions;
-      const APP_PUBLIC_PATH = onionOptions.publicPath;
       const SSR_HMR = process.env.META_MODE === 'dev' ? 'true' : 'false';
       this._siteOptions = deepExtend({
         envServer: {
           SSR_API_BASE_URL: `${this.app.util.protocol}://${this.app.util.host}`,
           SSR_PROD_PROTOCOL: this.app.util.protocol,
           SSR_PROD_HOST: this.app.util.host,
-          APP_PUBLIC_PATH,
           SSR_HMR,
         },
         envClient: {
           SSR_PROD_PROTOCOL: this.app.util.protocol,
           SSR_PROD_HOST: this.app.util.host,
-          APP_PUBLIC_PATH,
           SSR_HMR,
         },
       }, this.$scope.ssr.config.site.default, onionOptions);
