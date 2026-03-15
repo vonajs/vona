@@ -20,6 +20,8 @@ hero:
 features:
   - title: 全栈能力
     details: 可在同一个代码库中实现SSR/SPA/Admin后台/Web前台。Admin后台也支持 SSR，并且代码直观、优雅
+  - title: CRUD动态渲染
+    details: 可动态渲染CRUD的列表页、条目页、搜索表单，并且提供了Tanstack Table/Tanstack Form/Tanstack Query的最佳实践
   - title: DTO动态推断与生成
     details: 首创 DTO 动态推断与生成能力，解放我们的双手，显著提升生产力。甚至可以说，对于构建更加优雅的 Node.js 后端框架而言，能够动态推断与生成 DTO，是非常重要的`里程碑`
   - title: 双层页签
@@ -28,8 +30,6 @@ features:
     details: 优先使用`依赖查找`策略，从而使用更少的装饰器函数，使用更少的类型标注，从而让 IOC 容器更加简洁、直观
   - title: 多租户
     details: 内置了开箱即用的多租户能力，同时支持共享模式和独立模式
-  - title: 模块化体系
-    details: 在一个大型的 Web 业务系统当中，随着业务的增长和变更，为了避免代码失控，有必要将系统拆分为一个个相对独立的模块
   - title: 多数据库、多数据源
     details: 支持多数据库、多数据源，还提供了开箱即用的读写分离和动态数据源能力
   - title: 菜单命令
