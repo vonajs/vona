@@ -3,6 +3,7 @@ export const rules = {
   'e18e/prefer-object-has-own': 'off',
   'e18e/prefer-static-regex': 'off',
   'e18e/prefer-array-at': 'off',
+  'e18e/prefer-regex-test': 'off',
   'test/no-only-tests': 'off',
   'test/no-import-node-test': 'off',
   'jsdoc/check-alignment': 'off',
