@@ -16,7 +16,7 @@ const __schemaComponents = {
 
 export function schemaComponent<K extends keyof ISchemaComponentRecord>(
   name: K,
-  options: ISchemaComponentRecord[K],
+  options?: ISchemaComponentRecord[K],
   scene?: TypeSchemaScene,
 ) {
   return __schemaComponents[name](options, scene);
