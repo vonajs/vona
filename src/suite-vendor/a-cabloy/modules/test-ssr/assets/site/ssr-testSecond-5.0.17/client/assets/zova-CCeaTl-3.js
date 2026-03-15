@@ -1,0 +1,1 @@
+import{ag as o,ap as a}from"./zova-C_C1gUOw.js";import{g as s}from"./index-0FVeOdir.js";import"./vue-C2s86i-9.js";import"./commonjsHelper-CLPN-Npl.js";import"./zod-B6KeXXuZ.js";const p=o(async({app:o})=>{await a(o,s())});export{p as default};

@@ -1,5 +1,5 @@
 import type { IDecoratorSsrSiteOptions } from 'vona-module-a-ssr';
-import type { IPagePathRecord } from 'zova-rest-cabloy-basic-admin';
+import type { IPagePathRecord } from 'zova-rest-test-second';
 import type { DtoTestResult } from '../dto/testResult.tsx';
 import { BeanSsrSiteBase, SsrSite } from 'vona-module-a-ssr';
 
@@ -20,6 +20,6 @@ export interface ISsrSiteOptionsSecond extends IDecoratorSsrSiteOptions<ISsrSite
 
 @SsrSite<ISsrSiteOptionsSecond>({
   publicPath: 'second',
-  assetPath: 'ssr-cabloyBasicAdmin-5.0.17',
+  assetPath: 'ssr-testSecond-5.0.17',
 })
 export class SsrSiteSecond extends BeanSsrSiteBase<ISsrSiteOptionsSecond> {}

@@ -357,6 +357,9 @@ importers:
       zova-rest-cabloy-start-front:
         specifier: file:./.zova-rest/cabloy-start-front
         version: file:.zova-rest/cabloy-start-front
+      zova-rest-test-second:
+        specifier: file:./.zova-rest/test-second
+        version: file:.zova-rest/test-second
     devDependencies:
       '@cabloy/cli':
         specifier: ^3.0.98
@@ -9740,6 +9743,9 @@ packages:
   zova-rest-cabloy-start-front@file:.zova-rest/cabloy-start-front:
     resolution: {directory: .zova-rest/cabloy-start-front, type: directory}
 
+  zova-rest-test-second@file:.zova-rest/test-second:
+    resolution: {directory: .zova-rest/test-second, type: directory}
+
   zwitch@1.0.5:
     resolution: {integrity: sha512-V50KMwwzqJV0NpZIZFwfOD5/lyny3WlSzRiXgA0G7VUnRlqttta1L6UQIHzd6EuBY/cHGfwTIck7w1yH6Q5zUw==}
 
@@ -18054,6 +18060,8 @@ snapshots:
   zova-rest-cabloy-start-admin@file:.zova-rest/cabloy-start-admin: {}
 
   zova-rest-cabloy-start-front@file:.zova-rest/cabloy-start-front: {}
+
+  zova-rest-test-second@file:.zova-rest/test-second: {}
 
   zwitch@1.0.5: {}
 
