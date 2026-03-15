@@ -6,7 +6,7 @@ Vona is a fullstack meta-framework for building SSR/SPA/Admin/Front all in one c
 
 * Pioneered the ability to dynamically infer and generate DTOs, freeing our hands and significantly improving productivity. It can even be said that being able to dynamically infer and generate DTOs is a very important `milestone` for building a more elegant Node.js backend framework
 * Pioneering dual-layer tabs navigation design, allowing more convenient switching between multiple pages
-* Can dynamically render CRUD list pages, item pages, and search forms, and provides the best practices of Tanstack Table/Tanstack Form/Tanstack Query
+* Can dynamically render CRUD list pages, item pages, and search forms, and provides the best practices of `Tanstack Table/Tanstack Form/Tanstack Query`
 
 [![LICENSE MIT][license-image]][license-url]
 [![NPM version][npm-image]][npm-url]
