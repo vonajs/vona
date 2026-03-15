@@ -23122,6 +23122,7 @@ interface ZovaConfigEnv {
   LAYOUT_COMPONENT_EMPTY: keyof TypeComponentLayoutRecord | undefined;
   LAYOUT_COMPONENT_DEFAULT: keyof TypeComponentLayoutRecord | undefined;
   LAYOUT_SIDEBAR_LEFTOPENPC: string | undefined;
+  STYLE_DEFAULT_THEME: string | undefined;
   SSR_API_BASE_URL: string | undefined;
   API_BASE_URL: string | undefined;
   API_PREFIX: string | undefined;
@@ -23843,12 +23844,6 @@ interface ZovaConfig {
   ws: {
     baseURL: string;
     prefix: string;
-  };
-  ssr: {
-    server: {
-      protocol: string;
-      host: string;
-    };
   };
   logger: ConfigLogger;
   locale: {
@@ -32409,7 +32404,8 @@ declare class CookieWrapper extends BeanSimple {
 //#region src/suite-vendor/a-zova/modules/a-model/src/bean/bean.model/bean.model.last.d.ts
 declare class BeanModelLast extends BeanBase {
   selector: string;
-  protected __init__(selector?: unknown): Promise<void>;
+  constructor(selector?: unknown);
+  protected __init__(_selector?: unknown): Promise<void>;
   get $onionOptions(): IDecoratorModelOptions | undefined;
   get self(): BeanModelBase;
   get scopeSelf(): ScopeModuleAModel;
@@ -32809,13 +32805,49 @@ type TypeDateFormat = {
 } | string;
 //#endregion
 //#region src/suite-vendor/a-zova/modules/a-openapi/src/types/select.d.ts
+interface ISelectChipsOptions {
+  column?: boolean;
+  filter?: boolean;
+  selectedClass?: string;
+}
 interface ISelectOptions {
+  mode?: 'default' | 'chips';
+  chipsOptions?: ISelectChipsOptions;
   multiple?: boolean;
   chips?: boolean;
   items?: any[];
   itemTitle?: string;
   itemValue?: string;
   itemProps?: string;
+}
+//#endregion
+//#region src/suite-vendor/a-zova/modules/a-openapi/src/types/table.d.ts
+interface ITableQuery {
+  columns?: string[] | undefined;
+  where?: {
+    [key: string]: unknown;
+  } | undefined;
+  orders?: string | string[][] | undefined;
+  pageNo?: number;
+  pageSize?: number;
+}
+interface ITableRes<Entity = any> extends ITableResPaged {
+  list: Entity[];
+}
+interface ITableResPaged {
+  total: string;
+  pageCount: number;
+  pageSize: number;
+  pageNo: number;
+}
+//#endregion
+//#region src/suite-vendor/a-zova/modules/a-openapi/src/types/resourcePicker.d.ts
+interface IResourcePickerOptions {
+  resource?: string;
+  actionPath?: string;
+  query?: ITableQuery;
+  selectOptions?: ISelectOptions;
+  relation?: string;
 }
 //#endregion
 //#region src/suite-vendor/a-zova/modules/a-openapi/src/types/textarea.d.ts
@@ -32844,6 +32876,7 @@ interface ISchemaObjectExtensionFieldRest {
   toggle?: IToggleOptions;
   select?: ISelectOptions;
   textarea?: ITextareaOptions;
+  resourcePicker?: IResourcePickerOptions;
   customKey?: string;
   visible?: boolean;
   displayValue?: any;
@@ -33476,6 +33509,7 @@ interface IFormProviderComponents {
   toggle?: TypeFormFieldRenderComponentProvider;
   select?: TypeFormFieldRenderComponentProvider;
   textarea?: TypeFormFieldRenderComponentProvider;
+  resourcePicker?: TypeFormFieldRenderComponentProvider;
 }
 interface IFormProvider {
   components?: IFormProviderComponents;
@@ -36386,6 +36420,7 @@ interface ITableProviderComponents {
   toggle?: TypeTableCellRenderComponentProvider;
   select?: TypeTableCellRenderComponentProvider;
   textarea?: TypeTableCellRenderComponentProvider;
+  resourcePicker?: TypeTableCellRenderComponentProvider;
 }
 interface ITableProvider {
   components?: ITableProviderComponents;
@@ -36422,24 +36457,6 @@ interface ITableCellScope extends ITableColumnScope {
 //#region src/suite-vendor/a-zova/modules/a-table/src/types/table.d.ts
 type TypeTable<TData$1 extends RowData = RowData> = ReturnType<typeof useVueTable<TData$1>>;
 type TypeColumn<TData$1 extends RowData = RowData> = ColumnDef<TData$1, any>;
-interface ITableQuery {
-  columns?: string[] | undefined;
-  where?: {
-    [key: string]: unknown;
-  } | undefined;
-  orders?: string | string[][] | undefined;
-  pageNo?: number;
-  pageSize?: number;
-}
-interface ITableRes<Entity = any> extends ITableResPaged {
-  list: Entity[];
-}
-interface ITableResPaged {
-  total: string;
-  pageCount: number;
-  pageSize: number;
-  pageNo: number;
-}
 interface ITableMeta<TData$1 extends RowData = RowData> {
   properties: SchemaObject[];
   renders: Record<string, TypeTableCellRender<TData$1>>;
@@ -36946,8 +36963,8 @@ declare class SysSsrState extends BeanBase {
   protected [SymbolSSRStateDefer]: SSRContextStateDefer;
   protected __init__(): Promise<void>;
   private _patchEnvConfig;
-  get state(): SSRContextState;
-  get stateDefer(): SSRContextStateDefer;
+  get state(): any;
+  get stateDefer(): any;
 }
 //#endregion
 //#region src/suite-vendor/a-zova/modules/a-ssr/src/config/config.d.ts
@@ -37516,6 +37533,151 @@ declare module 'zova' {
 //#endregion
 //#region src/suite/a-home/modules/home-api/src/api/openapi/types.d.ts
 interface paths {
+  '/api/auth/mock/authorize': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get: operations['AuthMock_authorize'];
+    put?: never;
+    post: operations['AuthMock_authorizePost'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/captcha/create': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    put?: never;
+    post: operations['Captcha_create'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/captcha/refresh': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    put?: never;
+    post: operations['Captcha_refresh'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/captcha/verifyImmediate': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    put?: never;
+    post: operations['Captcha_verifyImmediate'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/mailconfirm/mail/emailConfirmCallback': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get: operations['MailconfirmMail_emailConfirmCallback'];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/mailconfirm/mail/passwordResetCallback': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get: operations['MailconfirmMail_passwordResetCallback'];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/home/base/menu/{publicPath?}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get: operations['HomeBaseMenu_retrieveMenus'];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/home/base/permission/{resource}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get: operations['HomeBasePermission_retrievePermissions'];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** @description Home */
+    get: operations['Home_index'];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
   '/api/home/user/passport/current': {
     parameters: {
       query?: never;
@@ -37676,167 +37838,6 @@ interface paths {
     patch?: never;
     trace?: never;
   };
-  '/api/captcha/create': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get?: never;
-    put?: never;
-    post: operations['Captcha_create'];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/captcha/refresh': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get?: never;
-    put?: never;
-    post: operations['Captcha_refresh'];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/captcha/verifyImmediate': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get?: never;
-    put?: never;
-    post: operations['Captcha_verifyImmediate'];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/mailconfirm/mail/emailConfirmCallback': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get: operations['MailconfirmMail_emailConfirmCallback'];
-    put?: never;
-    post?: never;
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/mailconfirm/mail/passwordResetCallback': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get: operations['MailconfirmMail_passwordResetCallback'];
-    put?: never;
-    post?: never;
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/home/base/menu/{publicPath?}': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get: operations['HomeBaseMenu_retrieveMenus'];
-    put?: never;
-    post?: never;
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/home/base/permission/{resource}': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get: operations['HomeBasePermission_retrievePermissions'];
-    put?: never;
-    post?: never;
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    /** @description Home */
-    get: operations['Home_index'];
-    put?: never;
-    post?: never;
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/start/test/product': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get: operations['StartTestProduct_select'];
-    put?: never;
-    post: operations['StartTestProduct_create'];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/start/test/product/{id}': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get: operations['StartTestProduct_view'];
-    put?: never;
-    post?: never;
-    delete: operations['StartTestProduct_delete'];
-    options?: never;
-    head?: never;
-    patch: operations['StartTestProduct_update'];
-    trace?: never;
-  };
   '/api/cabloy/store/cabloyModule': {
     parameters: {
       query?: never;
@@ -37917,14 +37918,78 @@ interface paths {
     patch: operations['CabloyStoreCabloyProvider_update'];
     trace?: never;
   };
-  '/api/test/cabloy/passport/isAuthenticated': {
+  '/api/store/purchaseOrder': {
     parameters: {
       query?: never;
       header?: never;
       path?: never;
       cookie?: never;
     };
-    get: operations['TestCabloyPassport_isAuthenticated'];
+    get: operations['StorePurchaseOrder_select'];
+    put?: never;
+    post: operations['StorePurchaseOrder_create'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/store/purchaseOrder/{id}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get: operations['StorePurchaseOrder_view'];
+    put?: never;
+    post?: never;
+    delete: operations['StorePurchaseOrder_delete'];
+    options?: never;
+    head?: never;
+    patch: operations['StorePurchaseOrder_update'];
+    trace?: never;
+  };
+  '/api/store/purchaseRecord': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get: operations['StorePurchaseRecord_select'];
+    put?: never;
+    post: operations['StorePurchaseRecord_create'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/store/purchaseRecord/{id}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get: operations['StorePurchaseRecord_view'];
+    put?: never;
+    post?: never;
+    delete: operations['StorePurchaseRecord_delete'];
+    options?: never;
+    head?: never;
+    patch: operations['StorePurchaseRecord_update'];
+    trace?: never;
+  };
+  '/api/store/purchaseRecord/getByCurrentUser/{moduleId}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get: operations['StorePurchaseRecord_getByCurrentUser'];
     put?: never;
     post?: never;
     delete?: never;
@@ -37933,14 +37998,46 @@ interface paths {
     patch?: never;
     trace?: never;
   };
-  '/api/test/cabloy/passport/current': {
+  '/api/store/purchaseRecord/purchasePaypal': {
     parameters: {
       query?: never;
       header?: never;
       path?: never;
       cookie?: never;
     };
-    get: operations['TestCabloyPassport_current'];
+    get?: never;
+    put?: never;
+    post: operations['StorePurchaseRecord_purchasePaypal'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/test/auth/passport/isAuthenticated': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get: operations['TestAuthPassport_isAuthenticated'];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/test/auth/passport/current': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get: operations['TestAuthPassport_current'];
     put?: never;
     post?: never;
     delete?: never;
@@ -38013,6 +38110,70 @@ interface paths {
     patch?: never;
     trace?: never;
   };
+  '/api/test/captcha/signin': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    put?: never;
+    post: operations['TestCaptcha_signin'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/paypal/getRecord/{recordId}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get: operations['Paypal_getRecord'];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/paypal/captureOrder/{recordId}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    put?: never;
+    post: operations['Paypal_captureOrder'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/paypal/cancelOrder/{recordId}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    put?: never;
+    post: operations['Paypal_cancelOrder'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
   '/api/play': {
     parameters: {
       query?: never;
@@ -38023,22 +38184,6 @@ interface paths {
     get?: never;
     put?: never;
     post: operations['Play_index'];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/test/vona/captcha/signin': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get?: never;
-    put?: never;
-    post: operations['TestVonaCaptcha_signin'];
     delete?: never;
     options?: never;
     head?: never;
@@ -38600,12 +38745,12 @@ interface components {
              * Format: date
              * @description Created At
              */
-      createdAt: string;
+      createdAt: Date;
       /**
              * Format: date
              * @description Updated At
              */
-      updatedAt: string;
+      updatedAt: Date;
       /**
              * @description Deleted
              * @default false
@@ -38628,6 +38773,47 @@ interface components {
       amount: number;
       orderId: number | string;
     };
+    'a-captcha.dto.captchaData': {
+      id: string;
+      provider: string;
+      token?: unknown;
+      payload?: unknown;
+    };
+    'a-menu.dto.menus': {
+      menus?: components['schemas']['a-menu.dto.menuItem'][] | undefined;
+      groups?: components['schemas']['a-menu.dto.menuGroup'][] | undefined;
+    };
+    'a-menu.dto.menuItem': {
+      name: string;
+      title?: string | undefined;
+      description?: string | undefined;
+      icon?: string | undefined;
+      order?: number | undefined;
+      group?: string | string[] | undefined;
+      separator?: boolean | undefined;
+      link?: string | undefined;
+      external?: boolean | undefined;
+      target?: string | undefined;
+      meta?: components['schemas']['a-menu.dto.menuItemMeta'];
+    };
+    'a-menu.dto.menuItemMeta': {
+      params?: unknown;
+      query?: unknown;
+    } | undefined;
+    'a-menu.dto.menuGroup': {
+      name: string;
+      title?: string | undefined;
+      description?: string | undefined;
+      icon?: string | undefined;
+      order?: number | undefined;
+      group?: string | string[] | undefined;
+      collapsed?: boolean | undefined;
+    };
+    'a-permission.dto.permissions': {
+      roleIds?: (number | string)[] | undefined;
+      roleNames?: string[] | undefined;
+      actions?: unknown;
+    };
     'home-user.dto.passport': {
       user: components['schemas']['home-user.entity.user'];
       auth: components['schemas']['a-auth.dto.auth'];
@@ -38639,12 +38825,12 @@ interface components {
              * Format: date
              * @description Created At
              */
-      createdAt: string;
+      createdAt: Date;
       /**
              * Format: date
              * @description Updated At
              */
-      updatedAt: string;
+      updatedAt: Date;
       /**
              * @description Deleted
              * @default false
@@ -38692,12 +38878,12 @@ interface components {
              * Format: date
              * @description Created At
              */
-      createdAt: string;
+      createdAt: Date;
       /**
              * Format: date
              * @description Updated At
              */
-      updatedAt: string;
+      updatedAt: Date;
       /**
              * @description Deleted
              * @default false
@@ -38743,170 +38929,6 @@ interface components {
       id: string;
       token: string;
     };
-    'a-captcha.dto.captchaData': {
-      id: string;
-      provider: string;
-      token?: unknown;
-      payload?: unknown;
-    };
-    'a-menu.dto.menus': {
-      menus?: components['schemas']['a-menu.dto.menuItem'][] | undefined;
-      groups?: components['schemas']['a-menu.dto.menuGroup'][] | undefined;
-    };
-    'a-menu.dto.menuItem': {
-      name: string;
-      title?: string | undefined;
-      description?: string | undefined;
-      icon?: string | undefined;
-      order?: number | undefined;
-      group?: string | string[] | undefined;
-      separator?: boolean | undefined;
-      link?: string | undefined;
-      external?: boolean | undefined;
-      target?: string | undefined;
-      meta?: components['schemas']['a-menu.dto.menuItemMeta'];
-    };
-    'a-menu.dto.menuItemMeta': {
-      params?: unknown;
-      query?: unknown;
-    } | undefined;
-    'a-menu.dto.menuGroup': {
-      name: string;
-      title?: string | undefined;
-      description?: string | undefined;
-      icon?: string | undefined;
-      order?: number | undefined;
-      group?: string | string[] | undefined;
-      collapsed?: boolean | undefined;
-    };
-    'a-permission.dto.permissions': {
-      roleIds?: (number | string)[] | undefined;
-      roleNames?: string[] | undefined;
-      actions?: unknown;
-    };
-    /** @description Create Product */
-    'start-test.dto.productCreate': {
-      /** @description Name */
-      name: string;
-      /** @description Description */
-      description?: string | undefined;
-      /** @description Price */
-      price: number;
-      /**
-             * @description Quantity
-             * @default 0
-             */
-      quantity?: number;
-      /** @description Amount */
-      amount: number;
-      /** @description Custom */
-      _custom?: unknown;
-      /** @description Test */
-      _test?: unknown;
-    };
-    'start-test.dto.productQueryRes': {
-      list: {
-        /**
-                 * Format: date
-                 * @description Created At
-                 */
-        createdAt: string;
-        /**
-                 * Format: date
-                 * @description Updated At
-                 */
-        updatedAt: string;
-        /**
-                 * @description Deleted
-                 * @default false
-                 */
-        deleted?: boolean;
-        /**
-                 * @description Instance ID
-                 * @default 0
-                 */
-        iid?: number;
-        /** @description ID */
-        id: number | string;
-        /** @description Name */
-        name: string;
-        /** @description Description */
-        description?: string | undefined;
-        /** @description Price */
-        price: number;
-        /**
-                 * @description Quantity
-                 * @default 0
-                 */
-        quantity?: number;
-        /** @description Amount */
-        amount: number;
-        /** @description Custom */
-        _custom?: unknown;
-      }[];
-      total: string;
-      pageCount: number;
-      pageSize: number;
-      pageNo: number;
-    };
-    /** @description Product Info */
-    'start-test.entity.product': {
-      /**
-             * Format: date
-             * @description Created At
-             */
-      createdAt: string;
-      /**
-             * Format: date
-             * @description Updated At
-             */
-      updatedAt: string;
-      /**
-             * @description Deleted
-             * @default false
-             */
-      deleted?: boolean;
-      /**
-             * @description Instance ID
-             * @default 0
-             */
-      iid?: number;
-      /** @description ID */
-      id: number | string;
-      /** @description Name */
-      name: string;
-      /** @description Description */
-      description?: string | undefined;
-      /** @description Price */
-      price: number;
-      /**
-             * @description Quantity
-             * @default 0
-             */
-      quantity?: number;
-      /** @description Amount */
-      amount: number;
-      /** @description Custom */
-      _custom?: unknown;
-    } | undefined;
-    /** @description Update Product */
-    'start-test.dto.productUpdate': {
-      /** @description Name */
-      name: string;
-      /** @description Description */
-      description?: string | undefined;
-      /** @description Price */
-      price: number;
-      /**
-             * @description Quantity
-             * @default 0
-             */
-      quantity?: number;
-      /** @description Amount */
-      amount: number;
-      /** @description Custom */
-      _custom?: unknown;
-    };
     'cabloy-store.dto.cabloyModuleCreate': {
       /** @description Name */
       name: string;
@@ -38914,6 +38936,8 @@ interface components {
       title: string;
       /** @description Description */
       description?: string | undefined;
+      /** @description Description(Chinese) */
+      descriptionZhcn?: string | undefined;
       /** @description Version */
       version: string;
       /** @description Repository */
@@ -38922,15 +38946,27 @@ interface components {
       demoUrl?: string | undefined;
       /** @description License */
       license: number;
-      /** @description Price */
+      /**
+             * @description Price
+             * @default 0
+             */
       price?: number | undefined;
       providerId: number | string;
-      content?: components['schemas']['cabloy-store.entity.cabloyModuleContent_415bfafaac51a5415ead581cd137db9671af9a2b_1816ff740d81c738ec055c7038bbd93beb9405a7'];
+      userId?: number | string | undefined;
+      /**
+             * @description Language
+             * @default en-us
+             */
+      _locale?: string;
+      content?: components['schemas']['cabloy-store.entity.cabloyModuleContent_81badf1cb6c91a163ef245059a4656a90b23a2f0_1816ff740d81c738ec055c7038bbd93beb9405a7'];
       _content?: unknown;
+      _contentZhcn?: unknown;
     };
-    'cabloy-store.entity.cabloyModuleContent_415bfafaac51a5415ead581cd137db9671af9a2b_1816ff740d81c738ec055c7038bbd93beb9405a7': {
+    'cabloy-store.entity.cabloyModuleContent_81badf1cb6c91a163ef245059a4656a90b23a2f0_1816ff740d81c738ec055c7038bbd93beb9405a7': {
       /** @description Content */
       content: string;
+      /** @description Content(Chinese) */
+      contentZhcn: string;
     };
     'cabloy-store.dto.cabloyModuleQueryRes': {
       list: components['schemas']['cabloy-store.dto.cabloyModuleQueryResItem'][];
@@ -38944,12 +38980,12 @@ interface components {
              * Format: date
              * @description Created At
              */
-      createdAt: string;
+      createdAt: Date;
       /**
              * Format: date
              * @description Updated At
              */
-      updatedAt: string;
+      updatedAt: Date;
       /**
              * @description Deleted
              * @default false
@@ -38968,6 +39004,8 @@ interface components {
       title: string;
       /** @description Description */
       description?: string | undefined;
+      /** @description Description(Chinese) */
+      descriptionZhcn?: string | undefined;
       /** @description Version */
       version: string;
       /** @description Repository */
@@ -38976,11 +39014,20 @@ interface components {
       demoUrl?: string | undefined;
       /** @description License */
       license: number;
-      /** @description Price */
+      /**
+             * @description Price
+             * @default 0
+             */
       price?: number | undefined;
       providerId: number | string;
       /** @description Published */
       published?: boolean | undefined;
+      userId?: number | string | undefined;
+      /**
+             * @description Language
+             * @default en-us
+             */
+      _locale?: string;
       provider?: components['schemas']['cabloy-store.entity.cabloyProvider_2c7d642ee581efa300341e343180fbb0ecdc785d_1816ff740d81c738ec055c7038bbd93beb9405a7'];
     };
     'cabloy-store.entity.cabloyProvider_2c7d642ee581efa300341e343180fbb0ecdc785d_1816ff740d81c738ec055c7038bbd93beb9405a7': {
@@ -38989,17 +39036,17 @@ interface components {
       /** @description Name */
       name: string;
     };
-    'cabloy-store.dto.cabloyModuleGet': {
+    'cabloy-store.dto.cabloyModuleView': {
       /**
              * Format: date
              * @description Created At
              */
-      createdAt: string;
+      createdAt: Date;
       /**
              * Format: date
              * @description Updated At
              */
-      updatedAt: string;
+      updatedAt: Date;
       /**
              * @description Deleted
              * @default false
@@ -39018,6 +39065,8 @@ interface components {
       title: string;
       /** @description Description */
       description?: string | undefined;
+      /** @description Description(Chinese) */
+      descriptionZhcn?: string | undefined;
       /** @description Version */
       version: string;
       /** @description Repository */
@@ -39026,20 +39075,32 @@ interface components {
       demoUrl?: string | undefined;
       /** @description License */
       license: number;
-      /** @description Price */
+      /**
+             * @description Price
+             * @default 0
+             */
       price?: number | undefined;
       providerId: number | string;
       /** @description Published */
       published?: boolean | undefined;
-      content?: components['schemas']['cabloy-store.entity.cabloyModuleContent_c6e103f7cf035f2c8b2a66de341b2af9a91356ae_1816ff740d81c738ec055c7038bbd93beb9405a7'];
+      userId?: number | string | undefined;
+      /**
+             * @description Language
+             * @default en-us
+             */
+      _locale?: string;
+      content?: components['schemas']['cabloy-store.entity.cabloyModuleContent_1c9d53f3af6f7dcc5939f31fcb21323dc5f0c0f2_1816ff740d81c738ec055c7038bbd93beb9405a7'];
       provider?: components['schemas']['cabloy-store.entity.cabloyProvider_2c7d642ee581efa300341e343180fbb0ecdc785d_1816ff740d81c738ec055c7038bbd93beb9405a7'];
       _content?: unknown;
+      _contentZhcn?: unknown;
     } | undefined;
-    'cabloy-store.entity.cabloyModuleContent_c6e103f7cf035f2c8b2a66de341b2af9a91356ae_1816ff740d81c738ec055c7038bbd93beb9405a7': {
+    'cabloy-store.entity.cabloyModuleContent_1c9d53f3af6f7dcc5939f31fcb21323dc5f0c0f2_1816ff740d81c738ec055c7038bbd93beb9405a7': {
       /** @description ID */
       id: number | string;
       /** @description Content */
       content: string;
+      /** @description Content(Chinese) */
+      contentZhcn: string;
     };
     'cabloy-store.dto.cabloyModuleUpdate': {
       /** @description Name */
@@ -39048,6 +39109,8 @@ interface components {
       title: string;
       /** @description Description */
       description?: string | undefined;
+      /** @description Description(Chinese) */
+      descriptionZhcn?: string | undefined;
       /** @description Version */
       version: string;
       /** @description Repository */
@@ -39056,13 +39119,22 @@ interface components {
       demoUrl?: string | undefined;
       /** @description License */
       license: number;
-      /** @description Price */
+      /**
+             * @description Price
+             * @default 0
+             */
       price?: number | undefined;
       providerId: number | string;
-      content?: components['schemas']['cabloy-store.entity.cabloyModuleContent_ff0869fb10e36144ce6da354ab0f63f1aaad2074_1816ff740d81c738ec055c7038bbd93beb9405a7'];
+      /**
+             * @description Language
+             * @default en-us
+             */
+      _locale?: string;
+      content?: components['schemas']['cabloy-store.entity.cabloyModuleContent_e7b4a0d4d4633f151e39304b0c3e984921d39abe_1816ff740d81c738ec055c7038bbd93beb9405a7'];
       _content?: unknown;
+      _contentZhcn?: unknown;
     };
-    'cabloy-store.entity.cabloyModuleContent_ff0869fb10e36144ce6da354ab0f63f1aaad2074_1816ff740d81c738ec055c7038bbd93beb9405a7': {
+    'cabloy-store.entity.cabloyModuleContent_e7b4a0d4d4633f151e39304b0c3e984921d39abe_1816ff740d81c738ec055c7038bbd93beb9405a7': {
       /**
              * @description Deleted
              * @default false
@@ -39072,7 +39144,70 @@ interface components {
       id?: number | string | undefined;
       /** @description Content */
       content: string;
+      /** @description Content(Chinese) */
+      contentZhcn: string;
     };
+    'cabloy-store.dto.cabloyModuleViewByName': {
+      /**
+             * Format: date
+             * @description Created At
+             */
+      createdAt: Date;
+      /**
+             * Format: date
+             * @description Updated At
+             */
+      updatedAt: Date;
+      /**
+             * @description Deleted
+             * @default false
+             */
+      deleted?: boolean;
+      /**
+             * @description Instance ID
+             * @default 0
+             */
+      iid?: number;
+      /** @description ID */
+      id: number | string;
+      /** @description Name */
+      name: string;
+      /** @description Title */
+      title: string;
+      /** @description Description */
+      description?: string | undefined;
+      /** @description Description(Chinese) */
+      descriptionZhcn?: string | undefined;
+      /** @description Version */
+      version: string;
+      /** @description Repository */
+      repoUrl?: string | undefined;
+      /** @description Demo */
+      demoUrl?: string | undefined;
+      /** @description License */
+      license: number;
+      /**
+             * @description Price
+             * @default 0
+             */
+      price?: number | undefined;
+      providerId: number | string;
+      /** @description Published */
+      published?: boolean | undefined;
+      userId?: number | string | undefined;
+      /**
+             * @description Language
+             * @default en-us
+             */
+      _locale?: string;
+      provider?: components['schemas']['cabloy-store.entity.cabloyProvider_2c7d642ee581efa300341e343180fbb0ecdc785d_1816ff740d81c738ec055c7038bbd93beb9405a7'];
+      html?: {
+        /** @description ID */
+        id: number | string;
+        html: string;
+        htmlZhcn: string;
+      };
+    } | undefined;
     'cabloy-store.dto.cabloyProviderCreate': {
       /** @description Name */
       name: string;
@@ -39091,12 +39226,12 @@ interface components {
                  * Format: date
                  * @description Created At
                  */
-        createdAt: string;
+        createdAt: Date;
         /**
                  * Format: date
                  * @description Updated At
                  */
-        updatedAt: string;
+        updatedAt: Date;
         /**
                  * @description Deleted
                  * @default false
@@ -39131,12 +39266,12 @@ interface components {
              * Format: date
              * @description Created At
              */
-      createdAt: string;
+      createdAt: Date;
       /**
              * Format: date
              * @description Updated At
              */
-      updatedAt: string;
+      updatedAt: Date;
       /**
              * @description Deleted
              * @default false
@@ -39171,6 +39306,305 @@ interface components {
              */
       githubAccount?: boolean | undefined;
     };
+    'store-purchase.dto.purchaseOrderCreate': {
+      userId: number | string;
+      moduleId: number | string;
+      /** @description Remark */
+      remark?: string | undefined;
+      /** @description License */
+      license: number;
+      /** @description Amount */
+      amount: number;
+      /** @default 0 */
+      status?: number;
+      paypalRecordId?: number | string | undefined;
+      /** @description Gross Amount */
+      grossAmount: number;
+      /** @description Paypal Fee */
+      paypalFee: number;
+      /** @description Net Amount */
+      netAmount: number;
+    };
+    'store-purchase.dto.purchaseOrderQueryRes': {
+      list: {
+        /**
+                 * Format: date
+                 * @description Created At
+                 */
+        createdAt: Date;
+        /**
+                 * Format: date
+                 * @description Updated At
+                 */
+        updatedAt: Date;
+        /**
+                 * @description Deleted
+                 * @default false
+                 */
+        deleted?: boolean;
+        /**
+                 * @description Instance ID
+                 * @default 0
+                 */
+        iid?: number;
+        /** @description ID */
+        id: number | string;
+        userId: number | string;
+        moduleId: number | string;
+        /** @description Remark */
+        remark?: string | undefined;
+        /** @description License */
+        license: number;
+        /** @description Amount */
+        amount: number;
+        /** @default 0 */
+        status?: number;
+        paypalRecordId?: number | string | undefined;
+        /** @description Gross Amount */
+        grossAmount: number;
+        /** @description Paypal Fee */
+        paypalFee: number;
+        /** @description Net Amount */
+        netAmount: number;
+      }[];
+      total: string;
+      pageCount: number;
+      pageSize: number;
+      pageNo: number;
+    };
+    /** @description Purchase Order */
+    'store-purchase.entity.purchaseOrder': {
+      /**
+             * Format: date
+             * @description Created At
+             */
+      createdAt: Date;
+      /**
+             * Format: date
+             * @description Updated At
+             */
+      updatedAt: Date;
+      /**
+             * @description Deleted
+             * @default false
+             */
+      deleted?: boolean;
+      /**
+             * @description Instance ID
+             * @default 0
+             */
+      iid?: number;
+      /** @description ID */
+      id: number | string;
+      userId: number | string;
+      moduleId: number | string;
+      /** @description Remark */
+      remark?: string | undefined;
+      /** @description License */
+      license: number;
+      /** @description Amount */
+      amount: number;
+      /** @default 0 */
+      status?: number;
+      paypalRecordId?: number | string | undefined;
+      /** @description Gross Amount */
+      grossAmount: number;
+      /** @description Paypal Fee */
+      paypalFee: number;
+      /** @description Net Amount */
+      netAmount: number;
+    } | undefined;
+    'store-purchase.dto.purchaseOrderUpdate': {
+      userId: number | string;
+      moduleId: number | string;
+      /** @description Remark */
+      remark?: string | undefined;
+      /** @description License */
+      license: number;
+      /** @description Amount */
+      amount: number;
+      /** @default 0 */
+      status?: number;
+      paypalRecordId?: number | string | undefined;
+      /** @description Gross Amount */
+      grossAmount: number;
+      /** @description Paypal Fee */
+      paypalFee: number;
+      /** @description Net Amount */
+      netAmount: number;
+    };
+    'store-purchase.dto.purchaseRecordCreate': {
+      userId: number | string;
+      moduleId: number | string;
+      /**
+             * Format: date
+             * @description Last Purchase Time
+             */
+      lastPurchaseTime: Date;
+      /**
+             * Format: date
+             * @description Expiration Date
+             */
+      expirationDate?: Date;
+    };
+    'store-purchase.dto.purchaseRecordQueryRes': {
+      list: {
+        /**
+                 * Format: date
+                 * @description Created At
+                 */
+        createdAt: Date;
+        /**
+                 * Format: date
+                 * @description Updated At
+                 */
+        updatedAt: Date;
+        /**
+                 * @description Deleted
+                 * @default false
+                 */
+        deleted?: boolean;
+        /**
+                 * @description Instance ID
+                 * @default 0
+                 */
+        iid?: number;
+        /** @description ID */
+        id: number | string;
+        userId: number | string;
+        moduleId: number | string;
+        /**
+                 * Format: date
+                 * @description Last Purchase Time
+                 */
+        lastPurchaseTime: Date;
+        /**
+                 * Format: date
+                 * @description Expiration Date
+                 */
+        expirationDate?: Date;
+        user?: components['schemas']['home-user.entity.user_2c7d642ee581efa300341e343180fbb0ecdc785d_1816ff740d81c738ec055c7038bbd93beb9405a7'];
+        module?: components['schemas']['cabloy-store.entity.cabloyModule_2c7d642ee581efa300341e343180fbb0ecdc785d_1816ff740d81c738ec055c7038bbd93beb9405a7'];
+      }[];
+      total: string;
+      pageCount: number;
+      pageSize: number;
+      pageNo: number;
+    };
+    'home-user.entity.user_2c7d642ee581efa300341e343180fbb0ecdc785d_1816ff740d81c738ec055c7038bbd93beb9405a7': {
+      /** @description ID */
+      id: number | string;
+      /** @description User Name */
+      name: string;
+    };
+    'cabloy-store.entity.cabloyModule_2c7d642ee581efa300341e343180fbb0ecdc785d_1816ff740d81c738ec055c7038bbd93beb9405a7': {
+      /** @description ID */
+      id: number | string;
+      /** @description Name */
+      name: string;
+      content?: components['schemas']['cabloy-store.entity.cabloyModuleContent_1c9d53f3af6f7dcc5939f31fcb21323dc5f0c0f2_1816ff740d81c738ec055c7038bbd93beb9405a7'];
+      provider?: components['schemas']['cabloy-store.entity.cabloyProvider_2c7d642ee581efa300341e343180fbb0ecdc785d_1816ff740d81c738ec055c7038bbd93beb9405a7'];
+    };
+    /** @description Purchase Record */
+    'store-purchase.entity.purchaseRecord': {
+      /**
+             * Format: date
+             * @description Created At
+             */
+      createdAt: Date;
+      /**
+             * Format: date
+             * @description Updated At
+             */
+      updatedAt: Date;
+      /**
+             * @description Deleted
+             * @default false
+             */
+      deleted?: boolean;
+      /**
+             * @description Instance ID
+             * @default 0
+             */
+      iid?: number;
+      /** @description ID */
+      id: number | string;
+      userId: number | string;
+      moduleId: number | string;
+      /**
+             * Format: date
+             * @description Last Purchase Time
+             */
+      lastPurchaseTime: Date;
+      /**
+             * Format: date
+             * @description Expiration Date
+             */
+      expirationDate?: Date;
+    } | undefined;
+    'store-purchase.dto.purchaseRecordUpdate': {
+      userId: number | string;
+      moduleId: number | string;
+      /**
+             * Format: date
+             * @description Last Purchase Time
+             */
+      lastPurchaseTime: Date;
+      /**
+             * Format: date
+             * @description Expiration Date
+             */
+      expirationDate?: Date;
+    };
+    'store-purchase.dto.purchaseRecordView': {
+      /**
+             * Format: date
+             * @description Created At
+             */
+      createdAt: Date;
+      /**
+             * Format: date
+             * @description Updated At
+             */
+      updatedAt: Date;
+      /**
+             * @description Deleted
+             * @default false
+             */
+      deleted?: boolean;
+      /**
+             * @description Instance ID
+             * @default 0
+             */
+      iid?: number;
+      /** @description ID */
+      id: number | string;
+      userId: number | string;
+      moduleId: number | string;
+      /**
+             * Format: date
+             * @description Last Purchase Time
+             */
+      lastPurchaseTime: Date;
+      /**
+             * Format: date
+             * @description Expiration Date
+             */
+      expirationDate?: Date;
+      user?: components['schemas']['home-user.entity.user_2c7d642ee581efa300341e343180fbb0ecdc785d_1816ff740d81c738ec055c7038bbd93beb9405a7'];
+      module?: components['schemas']['cabloy-store.entity.cabloyModule_2c7d642ee581efa300341e343180fbb0ecdc785d_1816ff740d81c738ec055c7038bbd93beb9405a7'];
+    } | undefined;
+    'store-purchase.dto.purchasePaypalResBody': {
+      orderId: number | string;
+      approveUrl: string;
+    };
+    'store-purchase.dto.purchasePaypalReqBody': {
+      moduleId: number | string;
+      remark: string;
+      returnTo: string;
+      returnUrl: string;
+      cancelUrl: string;
+    };
     /** @description Create Product */
     'test-rest.dto.productCreate': {
       /** @description Name */
@@ -39197,12 +39631,12 @@ interface components {
                  * Format: date
                  * @description Created At
                  */
-        createdAt: string;
+        createdAt: Date;
         /**
                  * Format: date
                  * @description Updated At
                  */
-        updatedAt: string;
+        updatedAt: Date;
         /**
                  * @description Deleted
                  * @default false
@@ -39242,12 +39676,12 @@ interface components {
              * Format: date
              * @description Created At
              */
-      createdAt: string;
+      createdAt: Date;
       /**
              * Format: date
              * @description Updated At
              */
-      updatedAt: string;
+      updatedAt: Date;
       /**
              * @description Deleted
              * @default false
@@ -39344,14 +39778,57 @@ interface components {
       _customCopy?: string | undefined;
       _customCopied?: boolean | undefined;
     };
-    'a-play.dto.play': {
-      args: string[];
-      projectPath: string;
-    };
-    'test-vona.dto.signin': {
+    'test-captcha.dto.signin': {
       username: string;
       password: string;
       captcha?: unknown;
+    };
+    'a-paypal.entity.paypalRecord': {
+      /**
+             * Format: date
+             * @description Created At
+             */
+      createdAt: Date;
+      /**
+             * Format: date
+             * @description Updated At
+             */
+      updatedAt: Date;
+      /**
+             * @description Deleted
+             * @default false
+             */
+      deleted?: boolean;
+      /**
+             * @description Instance ID
+             * @default 0
+             */
+      iid?: number;
+      /** @description ID */
+      id: number | string;
+      userId: number | string;
+      /** @default 0 */
+      status?: number;
+      prepayId: string;
+      payload: components['schemas']['a-paypal.dto.paypalOrderRecordPayload'];
+      options: components['schemas']['a-paypal.dto.paypalOrderRecordOptions'];
+    };
+    'a-paypal.dto.paypalOrderRecordPayload': {
+      remark: string;
+      total: string;
+      currencyCode: string;
+    };
+    'a-paypal.dto.paypalOrderRecordOptions': {
+      brandName: string;
+      returnUrl: string;
+      cancelUrl: string;
+      returnTo: string;
+      scene: string;
+      orderId: number | string;
+    };
+    'a-play.dto.play': {
+      args: string[];
+      projectPath: string;
     };
     'test-vona.dto.userLazy': {
       name: string;
@@ -39466,12 +39943,12 @@ interface components {
              * Format: date
              * @description Created At
              */
-      createdAt: string;
+      createdAt: Date;
       /**
              * Format: date
              * @description Updated At
              */
-      updatedAt: string;
+      updatedAt: Date;
       /**
              * @description Deleted
              * @default false
@@ -39513,12 +39990,12 @@ interface components {
                  * Format: date
                  * @description Created At
                  */
-        createdAt: string;
+        createdAt: Date;
         /**
                  * Format: date
                  * @description Updated At
                  */
-        updatedAt: string;
+        updatedAt: Date;
         /**
                  * @description Deleted
                  * @default false
@@ -39566,12 +40043,12 @@ interface components {
                  * Format: date
                  * @description Created At
                  */
-        createdAt: string;
+        createdAt: Date;
         /**
                  * Format: date
                  * @description Updated At
                  */
-        updatedAt: string;
+        updatedAt: Date;
         /**
                  * @description Deleted
                  * @default false
@@ -39688,6 +40165,274 @@ interface components {
   pathItems: never;
 }
 interface operations {
+  AuthMock_authorize: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            code: string;
+            message: string;
+            data?: unknown;
+          };
+        };
+      };
+    };
+  };
+  AuthMock_authorizePost: {
+    parameters: {
+      query: {
+        redirect_uri: string;
+        state: string;
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': {
+          username: string;
+        };
+      };
+    };
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            code: string;
+            message: string;
+            data?: unknown;
+          };
+        };
+      };
+    };
+  };
+  Captcha_create: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': {
+          scene: string;
+        };
+      };
+    };
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            code: string;
+            message: string;
+            data: components['schemas']['a-captcha.dto.captchaData'];
+          };
+        };
+      };
+    };
+  };
+  Captcha_refresh: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': {
+          id: string;
+          scene: string;
+        };
+      };
+    };
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            code: string;
+            message: string;
+            data: components['schemas']['a-captcha.dto.captchaData'];
+          };
+        };
+      };
+    };
+  };
+  Captcha_verifyImmediate: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': {
+          id: string;
+          token?: unknown;
+        };
+      };
+    };
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            code: string;
+            message: string;
+            data: string;
+          };
+        };
+      };
+    };
+  };
+  MailconfirmMail_emailConfirmCallback: {
+    parameters: {
+      query: {
+        token: string;
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            code: string;
+            message: string;
+            data?: unknown;
+          };
+        };
+      };
+    };
+  };
+  MailconfirmMail_passwordResetCallback: {
+    parameters: {
+      query: {
+        token: string;
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            code: string;
+            message: string;
+            data?: unknown;
+          };
+        };
+      };
+    };
+  };
+  HomeBaseMenu_retrieveMenus: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        publicPath: ((string | undefined) | undefined) | undefined;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            code: string;
+            message: string;
+            data: components['schemas']['a-menu.dto.menus'];
+          };
+        };
+      };
+    };
+  };
+  HomeBasePermission_retrievePermissions: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        resource: string;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            code: string;
+            message: string;
+            data: components['schemas']['a-permission.dto.permissions'];
+          };
+        };
+      };
+    };
+    authToken: true;
+  };
+  Home_index: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            code: string;
+            message: string;
+            data?: unknown;
+          };
+        };
+      };
+    };
+  };
   HomeUserPassport_current: {
     parameters: {
       query?: never;
@@ -39962,363 +40707,6 @@ interface operations {
     };
     authToken: true;
   };
-  Captcha_create: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        'application/json': {
-          scene: string;
-        };
-      };
-    };
-    responses: {
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': {
-            code: string;
-            message: string;
-            data: components['schemas']['a-captcha.dto.captchaData'];
-          };
-        };
-      };
-    };
-  };
-  Captcha_refresh: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        'application/json': {
-          id: string;
-          scene: string;
-        };
-      };
-    };
-    responses: {
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': {
-            code: string;
-            message: string;
-            data: components['schemas']['a-captcha.dto.captchaData'];
-          };
-        };
-      };
-    };
-  };
-  Captcha_verifyImmediate: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        'application/json': {
-          id: string;
-          token?: unknown;
-        };
-      };
-    };
-    responses: {
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': {
-            code: string;
-            message: string;
-            data: string;
-          };
-        };
-      };
-    };
-  };
-  MailconfirmMail_emailConfirmCallback: {
-    parameters: {
-      query: {
-        token: string;
-      };
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': {
-            code: string;
-            message: string;
-            data?: unknown;
-          };
-        };
-      };
-    };
-  };
-  MailconfirmMail_passwordResetCallback: {
-    parameters: {
-      query: {
-        token: string;
-      };
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': {
-            code: string;
-            message: string;
-            data?: unknown;
-          };
-        };
-      };
-    };
-  };
-  HomeBaseMenu_retrieveMenus: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        publicPath: ((string | undefined) | undefined) | undefined;
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': {
-            code: string;
-            message: string;
-            data: components['schemas']['a-menu.dto.menus'];
-          };
-        };
-      };
-    };
-  };
-  HomeBasePermission_retrievePermissions: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        resource: string;
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': {
-            code: string;
-            message: string;
-            data: components['schemas']['a-permission.dto.permissions'];
-          };
-        };
-      };
-    };
-    authToken: true;
-  };
-  Home_index: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': {
-            code: string;
-            message: string;
-            data?: unknown;
-          };
-        };
-      };
-    };
-  };
-  StartTestProduct_select: {
-    parameters: {
-      query?: {
-        columns?: string[] | undefined;
-        where?: {
-          [key: string]: unknown;
-        } | undefined;
-        orders?: string | string[][] | undefined;
-        pageNo?: number;
-        pageSize?: number;
-        createdAt?: string | undefined;
-        name?: string | undefined;
-      };
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': {
-            code: string;
-            message: string;
-            data: components['schemas']['start-test.dto.productQueryRes'];
-          };
-        };
-      };
-    };
-    authToken: true;
-  };
-  StartTestProduct_create: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        'application/json': components['schemas']['start-test.dto.productCreate'];
-      };
-    };
-    responses: {
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': {
-            code: string;
-            message: string;
-            data: number | string;
-          };
-        };
-      };
-    };
-    authToken: true;
-  };
-  StartTestProduct_view: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        id: number | string;
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': {
-            code: string;
-            message: string;
-            data?: components['schemas']['start-test.entity.product'];
-          };
-        };
-      };
-    };
-    authToken: true;
-  };
-  StartTestProduct_delete: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        id: number | string;
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': {
-            code: string;
-            message: string;
-            data?: unknown;
-          };
-        };
-      };
-    };
-    authToken: true;
-  };
-  StartTestProduct_update: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        id: number | string;
-      };
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        'application/json': components['schemas']['start-test.dto.productUpdate'];
-      };
-    };
-    responses: {
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': {
-            code: string;
-            message: string;
-            data?: unknown;
-          };
-        };
-      };
-    };
-    authToken: true;
-  };
   CabloyStoreCabloyModule_select: {
     parameters: {
       query?: {
@@ -40400,7 +40788,7 @@ interface operations {
           'application/json': {
             code: string;
             message: string;
-            data?: components['schemas']['cabloy-store.dto.cabloyModuleGet'];
+            data?: components['schemas']['cabloy-store.dto.cabloyModuleView'];
           };
         };
       };
@@ -40482,7 +40870,7 @@ interface operations {
           'application/json': {
             code: string;
             message: string;
-            data?: components['schemas']['cabloy-store.dto.cabloyModuleGet'];
+            data?: components['schemas']['cabloy-store.dto.cabloyModuleViewByName'];
           };
         };
       };
@@ -40632,7 +41020,346 @@ interface operations {
     };
     authToken: true;
   };
-  TestCabloyPassport_isAuthenticated: {
+  StorePurchaseOrder_select: {
+    parameters: {
+      query?: {
+        columns?: string[] | undefined;
+        where?: {
+          [key: string]: unknown;
+        } | undefined;
+        orders?: string | string[][] | undefined;
+        pageNo?: number;
+        pageSize?: number;
+        createdAt?: string | undefined;
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            code: string;
+            message: string;
+            data: components['schemas']['store-purchase.dto.purchaseOrderQueryRes'];
+          };
+        };
+      };
+    };
+    authToken: true;
+  };
+  StorePurchaseOrder_create: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['store-purchase.dto.purchaseOrderCreate'];
+      };
+    };
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            code: string;
+            message: string;
+            data: number | string;
+          };
+        };
+      };
+    };
+    authToken: true;
+  };
+  StorePurchaseOrder_view: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number | string;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            code: string;
+            message: string;
+            data?: components['schemas']['store-purchase.entity.purchaseOrder'];
+          };
+        };
+      };
+    };
+    authToken: true;
+  };
+  StorePurchaseOrder_delete: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number | string;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            code: string;
+            message: string;
+            data?: unknown;
+          };
+        };
+      };
+    };
+    authToken: true;
+  };
+  StorePurchaseOrder_update: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number | string;
+      };
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['store-purchase.dto.purchaseOrderUpdate'];
+      };
+    };
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            code: string;
+            message: string;
+            data?: unknown;
+          };
+        };
+      };
+    };
+    authToken: true;
+  };
+  StorePurchaseRecord_select: {
+    parameters: {
+      query?: {
+        columns?: string[] | undefined;
+        where?: {
+          [key: string]: unknown;
+        } | undefined;
+        orders?: string | string[][] | undefined;
+        pageNo?: number;
+        pageSize?: number;
+        createdAt?: string | undefined;
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            code: string;
+            message: string;
+            data: components['schemas']['store-purchase.dto.purchaseRecordQueryRes'];
+          };
+        };
+      };
+    };
+    authToken: true;
+  };
+  StorePurchaseRecord_create: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['store-purchase.dto.purchaseRecordCreate'];
+      };
+    };
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            code: string;
+            message: string;
+            data: number | string;
+          };
+        };
+      };
+    };
+    authToken: true;
+  };
+  StorePurchaseRecord_view: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number | string;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            code: string;
+            message: string;
+            data?: components['schemas']['store-purchase.entity.purchaseRecord'];
+          };
+        };
+      };
+    };
+    authToken: true;
+  };
+  StorePurchaseRecord_delete: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number | string;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            code: string;
+            message: string;
+            data?: unknown;
+          };
+        };
+      };
+    };
+    authToken: true;
+  };
+  StorePurchaseRecord_update: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number | string;
+      };
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['store-purchase.dto.purchaseRecordUpdate'];
+      };
+    };
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            code: string;
+            message: string;
+            data?: unknown;
+          };
+        };
+      };
+    };
+    authToken: true;
+  };
+  StorePurchaseRecord_getByCurrentUser: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        moduleId: number | string;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            code: string;
+            message: string;
+            data?: components['schemas']['store-purchase.dto.purchaseRecordView'];
+          };
+        };
+      };
+    };
+  };
+  StorePurchaseRecord_purchasePaypal: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['store-purchase.dto.purchasePaypalReqBody'];
+      };
+    };
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            code: string;
+            message: string;
+            data: components['schemas']['store-purchase.dto.purchasePaypalResBody'];
+          };
+        };
+      };
+    };
+    authToken: true;
+  };
+  TestAuthPassport_isAuthenticated: {
     parameters: {
       query?: never;
       header?: never;
@@ -40656,7 +41383,7 @@ interface operations {
     };
     authToken: true;
   };
-  TestCabloyPassport_current: {
+  TestAuthPassport_current: {
     parameters: {
       query?: never;
       header?: never;
@@ -40911,6 +41638,111 @@ interface operations {
       };
     };
   };
+  TestCaptcha_signin: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['test-captcha.dto.signin'];
+      };
+    };
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            code: string;
+            message: string;
+            data?: unknown;
+          };
+        };
+      };
+    };
+  };
+  Paypal_getRecord: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        recordId: number | string;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            code: string;
+            message: string;
+            data: components['schemas']['a-paypal.entity.paypalRecord'];
+          };
+        };
+      };
+    };
+    authToken: true;
+  };
+  Paypal_captureOrder: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        recordId: number | string;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            code: string;
+            message: string;
+            data?: unknown;
+          };
+        };
+      };
+    };
+    authToken: true;
+  };
+  Paypal_cancelOrder: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        recordId: number | string;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            code: string;
+            message: string;
+            data?: unknown;
+          };
+        };
+      };
+    };
+    authToken: true;
+  };
   Play_index: {
     parameters: {
       query?: never;
@@ -40938,33 +41770,6 @@ interface operations {
       };
     };
     authToken: true;
-  };
-  TestVonaCaptcha_signin: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        'application/json': components['schemas']['test-vona.dto.signin'];
-      };
-    };
-    responses: {
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': {
-            code: string;
-            message: string;
-            data?: unknown;
-          };
-        };
-      };
-    };
   };
   TestVonaDtoTest_getUserLazy: {
     parameters: {
@@ -41012,12 +41817,12 @@ interface operations {
                              * Created At
                              * Format: date
                              */
-              createdAt: string;
+              createdAt: Date;
               /**
                              * Updated At
                              * Format: date
                              */
-              updatedAt: string;
+              updatedAt: Date;
               /**
                              * Deleted
                              * @default false
@@ -41064,12 +41869,12 @@ interface operations {
                              * Created At
                              * Format: date
                              */
-              createdAt: string;
+              createdAt: Date;
               /**
                              * Updated At
                              * Format: date
                              */
-              updatedAt: string;
+              updatedAt: Date;
               /**
                              * Deleted
                              * @default false
@@ -41115,12 +41920,12 @@ interface operations {
                              * Created At
                              * Format: date
                              */
-              createdAt: string;
+              createdAt: Date;
               /**
                              * Updated At
                              * Format: date
                              */
-              updatedAt: string;
+              updatedAt: Date;
               /**
                              * Deleted
                              * @default false
@@ -42101,8 +42906,8 @@ type ApiApiHomeUserPassportcreateTempAuthTokenRequestQuery = paths[ApiApiHomeUse
 declare class ApiHomeUserPassport extends BeanApiBase {
   current(options?: IApiActionOptions): Promise<{
     user: {
-      createdAt: string;
-      updatedAt: string;
+      createdAt: Date;
+      updatedAt: Date;
       deleted?: boolean | undefined;
       iid?: number | undefined;
       id: string | number;
@@ -42124,8 +42929,8 @@ declare class ApiHomeUserPassport extends BeanApiBase {
       } | undefined;
     };
     roles: {
-      createdAt: string;
-      updatedAt: string;
+      createdAt: Date;
+      updatedAt: Date;
       deleted?: boolean | undefined;
       iid?: number | undefined;
       id: string | number;
@@ -42136,8 +42941,8 @@ declare class ApiHomeUserPassport extends BeanApiBase {
   register(body: ApiApiHomeUserPassportregisterRequestBody, options?: IApiActionOptions): Promise<{
     passport: {
       user: {
-        createdAt: string;
-        updatedAt: string;
+        createdAt: Date;
+        updatedAt: Date;
         deleted?: boolean | undefined;
         iid?: number | undefined;
         id: string | number;
@@ -42159,8 +42964,8 @@ declare class ApiHomeUserPassport extends BeanApiBase {
         } | undefined;
       };
       roles: {
-        createdAt: string;
-        updatedAt: string;
+        createdAt: Date;
+        updatedAt: Date;
         deleted?: boolean | undefined;
         iid?: number | undefined;
         id: string | number;
@@ -42176,8 +42981,8 @@ declare class ApiHomeUserPassport extends BeanApiBase {
   login(body: ApiApiHomeUserPassportloginRequestBody, options?: IApiActionOptions): Promise<{
     passport: {
       user: {
-        createdAt: string;
-        updatedAt: string;
+        createdAt: Date;
+        updatedAt: Date;
         deleted?: boolean | undefined;
         iid?: number | undefined;
         id: string | number;
@@ -42199,8 +43004,8 @@ declare class ApiHomeUserPassport extends BeanApiBase {
         } | undefined;
       };
       roles: {
-        createdAt: string;
-        updatedAt: string;
+        createdAt: Date;
+        updatedAt: Date;
         deleted?: boolean | undefined;
         iid?: number | undefined;
         id: string | number;
@@ -42223,8 +43028,8 @@ declare class ApiHomeUserPassport extends BeanApiBase {
   } & IApiActionOptions): Promise<{
     passport: {
       user: {
-        createdAt: string;
-        updatedAt: string;
+        createdAt: Date;
+        updatedAt: Date;
         deleted?: boolean | undefined;
         iid?: number | undefined;
         id: string | number;
@@ -42246,8 +43051,8 @@ declare class ApiHomeUserPassport extends BeanApiBase {
         } | undefined;
       };
       roles: {
-        createdAt: string;
-        updatedAt: string;
+        createdAt: Date;
+        updatedAt: Date;
         deleted?: boolean | undefined;
         iid?: number | undefined;
         id: string | number;
@@ -42266,8 +43071,8 @@ declare class ApiHomeUserPassport extends BeanApiBase {
   } & IApiActionOptions): Promise<{
     passport: {
       user: {
-        createdAt: string;
-        updatedAt: string;
+        createdAt: Date;
+        updatedAt: Date;
         deleted?: boolean | undefined;
         iid?: number | undefined;
         id: string | number;
@@ -42289,8 +43094,8 @@ declare class ApiHomeUserPassport extends BeanApiBase {
         } | undefined;
       };
       roles: {
-        createdAt: string;
-        updatedAt: string;
+        createdAt: Date;
+        updatedAt: Date;
         deleted?: boolean | undefined;
         iid?: number | undefined;
         id: string | number;
@@ -42311,8 +43116,8 @@ declare class ApiHomeUserPassport extends BeanApiBase {
   createPassportJwtFromOauthCode(body: ApiApiHomeUserPassportcreatePassportJwtFromOauthCodeRequestBody, options?: IApiActionOptions): Promise<{
     passport: {
       user: {
-        createdAt: string;
-        updatedAt: string;
+        createdAt: Date;
+        updatedAt: Date;
         deleted?: boolean | undefined;
         iid?: number | undefined;
         id: string | number;
@@ -42334,8 +43139,8 @@ declare class ApiHomeUserPassport extends BeanApiBase {
         } | undefined;
       };
       roles: {
-        createdAt: string;
-        updatedAt: string;
+        createdAt: Date;
+        updatedAt: Date;
         deleted?: boolean | undefined;
         iid?: number | undefined;
         id: string | number;
@@ -42744,84 +43549,7 @@ interface ControllerLayoutTabsProps {}
 type TypeControllerLayoutTabsPublicProps = TypeRenderComponentJsxPropsPublic & ControllerLayoutTabsProps;
 declare function ZZHomeLayoutTabs(_props: TypeControllerLayoutTabsPublicProps): string;
 //#endregion
-//#region src/suite-vendor/a-cabloy/modules/rest-actions/src/bean/action.view.d.ts
-type TypeActionViewResult = unknown;
-interface IActionOptionsView extends IDecoratorActionOptions<TypeActionViewResult> {
-  resource?: string;
-  id?: string;
-}
-//#endregion
-//#region src/suite-vendor/a-cabloy/modules/rest-actions/rest/action/view.d.ts
-declare function AARestActionsView(_props: TypeActionOptionsRest<IActionOptionsView>): string;
-//#endregion
-//#region src/suite-vendor/a-cabloy/modules/rest-actions/src/bean/action.edit.d.ts
-type TypeActionEditResult = unknown;
-interface IActionOptionsEdit extends IDecoratorActionOptions<TypeActionEditResult> {
-  resource?: string;
-  id?: string;
-}
-//#endregion
-//#region src/suite-vendor/a-cabloy/modules/rest-actions/rest/action/edit.d.ts
-declare function AARestActionsEdit(_props: TypeActionOptionsRest<IActionOptionsEdit>): string;
-//#endregion
-//#region src/suite-vendor/a-cabloy/modules/rest-actions/src/bean/action.delete.d.ts
-type TypeActionDeleteResult = unknown;
-interface IActionOptionsDelete extends IDecoratorActionOptions<TypeActionDeleteResult> {
-  id?: string;
-}
-//#endregion
-//#region src/suite-vendor/a-cabloy/modules/rest-actions/rest/action/delete.d.ts
-declare function AARestActionsDelete(_props: TypeActionOptionsRest<IActionOptionsDelete>): string;
-//#endregion
-//#region src/suite-vendor/a-cabloy/modules/rest-actions/src/bean/action.create.d.ts
-type TypeActionCreateResult = unknown;
-interface IActionOptionsCreate extends IDecoratorActionOptions<TypeActionCreateResult> {
-  resource?: string;
-}
-//#endregion
-//#region src/suite-vendor/a-cabloy/modules/rest-actions/rest/action/create.d.ts
-declare function AARestActionsCreate(_props: TypeActionOptionsRest<IActionOptionsCreate>): string;
-//#endregion
-//#region src/suite-vendor/a-cabloy/modules/rest-actions/src/bean/action.setValue.d.ts
-type TypeActionSetValueResult = unknown;
-interface IActionOptionsSetValue extends IDecoratorActionOptions<TypeActionSetValueResult> {
-  name?: string;
-  value?: any;
-  disableNotifyChanged?: boolean;
-}
-//#endregion
-//#region src/suite-vendor/a-cabloy/modules/rest-actions/rest/action/setValue.d.ts
-declare function AARestActionsSetValue(_props: TypeActionOptionsRest<IActionOptionsSetValue>): string;
-//#endregion
-//#region src/suite-vendor/a-cabloy/modules/rest-actions/src/bean/action.alert.d.ts
-type TypeActionAlertResult = unknown;
-interface IActionOptionsAlert extends IDecoratorActionOptions<TypeActionAlertResult> {
-  message: string;
-  wait?: boolean;
-}
-//#endregion
-//#region src/suite-vendor/a-cabloy/modules/rest-actions/rest/action/alert.d.ts
-declare function AARestActionsAlert(_props: TypeActionOptionsRest<IActionOptionsAlert>): string;
-//#endregion
-//#region src/suite-vendor/a-cabloy/modules/rest-actions/src/bean/action.confirm.d.ts
-type TypeActionConfirmResult = boolean;
-interface IActionOptionsConfirm extends IDecoratorActionOptions<TypeActionConfirmResult> {
-  message: string;
-}
-//#endregion
-//#region src/suite-vendor/a-cabloy/modules/rest-actions/rest/action/confirm.d.ts
-declare function AARestActionsConfirm(_props: TypeActionOptionsRest<IActionOptionsConfirm>): string;
-//#endregion
-//#region src/suite-vendor/a-cabloy/modules/rest-actions/src/bean/action.copy.d.ts
-type TypeActionCopyResult = unknown;
-interface IActionOptionsCopy extends IDecoratorActionOptions<TypeActionCopyResult> {
-  text: any;
-}
-//#endregion
-//#region src/suite-vendor/a-cabloy/modules/rest-actions/rest/action/copy.d.ts
-declare function AARestActionsCopy(_props: TypeActionOptionsRest<IActionOptionsCopy>): string;
-//#endregion
-//#region src/suite-vendor/a-devui/modules/devui-date/src/component/dateRange/controller.d.ts
+//#region src/suite/cabloy-basic/modules/basic-date/src/component/dateRange/controller.d.ts
 interface ControllerDateRangeProps {
   separator?: string;
 }
@@ -42840,17 +43568,17 @@ declare class ControllerDateRange extends BeanControllerBase {
   _combineValue(dateStartStr: string | undefined, dateEndStr: string | undefined): string | undefined;
 }
 //#endregion
-//#region src/suite-vendor/a-devui/modules/devui-date/rest/component/dateRange.d.ts
+//#region src/suite/cabloy-basic/modules/basic-date/rest/component/dateRange.d.ts
 type TypeControllerDateRangePublicProps$1 = TypeRenderComponentJsxPropsPublic & ControllerDateRangeProps & ControllerDateRangeModels & { [KEY in keyof ControllerDateRangeModels as TypePropValueFromModel<KEY>]: ControllerDateRangeModels[KEY] } & { [KEY in keyof ControllerDateRangeModels as TypePropUpdateFromModel<KEY>]: (value: ControllerDateRangeModels[KEY]) => void };
-declare function ZZDevuiDateRange(_props: TypeControllerDateRangePublicProps$1): string;
+declare function ZZBasicDateRange(_props: TypeControllerDateRangePublicProps$1): string;
 //#endregion
-//#region src/suite-vendor/a-devui/modules/devui-date/src/.metadata/component/dateRange.d.ts
+//#region src/suite/cabloy-basic/modules/basic-date/src/.metadata/component/dateRange.d.ts
 type TypeControllerDateRangePublicProps = {
   controllerRef?: (ref: ControllerDateRange) => void;
 } & ControllerDateRangeProps & ControllerDateRangeModels & { [KEY in keyof ControllerDateRangeModels as TypePropValueFromModel<KEY>]: ControllerDateRangeModels[KEY] } & { [KEY in keyof ControllerDateRangeModels as TypePropUpdateFromModel<KEY>]: (value: ControllerDateRangeModels[KEY]) => void };
 type TypeModelArguments = { [KEY in keyof ControllerDateRangeModels as TypePropValueFromModel<KEY>]: ControllerDateRangeModels[KEY] };
 type ControllerInnerProps$1 = TypeControllerInnerProps<ControllerDateRangeProps & { [KEY in keyof ControllerDateRangeModels as TypePropValueFromModel<KEY>]: ControllerDateRangeModels[KEY] }, keyof typeof ControllerDateRange.$propsDefault>;
-declare module 'zova-module-devui-date' {
+declare module 'zova-module-basic-date' {
   interface ControllerDateRange {
     $props: ControllerInnerProps$1;
     $useModel<K$1 extends keyof TypeModelArguments>(name: K$1, options?: DefineModelOptions<TypeModelArguments[K$1]>): ControllerInnerProps$1[K$1];
@@ -42868,12 +43596,12 @@ declare const ZDateRange: DefineSetupFnComponent<TypeControllerDateRangePublicPr
   [x: `on${Capitalize<string>}`]: ((...args: never) => any) | undefined;
 }), PublicProps>;
 //#endregion
-//#region src/suite-vendor/a-devui/modules/devui-date/src/.metadata/component/formFieldDateRange.d.ts
+//#region src/suite/cabloy-basic/modules/basic-date/src/.metadata/component/formFieldDateRange.d.ts
 type TypeControllerFormFieldDateRangePublicProps$1 = {
   controllerRef?: (ref: ControllerFormFieldDateRange) => void;
 } & ControllerFormFieldDateRangeProps;
 type ControllerInnerProps = TypeControllerInnerProps<ControllerFormFieldDateRangeProps, keyof typeof ControllerFormFieldDateRange.$propsDefault>;
-declare module 'zova-module-devui-date' {
+declare module 'zova-module-basic-date' {
   interface ControllerFormFieldDateRange {
     $props: ControllerInnerProps;
   }
@@ -42886,9 +43614,9 @@ declare const ZFormFieldDateRange: DefineSetupFnComponent<TypeControllerFormFiel
   [x: `on${Capitalize<string>}`]: ((...args: never) => any) | undefined;
 }), PublicProps>;
 //#endregion
-//#region src/suite-vendor/a-devui/modules/devui-date/src/.metadata/index.d.ts
+//#region src/suite/cabloy-basic/modules/basic-date/src/.metadata/index.d.ts
 declare module 'zova' {}
-declare module 'zova-module-devui-date' {
+declare module 'zova-module-basic-date' {
   interface ControllerDateRange {}
   interface ControllerFormFieldDateRange {}
 }
@@ -42897,8 +43625,8 @@ declare module 'zova-module-devui-date' {
 
 declare module 'zova' {
   interface IBeanRecordLocal {
-    'devui-date.controller.dateRange': ControllerDateRange;
-    'devui-date.controller.formFieldDateRange': ControllerFormFieldDateRange;
+    'basic-date.controller.dateRange': ControllerDateRange;
+    'basic-date.controller.formFieldDateRange': ControllerFormFieldDateRange;
   }
 }
 /** controller: end */
@@ -42906,29 +43634,29 @@ declare module 'zova' {
 
 declare module 'zova' {
   interface IComponentRecord {
-    'devui-date:dateRange': ControllerDateRange;
-    'devui-date:formFieldDateRange': ControllerFormFieldDateRange;
+    'basic-date:dateRange': ControllerDateRange;
+    'basic-date:formFieldDateRange': ControllerFormFieldDateRange;
   }
   interface IZovaComponentRecord {
-    'devui-date:dateRange': typeof ZDateRange;
-    'devui-date:formFieldDateRange': typeof ZFormFieldDateRange;
+    'basic-date:dateRange': typeof ZDateRange;
+    'basic-date:formFieldDateRange': typeof ZFormFieldDateRange;
   }
 }
 /** components: end */
 /** scope: begin */
 
-declare class ScopeModuleDevuiDate extends BeanScopeBase {}
-interface ScopeModuleDevuiDate {
+declare class ScopeModuleBasicDate extends BeanScopeBase {}
+interface ScopeModuleBasicDate {
   util: BeanScopeUtil;
 }
 declare module 'zova' {
   interface IBeanScopeRecord {
-    'devui-date': ScopeModuleDevuiDate;
+    'basic-date': ScopeModuleBasicDate;
   }
 }
 /** scope: end */
 //#endregion
-//#region src/suite-vendor/a-devui/modules/devui-date/src/component/formFieldDateRange/controller.d.ts
+//#region src/suite/cabloy-basic/modules/basic-date/src/component/formFieldDateRange/controller.d.ts
 interface ControllerFormFieldDateRangeProps extends IFormFieldOptions {
   separator?: string;
 }
@@ -42940,9 +43668,9 @@ declare class ControllerFormFieldDateRange extends BeanControllerBase {
   protected render(): JSX.Element;
 }
 //#endregion
-//#region src/suite-vendor/a-devui/modules/devui-date/rest/component/formFieldDateRange.d.ts
+//#region src/suite/cabloy-basic/modules/basic-date/rest/component/formFieldDateRange.d.ts
 type TypeControllerFormFieldDateRangePublicProps = TypeRenderComponentJsxPropsPublic & ControllerFormFieldDateRangeProps;
-declare function FFDevuiDateRange(_props: TypeControllerFormFieldDateRangePublicProps): string;
+declare function FFBasicDateRange(_props: TypeControllerFormFieldDateRangePublicProps): string;
 //#endregion
 //#region src/suite-vendor/a-zova/modules/a-zod/src/bean/tool.v.d.ts
 declare class ToolV extends BeanBase {
@@ -42994,14 +43722,14 @@ declare module 'zova' {
   }
 }
 //#endregion
-//#region src/suite-vendor/a-devui/modules/devui-form/src/component/formFieldCaptcha/controller.d.ts
+//#region src/suite/cabloy-basic/modules/basic-form/src/component/formFieldCaptcha/controller.d.ts
 interface ControllerFormFieldCaptchaProps extends IFormFieldOptions {
   captcha?: ICaptchaOptions;
 }
 //#endregion
-//#region src/suite-vendor/a-devui/modules/devui-form/rest/component/formFieldCaptcha.d.ts
+//#region src/suite/cabloy-basic/modules/basic-form/rest/component/formFieldCaptcha.d.ts
 type TypeControllerFormFieldCaptchaPublicProps = TypeRenderComponentJsxPropsPublic & ControllerFormFieldCaptchaProps;
-declare function FFDevuiFormCaptcha(_props: TypeControllerFormFieldCaptchaPublicProps): string;
+declare function FFBasicFormCaptcha(_props: TypeControllerFormFieldCaptchaPublicProps): string;
 //#endregion
 //#region src/suite-vendor/a-cabloy/modules/rest-resource/src/model/resource.d.ts
 interface IModelOptionsResource extends IDecoratorModelOptions {}
@@ -43020,7 +43748,8 @@ declare class ModelResource<Entity = any, EntityCreate = Partial<Entity>, Entity
   schemaPages?: SchemaObject;
   $$scopeModuleAOpenapi: ScopeModuleAOpenapi;
   protected __init__(resource: string): Promise<void>;
-  select(query: ITableQuery): UnwrapNestedRefs<UseQueryReturnType<ITableRes<Entity>, Error>>;
+  selectGeneral(actionPath?: string, query?: ITableQuery): UnwrapNestedRefs<UseQueryReturnType<ITableRes<Entity>, Error>>;
+  select(query?: ITableQuery): UnwrapNestedRefs<UseQueryReturnType<ITableRes<Entity>, Error>>;
   view(id: TableIdentity): UnwrapNestedRefs<UseQueryReturnType<NonNullable<Awaited<Entity>> | null, Error>>;
   create(): UnwrapNestedRefs<UseMutationReturnType<void, Error, EntityCreate, unknown>>;
   update(id: TableIdentity): UnwrapNestedRefs<UseMutationReturnType<void, Error, EntityUpdate, unknown>>;
@@ -43029,8 +43758,8 @@ declare class ModelResource<Entity = any, EntityCreate = Partial<Entity>, Entity
   get apiSchemasView(): IOpenapiSchemas;
   get apiSchemasCreate(): IOpenapiSchemas;
   get apiSchemasUpdate(): IOpenapiSchemas;
-  get componentRestPage(): "devui-restpage:restPage";
-  get componentRestPageEntry(): "devui-restpage:restPageEntry";
+  get componentRestPage(): "basic-restpage:restPage";
+  get componentRestPageEntry(): "basic-restpage:restPageEntry";
   get componentTable(): TypeComponentRecordSelectorKeysStrict<"table">;
   get componentForm(): "a-form:form";
   getFormSchema(formMeta: IFormMeta): SchemaObject | undefined;
@@ -43230,76 +43959,153 @@ declare module 'zova' {
 }
 /** scope: end */
 //#endregion
-//#region src/suite-vendor/a-devui/modules/devui-restpage/src/types/page.d.ts
+//#region src/suite/cabloy-basic/modules/basic-restpage/src/types/page.d.ts
 interface IPageScope extends IPageWrapperScope {}
 declare module 'zova-module-a-table' {
   interface ITableScope extends IPageScope {}
 }
 //#endregion
-//#region src/suite-vendor/a-devui/modules/devui-restpage/src/component/restPage/controller.d.ts
+//#region src/suite/cabloy-basic/modules/basic-restpage/src/component/restPage/controller.d.ts
 interface ControllerRestPageProps<TData$1 extends {} = {}> {
   showFilter?: boolean;
 }
 //#endregion
-//#region src/suite-vendor/a-devui/modules/devui-restpage/rest/component/restPage.d.ts
+//#region src/suite/cabloy-basic/modules/basic-restpage/rest/component/restPage.d.ts
 type TypeControllerRestPagePublicProps<TData$1 extends {} = {}> = TypeRenderComponentJsxPropsPublic & ControllerRestPageProps<TData$1>;
-declare function PPDevuiRestpage<TData$1 extends {} = {}>(_props: TypeControllerRestPagePublicProps<TData$1>): string;
+declare function PPBasicRestpage<TData$1 extends {} = {}>(_props: TypeControllerRestPagePublicProps<TData$1>): string;
 //#endregion
-//#region src/suite-vendor/a-devui/modules/devui-restpage/src/component/wrapperFilter/controller.d.ts
+//#region src/suite/cabloy-basic/modules/basic-restpage/src/component/wrapperFilter/controller.d.ts
 interface ControllerWrapperFilterProps {
   formData?: any;
   formProvider?: IFormProvider;
   onFilter?: (data: any) => void;
 }
 //#endregion
-//#region src/suite-vendor/a-devui/modules/devui-restpage/rest/component/wrapperFilter.d.ts
+//#region src/suite/cabloy-basic/modules/basic-restpage/rest/component/wrapperFilter.d.ts
 type TypeControllerWrapperFilterPublicProps = TypeRenderComponentJsxPropsPublic & ControllerWrapperFilterProps;
-declare function ZZDevuiRestpageWrapperFilter(_props: TypeControllerWrapperFilterPublicProps): string;
+declare function ZZBasicRestpageWrapperFilter(_props: TypeControllerWrapperFilterPublicProps): string;
 //#endregion
-//#region src/suite-vendor/a-devui/modules/devui-restpage/src/types/pageEntry.d.ts
+//#region src/suite/cabloy-basic/modules/basic-restpage/src/types/pageEntry.d.ts
 interface IPageEntryScope extends IPageEntryWrapperScope {}
 declare module 'zova-module-a-form' {
   interface IFormScope extends IPageEntryScope {}
 }
 //#endregion
-//#region src/suite-vendor/a-devui/modules/devui-restpage/src/component/restPageEntry/controller.d.ts
+//#region src/suite/cabloy-basic/modules/basic-restpage/src/component/restPageEntry/controller.d.ts
 interface ControllerRestPageEntryProps<TData$1 extends {} = {}> {
   toolbarPosition?: 'top' | 'bottom';
 }
 //#endregion
-//#region src/suite-vendor/a-devui/modules/devui-restpage/rest/component/restPageEntry.d.ts
+//#region src/suite/cabloy-basic/modules/basic-restpage/rest/component/restPageEntry.d.ts
 type TypeControllerRestPageEntryPublicProps<TData$1 extends {} = {}> = TypeRenderComponentJsxPropsPublic & ControllerRestPageEntryProps<TData$1>;
-declare function PPDevuiRestpageEntry<TData$1 extends {} = {}>(_props: TypeControllerRestPageEntryPublicProps<TData$1>): string;
+declare function PPBasicRestpageEntry<TData$1 extends {} = {}>(_props: TypeControllerRestPageEntryPublicProps<TData$1>): string;
 //#endregion
-//#region src/suite-vendor/a-devui/modules/devui-table/src/component/table/controller.d.ts
+//#region src/suite/cabloy-basic/modules/basic-table/src/component/table/controller.d.ts
 interface ControllerTableProps<TData$1 extends {} = {}> extends ControllerTableProps$1<TData$1> {}
 //#endregion
-//#region src/suite-vendor/a-devui/modules/devui-table/rest/component/table.d.ts
+//#region src/suite/cabloy-basic/modules/basic-table/rest/component/table.d.ts
 type TypeControllerTablePublicProps<TData$1 extends {} = {}> = TypeRenderComponentJsxPropsPublic & ControllerTableProps<TData$1>;
-declare function ZZDevuiTable<TData$1 extends {} = {}>(_props: TypeControllerTablePublicProps<TData$1>): string;
+declare function ZZBasicTable<TData$1 extends {} = {}>(_props: TypeControllerTablePublicProps<TData$1>): string;
 //#endregion
-//#region src/suite-vendor/a-devui/modules/devui-table/rest/component/operationsTable.d.ts
+//#region src/suite/cabloy-basic/modules/basic-table/rest/component/operationsTable.d.ts
 type TypeControllerOperationsTablePublicProps = TypeRenderComponentJsxPropsPublic;
 declare function ZZDevuiTableOperationsTable(_props: TypeControllerOperationsTablePublicProps): string;
 //#endregion
-//#region src/suite-vendor/a-devui/modules/devui-table/rest/component/actionOperationsTable.d.ts
+//#region src/suite/cabloy-basic/modules/basic-table/rest/component/actionOperationsTable.d.ts
 type TypeControllerActionOperationsTablePublicProps = TypeRenderComponentJsxPropsPublic;
-declare function ZZDevuiTableActionOperationsTable(_props: TypeControllerActionOperationsTablePublicProps): string;
+declare function ZZBasicTableActionOperationsTable(_props: TypeControllerActionOperationsTablePublicProps): string;
 //#endregion
-//#region src/suite-vendor/a-devui/modules/devui-table/src/bean/tableCell.actionOperationsRow.d.ts
+//#region src/suite/cabloy-basic/modules/basic-table/src/bean/tableCell.actionOperationsRow.d.ts
 interface ITableCellOptionsActionOperationsRow extends IDecoratorTableCellOptions {}
 //#endregion
-//#region src/suite-vendor/a-devui/modules/devui-table/rest/tableCell/actionOperationsRow.d.ts
-declare function TTDevuiTableActionOperationsRow(_props: ITableCellOptionsActionOperationsRow): string;
+//#region src/suite/cabloy-basic/modules/basic-table/rest/tableCell/actionOperationsRow.d.ts
+declare function TTBasicTableActionOperationsRow(_props: ITableCellOptionsActionOperationsRow): string;
 //#endregion
-//#region src/suite-vendor/a-devui/modules/devui-table/src/bean/tableCell.actionView.d.ts
+//#region src/suite/cabloy-basic/modules/basic-table/src/bean/tableCell.actionView.d.ts
 interface ITableCellOptionsActionView extends IDecoratorTableCellOptions {
   resource?: string;
   id?: string;
 }
 //#endregion
-//#region src/suite-vendor/a-devui/modules/devui-table/rest/tableCell/actionView.d.ts
-declare function TTDevuiTableActionView(_props: ITableCellOptionsActionView): string;
+//#region src/suite/cabloy-basic/modules/basic-table/rest/tableCell/actionView.d.ts
+declare function TTBasicTableActionView(_props: ITableCellOptionsActionView): string;
+//#endregion
+//#region src/suite-vendor/a-cabloy/modules/rest-actions/src/bean/action.view.d.ts
+type TypeActionViewResult = unknown;
+interface IActionOptionsView extends IDecoratorActionOptions<TypeActionViewResult> {
+  resource?: string;
+  id?: string;
+}
+//#endregion
+//#region src/suite-vendor/a-cabloy/modules/rest-actions/rest/action/view.d.ts
+declare function AARestActionsView(_props: TypeActionOptionsRest<IActionOptionsView>): string;
+//#endregion
+//#region src/suite-vendor/a-cabloy/modules/rest-actions/src/bean/action.edit.d.ts
+type TypeActionEditResult = unknown;
+interface IActionOptionsEdit extends IDecoratorActionOptions<TypeActionEditResult> {
+  resource?: string;
+  id?: string;
+}
+//#endregion
+//#region src/suite-vendor/a-cabloy/modules/rest-actions/rest/action/edit.d.ts
+declare function AARestActionsEdit(_props: TypeActionOptionsRest<IActionOptionsEdit>): string;
+//#endregion
+//#region src/suite-vendor/a-cabloy/modules/rest-actions/src/bean/action.delete.d.ts
+type TypeActionDeleteResult = unknown;
+interface IActionOptionsDelete extends IDecoratorActionOptions<TypeActionDeleteResult> {
+  id?: string;
+}
+//#endregion
+//#region src/suite-vendor/a-cabloy/modules/rest-actions/rest/action/delete.d.ts
+declare function AARestActionsDelete(_props: TypeActionOptionsRest<IActionOptionsDelete>): string;
+//#endregion
+//#region src/suite-vendor/a-cabloy/modules/rest-actions/src/bean/action.create.d.ts
+type TypeActionCreateResult = unknown;
+interface IActionOptionsCreate extends IDecoratorActionOptions<TypeActionCreateResult> {
+  resource?: string;
+}
+//#endregion
+//#region src/suite-vendor/a-cabloy/modules/rest-actions/rest/action/create.d.ts
+declare function AARestActionsCreate(_props: TypeActionOptionsRest<IActionOptionsCreate>): string;
+//#endregion
+//#region src/suite-vendor/a-cabloy/modules/rest-actions/src/bean/action.setValue.d.ts
+type TypeActionSetValueResult = unknown;
+interface IActionOptionsSetValue extends IDecoratorActionOptions<TypeActionSetValueResult> {
+  name?: string;
+  value?: any;
+  disableNotifyChanged?: boolean;
+}
+//#endregion
+//#region src/suite-vendor/a-cabloy/modules/rest-actions/rest/action/setValue.d.ts
+declare function AARestActionsSetValue(_props: TypeActionOptionsRest<IActionOptionsSetValue>): string;
+//#endregion
+//#region src/suite-vendor/a-cabloy/modules/rest-actions/src/bean/action.alert.d.ts
+type TypeActionAlertResult = unknown;
+interface IActionOptionsAlert extends IDecoratorActionOptions<TypeActionAlertResult> {
+  message: string;
+  wait?: boolean;
+}
+//#endregion
+//#region src/suite-vendor/a-cabloy/modules/rest-actions/rest/action/alert.d.ts
+declare function AARestActionsAlert(_props: TypeActionOptionsRest<IActionOptionsAlert>): string;
+//#endregion
+//#region src/suite-vendor/a-cabloy/modules/rest-actions/src/bean/action.confirm.d.ts
+type TypeActionConfirmResult = boolean;
+interface IActionOptionsConfirm extends IDecoratorActionOptions<TypeActionConfirmResult> {
+  message: string;
+}
+//#endregion
+//#region src/suite-vendor/a-cabloy/modules/rest-actions/rest/action/confirm.d.ts
+declare function AARestActionsConfirm(_props: TypeActionOptionsRest<IActionOptionsConfirm>): string;
+//#endregion
+//#region src/suite-vendor/a-cabloy/modules/rest-actions/src/bean/action.copy.d.ts
+type TypeActionCopyResult = unknown;
+interface IActionOptionsCopy extends IDecoratorActionOptions<TypeActionCopyResult> {
+  text: any;
+}
+//#endregion
+//#region src/suite-vendor/a-cabloy/modules/rest-actions/rest/action/copy.d.ts
+declare function AARestActionsCopy(_props: TypeActionOptionsRest<IActionOptionsCopy>): string;
 //#endregion
 //#region src/suite-vendor/a-zova/modules/a-actions/src/bean/action.log.d.ts
 type TypeActionLogResult = unknown;
@@ -43464,6 +44270,148 @@ declare class ControllerPageTodo extends BeanControllerPageBase {
   newTitle: string;
   currentTodoId?: string;
   protected __init__(): Promise<void>;
+  get queryTodos(): UnwrapNestedRefs<UseQueryReturnType<ApiTodoEntity[], Error>>;
+  get queryTodoCurrent(): {
+    dataUpdatedAt: number;
+    errorUpdatedAt: number;
+    failureCount: number;
+    failureReason: Error | null;
+    errorUpdateCount: number;
+    isFetched: boolean;
+    isFetchedAfterMount: boolean;
+    isFetching: boolean;
+    isInitialLoading: boolean;
+    isPaused: boolean;
+    isRefetching: boolean;
+    isStale: boolean;
+    isEnabled: boolean;
+    refetch: (options?: RefetchOptions | undefined) => Promise<QueryObserverResult<ApiTodoEntity, Error>>;
+    fetchStatus: FetchStatus;
+    promise: Promise<ApiTodoEntity>;
+    data: undefined;
+    error: Error;
+    isError: true;
+    isPending: false;
+    isLoading: false;
+    isLoadingError: true;
+    isRefetchError: false;
+    isSuccess: false;
+    isPlaceholderData: false;
+    status: "error";
+    suspense: () => Promise<QueryObserverResult<ApiTodoEntity, Error>>;
+  } | {
+    dataUpdatedAt: number;
+    errorUpdatedAt: number;
+    failureCount: number;
+    failureReason: Error | null;
+    errorUpdateCount: number;
+    isFetched: boolean;
+    isFetchedAfterMount: boolean;
+    isFetching: boolean;
+    isLoading: boolean;
+    isInitialLoading: boolean;
+    isPaused: boolean;
+    isRefetching: boolean;
+    isStale: boolean;
+    isEnabled: boolean;
+    refetch: (options?: RefetchOptions | undefined) => Promise<QueryObserverResult<ApiTodoEntity, Error>>;
+    fetchStatus: FetchStatus;
+    promise: Promise<ApiTodoEntity>;
+    data: undefined;
+    error: null;
+    isError: false;
+    isPending: true;
+    isLoadingError: false;
+    isRefetchError: false;
+    isSuccess: false;
+    isPlaceholderData: false;
+    status: "pending";
+    suspense: () => Promise<QueryObserverResult<ApiTodoEntity, Error>>;
+  } | {
+    dataUpdatedAt: number;
+    errorUpdatedAt: number;
+    failureCount: number;
+    failureReason: Error | null;
+    errorUpdateCount: number;
+    isFetched: boolean;
+    isFetchedAfterMount: boolean;
+    isFetching: boolean;
+    isInitialLoading: boolean;
+    isPaused: boolean;
+    isRefetching: boolean;
+    isStale: boolean;
+    isEnabled: boolean;
+    refetch: (options?: RefetchOptions | undefined) => Promise<QueryObserverResult<ApiTodoEntity, Error>>;
+    fetchStatus: FetchStatus;
+    promise: Promise<ApiTodoEntity>;
+    data: ApiTodoEntity;
+    isError: false;
+    error: null;
+    isPending: false;
+    isLoading: false;
+    isLoadingError: false;
+    isRefetchError: false;
+    isSuccess: true;
+    isPlaceholderData: true;
+    status: "success";
+    suspense: () => Promise<QueryObserverResult<ApiTodoEntity, Error>>;
+  } | {
+    dataUpdatedAt: number;
+    errorUpdatedAt: number;
+    failureCount: number;
+    failureReason: Error | null;
+    errorUpdateCount: number;
+    isFetched: boolean;
+    isFetchedAfterMount: boolean;
+    isFetching: boolean;
+    isInitialLoading: boolean;
+    isPaused: boolean;
+    isRefetching: boolean;
+    isStale: boolean;
+    isEnabled: boolean;
+    refetch: (options?: RefetchOptions | undefined) => Promise<QueryObserverResult<ApiTodoEntity, Error>>;
+    fetchStatus: FetchStatus;
+    promise: Promise<ApiTodoEntity>;
+    data: ApiTodoEntity;
+    error: Error;
+    isError: true;
+    isPending: false;
+    isLoading: false;
+    isLoadingError: false;
+    isRefetchError: true;
+    isSuccess: false;
+    isPlaceholderData: false;
+    status: "error";
+    suspense: () => Promise<QueryObserverResult<ApiTodoEntity, Error>>;
+  } | {
+    dataUpdatedAt: number;
+    errorUpdatedAt: number;
+    failureCount: number;
+    failureReason: Error | null;
+    errorUpdateCount: number;
+    isFetched: boolean;
+    isFetchedAfterMount: boolean;
+    isFetching: boolean;
+    isInitialLoading: boolean;
+    isPaused: boolean;
+    isRefetching: boolean;
+    isStale: boolean;
+    isEnabled: boolean;
+    refetch: (options?: RefetchOptions | undefined) => Promise<QueryObserverResult<ApiTodoEntity, Error>>;
+    fetchStatus: FetchStatus;
+    promise: Promise<ApiTodoEntity>;
+    data: ApiTodoEntity;
+    error: null;
+    isError: false;
+    isPending: false;
+    isLoading: false;
+    isLoadingError: false;
+    isRefetchError: false;
+    isSuccess: true;
+    isPlaceholderData: false;
+    status: "success";
+    suspense: () => Promise<QueryObserverResult<ApiTodoEntity, Error>>;
+  } | undefined;
   addTodo(): Promise<void>;
   completeTodo(item: ApiTodoEntity): Promise<void>;
   deleteTodo(item: ApiTodoEntity): Promise<void>;
@@ -43903,7 +44851,6 @@ interface IIconRecord {
   '::visibility': true;
   '::zoom-in': true;
   '::zoom-out': true;
-  '::zova': true;
   ':editor:add-box-outline': true;
   ':editor:add-box': true;
   ':editor:bookmark-outline': true;
@@ -43998,6 +44945,7 @@ interface IIconRecord {
   ':role:role': true;
   ':role:shield-key': true;
   ':role:template': true;
+  ':social:cabloy': true;
   ':social:chat': true;
   ':social:facebook': true;
   ':social:github': true;
@@ -44005,6 +44953,8 @@ interface IIconRecord {
   ':social:record-voice-over': true;
   ':social:school': true;
   ':social:twitter': true;
+  ':social:vona': true;
+  ':social:zova': true;
   ':tools:pomotodo': true;
   ':tools:spreadsheet': true;
 }
@@ -44044,4 +44994,4 @@ interface IPagePathRecord {
   presetResource: TypePagePathSchema<undefined, undefined>;
 }
 //#endregion
-export { $iconName, AAActionsLog, AARestActionsAlert, AARestActionsConfirm, AARestActionsCopy, AARestActionsCreate, AARestActionsDelete, AARestActionsEdit, AARestActionsSetValue, AARestActionsView, FFBTest, FFBTest3, FFCurrency, FFDemoBasicTest, FFDevuiDateRange, FFDevuiFormCaptcha, FFFormWrapper, IIconRecord, IPagePathRecord, PPDevuiRestpage, PPDevuiRestpageEntry, TTCurrency, TTDate, TTDemoBasicTest, TTDevuiTableActionOperationsRow, TTDevuiTableActionView, TypePagePathSchema, ZZApp, ZZBCard, ZZBCard3, ZZBehavior, ZZDemoBasicActionView, ZZDemoBasicCard, ZZDemoBasicTableCellTest, ZZDevuiDateRange, ZZDevuiRestpageWrapperFilter, ZZDevuiTable, ZZDevuiTableActionOperationsTable, ZZDevuiTableOperationsTable, ZZForm, ZZFormField, ZZFormSubscribe, ZZHomeBasePage, ZZHomeLayoutEmpty, ZZHomeLayoutEssentialLink, ZZHomeLayoutTabs, ZZIcon, ZZRouterViewEmpty, ZZRouterstackRouterViewStack, ZZRoutertabsRouterViewTabs, ZZTable };
+export { $iconName, AAActionsLog, AARestActionsAlert, AARestActionsConfirm, AARestActionsCopy, AARestActionsCreate, AARestActionsDelete, AARestActionsEdit, AARestActionsSetValue, AARestActionsView, FFBTest, FFBTest3, FFBasicDateRange, FFBasicFormCaptcha, FFCurrency, FFDemoBasicTest, FFFormWrapper, IIconRecord, IPagePathRecord, PPBasicRestpage, PPBasicRestpageEntry, TTBasicTableActionOperationsRow, TTBasicTableActionView, TTCurrency, TTDate, TTDemoBasicTest, TypePagePathSchema, ZZApp, ZZBCard, ZZBCard3, ZZBasicDateRange, ZZBasicRestpageWrapperFilter, ZZBasicTable, ZZBasicTableActionOperationsTable, ZZBehavior, ZZDemoBasicActionView, ZZDemoBasicCard, ZZDemoBasicTableCellTest, ZZDevuiTableOperationsTable, ZZForm, ZZFormField, ZZFormSubscribe, ZZHomeBasePage, ZZHomeLayoutEmpty, ZZHomeLayoutEssentialLink, ZZHomeLayoutTabs, ZZIcon, ZZRouterViewEmpty, ZZRouterstackRouterViewStack, ZZRoutertabsRouterViewTabs, ZZTable };

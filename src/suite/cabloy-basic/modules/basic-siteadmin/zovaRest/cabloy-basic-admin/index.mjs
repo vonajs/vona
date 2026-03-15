@@ -148,6 +148,72 @@ function ZZHomeLayoutTabs(_props) {
 }
 
 //#endregion
+//#region src/suite/cabloy-basic/modules/basic-date/rest/component/dateRange.ts
+function ZZBasicDateRange(_props) {
+	return "basic-date:dateRange";
+}
+
+//#endregion
+//#region src/suite/cabloy-basic/modules/basic-date/rest/component/formFieldDateRange.ts
+function FFBasicDateRange(_props) {
+	return "basic-date:formFieldDateRange";
+}
+
+//#endregion
+//#region src/suite/cabloy-basic/modules/basic-form/rest/component/formFieldCaptcha.ts
+function FFBasicFormCaptcha(_props) {
+	return "basic-form:formFieldCaptcha";
+}
+
+//#endregion
+//#region src/suite/cabloy-basic/modules/basic-restpage/rest/component/restPage.ts
+function PPBasicRestpage(_props) {
+	return "basic-restpage:restPage";
+}
+
+//#endregion
+//#region src/suite/cabloy-basic/modules/basic-restpage/rest/component/wrapperFilter.ts
+function ZZBasicRestpageWrapperFilter(_props) {
+	return "basic-restpage:wrapperFilter";
+}
+
+//#endregion
+//#region src/suite/cabloy-basic/modules/basic-restpage/rest/component/restPageEntry.ts
+function PPBasicRestpageEntry(_props) {
+	return "basic-restpage:restPageEntry";
+}
+
+//#endregion
+//#region src/suite/cabloy-basic/modules/basic-table/rest/component/table.ts
+function ZZBasicTable(_props) {
+	return "basic-table:table";
+}
+
+//#endregion
+//#region src/suite/cabloy-basic/modules/basic-table/rest/component/operationsTable.ts
+function ZZDevuiTableOperationsTable(_props) {
+	return "devui-table:operationsTable";
+}
+
+//#endregion
+//#region src/suite/cabloy-basic/modules/basic-table/rest/component/actionOperationsTable.ts
+function ZZBasicTableActionOperationsTable(_props) {
+	return "basic-table:actionOperationsTable";
+}
+
+//#endregion
+//#region src/suite/cabloy-basic/modules/basic-table/rest/tableCell/actionOperationsRow.ts
+function TTBasicTableActionOperationsRow(_props) {
+	return "basic-table.tableCell.actionOperationsRow";
+}
+
+//#endregion
+//#region src/suite/cabloy-basic/modules/basic-table/rest/tableCell/actionView.ts
+function TTBasicTableActionView(_props) {
+	return "basic-table.tableCell.actionView";
+}
+
+//#endregion
 //#region src/suite-vendor/a-cabloy/modules/rest-actions/rest/action/view.ts
 function AARestActionsView(_props) {
 	return "rest-actions:view";
@@ -196,72 +262,6 @@ function AARestActionsCopy(_props) {
 }
 
 //#endregion
-//#region src/suite-vendor/a-devui/modules/devui-date/rest/component/dateRange.ts
-function ZZDevuiDateRange(_props) {
-	return "devui-date:dateRange";
-}
-
-//#endregion
-//#region src/suite-vendor/a-devui/modules/devui-date/rest/component/formFieldDateRange.ts
-function FFDevuiDateRange(_props) {
-	return "devui-date:formFieldDateRange";
-}
-
-//#endregion
-//#region src/suite-vendor/a-devui/modules/devui-form/rest/component/formFieldCaptcha.ts
-function FFDevuiFormCaptcha(_props) {
-	return "devui-form:formFieldCaptcha";
-}
-
-//#endregion
-//#region src/suite-vendor/a-devui/modules/devui-restpage/rest/component/restPage.ts
-function PPDevuiRestpage(_props) {
-	return "devui-restpage:restPage";
-}
-
-//#endregion
-//#region src/suite-vendor/a-devui/modules/devui-restpage/rest/component/wrapperFilter.ts
-function ZZDevuiRestpageWrapperFilter(_props) {
-	return "devui-restpage:wrapperFilter";
-}
-
-//#endregion
-//#region src/suite-vendor/a-devui/modules/devui-restpage/rest/component/restPageEntry.ts
-function PPDevuiRestpageEntry(_props) {
-	return "devui-restpage:restPageEntry";
-}
-
-//#endregion
-//#region src/suite-vendor/a-devui/modules/devui-table/rest/component/table.ts
-function ZZDevuiTable(_props) {
-	return "devui-table:table";
-}
-
-//#endregion
-//#region src/suite-vendor/a-devui/modules/devui-table/rest/component/operationsTable.ts
-function ZZDevuiTableOperationsTable(_props) {
-	return "devui-table:operationsTable";
-}
-
-//#endregion
-//#region src/suite-vendor/a-devui/modules/devui-table/rest/component/actionOperationsTable.ts
-function ZZDevuiTableActionOperationsTable(_props) {
-	return "devui-table:actionOperationsTable";
-}
-
-//#endregion
-//#region src/suite-vendor/a-devui/modules/devui-table/rest/tableCell/actionOperationsRow.ts
-function TTDevuiTableActionOperationsRow(_props) {
-	return "devui-table.tableCell.actionOperationsRow";
-}
-
-//#endregion
-//#region src/suite-vendor/a-devui/modules/devui-table/rest/tableCell/actionView.ts
-function TTDevuiTableActionView(_props) {
-	return "devui-table.tableCell.actionView";
-}
-
-//#endregion
 //#region src/suite-vendor/a-zova/modules/a-actions/rest/action/log.ts
 function AAActionsLog(_props) {
 	return "a-actions:log";
@@ -286,4 +286,4 @@ function $iconName(name) {
 }
 
 //#endregion
-export { $iconName, AAActionsLog, AARestActionsAlert, AARestActionsConfirm, AARestActionsCopy, AARestActionsCreate, AARestActionsDelete, AARestActionsEdit, AARestActionsSetValue, AARestActionsView, FFBTest, FFBTest3, FFCurrency, FFDemoBasicTest, FFDevuiDateRange, FFDevuiFormCaptcha, FFFormWrapper, PPDevuiRestpage, PPDevuiRestpageEntry, TTCurrency, TTDate, TTDemoBasicTest, TTDevuiTableActionOperationsRow, TTDevuiTableActionView, ZZApp, ZZBCard, ZZBCard3, ZZBehavior, ZZDemoBasicActionView, ZZDemoBasicCard, ZZDemoBasicTableCellTest, ZZDevuiDateRange, ZZDevuiRestpageWrapperFilter, ZZDevuiTable, ZZDevuiTableActionOperationsTable, ZZDevuiTableOperationsTable, ZZForm, ZZFormField, ZZFormSubscribe, ZZHomeBasePage, ZZHomeLayoutEmpty, ZZHomeLayoutEssentialLink, ZZHomeLayoutTabs, ZZIcon, ZZRouterViewEmpty, ZZRouterstackRouterViewStack, ZZRoutertabsRouterViewTabs, ZZTable };
+export { $iconName, AAActionsLog, AARestActionsAlert, AARestActionsConfirm, AARestActionsCopy, AARestActionsCreate, AARestActionsDelete, AARestActionsEdit, AARestActionsSetValue, AARestActionsView, FFBTest, FFBTest3, FFBasicDateRange, FFBasicFormCaptcha, FFCurrency, FFDemoBasicTest, FFFormWrapper, PPBasicRestpage, PPBasicRestpageEntry, TTBasicTableActionOperationsRow, TTBasicTableActionView, TTCurrency, TTDate, TTDemoBasicTest, ZZApp, ZZBCard, ZZBCard3, ZZBasicDateRange, ZZBasicRestpageWrapperFilter, ZZBasicTable, ZZBasicTableActionOperationsTable, ZZBehavior, ZZDemoBasicActionView, ZZDemoBasicCard, ZZDemoBasicTableCellTest, ZZDevuiTableOperationsTable, ZZForm, ZZFormField, ZZFormSubscribe, ZZHomeBasePage, ZZHomeLayoutEmpty, ZZHomeLayoutEssentialLink, ZZHomeLayoutTabs, ZZIcon, ZZRouterViewEmpty, ZZRouterstackRouterViewStack, ZZRoutertabsRouterViewTabs, ZZTable };
