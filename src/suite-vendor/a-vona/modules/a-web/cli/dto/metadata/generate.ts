@@ -17,7 +17,7 @@ export default async function (options: IMetadataCustomGenerateOptions): Promise
   if (contentFields.length === 0) return '';
   // combine
   const content = `/** ${sceneName}: begin */
-${contentImports.join('\n')} 
+${contentImports.join('\n')}
 declare module 'vona-module-${moduleName}' {
   ${contentFields.join('\n')}
 }
