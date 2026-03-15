@@ -208,7 +208,6 @@ VonaJS puts all the utility methods for extending Zod Schema into the group `v`,
 |Name|Description|
 |--|--|
 |v.tableIdentity|Based on the current system configuration, provides `number` or `bigint` validation rules |
-|v.captcha| Provides captcha options|
 
 ## Controller
 
