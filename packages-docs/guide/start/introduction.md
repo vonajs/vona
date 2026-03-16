@@ -6,20 +6,25 @@ Vona is a fullstack meta-framework for building `SSR/SPA/Admin/Front` all in one
 
 * Pioneers dynamic DTO inference and generation capabilities, significantly improving development efficiency and experience. It can even be said that being able to dynamically infer and generate DTOs is a very important `milestone` for building a more elegant Node.js backend framework
 * Pioneers dual-layer tabs navigation design, allowing more convenient switching between multiple pages
-* Can dynamically render CRUD list pages, item pages, and search forms, and provides the best practices of `Tanstack Table/Tanstack Form/Tanstack Query`
+* Dynamically render CRUD list pages, item pages, and search forms, and provides the best practices of `Tanstack Table/Tanstack Form/Tanstack Query`
 
-## Philosophy
+## Demo online
 
-### 1. About Coding
+The Admin/Front websites of `Cabloy Store` are built by one codebase
 
-Many frameworks use the simplest use cases to demonstrate design elegance, ignoring the coding challenges presented by business complexity. As business grows and changes, project code quickly degrades and becomes difficult to maintain. Vona, however, addresses the complexity of large-scale businesses and proposes a series of engineering solutions. This allows us to maintain elegant and intuitive code even when developing large-scale business systems, improving development efficiency and experience while facilitating subsequent code iteration and maintenance
+* Front: [https://cabloy.com](https://cabloy.com)
+* Admin: [https://cabloy.com/admin](https://cabloy.com/admin)
 
-### 2. About Performance
+## Gif
 
-Many frameworks use the simplest use cases to demonstrate high performance, ignoring the performance challenges presented by business complexity. As business grows and changes, project performance plummets, and various optimization and mitigation measures lead to cumbersome and lengthy code. Vona, however, addresses the complexity of large-scale businesses and incorporates caching strategies into the framework's core, implementing mechanisms such as `two-layer cache`, `query cache`, and `entity cache`. This makes it easy to develop large-scale business systems, ensuring that code remains elegant and intuitive
+* Pioneers dual-layer tabs navigation design
+
+![](../../assets/img/start/cabloy-start-two-level-tabs.gif)
 
 ## Features
 
+* `Fullstack`: Building `SSR/SPA/Admin/Front` all in one codebase. The Admin backend also supports SSR, and the code is intuitive and elegant
+* `CRUD Dynamic Rendering`: Dynamically render CRUD list pages, item pages, and search forms, and provides the best practices of `Tanstack Table/Tanstack Form/Tanstack Query`
 * `Developed in TypeScript`: Provides comprehensive TypeScript type hints
 * `Using ESM modules throughout`: Faster project startup
 * `File-level precise HMR`: Makes the development experience smoother and more efficient
@@ -37,6 +42,18 @@ Many frameworks use the simplest use cases to demonstrate high performance, igno
 * `More Comprehensive AOP Programming`: Provides more comprehensive AOP programming capabilities, including controller aspect, internal aspect, and external aspect
 * `SSR Integration`: Provides out-of-the-box SSR rendering capabilities, supporting both the frontend website and the backend admin system
 * `Playground`: Provides a Playground, which allows us to test the code and verify the ideas very conveniently and quickly
+
+## Philosophy
+
+### 1. About Coding
+
+Many frameworks use the simplest use cases to demonstrate design elegance, ignoring the coding challenges presented by business complexity. As business grows and changes, project code quickly degrades and becomes difficult to maintain. Vona, however, addresses the complexity of large-scale businesses and proposes a series of engineering solutions. This allows us to maintain elegant and intuitive code even when developing large-scale business systems, improving development efficiency and experience while facilitating subsequent code iteration and maintenance
+
+### 2. About Performance
+
+Many frameworks use the simplest use cases to demonstrate high performance, ignoring the performance challenges presented by business complexity. As business grows and changes, project performance plummets, and various optimization and mitigation measures lead to cumbersome and lengthy code. Vona, however, addresses the complexity of large-scale businesses and incorporates caching strategies into the framework's core, implementing mechanisms such as `two-layer cache`, `query cache`, and `entity cache`. This makes it easy to develop large-scale business systems, ensuring that code remains elegant and intuitive
+
+
 
 ## Technology Stack
 

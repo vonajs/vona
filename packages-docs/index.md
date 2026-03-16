@@ -18,7 +18,7 @@ features:
   - title: Fullstack
     details: Building SSR/SPA/Admin/Front all in one codebase. The Admin backend also supports SSR, and the code is intuitive and elegant
   - title: CRUD Dynamic Rendering
-    details: Can dynamically render CRUD list pages, item pages, and search forms, and provides the best practices of Tanstack Table/Tanstack Form/Tanstack Query
+    details: Dynamically render CRUD list pages, item pages, and search forms, and provides the best practices of Tanstack Table/Tanstack Form/Tanstack Query
   - title: DTO Infer & Generation
     details: Pioneers dynamic DTO inference and generation capabilities, significantly improving development efficiency and experience
   - title: Dual-layer Tabs
