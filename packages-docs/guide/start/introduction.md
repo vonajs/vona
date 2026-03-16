@@ -25,6 +25,8 @@ The Admin/Front websites of `Cabloy Store` are built by one codebase
 
 * `Fullstack`: Building `SSR/SPA/Admin/Front` all in one codebase. The Admin backend also supports SSR, and the code is intuitive and elegant
 * `CRUD Dynamic Rendering`: Dynamically render CRUD list pages, item pages, and search forms, and provides the best practices of `Tanstack Table/Tanstack Form/Tanstack Query`
+* `Dynamic DTO Inference and Generation`: Pioneers dynamic DTO inference and generation capabilities, significantly improving development efficiency and experience
+* `Dual-layer Tabs`: Pioneers dual-layer tabs navigation design, allowing more convenient switching between multiple pages
 * `Developed in TypeScript`: Provides comprehensive TypeScript type hints
 * `Using ESM modules throughout`: Faster project startup
 * `File-level precise HMR`: Makes the development experience smoother and more efficient
@@ -35,13 +37,58 @@ The Admin/Front websites of `Cabloy Store` are built by one codebase
 * `Multi-tenancy`: Supports the development of multi-tenancy SaaS systems with a shared database schema, but data generated during operation is isolated
 * `Multi-database and multi-datasource`: Supports multi-database and multi-datasource, and provides out-of-the-box read-write splitting and dynamic datasource capabilities
 * `Database Transaction`: Built-in database transaction capabilities and support for transaction propagation mechanisms
-* `Dynamic DTO Inference and Generation`: Pioneers dynamic DTO inference and generation capabilities, significantly improving development efficiency and experience
 * `Cli Commands`: Provides a large number of Cli commands for generating code skeletons for various resources
 * `Menu Commands`: Execute Cli commands through the menus, significantly reducing mental overhead and improving the development experience
 * `Configuration Capabilities Based on Multi-Dimensional Variables`: Loads env/config files based on multi-dimensional variables, providing a more flexible configuration mechanism and supporting more complex business scenarios
 * `More Comprehensive AOP Programming`: Provides more comprehensive AOP programming capabilities, including controller aspect, internal aspect, and external aspect
-* `SSR Integration`: Provides out-of-the-box SSR rendering capabilities, supporting both the frontend website and the backend admin system
 * `Playground`: Provides a Playground, which allows us to test the code and verify the ideas very conveniently and quickly
+
+## Technology Stack
+
+### General
+
+|Name|Version|
+|--|--|
+|pnpm| >=10.19.0 |
+|Nodejs| >=24.8.0 |
+|Typescript| >=5.9.3 |
+
+### Backend
+
+|Name|Version|
+|--|--|
+|Koa|>=3.0.0|
+|Knex|>=3.1.0|
+|Zod|>=4.1.13|
+|Redis|>=7.2.6|
+|Sqlite3|内置|
+|MySQL|>=8|
+|Postgresql|>=17|
+
+* `Redis`: VonaJS provides the following capabilities based on Redis:
+  - `Queue, Schedule, Startup, Broadcast, Caching, Two-layer cache, and Redlock`
+* `Sqlite3`: You need to set up the node-gyp environment in advance to ensure that `better_sqlite3.node` can be compiled properly when installing dependencies
+
+### Frontend
+
+|Name|Version|
+|--|--|
+|Vite|>=7.3.1|
+|Vue|>=3.5.6|
+|Vue Router|>=4.4.5|
+|Zod|>=4.1.13|
+|Tanstack Query|>=5.92.5|
+|Tanstack Form|>=1.23.5|
+|Tanstack Table|>=8.21.3|
+
+### UI Libraries
+
+|Name|Version|
+|--|--|
+|daisyui|>=5.3.2|
+|tailwindcss|>=4.1.14|
+|quasar|>=2.18.1|
+|vuetify|>=4.0.1|
 
 ## Philosophy
 
@@ -52,25 +99,6 @@ Many frameworks use the simplest use cases to demonstrate design elegance, ignor
 ### 2. About Performance
 
 Many frameworks use the simplest use cases to demonstrate high performance, ignoring the performance challenges presented by business complexity. As business grows and changes, project performance plummets, and various optimization and mitigation measures lead to cumbersome and lengthy code. Vona, however, addresses the complexity of large-scale businesses and incorporates caching strategies into the framework's core, implementing mechanisms such as `two-layer cache`, `query cache`, and `entity cache`. This makes it easy to develop large-scale business systems, ensuring that code remains elegant and intuitive
-
-
-
-## Technology Stack
-
-|Name|Version|
-|--|--|
-|pnpm| >=10.19.0 |
-|Nodejs| >=24.8.0 |
-|Typescript| >=5.7.3 |
-|Koa|>=3.0.0|
-|Redis|>=7.2.6|
-|Sqlite3|Built-in|
-|MySQL|>=8|
-|Postgresql|>=17|
-
-* `Redis`: VonaJS provides the following capabilities based on Redis:
-  - `Queue, Schedule, Startup, Broadcast, Caching, Two-layer cache, and Redlock`
-* `Sqlite3`: You need to set up the node-gyp environment in advance to ensure that `better_sqlite3.node` can be compiled properly when installing dependencies
 
 ## Stay In Touch
 
