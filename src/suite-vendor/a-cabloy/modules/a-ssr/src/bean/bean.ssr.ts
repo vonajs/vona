@@ -39,9 +39,21 @@ export class BeanSsr extends BeanBase {
   }
 
   async retrieveMenus(publicPath?: string): Promise<IMenus | undefined> {
+    // publicPath
     publicPath = publicPath ?? '';
-    return await this.scope.event.retrieveMenus.emit({ publicPath }, async () => {
-      return await this.bean.ssr.retrieveMenus(publicPath);
+    // check sites
+    const sites = this.scope.service.ssr.getSitesEnabled();
+    const site = sites.find(site => {
+      const siteOptions = site.beanOptions.options as IDecoratorSsrSiteOptions;
+      return siteOptions.publicPath === publicPath;
+    });
+    if (!site) return;
+    const siteOptions = site.beanOptions.options as IDecoratorSsrSiteOptions;
+    // retrieveMenus
+    const siteInstance = this.bean._getBean<BeanSsrSiteBase>(site.beanOptions.beanFullName as any);
+    // event
+    return await this.scope.event.retrieveMenus.emit({ publicPath, siteOptions, siteInstance }, async () => {
+      return await siteInstance.retrieveMenus();
     });
   }
 }

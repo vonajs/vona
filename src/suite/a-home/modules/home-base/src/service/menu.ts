@@ -5,7 +5,7 @@ import { Service } from 'vona-module-a-bean';
 @Service()
 export class ServiceMenu extends BeanBase {
   async retrieveMenus(publicPath?: string): Promise<IMenus> {
-    const res = await this.bean.menu.retrieveMenus(publicPath);
+    const res = await this.bean.ssr.retrieveMenus(publicPath);
     if (res) return res;
     return this._getMenusDefault();
   }

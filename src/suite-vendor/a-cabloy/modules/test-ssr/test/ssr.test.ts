@@ -12,10 +12,10 @@ describe('ssr.test.ts', () => {
       // let group = menus.groups?.find(item => item.title === 'Tools');
       // assert.equal(!!group, false);
       // publicPath: second
-      const menus = await app.bean.menu.retrieveMenus('second');
-      const menu = menus.menus?.find(item => item.title === 'Home');
+      const menus = await app.bean.ssr.retrieveMenus('second');
+      const menu = menus!.menus?.find(item => item.title === 'Home');
       assert.equal(!!menu, false);
-      const group = menus.groups?.find(item => item.title === 'Tools');
+      const group = menus!.groups?.find(item => item.title === 'Tools');
       assert.equal(!!group, true);
     }, { locale: 'en-us' });
   });
@@ -28,10 +28,10 @@ describe('ssr.test.ts', () => {
       // let group = menus.groups?.find(item => item.title === '工具');
       // assert.equal(!!group, false);
       // publicPath: second
-      const menus = await app.bean.menu.retrieveMenus('second');
-      const menu = menus.menus?.find(item => item.title === '首页');
+      const menus = await app.bean.ssr.retrieveMenus('second');
+      const menu = menus!.menus?.find(item => item.title === '首页');
       assert.equal(!!menu, false);
-      const group = menus.groups?.find(item => item.title === '工具');
+      const group = menus!.groups?.find(item => item.title === '工具');
       assert.equal(!!group, true);
     }, { locale: 'zh-cn' });
   });
