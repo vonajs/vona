@@ -184,13 +184,13 @@ export class BeanContainer {
   }
 
   private _prepareBeanInstance(beanFullName, BeanClass, args, aop) {
-    // create
-    let beanInstance;
-    if (BeanClass.prototype.__init__) {
-      beanInstance = new BeanClass();
-    } else {
-      beanInstance = new BeanClass(...args);
-    }
+    // create: always passed in args
+    const beanInstance = new BeanClass(...args);
+    // if (BeanClass.prototype.__init__) {
+    //   beanInstance = new BeanClass();
+    // } else {
+    //   beanInstance = new BeanClass(...args);
+    // }
     // app/ctx
     if (beanInstance instanceof BeanSimple) {
       (beanInstance as any).app = this.app;
