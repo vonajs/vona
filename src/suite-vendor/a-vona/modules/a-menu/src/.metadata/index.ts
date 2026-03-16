@@ -1,68 +1,6 @@
 /* eslint-disable */
 import type { TypeSymbolKeyFieldsMore } from 'vona-module-a-orm';
 import type { TypeEntityOptionsFields } from 'vona-module-a-openapi';
-/** bean: begin */
-export * from '../bean/bean.menu.ts';
-
-import 'vona';
-declare module 'vona' {
-  
-  
-}
-declare module 'vona-module-a-menu' {
-  
-        export interface BeanMenu {
-          /** @internal */
-          get scope(): ScopeModuleAMenu;
-        } 
-}
-/** bean: end */
-/** bean: begin */
-import type { BeanMenu } from '../bean/bean.menu.ts';
-import 'vona';  
-declare module 'vona' {
-  export interface IBeanRecordGlobal {
-    'menu': BeanMenu;
-  }
-}
-/** bean: end */
-/** event: begin */
-export * from '../bean/event.retrieveMenus.ts';
-
-import 'vona';
-declare module 'vona' {
-  
-  
-}
-declare module 'vona-module-a-menu' {
-  
-        export interface EventRetrieveMenus {
-          /** @internal */
-          get scope(): ScopeModuleAMenu;
-        }
-
-          export interface EventRetrieveMenus {
-            get $beanFullName(): 'a-menu.event.retrieveMenus';
-            get $onionName(): 'a-menu:retrieveMenus';
-            
-          } 
-}
-/** event: end */
-/** event: begin */
-import type { EventRetrieveMenus } from '../bean/event.retrieveMenus.ts';
-export interface IModuleEvent {
-  'retrieveMenus': EventRetrieveMenus;
-}
-/** event: end */
-/** event: begin */
-import type { TypeEventRetrieveMenusData, TypeEventRetrieveMenusResult } from '../bean/event.retrieveMenus.ts';
-import type { EventOn } from 'vona-module-a-event'; 
-declare module 'vona-module-a-event' {
-  export interface IEventRecord {
-    'a-menu:retrieveMenus': EventOn<TypeEventRetrieveMenusData, TypeEventRetrieveMenusResult>;
-  }
-}
-/** event: end */
 /** dto: begin */
 export * from '../dto/menuGroup.ts';
 export * from '../dto/menuItem.ts';
@@ -100,7 +38,7 @@ import type { DtoMenuItem } from '../dto/menuItem.ts';
 import type { DtoMenuItemMeta } from '../dto/menuItemMeta.ts';
 import type { DtoMenuItemMetaParams } from '../dto/menuItemMetaParams.ts';
 import type { DtoMenuItemMetaQuery } from '../dto/menuItemMetaQuery.ts';
-import type { DtoMenus } from '../dto/menus.ts'; 
+import type { DtoMenus } from '../dto/menus.ts';
 declare module 'vona-module-a-menu' {
   
     export interface IDtoOptionsMenuGroup {
@@ -137,7 +75,6 @@ export class ScopeModuleAMenu extends BeanScopeBase {}
 
 export interface ScopeModuleAMenu {
   util: BeanScopeUtil;
-event: IModuleEvent;
 }
 
 import 'vona';

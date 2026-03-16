@@ -1,4 +1,6 @@
+import type { IMenus } from 'vona-module-a-menu';
 import type { IOnionSlice } from 'vona-module-a-onion';
+import type { BeanSsrSiteBase } from '../lib/beanSsrSiteBase.ts';
 import type { IDecoratorSsrSiteOptions, ISsrSiteRecord } from '../types/ssrSite.ts';
 import { BeanBase } from 'vona';
 import { Service } from 'vona-module-a-bean';
@@ -30,5 +32,20 @@ export class ServiceSsr extends BeanBase {
   public prepareMenuLink(link?: keyof IDecoratorSsrSiteOptions['pages']): (keyof IDecoratorSsrSiteOptions['pages']) | undefined {
     if (!link) return link;
     return this.scope.config.menuItemLinkPreset[link] as any || link;
+  }
+
+  public async retrieveMenus(publicPath?: string): Promise<IMenus | undefined> {
+    // publicPath
+    publicPath = publicPath ?? '';
+    // check sites
+    const sites = this.scope.service.ssr.getSitesEnabled();
+    const site = sites.find(site => {
+      const siteOptions = site.beanOptions.options as IDecoratorSsrSiteOptions;
+      return siteOptions.publicPath === publicPath;
+    });
+    if (!site) return;
+    // retrieveMenus
+    const beanInstance = this.bean._getBean<BeanSsrSiteBase>(site.beanOptions.beanFullName as any);
+    return await beanInstance.retrieveMenus();
   }
 }

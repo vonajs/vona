@@ -164,6 +164,7 @@ declare module 'vona' {
 }
 /** service: end */
 /** event: begin */
+export * from '../bean/event.retrieveMenus.ts';
 export * from '../bean/event.retrieveMenusSite.ts';
 
 import 'vona';
@@ -173,6 +174,17 @@ declare module 'vona' {
 }
 declare module 'vona-module-a-ssr' {
   
+        export interface EventRetrieveMenus {
+          /** @internal */
+          get scope(): ScopeModuleASsr;
+        }
+
+          export interface EventRetrieveMenus {
+            get $beanFullName(): 'a-ssr.event.retrieveMenus';
+            get $onionName(): 'a-ssr:retrieveMenus';
+            
+          }
+
         export interface EventRetrieveMenusSite {
           /** @internal */
           get scope(): ScopeModuleASsr;
@@ -186,17 +198,21 @@ declare module 'vona-module-a-ssr' {
 }
 /** event: end */
 /** event: begin */
+import type { EventRetrieveMenus } from '../bean/event.retrieveMenus.ts';
 import type { EventRetrieveMenusSite } from '../bean/event.retrieveMenusSite.ts';
 export interface IModuleEvent {
-  'retrieveMenusSite': EventRetrieveMenusSite;
+  'retrieveMenus': EventRetrieveMenus;
+'retrieveMenusSite': EventRetrieveMenusSite;
 }
 /** event: end */
 /** event: begin */
+import type { TypeEventRetrieveMenusData, TypeEventRetrieveMenusResult } from '../bean/event.retrieveMenus.ts';
 import type { TypeEventRetrieveMenusSiteData, TypeEventRetrieveMenusSiteResult } from '../bean/event.retrieveMenusSite.ts';
 import type { EventOn } from 'vona-module-a-event'; 
 declare module 'vona-module-a-event' {
   export interface IEventRecord {
-    'a-ssr:retrieveMenusSite': EventOn<TypeEventRetrieveMenusSiteData, TypeEventRetrieveMenusSiteResult>;
+    'a-ssr:retrieveMenus': EventOn<TypeEventRetrieveMenusData, TypeEventRetrieveMenusResult>;
+'a-ssr:retrieveMenusSite': EventOn<TypeEventRetrieveMenusSiteData, TypeEventRetrieveMenusSiteResult>;
   }
 }
 /** event: end */
