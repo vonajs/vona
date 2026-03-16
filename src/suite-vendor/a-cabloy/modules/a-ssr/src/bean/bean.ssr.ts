@@ -1,6 +1,7 @@
+import type { IMenus } from 'vona-module-a-menu';
 import type { TypeEventResolvePathResult } from 'vona-module-a-static';
 import type { BeanSsrSiteBase } from '../lib/beanSsrSiteBase.ts';
-import type { ISsrHandlerRenderOptions, ISsrSiteRecord } from '../types/ssrSite.ts';
+import type { IDecoratorSsrSiteOptions, ISsrHandlerRenderOptions, ISsrSiteRecord } from '../types/ssrSite.ts';
 import { BeanBase, beanFullNameFromOnionName } from 'vona';
 import { Bean } from 'vona-module-a-bean';
 
@@ -35,5 +36,20 @@ export class BeanSsr extends BeanBase {
     if (!beanInstance) return;
     // render
     return await beanInstance.render(pagePath as any, pageOptions as any, renderOptions);
+  }
+
+  async retrieveMenus(publicPath?: string): Promise<IMenus | undefined> {
+    // publicPath
+    publicPath = publicPath ?? '';
+    // check sites
+    const sites = this.scope.service.ssr.getSitesEnabled();
+    const site = sites.find(site => {
+      const siteOptions = site.beanOptions.options as IDecoratorSsrSiteOptions;
+      return siteOptions.publicPath === publicPath;
+    });
+    if (!site) return;
+    // retrieveMenus
+    const beanInstance = this.bean._getBean<BeanSsrSiteBase>(site.beanOptions.beanFullName as any);
+    return await beanInstance.retrieveMenus();
   }
 }

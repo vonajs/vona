@@ -203,7 +203,6 @@ declare module 'vona-module-a-event' {
 /** eventListener: begin */
 export * from '../bean/eventListener.hmrReload.ts';
 export * from '../bean/eventListener.resolvePath.ts';
-export * from '../bean/eventListener.retrieveMenus.ts';
 
 import { type IDecoratorEventListenerOptions } from 'vona-module-a-event';
 declare module 'vona-module-a-event' {
@@ -211,7 +210,6 @@ declare module 'vona-module-a-event' {
     export interface IEventListenerRecord {
       'a-ssr:hmrReload': IDecoratorEventListenerOptions;
 'a-ssr:resolvePath': IDecoratorEventListenerOptions;
-'a-ssr:retrieveMenus': IDecoratorEventListenerOptions;
     }
 
   
@@ -237,17 +235,6 @@ declare module 'vona-module-a-ssr' {
           export interface EventListenerResolvePath {
             get $beanFullName(): 'a-ssr.eventListener.resolvePath';
             get $onionName(): 'a-ssr:resolvePath';
-            get $onionOptions(): IDecoratorEventListenerOptions;
-          }
-
-        export interface EventListenerRetrieveMenus {
-          /** @internal */
-          get scope(): ScopeModuleASsr;
-        }
-
-          export interface EventListenerRetrieveMenus {
-            get $beanFullName(): 'a-ssr.eventListener.retrieveMenus';
-            get $onionName(): 'a-ssr:retrieveMenus';
             get $onionOptions(): IDecoratorEventListenerOptions;
           } 
 }
