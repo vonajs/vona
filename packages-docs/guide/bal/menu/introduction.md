@@ -1,10 +1,10 @@
 # Menu System
 
-The `a-menu` module provides a generic menu system. In fact, this `menu system` can be completely ignored, and your own menu retrieval logic can be provided. However, using a system-defined menu system facilitates the sharing and reuse of code resources within the community, significantly improving the system's scalability and maintainability
+The `a-ssr` module provides a generic ssr menu system. In fact, this `menu system` can be completely ignored, and your own menu retrieval logic can be provided. However, using a system-defined menu system facilitates the sharing and reuse of code resources within the community, significantly improving the system's scalability and maintainability
 
-## bean.menu
+## bean.ssr
 
-The module `a-menu` provides a global bean `bean.menu`, which allows for the unified retrieval of menus
+The module `a-ssr` provides a global bean `bean.ssr`, which allows for the unified retrieval of menus
 
 Taking the module `home-base` as an example:
 
@@ -13,9 +13,9 @@ Taking the module `home-base` as an example:
 ``` typescript
 class ServiceMenu {
   async retrieveMenus(publicPath?: string): Promise<IMenus> {
-    return await this.bean.menu.retrieveMenus(publicPath, async () => {
-      return this._getMenusDefault();
-    });
+    const res = await this.bean.ssr.retrieveMenus(publicPath);
+    if (res) return res;
+    return this._getMenusDefault();
   }
 
   private _getMenusDefault(): IMenus {
@@ -28,31 +28,8 @@ class ServiceMenu {
 }
 ```
 
-- `bean.menu.retrieveMenus`: Retrieves the menus
+- `bean.menu.retrieveMenus`: Retrieves the ssr menus
 - `_getMenusDefault`: Provides the default menus
-
-## bean.menu.retrieveMenus
-
-``` typescript
-class BeanMenu {
-  async retrieveMenus(
-    publicPath?: string,
-    nextOrDefault?: NextEventStrict<TypeEventRetrieveMenusData, TypeEventRetrieveMenusResult> | TypeEventRetrieveMenusResult,
-  ): Promise<TypeEventRetrieveMenusResult> {
-    return await this.scope.event.retrieveMenus.emit({ publicPath }, nextOrDefault);
-  }
-}
-```
-
-* Parameters
-
-|Name|Description|
-|--|--|
-|publicPath|URL path, can provide different menus for different paths|
-|nextOrDefault|Retrieves the default menus|
-
-- The `retrieveMenus` method raises an event `a-menu:retrieveMenus`
-- The `a-menu:retrieveMenus` event uses the onion model. You can add event listeners to implement custom menu retrieval logic
 
 ## Menu API
 
