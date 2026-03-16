@@ -6,11 +6,13 @@ import { Service } from 'vona-module-a-bean';
 export class ServiceMenu extends BeanBase {
   async retrieveMenus(publicPath?: string): Promise<IMenus> {
     return await this.bean.menu.retrieveMenus(publicPath, async () => {
-      return this._getMenusDefault();
+      return await this._getMenusDefault(publicPath);
     });
   }
 
-  private _getMenusDefault(): IMenus<any> {
+  private async _getMenusDefault(publicPath?: string): Promise<IMenus> {
+    const res = await this.bean.ssr.retrieveMenus(publicPath);
+    if (res) return res;
     return {
       menus: [
         { name: 'home', title: this.$scope.homeIndex.locale.Home(), icon: '::home', link: '/' },
