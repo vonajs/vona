@@ -5,7 +5,7 @@ export interface TypeEventRetrieveMenusData {
   publicPath?: string;
 }
 
-export type TypeEventRetrieveMenusResult = IMenus;
+export type TypeEventRetrieveMenusResult = IMenus | undefined;
 
 @Event()
 export class EventRetrieveMenus extends BeanEventBase<

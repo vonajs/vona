@@ -13,9 +13,9 @@ export class ServiceSsr extends BeanBase {
     if (!this.app.meta[SymbolCacheSites]) this.app.meta[SymbolCacheSites] = {};
     if (!this.app.meta[SymbolCacheSites][cacheKey]) {
       // check sites
-      this.app.meta[SymbolCacheSites][cacheKey] = this.bean.onion.ssrSite.getOnionsEnabled(this.ctx.instanceName!)
-        .concat()
-        .reverse()
+      this.app.meta[SymbolCacheSites][cacheKey] = this.bean.onion.ssrSite
+        .getOnionsEnabled(this.ctx.instanceName!)
+        .toReversed()
         .sort((site1, site2) => {
           const siteOptions1 = site1.beanOptions.options as IDecoratorSsrSiteOptions;
           const siteOptions2 = site2.beanOptions.options as IDecoratorSsrSiteOptions;
