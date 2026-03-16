@@ -87,6 +87,8 @@ Frontend projects built with Zova can run independently or the JS bundle can be 
 
 ### UI Libraries
 
+Zova can be used with any UI library and comes with built-in project templates for several UI libraries, making it easy to use out of the box
+
 |Name|Version|
 |--|--|
 |daisyui|>=5.3.2|
