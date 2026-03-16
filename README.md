@@ -2,10 +2,10 @@ English | [简体中文](./README.zh-CN.md)
 
 # Vona
 
-Vona is a fullstack meta-framework for building SSR/SPA/Admin/Front all in one codebase
+Vona is a fullstack meta-framework for building `SSR/SPA/Admin/Front` all in one codebase
 
-* Pioneered the ability to dynamically infer and generate DTOs, freeing our hands and significantly improving productivity. It can even be said that being able to dynamically infer and generate DTOs is a very important `milestone` for building a more elegant Node.js backend framework
-* Pioneering dual-layer tabs navigation design, allowing more convenient switching between multiple pages
+* Pioneers dynamic DTO inference and generation capabilities, significantly improving development efficiency and experience. It can even be said that being able to dynamically infer and generate DTOs is a very important `milestone` for building a more elegant Node.js backend framework
+* Pioneers dual-layer tabs navigation design, allowing more convenient switching between multiple pages
 * Can dynamically render CRUD list pages, item pages, and search forms, and provides the best practices of `Tanstack Table/Tanstack Form/Tanstack Query`
 
 [![LICENSE MIT][license-image]][license-url]
@@ -35,7 +35,7 @@ The Admin/Front websites of `Cabloy Store` are built by one codebase
 
 ## Gif
 
-* Pioneering dual-layer tabs navigation design
+* Pioneers dual-layer tabs navigation design
 
 ![](./packages-docs/zh/assets/img/start/cabloy-start-two-level-tabs.gif)
 

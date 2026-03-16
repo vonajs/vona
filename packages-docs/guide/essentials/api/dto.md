@@ -200,6 +200,6 @@ class DtoStudentUpdate
 
 ## DTO infer & generation
 
-Vona ORM pioneered the ability to dynamically infer and generate DTOs, freeing our hands and significantly improving productivity. It can even be said that being able to dynamically infer and generate DTOs is a very important `milestone` in building a more elegant Node.js backend framework
+Vona ORM pioneers dynamic DTO inference and generation capabilities, significantly improving development efficiency and experience. It can even be said that being able to dynamically infer and generate DTOs is a very important `milestone` in building a more elegant Node.js backend framework
 
 - See: [DTO infer & generation](../../techniques/orm/dto/introduction.md)

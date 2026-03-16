@@ -20,9 +20,9 @@ features:
   - title: CRUD Dynamic Rendering
     details: Can dynamically render CRUD list pages, item pages, and search forms, and provides the best practices of Tanstack Table/Tanstack Form/Tanstack Query
   - title: DTO Infer & Generation
-    details: Pioneered the ability to dynamically infer and generate DTOs, freeing our hands and significantly improving productivity
+    details: Pioneers dynamic DTO inference and generation capabilities, significantly improving development efficiency and experience
   - title: Dual-layer Tabs
-    details: Pioneering dual-layer tabs navigation design, allowing more convenient switching between multiple pages
+    details: Pioneers dual-layer tabs navigation design, allowing more convenient switching between multiple pages
   - title: IOC & AOP
     details: Recommended to use the `dependency lookup` strategy, so as to use fewer decorator functions and fewer type annotations, making the IOC container more concise and intuitive
   - title: Multi-tenancy
