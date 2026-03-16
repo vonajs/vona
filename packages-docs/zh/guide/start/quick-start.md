@@ -15,7 +15,7 @@
 |MySQL|>=8|
 |Postgresql|>=17|
 
-* `Redis`: VonaJS 基于 Redis 提供了以下能力: 
+* `Redis`: VonaJS 基于 Redis 提供了以下能力:
   - `队列、定时任务、启动项、广播、缓存、二级缓存、分布式锁`
 * `Sqlite3`: 需要预先准备 node-gyp 环境，确保在安装依赖时可以正常编译出`better_sqlite3.node`
 
@@ -36,9 +36,18 @@ $ pnpm add -g vona-cli@latest
 1. 创建项目
 
 ``` bash
-$ vona :create:project projectName
+$ vona :create:project projectName --template=cabloy-basic
 $ cd projectName
 ```
+
+Vona 提供了两个项目模版:
+
+|名称|说明|
+|--|--|
+|cabloy-basic|采用 daisyui，提供开箱即用的`Admin后台`|
+|cabloy-start|采用 vuetify，提供开箱即用的`Admin后台`和`Front前台`|
+
+> 关于 Vona、Zova 和 Cabloy 之间的关系，参见: [Cabloy](../../cabloy/introduction.md)
 
 2. 修改.env 文件
 

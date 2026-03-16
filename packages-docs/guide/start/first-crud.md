@@ -1,6 +1,6 @@
-# Create the first CRUD API
+# Create the first CRUD
 
-Next, let's create our first CRUD API to manage `Student` data
+Next, let's create our first CRUD to manage `Student` data
 
 ## Creating a New Module
 

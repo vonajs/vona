@@ -40,8 +40,9 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
       items: [
         { text: 'Introduction', link: 'start/introduction' },
         { text: 'Comparison with Next/Nest/Django', link: 'start/comparison' },
-        { text: 'Quick Start', link: 'start/quick-start' },
-        { text: 'Create the first CRUD API', link: 'start/first-crud' },
+        { text: '1. Quick Start', link: 'start/quick-start' },
+        { text: '2. Create the first CRUD', link: 'start/first-crud' },
+        {text:'3. Integrate with Zova',link:'start/with-zova'},
         { text: 'Cli Commands', link: 'start/cli' },
         { text: 'Menu Commands', link: 'start/menu' },
         { text: 'Scripts', link: 'start/scripts' },

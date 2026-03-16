@@ -1,6 +1,6 @@
-# 创建第一个CRUD API
+# 创建第一个CRUD
 
-下面来创建第一个 CRUD API，用于管理 Student 数据
+下面来创建第一个 CRUD，用于管理 Student 数据
 
 ## 新建模块
 
@@ -42,6 +42,10 @@ $ vona :tools:crud student --module=demo-student
 
 依据提示输入资源名称`student`，VSCode 插件会自动创建 CRUD 的代码骨架
 
+## CRUD管理页面
+
+打开http://localhost:7102，可以直接进行Student的CRUD操作
+
 ## Swagger/Rapidoc
 
 可以使用 [Swagger](https://swagger.io)/[Rapidoc](https://rapidocweb.com) 来查看和运行 Student 的 CRUD API
@@ -52,3 +56,6 @@ $ vona :tools:crud student --module=demo-student
 [a-swagger] swagger: http://localhost:7102/swagger
 [a-swagger] rapidoc: http://localhost:7102/rapidoc
 ```
+
+
+
