@@ -39,6 +39,7 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
       text: '开始',
       items: [
         { text: '简介', link: 'start/introduction' },
+        { text: '与Next/Nest/Django对比', link: 'start/comparison' },
         { text: '快速上手', link: 'start/quick-start' },
         { text: '创建第一个CRUD API', link: 'start/first-crud' },
         { text: 'Cli命令', link: 'start/cli' },

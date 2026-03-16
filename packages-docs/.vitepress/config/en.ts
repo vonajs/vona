@@ -39,6 +39,7 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
       text: 'Getting Started',
       items: [
         { text: 'Introduction', link: 'start/introduction' },
+        { text: 'Comparison with Next/Nest/Django', link: 'start/comparison' },
         { text: 'Quick Start', link: 'start/quick-start' },
         { text: 'Create the first CRUD API', link: 'start/first-crud' },
         { text: 'Cli Commands', link: 'start/cli' },
