@@ -71,6 +71,10 @@ The Admin/Front websites of `Cabloy Store` are built by one codebase
 
 ### Frontend
 
+The frontend uses Zova. Zova is a more intuitive framework with the pros of Vue3, React and Angular, empowers developers to build elegant, fast and reliable applications
+
+Frontend projects built with Zova can run independently or the JS bundle can be placed into the Vona backend for direct SSR rendering on the backend
+
 |Name|Version|
 |--|--|
 |Vite|>=7.3.1|
