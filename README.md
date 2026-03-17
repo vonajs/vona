@@ -22,6 +22,13 @@ Vona is a fullstack meta-framework for building `SSR/SPA/Admin/Front` all in one
 [download-image]: https://img.shields.io/npm/dm/vona?color=orange&label=npm%20downloads
 [download-url]: https://npmjs.com/package/vona
 
+## Fullstack Principles
+
+Vona and Zova work perfectly together, continuing the frontend and backend separation architecture style. Frontend projects built with Zova can run independently or have their JS bundle placed into the Vona backend for direct SSR rendering on the backend
+
+* Vona can generate a complete Openapi Schema, allowing an API SDK to be generated in Zova
+* Zova can generate types for routes and components, providing type hints in Vona
+
 ## Documentation
 
 - [Docs](https://vona.js.org/guide/start/introduction.html)

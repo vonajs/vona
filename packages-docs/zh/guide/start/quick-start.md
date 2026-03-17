@@ -42,10 +42,10 @@ $ cd projectName
 
 Vona 提供了两个项目模版:
 
-|名称|说明|
-|--|--|
-|cabloy-basic|采用 daisyui，提供开箱即用的`Admin后台`|
-|cabloy-start|采用 vuetify，提供开箱即用的`Admin后台`和`Front前台`|
+|名称|UI|说明|
+|--|--|--|
+|cabloy-basic|daisyui + tailwindcss|提供开箱即用的`Admin后台`|
+|cabloy-start|vuetify|提供开箱即用的`Admin后台`和`Front前台`|
 
 > 关于 Vona、Zova 和 Cabloy 之间的关系，参见: [Cabloy](../../cabloy/introduction.md)
 
