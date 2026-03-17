@@ -8,6 +8,8 @@ export const en = defineConfig({
       { text: 'Home', link: '/' },
       { text: 'Docs', link: '/guide/start/introduction', activeMatch: '/guide/' },
       { text: 'Cabloy', link: '/cabloy/introduction', activeMatch: '/cabloy/' },
+      { text: 'Start', link: '/cabloy-start/introduction', activeMatch: '/cabloy-start/' },
+      { text: 'Store', link: 'https://cabloy.com', target:'_self' },
     ],
     sidebar: {
       '/guide/': { base: '/guide/', items: sidebarGuide() },
