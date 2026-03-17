@@ -1,5 +1,5 @@
 import type { IDecoratorSsrSiteOptions } from 'vona-module-a-ssr';
-import type { IPagePathRecord } from 'zova-rest-cabloy-start-front';
+import type { IPagePathRecord } from 'zova-rest-cabloy-start-web';
 import { BeanSsrSiteBase, SsrSite } from 'vona-module-a-ssr';
 
 declare module 'vona-module-a-ssr' {
