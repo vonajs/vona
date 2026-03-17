@@ -1,6 +1,6 @@
 # Dynamic Datasource
 
-This module allows dynamic creation of datasources during system runtime, thereby managing third-party database data
+The module `a-datasource` allows dynamic creation of datasources during system runtime, thereby managing third-party database data
 
 ## Create datasource
 
