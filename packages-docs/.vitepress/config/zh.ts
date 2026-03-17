@@ -14,6 +14,7 @@ export const zh = defineConfig({
     sidebar: {
       '/zh/guide/': { base: '/zh/guide/', items: sidebarGuide() },
       '/zh/cabloy/': { base: '/zh/cabloy/', items: sidebarCabloy() },
+      '/zh/cabloy-start/': { base: '/zh/cabloy-start/', items: sidebarCabloyStart() },
     },
     footer: {
       message: '基于 MIT 许可发布',
@@ -32,6 +33,13 @@ function sidebarCabloy(): DefaultTheme.SidebarItem[] {
     { text: '介绍', link: 'introduction' },
     { text: '动态数据源', link: 'dynamic-datasource' },
     { text: '读写分离', link: 'sharding' },
+  ];
+}
+
+function sidebarCabloyStart(): DefaultTheme.SidebarItem[] {
+  return [
+    { text: '介绍', link: 'introduction' },
+    { text: '快速上手', link: 'quick-start' },
   ];
 }
 
