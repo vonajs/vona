@@ -14,6 +14,7 @@ export const en = defineConfig({
     sidebar: {
       '/guide/': { base: '/guide/', items: sidebarGuide() },
       '/cabloy/': { base: '/cabloy/', items: sidebarCabloy() },
+      '/cabloy-start/': { base: '/cabloy-start/', items: sidebarCabloyStart() },
     },
     footer: {
       message: 'Released under the MIT License.',
@@ -35,6 +36,13 @@ function sidebarCabloy(): DefaultTheme.SidebarItem[] {
   ];
 }
 
+function sidebarCabloyStart(): DefaultTheme.SidebarItem[] {
+  return [
+    { text: 'Introduction', link: 'introduction' },
+    { text: 'Quick Start', link: 'quick-start' },
+  ];
+}
+
 function sidebarGuide(): DefaultTheme.SidebarItem[] {
   return [
     {
@@ -44,7 +52,7 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
         { text: 'Comparison with Next/Nest/Django', link: 'start/comparison' },
         { text: '1. Quick Start', link: 'start/quick-start' },
         { text: '2. Create the first CRUD', link: 'start/first-crud' },
-        {text:'3. Integrate with Zova',link:'start/with-zova'},
+        { text: '3. Integrate with Zova', link:'start/with-zova' },
         { text: 'Cli Commands', link: 'start/cli' },
         { text: 'Menu Commands', link: 'start/menu' },
         { text: 'Scripts', link: 'start/scripts' },
