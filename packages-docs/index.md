@@ -5,7 +5,7 @@ layout: home
 hero:
   name: 'Vona'
   text: 'A fullstack meta-framework'
-  tagline: For building SSR/SPA/Admin/Front all in one codebase
+  tagline: For building SSR/SPA/Website/Admin-Dashboard all in one codebase
   actions:
     - theme: brand
       text: Get Started
@@ -16,7 +16,7 @@ hero:
 
 features:
   - title: Fullstack
-    details: Building SSR/SPA/Admin/Front all in one codebase. The Admin backend also supports SSR, and the code is intuitive and elegant
+    details: Building SSR/SPA/Website/Admin-Dashboard all in one codebase. The Admin-Dashboard also supports SSR with intuitive and elegant code
   - title: CRUD Dynamic Rendering
     details: Dynamically render CRUD list pages, item pages, and search forms, and provides the best practices of Tanstack Table/Tanstack Form/Tanstack Query
   - title: DTO Infer & Generation

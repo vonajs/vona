@@ -2,7 +2,7 @@
 
 ## What is Vona?
 
-Vona is a fullstack meta-framework for building `SSR/SPA/Admin/Front` all in one codebase
+Vona is a fullstack meta-framework for building `SSR/SPA/Website/Admin-Dashboard` all in one codebase
 
 * Pioneers dynamic DTO inference and generation capabilities, significantly improving development efficiency and experience. It can even be said that being able to dynamically infer and generate DTOs is a very important `milestone` for building a more elegant Node.js backend framework
 * Pioneers dual-layer tabs navigation design, allowing more convenient switching between multiple pages
@@ -17,10 +17,10 @@ Vona works perfectly with Zova, continuing the frontend-backend separation archi
 
 ## Demo online
 
-The Admin/Front websites of `Cabloy Store` are built by one codebase
+The Website and Admin-Dashboard of Cabloy Store are built by one codebase
 
-* Front: [https://cabloy.com](https://cabloy.com)
-* Admin: [https://cabloy.com/admin](https://cabloy.com/admin)
+* Website: [https://cabloy.com](https://cabloy.com)
+* Admin-Dashboard: [https://cabloy.com/admin](https://cabloy.com/admin)
 
 ## Gif
 
@@ -30,7 +30,7 @@ The Admin/Front websites of `Cabloy Store` are built by one codebase
 
 ## Features
 
-* `Fullstack`: Building `SSR/SPA/Admin/Front` all in one codebase. The Admin backend also supports SSR, and the code is intuitive and elegant
+* `Fullstack`: Building `SSR/SPA/Website/Admin-Dashboard` all in one codebase. The Admin-Dashboard also supports SSR with intuitive and elegant code
 * `CRUD Dynamic Rendering`: Dynamically render CRUD list pages, item pages, and search forms, and provides the best practices of `Tanstack Table/Tanstack Form/Tanstack Query`
 * `Dynamic DTO Inference and Generation`: Pioneers dynamic DTO inference and generation capabilities, significantly improving development efficiency and experience
 * `Dual-layer Tabs`: Pioneers dual-layer tabs navigation design, allowing more convenient switching between multiple pages

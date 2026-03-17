@@ -44,8 +44,8 @@ Vona 提供了两个项目模版:
 
 |名称|UI|说明|
 |--|--|--|
-|cabloy-basic|daisyui + tailwindcss|提供开箱即用的`Admin后台`|
-|cabloy-start|vuetify|提供开箱即用的`Admin后台`和`Front前台`|
+|cabloy-basic|daisyui + tailwindcss|提供开箱即用的`Admin面板`|
+|cabloy-start|vuetify|提供开箱即用的`Web网站`和`Admin面板`|
 
 > 关于 Vona、Zova 和 Cabloy 之间的关系，参见: [Cabloy](../../cabloy/introduction.md)
 

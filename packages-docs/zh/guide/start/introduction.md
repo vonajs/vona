@@ -6,7 +6,7 @@
 
 ## 什么是Vona？
 
-Vona 是一款全栈元框架，可在同一个代码库中实现`SSR/SPA/Admin后台/Web前台`
+Vona 是一款全栈元框架，可在同一个代码库中实现`SSR/SPA/Web网站/Admin面板`
 
 * 首创 DTO 动态推断与生成能力，解放我们的双手，显著提升生产力。甚至可以说，对于构建更加优雅的 Node.js 后端框架而言，能够动态推断与生成 DTO，是非常重要的`里程碑`
 * 首创双层页签导航设计，可以更加便捷的在多个页面中切换
@@ -21,10 +21,10 @@ Vona 与 Zova 完美协同，延续前后端分离的架构风格。采用 Zova 
 
 ## 在线演示
 
-使用同一套代码实现`Cabloy Store`的前台和后台
+使用同一套代码实现 Cabloy Store 的`Web网站`和`Admin面板`
 
-* 前台：[https://cabloy.com](https://cabloy.com)
-* 后台：[https://cabloy.com/admin](https://cabloy.com/admin)
+* Web 网站：[https://cabloy.com](https://cabloy.com)
+* Admin 面板：[https://cabloy.com/admin](https://cabloy.com/admin)
 
 ## 动图演示
 
@@ -34,7 +34,7 @@ Vona 与 Zova 完美协同，延续前后端分离的架构风格。采用 Zova 
 
 ## 特性
 
-* `全栈能力`：可在同一个代码库中实现`SSR/SPA/Admin后台/Web前台`。Admin 后台也支持 SSR，并且代码直观、优雅
+* `全栈能力`：可在同一个代码库中实现`SSR/SPA/Web网站/Admin面板`。Admin 面板也支持 SSR，并且代码直观、优雅
 * `CRUD动态渲染`：可动态渲染 CRUD 的列表页、条目页、搜索表单，并且提供了`Tanstack Table/Tanstack Form/Tanstack Query`的最佳实践
 * `DTO动态推断与生成`：首创 DTO 动态推断与生成能力，从而显著提升开发效率和开发体验
 * `双层页签`：首创双层页签导航设计，可以更加便捷的在多个页面中切换

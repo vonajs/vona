@@ -5,7 +5,7 @@ layout: home
 hero:
   name: 'Vona'
   text: '是一款全栈元框架'
-  tagline: 可在同一个代码库中实现SSR/SPA/Admin后台/Web前台
+  tagline: 可在同一个代码库中实现SSR/SPA/Web网站/Admin面板
   actions:
     - theme: brand
       text: 快速开始
@@ -19,7 +19,7 @@ hero:
 
 features:
   - title: 全栈能力
-    details: 可在同一个代码库中实现SSR/SPA/Admin后台/Web前台。Admin后台也支持 SSR，并且代码直观、优雅
+    details: 可在同一个代码库中实现SSR/SPA/Web网站/Admin面板。Admin面板也支持 SSR，并且代码直观、优雅
   - title: CRUD动态渲染
     details: 可动态渲染CRUD的列表页、条目页、搜索表单，并且提供了Tanstack Table/Tanstack Form/Tanstack Query的最佳实践
   - title: DTO动态推断与生成

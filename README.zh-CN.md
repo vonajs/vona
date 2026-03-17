@@ -37,8 +37,8 @@ Vona 与 Zova 完美协同，延续前后端分离的架构风格。采用 Zova 
 
 使用同一套代码实现 Cabloy Store 的`Web网站`和`Admin面板`
 
-* 前台：[https://cabloy.com](https://cabloy.com)
-* 后台：[https://cabloy.com/admin](https://cabloy.com/admin)
+* Web 网站：[https://cabloy.com](https://cabloy.com)
+* Admin 面板：[https://cabloy.com/admin](https://cabloy.com/admin)
 
 ## 动图演示
 
