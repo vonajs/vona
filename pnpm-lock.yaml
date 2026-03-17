@@ -354,6 +354,9 @@ importers:
       zova-rest-cabloy-start-admin:
         specifier: file:./.zova-rest/cabloy-start-admin
         version: file:.zova-rest/cabloy-start-admin
+      zova-rest-cabloy-start-web:
+        specifier: file:./.zova-rest/cabloy-start-web
+        version: file:.zova-rest/cabloy-start-web
       zova-rest-test-second:
         specifier: file:./.zova-rest/test-second
         version: file:.zova-rest/test-second
@@ -9796,6 +9799,9 @@ packages:
   zova-rest-cabloy-start-admin@file:.zova-rest/cabloy-start-admin:
     resolution: {directory: .zova-rest/cabloy-start-admin, type: directory}
 
+  zova-rest-cabloy-start-web@file:.zova-rest/cabloy-start-web:
+    resolution: {directory: .zova-rest/cabloy-start-web, type: directory}
+
   zova-rest-test-second@file:.zova-rest/test-second:
     resolution: {directory: .zova-rest/test-second, type: directory}
 
@@ -18178,6 +18184,8 @@ snapshots:
   zova-rest-cabloy-basic-admin@file:.zova-rest/cabloy-basic-admin: {}
 
   zova-rest-cabloy-start-admin@file:.zova-rest/cabloy-start-admin: {}
+
+  zova-rest-cabloy-start-web@file:.zova-rest/cabloy-start-web: {}
 
   zova-rest-test-second@file:.zova-rest/test-second: {}
 
