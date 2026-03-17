@@ -8,6 +8,13 @@ Vona is a fullstack meta-framework for building `SSR/SPA/Admin/Front` all in one
 * Pioneers dual-layer tabs navigation design, allowing more convenient switching between multiple pages
 * Dynamically render CRUD list pages, item pages, and search forms, and provides the best practices of `Tanstack Table/Tanstack Form/Tanstack Query`
 
+## Fullstack Principles
+
+Vona and Zova work perfectly together, continuing the frontend and backend separation architecture style. Frontend projects built with Zova can run independently or have their JS bundle placed into the Vona backend for direct SSR rendering on the backend
+
+* Vona can generate a complete Openapi Schema, allowing an API SDK to be generated in Zova
+* Zova can generate types for routes and components, providing type hints in Vona
+
 ## Demo online
 
 The Admin/Front websites of `Cabloy Store` are built by one codebase
@@ -53,7 +60,7 @@ The Admin/Front websites of `Cabloy Store` are built by one codebase
 |Nodejs| >=24.8.0 |
 |Typescript| >=5.9.3 |
 
-### Backend
+### Backend(Vona)
 
 |Name|Version|
 |--|--|
@@ -69,11 +76,7 @@ The Admin/Front websites of `Cabloy Store` are built by one codebase
   - `Queue, Schedule, Startup, Broadcast, Caching, Two-layer cache, and Redlock`
 * `Sqlite3`: You need to set up the node-gyp environment in advance to ensure that `better_sqlite3.node` can be compiled properly when installing dependencies
 
-### Frontend
-
-The frontend uses Zova. Zova is a more intuitive framework with the pros of Vue3, React and Angular, empowers developers to build elegant, fast and reliable applications
-
-Frontend projects built with Zova can run independently or the JS bundle can be placed into the Vona backend for direct SSR rendering on the backend
+### Frontend(Zova)
 
 |Name|Version|
 |--|--|
