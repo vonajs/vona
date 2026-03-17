@@ -309,9 +309,9 @@ importers:
       vona-module-start-siteadmin:
         specifier: workspace:^
         version: link:src/suite/cabloy-start/modules/start-siteadmin
-      vona-module-start-sitefront:
+      vona-module-start-siteweb:
         specifier: workspace:^
-        version: link:src/suite/cabloy-start/modules/start-sitefront
+        version: link:src/suite/cabloy-start/modules/start-siteweb
       vona-module-store-base:
         specifier: workspace:^
         version: link:src/suite/cabloy-store/modules/store-base
@@ -324,9 +324,9 @@ importers:
       vona-module-store-siteadmin:
         specifier: workspace:^
         version: link:src/suite/cabloy-store/modules/store-siteadmin
-      vona-module-store-sitefront:
+      vona-module-store-siteweb:
         specifier: workspace:^
-        version: link:src/suite/cabloy-store/modules/store-sitefront
+        version: link:src/suite/cabloy-store/modules/store-siteweb
       vona-module-store-test:
         specifier: workspace:^
         version: link:src/suite/cabloy-store/modules/store-test
@@ -354,9 +354,6 @@ importers:
       zova-rest-cabloy-start-admin:
         specifier: file:./.zova-rest/cabloy-start-admin
         version: file:.zova-rest/cabloy-start-admin
-      zova-rest-cabloy-start-front:
-        specifier: file:./.zova-rest/cabloy-start-front
-        version: file:.zova-rest/cabloy-start-front
       zova-rest-test-second:
         specifier: file:./.zova-rest/test-second
         version: file:.zova-rest/test-second
@@ -2368,9 +2365,9 @@ importers:
       vona-module-start-siteadmin:
         specifier: ^5.0.0
         version: link:modules/start-siteadmin
-      vona-module-start-sitefront:
+      vona-module-start-siteweb:
         specifier: ^5.0.0
-        version: link:modules/start-sitefront
+        version: link:modules/start-siteweb
       vona-suite-a-cabloy:
         specifier: ^5.0.0
         version: link:../../suite-vendor/a-cabloy
@@ -2384,7 +2381,7 @@ importers:
         specifier: ^6.0.1
         version: 6.1.3
 
-  src/suite/cabloy-start/modules/start-sitefront:
+  src/suite/cabloy-start/modules/start-siteweb:
     devDependencies:
       clean-package:
         specifier: ^2.2.0
@@ -2410,9 +2407,9 @@ importers:
       vona-module-store-siteadmin:
         specifier: ^5.0.0
         version: link:modules/store-siteadmin
-      vona-module-store-sitefront:
+      vona-module-store-siteweb:
         specifier: ^5.0.0
-        version: link:modules/store-sitefront
+        version: link:modules/store-siteweb
       vona-module-store-test:
         specifier: ^5.0.0
         version: link:modules/store-test
@@ -2500,7 +2497,7 @@ importers:
         specifier: ^6.0.1
         version: 6.1.3
 
-  src/suite/cabloy-store/modules/store-sitefront:
+  src/suite/cabloy-store/modules/store-siteweb:
     devDependencies:
       clean-package:
         specifier: ^2.2.0
@@ -9798,9 +9795,6 @@ packages:
 
   zova-rest-cabloy-start-admin@file:.zova-rest/cabloy-start-admin:
     resolution: {directory: .zova-rest/cabloy-start-admin, type: directory}
-
-  zova-rest-cabloy-start-front@file:.zova-rest/cabloy-start-front:
-    resolution: {directory: .zova-rest/cabloy-start-front, type: directory}
 
   zova-rest-test-second@file:.zova-rest/test-second:
     resolution: {directory: .zova-rest/test-second, type: directory}
@@ -18184,8 +18178,6 @@ snapshots:
   zova-rest-cabloy-basic-admin@file:.zova-rest/cabloy-basic-admin: {}
 
   zova-rest-cabloy-start-admin@file:.zova-rest/cabloy-start-admin: {}
-
-  zova-rest-cabloy-start-front@file:.zova-rest/cabloy-start-front: {}
 
   zova-rest-test-second@file:.zova-rest/test-second: {}
 
