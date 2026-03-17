@@ -42,6 +42,10 @@ Context menu - [Module Path]: `Vona Tools/Generate Crud`
 
 Enter the resource name `student` as prompted. The VSCode extension will automatically create the CRUD code skeleton
 
+## CRUD Admin Page
+
+Open http://localhost:7102 to directly perform CRUD operations for Student
+
 ## Swagger/Rapidoc
 
 We can use [Swagger](https://swagger.io)/[Rapidoc](https://rapidocweb.com) to view and try the Student CRUD API

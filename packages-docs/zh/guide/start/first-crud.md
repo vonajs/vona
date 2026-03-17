@@ -56,6 +56,3 @@ $ vona :tools:crudCabloy student --module=demo-student
 [a-swagger] swagger: http://localhost:7102/swagger
 [a-swagger] rapidoc: http://localhost:7102/rapidoc
 ```
-
-
-
