@@ -2,7 +2,7 @@ English | [简体中文](./README.zh-CN.md)
 
 # Vona
 
-Vona is a fullstack meta-framework for building `SSR/SPA/Admin/Front` all in one codebase
+Vona is a fullstack meta-framework for building `SSR/SPA/Website/Admin Dashboard` all in one codebase
 
 * Pioneers dynamic DTO inference and generation capabilities, significantly improving development efficiency and experience. It can even be said that being able to dynamically infer and generate DTOs is a very important `milestone` for building a more elegant Node.js backend framework
 * Pioneers dual-layer tabs navigation design, allowing more convenient switching between multiple pages
@@ -35,7 +35,7 @@ Vona works perfectly with Zova, continuing the frontend-backend separation archi
 
 ## Demo online
 
-The Admin/Front websites of `Cabloy Store` are built by one codebase
+The Website and Admin Dashboard of Cabloy Store are built by one codebase
 
 * Front: [https://cabloy.com](https://cabloy.com)
 * Admin: [https://cabloy.com/admin](https://cabloy.com/admin)

@@ -2,7 +2,7 @@
 
 # Vona 是什么
 
-Vona 是一款全栈元框架，可在同一个代码库中实现`SSR/SPA/Admin后台/Web前台`
+Vona 是一款全栈元框架，可在同一个代码库中实现`SSR/SPA/Web网站/Admin面板`
 
 * 首创 DTO 动态推断与生成能力，解放我们的双手，显著提升生产力。甚至可以说，对于构建更加优雅的 Node.js 后端框架而言，能够动态推断与生成 DTO，是非常重要的`里程碑`
 * 首创双层页签导航设计，可以更加便捷的在多个页面中切换
@@ -35,7 +35,7 @@ Vona 与 Zova 完美协同，延续前后端分离的架构风格。采用 Zova 
 
 ## 在线演示
 
-使用同一套代码实现`Cabloy Store`的前台和后台
+使用同一套代码实现 Cabloy Store 的`Web网站`和`Admin面板`
 
 * 前台：[https://cabloy.com](https://cabloy.com)
 * 后台：[https://cabloy.com/admin](https://cabloy.com/admin)
