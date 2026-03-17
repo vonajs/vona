@@ -22,7 +22,7 @@ The Website and Admin-Dashboard of Cabloy Store are built by one codebase
 * Website: [https://cabloy.com](https://cabloy.com)
 * Admin-Dashboard: [https://cabloy.com/admin](https://cabloy.com/admin)
 
-## Gif
+## GIF Demo
 
 * Pioneers dual-layer tabs navigation design
 

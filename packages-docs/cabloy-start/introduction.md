@@ -1,13 +1,6 @@
 # Cabloy Start
 
-VonaJS provides two project templates:
-
-| Name | UI | Description |
-|--|--|--|
-| cabloy-basic | daisyui   tailwindcss | Provides out-of-the-box `Admin backend` |
-| cabloy-start | vuetify | Provides out-of-the-box `Web website` and `Admin backend` |
-
-`Cabloy Start` includes a set of out-of-the-box Vona/Zova suites to accelerate the development of full-stack projects.
+`Cabloy Start` includes a set of out-of-the-box Vona/Zova suites to accelerate the development of fullstack projects
 
 | Type | Name | Description |
 |--|--|--|
@@ -16,22 +9,21 @@ VonaJS provides two project templates:
 
 ## Features
 
-* Can implement `SSR/SPA/Web website/Admin backend` in the same codebase
-* Admin backend also supports SSR, with clean and elegant code
-* Provides a new CRUD development paradigm, consolidating the best practices of `Tanstack Table`/`Tanstack Form`/`Tanstack Query`
-* Pioneers dual-level tab navigation design for easier switching between multiple pages
+* Building `SSR/SPA/Website/Admin-Dashboard` all in one codebase
+* Admin-Dashboard also supports SSR with intuitive and elegant code
+* Dynamically render CRUD list pages, item pages, and search forms, and provides the best practices of `Tanstack Table/Tanstack Form/Tanstack Query`
+* Pioneers dual-layer tabs navigation design, allowing more convenient switching between multiple pages
 * UI library uses the latest version of VuetifyJS
 
 ## Online Demo
 
-Uses the same codebase to implement Cabloy Store's `Web website` and `Admin backend`
+Uses the same codebase to implement Cabloy Store's `Website` and `Admin-Dashboard`
 
-* Web website: [https://cabloy.com](https://cabloy.com)
-* Admin backend: [https://cabloy.com/admin](https://cabloy.com/admin)
+* Website: [https://cabloy.com](https://cabloy.com)
+* Admin-Dashboard: [https://cabloy.com/admin](https://cabloy.com/admin)
 
 ## GIF Demo
 
-* Pioneers dual-level tab navigation design
+* Pioneers dual-layer tabs navigation design
 
 ![](../assets/img/start/cabloy-start-two-level-tabs.gif)
-

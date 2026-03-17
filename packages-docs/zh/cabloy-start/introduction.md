@@ -1,12 +1,5 @@
 # Cabloy Start
 
-VonaJS 提供了两个项目模版:
-
-|名称|UI|说明|
-|--|--|--|
-|cabloy-basic|daisyui + tailwindcss|提供开箱即用的`Admin中后台`|
-|cabloy-start|vuetify|提供开箱即用的`Web网站`和`Admin中后台`|
-
 `Cabloy Start`包含一组开箱即用的 Vona/Zova 套件，用于加速全栈项目的开发
 
 |类型|名称|说明|
