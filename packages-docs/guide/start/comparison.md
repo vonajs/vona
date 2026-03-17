@@ -9,12 +9,12 @@
 
 ## Comparison with Nest
 
-1. Vona generates unified schemas based on Zod4, which can be used for parameter validation, Swagger documentation generation, dynamic Form/Table rendering, response data serialization, and data masking.
-2. Vona pioneered DTO dynamic inference and generation capabilities, significantly improving development efficiency and experience.
-3. Vona has built-in support for multi-tenancy, multiple databases, and multiple data sources, easily handling large-scale business system development.
-4. Vona provides more complete AOP programming capabilities, including controller aspects, internal aspects, and external aspects, whereas Nest only implements controller aspects.
+1. Vona generates unified schemas based on Zod4, which can be used for parameter validation, Swagger documentation generation, dynamic Form/Table rendering, and response data serialization
+2. Vona pioneered DTO dynamic inference and generation capabilities, significantly improving development efficiency and experience
+3. Vona has built-in support for multi-tenancy, multi-database, and multi-datasource, easily handling large-scale business system development
+4. Vona provides more complete AOP programming capabilities, including controller aspect, internal aspect, and external aspect, whereas Nest only implements controller aspect
 
 ## Comparison with Django Admin
 
-1. Vona implements CRUD with a frontend-backend separation architecture. The frontend uses Zova, providing a more beautiful interface, cleaner code, and greater freedom to customize the interface and add new features.
-2. Vona can implement `SSR/SPA/Admin Backend/Web Frontend` in the same codebase. The Admin backend also supports SSR, with code that is straightforward and elegant.
+1. Vona implements CRUD with a frontend-backend separation architecture. The frontend uses Zova, providing a more beautiful interface, cleaner code, and greater freedom to customize the interface and add new features
+2. Vona can implement `SSR/SPA/Admin/Front` in the same codebase. The Admin backend also supports SSR, with intuitive and elegant code
