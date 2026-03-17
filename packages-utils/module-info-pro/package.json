@@ -41,7 +41,7 @@
     "postpack": "clean-package restore"
   },
   "dependencies": {
-    "@cabloy/module-info": "^1.3.42",
+    "@cabloy/module-info": "^2.0.0",
     "stack-utils": "^2.0.6"
   },
   "devDependencies": {
