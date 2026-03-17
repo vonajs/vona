@@ -6,7 +6,7 @@
       "path": "modules/start-siteadmin/tsconfig.build.json"
     },
     {
-      "path": "modules/start-sitefront/tsconfig.build.json"
+      "path": "modules/start-siteweb/tsconfig.build.json"
     }
   ],
   "exclude": [

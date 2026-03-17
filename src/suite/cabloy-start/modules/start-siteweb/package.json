@@ -1,8 +1,8 @@
 {
-  "name": "vona-module-start-sitefront",
+  "name": "vona-module-start-siteweb",
   "type": "module",
   "version": "5.0.0",
-  "title": "start-sitefront",
+  "title": "start-siteweb",
   "vonaModule": {
     "dependencies": {
       "a-vona": "5.0.0"

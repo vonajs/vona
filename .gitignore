@@ -61,8 +61,8 @@ src/backend/typing/mine.d.ts
 !/src/suite/cabloy-start
 /src/suite/cabloy-start/modules/start-siteadmin/zovaRest
 /src/suite/cabloy-start/modules/start-siteadmin/assets
-/src/suite/cabloy-start/modules/start-sitefront/zovaRest
-/src/suite/cabloy-start/modules/start-sitefront/assets
+/src/suite/cabloy-start/modules/start-siteweb/zovaRest
+/src/suite/cabloy-start/modules/start-siteweb/assets
 
 /src/suite-vendor/*
 !/src/suite-vendor/.gitkeep

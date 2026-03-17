@@ -11,7 +11,7 @@ async function _versionTemplate(templateName: string) {
   await fse.remove(suiteHomeDest);
   await fse.copy(suiteHomeSrc, suiteHomeDest);
   await fse.remove(path.join(suiteHomeDest, 'node_modules'));
-  for (const moduleName of ['start-siteadmin', 'start-sitefront']) {
+  for (const moduleName of ['start-siteadmin', 'start-siteweb']) {
     await removeSpecialFiles(suiteHomeDest,moduleName,['assets','zovaRest']);
   }
 }
