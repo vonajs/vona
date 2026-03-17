@@ -112,7 +112,7 @@ declare module 'vona-module-a-permission' {
 }
 /** dto: end */
 /** dto: begin */
-import type { DtoPermissions } from '../dto/permissions.tsx'; 
+import type { DtoPermissions } from '../dto/permissions.tsx';
 declare module 'vona-module-a-permission' {
   
     export interface IDtoOptionsPermissions {

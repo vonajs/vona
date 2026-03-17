@@ -105,7 +105,7 @@ declare module 'vona-module-a-captcha' {
 /** dto: end */
 /** dto: begin */
 import type { DtoCaptchaData } from '../dto/captchaData.ts';
-import type { DtoCaptchaVerify } from '../dto/captchaVerify.ts'; 
+import type { DtoCaptchaVerify } from '../dto/captchaVerify.ts';
 declare module 'vona-module-a-captcha' {
   
     export interface IDtoOptionsCaptchaData {

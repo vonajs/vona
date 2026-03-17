@@ -283,7 +283,7 @@ declare module 'vona-module-a-paypal' {
 /** dto: end */
 /** dto: begin */
 import type { DtoPaypalOrderRecordOptions } from '../dto/paypalOrderRecordOptions.tsx';
-import type { DtoPaypalOrderRecordPayload } from '../dto/paypalOrderRecordPayload.tsx'; 
+import type { DtoPaypalOrderRecordPayload } from '../dto/paypalOrderRecordPayload.tsx';
 declare module 'vona-module-a-paypal' {
   
     export interface IDtoOptionsPaypalOrderRecordOptions {

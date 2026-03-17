@@ -377,7 +377,7 @@ declare module 'vona-module-a-auth' {
 }
 /** dto: end */
 /** dto: begin */
-import type { DtoAuth } from '../dto/auth.ts'; 
+import type { DtoAuth } from '../dto/auth.ts';
 declare module 'vona-module-a-auth' {
   
     export interface IDtoOptionsAuth {

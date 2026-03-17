@@ -445,7 +445,7 @@ declare module 'vona-module-home-user' {
 import type { DtoLogin } from '../dto/login.ts';
 import type { DtoPassport } from '../dto/passport.ts';
 import type { DtoPassportJwt } from '../dto/passportJwt.ts';
-import type { DtoRegister } from '../dto/register.ts'; 
+import type { DtoRegister } from '../dto/register.ts';
 declare module 'vona-module-home-user' {
   
     export interface IDtoOptionsLogin {

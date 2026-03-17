@@ -1636,7 +1636,7 @@ import type { DtoSerializerSimple } from '../dto/serializerSimple.ts';
 import type { DtoUser } from '../dto/user.ts';
 import type { DtoUserCreate } from '../dto/userCreate.ts';
 import type { DtoUserLazy } from '../dto/userLazy.ts';
-import type { DtoUserUpdate } from '../dto/userUpdate.ts'; 
+import type { DtoUserUpdate } from '../dto/userUpdate.ts';
 declare module 'vona-module-test-vona' {
   
     export interface IDtoOptionsCategoryTree {

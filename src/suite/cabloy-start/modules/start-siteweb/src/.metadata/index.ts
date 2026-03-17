@@ -1,27 +1,27 @@
 /* eslint-disable */
 /** ssrSite: begin */
-export * from '../bean/ssrSite.front.ts';
-import type { ISsrSiteOptionsFront } from '../bean/ssrSite.front.ts';
+export * from '../bean/ssrSite.web.ts';
+import type { ISsrSiteOptionsWeb } from '../bean/ssrSite.web.ts';
 import 'vona-module-a-ssr';
 declare module 'vona-module-a-ssr' {
   
     export interface ISsrSiteRecord {
-      'start-sitefront:front': ISsrSiteOptionsFront;
+      'start-siteweb:web': ISsrSiteOptionsWeb;
     }
 
   
 }
-declare module 'vona-module-start-sitefront' {
+declare module 'vona-module-start-siteweb' {
   
-        export interface SsrSiteFront {
+        export interface SsrSiteWeb {
           /** @internal */
-          get scope(): ScopeModuleStartSitefront;
+          get scope(): ScopeModuleStartSiteweb;
         }
 
-          export interface SsrSiteFront {
-            get $beanFullName(): 'start-sitefront.ssrSite.front';
-            get $onionName(): 'start-sitefront:front';
-            get $onionOptions(): ISsrSiteOptionsFront;
+          export interface SsrSiteWeb {
+            get $beanFullName(): 'start-siteweb.ssrSite.web';
+            get $onionName(): 'start-siteweb:web';
+            get $onionOptions(): ISsrSiteOptionsWeb;
           } 
 }
 /** ssrSite: end */
@@ -30,20 +30,20 @@ import { BeanScopeBase, type BeanScopeUtil } from 'vona';
 import { Scope } from 'vona-module-a-bean';
 
 @Scope()
-export class ScopeModuleStartSitefront extends BeanScopeBase {}
+export class ScopeModuleStartSiteweb extends BeanScopeBase {}
 
-export interface ScopeModuleStartSitefront {
+export interface ScopeModuleStartSiteweb {
   util: BeanScopeUtil;
 }
 
 import 'vona';
 declare module 'vona' {
   export interface IBeanScopeRecord {
-    'start-sitefront': ScopeModuleStartSitefront;
+    'start-siteweb': ScopeModuleStartSiteweb;
   }
 
   export interface IBeanScopeContainer {
-    startSitefront: ScopeModuleStartSitefront;
+    startSiteweb: ScopeModuleStartSiteweb;
   }
   
   

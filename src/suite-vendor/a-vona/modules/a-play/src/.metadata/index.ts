@@ -18,7 +18,7 @@ declare module 'vona-module-a-play' {
 }
 /** dto: end */
 /** dto: begin */
-import type { DtoPlay } from '../dto/play.ts'; 
+import type { DtoPlay } from '../dto/play.ts';
 declare module 'vona-module-a-play' {
   
     export interface IDtoOptionsPlay {

@@ -18,7 +18,7 @@ declare module 'vona-module-test-captcha' {
 }
 /** dto: end */
 /** dto: begin */
-import type { DtoSignin } from '../dto/signin.ts'; 
+import type { DtoSignin } from '../dto/signin.ts';
 declare module 'vona-module-test-captcha' {
   
     export interface IDtoOptionsSignin {

@@ -44,7 +44,7 @@ declare module 'vona-module-a-openapischema' {
 }
 /** dto: end */
 /** dto: begin */
-import type { DtoBootstrap } from '../dto/bootstrap.tsx'; 
+import type { DtoBootstrap } from '../dto/bootstrap.tsx';
 declare module 'vona-module-a-openapischema' {
   
     export interface IDtoOptionsBootstrap {

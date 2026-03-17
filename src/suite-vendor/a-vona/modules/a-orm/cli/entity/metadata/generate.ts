@@ -43,7 +43,7 @@ declare module 'vona-module-${moduleName}' {
 function __parseTableName(fileContent: string): string | false {
   let matched = fileContent.match(/@Entity<.*?>\(\{[\s\S]*?table: ('[^']*')[\s\S]*?\}[\s\S]*?\)\s*export class/);
   if (!matched) {
-    matched = fileContent.match(/@Entity<.*?>\(([^)]*)\)/);
+    matched = fileContent.match(/@Entity<.*?>\(\s*('[^']*')/);
   }
   if (!matched) return false;
   const tableName = matched[1];

@@ -217,7 +217,7 @@ declare module 'vona-module-test-rest' {
 import type { DtoProductCreate } from '../dto/productCreate.ts';
 import type { DtoProductQuery } from '../dto/productQuery.ts';
 import type { DtoProductQueryRes } from '../dto/productQueryRes.ts';
-import type { DtoProductUpdate } from '../dto/productUpdate.ts'; 
+import type { DtoProductUpdate } from '../dto/productUpdate.ts';
 declare module 'vona-module-test-rest' {
   
     export interface IDtoOptionsProductCreate {

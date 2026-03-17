@@ -100,7 +100,7 @@ declare module 'vona-module-a-jwt' {
 }
 /** dto: end */
 /** dto: begin */
-import type { DtoJwtToken } from '../dto/jwtToken.ts'; 
+import type { DtoJwtToken } from '../dto/jwtToken.ts';
 declare module 'vona-module-a-jwt' {
   
     export interface IDtoOptionsJwtToken {

@@ -34,7 +34,7 @@ import type { DtoTestBody } from '../dto/testBody.ts';
 import type { DtoTestDetail } from '../dto/testDetail.ts';
 import type { DtoTestParams } from '../dto/testParams.ts';
 import type { DtoTestQuery } from '../dto/testQuery.ts';
-import type { DtoTestResult } from '../dto/testResult.tsx'; 
+import type { DtoTestResult } from '../dto/testResult.tsx';
 declare module 'vona-module-test-ssr' {
   
     export interface IDtoOptionsTestBody {
