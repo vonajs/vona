@@ -26,6 +26,7 @@ $ cd projectName
 
 ``` bash
 $ zova :create:project projectName --template=vuetify
+$ cd projectName
 ```
 
 ### 2. 克隆zova-suite-cabloy-start源码
@@ -33,7 +34,6 @@ $ zova :create:project projectName --template=vuetify
 购买后自动获取 GitHub 仓库的访问权限
 
 ``` bash
-$ cd projectName
 $ git clone git@github.com:cabloy/zova-suite-cabloy-start.git src/suite/cabloy-start
 ```
 
@@ -62,7 +62,7 @@ BUILD_REST_COPY_DIST = /path-to-vona/src/suite/cabloy-start/modules/start-sitewe
 
 ### 4. 构建Zova项目
 
-* 构建 js bundle
+* 构建 JS bundle
 
 ```bash
 $ npm run build:ssr:cabloyStartAdmin
@@ -78,7 +78,7 @@ $ npm run build:rest:cabloyStartWeb
 
 ## 运行项目
 
-### 1. 启动Vona服务
+### 1. 启动Vona开发服务
 
 ``` bash
 $ npm run dev
