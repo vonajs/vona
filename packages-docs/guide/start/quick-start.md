@@ -32,9 +32,18 @@ This extension provides a large number of menus for quickly creating code skelet
 1. Create Project
 
 ``` bash
-$ vona :create:project projectName
+$ vona :create:project projectName --template=cabloy-basic
 $ cd projectName
 ```
+
+Vona provides two project templates:
+
+| Name | UI | Description |
+|--|--|--|
+| cabloy-basic | daisyui + tailwindcss | Provides a ready-to-use `Admin-Dashboard` |
+| cabloy-start | vuetify | Provides a ready-to-use `Website` and `Admin-Dashboard` |
+
+> For the relationship between Vona, Zova, and Cabloy, see: [Cabloy](../../cabloy/introduction.md)
 
 2. Modify .env file
 

@@ -31,7 +31,7 @@ $ vona :create:module demo-student --suite=
 ### 1. Cli命令
 
 ``` bash
-$ vona :tools:crud student --module=demo-student
+$ vona :tools:crudCabloy student --module=demo-student
 ```
 
 ### 2. 菜单命令
