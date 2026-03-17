@@ -10,7 +10,7 @@ To further enhance the development experience and efficiency, CabloyJS provides 
 
 ### 1. 2016: V1-V4
 
-Development of CabloyJS began in 2016. CabloyJS is a full-stack NodeJS framework based on JavaScript, and has evolved through major versions, including V1, V2, V3, and V4
+Development of CabloyJS began in 2016. CabloyJS is a fullstack NodeJS framework based on JavaScript, and has evolved through major versions, including V1, V2, V3, and V4
 
 - Some say: `CabloyJS is like a textbook`
 - Others say: `If CabloyJS supported TypeScript and had a decoupled frontend and backend architecture, it would be even better`
