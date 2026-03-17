@@ -17,4 +17,4 @@
 ## 与Django Admin对比
 
 1. Vona 采用前后端分离的架构来实现 CRUD。前端采用 Zova，界面更美观、代码更简洁，可以更加自由的定制界面，添加新功能
-2. Vona 可在同一个代码库中实现`SSR/SPA/Web网站/Admin面板`。Admin 面板也支持 SSR，并且代码直观、优雅
+2. Vona 可在同一个代码库中实现`SSR/SPA/Web网站/Admin中后台`。Admin 中后台也支持 SSR，并且代码直观、优雅
