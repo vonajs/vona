@@ -35,7 +35,7 @@ export class SsrSiteAdmin {}
     icon: '::home',
     link: '/',
   },
-  site: ['start-siteadmin:admin'],
+  site: ['basic-siteadmin:admin'],
 })
 export class SsrMenuHome {}
 ```
@@ -53,7 +53,7 @@ export class SsrMenuHome {}
     title: $locale('Management'),
     order: $order(2),
   },
-  site: ['start-siteadmin:admin'],
+  site: ['basic-siteadmin:admin'],
 })
 export class SsrMenuGroupManagement {}
 ```
@@ -62,22 +62,3 @@ export class SsrMenuGroupManagement {}
 |--|--|
 |item|菜单组信息|
 |site|将菜单组与指定网站绑定|
-
-## start-siteweb
-
-该模块包含如下组件：
-
-### 1. SsrSite: Web
-
-``` typescript
-@SsrSite({
-  publicPath: '',
-  bundlePath: 'ssr-cabloyStartWeb-5.0.0',
-})
-export class SsrSiteWeb {}
-```
-
-|名称|说明|
-|--|--|
-|publicPath|指定网站URL的publicPath|
-|bundlePath|指定JS Bundle的路径。由Zova前端项目构建后拷贝至此|

@@ -40,15 +40,15 @@ function ZZFormField(_props) {
 }
 
 //#endregion
-//#region src/suite-vendor/a-zova/modules/a-form/rest/component/formSubscribe.ts
-function ZZFormSubscribe(_props) {
-	return "a-form:formSubscribe";
-}
-
-//#endregion
 //#region src/suite-vendor/a-zova/modules/a-form/rest/component/formFieldWrapper.ts
 function FFFormWrapper(_props) {
 	return "a-form:formFieldWrapper";
+}
+
+//#endregion
+//#region src/suite-vendor/a-zova/modules/a-form/rest/component/formSubscribe.ts
+function ZZFormSubscribe(_props) {
+	return "a-form:formSubscribe";
 }
 
 //#endregion
@@ -214,36 +214,6 @@ function TTBasicTableActionView(_props) {
 }
 
 //#endregion
-//#region src/suite-vendor/a-cabloy/modules/rest-actions/rest/action/view.ts
-function AARestActionsView(_props) {
-	return "rest-actions:view";
-}
-
-//#endregion
-//#region src/suite-vendor/a-cabloy/modules/rest-actions/rest/action/edit.ts
-function AARestActionsEdit(_props) {
-	return "rest-actions:edit";
-}
-
-//#endregion
-//#region src/suite-vendor/a-cabloy/modules/rest-actions/rest/action/delete.ts
-function AARestActionsDelete(_props) {
-	return "rest-actions:delete";
-}
-
-//#endregion
-//#region src/suite-vendor/a-cabloy/modules/rest-actions/rest/action/create.ts
-function AARestActionsCreate(_props) {
-	return "rest-actions:create";
-}
-
-//#endregion
-//#region src/suite-vendor/a-cabloy/modules/rest-actions/rest/action/setValue.ts
-function AARestActionsSetValue(_props) {
-	return "rest-actions:setValue";
-}
-
-//#endregion
 //#region src/suite-vendor/a-cabloy/modules/rest-actions/rest/action/alert.ts
 function AARestActionsAlert(_props) {
 	return "rest-actions:alert";
@@ -259,6 +229,36 @@ function AARestActionsConfirm(_props) {
 //#region src/suite-vendor/a-cabloy/modules/rest-actions/rest/action/copy.ts
 function AARestActionsCopy(_props) {
 	return "rest-actions:copy";
+}
+
+//#endregion
+//#region src/suite-vendor/a-cabloy/modules/rest-actions/rest/action/create.ts
+function AARestActionsCreate(_props) {
+	return "rest-actions:create";
+}
+
+//#endregion
+//#region src/suite-vendor/a-cabloy/modules/rest-actions/rest/action/delete.ts
+function AARestActionsDelete(_props) {
+	return "rest-actions:delete";
+}
+
+//#endregion
+//#region src/suite-vendor/a-cabloy/modules/rest-actions/rest/action/edit.ts
+function AARestActionsEdit(_props) {
+	return "rest-actions:edit";
+}
+
+//#endregion
+//#region src/suite-vendor/a-cabloy/modules/rest-actions/rest/action/setValue.ts
+function AARestActionsSetValue(_props) {
+	return "rest-actions:setValue";
+}
+
+//#endregion
+//#region src/suite-vendor/a-cabloy/modules/rest-actions/rest/action/view.ts
+function AARestActionsView(_props) {
+	return "rest-actions:view";
 }
 
 //#endregion

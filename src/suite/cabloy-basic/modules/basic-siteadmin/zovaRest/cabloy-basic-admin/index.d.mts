@@ -22945,7 +22945,7 @@ interface CookieOptions {
 //#region packages-zova/zova-core/src/types/interface/inject.d.ts
 interface IInjectRecord {}
 //#endregion
-//#region node_modules/.pnpm/@cabloy+module-info@1.3.42/node_modules/@cabloy/module-info/dist/index.d.mts
+//#region node_modules/.pnpm/@cabloy+module-info@2.0.0/node_modules/@cabloy/module-info/dist/index.d.mts
 //#region src/vona.d.ts
 type VonaMetaFlavor = 'normal' | 'play' | 'demo' | 'docker' | 'ci' | keyof VonaMetaFlavorExtend;
 type VonaMetaMode = 'test' | 'dev' | 'prod';
@@ -22956,9 +22956,9 @@ interface VonaOnionOptionsMeta {
 interface VonaMetaFlavorExtend {}
 //#endregion
 //#region src/zova.d.ts
-type ZovaMetaFlavor = 'front' | 'admin' | 'vonaHome' | 'vonaCabloy' | keyof ZovaMetaFlavorExtend;
-type ZovaMetaMode = 'development' | 'production';
-type ZovaMetaAppMode = 'spa' | 'ssr' | 'pwa' | 'cordova' | 'capacitor' | 'electron' | 'bex' | keyof ZovaMetaAppModeExtend;
+type ZovaMetaFlavor = "web" | "admin" | keyof ZovaMetaFlavorExtend;
+type ZovaMetaMode = "development" | "production";
+type ZovaMetaAppMode = "spa" | "ssr" | "pwa" | "cordova" | "capacitor" | "electron" | "bex" | keyof ZovaMetaAppModeExtend;
 interface ZovaConfigMeta {
   flavor: ZovaMetaFlavor;
   mode: ZovaMetaMode;
@@ -36655,13 +36655,13 @@ declare function ZZForm<TFormData extends {} = {}, TSubmitMeta = never>(_props: 
 type TypeControllerFormFieldPublicProps<TParentData extends {} = {}> = TypeRenderComponentJsxPropsPublic & ControllerFormFieldProps<TParentData>;
 declare function ZZFormField<TParentData extends {} = {}>(_props: TypeControllerFormFieldPublicProps<TParentData>): string;
 //#endregion
-//#region src/suite-vendor/a-zova/modules/a-form/rest/component/formSubscribe.d.ts
-type TypeControllerFormSubscribePublicProps<TFormData extends {} = {}, TSubmitMeta = never> = TypeRenderComponentJsxPropsPublic & ControllerFormSubscribeProps<TFormData, TSubmitMeta>;
-declare function ZZFormSubscribe<TFormData extends {} = {}, TSubmitMeta = never>(_props: TypeControllerFormSubscribePublicProps<TFormData, TSubmitMeta>): string;
-//#endregion
 //#region src/suite-vendor/a-zova/modules/a-form/rest/component/formFieldWrapper.d.ts
 type TypeControllerFormFieldWrapperPublicProps<TParentData extends {} = {}> = TypeRenderComponentJsxPropsPublic & ControllerFormFieldWrapperProps<TParentData>;
 declare function FFFormWrapper<TParentData extends {} = {}>(_props: TypeControllerFormFieldWrapperPublicProps<TParentData>): string;
+//#endregion
+//#region src/suite-vendor/a-zova/modules/a-form/rest/component/formSubscribe.d.ts
+type TypeControllerFormSubscribePublicProps<TFormData extends {} = {}, TSubmitMeta = never> = TypeRenderComponentJsxPropsPublic & ControllerFormSubscribeProps<TFormData, TSubmitMeta>;
+declare function ZZFormSubscribe<TFormData extends {} = {}, TSubmitMeta = never>(_props: TypeControllerFormSubscribePublicProps<TFormData, TSubmitMeta>): string;
 //#endregion
 //#region src/suite-vendor/a-zova/modules/a-icon/rest/component/icon.d.ts
 type TypeControllerIconPublicProps = TypeRenderComponentJsxPropsPublic & ControllerIconProps;
@@ -44030,55 +44030,6 @@ interface ITableCellOptionsActionView extends IDecoratorTableCellOptions {
 //#region src/suite/cabloy-basic/modules/basic-table/rest/tableCell/actionView.d.ts
 declare function TTBasicTableActionView(_props: ITableCellOptionsActionView): string;
 //#endregion
-//#region src/suite-vendor/a-cabloy/modules/rest-actions/src/bean/action.view.d.ts
-type TypeActionViewResult = unknown;
-interface IActionOptionsView extends IDecoratorActionOptions<TypeActionViewResult> {
-  resource?: string;
-  id?: string;
-}
-//#endregion
-//#region src/suite-vendor/a-cabloy/modules/rest-actions/rest/action/view.d.ts
-declare function AARestActionsView(_props: TypeActionOptionsRest<IActionOptionsView>): string;
-//#endregion
-//#region src/suite-vendor/a-cabloy/modules/rest-actions/src/bean/action.edit.d.ts
-type TypeActionEditResult = unknown;
-interface IActionOptionsEdit extends IDecoratorActionOptions<TypeActionEditResult> {
-  resource?: string;
-  id?: string;
-}
-//#endregion
-//#region src/suite-vendor/a-cabloy/modules/rest-actions/rest/action/edit.d.ts
-declare function AARestActionsEdit(_props: TypeActionOptionsRest<IActionOptionsEdit>): string;
-//#endregion
-//#region src/suite-vendor/a-cabloy/modules/rest-actions/src/bean/action.delete.d.ts
-type TypeActionDeleteResult = unknown;
-interface IActionOptionsDelete extends IDecoratorActionOptions<TypeActionDeleteResult> {
-  id?: string;
-}
-//#endregion
-//#region src/suite-vendor/a-cabloy/modules/rest-actions/rest/action/delete.d.ts
-declare function AARestActionsDelete(_props: TypeActionOptionsRest<IActionOptionsDelete>): string;
-//#endregion
-//#region src/suite-vendor/a-cabloy/modules/rest-actions/src/bean/action.create.d.ts
-type TypeActionCreateResult = unknown;
-interface IActionOptionsCreate extends IDecoratorActionOptions<TypeActionCreateResult> {
-  resource?: string;
-}
-//#endregion
-//#region src/suite-vendor/a-cabloy/modules/rest-actions/rest/action/create.d.ts
-declare function AARestActionsCreate(_props: TypeActionOptionsRest<IActionOptionsCreate>): string;
-//#endregion
-//#region src/suite-vendor/a-cabloy/modules/rest-actions/src/bean/action.setValue.d.ts
-type TypeActionSetValueResult = unknown;
-interface IActionOptionsSetValue extends IDecoratorActionOptions<TypeActionSetValueResult> {
-  name?: string;
-  value?: any;
-  disableNotifyChanged?: boolean;
-}
-//#endregion
-//#region src/suite-vendor/a-cabloy/modules/rest-actions/rest/action/setValue.d.ts
-declare function AARestActionsSetValue(_props: TypeActionOptionsRest<IActionOptionsSetValue>): string;
-//#endregion
 //#region src/suite-vendor/a-cabloy/modules/rest-actions/src/bean/action.alert.d.ts
 type TypeActionAlertResult = unknown;
 interface IActionOptionsAlert extends IDecoratorActionOptions<TypeActionAlertResult> {
@@ -44106,6 +44057,55 @@ interface IActionOptionsCopy extends IDecoratorActionOptions<TypeActionCopyResul
 //#endregion
 //#region src/suite-vendor/a-cabloy/modules/rest-actions/rest/action/copy.d.ts
 declare function AARestActionsCopy(_props: TypeActionOptionsRest<IActionOptionsCopy>): string;
+//#endregion
+//#region src/suite-vendor/a-cabloy/modules/rest-actions/src/bean/action.create.d.ts
+type TypeActionCreateResult = unknown;
+interface IActionOptionsCreate extends IDecoratorActionOptions<TypeActionCreateResult> {
+  resource?: string;
+}
+//#endregion
+//#region src/suite-vendor/a-cabloy/modules/rest-actions/rest/action/create.d.ts
+declare function AARestActionsCreate(_props: TypeActionOptionsRest<IActionOptionsCreate>): string;
+//#endregion
+//#region src/suite-vendor/a-cabloy/modules/rest-actions/src/bean/action.delete.d.ts
+type TypeActionDeleteResult = unknown;
+interface IActionOptionsDelete extends IDecoratorActionOptions<TypeActionDeleteResult> {
+  id?: string;
+}
+//#endregion
+//#region src/suite-vendor/a-cabloy/modules/rest-actions/rest/action/delete.d.ts
+declare function AARestActionsDelete(_props: TypeActionOptionsRest<IActionOptionsDelete>): string;
+//#endregion
+//#region src/suite-vendor/a-cabloy/modules/rest-actions/src/bean/action.edit.d.ts
+type TypeActionEditResult = unknown;
+interface IActionOptionsEdit extends IDecoratorActionOptions<TypeActionEditResult> {
+  resource?: string;
+  id?: string;
+}
+//#endregion
+//#region src/suite-vendor/a-cabloy/modules/rest-actions/rest/action/edit.d.ts
+declare function AARestActionsEdit(_props: TypeActionOptionsRest<IActionOptionsEdit>): string;
+//#endregion
+//#region src/suite-vendor/a-cabloy/modules/rest-actions/src/bean/action.setValue.d.ts
+type TypeActionSetValueResult = unknown;
+interface IActionOptionsSetValue extends IDecoratorActionOptions<TypeActionSetValueResult> {
+  name?: string;
+  value?: any;
+  disableNotifyChanged?: boolean;
+}
+//#endregion
+//#region src/suite-vendor/a-cabloy/modules/rest-actions/rest/action/setValue.d.ts
+declare function AARestActionsSetValue(_props: TypeActionOptionsRest<IActionOptionsSetValue>): string;
+//#endregion
+//#region src/suite-vendor/a-cabloy/modules/rest-actions/src/bean/action.view.d.ts
+type TypeActionViewResult = unknown;
+interface IActionOptionsView extends IDecoratorActionOptions<TypeActionViewResult> {
+  resource?: string;
+  id?: string;
+}
+//#endregion
+//#region src/suite-vendor/a-cabloy/modules/rest-actions/rest/action/view.d.ts
+declare function AARestActionsView(_props: TypeActionOptionsRest<IActionOptionsView>): string;
 //#endregion
 //#region src/suite-vendor/a-zova/modules/a-actions/src/bean/action.log.d.ts
 type TypeActionLogResult = unknown;

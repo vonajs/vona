@@ -1,6 +1,6 @@
 {
   "name": "zova-rest-cabloy-basic-admin",
-  "version": "5.0.17",
+  "version": "5.0.0",
   "type": "module",
   "exports": {
     ".": {
