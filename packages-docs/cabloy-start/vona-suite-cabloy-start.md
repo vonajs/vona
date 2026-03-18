@@ -1,15 +1,15 @@
 # vona-suite-cabloy-start
 
-该套件包含两个模块：
+This suite includes two modules:
 
-|名称|说明|
+|Name|Description|
 |--|--|
-|start-siteadmin|用于实现`Admin中后台`|
-|start-siteweb|用于实现`Web网站`|
+|start-siteadmin|Used to implement `Admin-Dashboard`|
+|start-siteweb|Used to implement `Website`|
 
 ## start-siteadmin
 
-该模块包含如下组件：
+This module includes the following components:
 
 ### 1. SsrSite: Admin
 
@@ -21,10 +21,10 @@
 export class SsrSiteAdmin {}
 ```
 
-|名称|说明|
+|Name|Description|
 |--|--|
-|publicPath|指定网站URL的publicPath|
-|bundlePath|指定JS Bundle的路径。由Zova前端项目构建后拷贝至此|
+|publicPath|Specifies the publicPath of the admin website URL|
+|bundlePath|Specifies the path of the JS bundle. Copied here after building from the Zova frontend project|
 
 ### 2. SsrMenu: Home
 
@@ -41,10 +41,10 @@ export class SsrSiteAdmin {}
 export class SsrMenuHome {}
 ```
 
-|名称|说明|
+|Name|Description|
 |--|--|
-|item|菜单信息|
-|site|将菜单与指定网站绑定|
+|item|Menu information|
+|site|Binds the menu to the specified site|
 
 ### 3. SsrMenuGroup: Management
 
@@ -59,14 +59,14 @@ export class SsrMenuHome {}
 export class SsrMenuGroupManagement {}
 ```
 
-|名称|说明|
+|Name|Description|
 |--|--|
-|item|菜单组信息|
-|site|将菜单组与指定网站绑定|
+|item|Menu group information|
+|site|Binds the menu group to the specified site|
 
 ## start-siteweb
 
-该模块包含如下组件：
+This module includes the following components:
 
 ### 1. SsrSite: Web
 
@@ -78,7 +78,7 @@ export class SsrMenuGroupManagement {}
 export class SsrSiteWeb {}
 ```
 
-|名称|说明|
+|Name|Description|
 |--|--|
-|publicPath|指定网站URL的publicPath|
-|bundlePath|指定JS Bundle的路径。由Zova前端项目构建后拷贝至此|
+|publicPath|Specifies the publicPath of the website URL|
+|bundlePath|Specifies the path of the JS bundle. Copied here after building from the Zova frontend project|

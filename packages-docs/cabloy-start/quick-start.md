@@ -15,8 +15,8 @@ The `cabloy-start` template has a built-in suite `vona-suite-cabloy-start`, whic
 
 |name|description|
 |--|--|
-|start-siteadmin| for implementing `Admin-Dashboard`|
-|start-siteweb|for implementing `Website`|
+|start-siteadmin| Used to implement `Admin-Dashboard`|
+|start-siteweb|Used to implement `Website`|
 
 ## Create a Zova project
 
