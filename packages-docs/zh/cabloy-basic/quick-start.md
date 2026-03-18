@@ -26,13 +26,13 @@ $ git clone git@github.com:zovajs/zova.git
 $ cd zova
 ```
 
-## 2. 初始化并安装依赖
+### 2. 初始化并安装依赖
 
 ```bash
 $ npm run init
 ```
 
-## 3. 进入zova-dev目录
+### 3. 进入zova-dev目录
 
 ```bash
 $ cd zova-dev
@@ -80,10 +80,10 @@ $ npm run dev
 
 ### 2. 启动Zova开发服务
 
-可以直接启动 Zova 的开发服务，方便调试前端代码。此时，Vona 可以作为 API 服务供前端访问
+可以直接启动 Zova 开发服务，方便调试前端代码。此时，Vona 可以作为 API 服务供前端访问
 
 ``` bash
-$ npm run dev:ssr:cabloyStartAdmin
+$ npm run dev:ssr:cabloyBasicAdmin
 ```
 
 |URL|说明|

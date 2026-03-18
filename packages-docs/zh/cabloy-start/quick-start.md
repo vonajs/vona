@@ -91,7 +91,7 @@ $ npm run dev
 
 ### 2. 启动Zova开发服务
 
-可以直接启动 Zova 的开发服务，方便调试前端代码。此时，Vona 可以作为 API 服务供前端访问
+可以直接启动 Zova 开发服务，方便调试前端代码。此时，Vona 可以作为 API 服务供前端访问
 
 ``` bash
 $ npm run dev:ssr:cabloyStartWeb

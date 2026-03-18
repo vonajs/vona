@@ -51,7 +51,7 @@ $ npm run build:rest:cabloyBasicAdmin
 
 ## 6. 启动开发服务
 
-可以直接启动 Zova 的开发服务，方便调试前端代码
+可以直接启动 Zova 开发服务，方便调试前端代码
 
 ```bash
 $ npm run dev:ssr:cabloyBasicAdmin
