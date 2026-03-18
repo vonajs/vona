@@ -11,7 +11,7 @@
 
 * Building `SSR/SPA/Website/Admin-Dashboard` all in one codebase
 * Admin-Dashboard also supports SSR with intuitive and elegant code
-* Dynamically render CRUD list pages, item pages, and search forms, and provides the best practices of `Tanstack Table/Tanstack Form/Tanstack Query`
+* Dynamically render CRUD list pages, entry pages, and search forms, and provides the best practices of `Tanstack Table/Tanstack Form/Tanstack Query`
 * Pioneers dual-layer tabs navigation UI/UX, allowing more convenient switching between multiple pages
 * UI library uses the latest version of VuetifyJS
 

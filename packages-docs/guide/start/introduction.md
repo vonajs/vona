@@ -6,7 +6,7 @@ Vona is a fullstack meta-framework for building `SSR/SPA/Website/Admin-Dashboard
 
 * Pioneers dynamic DTO inference and generation capabilities, significantly improving development efficiency and experience. It can even be said that being able to dynamically infer and generate DTOs is a very important `milestone` for building a more elegant Node.js backend framework
 * Pioneers dual-layer tabs navigation UI/UX, allowing more convenient switching between multiple pages
-* Dynamically render CRUD list pages, item pages, and search forms, and provides the best practices of `Tanstack Table/Tanstack Form/Tanstack Query`
+* Dynamically render CRUD list pages, entry pages, and search forms, and provides the best practices of `Tanstack Table/Tanstack Form/Tanstack Query`
 
 ## Fullstack Principles
 
@@ -31,7 +31,7 @@ The Website and Admin-Dashboard of Cabloy Store are built by one codebase
 ## Features
 
 * `Fullstack`: Building `SSR/SPA/Website/Admin-Dashboard` all in one codebase. The Admin-Dashboard also supports SSR with intuitive and elegant code
-* `CRUD Dynamic Rendering`: Dynamically render CRUD list pages, item pages, and search forms, and provides the best practices of `Tanstack Table/Tanstack Form/Tanstack Query`
+* `CRUD Dynamic Rendering`: Dynamically render CRUD list pages, entry pages, and search forms, and provides the best practices of `Tanstack Table/Tanstack Form/Tanstack Query`
 * `Dynamic DTO Inference and Generation`: Pioneers dynamic DTO inference and generation capabilities, significantly improving development efficiency and experience
 * `Dual-layer Tabs UI/UX`: Pioneers dual-layer tabs navigation UI/UX, allowing more convenient switching between multiple pages
 * `Developed in TypeScript`: Provides comprehensive TypeScript type hints
