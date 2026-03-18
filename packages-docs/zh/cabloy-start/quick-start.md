@@ -93,14 +93,12 @@ $ npm run dev
 
 可以直接启动 Zova 的开发服务，方便调试前端代码。此时，Vona 可以作为 API 服务供前端访问
 
-* Web 网站: http://localhost:9000
-
 ``` bash
 $ npm run dev:ssr:cabloyStartWeb
-```
-
-* Admin 中后台: http://localhost:9000/admin/
-
-``` bash
 $ npm run dev:ssr:cabloyStartAdmin
 ```
+
+|URL|说明|
+|--|--|
+|http://localhost:9000|Web网站|
+|http://localhost:9000/admin/|Admin中后台|
