@@ -26,6 +26,40 @@ export class SsrSiteAdmin {}
 |publicPath|指定网站URL的publicPath|
 |bundlePath|指定JS Bundle的路径。由Zova前端项目构建后拷贝至此|
 
+### 2. SsrMenu: Home
 
+``` typescript
+@SsrMenu({
+  item: {
+    title: $locale('Home'),
+    order: $order(1, 'core'),
+    icon: '::home',
+    link: '/',
+  },
+  site: ['start-siteadmin:admin'],
+})
+export class SsrMenuHome {}
+```
 
+|名称|说明|
+|--|--|
+|item|菜单信息|
+|site|将菜单与指定网站绑定|
 
+### 3. SsrMenuGroup: Management
+
+``` typescript
+@SsrMenuGroup({
+  item: {
+    title: $locale('Management'),
+    order: $order(2),
+  },
+  site: ['start-siteadmin:admin'],
+})
+export class SsrMenuGroupManagement {}
+```
+
+|名称|说明|
+|--|--|
+|item|菜单组信息|
+|site|将菜单组与指定网站绑定|
