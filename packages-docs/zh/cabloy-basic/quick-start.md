@@ -11,7 +11,7 @@ $ vona :create:project projectName --template=cabloy-basic
 $ cd projectName
 ```
 
-`cabloy-basic`模版内置一个套件`vona-suite-cabloy-basic`。该套件包含一个模块：
+`cabloy-basic`模版内置一个套件`vona-suite-cabloy-basic`。该套件包含如下模块：
 
 |名称|说明|
 |--|--|

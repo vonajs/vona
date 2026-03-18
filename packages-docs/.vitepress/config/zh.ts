@@ -42,6 +42,8 @@ function sidebarCabloyBasic(): DefaultTheme.SidebarItem[] {
   return [
     { text: '介绍', link: 'introduction' },
     { text: '快速上手', link: 'quick-start' },
+    { text: 'vona-suite-cabloy-basic', link: 'vona-suite-cabloy-basic' },
+    { text: 'zova-suite-cabloy-basic', link: 'zova-suite-cabloy-basic' },
   ];
 }
 

@@ -20,6 +20,6 @@ export interface ISsrSiteOptionsSecond extends IDecoratorSsrSiteOptions<ISsrSite
 
 @SsrSite<ISsrSiteOptionsSecond>({
   publicPath: 'second',
-  bundlePath: 'ssr-testSecond-5.0.17',
+  bundlePath: 'ssr-testSecond-5.0.0',
 })
 export class SsrSiteSecond extends BeanSsrSiteBase<ISsrSiteOptionsSecond> {}
