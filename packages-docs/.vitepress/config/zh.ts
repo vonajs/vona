@@ -8,12 +8,14 @@ export const zh = defineConfig({
       { text: '首页', link: '/' },
       { text: '文档', link: '/zh/guide/start/introduction', activeMatch: '/zh/guide/' },
       { text: 'Cabloy', link: '/zh/cabloy/introduction', activeMatch: '/zh/cabloy/' },
+      { text: 'Basic', link: '/zh/cabloy-basic/introduction', activeMatch: '/zh/cabloy-basic/' },
       { text: 'Start', link: '/zh/cabloy-start/introduction', activeMatch: '/zh/cabloy-start/' },
       { text: 'Store', link: 'https://cabloy.com', target:'_self' },
     ],
     sidebar: {
       '/zh/guide/': { base: '/zh/guide/', items: sidebarGuide() },
       '/zh/cabloy/': { base: '/zh/cabloy/', items: sidebarCabloy() },
+      '/zh/cabloy-basic/': { base: '/zh/cabloy-basic/', items: sidebarCabloyBasic() },
       '/zh/cabloy-start/': { base: '/zh/cabloy-start/', items: sidebarCabloyStart() },
     },
     footer: {
@@ -33,6 +35,13 @@ function sidebarCabloy(): DefaultTheme.SidebarItem[] {
     { text: '介绍', link: 'introduction' },
     { text: '动态数据源', link: 'dynamic-datasource' },
     { text: '读写分离', link: 'sharding' },
+  ];
+}
+
+function sidebarCabloyBasic(): DefaultTheme.SidebarItem[] {
+  return [
+    { text: '介绍', link: 'introduction' },
+    { text: '快速上手', link: 'quick-start' },
   ];
 }
 

@@ -8,12 +8,14 @@ export const en = defineConfig({
       { text: 'Home', link: '/' },
       { text: 'Docs', link: '/guide/start/introduction', activeMatch: '/guide/' },
       { text: 'Cabloy', link: '/cabloy/introduction', activeMatch: '/cabloy/' },
+      { text: 'Basic', link: '/cabloy-basic/introduction', activeMatch: '/cabloy-basic/' },
       { text: 'Start', link: '/cabloy-start/introduction', activeMatch: '/cabloy-start/' },
       { text: 'Store', link: 'https://cabloy.com', target:'_self' },
     ],
     sidebar: {
       '/guide/': { base: '/guide/', items: sidebarGuide() },
       '/cabloy/': { base: '/cabloy/', items: sidebarCabloy() },
+      '/cabloy-basic/': { base: '/cabloy-basic/', items: sidebarCabloyBasic() },
       '/cabloy-start/': { base: '/cabloy-start/', items: sidebarCabloyStart() },
     },
     footer: {
@@ -33,6 +35,13 @@ function sidebarCabloy(): DefaultTheme.SidebarItem[] {
     { text: 'Introduction', link: 'introduction' },
     { text: 'Dynamic Datasource', link: 'dynamic-datasource' },
     { text: 'Sharding', link: 'sharding' },
+  ];
+}
+
+function sidebarCabloyBasic(): DefaultTheme.SidebarItem[] {
+  return [
+    { text: 'Introduction', link: 'introduction' },
+    { text: 'Quick Start', link: 'quick-start' },
   ];
 }
 
