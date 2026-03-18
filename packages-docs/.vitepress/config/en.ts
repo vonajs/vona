@@ -42,6 +42,8 @@ function sidebarCabloyBasic(): DefaultTheme.SidebarItem[] {
   return [
     { text: 'Introduction', link: 'introduction' },
     { text: 'Quick Start', link: 'quick-start' },
+    { text: 'vona-suite-cabloy-basic', link: 'vona-suite-cabloy-basic' },
+    { text: 'zova-suite-cabloy-basic', link: 'zova-suite-cabloy-basic' },
   ];
 }
 
@@ -49,6 +51,8 @@ function sidebarCabloyStart(): DefaultTheme.SidebarItem[] {
   return [
     { text: 'Introduction', link: 'introduction' },
     { text: 'Quick Start', link: 'quick-start' },
+    { text: 'vona-suite-cabloy-start', link: 'vona-suite-cabloy-start' },
+    { text: 'zova-suite-cabloy-start', link: 'zova-suite-cabloy-start' },
   ];
 }
 

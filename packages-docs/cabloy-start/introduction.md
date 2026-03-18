@@ -1,6 +1,6 @@
 # Cabloy Start
 
-`Cabloy Start` includes a set of out-of-the-box Vona/Zova suites to accelerate the development of fullstack projects
+`Cabloy Start` includes a set of out-of-the-box Vona/Zova suites to accelerate the development of fullstack projects such as `Websites` and `Admin-Dashboards`
 
 | Type | Name | Description |
 |--|--|--|
