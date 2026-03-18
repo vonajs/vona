@@ -12,7 +12,7 @@
 * Building `SSR/SPA/Website/Admin-Dashboard` all in one codebase
 * Admin-Dashboard also supports SSR with intuitive and elegant code
 * Dynamically render CRUD list pages, item pages, and search forms, and provides the best practices of `Tanstack Table/Tanstack Form/Tanstack Query`
-* Pioneers dual-layer tabs navigation design, allowing more convenient switching between multiple pages
+* Pioneers dual-layer tabs navigation UI/UX, allowing more convenient switching between multiple pages
 * UI library uses the latest version of VuetifyJS
 
 ## Online Demo
@@ -24,6 +24,6 @@ Uses the same codebase to implement Cabloy Store's `Website` and `Admin-Dashboar
 
 ## GIF Demo
 
-* Pioneers dual-layer tabs navigation design
+* Pioneers dual-layer tabs navigation UI/UX
 
 ![](../assets/img/start/cabloy-start-two-level-tabs.gif)

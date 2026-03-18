@@ -9,7 +9,7 @@
 Vona 是一款全栈元框架，可在同一个代码库中实现`SSR/SPA/Web网站/Admin中后台`
 
 * 首创 DTO 动态推断与生成能力，解放我们的双手，显著提升生产力。甚至可以说，对于构建更加优雅的 Node.js 后端框架而言，能够动态推断与生成 DTO，是非常重要的`里程碑`
-* 首创双层页签导航设计，可以更加便捷的在多个页面中切换
+* 首创双层页签导航 UI/UX，可以更加便捷的在多个页面中切换
 * 可动态渲染 CRUD 的列表页、条目页、搜索表单，并且提供了`Tanstack Table/Tanstack Form/Tanstack Query`的最佳实践
 
 ## 全栈原理
@@ -28,7 +28,7 @@ Vona 与 Zova 完美协同，延续前后端分离的架构风格。采用 Zova 
 
 ## 动图演示
 
-* 首创双层页签导航设计
+* 首创双层页签导航 UI/UX
 
 ![](../../assets/img/start/cabloy-start-two-level-tabs.gif)
 
@@ -37,7 +37,7 @@ Vona 与 Zova 完美协同，延续前后端分离的架构风格。采用 Zova 
 * `全栈能力`：可在同一个代码库中实现`SSR/SPA/Web网站/Admin中后台`。Admin 中后台也支持 SSR，并且代码直观、优雅
 * `CRUD动态渲染`：可动态渲染 CRUD 的列表页、条目页、搜索表单，并且提供了`Tanstack Table/Tanstack Form/Tanstack Query`的最佳实践
 * `DTO动态推断与生成`：首创 DTO 动态推断与生成能力，从而显著提升开发效率和开发体验
-* `双层页签`：首创双层页签导航设计，可以更加便捷的在多个页面中切换
+* `双层页签UI/UX`：首创双层页签导航 UI/UX，可以更加便捷的在多个页面中切换
 * `基于Typescript开发`：提供完备的 Typescript 类型提示
 * `全部采用ESM模块`：使项目启动更快
 * `文件级别的精确HMR`：让开发体验更丝滑、更高效

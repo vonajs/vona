@@ -12,7 +12,7 @@
 * 可在同一个代码库中实现`SSR/SPA/Web网站/Admin中后台`
 * Admin 中后台也支持 SSR，并且代码直观、优雅
 * 提供了全新的 CRUD 开发范式，沉淀出`Tanstack Table`/`Tanstack Form`/`Tanstack Query`的最佳实践
-* 首创双层页签导航设计，可以更加便捷的在多个页面中切换
+* 首创双层页签导航 UI/UX，可以更加便捷的在多个页面中切换
 * UI 库采用最新版 VuetifyJS
 
 ## 在线演示
@@ -24,6 +24,6 @@
 
 ## 动图演示
 
-* 首创双层页签导航设计
+* 首创双层页签导航 UI/UX
 
 ![](../assets/img/start/cabloy-start-two-level-tabs.gif)
