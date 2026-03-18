@@ -37,7 +37,7 @@ BUILD_REST_COPY_DIST = /path-to-vona/src/suite/cabloy-basic/modules/basic-sitead
 
 ## 5. 构建项目
 
-* 构建 js bundle
+* 构建 JS bundle
 
 ```bash
 $ npm run build:ssr:cabloyBasicAdmin
