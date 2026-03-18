@@ -51,7 +51,7 @@ export type TypeMergePagesAndPagesData<Pages extends {} = {}, PagesData extends 
 export interface IDecoratorSsrSiteOptions<Pages extends {} = {}, PagesData extends {} = {}> extends
   IOnionOptionsEnable, IOnionOptionsMatch<TypeOnionOptionsMatchRule<keyof IInstanceRecord>> {
   publicPath: keyof ISsrSitePublicPathRecord;
-  assetPath: string;
+  bundlePath: string;
   envServer?: ZovaConfigEnv;
   envClient?: ZovaConfigEnv;
   apiType: 'performAction' | 'api' | 'dev';

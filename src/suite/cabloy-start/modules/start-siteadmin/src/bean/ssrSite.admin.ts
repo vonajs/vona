@@ -16,6 +16,6 @@ export interface ISsrSiteOptionsAdmin extends IDecoratorSsrSiteOptions<ISsrSiteO
 
 @SsrSite<ISsrSiteOptionsAdmin>({
   publicPath: 'admin',
-  assetPath: 'ssr-cabloyStartAdmin-5.0.0',
+  bundlePath: 'ssr-cabloyStartAdmin-5.0.0',
 })
 export class SsrSiteAdmin extends BeanSsrSiteBase<ISsrSiteOptionsAdmin> {}

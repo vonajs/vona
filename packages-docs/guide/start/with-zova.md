@@ -1,6 +1,6 @@
 # Integration with Zova
 
-When creating a Vona project using the `cabloy-basic` template, the latest version of the Zova js bundle is already included. Therefore, you can directly render CRUD admin pages. We can also create a Zova frontend project and integrate it with the Vona backend to develop a more advanced fullstack system
+When creating a Vona project using the `cabloy-basic` template, the latest version of the Zova JS bundle is already included. Therefore, you can directly render CRUD admin pages. We can also create a Zova frontend project and integrate it with the Vona backend to develop a more advanced fullstack system
 
 ## 1. Clone the Zova source code
 
@@ -25,12 +25,12 @@ BUILD_REST_COPY_DIST = /path-to-vona/src/suite/cabloy-basic/modules/basic-sitead
 
 |Name|Description|
 |--|--|
-|BUILD_COPY_RELEASE|Automatically copy the built js bundle to Vona|
+|BUILD_COPY_RELEASE|Automatically copy the built JS bundle to Vona|
 |BUILD_REST_COPY_DIST|Automatically copy the built type files to Vona|
 
 ## 4. Build
 
-* Build js bundle
+* Build JS bundle
 
 ```bash
 $ npm run build:ssr:cabloyBasicAdmin

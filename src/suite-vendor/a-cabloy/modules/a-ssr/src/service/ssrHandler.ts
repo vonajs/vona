@@ -49,7 +49,7 @@ export class ServiceSsrHandler extends BeanBase {
   private async _prepareHandler() {
     // handler
     const fileHandler = path.join(this._siteAssetDir, 'handler.js');
-    if (!fse.existsSync(fileHandler)) throw new Error(`The assetPath of ssr site not exists: ${this._siteAssetDir}`);
+    if (!fse.existsSync(fileHandler)) throw new Error(`The bundlePath of ssr site not exists: ${this._siteAssetDir}`);
     // import
     const fileUrl = `${pathToHref(fileHandler)}?${this._handlerNonce}`;
     const handlerInstance = await import(fileUrl);

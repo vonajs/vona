@@ -16,6 +16,6 @@ export interface ISsrSiteOptionsWeb extends IDecoratorSsrSiteOptions<ISsrSiteOpt
 
 @SsrSite<ISsrSiteOptionsWeb>({
   publicPath: '',
-  assetPath: 'ssr-cabloyStartWeb-5.0.0',
+  bundlePath: 'ssr-cabloyStartWeb-5.0.0',
 })
 export class SsrSiteWeb extends BeanSsrSiteBase<ISsrSiteOptionsWeb> {}

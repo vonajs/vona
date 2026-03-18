@@ -57,7 +57,7 @@ BUILD_REST_COPY_DIST = /path-to-vona/src/suite/cabloy-start/modules/start-sitewe
 
 |名称|说明|
 |--|--|
-|BUILD_COPY_RELEASE|将构建生成的js bundle自动拷贝到Vona中|
+|BUILD_COPY_RELEASE|将构建生成的JS bundle自动拷贝到Vona中|
 |BUILD_REST_COPY_DIST|将构建生成的类型文件自动拷贝到Vona中|
 
 ### 4. 构建Zova项目

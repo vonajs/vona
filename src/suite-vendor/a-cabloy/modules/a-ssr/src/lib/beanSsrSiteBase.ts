@@ -156,7 +156,7 @@ export class BeanSsrSiteBase<SsrSiteOptions extends IDecoratorSsrSiteOptions = I
   }
 
   private _getAssetPathPhysical(filePath: string) {
-    return this.app.util.getAssetPathPhysical(this[SymbolModuleName] as any, 'site', path.join(this.siteOptions.assetPath, filePath));
+    return this.app.util.getAssetPathPhysical(this[SymbolModuleName] as any, 'site', path.join(this.siteOptions.bundlePath, filePath));
   }
 
   private async _createPerformAction() {
