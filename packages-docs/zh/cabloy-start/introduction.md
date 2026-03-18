@@ -1,6 +1,6 @@
 # Cabloy Start
 
-`Cabloy Start`包含一组开箱即用的 Vona/Zova 套件，提供开箱即用的`Web网站`和`Admin中后台`
+`Cabloy Start`包含一组开箱即用的 Vona/Zova 套件，加速开发`Web网站`和`Admin中后台`等全栈系统
 
 |类型|名称|说明|
 |--|--|--|
