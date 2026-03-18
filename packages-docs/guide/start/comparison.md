@@ -17,4 +17,5 @@
 ## Comparison with Django Admin
 
 1. Vona implements CRUD with a frontend-backend separation architecture. The frontend uses Zova, providing a more beautiful interface, cleaner code, and greater freedom to customize the interface and add new features
-2. Vona can implement `SSR/SPA/Website/Admin-Dashboard` in the same codebase. The Admin-Dashboard also supports SSR, with intuitive and elegant code
+2. Vona can implement `SSR/SPA/Website/Admin-Dashboard` in the same codebase
+3. The Admin-Dashboard also supports SSR, with intuitive and elegant code
