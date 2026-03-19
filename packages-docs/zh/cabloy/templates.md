@@ -7,7 +7,7 @@
 |[cabloy-basic](../cabloy-basic/introduction.md)|Daisyui + Tailwindcss|提供开箱即用的`Admin中后台`||
 |[cabloy-start](../cabloy-start/introduction.md)|VuetifyJS|提供开箱即用的`Web网站`和`Admin中后台`|[Web网站](https://cabloy.com), [Admin中后台](https://cabloy.com/admin)|
 
-## 模版比对
+## 模版对比
 
 ||cabloy-basic|cabloy-start|
 |--|--|--|
