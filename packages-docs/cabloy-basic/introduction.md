@@ -15,4 +15,4 @@
 * Dynamically render CRUD list pages, entry pages, and search forms, and provides the best practices of `Tanstack Table/Tanstack Form/Tanstack Query`
 * Pioneers dual-layer tabs navigation UI/UX, allowing more convenient switching between multiple pages
     * You can develop the tabs navigation component on your own
-* UI library uses the latest version of Daisyui + Tailwindcss
+* UI library uses the latest version of `Daisyui + Tailwindcss`
