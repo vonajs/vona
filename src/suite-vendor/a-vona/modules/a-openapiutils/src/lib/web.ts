@@ -8,10 +8,3 @@ export function $apiPath<K extends keyof IApiPathRecord>(path: K): K {
 export function $apiPathAndCombineParamsAndQuery<K extends keyof IApiPathRecord>(path: K, options?: { params?: object; query?: object }): string {
   return combineParamsAndQuery(path, options);
 }
-
-// export function $makeFilterTransform<T extends keyof IFilterTransformRecord>(
-//   filterTransformName: T,
-//   options?: Partial<IFilterTransformRecord[T]>,
-// ): TypeSchemaObjectExtensionFieldFilterTransform {
-//   return [filterTransformName, options];
-// };

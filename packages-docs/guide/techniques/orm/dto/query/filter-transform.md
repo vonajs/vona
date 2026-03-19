@@ -84,11 +84,11 @@ config.onions = {
   dto: {
     'demo-student:studentQuery': {
       fields: {
-        createdAt: {
-          filter: {
-            transform: $makeFilterTransform('demo-student:dateRange'),
-          },
-        },
+        createdAt: $makeSchema(
+          v.filterTransform('demo-student:dateRange'),
+          v.optional(),
+          z.string(),
+        ),
       },
     },
   },
@@ -167,11 +167,11 @@ config.onions = {
   dto: {
     'demo-student:studentQuery': {
       fields: {
-        createdAt: {
-          filter: {
-+           transform: $makeFilterTransform('demo-student:dateRange', { separator: ' - ' }),
-          },
-        },
++       createdAt: $makeSchema(
++         v.filterTransform('demo-student:dateRange', { separator: ' - ' }),
++         v.optional(),
++         z.string(),
++       ),
       },
     },
   },
