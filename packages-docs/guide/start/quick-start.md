@@ -40,8 +40,8 @@ Vona provides two project templates:
 
 | Name | UI | Description |
 |--|--|--|
-| cabloy-basic | daisyui + tailwindcss | Provides out-of-the-box `Admin-Dashboard` |
-| cabloy-start | vuetify | Provides out-of-the-box `Website` and `Admin-Dashboard` |
+| cabloy-basic | Daisyui + Tailwindcss | Provides out-of-the-box `Admin-Dashboard` |
+| cabloy-start | VuetifyJS | Provides out-of-the-box `Website` and `Admin-Dashboard` |
 
 > For the relationship between Vona, Zova, and Cabloy, see: [Cabloy](../../cabloy/introduction.md)
 

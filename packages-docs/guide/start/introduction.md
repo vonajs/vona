@@ -94,10 +94,10 @@ Zova can be used with any UI library and comes with built-in project templates f
 
 |Name|Version|
 |--|--|
-|daisyui|>=5.3.2|
-|tailwindcss|>=4.1.14|
-|quasar|>=2.18.1|
-|vuetify|>=4.0.1|
+|Daisyui|>=5.3.2|
+|Tailwindcss|>=4.1.14|
+|Quasar|>=2.18.1|
+|Vuetify|>=4.0.1|
 
 ## Philosophy
 
