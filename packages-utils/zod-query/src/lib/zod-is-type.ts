@@ -62,11 +62,11 @@ const ZodTypeKeys: Record<keyof ZodTypes, string> = {
 
 export function isZodType<TypeName extends keyof ZodTypes>(
   schema: object,
-  typeNames: TypeName[]
+  typeNames: TypeName[],
 ): schema is ZodTypes[TypeName];
 export function isZodType<TypeName extends keyof ZodTypes>(
   schema: object,
-  typeName: TypeName
+  typeName: TypeName,
 ): schema is ZodTypes[TypeName];
 export function isZodType<TypeName extends keyof ZodTypes>(
   schema: object,
