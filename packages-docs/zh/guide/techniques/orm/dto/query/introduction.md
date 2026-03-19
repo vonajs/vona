@@ -154,14 +154,14 @@ config.onions = {
   dto: {
     'test-vona:orderQuery': {
       fields: {
-        userName: {
-          filter: {
+        userName: $makeMetadata(
+          v.filter({
             table: 'testVonaUser',
             joinType: 'innerJoin',
             joinOn: ['userId', 'testVonaUser.id'],
             originalName: 'name',
-          },
-        },
+          }),
+        ),
       },
     },
   },

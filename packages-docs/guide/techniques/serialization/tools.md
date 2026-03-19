@@ -58,11 +58,9 @@ config.onions = {
   entity: {
     'demo-student:student': {
       fields: {
-        name: {
-          serializerTransforms: {
-            'demo-student:upper': {},
-          },
-        },
+        name: $makeMetadata(
+          v.serializerTransform('demo-student:upper'),
+        ),
       },
     },
   },
@@ -79,7 +77,10 @@ config.onions = {
   entity: {
     'demo-student:student': {
       fields: {
-        name: $makeSchema(v.serializerTransform('demo-student:upper'), z.string()),
+        name: $makeSchema(
+          v.serializerTransform('demo-student:upper'),
+          z.string(),
+        ),
       },
     },
   },
@@ -123,13 +124,9 @@ config.onions = {
   entity: {
     'demo-student:student': {
       fields: {
-        name: {
-          serializerTransforms: {
-            'a-serialization:exclude': {
-              exclude: true,
-            },
-          },
-        },
+        name: $makeMetadata(
+          v.serializerExclude(),
+        ),
       },
     },
   },
@@ -146,7 +143,10 @@ config.onions = {
   entity: {
     'demo-student:student': {
       fields: {
-        name: $makeSchema(v.serializerExclude(), z.string()),
+        name: $makeSchema(
+          v.serializerExclude(),
+          z.string(),
+        ),
       },
     },
   },
@@ -195,14 +195,12 @@ config.onions = {
   entity: {
     'demo-student:student': {
       fields: {
-        name: {
-          serializerTransforms: {
-            'a-serialization:replace': {
-              patternFrom: /(\w)(\w+)(\w)/,
-              patternTo: '$1***$3',
-            },
-          },
-        },
+        name: $makeMetadata(
+          v.serializerReplace({
+            patternFrom: /(\w)(\w+)(\w)/,
+            patternTo: '$1***$3',
+          }),
+        ),
       },
     },
   },
@@ -222,7 +220,10 @@ config.onions = {
     'demo-student:student': {
       fields: {
         name: $makeSchema(
-          v.serializerReplace({ patternFrom: /(\w)(\w+)(\w)/, patternTo: '$1***$3' }),
+          v.serializerReplace({
+            patternFrom: /(\w)(\w+)(\w)/,
+            patternTo: '$1***$3',
+          }),
           z.string(),
         ),
       },
@@ -289,15 +290,11 @@ config.onions = {
   entity: {
     'demo-student:student': {
       fields: {
-        fullName: {
-          serializerTransforms: {
-            'a-serialization:getter': {
-              getter: (data: EntityStudent) => {
-                return `${data.firstName} ${data.lastName}`;
-              },
-            },
-          },
-        },
+        fullName: $makeMetadata(
+          v.serializerGetter((data: EntityStudent) => {
+            return `${data.firstName} ${data.lastName}`;
+          }),
+        ),
       },
     },
   },
@@ -372,15 +369,11 @@ config.onions = {
   entity: {
     'demo-student:student': {
       fields: {
-        name: {
-          serializerTransforms: {
-            'a-serialization:custom': {
-              custom: (value: string) => {
-                return value.toUpperCase();
-              },
-            },
-          },
-        },
+        name: $makeMetadata(
+          v.serializerCustom((value: string) => {
+            return value.toUpperCase();
+          }),
+        ),
       },
     },
   },
