@@ -13,7 +13,7 @@
     "docker-compose",
     "scripts",
     "zovaRest",
-    "assets",
+    "assets"
   ],
   "printWidth": 150,
   "tabWidth": 2,
@@ -33,8 +33,8 @@
       "value-internal",
       ["type-parent", "type-sibling", "type-index"],
       ["value-parent", "value-sibling", "value-index"],
-      "unknown",
-    ],
+      "unknown"
+    ]
   },
   "sortPackageJson": true,
   "overrides": [
@@ -42,8 +42,8 @@
       "files": ["*.json"],
       "options": {
         "printWidth": 80,
-        "trailingComma": "none",
-      },
-    },
-  ],
+        "trailingComma": "none"
+      }
+    }
+  ]
 }
