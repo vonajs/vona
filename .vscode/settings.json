@@ -1,22 +1,22 @@
 {
   // typescript
-  "ts.disableAutomaticTypeAcquisition": false,
-  "ts.format.enable": true,
-  "ts.implementationsCodeLens.enabled": true,
-  "ts.tsserver.useSyntaxServer": "auto",
-  "ts.validate.enable": true,
-  "ts.suggest.autoImports": true,
-  "ts.suggest.includeCompletionsForImportStatements": true,
-  "ts.preferences.importModuleSpecifier": "shortest",
-  "ts.preferences.importModuleSpecifierEnding": "js",
-  "ts.preferences.includePackageJsonAutoImports": "on",
+  "js/ts.tsserver.automaticTypeAcquisition.enabled": true,
+  "js/ts.format.enabled": true,
+  "js/ts.implementationsCodeLens.enabled": true,
+  "js/ts.tsserver.useSyntaxServer": "auto",
+  "js/ts.validate.enabled": true,
+  "js/ts.suggest.autoImports": true,
+  "js/ts.suggest.includeCompletionsForImportStatements": true,
+  "js/ts.preferences.importModuleSpecifier": "shortest",
+  "js/ts.preferences.importModuleSpecifierEnding": "js",
+  "js/ts.preferences.includePackageJsonAutoImports": "on",
   // oxfmt
   "oxc.fmt.configPath": ".oxfmtrc.json",
   "editor.defaultFormatter": "oxc.oxc-vscode",
   "editor.formatOnSave": true,
   // oxlint
   "editor.codeActionsOnSave": {
-    "source.fixAll.oxc": "always"
+    "source.fixAll.oxc": "always",
   },
   // associations
   "files.associations": {
@@ -24,7 +24,7 @@
     "*.css.ejs": "css",
     "*.less.ejs": "less",
     "*.code-snippets": "text",
-    "docker-compose-dockerfile-app": "dockerfile"
+    "docker-compose-dockerfile-app": "dockerfile",
   },
   // search
   "search.exclude": {
@@ -35,9 +35,9 @@
     "/src/backend/app/**": true,
     "/src/backend/logs/**": true,
     "/src/backend/run/**": true,
-    "**/node_modules": true
+    "**/node_modules": true,
   },
   "search.useIgnoreFiles": false,
   "textlint.autoFixOnSave": true,
-  "hide-my-secrets.hideSecrets": false
+  "hide-my-secrets.hideSecrets": false,
 }
