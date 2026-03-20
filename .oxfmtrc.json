@@ -8,6 +8,8 @@
   "singleQuote": true,
   "jsxSingleQuote": false,
   "trailingComma": "all",
+  "arrowParens": "avoid",
+  "bracketSpacing": true,
   "sortImports": {
     "groups": [
       "type-import",
