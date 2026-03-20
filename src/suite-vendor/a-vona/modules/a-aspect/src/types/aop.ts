@@ -14,15 +14,14 @@ export type AopActionInit<T extends {}> = AopAction<T, '__init__'>;
 // @ts-ignore ignore
 export type AopActionDispose<T extends {}> = AopAction<T, '__dispose__'>;
 
-export type AopAction<T extends {}, NAME extends keyof T, RESULT = undefined> =
-  (
-    // @ts-ignore ignore
-    args: Parameters<T[NAME]>,
-    // @ts-ignore ignore
-    next: AopActionNext<Parameters<T[NAME]>, ReturnType<T[NAME]>>,
-    _receiver: T,
-  ) // @ts-ignore ignore
-  => RESULT extends undefined ? ReturnType<T[NAME]> : ReturnType<T[NAME]> extends Promise<any> ? Promise<RESULT> : RESULT;
+export type AopAction<T extends {}, NAME extends keyof T, RESULT = undefined> = (
+  // @ts-ignore ignore
+  args: Parameters<T[NAME]>,
+  // @ts-ignore ignore
+  next: AopActionNext<Parameters<T[NAME]>, ReturnType<T[NAME]>>,
+  _receiver: T,
+) // @ts-ignore ignore
+=> RESULT extends undefined ? ReturnType<T[NAME]> : ReturnType<T[NAME]> extends Promise<any> ? Promise<RESULT> : RESULT;
 
 export type AopActionGetter<T extends {}, NAME extends keyof T, RESULT = undefined> =
   // @ts-ignore ignore
