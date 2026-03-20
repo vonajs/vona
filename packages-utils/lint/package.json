@@ -9,6 +9,7 @@
     "oxc"
   ],
   "type": "module",
+  "main": "index.js",
   "publishConfig": {
     "access": "public"
   },
