@@ -9,16 +9,16 @@
     "eslint-plugin-perfectionist",
     "@e18e/eslint-plugin",
     "@stylistic/eslint-plugin",
-    "eslint-plugin-regexp",
+    "eslint-plugin-regexp"
   ],
   "categories": {
-    "correctness": "off",
+    "correctness": "off"
   },
   "env": {
     "builtin": true,
     "es2026": true,
     "browser": true,
-    "node": true,
+    "node": true
   },
   "ignorePatterns": [
     "**/node_modules",
@@ -66,15 +66,15 @@
     "package.json",
     "scripts",
     "zovaRest",
-    "assets",
+    "assets"
   ],
   "rules": {
     "accessor-pairs": [
       "error",
       {
         "enforceForClassMembers": true,
-        "setWithoutGet": true,
-      },
+        "setWithoutGet": true
+      }
     ],
     "antfu/no-top-level-await": "error",
     "array-callback-return": "error",
@@ -87,8 +87,8 @@
       {
         "capIsNew": false,
         "newIsCap": true,
-        "properties": true,
-      },
+        "properties": true
+      }
     ],
     "no-alert": "error",
     "no-array-constructor": "error",
@@ -101,8 +101,8 @@
     "no-console": [
       "error",
       {
-        "allow": ["warn", "error"],
-      },
+        "allow": ["warn", "error"]
+      }
     ],
     "no-const-assign": "error",
     "no-control-regex": "error",
@@ -114,8 +114,8 @@
     "no-empty": [
       "error",
       {
-        "allowEmptyCatch": true,
-      },
+        "allowEmptyCatch": true
+      }
     ],
     "no-empty-pattern": "error",
     "no-eval": "error",
@@ -133,8 +133,8 @@
       "error",
       {
         "allowLoop": false,
-        "allowSwitch": false,
-      },
+        "allowSwitch": false
+      }
     ],
     "no-lone-blocks": "error",
     "no-loss-of-precision": "error",
@@ -150,26 +150,26 @@
     "no-redeclare": [
       "error",
       {
-        "builtinGlobals": false,
-      },
+        "builtinGlobals": false
+      }
     ],
     "no-regex-spaces": "error",
     "no-restricted-globals": [
       "error",
       {
         "message": "Use `globalThis` instead.",
-        "name": "global",
+        "name": "global"
       },
       {
         "message": "Use `globalThis` instead.",
-        "name": "self",
-      },
+        "name": "self"
+      }
     ],
     "no-self-assign": [
       "error",
       {
-        "props": true,
-      },
+        "props": true
+      }
     ],
     "no-self-compare": "error",
     "no-sequences": "error",
@@ -183,8 +183,8 @@
     "no-unneeded-ternary": [
       "error",
       {
-        "defaultAssignment": false,
-      },
+        "defaultAssignment": false
+      }
     ],
     "no-unsafe-finally": "error",
     "no-unsafe-negation": "error",
@@ -193,8 +193,8 @@
       {
         "allowShortCircuit": true,
         "allowTaggedTemplates": true,
-        "allowTernary": true,
-      },
+        "allowTernary": true
+      }
     ],
     "no-unused-vars": [
       "error",
@@ -202,16 +202,16 @@
         "args": "none",
         "caughtErrors": "none",
         "ignoreRestSiblings": true,
-        "vars": "all",
-      },
+        "vars": "all"
+      }
     ],
     "no-use-before-define": [
       "error",
       {
         "classes": false,
         "functions": false,
-        "variables": true,
-      },
+        "variables": true
+      }
     ],
     "no-useless-call": "error",
     "no-useless-catch": "error",
@@ -225,8 +225,8 @@
       "error",
       {
         "destructuring": "all",
-        "ignoreReadBeforeAssign": true,
-      },
+        "ignoreReadBeforeAssign": true
+      }
     ],
     "prefer-exponentiation-operator": "error",
     "prefer-promise-reject-errors": "error",
@@ -243,21 +243,21 @@
         "argsIgnorePattern": "^_",
         "ignoreRestSiblings": true,
         "vars": "all",
-        "varsIgnorePattern": "^_",
-      },
+        "varsIgnorePattern": "^_"
+      }
     ],
     "use-isnan": [
       "error",
       {
         "enforceForIndexOf": true,
-        "enforceForSwitchCase": true,
-      },
+        "enforceForSwitchCase": true
+      }
     ],
     "valid-typeof": [
       "error",
       {
-        "requireStringLiterals": true,
-      },
+        "requireStringLiterals": true
+      }
     ],
     "vars-on-top": "error",
     "yoda": ["error", "never"],
@@ -270,22 +270,22 @@
       "error",
       {
         "order": "asc",
-        "type": "natural",
-      },
+        "type": "natural"
+      }
     ],
     "perfectionist/sort-named-exports": [
       "error",
       {
         "order": "asc",
-        "type": "natural",
-      },
+        "type": "natural"
+      }
     ],
     "perfectionist/sort-named-imports": [
       "error",
       {
         "order": "asc",
-        "type": "natural",
-      },
+        "type": "natural"
+      }
     ],
     "antfu/import-dedupe": "error",
     "antfu/no-import-dist": "error",
@@ -332,32 +332,32 @@
       "error",
       {
         "after": true,
-        "before": true,
-      },
+        "before": true
+      }
     ],
     "@stylistic/block-spacing": ["error", "always"],
     "@stylistic/brace-style": [
       "error",
       "1tbs",
       {
-        "allowSingleLine": true,
-      },
+        "allowSingleLine": true
+      }
     ],
     "@stylistic/comma-dangle": ["error", "always-multiline"],
     "@stylistic/comma-spacing": [
       "error",
       {
         "after": true,
-        "before": false,
-      },
+        "before": false
+      }
     ],
     "@stylistic/comma-style": ["error", "last"],
     "@stylistic/computed-property-spacing": [
       "error",
       "never",
       {
-        "enforceForClassMembers": true,
-      },
+        "enforceForClassMembers": true
+      }
     ],
     "@stylistic/dot-location": ["error", "property"],
     "@stylistic/eol-last": "error",
@@ -365,8 +365,8 @@
       "error",
       {
         "after": true,
-        "before": false,
-      },
+        "before": false
+      }
     ],
     "@stylistic/indent": [
       "error",
@@ -378,76 +378,76 @@
         "MemberExpression": 1,
         "FunctionDeclaration": {
           "body": 1,
-          "parameters": 1,
+          "parameters": 1
         },
         "FunctionExpression": {
           "body": 1,
-          "parameters": 1,
+          "parameters": 1
         },
         "StaticBlock": {
-          "body": 1,
+          "body": 1
         },
         "CallExpression": {
-          "arguments": 1,
+          "arguments": 1
         },
         "ArrayExpression": 1,
         "ObjectExpression": 1,
         "ImportDeclaration": 1,
         "flatTernaryExpressions": true,
-        "offsetTernaryExpressions": true,
-      },
+        "offsetTernaryExpressions": true
+      }
     ],
     "@stylistic/indent-binary-ops": "off",
     "@stylistic/key-spacing": [
       "error",
       {
         "afterColon": true,
-        "beforeColon": false,
-      },
+        "beforeColon": false
+      }
     ],
     "@stylistic/keyword-spacing": [
       "error",
       {
         "overrides": {
           "this": {
-            "before": true,
-          },
-        },
-      },
+            "before": true
+          }
+        }
+      }
     ],
     "@stylistic/lines-between-class-members": [
       "error",
       "always",
       {
-        "exceptAfterSingleLine": true,
-      },
+        "exceptAfterSingleLine": true
+      }
     ],
     "@stylistic/max-statements-per-line": [
       "error",
       {
-        "max": 1,
-      },
+        "max": 1
+      }
     ],
     "@stylistic/member-delimiter-style": [
       "error",
       {
         "multiline": {
           "delimiter": "semi",
-          "requireLast": true,
+          "requireLast": true
         },
         "multilineDetection": "brackets",
         "overrides": {
           "interface": {
             "multiline": {
               "delimiter": "semi",
-              "requireLast": true,
-            },
-          },
+              "requireLast": true
+            }
+          }
         },
         "singleline": {
-          "delimiter": "semi",
-        },
-      },
+          "delimiter": "semi"
+        }
+      }
     ],
     "@stylistic/multiline-ternary": ["error", "always-multiline"],
     "@stylistic/new-parens": "error",
@@ -460,9 +460,9 @@
         "groups": [
           ["==", "!=", "===", "!==", ">", ">=", "<", "<="],
           ["&&", "||"],
-          ["in", "instanceof"],
-        ],
-      },
+          ["in", "instanceof"]
+        ]
+      }
     ],
     "@stylistic/no-mixed-spaces-and-tabs": "error",
     "@stylistic/no-multi-spaces": "error",
@@ -471,8 +471,8 @@
       {
         "max": 1,
         "maxBOF": 0,
-        "maxEOF": 0,
-      },
+        "maxEOF": 0
+      }
     ],
     "@stylistic/no-tabs": "error",
     "@stylistic/no-trailing-spaces": "error",
@@ -484,25 +484,25 @@
       {
         "overrides": {
           "?": "before",
-          ":": "before",
-        },
-      },
+          ":": "before"
+        }
+      }
     ],
     "@stylistic/padded-blocks": [
       "error",
       {
         "blocks": "never",
         "classes": "never",
-        "switches": "never",
-      },
+        "switches": "never"
+      }
     ],
     "@stylistic/quote-props": ["error", "consistent-as-needed"],
     "@stylistic/quotes": [
       "error",
       "single",
       {
-        "avoidEscape": true,
-      },
+        "avoidEscape": true
+      }
     ],
     "@stylistic/rest-spread-spacing": ["error", "never"],
     "@stylistic/semi": ["error", "always"],
@@ -510,8 +510,8 @@
       "error",
       {
         "after": true,
-        "before": false,
-      },
+        "before": false
+      }
     ],
     "@stylistic/space-before-blocks": ["error", "always"],
     "@stylistic/space-before-function-paren": [
@@ -519,8 +519,8 @@
       {
         "anonymous": "always",
         "asyncArrow": "always",
-        "named": "never",
-      },
+        "named": "never"
+      }
     ],
     "@stylistic/space-in-parens": ["error", "never"],
     "@stylistic/space-infix-ops": "error",
@@ -528,8 +528,8 @@
       "error",
       {
         "nonwords": false,
-        "words": true,
-      },
+        "words": true
+      }
     ],
     "@stylistic/spaced-comment": [
       "error",
@@ -538,13 +538,13 @@
         "block": {
           "balanced": true,
           "exceptions": ["*"],
-          "markers": ["!"],
+          "markers": ["!"]
         },
         "line": {
           "exceptions": ["/", "#"],
-          "markers": ["/"],
-        },
-      },
+          "markers": ["/"]
+        }
+      }
     ],
     "@stylistic/template-curly-spacing": "error",
     "@stylistic/template-tag-spacing": ["error", "never"],
@@ -555,23 +555,23 @@
       "error",
       "any",
       {
-        "functionPrototypeMethods": true,
-      },
+        "functionPrototypeMethods": true
+      }
     ],
     "@stylistic/yield-star-spacing": [
       "error",
       {
         "after": true,
-        "before": false,
-      },
+        "before": false
+      }
     ],
     "@stylistic/jsx-closing-bracket-location": "error",
     "@stylistic/jsx-closing-tag-location": "off",
     "@stylistic/jsx-curly-brace-presence": [
       "error",
       {
-        "propElementValues": "always",
-      },
+        "propElementValues": "always"
+      }
     ],
     "@stylistic/jsx-curly-newline": "error",
     "@stylistic/jsx-curly-spacing": ["error", "never"],
@@ -583,14 +583,14 @@
       "error",
       {
         "maximum": 1,
-        "when": "multiline",
-      },
+        "when": "multiline"
+      }
     ],
     "@stylistic/jsx-one-expression-per-line": [
       "error",
       {
-        "allow": "single-child",
-      },
+        "allow": "single-child"
+      }
     ],
     "@stylistic/jsx-quotes": "error",
     "@stylistic/jsx-tag-spacing": [
@@ -599,8 +599,8 @@
         "afterOpening": "never",
         "beforeClosing": "never",
         "beforeSelfClosing": "always",
-        "closingSlash": "never",
-      },
+        "closingSlash": "never"
+      }
     ],
     "@stylistic/jsx-wrap-multilines": [
       "error",
@@ -612,8 +612,8 @@
         "logical": "parens-new-line",
         "prop": "parens-new-line",
         "propertyValue": "parens-new-line",
-        "return": "parens-new-line",
-      },
+        "return": "parens-new-line"
+      }
     ],
     "antfu/consistent-list-newline": "error",
     "antfu/consistent-chaining": "error",
@@ -679,7 +679,7 @@
     "regexp/simplify-set-operations": "error",
     "regexp/sort-flags": "error",
     "regexp/strict": "error",
-    "regexp/use-ignore-case": "error",
+    "regexp/use-ignore-case": "error"
   },
   "overrides": [
     {
@@ -698,9 +698,9 @@
         "jsdoc/require-property": "warn",
         "jsdoc/require-property-description": "warn",
         "jsdoc/require-property-name": "warn",
-        "jsdoc/require-returns-description": "warn",
+        "jsdoc/require-returns-description": "warn"
       },
-      "plugins": ["node", "jsdoc"],
+      "plugins": ["node", "jsdoc"]
     },
     {
       "files": ["**/*.?([cm])ts", "**/*.?([cm])tsx"],
@@ -716,8 +716,8 @@
         "no-redeclare": [
           "error",
           {
-            "builtinGlobals": false,
-          },
+            "builtinGlobals": false
+          }
         ],
         "no-setter-return": "off",
         "no-this-before-super": "off",
@@ -727,22 +727,22 @@
           "error",
           {
             "destructuring": "all",
-            "ignoreReadBeforeAssign": true,
-          },
+            "ignoreReadBeforeAssign": true
+          }
         ],
         "@typescript-eslint/ban-ts-comment": [
           "error",
           {
-            "ts-expect-error": "allow-with-description",
-          },
+            "ts-expect-error": "allow-with-description"
+          }
         ],
         "@typescript-eslint/no-duplicate-enum-values": "error",
         "@typescript-eslint/no-dynamic-delete": "off",
         "@typescript-eslint/no-empty-object-type": [
           "error",
           {
-            "allowInterfaces": "always",
-          },
+            "allowInterfaces": "always"
+          }
         ],
         "@typescript-eslint/no-explicit-any": "off",
         "@typescript-eslint/no-extra-non-null-assertion": "error",
@@ -763,8 +763,8 @@
           {
             "allowShortCircuit": true,
             "allowTaggedTemplates": true,
-            "allowTernary": true,
-          },
+            "allowTernary": true
+          }
         ],
         "no-unused-vars": "off",
         "no-useless-constructor": "off",
@@ -779,21 +779,24 @@
           {
             "classes": false,
             "functions": false,
-            "variables": true,
-          },
+            "variables": true
+          }
         ],
-        "@typescript-eslint/consistent-type-definitions": ["error", "interface"],
+        "@typescript-eslint/consistent-type-definitions": [
+          "error",
+          "interface"
+        ],
         "@typescript-eslint/consistent-type-imports": [
           "error",
           {
             "disallowTypeAnnotations": false,
             "fixStyle": "separate-type-imports",
-            "prefer": "type-imports",
-          },
+            "prefer": "type-imports"
+          }
         ],
-        "@typescript-eslint/no-import-type-side-effects": "error",
+        "@typescript-eslint/no-import-type-side-effects": "error"
       },
-      "plugins": ["typescript"],
+      "plugins": ["typescript"]
     },
     {
       "files": [
@@ -801,15 +804,15 @@
         "**/*.spec.?([cm])[jt]s?(x)",
         "**/*.test.?([cm])[jt]s?(x)",
         "**/*.bench.?([cm])[jt]s?(x)",
-        "**/*.benchmark.?([cm])[jt]s?(x)",
+        "**/*.benchmark.?([cm])[jt]s?(x)"
       ],
       "rules": {
         "vitest/consistent-test-it": [
           "error",
           {
             "fn": "it",
-            "withinDescribe": "it",
-          },
+            "withinDescribe": "it"
+          }
         ],
         "vitest/no-identical-title": "error",
         "vitest/no-import-node-test": "error",
@@ -818,10 +821,10 @@
         "antfu/no-top-level-await": "off",
         "e18e/prefer-static-regex": "off",
         "no-unused-expressions": "off",
-        "@typescript-eslint/explicit-function-return-type": "off",
+        "@typescript-eslint/explicit-function-return-type": "off"
       },
       "jsPlugins": ["eslint-plugin-antfu", "@e18e/eslint-plugin"],
-      "plugins": ["vitest", "typescript"],
+      "plugins": ["vitest", "typescript"]
     },
     {
       "files": ["**/*.json", "**/*.json5", "**/*.jsonc"],
@@ -860,27 +863,27 @@
           "error",
           {
             "afterColon": true,
-            "beforeColon": false,
-          },
+            "beforeColon": false
+          }
         ],
         "jsonc/object-curly-newline": [
           "error",
           {
             "consistent": true,
-            "multiline": true,
-          },
+            "multiline": true
+          }
         ],
         "jsonc/object-curly-spacing": ["error", "always"],
         "jsonc/object-property-newline": [
           "error",
           {
-            "allowAllPropertiesOnSameLine": true,
-          },
+            "allowAllPropertiesOnSameLine": true
+          }
         ],
         "jsonc/quote-props": "error",
-        "jsonc/quotes": "error",
+        "jsonc/quotes": "error"
       },
-      "jsPlugins": ["eslint-plugin-jsonc"],
+      "jsPlugins": ["eslint-plugin-jsonc"]
     },
     {
       "files": ["**/package.json"],
@@ -889,10 +892,10 @@
           "error",
           {
             "order": {
-              "type": "asc",
+              "type": "asc"
             },
-            "pathPattern": "^files$",
-          },
+            "pathPattern": "^files$"
+          }
         ],
         "jsonc/sort-keys": [
           "error",
@@ -942,37 +945,37 @@
               "husky",
               "simple-git-hooks",
               "lint-staged",
-              "eslintConfig",
+              "eslintConfig"
             ],
-            "pathPattern": "^$",
+            "pathPattern": "^$"
           },
           {
             "order": {
-              "type": "asc",
+              "type": "asc"
             },
-            "pathPattern": "^(?:dev|peer|optional|bundled)?[Dd]ependencies(Meta)?$",
+            "pathPattern": "^(?:dev|peer|optional|bundled)?[Dd]ependencies(Meta)?$"
           },
           {
             "order": {
-              "type": "asc",
+              "type": "asc"
             },
-            "pathPattern": "^(?:resolutions|overrides|pnpm.overrides)$",
+            "pathPattern": "^(?:resolutions|overrides|pnpm.overrides)$"
           },
           {
             "order": {
-              "type": "asc",
+              "type": "asc"
             },
-            "pathPattern": "^workspaces\\.catalog$",
+            "pathPattern": "^workspaces\\.catalog$"
           },
           {
             "order": {
-              "type": "asc",
+              "type": "asc"
             },
-            "pathPattern": "^workspaces\\.catalogs\\.[^.]+$",
+            "pathPattern": "^workspaces\\.catalogs\\.[^.]+$"
           },
           {
             "order": ["types", "import", "require", "default"],
-            "pathPattern": "^exports.*$",
+            "pathPattern": "^exports.*$"
           },
           {
             "order": [
@@ -985,13 +988,13 @@
               "post-checkout",
               "post-merge",
               "pre-push",
-              "pre-auto-gc",
+              "pre-auto-gc"
             ],
-            "pathPattern": "^(?:gitHooks|husky|simple-git-hooks)$",
-          },
-        ],
+            "pathPattern": "^(?:gitHooks|husky|simple-git-hooks)$"
+          }
+        ]
       },
-      "jsPlugins": ["eslint-plugin-jsonc"],
+      "jsPlugins": ["eslint-plugin-jsonc"]
     },
     {
       "files": ["**/[jt]sconfig.json", "**/[jt]sconfig.*.json"],
@@ -999,8 +1002,15 @@
         "jsonc/sort-keys": [
           "error",
           {
-            "order": ["extends", "compilerOptions", "references", "files", "include", "exclude"],
-            "pathPattern": "^$",
+            "order": [
+              "extends",
+              "compilerOptions",
+              "references",
+              "files",
+              "include",
+              "exclude"
+            ],
+            "pathPattern": "^$"
           },
           {
             "order": [
@@ -1094,13 +1104,13 @@
               "verbatimModuleSyntax",
               "erasableSyntaxOnly",
               "skipDefaultLibCheck",
-              "skipLibCheck",
+              "skipLibCheck"
             ],
-            "pathPattern": "^compilerOptions$",
-          },
-        ],
+            "pathPattern": "^compilerOptions$"
+          }
+        ]
       },
-      "jsPlugins": ["eslint-plugin-jsonc"],
+      "jsPlugins": ["eslint-plugin-jsonc"]
     },
     {
       "files": ["package.json", "**/package.json"],
@@ -1108,17 +1118,17 @@
         "pnpm/json-prefer-workspace-settings": [
           "error",
           {
-            "autofix": true,
-          },
+            "autofix": true
+          }
         ],
         "pnpm/json-valid-catalog": [
           "error",
           {
-            "autofix": true,
-          },
-        ],
+            "autofix": true
+          }
+        ]
       },
-      "jsPlugins": ["eslint-plugin-pnpm"],
+      "jsPlugins": ["eslint-plugin-pnpm"]
     },
     {
       "files": ["pnpm-workspace.yaml"],
@@ -1128,9 +1138,9 @@
           {
             "settings": {
               "shellEmulator": true,
-              "trustPolicy": "no-downgrade",
-            },
-          },
+              "trustPolicy": "no-downgrade"
+            }
+          }
         ],
         "pnpm/yaml-no-duplicate-catalog-item": "error",
         "pnpm/yaml-no-unused-catalog-item": "error",
@@ -1193,19 +1203,19 @@
               "onlyBuiltDependencies",
               "onlyBuiltDependenciesFile",
               "packageExtensions",
-              "peerDependencyRules",
+              "peerDependencyRules"
             ],
-            "pathPattern": "^$",
+            "pathPattern": "^$"
           },
           {
             "order": {
-              "type": "asc",
+              "type": "asc"
             },
-            "pathPattern": ".*",
-          },
-        ],
+            "pathPattern": ".*"
+          }
+        ]
       },
-      "jsPlugins": ["eslint-plugin-pnpm", "eslint-plugin-yml"],
+      "jsPlugins": ["eslint-plugin-pnpm", "eslint-plugin-yml"]
     },
     {
       "files": ["**/*.y?(a)ml"],
@@ -1231,12 +1241,12 @@
           "error",
           {
             "avoidEscape": true,
-            "prefer": "single",
-          },
+            "prefer": "single"
+          }
         ],
-        "yml/spaced-comment": "error",
+        "yml/spaced-comment": "error"
       },
-      "jsPlugins": ["@stylistic/eslint-plugin", "eslint-plugin-yml"],
+      "jsPlugins": ["@stylistic/eslint-plugin", "eslint-plugin-yml"]
     },
     {
       "files": ["**/*.toml"],
@@ -1260,9 +1270,9 @@
         "toml/padding-line-between-tables": "error",
         "toml/quoted-keys": "error",
         "toml/spaced-comment": "error",
-        "toml/table-bracket-spacing": "error",
+        "toml/table-bracket-spacing": "error"
       },
-      "jsPlugins": ["@stylistic/eslint-plugin", "eslint-plugin-toml"],
+      "jsPlugins": ["@stylistic/eslint-plugin", "eslint-plugin-toml"]
     },
     {
       "files": ["**/*.md/**/*.?([cm])[jt]s?(x)"],
@@ -1287,61 +1297,72 @@
         "unused-imports/no-unused-imports": "off",
         "unused-imports/no-unused-vars": "off",
         "no-redeclare": "off",
-        "no-use-before-define": "off",
+        "no-use-before-define": "off"
       },
-      "jsPlugins": ["eslint-plugin-antfu", "@e18e/eslint-plugin", "@stylistic/eslint-plugin", "eslint-plugin-unused-imports"],
-      "plugins": ["typescript"],
+      "jsPlugins": [
+        "eslint-plugin-antfu",
+        "@e18e/eslint-plugin",
+        "@stylistic/eslint-plugin",
+        "eslint-plugin-unused-imports"
+      ],
+      "plugins": ["typescript"]
     },
     {
       "files": ["**/scripts/**/*.?([cm])[jt]s?(x)"],
       "rules": {
         "antfu/no-top-level-await": "off",
         "no-console": "off",
-        "@typescript-eslint/explicit-function-return-type": "off",
+        "@typescript-eslint/explicit-function-return-type": "off"
       },
       "jsPlugins": ["eslint-plugin-antfu"],
-      "plugins": ["typescript"],
+      "plugins": ["typescript"]
     },
     {
       "files": ["**/cli/**/*.?([cm])[jt]s?(x)", "**/cli.?([cm])[jt]s?(x)"],
       "rules": {
         "antfu/no-top-level-await": "off",
-        "no-console": "off",
+        "no-console": "off"
       },
-      "jsPlugins": ["eslint-plugin-antfu"],
+      "jsPlugins": ["eslint-plugin-antfu"]
     },
     {
       "files": ["**/bin/**/*", "**/bin.?([cm])[jt]s?(x)"],
       "rules": {
         "antfu/no-import-dist": "off",
-        "antfu/no-import-node-modules-by-path": "off",
+        "antfu/no-import-node-modules-by-path": "off"
       },
-      "jsPlugins": ["eslint-plugin-antfu"],
+      "jsPlugins": ["eslint-plugin-antfu"]
     },
     {
       "files": ["**/*.d.?([cm])ts"],
       "rules": {
         "eslint-comments/no-unlimited-disable": "off",
-        "unused-imports/no-unused-vars": "off",
+        "unused-imports/no-unused-vars": "off"
       },
-      "jsPlugins": ["eslint-plugin-eslint-comments", "eslint-plugin-unused-imports"],
+      "jsPlugins": [
+        "eslint-plugin-eslint-comments",
+        "eslint-plugin-unused-imports"
+      ]
     },
     {
       "files": ["**/*.js", "**/*.cjs"],
       "rules": {
-        "@typescript-eslint/no-require-imports": "off",
+        "@typescript-eslint/no-require-imports": "off"
       },
-      "plugins": ["typescript"],
+      "plugins": ["typescript"]
     },
     {
-      "files": ["**/*.config.?([cm])[jt]s?(x)", "**/*.config.*.?([cm])[jt]s?(x)"],
+      "files": [
+        "**/*.config.?([cm])[jt]s?(x)",
+        "**/*.config.*.?([cm])[jt]s?(x)"
+      ],
       "rules": {
         "antfu/no-top-level-await": "off",
         "no-console": "off",
-        "@typescript-eslint/explicit-function-return-type": "off",
+        "@typescript-eslint/explicit-function-return-type": "off"
       },
       "jsPlugins": ["eslint-plugin-antfu"],
-      "plugins": ["typescript"],
+      "plugins": ["typescript"]
     },
     {
       "files": ["**/*.ts", "**/*.tsx"],
@@ -1355,8 +1376,8 @@
         "no-extend-native": [
           "error",
           {
-            "exceptions": ["Set"],
-          },
+            "exceptions": ["Set"]
+          }
         ],
         "no-new-func": "off",
         "regexp/no-super-linear-backtracking": "off",
@@ -1371,22 +1392,22 @@
         "no-console": [
           "warn",
           {
-            "allow": ["warn", "error"],
-          },
+            "allow": ["warn", "error"]
+          }
         ],
         "no-debugger": "warn",
         "prefer-const": [
           "error",
           {
             "destructuring": "all",
-            "ignoreReadBeforeAssign": true,
-          },
+            "ignoreReadBeforeAssign": true
+          }
         ],
         "no-empty": [
           "error",
           {
-            "allowEmptyCatch": true,
-          },
+            "allowEmptyCatch": true
+          }
         ],
         "no-empty-function": [
           "error",
@@ -1401,15 +1422,15 @@
               "setters",
               "constructors",
               "asyncFunctions",
-              "asyncMethods",
-            ],
-          },
+              "asyncMethods"
+            ]
+          }
         ],
         "no-constant-condition": [
           "error",
           {
-            "checkLoops": false,
-          },
+            "checkLoops": false
+          }
         ],
         "prefer-rest-params": "off",
         "method-signature-style": "off",
@@ -1418,8 +1439,8 @@
           "error",
           {
             "fixStyle": "separate-type-imports",
-            "prefer": "type-imports",
-          },
+            "prefer": "type-imports"
+          }
         ],
         "explicit-function-return-type": "off",
         "no-namespace": "off",
@@ -1434,8 +1455,8 @@
             "caughtErrorsIgnorePattern": "^_",
             "destructuredArrayIgnorePattern": "^_",
             "varsIgnorePattern": "^_",
-            "ignoreRestSiblings": true,
-          },
+            "ignoreRestSiblings": true
+          }
         ],
         "no-unused-vars": [
           "error",
@@ -1446,8 +1467,8 @@
             "caughtErrorsIgnorePattern": "^_",
             "destructuredArrayIgnorePattern": "^_",
             "varsIgnorePattern": "^_",
-            "ignoreRestSiblings": true,
-          },
+            "ignoreRestSiblings": true
+          }
         ],
         "no-this-alias": "off",
         "no-unsafe-declaration-merging": "off",
@@ -1455,16 +1476,16 @@
           "error",
           {
             "ts-expect-error": "allow-with-description",
-            "ts-ignore": "allow-with-description",
-          },
+            "ts-ignore": "allow-with-description"
+          }
         ],
         "no-empty-object-type": "off",
         "no-unsafe-function-type": "off",
         "no-use-before-define": [
           "error",
           {
-            "functions": false,
-          },
+            "functions": false
+          }
         ],
         "max-len": [
           "error",
@@ -1476,9 +1497,9 @@
             "ignoreUrls": true,
             "ignoreStrings": true,
             "ignoreTemplateLiterals": true,
-            "ignoreRegExpLiterals": true,
-          },
-        ],
+            "ignoreRegExpLiterals": true
+          }
+        ]
       },
       "jsPlugins": [
         "@e18e/eslint-plugin",
@@ -1486,15 +1507,15 @@
         "eslint-plugin-antfu",
         "eslint-plugin-eslint-comments",
         "eslint-plugin-ts",
-        "eslint-plugin-unused-imports",
+        "eslint-plugin-unused-imports"
       ],
       "globals": {
-        "NodeJS": "writable",
+        "NodeJS": "writable"
       },
       "plugins": ["vitest"],
       "env": {
-        "jest": true,
-      },
-    },
-  ],
+        "jest": true
+      }
+    }
+  ]
 }
