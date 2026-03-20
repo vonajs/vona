@@ -41,7 +41,8 @@
     "assets",
     "cli",
     "dist",
-    "dist-cli"
+    "dist-cli",
+    "src"
   ],
   "scripts": {
     "clean": "rimraf dist dist-cli tsconfig.build.tsbuildinfo tsconfig.cli.tsbuildinfo",

@@ -9,6 +9,11 @@
     },
     "fileVersion": 1
   },
+  "description": "",
+  "author": "",
+  "keywords": [
+    "Vona Module"
+  ],
   "exports": {
     ".": {
       "types": [
@@ -20,16 +25,14 @@
     },
     "./package.json": "./package.json"
   },
-  "description": "",
-  "keywords": ["Vona Module"],
-  "author": "",
   "files": [
     "assets",
-    "dist"
+    "dist",
+    "src"
   ],
   "scripts": {
     "clean": "rimraf dist tsconfig.build.tsbuildinfo",
-    "tsc:publish": "npm run clean && vona :bin:buildModule && tsc -p tsconfig.build.json",
+    "tsc:publish": "npm run clean && vona :bin:buildModule --sourcemap && tsc -p tsconfig.build.json",
     "prepublishOnly": "npm run tsc:publish",
     "prepack": "clean-package",
     "postpack": "clean-package restore && npm run clean"
