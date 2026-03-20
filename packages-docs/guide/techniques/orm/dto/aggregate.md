@@ -8,14 +8,14 @@
 
 In VSCode, use the `Vona Create/Dto` context menu to create a DTO code skeleton:
 
-``` typescript
+```typescript
 @Dto()
 export class DtoPostAggregate {}
 ```
 
 ### 2. Inherit $Dto.aggregate
 
-``` diff
+```diff
 @Dto()
 export class DtoPostAggregate
 + extends $Dto.aggregate(() => ModelPost, {
@@ -31,7 +31,7 @@ export class DtoPostAggregate
 
 Taking the `aggregate` method of the `Post` controller as an example, we can annotate the API Result:
 
-``` diff
+```diff
 class ControllerPost {
   @Web.get('aggregate')
 + @Api.body(DtoPostAggregate)

@@ -1,4 +1,5 @@
 import { defineConfig } from 'vitepress';
+
 import { en } from './en.js';
 import { shared } from './shared.js';
 import { zh } from './zh.js';

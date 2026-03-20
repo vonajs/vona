@@ -10,7 +10,7 @@
 
 ### 1. Cli命令
 
-``` bash
+```bash
 $ vona :create:bean captchaScene simple --module=captcha-simple
 ```
 
@@ -22,7 +22,7 @@ $ vona :create:bean captchaScene simple --module=captcha-simple
 
 ## Captcha Scene定义
 
-``` typescript
+```typescript
 @CaptchaScene({
   resolver: async (_ctx, _providers) => {
     return 'captcha-simple:imageText';
@@ -39,11 +39,11 @@ export class CaptchaSceneSimple extends BeanBase {}
 
 * provider 类型
 
-|名称|说明|
-|--|--|
-|true|启用 Provider|
-|false|禁用 Provider|
-|object|Provider 参数|
+| 名称   | 说明          |
+| ------ | ------------- |
+| true   | 启用 Provider |
+| false  | 禁用 Provider |
+| object | Provider 参数 |
 
 ## App Config
 
@@ -51,7 +51,7 @@ export class CaptchaSceneSimple extends BeanBase {}
 
 `src/backend/config/config/config.ts`
 
-``` typescript
+```typescript
 // onions
 config.onions = {
   captchaScene: {

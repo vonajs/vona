@@ -4,7 +4,7 @@
 
 ## 举例
 
-``` diff
+```diff
 class ControllerStudent {
   async test() {
     const data = { a: 1, b: 2 };
@@ -25,7 +25,7 @@ class ControllerStudent {
 
 在执行任务时，可以直接取得`header`值：
 
-``` diff
+```diff
 @Queue()
 class QueueAdd {
   async execute(data, _options) {

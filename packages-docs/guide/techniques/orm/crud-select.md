@@ -8,7 +8,7 @@ The `test-vona` module defines the `Post` model. You can query `Post` data as fo
 
 ### 1. select
 
-``` typescript
+```typescript
 class ServicePost {
   async select() {
     return await this.scope.model.post.select();
@@ -18,7 +18,7 @@ class ServicePost {
 
 ### 2. count
 
-``` typescript
+```typescript
 class ServicePost {
   async count() {
     return await this.scope.model.post.count();
@@ -28,7 +28,7 @@ class ServicePost {
 
 ### 3. select and count
 
-``` typescript
+```typescript
 class ServicePost {
   async selectAndCount() {
     return await this.scope.model.post.selectAndCount();
@@ -38,7 +38,7 @@ class ServicePost {
 
 ### 4. get
 
-``` typescript
+```typescript
 class ServicePost {
   async get(id: TableIdentity) {
     return await this.scope.model.post.get({ id });
@@ -48,7 +48,7 @@ class ServicePost {
 
 ### 5. mget
 
-``` typescript
+```typescript
 class ServicePost {
   async mget(ids: TableIdentity[]) {
     return await this.scope.model.post.mget(ids);
@@ -58,7 +58,7 @@ class ServicePost {
 
 ## Select Type Definition
 
-``` typescript
+```typescript
 async select<
   T extends IModelSelectParams<TRecord>,
   ModelJoins extends TypeModelsClassLikeGeneral | undefined,
@@ -69,58 +69,62 @@ async select<
 ): Promise<TRecord[]>;
 ```
 
-* Example: A relatively complex select query:
+- Example: A relatively complex select query:
 
-``` typescript
+```typescript
 class ServicePost {
   async select() {
-    return await this.scope.model.post.select({
-      columns: ['id', 'title', 'userId'],
-      where: {
-        'id': { _gt_: 1 },
-        'testVonaUser.id': 1,
+    return await this.scope.model.post.select(
+      {
+        columns: ['id', 'title', 'userId'],
+        where: {
+          id: { _gt_: 1 },
+          'testVonaUser.id': 1,
+        },
+        joins: [['innerJoin', 'testVonaUser', ['userId', 'testVonaUser.id']]],
+        offset: 0,
+        limit: 20,
+        orders: [['createdAt', 'desc']],
       },
-      joins: [['innerJoin', 'testVonaUser', ['userId', 'testVonaUser.id']]],
-      offset: 0,
-      limit: 20,
-      orders: [['createdAt', 'desc']],
-    }, {
-      disableDeleted: false,
-    }, 'test-vona:user');
+      {
+        disableDeleted: false,
+      },
+      'test-vona:user',
+    );
   }
 }
 ```
 
 ## Select Parameter: Options
 
-|Name|Type|Default Value|Description|
-|--|--|--|--|
-|disableDeleted|boolean|false|Disable soft deletion|
-|disableCreateTime|boolean|false|Disable automatic creation time setting|
-|disableUpdateTime|boolean|false|Disable automatic update time setting|
-|disableCacheQuery|boolean|false|Disable `Cache Query`|
-|disableCacheEntity|boolean|false|Disable `Cache Entity`|
-|deleted|boolean|undefined|Can explicitly set the `deleted` value|
+| Name               | Type    | Default Value | Description                             |
+| ------------------ | ------- | ------------- | --------------------------------------- |
+| disableDeleted     | boolean | false         | Disable soft deletion                   |
+| disableCreateTime  | boolean | false         | Disable automatic creation time setting |
+| disableUpdateTime  | boolean | false         | Disable automatic update time setting   |
+| disableCacheQuery  | boolean | false         | Disable `Cache Query`                   |
+| disableCacheEntity | boolean | false         | Disable `Cache Entity`                  |
+| deleted            | boolean | undefined     | Can explicitly set the `deleted` value  |
 
 ## Select Parameter: Params
 
-|Name|Description|
-|--|--|
-|distinct|Whether to enable distinct|
-|columns|List of fields to be queried|
-|where|Conditional statement|
-|joins|Related tables|
-|orders|Sorting|
-|limit|Can be used for paginated queries|
-|offset|Can be used for paginated queries|
-|include|Static relationships|
-|with|Dynamic relationships|
+| Name     | Description                       |
+| -------- | --------------------------------- |
+| distinct | Whether to enable distinct        |
+| columns  | List of fields to be queried      |
+| where    | Conditional statement             |
+| joins    | Related tables                    |
+| orders   | Sorting                           |
+| limit    | Can be used for paginated queries |
+| offset   | Can be used for paginated queries |
+| include  | Static relationships              |
+| with     | Dynamic relationships             |
 
 ## orders
 
 This is an array type, and multiple orders can be specified:
 
-``` typescript
+```typescript
 async select() {
   return await this.scope.model.post.select({
     orders: [
@@ -135,7 +139,7 @@ async select() {
 
 You can use `joins` to join multiple tables
 
-``` typescript
+```typescript
 async select() {
   return await this.scope.model.post.select({
     joins: [
@@ -154,11 +158,16 @@ So, where does the list of tables shown in the figure come from?
 
 As mentioned earlier, you can define relationships between multiple entities in a `Model`. Therefore, the system automatically extracts the corresponding data tables from the relationships defined in the model. The relationships for the `Post` model are defined as follows:
 
-``` typescript
+```typescript
 @Model({
   relations: {
     postContent: $relation.hasOne('test-vona:postContent', 'postId', { columns: ['id', 'content'] }),
-    user: $relation.belongsTo(() => ModelPost, () => ModelUser, 'userId', { autoload: true, columns: ['id', 'name'] }),
+    user: $relation.belongsTo(
+      () => ModelPost,
+      () => ModelUser,
+      'userId',
+      { autoload: true, columns: ['id', 'name'] },
+    ),
   },
 })
 class ModelPost {}
@@ -178,7 +187,7 @@ We can also specify multiple models:
 
 ### 1. Basic usage
 
-``` typescript
+```typescript
 class ServicePost {
   async select() {
     return await this.scope.model.post.select({
@@ -191,7 +200,7 @@ class ServicePost {
 }
 ```
 
-``` typescript
+```typescript
 class ServicePost {
   async select() {
     return await this.scope.model.post.select({
@@ -208,34 +217,34 @@ class ServicePost {
 
 ### 2. List of Normal Operators
 
-|Name|Description|
-|--|--|
-|\_eq_||
-|\_notEq_||
-|\_gt_||
-|\_gte_||
-|\_lt_||
-|\_lte_||
-|\_in_||
-|\_notIn_||
-|\_is_|value值为`null`或`undefined`|
-|\_isNot_|value值为`null`或`undefined`|
-|\_between_||
-|\_notBetween_||
-|\_startsWith_||
-|\_endsWith_||
-|\_includes_||
-|\_startsWithI_|Insensitive string operator|
-|\_endsWithI_|Insensitive string operator|
-|\_includesI_|Insensitive string operator|
-|\_ref_|value is an identifier|
-|\_skip_|If value is equal to `_skip`, ignore the current contition|
+| Name            | Description                                                |
+| --------------- | ---------------------------------------------------------- |
+| \_eq\_          |                                                            |
+| \_notEq\_       |                                                            |
+| \_gt\_          |                                                            |
+| \_gte\_         |                                                            |
+| \_lt\_          |                                                            |
+| \_lte\_         |                                                            |
+| \_in\_          |                                                            |
+| \_notIn\_       |                                                            |
+| \_is\_          | value值为`null`或`undefined`                               |
+| \_isNot\_       | value值为`null`或`undefined`                               |
+| \_between\_     |                                                            |
+| \_notBetween\_  |                                                            |
+| \_startsWith\_  |                                                            |
+| \_endsWith\_    |                                                            |
+| \_includes\_    |                                                            |
+| \_startsWithI\_ | Insensitive string operator                                |
+| \_endsWithI\_   | Insensitive string operator                                |
+| \_includesI\_   | Insensitive string operator                                |
+| \_ref\_         | value is an identifier                                     |
+| \_skip\_        | If value is equal to `_skip`, ignore the current contition |
 
 ### 3. Examples
 
-* Array
+- Array
 
-``` typescript
+```typescript
 class ServicePost {
   async select() {
     return await this.scope.model.post.select({
@@ -251,7 +260,7 @@ class ServicePost {
 
 `select * from "testVonaPost" where ("title" in ('ai', 'web'))`
 
-``` typescript
+```typescript
 class ServicePost {
   async select() {
     return await this.scope.model.post.select({
@@ -265,13 +274,13 @@ class ServicePost {
 
 `select * from "testVonaPost" where "title" in ('ai', 'web')`
 
-* Check if empty
+- Check if empty
 
-``` typescript
+```typescript
 class ServicePost {
   async select() {
     return await this.scope.model.post.select({
-       where: {
+      where: {
         title: {
           _is_: null,
         },
@@ -283,11 +292,11 @@ class ServicePost {
 
 `select * from "testVonaPost" where ("title" is null)`
 
-``` typescript
+```typescript
 class ServicePost {
   async select() {
     return await this.scope.model.post.select({
-       where: {
+      where: {
         title: null,
       },
     });
@@ -297,13 +306,13 @@ class ServicePost {
 
 `select * from "testVonaPost" where "title" is null`
 
-* \_ref_
+- \_ref\_
 
-``` typescript
+```typescript
 class ServicePost {
   async select() {
     return await this.scope.model.post.select({
-       where: {
+      where: {
         title: {
           _ref_: 'title',
         },
@@ -315,11 +324,11 @@ class ServicePost {
 
 `select * from "testVonaPost" where ("title" = "title")`
 
-``` typescript
+```typescript
 class ServicePost {
   async select() {
     return await this.scope.model.post.select({
-       where: {
+      where: {
         title: {
           _ref_: 'testVonaPost.title',
         },
@@ -331,9 +340,9 @@ class ServicePost {
 
 `select * from "testVonaPost" where ("title" = "testVonaPost"."title")`
 
-* \_skip_
+- \_skip\_
 
-``` typescript
+```typescript
 class ServicePost {
   async select() {
     const where = {
@@ -356,7 +365,7 @@ class ServicePost {
 
 ### 1. Basic Usage
 
-``` typescript
+```typescript
 class ServicePost {
   async select() {
     return await this.scope.model.post.select({
@@ -373,7 +382,7 @@ class ServicePost {
 
 `select * from "testVonaPost" where ((("title" like '%ai%')) or (("stars" > 20)))`
 
-``` typescript
+```typescript
 class ServicePost {
   async select() {
     return await this.scope.model.post.select({
@@ -394,19 +403,19 @@ class ServicePost {
 
 ### 2. List of Joint Operators
 
-|Name|Description|
-|--|--|
-|\_and_||
-|\_or_||
-|\_not_||
-|\_exists_||
-|\_notExists_||
+| Name          | Description |
+| ------------- | ----------- |
+| \_and\_       |             |
+| \_or\_        |             |
+| \_not\_       |             |
+| \_exists\_    |             |
+| \_notExists\_ |             |
 
 ### 3. Examples
 
-* \_not_
+- \_not\_
 
-``` typescript
+```typescript
 class ServicePost {
   async select() {
     return await this.scope.model.post.select({
@@ -423,18 +432,15 @@ class ServicePost {
 
 `select * from "testVonaPost" where not (("title" like '%ai%') and ("stars" > 20))`
 
-* \_exists_
+- \_exists\_
 
-``` typescript
+```typescript
 class ServicePost {
   async select() {
     return await this.scope.model.post.select({
       where: {
         _exists_: function (builder: Knex.QueryBuilder) {
-          builder
-            .select('*')
-            .from('testVonaPostContent')
-            .where('postId', this.scope.model.post.ref('testVonaPost.id'));
+          builder.select('*').from('testVonaPostContent').where('postId', this.scope.model.post.ref('testVonaPost.id'));
         } as any,
       },
     });
@@ -446,7 +452,7 @@ class ServicePost {
 
 ## where：raw
 
-``` typescript
+```typescript
 class ServicePost {
   async select() {
     return await this.scope.model.post.select({
@@ -460,14 +466,14 @@ class ServicePost {
 
 ## where：ref
 
-``` typescript
+```typescript
 class ServicePost {
   async select() {
     return await this.scope.model.post.select({
-       where: {
+      where: {
         title: {
-          '_eq_': this.scope.model.post.ref('title') as any,
-        }
+          _eq_: this.scope.model.post.ref('title') as any,
+        },
       },
     });
   }
@@ -476,14 +482,14 @@ class ServicePost {
 
 `select * from "testVonaPost" where ("title" = "title")`
 
-``` typescript
+```typescript
 class ServicePost {
   async select() {
     return await this.scope.model.post.select({
-       where: {
+      where: {
         title: {
-          '_eq_': this.scope.model.post.ref('testVonaPost.title') as any,
-        }
+          _eq_: this.scope.model.post.ref('testVonaPost.title') as any,
+        },
       },
     });
   }

@@ -6,7 +6,7 @@ The module `a-datasource` allows dynamic creation of datasources during system r
 
 The module stores the dynamically created datasource in the data table
 
-``` typescript
+```typescript
 const entityDatasource = await this.bean.datasource.create({
   title: 'test001',
   config: {
@@ -28,7 +28,7 @@ const entityDatasource = await this.bean.datasource.create({
 
 ### 1. General usage
 
-``` typescript
+```typescript
 const db = await this.bean.datasource.getDb({ id: entityDatasource.id });
 const modelTest = this.scope.model.test.newInstance(db);
 const items = await modelTest.select();
@@ -39,7 +39,7 @@ const items = await modelTest.select();
 
 ### 2. Transaction
 
-``` typescript
+```typescript
 const db = await this.bean.datasource.getDb({ id: entityDatasource.id });
 const modelTest = this.scope.model.test.newInstance(db);
 await db.transaction.begin(async () => {
@@ -52,7 +52,7 @@ await db.transaction.begin(async () => {
 
 ## Update datasource
 
-``` typescript
+```typescript
 await this.bean.datasource.update({
   id: entityDatasource.id,
   config: {
@@ -74,7 +74,7 @@ await this.bean.datasource.update({
 
 ## Delete datasource
 
-``` typescript
+```typescript
 await this.bean.datasource.remove(entityDatasource.id);
 ```
 

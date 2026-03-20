@@ -6,31 +6,31 @@ Vona implements a very convenient `Swagger/Openapi` based on [@asteasolutions/zo
 
 Vona has a built-in `Swagger` module, which we can access directly through the URL:
 
-|Name|URL|
-|--|--|
-|Swagger|http://localhost:7102/swagger|
-|Openapi json| http://localhost:7102/swagger/json|
-|Openapi json V3.1| http://localhost:7102/swagger/json?version=V31|
-|Openapi json V3.0| http://localhost:7102/swagger/json?version=V30|
+| Name              | URL                                            |
+| ----------------- | ---------------------------------------------- |
+| Swagger           | http://localhost:7102/swagger                  |
+| Openapi json      | http://localhost:7102/swagger/json             |
+| Openapi json V3.1 | http://localhost:7102/swagger/json?version=V31 |
+| Openapi json V3.0 | http://localhost:7102/swagger/json?version=V30 |
 
 - The default version of Openapi json is `V3.1`
 
 In addition, Vona also has built-in [RapiDoc](https://rapidocweb.com/), which provides a more elegant UI
 
-|Name|URL|
-|--|--|
-|RapiDoc|http://localhost:7102/rapidoc|
+| Name    | URL                           |
+| ------- | ----------------------------- |
+| RapiDoc | http://localhost:7102/rapidoc |
 
 ## bean.openapi
 
 The module `a-openapi` provides a global bean `bean.openapi`, which includes several built-in utilities for manipulating Swagger/Openapi
 
-|Name|Description|
-|--|--|
-|generateJsonOfClass|Generates Openapi metadata for a specific DTO class|
-|generateJsonOfClasses|Generates Openapi metadata for multiple DTO classes|
-|generateJson|Generates Openapi metadata for the entire system|
-|generateJsonOfControllerAction|Generates Openapi metadata for a specific API|
+| Name                           | Description                                         |
+| ------------------------------ | --------------------------------------------------- |
+| generateJsonOfClass            | Generates Openapi metadata for a specific DTO class |
+| generateJsonOfClasses          | Generates Openapi metadata for multiple DTO classes |
+| generateJson                   | Generates Openapi metadata for the entire system    |
+| generateJsonOfControllerAction | Generates Openapi metadata for a specific API       |
 
 ## 1. Automatically infer Zod Schema: Basic type/Dto/Entity
 
@@ -74,21 +74,21 @@ For example, `findOne(@Arg.query('ids', v.array(Number)) ids: number[])`, we spe
 
 Vona also provides many extension tools for setting metadata related to Openapi
 
-|Name|Description|
-|--|--|
-|v.required|Provide a custom error message for `required`; otherwise, use Zod's built-in error message|
-|v.optional|optional|
-|v.default|default|
-|v.openapi|openapi|
-|v.title|title|
-|v.description|description|
-|v.example|example|
+| Name          | Description                                                                                |
+| ------------- | ------------------------------------------------------------------------------------------ |
+| v.required    | Provide a custom error message for `required`; otherwise, use Zod's built-in error message |
+| v.optional    | optional                                                                                   |
+| v.default     | default                                                                                    |
+| v.openapi     | openapi                                                                                    |
+| v.title       | title                                                                                      |
+| v.description | description                                                                                |
+| v.example     | example                                                                                    |
 
 ### 1. Example: v.title
 
 For example, we can specify `title` as `Name` for Openapi
 
-``` typescript
+```typescript
 class ControllerStudent3 {
   @Web.get()
   findOne(@Arg.query('name', v.title('Name')) name: string) {}
@@ -103,7 +103,7 @@ The automatically generated Swagger/Openapi is as follows: (Since Swagger do not
 
 We can use `v.openapi` to set more metadata at once. For example, we can specify `title` as `Name` and `example` as `Tom` for Openapi
 
-``` typescript
+```typescript
 class ControllerStudent3 {
   @Web.get()
   findOne(@Arg.query('name', v.openapi({ title: 'Name', example: 'Tom' })) name: string) {}
@@ -122,17 +122,17 @@ Vona provides I18n for Openapi. For example, `title` is `Name`, and the steps to
 
 For how to add language resources, see: [I18n](../../essentials/scope/locale.md)
 
-* English: `src/module/demo-student/src/config/locale/en-us.ts`
+- English: `src/module/demo-student/src/config/locale/en-us.ts`
 
-``` typescript
+```typescript
 export default {
   Name: 'Name',
 };
 ```
 
-* Chinese: `src/module/demo-student/src/config/locale/zh-cn.ts`
+- Chinese: `src/module/demo-student/src/config/locale/zh-cn.ts`
 
-``` typescript
+```typescript
 export default {
   Name: '姓名',
 };
@@ -142,7 +142,7 @@ export default {
 
 Use the `$locale` method for language translation, and support auto-complete hints for language resources
 
-``` typescript
+```typescript
 import { $locale } from '../.metadata/locales.ts';
 
 class ControllerStudent3 {
@@ -153,11 +153,11 @@ class ControllerStudent3 {
 
 The automatically generated Swagger/Openapi are as follows:
 
-* English: http://localhost:7102/swagger/json?x-vona-locale=en-us
+- English: http://localhost:7102/swagger/json?x-vona-locale=en-us
 
 ![](../../../assets/img/openapi/openapi-8.png)
 
-* Chinese: http://localhost:7102/swagger/json?x-vona-locale=zh-cn
+- Chinese: http://localhost:7102/swagger/json?x-vona-locale=zh-cn
 
 ![](../../../assets/img/openapi/openapi-9.png)
 
@@ -167,7 +167,7 @@ The automatically generated Swagger/Openapi are as follows:
 
 `src/backend/config/config/config.ts`
 
-``` typescript
+```typescript
 // modules
 config.modules = {
   'a-openapi': {

@@ -10,11 +10,11 @@ VonaJS AOP programming includes three capabilities:
 
 ### Controller Aspect List
 
-* Middleware
-* Guard
-* Interceptor
-* Pipe
-* Filter
+- Middleware
+- Guard
+- Interceptor
+- Pipe
+- Filter
 
 ### Execution Sequence Diagram
 
@@ -37,7 +37,7 @@ Implement aspect logic directly on Class Method through decorator
 
 #### Example: Database Transaction
 
-``` diff
+```diff
 class ServiceStudent {
 + @Core.transaction()
   async update(id: TableIdentity, student: DtoStudentUpdate) {
@@ -50,7 +50,7 @@ class ServiceStudent {
 
 #### Example: Logging
 
-``` diff
+```diff
 class ServiceStudent {
 + @Core.log()
   async update(id: TableIdentity, student: DtoStudentUpdate) {
@@ -67,7 +67,7 @@ Dynamic properties or methods can be implemented through `__get__` and `__set__`
 
 #### Example: Obtaining a model instance
 
-``` diff
+```diff
 class ServiceStudent {
   async update(id: TableIdentity, student: DtoStudentUpdate) {
 +   return await this.scope.model.student.updateById(id, student);
@@ -81,7 +81,7 @@ class ServiceStudent {
 
 The system provides a `ServiceModelResolver` class for dynamic model instance resolution. The code is as follows:
 
-``` typescript
+```typescript
 class ServiceModelResolver {
   protected __get__(prop: string) {
     const beanFullName = `${this[SymbolModuleScope]}.model.${prop}`;
@@ -98,7 +98,7 @@ class ServiceModelResolver {
 
 Using the `update` method of the `ServiceStudent` class as an example, we implement logging capabilities through the `external aspect`:
 
-``` typescript
+```typescript
 import { Aop } from 'vona-module-a-aspect';
 
 @Aop({ match: 'demo-student.service.student' })

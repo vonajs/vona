@@ -6,7 +6,7 @@
 
 ### 1. Cli命令
 
-``` bash
+```bash
 $ vona :init:constant demo-student
 ```
 

@@ -6,7 +6,7 @@
 
 ### 1. Cli命令
 
-``` bash
+```bash
 $ vona :create:bean filter test --module=demo-student
 ```
 
@@ -18,7 +18,7 @@ $ vona :create:bean filter test --module=demo-student
 
 ## 过滤器定义
 
-``` typescript
+```typescript
 export interface IFilterOptionsTest extends IDecoratorFilterOptions {}
 
 @Filter<IFilterOptionsTest>()
@@ -43,7 +43,7 @@ class FilterTest {
 
 ### 1. 标注控制器方法
 
-``` diff
+```diff
 import { Aspect } from 'vona-module-a-aspect';
 
 @Controller()
@@ -61,7 +61,7 @@ class ControllerStudent {
 
 可以针对控制器类使用过滤器，从而类中所有方法都会应用此过滤器
 
-``` diff
+```diff
 import { Aspect } from 'vona-module-a-aspect';
 
 @Controller()
@@ -80,7 +80,7 @@ class ControllerStudent {
 
 ### 1. 定义参数类型
 
-``` diff
+```diff
 export interface IFilterOptionsTest extends IDecoratorFilterOptions {
 +  prefix: string;
 }
@@ -88,7 +88,7 @@ export interface IFilterOptionsTest extends IDecoratorFilterOptions {
 
 ### 2. 提供参数缺省值
 
-``` diff
+```diff
 @Filter<IFilterOptionsTest>({
 + prefix: 'Custom Error',
 })
@@ -96,7 +96,7 @@ export interface IFilterOptionsTest extends IDecoratorFilterOptions {
 
 ### 3. 使用参数
 
-``` diff
+```diff
 export interface IFilterOptionsTest extends IDecoratorFilterOptions {
   prefix: string;
 }
@@ -123,7 +123,7 @@ export class FilterTest extends BeanBase implements IFilterLog {
 
 可以针对某个 API 单独指定局部过滤器的参数
 
-``` diff
+```diff
 class ControllerStudent {
   @Web.post()
 + @Aspect.filter('demo-student:test', { prefix: 'Test Error' })
@@ -139,7 +139,7 @@ class ControllerStudent {
 
 `src/backend/config/config/config.ts`
 
-``` typescript
+```typescript
 // onions
 config.onions = {
   filter: {

@@ -6,7 +6,7 @@ Applies logic to any method of any class from the outside without changing the c
 
 External aspect can be implemented for any class. Below, taking Service as an example, create a Service `test` in the module demo-student with the following code:
 
-``` typescript
+```typescript
 @Service()
 export class ServiceTest extends BeanBase {
   private _name: string;
@@ -43,7 +43,7 @@ Next, create an external aspect `log` to provide extension logic for the propert
 
 ### 1. Cli command
 
-``` bash
+```bash
 $ vona :create:bean aop log --module=demo-student
 ```
 
@@ -55,7 +55,7 @@ Context Menu - [Module Path]: `Vona Aspect/Aop`
 
 ## AOP Definition
 
-``` typescript
+```typescript
 import { BeanAopBase } from 'vona';
 import { Aop } from 'vona-module-a-aspect';
 
@@ -66,9 +66,9 @@ export class AopLog extends BeanAopBase {}
 - `@Aop`: This decorator is used to implement the `external aspect`
 - `match`: This option is used to associate the `AopLog` class with the `ServiceTest` class, which beanFullName is `demo-student.service.test`
 
-|name|type|description|
-|--|--|--|
-|match|string\|regexp\|(string\|regexp)[]|For which classes to enable|
+| name  | type                               | description                 |
+| ----- | ---------------------------------- | --------------------------- |
+| match | string\|regexp\|(string\|regexp)[] | For which classes to enable |
 
 ## Aspect: Synchronous method
 
@@ -76,7 +76,7 @@ Outputs execution time for `ServiceTest#actionSync`
 
 In the VSCode editor, enter the code snippet `aopactionsync` to automatically generate a code skeleton:
 
-``` typescript
+```typescript
 action: AopAction<ClassSome, 'action'> = (_args, next, _receiver) => {
   return next();
 };
@@ -84,7 +84,7 @@ action: AopAction<ClassSome, 'action'> = (_args, next, _receiver) => {
 
 Adjust the code and add log logic
 
-``` typescript
+```typescript
 actionSync: AopAction<ServiceTest, 'actionSync'> = (_args, next, _receiver) => {
   const timeBegin = Date.now();
   const res = next();
@@ -102,7 +102,7 @@ Outputs execution time for `ServiceTest#actionAsync`
 
 In the VSCode editor, enter the code snippet `aopaction` to automatically generate a code skeleton:
 
-``` typescript
+```typescript
 action: AopAction<ClassSome, 'action'> = async (_args, next, _receiver) => {
   return await next();
 };
@@ -110,7 +110,7 @@ action: AopAction<ClassSome, 'action'> = async (_args, next, _receiver) => {
 
 Adjust the code and add log logic
 
-``` typescript
+```typescript
 actionAsync: AopAction<ServiceTest, 'actionAsync'> = async (_args, next, _receiver) => {
   const timeBegin = Date.now();
   const res = await next();
@@ -128,7 +128,7 @@ Outputs execution time for `ServiceTest#get name`
 
 In the VSCode editor, enter the code snippet `aopgetter` to automatically generate a code skeleton:
 
-``` typescript
+```typescript
 protected __get_xxx__: AopActionGetter<ClassSome, 'xxx'> = function (next, _receiver) {
   const value = next();
   return value;
@@ -137,7 +137,7 @@ protected __get_xxx__: AopActionGetter<ClassSome, 'xxx'> = function (next, _rece
 
 Adjust the code and add log logic
 
-``` typescript
+```typescript
 protected __get_name__: AopActionGetter<ServiceTest, 'name'> = function (next, _receiver) {
   const timeBegin = Date.now();
   const value = next();
@@ -155,7 +155,7 @@ Outputs execution time for `ServiceTest#set name`
 
 In the VSCode editor, enter the code snippet `aopsetter` to automatically generate a code skeleton:
 
-``` typescript
+```typescript
 protected __set_xxx__: AopActionSetter<ClassSome, 'xxx'> = function (value, next, _receiver) {
   return next(value);
 }
@@ -163,7 +163,7 @@ protected __set_xxx__: AopActionSetter<ClassSome, 'xxx'> = function (value, next
 
 Adjust the code and add log logic
 
-``` typescript
+```typescript
 protected __set_name__: AopActionSetter<ServiceTest, 'name'> = function (value, next, _receiver) {
   const timeBegin = Date.now();
   const res = next(value);
@@ -181,7 +181,7 @@ Outputs execution time for `ServiceTest#__init__`
 
 In the VSCode editor, enter the code snippet `aopinit` to automatically generate a code skeleton:
 
-``` typescript
+```typescript
 protected __init__: AopActionInit<ClassSome> = (_args, next, _receiver) => {
   next();
 };
@@ -189,7 +189,7 @@ protected __init__: AopActionInit<ClassSome> = (_args, next, _receiver) => {
 
 Adjust the code and add log logic
 
-``` typescript
+```typescript
 protected __init__: AopActionInit<ServiceTest> = (_args, next, _receiver) => {
   const timeBegin = Date.now();
   next();
@@ -206,7 +206,7 @@ Outputs execution time for `ServiceTest#__dispose__`
 
 In the VSCode editor, enter the code snippet `aopdispose` to automatically generate a code skeleton:
 
-``` typescript
+```typescript
 protected __dispose__: AopActionDispose<ClassSome> = async (_args, next, _receiver) => {
   await next();
 };
@@ -214,7 +214,7 @@ protected __dispose__: AopActionDispose<ClassSome> = async (_args, next, _receiv
 
 Adjust the code and add log logic
 
-``` typescript
+```typescript
 protected __dispose__: AopActionDispose<ServiceTest> = async (_args, next, _receiver) => {
   const timeBegin = Date.now();
   await next();
@@ -233,7 +233,7 @@ Extending magic method for `ServiceTest`
 
 In the VSCode editor, enter the code snippet `aopget` to automatically generate a code skeleton:
 
-``` typescript
+```typescript
 protected __get__: AopActionGet<ClassSome> = (_prop, next, _receiver) => {
   const value = next();
   return value;
@@ -242,7 +242,7 @@ protected __get__: AopActionGet<ClassSome> = (_prop, next, _receiver) => {
 
 Adjust the code and add the custom field `red`
 
-``` typescript
+```typescript
 protected __get__: AopActionGet<ServiceTest> = (prop, next, _receiver) => {
   if (prop === 'red') return '#FF0000';
   const value = next();
@@ -254,7 +254,7 @@ protected __get__: AopActionGet<ServiceTest> = (prop, next, _receiver) => {
 
 Provide type definitions for colors using the interface type merging mechanism
 
-``` typescript
+```typescript
 declare module 'vona-module-demo-student' {
   export interface ServiceTest {
     red: string;
@@ -270,7 +270,7 @@ Extending magic method for `ServiceTest`
 
 In the VSCode editor, enter the code snippet `aopset` to automatically generate a code skeleton:
 
-``` typescript
+```typescript
 protected __set__: AopActionSet<ClassSome> = (_prop, value, next, _receiver) => {
   return next(value);
 };
@@ -278,7 +278,7 @@ protected __set__: AopActionSet<ClassSome> = (_prop, value, next, _receiver) => 
 
 Adjust the code to set the value for the custom field `red`
 
-``` typescript
+```typescript
 private _colorRed: string | undefined;
 
 protected __set__: AopActionSet<ServiceTest> = (prop, value, next, _receiver) => {
@@ -295,7 +295,7 @@ protected __set__: AopActionSet<ServiceTest> = (prop, value, next, _receiver) =>
 
 Then adjust the `__get__` logic:
 
-``` diff
+```diff
 protected __get__: AopActionGet<ServiceTest> = (prop, next, _receiver) => {
 - if (prop === 'red') return '#FF0000';
 + if (prop === 'red') return this._colorRed;
@@ -310,7 +310,7 @@ Extending logic for any method of `ServiceTest`
 
 In the VSCode editor, enter the code snippet `aopmethod` to automatically generate a code skeleton:
 
-``` typescript
+```typescript
 protected __method__: AopActionMethod<ClassSome> = (_method, _args, next, _receiver) => {
   return next();
 };
@@ -318,7 +318,7 @@ protected __method__: AopActionMethod<ClassSome> = (_method, _args, next, _recei
 
 Adjust the code and add log logic for `actionSync` and `actionAsync`
 
-``` typescript
+```typescript
 protected __method__: AopActionMethod<ServiceTest> = (method, _args, next, _receiver) => {
   if (method !== 'actionSync' && method !== 'actionAsync') {
     return next();
@@ -350,7 +350,7 @@ For the same target Class, multiple AOPs can be associated. Therefore, VonaJS pr
 
 For example, has another AOP `demo-student:log3`, and we hope that the execution order is as follows: `demo-student:log3` > `Current`
 
-``` diff
+```diff
 @Aop({
   match: 'demo-student.service.test',
 + dependencies: 'demo-student:log3',
@@ -362,7 +362,7 @@ class AopLog {}
 
 The order of `dependents` is just the opposite of `dependencies`. We hope that the execution order is as follows: `Current` > `demo-student:log3`
 
-``` diff
+```diff
 @Aop({
   match: 'demo-student.service.test',
 + dependents: 'demo-student:log3',
@@ -378,7 +378,7 @@ You can control `enable/disable` of AOPs
 
 `src/backend/config/config/config.ts`
 
-``` diff
+```diff
 // onions
 config.onions = {
   aop: {
@@ -393,14 +393,14 @@ config.onions = {
 
 Allows AOPs to take effect in a specified operating environment
 
-|Name|Type|Description|
-|--|--|--|
-|flavor|string\|string[]|See: [Runtime Environments and Flavors](../../env-config/mode-flavor/introduction.md)|
-|mode|string\|string[]|See: [Runtime Environments and Flavors](../../env-config/mode-flavor/introduction.md)|
+| Name   | Type             | Description                                                                           |
+| ------ | ---------------- | ------------------------------------------------------------------------------------- |
+| flavor | string\|string[] | See: [Runtime Environments and Flavors](../../env-config/mode-flavor/introduction.md) |
+| mode   | string\|string[] | See: [Runtime Environments and Flavors](../../env-config/mode-flavor/introduction.md) |
 
-* Example
+- Example
 
-``` diff
+```diff
 @Aop({
 + meta: {
 +   flavor: 'normal',
@@ -414,7 +414,7 @@ class AopLog {}
 
 You can directly inspect the currently effective AOP list in the target class action
 
-``` diff
+```diff
 class ServiceTest {
   protected async __dispose__() {
 +   this.bean.onion.aop.inspect();

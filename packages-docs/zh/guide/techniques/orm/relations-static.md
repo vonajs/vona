@@ -6,18 +6,18 @@
 
 Vona ORM 提供了 4 种关系：
 
-|名称|说明|
-|--|--|
-|hasOne|`1:1`|
-|belongsTo|`1:1`/`n:1`|
-|hasMany|`1:n`。可以实现`主表-明细表`，以及`主表-多级明细表`的功能|
-|belongsToMany|`n:n`|
+| 名称          | 说明                                                      |
+| ------------- | --------------------------------------------------------- |
+| hasOne        | `1:1`                                                     |
+| belongsTo     | `1:1`/`n:1`                                               |
+| hasMany       | `1:n`。可以实现`主表-明细表`，以及`主表-多级明细表`的功能 |
+| belongsToMany | `n:n`                                                     |
 
 ## hasOne
 
 ### 1. 定义关系
 
-``` typescript
+```typescript
 import { ModelPostContent } from './postContent.ts';
 
 @Model({
@@ -29,13 +29,13 @@ import { ModelPostContent } from './postContent.ts';
 class ModelPost {}
 ```
 
-|名称|说明|
-|--|--|
-|relations.postContent|关系名|
-|$relation.hasOne|定义`1:1`关系|
-|ModelPostContent|目标Model|
-|'postId'|外键|
-|columns|要查询的字段列表|
+| 名称                  | 说明             |
+| --------------------- | ---------------- |
+| relations.postContent | 关系名           |
+| $relation.hasOne      | 定义`1:1`关系    |
+| ModelPostContent      | 目标Model        |
+| 'postId'              | 外键             |
+| columns               | 要查询的字段列表 |
 
 ::: warning
 `relations`节点有任何变更，都需要执行菜单：`Vona Tools: Generate .metadata`，从而同步生成对应的类型定义
@@ -45,7 +45,7 @@ class ModelPost {}
 
 在 Model 中定义的 hasOne 关系可以用于所有 CRUD 操作。通过`include`指定需要操作的关系，比如`postContent: true`，那么，系统在操作 Model Post 的同时，也会操作 Model PostContent
 
-``` typescript
+```typescript
 class ServicePost {
   async relationHasOne() {
     // insert
@@ -100,37 +100,42 @@ class ServicePost {
       },
     );
   }
-}  
+}
 ```
 
 ## belongsTo
 
 ### 1. 定义关系
 
-``` typescript
+```typescript
 @Model({
   entity: EntityPostContent,
   relations: {
-    post: $relation.belongsTo(() => ModelPostContent, () => ModelPost, 'postId', { columns: '*' }),
+    post: $relation.belongsTo(
+      () => ModelPostContent,
+      () => ModelPost,
+      'postId',
+      { columns: '*' },
+    ),
   },
 })
 class ModelPostContent {}
 ```
 
-|名称|说明|
-|--|--|
-|relations.post|关系名|
-|$relation.belongsTo|定义`1:1`/`n:1`关系|
-|ModelPostContent|源Model|
-|ModelPost|目标Model|
-|'postId'|外键|
-|columns|要查询的字段列表|
+| 名称                | 说明                |
+| ------------------- | ------------------- |
+| relations.post      | 关系名              |
+| $relation.belongsTo | 定义`1:1`/`n:1`关系 |
+| ModelPostContent    | 源Model             |
+| ModelPost           | 目标Model           |
+| 'postId'            | 外键                |
+| columns             | 要查询的字段列表    |
 
 ### 2. 使用关系
 
 在 Model 中定义的 belongsTo 关系只用于查询操作。通过`include`指定需要查询的关系，比如`post: true`，那么，系统在查询 Model PostContent 的同时，也会查询 Model Post
 
-``` typescript
+```typescript
 class ServicePost {
   async relationBelongsTo() {
     const postContent = await this.scope.model.postContent.select({
@@ -147,7 +152,7 @@ class ServicePost {
 
 ### 1. 定义关系
 
-``` typescript
+```typescript
 import { ModelProduct } from './product.ts';
 
 @Model({
@@ -161,29 +166,26 @@ import { ModelProduct } from './product.ts';
 class ModelOrder {}
 ```
 
-|名称|说明|
-|--|--|
-|relations.products|关系名|
-|$relation.hasMany|定义`1:n`关系|
-|ModelProduct|目标Model|
-|'orderId'|外键|
-|columns|要查询的字段列表|
+| 名称               | 说明             |
+| ------------------ | ---------------- |
+| relations.products | 关系名           |
+| $relation.hasMany  | 定义`1:n`关系    |
+| ModelProduct       | 目标Model        |
+| 'orderId'          | 外键             |
+| columns            | 要查询的字段列表 |
 
 ### 2. 使用关系
 
 在 Model 中定义的 hasMany 关系可以用于所有 CRUD 操作。通过`include`指定需要操作的关系，比如`products: true`，那么，系统在操作 Model Order 的同时，也会操作 Model Product
 
-``` typescript
+```typescript
 class ServicePost {
   async relationHasMany() {
     // insert
     const orderCreate = await this.scope.model.order.insert(
       {
         orderNo: 'Order001',
-        products: [
-          { name: 'Apple' },
-          { name: 'Pear' },
-        ],
+        products: [{ name: 'Apple' }, { name: 'Pear' }],
       },
       {
         include: {
@@ -234,7 +236,7 @@ class ServicePost {
       },
     );
   }
-}  
+}
 ```
 
 - 当更新主表数据时，可以同时更新明细表数据（包括 Insert/Update/Delete）
@@ -246,7 +248,7 @@ class ServicePost {
 
 定义`n:n`关系需要中间 Model。比如，Model User 和 Model Role 是`n:n`，需要提供中间 Model RoleUser
 
-``` typescript
+```typescript
 @Model({
   entity: EntityUser,
   relations: {
@@ -256,37 +258,36 @@ class ServicePost {
 class ModelUser {}
 ```
 
-|名称|说明|
-|--|--|
-|relations.roles|关系名|
-|$relation.belongsToMany|定义`n:n`关系|
-|'test-vona:roleUser'|中间Model|
-|'test-vona:role'|目标Model|
-|'userId'|外键|
-|'roleId'|外键|
-|columns|要查询的字段列表|
+| 名称                    | 说明             |
+| ----------------------- | ---------------- |
+| relations.roles         | 关系名           |
+| $relation.belongsToMany | 定义`n:n`关系    |
+| 'test-vona:roleUser'    | 中间Model        |
+| 'test-vona:role'        | 目标Model        |
+| 'userId'                | 外键             |
+| 'roleId'                | 外键             |
+| columns                 | 要查询的字段列表 |
 
 ### 2. 使用关系
 
 在 Model 中定义的 belongsToMany 关系可以用于所有 CRUD 操作。需要强调的是，这里的 CRUD 操作是针对中间 Model，而不是目标 Model。通过`include`指定需要操作的关系，比如`roles: true`，那么，系统在操作 Model User 的同时，也会操作中间 Model RoleUser
 
-``` typescript
+```typescript
 class ServiceUser {
   async relationBelongsToMany() {
     // insert: roles
-    const roles = await this.scope.model.role.insertBulk([
-      { name: 'role-family' },
-      { name: 'role-friend' },
-    ]);
+    const roles = await this.scope.model.role.insertBulk([{ name: 'role-family' }, { name: 'role-friend' }]);
     const roleIdFamily = roles[0].id;
     const roleIdFriend = roles[1].id;
     // insert: user
     const userCreate = await this.scope.model.user.insert(
       {
         name: 'Tom',
-        roles: [{
-          id: roleIdFamily,
-        }],
+        roles: [
+          {
+            id: roleIdFamily,
+          },
+        ],
       },
       {
         include: {
@@ -349,7 +350,7 @@ class ServiceUser {
 
 ### 1. 定义关系
 
-``` typescript
+```typescript
 @Model({
   entity: EntityCategory,
   relations: {
@@ -362,21 +363,21 @@ class ServiceUser {
 class ModelCategory {}
 ```
 
-|名称|说明|
-|--|--|
-|relations.children|关系名|
-|$relation.hasMany|定义`1:n`关系|
-|ModelCategory|目标Model|
-|'categoryIdParent'|外键|
-|autoload|自动加载|
-|columns|要查询的字段列表|
+| 名称               | 说明             |
+| ------------------ | ---------------- |
+| relations.children | 关系名           |
+| $relation.hasMany  | 定义`1:n`关系    |
+| ModelCategory      | 目标Model        |
+| 'categoryIdParent' | 外键             |
+| autoload           | 自动加载         |
+| columns            | 要查询的字段列表 |
 
 ### 2. 使用关系
 
-* 由于定义了与自身的 hasMany 关系，从而形成树形结构。此树形结构可以用于所有 CRUD 操作
-* 由于定义了`autoload: true`，那么，系统在操作主数据的同时，也会自动操作 children
+- 由于定义了与自身的 hasMany 关系，从而形成树形结构。此树形结构可以用于所有 CRUD 操作
+- 由于定义了`autoload: true`，那么，系统在操作主数据的同时，也会自动操作 children
 
-``` typescript
+```typescript
 class ServiceCategory {
   async categoryTree() {
     // create
@@ -385,9 +386,7 @@ class ServiceCategory {
       children: [
         {
           name: 'Category-1-1',
-          children: [
-            { name: 'Category-1-1-1' },
-          ],
+          children: [{ name: 'Category-1-1-1' }],
         },
         {
           name: 'Category-1-2',
@@ -427,35 +426,40 @@ class ServiceCategory {
 
 ### 1. 定义关系
 
-``` typescript
+```typescript
 @Model({
   entity: EntityCategory,
   relations: {
-    parent: $relation.belongsTo(() => ModelCategoryChain, () => ModelCategoryChain, 'categoryIdParent', {
-      autoload: true,
-      columns: ['id', 'name', 'categoryIdParent'],
-    }),
+    parent: $relation.belongsTo(
+      () => ModelCategoryChain,
+      () => ModelCategoryChain,
+      'categoryIdParent',
+      {
+        autoload: true,
+        columns: ['id', 'name', 'categoryIdParent'],
+      },
+    ),
   },
 })
 class ModelCategoryChain {}
 ```
 
-|名称|说明|
-|--|--|
-|relations.parent|关系名|
-|$relation.belongsTo|定义`n:1`关系|
-|ModelCategoryChain|源Model|
-|ModelCategoryChain|目标Model|
-|'categoryIdParent'|外键|
-|autoload|自动加载|
-|columns|要查询的字段列表|
+| 名称                | 说明             |
+| ------------------- | ---------------- |
+| relations.parent    | 关系名           |
+| $relation.belongsTo | 定义`n:1`关系    |
+| ModelCategoryChain  | 源Model          |
+| ModelCategoryChain  | 目标Model        |
+| 'categoryIdParent'  | 外键             |
+| autoload            | 自动加载         |
+| columns             | 要查询的字段列表 |
 
 ### 2. 使用关系
 
-* 由于定义了与自身的 belongsTo 关系，从而形成反向的树形结构。此树形结构只用于查询操作
-* 由于定义了`autoload: true`，那么，系统在查询子目录的同时，也会自动查询 parent
+- 由于定义了与自身的 belongsTo 关系，从而形成反向的树形结构。此树形结构只用于查询操作
+- 由于定义了`autoload: true`，那么，系统在查询子目录的同时，也会自动查询 parent
 
-``` typescript
+```typescript
 class ServiceCategory {
   async categoryTreeReverse() {
     // create
@@ -464,9 +468,7 @@ class ServiceCategory {
       children: [
         {
           name: 'Category-1-1',
-          children: [
-            { name: 'Category-1-1-1' },
-          ],
+          children: [{ name: 'Category-1-1-1' }],
         },
         {
           name: 'Category-1-2',
@@ -488,36 +490,36 @@ class ServiceCategory {
 
 ### 1. $relation.hasOne/$relation.belongsTo
 
-|名称|说明|
-|--|--|
-|autoload|自动加载|
-|columns|要查询的字段列表|
-|meta.client|定义关系所使用的数据源，可以实现跨数据源的关系查询|
-|meta.table|定义关系所使用的数据表|
+| 名称        | 说明                                               |
+| ----------- | -------------------------------------------------- |
+| autoload    | 自动加载                                           |
+| columns     | 要查询的字段列表                                   |
+| meta.client | 定义关系所使用的数据源，可以实现跨数据源的关系查询 |
+| meta.table  | 定义关系所使用的数据表                             |
 
 ### 2. $relation.hasMany/$relation.belongsToMany
 
-|名称|说明|
-|--|--|
-|autoload|自动加载|
-|columns|要查询的字段列表|
-|meta.client|定义关系所使用的数据源，可以实现跨数据源的关系查询|
-|meta.table|定义关系所使用的数据表|
-|distinct|是否启用 distinct|
-|where|条件语句|
-|joins|关联表|
-|orders|排序|
-|limit|可用于分页查询|
-|offset|可用于分页查询|
-|aggrs|聚合查询|
-|groups|分组查询|
+| 名称        | 说明                                               |
+| ----------- | -------------------------------------------------- |
+| autoload    | 自动加载                                           |
+| columns     | 要查询的字段列表                                   |
+| meta.client | 定义关系所使用的数据源，可以实现跨数据源的关系查询 |
+| meta.table  | 定义关系所使用的数据表                             |
+| distinct    | 是否启用 distinct                                  |
+| where       | 条件语句                                           |
+| joins       | 关联表                                             |
+| orders      | 排序                                               |
+| limit       | 可用于分页查询                                     |
+| offset      | 可用于分页查询                                     |
+| aggrs       | 聚合查询                                           |
+| groups      | 分组查询                                           |
 
 ## Model参数
 
 在定义关系时需要提供参数：`源Model`/`目标Model`/`中间Model`，支持以下类型：
 
-|名称|说明|
-|--|--|
-|ModelPost|Model Class|
-|() => ModelPost|通过函数延迟加载，从而避免触发循环依赖的错误|
-|'test-vona:post'|当跨模块使用Model时，一般直接使用Model名|
+| 名称             | 说明                                         |
+| ---------------- | -------------------------------------------- |
+| ModelPost        | Model Class                                  |
+| () => ModelPost  | 通过函数延迟加载，从而避免触发循环依赖的错误 |
+| 'test-vona:post' | 当跨模块使用Model时，一般直接使用Model名     |

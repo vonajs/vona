@@ -8,7 +8,7 @@ For example, create an Event Listener `echo` in the module `demo-student`. When 
 
 ### 1. Cli command
 
-``` bash
+```bash
 $ vona :create:bean eventListener echo --module=demo-student
 ```
 
@@ -22,14 +22,12 @@ Context Menu - [Module Path]: `Vona Bean/Event Listener`
 
 ### 1. Automatically Generated Code Skeleton
 
-``` typescript
+```typescript
 type TypeEventData = unknown; // TypeEventEchoData;
 type TypeEventResult = unknown; // TypeEventEchoResult;
 
 @EventListener({ match: 'some-module:echo' })
-export class EventListenerEcho
-  extends BeanBase
-  implements IEventExecute<TypeEventData, TypeEventResult> {
+export class EventListenerEcho extends BeanBase implements IEventExecute<TypeEventData, TypeEventResult> {
   async execute(_data: TypeEventData, next: NextEvent<TypeEventData, TypeEventResult>): Promise<TypeEventResult> {
     // next
     return next();
@@ -41,13 +39,13 @@ export class EventListenerEcho
 - `TypeEventResult`: Defines the result type
 - `match`: Specifies the events to listen for
 
-|Name|Type|Description|
-|--|--|--|
-|match|string\|regexp\|(string\|regexp)[]|Specifies the events to listen for|
+| Name  | Type                               | Description                        |
+| ----- | ---------------------------------- | ---------------------------------- |
+| match | string\|regexp\|(string\|regexp)[] | Specifies the events to listen for |
 
 ### 2. Adjust the code
 
-``` diff
+```diff
 + import type { TypeEventEchoData, TypeEventEchoResult } from './event.echo.ts';
 
 + type TypeEventData = TypeEventEchoData;
@@ -80,7 +78,7 @@ Multiple Event Listeners can be associated with the same event. Therefore, VonaJ
 
 For example, given an Event Listener `demo-student:echo3`, we want the execution order to be: `demo-student:echo3` > `Current`
 
-``` diff
+```diff
 @EventListener({
   match: 'demo-student:echo',
 + dependencies: 'demo-student:echo3',
@@ -92,7 +90,7 @@ class EventListenerEcho {}
 
 The order of `dependents` is exactly the opposite of `dependencies`. We want the execution order to be: `Current` > `demo-student:echo3`
 
-``` diff
+```diff
 @EventListener({
   match: 'demo-student:echo',
 + dependents: 'demo-student:echo3',
@@ -108,7 +106,7 @@ You can control `enable/disable` of Event Listeners
 
 `src/backend/config/config/config.ts`
 
-``` diff
+```diff
 // onions
 config.onions = {
   eventListener: {
@@ -123,14 +121,14 @@ config.onions = {
 
 Allows Event Listeners to take effect in a specified operating environment
 
-|Name|Type|Description|
-|--|--|--|
-|flavor|string\|string[]|See: [Runtime Environments and Flavors](../../env-config/mode-flavor/introduction.md)|
-|mode|string\|string[]|See: [Runtime Environments and Flavors](../../env-config/mode-flavor/introduction.md)|
+| Name   | Type             | Description                                                                           |
+| ------ | ---------------- | ------------------------------------------------------------------------------------- |
+| flavor | string\|string[] | See: [Runtime Environments and Flavors](../../env-config/mode-flavor/introduction.md) |
+| mode   | string\|string[] | See: [Runtime Environments and Flavors](../../env-config/mode-flavor/introduction.md) |
 
-* Example
+- Example
 
-``` diff
+```diff
 @EventListener({
 + meta: {
 +   flavor: 'normal',
@@ -144,7 +142,7 @@ class EventListenerEcho {}
 
 You can directly inspect the currently effective event listener list
 
-``` diff
+```diff
 class ControllerStudent {
   @Web.get('test')
   test() {

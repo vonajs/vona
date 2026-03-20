@@ -6,7 +6,7 @@
 
 参数管道并不是独立存在的，而是在`局部管道`的基础上创建。下面以局部管道`number`为例，演示如何创建参数管道
 
-``` diff
+```diff
 + import { createArgumentPipe, Pipe } from 'vona-module-a-aspect';
 
 @Pipe()

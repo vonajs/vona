@@ -17,13 +17,13 @@ Vona 提供了与众不同的迁移机制，适应大型项目的开发与持续
 
 `src/module/demo-student/package.json`
 
-``` typescript
+```typescript
 {
   "name": "vona-module-demo-student",
   "vonaModule": {
     "fileVersion": 1
   },
-}  
+}
 ```
 
 - fileVersion: 当模块已经发布后，下次再发生数据架构变更时，`fileVersion`需要递增`+1`
@@ -34,7 +34,7 @@ Vona 使用 Bean `meta.version`统一管理模块的迁移代码
 
 ### 1. Cli命令
 
-``` bash
+```bash
 $ vona :create:bean meta version --module=demo-student
 ```
 
@@ -46,7 +46,7 @@ $ vona :create:bean meta version --module=demo-student
 
 ## meta.version定义
 
-``` typescript
+```typescript
 @Meta()
 export class MetaVersion extends BeanBase {}
 ```
@@ -55,17 +55,17 @@ export class MetaVersion extends BeanBase {}
 
 Vona 提供了三个变更场景，可以根据业务需求，继承相应的接口，并实现约定的方法即可
 
-|场景|接口|方法|说明|
-|--|--|--|--|
-|update|IMetaVersionUpdate|update|数据架构的变更，比如新建数据表、添加字段，等等|
-|init|IMetaVersionInit|init|为不同的实例/租户提供初始化数据|
-|test|IMetaVersionTest|test|为测试环境提供测试数据|
+| 场景   | 接口               | 方法   | 说明                                           |
+| ------ | ------------------ | ------ | ---------------------------------------------- |
+| update | IMetaVersionUpdate | update | 数据架构的变更，比如新建数据表、添加字段，等等 |
+| init   | IMetaVersionInit   | init   | 为不同的实例/租户提供初始化数据                |
+| test   | IMetaVersionTest   | test   | 为测试环境提供测试数据                         |
 
 ## update：架构迁移
 
 比如，模块 demo-student 当前数据版本为`1`，为`版本1`创建数据表`demoStudent`
 
-``` typescript
+```typescript
 @Meta()
 export class MetaVersion extends BeanBase implements IMetaVersionUpdate {
   async update(options: IMetaVersionUpdateOptions) {
@@ -87,7 +87,7 @@ Vona 底层采用 knex，更多细节，参见：[knex](https://knexjs.org/)
 
 为了让代码质量更高，更容易维护，还可以使用类型化的代码风格
 
-``` typescript
+```typescript
 @Meta()
 export class MetaVersion extends BeanBase implements IMetaVersionUpdate {
   async update(options: IMetaVersionUpdateOptions) {
@@ -107,7 +107,7 @@ export class MetaVersion extends BeanBase implements IMetaVersionUpdate {
 
 比如，初始化一个学生数据
 
-``` typescript
+```typescript
 @Meta()
 export class MetaVersion extends BeanBase implements IMetaVersionInit {
   async init(options: IMetaVersionInitOptions) {
@@ -123,7 +123,7 @@ export class MetaVersion extends BeanBase implements IMetaVersionInit {
 
 在数据库中自动写入数据：
 
-``` typescript
+```typescript
 {
   id: '1',
   createdAt: 2025-07-03T13:39:22.642Z,
@@ -141,7 +141,7 @@ export class MetaVersion extends BeanBase implements IMetaVersionInit {
 
 比如，添加一个学生数据，此数据只在测试环境中使用
 
-``` typescript
+```typescript
 @Meta()
 export class MetaVersion extends BeanBase implements IMetaVersionTest {
   async test(_options: IMetaVersionTestOptions) {
@@ -161,19 +161,19 @@ export class MetaVersion extends BeanBase implements IMetaVersionTest {
 
 ### 1. 递增fileVersion
 
-``` diff
+```diff
 {
   "name": "vona-module-demo-student",
   "vonaModule": {
 -   "fileVersion": 1
 +   "fileVersion": 2
   },
-}  
+}
 ```
 
 ### 2. 创建 Entity：EntityBook
 
-``` typescript
+```typescript
 @Entity('demoStudentBook')
 export class EntityBook {
   @Api.field()
@@ -185,7 +185,7 @@ export class EntityBook {
 
 根据需要，在`update/init/test`中编写迁移代码。在这里，仅需在`update`中创建新的数据表
 
-``` typescript
+```typescript
 @Meta()
 export class MetaVersion extends BeanBase implements IMetaVersionUpdate {
   async update(options: IMetaVersionUpdateOptions) {
@@ -207,7 +207,7 @@ export class MetaVersion extends BeanBase implements IMetaVersionUpdate {
 
 当系统启动时，会自动检测模块是否需要变更，并且会自动执行迁移代码
 
-``` bash
+```bash
 # 开发环境
 $ npm run dev
 # 生产环境
@@ -220,13 +220,13 @@ $ npm run start
 
 在本地开发时，针对当前的数据版本，需要频繁的更新数据库架构。那么，并不需要修改`fileVersion`，而是执行以下命令，让迁移代码生效
 
-``` bash
+```bash
 $ npm run test
 ```
 
 当执行单元测试时，系统就会自动删除旧数据库，并创建一个新的数据库，从而会重新执行迁移代码，然后执行单元测试
 
-``` bash
+```bash
 $ npm run db:reset
 ```
 

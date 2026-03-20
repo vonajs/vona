@@ -6,7 +6,7 @@
 
 ### 1. Cli命令
 
-``` bash
+```bash
 $ vona :create:bean dto studentCreate --module=demo-student
 ```
 
@@ -18,7 +18,7 @@ $ vona :create:bean dto studentCreate --module=demo-student
 
 ## Dto定义
 
-``` typescript
+```typescript
 @Dto<IDtoOptionsStudentCreate>()
 export class DtoStudentCreate {}
 ```
@@ -29,14 +29,14 @@ export class DtoStudentCreate {}
 
 Dto 中`@Api.field`的使用方式与 Entity 一致
 
-  - 参见：[Entity](./entity.md)
+- 参见：[Entity](./entity.md)
 
 ### 举例
 
 - `name`: `string, min(3), title: 'Name'(支持I18n)`
 - `description`: `string, 可选, title: 'Description'(支持I18n)`
 
-``` typescript
+```typescript
 class DtoStudentCreate {
   @Api.field(v.title($locale('Name')), v.min(3))
   name: string;
@@ -48,11 +48,11 @@ class DtoStudentCreate {
 
 ## Dto Options
 
-|名称|说明|
-|--|--|
-|independent|是否独立显示在Swagger/Openapi中，默认为false|
-|openapi|与Swagger/Openapi相关的元数据|
-|fields|定义Fields options|
+| 名称        | 说明                                         |
+| ----------- | -------------------------------------------- |
+| independent | 是否独立显示在Swagger/Openapi中，默认为false |
+| openapi     | 与Swagger/Openapi相关的元数据                |
+| fields      | 定义Fields options                           |
 
 - independent: 如果 Controller Action 引用了 dto，那么该 dto 就会自动输出到 Swagger/Openapi 中。如果指定`independent: true`，那么该 dto 就总会输出到 Swagger/Openapi 中
 
@@ -60,20 +60,20 @@ class DtoStudentCreate {
 
 为 dto 提供 description 信息，从而在 Swagger/Openapi 中显示
 
-``` typescript
+```typescript
 @Dto({
   openapi: { description: 'Create Student' },
 })
 class DtoStudentCreate {}
 ```
 
-* 支持 I18n 国际化
+- 支持 I18n 国际化
 
 创建语言资源:
 
 `src/module/demo-student/src/config/locale/en-us.ts`
 
-``` typescript
+```typescript
 export default {
   CreateStudent: 'Create Student',
 };
@@ -81,7 +81,7 @@ export default {
 
 `src/module/demo-student/src/config/locale/zh-cn.ts`
 
-``` typescript
+```typescript
 export default {
   CreateStudent: '创建学生',
 };
@@ -89,7 +89,7 @@ export default {
 
 使用`$locale`函数进行语言翻译
 
-``` typescript
+```typescript
 import { $locale } from '../.metadata/locales.ts';
 
 @Dto({
@@ -102,7 +102,7 @@ class DtoStudentCreate {}
 
 将字段`name`的 openapi 信息改为：`title: 'Student Name'`
 
-``` typescript
+```typescript
 @Dto({
   fields: {
     name: { title: 'Student Name' },
@@ -113,7 +113,7 @@ class DtoStudentCreate {}
 
 或者：
 
-``` typescript
+```typescript
 import z from 'zod';
 
 @Dto({
@@ -130,12 +130,12 @@ class DtoStudentCreate {}
 
 `src/backend/config/config/config.ts`
 
-``` typescript
+```typescript
 // onions
 config.onions = {
   dto: {
     'demo-student:studentCreate': {
-      openapi: { 
+      openapi: {
         description: 'Create Student',
       },
       fields: {
@@ -154,7 +154,7 @@ config.onions = {
 
 从`EntityStudent`中提取`name`和`description`两个字段，生成 Dto `DtoStudentCreate`
 
-``` typescript
+```typescript
 class DtoStudentCreate extends $Class.pick(EntityStudent, ['name', 'description']) {}
 ```
 
@@ -162,13 +162,13 @@ class DtoStudentCreate extends $Class.pick(EntityStudent, ['name', 'description'
 
 将`DtoStudentCreate`中所有字段改为可选，生成 Dto `DtoStudentUpdate`
 
-``` typescript
+```typescript
 class DtoStudentUpdate extends $Class.partial(DtoStudentCreate) {}
 ```
 
 将`DtoStudentCreate`中的字段`name`改为可选，生成 Dto `DtoStudentUpdate`
 
-``` typescript
+```typescript
 class DtoStudentUpdate extends $Class.partial(DtoStudentCreate, ['name']) {}
 ```
 
@@ -176,7 +176,7 @@ class DtoStudentUpdate extends $Class.partial(DtoStudentCreate, ['name']) {}
 
 将`EntityStudent`中的字段`id`排除，生成 Dto `DtoStudentOther`
 
-``` typescript
+```typescript
 class DtoStudentOther extends $Class.omit(EntityStudent, ['id']) {}
 ```
 
@@ -184,7 +184,7 @@ class DtoStudentOther extends $Class.omit(EntityStudent, ['id']) {}
 
 将多个 Class 中的字段进行合并，生成新的 Dto `DtoStudentOther`
 
-``` typescript
+```typescript
 class DtoStudentOther extends $Class.mixin(EntityStudent, DtoStudentCreate, DtoStudentUpdate) {}
 ```
 
@@ -192,9 +192,8 @@ class DtoStudentOther extends $Class.mixin(EntityStudent, DtoStudentCreate, DtoS
 
 可以将多个 Mapped 工具函数组合使用
 
-``` typescript
-class DtoStudentUpdate 
-  extends $Class.partial($Class.pick(EntityStudent, ['name', 'description'])) {}
+```typescript
+class DtoStudentUpdate extends $Class.partial($Class.pick(EntityStudent, ['name', 'description'])) {}
 ```
 
 ## DTO推断与生成

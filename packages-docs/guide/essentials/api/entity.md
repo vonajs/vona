@@ -6,7 +6,7 @@ For example, we create an Entity `student` in the module demo-student
 
 ### 1. Cli command
 
-``` bash
+```bash
 $ vona :create:bean entity student --module=demo-student
 ```
 
@@ -18,7 +18,7 @@ Context Menu - [Module Path]: `Vona Create/Entity`
 
 ## Entity Definition
 
-``` diff
+```diff
 + @Entity<IEntityOptionsStudent>('demoStudent')
 export class EntityStudent extends EntityBase {}
 ```
@@ -31,7 +31,7 @@ Vona is a modular system, and different modules can manage their own data tables
 
 ### 1. General format
 
-``` bash
+```bash
 tableName = moduleName + entityName
 ```
 
@@ -50,6 +50,7 @@ Generally speaking, when defining a field, you need to specify the field type, v
 In `Entity` You only need to use the `@Api.field` decorator to provide all the above information, making the code more concise and intuitive
 
 The parameter usage mechanism of the `@Api.field` decorator is similar to the Controller request parameter, see:
+
 - [Validation](../../techniques/validation/introduction.md)
 - [Swagger/Openapi](../../techniques/openapi/introduction.md)
 
@@ -59,9 +60,9 @@ The parameter usage mechanism of the `@Api.field` decorator is similar to the Co
 
 If the field type is `Basic type/Dto/Entity`, then the system will automatically infer the corresponding Zod Schema and automatically generate Swagger/Openapi
 
-* Example: `string`
+- Example: `string`
 
-``` typescript
+```typescript
 class EntityStudent {
   @Api.field()
   name: string;
@@ -70,9 +71,9 @@ class EntityStudent {
 
 ![](../../../assets/img/openapi/openapi-17.png)
 
-* Example: `EntityBook`
+- Example: `EntityBook`
 
-``` typescript
+```typescript
 class EntityStudent {
   @Api.field()
   book: EntityBook;
@@ -81,23 +82,23 @@ class EntityStudent {
 
 ![](../../../assets/img/openapi/openapi-18.png)
 
-* List of automatically inferred types
+- List of automatically inferred types
 
-|Name|Description|
-|--|--|
-|string|z.string()|
-|number|z.number()|
-|boolean|z.boolean()|
-|Dto|z.object({...})|
-|Entity|z.object({...})|
+| Name    | Description     |
+| ------- | --------------- |
+| string  | z.string()      |
+| number  | z.number()      |
+| boolean | z.boolean()     |
+| Dto     | z.object({...}) |
+| Entity  | z.object({...}) |
 
 ### 2. Specify Zod Schema
 
 We can also explicitly specify Zod Schema and automatically generate Swagger/Openapi
 
-* Example: `number, >=18`
+- Example: `number, >=18`
 
-``` typescript
+```typescript
 class EntityStudent {
   @Api.field(z.number().min(18))
   age: number;
@@ -110,9 +111,9 @@ class EntityStudent {
 
 We can also extend new properties based on the existing Zod Schema
 
-* Example: `number, optional, default value is 18`
+- Example: `number, optional, default value is 18`
 
-``` typescript
+```typescript
 class EntityStudent {
   @Api.field(v.default(18), v.optional())
   age?: number;
@@ -121,7 +122,7 @@ class EntityStudent {
 
 The above code is equivalent to:
 
-``` typescript
+```typescript
 class EntityStudent {
   @Api.field(z.number().optional().default(18))
   age?: number;
@@ -130,7 +131,7 @@ class EntityStudent {
 
 Also equivalent to:
 
-``` typescript
+```typescript
 class EntityStudent {
   @Api.field(v.default(18), z.number().optional())
   age?: number;
@@ -143,9 +144,9 @@ class EntityStudent {
 
 For Array type parameters, Vona also provides convenient tools
 
-* Example: `number[]`
+- Example: `number[]`
 
-``` typescript
+```typescript
 class EntityStudent {
   @Api.field(v.array(Number))
   bookIds: number[];
@@ -154,7 +155,7 @@ class EntityStudent {
 
 Equivalent to:
 
-``` typescript
+```typescript
 class EntityStudent {
   @Api.field(v.array(z.number()))
   bookIds: number[];
@@ -163,9 +164,9 @@ class EntityStudent {
 
 ![](../../../assets/img/openapi/openapi-21.png)
 
-* Example: `EntityBook[]`
+- Example: `EntityBook[]`
 
-``` typescript
+```typescript
 class EntityStudent {
   @Api.field(v.array(EntityBook))
   books: EntityBook[];
@@ -180,20 +181,20 @@ These utility methods for extending Zod Schema are put into the decorator group 
 
 Vona also provides many extension tools for setting metadata related to Openapi
 
-|Name|Description|
-|--|--|
-|v.default|default|
-|v.optional|optional|
-|v.openapi|openapi|
-|v.title|title|
-|v.description|description|
-|v.example|example|
+| Name          | Description |
+| ------------- | ----------- |
+| v.default     | default     |
+| v.optional    | optional    |
+| v.openapi     | openapi     |
+| v.title       | title       |
+| v.description | description |
+| v.example     | example     |
 
 ### 1. Example: v.title
 
 `title='Name'`
 
-``` typescript
+```typescript
 class EntityStudent {
   @Api.field(v.title('Name'))
   name: string;
@@ -208,7 +209,7 @@ We can use `v.openapi` to set more metadata at once
 
 `title='Name', example='Tom'`
 
-``` typescript
+```typescript
 class EntityStudent {
   @Api.field(v.openapi({ title: 'Name', example: 'Tom' }))
   name: string;
@@ -225,17 +226,17 @@ Vona provides I18n for Openapi. For example, `title` is `Name`, and the steps to
 
 For how to add language resources, see: [I18n](../../essentials/scope/locale.md)
 
-* English: `src/module/demo-student/src/config/locale/en-us.ts`
+- English: `src/module/demo-student/src/config/locale/en-us.ts`
 
-``` typescript
+```typescript
 export default {
   Name: 'Name',
 };
 ```
 
-* Chinese: `src/module/demo-student/src/config/locale/zh-cn.ts`
+- Chinese: `src/module/demo-student/src/config/locale/zh-cn.ts`
 
-``` typescript
+```typescript
 export default {
   Name: '姓名',
 };
@@ -245,7 +246,7 @@ export default {
 
 Use the `$locale` method for language translation, and support automatic type hints for language resources
 
-``` typescript
+```typescript
 import { $locale } from '../.metadata/locales.ts';
 
 @Api.field(v.title($locale('Name')))
@@ -261,12 +262,12 @@ import { $locale } from '../.metadata/locales.ts';
 
 ## Entity Options
 
-|Name|Description|
-|--|--|
-|table|The table name corresponding to entity|
-|independent|Whether to display independently in Swagger/Openapi, the default is false|
-|openapi|Metadata related to Swagger/Openapi|
-|fields|Define Fields options|
+| Name        | Description                                                               |
+| ----------- | ------------------------------------------------------------------------- |
+| table       | The table name corresponding to entity                                    |
+| independent | Whether to display independently in Swagger/Openapi, the default is false |
+| openapi     | Metadata related to Swagger/Openapi                                       |
+| fields      | Define Fields options                                                     |
 
 - independent: If the Controller Action references entity, then the entity will be automatically output to Swagger/Openapi. If `independent: true` is specified, the entity will always be output to Swagger/Openapi
 
@@ -274,18 +275,18 @@ import { $locale } from '../.metadata/locales.ts';
 
 Provide description information for entity so that it can be displayed in Swagger/Openapi
 
-``` typescript
+```typescript
 @Entity({
   openapi: { description: 'Student' },
 })
 class EntityStudent {}
 ```
 
-* Support I18n
+- Support I18n
 
 English: `src/module/demo-student/src/config/locale/en-us.ts`
 
-``` typescript
+```typescript
 export default {
   Student: 'Student',
 };
@@ -293,13 +294,13 @@ export default {
 
 Chinese: `src/module/demo-student/src/config/locale/zh-cn.ts`
 
-``` typescript
+```typescript
 export default {
   Student: '学生',
 };
 ```
 
-``` typescript
+```typescript
 import { $locale } from '../.metadata/locales.ts';
 
 @Entity({
@@ -314,7 +315,7 @@ Change the validation rules of the field `age` to: `number, optional, default va
 
 Change the openapi metadata of the field `name` to: `title: 'Student Name'`
 
-``` typescript
+```typescript
 @Entity({
   fields: {
     age: z.number().optional().default(16),
@@ -330,7 +331,7 @@ Entity options can be configured in App Config
 
 `src/backend/config/config/config.ts`
 
-``` typescript
+```typescript
 // onions
 config.onions = {
   entity: {
@@ -351,13 +352,13 @@ config.onions = {
 
 By default, entity inherits from the base class `EntityBase`. EntityBase provides several commonly used fields. You can implement your own base class according to business needs
 
-|Name|Type|Description|
-|--|--|--|
-|id|TableIdentity|TableIdentity is a union type of string and number|
-|createdAt|Date|Creation time|
-|updatedAt|Date|Update time|
-|deleted|boolean|Soft deletion|
-|iid|number|Instance ID/Tenant ID|
+| Name      | Type          | Description                                        |
+| --------- | ------------- | -------------------------------------------------- |
+| id        | TableIdentity | TableIdentity is a union type of string and number |
+| createdAt | Date          | Creation time                                      |
+| updatedAt | Date          | Update time                                        |
+| deleted   | boolean       | Soft deletion                                      |
+| iid       | number        | Instance ID/Tenant ID                              |
 
 - id: Use the `TableIdentity` type to support business systems of any size
 
@@ -365,21 +366,21 @@ By default, entity inherits from the base class `EntityBase`. EntityBase provide
 
 The key field `id` uses the `TableIdentity` type to support business systems of any size. When we use `int64` as the database field type, the value read from the database is of `string` type
 
-``` typescript
+```typescript
 export type TableIdentity = string | number;
 ```
 
-* Set the default field type
+- Set the default field type
 
 When creating a data table, the system will use `number` or `bigint` as the type of the id field according to the current configuration, and the default is `bigint`
 
 `src/backend/config/config/config.ts`
 
-``` typescript
+```typescript
 // modules
 config.modules = {
   'a-orm': {
-    'table': {
+    table: {
       identityType: 'bigint',
     },
   },

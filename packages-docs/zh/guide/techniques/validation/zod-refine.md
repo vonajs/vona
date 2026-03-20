@@ -8,7 +8,7 @@
 
 ### 1. Cli命令
 
-``` bash
+```bash
 $ vona :create:bean zodRefine nameExists --module=demo-student
 ```
 
@@ -20,8 +20,10 @@ $ vona :create:bean zodRefine nameExists --module=demo-student
 
 ## Zod Refine定义
 
-``` typescript
-export interface TypeZodRefineNameExistsData { name: string }
+```typescript
+export interface TypeZodRefineNameExistsData {
+  name: string;
+}
 
 export interface IZodRefineOptionsNameExists extends IDecoratorZodRefineOptions {}
 
@@ -46,7 +48,7 @@ class ZodRefineNameExists {
 
 ## 使用Zod Refine
 
-``` diff
+```diff
 import { v } from 'vona-module-a-openapiutils';
 
 @Controller()
@@ -67,7 +69,7 @@ class ControllerStudent {
 
 ### 1. 定义参数类型
 
-``` diff
+```diff
 export interface IZodRefineOptionsNameExists extends IDecoratorZodRefineOptions {
 + errorMessage: string;
 }
@@ -75,7 +77,7 @@ export interface IZodRefineOptionsNameExists extends IDecoratorZodRefineOptions 
 
 ### 2. 提供参数缺省值
 
-``` diff
+```diff
 @ZodRefine<IZodRefineOptionsNameExists>({
 + errorMessage: 'Student Exists',
 })
@@ -83,7 +85,7 @@ export interface IZodRefineOptionsNameExists extends IDecoratorZodRefineOptions 
 
 ### 3. 使用参数
 
-``` diff
+```diff
 export interface TypeZodRefineNameExistsData { name: string }
 
 export interface IZodRefineOptionsNameExists extends IDecoratorZodRefineOptions {
@@ -112,7 +114,7 @@ class ZodRefineNameExists {
 
 可以在使用时指定 Zod Refine 参数
 
-``` diff
+```diff
 class ControllerStudent {
   @Web.post()
 + async create(@Arg.body(v.refine('demo-student:nameExists', { errorMessage: 'Student Exists!!!' })) student: DtoStudentCreate) {}
@@ -125,7 +127,7 @@ class ControllerStudent {
 
 `src/backend/config/config/config.ts`
 
-``` typescript
+```typescript
 // onions
 config.onions = {
   zodRefine: {

@@ -9,7 +9,7 @@ VonaJS 为了兼顾`开箱即用`与`灵活定制`的架构设计理念，将用
 
 模块`a-user`提供了接口`IUser`，约定了 User 的基础字段
 
-``` typescript
+```typescript
 export interface IUser {
   id: TableIdentity;
   name: string;
@@ -26,28 +26,28 @@ export interface IUser {
 
 模块`a-user`提供了全局 Bean `bean.user`，为业务提供了通用的调用规范
 
-``` typescript
+```typescript
 // find user
 const user = await this.bean.user.findOneById(userId);
 // activate user
 this.bean.user.activate(user);
 ```
 
-* `bean.user`方法清单
+- `bean.user`方法清单
 
-|名称|说明|
-|--|--|
-|activate|激活用户|
-|register|注册用户|
-|registerByProfile|使用profile数据注册用户，profile数据来自OAuth认证|
-|createAnonymous|创建匿名用户|
-|findOneByName|通过`name`查找用户|
-|findOneById|通过`id`查找用户|
-|findOne|查找用户|
-|updateById|通过`id`更新用户|
-|update|更新用户|
-|removeById|通过`id`删除用户|
-|remove|删除用户|
+| 名称              | 说明                                              |
+| ----------------- | ------------------------------------------------- |
+| activate          | 激活用户                                          |
+| register          | 注册用户                                          |
+| registerByProfile | 使用profile数据注册用户，profile数据来自OAuth认证 |
+| createAnonymous   | 创建匿名用户                                      |
+| findOneByName     | 通过`name`查找用户                                |
+| findOneById       | 通过`id`查找用户                                  |
+| findOne           | 查找用户                                          |
+| updateById        | 通过`id`更新用户                                  |
+| update            | 更新用户                                          |
+| removeById        | 通过`id`删除用户                                  |
+| remove            | 删除用户                                          |
 
 ## home-user适配器: ServiceUserAdapter
 
@@ -55,22 +55,22 @@ this.bean.user.activate(user);
 
 `src/suite/a-home/modules/home-user/src/service/userAdapter.ts`
 
-|名称|说明|
-|--|--|
-|create|创建用户|
-|userOfProfile|将profile数据转换为user|
-|createAnonymous|创建匿名用户|
-|findOneByName|通过`name`查找用户|
-|findOne|查找用户|
-|update|更新用户|
-|remove|删除用户|
-|setActivated|设置激活状态|
+| 名称            | 说明                    |
+| --------------- | ----------------------- |
+| create          | 创建用户                |
+| userOfProfile   | 将profile数据转换为user |
+| createAnonymous | 创建匿名用户            |
+| findOneByName   | 通过`name`查找用户      |
+| findOne         | 查找用户                |
+| update          | 更新用户                |
+| remove          | 删除用户                |
+| setActivated    | 设置激活状态            |
 
 ## 获取当前用户
 
 ### 1. 参数装饰器
 
-``` diff
+```diff
 import type { IUser } from 'vona-module-a-user';
 
 class ControllerStudent {
@@ -78,44 +78,44 @@ class ControllerStudent {
 + test(@Arg.user() user: IUser) {
     console.log(user);
   }
-}  
+}
 ```
 
 ### 2. bean.passport
 
-``` diff
+```diff
 class ControllerStudent {
   @Web.get('test')
   test() {
 +   const user = this.bean.passport.currentUser;
     console.log(user);
   }
-}  
+}
 ```
 
 ### 3. ctx.user
 
-``` diff
+```diff
 class ControllerStudent {
   @Web.get('test')
   test() {
 +   const user = this.ctx.user;
     console.log(user);
   }
-}  
+}
 ```
 
 ## 匿名用户
 
 当匿名用户访问 API 时，系统会自动创建一个匿名 user 对象
 
-``` diff
+```diff
 class ControllerStudent {
   @Web.get('test')
   test(@Arg.user() user: IUser) {
 +   console.log(user.anonymous);
   }
-}  
+}
 ```
 
 ## 注册用户
@@ -124,12 +124,12 @@ class ControllerStudent {
 
 `src/suite/a-home/modules/home-user/src/bean/eventListener.register.ts`
 
-``` typescript
+```typescript
 @EventListener({ match: 'a-user:register' })
 class EventListenerRegister {
   async execute(data, next) {
     // next: registered
-    const user = await next() as IUser;
+    const user = (await next()) as IUser;
     // mail: activate
     if (!data.autoActivate && user.email) {
       await this.bean.mailConfirm.emailConfirm(user);
@@ -143,9 +143,9 @@ class EventListenerRegister {
 - 先调用`next`完成缺省的注册逻辑
 - 然后判断是否需要使用 email 激活，如果需要就调用`emailConfirm`方法
 
-|名称|类型|说明|
-|--|--|--|
-|match|string\|regexp\|(string\|regexp)[]|监听哪些事件|
+| 名称  | 类型                               | 说明         |
+| ----- | ---------------------------------- | ------------ |
+| match | string\|regexp\|(string\|regexp)[] | 监听哪些事件 |
 
 ## 激活用户
 
@@ -153,7 +153,7 @@ class EventListenerRegister {
 
 `src/suite/a-home/modules/home-user/src/bean/eventListener.activate.ts`
 
-``` typescript
+```typescript
 @EventListener({ match: 'a-user:activate' })
 class EventListenerActivate {
   async execute(data, next) {
@@ -203,7 +203,7 @@ config.modules = {
 
 `src/suite/a-home/modules/home-user/src/bean/meta.version.ts`
 
-``` typescript
+```typescript
 async init(options) {
   if (options.version === 1) {
     // user: admin
@@ -226,7 +226,7 @@ async init(options) {
 
 `src/backend/config/config/config.ts`
 
-``` typescript
+```typescript
 // modules
 config.modules = {
   'home-user': {

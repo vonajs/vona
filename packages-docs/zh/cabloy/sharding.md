@@ -12,7 +12,7 @@
 
 `src/backend/config/config/config.ts`
 
-``` typescript
+```typescript
 declare module 'vona-module-a-orm' {
   export interface IDatabaseClientRecord {
     read1: never;
@@ -27,7 +27,7 @@ declare module 'vona-module-a-orm' {
 
 `src/backend/config/config/config.ts`
 
-``` typescript
+```typescript
 // database
 config.database = {
   clients: {
@@ -54,7 +54,7 @@ config.database = {
 
 `src/backend/config/config/config.ts`
 
-``` typescript
+```typescript
 // modules
 config.modules = {
   'a-datasharding': {
@@ -68,12 +68,12 @@ config.modules = {
 };
 ```
 
-|名称|说明|
-|--|--|
-|reads|指定一组读数据源|
-|writes|指定一组写数据源|
-|randomRead|可指定自定义函数，从`reads`中提取一个读数据源。默认为`undefined`，由系统随机提取|
-|randomWrite|可指定自定义函数，从`writes`中提取一个写数据源。默认为`undefined`，由系统随机提取|
+| 名称        | 说明                                                                              |
+| ----------- | --------------------------------------------------------------------------------- |
+| reads       | 指定一组读数据源                                                                  |
+| writes      | 指定一组写数据源                                                                  |
+| randomRead  | 可指定自定义函数，从`reads`中提取一个读数据源。默认为`undefined`，由系统随机提取  |
+| randomWrite | 可指定自定义函数，从`writes`中提取一个写数据源。默认为`undefined`，由系统随机提取 |
 
 ## 读写分离的运行机制
 
@@ -97,7 +97,7 @@ config.modules = {
 
 `src/backend/config/config/config.ts`
 
-``` typescript
+```typescript
 // onions
 config.onions = {
   summerCache: {
@@ -113,10 +113,10 @@ config.onions = {
 };
 ```
 
-|名称|说明|
-|--|--|
-|mem.ttl|Mem缓存的过期时间，默认为`3`秒|
-|redis.ttl|Redis缓存的过期时间，默认为`3`秒|
+| 名称      | 说明                             |
+| --------- | -------------------------------- |
+| mem.ttl   | Mem缓存的过期时间，默认为`3`秒   |
+| redis.ttl | Redis缓存的过期时间，默认为`3`秒 |
 
 ## 数据一致性: 缓存双删
 
@@ -132,7 +132,7 @@ Vona ORM 提供了开箱即用的缓存机制，参见：[缓存](../guide/techn
 
 `src/backend/config/config/config.ts`
 
-``` typescript
+```typescript
 // modules
 config.modules = {
   'a-orm': {
@@ -151,7 +151,7 @@ config.modules = {
 
 `src/backend/config/config/config.ts`
 
-``` typescript
+```typescript
 // onions
 config.onions = {
   queue: {
@@ -166,6 +166,6 @@ config.onions = {
 };
 ```
 
-|名称|说明|
-|--|--|
-|job.delay|指定延迟多长时间执行缓存双删任务，默认为`3`秒|
+| 名称      | 说明                                          |
+| --------- | --------------------------------------------- |
+| job.delay | 指定延迟多长时间执行缓存双删任务，默认为`3`秒 |

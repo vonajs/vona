@@ -6,7 +6,7 @@ The module `auth-simple` provides out-of-the-box username/password authenticatio
 
 ### 1. Register a New User
 
-``` typescript
+```typescript
 const jwt = await this.bean.auth.authenticate('auth-simple:simple', {
   clientOptions: {
     username: 'tom',
@@ -23,21 +23,24 @@ const jwt = await this.bean.auth.authenticate('auth-simple:simple', {
 
 `confirmed`: If `true`, it means the user has already confirmed and no further `activation` operation is needed
 
-* Shorthand:
+- Shorthand:
 
-``` typescript
-const jwt = await this.bean.authSimple.authenticate({
-  username: 'tom',
-  password: '123456',
-  email: 'xxx@xxx.com',
-  avatar: ':emoji:flower',
-  confirmed: true,
-}, 'register');
+```typescript
+const jwt = await this.bean.authSimple.authenticate(
+  {
+    username: 'tom',
+    password: '123456',
+    email: 'xxx@xxx.com',
+    avatar: ':emoji:flower',
+    confirmed: true,
+  },
+  'register',
+);
 ```
 
 ### 2. Login
 
-``` typescript
+```typescript
 const jwt = await this.bean.auth.authenticate('auth-simple:simple', {
   clientOptions: {
     username: 'tom',
@@ -49,18 +52,21 @@ const jwt = await this.bean.auth.authenticate('auth-simple:simple', {
 });
 ```
 
-* Shorthand:
+- Shorthand:
 
-``` typescript
-const jwt = await this.bean.authSimple.authenticate({
-  username: 'tom',
-  password: '123456',
-}, 'login');
+```typescript
+const jwt = await this.bean.authSimple.authenticate(
+  {
+    username: 'tom',
+    password: '123456',
+  },
+  'login',
+);
 ```
 
 ### 3. Logout
 
-``` typescript
+```typescript
 await this.bean.passport.signout();
 ```
 
@@ -72,7 +78,7 @@ Configuration can be modified in App Config
 
 `src/backend/config/config/config.ts`
 
-``` typescript
+```typescript
 // modules
 config.modules = {
   'auth-simple': {
@@ -94,7 +100,7 @@ For example, create an Auth Provider in the module `auth-simple`: `simple`
 
 ### 1. CLI Command
 
-``` bash
+```bash
 $ vona :create:bean authProvider simple --module=auth-simple
 ```
 
@@ -106,7 +112,7 @@ Context Menu - [Module Path]: `Vona Bean/Auth Provider`
 
 ## Auth Provider Definition
 
-``` diff
+```diff
 export interface IAuthProviderSimpleClientRecord extends IAuthProviderClientRecord {}
 
 export interface IAuthProviderSimpleClientOptions extends IAuthProviderClientOptions {
@@ -180,7 +186,7 @@ class AuthProviderSimple {
 
 Profile has a unified interface definition:
 
-``` typescript
+```typescript
 export interface IAuthUserProfile {
   id: string;
   username?: string;
@@ -195,4 +201,4 @@ export interface IAuthUserProfile {
 }
 ```
 
-* `confirmed`: If `true`, it means the user has confirmed and no further `activation` operation is needed
+- `confirmed`: If `true`, it means the user has confirmed and no further `activation` operation is needed

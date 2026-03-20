@@ -8,7 +8,6 @@ Of course, for regular business needs, it is generally sufficient to just create
 
 Before explaining the `Hook/Monkey` mechanism, it is necessary to first understand the timing of application startup and shutdown
 
-
 ## Application Startup Timing
 
 ![](../../../assets/img/app-start/app-start.png)
@@ -41,22 +40,22 @@ The system provides three scenarios to respond to application startup/shutdown h
 
 For different scenarios, corresponding interface definitions are provided for different hooks, thereby standardizing the use of hooks
 
-|Hook|Module Main Interface|Module Monkey Interface|App Monkey Interface|
-|--|--|--|--|
-|moduleLoading|IModuleMain|IMonkeyModule|IMonkeyModule|
-|configLoaded|IModuleMain|IMonkeyModule|IMonkeyModule|
-|moduleLoaded|IModuleMain|IMonkeyModule|IMonkeyModule|
-|appStart||IMonkeySystem / IMonkeyAppStart|IMonkeySystem / IMonkeyAppStart|
-|appReady||IMonkeySystem / IMonkeyAppReady|IMonkeySystem / IMonkeyAppReady|
-|appStarted||IMonkeySystem / IMonkeyAppStarted|IMonkeySystem / IMonkeyAppStarted|
-|appClose||IMonkeySystem / IMonkeyAppClose|IMonkeySystem / IMonkeyAppClose|
-|appClosed||IMonkeySystem / IMonkeyAppClosed|IMonkeySystem / IMonkeyAppClosed|
+| Hook          | Module Main Interface | Module Monkey Interface           | App Monkey Interface              |
+| ------------- | --------------------- | --------------------------------- | --------------------------------- |
+| moduleLoading | IModuleMain           | IMonkeyModule                     | IMonkeyModule                     |
+| configLoaded  | IModuleMain           | IMonkeyModule                     | IMonkeyModule                     |
+| moduleLoaded  | IModuleMain           | IMonkeyModule                     | IMonkeyModule                     |
+| appStart      |                       | IMonkeySystem / IMonkeyAppStart   | IMonkeySystem / IMonkeyAppStart   |
+| appReady      |                       | IMonkeySystem / IMonkeyAppReady   | IMonkeySystem / IMonkeyAppReady   |
+| appStarted    |                       | IMonkeySystem / IMonkeyAppStarted | IMonkeySystem / IMonkeyAppStarted |
+| appClose      |                       | IMonkeySystem / IMonkeyAppClose   | IMonkeySystem / IMonkeyAppClose   |
+| appClosed     |                       | IMonkeySystem / IMonkeyAppClosed  | IMonkeySystem / IMonkeyAppClosed  |
 
 ## Create Module Main
 
 ### 1. Cli command
 
-``` bash
+```bash
 $ vona :init:main demo-student
 ```
 
@@ -68,7 +67,7 @@ Context Menu - [Module Path]: `Vona Init/Main`
 
 ### Module Main Definition
 
-``` typescript
+```typescript
 export class Main extends BeanSimple implements IModuleMain {
   async moduleLoading() {}
   async moduleLoaded() {}
@@ -80,7 +79,7 @@ export class Main extends BeanSimple implements IModuleMain {
 
 ### 1. Cli command
 
-``` bash
+```bash
 $ vona :init:monkey demo-student
 ```
 
@@ -92,7 +91,7 @@ Context Menu - [Module Path]: `Vona Init/Monkey`
 
 ### Module Monkey Definition
 
-``` typescript
+```typescript
 export class Monkey extends BeanSimple implements IMonkeyModule, IMonkeySystem {
   async moduleLoading(_module: IModule) {}
   async moduleLoaded(_module: IModule) {}
@@ -109,7 +108,7 @@ export class Monkey extends BeanSimple implements IMonkeyModule, IMonkeySystem {
 
 ### 1. Cli command
 
-``` bash
+```bash
 $ vona :init:appMonkey
 ```
 
@@ -123,7 +122,7 @@ Context Menu - [Project Path/src]: `Vona Init/App Monkey`
 
 `src/backend/config/monkey.ts`
 
-``` typescript
+```typescript
 export class AppMonkey extends BeanSimple implements IMonkeyModule, IMonkeySystem {
   async moduleLoading(_module: IModule) {}
   async moduleLoaded(_module: IModule) {}

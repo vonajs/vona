@@ -22,7 +22,7 @@ class ControllerStudent extends BeanBase {
 
 ## this.$scope: 跨模块获取Scope实例
 
-``` typescript
+```typescript
 class ControllerOther extends BeanBase {
   async test() {
     console.log(this.$scope.demoStudent);
@@ -32,7 +32,7 @@ class ControllerOther extends BeanBase {
 
 通过`this.$scope.demoStudent`获取模块 demo-student 的`Scope`实例
 
-``` typescript
+```typescript
 class ControllerOther extends BeanBase {
   async test() {
     console.log(this.$scope.user);
@@ -48,7 +48,7 @@ class ControllerOther extends BeanBase {
 
 `src/backend/play/index.ts`
 
-``` diff 
+```diff
 export async function main(app: VonaApplication, _argv: IArgv) {
   await app.bean.executor.mockCtx(async () => {
 +   const scopeDemoStudent = app.scope('demo-student');
@@ -65,6 +65,6 @@ export async function main(app: VonaApplication, _argv: IArgv) {
 | constant | 模块的常量定义   |
 | locale   | 模块的I18n国际化 |
 | error    | 模块的错误异常   |
-| service      | 模块的Services    |
-| model |模块的Models |
-| entity |模块的Entities|
+| service  | 模块的Services   |
+| model    | 模块的Models     |
+| entity   | 模块的Entities   |

@@ -10,13 +10,13 @@ Vona ORM 提供了`开箱即用`的缓存机制，我们只需像常规一样操
 
 `Entity缓存`的规则：
 
-|Key|Value|
-|--|--|
-|Entity Id|Entity Data|
+| Key       | Value       |
+| --------- | ----------- |
+| Entity Id | Entity Data |
 
 #### 举例
 
-``` typescript
+```typescript
 class ServiceUser extends BeanBase {
   async getUser() {
     const user = await this.scope.model.user.get({ id: 1 });
@@ -30,7 +30,7 @@ class ServiceUser extends BeanBase {
   async deleteUser() {
     await this.scope.model.user.delete({ id: 1 });
   }
-}  
+}
 ```
 
 1. 当执行`user.get`方法时，系统自动创建缓存：`1 -> user`。如果已经存在缓存，则直接返回缓存
@@ -42,21 +42,22 @@ class ServiceUser extends BeanBase {
 ### 1. 普通查询
 
 普通查询分两步：
+
 1. 先查询出目标数据的`Id数组`
 2. 再使用`Id数组`从`Entity缓存`中取得最终数据
 
 因此，`普通查询`的`Query缓存`规则如下：
 
-|Key|Value|
-|--|--|
-|Hash of query clause|Array of Id|
+| Key                  | Value       |
+| -------------------- | ----------- |
+| Hash of query clause | Array of Id |
 
 - `缓存 Key`：为了节约缓存空间，并且提升缓存查询性能，系统将`查询语句`生成`Hash`，作为缓存 Key
 - `缓存 Value`：系统将查询出的目标数据的`Id数组`作为缓存 Value
 
 #### 举例
 
-``` typescript
+```typescript
 class ServiceUser extends BeanBase {
   async findUsers() {
     const users = await this.scope.model.user.select({
@@ -69,11 +70,11 @@ class ServiceUser extends BeanBase {
 }
 ```
 
-* 当执行`user.select`方法时，系统执行以下逻辑：
-  1. 基于 where 计算出 Hash：`xxxxxx` 
+- 当执行`user.select`方法时，系统执行以下逻辑：
+  1. 基于 where 计算出 Hash：`xxxxxx`
   2. 通过 Hash：`xxxxxx`判断是否存在 Query 缓存
-      - 如果存在，则直接取得`Id数组`
-      - 如果不存在，则通过 where 查询出`Id数组`，并创建缓存
+     - 如果存在，则直接取得`Id数组`
+     - 如果不存在，则通过 where 查询出`Id数组`，并创建缓存
   3. 使用`Id数组`从`Entity缓存`中取得最终数据
 
 ### 2. 聚合与分组
@@ -82,13 +83,13 @@ class ServiceUser extends BeanBase {
 
 因此，`聚合与分组`的`Query缓存`规则如下：
 
-|Key|Value|
-|--|--|
-|Hash of query clause|Result|
+| Key                  | Value  |
+| -------------------- | ------ |
+| Hash of query clause | Result |
 
 #### 举例
 
-``` typescript
+```typescript
 class ServiceUser extends BeanBase {
   async userStats() {
     const userStats = await this.scope.model.user.aggregate({
@@ -107,11 +108,11 @@ class ServiceUser extends BeanBase {
 }
 ```
 
-* 当执行`user.aggregate`方法时，系统执行以下逻辑：
-  1. 基于 where + aggrs 计算出 Hash：`xxxxxx` 
+- 当执行`user.aggregate`方法时，系统执行以下逻辑：
+  1. 基于 where + aggrs 计算出 Hash：`xxxxxx`
   2. 通过 Hash：`xxxxxx`判断是否存在 Query 缓存
-      - 如果存在，则直接取得缓存作为最终数据
-      - 如果不存在，则通过 where + aggrs 查询出最终数据，并创建缓存
+     - 如果存在，则直接取得缓存作为最终数据
+     - 如果不存在，则通过 where + aggrs 查询出最终数据，并创建缓存
 
 ## 缓存配置
 
@@ -121,7 +122,7 @@ class ServiceUser extends BeanBase {
 
 可以在 Model Options 中配置缓存，比如：
 
-``` typescript
+```typescript
 @Model({
   entity: EntityUser,
   cache: {
@@ -146,15 +147,15 @@ class ServiceUser extends BeanBase {
 class ModelUser {}
 ```
 
-* 完整配置如下：
+- 完整配置如下：
 
-|名称|说明|
-|--|--|
-|cache.entity|Entity缓存配置。可参考`Summer（二级缓存）`的配置|
-|cache.query|Query缓存配置。可参考`Summer（二级缓存）`的配置|
-|cache.modelsClear|当Query缓存数据被清除时，可以同时清除其他相关Models的Query缓存|
-|cache.modelsClearedBy|当其他Models的Query缓存数据被清除时，可以同时清除当前Model的Query缓存|
-|cache.modelsClearedByFn|当其他Models的Query缓存数据被清除时，可以执行自定义函数，从而实现定制化的清除逻辑。比如在`动态分表`的场景中，就可以使用此机制清除不同数据表的Query缓存|
+| 名称                    | 说明                                                                                                                                                   |
+| ----------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| cache.entity            | Entity缓存配置。可参考`Summer（二级缓存）`的配置                                                                                                       |
+| cache.query             | Query缓存配置。可参考`Summer（二级缓存）`的配置                                                                                                        |
+| cache.modelsClear       | 当Query缓存数据被清除时，可以同时清除其他相关Models的Query缓存                                                                                         |
+| cache.modelsClearedBy   | 当其他Models的Query缓存数据被清除时，可以同时清除当前Model的Query缓存                                                                                  |
+| cache.modelsClearedByFn | 当其他Models的Query缓存数据被清除时，可以执行自定义函数，从而实现定制化的清除逻辑。比如在`动态分表`的场景中，就可以使用此机制清除不同数据表的Query缓存 |
 
 ### 2. App Config
 
@@ -162,7 +163,7 @@ class ModelUser {}
 
 `src/backend/config/config/config.ts`
 
-``` typescript
+```typescript
 // onions
 config.onions = {
   model: {
@@ -204,7 +205,7 @@ config.onions = {
 
 比如，Model `UserStats`和 Model `UserStatsGroup`分别是与 Model `User`相关的 Model，专门用于查询 User 的聚合和分组数据。当我们`Create/Update/Delete`用户数据时，不仅要清除 Model `User`的`Query缓存`，还要清除 Model `UserStats`和 Model `UserStatsGroup`的`Query缓存`。那么，可以如下配置：
 
-``` typescript
+```typescript
 import { ModelUserStats } from './userStats.ts';
 import { ModelUserStatsGroup } from './userStatsGroup.ts';
 
@@ -220,4 +221,5 @@ class ModelUser {}
 3. 数据库事务与 Cache 数据一致性
 
 Vona 系统对数据库事务与缓存进行了适配，当数据库事务失败时会自动执行缓存的补偿操作，从而让数据库数据与缓存数据始终保持一致
-  - 参见：[事务与Cache数据一致性](./transaction.md#transaction-cache-consistency)
+
+- 参见：[事务与Cache数据一致性](./transaction.md#transaction-cache-consistency)

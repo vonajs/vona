@@ -4,8 +4,8 @@
 
 1. Vona provides more powerful and complete backend capabilities, easily handling the development of large-scale business systems
 2. Vona works perfectly with Zova, continuing the frontend-backend separation architecture. Zova is a more intuitive framework with the pros of Vue3, React and Angular, empowers developers to build elegant, fast and reliable applications. Frontend projects built with Zova can run independently or have their JS bundle copied into the Vona backend for SSR rendering directly on the backend
-    * Vona can generate a complete Openapi Schema, which can then generate an API SDK in Zova
-    * Zova can generate types for routes and components to provide type hints in Vona
+   - Vona can generate a complete Openapi Schema, which can then generate an API SDK in Zova
+   - Zova can generate types for routes and components to provide type hints in Vona
 
 ## Comparison with Nest
 

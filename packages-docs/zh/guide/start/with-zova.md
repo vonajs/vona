@@ -30,20 +30,20 @@ BUILD_COPY_RELEASE = /path-to-vona/src/suite/cabloy-basic/modules/basic-siteadmi
 BUILD_REST_COPY_DIST = /path-to-vona/src/suite/cabloy-basic/modules/basic-siteadmin/zovaRest
 ```
 
-|名称|说明|
-|--|--|
-|BUILD_COPY_RELEASE|将构建生成的JS bundle自动拷贝到Vona中|
-|BUILD_REST_COPY_DIST|将构建生成的类型文件自动拷贝到Vona中|
+| 名称                 | 说明                                  |
+| -------------------- | ------------------------------------- |
+| BUILD_COPY_RELEASE   | 将构建生成的JS bundle自动拷贝到Vona中 |
+| BUILD_REST_COPY_DIST | 将构建生成的类型文件自动拷贝到Vona中  |
 
 ## 5. 构建项目
 
-* 构建 JS bundle
+- 构建 JS bundle
 
 ```bash
 $ npm run build:ssr:cabloyBasicAdmin
 ```
 
-* 构建类型文件
+- 构建类型文件
 
 ```bash
 $ npm run build:rest:cabloyBasicAdmin

@@ -6,7 +6,7 @@
 
 ### 1. Cli命令
 
-``` bash
+```bash
 $ vona :create:bean guard admin --module=demo-student
 ```
 
@@ -18,7 +18,7 @@ $ vona :create:bean guard admin --module=demo-student
 
 ## 守卫定义
 
-``` typescript
+```typescript
 export interface IGuardOptionsAdmin extends IDecoratorGuardOptions {}
 
 @Guard<IGuardOptionsAdmin>()
@@ -38,7 +38,7 @@ class GuardAdmin {
 
 ### 1. 标注控制器方法
 
-``` diff
+```diff
 import { Aspect } from 'vona-module-a-aspect';
 
 @Controller()
@@ -56,7 +56,7 @@ class ControllerStudent {
 
 可以针对控制器类使用守卫，从而类中所有方法都会应用此守卫
 
-``` diff
+```diff
 import { Aspect } from 'vona-module-a-aspect';
 
 @Controller()
@@ -75,7 +75,7 @@ class ControllerStudent {
 
 ### 1. 定义参数类型
 
-``` diff
+```diff
 export interface IGuardOptionsAdmin extends IDecoratorGuardOptions {
 + name: string;
 }
@@ -83,7 +83,7 @@ export interface IGuardOptionsAdmin extends IDecoratorGuardOptions {
 
 ### 2. 提供参数缺省值
 
-``` diff
+```diff
 @Guard<IGuardOptionsAdmin>({
 + name: 'admin',
 })
@@ -91,7 +91,7 @@ export interface IGuardOptionsAdmin extends IDecoratorGuardOptions {
 
 ### 3. 使用参数
 
-``` diff
+```diff
 export interface IGuardOptionsAdmin extends IDecoratorGuardOptions {
   name: string;
 }
@@ -114,7 +114,7 @@ export class GuardAdmin extends BeanBase implements IGuardExecute {
 
 可以针对某个 API 单独指定局部守卫的参数
 
-``` diff
+```diff
 class ControllerStudent {
   @Web.get()
 + @Aspect.guard('demo-student:admin', { name: 'other-name' })
@@ -130,7 +130,7 @@ class ControllerStudent {
 
 `src/backend/config/config/config.ts`
 
-``` typescript
+```typescript
 // onions
 config.onions = {
   guard: {

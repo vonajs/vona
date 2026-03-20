@@ -8,7 +8,7 @@ For example, create redlock in the module `demo-student`
 
 ### 1. Cli Command
 
-``` bash
+```bash
 $ vona :create:bean meta redlock --module=demo-student
 ```
 
@@ -20,7 +20,7 @@ Context menu - [Module Path]: `Vona Meta/Redlock`
 
 ## Redlock Definition
 
-``` typescript
+```typescript
 export type TypeRedlockLockResource = never;
 export type TypeRedlockLockIsolateResource = never;
 
@@ -35,14 +35,14 @@ export class MetaRedlock extends BeanRedlockBase<TypeRedlockLockResource, TypeRe
 
 When using distributed locks, we need to specify the corresponding lock resources. For example, defining a lock resource `name` for the `lock` method:
 
-``` diff
+```diff
 - export type TypeRedlockLockResource = never;
 + export type TypeRedlockLockResource = 'name';
 ```
 
 ## Using Redlock
 
-``` typescript
+```typescript
 class ControllerStudent {
   async test() {
     const res = await this.scope.redlock.lock('name', async () => {
@@ -50,7 +50,7 @@ class ControllerStudent {
       return 'some result';
     });
   }
-}  
+}
 ```
 
 - `redlock.lock`: Passing in the lock resource `name`
@@ -65,14 +65,14 @@ VonaJS provides two lock methods: `lock/lockIsolate`. The difference between the
 
 Defining lock resources for the `lockIsolate` method:
 
-``` diff
+```diff
 - export type TypeRedlockLockIsolateResource = never;
 + export type TypeRedlockLockIsolateResource = 'name';
 ```
 
 ### Using Redlock: lockIsolate
 
-``` typescript
+```typescript
 class ControllerStudent {
   async test() {
     const res = await this.scope.redlock.lockIsolate('name', async () => {
@@ -80,7 +80,7 @@ class ControllerStudent {
       return 'some result';
     });
   }
-}  
+}
 ```
 
 ## Defining Lock Resources: Literal Template
@@ -89,14 +89,14 @@ Lock resources can also be literal templates
 
 For example, if you want to provide separate lock resources for different users, you can use a string like `user-${userId}` as the lock resource name
 
-``` diff
+```diff
 - export type TypeRedlockLockIsolateResource = 'name';
 + export type TypeRedlockLockIsolateResource = 'name' | `user-${string}`;
 ```
 
 This way, type hints can also be provided when using the `lockIsolate` method
 
-``` typescript
+```typescript
 class ControllerStudent {
   async test() {
     const userId = 1;
@@ -105,14 +105,14 @@ class ControllerStudent {
       return 'some result';
     });
   }
-}  
+}
 ```
 
 ## Inspect
 
 You can directly inspect the currently effective redlock list
 
-``` diff
+```diff
 class ControllerStudent {
   @Web.get('test')
   test() {

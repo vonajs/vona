@@ -13,13 +13,13 @@
 
 比如，当前时区为`Asia/Tokyo (+9:00)`。传入字段`createdAt`值为`2025-12-01~2025-12-02`，转换后的条件语句为:
 
-``` typescript
+```typescript
 createdAt >= '2025-11-30T15:00:00.000Z' and createdAt < '2025-12-02T15:00:00.000Z'
 ```
 
 ### 1. Cli命令
 
-``` bash
+```bash
 $ vona :create:bean filterTransform dateRange --module=demo-student
 ```
 
@@ -31,7 +31,7 @@ $ vona :create:bean filterTransform dateRange --module=demo-student
 
 ## Filter Transform定义
 
-``` typescript
+```typescript
 import { DateTime } from 'luxon';
 
 export interface IFilterTransformOptionsDateRange extends IDecoratorFilterTransformOptions {}
@@ -60,7 +60,7 @@ export class FilterTransformDateRange extends BeanBase implements IFilterTransfo
 
 ### 1. 一般用法
 
-``` diff
+```diff
 import { v } from 'vona-module-a-openapiutils';
 
 class DtoStudentQuery {
@@ -79,16 +79,12 @@ class DtoStudentQuery {
 
 可以在 App Config 中配置 createdAt 参数
 
-``` typescript
+```typescript
 config.onions = {
   dto: {
     'demo-student:studentQuery': {
       fields: {
-        createdAt: $makeSchema(
-          v.filterTransform('demo-student:dateRange'),
-          v.optional(),
-          z.string(),
-        ),
+        createdAt: $makeSchema(v.filterTransform('demo-student:dateRange'), v.optional(), z.string()),
       },
     },
   },
@@ -103,7 +99,7 @@ config.onions = {
 
 ### 1. 定义参数类型
 
-``` diff
+```diff
 export interface IFilterTransformOptionsDateRange extends IDecoratorFilterTransformOptions {
 + separator: string;
 }
@@ -111,7 +107,7 @@ export interface IFilterTransformOptionsDateRange extends IDecoratorFilterTransf
 
 ### 2. 提供参数缺省值
 
-``` diff
+```diff
 @FilterTransform<IFilterTransformOptionsDateRange>({
 + separator: '~',
 })
@@ -119,7 +115,7 @@ export interface IFilterTransformOptionsDateRange extends IDecoratorFilterTransf
 
 ### 3. 使用参数
 
-``` diff
+```diff
 export interface IFilterTransformOptionsDateRange extends IDecoratorFilterTransformOptions {
   separator: string;
 }
@@ -146,9 +142,9 @@ export class FilterTransformDateRange extends BeanBase implements IFilterTransfo
 
 可以在使用时指定 Filter Transform 参数
 
-* 一般用法
+- 一般用法
 
-``` diff
+```diff
 class DtoStudentQuery {
   @Api.field(
 +   v.filterTransform('demo-student:dateRange', { separator: ' - ' }),
@@ -158,11 +154,11 @@ class DtoStudentQuery {
 }
 ```
 
-* App Config
+- App Config
 
 可以在 App Config 中配置 createdAt 参数
 
-``` diff
+```diff
 config.onions = {
   dto: {
     'demo-student:studentQuery': {
@@ -184,7 +180,7 @@ config.onions = {
 
 `src/backend/config/config/config.ts`
 
-``` typescript
+```typescript
 // onions
 config.onions = {
   filterTransform: {

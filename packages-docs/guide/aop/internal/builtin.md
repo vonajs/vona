@@ -2,28 +2,28 @@
 
 ## AOP Method
 
-|Name|Description|
-|--|--|
-|a-logger:log|Output log|
-|a-orm:transaction|Database transaction|
-|a-caching:cachingGet|Get cache|
-|a-caching:cachingSet|Set cache|
-|a-caching:cachingDel|Delete cache|
-|a-caching:cachingClear|Clear cache|
+| Name                   | Description          |
+| ---------------------- | -------------------- |
+| a-logger:log           | Output log           |
+| a-orm:transaction      | Database transaction |
+| a-caching:cachingGet   | Get cache            |
+| a-caching:cachingSet   | Set cache            |
+| a-caching:cachingDel   | Delete cache         |
+| a-caching:cachingClear | Clear cache          |
 
 ## a-logger:log
 
-* General usage:
+- General usage:
 
-``` typescript
+```typescript
 import { Aspect } from 'vona-module-a-aspect';
 
 @Aspect.aopMethod('a-logger:log', { level: 'info' })
 ```
 
-* Shorthand:
+- Shorthand:
 
-``` typescript
+```typescript
 import { Core } from 'vona-module-a-core';
 
 @Core.log({ level: 'info' })
@@ -31,17 +31,17 @@ import { Core } from 'vona-module-a-core';
 
 ## a-orm:transaction
 
-* General usage:
+- General usage:
 
-``` typescript
+```typescript
 import { Aspect } from 'vona-module-a-aspect';
 
 @Aspect.aopMethod('a-orm:transaction', { isolationLevel: 'READ_COMMITTED', propagation: 'REQUIRED' })
 ```
 
-* Shorthand:
+- Shorthand:
 
-``` typescript
+```typescript
 import { Core } from 'vona-module-a-core';
 
 @Core.transaction({ isolationLevel: 'READ_COMMITTED', propagation: 'REQUIRED' })
@@ -49,17 +49,17 @@ import { Core } from 'vona-module-a-core';
 
 ## a-caching:cachingGet
 
-* General usage:
+- General usage:
 
-``` typescript
+```typescript
 import { Aspect } from 'vona-module-a-aspect';
 
 @Aspect.aopMethod('a-caching:cachingGet', { cacheName: 'module-name:xxx' })
 ```
 
-* Shorthand:
+- Shorthand:
 
-``` typescript
+```typescript
 import { Caching } from 'vona-module-a-caching';
 
 @Caching.get({ cacheName: 'module-name:xxx' })

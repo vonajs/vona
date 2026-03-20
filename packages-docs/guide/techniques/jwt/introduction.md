@@ -8,7 +8,7 @@ JWT configuration can be modified in the App Config:
 
 `src/backend/config/config/config.ts`
 
-``` typescript
+```typescript
 // modules
 config.modules = {
   'a-jwt': {
@@ -32,11 +32,11 @@ config.modules = {
 };
 ```
 
-|Name|Description|
-|--|--|
-|tempAuthToken|Configuration for temporary accessToken|
-|base|Basic configuration, providing common base settings for all Clients|
-|clients|Configures multiple Clients. The system provides built-in `access/refresh` Clients for generating `accessToken/refreshToken`|
+| Name          | Description                                                                                                                  |
+| ------------- | ---------------------------------------------------------------------------------------------------------------------------- |
+| tempAuthToken | Configuration for temporary accessToken                                                                                      |
+| base          | Basic configuration, providing common base settings for all Clients                                                          |
+| clients       | Configures multiple Clients. The system provides built-in `access/refresh` Clients for generating `accessToken/refreshToken` |
 
 - `signOptions`: see: [jsonwebtoken](https://github.com/auth0/node-jsonwebtoken)
 
@@ -50,7 +50,7 @@ Add a new Client type definition using the interface merging mechanism, such as 
 
 In the VSCode editor, enter the code snippet `recordjwtclient`, and the code skeleton will be automatically generated:
 
-``` typescript
+```typescript
 declare module 'vona-module-a-jwt' {
   export interface IJwtClientRecord {
     : never;
@@ -60,7 +60,7 @@ declare module 'vona-module-a-jwt' {
 
 Adjust the code, and then add `test`
 
-``` diff
+```diff
 declare module 'vona-module-a-jwt' {
   export interface IJwtClientRecord {
 +   test: never;
@@ -72,7 +72,7 @@ declare module 'vona-module-a-jwt' {
 
 `src/backend/config/config/config.ts`
 
-``` typescript
+```typescript
 // modules
 config.modules = {
   'a-jwt': {
@@ -94,7 +94,7 @@ config.modules = {
 
 `env/.env`
 
-``` typescript
+```typescript
 # server
 
 SERVER_KEYS = vona__1596889047267_3245
@@ -102,16 +102,16 @@ SERVER_KEYS = vona__1596889047267_3245
 
 `src/backend/config/config/config.ts`
 
-``` typescript
+```typescript
 // server
 config.server = {
   keys: (env.SERVER_KEYS || '').split(','),
-};  
+};
 ```
 
 ## Obtaining JWT Client Instance
 
-``` typescript
+```typescript
 class ControllerStudent {
   @Web.get('test')
   async test() {
@@ -119,33 +119,33 @@ class ControllerStudent {
     const jwtRefresh = this.bean.jwt.get('refresh');
     const jwtTest = this.bean.jwt.get('test');
   }
-}  
+}
 ```
 
 ## Generate accessToken
 
-``` typescript
+```typescript
 class ControllerStudent {
   @Web.get('test')
   async test() {
     const jwtAccess = this.bean.jwt.get('access');
     const accessToken = await jwtAccess.sign({ userId: '1' });
   }
-}  
+}
 ```
 
 ## Generate JWT Tokens
 
 Can generate `accessToken/refreshToken` at the same time
 
-``` typescript
+```typescript
 class ControllerStudent {
   @Web.get('test')
   async test() {
     const jwtTokens = await this.bean.jwt.create({ userId: '1' });
     console.log(jwtTokens);
   }
-}  
+}
 ```
 
 As shown in the figure below:
@@ -158,32 +158,32 @@ In certain scenarios, an accessToken needs to be used in the URL query. In this 
 
 There are two ways to generate a temporary accessToken:
 
-* `Method 1`
+- `Method 1`
 
-``` typescript
+```typescript
 class ControllerStudent {
   @Web.get('test')
   async test() {
     const jwtAccess = this.bean.jwt.get('access');
     const accessToken = await jwtAccess.sign({ userId: '1' }, { temp: true });
   }
-}  
+}
 ```
 
-* `Method 2`
+- `Method 2`
 
-``` typescript
+```typescript
 class ControllerStudent {
   @Web.get('test')
   async test() {
     const accessToken = await this.bean.jwt.createTempAuthToken({ userId: '1' });
   }
-}  
+}
 ```
 
-##  JWT Verification
+## JWT Verification
 
-``` diff
+```diff
 class ControllerStudent {
   @Web.get('test')
   async test() {
@@ -192,5 +192,5 @@ class ControllerStudent {
 +   const payload = await jwtAccess.verify(accessToken);
     assert.deepEqual(payload, { userId: '1' });
   }
-}  
+}
 ```

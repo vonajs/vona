@@ -8,7 +8,7 @@ Vona 提供了一个练习场的功能，允许我们非常方便、快捷的对
 
 我们需要新建源码文件：`src/backend/play/index.ts`。当然，并不需要手工创建此文件，而是执行以下命令，自动创建该文件：
 
-``` bash
+```bash
 $ vona play
 ```
 
@@ -16,7 +16,7 @@ $ vona play
 
 在文件`play/index.ts`中，写入测试代码：
 
-``` diff
+```diff
 export async function main(app: VonaApplication, _argv: IArgv) {
 + console.log('server listen: ', app.config.server.listen);
 }
@@ -24,7 +24,7 @@ export async function main(app: VonaApplication, _argv: IArgv) {
 
 ### 3. 执行play文件
 
-``` bash
+```bash
 $ vona play
 ```
 
@@ -34,7 +34,7 @@ $ vona play
 
 如果已经启动了开发服务，可以使用 Attach 模式，直接在开发服务中执行 play 文件
 
-``` bash
+```bash
 $ vona play --attach
 $ vona play -a
 ```
@@ -43,7 +43,7 @@ $ vona play -a
 
 ### 1. 模拟请求的上下文环境ctx
 
-``` diff
+```diff
 export async function main(app: VonaApplication, _argv: IArgv) {
 + await app.bean.executor.mockCtx(async () => {
 +   // do something in ctx
@@ -55,7 +55,7 @@ export async function main(app: VonaApplication, _argv: IArgv) {
 
 比如，访问首页 Api：
 
-``` diff
+```diff
 export async function main(app: VonaApplication, _argv: IArgv) {
   await app.bean.executor.mockCtx(async () => {
 +   const homeBody = await app.bean.executor.performAction('get', '//');
@@ -66,7 +66,7 @@ export async function main(app: VonaApplication, _argv: IArgv) {
 
 也可以模拟中文的 ctx，然后访问首页 Api：
 
-``` diff
+```diff
 export async function main(app: VonaApplication, _argv: IArgv) {
   await app.bean.executor.mockCtx(async () => {
 +   const homeBody = await app.bean.executor.performAction('get', '//');
@@ -77,7 +77,7 @@ export async function main(app: VonaApplication, _argv: IArgv) {
 
 ### 3. 模拟登录和退出登录
 
-``` diff
+```diff
 export async function main(app: VonaApplication, _argv: IArgv) {
   await app.bean.executor.mockCtx(async () => {
     // signin as user: admin

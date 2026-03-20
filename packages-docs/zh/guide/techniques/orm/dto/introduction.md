@@ -8,16 +8,16 @@
 
 Vona ORM 提供了以下 DTO 工具：
 
-|名称|说明|
-|--|--|
-|$Dto.get|标注返回结果|
-|$Dto.selectAndCount|标注带分页的返回结果|
-|$Dto.query/DtoQueryBase|标注Query参数|
-|$Dto.queryPage/DtoQueryPageBase|标注带分页的Query参数|
-|$Dto.create|标注Create参数|
-|$Dto.update|标注Update参数|
-|$Dto.aggregate|标注聚合操作的返回结果|
-|$Dto.group|标注分组操作的返回结果|
+| 名称                            | 说明                   |
+| ------------------------------- | ---------------------- |
+| $Dto.get                        | 标注返回结果           |
+| $Dto.selectAndCount             | 标注带分页的返回结果   |
+| $Dto.query/DtoQueryBase         | 标注Query参数          |
+| $Dto.queryPage/DtoQueryPageBase | 标注带分页的Query参数  |
+| $Dto.create                     | 标注Create参数         |
+| $Dto.update                     | 标注Update参数         |
+| $Dto.aggregate                  | 标注聚合操作的返回结果 |
+| $Dto.group                      | 标注分组操作的返回结果 |
 
 ## DTO使用方法
 
@@ -27,7 +27,7 @@ Vona ORM 提供了以下 DTO 工具：
 
 先在 Model Order 中定义与 Model Product 的`1:n`关系
 
-``` typescript
+```typescript
 @Model({
   entity: EntityOrder,
   relations: {
@@ -43,7 +43,7 @@ class ModelOrder {}
 
 创建 Controller，提供 findAll 方法
 
-``` typescript
+```typescript
 class ControllerOrder {
   @Web.get('findAll')
   async findAll() {
@@ -60,7 +60,7 @@ class ControllerOrder {
 
 由于此 Api 返回的结果是`主表-明细表`结构，我们不能简单的使用`EntityOrder数组`来标注返回类型。而是使用 DTO 进行动态推断与生成
 
-``` diff
+```diff
 + import { $Dto } from 'vona-module-a-orm';
 
 class ControllerOrder {
@@ -90,14 +90,14 @@ class ControllerOrder {
 
 1. 在 VSCode 中，可以通过右键菜单`Vona Create/Dto`创建 DTO 的代码骨架：
 
-``` typescript
+```typescript
 @Dto()
 export class DtoOrderResult {}
 ```
 
 2. 使用继承机制来封装 DTO：
 
-``` diff
+```diff
 + import { $Dto } from 'vona-module-a-orm';
 
 @Dto()
@@ -107,7 +107,7 @@ export class DtoOrderResult
 
 3. 现在，再使用`DtoOrderResult`重构前面的 API 代码：
 
-``` diff
+```diff
 class ControllerOrder {
   @Web.get('findAll')
 + @Api.body(v.array(DtoOrderResult))

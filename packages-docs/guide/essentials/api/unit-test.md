@@ -12,7 +12,7 @@ Vona uses a `parallel mechanism` to run test files, thereby significantly improv
 
 ### 1. Cli command
 
-``` bash
+```bash
 $ vona :create:test student --module=demo-student
 ```
 
@@ -24,7 +24,7 @@ Context menu - [Module Path]: `Vona Create/Test`
 
 ## Execute unit tests
 
-``` bash
+```bash
 $ npm run test
 ```
 
@@ -36,7 +36,7 @@ When this command is executed, the system will perform the following steps:
 4. Execute migration code
 5. `Parallel` execute unit test files
 
-``` bash
+```bash
 $ npm run db:reset
 ```
 
@@ -44,7 +44,7 @@ Unlike the `test` command, `db:reset` only executes the first `four` steps and d
 
 ## Test coverage
 
-``` bash
+```bash
 $ npm run cov
 ```
 
@@ -52,7 +52,7 @@ $ npm run cov
 
 ### 1. Simulate the request context object
 
-``` typescript
+```typescript
 describe('student.test.ts', () => {
   it('action:student', async () => {
     await app.bean.executor.mockCtx(async () => {
@@ -62,21 +62,24 @@ describe('student.test.ts', () => {
 });
 ```
 
-* Specify the current language for ctx
+- Specify the current language for ctx
 
-``` typescript
+```typescript
 describe('student.test.ts', () => {
   it('action:student', async () => {
-    await app.bean.executor.mockCtx(async () => {
-      // do something
-    }, { locale: 'zh-cn' });
+    await app.bean.executor.mockCtx(
+      async () => {
+        // do something
+      },
+      { locale: 'zh-cn' },
+    );
   });
 });
 ```
 
 ### 2. Get the module Scope object
 
-``` typescript
+```typescript
 await app.bean.executor.mockCtx(async () => {
   const scopeStudent = app.scope('demo-student');
 });
@@ -98,7 +101,7 @@ const students = await scopeStudent.model.student.select();
 
 ### 5. Using Entity
 
-``` typescript
+```typescript
 const scopeStudent = app.scope('demo-student');
 const tableName = scopeStudent.entity.student.$table;
 const fieldName = scopeStudent.entity.student.name;
@@ -106,7 +109,7 @@ const fieldName = scopeStudent.entity.student.name;
 
 ### 6. Access API to test Controller
 
-``` typescript
+```typescript
 await app.bean.executor.mockCtx(async () => {
   const students = await app.bean.executor.performAction('get', '/demo/student');
 });
@@ -114,23 +117,23 @@ await app.bean.executor.mockCtx(async () => {
 
 ### 7. Simulate authentication
 
-* Simulate login
+- Simulate login
 
-``` typescript
+```typescript
 await app.bean.executor.mockCtx(async () => {
-await app.bean.passport.signinMock();
+  await app.bean.passport.signinMock();
 });
 ```
 
 You can specify the login username, the default is `admin`
 
-``` typescript
+```typescript
 await app.bean.passport.signinMock('admin');
 ```
 
-* Get current user information
+- Get current user information
 
-``` typescript
+```typescript
 await app.bean.passport.signinMock();
 
 const passport = app.ctx.passport;
@@ -142,9 +145,9 @@ const auth = app.bean.passport.currentAuth;
 const roles = app.bean.passport.currentRoles;
 ```
 
-* Simulate logout
+- Simulate logout
 
-``` typescript
+```typescript
 await app.bean.passport.signout();
 ```
 
@@ -152,7 +155,7 @@ await app.bean.passport.signout();
 
 Vona uses Node's built-in assertion library
 
-``` typescript
+```typescript
 import assert from 'node:assert';
 
 await app.bean.executor.mockCtx(async () => {
@@ -164,9 +167,9 @@ await app.bean.executor.mockCtx(async () => {
 
 `catchError` can capture error exception more elegantly
 
-* General writing
+- General writing
 
-``` typescript
+```typescript
 await app.bean.executor.mockCtx(async () => {
   const scopeStudent = app.scope('demo-student');
   try {
@@ -177,9 +180,9 @@ await app.bean.executor.mockCtx(async () => {
 });
 ```
 
-* Use catchError
+- Use catchError
 
-``` typescript
+```typescript
 import { catchError } from '@cabloy/utils';
 
 await app.bean.executor.mockCtx(async () => {
@@ -195,7 +198,7 @@ await app.bean.executor.mockCtx(async () => {
 
 ### 10. Complete Crud test
 
-``` typescript
+```typescript
 describe('student.test.ts', () => {
   it('action:student', async () => {
     await app.bean.executor.mockCtx(async () => {

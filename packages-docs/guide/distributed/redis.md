@@ -8,7 +8,7 @@ Redis configuration can be modified in the App Config:
 
 `src/backend/config/config/config.ts`
 
-``` typescript
+```typescript
 // redis
 config.redis = {
   base: {
@@ -32,10 +32,10 @@ config.redis = {
 };
 ```
 
-|Name|Description|
-|--|--|
-|base|Basic configuration, providing common foundational settings for all Clients|
-|clients|Configures multiple Clients. For different application scenarios, the system offers a large number of built-in Clients|
+| Name    | Description                                                                                                            |
+| ------- | ---------------------------------------------------------------------------------------------------------------------- |
+| base    | Basic configuration, providing common foundational settings for all Clients                                            |
+| clients | Configures multiple Clients. For different application scenarios, the system offers a large number of built-in Clients |
 
 - `keyPrefix`: Provides a `keyPrefix` for the Client to achieve keyspace isolation
   - For example, if there are multiple VonaJS projects on the same machine using the same Redis service, providing different `keyPrefix` values ensures that the projects do not interfere with each other
@@ -47,11 +47,11 @@ You can provide `base` configuration in the env file:
 
 `env/.env`
 
-``` typescript
+```typescript
 # redis
 REDIS_DEFAULT_HOST = 127.0.0.1
 REDIS_DEFAULT_PORT = 6379
-REDIS_DEFAULT_PASSWORD = 
+REDIS_DEFAULT_PASSWORD =
 REDIS_DEFAULT_DB = 0
 ```
 
@@ -63,7 +63,7 @@ For large projects, independent configurations can be provided for different com
 
 `src/backend/config/config/config.ts`
 
-``` typescript
+```typescript
 // redis
 config.redis = {
   clients: {
@@ -91,7 +91,7 @@ Add a new Client type definition using the interface merging mechanism, such as 
 
 In the VSCode editor, enter the code snippet `recordredisclient`, and the code skeleton will be automatically generated:
 
-``` typescript
+```typescript
 declare module 'vona-module-a-redis' {
   export interface IRedisClientRecord {
     : never;
@@ -101,7 +101,7 @@ declare module 'vona-module-a-redis' {
 
 Adjust the code, and then add `order`
 
-``` diff
+```diff
 declare module 'vona-module-a-redis' {
   export interface IRedisClientRecord {
 +   order: never;
@@ -113,7 +113,7 @@ declare module 'vona-module-a-redis' {
 
 `src/backend/config/config/config.ts`
 
-``` typescript
+```typescript
 // redis
 config.redis = {
   clients: {
@@ -129,7 +129,7 @@ config.redis = {
 
 ## Obtaining Redis Client Instance
 
-``` typescript
+```typescript
 class ControllerStudent {
   @Web.get('test')
   async test() {
@@ -142,7 +142,7 @@ class ControllerStudent {
 
 ## Using Redis Client
 
-``` diff
+```diff
 class ControllerStudent {
   @Web.get('test')
   async test() {

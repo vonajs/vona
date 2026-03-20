@@ -8,7 +8,7 @@
 
 ### 1. Cli命令
 
-``` bash
+```bash
 $ vona :create:bean eventListener echo --module=demo-student
 ```
 
@@ -22,14 +22,12 @@ $ vona :create:bean eventListener echo --module=demo-student
 
 ### 1. 自动生成的代码骨架
 
-``` typescript
+```typescript
 type TypeEventData = unknown; // TypeEventEchoData;
 type TypeEventResult = unknown; // TypeEventEchoResult;
 
 @EventListener({ match: 'some-module:echo' })
-export class EventListenerEcho
-  extends BeanBase
-  implements IEventExecute<TypeEventData, TypeEventResult> {
+export class EventListenerEcho extends BeanBase implements IEventExecute<TypeEventData, TypeEventResult> {
   async execute(_data: TypeEventData, next: NextEvent<TypeEventData, TypeEventResult>): Promise<TypeEventResult> {
     // next
     return next();
@@ -41,13 +39,13 @@ export class EventListenerEcho
 - `TypeEventResult`: 定义结果类型
 - `match`: 指定需要监听的事件
 
-|名称|类型|说明|
-|--|--|--|
-|match|string\|regexp\|(string\|regexp)[]|指定需要监听的事件|
+| 名称  | 类型                               | 说明               |
+| ----- | ---------------------------------- | ------------------ |
+| match | string\|regexp\|(string\|regexp)[] | 指定需要监听的事件 |
 
 ### 2. 调整代码
 
-``` diff
+```diff
 + import type { TypeEventEchoData, TypeEventEchoResult } from './event.echo.ts';
 
 + type TypeEventData = TypeEventEchoData;
@@ -80,7 +78,7 @@ export class EventListenerEcho
 
 比如，还有一个 Event Listener `demo-student:echo3`，希望执行顺序如下：`demo-student:echo3` > `Current`
 
-``` diff
+```diff
 @EventListener({
   match: 'demo-student:echo',
 + dependencies: 'demo-student:echo3',
@@ -92,7 +90,7 @@ class EventListenerEcho {}
 
 `dependents`的顺序刚好与`dependencies`相反，希望执行顺序如下：`Current` > `demo-student:echo3`
 
-``` diff
+```diff
 @EventListener({
   match: 'demo-student:echo',
 + dependents: 'demo-student:echo3',
@@ -108,7 +106,7 @@ class EventListenerEcho {}
 
 `src/backend/config/config/config.ts`
 
-``` diff
+```diff
 // onions
 config.onions = {
   eventListener: {
@@ -123,14 +121,14 @@ config.onions = {
 
 可以让 Event Listener 在指定的运行环境生效
 
-|名称|类型|说明|
-|--|--|--|
-|flavor|string\|string[]|参见: [运行环境与Flavor](../../env-config/mode-flavor/introduction.md)|
-|mode|string\|string[]|参见: [运行环境与Flavor](../../env-config/mode-flavor/introduction.md)|
+| 名称   | 类型             | 说明                                                                   |
+| ------ | ---------------- | ---------------------------------------------------------------------- |
+| flavor | string\|string[] | 参见: [运行环境与Flavor](../../env-config/mode-flavor/introduction.md) |
+| mode   | string\|string[] | 参见: [运行环境与Flavor](../../env-config/mode-flavor/introduction.md) |
 
-* 举例
+- 举例
 
-``` diff
+```diff
 @EventListener({
 + meta: {
 +   flavor: 'normal',
@@ -144,7 +142,7 @@ class EventListenerEcho {}
 
 可以直接输出当前生效的 Event Listener 清单
 
-``` diff
+```diff
 class ControllerStudent {
   @Web.get('test')
   test() {

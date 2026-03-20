@@ -8,7 +8,7 @@ Vona uses Bean `meta.index` to uniformly configure the field indexes of the modu
 
 ### 1. Cli command
 
-``` bash
+```bash
 $ vona :create:bean meta index --module=demo-student
 ```
 
@@ -20,7 +20,7 @@ Context Menu - [Module Path]: `Vona Meta/Index`
 
 ## meta.index Definition
 
-``` typescript
+```typescript
 @Meta()
 export class MetaIndex extends BeanBase {}
 ```
@@ -43,7 +43,7 @@ class MetaIndex {}
 
 In order to make the code higher quality and easier to maintain, we can also use a typed code style
 
-``` typescript
+```typescript
 import { $tableColumns } from 'vona-module-a-ormutils';
 
 @Meta({
@@ -62,7 +62,7 @@ Field indexes can be configured in App Config
 
 `src/backend/config/config/config.ts`
 
-``` typescript
+```typescript
 // onions
 config.onions = {
   meta: {

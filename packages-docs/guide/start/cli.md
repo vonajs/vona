@@ -6,7 +6,7 @@ Vona provides a large number of Cli commands for generating code skeletons for v
 
 Create a Service: `student` in the module demo-student, the command is as follows:
 
-``` bash
+```bash
 $ vona :create:bean service student --module=demo-student
 ```
 
@@ -16,18 +16,18 @@ Vona's Cli commands have a unified format. As long as we master the ideas of run
 
 1. List all commands
 
-``` bash
+```bash
 $ vona :
 ```
 
 2. List commands for a specified group
 
-``` bash
+```bash
 $ vona :create
 ```
 
 3. View the help information of a specified command
 
-``` bash
+```bash
 $ vona :create:bean --help
 ```

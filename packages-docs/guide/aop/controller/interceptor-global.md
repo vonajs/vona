@@ -6,7 +6,7 @@ For example, we create a Global Interceptor `logger` in the module demo-student
 
 ### 1. Cli command
 
-``` bash
+```bash
 $ vona :create:bean interceptor logger --module=demo-student --boilerplate=global
 ```
 
@@ -18,7 +18,7 @@ Context Menu - [Module Path]: `Vona Aspect/Interceptor Global`
 
 ## Interceptor Definition
 
-``` typescript
+```typescript
 export interface IInterceptorOptionsLogger extends IDecoratorInterceptorOptionsGlobal {}
 
 @Interceptor<IInterceptorOptionsLogger>()
@@ -49,7 +49,7 @@ For example, define the `prefix` parameter for the logger interceptor to control
 
 ### 1. Defining parameter types
 
-``` diff
+```diff
 export interface IInterceptorOptionsLogger extends IDecoratorInterceptorOptionsGlobal {
 + prefix: string;
 }
@@ -57,7 +57,7 @@ export interface IInterceptorOptionsLogger extends IDecoratorInterceptorOptionsG
 
 ### 2. Providing default values ​​for parameters
 
-``` diff
+```diff
 @Interceptor<IInterceptorOptionsLogger>({
 + prefix: 'time',
 })
@@ -65,7 +65,7 @@ export interface IInterceptorOptionsLogger extends IDecoratorInterceptorOptionsG
 
 ### 3. Using Parameters
 
-``` diff
+```diff
 export interface IInterceptorOptionsLogger extends IDecoratorInterceptorOptionsGlobal {
   prefix: string;
 }
@@ -89,7 +89,7 @@ class InterceptorLogger {
 
 You can specify global interceptor parameters for a specific API
 
-``` diff
+```diff
 class ControllerStudent {
   @Web.get()
 + @Aspect.interceptorGlobal('demo-student:logger', { prefix: 'elapsed' })
@@ -105,7 +105,7 @@ Interceptor parameters can be configured in App Config
 
 `src/backend/config/config/config.ts`
 
-``` typescript
+```typescript
 // onions
 config.onions = {
   interceptor: {
@@ -128,7 +128,7 @@ Since global interceptors ard loaded and enabled by default, VonaJS provides two
 
 For example, the system has a built-in global interceptor `a-body:bodyRes`, and we hope that the loading order is as follows: `a-body:bodyRes` > `Current`
 
-``` diff
+```diff
 @Interceptor({
 + dependencies: 'a-body:bodyRes',
   prefix: 'time',
@@ -140,7 +140,7 @@ class InterceptorLogger {}
 
 The order of `dependents` is just the opposite of `dependencies`. We hope that the loading order is as follows: `Current` > `a-body:bodyRes`
 
-``` diff
+```diff
 @Interceptor({
 + dependents: 'a-body:bodyRes',
   prefix: 'time',
@@ -154,9 +154,9 @@ You can control `enable/disable` of global interceptor for certain APIs
 
 ### 1. Enable
 
-* Disable for an API
+- Disable for an API
 
-``` diff
+```diff
 class ControllerStudent {
   @Web.get()
 + @Aspect.interceptorGlobal('demo-student:logger', { enable: false })
@@ -164,11 +164,11 @@ class ControllerStudent {
 }
 ```
 
-* Disable for all APIs
+- Disable for all APIs
 
 `src/backend/config/config/config.ts`
 
-``` diff
+```diff
 // onions
 config.onions = {
   interceptor: {
@@ -183,14 +183,14 @@ config.onions = {
 
 Allows global interceptor to take effect in a specified operating environment
 
-|Name|Type|Description|
-|--|--|--|
-|flavor|string\|string[]|See: [Runtime Environments and Flavors](../../env-config/mode-flavor/introduction.md)|
-|mode|string\|string[]|See: [Runtime Environments and Flavors](../../env-config/mode-flavor/introduction.md)|
+| Name   | Type             | Description                                                                           |
+| ------ | ---------------- | ------------------------------------------------------------------------------------- |
+| flavor | string\|string[] | See: [Runtime Environments and Flavors](../../env-config/mode-flavor/introduction.md) |
+| mode   | string\|string[] | See: [Runtime Environments and Flavors](../../env-config/mode-flavor/introduction.md) |
 
-* Example
+- Example
 
-``` diff
+```diff
 @Interceptor({
 + meta: {
 +   flavor: 'normal',
@@ -204,16 +204,16 @@ class InterceptorLogger {}
 
 You can enable/disable global interceptor for some specific APIs
 
-|Name|Type|Description|
-|--|--|--|
-|match|string\|regexp\|(string\|regexp)[]|For which APIs to enable|
-|ignore|string\|regexp\|(string\|regexp)[]|For which APIs to disable|
+| Name   | Type                               | Description               |
+| ------ | ---------------------------------- | ------------------------- |
+| match  | string\|regexp\|(string\|regexp)[] | For which APIs to enable  |
+| ignore | string\|regexp\|(string\|regexp)[] | For which APIs to disable |
 
 ## Inspect
 
 You can directly inspect the currently effective global interceptor list in the Controller action
 
-``` diff
+```diff
 class ControllerStudent {
   @Web.get()
   async findMany() {

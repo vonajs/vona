@@ -6,7 +6,7 @@ Modules can individually provide their own `Error` exceptions
 
 ### 1. Cli command
 
-``` bash
+```bash
 $ vona :init:error demo-student
 ```
 

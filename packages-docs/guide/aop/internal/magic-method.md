@@ -10,7 +10,7 @@ To make using the IOC container more concise and intuitive, VonaJS recommends pr
 
 For example, the `demo-student` module contains a `student` model for crud operations. You can use the model like this:
 
-``` typescript
+```typescript
 import { ModelStudent } from '../model/student.ts';
 
 async findMany(params) {
@@ -21,7 +21,7 @@ async findMany(params) {
 
 Using magic method:
 
-``` typescript
+```typescript
 async findMany(params) {
   return await this.scope.model.student.selectAndCount(params);
 }
@@ -37,7 +37,7 @@ Vona ORM uses magic method to further simplify data manipulation code
 
 For example, to query student information by the `id` field, the code is as follows:
 
-``` typescript
+```typescript
 async findOne(id) {
   return await this.scope.model.student.get({ id });
 }
@@ -45,7 +45,7 @@ async findOne(id) {
 
 Using magic method:
 
-``` typescript
+```typescript
 async findOne(id) {
   return await this.scope.model.student.getById(id);
 }
@@ -59,7 +59,7 @@ Magic method can be implemented in any class. Taking Service as an example, crea
 
 - For information on creating a Service, see: [Service](../../essentials/api/service.md)
 
-``` typescript
+```typescript
 import { BeanBase } from 'vona';
 import { Service } from 'vona-module-a-bean';
 
@@ -75,7 +75,7 @@ Then, use `__get__` to retrieve the color values
 
 In the VSCode editor, enter the code snippet `aopmagicget` to automatically generate a code skeleton:
 
-``` diff
+```diff
 @Service()
 export class ServiceColor extends BeanBase {
 + protected __get__(prop: string) {}
@@ -84,7 +84,7 @@ export class ServiceColor extends BeanBase {
 
 ### 2. Implement custom logic
 
-``` diff
+```diff
 @Service()
 export class ServiceColor extends BeanBase {
 + private _colors = {
@@ -103,7 +103,7 @@ export class ServiceColor extends BeanBase {
 
 Providing type definitions for colors using interface type merging
 
-``` typescript
+```typescript
 declare module 'vona-module-demo-student' {
   export interface ServiceColor {
     red: string;
@@ -131,7 +131,7 @@ Then, use `__set__` to set the color values
 
 In the VSCode editor, enter the code snippet `aopmagicset` to automatically generate a code skeleton:
 
-``` diff
+```diff
 @Service()
 export class ServiceColor extends BeanBase {
 + protected __set__(prop: string, value: any): boolean {
@@ -142,7 +142,7 @@ export class ServiceColor extends BeanBase {
 
 ### 2. Implement custom logic
 
-``` diff
+```diff
 @Service()
 export class ServiceColor extends BeanBase {
   private _colors = {
@@ -166,7 +166,7 @@ export class ServiceColor extends BeanBase {
 
 Provide type definitions for colors using the interface type merging mechanism
 
-``` diff
+```diff
 declare module 'vona-module-demo-student' {
   export interface ServiceColor {
     red: string;

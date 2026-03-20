@@ -8,16 +8,16 @@ Vona ORM pioneers dynamic DTO inference and generation capabilities, significant
 
 Vona ORM provides the following DTO Tools:
 
-|Name|Description|
-|--|--|
-|$Dto.get|Annotate the return result|
-|$Dto.selectAndCount|Annotate the return result with paging|
-|$Dto.query/DtoQueryBase|Annotate the query parameters|
-|$Dto.queryPage/DtoQueryPageBase|Annotate the query parameters with paging|
-|$Dto.create|Annotate the Create parameters|
-|$Dto.update|Annotate the Update parameters|
-|$Dto.aggregate|Annotate the return result of the aggregation operation|
-|$Dto.group|Annotate the return result of the grouping operation|
+| Name                            | Description                                             |
+| ------------------------------- | ------------------------------------------------------- |
+| $Dto.get                        | Annotate the return result                              |
+| $Dto.selectAndCount             | Annotate the return result with paging                  |
+| $Dto.query/DtoQueryBase         | Annotate the query parameters                           |
+| $Dto.queryPage/DtoQueryPageBase | Annotate the query parameters with paging               |
+| $Dto.create                     | Annotate the Create parameters                          |
+| $Dto.update                     | Annotate the Update parameters                          |
+| $Dto.aggregate                  | Annotate the return result of the aggregation operation |
+| $Dto.group                      | Annotate the return result of the grouping operation    |
 
 ## DTO Usage
 
@@ -27,7 +27,7 @@ The following uses the `Order/Product` model as an example to demonstrate how to
 
 First, define a `1:n` relation between the `Order` model and the `Product` model
 
-``` typescript
+```typescript
 @Model({
   entity: EntityOrder,
   relations: {
@@ -43,7 +43,7 @@ class ModelOrder {}
 
 Create a `Controller` and Provide a `findAll` Method
 
-``` typescript
+```typescript
 class ControllerOrder {
   @Web.get('findAll')
   async findAll() {
@@ -60,7 +60,7 @@ class ControllerOrder {
 
 Since the result returned by this API is a `main-details` structure, we cannot simply use an `EntityOrder` array to annotate the return type. Instead, DTOs are used for dynamic inference and generation
 
-``` diff
+```diff
 + import { $Dto } from 'vona-module-a-orm';
 
 class ControllerOrder {
@@ -90,14 +90,14 @@ We can also create a new DTO class to encapsulate the `$Dto.get` code for use el
 
 1. In VSCode, use the `Vona Create/Dto` context menu to create a DTO code skeleton:
 
-``` typescript
+```typescript
 @Dto()
 export class DtoOrderResult {}
 ```
 
 2. Encapsulate the DTO using inheritance:
 
-``` diff
+```diff
 + import { $Dto } from 'vona-module-a-orm';
 
 @Dto()
@@ -107,7 +107,7 @@ export class DtoOrderResult
 
 3. Now, let's refactor the previous code using `DtoOrderResult`:
 
-``` diff
+```diff
 class ControllerOrder {
   @Web.get('findAll')
 + @Api.body(v.array(DtoOrderResult))

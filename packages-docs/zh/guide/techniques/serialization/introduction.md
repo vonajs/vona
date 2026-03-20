@@ -10,7 +10,7 @@ VonaJS 提供了`序列化`能力，可以对 API 的响应数据进行转换，
 
 ### 1. Cli命令
 
-``` bash
+```bash
 $ vona :create:bean serializerTransform upper --module=demo-student
 ```
 
@@ -22,7 +22,7 @@ $ vona :create:bean serializerTransform upper --module=demo-student
 
 ## Serializer Transform定义
 
-``` typescript
+```typescript
 export type TypeSerializerTransformUpperValue = string;
 
 export type TypeSerializerTransformUpperData = unknown;
@@ -57,7 +57,7 @@ export class SerializerTransformUpper extends BeanBase {
 
 需要为 API 开启序列化
 
-``` diff
+```diff
 class ControllerStudent {
   @Web.get(':id')
   @Api.body(v.optional(), v.object(EntityStudent))
@@ -72,7 +72,7 @@ class ControllerStudent {
 
 ### 2. 字段装饰器
 
-``` diff
+```diff
 class EntityStudent {
 + @Serializer.transform('demo-student:upper')
   @Api.field(v.title($locale('Name')))
@@ -88,7 +88,7 @@ class EntityStudent {
 
 比如，如果当前用户名是`admin`则不执行`upper`的转换逻辑
 
-``` diff
+```diff
 class EntityStudent {
   @Serializer.transform('demo-student:upper', {
 +   filter(this: VonaContext) {
@@ -108,7 +108,7 @@ class EntityStudent {
 
 ### 1. 定义参数类型
 
-``` diff
+```diff
 export interface ISerializerTransformOptionsUpper extends IDecoratorSerializerTransformOptions {
 + first?: boolean;
 }
@@ -116,7 +116,7 @@ export interface ISerializerTransformOptionsUpper extends IDecoratorSerializerTr
 
 ### 2. 提供参数缺省值
 
-``` diff
+```diff
 @SerializerTransform<ISerializerTransformOptionsUpper>({
 + first: false,
 })
@@ -124,7 +124,7 @@ export interface ISerializerTransformOptionsUpper extends IDecoratorSerializerTr
 
 ### 3. 使用参数
 
-``` diff
+```diff
 export interface ISerializerTransformOptionsUpper extends IDecoratorSerializerTransformOptions {
   first?: boolean;
 }
@@ -148,7 +148,7 @@ class SerializerTransformUpper {
 
 可以指定`@Serializer.transform`的参数
 
-``` diff
+```diff
 class EntityStudent {
 + @Serializer.transform('demo-student:upper', { first: true })
   @Api.field(v.title($locale('Name')))
@@ -162,7 +162,7 @@ class EntityStudent {
 
 `src/backend/config/config/config.ts`
 
-``` typescript
+```typescript
 // onions
 config.onions = {
   serializerTransform: {

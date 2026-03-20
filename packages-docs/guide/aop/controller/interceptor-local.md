@@ -6,7 +6,7 @@ For example, we create a Local Interceptor `logger` in the module demo-student
 
 ### 1. Cli command
 
-``` bash
+```bash
 $ vona :create:bean interceptor logger --module=demo-student
 ```
 
@@ -18,7 +18,7 @@ Context Menu - [Module Path]: `Vona Aspect/Interceptor`
 
 ## Interceptor Definition
 
-``` typescript
+```typescript
 export interface IInterceptorOptionsLogger extends IDecoratorInterceptorOptions {}
 
 @Interceptor<IInterceptorOptionsLogger>()
@@ -40,7 +40,7 @@ class InterceptorLogger {
 
 ### 1. Annotating controller actions
 
-``` diff
+```diff
 import { Aspect } from 'vona-module-a-aspect';
 
 @Controller()
@@ -58,7 +58,7 @@ class ControllerStudent {
 
 You can use interceptor for controller classes so that all actions in the class will apply this interceptor
 
-``` diff
+```diff
 import { Aspect } from 'vona-module-a-aspect';
 
 @Controller()
@@ -77,7 +77,7 @@ For example, define the `prefix` parameter for the logger interceptor to control
 
 ### 1. Defining parameter types
 
-``` diff
+```diff
 export interface IInterceptorOptionsLogger extends IDecoratorInterceptorOptions {
 + prefix: string;
 }
@@ -85,7 +85,7 @@ export interface IInterceptorOptionsLogger extends IDecoratorInterceptorOptions 
 
 ### 2. Providing default values ​​for parameters
 
-``` diff
+```diff
 @Interceptor<IInterceptorOptionsLogger>({
 + prefix: 'time',
 })
@@ -93,7 +93,7 @@ export interface IInterceptorOptionsLogger extends IDecoratorInterceptorOptions 
 
 ### 3. Using Parameters
 
-``` diff
+```diff
 export interface IInterceptorOptionsLogger extends IDecoratorInterceptorOptions {
   prefix: string;
 }
@@ -117,7 +117,7 @@ class InterceptorLogger {
 
 You can specify local interceptor parameters for a specific API
 
-``` diff
+```diff
 class ControllerStudent {
   @Web.get()
 + @Aspect.interceptor('demo-student:logger', { prefix: 'elapsed' })
@@ -133,7 +133,7 @@ Interceptor parameters can be configured in App Config
 
 `src/backend/config/config/config.ts`
 
-``` typescript
+```typescript
 // onions
 config.onions = {
   interceptor: {

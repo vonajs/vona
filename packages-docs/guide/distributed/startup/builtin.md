@@ -2,11 +2,11 @@
 
 ## App Startup
 
-|Name|Description|
-|--|--|
-|a-version:databaseInit|Automatically create a test database|
-|a-version:databaseName|Automatically set the database name of the default datasource|
-|a-web:listen | Starts listening port |
+| Name                   | Description                                                   |
+| ---------------------- | ------------------------------------------------------------- |
+| a-version:databaseInit | Automatically create a test database                          |
+| a-version:databaseName | Automatically set the database name of the default datasource |
+| a-web:listen           | Starts listening port                                         |
 
 ### 1. a-version:databaseInit
 
@@ -24,10 +24,9 @@ Since the test database is automatically created in the local development and te
 
 ## Instance Startup
 
-|Name|Description|
-|--|--|
-|a-version:instanceInit|Initials data for the instance, just as the `version.init` method does. See: [Migration and Changes](../../essentials/api/version.md) |
-|a-printtip:printTip | Outputs messages to the console, such as `Swagger URL`, etc. |
-|a-queue:loadQueueWorkers | Starts the workers of the queues |
-|a-schedule:loadSchedules | Starts schedules |
-
+| Name                     | Description                                                                                                                           |
+| ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------- |
+| a-version:instanceInit   | Initials data for the instance, just as the `version.init` method does. See: [Migration and Changes](../../essentials/api/version.md) |
+| a-printtip:printTip      | Outputs messages to the console, such as `Swagger URL`, etc.                                                                          |
+| a-queue:loadQueueWorkers | Starts the workers of the queues                                                                                                      |
+| a-schedule:loadSchedules | Starts schedules                                                                                                                      |

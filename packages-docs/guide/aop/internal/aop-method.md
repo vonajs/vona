@@ -8,7 +8,7 @@ For example, we create a AOP Method `log` in the module demo-student to output t
 
 ### 1. Cli command
 
-``` bash
+```bash
 $ vona :create:bean aopMethod log --module=demo-student
 ```
 
@@ -20,7 +20,7 @@ Context Menu - [Module Path]: `Vona Aspect/AOP Method`
 
 ## AOP Method Definition
 
-``` typescript
+```typescript
 export interface IAopMethodOptionsLog extends IDecoratorAopMethodOptions {}
 
 @AopMethod<IAopMethodOptionsLog>()
@@ -42,7 +42,7 @@ class AopMethodLog {
 
 ### 1. Annotating controller actions
 
-``` diff
+```diff
 import { Aspect } from 'vona-module-a-aspect';
 
 @Controller()
@@ -58,7 +58,7 @@ class ControllerStudent {
 
 ### 2. Annotating service methods
 
-``` diff
+```diff
 import { Aspect } from 'vona-module-a-aspect';
 
 @Service()
@@ -75,7 +75,7 @@ For example, define the `prefix` parameter for the log AOP Method to control the
 
 ### 1. Defining parameter types
 
-``` diff
+```diff
 export interface IAopMethodOptionsLog extends IDecoratorAopMethodOptions {
 + prefix: string;
 }
@@ -83,7 +83,7 @@ export interface IAopMethodOptionsLog extends IDecoratorAopMethodOptions {
 
 ### 2. Providing default values ​​for parameters
 
-``` diff
+```diff
 @AopMethod<IAopMethodOptionsLog>({
 + prefix: 'time',
 })
@@ -91,7 +91,7 @@ export interface IAopMethodOptionsLog extends IDecoratorAopMethodOptions {
 
 ### 3. Using Parameters
 
-``` diff
+```diff
 export interface IAopMethodOptionsLog extends IDecoratorAopMethodOptions {
   prefix: string;
 }
@@ -115,7 +115,7 @@ class AopMethodLog {
 
 You can specify AOP Method parameters for any specific Class Method
 
-``` diff
+```diff
 class ControllerStudent {
   @Web.get()
 + @Aspect.aopMethod('demo-student:log', { prefix: 'elapsed' })
@@ -131,7 +131,7 @@ AOP Method parameters can be configured in App Config
 
 `src/backend/config/config/config.ts`
 
-``` typescript
+```typescript
 // onions
 config.onions = {
   aopMethod: {
@@ -152,9 +152,9 @@ You can control `enable/disable` of AOP Method
 
 ### 1. Enable
 
-* Disable for an Class Method
+- Disable for an Class Method
 
-``` diff
+```diff
 class ControllerStudent {
   @Web.get()
 + @Aspect.aopMethod('demo-student:log', { enable: false })
@@ -162,11 +162,11 @@ class ControllerStudent {
 }
 ```
 
-* Disable for Class Methods
+- Disable for Class Methods
 
 `src/backend/config/config/config.ts`
 
-``` diff
+```diff
 // onions
 config.onions = {
   aopMethod: {
@@ -181,14 +181,14 @@ config.onions = {
 
 Allows AOP Method to take effect in a specified operating environment
 
-|Name|Type|Description|
-|--|--|--|
-|flavor|string\|string[]|See: [Runtime Environments and Flavors](../../env-config/mode-flavor/introduction.md)|
-|mode|string\|string[]|See: [Runtime Environments and Flavors](../../env-config/mode-flavor/introduction.md)|
+| Name   | Type             | Description                                                                           |
+| ------ | ---------------- | ------------------------------------------------------------------------------------- |
+| flavor | string\|string[] | See: [Runtime Environments and Flavors](../../env-config/mode-flavor/introduction.md) |
+| mode   | string\|string[] | See: [Runtime Environments and Flavors](../../env-config/mode-flavor/introduction.md) |
 
-* Example
+- Example
 
-``` diff
+```diff
 @AopMethod({
 + meta: {
 +   flavor: 'normal',

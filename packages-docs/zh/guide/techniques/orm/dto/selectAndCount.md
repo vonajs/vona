@@ -10,14 +10,14 @@
 
 在 VSCode 中，可以通过右键菜单`Vona Create/Dto`创建 DTO 的代码骨架：
 
-``` typescript
+```typescript
 @Dto()
 export class DtoOrderResultPage {}
 ```
 
 ### 2. 继承$Dto.selectAndCount
 
-``` diff
+```diff
 @Dto()
 export class DtoOrderResultPage
 + extends $Dto.selectAndCount(() => ModelOrder) {}
@@ -25,16 +25,16 @@ export class DtoOrderResultPage
 
 ## DtoOrderResultPage成员字段
 
-|名称|说明|
-|--|--|
-|list|当前页的条目列表|
-|total|数据总条数|
+| 名称  | 说明             |
+| ----- | ---------------- |
+| list  | 当前页的条目列表 |
+| total | 数据总条数       |
 
 ## 标注API返回值
 
 以 Controller Order 的 findMany 方法为例，标注 API 返回值：
 
-``` diff
+```diff
 class ControllerOrder extends BeanBase {
   @Web.get('findMany')
 + @Api.body(DtoOrderResultPage)

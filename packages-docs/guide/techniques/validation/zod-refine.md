@@ -8,7 +8,7 @@ For example, create a Zod Refine `nameExists` in the module demo-student to chec
 
 ### 1. Cli command
 
-``` bash
+```bash
 $ vona :create:bean zodRefine nameExists --module=demo-student
 ```
 
@@ -20,8 +20,10 @@ Context Menu - [Module Path]: `Vona Bean/Zod Refine`
 
 ## Zod Refine Definition
 
-``` typescript
-export interface TypeZodRefineNameExistsData { name: string }
+```typescript
+export interface TypeZodRefineNameExistsData {
+  name: string;
+}
 
 export interface IZodRefineOptionsNameExists extends IDecoratorZodRefineOptions {}
 
@@ -46,7 +48,7 @@ class ZodRefineNameExists {
 
 ## Using Zod Refine
 
-``` diff
+```diff
 import { v } from 'vona-module-a-openapiutils';
 
 @Controller()
@@ -67,7 +69,7 @@ For example, define the `errorMessage` parameter for the `nameExists` Zod Refine
 
 ### 1. Defining parameter types
 
-``` diff
+```diff
 export interface IZodRefineOptionsNameExists extends IDecoratorZodRefineOptions {
 + errorMessage: string;
 }
@@ -75,7 +77,7 @@ export interface IZodRefineOptionsNameExists extends IDecoratorZodRefineOptions 
 
 ### 2. Providing default values ​​for parameters
 
-``` diff
+```diff
 @ZodRefine<IZodRefineOptionsNameExists>({
 + errorMessage: 'Student Exists',
 })
@@ -83,7 +85,7 @@ export interface IZodRefineOptionsNameExists extends IDecoratorZodRefineOptions 
 
 ### 3. Using Parameters
 
-``` diff
+```diff
 export interface TypeZodRefineNameExistsData { name: string }
 
 export interface IZodRefineOptionsNameExists extends IDecoratorZodRefineOptions {
@@ -112,7 +114,7 @@ class ZodRefineNameExists {
 
 You can specify Zod Refine parameters when using
 
-``` diff
+```diff
 class ControllerStudent {
   @Web.post()
 + async create(@Arg.body(v.refine('demo-student:nameExists', { errorMessage: 'Student Exists!!!' })) student: DtoStudentCreate) {}
@@ -125,7 +127,7 @@ Zod Refine parameters can be configured in App Config
 
 `src/backend/config/config/config.ts`
 
-``` typescript
+```typescript
 // onions
 config.onions = {
   zodRefine: {

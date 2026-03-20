@@ -10,7 +10,7 @@ For example, create a Serializer Transform: `upper` in the module demo-student t
 
 ### 1. Cli command
 
-``` bash
+```bash
 $ vona :create:bean serializerTransform upper --module=demo-student
 ```
 
@@ -22,7 +22,7 @@ Context Menu - [Module Path]: `Vona Bean/Serializer Transform`
 
 ## Serializer Transform Definition
 
-``` typescript
+```typescript
 export type TypeSerializerTransformUpperValue = string;
 
 export type TypeSerializerTransformUpperData = unknown;
@@ -57,7 +57,7 @@ For example, the result type returned by the Student API's `findOne` method is `
 
 Serialization needs to be enabled for the API
 
-``` diff
+```diff
 class ControllerStudent {
   @Web.get(':id')
   @Api.body(v.optional(), v.object(EntityStudent))
@@ -72,7 +72,7 @@ class ControllerStudent {
 
 ### 2. Field Decorator
 
-``` diff
+```diff
 class EntityStudent {
 + @Serializer.transform('demo-student:upper')
   @Api.field(v.title($locale('Name')))
@@ -88,7 +88,7 @@ You can pass Filter parameter to the Serializer Transform. The system first exec
 
 For example, if the current username is `admin`, the conversion logic for `upper` will not be executed
 
-``` diff
+```diff
 class EntityStudent {
   @Serializer.transform('demo-student:upper', {
 +   filter(this: VonaContext) {
@@ -108,7 +108,7 @@ For example, define the `first` parameter for Serializer Transform `upper` to co
 
 ### 1. Defining parameter types
 
-``` diff
+```diff
 export interface ISerializerTransformOptionsUpper extends IDecoratorSerializerTransformOptions {
 + first?: boolean;
 }
@@ -116,7 +116,7 @@ export interface ISerializerTransformOptionsUpper extends IDecoratorSerializerTr
 
 ### 2. Providing default values ​​for parameters
 
-``` diff
+```diff
 @SerializerTransform<ISerializerTransformOptionsUpper>({
 + first: false,
 })
@@ -124,7 +124,7 @@ export interface ISerializerTransformOptionsUpper extends IDecoratorSerializerTr
 
 ### 3. Using Parameters
 
-``` diff
+```diff
 export interface ISerializerTransformOptionsUpper extends IDecoratorSerializerTransformOptions {
   first?: boolean;
 }
@@ -148,7 +148,7 @@ class SerializerTransformUpper {
 
 Parameters can be specified for `@Serializer.transform`
 
-``` diff
+```diff
 class EntityStudent {
 + @Serializer.transform('demo-student:upper', { first: true })
   @Api.field(v.title($locale('Name')))
@@ -162,7 +162,7 @@ Serializer Transform parameters can be configured in App Config
 
 `src/backend/config/config/config.ts`
 
-``` typescript
+```typescript
 // onions
 config.onions = {
   serializerTransform: {

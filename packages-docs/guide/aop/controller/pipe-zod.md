@@ -11,7 +11,7 @@ Let's take the `ArgNumber` argument pipe created earlier as an example. The same
 ```diff
 class ControllerStudent {
   @Web.get(':id')
-- async findOne(@ArgNumber() @Arg.param('id') id: any) {}  
+- async findOne(@ArgNumber() @Arg.param('id') id: any) {}
 + async findOne(@Arg.param('id') id: number) {}
 }
 ```

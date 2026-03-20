@@ -2,11 +2,11 @@
 
 Vona also provides a set of APIs that allow us to lookup bean instances more flexibly
 
-## _getBean
+## \_getBean
 
 ### 1. Lookup based on Bean class
 
-``` typescript
+```typescript
 import { ServiceStudent } from '../service/student.ts';
 
 class ControllerStudent {
@@ -20,7 +20,7 @@ this.bean === this.app.bean, which is the app container
 
 ### 2. Lookup based on Bean identifier
 
-``` typescript
+```typescript
 class ControllerOther {
   async test() {
     const serviceStudent = this.bean._getBean('demo-student.service.student');
@@ -30,7 +30,7 @@ class ControllerOther {
 
 ### 3. Lookup global service bean
 
-``` typescript
+```typescript
 import { BeanJwt } from 'vona-module-a-jwt';
 
 class ControllerStudent {
@@ -47,7 +47,7 @@ class ControllerStudent {
 
 If create a request-scope Bean instance, we only need to invoke the `_getBean` method of the ctx container
 
-``` typescript
+```typescript
 class ControllerStudent {
   async test() {
     const serviceStudent1 = this.ctx.bean._getBean(ServiceStudent);
@@ -57,11 +57,11 @@ class ControllerStudent {
 }
 ```
 
-## _newBean
+## \_newBean
 
 ### 1. Create new instance based on Bean class
 
-``` typescript
+```typescript
 import { ServiceStudent } from '../service/student.ts';
 
 class ControllerStudent {
@@ -73,7 +73,7 @@ class ControllerStudent {
 
 ### 2. Create new instance based on Bean identifier
 
-``` typescript
+```typescript
 class ControllerOther {
   async test() {
     const serviceStudent = this.bean._newBean('demo-student.service.student');
@@ -83,7 +83,7 @@ class ControllerOther {
 
 ### 3. Create new instance of global service beans
 
-``` typescript
+```typescript
 import { BeanJwt } from 'vona-module-a-jwt';
 
 class ControllerStudent {

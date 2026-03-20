@@ -8,14 +8,14 @@
 
 In VSCode, use the `Vona Create/Dto` context menu to create a DTO code skeleton:
 
-``` typescript
+```typescript
 @Dto()
 export class DtoOrderQuery {}
 ```
 
 ### 2. Inherit DtoQueryBase
 
-``` typescript
+```typescript
 @Dto()
 export class DtoOrderQuery extends DtoQueryBase {}
 ```
@@ -24,17 +24,17 @@ export class DtoOrderQuery extends DtoQueryBase {}
 
 Since `DtoOrderQuery` inherits from `DtoQueryBase`, it has the following member fields:
 
-|Name|Description|Example|
-|--|--|--|
-|columns|List of fields to query|`*`, `id,orderNo,remark`, `["id","orderNo","remark"]`|
-|where|Query clause|`{ "orderNo": { "_include_":  "order001" } }`|
-|orders|Sorting|`orderNo,desc`, `[["orderNo", "desc"], ["createdAt", "desc"]]`|
+| Name    | Description             | Example                                                        |
+| ------- | ----------------------- | -------------------------------------------------------------- |
+| columns | List of fields to query | `*`, `id,orderNo,remark`, `["id","orderNo","remark"]`          |
+| where   | Query clause            | `{ "orderNo": { "_include_":  "order001" } }`                  |
+| orders  | Sorting                 | `orderNo,desc`, `[["orderNo", "desc"], ["createdAt", "desc"]]` |
 
 ## Annotating Query Parameters
 
 Still taking the `findAll` method of the `Order` controller as an example, we can annotate the Query parameters:
 
-``` diff
+```diff
 + import type { IQueryParams } from 'vona-module-a-orm';
 + import { Arg } from 'vona-module-a-web';
 
@@ -60,7 +60,7 @@ The automatically generated Swagger/Openapi is as follows:
 
 If you need to add query clause for business fields in DTO, you can use `$Dto.query`
 
-``` diff
+```diff
 @Dto()
 export class DtoOrderQuery
 + extends $Dto.query(EntityOrder, ['orderNo', 'remark']) {}
@@ -76,7 +76,7 @@ The automatically generated Swagger/Openapi is as follows:
 
 You can also add custom fields directly in the DTO
 
-``` diff
+```diff
 @Dto()
 export class DtoOrderQuery
 + extends $Dto.query(EntityOrder, ['remark']) {
@@ -96,10 +96,9 @@ We can also specify OpenAPI parameters to support more capabilities
 
 For example, if the Model `Order` and Model `User` have an `n:1` relation, we can pass `userName` as the query condition in the Query parameters. Then, we need to add the `userName` field in the DTO and set the OpenAPI parameters
 
-``` typescript
+```typescript
 @Dto()
-export class DtoOrderQuery
-  extends $Dto.query(EntityOrder, ['orderNo', 'remark']) {
+export class DtoOrderQuery extends $Dto.query(EntityOrder, ['orderNo', 'remark']) {
   @Api.field(
     v.openapi({
       filter: {
@@ -117,10 +116,9 @@ export class DtoOrderQuery
 
 You can also use `v.filter`:
 
-``` typescript
+```typescript
 @Dto()
-export class DtoOrderQuery
-  extends $Dto.query(EntityOrder, ['orderNo', 'remark']) {
+export class DtoOrderQuery extends $Dto.query(EntityOrder, ['orderNo', 'remark']) {
   @Api.field(
     v.filter({
       table: 'testVonaUser',
@@ -134,12 +132,12 @@ export class DtoOrderQuery
 }
 ```
 
-|Name|Description|
-|--|--|
-|table|Table name of relation|
-|joinType|Relation Type, default is `innerJoin`|
-|joinOn|Relation condition|
-|originalName|Original field name|
+| Name         | Description                           |
+| ------------ | ------------------------------------- |
+| table        | Table name of relation                |
+| joinType     | Relation Type, default is `innerJoin` |
+| joinOn       | Relation condition                    |
+| originalName | Original field name                   |
 
 The automatically generated Swagger/Openapi is as follows:
 
@@ -149,7 +147,7 @@ The automatically generated Swagger/Openapi is as follows:
 
 Openapi parameters can be configured in App Config
 
-``` typescript
+```typescript
 config.onions = {
   dto: {
     'test-vona:orderQuery': {
@@ -174,7 +172,7 @@ When querying Model `Order` which joins with Model `User`, if the fields in `ord
 
 Vona ORM has built-in relations-based orders processing logic. You only need to set the Openapi parameters in the DTO:
 
-``` diff
+```diff
 @Dto<IDtoOptionsOrderQuery>({
 + openapi: {
 +   filter: {

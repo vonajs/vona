@@ -6,7 +6,7 @@ For example, create a global filter `test` in the module demo-student to customi
 
 ### 1. Cli command
 
-``` bash
+```bash
 $ vona :create:bean filter test --module=demo-student --boilerplate=global
 ```
 
@@ -18,7 +18,7 @@ Context Menu - [Module Path]: `Vona Aspect/Filter Global`
 
 ## Filter Definition
 
-``` typescript
+```typescript
 export interface IFilterOptionsTest extends IDecoratorFilterOptionsGlobal {}
 
 @Filter<IFilterOptionsTest>()
@@ -52,7 +52,7 @@ For example, define the `prefix` parameter for the test filter to customize the 
 
 ### 1. Defining parameter types
 
-``` diff
+```diff
 export interface IFilterOptionsTest extends IDecoratorFilterOptionsGlobal {
 + prefix: string;
 }
@@ -60,7 +60,7 @@ export interface IFilterOptionsTest extends IDecoratorFilterOptionsGlobal {
 
 ### 2. Providing default values ​​for parameters
 
-``` diff
+```diff
 @Filter<IFilterOptionsTest>({
 + prefix: 'Custom Error',
 })
@@ -68,7 +68,7 @@ export interface IFilterOptionsTest extends IDecoratorFilterOptionsGlobal {
 
 ### 3. Using Parameters
 
-``` diff
+```diff
 export interface IFilterOptionsTest extends IDecoratorFilterOptionsGlobal {
   prefix: string;
 }
@@ -95,7 +95,7 @@ export class FilterTest extends BeanBase implements IFilterLog {
 
 You can specify global filter parameters for a specific API
 
-``` diff
+```diff
 class ControllerStudent {
   @Web.post()
 + @Aspect.filterGlobal('demo-student:test', { prefix: 'Test Error' })
@@ -111,7 +111,7 @@ Filter parameters can be configured in App Config
 
 `src/backend/config/config/config.ts`
 
-``` typescript
+```typescript
 // onions
 config.onions = {
   filter: {
@@ -134,7 +134,7 @@ Since global filters ard loaded and enabled by default, VonaJS provides two para
 
 For example, the system has a built-in global filter `a-error:error`, and we hope that the loading order is as follows: `a-error:error` > `Current`
 
-``` diff
+```diff
 @Filter({
 + dependencies: 'a-error:error',
   prefix: 'Custom Error',
@@ -146,7 +146,7 @@ class FilterTest {}
 
 The order of `dependents` is just the opposite of `dependencies`. We hope that the loading order is as follows: `Current` > `a-error:error`
 
-``` diff
+```diff
 @Filter({
 + dependents: 'a-error:error',
   prefix: 'Custom Error',
@@ -160,9 +160,9 @@ You can control `enable/disable` of global filter for certain APIs
 
 ### 1. Enable
 
-* Disable for an API
+- Disable for an API
 
-``` diff
+```diff
 class ControllerStudent {
   @Web.post()
 + @Aspect.filterGlobal('demo-student:test', { enable: false })
@@ -170,11 +170,11 @@ class ControllerStudent {
 }
 ```
 
-* Disable for all APIs
+- Disable for all APIs
 
 `src/backend/config/config/config.ts`
 
-``` diff
+```diff
 // onions
 config.onions = {
   filter: {
@@ -189,14 +189,14 @@ config.onions = {
 
 Allows global filter to take effect in a specified operating environment
 
-|Name|Type|Description|
-|--|--|--|
-|flavor|string\|string[]|See: [Runtime Environments and Flavors](../../env-config/mode-flavor/introduction.md)|
-|mode|string\|string[]|See: [Runtime Environments and Flavors](../../env-config/mode-flavor/introduction.md)|
+| Name   | Type             | Description                                                                           |
+| ------ | ---------------- | ------------------------------------------------------------------------------------- |
+| flavor | string\|string[] | See: [Runtime Environments and Flavors](../../env-config/mode-flavor/introduction.md) |
+| mode   | string\|string[] | See: [Runtime Environments and Flavors](../../env-config/mode-flavor/introduction.md) |
 
-* Example
+- Example
 
-``` diff
+```diff
 @Filter({
 + meta: {
 +   flavor: 'normal',
@@ -207,19 +207,19 @@ class FilterTest {}
 ```
 
 ### 3. match/ignore
-    
-You can enable/disable global filter for some specific APIs    
 
-|Name|Type|Description|
-|--|--|--|
-|match|string\|regexp\|(string\|regexp)[]|For which APIs to enable|
-|ignore|string\|regexp\|(string\|regexp)[]|For which APIs to disable|
+You can enable/disable global filter for some specific APIs
+
+| Name   | Type                               | Description               |
+| ------ | ---------------------------------- | ------------------------- |
+| match  | string\|regexp\|(string\|regexp)[] | For which APIs to enable  |
+| ignore | string\|regexp\|(string\|regexp)[] | For which APIs to disable |
 
 ## Inspect
 
 You can directly inspect the currently effective global filter list in the Controller action
 
-``` diff
+```diff
 class ControllerStudent {
   @Web.post()
   async create() {

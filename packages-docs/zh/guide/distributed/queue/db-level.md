@@ -14,7 +14,7 @@ VonaJS 采用`Async Local Storage`为不同的上下文提供不同的`数据源
 
 在 Worker A 中执行如下代码：
 
-``` typescript
+```typescript
 class ControllerStudent {
   async test() {
     const result = await this.ctx.db.transaction.begin(async () => {
@@ -33,7 +33,7 @@ class ControllerStudent {
 
 在 Worker B 中执行如下代码：
 
-``` diff
+```diff
 class QueueAdd {
   async execute(data, _options) {
 +   await this.scope.model.student.update({ id: 1, name: 'student name' });
@@ -61,16 +61,19 @@ VonaJS 采用`Async Local Storage`为不同的上下文提供不同的`数据源
 在 VonaJS 中，在分布式场景下，将数据库连接池的最大连接数设为`1`，也不会发生因数据源竞争而导致的死锁情况
 :::
 
-``` typescript
+```typescript
 class ControllerStudent {
   async test() {
     await this.scope.model.student.select();
     const dbLevel = this.bean.database.current.level;
-    await this.bean.database.switchDb(async () => {
-      await this.scope.model.student.select();
-      const dbLevel1 = this.bean.database.current.level;
-      console.log(dbLevel, dbLevel1);
-    }, { level: dbLevel + 1 });
+    await this.bean.database.switchDb(
+      async () => {
+        await this.scope.model.student.select();
+        const dbLevel1 = this.bean.database.current.level;
+        console.log(dbLevel, dbLevel1);
+      },
+      { level: dbLevel + 1 },
+    );
   }
 }
 ```
@@ -81,7 +84,7 @@ class ControllerStudent {
 
 ### 简写方式
 
-``` diff
+```diff
 class ControllerStudent {
   async test() {
 +   await this.bean.database.switchDbIsolate(async () => {
@@ -96,13 +99,13 @@ class ControllerStudent {
 
 当使用`push/pushAsync`方法推送任务时，系统会自动传入`current.level + 1`，从而实现数据源分级，避免死锁发生
 
-``` typescript
+```typescript
 await this.scope.queue.add.pushAsync(data);
 ```
 
 等价于：
 
-``` typescript
+```typescript
 await this.scope.queue.add.pushAsync(data, {
   dbInfo: {
     level: this.bean.database.current.level + 1,

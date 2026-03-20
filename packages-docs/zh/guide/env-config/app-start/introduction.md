@@ -31,7 +31,7 @@ VonaJS 提供了`Hook/Monkey`机制，可以在应用启动时对系统进行深
 应用停止时序分两个步骤：
 
 1. `appClose`: 触发钩子`appClose`
-4. `appClosed`: 触发钩子`appClosed`
+2. `appClosed`: 触发钩子`appClosed`
 
 ## 钩子清单
 
@@ -43,22 +43,22 @@ VonaJS 提供了`Hook/Monkey`机制，可以在应用启动时对系统进行深
 
 针对不同的场景，为不同的钩子提供了对应的接口定义，从而规范钩子的使用
 
-|钩子|Module Main 接口|Module Monkey 接口|App Monkey 接口|
-|--|--|--|--|
-|moduleLoading|IModuleMain|IMonkeyModule|IMonkeyModule|
-|configLoaded|IModuleMain|IMonkeyModule|IMonkeyModule|
-|moduleLoaded|IModuleMain|IMonkeyModule|IMonkeyModule|
-|appStart||IMonkeySystem / IMonkeyAppStart|IMonkeySystem / IMonkeyAppStart|
-|appReady||IMonkeySystem / IMonkeyAppReady|IMonkeySystem / IMonkeyAppReady|
-|appStarted||IMonkeySystem / IMonkeyAppStarted|IMonkeySystem / IMonkeyAppStarted|
-|appClose||IMonkeySystem / IMonkeyAppClose|IMonkeySystem / IMonkeyAppClose|
-|appClosed||IMonkeySystem / IMonkeyAppClosed|IMonkeySystem / IMonkeyAppClosed|
+| 钩子          | Module Main 接口 | Module Monkey 接口                | App Monkey 接口                   |
+| ------------- | ---------------- | --------------------------------- | --------------------------------- |
+| moduleLoading | IModuleMain      | IMonkeyModule                     | IMonkeyModule                     |
+| configLoaded  | IModuleMain      | IMonkeyModule                     | IMonkeyModule                     |
+| moduleLoaded  | IModuleMain      | IMonkeyModule                     | IMonkeyModule                     |
+| appStart      |                  | IMonkeySystem / IMonkeyAppStart   | IMonkeySystem / IMonkeyAppStart   |
+| appReady      |                  | IMonkeySystem / IMonkeyAppReady   | IMonkeySystem / IMonkeyAppReady   |
+| appStarted    |                  | IMonkeySystem / IMonkeyAppStarted | IMonkeySystem / IMonkeyAppStarted |
+| appClose      |                  | IMonkeySystem / IMonkeyAppClose   | IMonkeySystem / IMonkeyAppClose   |
+| appClosed     |                  | IMonkeySystem / IMonkeyAppClosed  | IMonkeySystem / IMonkeyAppClosed  |
 
 ## 创建 Module Main
 
 ### 1. Cli命令
 
-``` bash
+```bash
 $ vona :init:main demo-student
 ```
 
@@ -70,7 +70,7 @@ $ vona :init:main demo-student
 
 ### Module Main定义
 
-``` typescript
+```typescript
 export class Main extends BeanSimple implements IModuleMain {
   async moduleLoading() {}
   async moduleLoaded() {}
@@ -82,7 +82,7 @@ export class Main extends BeanSimple implements IModuleMain {
 
 ### 1. Cli命令
 
-``` bash
+```bash
 $ vona :init:monkey demo-student
 ```
 
@@ -94,7 +94,7 @@ $ vona :init:monkey demo-student
 
 ### Module Monkey定义
 
-``` typescript
+```typescript
 export class Monkey extends BeanSimple implements IMonkeyModule, IMonkeySystem {
   async moduleLoading(_module: IModule) {}
   async moduleLoaded(_module: IModule) {}
@@ -111,7 +111,7 @@ export class Monkey extends BeanSimple implements IMonkeyModule, IMonkeySystem {
 
 ### 1. Cli命令
 
-``` bash
+```bash
 $ vona :init:appMonkey
 ```
 
@@ -125,7 +125,7 @@ $ vona :init:appMonkey
 
 `src/backend/config/monkey.ts`
 
-``` typescript
+```typescript
 export class AppMonkey extends BeanSimple implements IMonkeyModule, IMonkeySystem {
   async moduleLoading(_module: IModule) {}
   async moduleLoaded(_module: IModule) {}

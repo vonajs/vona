@@ -23,7 +23,7 @@ Configuration can be modified in the App Config or .env file
 
 `src/backend/config/config/config.ts`
 
-``` typescript
+```typescript
 // logger
 config.logger = {
   baseDir: '/new/path',
@@ -34,7 +34,7 @@ config.logger = {
 
 `env/.env`
 
-``` typescript
+```typescript
 # logger
 LOGGER_DIR = /new/path
 ```
@@ -45,7 +45,7 @@ Log configuration can be modified in App Config:
 
 `src/backend/config/config/config.ts`
 
-``` typescript
+```typescript
 // logger
 config.logger = {
   baseDir: '/new/path',
@@ -55,12 +55,12 @@ config.logger = {
 };
 ```
 
-|Name|Description|
-|--|--|
-|baseDir|Log Directory|
-|rotate|Log Rotate|
-|base|Basic configuration, providing common basic configuration for all clients|
-|clients|Configure multiple clients. The system provides a built-in `default` client, enabling out-of-the-box logging capabilities|
+| Name    | Description                                                                                                               |
+| ------- | ------------------------------------------------------------------------------------------------------------------------- |
+| baseDir | Log Directory                                                                                                             |
+| rotate  | Log Rotate                                                                                                                |
+| base    | Basic configuration, providing common basic configuration for all clients                                                 |
+| clients | Configure multiple clients. The system provides a built-in `default` client, enabling out-of-the-box logging capabilities |
 
 ## Rotate
 
@@ -70,7 +70,7 @@ The system provides a default rotation configuration, which is enabled. You can 
 
 `src/backend/config/config/config.ts`
 
-``` typescript
+```typescript
 // logger
 config.logger = {
   rotate(filename: string) {
@@ -81,23 +81,23 @@ config.logger = {
       maxSize: '20m',
       maxFiles: '7d',
     };
-  },  
+  },
 };
 ```
 
-|Name|Description|
-|--|--|
-|enable|Whether Rotate is enabled|
-|filename|Filename template|
-|datePattern|Date pattern|
-|maxSize|Maximum size of each file|
-|maxFiles|Keep only files from the last few days|
+| Name        | Description                            |
+| ----------- | -------------------------------------- |
+| enable      | Whether Rotate is enabled              |
+| filename    | Filename template                      |
+| datePattern | Date pattern                           |
+| maxSize     | Maximum size of each file              |
+| maxFiles    | Keep only files from the last few days |
 
 ### 2. .env
 
 `env/.env`
 
-``` typescript
+```typescript
 # logger
 LOGGER_ROTATE_ENABLE = true
 LOGGER_ROTATE_FILENAME = '{{filename}}-%DATE%.log'
@@ -116,7 +116,7 @@ Add a new Client type definition using the interface merging mechanism, such as 
 
 In the VSCode editor, enter the code snippet `recordloggerclient`, and the code skeleton will be automatically generated:
 
-``` typescript
+```typescript
 declare module 'vona' {
   export interface ILoggerClientRecord {
     : never;
@@ -126,7 +126,7 @@ declare module 'vona' {
 
 Adjust the code, and then add `order`
 
-``` diff
+```diff
 declare module 'vona' {
   export interface ILoggerClientRecord {
 +   order: never;
@@ -138,15 +138,12 @@ declare module 'vona' {
 
 `src/backend/config/config/config.ts`
 
-``` typescript
+```typescript
 // logger
 config.logger = {
   clients: {
     order(this: VonaApplication, clientInfo) {
-      const transports = [
-        this.bean.logger.makeTransportFile(clientInfo, 'order'),
-        this.bean.logger.makeTransportConsole(clientInfo),
-      ];
+      const transports = [this.bean.logger.makeTransportFile(clientInfo, 'order'), this.bean.logger.makeTransportConsole(clientInfo)];
       return { transports };
     },
   },
@@ -164,9 +161,9 @@ config.logger = {
 
 There are two ways to obtain a Logger Client instance:
 
-* `Method 1`
+- `Method 1`
 
-``` typescript
+```typescript
 class ControllerStudent extends BeanBase {
   async test() {
     // logger: default
@@ -177,9 +174,9 @@ class ControllerStudent extends BeanBase {
 }
 ```
 
-* `Method 2`
+- `Method 2`
 
-``` typescript
+```typescript
 class ControllerStudent extends BeanBase {
   async test() {
     // logger: default
@@ -192,16 +189,16 @@ class ControllerStudent extends BeanBase {
 
 `Method 2` is not only more concise, but it also automatically includes the `beanFullName` of the current Bean Class in the logs, making it easier to troubleshoot problems
 
-* Example:
+- Example:
 
-``` typescript
+```typescript
 const loggerOrder = this.bean.logger.get('order');
 loggerOrder.info('test');
 ```
 
 ![](../../../assets/img/logger/logger-1.png)
 
-``` typescript
+```typescript
 // logger: default
 this.$logger.info('test');
 // logger: order
@@ -218,7 +215,7 @@ For the same Logger Client, multiple Child instances can be generated, each corr
 
 For example, generating a Child `pay` will clearly display the `pay` information in the log
 
-``` typescript
+```typescript
 // child of logger-default
 this.$loggerChild('pay').info('$50');
 // child of logger-order
@@ -235,7 +232,7 @@ Similarly, a type definition for `pay` is required to support type hints
 
 In the VSCode editor, enter the code snippet `recordloggerchild`, and the code skeleton will be automatically generated:
 
-``` typescript
+```typescript
 declare module 'vona' {
   export interface ILoggerChildRecord {
     : never;
@@ -245,7 +242,7 @@ declare module 'vona' {
 
 Adjust the code, and then add `pay`
 
-``` diff
+```diff
 declare module 'vona' {
   export interface ILoggerChildRecord {
 +   pay: never;
@@ -257,7 +254,7 @@ declare module 'vona' {
 
 ### 1. General Usage
 
-``` typescript
+```typescript
 this.$logger.info('test');
 ```
 
@@ -265,7 +262,7 @@ this.$logger.info('test');
 
 String interpolation is implemented based on [util.format](https://nodejs.org/dist/latest/docs/api/util.html#util_util_format_format_args)
 
-``` typescript
+```typescript
 this.$logger.info('%s has %d apples', 'Tom', 3);
 ```
 
@@ -273,20 +270,20 @@ this.$logger.info('%s has %d apples', 'Tom', 3);
 
 Due to log level, some leveled messages are not written to files. Therefore, constructing excessively large message contents will waste system resources
 
-* Example
+- Example
 
-``` typescript
+```typescript
 const obj = { data: 'more info' };
 this.$logger.debug(JSON.stringify(obj));
 ```
 
 If the current level is `info`, then logs at the `debug` level will not be written to the file. Therefore, `JSON.stringify` will waste system resources
 
-* Solution
+- Solution
 
 A callback function can be provided. This function is executed only when writing to a file is required, thus generating the actual message
 
-``` typescript
+```typescript
 const obj = { data: 'more info' };
 this.$logger.debug(() => {
   return JSON.stringify(obj);
@@ -297,7 +294,7 @@ this.$logger.debug(() => {
 
 Multi-Child Loggers can be created from the current Logger instance, thus passing more metadata to the log message
 
-``` typescript
+```typescript
 this.$logger.child({ requestId: '451' }).child({ extra: 'some info' }).info('test');
 this.$logger.child({ requestId: '578', extra: 'some info' }).info('test');
 ```

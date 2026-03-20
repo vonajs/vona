@@ -6,7 +6,7 @@
 
 ### 1. Cli命令
 
-``` bash
+```bash
 $ vona :create:bean filter test --module=demo-student --boilerplate=global
 ```
 
@@ -18,7 +18,7 @@ $ vona :create:bean filter test --module=demo-student --boilerplate=global
 
 ## 过滤器定义
 
-``` typescript
+```typescript
 export interface IFilterOptionsTest extends IDecoratorFilterOptionsGlobal {}
 
 @Filter<IFilterOptionsTest>()
@@ -52,7 +52,7 @@ class FilterTest {
 
 ### 1. 定义参数类型
 
-``` diff
+```diff
 export interface IFilterOptionsTest extends IDecoratorFilterOptionsGlobal {
 +  prefix: string;
 }
@@ -60,7 +60,7 @@ export interface IFilterOptionsTest extends IDecoratorFilterOptionsGlobal {
 
 ### 2. 提供参数缺省值
 
-``` diff
+```diff
 @Filter<IFilterOptionsTest>({
 + prefix: 'Custom Error',
 })
@@ -68,7 +68,7 @@ export interface IFilterOptionsTest extends IDecoratorFilterOptionsGlobal {
 
 ### 3. 使用参数
 
-``` diff
+```diff
 export interface IFilterOptionsTest extends IDecoratorFilterOptionsGlobal {
   prefix: string;
 }
@@ -95,7 +95,7 @@ export class FilterTest extends BeanBase implements IFilterLog {
 
 可以针对某个 API 单独指定全局过滤器的参数
 
-``` diff
+```diff
 class ControllerStudent {
   @Web.post()
 + @Aspect.filterGlobal('demo-student:test', { prefix: 'Test Error' })
@@ -111,7 +111,7 @@ class ControllerStudent {
 
 `src/backend/config/config/config.ts`
 
-``` typescript
+```typescript
 // onions
 config.onions = {
   filter: {
@@ -134,7 +134,7 @@ config.onions = {
 
 比如，系统有一个内置全局过滤器`a-error:error`，希望加载顺序如下：`a-error:error` > `Current`
 
-``` diff
+```diff
 @Filter({
 + dependencies: 'a-error:error',
   prefix: 'Custom Error',
@@ -146,7 +146,7 @@ class FilterTest {}
 
 `dependents`的顺序刚好与`dependencies`相反，希望加载顺序如下：`Current` > `a-error:error`
 
-``` diff
+```diff
 @Filter({
 + dependents: 'a-error:error',
   prefix: 'Custom Error',
@@ -160,9 +160,9 @@ class FilterTest {}
 
 ### 1. Enable
 
-* 针对某个 API 禁用
+- 针对某个 API 禁用
 
-``` diff
+```diff
 class ControllerStudent {
   @Web.post()
 + @Aspect.filterGlobal('demo-student:test', { enable: false })
@@ -170,11 +170,11 @@ class ControllerStudent {
 }
 ```
 
-* 针对所有 API 禁用
+- 针对所有 API 禁用
 
 `src/backend/config/config/config.ts`
 
-``` diff
+```diff
 // onions
 config.onions = {
   filter: {
@@ -189,14 +189,14 @@ config.onions = {
 
 可以让全局过滤器在指定的运行环境生效
 
-|名称|类型|说明|
-|--|--|--|
-|flavor|string\|string[]|参见: [运行环境与Flavor](../../env-config/mode-flavor/introduction.md)|
-|mode|string\|string[]|参见: [运行环境与Flavor](../../env-config/mode-flavor/introduction.md)|
+| 名称   | 类型             | 说明                                                                   |
+| ------ | ---------------- | ---------------------------------------------------------------------- |
+| flavor | string\|string[] | 参见: [运行环境与Flavor](../../env-config/mode-flavor/introduction.md) |
+| mode   | string\|string[] | 参见: [运行环境与Flavor](../../env-config/mode-flavor/introduction.md) |
 
-* 举例
+- 举例
 
-``` diff
+```diff
 @Filter({
 + meta: {
 +   flavor: 'normal',
@@ -207,19 +207,19 @@ class FilterTest {}
 ```
 
 ### 3. match/ignore
-    
+
 可以针对指定的 API 启用/禁用全局过滤器
 
-|名称|类型|说明|
-|--|--|--|
-|match|string\|regexp\|(string\|regexp)[]|针对哪些API启用|
-|ignore|string\|regexp\|(string\|regexp)[]|针对哪些API禁用|
+| 名称   | 类型                               | 说明            |
+| ------ | ---------------------------------- | --------------- |
+| match  | string\|regexp\|(string\|regexp)[] | 针对哪些API启用 |
+| ignore | string\|regexp\|(string\|regexp)[] | 针对哪些API禁用 |
 
 ## 查看当前生效的全局过滤器清单
 
 可以直接在 Controller action 中输出当前生效的全局过滤器清单
 
-``` diff
+```diff
 class ControllerStudent {
   @Web.post()
   async create() {

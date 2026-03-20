@@ -6,7 +6,7 @@ For example, we create a Service `student` in the module demo-student
 
 ### 1. Cli command
 
-``` bash
+```bash
 $ vona :create:bean service student --module=demo-student
 ```
 
@@ -18,7 +18,7 @@ Context Menu - [Module Path]: `Vona Create/Service`
 
 ## Service Definition
 
-``` typescript
+```typescript
 @Service()
 export class ServiceStudent extends BeanBase {}
 ```
@@ -35,9 +35,9 @@ The use of Service can be explained from different dimensions
 
 Inject `ServiceStudent` into `ControllerStudent` of module demo-student, the code is as follows:
 
-* Based on Class type
+- Based on Class type
 
-``` typescript
+```typescript
 import { ServiceStudent } from '../service/student.ts';
 
 class ControllerStudent {
@@ -46,9 +46,9 @@ class ControllerStudent {
 }
 ```
 
-* Based on Bean identifier
+- Based on Bean identifier
 
-``` typescript
+```typescript
 import type { ServiceStudent } from '../service/student.ts';
 
 export class ControllerStudent {
@@ -61,9 +61,9 @@ Since the imported `ServiceStudent` is a `type`, the Bean identifier of Service 
 
 ## 2. Dependency lookup
 
-* Lookup in this module
+- Lookup in this module
 
-``` typescript
+```typescript
 class ControllerStudent {
   findOne() {
     return this.scope.service.student.findOne();
@@ -71,9 +71,9 @@ class ControllerStudent {
 }
 ```
 
-* Lookup cross-module
+- Lookup cross-module
 
-``` typescript
+```typescript
 class ControllerStudent {
   findOne() {
     return this.$scope.demoStudent.service.student.findOne();
@@ -83,11 +83,11 @@ class ControllerStudent {
 
 ## 3. Dependency lookup (API)
 
-### _getBean
+### \_getBean
 
 1. Lookup based on Bean class
 
-``` typescript
+```typescript
 import { ServiceStudent } from '../service/student.ts';
 
 class ControllerStudent {
@@ -101,7 +101,7 @@ this.bean === this.app.bean, which is the app container
 
 2. Lookup based on Bean identifier
 
-``` typescript
+```typescript
 class ControllerStudent {
   findOne() {
     const serviceStudent = this.bean._getBean('demo-student.service.student');
@@ -113,21 +113,21 @@ class ControllerStudent {
 
 If we want to create a request-scope Bean instance, then we only need to invoke the `_getBean` method of the ctx container
 
-``` typescript
+```typescript
 class ControllerStudent {
   findOne() {
     const serviceStudent1 = this.ctx.bean._getBean(ServiceStudent);
     const serviceStudent2 = this.ctx.bean._getBean('demo-student.service.student');
     // serviceStudent1 === serviceStudent2
-}
+  }
 }
 ```
 
-### _newBean
+### \_newBean
 
 1. Create a new instance based on the Bean class
 
-``` typescript
+```typescript
 class ControllerStudent {
   findOne() {
     const serviceStudent = this.bean._newBean(ServiceStudent);
@@ -137,7 +137,7 @@ class ControllerStudent {
 
 2. Create a new instance based on the Bean identifier
 
-``` typescript
+```typescript
 class ControllerStudent {
   findOne() {
     const serviceStudent = this.bean._newBean('demo-student.service.student');

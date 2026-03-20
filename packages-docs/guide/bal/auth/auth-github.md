@@ -6,22 +6,19 @@ This module provides `GitHub Authentication` and supports mock user login in the
 
 ### 1. Login
 
-``` typescript
+```typescript
 class ControllerStudent {
   @Web.get('login')
   @Passport.public()
   async login() {
-    await this.bean.auth.authenticate(
-      'auth-github:github',
-      { state: { redirect: '/' } },
-    );
+    await this.bean.auth.authenticate('auth-github:github', { state: { redirect: '/' } });
   }
 }
 ```
 
 ### 2. Logout
 
-``` typescript
+```typescript
 await this.bean.passport.signout();
 ```
 
@@ -31,7 +28,7 @@ In App Config Setting Authentication Credentials
 
 `src/backend/config/config/config.ts`
 
-``` typescript
+```typescript
 // onions
 config.onions = {
   authProvider: {
@@ -51,11 +48,11 @@ config.onions = {
 
 ### 4. Adding More Client Credentials
 
-* First, add the Client type definition using the interface merging mechanism
+- First, add the Client type definition using the interface merging mechanism
 
 In the VSCode editor, enter the code snippet `recordauthclient`, and the code skeleton will be automatically generated:
 
-``` typescript
+```typescript
 declare module 'vona-module-x-x' {
   export interface IAuthProvider_xxx_ClientRecord {
     : never;
@@ -65,7 +62,7 @@ declare module 'vona-module-x-x' {
 
 Adjust the code:
 
-``` typescript
+```typescript
 declare module 'vona-module-auth-github' {
   export interface IAuthProviderGithubClientRecord {
     another: never;
@@ -73,9 +70,9 @@ declare module 'vona-module-auth-github' {
 }
 ```
 
-* Then set the authentication credentials in App Config
+- Then set the authentication credentials in App Config
 
-``` diff
+```diff
 // onions
 config.onions = {
   authProvider: {
@@ -130,7 +127,7 @@ For example, creating an Auth Provider: `github` in the module `auth-github`
 
 ### 1. Cli command
 
-``` bash
+```bash
 $ vona :create:bean authProvider github --module=auth-github
 ```
 
@@ -142,7 +139,7 @@ Context Menu - [Module Path]: `Vona Bean/Auth Provider`
 
 ## Auth Provider definition
 
-``` diff
+```diff
 export interface IAuthProviderGithubClientRecord extends IAuthProviderClientRecord {}
 
 export interface IAuthProviderGithubClientOptions extends IAuthProviderOauth2ClientOptions {
@@ -188,7 +185,7 @@ class AuthProviderGithub {
 
 Profile has a unified interface definition:
 
-``` typescript
+```typescript
 export interface IAuthUserProfile {
   id: string;
   username?: string;
@@ -203,4 +200,4 @@ export interface IAuthUserProfile {
 }
 ```
 
-* `confirmed`: If `true`, it means the user has confirmed and no further `activation` operation is needed
+- `confirmed`: If `true`, it means the user has confirmed and no further `activation` operation is needed

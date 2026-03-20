@@ -10,7 +10,7 @@
 
 比如，模块 demo-student 中有一个 model `student`，用于 crud 操作。可以这样使用 model：
 
-``` typescript
+```typescript
 import { ModelStudent } from '../model/student.ts';
 
 async findMany(params) {
@@ -21,7 +21,7 @@ async findMany(params) {
 
 使用魔术方法：
 
-``` typescript
+```typescript
 async findMany(params) {
   return await this.scope.model.student.selectAndCount(params);
 }
@@ -37,7 +37,7 @@ Vona ORM 采用魔术方法的机制进一步简化操作数据的代码
 
 比如，通过字段`id`查询学生信息，代码如下：
 
-``` typescript
+```typescript
 async findOne(id) {
   return await this.scope.model.student.get({ id });
 }
@@ -45,7 +45,7 @@ async findOne(id) {
 
 使用魔术方法：
 
-``` typescript
+```typescript
 async findOne(id) {
   return await this.scope.model.student.getById(id);
 }
@@ -59,7 +59,7 @@ async findOne(id) {
 
 - 如何创建 Service，参见: [Service](../../essentials/api/service.md)
 
-``` typescript
+```typescript
 import { BeanBase } from 'vona';
 import { Service } from 'vona-module-a-bean';
 
@@ -75,7 +75,7 @@ export class ServiceColor extends BeanBase {}
 
 在 VSCode 编辑器中，输入代码片段`aopmagicget`，自动生成代码骨架:
 
-``` diff
+```diff
 @Service()
 export class ServiceColor extends BeanBase {
 + protected __get__(prop: string) {}
@@ -84,7 +84,7 @@ export class ServiceColor extends BeanBase {
 
 ### 2. 实现自定义逻辑
 
-``` diff
+```diff
 @Service()
 export class ServiceColor extends BeanBase {
 + private _colors = {
@@ -103,7 +103,7 @@ export class ServiceColor extends BeanBase {
 
 通过接口类型合并的机制为颜色提供类型定义
 
-``` typescript
+```typescript
 declare module 'vona-module-demo-student' {
   export interface ServiceColor {
     red: string;
@@ -131,7 +131,7 @@ async test() {
 
 在 VSCode 编辑器中，输入代码片段`aopmagicset`，自动生成代码骨架:
 
-``` diff
+```diff
 @Service()
 export class ServiceColor extends BeanBase {
 + protected __set__(prop: string, value: any): boolean {
@@ -142,7 +142,7 @@ export class ServiceColor extends BeanBase {
 
 ### 2. 实现自定义逻辑
 
-``` diff
+```diff
 @Service()
 export class ServiceColor extends BeanBase {
   private _colors = {
@@ -166,7 +166,7 @@ export class ServiceColor extends BeanBase {
 
 通过接口类型合并的机制为颜色提供类型定义
 
-``` diff
+```diff
 declare module 'vona-module-demo-student' {
   export interface ServiceColor {
     red: string;

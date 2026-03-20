@@ -6,7 +6,7 @@
 
 ## insert
 
-``` typescript
+```typescript
 class ServicePost {
   async create() {
     const post = await this.scope.model.post.insert({
@@ -20,13 +20,10 @@ class ServicePost {
 
 ## insertBulk
 
-``` typescript
+```typescript
 class ServicePost {
   async createBulk() {
-    const posts = await this.scope.model.post.insertBulk([
-      { title: 'Post001' },
-      { title: 'Post002' },
-    ]);
+    const posts = await this.scope.model.post.insertBulk([{ title: 'Post001' }, { title: 'Post002' }]);
     console.log(posts[0].id, posts[1].id);
     return posts;
   }
@@ -35,7 +32,7 @@ class ServicePost {
 
 ## update
 
-``` typescript
+```typescript
 class ServicePost {
   async update() {
     const post = await this.scope.model.post.update({
@@ -47,7 +44,7 @@ class ServicePost {
 }
 ```
 
-``` typescript
+```typescript
 class ServicePost {
   async update2() {
     const post = await this.scope.model.post.update(
@@ -67,7 +64,7 @@ class ServicePost {
 
 ## updateBulk
 
-``` typescript
+```typescript
 class ServicePost {
   async updateBulk() {
     const posts = await this.scope.model.post.updateBulk([
@@ -81,7 +78,7 @@ class ServicePost {
 
 ## delete
 
-``` typescript
+```typescript
 class ServicePost {
   async delete() {
     await this.scope.model.post.delete({
@@ -91,7 +88,7 @@ class ServicePost {
 }
 ```
 
-``` typescript
+```typescript
 class ServicePost {
   async delete2() {
     await this.scope.model.post.delete({
@@ -105,7 +102,7 @@ class ServicePost {
 
 ## deleteBulk
 
-``` typescript
+```typescript
 class ServicePost {
   async deleteBulk() {
     await this.scope.model.post.deleteBulk([1, 2]);
@@ -117,13 +114,13 @@ class ServicePost {
 
 `mutate`是`insert/update/delete`的混合操作，系统会根据传入数据的特征执行相应的变更操作
 
-|数据特征|变更操作|
-|--|--|
-|不存在`id`字段|insert|
-|存在`id`字段|update|
-|存在`id`字段，并且`deleted`字段值为`true`|delete|
+| 数据特征                                  | 变更操作 |
+| ----------------------------------------- | -------- |
+| 不存在`id`字段                            | insert   |
+| 存在`id`字段                              | update   |
+| 存在`id`字段，并且`deleted`字段值为`true` | delete   |
 
-``` typescript
+```typescript
 class ServicePost {
   async mutate() {
     // insert
@@ -146,7 +143,7 @@ class ServicePost {
 
 ## mutateBulk
 
-``` typescript
+```typescript
 class ServicePost {
   async mutateBulk() {
     await this.scope.model.post.mutateBulk([

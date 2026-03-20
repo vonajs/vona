@@ -6,7 +6,7 @@ You can control the messages written to log files based on levels
 
 VonaJS uses NPM levels, see: [RFC5424](https://tools.ietf.org/html/rfc5424)
 
-``` typescript
+```typescript
 const levels = {
   error: 0,
   warn: 1,
@@ -14,7 +14,7 @@ const levels = {
   http: 3,
   verbose: 4,
   debug: 5,
-  silly: 6
+  silly: 6,
 };
 ```
 
@@ -22,7 +22,7 @@ const levels = {
 
 A set of log methods corresponds to the levels
 
-``` typescript
+```typescript
 this.$logger.error('test');
 this.$logger.warn('test');
 this.$logger.info('test');
@@ -40,7 +40,7 @@ VonaJS's default logger level is `info`, allowing you to control that only messa
 
 When creating a new `order` Client, you can implement this strategy using the `makeTransportFile` method: only messages with level `<=info` are written to the file
 
-``` diff
+```diff
 // logger
 config.logger = {
   clients: {
@@ -59,7 +59,7 @@ config.logger = {
 
 If you need to force a certain level of messages to be written to an independent file, you can add another file transport. For example, writing `debug` level messages to the file `order-debug`
 
-``` diff
+```diff
 // logger
 config.logger = {
   clients: {
@@ -79,7 +79,7 @@ config.logger = {
 
 For the console transport, there is a special convention: all `silly` level messages will be output to the console. Therefore, this strategy is implemented through the `makeTransportConsole` method
 
-``` diff
+```diff
 // logger
 config.logger = {
   clients: {
@@ -102,7 +102,7 @@ Since multiple Clients can be configured, each Client can configure its own defa
 
 ### 1. Client: `default`
 
-``` typescript
+```typescript
 LOGGER_CLIENT_DEFAULT =
 ```
 
@@ -110,13 +110,13 @@ The following values ​​are supported: `(empty)/true/false/{level}`
 
 For example, to write messages of level `<=debug` to a file, configure as follows:
 
-``` typescript
-LOGGER_CLIENT_DEFAULT = debug
+```typescript
+LOGGER_CLIENT_DEFAULT = debug;
 ```
 
 You can also set the environment variable directly in the console:
 
-``` bash
+```bash
 LOGGER_CLIENT_DEFAULT=debug npm run dev
 ```
 
@@ -124,15 +124,15 @@ LOGGER_CLIENT_DEFAULT=debug npm run dev
 
 For the newly added Client `order`, a default level can also be set:
 
-``` typescript
-LOGGER_CLIENT_ORDER = verbose
+```typescript
+LOGGER_CLIENT_ORDER = verbose;
 ```
 
 ## Get the current level
 
 The current level can be obtained during system running:
 
-``` typescript
+```typescript
 class ControllerStudent {
   async test() {
     // logger: default
@@ -149,7 +149,7 @@ The level can be dynamically modified during system running, allowing control ov
 
 When the `setLevel` method is called, the system automatically broadcasts it to all Workers, thereby modifying the current level in each worker process
 
-``` typescript
+```typescript
 class ControllerStudent {
   async test() {
     // level: info

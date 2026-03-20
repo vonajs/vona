@@ -10,21 +10,21 @@ For example, `findOne(@Arg.query('id') id: number)`, the type of id is `number`,
 
 For another example, `findOne(@Arg.query() query: DtoStudentInfo)`, the type of query is Dto: `DtoStudentInfo`, then the automatically inferred Schema is: `z.object({...})`
 
-* List of automatically inferred types
+- List of automatically inferred types
 
-|Name|Description|
-|--|--|
-|string|z.string()|
-|number|z.number()|
-|boolean|z.boolean()|
-|Dto|z.object({...})|
-|Entity|z.object({...})|
+| Name    | Description     |
+| ------- | --------------- |
+| string  | z.string()      |
+| number  | z.number()      |
+| boolean | z.boolean()     |
+| Dto     | z.object({...}) |
+| Entity  | z.object({...}) |
 
 ## 2. Specify Zod Schema
 
 We can also explicitly specify Zod Schema to provide more complex validation rules. For example, if the URL is `/?id=1`, we require id to be `number` and `>=6`. Then, we can pass parameters to query: `z.number().min(6)`
 
-``` typescript
+```typescript
 import z from 'zod';
 
 class ControllerStudent3 {
@@ -39,7 +39,7 @@ We can also extend new properties based on the existing Zod Schema
 
 For example, we want to specify id as `number`, and it is `optional`, with a default value of `3`
 
-``` typescript
+```typescript
 import { v } from 'vona-module-a-openapiutils';
 
 class ControllerStudent3 {
@@ -52,7 +52,7 @@ First, the system automatically infers the schema For `z.number()`, then, append
 
 Therefore, the above code is equivalent to:
 
-``` typescript
+```typescript
 class ControllerStudent3 {
   @Web.get()
   findOne(@Arg.query('id', z.number().optional().default(3)) id: number) {}
@@ -61,7 +61,7 @@ class ControllerStudent3 {
 
 Also equivalent to:
 
-``` typescript
+```typescript
 class ControllerStudent3 {
   @Web.get()
   findOne(@Arg.query('id', v.default(3), z.number().optional()) id: number) {}
@@ -80,7 +80,7 @@ The decorator `@Arg.filter` supports more advanced query parameters, including `
 
 For Array type parameters, Vona also provides convenient tools. For example, we require `ids` to be `number[]`:
 
-``` typescript
+```typescript
 class ControllerStudent3 {
   @Web.get()
   findOne(@Arg.query('ids', v.array(Number)) ids: number[]) {}
@@ -89,7 +89,7 @@ class ControllerStudent3 {
 
 Equivalent to:
 
-``` typescript
+```typescript
 class ControllerStudent3 {
   @Web.get()
   findOne(@Arg.query('ids', v.array(z.number())) ids: number[]) {}
@@ -98,7 +98,7 @@ class ControllerStudent3 {
 
 For another example, we get the students array from the Request body, which is of type `DtoStudentInfo[]`:
 
-``` typescript
+```typescript
 class ControllerStudent3 {
   @Web.post()
   update(@Arg.body('students', v.array(DtoStudentInfo)) students: DtoStudentInfo[]) {}
@@ -109,7 +109,7 @@ class ControllerStudent3 {
 
 For classes that may cause circular references, you can use `v.lazy` to create a lazy schema:
 
-``` typescript
+```typescript
 @Dto()
 export class DtoUserLazy {
   @Api.field(v.optional(), v.lazy(() => DtoUserLazy))
@@ -122,18 +122,18 @@ export class DtoUserLazy {
 
 ## Decorator List
 
-|Name|Description|
-|--|--|
-|@Arg.param|Gets the value from the request params|
-|@Arg.query|Gets the value from the request query|
-|@Arg.body|Gets the value from the request body|
-|@Arg.headers|Gets the value from the request headers|
-|@Arg.fields|Gets the value from the request upload|
-|@Arg.field|Gets the value from the request upload|
-|@Arg.files|Gets the value from the request upload|
-|@Arg.file|Gets the value from the request upload|
-|@Arg.user|Gets the current user|
-|@Arg.filter|Gets the value from the request query|
+| Name         | Description                             |
+| ------------ | --------------------------------------- |
+| @Arg.param   | Gets the value from the request params  |
+| @Arg.query   | Gets the value from the request query   |
+| @Arg.body    | Gets the value from the request body    |
+| @Arg.headers | Gets the value from the request headers |
+| @Arg.fields  | Gets the value from the request upload  |
+| @Arg.field   | Gets the value from the request upload  |
+| @Arg.files   | Gets the value from the request upload  |
+| @Arg.file    | Gets the value from the request upload  |
+| @Arg.user    | Gets the current user                   |
+| @Arg.filter  | Gets the value from the request query   |
 
 ## Tool List
 
@@ -141,73 +141,73 @@ VonaJS puts all the utility methods for extending Zod Schema into the group `v`,
 
 ### 1. Basic Tools
 
-|Name|Description|
-|--|--|
-|v.required|Provide a custom error message for `required`; otherwise, use Zod's built-in error message|
-|v.optional|optional|
-|v.default|default|
-|v.object|object|
-|v.strictObject|Same as `z.strictObject(schema.shape)`|
-|v.looseObject|Same as `z.looseObject(schema.shape)`|
-|v.array|array|
-|v.lazy|Create a lazy schema|
+| Name           | Description                                                                                |
+| -------------- | ------------------------------------------------------------------------------------------ |
+| v.required     | Provide a custom error message for `required`; otherwise, use Zod's built-in error message |
+| v.optional     | optional                                                                                   |
+| v.default      | default                                                                                    |
+| v.object       | object                                                                                     |
+| v.strictObject | Same as `z.strictObject(schema.shape)`                                                     |
+| v.looseObject  | Same as `z.looseObject(schema.shape)`                                                      |
+| v.array        | array                                                                                      |
+| v.lazy         | Create a lazy schema                                                                       |
 
 ### 2. String Tools
 
-|Name|Description|
-|--|--|
-|v.email|email|
-|v.url|url|
-|v.uuid|uuid|
-|v.ipv4|ipv4|
-|v.ipv6|ipv6|
-|v.min|Supports `string/number`|
-|v.max|Supports `string/number`|
-|v.trim|trim|
-|v.toLowerCase|toLowerCase|
-|v.toUpperCase|toUpperCase|
-|v.lowercase|lowercase|
-|v.uppercase|uppercase|
-|v.regex|regex|
+| Name          | Description              |
+| ------------- | ------------------------ |
+| v.email       | email                    |
+| v.url         | url                      |
+| v.uuid        | uuid                     |
+| v.ipv4        | ipv4                     |
+| v.ipv6        | ipv6                     |
+| v.min         | Supports `string/number` |
+| v.max         | Supports `string/number` |
+| v.trim        | trim                     |
+| v.toLowerCase | toLowerCase              |
+| v.toUpperCase | toUpperCase              |
+| v.lowercase   | lowercase                |
+| v.uppercase   | uppercase                |
+| v.regex       | regex                    |
 
 ### 3. Openapi Tools
 
-|Name|Description|
-|--|--|
-|v.openapi|openapi|
-|v.title|title|
-|v.description|description|
-|v.example|example|
+| Name          | Description |
+| ------------- | ----------- |
+| v.openapi     | openapi     |
+| v.title       | title       |
+| v.description | description |
+| v.example     | example     |
 
 ### 4. Serializer Tools
 
-|Name|Description|
-|--|--|
-|v.serializerExclude|Exclude fields|
-|v.serializerTransform|Transform field values|
-|v.serializerSensitive|Desensitize fields|
-|v.serializerGetter|Generate field values ​​using a getter|
+| Name                  | Description                            |
+| --------------------- | -------------------------------------- |
+| v.serializerExclude   | Exclude fields                         |
+| v.serializerTransform | Transform field values                 |
+| v.serializerSensitive | Desensitize fields                     |
+| v.serializerGetter    | Generate field values ​​using a getter |
 
 ### 5. Zod Tools
 
-|Name|Description|
-|--|--|
-|v.refine|Provides `Zod Refine` capabilities|
-|v.transform|Provides `Zod Transform` capabilities|
+| Name        | Description                           |
+| ----------- | ------------------------------------- |
+| v.refine    | Provides `Zod Refine` capabilities    |
+| v.transform | Provides `Zod Transform` capabilities |
 
 ### 6. Query Filter Tools
 
-|名称|说明|
-|--|--|
-|v.filter|Set the parameters for the Query Filter|
-|v.filterTransform|Provides `Filter Transform` capabilities|
-|v.filterDateRange|Converts date range into a conditional statement|
+| 名称              | 说明                                             |
+| ----------------- | ------------------------------------------------ |
+| v.filter          | Set the parameters for the Query Filter          |
+| v.filterTransform | Provides `Filter Transform` capabilities         |
+| v.filterDateRange | Converts date range into a conditional statement |
 
 ### 7. Special Tools
 
-|Name|Description|
-|--|--|
-|v.tableIdentity|Based on the current system configuration, provides `number` or `bigint` validation rules |
+| Name            | Description                                                                               |
+| --------------- | ----------------------------------------------------------------------------------------- |
+| v.tableIdentity | Based on the current system configuration, provides `number` or `bigint` validation rules |
 
 ## Controller
 

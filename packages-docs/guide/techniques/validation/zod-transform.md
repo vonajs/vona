@@ -8,7 +8,7 @@ For example, create a Zod Transform `nameCapitalize` in the module demo-student 
 
 ### 1. Cli command
 
-``` bash
+```bash
 $ vona :create:bean zodTransform nameCapitalize --module=demo-student
 ```
 
@@ -20,10 +20,12 @@ Context Menu - [Module Path]: `Vona Bean/Zod Transform`
 
 ## Zod Transform Definition
 
-``` typescript
+```typescript
 import { toUpperCaseFirstChar } from '@cabloy/word-utils';
 
-export interface TypeZodTransformNameCapitalizeData { name: string }
+export interface TypeZodTransformNameCapitalizeData {
+  name: string;
+}
 
 export type TypeZodTransformNameCapitalizeResult = TypeZodTransformNameCapitalizeData;
 
@@ -47,7 +49,7 @@ class ZodTransformNameCapitalize {
 
 ## Using Zod Transform
 
-``` diff
+```diff
 import { v } from 'vona-module-a-openapiutils';
 
 @Controller()
@@ -68,7 +70,7 @@ For example, define the `lowercase` parameter for the `nameCapitalize` Zod Trans
 
 ### 1. Defining parameter types
 
-``` diff
+```diff
 export interface IZodTransformOptionsNameCapitalize extends IDecoratorZodTransformOptions {
 + lowercase: boolean;
 }
@@ -76,7 +78,7 @@ export interface IZodTransformOptionsNameCapitalize extends IDecoratorZodTransfo
 
 ### 2. Providing default values ​​for parameters
 
-``` diff
+```diff
 @ZodTransform<IZodTransformOptionsNameCapitalize>({
 + lowercase: false,
 })
@@ -84,7 +86,7 @@ export interface IZodTransformOptionsNameCapitalize extends IDecoratorZodTransfo
 
 ### 3. Using Parameters
 
-``` diff
+```diff
 import { toLowerCaseFirstChar, toUpperCaseFirstChar } from '@cabloy/word-utils';
 
 export interface TypeZodTransformNameCapitalizeData { name: string }
@@ -113,7 +115,7 @@ class ZodTransformNameCapitalize {
 
 You can specify Zod Transform parameters when using
 
-``` diff
+```diff
 class ControllerStudent {
   @Web.post()
 + async create(@Arg.body(v.transform('demo-student:nameCapitalize', { lowercase: true })) student: DtoStudentCreate) {}
@@ -126,7 +128,7 @@ Zod Transform parameters can be configured in App Config
 
 `src/backend/config/config/config.ts`
 
-``` typescript
+```typescript
 // onions
 config.onions = {
   zodTransform: {

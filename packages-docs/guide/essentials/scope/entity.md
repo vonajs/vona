@@ -6,7 +6,7 @@ Modules can individually provide their own `Entities`
 
 ### 1. Cli command
 
-``` bash
+```bash
 $ vona :create:bean entity student --module=demo-student
 ```
 

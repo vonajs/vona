@@ -12,7 +12,7 @@ Vona 采用`并行机制`运行测试文件，从而显著提升测试效率
 
 ### 1. Cli命令
 
-``` bash
+```bash
 $ vona :create:test student --module=demo-student
 ```
 
@@ -24,7 +24,7 @@ $ vona :create:test student --module=demo-student
 
 ## 执行单元测试
 
-``` bash
+```bash
 $ npm run test
 ```
 
@@ -36,7 +36,7 @@ $ npm run test
 4. 执行迁移代码
 5. `并行`执行单元测试文件
 
-``` bash
+```bash
 $ npm run db:reset
 ```
 
@@ -44,7 +44,7 @@ $ npm run db:reset
 
 ## 测试覆盖率
 
-``` bash
+```bash
 $ npm run cov
 ```
 
@@ -52,7 +52,7 @@ $ npm run cov
 
 ### 1. 模拟请求上下文对象
 
-``` typescript
+```typescript
 describe('student.test.ts', () => {
   it('action:student', async () => {
     await app.bean.executor.mockCtx(async () => {
@@ -62,21 +62,24 @@ describe('student.test.ts', () => {
 });
 ```
 
-* 为 ctx 指定当前语言
+- 为 ctx 指定当前语言
 
-``` typescript
+```typescript
 describe('student.test.ts', () => {
   it('action:student', async () => {
-    await app.bean.executor.mockCtx(async () => {
-      // do something
-    }, { locale: 'zh-cn' });
+    await app.bean.executor.mockCtx(
+      async () => {
+        // do something
+      },
+      { locale: 'zh-cn' },
+    );
   });
 });
 ```
 
 ### 2. 获取模块Scope对象
 
-``` typescript
+```typescript
 await app.bean.executor.mockCtx(async () => {
   const scopeStudent = app.scope('demo-student');
 });
@@ -84,21 +87,21 @@ await app.bean.executor.mockCtx(async () => {
 
 ### 3. 使用Service
 
-``` typescript
+```typescript
 const scopeStudent = app.scope('demo-student');
 const students = await scopeStudent.service.student.findMany();
 ```
 
 ### 4. 使用Model
 
-``` typescript
+```typescript
 const scopeStudent = app.scope('demo-student');
 const students = await scopeStudent.model.student.select();
 ```
 
 ### 5. 使用Entity
 
-``` typescript
+```typescript
 const scopeStudent = app.scope('demo-student');
 const tableName = scopeStudent.entity.student.$table;
 const fieldName = scopeStudent.entity.student.name;
@@ -106,7 +109,7 @@ const fieldName = scopeStudent.entity.student.name;
 
 ### 6. 调用Api，从而测试Controller
 
-``` typescript
+```typescript
 await app.bean.executor.mockCtx(async () => {
   const students = await app.bean.executor.performAction('get', '/demo/student');
 });
@@ -114,9 +117,9 @@ await app.bean.executor.mockCtx(async () => {
 
 ### 7. 模拟认证
 
-* 模拟登录
+- 模拟登录
 
-``` typescript
+```typescript
 await app.bean.executor.mockCtx(async () => {
   await app.bean.passport.signinMock();
 });
@@ -124,13 +127,13 @@ await app.bean.executor.mockCtx(async () => {
 
 可以指定登录的用户名，默认为`admin`
 
-``` typescript
+```typescript
 await app.bean.passport.signinMock('admin');
 ```
 
-* 获取当前用户信息
+- 获取当前用户信息
 
-``` typescript
+```typescript
 await app.bean.passport.signinMock();
 
 const passport = app.ctx.passport;
@@ -142,9 +145,9 @@ const auth = app.bean.passport.currentAuth;
 const roles = app.bean.passport.currentRoles;
 ```
 
-* 模拟退出登录
+- 模拟退出登录
 
-``` typescript
+```typescript
 await app.bean.passport.signout();
 ```
 
@@ -152,7 +155,7 @@ await app.bean.passport.signout();
 
 Vona 使用 Node 内置的断言库
 
-``` typescript
+```typescript
 import assert from 'node:assert';
 
 await app.bean.executor.mockCtx(async () => {
@@ -164,9 +167,9 @@ await app.bean.executor.mockCtx(async () => {
 
 `catchError`可以更优雅的捕获错误异常
 
-* 一般的写法
+- 一般的写法
 
-``` typescript
+```typescript
 await app.bean.executor.mockCtx(async () => {
   const scopeStudent = app.scope('demo-student');
   try {
@@ -177,9 +180,9 @@ await app.bean.executor.mockCtx(async () => {
 });
 ```
 
-* 使用 catchError
+- 使用 catchError
 
-``` typescript
+```typescript
 import { catchError } from '@cabloy/utils';
 
 await app.bean.executor.mockCtx(async () => {
@@ -195,7 +198,7 @@ await app.bean.executor.mockCtx(async () => {
 
 ### 10. 完整的Crud测试
 
-``` typescript
+```typescript
 describe('student.test.ts', () => {
   it('action:student', async () => {
     await app.bean.executor.mockCtx(async () => {

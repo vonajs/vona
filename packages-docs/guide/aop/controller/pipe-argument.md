@@ -6,7 +6,7 @@ In actual development, we rarely use local and global pipes. Instead, we use arg
 
 Argument pipe do not exist independently; they are created based on local pipe. The following uses the local pipe `number` as an example to demonstrate how to create an argument pipe
 
-``` diff
+```diff
 + import { createArgumentPipe, Pipe } from 'vona-module-a-aspect';
 
 @Pipe()

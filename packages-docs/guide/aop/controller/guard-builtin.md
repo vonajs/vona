@@ -2,42 +2,42 @@
 
 ## Local Guard
 
-|Name|Description|
-|--|--|
-|a-user:userName|Determines the current user name|
-|a-user:roleName|Determines the current user's role name|
+| Name            | Description                             |
+| --------------- | --------------------------------------- |
+| a-user:userName | Determines the current user name        |
+| a-user:roleName | Determines the current user's role name |
 
 ## Global Guard
 
-|Name|Description|
-|--|--|
-|a-user:passport|Initializes the current user information and performs basic checks|
+| Name            | Description                                                        |
+| --------------- | ------------------------------------------------------------------ |
+| a-user:passport | Initializes the current user information and performs basic checks |
 
 ## Allow anonymous users to access the API
 
 By default, only authenticated users can access the API. To allow anonymous users to access the API, the code is as follows:
 
-* General usage:
+- General usage:
 
-``` typescript
+```typescript
 import { Aspect } from 'vona-module-a-aspect';
 
 @Aspect.guardGlobal('a-user:passport', { public: true })
 ```
 
-* Shorthand:
+- Shorthand:
 
-``` typescript
+```typescript
 import { Passport } from 'vona-module-a-user';
 
 @Passport.public()
 ```
 
-* Shorthand principle:
+- Shorthand principle:
 
 `@Passport.public` still calls `@Aspect.guardGlobal` internally. The code is as follows:
 
-``` typescript
+```typescript
 function Public(_public: boolean = true): ClassDecorator & MethodDecorator {
   return Aspect.guardGlobal('a-user:passport', { public: _public });
 }
@@ -47,17 +47,17 @@ function Public(_public: boolean = true): ClassDecorator & MethodDecorator {
 
 By default, only activated users can access the API. To allow inactive users to access the API, the code is as follows:
 
-* General usage:
+- General usage:
 
-``` typescript
+```typescript
 import { Aspect } from 'vona-module-a-aspect';
 
 @Aspect.guardGlobal('a-user:passport', { activated: false })
 ```
 
-* Shorthand:
+- Shorthand:
 
-``` typescript
+```typescript
 import { Passport } from 'vona-module-a-user';
 
 @Passport.activated(false)
@@ -67,17 +67,17 @@ import { Passport } from 'vona-module-a-user';
 
 Determine the current username. If it is `admin`, complete the check. If it is not, throw an exception
 
-* General usage:
+- General usage:
 
-``` typescript
+```typescript
 import { Aspect } from 'vona-module-a-aspect';
 
 @Aspect.guard('a-user:userName', { name: 'admin' })
 ```
 
-* Shorthand:
+- Shorthand:
 
-``` typescript
+```typescript
 import { Passport } from 'vona-module-a-user';
 
 @Passport.userName({ name: 'admin' })
@@ -87,17 +87,17 @@ import { Passport } from 'vona-module-a-user';
 
 Determine the current role name. If it is `admin`, complete the check. If it is not, throw an exception
 
-* General usage:
+- General usage:
 
-``` typescript
+```typescript
 import { Aspect } from 'vona-module-a-aspect';
 
 @Aspect.guard('a-user:roleName', { name: 'admin' })
 ```
 
-* Shorthand method:
+- Shorthand method:
 
-``` typescript
+```typescript
 import { Passport } from 'vona-module-a-user';
 
 @Passport.roleName({ name: 'admin' })
@@ -107,7 +107,7 @@ import { Passport } from 'vona-module-a-user';
 
 Because determining whether the role name is `admin` is frequently used, we have provided a shorthand method as follows:
 
-``` typescript
+```typescript
 import { Passport } from 'vona-module-a-user';
 
 @Passport.admin()
@@ -117,9 +117,9 @@ import { Passport } from 'vona-module-a-user';
 
 For example, let's use both the local guards `a-user:userName` and `a-user:roleName`. The check rules are as follows:
 
-* If one condition is met, the check is completed
+- If one condition is met, the check is completed
 
-``` typescript
+```typescript
 @Passport.roleName({ name: 'admin' })
 @Passport.userName({ name: 'admin', rejectWhenDismatched: false })
 ```
@@ -128,14 +128,14 @@ For example, let's use both the local guards `a-user:userName` and `a-user:roleN
 Check order: @Passport.userName > @Passport.roleName
 :::
 
-* If both conditions are met, the check is completed
+- If both conditions are met, the check is completed
 
-``` typescript
+```typescript
 @Passport.roleName({ name: 'admin' })
 @Passport.userName({ name: 'admin', passWhenMatched: false })
 ```
 
-|Name|Description|
-|--|--|
-|rejectWhenDismatched|Whether to throw an exception when dismatched. Defaults to `true`|
-|passWhenMatched|Whether to complete the check when matched. Defaults to `true`|
+| Name                 | Description                                                       |
+| -------------------- | ----------------------------------------------------------------- |
+| rejectWhenDismatched | Whether to throw an exception when dismatched. Defaults to `true` |
+| passWhenMatched      | Whether to complete the check when matched. Defaults to `true`    |

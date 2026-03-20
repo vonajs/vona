@@ -8,7 +8,7 @@ For example, create a Summer Cache `student` in the module `demo-student`, to ca
 
 ### 1. Cli Command
 
-``` bash
+```bash
 $ vona :create:bean summerCache student --module=demo-student
 ```
 
@@ -20,14 +20,18 @@ Context menu - [Module Path]: `Vona Bean/Summer Cache`
 
 ## Summer Cache Definition
 
-``` typescript
+```typescript
 export type TSummerCacheStudentKey = string;
-export interface TSummerCacheStudentData { id: string; name: string }
+export interface TSummerCacheStudentData {
+  id: string;
+  name: string;
+}
 
 @SummerCache()
 export class SummerCacheStudent
   extends BeanSummerCacheBase<TSummerCacheStudentKey, TSummerCacheStudentData>
-  implements ISummerCacheGet<TSummerCacheStudentKey, TSummerCacheStudentData> {
+  implements ISummerCacheGet<TSummerCacheStudentKey, TSummerCacheStudentData>
+{
   async getNative(
     key?: TSummerCacheStudentKey,
     _options?: TSummerCacheActionOptions<TSummerCacheStudentKey, TSummerCacheStudentData>,
@@ -49,7 +53,8 @@ General process for reading Summer cache:
 1. First, read the Mem cache
 2. If the Mem cache does not exist, read the Redis cache
 3. If the Redis cache does not exist, call the `getNative` method
-  - For example, query the database data in the `getNative` method
+
+- For example, query the database data in the `getNative` method
 
 ## mgetNative
 
@@ -57,7 +62,7 @@ The `mgetNative` method can be provided to support reading multiple caches simul
 
 If the `mgetNative` method is not provided, the system will automatically loop through and call the `getNative` method when reading multiple caches at the same time
 
-``` diff
+```diff
 export class SummerCacheStudent
   extends BeanSummerCacheBase<TSummerCacheStudentKey, TSummerCacheStudentData>
   implements
@@ -86,7 +91,7 @@ export class SummerCacheStudent
 
 Parameters can be configured for Summer Cache
 
-``` typescript
+```typescript
 @SummerCache({
   preset: 'all',
   mode: 'all',
@@ -102,21 +107,21 @@ Parameters can be configured for Summer Cache
 class SummerCacheStudent {}
 ```
 
-|Name|Type|Default|Description|
-|--|--|--|--|
-|preset|'all' \| 'mem' \| 'redis'||Predefined configuration is a combination of `mode/mem/redis` parameters|
-|mode|'all' \| 'mem' \| 'redis'|'all'|Cache mode|
-|mem|||Mem cache configuration|
-|redis|||Redis cache configuration|
-|ignoreNull|boolean|false|Whether to ignore `null` values. When `ignoreNull=true`, if the data read from Memcache/Redis cache is `null`, it will be ignored, and then the `getNative/mgetNative` method will be called to obtain a new value|
+| Name       | Type                      | Default | Description                                                                                                                                                                                                        |
+| ---------- | ------------------------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| preset     | 'all' \| 'mem' \| 'redis' |         | Predefined configuration is a combination of `mode/mem/redis` parameters                                                                                                                                           |
+| mode       | 'all' \| 'mem' \| 'redis' | 'all'   | Cache mode                                                                                                                                                                                                         |
+| mem        |                           |         | Mem cache configuration                                                                                                                                                                                            |
+| redis      |                           |         | Redis cache configuration                                                                                                                                                                                          |
+| ignoreNull | boolean                   | false   | Whether to ignore `null` values. When `ignoreNull=true`, if the data read from Memcache/Redis cache is `null`, it will be ignored, and then the `getNative/mgetNative` method will be called to obtain a new value |
 
-* mode
+- mode
 
-|Name|Description|
-|--|--|
-|all|Use both Mem cache and Redis cache|
-|mem|Use only Mem cache|
-|redis|Use only Redis cache|
+| Name  | Description                        |
+| ----- | ---------------------------------- |
+| all   | Use both Mem cache and Redis cache |
+| mem   | Use only Mem cache                 |
+| redis | Use only Redis cache               |
 
 ## App Config
 
@@ -124,7 +129,7 @@ Summer Cache parameters can be configured in App Config
 
 `src/backend/config/config/config.ts`
 
-``` typescript
+```typescript
 // onions
 config.onions = {
   summerCache: {
@@ -152,7 +157,7 @@ You can control `enable/disable` of Summer Cache
 
 `src/backend/config/config/config.ts`
 
-``` diff
+```diff
 // onions
 config.onions = {
   summerCache: {
@@ -167,14 +172,14 @@ config.onions = {
 
 Allows Summer Cache to take effect in a specified operating environment
 
-|Name|Type|Description|
-|--|--|--|
-|flavor|string\|string[]|See: [Runtime Environments and Flavors](../../env-config/mode-flavor/introduction.md)|
-|mode|string\|string[]|See: [Runtime Environments and Flavors](../../env-config/mode-flavor/introduction.md)|
+| Name   | Type             | Description                                                                           |
+| ------ | ---------------- | ------------------------------------------------------------------------------------- |
+| flavor | string\|string[] | See: [Runtime Environments and Flavors](../../env-config/mode-flavor/introduction.md) |
+| mode   | string\|string[] | See: [Runtime Environments and Flavors](../../env-config/mode-flavor/introduction.md) |
 
-* Example
+- Example
 
-``` diff
+```diff
 @SummerCache({
 + meta: {
 +   flavor: 'normal',
@@ -186,7 +191,7 @@ class SummerCacheStudent {}
 
 ## Using Summer Cache
 
-``` typescript
+```typescript
 class ControllerStudent {
   @Web.get('test')
   async test() {
@@ -195,7 +200,7 @@ class ControllerStudent {
     assert.equal(studentByDb?.id, studentBySummer?.id);
     assert.equal(studentByDb?.name, studentBySummer?.name);
   }
-}  
+}
 ```
 
 - `this.scope.summerCache.student`: Gets the Summer Cache instance through the module scope
@@ -204,7 +209,7 @@ class ControllerStudent {
 
 Take the `get` method as an example to introduce the parameters of the cache method
 
-``` typescript
+```typescript
 await this.scope.summerCache.student.get('2', {
   ttl: 2 * 3600 * 1000,
   broadcastOnSet: 'del',
@@ -215,36 +220,40 @@ await this.scope.summerCache.student.get('2', {
   disableTransactionCompensate: false,
   db: this.ctx.db,
   enable: true,
-  get: async (_key?: string) => { return undefined; },
-  mget: async (_keys: string[]) => { return []; },
+  get: async (_key?: string) => {
+    return undefined;
+  },
+  mget: async (_keys: string[]) => {
+    return [];
+  },
 });
 ```
 
-|名称|类型|说明|
-|--|--|--|
-|ttl|number|Cache expiration time|
-|broadcastOnSet|boolean \| 'del'|Whether to broadcast changes to other Workers when setting the cache. Set to `del` to broadcast deletion to other Workers’ caches|
-|updateAgeOnGet|boolean|Whether to update the ttl when reading from the cache|
-|ignoreNull|boolean|Whether to ignore `null` values|
-|mode|'all' \| 'mem' \| 'redis'|Cache mode|
-|force|boolean|Force read new value|
-|disableTransactionCompensate|boolean|Whether to disable transaction compensation|
-|db|ServiceDb|This db object is used when performing transaction compensation. By default, the db object in the context is automatically used|
-|enable|boolean|Whether to disable Summer Cache|
-|get|Function|Override `getNative` method|
-|mget|Function|Override `mgetNative` method|
+| 名称                         | 类型                      | 说明                                                                                                                              |
+| ---------------------------- | ------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
+| ttl                          | number                    | Cache expiration time                                                                                                             |
+| broadcastOnSet               | boolean \| 'del'          | Whether to broadcast changes to other Workers when setting the cache. Set to `del` to broadcast deletion to other Workers’ caches |
+| updateAgeOnGet               | boolean                   | Whether to update the ttl when reading from the cache                                                                             |
+| ignoreNull                   | boolean                   | Whether to ignore `null` values                                                                                                   |
+| mode                         | 'all' \| 'mem' \| 'redis' | Cache mode                                                                                                                        |
+| force                        | boolean                   | Force read new value                                                                                                              |
+| disableTransactionCompensate | boolean                   | Whether to disable transaction compensation                                                                                       |
+| db                           | ServiceDb                 | This db object is used when performing transaction compensation. By default, the db object in the context is automatically used   |
+| enable                       | boolean                   | Whether to disable Summer Cache                                                                                                   |
+| get                          | Function                  | Override `getNative` method                                                                                                       |
+| mget                         | Function                  | Override `mgetNative` method                                                                                                      |
 
 - `db`: VonaJS supports multiple databases/datasources, so transaction compensation can be precisely controlled through `db`
 
 ## Cache methods
 
-|Name|Description|
-|--|--|
-|get|Read cache|
-|mget|Read multiple caches at once|
-|peek|Retrieve cache without updating its TTL|
-|set|Set cache|
-|mset|Set multiple caches at once|
-|del|Delete cache|
-|mdel|Delete multiple caches at once|
-|clear|Clear all caches|
+| Name  | Description                             |
+| ----- | --------------------------------------- |
+| get   | Read cache                              |
+| mget  | Read multiple caches at once            |
+| peek  | Retrieve cache without updating its TTL |
+| set   | Set cache                               |
+| mset  | Set multiple caches at once             |
+| del   | Delete cache                            |
+| mdel  | Delete multiple caches at once          |
+| clear | Clear all caches                        |

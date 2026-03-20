@@ -10,7 +10,7 @@ For example, creating a Captcha Scene in the module `captcha-simple`: `simple`
 
 ### 1. CLI Command
 
-``` bash
+```bash
 $ vona :create:bean captchaScene simple --module=captcha-simple
 ```
 
@@ -22,7 +22,7 @@ Context Menu - [Module Path]: `Vona Bean/Captcha Scene`
 
 ## Captcha Scene Definition
 
-``` typescript
+```typescript
 @CaptchaScene({
   resolver: async (_ctx, _providers) => {
     return 'captcha-simple:imageText';
@@ -39,11 +39,11 @@ export class CaptchaSceneSimple extends BeanBase {}
 
 * Provider Type
 
-|Name|Description|
-|--|--|
-|true|Enable Provider|
-|false|Disable Provider|
-|object|Provider Parameters|
+| Name   | Description         |
+| ------ | ------------------- |
+| true   | Enable Provider     |
+| false  | Disable Provider    |
+| object | Provider Parameters |
 
 ## App Config
 
@@ -51,7 +51,7 @@ Captcha Scene parameters can be configured in the App Config
 
 `src/backend/config/config/config.ts`
 
-``` typescript
+```typescript
 // onions
 config.onions = {
   captchaScene: {

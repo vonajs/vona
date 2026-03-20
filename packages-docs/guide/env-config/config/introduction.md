@@ -15,10 +15,10 @@ config.[meta].mine.ts    # only loaded in specified condition, ignored by git
 
 - `[meta]` can be `any combination` of the following two variables
 
-| Name    | Description  |
-| ------- | ---------- |
-| mode    | 'test' \|'dev' \| 'prod' |
-| flavor  | 'normal' \|'play' \|'docker' \| 'ci' \| keyof VonaMetaFlavorExtend  |
+| Name   | Description                                                        |
+| ------ | ------------------------------------------------------------------ |
+| mode   | 'test' \|'dev' \| 'prod'                                           |
+| flavor | 'normal' \|'play' \|'docker' \| 'ci' \| keyof VonaMetaFlavorExtend |
 
 ## npm scripts
 
@@ -31,12 +31,12 @@ $ npm run build
 $ npm run build:docker
 ```
 
-``` json
+```json
 "scripts": {
   "test": "vona :bin:test --flavor=normal",
   "dev": "vona :bin:dev --flavor=normal",
   "build": "vona :bin:build --flavor=normal",
-  "build:docker": "vona :bin:build --flavor=docker", 
+  "build:docker": "vona :bin:build --flavor=docker",
 }
 ```
 
@@ -44,10 +44,10 @@ $ npm run build:docker
 
 Execute `npm run dev` on the command line, then the corresponding meta variable values are:
 
-| Name    | Value         |
-| ------- | ------------- |
-| mode    | 'dev' |
-| flavor  | 'normal'       |
+| Name   | Value    |
+| ------ | -------- |
+| mode   | 'dev'    |
+| flavor | 'normal' |
 
 The system will automatically load the configuration in the following files and merge them:
 
@@ -64,7 +64,7 @@ config.normal.dev.mine.ts
 
 The config files support asynchronous loading
 
-``` typescript
+```typescript
 export default async function (app: VonaApplication, env: VonaConfigEnv) {
   const config: VonaConfigOptional = {};
 
@@ -72,7 +72,7 @@ export default async function (app: VonaApplication, env: VonaConfigEnv) {
   ...
 
   return config;
-}  
+}
 ```
 
 ## Obtaining global config
@@ -80,8 +80,8 @@ export default async function (app: VonaApplication, env: VonaConfigEnv) {
 The global config object can be obtained directly through `this.app.config` in any bean instance
 
 ```typescript
-this.app.config.server.globalPrefix
-this.app.config.database.defaultClient
+this.app.config.server.globalPrefix;
+this.app.config.database.defaultClient;
 ```
 
 ## Obtaining instance config
@@ -89,17 +89,17 @@ this.app.config.database.defaultClient
 The instance config object can be obtained directly through `this.ctx.config` in any bean instance
 
 ```typescript
-this.ctx.config.server.serve.protocol
-this.ctx.config.server.serve.host
+this.ctx.config.server.serve.protocol;
+this.ctx.config.server.serve.host;
 ```
 
 ## Obtaining module config
 
 Modules can individually provide their own `config` configuration, which can be obtained through the `Scope` instance. See: [Config](../../essentials/scope/config.md)
 
-``` typescript
-this.scope.config.title
-this.$scope.homeIndex.config.title
+```typescript
+this.scope.config.title;
+this.$scope.homeIndex.config.title;
 ```
 
 ## Override module config

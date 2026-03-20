@@ -18,7 +18,7 @@ For example, create `meta.runtime` in the module demo-student. Output `accessTok
 
 ### 1. Cli Command
 
-``` bash
+```bash
 $ vona :create:bean meta runtime --module=demo-student
 ```
 
@@ -30,7 +30,7 @@ Context menu - [Module Path]: `Vona Meta/Runtime`
 
 ## meta.runtime Definition
 
-``` typescript
+```typescript
 export type TypeMetaRuntimeResult = { accessToken?: string } | undefined;
 
 @Meta()

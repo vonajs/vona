@@ -4,7 +4,7 @@
 
 The module `a-user` provides the interface `IRole`, which defines the basic fields of a Role
 
-``` typescript
+```typescript
 export interface IRole {
   id: TableIdentity;
   name: string;
@@ -15,21 +15,21 @@ export interface IRole {
 
 The module `a-user` provides the global Bean `bean.role`, providing a common calling convention for business logic
 
-``` typescript
+```typescript
 // find role
 const role = await this.bean.role.findOneById(roleId);
 // find roles of user
 const roles = await this.bean.role.findAllByUserId(userId);
 ```
 
-* `bean.role` Method List
+- `bean.role` Method List
 
-|Name|Description|
-|--|--|
-|findOneByName|Finds a role by `name`|
-|findOneById|Finds a role by `id`|
-|findOne|Finds a role|
-|findAllByUserId|Finds all roles for a given user|
+| Name            | Description                      |
+| --------------- | -------------------------------- |
+| findOneByName   | Finds a role by `name`           |
+| findOneById     | Finds a role by `id`             |
+| findOne         | Finds a role                     |
+| findAllByUserId | Finds all roles for a given user |
 
 ## home-user adapter: ServiceRoleAdapter
 
@@ -37,22 +37,22 @@ The `home-user` module provides the adapter `ServiceRoleAdapter`, which allows u
 
 `src/suite/a-home/modules/home-user/src/service/roleAdapter.ts`
 
-|Name|Description|
-|--|--|
-|findOneByName|Finds a role by `name`|
-|findOne|Finds a role|
-|findAllByUserId|Finds all roles for a given user|
+| Name            | Description                      |
+| --------------- | -------------------------------- |
+| findOneByName   | Finds a role by `name`           |
+| findOne         | Finds a role                     |
+| findAllByUserId | Finds all roles for a given user |
 
 ## Get the current role
 
-``` diff
+```diff
 class ControllerStudent {
   @Web.get('test')
   test() {
 +   const roles = this.bean.passport.currentRoles;
     console.log(roles);
   }
-}  
+}
 ```
 
 ## Role: admin
@@ -63,7 +63,7 @@ Automatically creates the `admin` role in the `meta.version` of the `home-user` 
 
 `src/suite/a-home/modules/home-user/src/bean/meta.version.ts`
 
-``` typescript
+```typescript
 async init(options) {
   if (options.version === 1) {
     // role: admin
@@ -76,7 +76,7 @@ async init(options) {
 
 ## Assign Roles to Users
 
-``` typescript
+```typescript
 await this.scope.model.roleUser.insert({
   userId,
   roleId,

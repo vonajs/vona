@@ -6,7 +6,7 @@
 
 模块将动态创建的数据源存储在数据表中
 
-``` typescript
+```typescript
 const entityDatasource = await this.bean.datasource.create({
   title: 'test001',
   config: {
@@ -28,7 +28,7 @@ const entityDatasource = await this.bean.datasource.create({
 
 ### 1. 一般用法
 
-``` typescript
+```typescript
 const db = await this.bean.datasource.getDb({ id: entityDatasource.id });
 const modelTest = this.scope.model.test.newInstance(db);
 const items = await modelTest.select();
@@ -39,7 +39,7 @@ const items = await modelTest.select();
 
 ### 2. 数据库事务
 
-``` typescript
+```typescript
 const db = await this.bean.datasource.getDb({ id: entityDatasource.id });
 const modelTest = this.scope.model.test.newInstance(db);
 await db.transaction.begin(async () => {
@@ -52,7 +52,7 @@ await db.transaction.begin(async () => {
 
 ## 更新数据源
 
-``` typescript
+```typescript
 await this.bean.datasource.update({
   id: entityDatasource.id,
   config: {
@@ -74,7 +74,7 @@ await this.bean.datasource.update({
 
 ## 删除数据源
 
-``` typescript
+```typescript
 await this.bean.datasource.remove(entityDatasource.id);
 ```
 

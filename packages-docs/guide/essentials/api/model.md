@@ -6,7 +6,7 @@ For example, we create a Model: `student` in the module demo-student
 
 ### 1. Cli command
 
-``` bash
+```bash
 $ vona :create:bean model student --module=demo-student
 ```
 
@@ -34,7 +34,7 @@ Using Model in Vona supports `dependency injection` and `dependency lookup`. It 
 
 ### 1. Lookup in this module
 
-``` typescript
+```typescript
 class ServiceStudent {
   async findAll(): Promise<EntityStudent[]> {
     return await this.scope.model.student.select();
@@ -44,7 +44,7 @@ class ServiceStudent {
 
 ### 2. Lookup Cross-module
 
-``` typescript
+```typescript
 class ServiceStudent {
   async findAll(): Promise<EntityStudent[]> {
     return await this.$scope.demoStudent.model.student.select();
@@ -54,7 +54,7 @@ class ServiceStudent {
 
 You can also use `bean._getBean` to get the Model instance directly from the IOC container:
 
-``` typescript
+```typescript
 class ServiceStudent {
   async findAll(): Promise<EntityStudent[]> {
     return await this.bean._getBean('demo-student.model.student').select();
@@ -66,13 +66,13 @@ class ServiceStudent {
 
 Here, we only introduce basic CRUD operations. For more information, see:
 
-- [CRUD(Select)](../../techniques/orm/crud-select.md) 
+- [CRUD(Select)](../../techniques/orm/crud-select.md)
 - [CRUD(Insert/Update/Delete)](../../techniques/orm/crud-cud.md)
 - [CRUD(Magic Methods)](../../techniques/orm/crud-magic.md)
 
 ### 1. Create
 
-``` typescript
+```typescript
 class ServiceStudent {
   async create(student: DtoStudentCreate): Promise<EntityStudent> {
     return await this.scope.model.student.insert(student);
@@ -83,13 +83,13 @@ class ServiceStudent {
 ### 2. Read
 
 ```typescript
-class ServiceStudent { 
-  async findAll(): Promise<EntityStudent[]> { 
-    return await this.scope.model.student.select(); 
-  } 
+class ServiceStudent {
+  async findAll(): Promise<EntityStudent[]> {
+    return await this.scope.model.student.select();
+  }
 
-  async findOne(id: TableIdentity): Promise<EntityStudent | undefined> { 
-    return await this.scope.model.student.getById(id); 
+  async findOne(id: TableIdentity): Promise<EntityStudent | undefined> {
+    return await this.scope.model.student.getById(id);
   }
 }
 ```
@@ -99,9 +99,9 @@ class ServiceStudent {
 ### 3. Update
 
 ```typescript
-class ServiceStudent { 
-  async update(id: TableIdentity, student: DtoStudentUpdate) { 
-    return await this.scope.model.student.updateById(id, student); 
+class ServiceStudent {
+  async update(id: TableIdentity, student: DtoStudentUpdate) {
+    return await this.scope.model.student.updateById(id, student);
   }
 }
 ```
@@ -109,7 +109,7 @@ class ServiceStudent {
 ### 4. Delete
 
 ```typescript
-class ServiceStudent { 
+class ServiceStudent {
   async remove(id: TableIdentity) {
     return await this.scope.model.student.deleteById(id);
   }
@@ -124,7 +124,7 @@ Vona Model is based on [knex](https://knexjs.org/). Therefore, it also supports 
 
 Invoke the `builder` method of the model to obtain an instance of the knex query builder
 
-``` typescript
+```typescript
 class ServiceStudent {
   async findAll(): Promise<EntityStudent[]> {
     return await this.scope.model.student.builder().where('name', 'tom').orderBy('name');
@@ -136,7 +136,7 @@ class ServiceStudent {
 
 The `builderSelect` method also obtains an instance of the knex query builder. Unlike `builder`, `builderSelect` supports `soft deletion` and `multi-instance/multi-tenancy`
 
-``` typescript
+```typescript
 class ServiceStudent {
   async findAll(): Promise<EntityStudent[]> {
     return await this.scope.model.student.builderSelect().where('name', 'tom').orderBy('name');
@@ -148,7 +148,7 @@ class ServiceStudent {
 
 Raw Sql statements can be executed directly
 
-``` typescript
+```typescript
 class ServiceStudent {
   async findAll(): Promise<EntityStudent[]> {
     return await this.scope.model.student.query('select * from demoStudent');
@@ -156,7 +156,7 @@ class ServiceStudent {
 }
 ```
 
-``` typescript
+```typescript
 class ServiceStudent {
   async findOne(id: TableIdentity): Promise<EntityStudent | undefined> {
     return await this.scope.model.student.queryOne('select * from demoStudent where id=?', [id]);
@@ -166,20 +166,20 @@ class ServiceStudent {
 
 ## Model Options
 
-|Name|Description|
-|--|--|
-|entity|Entity corresponding to model|
-|table|Table name corresponding to model |
-|disableDeleted|Whether to disable soft deletion, the default is false|
-|disableInstance|Whether to disable multi-instance/multi-tenancy, the default is false|
-|disableCreateTime|Whether to disable create time. The default value is false, and the system automatically sets the create time for new data|
-|disableUpdateTime|Whether to disable update time. The default value is false, and the system automatically sets the update time for the data to be modified|
-|softDeletionPrune|Whether to automatically clean up soft deleted data|
-|client|Specify the datasource|
-|cache|Configure cache parameters, enable redis-based cache by default|
-|relations|Specify models relationship, support: 1:1, 1:n, n:1, n:n|
+| Name              | Description                                                                                                                               |
+| ----------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| entity            | Entity corresponding to model                                                                                                             |
+| table             | Table name corresponding to model                                                                                                         |
+| disableDeleted    | Whether to disable soft deletion, the default is false                                                                                    |
+| disableInstance   | Whether to disable multi-instance/multi-tenancy, the default is false                                                                     |
+| disableCreateTime | Whether to disable create time. The default value is false, and the system automatically sets the create time for new data                |
+| disableUpdateTime | Whether to disable update time. The default value is false, and the system automatically sets the update time for the data to be modified |
+| softDeletionPrune | Whether to automatically clean up soft deleted data                                                                                       |
+| client            | Specify the datasource                                                                                                                    |
+| cache             | Configure cache parameters, enable redis-based cache by default                                                                           |
+| relations         | Specify models relationship, support: 1:1, 1:n, n:1, n:n                                                                                  |
 
-- table: 
+- table:
   - If it is empty, the table name is automatically obtained from entity
   - You can also specify a function to achieve dynamic table partitioning
 
@@ -189,15 +189,15 @@ Model options can be configured in App Config
 
 `src/backend/config/config/config.ts`
 
-``` typescript
+```typescript
 // onions
 config.onions = {
   model: {
     'demo-student:student': {
-      disableDeleted: true,   // disable soft deletion
-      disableInstance: true,  // disable multi-instance/multi-tenancy
-      client: 'mysql',    // use datasource：mysql
-      cache: false,    // disable cache
+      disableDeleted: true, // disable soft deletion
+      disableInstance: true, // disable multi-instance/multi-tenancy
+      client: 'mysql', // use datasource：mysql
+      cache: false, // disable cache
     },
   },
 };
@@ -207,10 +207,12 @@ config.onions = {
 
 Model supports dynamic table partitioning. For example, we partition the Order table and store the daily orders in a data table in the format of `order_YYYYMMDD`
 
-``` typescript
-@Model({ table: (ctx: VonaContext, where: EntityOrder | undefined, defaultTable: keyof ITableRecord) => {
-  return `${defaultTable}_${moment().format('YYYYMMDD')}`;
-} })
+```typescript
+@Model({
+  table: (ctx: VonaContext, where: EntityOrder | undefined, defaultTable: keyof ITableRecord) => {
+    return `${defaultTable}_${moment().format('YYYYMMDD')}`;
+  },
+})
 class ModelOrder {}
 ```
 
@@ -226,7 +228,7 @@ Model supports multi-instance/multi-tenancy by default. When performing CRUD ope
 
 For example, execute `model.student.select()`, then the generated sql is as follows:
 
-``` bash
+```bash
 select "demoStudent"."id" from "demoStudent"
   where "demoStudent"."iid" = 1 and "demoStudent"."deleted" = false
 ```
@@ -238,7 +240,7 @@ select "demoStudent"."id" from "demoStudent"
 
 We can also temporarily specify the `soft deletion` parameter when executing the model method
 
-``` typescript
+```typescript
 class ServiceStudent {
   async findAll(): Promise<EntityStudent[]> {
     return await this.scope.model.student.select({}, { disableDeleted: true });
@@ -265,24 +267,24 @@ By default, Model uses the default datasource set by the system
 
 `env/.env`
 
-``` bash
+```bash
 DATABASE_DEFAULT_CLIENT = 'sqlite3' # sqlite3/pg/mysql
 ```
 
 ### 2. Static datasource
 
-* Specify the datasource in Model options
+- Specify the datasource in Model options
 
 ```diff
 + @Model({ client: 'mysql' })
 class ModelBook {}
 ```
 
-* Specify the datasource in App Config
+- Specify the datasource in App Config
 
 `src/backend/config/config/config.ts`
 
-``` typescript
+```typescript
 // onions
 config.onions = {
   model: {
@@ -297,7 +299,7 @@ config.onions = {
 
 In complex systems, we may need to use a different datasource based on the current request environment. To do this, we can use `Adaptive datasource`:
 
-``` typescript
+```typescript
 @Model({
   client: (ctx: VonaContext) => {
     if (ctx.headers['xxx-xxx'] === 'xxx') return 'mysql';
@@ -311,7 +313,7 @@ export class ModelOrder {}
 
 We can also specify the datasource dynamically in the code
 
-``` typescript
+```typescript
 class ServiceStudent {
   async findAll(): Promise<EntityStudent[]> {
     const modelMysql = this.scope.model.student.newInstance('mysql');
@@ -330,14 +332,14 @@ This briefly introduces the basic configuration of caching. For more detailed in
 
 ### 1. Disable cache
 
-``` typescript
+```typescript
 @Model({ cache: false })
 class ModelStudent {}
 ```
 
 ### 2. Configure cache in Model options
 
-``` typescript
+````typescript
 ``` typescript
 @Model({ cache: {
   entity: {
@@ -348,14 +350,14 @@ class ModelStudent {}
     },
     redis: {
       ttl: 5 * 1000, // 5s
-    }, 
+    },
   },
   query: {
     ...
   },
 } })
 class ModelStudent {}
-```
+````
 
 - mode: cache mode
 - mem: `mem cache` configuration
@@ -365,7 +367,7 @@ class ModelStudent {}
 
 `src/backend/config/config/config.ts`
 
-``` typescript
+```typescript
 // onions
 config.onions = {
   model: {
@@ -398,7 +400,9 @@ Vona provides two types of caches: `Entity Cache` and `Query Cache`:
 - `Query Cache`: Hash of Query Clause -> EntityIds
 
 > Question 1: Some may ask, doesn't the `Query Cache` take up a lot of space?
->   - On the contrary, the space occupied by a `Query cache` is equal to `Hash + EntityIds`, thus saving more cache space. The system automatically uses the `EntityIds` to retrieve cached data from the `Entity Cache` and assembles it into the final query result
+>
+> - On the contrary, the space occupied by a `Query cache` is equal to `Hash + EntityIds`, thus saving more cache space. The system automatically uses the `EntityIds` to retrieve cached data from the `Entity Cache` and assembles it into the final query result
 
 > Question 2: How do we ensure cached data consistency?
->   - When data changes, the `Entity Cache` for the current data is automatically cleared, and all `Query Caches` for the current model are automatically cleared
+>
+> - When data changes, the `Entity Cache` for the current data is automatically cleared, and all `Query Caches` for the current model are automatically cleared

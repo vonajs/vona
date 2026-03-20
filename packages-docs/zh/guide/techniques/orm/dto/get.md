@@ -4,19 +4,19 @@
 
 ## 参数
 
-|名称|描述|
-|--|--|
-|columns|需要查询的字段列表|
-|include|静态关系|
-|with|动态关系|
+| 名称    | 描述               |
+| ------- | ------------------ |
+| columns | 需要查询的字段列表 |
+| include | 静态关系           |
+| with    | 动态关系           |
 
 ## 1. 一般用法
 
-``` typescript
+```typescript
 $Dto.get(() => ModelOrder);
 ```
 
-``` typescript
+```typescript
 $Dto.get(() => ModelOrder, { columns: ['id', 'orderNo', 'remark'] });
 ```
 
@@ -28,7 +28,7 @@ $Dto.get(() => ModelOrder, { columns: ['id', 'orderNo', 'remark'] });
 
 先在 Model Order 中定义与 Model Product 的`1:n`关系
 
-``` typescript
+```typescript
 @Model({
   entity: EntityOrder,
   relations: {
@@ -42,7 +42,7 @@ class ModelOrder {}
 
 ### 动态推断与生成DTO
 
-``` typescript
+```typescript
 $Dto.get(() => ModelOrder, {
   include: {
     products: true,
@@ -52,7 +52,7 @@ $Dto.get(() => ModelOrder, {
 
 ## 3. 动态关系
 
-``` typescript
+```typescript
 $Dto.get(() => ModelOrder, {
   with: {
     products: $relationDynamic.hasMany(() => ModelProduct, 'orderId', {
@@ -70,7 +70,7 @@ $Dto.get(() => ModelOrder, {
 
 先在 Model OrderStats 中定义与 Model Product 的`1:n`关系
 
-``` typescript
+```typescript
 @Model({
   entity: EntityOrder,
   relations: {
@@ -87,7 +87,7 @@ export class ModelOrderStats {}
 
 ### 动态推断与生成DTO
 
-``` typescript
+```typescript
 $Dto.get(() => ModelOrderStats, {
   include: {
     productStats: true,
@@ -97,7 +97,7 @@ $Dto.get(() => ModelOrderStats, {
 
 ## 5. 基于动态关系的聚合
 
-``` typescript
+```typescript
 $Dto.get(() => ModelOrder, {
   with: {
     productStats: $relationDynamic.hasMany(() => ModelProduct, 'orderId', {
@@ -118,7 +118,7 @@ $Dto.get(() => ModelOrder, {
 
 先在 Model OrderStats 中定义与 Model Product 的`1:n`关系
 
-``` typescript
+```typescript
 @Model({
   entity: EntityOrder,
   relations: {
@@ -136,7 +136,7 @@ export class ModelOrderStats {}
 
 ### 动态推断与生成DTO
 
-``` typescript
+```typescript
 $Dto.get(() => ModelOrderStats, {
   include: {
     productsGroups: true,
@@ -146,7 +146,7 @@ $Dto.get(() => ModelOrderStats, {
 
 ## 7. 基于动态关系的分组
 
-``` typescript
+```typescript
 $Dto.get(() => ModelOrder, {
   with: {
     productsGroups: $relationDynamic.hasMany(() => ModelProduct, 'orderId', {

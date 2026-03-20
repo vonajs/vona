@@ -6,7 +6,7 @@ Modules can individually provide their own `Config` configuration
 
 ### 1. Cli command
 
-``` bash
+```bash
 $ vona :init:config demo-student
 ```
 

@@ -8,7 +8,7 @@ VonaJS 基于[Redlock](https://github.com/sesamecare/redlock/)提供了直观、
 
 ### 1. Cli命令
 
-``` bash
+```bash
 $ vona :create:bean meta redlock --module=demo-student
 ```
 
@@ -20,7 +20,7 @@ $ vona :create:bean meta redlock --module=demo-student
 
 ## 分布式锁定义
 
-``` typescript
+```typescript
 export type TypeRedlockLockResource = never;
 export type TypeRedlockLockIsolateResource = never;
 
@@ -35,14 +35,14 @@ export class MetaRedlock extends BeanRedlockBase<TypeRedlockLockResource, TypeRe
 
 当使用分布式锁时，需要指定对应的锁资源。比如，为`lock`方法定义锁资源`name`:
 
-``` diff
+```diff
 - export type TypeRedlockLockResource = never;
 + export type TypeRedlockLockResource = 'name';
 ```
 
 ## 使用分布式锁
 
-``` typescript
+```typescript
 class ControllerStudent {
   async test() {
     const res = await this.scope.redlock.lock('name', async () => {
@@ -50,7 +50,7 @@ class ControllerStudent {
       return 'some result';
     });
   }
-}  
+}
 ```
 
 - `redlock.lock`：传入锁资源`name`
@@ -65,14 +65,14 @@ VonaJS 提供了两个锁方法: `lock/lockIsolate`。二者的区别是：`lock
 
 为`lockIsolate`方法定义锁资源:
 
-``` diff
+```diff
 - export type TypeRedlockLockIsolateResource = never;
 + export type TypeRedlockLockIsolateResource = 'name';
 ```
 
 ### 使用分布式锁: lockIsolate
 
-``` typescript
+```typescript
 class ControllerStudent {
   async test() {
     const res = await this.scope.redlock.lockIsolate('name', async () => {
@@ -80,7 +80,7 @@ class ControllerStudent {
       return 'some result';
     });
   }
-}  
+}
 ```
 
 ## 定义锁资源: 字面量模版
@@ -89,14 +89,14 @@ class ControllerStudent {
 
 比如，如果要为不同的用户单独提供锁资源，那么可以使用形如`user-${userId}`的字符串，作为锁资源名称
 
-``` diff
+```diff
 - export type TypeRedlockLockIsolateResource = 'name';
 + export type TypeRedlockLockIsolateResource = 'name' | `user-${string}`;
 ```
 
 这样，在使用`lockIsolate`方法时同样可以提供类型提示
 
-``` typescript
+```typescript
 class ControllerStudent {
   async test() {
     const userId = 1;
@@ -105,14 +105,14 @@ class ControllerStudent {
       return 'some result';
     });
   }
-}  
+}
 ```
 
 ## 查看当前生效的分布式锁清单
 
 可以直接输出当前生效的分布式锁清单
 
-``` diff
+```diff
 class ControllerStudent {
   @Web.get('test')
   test() {

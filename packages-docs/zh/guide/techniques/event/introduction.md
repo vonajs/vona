@@ -10,7 +10,7 @@ VonaJS 提供了事件机制，由`事件`和`事件监听器`组成
 
 ### 1. Cli命令
 
-``` bash
+```bash
 $ vona :create:bean event echo --module=demo-student
 ```
 
@@ -22,16 +22,13 @@ $ vona :create:bean event echo --module=demo-student
 
 ## Event定义
 
-``` typescript
+```typescript
 export type TypeEventEchoData = string;
 
 export type TypeEventEchoResult = string | undefined;
 
 @Event()
-export class EventEcho extends BeanEventBase<
-  TypeEventEchoData,
-  TypeEventEchoResult
-> {}
+export class EventEcho extends BeanEventBase<TypeEventEchoData, TypeEventEchoResult> {}
 ```
 
 - `TypeEventEchoData`: 定义参数类型
@@ -43,7 +40,7 @@ export class EventEcho extends BeanEventBase<
 
 触发事件时传入事件参数`Hello World`，并返回结果
 
-``` diff
+```diff
 class ControllerStudent {
   @Web.get('test')
   async test() {
@@ -59,7 +56,7 @@ class ControllerStudent {
 
 在触发事件时可以提供缺省方法
 
-``` diff
+```diff
 class ControllerStudent {
   @Web.get('test')
   async test() {
@@ -79,7 +76,7 @@ class ControllerStudent {
 
 触发事件时传入事件参数`Hello World`，并返回结果
 
-``` diff
+```diff
 class ControllerStudent {
   @Web.get('test')
   async test() {
@@ -95,7 +92,7 @@ class ControllerStudent {
 
 在触发事件时可以提供缺省方法
 
-``` diff
+```diff
 class ControllerStudent {
   @Web.get('test')
   async test() {

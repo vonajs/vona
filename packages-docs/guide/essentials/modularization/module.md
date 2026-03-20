@@ -27,23 +27,23 @@ FullName: vona-module-{providerId}-{moduleName}
 ShortName: {providerId}-{moduleName}
 ```
 
-|Name|Description|
-|--|--|
-|providerId|Provider ID. You can designate a certain feature, function, or organization as the providerId, such as: test, demo, blog, dashboard, flow, cabloy, apple, etc.|
-|moduleName|Module Name|
+| Name       | Description                                                                                                                                                    |
+| ---------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| providerId | Provider ID. You can designate a certain feature, function, or organization as the providerId, such as: test, demo, blog, dashboard, flow, cabloy, apple, etc. |
+| moduleName | Module Name                                                                                                                                                    |
 
 ## Create Module
 
 ### 1. Cli command
 
-``` bash
+```bash
 $ vona :create:module moduleName [--suite=]
 ```
 
-|Name|Description|
-|--|--|
-|moduleName|Module Name|
-|suite|Suite Name. Optional|
+| Name       | Description          |
+| ---------- | -------------------- |
+| moduleName | Module Name          |
+| suite      | Suite Name. Optional |
 
 ### 2. Menu command
 

@@ -6,27 +6,27 @@ Vona ORM uses magic methods to further simplify data manipulation code
 
 The system automatically parses the parameters from the method name and then invokes the actual CRUD method
 
-* Example 1
+- Example 1
 
-``` typescript
+```typescript
 this.scope.model.student.getByName('Tom');
 ```
 
 The system detects the `getBy` prefix and automatically parses the parameter name `name` and the parameter value `Tom`, then invokes the following method:
 
-``` typescript
+```typescript
 this.scope.model.student.get({ name: 'Tom' });
 ```
 
-* Example 2
+- Example 2
 
-``` typescript
+```typescript
 this.scope.model.student.getByNameEqI('Tom');
 ```
 
 The system detects the `getBy` prefix and automatically parses the parameter name `name`, the parameter value `'Tom'`, the operator `eqI`, and then invokes the following method:
 
-``` typescript
+```typescript
 this.scope.model.student.get({ name: { _eqI_: 'Tom' } });
 ```
 
@@ -40,7 +40,7 @@ Thus, we can enjoy the convenience of magic methods without any additional code
 
 For example, the field `id` provides the following magic methods:
 
-``` typescript
+```typescript
 this.scope.model.student.getById(id);
 this.scope.model.student.updateById(id, student);
 this.scope.model.student.deleteById(id);
@@ -48,7 +48,7 @@ this.scope.model.student.deleteById(id);
 
 For the `name` field, for example, the following magic methods are provided:
 
-``` typescript
+```typescript
 this.scope.model.student.getByName(name);
 this.scope.model.student.getByNameEqI(name);
 this.scope.model.student.selectByName(name);
@@ -61,7 +61,7 @@ If you need to implement a magic method-like style for other fields, you can def
 
 For example, for the `title` field, provide the `getByTitle`/`selectByTitle` methods:
 
-``` typescript
+```typescript
 @Model()
 class ModelPost {
   getByTitle(title: string) {
@@ -80,7 +80,7 @@ This defines a general method, not a magic method. We can implement custom logic
 
 So, you can use it like this:
 
-``` typescript
+```typescript
 this.scope.model.post.getByTitle(title);
 this.scope.model.post.selectByTitle(title);
 ```
@@ -91,7 +91,7 @@ If a custom method is provided in the model, the corresponding magic method will
 
 For example, for the field `name`, provide the method `getByName`:
 
-``` typescript
+```typescript
 @Model()
 class ModelStudent {
   getByName(name: string) {

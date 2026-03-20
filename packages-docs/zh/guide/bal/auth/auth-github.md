@@ -6,22 +6,19 @@
 
 ### 1. 登录
 
-``` typescript
+```typescript
 class ControllerStudent {
   @Web.get('login')
   @Passport.public()
   async login() {
-    await this.bean.auth.authenticate(
-      'auth-github:github',
-      { state: { redirect: '/' } },
-    );
+    await this.bean.auth.authenticate('auth-github:github', { state: { redirect: '/' } });
   }
 }
 ```
 
 ### 2. 退出登录
 
-``` typescript
+```typescript
 await this.bean.passport.signout();
 ```
 
@@ -31,7 +28,7 @@ await this.bean.passport.signout();
 
 `src/backend/config/config/config.ts`
 
-``` typescript
+```typescript
 // onions
 config.onions = {
   authProvider: {
@@ -51,11 +48,11 @@ config.onions = {
 
 ### 4. 添加更多Client凭据
 
-* 首先采用接口合并机制添加 Client 类型定义
+- 首先采用接口合并机制添加 Client 类型定义
 
 在 VSCode 编辑器中，输入代码片段`recordauthclient`，自动生成代码骨架:
 
-``` typescript
+```typescript
 declare module 'vona-module-x-x' {
   export interface IAuthProvider_xxx_ClientRecord {
     : never;
@@ -65,7 +62,7 @@ declare module 'vona-module-x-x' {
 
 调整代码:
 
-``` typescript
+```typescript
 declare module 'vona-module-auth-github' {
   export interface IAuthProviderGithubClientRecord {
     another: never;
@@ -73,9 +70,9 @@ declare module 'vona-module-auth-github' {
 }
 ```
 
-* 然后在 App Config 中设置认证凭据
+- 然后在 App Config 中设置认证凭据
 
-``` diff
+```diff
 // onions
 config.onions = {
   authProvider: {
@@ -130,7 +127,7 @@ config.onions = {
 
 ### 1. Cli命令
 
-``` bash
+```bash
 $ vona :create:bean authProvider github --module=auth-github
 ```
 
@@ -142,7 +139,7 @@ $ vona :create:bean authProvider github --module=auth-github
 
 ## Auth Provider定义
 
-``` diff
+```diff
 export interface IAuthProviderGithubClientRecord extends IAuthProviderClientRecord {}
 
 export interface IAuthProviderGithubClientOptions extends IAuthProviderOauth2ClientOptions {
@@ -188,7 +185,7 @@ class AuthProviderGithub {
 
 Profile 具有统一的接口定义:
 
-``` typescript
+```typescript
 export interface IAuthUserProfile {
   id: string;
   username?: string;
@@ -203,4 +200,4 @@ export interface IAuthUserProfile {
 }
 ```
 
-* `confirmed`: 如果为`true`，意味着用户已经确认，不需要后续的`激活`操作
+- `confirmed`: 如果为`true`，意味着用户已经确认，不需要后续的`激活`操作

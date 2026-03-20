@@ -10,11 +10,11 @@ VonaJS AOP 编程包括三个方面的能力：
 
 ### 控制器切面清单
 
-* Middleware
-* Guard
-* Interceptor
-* Pipe
-* Filter
+- Middleware
+- Guard
+- Interceptor
+- Pipe
+- Filter
 
 ### 执行时序图
 
@@ -37,7 +37,7 @@ VonaJS AOP 编程包括三个方面的能力：
 
 #### 举例：数据库事务
 
-``` diff
+```diff
 class ServiceStudent {
 + @Core.transaction()
   async update(id: TableIdentity, student: DtoStudentUpdate) {
@@ -50,7 +50,7 @@ class ServiceStudent {
 
 #### 举例：日志
 
-``` diff
+```diff
 class ServiceStudent {
 + @Core.log()
   async update(id: TableIdentity, student: DtoStudentUpdate) {
@@ -67,7 +67,7 @@ class ServiceStudent {
 
 #### 举例：获取 model 实例
 
-``` diff
+```diff
 class ServiceStudent {
   async update(id: TableIdentity, student: DtoStudentUpdate) {
 +   return await this.scope.model.student.updateById(id, student);
@@ -81,7 +81,7 @@ class ServiceStudent {
 
 系统提供了一个 Class `ServiceModelResolver`，用于实现 model 实例的动态解析，代码如下：
 
-``` typescript
+```typescript
 class ServiceModelResolver {
   protected __get__(prop: string) {
     const beanFullName = `${this[SymbolModuleScope]}.model.${prop}`;
@@ -98,7 +98,7 @@ class ServiceModelResolver {
 
 仍以 Class `ServiceStudent`的`update`方法为例，通过`外部切面`来实现日志能力：
 
-``` typescript
+```typescript
 import { Aop } from 'vona-module-a-aspect';
 
 @Aop({ match: 'demo-student.service.student' })

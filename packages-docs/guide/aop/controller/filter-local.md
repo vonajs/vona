@@ -6,7 +6,7 @@ For example, create a local filter: `test` in the module demo-student to customi
 
 ### 1. Cli command
 
-``` bash
+```bash
 $ vona :create:bean filter test --module=demo-student
 ```
 
@@ -18,7 +18,7 @@ Context Menu - [Module Path]: `Vona Aspect/Filter`
 
 ## Filter Definition
 
-``` typescript
+```typescript
 export interface IFilterOptionsTest extends IDecoratorFilterOptions {}
 
 @Filter<IFilterOptionsTest>()
@@ -43,7 +43,7 @@ class FilterTest {
 
 ### 1. Annotating controller actions
 
-``` diff
+```diff
 import { Aspect } from 'vona-module-a-aspect';
 
 @Controller()
@@ -61,7 +61,7 @@ class ControllerStudent {
 
 You can use filter for controller classes so that all actions in the class will apply this filter
 
-``` diff
+```diff
 import { Aspect } from 'vona-module-a-aspect';
 
 @Controller()
@@ -80,7 +80,7 @@ For example, define the `prefix` parameter for the test filter to customize the 
 
 ### 1. Defining parameter types
 
-``` diff
+```diff
 export interface IFilterOptionsTest extends IDecoratorFilterOptions {
 +  prefix: string;
 }
@@ -88,7 +88,7 @@ export interface IFilterOptionsTest extends IDecoratorFilterOptions {
 
 ### 2. Providing default values ​​for parameters
 
-``` diff
+```diff
 @Filter<IFilterOptionsTest>({
 + prefix: 'Custom Error',
 })
@@ -96,7 +96,7 @@ export interface IFilterOptionsTest extends IDecoratorFilterOptions {
 
 ### 3. Using Parameters
 
-``` diff
+```diff
 export interface IFilterOptionsTest extends IDecoratorFilterOptions {
   prefix: string;
 }
@@ -123,7 +123,7 @@ export class FilterTest extends BeanBase implements IFilterLog {
 
 You can specify local filter parameters for a specific API
 
-``` diff
+```diff
 class ControllerStudent {
   @Web.post()
 + @Aspect.filter('demo-student:test', { prefix: 'Test Error' })
@@ -139,7 +139,7 @@ Filter parameters can be configured in App Config
 
 `src/backend/config/config/config.ts`
 
-``` typescript
+```typescript
 // onions
 config.onions = {
   filter: {

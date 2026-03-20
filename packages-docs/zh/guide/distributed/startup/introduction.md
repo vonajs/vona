@@ -15,7 +15,7 @@ VonaJS 提供了两类启动项：
 
 ### 1. Cli命令
 
-``` bash
+```bash
 $ vona :create:bean startup log --module=demo-student
 ```
 
@@ -27,7 +27,7 @@ $ vona :create:bean startup log --module=demo-student
 
 ## 启动项定义
 
-``` typescript
+```typescript
 @Startup()
 export class StartupLog extends BeanBase implements IStartupExecute {
   async execute() {
@@ -42,7 +42,7 @@ export class StartupLog extends BeanBase implements IStartupExecute {
 
 可以为启动项配置参数
 
-``` typescript
+```typescript
 @Startup({
   instance: false,
   after: false,
@@ -52,16 +52,16 @@ export class StartupLog extends BeanBase implements IStartupExecute {
 export class StartupLog {}
 ```
 
-|名称|类型|说明|
-|--|--|--|
-|instance|boolean|是否是实例启动项，默认为`false`|
-|after|boolean|控制启动项的时机，默认为`false`|
-|debounce|boolean\|number|采用debounce方式执行Startup，默认为`false`|
-|transaction|boolean|是否启用数据库事务，默认为`false`|
+| 名称        | 类型            | 说明                                       |
+| ----------- | --------------- | ------------------------------------------ |
+| instance    | boolean         | 是否是实例启动项，默认为`false`            |
+| after       | boolean         | 控制启动项的时机，默认为`false`            |
+| debounce    | boolean\|number | 采用debounce方式执行Startup，默认为`false` |
+| transaction | boolean         | 是否启用数据库事务，默认为`false`          |
 
-- `after`:  
+- `after`:
   - `false`: 在`appReady`(应用启动项)或者`instanceReady`(实例启动项)之前执行
-  - `true`: 在`appReady`(应用启动项)或者`instanceReady`(实例启动项)之后执行 
+  - `true`: 在`appReady`(应用启动项)或者`instanceReady`(实例启动项)之后执行
 - `debounce`
   - `false`: 禁用 debounce
   - `true`: 使用系统默认的 debounce 时间
@@ -73,7 +73,7 @@ export class StartupLog {}
 
 `src/backend/config/config/config.ts`
 
-``` typescript
+```typescript
 // onions
 config.onions = {
   startup: {
@@ -95,7 +95,7 @@ config.onions = {
 
 比如，系统有一个内置启动项`a-web:listen`，希望加载顺序如下：`a-web:listen` > `Current`
 
-``` diff
+```diff
 @Startup({
 + dependencies: 'a-web:listen',
 })
@@ -106,7 +106,7 @@ class StartupLog {}
 
 `dependents`的顺序刚好与`dependencies`相反，希望加载顺序如下：`Current` > `a-web:listen`
 
-``` diff
+```diff
 @Startup({
 + dependents: 'a-web:listen',
 })
@@ -121,7 +121,7 @@ class StartupLog {}
 
 `src/backend/config/config/config.ts`
 
-``` diff
+```diff
 // onions
 config.onions = {
   startup: {
@@ -136,14 +136,14 @@ config.onions = {
 
 可以让启动项在指定的运行环境生效
 
-|名称|类型|说明|
-|--|--|--|
-|flavor|string\|string[]|参见: [运行环境与Flavor](../../env-config/mode-flavor/introduction.md)|
-|mode|string\|string[]|参见: [运行环境与Flavor](../../env-config/mode-flavor/introduction.md)|
+| 名称   | 类型             | 说明                                                                   |
+| ------ | ---------------- | ---------------------------------------------------------------------- |
+| flavor | string\|string[] | 参见: [运行环境与Flavor](../../env-config/mode-flavor/introduction.md) |
+| mode   | string\|string[] | 参见: [运行环境与Flavor](../../env-config/mode-flavor/introduction.md) |
 
-* 举例
+- 举例
 
-``` diff
+```diff
 @Startup({
 + meta: {
 +   flavor: 'normal',
@@ -157,7 +157,7 @@ class StartupLog {}
 
 可以直接输出当前生效的启动项清单
 
-``` diff
+```diff
 class ControllerStudent {
   @Web.get('test')
   test() {

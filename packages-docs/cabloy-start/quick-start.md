@@ -6,17 +6,17 @@ Here, we create a Vona project and a Zova project and combine them to create a c
 
 Create a Vona project using the `cabloy-start` template
 
-``` bash
+```bash
 $ vona :create:project projectName --template=cabloy-start
 $ cd projectName
 ```
 
 The `cabloy-start` template has a built-in suite `vona-suite-cabloy-start`, which contains two modules:
 
-|name|description|
-|--|--|
-|start-siteadmin| Used to implement `Admin-Dashboard`|
-|start-siteweb|Used to implement `Website`|
+| name            | description                         |
+| --------------- | ----------------------------------- |
+| start-siteadmin | Used to implement `Admin-Dashboard` |
+| start-siteweb   | Used to implement `Website`         |
 
 ## Create a Zova project
 
@@ -24,7 +24,7 @@ The `cabloy-start` template has a built-in suite `vona-suite-cabloy-start`, whic
 
 Create a Zova project using the `vuetify` template
 
-``` bash
+```bash
 $ zova :create:project projectName --template=vuetify
 $ cd projectName
 ```
@@ -33,7 +33,7 @@ $ cd projectName
 
 Automatically gain access to the GitHub repository after purchase
 
-``` bash
+```bash
 $ git clone git@github.com:cabloy/zova-suite-cabloy-start.git src/suite/cabloy-start
 ```
 
@@ -41,35 +41,35 @@ $ git clone git@github.com:cabloy/zova-suite-cabloy-start.git src/suite/cabloy-s
 
 Modify the environment parameter configuration of the two flavors of `Website` and `Admin-Dashboard` respectively
 
-* `env/.env.ssr.cabloyStartAdmin`:
+- `env/.env.ssr.cabloyStartAdmin`:
 
 ```bash
 BUILD_COPY_RELEASE = /path-to-vona/src/suite/cabloy-start/modules/start-siteadmin/assets/site
 BUILD_REST_COPY_DIST = /path-to-vona/src/suite/cabloy-start/modules/start-siteadmin/zovaRest
 ```
 
-* `env/.env.ssr.cabloyStartWeb`:
+- `env/.env.ssr.cabloyStartWeb`:
 
 ```bash
 BUILD_COPY_RELEASE = /path-to-vona/src/suite/cabloy-start/modules/start-siteweb/assets/site
 BUILD_REST_COPY_DIST = /path-to-vona/src/suite/cabloy-start/modules/start-siteweb/zovaRest
 ```
 
-|Name|Description|
-|--|--|
-|BUILD_COPY_RELEASE|Automatically copy the built JS bundle to Vona|
-|BUILD_REST_COPY_DIST|Automatically copy the built type files to Vona|
+| Name                 | Description                                     |
+| -------------------- | ----------------------------------------------- |
+| BUILD_COPY_RELEASE   | Automatically copy the built JS bundle to Vona  |
+| BUILD_REST_COPY_DIST | Automatically copy the built type files to Vona |
 
 ### 4. Build the Zova project
 
-* Build JS bundle
+- Build JS bundle
 
 ```bash
 $ npm run build:ssr:cabloyStartAdmin
 $ npm run build:ssr:cabloyStartWeb
 ```
 
-* Build type files
+- Build type files
 
 ```bash
 $ npm run build:rest:cabloyStartAdmin
@@ -80,25 +80,25 @@ $ npm run build:rest:cabloyStartWeb
 
 ### 1. Start Vona development service
 
-``` bash
+```bash
 $ npm run dev
 ```
 
-| URL|Description|
-|--|--|
-|http://localhost:7102| Website |
-|http://localhost:7102/admin| Admin-Dashboard |
+| URL                         | Description     |
+| --------------------------- | --------------- |
+| http://localhost:7102       | Website         |
+| http://localhost:7102/admin | Admin-Dashboard |
 
 ### 2. Start Zova development service
 
 You can directly start Zova development service to debug the frontend code. At this point, Vona can be accessed by the frontend as an API service
 
-``` bash
+```bash
 $ npm run dev:ssr:cabloyStartWeb
 $ npm run dev:ssr:cabloyStartAdmin
 ```
 
-|URL|说明|
-|--|--|
-|http://localhost:9000|Website|
-|http://localhost:9000/admin/|Admin-Dashboard|
+| URL                          | 说明            |
+| ---------------------------- | --------------- |
+| http://localhost:9000        | Website         |
+| http://localhost:9000/admin/ | Admin-Dashboard |

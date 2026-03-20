@@ -3,8 +3,8 @@
 Vona ORM supports `Multi-database/Multi-datasource`, with the following features:
 
 1. Multi-database
-    - For example: Sqlite3/PostgreSQL/MySQL
-    - Support for new database dialects is continuously being added
+   - For example: Sqlite3/PostgreSQL/MySQL
+   - Support for new database dialects is continuously being added
 2. Multi-datasource
 3. Cross-datasource relation queries
 
@@ -16,16 +16,16 @@ First prepare two Models: `User/Order`
 
 1. Model Order
 
-``` typescript
+```typescript
 @Model({
   entity: EntityOrder,
 })
-class ModelOrder{}
+class ModelOrder {}
 ```
 
 2. Model User
 
-``` typescript
+```typescript
 @Model({
   entity: EntityUser,
   relations: {
@@ -39,7 +39,7 @@ class ModelUser {}
 
 Then query the user's order list
 
-``` typescript
+```typescript
 class ServiceOrder {
   async selectUserOrders() {
     const userId = 1;
@@ -54,7 +54,7 @@ class ServiceOrder {
       },
     );
   }
-}  
+}
 ```
 
 So far, `system default datasource` has been used to query the user information of `userId=1` and the order list of this user
@@ -65,13 +65,13 @@ Next, create two datasources: `user-pg` and `order-mysql`
 
 ### 1. Add datasource type definition
 
-* In VSCode, create a type file in the module through the context menu `Vona Init/Types`
+- In VSCode, create a type file in the module through the context menu `Vona Init/Types`
 
-* Then add the type definition in the type file
+- Then add the type definition in the type file
 
 `{module path}/src/types/index.ts`
 
-``` typescript
+```typescript
 declare module 'vona-module-a-orm' {
   export interface IDatabaseClientRecord {
     'user-pg': never;
@@ -84,7 +84,7 @@ declare module 'vona-module-a-orm' {
 
 `src/backend/config/config/config.ts`
 
-``` typescript
+```typescript
 // database
 config.database = {
   clients: {
@@ -116,7 +116,7 @@ config.database = {
 
 You can use datasources dynamically in your code:
 
-``` diff
+```diff
 class ServiceOrder {
   async selectUserOrders() {
     const userId = 1;
@@ -132,7 +132,7 @@ class ServiceOrder {
       },
     );
   }
-}  
+}
 ```
 
 - `newInstance`: Passes the datasource to use and returns a new model instance
@@ -143,7 +143,7 @@ So far, we've used the `user-pg` datasource to query user information and the `s
 
 The datasource can be specified dynamically in the relation options:
 
-``` diff
+```diff
 class ServiceOrder {
   async selectUserOrders() {
     const userId = 1;
@@ -163,7 +163,7 @@ class ServiceOrder {
       },
     );
   }
-}  
+}
 ```
 
 - `meta.client`: specifies the datasource to be used by relation `orders`
@@ -176,7 +176,7 @@ You can also configure the datasource directly in the Model options to simplify 
 
 1. Model Order
 
-``` diff
+```diff
 @Model({
   entity: EntityOrder,
 + client: 'order-mysql',
@@ -186,7 +186,7 @@ class ModelOrder{}
 
 2. Model User
 
-``` diff
+```diff
 @Model({
   entity: EntityUser,
 + client: 'user-pg',
@@ -201,7 +201,7 @@ class ModelUser {}
 
 Now, you can query the user's order list in the usual way
 
-``` typescript
+```typescript
 class ServiceOrder {
   async selectUserOrders() {
     const userId = 1;
@@ -216,7 +216,7 @@ class ServiceOrder {
       },
     );
   }
-}  
+}
 ```
 
 ## Using Datasources: App Config
@@ -225,7 +225,7 @@ You can also configure Model options in App Config:
 
 `src/backend/config/config/config.ts`
 
-``` typescript
+```typescript
 // onions
 config.onions = {
   model: {
@@ -245,7 +245,7 @@ Therefore, you can also use the usual way to query the user's order list
 
 Static options can also be specified when defining a Relation:
 
-``` diff
+```diff
 @Model({
   entity: EntityUser,
   client: 'user-pg',

@@ -4,26 +4,26 @@ The following uses the module `test-vona` as an example to explain the usage of 
 
 ## count
 
-``` typescript
+```typescript
 class ServicePost {
   async count() {
     return await this.scope.model.post.count();
   }
-}  
+}
 ```
 
-* Params
+- Params
 
-|Name|Description|
-|--|--|
-|column|The column to be counted|
-|distinct|Whether to enable distinct|
-|where|Conditional statement|
-|joins|Related tables|
+| Name     | Description                |
+| -------- | -------------------------- |
+| column   | The column to be counted   |
+| distinct | Whether to enable distinct |
+| where    | Conditional statement      |
+| joins    | Related tables             |
 
 ## Aggregate
 
-``` typescript
+```typescript
 class ServicePost {
   async aggregate() {
     const result = await this.scope.model.post.aggregate({
@@ -37,25 +37,25 @@ class ServicePost {
     });
     return result;
   }
-}  
+}
 ```
 
 Vona ORM automatically infers the type of `result` from the `aggrs` parameter
 
 ![](../../../assets/img/orm/aggr-group/aggr-group-1.png)
 
-* Params
+- Params
 
-|Name|Description|
-|--|--|
-|aggrs|The functions and columns to be aggregated. Functions: `count`/`sum`/`avg`/`min`/`max`. Columns: `string`/`string[]` |
-|distinct|Whether to enable distinct|
-|where|Conditional statement|
-|joins|Related tables|
+| Name     | Description                                                                                                          |
+| -------- | -------------------------------------------------------------------------------------------------------------------- |
+| aggrs    | The functions and columns to be aggregated. Functions: `count`/`sum`/`avg`/`min`/`max`. Columns: `string`/`string[]` |
+| distinct | Whether to enable distinct                                                                                           |
+| where    | Conditional statement                                                                                                |
+| joins    | Related tables                                                                                                       |
 
 ## Group
 
-``` typescript
+```typescript
 class ServicePost {
   async group() {
     const result = await this.scope.model.post.group({
@@ -67,31 +67,31 @@ class ServicePost {
     });
     return result;
   }
-}  
+}
 ```
 
 Vona ORM automatically infers the type of `result` from the parameters `groups` and `aggrs`
 
 ![](../../../assets/img/orm/aggr-group/aggr-group-2.png)
 
-* Params
+- Params
 
-|Name|Description|
-|--|--|
-|groups|The groups to be grouped: `string`/`string[]`|
-|columns|The group columns to be displayed. If it is empty, the columns specified by the `groups` parameter will be displayed|
-|aggrs|The functions and columns to be aggregated. Functions: `count`/`sum`/`avg`/`min`/`max`. Columns: `string`/`string[]` |
-|distinct|Whether to enable distinct|
-|where|Conditional statement|
-|joins|Related tables|
-|limit|Limit the range of data to be grouped|
-|offset|Limit the range of data to be grouped|
-|having|Filter the group results|
-|orders|Sort the group results|
+| Name     | Description                                                                                                          |
+| -------- | -------------------------------------------------------------------------------------------------------------------- |
+| groups   | The groups to be grouped: `string`/`string[]`                                                                        |
+| columns  | The group columns to be displayed. If it is empty, the columns specified by the `groups` parameter will be displayed |
+| aggrs    | The functions and columns to be aggregated. Functions: `count`/`sum`/`avg`/`min`/`max`. Columns: `string`/`string[]` |
+| distinct | Whether to enable distinct                                                                                           |
+| where    | Conditional statement                                                                                                |
+| joins    | Related tables                                                                                                       |
+| limit    | Limit the range of data to be grouped                                                                                |
+| offset   | Limit the range of data to be grouped                                                                                |
+| having   | Filter the group results                                                                                             |
+| orders   | Sort the group results                                                                                               |
 
 ### Example: having
 
-``` typescript
+```typescript
 class ServicePost {
   async group() {
     const result = await this.scope.model.post.group({
@@ -112,12 +112,12 @@ class ServicePost {
     });
     return result;
   }
-}  
+}
 ```
 
 ### Example: orders
 
-``` typescript
+```typescript
 class ServicePost {
   async group() {
     const result = await this.scope.model.post.group({
@@ -130,5 +130,5 @@ class ServicePost {
     });
     return result;
   }
-}  
+}
 ```

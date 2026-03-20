@@ -30,20 +30,20 @@ BUILD_COPY_RELEASE = /path-to-vona/src/suite/cabloy-basic/modules/basic-siteadmi
 BUILD_REST_COPY_DIST = /path-to-vona/src/suite/cabloy-basic/modules/basic-siteadmin/zovaRest
 ```
 
-|Name|Description|
-|--|--|
-|BUILD_COPY_RELEASE|Automatically copy the built JS bundle to Vona|
-|BUILD_REST_COPY_DIST|Automatically copy the built type files to Vona|
+| Name                 | Description                                     |
+| -------------------- | ----------------------------------------------- |
+| BUILD_COPY_RELEASE   | Automatically copy the built JS bundle to Vona  |
+| BUILD_REST_COPY_DIST | Automatically copy the built type files to Vona |
 
 ## 5. Build
 
-* Build JS bundle
+- Build JS bundle
 
 ```bash
 $ npm run build:ssr:cabloyBasicAdmin
 ```
 
-* Build type files
+- Build type files
 
 ```bash
 $ npm run build:rest:cabloyBasicAdmin

@@ -4,7 +4,7 @@ When using the `push/pushAsync` method to push jobs, you can pass extra data
 
 ## Example
 
-``` diff
+```diff
 class ControllerStudent {
   async test() {
     const data = { a: 1, b: 2 };
@@ -25,7 +25,7 @@ class ControllerStudent {
 
 When executing the job, you can directly obtain the `header` value:
 
-``` diff
+```diff
 @Queue()
 class QueueAdd {
   async execute(data, _options) {

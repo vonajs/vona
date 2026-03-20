@@ -6,7 +6,7 @@ Modules can individually provide their own `Constant`
 
 ### 1. Cli command
 
-``` bash
+```bash
 $ vona :init:constant demo-student
 ```
 

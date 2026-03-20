@@ -22,7 +22,7 @@ The `Scope` instance of the module to which the current bean belongs can be obta
 
 ## this.$scope: Obtain scope instance cross-module
 
-``` typescript
+```typescript
 class ControllerOther extends BeanBase {
   async test() {
     console.log(this.$scope.demoStudent);
@@ -32,7 +32,7 @@ class ControllerOther extends BeanBase {
 
 The `Scope` instance of the module `demo-student` can be obtained through `this.$scope.demoStudent`
 
-``` typescript
+```typescript
 class ControllerOther extends BeanBase {
   async test() {
     console.log(this.$scope.user);
@@ -48,7 +48,7 @@ If you do not inherit from the base class `BeanBase`, `this.scope` and `this.$sc
 
 `src/backend/play/index.ts`
 
-``` diff 
+```diff
 export async function main(app: VonaApplication, _argv: IArgv) {
   await app.bean.executor.mockCtx(async () => {
 +   const scopeDemoStudent = app.scope('demo-student');
@@ -65,6 +65,6 @@ export async function main(app: VonaApplication, _argv: IArgv) {
 | constant | Constant of Module        |
 | locale   | I18n of Module            |
 | error    | Error exception of Module |
-| service  | Services of Module     |
-| model  | Models of Module     |
-| entity  | Entities of Module     |
+| service  | Services of Module        |
+| model    | Models of Module          |
+| entity   | Entities of Module        |

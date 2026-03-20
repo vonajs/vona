@@ -8,16 +8,16 @@
 
 ## 内置成员
 
-| 名称     | 说明                                        |
-| -------- | ------------------------------------------- |
-| app      | 全局 App 对象                               |
-| ctx      | 当前 request 的 Context 对象         |
-| ctx.bean     | ctx 容器            |
-| bean     | app 容器            |
-| scope    | 当前 bean 实例所归属模块的 Scope 对象       |
-| $scope   | 获取指定模块的 Scope 对象       |
-| $logger      | 获取Logger对象 |
-|$loggerChild|获取Logger Child对象|
+| 名称         | 说明                                  |
+| ------------ | ------------------------------------- |
+| app          | 全局 App 对象                         |
+| ctx          | 当前 request 的 Context 对象          |
+| ctx.bean     | ctx 容器                              |
+| bean         | app 容器                              |
+| scope        | 当前 bean 实例所归属模块的 Scope 对象 |
+| $scope       | 获取指定模块的 Scope 对象             |
+| $logger      | 获取Logger对象                        |
+| $loggerChild | 获取Logger Child对象                  |
 
 ## BeanBaseSimple
 
@@ -25,9 +25,9 @@
 
 ### 内置成员
 
-|名称|说明|
-|--|--|
-|$beanFullName|Bean标识|
-|$beanOptions|Bean Options|
-|$onionName|Onion名称|
-|$onionOptions|Bean参数|
+| 名称          | 说明         |
+| ------------- | ------------ |
+| $beanFullName | Bean标识     |
+| $beanOptions  | Bean Options |
+| $onionName    | Onion名称    |
+| $onionOptions | Bean参数     |

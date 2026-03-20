@@ -6,7 +6,7 @@ Modules can individually provide their own `Services`
 
 ### 1. Cli command
 
-``` bash
+```bash
 $ vona :create:bean service student --module=demo-student
 ```
 

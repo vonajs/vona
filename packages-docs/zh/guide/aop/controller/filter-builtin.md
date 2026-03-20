@@ -12,7 +12,7 @@
 
 禁用 errorCode: `422`
 
-``` diff
+```diff
 import { Aspect } from 'vona-module-a-aspect';
 
 class ControllerStudent {
@@ -24,7 +24,7 @@ class ControllerStudent {
 
 简化写法：
 
-``` diff
+```diff
 import { Core } from 'vona-module-a-core';
 
 class ControllerStudent {
@@ -42,7 +42,7 @@ class ControllerStudent {
 
 由于`ErrorTest`的错误码是`1001`，因此可以禁用 errorCode: `demo-student:1001`
 
-``` diff
+```diff
 import { Aspect } from 'vona-module-a-aspect';
 
 class ControllerStudent {
@@ -57,7 +57,7 @@ class ControllerStudent {
 
 简化写法：
 
-``` diff
+```diff
 import { Core } from 'vona-module-a-core';
 
 class ControllerStudent {
@@ -76,7 +76,7 @@ class ControllerStudent {
 
 `src/backend/config/config/config.ts`
 
-``` typescript
+```typescript
 // onions
 config.onions = {
   filter: {

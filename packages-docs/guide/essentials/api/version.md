@@ -22,7 +22,7 @@ Configure the current data version of the module in the module's `package.json`
 
 `src/module/demo-student/package.json`
 
-``` typescript
+```typescript
 {
   "name": "vona-module-demo-student",
   "vonaModule": {
@@ -39,7 +39,7 @@ Vona uses Bean `meta.version` to uniformly manage module migration codes
 
 ### 1. Cli command
 
-``` bash
+```bash
 $ vona :create:bean meta version --module=demo-student
 ```
 
@@ -51,7 +51,7 @@ Context Menu - [Module Path]: `Vona Meta/Version`
 
 ## meta.version Definition
 
-``` typescript
+```typescript
 @Meta()
 export class MetaVersion extends BeanBase {}
 ```
@@ -60,17 +60,17 @@ export class MetaVersion extends BeanBase {}
 
 Vona provides three change-scenarios. You can inherit the corresponding interface and implement the corresponding method according to business needs
 
-|Scenario|Interface|Method|Description|
-|--|--|--|--|
-|update|IMetaVersionUpdate|update|Changes in database schema, such as creating a new data table, adding fields, etc.|
-|init|IMetaVersionInit|init|Provide initialization data for different instances/tenants|
-|test|IMetaVersionTest|test|Provide test data for the test environment|
+| Scenario | Interface          | Method | Description                                                                        |
+| -------- | ------------------ | ------ | ---------------------------------------------------------------------------------- |
+| update   | IMetaVersionUpdate | update | Changes in database schema, such as creating a new data table, adding fields, etc. |
+| init     | IMetaVersionInit   | init   | Provide initialization data for different instances/tenants                        |
+| test     | IMetaVersionTest   | test   | Provide test data for the test environment                                         |
 
 ## update: Database schema migration
 
 For example, the current data version of the module demo-student is `1`, and we create a data table `demoStudent` for `version 1`
 
-``` typescript
+```typescript
 @Meta()
 export class MetaVersion extends BeanBase implements IMetaVersionUpdate {
   async update(options: IMetaVersionUpdateOptions) {
@@ -92,7 +92,7 @@ Vona uses `knex` at the bottom. For more details, see: [knex](https://knexjs.org
 
 In order to make the code higher quality and easier to maintain, we can also use a typed code style
 
-``` typescript
+```typescript
 @Meta()
 export class MetaVersion extends BeanBase implements IMetaVersionUpdate {
   async update(options: IMetaVersionUpdateOptions) {
@@ -112,7 +112,7 @@ export class MetaVersion extends BeanBase implements IMetaVersionUpdate {
 
 For example, we initialize a student data
 
-``` typescript
+```typescript
 @Meta()
 export class MetaVersion extends BeanBase implements IMetaVersionInit {
   async init(options: IMetaVersionInitOptions) {
@@ -128,7 +128,7 @@ export class MetaVersion extends BeanBase implements IMetaVersionInit {
 
 Automatically write data in the database:
 
-``` typescript
+```typescript
 {
   id: '1',
   createdAt: 2025-07-03T13:39:22.642Z,
@@ -146,7 +146,7 @@ Where `iid: 1` is the Id of the current instance/tenant. Therefore, if there are
 
 For example, add a student data, which is only used in the test environment
 
-``` typescript
+```typescript
 @Meta()
 export class MetaVersion extends BeanBase implements IMetaVersionTest {
   async test(_options: IMetaVersionTestOptions) {
@@ -166,19 +166,19 @@ If we need to create a new data table, such as `Book`, in subsequent business it
 
 ### 1. Increment fileVersion
 
-``` diff
+```diff
 {
   "name": "vona-module-demo-student",
   "vonaModule": {
 -   "fileVersion": 1
 +   "fileVersion": 2
   },
-}  
+}
 ```
 
 ### 2. Create Entity: EntityBook
 
-``` typescript
+```typescript
 @Entity('demoStudentBook')
 export class EntityBook {
   @Api.field()
@@ -190,7 +190,7 @@ export class EntityBook {
 
 Write migration code in `update/init/test` as needed. Here, we only need to create a new data table in `update`
 
-``` typescript
+```typescript
 @Meta()
 export class MetaVersion extends BeanBase implements IMetaVersionUpdate {
   async update(options: IMetaVersionUpdateOptions) {
@@ -212,7 +212,7 @@ export class MetaVersion extends BeanBase implements IMetaVersionUpdate {
 
 When the system starts, it will automatically detect whether the module needs to be changed, and automatically execute the migration code
 
-``` bash
+```bash
 # Development environment
 $ npm run dev
 # Production environment
@@ -225,13 +225,13 @@ $ npm run start
 
 When we develop locally, we need to frequently update the database schema for the current data version. Then, we do not need to modify `fileVersion`, but execute the following command to make the migration code effective
 
-``` bash
+```bash
 $ npm run test
 ```
 
 When we run this command, the system will automatically delete the old database and create a new database, which will re-execute the migration code and then execute unit tests
 
-``` bash
+```bash
 $ npm run db:reset
 ```
 

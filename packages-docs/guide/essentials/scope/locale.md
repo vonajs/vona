@@ -6,7 +6,7 @@ Modules can individually provide their own `I18n` language resources
 
 ### 1. Cli command
 
-``` bash
+```bash
 $ vona :init:locale demo-student
 ```
 
@@ -80,7 +80,7 @@ English: `src/backend/config/locale/en-us.ts`
 locale.modules = {
   'demo-student': {
 +   HelloWorld: 'Hello World!!!',
-  },  
+  },
 };
 ```
 
@@ -90,6 +90,6 @@ Chinese: `src/backend/config/locale/zh-cn.ts`
 locale.modules = {
   'demo-student': {
 +   HelloWorld: '您好世界!!!',
-  },  
+  },
 };
 ```

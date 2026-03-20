@@ -6,16 +6,16 @@ Here, we create a Vona project and a Zova project and combine them to create a c
 
 Create a Vona project using the `cabloy-basic` template
 
-``` bash
+```bash
 $ vona :create:project projectName --template=cabloy-basic
 $ cd projectName
 ```
 
 The `cabloy-basic` template has a built-in suite `vona-suite-cabloy-basic`, which contains the following modules:
 
-|name|description|
-|--|--|
-|basic-siteadmin| Used to implement `Admin-Dashboard`|
+| name            | description                         |
+| --------------- | ----------------------------------- |
+| basic-siteadmin | Used to implement `Admin-Dashboard` |
 
 ## Create a Zova project
 
@@ -47,20 +47,20 @@ BUILD_COPY_RELEASE = /path-to-vona/src/suite/cabloy-basic/modules/basic-siteadmi
 BUILD_REST_COPY_DIST = /path-to-vona/src/suite/cabloy-basic/modules/basic-siteadmin/zovaRest
 ```
 
-|Name|Description|
-|--|--|
-|BUILD_COPY_RELEASE|Automatically copy the built JS bundle to Vona|
-|BUILD_REST_COPY_DIST|Automatically copy the built type files to Vona|
+| Name                 | Description                                     |
+| -------------------- | ----------------------------------------------- |
+| BUILD_COPY_RELEASE   | Automatically copy the built JS bundle to Vona  |
+| BUILD_REST_COPY_DIST | Automatically copy the built type files to Vona |
 
 ### 5. Build the Zova project
 
-* Build JS bundle
+- Build JS bundle
 
 ```bash
 $ npm run build:ssr:cabloyBasicAdmin
 ```
 
-* Build type files
+- Build type files
 
 ```bash
 $ npm run build:rest:cabloyBasicAdmin
@@ -70,22 +70,22 @@ $ npm run build:rest:cabloyBasicAdmin
 
 ### 1. Start Vona development service
 
-``` bash
+```bash
 $ npm run dev
 ```
 
-| URL|Description|
-|--|--|
-|http://localhost:7102| Admin-Dashboard |
+| URL                   | Description     |
+| --------------------- | --------------- |
+| http://localhost:7102 | Admin-Dashboard |
 
 ### 2. Start Zova development service
 
 You can directly start Zova development service to debug the frontend code. At this point, Vona can be accessed by the frontend as an API service
 
-``` bash
+```bash
 $ npm run dev:ssr:cabloyBasicAdmin
 ```
 
-|URL|说明|
-|--|--|
-|http://localhost:9000|Admin-Dashboard|
+| URL                   | 说明            |
+| --------------------- | --------------- |
+| http://localhost:9000 | Admin-Dashboard |

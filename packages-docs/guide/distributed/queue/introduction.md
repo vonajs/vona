@@ -8,7 +8,7 @@ For example, create a queue `add` in the module `demo-student`, which performs a
 
 ### 1. Cli Command
 
-``` bash
+```bash
 $ vona :create:bean queue add --module=demo-student
 ```
 
@@ -20,15 +20,19 @@ Context Menu - [Module Path]: `Vona Bean/Queue`
 
 ## Queue Definition
 
-``` typescript
-export interface TypeQueueAddJobData { a: number; b: number }
+```typescript
+export interface TypeQueueAddJobData {
+  a: number;
+  b: number;
+}
 
 export type TypeQueueAddJobResult = number;
 
 @Queue()
 export class QueueAdd
   extends BeanQueueBase<TypeQueueAddJobData, TypeQueueAddJobResult>
-  implements IQueueExecute<TypeQueueAddJobData, TypeQueueAddJobResult> {
+  implements IQueueExecute<TypeQueueAddJobData, TypeQueueAddJobResult>
+{
   async execute(data: TypeQueueAddJobData, _options?: IQueuePushOptions): Promise<TypeQueueAddJobResult> {
     return data.a + data.b;
   }
@@ -41,22 +45,22 @@ export class QueueAdd
 
 * execute parameters
 
-|Name|Description|
-|--|--|
-|data|Job data|
-|options|Job options|
+| Name    | Description |
+| ------- | ----------- |
+| data    | Job data    |
+| options | Job options |
 
 ## Push Job
 
 ### 1. No return value
 
-``` typescript
+```typescript
 class ControllerStudent {
   test() {
     const data = { a: 1, b: 2 };
     this.scope.queue.add.push(data);
   }
-}  
+}
 ```
 
 - `this.scope.queue.add`: Gets the queue instance through the module scope
@@ -64,14 +68,14 @@ class ControllerStudent {
 
 ### 2. Await return value
 
-``` typescript
+```typescript
 class ControllerStudent {
   async test() {
     const data = { a: 1, b: 2 };
     const result = await this.scope.queue.add.pushAsync(data);
     console.log(result);
   }
-}  
+}
 ```
 
 - `this.scope.queue.add`: Gets the queue instance through the module scope
@@ -79,34 +83,34 @@ class ControllerStudent {
 
 ## `push/pushAsync`
 
-``` typescript
+```typescript
 push(data: DATA, options?: IQueuePushOptions);
 async pushAsync(data: DATA, options?: IQueuePushOptions): Promise<RESULT>;
 ```
 
-|Name|Description|
-|--|--|
-|data|Job data|
-|options|Job options|
+| Name    | Description |
+| ------- | ----------- |
+| data    | Job data    |
+| options | Job options |
 
-* options
+- options
 
-|Name|Type|Description|
-|--|--|--|
-|queueNameSub|string|Subqueue name|
-|jobName|string|Job name|
-|jobOptions|Bull.JobsOptions|Job options|
-|dbInfo.level|number|Defaults to the current context's datasource level `+1`, see: [Datasource Level](./db-level.md)|
-|dbInfo.clientName|string|Defaults to the current context's datasource name|
-|locale|string|Defaults to the current context's locale|
-|instanceName|string|Defaults to the current context's instance name|
-|extraData|object|See: [Extra Data](./extra-data.md)|
+| Name              | Type             | Description                                                                                     |
+| ----------------- | ---------------- | ----------------------------------------------------------------------------------------------- |
+| queueNameSub      | string           | Subqueue name                                                                                   |
+| jobName           | string           | Job name                                                                                        |
+| jobOptions        | Bull.JobsOptions | Job options                                                                                     |
+| dbInfo.level      | number           | Defaults to the current context's datasource level `+1`, see: [Datasource Level](./db-level.md) |
+| dbInfo.clientName | string           | Defaults to the current context's datasource name                                               |
+| locale            | string           | Defaults to the current context's locale                                                        |
+| instanceName      | string           | Defaults to the current context's instance name                                                 |
+| extraData         | object           | See: [Extra Data](./extra-data.md)                                                              |
 
 ## Queue Parameters
 
 Parameters can be configured for queue
 
-``` typescript
+```typescript
 @Queue({
   concurrency: false,
   transaction: false,
@@ -120,14 +124,14 @@ Parameters can be configured for queue
 class QueueAdd {}
 ```
 
-| Name | Type | Description |
-| -- | -- | -- |
-| concurrency | boolean | Whether to execute in parallel, default is `false` |
-| transaction | boolean | Whether to enable database transaction, default is `false` |
-| options.queue | Bull.QueueOptions | Bull Queue options |
-| options.worker | Bull.WorkerOptions | Bull Worker options |
-| options.job | Bull.JobsOptions | Bull Job options |
-| options.redlock | Redlock.Redlock | Redlock options |
+| Name            | Type               | Description                                                |
+| --------------- | ------------------ | ---------------------------------------------------------- |
+| concurrency     | boolean            | Whether to execute in parallel, default is `false`         |
+| transaction     | boolean            | Whether to enable database transaction, default is `false` |
+| options.queue   | Bull.QueueOptions  | Bull Queue options                                         |
+| options.worker  | Bull.WorkerOptions | Bull Worker options                                        |
+| options.job     | Bull.JobsOptions   | Bull Job options                                           |
+| options.redlock | Redlock.Redlock    | Redlock options                                            |
 
 - `options.redlock`: When `concurrency=false`, a redlock is required to ensure that jobs are executed serially. The system provides a default redlock, but you can also provide your own
 
@@ -137,7 +141,7 @@ You can configure queue parameters in the App Config
 
 `src/backend/config/config/config.ts`
 
-``` typescript
+```typescript
 // onions
 config.onions = {
   queue: {
@@ -163,7 +167,7 @@ You can control `enable/disable` of queue
 
 `src/backend/config/config/config.ts`
 
-``` diff
+```diff
 // onions
 config.onions = {
   queue: {
@@ -178,14 +182,14 @@ config.onions = {
 
 Allows queue to take effect in a specified operating environment
 
-|Name|Type|Description|
-|--|--|--|
-|flavor|string\|string[]|See: [Runtime Environments and Flavors](../../env-config/mode-flavor/introduction.md)|
-|mode|string\|string[]|See: [Runtime Environments and Flavors](../../env-config/mode-flavor/introduction.md)|
+| Name   | Type             | Description                                                                           |
+| ------ | ---------------- | ------------------------------------------------------------------------------------- |
+| flavor | string\|string[] | See: [Runtime Environments and Flavors](../../env-config/mode-flavor/introduction.md) |
+| mode   | string\|string[] | See: [Runtime Environments and Flavors](../../env-config/mode-flavor/introduction.md) |
 
-* Example
+- Example
 
-``` diff
+```diff
 @Queue({
 + meta: {
 +   flavor: 'normal',
@@ -199,7 +203,7 @@ class QueueAdd {}
 
 You can directly inspect the currently effective queue list
 
-``` diff
+```diff
 class ControllerStudent {
   @Web.get('test')
   test() {

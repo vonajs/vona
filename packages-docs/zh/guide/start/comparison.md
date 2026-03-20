@@ -4,8 +4,8 @@
 
 1. Vona 提供了更强大、更完善的后端能力，可以轻松应对大型业务系统的开发
 2. Vona 与 Zova 完美协同，延续前后端分离的架构风格。Zova 是一款更直观的前端框架，汲取 Vue3、React 和 Angular 的精华，用于开发优雅、快速、可靠的系统。采用 Zova 构建的前端项目，既可以独立运行，也可以将 JS bundle 放入 Vona 后端，在后端直接进行 SSR 渲染
-    * Vona 可以生成完整的 Openapi Schema，从而在 Zova 中生成 Api SDK
-    * Zova 可以生成路由和组件的类型，从而在 Vona 中提供类型提示
+   - Vona 可以生成完整的 Openapi Schema，从而在 Zova 中生成 Api SDK
+   - Zova 可以生成路由和组件的类型，从而在 Vona 中提供类型提示
 
 ## 与Nest对比
 

@@ -1,10 +1,10 @@
 {
   "name": "vona-docs",
-  "type": "module",
   "private": true,
   "description": "vona docs",
-  "author": "zhennann",
   "license": "MIT",
+  "author": "zhennann",
+  "type": "module",
   "scripts": {
     "docs:dev": "vitepress dev .",
     "docs:build": "vitepress build .",

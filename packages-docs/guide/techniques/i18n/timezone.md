@@ -2,13 +2,13 @@
 
 ## 1. Get Current Timezone
 
-``` typescript
+```typescript
 const tz = this.ctx.tz;
 ```
 
 ## 2. Set Current Timezone
 
-``` typescript
+```typescript
 this.ctx.tz = 'America/New_York';
 ```
 
@@ -22,7 +22,7 @@ I18n is the core capability provided by the module `a-locale`. The module config
 
 `src/backend/config/config/config.ts`
 
-``` typescript
+```typescript
 // modules
 config.modules = {
   'a-locale': {
@@ -36,12 +36,12 @@ config.modules = {
 };
 ```
 
-|Name|Description|
-|--|--|
-|defaultTz|Default timezone|
-|queryField|Retrieves the current timezone from the request query. The query key defaults to `x-vona-tz`|
-|headerField|Retrieves the current timezone from the request header. The header key defaults to `x-vona-tz`|
-|cookieField|Retrieves the current timezone from the request cookie. The cookie key defaults to `tz`|
+| Name        | Description                                                                                    |
+| ----------- | ---------------------------------------------------------------------------------------------- |
+| defaultTz   | Default timezone                                                                               |
+| queryField  | Retrieves the current timezone from the request query. The query key defaults to `x-vona-tz`   |
+| headerField | Retrieves the current timezone from the request header. The header key defaults to `x-vona-tz` |
+| cookieField | Retrieves the current timezone from the request cookie. The cookie key defaults to `tz`        |
 
 ### 2. Rule Order
 

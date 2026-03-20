@@ -4,20 +4,20 @@
 
 ## Parameters
 
-|Name|Description|
-|--|--|
-|columns|List of fields to be created|
-|include|Static relations|
-|with|Dynamic relations|
+| Name    | Description                  |
+| ------- | ---------------------------- |
+| columns | List of fields to be created |
+| include | Static relations             |
+| with    | Dynamic relations            |
 
-## 1.  General Usage
+## 1. General Usage
 
-``` typescript
+```typescript
 $Dto.create(() => ModelOrder);
 ```
 
-``` typescript
-$Dto.create(() => ModelOrder, { columns: [ 'orderNo', 'remark'] });
+```typescript
+$Dto.create(() => ModelOrder, { columns: ['orderNo', 'remark'] });
 ```
 
 ## 2. Static Relation
@@ -28,7 +28,7 @@ Take Order/Product as an example to demonstrate the `1:n` relation
 
 First define a `1:n` relation between Model `Order` and Model `Product`
 
-``` typescript
+```typescript
 @Model({
   entity: EntityOrder,
   relations: {
@@ -42,9 +42,9 @@ class ModelOrder {}
 
 ### Dynamically inferring and generating DTO
 
-``` typescript
+```typescript
 $Dto.create(() => ModelOrder, {
-  columns: [ 'orderNo', 'remark'],
+  columns: ['orderNo', 'remark'],
   include: {
     products: true,
   },
@@ -53,12 +53,12 @@ $Dto.create(() => ModelOrder, {
 
 ## 3. Dynamic Relation
 
-``` typescript
+```typescript
 $Dto.create(() => ModelOrder, {
-  columns: [ 'orderNo', 'remark'],
+  columns: ['orderNo', 'remark'],
   with: {
     products: $relationDynamic.hasMany(() => ModelProduct, 'orderId', {
-      columns: [ 'name', 'price', 'quantity', 'amount'],
+      columns: ['name', 'price', 'quantity', 'amount'],
     }),
   },
 });

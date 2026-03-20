@@ -6,16 +6,16 @@
 
 使用`cabloy-basic`模版创建 Vona 项目
 
-``` bash
+```bash
 $ vona :create:project projectName --template=cabloy-basic
 $ cd projectName
 ```
 
 `cabloy-basic`模版内置一个套件`vona-suite-cabloy-basic`。该套件包含如下模块：
 
-|名称|说明|
-|--|--|
-|basic-siteadmin|用于实现`Admin中后台`|
+| 名称            | 说明                  |
+| --------------- | --------------------- |
+| basic-siteadmin | 用于实现`Admin中后台` |
 
 ## 创建Zova项目
 
@@ -47,20 +47,20 @@ BUILD_COPY_RELEASE = /path-to-vona/src/suite/cabloy-basic/modules/basic-siteadmi
 BUILD_REST_COPY_DIST = /path-to-vona/src/suite/cabloy-basic/modules/basic-siteadmin/zovaRest
 ```
 
-|名称|说明|
-|--|--|
-|BUILD_COPY_RELEASE|将构建生成的JS bundle自动拷贝到Vona中|
-|BUILD_REST_COPY_DIST|将构建生成的类型文件自动拷贝到Vona中|
+| 名称                 | 说明                                  |
+| -------------------- | ------------------------------------- |
+| BUILD_COPY_RELEASE   | 将构建生成的JS bundle自动拷贝到Vona中 |
+| BUILD_REST_COPY_DIST | 将构建生成的类型文件自动拷贝到Vona中  |
 
 ### 5. 构建Zova项目
 
-* 构建 JS bundle
+- 构建 JS bundle
 
 ```bash
 $ npm run build:ssr:cabloyBasicAdmin
 ```
 
-* 构建类型文件
+- 构建类型文件
 
 ```bash
 $ npm run build:rest:cabloyBasicAdmin
@@ -70,22 +70,22 @@ $ npm run build:rest:cabloyBasicAdmin
 
 ### 1. 启动Vona开发服务
 
-``` bash
+```bash
 $ npm run dev
 ```
 
-|URL|说明|
-|--|--|
-|http://localhost:7102|Admin中后台|
+| URL                   | 说明        |
+| --------------------- | ----------- |
+| http://localhost:7102 | Admin中后台 |
 
 ### 2. 启动Zova开发服务
 
 可以直接启动 Zova 开发服务，方便调试前端代码。此时，Vona 可以作为 API 服务供前端访问
 
-``` bash
+```bash
 $ npm run dev:ssr:cabloyBasicAdmin
 ```
 
-|URL|说明|
-|--|--|
-|http://localhost:9000|Admin中后台|
+| URL                   | 说明        |
+| --------------------- | ----------- |
+| http://localhost:9000 | Admin中后台 |

@@ -6,7 +6,7 @@
 
 可以针对任何 Class 实现外部切面。下面，以 Service 为例，在模块 demo-student 中创建一个 Service `test`，代码如下：
 
-``` typescript
+```typescript
 @Service()
 export class ServiceTest extends BeanBase {
   private _name: string;
@@ -43,7 +43,7 @@ export class ServiceTest extends BeanBase {
 
 ### 1. Cli命令
 
-``` bash
+```bash
 $ vona :create:bean aop log --module=demo-student
 ```
 
@@ -55,7 +55,7 @@ $ vona :create:bean aop log --module=demo-student
 
 ## AOP定义
 
-``` typescript
+```typescript
 import { BeanAopBase } from 'vona';
 import { Aop } from 'vona-module-a-aspect';
 
@@ -66,9 +66,9 @@ export class AopLog extends BeanAopBase {}
 - `@Aop`: 此装饰器用于实现`外部切面`
 - `match`: 用于将 Class `AopLog`与 Class `ServiceTest`关联，`ServiceTest`的 beanFullName 是`demo-student.service.test`
 
-|名称|类型|说明|
-|--|--|--|
-|match|string\|regexp\|(string\|regexp)[]|针对哪些 Class 启用|
+| 名称  | 类型                               | 说明                |
+| ----- | ---------------------------------- | ------------------- |
+| match | string\|regexp\|(string\|regexp)[] | 针对哪些 Class 启用 |
 
 ## 切面：同步方法
 
@@ -76,7 +76,7 @@ export class AopLog extends BeanAopBase {}
 
 在 VSCode 编辑器中，输入代码片段`aopactionsync`，自动生成代码骨架:
 
-``` typescript
+```typescript
 action: AopAction<ClassSome, 'action'> = (_args, next, _receiver) => {
   return next();
 };
@@ -84,7 +84,7 @@ action: AopAction<ClassSome, 'action'> = (_args, next, _receiver) => {
 
 调整代码，然后添加 log 逻辑
 
-``` typescript
+```typescript
 actionSync: AopAction<ServiceTest, 'actionSync'> = (_args, next, _receiver) => {
   const timeBegin = Date.now();
   const res = next();
@@ -102,7 +102,7 @@ actionSync: AopAction<ServiceTest, 'actionSync'> = (_args, next, _receiver) => {
 
 在 VSCode 编辑器中，输入代码片段`aopaction`，自动生成代码骨架:
 
-``` typescript
+```typescript
 action: AopAction<ClassSome, 'action'> = async (_args, next, _receiver) => {
   return await next();
 };
@@ -110,7 +110,7 @@ action: AopAction<ClassSome, 'action'> = async (_args, next, _receiver) => {
 
 调整代码，然后添加 log 逻辑
 
-``` typescript
+```typescript
 actionAsync: AopAction<ServiceTest, 'actionAsync'> = async (_args, next, _receiver) => {
   const timeBegin = Date.now();
   const res = await next();
@@ -128,7 +128,7 @@ actionAsync: AopAction<ServiceTest, 'actionAsync'> = async (_args, next, _receiv
 
 在 VSCode 编辑器中，输入代码片段`aopgetter`，自动生成代码骨架:
 
-``` typescript
+```typescript
 protected __get_xxx__: AopActionGetter<ClassSome, 'xxx'> = function (next, _receiver) {
   const value = next();
   return value;
@@ -137,7 +137,7 @@ protected __get_xxx__: AopActionGetter<ClassSome, 'xxx'> = function (next, _rece
 
 调整代码，然后添加 log 逻辑
 
-``` typescript
+```typescript
 protected __get_name__: AopActionGetter<ServiceTest, 'name'> = function (next, _receiver) {
   const timeBegin = Date.now();
   const value = next();
@@ -155,7 +155,7 @@ protected __get_name__: AopActionGetter<ServiceTest, 'name'> = function (next, _
 
 在 VSCode 编辑器中，输入代码片段`aopsetter`，自动生成代码骨架:
 
-``` typescript
+```typescript
 protected __set_xxx__: AopActionSetter<ClassSome, 'xxx'> = function (value, next, _receiver) {
   return next(value);
 }
@@ -163,7 +163,7 @@ protected __set_xxx__: AopActionSetter<ClassSome, 'xxx'> = function (value, next
 
 调整代码，然后添加 log 逻辑
 
-``` typescript
+```typescript
 protected __set_name__: AopActionSetter<ServiceTest, 'name'> = function (value, next, _receiver) {
   const timeBegin = Date.now();
   const res = next(value);
@@ -181,7 +181,7 @@ protected __set_name__: AopActionSetter<ServiceTest, 'name'> = function (value, 
 
 在 VSCode 编辑器中，输入代码片段`aopinit`，自动生成代码骨架:
 
-``` typescript
+```typescript
 protected __init__: AopActionInit<ClassSome> = (_args, next, _receiver) => {
   next();
 };
@@ -189,7 +189,7 @@ protected __init__: AopActionInit<ClassSome> = (_args, next, _receiver) => {
 
 调整代码，然后添加 log 逻辑
 
-``` typescript
+```typescript
 protected __init__: AopActionInit<ServiceTest> = (_args, next, _receiver) => {
   const timeBegin = Date.now();
   next();
@@ -206,7 +206,7 @@ protected __init__: AopActionInit<ServiceTest> = (_args, next, _receiver) => {
 
 在 VSCode 编辑器中，输入代码片段`aopdispose`，自动生成代码骨架:
 
-``` typescript
+```typescript
 protected __dispose__: AopActionDispose<ClassSome> = async (_args, next, _receiver) => {
   await next();
 };
@@ -214,7 +214,7 @@ protected __dispose__: AopActionDispose<ClassSome> = async (_args, next, _receiv
 
 调整代码，然后添加 log 逻辑
 
-``` typescript
+```typescript
 protected __dispose__: AopActionDispose<ServiceTest> = async (_args, next, _receiver) => {
   const timeBegin = Date.now();
   await next();
@@ -233,7 +233,7 @@ protected __dispose__: AopActionDispose<ServiceTest> = async (_args, next, _rece
 
 在 VSCode 编辑器中，输入代码片段`aopget`，自动生成代码骨架:
 
-``` typescript
+```typescript
 protected __get__: AopActionGet<ClassSome> = (_prop, next, _receiver) => {
   const value = next();
   return value;
@@ -242,7 +242,7 @@ protected __get__: AopActionGet<ClassSome> = (_prop, next, _receiver) => {
 
 调整代码，然后添加自定义字段`red`
 
-``` typescript
+```typescript
 protected __get__: AopActionGet<ServiceTest> = (prop, next, _receiver) => {
   if (prop === 'red') return '#FF0000';
   const value = next();
@@ -254,7 +254,7 @@ protected __get__: AopActionGet<ServiceTest> = (prop, next, _receiver) => {
 
 通过接口类型合并的机制为颜色提供类型定义
 
-``` typescript
+```typescript
 declare module 'vona-module-demo-student' {
   export interface ServiceTest {
     red: string;
@@ -270,7 +270,7 @@ declare module 'vona-module-demo-student' {
 
 在 VSCode 编辑器中，输入代码片段`aopset`，自动生成代码骨架:
 
-``` typescript
+```typescript
 protected __set__: AopActionSet<ClassSome> = (_prop, value, next, _receiver) => {
   return next(value);
 };
@@ -278,7 +278,7 @@ protected __set__: AopActionSet<ClassSome> = (_prop, value, next, _receiver) => 
 
 调整代码，为自定义字段`red`设置值
 
-``` typescript
+```typescript
 private _colorRed: string | undefined;
 
 protected __set__: AopActionSet<ServiceTest> = (prop, value, next, _receiver) => {
@@ -295,7 +295,7 @@ protected __set__: AopActionSet<ServiceTest> = (prop, value, next, _receiver) =>
 
 然后调整`__get__`的逻辑:
 
-``` diff
+```diff
 protected __get__: AopActionGet<ServiceTest> = (prop, next, _receiver) => {
 - if (prop === 'red') return '#FF0000';
 + if (prop === 'red') return this._colorRed;
@@ -310,7 +310,7 @@ protected __get__: AopActionGet<ServiceTest> = (prop, next, _receiver) => {
 
 在 VSCode 编辑器中，输入代码片段`aopmethod`，自动生成代码骨架:
 
-``` typescript
+```typescript
 protected __method__: AopActionMethod<ClassSome> = (_method, _args, next, _receiver) => {
   return next();
 };
@@ -318,7 +318,7 @@ protected __method__: AopActionMethod<ClassSome> = (_method, _args, next, _recei
 
 调整代码，然后为方法`actionSync`和`actionAsync`添加 log 逻辑
 
-``` typescript
+```typescript
 protected __method__: AopActionMethod<ServiceTest> = (method, _args, next, _receiver) => {
   if (method !== 'actionSync' && method !== 'actionAsync') {
     return next();
@@ -350,7 +350,7 @@ protected __method__: AopActionMethod<ServiceTest> = (method, _args, next, _rece
 
 比如，还有一个 AOP `demo-student:log3`，希望执行顺序如下：`demo-student:log3` > `Current`
 
-``` diff
+```diff
 @Aop({
   match: 'demo-student.service.test',
 + dependencies: 'demo-student:log3',
@@ -362,7 +362,7 @@ class AopLog {}
 
 `dependents`的顺序刚好与`dependencies`相反，希望执行顺序如下：`Current` > `demo-student:log3`
 
-``` diff
+```diff
 @Aop({
   match: 'demo-student.service.test',
 + dependents: 'demo-student:log3',
@@ -378,7 +378,7 @@ class AopLog {}
 
 `src/backend/config/config/config.ts`
 
-``` diff
+```diff
 // onions
 config.onions = {
   aop: {
@@ -393,14 +393,14 @@ config.onions = {
 
 可以让 AOP 在指定的运行环境生效
 
-|名称|类型|说明|
-|--|--|--|
-|flavor|string\|string[]|参见: [运行环境与Flavor](../../env-config/mode-flavor/introduction.md)|
-|mode|string\|string[]|参见: [运行环境与Flavor](../../env-config/mode-flavor/introduction.md)|
+| 名称   | 类型             | 说明                                                                   |
+| ------ | ---------------- | ---------------------------------------------------------------------- |
+| flavor | string\|string[] | 参见: [运行环境与Flavor](../../env-config/mode-flavor/introduction.md) |
+| mode   | string\|string[] | 参见: [运行环境与Flavor](../../env-config/mode-flavor/introduction.md) |
 
-* 举例
+- 举例
 
-``` diff
+```diff
 @Aop({
 + meta: {
 +   flavor: 'normal',
@@ -414,7 +414,7 @@ class AopLog {}
 
 可以直接在目标 Class action 中输出当前生效的 AOP 清单
 
-``` diff
+```diff
 class ServiceTest {
   protected async __dispose__() {
 +   this.bean.onion.aop.inspect();

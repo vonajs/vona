@@ -26,12 +26,12 @@ project
 
 ## Module/Suite
 
-| Name          | Description         |
-| ----------------- | ------------------- |
-| src/module   | Standalone module  |
-| src/module-vendor | Standalone module (from third-party)  |
-| src/suite         | Suite                    |
-| src/suite-vendor  | Suite (from third-party)     |
+| Name              | Description                          |
+| ----------------- | ------------------------------------ |
+| src/module        | Standalone module                    |
+| src/module-vendor | Standalone module (from third-party) |
+| src/suite         | Suite                                |
+| src/suite-vendor  | Suite (from third-party)             |
 
 ## Development suggestions
 
@@ -42,11 +42,11 @@ Vona has planned the modules/suites so that we can start business development im
 
 ## Directory cheat sheet
 
-| Name    | Description         |
-| --------- | ------------ |
-|docker-compose|docker-compose templates|
-| env  | [Env](../../env-config/env/introduction.md) |
-| src/front/config/config  | [Config](../../env-config/config/introduction.md) |
-| src/front/config/locales.ts   | [I18n](../scope/locale.md) |
-| src/backend/play  | [Playground](../../start/play.md) |
-| src/backend/typing | Project-level type definitions  |
+| Name                        | Description                                       |
+| --------------------------- | ------------------------------------------------- |
+| docker-compose              | docker-compose templates                          |
+| env                         | [Env](../../env-config/env/introduction.md)       |
+| src/front/config/config     | [Config](../../env-config/config/introduction.md) |
+| src/front/config/locales.ts | [I18n](../scope/locale.md)                        |
+| src/backend/play            | [Playground](../../start/play.md)                 |
+| src/backend/typing          | Project-level type definitions                    |

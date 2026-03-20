@@ -4,20 +4,20 @@
 
 ## 参数
 
-|名称|描述|
-|--|--|
-|columns|需要创建的字段列表|
-|include|静态关系|
-|with|动态关系|
+| 名称    | 描述               |
+| ------- | ------------------ |
+| columns | 需要创建的字段列表 |
+| include | 静态关系           |
+| with    | 动态关系           |
 
 ## 1. 一般用法
 
-``` typescript
+```typescript
 $Dto.create(() => ModelOrder);
 ```
 
-``` typescript
-$Dto.create(() => ModelOrder, { columns: [ 'orderNo', 'remark'] });
+```typescript
+$Dto.create(() => ModelOrder, { columns: ['orderNo', 'remark'] });
 ```
 
 ## 2. 静态关系
@@ -28,7 +28,7 @@ $Dto.create(() => ModelOrder, { columns: [ 'orderNo', 'remark'] });
 
 先在 Model Order 中定义与 Model Product 的`1:n`关系
 
-``` typescript
+```typescript
 @Model({
   entity: EntityOrder,
   relations: {
@@ -42,9 +42,9 @@ class ModelOrder {}
 
 ### 动态推断与生成DTO
 
-``` typescript
+```typescript
 $Dto.create(() => ModelOrder, {
-  columns: [ 'orderNo', 'remark'],
+  columns: ['orderNo', 'remark'],
   include: {
     products: true,
   },
@@ -53,12 +53,12 @@ $Dto.create(() => ModelOrder, {
 
 ## 3. 动态关系
 
-``` typescript
+```typescript
 $Dto.create(() => ModelOrder, {
-  columns: [ 'orderNo', 'remark'],
+  columns: ['orderNo', 'remark'],
   with: {
     products: $relationDynamic.hasMany(() => ModelProduct, 'orderId', {
-      columns: [ 'name', 'price', 'quantity', 'amount'],
+      columns: ['name', 'price', 'quantity', 'amount'],
     }),
   },
 });

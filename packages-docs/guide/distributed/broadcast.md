@@ -8,7 +8,7 @@ For example, create a broadcast `echo` in the module `demo-student`, so that eac
 
 ### 1. Cli Command
 
-``` bash
+```bash
 $ vona :create:bean broadcast echo --module=demo-student
 ```
 
@@ -20,13 +20,13 @@ Context Menu - [Module Path]: `Vona Bean/Broadcast`
 
 ## Broadcast Definition
 
-``` typescript
-export interface TypeBroadcastEchoJobData { message: string }
+```typescript
+export interface TypeBroadcastEchoJobData {
+  message: string;
+}
 
 @Broadcast()
-export class BroadcastEcho
-  extends BeanBroadcastBase<TypeBroadcastEchoJobData>
-  implements IBroadcastExecute<TypeBroadcastEchoJobData> {
+export class BroadcastEcho extends BeanBroadcastBase<TypeBroadcastEchoJobData> implements IBroadcastExecute<TypeBroadcastEchoJobData> {
   async execute(data: TypeBroadcastEchoJobData, isEmitter?: boolean) {
     if (!isEmitter) {
       console.log(`pid: ${process.pid} message: ${data.message}`);
@@ -40,21 +40,21 @@ export class BroadcastEcho
 
 * execute parameters
 
-|Name|Description|
-|--|--|
-|data|Broadcast data|
-|isEmitter|Whether it is the worker process emiting the broadcast|
+| Name      | Description                                            |
+| --------- | ------------------------------------------------------ |
+| data      | Broadcast data                                         |
+| isEmitter | Whether it is the worker process emiting the broadcast |
 
 ## Emit Broadcast
 
-``` typescript
+```typescript
 class ControllerStudent {
   test() {
     const data = { message: 'Hello world' };
     console.log(`pid: ${process.pid} message: ${data.message}`);
     this.scope.broadcast.echo.emit(data);
   }
-}  
+}
 ```
 
 - `this.scope.broadcast.echo`: Retrieves the broadcast instance through the module scope
@@ -68,7 +68,7 @@ If business logic has already been executed in the current worker process, you c
 
 Parameters can be configured for broadcasts
 
-``` typescript
+```typescript
 @Broadcast({
   instance: true,
   transaction: true,
@@ -76,10 +76,10 @@ Parameters can be configured for broadcasts
 class BroadcastEcho {}
 ```
 
-|Name|Description|
-|--|--|
-|instance|Whether to ensure that the instance has been initialized. Defaults to `true`|
-|transaction|Whether to enable database transaction|
+| Name        | Description                                                                  |
+| ----------- | ---------------------------------------------------------------------------- |
+| instance    | Whether to ensure that the instance has been initialized. Defaults to `true` |
+| transaction | Whether to enable database transaction                                       |
 
 - `instance`: VonaJS supports `multi-instance/multi-tenancy`. If the broadcast's business logic requires manipulating instance data, then you need to ensure that the instance has been initialized
 - `transaction`: If set to true, the system will automatically put the broadcast's `execute` method into a database transaction
@@ -90,7 +90,7 @@ Broadcast parameters can be configured in App Config
 
 `src/backend/config/config/config.ts`
 
-``` typescript
+```typescript
 // onions
 config.onions = {
   broadcast: {
@@ -106,7 +106,7 @@ config.onions = {
 
 You can directly inspect the currently effective broadcast list
 
-``` diff
+```diff
 class ControllerStudent {
   @Web.get('test')
   test() {

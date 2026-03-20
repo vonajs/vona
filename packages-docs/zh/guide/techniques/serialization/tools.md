@@ -4,20 +4,20 @@ VonaJS 提供了一组工具函数，可以更加便利的使用序列化能力
 
 ## 工具清单
 
-|@Serializer|v|说明|
-|--|--|--|
-|@Serializer.transform|v.serializerTransform|使用Serializer Transform，参见: [序列化](./introduction.md)|
-|@Serializer.exclude|v.serializerExclude|排除字段|
-|@Serializer.replace|v.serializerReplace|对字段值进行脱敏处理|
-|@Serializer.getter|v.serializerGetter|采用getter机制生成新的字段值|
-|@Serializer.custom|v.serializerCustom|使用自定义函数对字段值进行处理|
+| @Serializer           | v                     | 说明                                                        |
+| --------------------- | --------------------- | ----------------------------------------------------------- |
+| @Serializer.transform | v.serializerTransform | 使用Serializer Transform，参见: [序列化](./introduction.md) |
+| @Serializer.exclude   | v.serializerExclude   | 排除字段                                                    |
+| @Serializer.replace   | v.serializerReplace   | 对字段值进行脱敏处理                                        |
+| @Serializer.getter    | v.serializerGetter    | 采用getter机制生成新的字段值                                |
+| @Serializer.custom    | v.serializerCustom    | 使用自定义函数对字段值进行处理                              |
 
 ::: tip
 既然`@Serializer`工具非常简洁，直观，为什么还要提供`v`工具？
 
 1. `v`工具可以实现通过 App Config 修改配置
 2. `v`工具和`@Serializer`工具底层逻辑是一致的
-:::
+   :::
 
 ## @Serializer.transform/v.serializerTransform
 
@@ -27,7 +27,7 @@ VonaJS 提供了一组工具函数，可以更加便利的使用序列化能力
 
 ### 1. @Serializer.transform
 
-``` diff
+```diff
 class EntityStudent {
 + @Serializer.transform('demo-student:upper')
   @Api.field(v.title($locale('Name')))
@@ -37,7 +37,7 @@ class EntityStudent {
 
 ### 2. v.serializerTransform
 
-``` diff
+```diff
 class EntityStudent {
 + @Api.field(v.serializerTransform('demo-student:upper'), v.title($locale('Name')))
   name: string;
@@ -50,26 +50,24 @@ class EntityStudent {
 
 `src/backend/config/config/config.ts`
 
-* 方法 1: 直接修改 Openapi 参数
+- 方法 1: 直接修改 Openapi 参数
 
-``` typescript
+```typescript
 // onions
 config.onions = {
   entity: {
     'demo-student:student': {
       fields: {
-        name: $makeMetadata(
-          v.serializerTransform('demo-student:upper'),
-        ),
+        name: $makeMetadata(v.serializerTransform('demo-student:upper')),
       },
     },
   },
 };
 ```
 
-* 方法 2: 构造一个新的 schema
+- 方法 2: 构造一个新的 schema
 
-``` typescript
+```typescript
 import { $makeSchema, v } from 'vona-module-a-openapi';
 
 // onions
@@ -77,10 +75,7 @@ config.onions = {
   entity: {
     'demo-student:student': {
       fields: {
-        name: $makeSchema(
-          v.serializerTransform('demo-student:upper'),
-          z.string(),
-        ),
+        name: $makeSchema(v.serializerTransform('demo-student:upper'), z.string()),
       },
     },
   },
@@ -93,7 +88,7 @@ config.onions = {
 
 ### 1. @Serializer.exclude
 
-``` diff
+```diff
 class EntityStudent {
 + @Serializer.exclude()
   @Api.field(v.title($locale('Name')))
@@ -103,7 +98,7 @@ class EntityStudent {
 
 ### 2. v.serializerExclude
 
-``` diff
+```diff
 class EntityStudent {
 + @Api.field(v.serializerExclude(), v.title($locale('Name')))
   name: string;
@@ -116,26 +111,24 @@ class EntityStudent {
 
 `src/backend/config/config/config.ts`
 
-* 方法 1: 直接修改 Openapi 参数
+- 方法 1: 直接修改 Openapi 参数
 
-``` typescript
+```typescript
 // onions
 config.onions = {
   entity: {
     'demo-student:student': {
       fields: {
-        name: $makeMetadata(
-          v.serializerExclude(),
-        ),
+        name: $makeMetadata(v.serializerExclude()),
       },
     },
   },
 };
 ```
 
-* 方法 2: 构造一个新的 schema
+- 方法 2: 构造一个新的 schema
 
-``` typescript
+```typescript
 import { $makeSchema, v } from 'vona-module-a-openapi';
 
 // onions
@@ -143,10 +136,7 @@ config.onions = {
   entity: {
     'demo-student:student': {
       fields: {
-        name: $makeSchema(
-          v.serializerExclude(),
-          z.string(),
-        ),
+        name: $makeSchema(v.serializerExclude(), z.string()),
       },
     },
   },
@@ -161,7 +151,7 @@ config.onions = {
 
 ### 1. @Serializer.replace
 
-``` diff
+```diff
 class EntityStudent {
 + @Serializer.replace({ patternFrom: /(\w)(\w+)(\w)/, patternTo: '$1***$3' })
   @Api.field(v.title($locale('Name')))
@@ -171,7 +161,7 @@ class EntityStudent {
 
 ### 2. v.serializerReplace
 
-``` diff
+```diff
 class EntityStudent {
   @Api.field(
 +   v.serializerReplace({ patternFrom: /(\w)(\w+)(\w)/, patternTo: '$1***$3' }),
@@ -187,9 +177,9 @@ class EntityStudent {
 
 `src/backend/config/config/config.ts`
 
-* 方法 1: 直接修改 Openapi 参数
+- 方法 1: 直接修改 Openapi 参数
 
-``` typescript
+```typescript
 // onions
 config.onions = {
   entity: {
@@ -209,9 +199,9 @@ config.onions = {
 
 `a-serialization:replace`: `a-serialization`模块提供的 Serializer Transform
 
-* 方法 2: 构造一个新的 schema
+- 方法 2: 构造一个新的 schema
 
-``` typescript
+```typescript
 import { $makeSchema, v } from 'vona-module-a-openapi';
 
 // onions
@@ -238,7 +228,7 @@ config.onions = {
 
 ### 1. getter
 
-``` diff
+```diff
 class EntityStudent {
   @Api.field()
   firstName: string;
@@ -255,7 +245,7 @@ class EntityStudent {
 
 ### 2. @Serializer.getter
 
-``` diff
+```diff
 class EntityStudent {
 + @Serializer.getter((data: EntityStudent) => {
 +   return `${data.firstName} ${data.lastName}`;
@@ -267,7 +257,7 @@ class EntityStudent {
 
 ### 3. v.serializerGetter
 
-``` diff
+```diff
 class EntityStudent {
 + @Api.field(v.serializerGetter((data: EntityStudent) => {
 +   return `${data.firstName} ${data.lastName}`;
@@ -282,9 +272,9 @@ class EntityStudent {
 
 `src/backend/config/config/config.ts`
 
-* 方法 1: 直接修改 Openapi 参数
+- 方法 1: 直接修改 Openapi 参数
 
-``` typescript
+```typescript
 // onions
 config.onions = {
   entity: {
@@ -303,9 +293,9 @@ config.onions = {
 
 `a-serialization:getter`: `a-serialization`模块提供的 Serializer Transform
 
-* 方法 2: 构造一个新的 schema
+- 方法 2: 构造一个新的 schema
 
-``` typescript
+```typescript
 import { $makeSchema, v } from 'vona-module-a-openapi';
 
 // onions
@@ -331,7 +321,7 @@ config.onions = {
 
 ### 1. @Serializer.custom
 
-``` diff
+```diff
 class EntityStudent {
 + @Serializer.custom((value: string) => {
 +   return value.toUpperCase();
@@ -343,7 +333,7 @@ class EntityStudent {
 
 ### 2. v.serializerCustom
 
-``` diff
+```diff
 class EntityStudent {
   @Api.field(
 +   v.serializerCustom((value: string) => {
@@ -361,9 +351,9 @@ class EntityStudent {
 
 `src/backend/config/config/config.ts`
 
-* 方法 1: 直接修改 Openapi 参数
+- 方法 1: 直接修改 Openapi 参数
 
-``` typescript
+```typescript
 // onions
 config.onions = {
   entity: {
@@ -382,9 +372,9 @@ config.onions = {
 
 `a-serialization:custom`: `a-serialization`模块提供的 Serializer Transform
 
-* 方法 2: 构造一个新的 schema
+- 方法 2: 构造一个新的 schema
 
-``` typescript
+```typescript
 import { $makeSchema, v } from 'vona-module-a-openapi';
 
 // onions

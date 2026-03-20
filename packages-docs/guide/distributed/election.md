@@ -17,7 +17,7 @@ For example, create `meta.election` in the module demo-student. Start a timer in
 
 ### 1. Cli Command
 
-``` bash
+```bash
 $ vona :create:bean meta election --module=demo-student
 ```
 
@@ -29,7 +29,7 @@ Context menu - [Module Path]: `Vona Meta/Election`
 
 ## meta.election Definition
 
-``` typescript
+```typescript
 export type TypeElectionObtainResource = 'echo';
 
 @Meta()
@@ -44,15 +44,19 @@ Next, create a `Module Monkey` that responds to the `appStarted` and `appClose` 
 
 - See also: [App Startup Customization](../env-config/app-start/introduction.md)
 
-``` typescript
+```typescript
 export class Monkey extends BeanSimple implements IMonkeyAppStarted {
   async appStarted() {
     const scope = this.app.scope(__ThisModule__);
-    scope.election.obtain('echo', () => {
-      // custom logic
-    }, async () => {
-      // cleanup
-    });
+    scope.election.obtain(
+      'echo',
+      () => {
+        // custom logic
+      },
+      async () => {
+        // cleanup
+      },
+    );
   }
 }
 ```
@@ -63,7 +67,7 @@ export class Monkey extends BeanSimple implements IMonkeyAppStarted {
 
 When calling `election.obtain`, you can specify that multiple Workers are allowed to acquire ownership:
 
-``` diff
+```diff
 async appStarted() {
   const scope = this.app.scope(__ThisModule__);
   scope.election.obtain('echo', () => {
@@ -74,6 +78,6 @@ async appStarted() {
 }
 ```
 
-|Name|Description|
-|--|--|
-|tickets|Allows a specified number of Workers to acquire ownership. Defaults to `1`|
+| Name    | Description                                                                |
+| ------- | -------------------------------------------------------------------------- |
+| tickets | Allows a specified number of Workers to acquire ownership. Defaults to `1` |

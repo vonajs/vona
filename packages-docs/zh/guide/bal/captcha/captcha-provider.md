@@ -8,7 +8,7 @@
 
 ### 1. Cli命令
 
-``` bash
+```bash
 $ vona :create:bean captchaProvider imageText --module=captcha-simple
 ```
 
@@ -20,7 +20,7 @@ $ vona :create:bean captchaProvider imageText --module=captcha-simple
 
 ## Captcha Provider定义
 
-``` typescript
+```typescript
 export type TypeCaptchaProviderImageTextToken = string;
 export type TypeCaptchaProviderImageTextPayload = string;
 export type TypeCaptchaProviderImageTextData = ICaptchaProviderData<TypeCaptchaProviderImageTextToken, TypeCaptchaProviderImageTextPayload>;
@@ -50,11 +50,7 @@ class CaptchaProviderImageText {
     return { token: captcha.text, payload: svg64(captcha.data) };
   }
 
-  async verify(
-    token,
-    tokenInput,
-    _options,
-  ) {
+  async verify(token, tokenInput, _options) {
     return !!tokenInput && !!token && tokenInput.toLowerCase() === token.toLowerCase();
   }
 }
@@ -73,7 +69,7 @@ class CaptchaProviderImageText {
 
 `src/backend/config/config/config.ts`
 
-``` typescript
+```typescript
 // onions
 config.onions = {
   captchaProvider: {

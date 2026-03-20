@@ -6,7 +6,7 @@ In VonaJS, each module can provide static resources, accessible via a URL
 
 ### 1. Cli Command
 
-``` bash
+```bash
 $ vona :init:static demo-student
 ```
 
@@ -22,7 +22,7 @@ Executing the above command will automatically create the directory: `assets/sta
 
 Add static resources according to business needs, such as adding two images:
 
-``` bash
+```bash
 src/module/demo-student/assets/static/img/vona.png
 src/module/demo-student/assets/static/img/vona.svg
 ```
@@ -31,7 +31,7 @@ src/module/demo-student/assets/static/img/vona.svg
 
 Static resources can be accessed via the following URL:
 
-``` bash
+```bash
 http://localhost:7102/api/static/demo/student/img/vona.png
 http://localhost:7102/api/static/demo/student/img/vona.svg
 ```
@@ -44,7 +44,7 @@ For example, create `meta.static` in the module demo-student
 
 ### 1. Cli Command
 
-``` bash
+```bash
 $ vona :create:bean meta static --module=demo-student
 ```
 
@@ -56,7 +56,7 @@ Context menu - [Module Path]: `Vona Meta/Static`
 
 ## meta.static Definition
 
-``` typescript
+```typescript
 export type TypeStaticGetPath = 'img/vona.png' | 'img/vona.svg';
 
 @Meta()
@@ -67,26 +67,26 @@ export class MetaStatic extends BeanStaticBase<TypeStaticGetPath> {}
 
 ## Get the static resource path
 
-``` typescript
+```typescript
 class ControllerStudent {
   test() {
     const path = this.scope.static.get('img/vona.png');
     assert.equal(path, '/api/static/demo/student/img/vona.png');
   }
-}  
+}
 ```
 
 - `static.get`: Takes the static resource `img/vona.png` as input, generates the path `/api/static/demo/student/img/vona.png`
 
 ## Get the static resource URL
 
-``` typescript
+```typescript
 class ControllerStudent {
   test() {
     const url = this.scope.static.getURL('img/vona.png');
     assert.equal(url, 'http://localhost:7102/api/static/demo/student/img/vona.png);
   }
-}  
+}
 ```
 
 - `static.getURL`: Takes the static resource `img/vona.png` as input and generates the URL `http://localhost:7102/api/static/demo/student/img/vona.png`
@@ -99,7 +99,7 @@ class ControllerStudent {
 
 `src/backend/config/config/config.ts`
 
-``` typescript
+```typescript
 // server
 config.server = {
   serve: {
@@ -115,7 +115,7 @@ Then, executing the method `static.getURL` will return the URL `https://cabloy.c
 
 VonaJS supports `multi-instance/multi-tenancy`, allowing you to specify different configuration for specific instances
 
-``` typescript
+```typescript
 // instance
 config.instance = {
   instances: {

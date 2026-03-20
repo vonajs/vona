@@ -6,7 +6,7 @@
 
 ### 1. Cli命令
 
-``` bash
+```bash
 $ vona :init:locale demo-student
 ```
 
@@ -80,7 +80,7 @@ class ControllerOther {
 locale.modules = {
   'demo-student': {
 +   HelloWorld: 'Hello World!!!',
-  },  
+  },
 };
 ```
 
@@ -90,6 +90,6 @@ locale.modules = {
 locale.modules = {
   'demo-student': {
 +   HelloWorld: '您好世界!!!',
-  },  
+  },
 };
 ```

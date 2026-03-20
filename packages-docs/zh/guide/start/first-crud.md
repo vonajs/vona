@@ -8,7 +8,7 @@
 
 ### 1. Cli 命令
 
-``` bash
+```bash
 $ vona :create:module demo-student --suite=
 ```
 
@@ -30,7 +30,7 @@ $ vona :create:module demo-student --suite=
 
 ### 1. Cli命令
 
-``` bash
+```bash
 $ vona :tools:crudCabloy student --module=demo-student
 ```
 
@@ -52,7 +52,7 @@ $ vona :tools:crudCabloy student --module=demo-student
 
 当启动开发服务后，系统自动在终端输出 Swagger/Rapidoc 的 URL 路径：
 
-``` bash
+```bash
 [a-swagger] swagger: http://localhost:7102/swagger
 [a-swagger] rapidoc: http://localhost:7102/rapidoc
 ```

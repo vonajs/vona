@@ -39,7 +39,6 @@ Since the module a-core declares `chalk` and `luxon` as global dependencies, the
 
 If the module needs to provide global dev dependencies, you need to configure `vonaModule.globalDependenciesDev`, for example: the configuration of module `a-core`:
 
-
 ```typescript
 {
   "name": "vona-module-a-core",

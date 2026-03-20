@@ -8,18 +8,18 @@
 
 Vona ORM 提供了 4 种动态关系：
 
-|名称|说明|
-|--|--|
-|hasOne|`1:1`|
-|belongsTo|`1:1`/`n:1`|
-|hasMany|`1:n`。可以实现`主表-明细表`，以及`主表-多级明细表`的功能|
-|belongsToMany|`n:n`|
+| 名称          | 说明                                                      |
+| ------------- | --------------------------------------------------------- |
+| hasOne        | `1:1`                                                     |
+| belongsTo     | `1:1`/`n:1`                                               |
+| hasMany       | `1:n`。可以实现`主表-明细表`，以及`主表-多级明细表`的功能 |
+| belongsToMany | `n:n`                                                     |
 
 ## hasOne
 
 直接在 CRUD 操作中通过`with`指定动态关系
 
-``` typescript
+```typescript
 class ServicePost {
   async relationHasOne() {
     // insert
@@ -76,29 +76,34 @@ class ServicePost {
       },
     );
   }
-}  
+}
 ```
 
-|名称|说明|
-|--|--|
-|with.postContent|关系名|
-|$relationDynamic.hasOne|定义`1:1`关系|
-|ModelPostContent|目标Model|
-|'postId'|外键|
-|columns|要查询的字段列表|
+| 名称                    | 说明             |
+| ----------------------- | ---------------- |
+| with.postContent        | 关系名           |
+| $relationDynamic.hasOne | 定义`1:1`关系    |
+| ModelPostContent        | 目标Model        |
+| 'postId'                | 外键             |
+| columns                 | 要查询的字段列表 |
 
 ## belongsTo
 
 belongsTo 关系只用于查询操作。直接在查询操作中通过`with`指定动态关系
 
-``` typescript
+```typescript
 class ServicePost {
   async relationBelongsTo() {
     const postContent = await this.scope.model.postContent.select({
       with: {
-        post: $relationDynamic.belongsTo(() => ModelPostContent, () => ModelPost, 'postId', {
-          columns: ['id', 'title'],
-        }),
+        post: $relationDynamic.belongsTo(
+          () => ModelPostContent,
+          () => ModelPost,
+          'postId',
+          {
+            columns: ['id', 'title'],
+          },
+        ),
       },
     });
     console.log(postContent[0]?.post?.title);
@@ -106,30 +111,27 @@ class ServicePost {
 }
 ```
 
-|名称|说明|
-|--|--|
-|with.post|关系名|
-|$relationDynamic.belongsTo|定义`1:1`/`n:1`关系|
-|ModelPostContent|源Model|
-|ModelPost|目标Model|
-|'postId'|外键|
-|columns|要查询的字段列表|
+| 名称                       | 说明                |
+| -------------------------- | ------------------- |
+| with.post                  | 关系名              |
+| $relationDynamic.belongsTo | 定义`1:1`/`n:1`关系 |
+| ModelPostContent           | 源Model             |
+| ModelPost                  | 目标Model           |
+| 'postId'                   | 外键                |
+| columns                    | 要查询的字段列表    |
 
 ## hasMany
 
 直接在 CRUD 操作中通过`with`指定动态关系
 
-``` typescript
+```typescript
 class ServiceOrder {
   async relationHasMany() {
     // insert
     const orderCreate = await this.scope.model.order.insert(
       {
         orderNo: 'Order001',
-        products2: [
-          { name: 'Apple' },
-          { name: 'Pear' },
-        ],
+        products2: [{ name: 'Apple' }, { name: 'Pear' }],
       },
       {
         with: {
@@ -182,45 +184,49 @@ class ServiceOrder {
       },
     );
   }
-}  
+}
 ```
 
 - 当更新主表数据时，可以同时更新明细表数据（包括 Insert/Update/Delete）
   - 参见：[CRUD(插入/更新/删除)-mutate](./crud-cud.md#mutate)
 
-|名称|说明|
-|--|--|
-|with.products2|关系名。由于`test-vona`模块已经定义了静态关系`products`，并且是自动加载的。为了演示起见，使用不同的关系名`products2`|
-|$relationDynamic.hasMany|定义`1:n`关系|
-|ModelProduct|目标Model|
-|'orderId'|外键|
-|columns|要查询的字段列表|
+| 名称                     | 说明                                                                                                                 |
+| ------------------------ | -------------------------------------------------------------------------------------------------------------------- |
+| with.products2           | 关系名。由于`test-vona`模块已经定义了静态关系`products`，并且是自动加载的。为了演示起见，使用不同的关系名`products2` |
+| $relationDynamic.hasMany | 定义`1:n`关系                                                                                                        |
+| ModelProduct             | 目标Model                                                                                                            |
+| 'orderId'                | 外键                                                                                                                 |
+| columns                  | 要查询的字段列表                                                                                                     |
 
 ## belongsToMany
 
 直接在 CRUD 操作中通过`with`指定动态关系，需要提供中间 Model RoleUser。需要强调的是，这里的 CRUD 操作是针对中间 Model，而不是目标 Model
 
-``` typescript
+```typescript
 class ServiceUser {
   async relationBelongsToMany() {
     // insert: roles
-    const roles = await this.scope.model.role.insertBulk([
-      { name: 'role-family' },
-      { name: 'role-friend' },
-    ]);
+    const roles = await this.scope.model.role.insertBulk([{ name: 'role-family' }, { name: 'role-friend' }]);
     const roleIdFamily = roles[0].id;
     const roleIdFriend = roles[1].id;
     // insert: user
     const userCreate = await this.scope.model.user.insert(
       {
         name: 'Tom',
-        roles: [{
-          id: roleIdFamily,
-        }],
+        roles: [
+          {
+            id: roleIdFamily,
+          },
+        ],
       },
       {
         with: {
-          roles: $relationDynamic.belongsToMany(() => ModelRoleUser, () => ModelRole, 'userId', 'roleId'),
+          roles: $relationDynamic.belongsToMany(
+            () => ModelRoleUser,
+            () => ModelRole,
+            'userId',
+            'roleId',
+          ),
         },
       },
     );
@@ -231,9 +237,15 @@ class ServiceUser {
       },
       {
         with: {
-          roles: $relationDynamic.belongsToMany(() => ModelRoleUser, () => ModelRole, 'userId', 'roleId', {
-            columns: ['id', 'name'],
-          }),
+          roles: $relationDynamic.belongsToMany(
+            () => ModelRoleUser,
+            () => ModelRole,
+            'userId',
+            'roleId',
+            {
+              columns: ['id', 'name'],
+            },
+          ),
         },
       },
     );
@@ -250,9 +262,15 @@ class ServiceUser {
       },
       {
         with: {
-          roles: $relationDynamic.belongsToMany(() => ModelRoleUser, () => ModelRole, 'userId', 'roleId', {
-            columns: ['id', 'name'],
-          }),
+          roles: $relationDynamic.belongsToMany(
+            () => ModelRoleUser,
+            () => ModelRole,
+            'userId',
+            'roleId',
+            {
+              columns: ['id', 'name'],
+            },
+          ),
         },
       },
     );
@@ -263,7 +281,12 @@ class ServiceUser {
       },
       {
         with: {
-          roles: $relationDynamic.belongsToMany(() => ModelRoleUser, () => ModelRole, 'userId', 'roleId'),
+          roles: $relationDynamic.belongsToMany(
+            () => ModelRoleUser,
+            () => ModelRole,
+            'userId',
+            'roleId',
+          ),
         },
       },
     );
@@ -271,15 +294,15 @@ class ServiceUser {
 }
 ```
 
-|名称|说明|
-|--|--|
-|with.roles|关系名|
-|$relationDynamic.belongsToMany|定义`n:n`关系|
-|ModelRoleUser|中间Model|
-|ModelRole|目标Model|
-|'userId'|外键|
-|'roleId'|外键|
-|columns|要查询的字段列表|
+| 名称                           | 说明             |
+| ------------------------------ | ---------------- |
+| with.roles                     | 关系名           |
+| $relationDynamic.belongsToMany | 定义`n:n`关系    |
+| ModelRoleUser                  | 中间Model        |
+| ModelRole                      | 目标Model        |
+| 'userId'                       | 外键             |
+| 'roleId'                       | 外键             |
+| columns                        | 要查询的字段列表 |
 
 ## 树形结构
 
@@ -287,7 +310,7 @@ class ServiceUser {
 
 为了演示起见，我们仍然通过`动态关系`来实现树形结构
 
-``` typescript
+```typescript
 class ServiceCategory {
   async categoryTreeDynamic() {
     // create
@@ -297,9 +320,7 @@ class ServiceCategory {
         children2: [
           {
             name: 'Category-1-1',
-            children2: [
-              { name: 'Category-1-1-1' },
-            ],
+            children2: [{ name: 'Category-1-1-1' }],
           },
           {
             name: 'Category-1-2',
@@ -310,8 +331,7 @@ class ServiceCategory {
         with: {
           children2: $relationDynamic.hasMany(() => ModelCategory, 'categoryIdParent', {
             with: {
-              children2: $relationDynamic.hasMany(() => ModelCategory, 'categoryIdParent', {
-              }),
+              children2: $relationDynamic.hasMany(() => ModelCategory, 'categoryIdParent', {}),
             },
           }),
         },
@@ -366,8 +386,7 @@ class ServiceCategory {
         with: {
           children2: $relationDynamic.hasMany(() => ModelCategory, 'categoryIdParent', {
             with: {
-              children2: $relationDynamic.hasMany(() => ModelCategory, 'categoryIdParent', {
-              }),
+              children2: $relationDynamic.hasMany(() => ModelCategory, 'categoryIdParent', {}),
             },
           }),
         },
@@ -377,50 +396,50 @@ class ServiceCategory {
 }
 ```
 
-|名称|说明|
-|--|--|
-|with.children2|关系名。由于`test-vona`模块已经定义了静态关系`children`，并且是自动加载的。为了演示起见，使用不同的关系名`children2`|
-|$relationDynamic.hasMany|定义`1:n`关系|
-|ModelCategory|目标Model|
-|'categoryIdParent'|外键|
-|columns|要查询的字段列表|
+| 名称                     | 说明                                                                                                                 |
+| ------------------------ | -------------------------------------------------------------------------------------------------------------------- |
+| with.children2           | 关系名。由于`test-vona`模块已经定义了静态关系`children`，并且是自动加载的。为了演示起见，使用不同的关系名`children2` |
+| $relationDynamic.hasMany | 定义`1:n`关系                                                                                                        |
+| ModelCategory            | 目标Model                                                                                                            |
+| 'categoryIdParent'       | 外键                                                                                                                 |
+| columns                  | 要查询的字段列表                                                                                                     |
 
 ## 关系选项
 
 ### 1. $relationDynamic.hasOne/$relationDynamic.belongsTo
 
-|名称|说明|
-|--|--|
-|columns|要查询的字段列表|
-|include|指定嵌套的静态关系|
-|with|指定嵌套的动态关系|
-|meta.client|定义关系所使用的数据源，可以实现跨数据源的关系查询|
-|meta.table|定义关系所使用的数据表|
+| 名称        | 说明                                               |
+| ----------- | -------------------------------------------------- |
+| columns     | 要查询的字段列表                                   |
+| include     | 指定嵌套的静态关系                                 |
+| with        | 指定嵌套的动态关系                                 |
+| meta.client | 定义关系所使用的数据源，可以实现跨数据源的关系查询 |
+| meta.table  | 定义关系所使用的数据表                             |
 
 ### 2. $relationDynamic.hasMany/$relationDynamic.belongsToMany
 
-|名称|说明|
-|--|--|
-|columns|要查询的字段列表|
-|include|指定嵌套的静态关系|
-|with|指定嵌套的动态关系|
-|meta.client|定义关系所使用的数据源，可以实现跨数据源的关系查询|
-|meta.table|定义关系所使用的数据表|
-|distinct|是否启用 distinct|
-|where|条件语句|
-|joins|关联表|
-|orders|排序|
-|limit|可用于分页查询|
-|offset|可用于分页查询|
-|aggrs|聚合查询|
-|groups|分组查询|
+| 名称        | 说明                                               |
+| ----------- | -------------------------------------------------- |
+| columns     | 要查询的字段列表                                   |
+| include     | 指定嵌套的静态关系                                 |
+| with        | 指定嵌套的动态关系                                 |
+| meta.client | 定义关系所使用的数据源，可以实现跨数据源的关系查询 |
+| meta.table  | 定义关系所使用的数据表                             |
+| distinct    | 是否启用 distinct                                  |
+| where       | 条件语句                                           |
+| joins       | 关联表                                             |
+| orders      | 排序                                               |
+| limit       | 可用于分页查询                                     |
+| offset      | 可用于分页查询                                     |
+| aggrs       | 聚合查询                                           |
+| groups      | 分组查询                                           |
 
 ## Model参数
 
 在定义关系时需要提供参数：`源Model`/`目标Model`/`中间Model`，支持以下类型：
 
-|名称|说明|
-|--|--|
-|ModelPost|Model Class|
-|() => ModelPost|通过函数延迟加载，从而避免触发循环依赖的错误|
-|'test-vona:post'|当跨模块使用Model时，一般直接使用Model名|
+| 名称             | 说明                                         |
+| ---------------- | -------------------------------------------- |
+| ModelPost        | Model Class                                  |
+| () => ModelPost  | 通过函数延迟加载，从而避免触发循环依赖的错误 |
+| 'test-vona:post' | 当跨模块使用Model时，一般直接使用Model名     |

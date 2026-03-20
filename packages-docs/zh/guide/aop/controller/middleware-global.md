@@ -6,7 +6,7 @@
 
 ### 1. Cli命令
 
-``` bash
+```bash
 $ vona :create:bean middleware logger --module=demo-student --boilerplate=global
 ```
 
@@ -18,7 +18,7 @@ $ vona :create:bean middleware logger --module=demo-student --boilerplate=global
 
 ## 中间件定义
 
-``` typescript
+```typescript
 export interface IMiddlewareOptionsLogger extends IDecoratorMiddlewareOptionsGlobal {}
 
 @Middleware<IMiddlewareOptionsLogger>()
@@ -49,7 +49,7 @@ export class MiddlewareLogger extends BeanBase implements IMiddlewareExecute {
 
 ### 1. 定义参数类型
 
-``` diff
+```diff
 export interface IMiddlewareOptionsLogger extends IDecoratorMiddlewareOptionsGlobal {
 + prefix: string;
 }
@@ -57,7 +57,7 @@ export interface IMiddlewareOptionsLogger extends IDecoratorMiddlewareOptionsGlo
 
 ### 2. 提供参数缺省值
 
-``` diff
+```diff
 @Middleware<IMiddlewareOptionsLogger>({
 + prefix: 'time',
 })
@@ -65,7 +65,7 @@ export interface IMiddlewareOptionsLogger extends IDecoratorMiddlewareOptionsGlo
 
 ### 3. 使用参数
 
-``` diff
+```diff
 export interface IMiddlewareOptionsLogger extends IDecoratorMiddlewareOptionsGlobal {
   prefix: string;
 }
@@ -89,7 +89,7 @@ class MiddlewareLogger {
 
 可以针对某个 API 单独指定全局中间件的参数
 
-``` diff
+```diff
 class ControllerStudent {
   @Web.get()
 + @Aspect.middlewareGlobal('demo-student:logger', { prefix: 'elapsed' })
@@ -105,7 +105,7 @@ class ControllerStudent {
 
 `src/backend/config/config/config.ts`
 
-``` typescript
+```typescript
 // onions
 config.onions = {
   middleware: {
@@ -128,7 +128,7 @@ config.onions = {
 
 比如，系统有一个内置全局中间件`a-core:gate`，希望加载顺序如下：`a-core:gate` > `Current`
 
-``` diff
+```diff
 @Middleware({
 + dependencies: 'a-core:gate',
   prefix: 'time',
@@ -140,7 +140,7 @@ class MiddlewareLogger {}
 
 `dependents`的顺序刚好与`dependencies`相反，希望加载顺序如下：`Current` > `a-core:gate`
 
-``` diff
+```diff
 @Middleware({
 + dependents: 'a-core:gate',
   prefix: 'time',
@@ -154,9 +154,9 @@ class MiddlewareLogger {}
 
 ### 1. Enable
 
-* 针对某个 API 禁用
+- 针对某个 API 禁用
 
-``` diff
+```diff
 class ControllerStudent {
   @Web.get()
 + @Aspect.middlewareGlobal('demo-student:logger', { enable: false })
@@ -164,11 +164,11 @@ class ControllerStudent {
 }
 ```
 
-* 针对所有 API 禁用
+- 针对所有 API 禁用
 
 `src/backend/config/config/config.ts`
 
-``` diff
+```diff
 // onions
 config.onions = {
   middleware: {
@@ -183,14 +183,14 @@ config.onions = {
 
 可以让全局中间件在指定的运行环境生效
 
-|名称|类型|说明|
-|--|--|--|
-|flavor|string\|string[]|参见: [运行环境与Flavor](../../env-config/mode-flavor/introduction.md)|
-|mode|string\|string[]|参见: [运行环境与Flavor](../../env-config/mode-flavor/introduction.md)|
+| 名称   | 类型             | 说明                                                                   |
+| ------ | ---------------- | ---------------------------------------------------------------------- |
+| flavor | string\|string[] | 参见: [运行环境与Flavor](../../env-config/mode-flavor/introduction.md) |
+| mode   | string\|string[] | 参见: [运行环境与Flavor](../../env-config/mode-flavor/introduction.md) |
 
-* 举例
+- 举例
 
-``` diff
+```diff
 @Middleware({
 + meta: {
 +   flavor: 'normal',
@@ -201,19 +201,19 @@ class MiddlewareLogger {}
 ```
 
 ### 3. match/ignore
-    
+
 可以针对指定的 API 启用/禁用全局中间件
 
-|名称|类型|说明|
-|--|--|--|
-|match|string\|regexp\|(string\|regexp)[]|针对哪些API启用|
-|ignore|string\|regexp\|(string\|regexp)[]|针对哪些API禁用|
+| 名称   | 类型                               | 说明            |
+| ------ | ---------------------------------- | --------------- |
+| match  | string\|regexp\|(string\|regexp)[] | 针对哪些API启用 |
+| ignore | string\|regexp\|(string\|regexp)[] | 针对哪些API禁用 |
 
 ## 查看当前生效的全局中间件清单
 
 可以直接在 Controller action 中输出当前生效的全局中间件清单
 
-``` diff
+```diff
 class ControllerStudent {
   @Web.get()
   async findMany() {

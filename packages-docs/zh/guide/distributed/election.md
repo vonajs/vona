@@ -17,7 +17,7 @@ VonaJS 针对此场景提供了`Election`，工作原理如下：
 
 ### 1. Cli命令
 
-``` bash
+```bash
 $ vona :create:bean meta election --module=demo-student
 ```
 
@@ -29,7 +29,7 @@ $ vona :create:bean meta election --module=demo-student
 
 ## meta.election定义
 
-``` typescript
+```typescript
 export type TypeElectionObtainResource = 'echo';
 
 @Meta()
@@ -44,15 +44,19 @@ export class MetaElection extends BeanElectionBase<TypeElectionObtainResource> {
 
 - 参见: [应用启动自定义](../env-config/app-start/introduction.md)
 
-``` typescript
+```typescript
 export class Monkey extends BeanSimple implements IMonkeyAppStarted {
   async appStarted() {
     const scope = this.app.scope(__ThisModule__);
-    scope.election.obtain('echo', () => {
-      // custom logic
-    }, async () => {
-      // cleanup
-    });
+    scope.election.obtain(
+      'echo',
+      () => {
+        // custom logic
+      },
+      async () => {
+        // cleanup
+      },
+    );
   }
 }
 ```
@@ -63,7 +67,7 @@ export class Monkey extends BeanSimple implements IMonkeyAppStarted {
 
 在调用`election.obtain`时，可以指定允许多个 Workers 取得所有权:
 
-``` diff
+```diff
 async appStarted() {
   const scope = this.app.scope(__ThisModule__);
   scope.election.obtain('echo', () => {
@@ -74,6 +78,6 @@ async appStarted() {
 }
 ```
 
-|名称|说明|
-|--|--|
-|tickets|允许指定数量的Workers取得所有权，默认为`1`|
+| 名称    | 说明                                       |
+| ------- | ------------------------------------------ |
+| tickets | 允许指定数量的Workers取得所有权，默认为`1` |

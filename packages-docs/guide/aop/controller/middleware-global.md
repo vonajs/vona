@@ -6,7 +6,7 @@ For example, we create a Global Middleware `logger` in the module demo-student
 
 ### 1. Cli command
 
-``` bash
+```bash
 $ vona :create:bean middleware logger --module=demo-student --boilerplate=global
 ```
 
@@ -18,7 +18,7 @@ Context Menu - [Module Path]: `Vona Aspect/Middleware Global`
 
 ## Middleware Definition
 
-``` typescript
+```typescript
 export interface IMiddlewareOptionsLogger extends IDecoratorMiddlewareOptionsGlobal {}
 
 @Middleware<IMiddlewareOptionsLogger>()
@@ -49,7 +49,7 @@ For example, define the `prefix` parameter for the logger middleware to control 
 
 ### 1. Defining parameter types
 
-``` diff
+```diff
 export interface IMiddlewareOptionsLogger extends IDecoratorMiddlewareOptionsGlobal {
 + prefix: string;
 }
@@ -57,7 +57,7 @@ export interface IMiddlewareOptionsLogger extends IDecoratorMiddlewareOptionsGlo
 
 ### 2. Providing default values ​​for parameters
 
-``` diff
+```diff
 @Middleware<IMiddlewareOptionsLogger>({
 + prefix: 'time',
 })
@@ -65,7 +65,7 @@ export interface IMiddlewareOptionsLogger extends IDecoratorMiddlewareOptionsGlo
 
 ### 3. Using Parameters
 
-``` diff
+```diff
 export interface IMiddlewareOptionsLogger extends IDecoratorMiddlewareOptionsGlobal {
   prefix: string;
 }
@@ -89,7 +89,7 @@ class MiddlewareLogger {
 
 You can specify global middleware parameters for a specific API
 
-``` diff
+```diff
 class ControllerStudent {
   @Web.get()
 + @Aspect.middlewareGlobal('demo-student:logger', { prefix: 'elapsed' })
@@ -105,7 +105,7 @@ Middleware parameters can be configured in App Config
 
 `src/backend/config/config/config.ts`
 
-``` typescript
+```typescript
 // onions
 config.onions = {
   middleware: {
@@ -128,7 +128,7 @@ Since global middlewares ard loaded and enabled by default, VonaJS provides two 
 
 For example, the system has a built-in global middleware `a-core:gate`, and we hope that the loading order is as follows: `a-core:gate` > `Current`
 
-``` diff
+```diff
 @Middleware({
 + dependencies: 'a-core:gate',
   prefix: 'time',
@@ -140,7 +140,7 @@ class MiddlewareLogger {}
 
 The order of `dependents` is just the opposite of `dependencies`. We hope that the loading order is as follows: `Current` > `a-core:gate`
 
-``` diff
+```diff
 @Middleware({
 + dependents: 'a-core:gate',
   prefix: 'time',
@@ -154,9 +154,9 @@ You can control `enable/disable` of global middleware for certain APIs
 
 ### 1. Enable
 
-* Disable for an API
+- Disable for an API
 
-``` diff
+```diff
 class ControllerStudent {
   @Web.get()
 + @Aspect.middlewareGlobal('demo-student:logger', { enable: false })
@@ -164,11 +164,11 @@ class ControllerStudent {
 }
 ```
 
-* Disable for all APIs
+- Disable for all APIs
 
 `src/backend/config/config/config.ts`
 
-``` diff
+```diff
 // onions
 config.onions = {
   middleware: {
@@ -183,14 +183,14 @@ config.onions = {
 
 Allows global middleware to take effect in a specified operating environment
 
-|Name|Type|Description|
-|--|--|--|
-|flavor|string\|string[]|See: [Runtime Environments and Flavors](../../env-config/mode-flavor/introduction.md)|
-|mode|string\|string[]|See: [Runtime Environments and Flavors](../../env-config/mode-flavor/introduction.md)|
+| Name   | Type             | Description                                                                           |
+| ------ | ---------------- | ------------------------------------------------------------------------------------- |
+| flavor | string\|string[] | See: [Runtime Environments and Flavors](../../env-config/mode-flavor/introduction.md) |
+| mode   | string\|string[] | See: [Runtime Environments and Flavors](../../env-config/mode-flavor/introduction.md) |
 
-* Example
+- Example
 
-``` diff
+```diff
 @Middleware({
 + meta: {
 +   flavor: 'normal',
@@ -204,16 +204,16 @@ class MiddlewareLogger {}
 
 You can enable/disable global middleware for some specific APIs
 
-|Name|Type|Description|
-|--|--|--|
-|match|string\|regexp\|(string\|regexp)[]|For which APIs to enable|
-|ignore|string\|regexp\|(string\|regexp)[]|For which APIs to disable|
+| Name   | Type                               | Description               |
+| ------ | ---------------------------------- | ------------------------- |
+| match  | string\|regexp\|(string\|regexp)[] | For which APIs to enable  |
+| ignore | string\|regexp\|(string\|regexp)[] | For which APIs to disable |
 
 ## Inspect
 
 You can directly inspect the currently effective global middleware list in the Controller action
 
-``` diff
+```diff
 class ControllerStudent {
   @Web.get()
   async findMany() {

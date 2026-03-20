@@ -2,11 +2,11 @@
 
 ## Create Controller
 
-For example, we create a Controller `student` in the module demo-student: 
+For example, we create a Controller `student` in the module demo-student:
 
 ### 1. Cli command
 
-``` bash
+```bash
 $ vona :create:bean controller student --module=demo-student
 ```
 
@@ -18,7 +18,7 @@ Context Menu - [Module Path]: `Vona Create/Controller`
 
 ## Controller Definition
 
-``` diff
+```diff
 + @Controller<IControllerOptionsStudent>('student')
 export class ControllerStudent extends BeanBase {
 + @Web.post('')
@@ -40,7 +40,7 @@ The route path is composed of the Controller Path and the Action Path
 
 ### General format
 
-``` bash
+```bash
 Route Path = GlobalPrefix + Module Url + Controller Path + Action Path
 ```
 
@@ -49,10 +49,10 @@ Route Path = GlobalPrefix + Module Url + Controller Path + Action Path
 
 For example, the route of Controller `teacher` in module demo-student is as follows:
 
-|Controller Path|Action Path| Route Path|
-|--|--|--|
-|teacher|empty|/api/demo/student/teacher|
-|teacher|:id|/api/demo/student/teacher/:id|
+| Controller Path | Action Path | Route Path                    |
+| --------------- | ----------- | ----------------------------- |
+| teacher         | empty       | /api/demo/student/teacher     |
+| teacher         | :id         | /api/demo/student/teacher/:id |
 
 ### Simplification rule 1
 
@@ -60,40 +60,40 @@ If the Controller Path is the same as the module name, the duplicate part will b
 
 For example, the route of Controller `student` in module demo-student is as follows:
 
-|Controller Path|Action Path| Route Path|
-|--|--|--|
-|student|empty|/api/demo/student|
-|student|:id|/api/demo/student/:id|
+| Controller Path | Action Path | Route Path            |
+| --------------- | ----------- | --------------------- |
+| student         | empty       | /api/demo/student     |
+| student         | :id         | /api/demo/student/:id |
 
 ### Simplification rule 2
 
 If the Controller Path or Action Path is prefixed with `/`, then the Module Url is automatically removed
 
-|Controller Path|Action Path| Route Path|
-|--|--|--|
-|/student|empty|/api/student|
-|/student|:id|/api/student/:id|
+| Controller Path | Action Path | Route Path       |
+| --------------- | ----------- | ---------------- |
+| /student        | empty       | /api/student     |
+| /student        | :id         | /api/student/:id |
 
 ### Simplification rule 3
 
 If the Controller Path or Action Path is prefixed with `//`, then the GlobalPrefix and Module Url are automatically removed
 
-|Controller Path|Action Path| Route Path|
-|--|--|--|
-|//student|empty|/student|
-|//student|:id|/student/:id|
+| Controller Path | Action Path | Route Path   |
+| --------------- | ----------- | ------------ |
+| //student       | empty       | /student     |
+| //student       | :id         | /student/:id |
 
 For example, the homepage of the project has the following route:
 
-|Controller Path|Action Path| Route Path|
-|--|--|--|
-|any value|//|/|
+| Controller Path | Action Path | Route Path |
+| --------------- | ----------- | ---------- |
+| any value       | //          | /          |
 
 ## Request Method
 
 Vona uses decorators to define request methods. These decorators are put into a group `@Web`. Because there are many decorators, the grouping mechanism can reduce the mental burden. For example: we set a `post` method for `create`:
 
-``` typescript
+```typescript
 import { Web } from 'vona-module-a-web';
 
 class ControllerStudent {
@@ -102,23 +102,23 @@ class ControllerStudent {
 }
 ```
 
-* Method decorator list
+- Method decorator list
 
-|Name|Description|
-|--|--|
-|@Web.post|post|
-|@Web.get|get|
-|@Web.delete|delete|
-|@Web.put|put|
-|@Web.patch|patch|
-|@Web.options|options|
-|@Web.head|head|
+| Name         | Description |
+| ------------ | ----------- |
+| @Web.post    | post        |
+| @Web.get     | get         |
+| @Web.delete  | delete      |
+| @Web.put     | put         |
+| @Web.patch   | patch       |
+| @Web.options | options     |
+| @Web.head    | head        |
 
 ## Request Parameters
 
 We need to get various parameters from the request, such as `Query`, `Params`, `Body`, `Headers`, etc. Similarly, Vona also provides many decorators for obtaining parameters. We also put all parameter decorators into the group `@Arg` to reduce the mental burden. For example, if we want to obtain the data of a student, the requested URL is `/?id=1`:
 
-``` typescript
+```typescript
 class ControllerStudent3 {
   @Web.get()
   findOne(@Arg.query('id') id: number) {}
@@ -129,7 +129,7 @@ Depending on the characteristics of the parameters, different types of parameter
 
 For example, the URL is `/?id=1&name=tom`:
 
-``` typescript
+```typescript
 class DtoStudentInfo {
   id: number;
   name: string;
@@ -143,19 +143,19 @@ class ControllerStudent3 {
 }
 ```
 
-* Parameter decorator list
+- Parameter decorator list
 
-|Name|Description|
-|--|--|
-|@Arg.param|Param|
-|@Arg.query|Query|
-|@Arg.body|Body|
-|@Arg.headers|Headers|
-|@Arg.fields|Fields|
-|@Arg.field|Field|
-|@Arg.files|Files|
-|@Arg.file|File|
-|@Arg.user|The current user|
+| Name         | Description      |
+| ------------ | ---------------- |
+| @Arg.param   | Param            |
+| @Arg.query   | Query            |
+| @Arg.body    | Body             |
+| @Arg.headers | Headers          |
+| @Arg.fields  | Fields           |
+| @Arg.field   | Field            |
+| @Arg.files   | Files            |
+| @Arg.file    | File             |
+| @Arg.user    | The current user |
 
 ## Parameter Validation
 
@@ -177,7 +177,7 @@ Vona provides a mechanism similar to [Validation](../../techniques/validation/in
 
 If the body type is `Basic type/Dto/Entity`, then the system will automatically infer the corresponding Zod Schema and automatically generate Swagger/Openapi
 
-* Example: `string`
+- Example: `string`
 
 ```diff
 class ControllerStudent {
@@ -185,12 +185,12 @@ class ControllerStudent {
 + findOne(): string {
     return 'Tom';
   }
-}  
+}
 ```
 
 ![](../../../assets/img/openapi/openapi-10.png)
 
-* Example: `EntityStudent`
+- Example: `EntityStudent`
 
 ```diff
 class ControllerStudent {
@@ -198,26 +198,26 @@ class ControllerStudent {
 + findOne(): EntityStudent {
     return {} as EntityStudent;
   }
-}  
+}
 ```
 
 ![](../../../assets/img/openapi/openapi-11.png)
 
-* List of types that can be automatically inferred
+- List of types that can be automatically inferred
 
-|Name|Description|
-|--|--|
-|string|z.string()|
-|number|z.number()|
-|boolean|z.boolean()|
-|Dto|z.object({...})|
-|Entity|z.object({...})|
+| Name    | Description     |
+| ------- | --------------- |
+| string  | z.string()      |
+| number  | z.number()      |
+| boolean | z.boolean()     |
+| Dto     | z.object({...}) |
+| Entity  | z.object({...}) |
 
 ### 2. Specify Zod Schema
 
 We can also explicitly specify Zod Schema and automatically generate Swagger/Openapi
 
-* Example: `string[]`
+- Example: `string[]`
 
 Use the decorator `@Api.body` to specify Zod Schema. Zod Schema usage rules are consistent with [Validation](../../techniques/validation/introduction.md)
 
@@ -230,12 +230,12 @@ class ControllerStudent {
   findOne(): string[] {
     return ['Tom'];
   }
-}  
+}
 ```
 
 ![](../../../assets/img/openapi/openapi-12.png)
 
-* Example: `Promise<EntityStudent>`
+- Example: `Promise<EntityStudent>`
 
 ```diff
 class ControllerStudent {
@@ -244,7 +244,7 @@ class ControllerStudent {
   async findOne(): Promise<EntityStudent> {
     return {} as EntityStudent;
   }
-}  
+}
 ```
 
 ![](../../../assets/img/openapi/openapi-13.png)
@@ -253,7 +253,7 @@ class ControllerStudent {
 
 By default, Vona automatically provides a wrapper object for the Response body. For example, if we want to return a body of type `string`, the actual returned data type is:
 
-``` typescript
+```typescript
 {
   code: string;
   message: string;
@@ -274,16 +274,16 @@ class ControllerStudent {
   findOne(): string {
     return 'Tom';
   }
-}  
+}
 ```
 
 ![](../../../assets/img/openapi/openapi-14.png)
 
 ### 2. Provide a custom wrapper object
 
-* First, define the wrapper function:
+- First, define the wrapper function:
 
-``` typescript
+```typescript
 export function bodySchemaWrapperCustom(bodySchema: any) {
   return z.object({
     status: z.number(),
@@ -293,7 +293,7 @@ export function bodySchemaWrapperCustom(bodySchema: any) {
 }
 ```
 
-* Then pass the wrapper function `bodySchemaWrapperCustom` to the decorator `@Api.bodyCustom`
+- Then pass the wrapper function `bodySchemaWrapperCustom` to the decorator `@Api.bodyCustom`
 
 ```diff
 class ControllerStudent {
@@ -302,12 +302,12 @@ class ControllerStudent {
   findOne(): string {
     return 'Tom';
   }
-}  
+}
 ```
 
 ![](../../../assets/img/openapi/openapi-15.png)
 
-* If the type of Response body is `Promise<EntityStudent>`, the code is as follows:
+- If the type of Response body is `Promise<EntityStudent>`, the code is as follows:
 
 ```diff
 class ControllerStudent {
@@ -316,7 +316,7 @@ class ControllerStudent {
   async findOne(): Promise<EntityStudent> {
     return {} as EntityStudent;
   }
-}  
+}
 ```
 
 ![](../../../assets/img/openapi/openapi-16.png)
@@ -327,7 +327,7 @@ class ControllerStudent {
 
 Set the response content type
 
-``` typescript
+```typescript
 @Api.contentType('application/xml')
 ```
 
@@ -335,7 +335,7 @@ Set the response content type
 
 Do not display this API in Swagger/Openapi metadata. This decorator can be used in Controller/Action
 
-``` typescript
+```typescript
 @Api.exclude()
 ```
 
@@ -343,7 +343,7 @@ Do not display this API in Swagger/Openapi metadata. This decorator can be used 
 
 Define Request headers
 
-``` typescript
+```typescript
 @Api.header({ name: 'x-request-header', description: 'request header' })
 // Define multiple headers at once
 @Api.headers([{ name: 'x-request-header', description: 'request header' }])
@@ -353,15 +353,15 @@ Define Request headers
 
 Set the response http code
 
-``` typescript
+```typescript
 @Api.httpCode(400)
 ```
 
 ### 5. @Api.setHeader
 
-Set the response headers 
+Set the response headers
 
-``` typescript
+```typescript
 @Api.setHeader('x-response-header', 'value')
 // Set multiple headers at once
 @Api.setHeader({ 'x-response-header1': 'value1', 'x-response-header2': 'value2' })
@@ -371,7 +371,7 @@ Set the response headers
 
 Set the grouping information in Swagger/Openapi. This decorator can be used for Controller/Action
 
-``` typescript
+```typescript
 @Api.tags(['Student'])
 ```
 
@@ -381,7 +381,7 @@ Set the grouping information in Swagger/Openapi. This decorator can be used for 
 
 You can pass more options when defining the request method of Action
 
-``` typescript
+```typescript
 class ControllerStudent {
   @Web.get(':id', {
     tags: ['Student'],
@@ -398,17 +398,17 @@ class ControllerStudent {
 
 First, define the language resources:
 
-* English: `src/module/demo-student/src/config/locale/en-us.ts`
+- English: `src/module/demo-student/src/config/locale/en-us.ts`
 
-``` typescript
+```typescript
 export default {
   FindStudent: 'Find a student',
 };
 ```
 
-* Chinese: `src/module/demo-student/src/config/locale/zh-cn.ts`
+- Chinese: `src/module/demo-student/src/config/locale/zh-cn.ts`
 
-``` typescript
+```typescript
 export default {
   FindStudent: '查找一个学生',
 };
@@ -416,7 +416,7 @@ export default {
 
 Use the `$locale` method for language translation, and support automatic type hints for language resources
 
-``` typescript
+```typescript
 import { $locale } from '../.metadata/locales.ts';
 
 @Web.get(':id', {
@@ -426,19 +426,19 @@ import { $locale } from '../.metadata/locales.ts';
 
 ### 3. Action options list
 
-|Name|Description|
-|--|--|
-|description|API description|
-|summary|API summary|
-|httpCode|Response http code|
-|contentType|Response content type|
-|bodySchema|Response body schema|
-|bodySchemaWrapper|Response body wrapper|
-|exclude|Whether to exclude this API in Swagger/Openapi metadata, default is false|
-|tags|API tag grouping|
-|operationId|API operation ID, default is methodName|
-|headers|Define Request Headers|
-|setHeaders|Set Response Headers|
+| Name              | Description                                                               |
+| ----------------- | ------------------------------------------------------------------------- |
+| description       | API description                                                           |
+| summary           | API summary                                                               |
+| httpCode          | Response http code                                                        |
+| contentType       | Response content type                                                     |
+| bodySchema        | Response body schema                                                      |
+| bodySchemaWrapper | Response body wrapper                                                     |
+| exclude           | Whether to exclude this API in Swagger/Openapi metadata, default is false |
+| tags              | API tag grouping                                                          |
+| operationId       | API operation ID, default is methodName                                   |
+| headers           | Define Request Headers                                                    |
+| setHeaders        | Set Response Headers                                                      |
 
 ## Controller options
 
@@ -446,7 +446,7 @@ import { $locale } from '../.metadata/locales.ts';
 
 You can pass more options when defining a Controller
 
-``` typescript
+```typescript
 @Controller('student', {
   exclude: false,
   tags: ['Student'],
@@ -459,13 +459,13 @@ class ControllerStudent {}
 
 ### 2. Controller options list
 
-|Name|Description|
-|--|--|
-|exclude|Whether to exclude all APIs of this Controller in Swagger/Openapi metadata, default is false|
-|tags|API tag grouping|
-|actions|Define Actions options|
-|enable|Whether to enable Controller|
-|meta|Enable Controller based on conditions|
+| Name    | Description                                                                                  |
+| ------- | -------------------------------------------------------------------------------------------- |
+| exclude | Whether to exclude all APIs of this Controller in Swagger/Openapi metadata, default is false |
+| tags    | API tag grouping                                                                             |
+| actions | Define Actions options                                                                       |
+| enable  | Whether to enable Controller                                                                 |
+| meta    | Enable Controller based on conditions                                                        |
 
 ### 3. App Config
 
@@ -475,7 +475,7 @@ For example, by default, `http://localhost:7102/swagger` is only valid in `test`
 
 `src/backend/config/config/config.prod.ts`
 
-``` typescript
+```typescript
 // onions
 config.onions = {
   controller: {
@@ -496,7 +496,7 @@ For example, we set the action options of `findOne` in the `ControllerStudent` c
 
 `src/backend/config/config/config.ts`
 
-``` typescript
+```typescript
 // onions
 config.onions = {
   controller: {

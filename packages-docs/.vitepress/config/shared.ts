@@ -44,7 +44,5 @@ export const shared = defineConfig({
       "window.dataLayer = window.dataLayer || [];\nfunction gtag(){dataLayer.push(arguments);}\ngtag('js', new Date());\ngtag('config', 'G-2NYR9RGRL4');",
     ],
   ],
-  ignoreDeadLinks: [
-    /^https?:\/\/localhost/,
-  ],
+  ignoreDeadLinks: [/^https?:\/\/localhost/],
 });

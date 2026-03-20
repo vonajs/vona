@@ -8,17 +8,17 @@ These multi-dimensional variables are the `runtime environments` and `flavors`
 
 Vona provides three runtime environments:
 
-|Name|Description|
-|--|--|
-|test|Testing environment|
-|dev|Development environment|
-|prod|Production environment|
+| Name | Description             |
+| ---- | ----------------------- |
+| test | Testing environment     |
+| dev  | Development environment |
+| prod | Production environment  |
 
 ### 1. Enabling the Runtime Environment
 
 Enabling the corresponding runtime environment by executing different commands
 
-``` bash
+```bash
 # test
 $ npm run test
 $ npm run cov
@@ -34,30 +34,30 @@ $ npm run start:docker
 
 ### 2. How to Determine the Current Runtime Environment
 
-* Determining with `Env`
+- Determining with `Env`
 
 Using Env to determine the current runtime environment supports `tree-shaking` during builds
 
-``` typescript
-process.env.META_MODE === 'test'
-process.env.META_MODE === 'dev'
-process.env.META_MODE === 'prod'
+```typescript
+process.env.META_MODE === 'test';
+process.env.META_MODE === 'dev';
+process.env.META_MODE === 'prod';
 ```
 
-* Determined by `Config`
+- Determined by `Config`
 
-``` typescript
-app.config.meta.mode === 'test'
-app.config.meta.mode === 'dev'
-app.config.meta.mode === 'prod'
+```typescript
+app.config.meta.mode === 'test';
+app.config.meta.mode === 'dev';
+app.config.meta.mode === 'prod';
 ```
 
-* Simplified Notation
+- Simplified Notation
 
-``` typescript
-app.meta.isTest
-app.meta.isDev
-app.meta.isProd
+```typescript
+app.meta.isTest;
+app.meta.isDev;
+app.meta.isProd;
 ```
 
 ## Flavor
@@ -68,18 +68,18 @@ For more complex business scenarios, we often need to provide configuration capa
 
 For out-of-the-box, Vona provides several built-in flavors:
 
-|Name|Description|
-|--|--|
-|normal|The default flavor|
-|play|For use in [Playground](../../start/play.md)|
-|docker|For use in Docker environments|
-|ci|For use in CI environments, such as GitHub Actions|
+| Name   | Description                                        |
+| ------ | -------------------------------------------------- |
+| normal | The default flavor                                 |
+| play   | For use in [Playground](../../start/play.md)       |
+| docker | For use in Docker environments                     |
+| ci     | For use in CI environments, such as GitHub Actions |
 
 ### 2. Enabling a Flavor
 
 Enabling the corresponding flavor by passing the command parameter: `--flavor`
 
-``` bash
+```bash
 # normal
 $ npm run dev
 # docker
@@ -91,22 +91,22 @@ $ npm run build -- --flavor=ci
 
 ### 3. How to Determine the Current Flavor
 
-* Determining via `Env`
+- Determining via `Env`
 
 Using Env to determine the current flavor supports tree-shaking during builds
 
-``` typescript
-process.env.META_FLAVOR === 'normal'
-process.env.META_FLAVOR === 'docker'
-process.env.META_FLAVOR === 'ci'
+```typescript
+process.env.META_FLAVOR === 'normal';
+process.env.META_FLAVOR === 'docker';
+process.env.META_FLAVOR === 'ci';
 ```
 
-* Determine via `Config`
+- Determine via `Config`
 
-``` typescript
-app.config.meta.flavor === 'normal'
-app.config.meta.flavor === 'docker'
-app.config.meta.flavor === 'ci'
+```typescript
+app.config.meta.flavor === 'normal';
+app.config.meta.flavor === 'docker';
+app.config.meta.flavor === 'ci';
 ```
 
 ### 4. Creating a Flavor
@@ -115,17 +115,17 @@ You can create a flavor based on any business need, such as customer, project, o
 
 For example, let's assign a flavor named `customA` to customer A, providing a separate env/config configuration for customer A
 
-* Enabling the Flavor
+- Enabling the Flavor
 
-``` bash
+```bash
 $ npm run dev -- --flavor=customA
 ```
 
-* How to determine the flavor
+- How to determine the flavor
 
-``` typescript
-process.env.META_FLAVOR === 'customA'
-app.config.meta.flavor === 'customA'
+```typescript
+process.env.META_FLAVOR === 'customA';
+app.config.meta.flavor === 'customA';
 ```
 
 ### 5. Add Flavor Type Definition
@@ -134,7 +134,7 @@ You can add a Flavor type definition to provide type hints
 
 In the VSCode editor, enter the code snippet `recordflavor` to automatically generate a code skeleton, and then add a custom Flavor type definition
 
-``` diff
+```diff
 declare module '@cabloy/module-info' {
   export interface VonaMetaFlavorExtend {
 +   customA: never;

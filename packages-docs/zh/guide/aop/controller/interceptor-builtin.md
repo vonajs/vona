@@ -2,19 +2,19 @@
 
 ## 局部拦截器
 
-|名称|说明|
-|--|--|
-|a-captcha:captchaVerify|判断验证码是否正确|
-|a-serialization:serializer|对Response body进行转换等操作，比如脱敏处理|
-|a-upload:upload|对上传文件进行处理|
+| 名称                       | 说明                                        |
+| -------------------------- | ------------------------------------------- |
+| a-captcha:captchaVerify    | 判断验证码是否正确                          |
+| a-serialization:serializer | 对Response body进行转换等操作，比如脱敏处理 |
+| a-upload:upload            | 对上传文件进行处理                          |
 
 ## 全局拦截器
 
-|名称|说明|
-|--|--|
-|a-datasharding:datasharding|用于读写分离，缓存写数据源，确保数据一致性。参见: [读写分离](../../../../cabloy/sharding.md)|
-|a-body:bodyReq|解析Request body|
-|a-body:bodyRes|封装Response body，提供`code/message/data`等字段|
+| 名称                        | 说明                                                                                         |
+| --------------------------- | -------------------------------------------------------------------------------------------- |
+| a-datasharding:datasharding | 用于读写分离，缓存写数据源，确保数据一致性。参见: [读写分离](../../../../cabloy/sharding.md) |
+| a-body:bodyReq              | 解析Request body                                                                             |
+| a-body:bodyRes              | 封装Response body，提供`code/message/data`等字段                                             |
 
 ## a-body:bodyReq
 
@@ -26,7 +26,7 @@
 
 可以自行解析 Request body，代码如下：
 
-``` typescript
+```typescript
 // parse
 await this.bean.bodyReq.parse();
 ```

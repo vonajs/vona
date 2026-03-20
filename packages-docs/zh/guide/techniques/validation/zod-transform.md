@@ -8,7 +8,7 @@
 
 ### 1. Cli命令
 
-``` bash
+```bash
 $ vona :create:bean zodTransform nameCapitalize --module=demo-student
 ```
 
@@ -20,10 +20,12 @@ $ vona :create:bean zodTransform nameCapitalize --module=demo-student
 
 ## Zod Transform定义
 
-``` typescript
+```typescript
 import { toUpperCaseFirstChar } from '@cabloy/word-utils';
 
-export interface TypeZodTransformNameCapitalizeData { name: string }
+export interface TypeZodTransformNameCapitalizeData {
+  name: string;
+}
 
 export type TypeZodTransformNameCapitalizeResult = TypeZodTransformNameCapitalizeData;
 
@@ -47,7 +49,7 @@ class ZodTransformNameCapitalize {
 
 ## 使用Zod Transform
 
-``` diff
+```diff
 import { v } from 'vona-module-a-openapiutils';
 
 @Controller()
@@ -68,7 +70,7 @@ class ControllerStudent {
 
 ### 1. 定义参数类型
 
-``` diff
+```diff
 export interface IZodTransformOptionsNameCapitalize extends IDecoratorZodTransformOptions {
 + lowercase: boolean;
 }
@@ -76,7 +78,7 @@ export interface IZodTransformOptionsNameCapitalize extends IDecoratorZodTransfo
 
 ### 2. 提供参数缺省值
 
-``` diff
+```diff
 @ZodTransform<IZodTransformOptionsNameCapitalize>({
 + lowercase: false,
 })
@@ -84,7 +86,7 @@ export interface IZodTransformOptionsNameCapitalize extends IDecoratorZodTransfo
 
 ### 3. 使用参数
 
-``` diff
+```diff
 import { toLowerCaseFirstChar, toUpperCaseFirstChar } from '@cabloy/word-utils';
 
 export interface TypeZodTransformNameCapitalizeData { name: string }
@@ -113,7 +115,7 @@ class ZodTransformNameCapitalize {
 
 可以在使用时指定 Zod Transform 参数
 
-``` diff
+```diff
 class ControllerStudent {
   @Web.post()
 + async create(@Arg.body(v.transform('demo-student:nameCapitalize', { lowercase: true })) student: DtoStudentCreate) {}
@@ -126,7 +128,7 @@ class ControllerStudent {
 
 `src/backend/config/config/config.ts`
 
-``` typescript
+```typescript
 // onions
 config.onions = {
   zodTransform: {

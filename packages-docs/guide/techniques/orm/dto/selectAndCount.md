@@ -10,14 +10,14 @@ The usage of `$Dto.selectAndCount` can be referred to `$Dto.get`. The difference
 
 In VSCode, use the `Vona Create/Dto` context menu to create a DTO code skeleton:
 
-``` typescript
+```typescript
 @Dto()
 export class DtoOrderResultPage {}
 ```
 
 ### 2. Inherit $Dto.selectAndCount
 
-``` diff
+```diff
 @Dto()
 export class DtoOrderResultPage
 + extends $Dto.selectAndCount(() => ModelOrder) {}
@@ -25,16 +25,16 @@ export class DtoOrderResultPage
 
 ## DtoOrderResultPage Fields
 
-|Name|Description|
-|--|--|
-|list|list of items of the current page|
-|total|total number of all items|
+| Name  | Description                       |
+| ----- | --------------------------------- |
+| list  | list of items of the current page |
+| total | total number of all items         |
 
 ## Annotating API Result
 
 Taking the `findMany` method of the `Order` controller as an example, we can annotate the API Result:
 
-``` diff
+```diff
 class ControllerOrder extends BeanBase {
   @Web.get('findMany')
 + @Api.body(DtoOrderResultPage)

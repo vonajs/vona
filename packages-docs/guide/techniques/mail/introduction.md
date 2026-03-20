@@ -13,7 +13,7 @@ Email configuration can be done in App Config:
 
 `src/backend/config/config/config.ts`
 
-``` typescript
+```typescript
 // modules
 config.modules = {
   'a-mail': {
@@ -39,28 +39,28 @@ config.modules = {
 };
 ```
 
-|Name|Description|
-|--|--|
-|defaultClient|Default Client name, defaults to `system`|
-|clients|Configure multiple Clients. The system provides a built-in `system` Client|
+| Name          | Description                                                                |
+| ------------- | -------------------------------------------------------------------------- |
+| defaultClient | Default Client name, defaults to `system`                                  |
+| clients       | Configure multiple Clients. The system provides a built-in `system` Client |
 
-* Client
+- Client
 
-|Name|Description|
-|--|--|
-|transport|Mail service configuration|
-|defaults|Default values ​​for email. For example, when sending emails, if the value of the `from` field is not specified, then the default value is used|
+| Name      | Description                                                                                                                                     |
+| --------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
+| transport | Mail service configuration                                                                                                                      |
+| defaults  | Default values ​​for email. For example, when sending emails, if the value of the `from` field is not specified, then the default value is used |
 
-* Transport
+- Transport
 
-|Name|Description|
-|--|--|
-|service|Built-in service name, such as `Gmail`. If service is specified, `host/port` no longer needs to be set|
-|host|Host|
-|port|Port|
-|secure|Whether service security is enabled|
-|auth.user|Account name|
-|auth.pass|Account password|
+| Name      | Description                                                                                            |
+| --------- | ------------------------------------------------------------------------------------------------------ |
+| service   | Built-in service name, such as `Gmail`. If service is specified, `host/port` no longer needs to be set |
+| host      | Host                                                                                                   |
+| port      | Port                                                                                                   |
+| secure    | Whether service security is enabled                                                                    |
+| auth.user | Account name                                                                                           |
+| auth.pass | Account password                                                                                       |
 
 - `service: test`: VonaJS provides a built-in `test` service. This allows for convenient testing of email sending capabilities during development without needing to provide a real mail server
 
@@ -70,7 +70,7 @@ Email configuration can also be done in the env file:
 
 `env/.env`
 
-``` typescript
+```typescript
 # mail
 
 MAIL_DEFAULT_CLIENT = 'system'
@@ -92,7 +92,7 @@ Add a new client type definition using the interface merging mechanism, such as 
 
 In VSCode In the editor, enter the code snippet `recordmailclient` to automatically generate the code skeleton:
 
-``` typescript
+```typescript
 declare module 'vona-module-a-mail' {
   export interface IMailClientRecord {
     : never;
@@ -102,7 +102,7 @@ declare module 'vona-module-a-mail' {
 
 Adjust the code, then add `order`
 
-``` diff
+```diff
 declare module 'vona-module-a-mail' {
   export interface IMailClientRecord {
 +   order: never;
@@ -114,7 +114,7 @@ declare module 'vona-module-a-mail' {
 
 `src/backend/config/config/config.ts`
 
-``` diff
+```diff
 // modules
 config.modules = {
   'a-mail': {
@@ -135,7 +135,7 @@ config.modules = {
 
 VonaJS provides a global bean `bean.mail` through the module `a-mail`, which can be used to send emails
 
-``` typescript
+```typescript
 import type { IMailOptions } from 'vona-module-a-mail';
 
 class ControllerStudent {
@@ -148,12 +148,12 @@ class ControllerStudent {
     };
     await this.bean.mail.send(mail);
   }
-}  
+}
 ```
 
 You can specify which client to use when sending emails
 
-``` typescript
+```typescript
 await this.bean.mail.send(mail, 'order');
 ```
 
@@ -161,7 +161,7 @@ await this.bean.mail.send(mail, 'order');
 
 VonaJS uses a built-in queue to send emails. You can modify the queue configuration in App Config
 
-``` typescript
+```typescript
 // onions
 config.onions = {
   queue: {
@@ -176,6 +176,6 @@ config.onions = {
 };
 ```
 
-| Name | Description |
-| -- | -- |
+| Name               | Description                                                 |
+| ------------------ | ----------------------------------------------------------- |
 | worker.concurrency | Number of tasks that each Worker can execute simultaneously |

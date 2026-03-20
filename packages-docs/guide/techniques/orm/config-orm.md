@@ -4,7 +4,7 @@ Vona ORM is a core capability provided by the `a-orm` module. You can modify the
 
 `src/backend/config/config/config.ts`
 
-``` typescript
+```typescript
 // modules
 config.modules = {
   'a-orm': {
@@ -18,11 +18,11 @@ config.modules = {
 };
 ```
 
-* The complete configuration is as follows:
+- The complete configuration is as follows:
 
 `src/suite-vendor/a-vona/modules/a-orm/src/config/config.ts`
 
-``` typescript
+```typescript
 export function config(_app: VonaApplication) {
   return {
     table: {
@@ -59,10 +59,10 @@ export function config(_app: VonaApplication) {
 }
 ```
 
-|Name|Description|
-|--|--|
-|table.identityType|Type of the table key field `id`: `number`/`bigint`|
-|model|General settings for the model|
-|softDeletionPrune|Soft deletion data prune settings|
-|dialects|Supported database dialects|
-|summer|two-layer cache settings|
+| Name               | Description                                         |
+| ------------------ | --------------------------------------------------- |
+| table.identityType | Type of the table key field `id`: `number`/`bigint` |
+| model              | General settings for the model                      |
+| softDeletionPrune  | Soft deletion data prune settings                   |
+| dialects           | Supported database dialects                         |
+| summer             | two-layer cache settings                            |

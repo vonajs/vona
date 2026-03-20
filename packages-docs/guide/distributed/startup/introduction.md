@@ -15,7 +15,7 @@ For example, create a startup `log` in the module `demo-student` to output the c
 
 ### 1. Cli Command
 
-``` bash
+```bash
 $ vona :create:bean startup log --module=demo-student
 ```
 
@@ -27,7 +27,7 @@ Context menu - [Module Path]: `Vona Bean/Startup`
 
 ## Startup Definition
 
-``` typescript
+```typescript
 @Startup()
 export class StartupLog extends BeanBase implements IStartupExecute {
   async execute() {
@@ -42,7 +42,7 @@ export class StartupLog extends BeanBase implements IStartupExecute {
 
 Parameters can be configured for startup
 
-``` typescript
+```typescript
 @Startup({
   instance: false,
   after: false,
@@ -52,16 +52,16 @@ Parameters can be configured for startup
 export class StartupLog {}
 ```
 
-| Name | Type | Description |
-|--|--|--|
-| instance | boolean | Whether it is an instance startup, defaults to `false` |
-| after | boolean | Controls the timing of startup, defaults to `false` |
-| debounce | boolean\| number | Execute Startup using debounce, defaults to `false` |
-| transaction | boolean | Whether to enable database transaction, defaults to `false` |
+| Name        | Type             | Description                                                 |
+| ----------- | ---------------- | ----------------------------------------------------------- |
+| instance    | boolean          | Whether it is an instance startup, defaults to `false`      |
+| after       | boolean          | Controls the timing of startup, defaults to `false`         |
+| debounce    | boolean\| number | Execute Startup using debounce, defaults to `false`         |
+| transaction | boolean          | Whether to enable database transaction, defaults to `false` |
 
 - `after`:
   - `false`: Executes before `appReady` (app startup) or `instanceReady` (instance startup)
-  - `true`: Executes after `appReady` (app startup) or `instanceReady` (instance startup) 
+  - `true`: Executes after `appReady` (app startup) or `instanceReady` (instance startup)
 - `debounce`
   - `false`: Disable debounce
   - `true`: Use the system's default debounce time
@@ -73,7 +73,7 @@ You can configure startup parameters in App Config
 
 `src/backend/config/config/config.ts`
 
-``` typescript
+```typescript
 // onions
 config.onions = {
   startup: {
@@ -95,7 +95,7 @@ Since startups ard loaded and enabled by default, VonaJS provides two parameters
 
 For example, the system has a built-in startup `a-web:listen`, and we hope that the loading order is as follows: `a-web:listen` > `Current`
 
-``` diff
+```diff
 @Startup({
 + dependencies: 'a-web:listen',
 })
@@ -106,7 +106,7 @@ class StartupLog {}
 
 The order of `dependents` is just the opposite of `dependencies`. We hope that the loading order is as follows: `Current` > `a-web:listen`
 
-``` diff
+```diff
 @Startup({
 + dependents: 'a-web:listen',
 })
@@ -121,7 +121,7 @@ You can control `enable/disable` of startup
 
 `src/backend/config/config/config.ts`
 
-``` diff
+```diff
 // onions
 config.onions = {
   startup: {
@@ -136,14 +136,14 @@ config.onions = {
 
 Allows startup to take effect in a specified operating environment
 
-|Name|Type|Description|
-|--|--|--|
-|flavor|string\|string[]|See: [Runtime Environments and Flavors](../../env-config/mode-flavor/introduction.md)|
-|mode|string\|string[]|See: [Runtime Environments and Flavors](../../env-config/mode-flavor/introduction.md)|
+| Name   | Type             | Description                                                                           |
+| ------ | ---------------- | ------------------------------------------------------------------------------------- |
+| flavor | string\|string[] | See: [Runtime Environments and Flavors](../../env-config/mode-flavor/introduction.md) |
+| mode   | string\|string[] | See: [Runtime Environments and Flavors](../../env-config/mode-flavor/introduction.md) |
 
-* Example
+- Example
 
-``` diff
+```diff
 @Startup({
 + meta: {
 +   flavor: 'normal',
@@ -157,7 +157,7 @@ class StartupLog {}
 
 You can directly inspect the currently effective startup list
 
-``` diff
+```diff
 class ControllerStudent {
   @Web.get('test')
   test() {

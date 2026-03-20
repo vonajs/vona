@@ -8,7 +8,7 @@ For example, creating a Captcha Provider: `imageText` within the module `captcha
 
 ### 1. CLI Command
 
-``` bash
+```bash
 $ vona :create:bean captchaProvider imageText --module=captcha-simple
 ```
 
@@ -20,7 +20,7 @@ Context Menu - [Module Path]: `Vona Bean/Captcha Provider`
 
 ## Captcha Provider Definition
 
-``` typescript
+```typescript
 export type TypeCaptchaProviderImageTextToken = string;
 export type TypeCaptchaProviderImageTextPayload = string;
 export type TypeCaptchaProviderImageTextData = ICaptchaProviderData<TypeCaptchaProviderImageTextToken, TypeCaptchaProviderImageTextPayload>;
@@ -50,11 +50,7 @@ class CaptchaProviderImageText {
     return { token: captcha.text, payload: svg64(captcha.data) };
   }
 
-  async verify(
-    token,
-    tokenInput,
-    _options,
-  ) {
+  async verify(token, tokenInput, _options) {
     return !!tokenInput && !!token && tokenInput.toLowerCase() === token.toLowerCase();
   }
 }
@@ -76,7 +72,7 @@ Captcha Provider parameters can be configured in the App Config
 
 `src/backend/config/config/config.ts`
 
-``` typescript
+```typescript
 // onions
 config.onions = {
   captchaProvider: {

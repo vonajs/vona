@@ -6,7 +6,7 @@ Modules can individually provide their own `Locale` language resources
 
 ### 1. Cli command
 
-``` bash
+```bash
 $ vona :init:locale demo-student
 ```
 
@@ -20,7 +20,7 @@ Context Menu - [Module Path]: `Vona Init/Locale`
 
 Taking the module `demo-student` as an example, define the module's language resources:
 
-* English
+- English
 
 `src/module/demo-student/src/config/locale/en-us.ts`
 
@@ -31,7 +31,7 @@ export default {
 
 ```
 
-* Chinese
+- Chinese
 
 `src/module/demo-student/src/config/locale/zh-cn.ts`
 
@@ -57,7 +57,7 @@ class ControllerStudent {
     const message3 = this.scope.locale.StudentName.locale('zh-cn');
     console.log(message1, message2, message3);
   }
-}  
+}
 ```
 
 ## Use language resources cross-module
@@ -74,14 +74,14 @@ class ControllerStudent {
     const message3 = this.$scope.demoStudent.locale.StudentName.locale('zh-cn');
     console.log(message1, message2, message3);
   }
-}  
+}
 ```
 
 ## Override language resources
 
 You can use `project-level` language resources to override `module-level` language resources
 
-* English
+- English
 
 `src/backend/config/locale/en-us.ts`
 
@@ -89,11 +89,11 @@ You can use `project-level` language resources to override `module-level` langua
 locale.modules = {
 + 'demo-student': {
 +   StudentName: 'Student Name!',
-+ }, 
++ },
 };
 ```
 
-* Chinese
+- Chinese
 
 `src/backend/config/locale/zh-cn.ts`
 
@@ -109,19 +109,19 @@ locale.modules = {
 
 ### 1. Get Current Locale
 
-``` typescript
+```typescript
 const locale = this.ctx.locale;
 ```
 
 ### 2. Set Current Locale
 
-``` typescript
+```typescript
 this.ctx.locale = 'en-us';
 ```
 
 ### 3. Get Default Locale
 
-``` typescript
+```typescript
 const localeDefault = this.$scope.locale.config.locale.defaultLocale;
 ```
 
@@ -135,7 +135,7 @@ I18n is the core capability provided by the module `a-locale`. The module config
 
 `src/backend/config/config/config.ts`
 
-``` typescript
+```typescript
 // modules
 config.modules = {
   'a-locale': {
@@ -149,12 +149,12 @@ config.modules = {
 };
 ```
 
-|Name|Description|
-|--|--|
-|defaultLocale|Default locale|
-|queryField|Retrieves the current locale from the request query. The query key defaults to `x-vona-locale`|
-|headerField|Retrieves the current locale from the request header. The header key defaults to `x-vona-locale`|
-|cookieField|Retrieves the current locale from the request cookie. The cookie key defaults to `locale`|
+| Name          | Description                                                                                      |
+| ------------- | ------------------------------------------------------------------------------------------------ |
+| defaultLocale | Default locale                                                                                   |
+| queryField    | Retrieves the current locale from the request query. The query key defaults to `x-vona-locale`   |
+| headerField   | Retrieves the current locale from the request header. The header key defaults to `x-vona-locale` |
+| cookieField   | Retrieves the current locale from the request cookie. The cookie key defaults to `locale`        |
 
 ### 2. Rule Order
 
@@ -172,7 +172,7 @@ Adding a new language type definition using the interface merging mechanism
 
 In the VSCode editor, enter the code snippet `recordlocale`, which will automatically generate a code skeleton:
 
-``` typescript
+```typescript
 declare module 'vona' {
   export interface ILocaleRecord {
     : never;
@@ -182,7 +182,7 @@ declare module 'vona' {
 
 Adjust the code, and then add `zh-tw`
 
-``` diff
+```diff
 declare module 'vona' {
   export interface ILocaleRecord {
 +   'zh-tw': never;
@@ -196,7 +196,7 @@ Create a new language file `zh-tw.ts`, and then add language resources
 
 `src/module/demo-student/src/config/locale/zh-tw.ts`
 
-``` typescript
+```typescript
 export default {
   StudentName: '學生名稱',
 };
@@ -227,7 +227,7 @@ export default {
 
 ### 2. Use Language Resources
 
-``` typescript
+```typescript
 this.ctx.locale = 'en-us';
 const apple0 = this.scope.locale.TestApples_(0);
 const apple1 = this.scope.locale.TestApples_(1);
@@ -237,7 +237,7 @@ console.log(`${apple0}, ${apple1}, ${apple2}`);
 
 The console output is as follows:
 
-``` bash
+```bash
 no apples, one apple, 2 apples
 ```
 
@@ -272,7 +272,7 @@ export default {
 
 ### 2. Using Language Resources
 
-``` typescript
+```typescript
 this.ctx.locale = 'en-us';
 const apple0 = this.scope.locale.TestNameApples_('Tom', 0);
 const apple1 = this.scope.locale.TestNameApples_('Tom', 1);
@@ -282,7 +282,7 @@ console.log(`${apple0}, ${apple1}, ${apple2}`);
 
 Console output is as follows:
 
-``` bash
+```bash
 Tom has no apples, Tom has one apple, Tom has 2 apples
 ```
 
@@ -300,7 +300,7 @@ For example, providing I18n `title` information for the `name` field of `EntityS
 
 When setting the field title information, use `Language Resource FullKey`. When actually generating Swagger/Openapi metadata, the system automatically translates the `Language Resource FullKey` into the specified language
 
-``` diff
+```diff
 + import { $localeScope } from 'vona';
 
 class EntityStudent {
@@ -316,7 +316,7 @@ class EntityStudent {
 
 VonaJS also provides a simplified utility function `$locale`
 
-``` diff
+```diff
 + import { $locale } from '../.metadata/locales.ts';
 
 class EntityStudent {

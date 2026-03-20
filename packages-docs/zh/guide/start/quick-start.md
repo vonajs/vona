@@ -6,24 +6,24 @@
 
 ## 前置条件
 
-|名称|版本|
-|--|--|
-|pnpm| >=10.19.0 |
-|Nodejs| >=24.8.0 |
-|Redis|>=7.2.6|
-|Sqlite3|内置|
-|MySQL|>=8|
-|Postgresql|>=17|
+| 名称       | 版本      |
+| ---------- | --------- |
+| pnpm       | >=10.19.0 |
+| Nodejs     | >=24.8.0  |
+| Redis      | >=7.2.6   |
+| Sqlite3    | 内置      |
+| MySQL      | >=8       |
+| Postgresql | >=17      |
 
-* `Redis`: VonaJS 基于 Redis 提供了以下能力:
+- `Redis`: VonaJS 基于 Redis 提供了以下能力:
   - `队列、定时任务、启动项、广播、缓存、二级缓存、分布式锁`
-* `Sqlite3`: 需要预先准备 node-gyp 环境，确保在安装依赖时可以正常编译出`better_sqlite3.node`
+- `Sqlite3`: 需要预先准备 node-gyp 环境，确保在安装依赖时可以正常编译出`better_sqlite3.node`
 
 ## 准备工作
 
 1. 安装命令行工具
 
-``` bash
+```bash
 $ pnpm add -g vona-cli@latest
 ```
 
@@ -35,17 +35,17 @@ $ pnpm add -g vona-cli@latest
 
 1. 创建项目
 
-``` bash
+```bash
 $ vona :create:project projectName --template=cabloy-basic
 $ cd projectName
 ```
 
 Vona 提供了两个项目模版:
 
-|名称|UI|说明|
-|--|--|--|
-|cabloy-basic|Daisyui + Tailwindcss|提供开箱即用的`Admin中后台`|
-|cabloy-start|VuetifyJS|提供开箱即用的`Web网站`和`Admin中后台`|
+| 名称         | UI                    | 说明                                   |
+| ------------ | --------------------- | -------------------------------------- |
+| cabloy-basic | Daisyui + Tailwindcss | 提供开箱即用的`Admin中后台`            |
+| cabloy-start | VuetifyJS             | 提供开箱即用的`Web网站`和`Admin中后台` |
 
 > 关于 Vona、Zova 和 Cabloy 之间的关系，参见: [Cabloy](../../cabloy/introduction.md)
 
@@ -53,7 +53,7 @@ Vona 提供了两个项目模版:
 
 `env/.env`:
 
-``` bash
+```bash
 # database
 DATABASE_DEFAULT_CLIENT = 'sqlite3' # sqlite3/pg/mysql
 DATABASE_CLIENT_PG_PASSWORD =
@@ -65,25 +65,25 @@ REDIS_DEFAULT_PASSWORD =
 
 3. 启动开发服务
 
-``` bash
+```bash
 $ npm run dev
 ```
 
 4. 单元测试
 
-``` bash
+```bash
 $ npm run test
 ```
 
 5. 构建
 
-``` bash
+```bash
 $ npm run build
 ```
 
 ## Docker Compose
 
-``` bash
+```bash
 $ npm run build:docker
 $ sudo docker-compose build
 $ sudo docker-compose up

@@ -15,10 +15,10 @@ config.[meta].mine.ts    # 只在指定条件下加载，但会被 git 忽略
 
 - `[meta]`可以是以下两个字段值的`任意组合`，从而支持基于多维变量的加载机制
 
-| 名称    | 类型        |
-| ------- | --------------- |
-| mode    | 'test' \|'dev' \| 'prod'    |
-| flavor  | 'normal' \|'play' \|'docker' \| 'ci' \| keyof VonaMetaFlavorExtend  |
+| 名称   | 类型                                                               |
+| ------ | ------------------------------------------------------------------ |
+| mode   | 'test' \|'dev' \| 'prod'                                           |
+| flavor | 'normal' \|'play' \|'docker' \| 'ci' \| keyof VonaMetaFlavorExtend |
 
 ## npm scripts
 
@@ -31,12 +31,12 @@ $ npm run build
 $ npm run build:docker
 ```
 
-``` json
+```json
 "scripts": {
   "test": "vona :bin:test --flavor=normal",
   "dev": "vona :bin:dev --flavor=normal",
   "build": "vona :bin:build --flavor=normal",
-  "build:docker": "vona :bin:build --flavor=docker", 
+  "build:docker": "vona :bin:build --flavor=docker",
 }
 ```
 
@@ -44,10 +44,10 @@ $ npm run build:docker
 
 在命令行执行`npm run dev`，那么，对应的 meta 变量值是：
 
-| 名称    | 值            |
-| ------- | ------------- |
-| mode    | 'dev' |
-| flavor  | 'normal'       |
+| 名称   | 值       |
+| ------ | -------- |
+| mode   | 'dev'    |
+| flavor | 'normal' |
 
 系统就会自动加载下列文件中的 Config 配置，并进行合并:
 
@@ -64,7 +64,7 @@ config.normal.dev.mine.ts
 
 config 文件支持异步加载
 
-``` typescript
+```typescript
 export default async function (app: VonaApplication, env: VonaConfigEnv) {
   const config: VonaConfigOptional = {};
 
@@ -72,7 +72,7 @@ export default async function (app: VonaApplication, env: VonaConfigEnv) {
   ...
 
   return config;
-}  
+}
 ```
 
 ## 获取全局config
@@ -80,8 +80,8 @@ export default async function (app: VonaApplication, env: VonaConfigEnv) {
 在任何 bean 实例中可以直接通过`this.app.config`获取全局 config 对象
 
 ```typescript
-this.app.config.server.globalPrefix
-this.app.config.database.defaultClient
+this.app.config.server.globalPrefix;
+this.app.config.database.defaultClient;
 ```
 
 ## 获取实例config
@@ -89,17 +89,17 @@ this.app.config.database.defaultClient
 在任何 bean 实例中可以直接通过`this.ctx.config`获取实例 config 对象
 
 ```typescript
-this.ctx.config.server.serve.protocol
-this.ctx.config.server.serve.host
+this.ctx.config.server.serve.protocol;
+this.ctx.config.server.serve.host;
 ```
 
 ## 获取模块config
 
 模块可以单独提供自己的 config 配置，可以通过 Scope 实例获取模块的 config 配置，参见：[Config配置](../../essentials/scope/config.md)
 
-``` typescript
-this.scope.config.title
-this.$scope.homeIndex.config.title
+```typescript
+this.scope.config.title;
+this.$scope.homeIndex.config.title;
 ```
 
 ## 覆盖模块config

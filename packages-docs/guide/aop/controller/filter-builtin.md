@@ -12,7 +12,7 @@ You can disable logging for certain errors for a specific API. The following exa
 
 Disabling errorCode: `422`
 
-``` diff
+```diff
 import { Aspect } from 'vona-module-a-aspect';
 
 class ControllerStudent {
@@ -24,7 +24,7 @@ class ControllerStudent {
 
 Simplified:
 
-``` diff
+```diff
 import { Core } from 'vona-module-a-core';
 
 class ControllerStudent {
@@ -42,7 +42,7 @@ For example, in the demo-student module, there is a custom Error: `ErrorTest`
 
 Since the error code for `ErrorTest` is `1001`, we can disable errorCode: `demo-student:1001`
 
-``` diff
+```diff
 import { Aspect } from 'vona-module-a-aspect';
 
 class ControllerStudent {
@@ -57,7 +57,7 @@ class ControllerStudent {
 
 Simplified:
 
-``` diff
+```diff
 import { Core } from 'vona-module-a-core';
 
 class ControllerStudent {
@@ -76,7 +76,7 @@ Filter parameters can be configured in App Config to apply to all APIs
 
 `src/backend/config/config/config.ts`
 
-``` typescript
+```typescript
 // onions
 config.onions = {
   filter: {

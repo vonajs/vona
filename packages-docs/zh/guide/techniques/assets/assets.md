@@ -2,7 +2,7 @@
 
 在 VonaJS 框架中，每个模块都可以提供 Assets，供服务端使用
 
-* `多场景`：可以针对不同的场景、不同的用途提供不同类型的 Assets
+- `多场景`：可以针对不同的场景、不同的用途提供不同类型的 Assets
 
 ## 初始化代码骨架
 
@@ -10,7 +10,7 @@
 
 ### 1. Cli命令
 
-``` bash
+```bash
 $ vona :init:asset templates --module=demo-student
 ```
 
@@ -26,7 +26,7 @@ $ vona :init:asset templates --module=demo-student
 
 根据业务需求添加 Assets，比如添加两个模版文件：
 
-``` bash
+```bash
 src/module/demo-student/assets/templates/item.ejs
 src/module/demo-student/assets/templates/list.ejs
 ```
@@ -35,14 +35,14 @@ src/module/demo-student/assets/templates/list.ejs
 
 在测试和开发环境，可以通过如下文件路径访问 Assets：
 
-``` bash
+```bash
 /path/to/project/src/module/demo-student/assets/templates/item.ejs
 /path/to/project/src/module/demo-student/assets/templates/list.ejs
 ```
 
 在生产环境，文件路径如下：
 
-``` bash
+```bash
 /path/to/project/dist/normal/assets/templates/demo-student/item.ejs
 /path/to/project/dist/normal/assets/templates/demo-student/list.ejs
 ```
@@ -55,7 +55,7 @@ src/module/demo-student/assets/templates/list.ejs
 
 ### 1. Cli命令
 
-``` bash
+```bash
 $ vona :create:bean meta asset --module=demo-student
 ```
 
@@ -67,7 +67,7 @@ $ vona :create:bean meta asset --module=demo-student
 
 ## meta.asset定义
 
-``` typescript
+```typescript
 export interface IAssetGetPath {
   templates: 'item.ejs' | 'list.ejs';
 }
@@ -80,12 +80,12 @@ export class MetaAsset extends BeanAssetBase<IAssetGetPath> {}
 
 ## 获取文件路径
 
-``` typescript
+```typescript
 class ControllerStudent {
   test() {
     const path = this.scope.asset.get('templates', 'item.ejs');
   }
-}  
+}
 ```
 
 - `asset.get`：传入场景名和文件名，生成文件路径

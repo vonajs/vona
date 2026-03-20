@@ -6,7 +6,7 @@
 
 `src/backend/config/config/config.ts`
 
-``` typescript
+```typescript
 // orm
 config.database = {
   base: {},
@@ -15,11 +15,11 @@ config.database = {
 };
 ```
 
-|名称|说明|
-|--|--|
-|base|基础配置，为所有数据源提供通用的基础配置|
-|defaultClient|默认数据源，默认为`pg`|
-|clients|配置多个数据源|
+| 名称          | 说明                                     |
+| ------------- | ---------------------------------------- |
+| base          | 基础配置，为所有数据源提供通用的基础配置 |
+| defaultClient | 默认数据源，默认为`pg`                   |
+| clients       | 配置多个数据源                           |
 
 ## 内置数据源
 
@@ -27,7 +27,7 @@ config.database = {
 
 `src/backend/config/config/config.ts`
 
-``` typescript
+```typescript
 // database
 config.database = {
   clients: {
@@ -61,12 +61,12 @@ config.database = {
 };
 ```
 
-* Vona ORM 底层使用的是[Knex](https://knexjs.org/)，因此，数据源的配置直接继承自`Knex.Config`
+- Vona ORM 底层使用的是[Knex](https://knexjs.org/)，因此，数据源的配置直接继承自`Knex.Config`
   - 参见：[Configuration Options](https://knexjs.org/guide/#configuration-options)
 
-* `clients.sqlite3.client`: 使用方言 `better-sqlite3`
-* `clients.pg.client`：使用方言`pg`
-* `clients.mysql.client`：使用方言`mysql2`
+- `clients.sqlite3.client`: 使用方言 `better-sqlite3`
+- `clients.pg.client`：使用方言`pg`
+- `clients.mysql.client`：使用方言`mysql2`
 
 ## env配置
 
@@ -74,7 +74,7 @@ config.database = {
 
 `env/.env`
 
-``` typescript
+```typescript
 # database
 
 DATABASE_DEFAULT_CLIENT = 'sqlite3' # sqlite3/pg/mysql
@@ -82,13 +82,13 @@ DATABASE_DEFAULT_CLIENT = 'sqlite3' # sqlite3/pg/mysql
 DATABASE_CLIENT_PG_HOST = 127.0.0.1
 DATABASE_CLIENT_PG_PORT = 5432
 DATABASE_CLIENT_PG_USER = postgres
-DATABASE_CLIENT_PG_PASSWORD = 
+DATABASE_CLIENT_PG_PASSWORD =
 DATABASE_CLIENT_PG_DATABASE = postgres
 
 DATABASE_CLIENT_MYSQL_HOST = 127.0.0.1
 DATABASE_CLIENT_MYSQL_PORT = 3306
 DATABASE_CLIENT_MYSQL_USER = root
-DATABASE_CLIENT_MYSQL_PASSWORD = 
+DATABASE_CLIENT_MYSQL_PASSWORD =
 DATABASE_CLIENT_MYSQL_DATABASE = mysql
 ```
 
@@ -104,7 +104,7 @@ DATABASE_CLIENT_MYSQL_DATABASE = mysql
 
 `src/backend/config/config/config.ts`
 
-``` typescript
+```typescript
 declare module 'vona-module-a-orm' {
   export interface IDatabaseClientRecord {
     : never;
@@ -114,7 +114,7 @@ declare module 'vona-module-a-orm' {
 
 调整代码，然后添加`pgOrder`
 
-``` diff
+```diff
 declare module 'vona-module-a-orm' {
   export interface IDatabaseClientRecord {
 +   pgOrder: never;
@@ -126,7 +126,7 @@ declare module 'vona-module-a-orm' {
 
 `src/backend/config/config/config.ts`
 
-``` typescript
+```typescript
 // database
 config.database = {
   clients: {
@@ -148,7 +148,7 @@ config.database = {
 
 ### 1. 获取指定数据源
 
-``` typescript
+```typescript
 const pg = app.bean.database.getDb('pg');
 const mysql = app.bean.database.getDb('mysql');
 const pgOrder = app.bean.database.getDb('pgOrder');
@@ -158,7 +158,7 @@ const pgOrder = app.bean.database.getDb('pgOrder');
 
 默认数据源由配置项`defaultClient`决定
 
-``` typescript
+```typescript
 const dbDefault = app.bean.database.getDb('default');
 ```
 
@@ -166,7 +166,7 @@ const dbDefault = app.bean.database.getDb('default');
 
 系统为不同的数据源创建了不同的 knex 实例，使用 knex 实例操作数据库
 
-``` typescript
+```typescript
 const pg = app.bean.database.getDb('pg');
 const items = pg.connection.select('*').from('tableName');
 
@@ -178,7 +178,7 @@ const items = dbDefault.connection.select('*').from('tableName');
 
 在实际的代码上下文中，可能使用任何一个数据源，那么可以通过以下代码获取上下文中的当前数据源：
 
-``` typescript
+```typescript
 const current = app.bean.database.current;
 const items = current.connection.select('*').from('tableName');
 ```
@@ -189,7 +189,7 @@ const items = current.connection.select('*').from('tableName');
 
 `src/backend/config/config/config.ts`
 
-``` typescript
+```typescript
 // database
 config.database = {
   defaultClient: (ctx?: VonaContext) => {

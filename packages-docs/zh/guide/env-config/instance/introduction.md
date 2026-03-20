@@ -18,35 +18,35 @@ VonaJS 支持以下几种`多实例/多租户`模式：
 
 `src/backend/config/config/config.dev.ts`
 
-``` typescript
+```typescript
 // instance
 config.instance = {
   instances: {
     '': { password: '', title: '', config: {} },
-    'shareTest': { password: '', title: '' },
-    'isolateTest': { password: '', title: '', id: 1000, isolate: true, isolateClient: 'isolateTest' },
+    shareTest: { password: '', title: '' },
+    isolateTest: { password: '', title: '', id: 1000, isolate: true, isolateClient: 'isolateTest' },
   },
 };
 ```
 
-* 实例清单
+- 实例清单
 
-|名称|说明|
-|--|--|
-|empty|缺省实例|
-|shareTest|用于演示`共享模式`，具体而言，`shareTest`与`empty`共享同一个数据库|
-|isolateTest|用于演示`独立模式`，具体而言，`isolateTest`使用独立的数据库|
+| 名称        | 说明                                                               |
+| ----------- | ------------------------------------------------------------------ |
+| empty       | 缺省实例                                                           |
+| shareTest   | 用于演示`共享模式`，具体而言，`shareTest`与`empty`共享同一个数据库 |
+| isolateTest | 用于演示`独立模式`，具体而言，`isolateTest`使用独立的数据库        |
 
-* 实例属性
+- 实例属性
 
-|名称|说明|
-|--|--|
-|password|实例中用户`admin`的初始密码，默认是`123456`|
-|title|网站标题|
-|config|实例的配置信息|
-|id|当使用`独立模式`时，必须明确指定唯一的`实例Id`|
-|isolate|是否使用`独立模式`，默认为`共享模式`|
-|isolateClient|当使用`独立模式`时，必须明确指定`数据源`|
+| 名称          | 说明                                           |
+| ------------- | ---------------------------------------------- |
+| password      | 实例中用户`admin`的初始密码，默认是`123456`    |
+| title         | 网站标题                                       |
+| config        | 实例的配置信息                                 |
+| id            | 当使用`独立模式`时，必须明确指定唯一的`实例Id` |
+| isolate       | 是否使用`独立模式`，默认为`共享模式`           |
+| isolateClient | 当使用`独立模式`时，必须明确指定`数据源`       |
 
 - `config`: `config`数据将与`App Config`合并，从而生成`Instance Config`。可以使用`this.ctx.config`获取实例配置
 
@@ -56,7 +56,7 @@ config.instance = {
 
 `src/backend/config/config/config.prod.ts`
 
-``` typescript
+```typescript
 // instance
 config.instance = {
   instances: {
@@ -78,7 +78,7 @@ config.instance = {
 
 `src/backend/config/config/config.ts`
 
-``` typescript
+```typescript
 declare module 'vona' {
   export interface IInstanceRecord {
     : never;
@@ -88,7 +88,7 @@ declare module 'vona' {
 
 调整代码，然后添加`shareTest`
 
-``` diff
+```diff
 declare module 'vona' {
   export interface IInstanceRecord {
 +   shareTest: never;
@@ -102,7 +102,7 @@ declare module 'vona' {
 
 `src/backend/config/config/config.test.ts`
 
-``` typescript
+```typescript
 // instance
 config.instance = {
   instances: {
@@ -121,7 +121,7 @@ config.instance = {
 
 `src/backend/config/config/config.ts`
 
-``` typescript
+```typescript
 // instance
 config.instance = {
   getInstanceName: undefined,
@@ -130,11 +130,11 @@ config.instance = {
 };
 ```
 
-|名称|说明|
-|--|--|
-|getInstanceName|提供自定义函数，用于获取当前实例名|
-|headerField|从request header中获取当前实例名，header key默认为`x-vona-instance-name`|
-|queryField|从request query中获取当前实例名，query key默认为`x-vona-instance-name`|
+| 名称            | 说明                                                                     |
+| --------------- | ------------------------------------------------------------------------ |
+| getInstanceName | 提供自定义函数，用于获取当前实例名                                       |
+| headerField     | 从request header中获取当前实例名，header key默认为`x-vona-instance-name` |
+| queryField      | 从request query中获取当前实例名，query key默认为`x-vona-instance-name`   |
 
 ### 2. 规则次序
 
@@ -151,30 +151,30 @@ config.instance = {
 
 `env/.env`
 
-``` typescript
+```typescript
 # server
 SERVER_SUBDOMAINOFFSET = 1
 ```
 
-* 当`SERVER_SUBDOMAINOFFSET = 1`时，域名与实例名对应关系如下：
+- 当`SERVER_SUBDOMAINOFFSET = 1`时，域名与实例名对应关系如下：
 
-|域名|实例名|
-|--|--|
-|cabloy.com|cabloy|
-|store.cabloy.com|cabloy.store|
+| 域名             | 实例名       |
+| ---------------- | ------------ |
+| cabloy.com       | cabloy       |
+| store.cabloy.com | cabloy.store |
 
-* 当`SERVER_SUBDOMAINOFFSET = 2`时，域名与实例名对应关系如下：
+- 当`SERVER_SUBDOMAINOFFSET = 2`时，域名与实例名对应关系如下：
 
-|域名|实例名|
-|--|--|
-|cabloy.com|空字符串|
-|store.cabloy.com|store|
+| 域名             | 实例名   |
+| ---------------- | -------- |
+| cabloy.com       | 空字符串 |
+| store.cabloy.com | store    |
 
 ## 使用多实例
 
 ### 1. 访问当前实例信息
 
-``` typescript
+```typescript
 // 当前实例名
 const name = this.ctx.instanceName;
 // 当前实例对象
@@ -187,7 +187,7 @@ const iid = this.ctx.instance.id;
 
 由于多实例的数据是相互隔离的，因此在操作数据库时，需要指定`实例Id`。VonaJS 提供了非常强大的`Model`对象，从而可以透明的处理多实例
 
-``` typescript
+```typescript
 // create
 await this.scope.model.student.insert({ name: 'Tom' });
 // select
@@ -206,7 +206,7 @@ await this.scope.model.student.delete({ id: 1 });
 
 如果使用`builder()`方法操作数据库，就需要自行添加`实例Id`
 
-``` typescript
+```typescript
 await this.scope.model.student.builder().where({
   iid: this.ctx.instance.id,
   name: 'Tom',
@@ -215,7 +215,7 @@ await this.scope.model.student.builder().where({
 
 如果使用`builderSelect()`方法操作数据库，系统会自动添加`实例Id`
 
-``` typescript
+```typescript
 await this.scope.model.student.builderSelect().where({
   name: 'Tom',
 });
@@ -225,13 +225,7 @@ await this.scope.model.student.builderSelect().where({
 
 如果使用`原生Sql`操作数据库，就需要自行添加`实例Id`
 
-``` typescript
-await this.scope.model.student.query(
-  'select * from demoStudent where iid=?',
-  [this.ctx.instance.id],
-);
-await this.scope.model.student.queryOne(
-  'select * from demoStudent where iid=? and id=?',
-  [this.ctx.instance.id, 1],
-);
+```typescript
+await this.scope.model.student.query('select * from demoStudent where iid=?', [this.ctx.instance.id]);
+await this.scope.model.student.queryOne('select * from demoStudent where iid=? and id=?', [this.ctx.instance.id, 1]);
 ```

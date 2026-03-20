@@ -6,7 +6,7 @@ For example, create a global pipe `number` in the module demo-student to convert
 
 ### 1. Cli command
 
-``` bash
+```bash
 $ vona :create:bean pipe number --module=demo-student --boilerplate=global
 ```
 
@@ -18,7 +18,7 @@ Context Menu - [Module Path]: `Vona Aspect/Pipe Global`
 
 ## Pipe Definition
 
-``` typescript
+```typescript
 export type TypePipeNumberData = unknown;
 
 export type TypePipeNumberResult = number;
@@ -53,7 +53,7 @@ For example, define the `errorCode` parameter for the number pipe. If the incomi
 
 ### 1. Defining parameter types
 
-``` diff
+```diff
 export interface IPipeOptionsNumber extends IDecoratorPipeOptionsGlobal {
 + errorCode: number;
 }
@@ -61,7 +61,7 @@ export interface IPipeOptionsNumber extends IDecoratorPipeOptionsGlobal {
 
 ### 2. Providing default values ​​for parameters
 
-``` diff
+```diff
 @Pipe<IPipeOptionsNumber>({
 + errorCode: 400,
 })
@@ -69,7 +69,7 @@ export interface IPipeOptionsNumber extends IDecoratorPipeOptionsGlobal {
 
 ### 3. Using Parameters
 
-``` diff
+```diff
 export interface IPipeOptionsNumber extends IDecoratorPipeOptionsGlobal {
   errorCode: number;
 }
@@ -91,7 +91,7 @@ export class PipeNumber extends BeanBase implements IPipeTransform<TypePipeNumbe
 
 You can specify global pipe parameters for a specific API
 
-``` diff
+```diff
 class ControllerStudent {
   @Web.get(':id')
 + @Aspect.pipeGlobal('demo-student:number', { errorCode: 500 })
@@ -107,7 +107,7 @@ Pipe parameters can be configured in App Config
 
 `src/backend/config/config/config.ts`
 
-``` typescript
+```typescript
 // onions
 config.onions = {
   pipe: {
@@ -130,7 +130,7 @@ Since global pipes ard loaded and enabled by default, VonaJS provides two parame
 
 For example, the system has a built-in global pipe `a-xxx:yyy`, and we hope that the loading order is as follows: `a-xxx:yyy` > `Current`
 
-``` diff
+```diff
 @Pipe({
 + dependencies: 'a-xxx:yyy',
   errorCode: 400,
@@ -142,7 +142,7 @@ class PipeNumber {}
 
 The order of `dependents` is just the opposite of `dependencies`. We hope that the loading order is as follows: `Current` > `a-xxx:yyy`
 
-``` diff
+```diff
 @Pipe({
 + dependents: 'a-xxx:yyy',
   errorCode: 400,
@@ -156,9 +156,9 @@ You can control `enable/disable` of global pipe for certain APIs
 
 ### 1. Enable
 
-* Disable for an API
+- Disable for an API
 
-``` diff
+```diff
 class ControllerStudent {
   @Web.get(':id')
 + @Aspect.pipeGlobal('demo-student:number', { enable: false })
@@ -166,11 +166,11 @@ class ControllerStudent {
 }
 ```
 
-* Disable for all APIs
+- Disable for all APIs
 
 `src/backend/config/config/config.ts`
 
-``` diff
+```diff
 // onions
 config.onions = {
   pipe: {
@@ -185,14 +185,14 @@ config.onions = {
 
 Allows global pipe to take effect in a specified operating environment
 
-|Name|Type|Description|
-|--|--|--|
-|flavor|string\|string[]|See: [Runtime Environments and Flavors](../../env-config/mode-flavor/introduction.md)|
-|mode|string\|string[]|See: [Runtime Environments and Flavors](../../env-config/mode-flavor/introduction.md)|
+| Name   | Type             | Description                                                                           |
+| ------ | ---------------- | ------------------------------------------------------------------------------------- |
+| flavor | string\|string[] | See: [Runtime Environments and Flavors](../../env-config/mode-flavor/introduction.md) |
+| mode   | string\|string[] | See: [Runtime Environments and Flavors](../../env-config/mode-flavor/introduction.md) |
 
-* Example
+- Example
 
-``` diff
+```diff
 @Pipe({
 + meta: {
 +   flavor: 'normal',
@@ -203,19 +203,19 @@ class PipeNumber {}
 ```
 
 ### 3. match/ignore
-    
-You can enable/disable global pipe for some specific APIs    
 
-|Name|Type|Description|
-|--|--|--|
-|match|string\|regexp\|(string\|regexp)[]|For which APIs to enable|
-|ignore|string\|regexp\|(string\|regexp)[]|For which APIs to disable|
+You can enable/disable global pipe for some specific APIs
+
+| Name   | Type                               | Description               |
+| ------ | ---------------------------------- | ------------------------- |
+| match  | string\|regexp\|(string\|regexp)[] | For which APIs to enable  |
+| ignore | string\|regexp\|(string\|regexp)[] | For which APIs to disable |
 
 ## Inspect
 
 You can directly inspect the currently effective global pipe list in the Controller action
 
-``` diff
+```diff
 class ControllerStudent {
   @Web.get(':id')
   async findOne(id: number)() {

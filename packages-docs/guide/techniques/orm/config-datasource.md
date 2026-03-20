@@ -6,7 +6,7 @@ We can configure the Datasources in App Config:
 
 `src/backend/config/config/config.ts`
 
-``` typescript
+```typescript
 // orm
 config.database = {
   base: {},
@@ -15,11 +15,11 @@ config.database = {
 };
 ```
 
-|Name|Description|
-|--|--|
-|base|Base configuration, provides common base configuration for all datasources|
-|defaultClient|Default datasource, defaults to `pg`|
-|clients|Configure multiple datasources|
+| Name          | Description                                                                |
+| ------------- | -------------------------------------------------------------------------- |
+| base          | Base configuration, provides common base configuration for all datasources |
+| defaultClient | Default datasource, defaults to `pg`                                       |
+| clients       | Configure multiple datasources                                             |
 
 ## Built-in Datasources
 
@@ -27,7 +27,7 @@ For out-of-the-box usage, three datasources are built-in: `sqlite3/pg/mysql`. Th
 
 `src/backend/config/config/config.ts`
 
-``` typescript
+```typescript
 // database
 config.database = {
   clients: {
@@ -61,12 +61,12 @@ config.database = {
 };
 ```
 
-* Vona ORM uses [Knex](https://knexjs.org/) under the hood, so the datasource configuration inherits directly from `Knex.Config`
+- Vona ORM uses [Knex](https://knexjs.org/) under the hood, so the datasource configuration inherits directly from `Knex.Config`
   - See: [Configuration Options](https://knexjs.org/guide/#configuration-options)
 
-* `clients.sqlite3.client`: Uses the dialect `better-sqlite3`
-* `clients.pg.client`: Uses the dialect `pg`
-* `clients.mysql.client`: Uses the dialect `mysql2`
+- `clients.sqlite3.client`: Uses the dialect `better-sqlite3`
+- `clients.pg.client`: Uses the dialect `pg`
+- `clients.mysql.client`: Uses the dialect `mysql2`
 
 ## env
 
@@ -74,7 +74,7 @@ For ease of configuration, built-in datasources obtain configuration parameters 
 
 `env/.env`
 
-``` typescript
+```typescript
 # database
 
 DATABASE_DEFAULT_CLIENT = 'sqlite3' # sqlite3/pg/mysql
@@ -82,13 +82,13 @@ DATABASE_DEFAULT_CLIENT = 'sqlite3' # sqlite3/pg/mysql
 DATABASE_CLIENT_PG_HOST = 127.0.0.1
 DATABASE_CLIENT_PG_PORT = 5432
 DATABASE_CLIENT_PG_USER = postgres
-DATABASE_CLIENT_PG_PASSWORD = 
+DATABASE_CLIENT_PG_PASSWORD =
 DATABASE_CLIENT_PG_DATABASE = postgres
 
 DATABASE_CLIENT_MYSQL_HOST = 127.0.0.1
 DATABASE_CLIENT_MYSQL_PORT = 3306
 DATABASE_CLIENT_MYSQL_USER = root
-DATABASE_CLIENT_MYSQL_PASSWORD = 
+DATABASE_CLIENT_MYSQL_PASSWORD =
 DATABASE_CLIENT_MYSQL_DATABASE = mysql
 ```
 
@@ -104,7 +104,7 @@ In the VSCode editor, enter the code snippet `recorddatabaseclient` to automatic
 
 `src/backend/config/config/config.ts`
 
-``` typescript
+```typescript
 declare module 'vona-module-a-orm' {
   export interface IDatabaseClientRecord {
     : never;
@@ -114,7 +114,7 @@ declare module 'vona-module-a-orm' {
 
 Adjust the code and add `pgOrder`
 
-``` diff
+```diff
 declare module 'vona-module-a-orm' {
   export interface IDatabaseClientRecord {
 +   pgOrder: never;
@@ -126,7 +126,7 @@ declare module 'vona-module-a-orm' {
 
 `src/backend/config/config/config.ts`
 
-``` typescript
+```typescript
 // database
 config.database = {
   clients: {
@@ -148,7 +148,7 @@ config.database = {
 
 ### 1. Obtaining a Specified Datasource
 
-``` typescript
+```typescript
 const pg = app.bean.database.getDb('pg');
 const mysql = app.bean.database.getDb('mysql');
 const pgOrder = app.bean.database.getDb('pgOrder');
@@ -158,7 +158,7 @@ const pgOrder = app.bean.database.getDb('pgOrder');
 
 The default datasource is determined by the `defaultClient` configuration option
 
-``` typescript
+```typescript
 const dbDefault = app.bean.database.getDb('default');
 ```
 
@@ -166,7 +166,7 @@ const dbDefault = app.bean.database.getDb('default');
 
 The system creates different Knex instances for different datasources. Use these Knex instances to operate the database
 
-``` typescript
+```typescript
 const pg = app.bean.database.getDb('pg');
 const items = pg.connection.select('*').from('tableName');
 
@@ -178,7 +178,7 @@ const items = dbDefault.connection.select('*').from('tableName');
 
 In real-world code, we might use any datasource. We can use the following code to get the current datasource in the context:
 
-``` typescript
+```typescript
 const current = app.bean.database.current;
 const items = current.connection.select('*').from('tableName');
 ```
@@ -189,7 +189,7 @@ const items = current.connection.select('*').from('tableName');
 
 `src/backend/config/config/config.ts`
 
-``` typescript
+```typescript
 // database
 config.database = {
   defaultClient: (ctx?: VonaContext) => {

@@ -4,65 +4,60 @@ The module `a-auth` provides a general authentication system, using `Auth Provid
 
 ## Features
 
-* `Auth Provider`: Supports various authentication methods, such as username/password authentication, OAuth authentication (GitHub), etc.
+- `Auth Provider`: Supports various authentication methods, such as username/password authentication, OAuth authentication (GitHub), etc.
 
-* `Clients`: A single provider can provide multiple credentials
+- `Clients`: A single provider can provide multiple credentials
 
-* `Associate Authentication`: Allows associating multiple authentication methods with the same user
+- `Associate Authentication`: Allows associating multiple authentication methods with the same user
 
-* `Migrate Authentication`: Allows migrating authentication methods from one user to another
+- `Migrate Authentication`: Allows migrating authentication methods from one user to another
 
 ## bean.auth
 
 The module `a-auth` provides a global Bean `bean.auth`, allowing the use of authentication capabilities provided by all providers in a unified way
 
-* Example: `Username/Password` Authentication
+- Example: `Username/Password` Authentication
 
-``` typescript
+```typescript
 class ControllerStudent {
   @Web.get('login')
   @Passport.public()
   async login() {
     const jwt = await this.bean.auth.authenticate('auth-simple:simple', {
-      clientOptions: { username: 'admin', password:'123456' },
+      clientOptions: { username: 'admin', password: '123456' },
     });
     return jwt;
   }
 }
 ```
 
-* Simplified method:
+- Simplified method:
 
-``` typescript
+```typescript
 class ControllerStudent {
   @Web.get('login')
   @Passport.public()
   async login() {
-    const jwt = await this.bean.authSimple.authenticate(
-      { username: 'admin', password:'123456' }
-    );
+    const jwt = await this.bean.authSimple.authenticate({ username: 'admin', password: '123456' });
     return jwt;
   }
 }
 ```
 
-* Example: `GitHub` Authentication
+- Example: `GitHub` Authentication
 
 `GitHub` authentication is a separate module and needs to be installed in the project:
 
-``` bash
+```bash
 $ pnpm add vona-module-auth-github -w
 ```
 
-``` typescript
+```typescript
 class ControllerStudent {
   @Web.get('login')
   @Passport.public()
   async login() {
-    await this.bean.auth.authenticate(
-      'auth-github:github',
-      { state: { redirect: '/' } },
-    );
+    await this.bean.auth.authenticate('auth-github:github', { state: { redirect: '/' } });
   }
 }
 ```
@@ -73,7 +68,7 @@ Using `GitHub` as an example, set the authentication credentials in the App Conf
 
 `src/backend/config/config/config.ts`
 
-``` typescript
+```typescript
 // onions
 config.onions = {
   authProvider: {
@@ -93,11 +88,11 @@ config.onions = {
 
 ### How to Add More Client Credentials
 
-* First, add Client type definitions using the interface merging mechanism
+- First, add Client type definitions using the interface merging mechanism
 
 In VSCode In the editor, enter the code snippet `recordauthclient` to automatically generate the code skeleton:
 
-``` typescript
+```typescript
 declare module 'vona-module-x-x' {
   export interface IAuthProvider_xxx_ClientRecord {
     : never;
@@ -107,7 +102,7 @@ declare module 'vona-module-x-x' {
 
 Adjust the code:
 
-``` typescript
+```typescript
 declare module 'vona-module-auth-github' {
   export interface IAuthProviderGithubClientRecord {
     another: never;
@@ -115,9 +110,9 @@ declare module 'vona-module-auth-github' {
 }
 ```
 
-* Then set the authentication credentials in App Config
+- Then set the authentication credentials in App Config
 
-``` diff
+```diff
 // onions
 config.onions = {
   authProvider: {
@@ -149,7 +144,7 @@ VonaJS provides a unified Callback URL value and outputs it directly to the cons
 
 ### Method Definition
 
-``` typescript
+```typescript
 async authenticate<T extends keyof IAuthProviderRecord>(
   authProviderName: T,
   options?: IAuthenticateOptions<IAuthProviderRecord[T]>,
@@ -158,40 +153,40 @@ async authenticate<T extends keyof IAuthProviderRecord>(
 
 ### Return Value
 
-* For authentication methods that do not require redirection, a jwt token is returned upon successful authentication
+- For authentication methods that do not require redirection, a jwt token is returned upon successful authentication
 
-* For authentication methods requiring a redirect, the system will redirect directly upon successful authentication
+- For authentication methods requiring a redirect, the system will redirect directly upon successful authentication
 
 ### Parameters
 
-|Name|Description|
-|--|--|
-|authProviderName|Provider name|
-|options.clientName|Client name, defaults to `default`|
-|options.clientOptions|Client options, different providers have different options definitions|
-|options.state|Status value of this authentication|
+| Name                  | Description                                                            |
+| --------------------- | ---------------------------------------------------------------------- |
+| authProviderName      | Provider name                                                          |
+| options.clientName    | Client name, defaults to `default`                                     |
+| options.clientOptions | Client options, different providers have different options definitions |
+| options.state         | Status value of this authentication                                    |
 
-* options.clientOptions
+- options.clientOptions
 
 For OAuth authentication, the following basic fields are available:
 
-|Name|Description|
-|--|--|
-|clientID|Credential ID|
-|clientSecret|Credential Secret|
-|scope|Authorization scope|
-|confirmed|Whether the user is in a confirmed state|
+| Name         | Description                              |
+| ------------ | ---------------------------------------- |
+| clientID     | Credential ID                            |
+| clientSecret | Credential Secret                        |
+| scope        | Authorization scope                      |
+| confirmed    | Whether the user is in a confirmed state |
 
 ::: tip
 `confirmed`: Generally, for new users, if OAuth authentication returns a valid email, `confirmed=true` can be assumed, thus eliminating the need for subsequent `user activation` operation. The `confirmed` judgment rules can be flexibly customized according to business needs
 :::
 
-* options.state
+- options.state
 
-|Name|Type|Description|
-|--|--|--|
-|intention|'register' \| 'login' \| 'associate' \| 'migrate'|The intent of this authentication, defaults to `login`|
-|redirect|string \| undefined|The URL to redirect to after successful authentication|
+| Name      | Type                                              | Description                                            |
+| --------- | ------------------------------------------------- | ------------------------------------------------------ |
+| intention | 'register' \| 'login' \| 'associate' \| 'migrate' | The intent of this authentication, defaults to `login` |
+| redirect  | string \| undefined                               | The URL to redirect to after successful authentication |
 
 ::: tip
 `redirect`: After successful OAuth authentication, a `code` value will be returned. This value will be appended to the URL Query, in the form of: `/?x-vona-oauth-code=xxxxxx`
@@ -205,12 +200,12 @@ The `home-user` module provides a set of `out-of-the-box` Passport API. The API 
 
 `src/suite/a-home/modules/home-user/src/controller/passport.ts`
 
-|Name|Description|
-|--|--|
-|current|Get the current Passport|
-|logout|Logout|
-|register|Register new user|
-|login|Login|
-|loginOauth|OAuth authentication|
-|associate|Associate authentication|
-|migrate|Migrate authentication|
+| Name       | Description              |
+| ---------- | ------------------------ |
+| current    | Get the current Passport |
+| logout     | Logout                   |
+| register   | Register new user        |
+| login      | Login                    |
+| loginOauth | OAuth authentication     |
+| associate  | Associate authentication |
+| migrate    | Migrate authentication   |

@@ -12,7 +12,7 @@ For example, create `meta.printTip` in the module demo-student. Output `=== Hell
 
 ### 1. Cli Command
 
-``` bash
+```bash
 $ vona :create:bean meta printTip --module=demo-student
 ```
 
@@ -24,7 +24,7 @@ Context menu - [Module Path]: `Vona Meta/Print Tip`
 
 ## meta.printTip Definition
 
-``` typescript
+```typescript
 @Meta()
 export class MetaPrintTip extends BeanBase implements IMetaPrintTipExecute {
   async execute(): Promise<TypeMetaPrintTipResult> {

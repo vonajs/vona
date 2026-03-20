@@ -1,6 +1,6 @@
 # JWT
 
-VonaJS 基于[jsonwebtoken](https://github.com/auth0/node-jsonwebtoken)提供了强大而灵活的 JWT 
+VonaJS 基于[jsonwebtoken](https://github.com/auth0/node-jsonwebtoken)提供了强大而灵活的 JWT
 
 ## App Config
 
@@ -8,7 +8,7 @@ VonaJS 基于[jsonwebtoken](https://github.com/auth0/node-jsonwebtoken)提供了
 
 `src/backend/config/config/config.ts`
 
-``` typescript
+```typescript
 // modules
 config.modules = {
   'a-jwt': {
@@ -32,11 +32,11 @@ config.modules = {
 };
 ```
 
-|名称|说明|
-|--|--|
-|tempAuthToken|临时accessToken的配置|
-|base|基础配置，为所有Clients提供通用的基础配置|
-|clients|配置多个Clients。系统提供了内置的`access/refresh` Clients，用于生成`accessToken/refreshToken`|
+| 名称          | 说明                                                                                          |
+| ------------- | --------------------------------------------------------------------------------------------- |
+| tempAuthToken | 临时accessToken的配置                                                                         |
+| base          | 基础配置，为所有Clients提供通用的基础配置                                                     |
+| clients       | 配置多个Clients。系统提供了内置的`access/refresh` Clients，用于生成`accessToken/refreshToken` |
 
 - `signOptions`: 参见: [jsonwebtoken](https://github.com/auth0/node-jsonwebtoken)
 
@@ -50,7 +50,7 @@ config.modules = {
 
 在 VSCode 编辑器中，输入代码片段`recordjwtclient`，自动生成代码骨架:
 
-``` typescript
+```typescript
 declare module 'vona-module-a-jwt' {
   export interface IJwtClientRecord {
     : never;
@@ -60,7 +60,7 @@ declare module 'vona-module-a-jwt' {
 
 调整代码，然后添加`test`
 
-``` diff
+```diff
 declare module 'vona-module-a-jwt' {
   export interface IJwtClientRecord {
 +   test: never;
@@ -72,7 +72,7 @@ declare module 'vona-module-a-jwt' {
 
 `src/backend/config/config/config.ts`
 
-``` typescript
+```typescript
 // modules
 config.modules = {
   'a-jwt': {
@@ -94,7 +94,7 @@ config.modules = {
 
 `env/.env`
 
-``` typescript
+```typescript
 # server
 
 SERVER_KEYS = vona__1596889047267_3245
@@ -102,16 +102,16 @@ SERVER_KEYS = vona__1596889047267_3245
 
 `src/backend/config/config/config.ts`
 
-``` typescript
+```typescript
 // server
 config.server = {
   keys: (env.SERVER_KEYS || '').split(','),
-};  
+};
 ```
 
 ## 获取JWT Client实例
 
-``` typescript
+```typescript
 class ControllerStudent {
   @Web.get('test')
   async test() {
@@ -119,33 +119,33 @@ class ControllerStudent {
     const jwtRefresh = this.bean.jwt.get('refresh');
     const jwtTest = this.bean.jwt.get('test');
   }
-}  
+}
 ```
 
 ## 生成accessToken
 
-``` typescript
+```typescript
 class ControllerStudent {
   @Web.get('test')
   async test() {
     const jwtAccess = this.bean.jwt.get('access');
     const accessToken = await jwtAccess.sign({ userId: '1' });
   }
-}  
+}
 ```
 
 ## 生成JWT Tokens
 
 可以同时生成`accessToken/refreshToken`
 
-``` typescript
+```typescript
 class ControllerStudent {
   @Web.get('test')
   async test() {
     const jwtTokens = await this.bean.jwt.create({ userId: '1' });
     console.log(jwtTokens);
   }
-}  
+}
 ```
 
 如下图所示：
@@ -158,32 +158,32 @@ class ControllerStudent {
 
 生成临时 accessToken 有两种方式:
 
-* `方式1`
+- `方式1`
 
-``` typescript
+```typescript
 class ControllerStudent {
   @Web.get('test')
   async test() {
     const jwtAccess = this.bean.jwt.get('access');
     const accessToken = await jwtAccess.sign({ userId: '1' }, { temp: true });
   }
-}  
+}
 ```
 
-* `方式2`
+- `方式2`
 
-``` typescript
+```typescript
 class ControllerStudent {
   @Web.get('test')
   async test() {
     const accessToken = await this.bean.jwt.createTempAuthToken({ userId: '1' });
   }
-}  
+}
 ```
 
 ## JWT校验
 
-``` diff
+```diff
 class ControllerStudent {
   @Web.get('test')
   async test() {
@@ -192,5 +192,5 @@ class ControllerStudent {
 +   const payload = await jwtAccess.verify(accessToken);
     assert.deepEqual(payload, { userId: '1' });
   }
-}  
+}
 ```

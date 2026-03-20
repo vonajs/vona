@@ -11,7 +11,7 @@ Vona 通过`@Use`装饰器函数注入 Bean 实例
 
 在模块 demo-student 注入本模块提供的 ServiceStudent，代码如下：
 
-``` typescript
+```typescript
 import { ServiceStudent } from '../service/student.ts';
 
 export class ControllerStudent {
@@ -24,13 +24,13 @@ export class ControllerStudent {
 
 在其他模块注入模块 demo-student 提供的 ServiceStudent，代码如下：
 
-``` typescript
+```typescript
 import type { ServiceStudent } from 'vona-module-demo-student';
 
 export class ControllerOther {
   @Use('demo-student.service.student')
   student: ServiceStudent;
-}  
+}
 ```
 
 由于导入的 ServiceStudent 是 type，因此需要指定 Service 的 Bean 标识

@@ -4,19 +4,19 @@
 
 ## Parameters
 
-|Name|Description|
-|--|--|
-|columns|List of fields to be queried|
-|include|Static relations|
-|with|Dynamic relations|
+| Name    | Description                  |
+| ------- | ---------------------------- |
+| columns | List of fields to be queried |
+| include | Static relations             |
+| with    | Dynamic relations            |
 
 ## 1. General Usage
 
-``` typescript
+```typescript
 $Dto.get(() => ModelOrder);
 ```
 
-``` typescript
+```typescript
 $Dto.get(() => ModelOrder, { columns: ['id', 'orderNo', 'remark'] });
 ```
 
@@ -28,7 +28,7 @@ Take Order/Product as an example to demonstrate the `1:n` relation
 
 First define a `1:n` relation between Model `Order` and Model `Product`
 
-``` typescript
+```typescript
 @Model({
   entity: EntityOrder,
   relations: {
@@ -42,7 +42,7 @@ class ModelOrder {}
 
 ### Dynamically inferring and generating DTO
 
-``` typescript
+```typescript
 $Dto.get(() => ModelOrder, {
   include: {
     products: true,
@@ -52,7 +52,7 @@ $Dto.get(() => ModelOrder, {
 
 ## 3. Dynamic Relation
 
-``` typescript
+```typescript
 $Dto.get(() => ModelOrder, {
   with: {
     products: $relationDynamic.hasMany(() => ModelProduct, 'orderId', {
@@ -70,7 +70,7 @@ Take Order/Product as an example to demonstrate the `1:n` relation
 
 First define a `1:n` relation between Model `OrderStats` and Model `Product`
 
-``` typescript
+```typescript
 @Model({
   entity: EntityOrder,
   relations: {
@@ -87,7 +87,7 @@ export class ModelOrderStats {}
 
 ### Dynamically inferring and generating DTO
 
-``` typescript
+```typescript
 $Dto.get(() => ModelOrderStats, {
   include: {
     productStats: true,
@@ -97,7 +97,7 @@ $Dto.get(() => ModelOrderStats, {
 
 ## 5. Aggregation based on dynamic relation
 
-``` typescript
+```typescript
 $Dto.get(() => ModelOrder, {
   with: {
     productStats: $relationDynamic.hasMany(() => ModelProduct, 'orderId', {
@@ -118,7 +118,7 @@ Take Order/Product as an example to demonstrate the `1:n` relation
 
 First define a `1:n` relation between Model `OrderStats` and Model `Product`
 
-``` typescript
+```typescript
 @Model({
   entity: EntityOrder,
   relations: {
@@ -136,7 +136,7 @@ export class ModelOrderStats {}
 
 ### Dynamically inferring and generating DTO
 
-``` typescript
+```typescript
 $Dto.get(() => ModelOrderStats, {
   include: {
     productsGroups: true,
@@ -146,7 +146,7 @@ $Dto.get(() => ModelOrderStats, {
 
 ## 7. Grouping based on dynamic relation
 
-``` typescript
+```typescript
 $Dto.get(() => ModelOrder, {
   with: {
     productsGroups: $relationDynamic.hasMany(() => ModelProduct, 'orderId', {

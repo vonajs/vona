@@ -11,7 +11,7 @@
 
 ### 1. Cli命令
 
-``` bash
+```bash
 $ vona :create:bean middlewareSystem logger --module=demo-student
 ```
 
@@ -23,7 +23,7 @@ $ vona :create:bean middlewareSystem logger --module=demo-student
 
 ## 中间件定义
 
-``` typescript
+```typescript
 export interface IMiddlewareOptionsLogger extends IDecoratorMiddlewareOptions {}
 
 @Middleware<IMiddlewareOptionsLogger>()
@@ -53,7 +53,7 @@ export class MiddlewareLogger extends BeanBase implements IMiddlewareExecute {
 
 ### 1. 定义参数类型
 
-``` diff
+```diff
 export interface IMiddlewareSystemOptionsLogger extends IDecoratorMiddlewareSystemOptions {
 + prefix: string;
 }
@@ -61,7 +61,7 @@ export interface IMiddlewareSystemOptionsLogger extends IDecoratorMiddlewareSyst
 
 ### 2. 提供参数缺省值
 
-``` diff
+```diff
 @MiddlewareSystem<IMiddlewareSystemOptionsLogger>({
 + prefix: 'time',
 })
@@ -69,7 +69,7 @@ export interface IMiddlewareSystemOptionsLogger extends IDecoratorMiddlewareSyst
 
 ### 3. 使用参数
 
-``` diff
+```diff
 export interface IMiddlewareSystemOptionsLogger extends IDecoratorMiddlewareSystemOptions {
   prefix: string;
 }
@@ -82,7 +82,7 @@ class MiddlewareSystemLogger {
     const timeBegin = Date.now();
     const res = await next();
     const timeEnd = Date.now();
--   console.log('time: ', timeEnd - timeBegin);    
+-   console.log('time: ', timeEnd - timeBegin);
 +   console.log(`${options.prefix}: `, timeEnd - timeBegin);
     return res;
   }
@@ -95,7 +95,7 @@ class MiddlewareSystemLogger {
 
 `src/backend/config/config/config.ts`
 
-``` typescript
+```typescript
 // onions
 config.onions = {
   middlewareSystem: {
@@ -118,7 +118,7 @@ config.onions = {
 
 比如，系统有一个内置系统中间件`a-core:notfound`，希望加载顺序如下：`a-core:notfound` > `Current`
 
-``` diff
+```diff
 @MiddlewareSystem({
 + dependencies: 'a-core:notfound',
   prefix: 'time',
@@ -130,7 +130,7 @@ class MiddlewareSystemLogger {}
 
 `dependents`的顺序刚好与`dependencies`相反，希望加载顺序如下：`Current` > `a-core:notfound`
 
-``` diff
+```diff
 @MiddlewareSystem({
 + dependents: 'a-core:notfound',
   prefix: 'time',
@@ -144,11 +144,11 @@ class MiddlewareSystemLogger {}
 
 ### 1. Enable
 
-* 针对所有 API 禁用
+- 针对所有 API 禁用
 
 `src/backend/config/config/config.ts`
 
-``` diff
+```diff
 // onions
 config.onions = {
   middlewareSystem: {
@@ -163,14 +163,14 @@ config.onions = {
 
 可以让系统中间件在指定的运行环境生效
 
-|名称|类型|说明|
-|--|--|--|
-|flavor|string\|string[]|参见: [运行环境与Flavor](../../env-config/mode-flavor/introduction.md)|
-|mode|string\|string[]|参见: [运行环境与Flavor](../../env-config/mode-flavor/introduction.md)|
+| 名称   | 类型             | 说明                                                                   |
+| ------ | ---------------- | ---------------------------------------------------------------------- |
+| flavor | string\|string[] | 参见: [运行环境与Flavor](../../env-config/mode-flavor/introduction.md) |
+| mode   | string\|string[] | 参见: [运行环境与Flavor](../../env-config/mode-flavor/introduction.md) |
 
-* 举例
+- 举例
 
-``` diff
+```diff
 @MiddlewareSystem({
 + meta: {
 +   flavor: 'normal',
@@ -181,13 +181,13 @@ class MiddlewareSystemLogger {}
 ```
 
 ### 3. match/ignore
-    
+
 可以针对指定的 API 启用/禁用系统中间件
 
-|名称|类型|说明|
-|--|--|--|
-|match|string\|regexp\|(string\|regexp)[]|针对哪些API启用|
-|ignore|string\|regexp\|(string\|regexp)[]|针对哪些API禁用|
+| 名称   | 类型                               | 说明            |
+| ------ | ---------------------------------- | --------------- |
+| match  | string\|regexp\|(string\|regexp)[] | 针对哪些API启用 |
+| ignore | string\|regexp\|(string\|regexp)[] | 针对哪些API禁用 |
 
 系统中间件与全局中间件都支持`match`和`ignore`，但是传入的 API Path 格式不同，以 ControllerStudent 的 findMany API 为例：
 
@@ -200,7 +200,7 @@ class MiddlewareSystemLogger {}
 
 可以直接在 Controller action 中输出当前生效的系统中间件清单
 
-``` diff
+```diff
 class ControllerStudent {
   @Web.get()
   async findMany() {

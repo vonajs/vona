@@ -13,10 +13,10 @@ FullName: vona-suite-{providerId}-{suiteName}
 ShortName: {providerId}-{suiteName}
 ```
 
-|Name|Description|
-|--|--|
-|providerId|Provider ID|
-|suiteName|Suite Name|
+| Name       | Description |
+| ---------- | ----------- |
+| providerId | Provider ID |
+| suiteName  | Suite Name  |
 
 ## Directory Structure
 

@@ -8,7 +8,7 @@
 
 ### 1. Cli命令
 
-``` bash
+```bash
 $ vona :create:bean aopMethod log --module=demo-student
 ```
 
@@ -20,7 +20,7 @@ $ vona :create:bean aopMethod log --module=demo-student
 
 ## AOP Method定义
 
-``` typescript
+```typescript
 export interface IAopMethodOptionsLog extends IDecoratorAopMethodOptions {}
 
 @AopMethod<IAopMethodOptionsLog>()
@@ -44,7 +44,7 @@ class AopMethodLog {
 
 ### 1. 标注Controller方法
 
-``` diff
+```diff
 import { Aspect } from 'vona-module-a-aspect';
 
 @Controller()
@@ -60,7 +60,7 @@ class ControllerStudent {
 
 ### 2. 标注Service方法
 
-``` diff
+```diff
 import { Aspect } from 'vona-module-a-aspect';
 
 @Service()
@@ -77,7 +77,7 @@ class ServiceStudent {
 
 ### 1. 定义参数类型
 
-``` diff
+```diff
 export interface IAopMethodOptionsLog extends IDecoratorAopMethodOptions {
 + prefix: string;
 }
@@ -85,7 +85,7 @@ export interface IAopMethodOptionsLog extends IDecoratorAopMethodOptions {
 
 ### 2. 提供参数缺省值
 
-``` diff
+```diff
 @AopMethod<IAopMethodOptionsLog>({
 + prefix: 'time',
 })
@@ -93,7 +93,7 @@ export interface IAopMethodOptionsLog extends IDecoratorAopMethodOptions {
 
 ### 3. 使用参数
 
-``` diff
+```diff
 export interface IAopMethodOptionsLog extends IDecoratorAopMethodOptions {
   prefix: string;
 }
@@ -117,7 +117,7 @@ class AopMethodLog {
 
 可以针对某个 Class Method 单独指定 AOP Method 的参数
 
-``` diff
+```diff
 class ControllerStudent {
   @Web.get()
 + @Aspect.aopMethod('demo-student:log', { prefix: 'elapsed' })
@@ -133,7 +133,7 @@ class ControllerStudent {
 
 `src/backend/config/config/config.ts`
 
-``` typescript
+```typescript
 // onions
 config.onions = {
   aopMethod: {
@@ -154,9 +154,9 @@ config.onions = {
 
 ### 1. Enable
 
-* 针对某个 Class Method 禁用
+- 针对某个 Class Method 禁用
 
-``` diff
+```diff
 class ControllerStudent {
   @Web.get()
 + @Aspect.aopMethod('demo-student:log', { enable: false })
@@ -164,11 +164,11 @@ class ControllerStudent {
 }
 ```
 
-* 针对所有 Class Methods 禁用
+- 针对所有 Class Methods 禁用
 
 `src/backend/config/config/config.ts`
 
-``` diff
+```diff
 // onions
 config.onions = {
   aopMethod: {
@@ -183,14 +183,14 @@ config.onions = {
 
 可以让 AOP Method 在指定的运行环境生效
 
-|名称|类型|说明|
-|--|--|--|
-|flavor|string\|string[]|参见: [运行环境与Flavor](../../env-config/mode-flavor/introduction.md)|
-|mode|string\|string[]|参见: [运行环境与Flavor](../../env-config/mode-flavor/introduction.md)|
+| 名称   | 类型             | 说明                                                                   |
+| ------ | ---------------- | ---------------------------------------------------------------------- |
+| flavor | string\|string[] | 参见: [运行环境与Flavor](../../env-config/mode-flavor/introduction.md) |
+| mode   | string\|string[] | 参见: [运行环境与Flavor](../../env-config/mode-flavor/introduction.md) |
 
-* 举例
+- 举例
 
-``` diff
+```diff
 @AopMethod({
 + meta: {
 +   flavor: 'normal',

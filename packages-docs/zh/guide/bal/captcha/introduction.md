@@ -4,10 +4,10 @@
 
 ## 特性
 
-* `Captcha Provider`：使用`Captcha Provider`支持各种验证码方式，如：文字图形验证码、短信验证码，等等
-* `Captcha Scene`：使用`Captcha Scene`支持不同场景的验证码使用策略。比如，在某个场景下，可以在多个 Captcha Provider 中进行轮替，或者根据用户状态使用不同难度的 Captcha Provider，等等
-* `立即验证`：前端可以对用户输入的验证码进行立即验证。`立即验证`之后在提交表单时仍然要进行`二次验证`
-* `表单验证`：前端可以将用户输入的验证码与表单数据一起发往后端验证
+- `Captcha Provider`：使用`Captcha Provider`支持各种验证码方式，如：文字图形验证码、短信验证码，等等
+- `Captcha Scene`：使用`Captcha Scene`支持不同场景的验证码使用策略。比如，在某个场景下，可以在多个 Captcha Provider 中进行轮替，或者根据用户状态使用不同难度的 Captcha Provider，等等
+- `立即验证`：前端可以对用户输入的验证码进行立即验证。`立即验证`之后在提交表单时仍然要进行`二次验证`
+- `表单验证`：前端可以将用户输入的验证码与表单数据一起发往后端验证
 
 ## bean.captcha
 
@@ -21,14 +21,14 @@
 
 ### 1. create
 
-``` typescript
+```typescript
 // create captcha
 const captcha = await this.bean.captcha.create('captcha-simple:simple');
 ```
 
-* 返回值类型：`ICaptchaData`
+- 返回值类型：`ICaptchaData`
 
-``` typescript
+```typescript
 export interface ICaptchaData {
   id: string;
   provider: keyof ICaptchaProviderRecord;
@@ -37,16 +37,16 @@ export interface ICaptchaData {
 }
 ```
 
-|名称|说明|
-|--|--|
-|id|本次验证码数据的id标识|
-|provider|本次验证码所使用的Provider名称|
-|token|本次验证码数据的token，用于比对用户输入值。在开发环境可以通过修改系统配置，将token发往前端，用于调试|
-|payload|本次验证码的负载内容，不同的Provider有不同的payload类型|
+| 名称     | 说明                                                                                                 |
+| -------- | ---------------------------------------------------------------------------------------------------- |
+| id       | 本次验证码数据的id标识                                                                               |
+| provider | 本次验证码所使用的Provider名称                                                                       |
+| token    | 本次验证码数据的token，用于比对用户输入值。在开发环境可以通过修改系统配置，将token发往前端，用于调试 |
+| payload  | 本次验证码的负载内容，不同的Provider有不同的payload类型                                              |
 
 ### 2. refresh
 
-``` typescript
+```typescript
 // refresh captcha
 const captchaNew = await this.bean.captcha.refresh(captchaId, 'captcha-simple:simple');
 ```
@@ -55,7 +55,7 @@ const captchaNew = await this.bean.captcha.refresh(captchaId, 'captcha-simple:si
 
 ### 3. verify
 
-``` typescript
+```typescript
 // verify captcha
 const passed = await this.bean.captcha.verify(captchaId, '1234', 'captcha-simple:simple');
 ```
@@ -64,7 +64,7 @@ const passed = await this.bean.captcha.verify(captchaId, '1234', 'captcha-simple
 
 前端可以对用户输入的验证码进行`立即验证`。`立即验证`之后在提交表单时仍然要进行`二次验证`
 
-``` typescript
+```typescript
 // verifyImmediate captcha
 const tokenOrFalse = await this.bean.captcha.verifyImmediate(captchaId, '1234');
 ```
@@ -79,7 +79,7 @@ const tokenOrFalse = await this.bean.captcha.verifyImmediate(captchaId, '1234');
 
 `src/suite/a-home/modules/home-user/src/controller/passport.ts`
 
-``` diff
+```diff
 import { Core } from 'vona-module-a-core';
 
 class ControllerPassport {
@@ -98,11 +98,11 @@ class ControllerPassport {
 
 `src/suite-vendor/a-vona/modules/a-captcha/src/controller/captcha.ts`
 
-|名称|说明|
-|--|--|
-|create||
-|refresh||
-|verifyImmediate||
+| 名称            | 说明 |
+| --------------- | ---- |
+| create          |      |
+| refresh         |      |
+| verifyImmediate |      |
 
 ::: tip
 为何没有提供`verify`API？
@@ -116,7 +116,7 @@ class ControllerPassport {
 
 `src/backend/config/config/config.ts`
 
-``` typescript
+```typescript
 // modules
 config.modules = {
   'a-captcha': {
@@ -131,8 +131,8 @@ config.modules = {
 };
 ```
 
-|名称|说明|
-|--|--|
-|captcha.showToken|是否显示token。如果为true，就将token发往前端，用于调试。默认为false|
-|captchaProvider.ttl|captcha token的过期时间|
-|captchaProvider.ttlSecondary|二次token的过期时间|
+| 名称                         | 说明                                                                |
+| ---------------------------- | ------------------------------------------------------------------- |
+| captcha.showToken            | 是否显示token。如果为true，就将token发往前端，用于调试。默认为false |
+| captchaProvider.ttl          | captcha token的过期时间                                             |
+| captchaProvider.ttlSecondary | 二次token的过期时间                                                 |

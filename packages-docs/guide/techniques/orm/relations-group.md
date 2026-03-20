@@ -6,7 +6,7 @@ For example, the `User` model and the `Post` model have a `1:n` relation. When q
 
 ## Dynamic Relation
 
-``` typescript
+```typescript
 class ServiceUser {
   async relationGroup() {
     const users = await this.scope.model.user.select({
@@ -22,22 +22,22 @@ class ServiceUser {
     });
     return users;
   }
-}  
+}
 ```
 
 Vona ORM automatically infers the type of `users`
 
 ![](../../../assets/img/orm/aggr-group/aggr-group-5.png)
 
-|Name|Description|
-|--|--|
-|with.posts|Relation Name|
-|$relationDynamic.hasMany|`1:n`|
-|ModelPost|Target Model|
-|'userId'|Foreign key|
-|groups|The groups to be grouped: `string`/`string[]`|
-|columns|The group columns to be displayed. If it is empty, the columns specified by the `groups` parameter will be displayed|
-|aggrs|The functions and columns to be aggregated. Functions: `count`/`sum`/`avg`/`min`/`max`. Columns: `string`/`string[]` |
+| Name                     | Description                                                                                                          |
+| ------------------------ | -------------------------------------------------------------------------------------------------------------------- |
+| with.posts               | Relation Name                                                                                                        |
+| $relationDynamic.hasMany | `1:n`                                                                                                                |
+| ModelPost                | Target Model                                                                                                         |
+| 'userId'                 | Foreign key                                                                                                          |
+| groups                   | The groups to be grouped: `string`/`string[]`                                                                        |
+| columns                  | The group columns to be displayed. If it is empty, the columns specified by the `groups` parameter will be displayed |
+| aggrs                    | The functions and columns to be aggregated. Functions: `count`/`sum`/`avg`/`min`/`max`. Columns: `string`/`string[]` |
 
 ## Static Relation
 
@@ -45,7 +45,7 @@ Vona ORM automatically infers the type of `users`
 
 For demonstration purposes, create a new Model `UserStatsGroup` and define a static relation `posts`
 
-``` typescript
+```typescript
 @Model({
   entity: EntityUser,
   relations: {
@@ -63,7 +63,7 @@ class ModelUserStatsGroup {}
 
 ### 2. Using relations
 
-``` typescript
+```typescript
 class ServiceUser {
   async relationGroup() {
     const users = await this.scope.model.userStatsGroup.select({
@@ -86,7 +86,7 @@ You can also set the static relation to `autoload: true` to achieve automatic lo
 
 ### 1. Define the relation
 
-``` diff
+```diff
 @Model({
   entity: EntityUser,
   relations: {
@@ -105,7 +105,7 @@ class ModelUserStatsGroup {}
 
 ### 2. Using relations
 
-``` typescript
+```typescript
 class ServiceUser {
   async relationGroup() {
     const users = await this.scope.model.userStatsGroup.select();

@@ -6,7 +6,7 @@
 
 ### 1. Cli命令
 
-``` bash
+```bash
 $ vona :create:bean guard admin --module=demo-student --boilerplate=global
 ```
 
@@ -18,7 +18,7 @@ $ vona :create:bean guard admin --module=demo-student --boilerplate=global
 
 ## 守卫定义
 
-``` typescript
+```typescript
 export interface IGuardOptionsAdmin extends IDecoratorGuardOptionsGlobal {}
 
 @Guard<IGuardOptionsAdmin>()
@@ -47,7 +47,7 @@ export class GuardAdmin {
 
 ### 1. 定义参数类型
 
-``` diff
+```diff
 export interface IGuardOptionsAdmin extends IDecoratorGuardOptionsGlobal {
 + name: string;
 }
@@ -55,7 +55,7 @@ export interface IGuardOptionsAdmin extends IDecoratorGuardOptionsGlobal {
 
 ### 2. 提供参数缺省值
 
-``` diff
+```diff
 @Guard<IGuardOptionsAdmin>({
 + name: 'admin',
 })
@@ -63,7 +63,7 @@ export interface IGuardOptionsAdmin extends IDecoratorGuardOptionsGlobal {
 
 ### 3. 使用参数
 
-``` diff
+```diff
 export interface IGuardOptionsAdmin extends IDecoratorGuardOptionsGlobal {
   name: string;
 }
@@ -86,7 +86,7 @@ export class GuardAdmin extends BeanBase implements IGuardExecute {
 
 可以针对某个 API 单独指定全局守卫的参数
 
-``` diff
+```diff
 class ControllerStudent {
   @Web.get()
 + @Aspect.guardGlobal('demo-student:admin', { name: 'other-name' })
@@ -102,7 +102,7 @@ class ControllerStudent {
 
 `src/backend/config/config/config.ts`
 
-``` typescript
+```typescript
 // onions
 config.onions = {
   guard: {
@@ -125,7 +125,7 @@ config.onions = {
 
 比如，系统有一个内置全局守卫`a-user:passport`，希望加载顺序如下：`a-user:passport` > `Current`
 
-``` diff
+```diff
 @Guard({
 + dependencies: 'a-user:passport',
   name: 'admin',
@@ -137,7 +137,7 @@ class GuardAdmin {}
 
 `dependents`的顺序刚好与`dependencies`相反，希望加载顺序如下：`Current` > `a-user:passport`
 
-``` diff
+```diff
 @Guard({
 + dependents: 'a-user:passport',
   name: 'admin',
@@ -151,9 +151,9 @@ class GuardAdmin {}
 
 ### 1. Enable
 
-* 针对某个 API 禁用
+- 针对某个 API 禁用
 
-``` diff
+```diff
 class ControllerStudent {
   @Web.get()
 + @Aspect.guardGlobal('demo-student:admin', { enable: false })
@@ -161,11 +161,11 @@ class ControllerStudent {
 }
 ```
 
-* 针对所有 API 禁用
+- 针对所有 API 禁用
 
 `src/backend/config/config/config.ts`
 
-``` diff
+```diff
 // onions
 config.onions = {
   guard: {
@@ -180,14 +180,14 @@ config.onions = {
 
 可以让全局守卫在指定的运行环境生效
 
-|名称|类型|说明|
-|--|--|--|
-|flavor|string\|string[]|参见: [运行环境与Flavor](../../env-config/mode-flavor/introduction.md)|
-|mode|string\|string[]|参见: [运行环境与Flavor](../../env-config/mode-flavor/introduction.md)|
+| 名称   | 类型             | 说明                                                                   |
+| ------ | ---------------- | ---------------------------------------------------------------------- |
+| flavor | string\|string[] | 参见: [运行环境与Flavor](../../env-config/mode-flavor/introduction.md) |
+| mode   | string\|string[] | 参见: [运行环境与Flavor](../../env-config/mode-flavor/introduction.md) |
 
-* 举例
+- 举例
 
-``` diff
+```diff
 @Guard({
 + meta: {
 +   flavor: 'normal',
@@ -198,19 +198,19 @@ class GuardAdmin {}
 ```
 
 ### 3. match/ignore
-    
+
 可以针对指定的 API 启用/禁用全局守卫
 
-|名称|类型|说明|
-|--|--|--|
-|match|string\|regexp\|(string\|regexp)[]|针对哪些API启用|
-|ignore|string\|regexp\|(string\|regexp)[]|针对哪些API禁用|
+| 名称   | 类型                               | 说明            |
+| ------ | ---------------------------------- | --------------- |
+| match  | string\|regexp\|(string\|regexp)[] | 针对哪些API启用 |
+| ignore | string\|regexp\|(string\|regexp)[] | 针对哪些API禁用 |
 
 ## 查看当前生效的全局守卫清单
 
 可以直接在 Controller action 中输出当前生效的全局守卫清单
 
-``` diff
+```diff
 class ControllerStudent {
   @Web.get()
   async findMany() {

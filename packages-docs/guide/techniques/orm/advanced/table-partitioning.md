@@ -6,8 +6,8 @@ For scenarios with high concurrency and large amounts of data, table-partitionin
 
 For example, if you need to split the order table, you can design the table partitioning rules based on the actual business needs. Here, the table name is dynamically generated based on the `user ID`. For example, if the table is split into `16` tables and the `user ID` is `129`, the corresponding table names are as follows:
 
-``` typescript
-const tableName = `Order_${129 % 16}`;  // Order_1
+```typescript
+const tableName = `Order_${129 % 16}`; // Order_1
 ```
 
 ## Preparing Models
@@ -16,16 +16,16 @@ First prepare two Models: `User/Order`
 
 1. Model Order
 
-``` typescript
+```typescript
 @Model({
   entity: EntityOrder,
 })
-class ModelOrder{}
+class ModelOrder {}
 ```
 
 2. Model User
 
-``` typescript
+```typescript
 @Model({
   entity: EntityUser,
   relations: {
@@ -39,7 +39,7 @@ class ModelUser {}
 
 ### 1. Query the order list directly
 
-``` typescript
+```typescript
 class ServiceOrder {
   async selectOrdersDirectly() {
     const userId = 129;
@@ -49,26 +49,29 @@ class ServiceOrder {
       },
     });
   }
-}  
-``` 
+}
+```
 
 So far, we've used the `default` table to query order list of `userId=129`
 
 ### 2. Query the order list by relation
 
-``` typescript
+```typescript
 class ServiceOrder {
   async selectOrdersByRelation() {
     const userId = 129;
-    const userAndOrders = await this.scope.model.user.get({
-      id: userId,
-    }, {
-      include: {
-        orders: true,
+    const userAndOrders = await this.scope.model.user.get(
+      {
+        id: userId,
       },
-    });
+      {
+        include: {
+          orders: true,
+        },
+      },
+    );
   }
-}  
+}
 ```
 
 So far, we've used the `default` table to query user information of `userId=129` and the order list of this user
@@ -77,7 +80,7 @@ So far, we've used the `default` table to query user information of `userId=129`
 
 You can use table-partitioning dynamically in your code:
 
-``` diff
+```diff
 class ServiceOrder {
   async selectOrdersDirectly() {
     const userId = 129;
@@ -89,7 +92,7 @@ class ServiceOrder {
       },
     });
   }
-}  
+}
 ```
 
 - `newInstance`: Passes the table name to use and returns a new model instance
@@ -100,7 +103,7 @@ So far, we've used the `table-partitioning` to query order list
 
 The table name can be specified dynamically in the relation options:
 
-``` diff
+```diff
 class ServiceOrder {
   async selectOrdersByRelation() {
     const userId = 129;
@@ -117,7 +120,7 @@ class ServiceOrder {
       },
     });
   }
-}  
+}
 ```
 
 - `meta.table`: specifies the table name to be used by relation `orders`
@@ -130,7 +133,7 @@ You can also configure the `table-partitioning` directly in the Model options to
 
 1. Model Order
 
-``` diff
+```diff
 @Model({
   entity: EntityOrder,
 + table(_ctx: VonaContext, where: EntityOrder | undefined, defaultTable: keyof ITableRecord) {
@@ -148,7 +151,7 @@ class ModelOrder{}
 
 Now, you can query the user's order list in the usual way
 
-``` typescript
+```typescript
 class ServiceOrder {
   async selectOrdersDirectly() {
     const userId = 129;
@@ -158,22 +161,25 @@ class ServiceOrder {
       },
     });
   }
-}  
+}
 ```
 
-``` typescript
+```typescript
 class ServiceOrder {
   async selectOrdersByRelation() {
     const userId = 129;
-    const userAndOrders = await this.scope.model.user.get({
-      id: userId,
-    }, {
-      include: {
-        orders: true,
+    const userAndOrders = await this.scope.model.user.get(
+      {
+        id: userId,
       },
-    });
+      {
+        include: {
+          orders: true,
+        },
+      },
+    );
   }
-}  
+}
 ```
 
 ## Using Table-partitioning: App Config
@@ -182,7 +188,7 @@ You can also configure Model options in App Config:
 
 `src/backend/config/config/config.ts`
 
-``` typescript
+```typescript
 // onions
 config.onions = {
   model: {
@@ -203,7 +209,7 @@ Therefore, you can also use the usual way to query the user's order list
 
 Static options can also be specified when defining a Relation:
 
-``` diff
+```diff
 @Model({
   entity: EntityUser,
   relations: {

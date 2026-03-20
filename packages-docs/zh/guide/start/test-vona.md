@@ -4,6 +4,6 @@
 
 ## 安装模块
 
-``` bash
+```bash
 $ pnpm add vona-module-test-vona -w
 ```

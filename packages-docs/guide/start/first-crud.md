@@ -8,7 +8,7 @@ First, create a module named `demo-student`. There are two ways to create a modu
 
 ### 1. Cli Command
 
-``` bash
+```bash
 $ vona :create:module demo-student --suite=
 ```
 
@@ -30,7 +30,7 @@ Next, we'll use Vona's built-in code generator to create the CRUD code skeleton.
 
 ### 1. Cli Command
 
-``` bash
+```bash
 $ vona :tools:crudCabloy student --module=demo-student
 ```
 
@@ -52,7 +52,7 @@ We can use [Swagger](https://swagger.io)/[Rapidoc](https://rapidocweb.com) to vi
 
 After starting the development server, the system automatically outputs the Swagger/Rapidoc URL to the terminal:
 
-``` bash
+```bash
 [a-swagger] swagger: http://localhost:7102/swagger
 [a-swagger] rapidoc: http://localhost:7102/rapidoc
 ```

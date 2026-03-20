@@ -3,8 +3,8 @@
 Vona ORM 支持`多数据库/多数据源`，特性如下：
 
 1. 支持多数据库
-    - 例如：Sqlite3/Postgresql/MySQL
-    - 持续增加新的数据库支持
+   - 例如：Sqlite3/Postgresql/MySQL
+   - 持续增加新的数据库支持
 2. 支持多数据源
 3. 支持跨数据源的关联查询
 
@@ -16,16 +16,16 @@ Vona ORM 支持`多数据库/多数据源`，特性如下：
 
 1. Model Order
 
-``` typescript
+```typescript
 @Model({
   entity: EntityOrder,
 })
-class ModelOrder{}
+class ModelOrder {}
 ```
 
 2. Model User
 
-``` typescript
+```typescript
 @Model({
   entity: EntityUser,
   relations: {
@@ -39,7 +39,7 @@ class ModelUser {}
 
 然后查询用户的订单列表
 
-``` typescript
+```typescript
 class ServiceOrder {
   async selectUserOrders() {
     const userId = 1;
@@ -54,7 +54,7 @@ class ServiceOrder {
       },
     );
   }
-}  
+}
 ```
 
 到目前为止，使用`系统默认数据源`查询`userId=1`的用户信息，和该用户的所有订单列表
@@ -65,13 +65,13 @@ class ServiceOrder {
 
 ### 1. 添加数据源的类型定义
 
-* 在 VSCode 中，通过右键菜单`Vona Init/Types`在模块中创建类型文件
+- 在 VSCode 中，通过右键菜单`Vona Init/Types`在模块中创建类型文件
 
-* 然后在类型文件中添加类型定义
+- 然后在类型文件中添加类型定义
 
 `{module path}/src/types/index.ts`
 
-``` typescript
+```typescript
 declare module 'vona-module-a-orm' {
   export interface IDatabaseClientRecord {
     'user-pg': never;
@@ -84,7 +84,7 @@ declare module 'vona-module-a-orm' {
 
 `src/backend/config/config/config.ts`
 
-``` typescript
+```typescript
 // database
 config.database = {
   clients: {
@@ -116,7 +116,7 @@ config.database = {
 
 可以在代码中动态使用数据源：
 
-``` diff
+```diff
 class ServiceOrder {
   async selectUserOrders() {
     const userId = 1;
@@ -132,7 +132,7 @@ class ServiceOrder {
       },
     );
   }
-}  
+}
 ```
 
 - `newInstance`: 传入要使用的数据源，返回新的 Model 实例
@@ -143,7 +143,7 @@ class ServiceOrder {
 
 可以在 relation 选项中动态指定数据源：
 
-``` diff
+```diff
 class ServiceOrder {
   async selectUserOrders() {
     const userId = 1;
@@ -163,7 +163,7 @@ class ServiceOrder {
       },
     );
   }
-}  
+}
 ```
 
 - `meta.client`: 指定 relation `orders`要使用的数据源
@@ -176,7 +176,7 @@ class ServiceOrder {
 
 1. Model Order
 
-``` diff
+```diff
 @Model({
   entity: EntityOrder,
 + client: 'order-mysql',
@@ -186,7 +186,7 @@ class ModelOrder{}
 
 2. Model User
 
-``` diff
+```diff
 @Model({
   entity: EntityUser,
 + client: 'user-pg',
@@ -201,7 +201,7 @@ class ModelUser {}
 
 现在，又可以使用常规的方式查询用户的订单列表
 
-``` typescript
+```typescript
 class ServiceOrder {
   async selectUserOrders() {
     const userId = 1;
@@ -216,7 +216,7 @@ class ServiceOrder {
       },
     );
   }
-}  
+}
 ```
 
 ## 使用数据源：App Config配置
@@ -225,7 +225,7 @@ class ServiceOrder {
 
 `src/backend/config/config/config.ts`
 
-``` typescript
+```typescript
 // onions
 config.onions = {
   model: {
@@ -245,7 +245,7 @@ config.onions = {
 
 也可以在定义 Relation 时指定静态选项：
 
-``` diff
+```diff
 @Model({
   entity: EntityUser,
   client: 'user-pg',

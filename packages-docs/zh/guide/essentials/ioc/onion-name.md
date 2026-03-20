@@ -8,17 +8,17 @@
 
 ## 举例
 
-* 模块 demo-student 的 Controller bean: ControllerStudent
+- 模块 demo-student 的 Controller bean: ControllerStudent
 
-|Class 名称|Scene 名称|Bean 标识|Onion 名称|Controller 名称|
-|--|--|--|--|--|
-|ControllerStudent|controller|demo-student.controller.student|demo-student:student|`= Onion 名称`|
+| Class 名称        | Scene 名称 | Bean 标识                       | Onion 名称           | Controller 名称 |
+| ----------------- | ---------- | ------------------------------- | -------------------- | --------------- |
+| ControllerStudent | controller | demo-student.controller.student | demo-student:student | `= Onion 名称`  |
 
-* 模块 demo-student 的 Model bean: ModelStudent
+- 模块 demo-student 的 Model bean: ModelStudent
 
-|Class 名称|Scene 名称|Bean 标识|Onion 名称|Model 名称|
-|--|--|--|--|--|
-|ModelStudent|model|demo-student.model.student|demo-student:student|`= Onion 名称`|
+| Class 名称   | Scene 名称 | Bean 标识                  | Onion 名称           | Model 名称     |
+| ------------ | ---------- | -------------------------- | -------------------- | -------------- |
+| ModelStudent | model      | demo-student.model.student | demo-student:student | `= Onion 名称` |
 
 ## App Config
 
@@ -26,7 +26,7 @@
 
 `src/backend/config/config/config.ts`
 
-``` typescript
+```typescript
 // onions
 config.onions = {
   controller: {
@@ -57,14 +57,14 @@ config.onions = {
 
 所有的配置都有类型提示，如下图所示：
 
-* 所有 SceneName 提示
+- 所有 SceneName 提示
 
 ![](../../../assets/img/ioc/onion-1.png)
 
-* 所有 OnionName 提示
+- 所有 OnionName 提示
 
 ![](../../../assets/img/ioc/onion-2.png)
 
-* 所有配置提示
+- 所有配置提示
 
 ![](../../../assets/img/ioc/onion-3.png)

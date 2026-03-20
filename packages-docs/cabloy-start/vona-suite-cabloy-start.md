@@ -2,10 +2,10 @@
 
 This suite includes two modules:
 
-|Name|Description|
-|--|--|
-|start-siteadmin|Used to implement `Admin-Dashboard`|
-|start-siteweb|Used to implement `Website`|
+| Name            | Description                         |
+| --------------- | ----------------------------------- |
+| start-siteadmin | Used to implement `Admin-Dashboard` |
+| start-siteweb   | Used to implement `Website`         |
 
 ## start-siteadmin
 
@@ -13,7 +13,7 @@ This module includes the following components:
 
 ### 1. SsrSite: Admin
 
-``` typescript
+```typescript
 @SsrSite({
   publicPath: 'admin',
   bundlePath: 'ssr-cabloyStartAdmin-5.0.0',
@@ -21,14 +21,14 @@ This module includes the following components:
 export class SsrSiteAdmin {}
 ```
 
-|Name|Description|
-|--|--|
-|publicPath|Specifies the publicPath of the admin website URL|
-|bundlePath|Specifies the path of the JS bundle. Copied here after building from the Zova frontend project|
+| Name       | Description                                                                                    |
+| ---------- | ---------------------------------------------------------------------------------------------- |
+| publicPath | Specifies the publicPath of the admin website URL                                              |
+| bundlePath | Specifies the path of the JS bundle. Copied here after building from the Zova frontend project |
 
 ### 2. SsrMenu: Home
 
-``` typescript
+```typescript
 @SsrMenu({
   item: {
     title: $locale('Home'),
@@ -41,14 +41,14 @@ export class SsrSiteAdmin {}
 export class SsrMenuHome {}
 ```
 
-|Name|Description|
-|--|--|
-|item|Menu information|
-|site|Binds the menu to the specified site|
+| Name | Description                          |
+| ---- | ------------------------------------ |
+| item | Menu information                     |
+| site | Binds the menu to the specified site |
 
 ### 3. SsrMenuGroup: Management
 
-``` typescript
+```typescript
 @SsrMenuGroup({
   item: {
     title: $locale('Management'),
@@ -59,10 +59,10 @@ export class SsrMenuHome {}
 export class SsrMenuGroupManagement {}
 ```
 
-|Name|Description|
-|--|--|
-|item|Menu group information|
-|site|Binds the menu group to the specified site|
+| Name | Description                                |
+| ---- | ------------------------------------------ |
+| item | Menu group information                     |
+| site | Binds the menu group to the specified site |
 
 ## start-siteweb
 
@@ -70,7 +70,7 @@ This module includes the following components:
 
 ### 1. SsrSite: Web
 
-``` typescript
+```typescript
 @SsrSite({
   publicPath: '',
   bundlePath: 'ssr-cabloyStartWeb-5.0.0',
@@ -78,7 +78,7 @@ This module includes the following components:
 export class SsrSiteWeb {}
 ```
 
-|Name|Description|
-|--|--|
-|publicPath|Specifies the publicPath of the website URL|
-|bundlePath|Specifies the path of the JS bundle. Copied here after building from the Zova frontend project|
+| Name       | Description                                                                                    |
+| ---------- | ---------------------------------------------------------------------------------------------- |
+| publicPath | Specifies the publicPath of the website URL                                                    |
+| bundlePath | Specifies the path of the JS bundle. Copied here after building from the Zova frontend project |

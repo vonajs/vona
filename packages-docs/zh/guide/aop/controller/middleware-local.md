@@ -6,7 +6,7 @@
 
 ### 1. Cli命令
 
-``` bash
+```bash
 $ vona :create:bean middleware logger --module=demo-student
 ```
 
@@ -18,7 +18,7 @@ $ vona :create:bean middleware logger --module=demo-student
 
 ## 中间件定义
 
-``` typescript
+```typescript
 export interface IMiddlewareOptionsLogger extends IDecoratorMiddlewareOptions {}
 
 @Middleware<IMiddlewareOptionsLogger>()
@@ -40,7 +40,7 @@ class MiddlewareLogger {
 
 ### 1. 标注控制器方法
 
-``` diff
+```diff
 import { Aspect } from 'vona-module-a-aspect';
 
 @Controller()
@@ -58,7 +58,7 @@ class ControllerStudent {
 
 可以针对控制器类使用中间件，从而类中所有方法都会应用此中间件
 
-``` diff
+```diff
 import { Aspect } from 'vona-module-a-aspect';
 
 @Controller()
@@ -77,7 +77,7 @@ class ControllerStudent {
 
 ### 1. 定义参数类型
 
-``` diff
+```diff
 export interface IMiddlewareOptionsLogger extends IDecoratorMiddlewareOptions {
 + prefix: string;
 }
@@ -85,7 +85,7 @@ export interface IMiddlewareOptionsLogger extends IDecoratorMiddlewareOptions {
 
 ### 2. 提供参数缺省值
 
-``` diff
+```diff
 @Middleware<IMiddlewareOptionsLogger>({
 + prefix: 'time',
 })
@@ -93,7 +93,7 @@ export interface IMiddlewareOptionsLogger extends IDecoratorMiddlewareOptions {
 
 ### 3. 使用参数
 
-``` diff
+```diff
 export interface IMiddlewareOptionsLogger extends IDecoratorMiddlewareOptions {
   prefix: string;
 }
@@ -117,7 +117,7 @@ class MiddlewareLogger {
 
 可以针对某个 API 单独指定局部中间件的参数
 
-``` diff
+```diff
 class ControllerStudent {
   @Web.get()
 + @Aspect.middleware('demo-student:logger', { prefix: 'elapsed' })
@@ -133,7 +133,7 @@ class ControllerStudent {
 
 `src/backend/config/config/config.ts`
 
-``` typescript
+```typescript
 // onions
 config.onions = {
   middleware: {

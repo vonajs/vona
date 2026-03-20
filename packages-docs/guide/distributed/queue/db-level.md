@@ -14,7 +14,7 @@ VonaJS uses `Async Local Storage` to provide different `datasource level` for di
 
 Execute the following code in Worker A:
 
-``` typescript
+```typescript
 class ControllerStudent {
   async test() {
     const result = await this.ctx.db.transaction.begin(async () => {
@@ -33,7 +33,7 @@ class ControllerStudent {
 
 Execute the following code in Worker B:
 
-``` diff
+```diff
 class QueueAdd {
   async execute(data, _options) {
 +   await this.scope.model.student.update({ id: 1, name: 'student name' });
@@ -61,16 +61,19 @@ VonaJS uses `Async Local Storage` to provide different `datasource level` for di
 In VonaJS, in a distributed scenario, setting the connection maximum of the database connection pool to `1` will not cause deadlocks due to datasource contention
 :::
 
-``` typescript
+```typescript
 class ControllerStudent {
   async test() {
     await this.scope.model.student.select();
     const dbLevel = this.bean.database.current.level;
-    await this.bean.database.switchDb(async () => {
-      await this.scope.model.student.select();
-      const dbLevel1 = this.bean.database.current.level;
-      console.log(dbLevel, dbLevel1);
-    }, { level: dbLevel + 1 });
+    await this.bean.database.switchDb(
+      async () => {
+        await this.scope.model.student.select();
+        const dbLevel1 = this.bean.database.current.level;
+        console.log(dbLevel, dbLevel1);
+      },
+      { level: dbLevel + 1 },
+    );
   }
 }
 ```
@@ -81,7 +84,7 @@ class ControllerStudent {
 
 ### Shorthand Method
 
-``` diff
+```diff
 class ControllerStudent {
   async test() {
 +   await this.bean.database.switchDbIsolate(async () => {
@@ -96,13 +99,13 @@ class ControllerStudent {
 
 When using the `push/pushAsync` method to push a job, the system automatically passes in `current.level + 1`, thus implementing datasource leveling and avoiding deadlocks
 
-``` typescript
+```typescript
 await this.scope.queue.add.pushAsync(data);
 ```
 
 is equivalent to:
 
-``` typescript
+```typescript
 await this.scope.queue.add.pushAsync(data, {
   dbInfo: {
     level: this.bean.database.current.level + 1,

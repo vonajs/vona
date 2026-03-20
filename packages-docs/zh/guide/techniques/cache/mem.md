@@ -8,7 +8,7 @@
 
 ### 1. Cli命令
 
-``` bash
+```bash
 $ vona :create:bean cacheMem student --module=demo-student
 ```
 
@@ -20,16 +20,18 @@ $ vona :create:bean cacheMem student --module=demo-student
 
 ## Mem缓存定义
 
-``` typescript
+```typescript
 export type TCacheMemStudentKey = string;
-export interface TCacheMemStudentData { id: string; name: string }
+export interface TCacheMemStudentData {
+  id: string;
+  name: string;
+}
 
 @CacheMem({
   max: 500,
   ttl: 2 * 3600 * 1000,
 })
-export class CacheMemStudent
-  extends BeanCacheMemBase<TCacheMemStudentKey, TCacheMemStudentData> {}
+export class CacheMemStudent extends BeanCacheMemBase<TCacheMemStudentKey, TCacheMemStudentData> {}
 ```
 
 - `TCacheMemStudentKey`: 定义缓存 Key 的类型
@@ -39,7 +41,7 @@ export class CacheMemStudent
 
 可以为 Mem 缓存配置参数
 
-``` typescript
+```typescript
 @CacheMem({
   max: 500,
   ttl: 2 * 3600 * 1000,
@@ -52,15 +54,15 @@ export class CacheMemStudent
 class CacheMemStudent {}
 ```
 
-|名称|类型|默认值|说明|
-|--|--|--|--|
-|max|number||允许缓存的最大条数|
-|ttl|number||缓存的过期时间|
-|updateAgeOnGet|boolean|true|当读取缓存时是否更新ttl|
-|updateAgeOnHas|boolean|false|当判断缓存是否存在时是否更新ttl|
-|broadcastOnSet|boolean \| 'del'|false|当设置缓存时，是否需要通过广播设置其他Workers的缓存。设置为`del`，那么就通过广播删除其他Workers的缓存|
-|disableInstance|boolean|false|是否禁用实例隔离。在默认情况下，多实例之间的缓存是隔离的|
-|disableTransactionCompensate|boolean|false|是否禁止事务补偿。启用事务补偿可以确保缓存数据一致性|
+| 名称                         | 类型             | 默认值 | 说明                                                                                                  |
+| ---------------------------- | ---------------- | ------ | ----------------------------------------------------------------------------------------------------- |
+| max                          | number           |        | 允许缓存的最大条数                                                                                    |
+| ttl                          | number           |        | 缓存的过期时间                                                                                        |
+| updateAgeOnGet               | boolean          | true   | 当读取缓存时是否更新ttl                                                                               |
+| updateAgeOnHas               | boolean          | false  | 当判断缓存是否存在时是否更新ttl                                                                       |
+| broadcastOnSet               | boolean \| 'del' | false  | 当设置缓存时，是否需要通过广播设置其他Workers的缓存。设置为`del`，那么就通过广播删除其他Workers的缓存 |
+| disableInstance              | boolean          | false  | 是否禁用实例隔离。在默认情况下，多实例之间的缓存是隔离的                                              |
+| disableTransactionCompensate | boolean          | false  | 是否禁止事务补偿。启用事务补偿可以确保缓存数据一致性                                                  |
 
 ## App Config
 
@@ -68,7 +70,7 @@ class CacheMemStudent {}
 
 `src/backend/config/config/config.ts`
 
-``` typescript
+```typescript
 // onions
 config.onions = {
   cacheMem: {
@@ -93,7 +95,7 @@ config.onions = {
 
 `src/backend/config/config/config.ts`
 
-``` diff
+```diff
 // onions
 config.onions = {
   cacheMem: {
@@ -108,14 +110,14 @@ config.onions = {
 
 可以让 Redis 缓存在指定的运行环境生效
 
-|名称|类型|说明|
-|--|--|--|
-|flavor|string\|string[]|参见: [运行环境与Flavor](../../env-config/mode-flavor/introduction.md)|
-|mode|string\|string[]|参见: [运行环境与Flavor](../../env-config/mode-flavor/introduction.md)|
+| 名称   | 类型             | 说明                                                                   |
+| ------ | ---------------- | ---------------------------------------------------------------------- |
+| flavor | string\|string[] | 参见: [运行环境与Flavor](../../env-config/mode-flavor/introduction.md) |
+| mode   | string\|string[] | 参见: [运行环境与Flavor](../../env-config/mode-flavor/introduction.md) |
 
-* 举例
+- 举例
 
-``` diff
+```diff
 @CacheMem({
 + meta: {
 +   flavor: 'normal',
@@ -127,7 +129,7 @@ class CacheMemStudent {}
 
 ## 使用Mem缓存
 
-``` typescript
+```typescript
 class ControllerStudent {
   @Web.get('test')
   async test() {
@@ -136,7 +138,7 @@ class ControllerStudent {
     const value = this.scope.cacheMem.student.get('1');
     assert.deepEqual(student, value);
   }
-}  
+}
 ```
 
 - `this.scope.cacheMem.student`: 通过模块 scope 取得缓存实例
@@ -145,7 +147,7 @@ class ControllerStudent {
 
 以`set方法`为例介绍缓存方法的参数
 
-``` typescript
+```typescript
 this.scope.cacheMem.student.set(student, '1', {
   ttl: 2 * 3600 * 1000,
   broadcastOnSet: 'del',
@@ -154,26 +156,26 @@ this.scope.cacheMem.student.set(student, '1', {
 });
 ```
 
-|名称|类型|说明|
-|--|--|--|
-|ttl|number|缓存的过期时间|
-|broadcastOnSet|boolean \| 'del'|当设置缓存时，是否需要通过广播设置其他Workers的缓存。设置为`del`，那么就通过广播删除其他Workers的缓存|
-|disableTransactionCompensate|boolean|是否禁止事务补偿|
-|db|ServiceDb|在进行事务补偿时，会用到此db对象。在默认情况下，自动使用上下文中的db对象|
+| 名称                         | 类型             | 说明                                                                                                  |
+| ---------------------------- | ---------------- | ----------------------------------------------------------------------------------------------------- |
+| ttl                          | number           | 缓存的过期时间                                                                                        |
+| broadcastOnSet               | boolean \| 'del' | 当设置缓存时，是否需要通过广播设置其他Workers的缓存。设置为`del`，那么就通过广播删除其他Workers的缓存 |
+| disableTransactionCompensate | boolean          | 是否禁止事务补偿                                                                                      |
+| db                           | ServiceDb        | 在进行事务补偿时，会用到此db对象。在默认情况下，自动使用上下文中的db对象                              |
 
 - `db`: VonaJS 支持多数据库/多数据源，因此可以通过`db`精确控制事务补偿能力
 
 ## 缓存方法清单
 
-|名称|说明|
-|--|--|
-|get|读取缓存|
-|mget|同时读取多个缓存|
-|peek|拣取缓存，不更新缓存的ttl|
-|set|设置缓存|
-|mset|同时设置多个缓存|
-|getset|设置新缓存，并返回旧值|
-|has|判断缓存是否存在|
-|del|删除缓存|
-|mdel|同时删除多个缓存|
-|clear|清理所有缓存|
+| 名称   | 说明                      |
+| ------ | ------------------------- |
+| get    | 读取缓存                  |
+| mget   | 同时读取多个缓存          |
+| peek   | 拣取缓存，不更新缓存的ttl |
+| set    | 设置缓存                  |
+| mset   | 同时设置多个缓存          |
+| getset | 设置新缓存，并返回旧值    |
+| has    | 判断缓存是否存在          |
+| del    | 删除缓存                  |
+| mdel   | 同时删除多个缓存          |
+| clear  | 清理所有缓存              |

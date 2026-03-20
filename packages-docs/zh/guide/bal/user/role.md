@@ -4,7 +4,7 @@
 
 模块`a-user`提供了接口`IRole`，约定了 Role 的基础字段
 
-``` typescript
+```typescript
 export interface IRole {
   id: TableIdentity;
   name: string;
@@ -15,21 +15,21 @@ export interface IRole {
 
 模块`a-user`提供了全局 Bean `bean.role`，为业务提供了通用的调用规范
 
-``` typescript
+```typescript
 // find role
 const role = await this.bean.role.findOneById(roleId);
 // find roles of user
 const roles = await this.bean.role.findAllByUserId(userId);
 ```
 
-* `bean.role`方法清单
+- `bean.role`方法清单
 
-|名称|说明|
-|--|--|
-|findOneByName|通过`name`查找角色|
-|findOneById|通过`id`查找角色|
-|findOne|查找角色|
-|findAllByUserId|查找某个用户的所有角色|
+| 名称            | 说明                   |
+| --------------- | ---------------------- |
+| findOneByName   | 通过`name`查找角色     |
+| findOneById     | 通过`id`查找角色       |
+| findOne         | 查找角色               |
+| findAllByUserId | 查找某个用户的所有角色 |
 
 ## home-user适配器: ServiceRoleAdapter
 
@@ -37,22 +37,22 @@ const roles = await this.bean.role.findAllByUserId(userId);
 
 `src/suite/a-home/modules/home-user/src/service/roleAdapter.ts`
 
-|名称|说明|
-|--|--|
-|findOneByName|通过`name`查找角色|
-|findOne|查找角色|
-|findAllByUserId|查找某个用户的所有角色|
+| 名称            | 说明                   |
+| --------------- | ---------------------- |
+| findOneByName   | 通过`name`查找角色     |
+| findOne         | 查找角色               |
+| findAllByUserId | 查找某个用户的所有角色 |
 
 ## 获取当前角色
 
-``` diff
+```diff
 class ControllerStudent {
   @Web.get('test')
   test() {
 +   const roles = this.bean.passport.currentRoles;
     console.log(roles);
   }
-}  
+}
 ```
 
 ## 角色: admin
@@ -63,7 +63,7 @@ class ControllerStudent {
 
 `src/suite/a-home/modules/home-user/src/bean/meta.version.ts`
 
-``` typescript
+```typescript
 async init(options) {
   if (options.version === 1) {
     // role: admin
@@ -76,7 +76,7 @@ async init(options) {
 
 ## 为用户分配角色
 
-``` typescript
+```typescript
 await this.scope.model.roleUser.insert({
   userId,
   roleId,

@@ -6,7 +6,7 @@ For example, we create a Local Middleware `logger` in the module demo-student
 
 ### 1. Cli command
 
-``` bash
+```bash
 $ vona :create:bean middleware logger --module=demo-student
 ```
 
@@ -18,7 +18,7 @@ Context Menu - [Module Path]: `Vona Aspect/Middleware`
 
 ## Middleware Definition
 
-``` typescript
+```typescript
 export interface IMiddlewareOptionsLogger extends IDecoratorMiddlewareOptions {}
 
 @Middleware<IMiddlewareOptionsLogger>()
@@ -40,7 +40,7 @@ class MiddlewareLogger {
 
 ### 1. Annotating controller actions
 
-``` diff
+```diff
 import { Aspect } from 'vona-module-a-aspect';
 
 @Controller()
@@ -58,7 +58,7 @@ class ControllerStudent {
 
 You can use middleware for controller classes so that all actions in the class will apply this middleware
 
-``` diff
+```diff
 import { Aspect } from 'vona-module-a-aspect';
 
 @Controller()
@@ -77,7 +77,7 @@ For example, define the `prefix` parameter for the logger middleware to control 
 
 ### 1. Defining parameter types
 
-``` diff
+```diff
 export interface IMiddlewareOptionsLogger extends IDecoratorMiddlewareOptions {
 + prefix: string;
 }
@@ -85,7 +85,7 @@ export interface IMiddlewareOptionsLogger extends IDecoratorMiddlewareOptions {
 
 ### 2. Providing default values ​​for parameters
 
-``` diff
+```diff
 @Middleware<IMiddlewareOptionsLogger>({
 + prefix: 'time',
 })
@@ -93,7 +93,7 @@ export interface IMiddlewareOptionsLogger extends IDecoratorMiddlewareOptions {
 
 ### 3. Using Parameters
 
-``` diff
+```diff
 export interface IMiddlewareOptionsLogger extends IDecoratorMiddlewareOptions {
   prefix: string;
 }
@@ -117,7 +117,7 @@ class MiddlewareLogger {
 
 You can specify local middleware parameters for a specific API
 
-``` diff
+```diff
 class ControllerStudent {
   @Web.get()
 + @Aspect.middleware('demo-student:logger', { prefix: 'elapsed' })
@@ -133,7 +133,7 @@ Middleware parameters can be configured in App Config
 
 `src/backend/config/config/config.ts`
 
-``` typescript
+```typescript
 // onions
 config.onions = {
   middleware: {

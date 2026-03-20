@@ -11,7 +11,7 @@ For example, we create a System Middleware `logger` in the module demo-student
 
 ### 1. Cli command
 
-``` bash
+```bash
 $ vona :create:bean middlewareSystem logger --module=demo-student
 ```
 
@@ -23,7 +23,7 @@ Context Menu - [Module Path]: `Vona Aspect/Middleware System`
 
 ## Middleware Definition
 
-``` typescript
+```typescript
 export interface IMiddlewareOptionsLogger extends IDecoratorMiddlewareOptions {}
 
 @Middleware<IMiddlewareOptionsLogger>()
@@ -53,7 +53,7 @@ For example, define the `prefix` parameter for the logger middleware to control 
 
 ### 1. Defining parameter types
 
-``` diff
+```diff
 export interface IMiddlewareSystemOptionsLogger extends IDecoratorMiddlewareSystemOptions {
 + prefix: string;
 }
@@ -61,7 +61,7 @@ export interface IMiddlewareSystemOptionsLogger extends IDecoratorMiddlewareSyst
 
 ### 2. Providing default values ​​for parameters
 
-``` diff
+```diff
 @MiddlewareSystem<IMiddlewareSystemOptionsLogger>({
 + prefix: 'time',
 })
@@ -69,7 +69,7 @@ export interface IMiddlewareSystemOptionsLogger extends IDecoratorMiddlewareSyst
 
 ### 3. Using Parameters
 
-``` diff
+```diff
 export interface IMiddlewareSystemOptionsLogger extends IDecoratorMiddlewareSystemOptions {
   prefix: string;
 }
@@ -82,7 +82,7 @@ class MiddlewareSystemLogger {
     const timeBegin = Date.now();
     const res = await next();
     const timeEnd = Date.now();
--   console.log('time: ', timeEnd - timeBegin);    
+-   console.log('time: ', timeEnd - timeBegin);
 +   console.log(`${options.prefix}: `, timeEnd - timeBegin);
     return res;
   }
@@ -95,7 +95,7 @@ Middleware parameters can be configured in App Config
 
 `src/backend/config/config/config.ts`
 
-``` typescript
+```typescript
 // onions
 config.onions = {
   middlewareSystem: {
@@ -118,7 +118,7 @@ Since system middlewares ard loaded and enabled by default, VonaJS provides two 
 
 For example, the system has a built-in system middleware `a-core:notfound`, and we hope that the loading order is as follows: `a-core:notfound` > `Current`
 
-``` diff
+```diff
 @MiddlewareSystem({
 + dependencies: 'a-core:notfound',
   prefix: 'time',
@@ -130,7 +130,7 @@ class MiddlewareSystemLogger {}
 
 The order of `dependents` is just the opposite of `dependencies`. We hope that the loading order is as follows: `Current` > `a-core:notfound`
 
-``` diff
+```diff
 @MiddlewareSystem({
 + dependents: 'a-core:notfound',
   prefix: 'time',
@@ -138,17 +138,17 @@ The order of `dependents` is just the opposite of `dependencies`. We hope that t
 class MiddlewareSystemLogger {}
 ```
 
-## Middleware Enable/Disable 
+## Middleware Enable/Disable
 
 You can control `enable/disable` of system middleware for certain APIs
 
 ### 1. Enable
 
-* Disable all APIs
+- Disable all APIs
 
 `src/backend/config/config/config.ts`
 
-``` diff
+```diff
 // onions
 config.onions = {
   middlewareSystem: {
@@ -163,14 +163,14 @@ config.onions = {
 
 Allows system middleware to take effect in a specified operating environment
 
-|Name|Type|Description|
-|--|--|--|
-|flavor|string\|string[]|See: [Runtime Environments and Flavors](../../env-config/mode-flavor/introduction.md)|
-|mode|string\|string[]|See: [Runtime Environments and Flavors](../../env-config/mode-flavor/introduction.md)|
+| Name   | Type             | Description                                                                           |
+| ------ | ---------------- | ------------------------------------------------------------------------------------- |
+| flavor | string\|string[] | See: [Runtime Environments and Flavors](../../env-config/mode-flavor/introduction.md) |
+| mode   | string\|string[] | See: [Runtime Environments and Flavors](../../env-config/mode-flavor/introduction.md) |
 
-* Example
+- Example
 
-``` diff
+```diff
 @MiddlewareSystem({
 + meta: {
 +   flavor: 'normal',
@@ -184,10 +184,10 @@ class MiddlewareSystemLogger {}
 
 You can enable/disable system middleware for some specific APIs
 
-|Name|Type|Description|
-|--|--|--|
-|match|string\|regexp\|(string\|regexp)[]|For which APIs to enable|
-|ignore|string\|regexp\|(string\|regexp)[]|For which APIs to disable|
+| Name   | Type                               | Description               |
+| ------ | ---------------------------------- | ------------------------- |
+| match  | string\|regexp\|(string\|regexp)[] | For which APIs to enable  |
+| ignore | string\|regexp\|(string\|regexp)[] | For which APIs to disable |
 
 Both system and global middleware support `match` and `ignore`, but the API path format used is different. For example, consider the `findMany` API in ControllerStudent:
 
@@ -200,7 +200,7 @@ Both system and global middleware support `match` and `ignore`, but the API path
 
 You can directly inspect the currently effective system middleware list in the Controller action
 
-``` diff
+```diff
 class ControllerStudent {
   @Web.get()
   async findMany() {

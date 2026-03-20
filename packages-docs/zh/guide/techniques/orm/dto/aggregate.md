@@ -8,14 +8,14 @@
 
 在 VSCode 中，可以通过右键菜单`Vona Create/Dto`创建 DTO 的代码骨架：
 
-``` typescript
+```typescript
 @Dto()
 export class DtoPostAggregate {}
 ```
 
 ### 2. 继承$Dto.aggregate
 
-``` diff
+```diff
 @Dto()
 export class DtoPostAggregate
 + extends $Dto.aggregate(() => ModelPost, {
@@ -31,7 +31,7 @@ export class DtoPostAggregate
 
 以 Controller Post 的 aggregate 方法为例，标注 API 返回值：
 
-``` diff
+```diff
 class ControllerPost {
   @Web.get('aggregate')
 + @Api.body(DtoPostAggregate)

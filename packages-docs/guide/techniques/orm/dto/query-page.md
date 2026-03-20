@@ -10,14 +10,14 @@
 
 In VSCode, use the `Vona Create/Dto` context menu to create a DTO code skeleton:
 
-``` typescript
+```typescript
 @Dto()
 export class DtoOrderQueryPage {}
 ```
 
 ### 2. Inherit DtoQueryPageBase
 
-``` typescript
+```typescript
 @Dto()
 export class DtoOrderQueryPage extends DtoQueryPageBase {}
 ```
@@ -26,19 +26,19 @@ export class DtoOrderQueryPage extends DtoQueryPageBase {}
 
 Since `DtoOrderQueryPage` inherits from `DtoQueryPageBase`, it has the following member fields:
 
-|Name|Description|Example|
-|--|--|--|
-|columns|List of fields to query|`*`, `id,orderNo,remark`, `["id","orderNo","remark"]`|
-|where|Query clause|`{ "orderNo": { "_include_":  "order001" } }`|
-|orders|Sorting|`orderNo,desc`, `[["orderNo", "desc"], ["createdAt", "desc"]]`|
-|pageNo|Page No|Default: `1`|
-|pageSize|Page Size|Default: `20`|
+| Name     | Description             | Example                                                        |
+| -------- | ----------------------- | -------------------------------------------------------------- |
+| columns  | List of fields to query | `*`, `id,orderNo,remark`, `["id","orderNo","remark"]`          |
+| where    | Query clause            | `{ "orderNo": { "_include_":  "order001" } }`                  |
+| orders   | Sorting                 | `orderNo,desc`, `[["orderNo", "desc"], ["createdAt", "desc"]]` |
+| pageNo   | Page No                 | Default: `1`                                                   |
+| pageSize | Page Size               | Default: `20`                                                  |
 
 ## Annotating Query Parameters
 
 Taking the `findMany` method of the `Order` controller as an example, we can annotate the Query parameters:
 
-``` diff
+```diff
 + import type { IQueryParams } from 'vona-module-a-orm';
 + import { Arg } from 'vona-module-a-web';
 
@@ -64,7 +64,7 @@ The automatically generated Swagger/Openapi is as follows:
 
 If you need to add query clause for business fields in DTO, you can use `$Dto.queryPage`
 
-``` diff
+```diff
 @Dto()
 export class DtoOrderQueryPage
 + extends $Dto.queryPage(EntityOrder, ['orderNo', 'remark']) {}
@@ -84,7 +84,7 @@ The default value of pageSize is `20`, which can be modified in App Config:
 
 `src/backend/config/config/config.ts`
 
-``` typescript
+```typescript
 // modules
 config.modules = {
   'a-orm': {
@@ -100,16 +100,16 @@ config.modules = {
 };
 ```
 
-|Name|Description|
-|--|--|
-|default|The default value|
-|max|The maxinum value|
+| Name    | Description       |
+| ------- | ----------------- |
+| default | The default value |
+| max     | The maxinum value |
 
 ### 2. DTO configuration
 
 You can also provide different `pageSize` configurations for specific DTOs:
 
-``` diff
+```diff
 @Dto()
 export class DtoOrderQueryPage
 + extends $Class.omit($Dto.queryPage(EntityOrder, ['orderNo', 'remark']), ['pageSize']) {
@@ -123,7 +123,7 @@ export class DtoOrderQueryPage
 
 Or:
 
-``` diff
+```diff
 @Dto({
 + fields: {
 +   pageSize: z.number().min(1).max(300).default(30),

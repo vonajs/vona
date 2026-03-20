@@ -6,7 +6,7 @@
 
 ### 1. Cli命令
 
-``` bash
+```bash
 $ vona :create:bean interceptor logger --module=demo-student
 ```
 
@@ -18,7 +18,7 @@ $ vona :create:bean interceptor logger --module=demo-student
 
 ## 拦截器定义
 
-``` typescript
+```typescript
 export interface IInterceptorOptionsLogger extends IDecoratorInterceptorOptions {}
 
 @Interceptor<IInterceptorOptionsLogger>()
@@ -40,7 +40,7 @@ class InterceptorLogger {
 
 ### 1. 标注控制器方法
 
-``` diff
+```diff
 import { Aspect } from 'vona-module-a-aspect';
 
 @Controller()
@@ -58,7 +58,7 @@ class ControllerStudent {
 
 可以针对控制器类使用拦截器，从而类中所有方法都会应用此拦截器
 
-``` diff
+```diff
 import { Aspect } from 'vona-module-a-aspect';
 
 @Controller()
@@ -77,7 +77,7 @@ class ControllerStudent {
 
 ### 1. 定义参数类型
 
-``` diff
+```diff
 export interface IInterceptorOptionsLogger extends IDecoratorInterceptorOptions {
 + prefix: string;
 }
@@ -85,7 +85,7 @@ export interface IInterceptorOptionsLogger extends IDecoratorInterceptorOptions 
 
 ### 2. 提供参数缺省值
 
-``` diff
+```diff
 @Interceptor<IInterceptorOptionsLogger>({
 + prefix: 'time',
 })
@@ -93,7 +93,7 @@ export interface IInterceptorOptionsLogger extends IDecoratorInterceptorOptions 
 
 ### 3. 使用参数
 
-``` diff
+```diff
 export interface IInterceptorOptionsLogger extends IDecoratorInterceptorOptions {
   prefix: string;
 }
@@ -117,7 +117,7 @@ class InterceptorLogger {
 
 可以针对某个 API 单独指定局部拦截器的参数
 
-``` diff
+```diff
 class ControllerStudent {
   @Web.get()
 + @Aspect.interceptor('demo-student:logger', { prefix: 'elapsed' })
@@ -133,7 +133,7 @@ class ControllerStudent {
 
 `src/backend/config/config/config.ts`
 
-``` typescript
+```typescript
 // onions
 config.onions = {
   interceptor: {

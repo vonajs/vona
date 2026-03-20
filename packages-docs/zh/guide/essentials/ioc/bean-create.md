@@ -8,7 +8,7 @@
 
 ### 1. Cli 命令
 
-``` bash
+```bash
 $ vona :create:bean service student --module=demo-student
 ```
 
@@ -24,7 +24,7 @@ $ vona :create:bean service student --module=demo-student
 
 ### 1. Cli 命令
 
-``` bash
+```bash
 $ vona :create:bean bean test --module=demo-student
 ```
 

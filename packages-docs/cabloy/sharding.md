@@ -12,7 +12,7 @@ Adding type definitions for the new datasources
 
 `src/backend/config/config/config.ts`
 
-``` typescript
+```typescript
 declare module 'vona-module-a-orm' {
   export interface IDatabaseClientRecord {
     read1: never;
@@ -27,7 +27,7 @@ declare module 'vona-module-a-orm' {
 
 `src/backend/config/config/config.ts`
 
-``` typescript
+```typescript
 // database
 config.database = {
   clients: {
@@ -54,7 +54,7 @@ Then configure the module's read-datasources and write-datasources
 
 `src/backend/config/config/config.ts`
 
-``` typescript
+```typescript
 // modules
 config.modules = {
   'a-datasharding': {
@@ -68,12 +68,12 @@ config.modules = {
 };
 ```
 
-|Name|Description|
-|--|--|
-|reads|Specifies a set of read-datasources|
-|writes|Specifies a set of write-datasources|
-|randomRead|Specifies a custom function to extract a read-datasource from `reads`. Defaults to `undefined`, which is randomly selected by the system |
-|randomWrite|Specifies a custom function to extract a write-datasource from `writes`. Defaults to `undefined`, which is randomly selected by the system |
+| Name        | Description                                                                                                                                |
+| ----------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| reads       | Specifies a set of read-datasources                                                                                                        |
+| writes      | Specifies a set of write-datasources                                                                                                       |
+| randomRead  | Specifies a custom function to extract a read-datasource from `reads`. Defaults to `undefined`, which is randomly selected by the system   |
+| randomWrite | Specifies a custom function to extract a write-datasource from `writes`. Defaults to `undefined`, which is randomly selected by the system |
 
 ## Sharding Mechanism
 
@@ -97,7 +97,7 @@ The name of the `two-layer cache` is `a-datasharding:datasourceWrite`. You can m
 
 `src/backend/config/config/config.ts`
 
-``` typescript
+```typescript
 // onions
 config.onions = {
   summerCache: {
@@ -113,10 +113,10 @@ config.onions = {
 };
 ```
 
-|Name|Description|
-|--|--|
-|mem.ttl|Mem cache expiration time, default is `3` seconds|
-|redis.ttl|Redis cache expiration time, default is `3` seconds|
+| Name      | Description                                         |
+| --------- | --------------------------------------------------- |
+| mem.ttl   | Mem cache expiration time, default is `3` seconds   |
+| redis.ttl | Redis cache expiration time, default is `3` seconds |
 
 ## Data Consistency: Cache-Double-Delete
 
@@ -132,7 +132,7 @@ To address this issue, the `a-orm` module provides a `cache-double-delete` mecha
 
 `src/backend/config/config/config.ts`
 
-``` typescript
+```typescript
 // modules
 config.modules = {
   'a-orm': {
@@ -151,7 +151,7 @@ The system uses a queue task to perform `cache-double-delete`. The queue name is
 
 `src/backend/config/config/config.ts`
 
-``` typescript
+```typescript
 // onions
 config.onions = {
   queue: {
@@ -166,6 +166,6 @@ config.onions = {
 };
 ```
 
-|Name|Description|
-|--|--|
-|job.delay|Specifies the delay time for performing `cache-double-delete` jobs. The default is `3` seconds|
+| Name      | Description                                                                                    |
+| --------- | ---------------------------------------------------------------------------------------------- |
+| job.delay | Specifies the delay time for performing `cache-double-delete` jobs. The default is `3` seconds |

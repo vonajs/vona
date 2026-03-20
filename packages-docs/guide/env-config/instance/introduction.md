@@ -18,35 +18,35 @@ In the test and development environments, a `empty` instance is provided by defa
 
 `src/backend/config/config/config.dev.ts`
 
-``` typescript
+```typescript
 // instance
 config.instance = {
   instances: {
     '': { password: '', title: '', config: {} },
-    'shareTest': { password: '', title: '' },
-    'isolateTest': { password: '', title: '', id: 1000, isolate: true, isolateClient: 'isolateTest' },
+    shareTest: { password: '', title: '' },
+    isolateTest: { password: '', title: '', id: 1000, isolate: true, isolateClient: 'isolateTest' },
   },
 };
 ```
 
-* Instance List
+- Instance List
 
-|Name|Description|
-|--|--|
-|empty|Default instance|
-|shareTest|Used to demonstrate `shared mode`, specifically, `shareTest` shares the same database with `empty`|
-|isolateTest|Used to demonstrate `isolated mode`, specifically, `isolateTest` using an isolated database|
+| Name        | Description                                                                                        |
+| ----------- | -------------------------------------------------------------------------------------------------- |
+| empty       | Default instance                                                                                   |
+| shareTest   | Used to demonstrate `shared mode`, specifically, `shareTest` shares the same database with `empty` |
+| isolateTest | Used to demonstrate `isolated mode`, specifically, `isolateTest` using an isolated database        |
 
-* Instance Fields
+- Instance Fields
 
-|Name|Description|
-|--|--|
-|password|Initial password for the `admin` user in the instance, defaults to `123456`|
-|title|Website title|
-|config|Instance configuration information|
-|id|When using `isolated mode`, you must explicitly specify a unique `Instance Id`|
-|isolate|Whether to use `isolated mode`, the default is `shared mode`|
-|isolateClient|When using `isolated mode`, you must explicitly specify `datasource`|
+| Name          | Description                                                                    |
+| ------------- | ------------------------------------------------------------------------------ |
+| password      | Initial password for the `admin` user in the instance, defaults to `123456`    |
+| title         | Website title                                                                  |
+| config        | Instance configuration information                                             |
+| id            | When using `isolated mode`, you must explicitly specify a unique `Instance Id` |
+| isolate       | Whether to use `isolated mode`, the default is `shared mode`                   |
+| isolateClient | When using `isolated mode`, you must explicitly specify `datasource`           |
 
 - `config`: The `config` data will be merged with `App Config` to generate `Instance Config`. The instance config can be retrieved using `this.ctx.config`
 
@@ -56,7 +56,7 @@ In the production environment, you need to configure instance information yourse
 
 `src/backend/config/config/config.prod.ts`
 
-``` typescript
+```typescript
 // instance
 config.instance = {
   instances: {
@@ -78,7 +78,7 @@ In the VSCode editor, enter the code snippet `recordinstance` to automatically g
 
 `src/backend/config/config/config.ts`
 
-``` typescript
+```typescript
 declare module 'vona' {
   export interface IInstanceRecord {
     : never;
@@ -88,7 +88,7 @@ declare module 'vona' {
 
 Adjust the code and add `shareTest`
 
-``` diff
+```diff
 declare module 'vona' {
   export interface IInstanceRecord {
 +   shareTest: never;
@@ -102,7 +102,7 @@ Add instance configuration to the required config file, for example, to configur
 
 `src/backend/config/config/config.test.ts`
 
-``` typescript
+```typescript
 // instance
 config.instance = {
   instances: {
@@ -113,7 +113,6 @@ config.instance = {
 
 - For `isolated mode`, you also need to configure a `datasource`. See: [Datasource Config](../../techniques/orm/config-datasource.md)
 
-
 ## Rules for Obtaining the Current Instance Name
 
 When a user accesses the backend API, the backend automatically obtains the current instance name based on the rules and then retrieves instance information based on the instance name
@@ -122,7 +121,7 @@ When a user accesses the backend API, the backend automatically obtains the curr
 
 `src/backend/config/config/config.ts`
 
-``` typescript
+```typescript
 // instance
 config.instance = {
   getInstanceName: undefined,
@@ -131,11 +130,11 @@ config.instance = {
 };
 ```
 
-|Name|Description|
-|--|--|
-|getInstanceName|Provides a custom function for obtaining the current instance name|
-|headerField|Gets the current instance name from the request header. The header key defaults to `x-vona-instance-name`|
-|queryField|Gets the current instance name from the request query. The query key defaults to `x-vona-instance-name`|
+| Name            | Description                                                                                               |
+| --------------- | --------------------------------------------------------------------------------------------------------- |
+| getInstanceName | Provides a custom function for obtaining the current instance name                                        |
+| headerField     | Gets the current instance name from the request header. The header key defaults to `x-vona-instance-name` |
+| queryField      | Gets the current instance name from the request query. The query key defaults to `x-vona-instance-name`   |
 
 ### 2. Rule Order
 
@@ -152,30 +151,30 @@ For example, if the domain name is `https://cabloy.com`, the corresponding insta
 
 `env/.env`
 
-``` typescript
+```typescript
 # server
 SERVER_SUBDOMAINOFFSET = 1
 ```
 
-* When `SERVER_SUBDOMAINOFFSET = 1`, the domain name and instance name correspond as follows:
+- When `SERVER_SUBDOMAINOFFSET = 1`, the domain name and instance name correspond as follows:
 
-|Domain Name|Instance Name|
-|--|--|
-|cabloy.com|cabloy|
-|store.cabloy.com|cabloy.store|
+| Domain Name      | Instance Name |
+| ---------------- | ------------- |
+| cabloy.com       | cabloy        |
+| store.cabloy.com | cabloy.store  |
 
-* When `SERVER_SUBDOMAINOFFSET = 2`, the domain name and instance name correspond as follows:
+- When `SERVER_SUBDOMAINOFFSET = 2`, the domain name and instance name correspond as follows:
 
-|Domain Name|Instance Name|
-|--|--|
-|cabloy.com|Empty String|
-|store.cabloy.com|store|
+| Domain Name      | Instance Name |
+| ---------------- | ------------- |
+| cabloy.com       | Empty String  |
+| store.cabloy.com | store         |
 
 ## Using Multi-Instance
 
 ### 1. Accessing Current Instance Information
 
-``` typescript
+```typescript
 // Current Instance Name
 const name = this.ctx.instanceName;
 // Current instance object
@@ -188,7 +187,7 @@ const iid = this.ctx.instance.id;
 
 Since data across multi-instance is isolated, you must specify the `instance id` when querying data. VonaJS provides a very powerful `Model` object, which can transparently handle multi-instance
 
-``` typescript
+```typescript
 // create
 await this.scope.model.student.insert({ name: 'Tom' });
 // select
@@ -207,7 +206,7 @@ When we use the `student` model to manipulate data, the system automatically set
 
 If you use the `builder()` method to query data, you need to add `Instance Id` yourself
 
-``` typescript
+```typescript
 await this.scope.model.student.builder().where({
   iid: this.ctx.instance.id,
   name: 'Tom',
@@ -216,7 +215,7 @@ await this.scope.model.student.builder().where({
 
 If you use the `builderSelect()` method to query data, the system will automatically add `Instance Id`
 
-``` typescript
+```typescript
 await this.scope.model.student.builderSelect().where({
   name: 'Tom',
 });
@@ -226,13 +225,7 @@ await this.scope.model.student.builderSelect().where({
 
 If you use `Raw SQL` to query data, you will need to add `Instance Id` yourself
 
-``` typescript
-await this.scope.model.student.query(
-  'select * from demoStudent where iid=?',
-  [this.ctx.instance.id],
-);
-await this.scope.model.student.queryOne(
-  'select * from demoStudent where iid=? and id=?',
-  [this.ctx.instance.id, 1],
-);
+```typescript
+await this.scope.model.student.query('select * from demoStudent where iid=?', [this.ctx.instance.id]);
+await this.scope.model.student.queryOne('select * from demoStudent where iid=? and id=?', [this.ctx.instance.id, 1]);
 ```

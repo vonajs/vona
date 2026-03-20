@@ -10,7 +10,7 @@
 
 `src/suite/a-home/modules/home-base/src/service/menu.ts`
 
-``` typescript
+```typescript
 class ServiceMenu {
   async retrieveMenus(publicPath?: string): Promise<IMenus> {
     const res = await this.bean.ssr.retrieveMenus(publicPath);
@@ -20,9 +20,7 @@ class ServiceMenu {
 
   private _getMenusDefault(): IMenus {
     return {
-      menus: [
-        { name: 'home', title: this.$scope.homeIndex.locale.Home(), icon: '::home', link: '/' },
-      ],
+      menus: [{ name: 'home', title: this.$scope.homeIndex.locale.Home(), icon: '::home', link: '/' }],
     };
   }
 }
@@ -37,7 +35,7 @@ class ServiceMenu {
 
 `src/suite/a-home/modules/home-base/src/controller/menu.ts`
 
-``` typescript
+```typescript
 class ControllerMenu {
   @Web.get(':publicPath?')
   @Api.body(v.object(DtoMenus))

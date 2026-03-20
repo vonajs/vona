@@ -8,14 +8,14 @@
 
 In VSCode, use the `Vona Create/Dto` context menu to create a DTO code skeleton:
 
-``` typescript
+```typescript
 @Dto()
 export class DtoPostGroup {}
 ```
 
 ### 2. Inherit $Dto.group
 
-``` diff
+```diff
 @Dto()
 export class DtoPostGroup
 + extends $Dto.group(() => ModelPost, 'userId', {
@@ -28,7 +28,7 @@ export class DtoPostGroup
 
 Taking the `group` method of the `Post` controller as an example, we can annotate the API Result:
 
-``` diff
+```diff
 class ControllerPost {
   @Web.get('group')
 + @Api.body(v.array(DtoPostGroup))

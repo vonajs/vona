@@ -8,7 +8,7 @@ For example, create a Redis Cache `student` in the module `demo-student`, to cac
 
 ### 1. Cli Command
 
-``` bash
+```bash
 $ vona :create:bean cacheRedis student --module=demo-student
 ```
 
@@ -20,15 +20,17 @@ Context menu - [Module Path]: `Vona Bean/Cache Redis`
 
 ## Redis Cache Definition
 
-``` typescript
+```typescript
 export type TCacheRedisStudentKey = string;
-export interface TCacheRedisStudentData { id: string; name: string }
+export interface TCacheRedisStudentData {
+  id: string;
+  name: string;
+}
 
 @CacheRedis({
   ttl: 2 * 3600 * 1000,
 })
-export class CacheRedisStudent
-  extends BeanCacheRedisBase<TCacheRedisStudentKey, TCacheRedisStudentData> {}
+export class CacheRedisStudent extends BeanCacheRedisBase<TCacheRedisStudentKey, TCacheRedisStudentData> {}
 ```
 
 - `TCacheRedisStudentKey`: Defines the type of the cache key
@@ -38,7 +40,7 @@ export class CacheRedisStudent
 
 Parameters can be configured for Redis Cache
 
-``` typescript
+```typescript
 @CacheRedis({
   ttl: 2 * 3600 * 1000,
   updateAgeOnGet: true,
@@ -49,13 +51,13 @@ Parameters can be configured for Redis Cache
 class CacheRedisStudent {}
 ```
 
-|Name|Type|Default|Description|
-|--|--|--|--|
-|ttl|number||Cache expiration time|
-|updateAgeOnGet|boolean|true|Whether to update the ttl when reading from the cache|
-|disableInstance|boolean|false|Whether to disable instance isolation. By default, caches between multiple instances are isolated|
-|disableTransactionCompensate|boolean|false|Whether to disable transaction compensation. Enabling transaction compensation ensures cache data consistency|
-|client|string|'cache'|Redis client used for caching|
+| Name                         | Type    | Default | Description                                                                                                   |
+| ---------------------------- | ------- | ------- | ------------------------------------------------------------------------------------------------------------- |
+| ttl                          | number  |         | Cache expiration time                                                                                         |
+| updateAgeOnGet               | boolean | true    | Whether to update the ttl when reading from the cache                                                         |
+| disableInstance              | boolean | false   | Whether to disable instance isolation. By default, caches between multiple instances are isolated             |
+| disableTransactionCompensate | boolean | false   | Whether to disable transaction compensation. Enabling transaction compensation ensures cache data consistency |
+| client                       | string  | 'cache' | Redis client used for caching                                                                                 |
 
 ## App Config
 
@@ -63,7 +65,7 @@ Redis Cache parameters can be configured in App Config
 
 `src/backend/config/config/config.ts`
 
-``` typescript
+```typescript
 // onions
 config.onions = {
   cacheRedis: {
@@ -86,7 +88,7 @@ You can control `enable/disable` of Redis Cache
 
 `src/backend/config/config/config.ts`
 
-``` diff
+```diff
 // onions
 config.onions = {
   cacheRedis: {
@@ -101,14 +103,14 @@ config.onions = {
 
 Allows Redis Cache to take effect in a specified operating environment
 
-|Name|Type|Description|
-|--|--|--|
-|flavor|string\|string[]|See: [Runtime Environments and Flavors](../../env-config/mode-flavor/introduction.md)|
-|mode|string\|string[]|See: [Runtime Environments and Flavors](../../env-config/mode-flavor/introduction.md)|
+| Name   | Type             | Description                                                                           |
+| ------ | ---------------- | ------------------------------------------------------------------------------------- |
+| flavor | string\|string[] | See: [Runtime Environments and Flavors](../../env-config/mode-flavor/introduction.md) |
+| mode   | string\|string[] | See: [Runtime Environments and Flavors](../../env-config/mode-flavor/introduction.md) |
 
-* Example
+- Example
 
-``` diff
+```diff
 @CacheRedis({
 + meta: {
 +   flavor: 'normal',
@@ -120,7 +122,7 @@ class CacheRedisStudent {}
 
 ## Using Redis Cache
 
-``` typescript
+```typescript
 class ControllerStudent {
   @Web.get('test')
   async test() {
@@ -129,7 +131,7 @@ class ControllerStudent {
     const value = await this.scope.cacheRedis.student.get('1');
     assert.deepEqual(student, value);
   }
-}  
+}
 ```
 
 - `this.scope.cacheRedis.student`: Gets the Redis Cache instance through the module scope
@@ -138,7 +140,7 @@ class ControllerStudent {
 
 Take the `set` method as an example to introduce the parameters of the cache method
 
-``` typescript
+```typescript
 await this.scope.cacheRedis.student.set(student, '1', {
   ttl: 2 * 3600 * 1000,
   disableTransactionCompensate: true,
@@ -146,27 +148,27 @@ await this.scope.cacheRedis.student.set(student, '1', {
 });
 ```
 
-|Name|Type|Description|
-|--|--|--|
-|ttl|number|Cache expiration time|
-|disableTransactionCompensate|boolean|Whether to disable transaction compensation|
-|db| ServiceDb| This db object is used when performing transaction compensation. By default, the db object in the context is automatically used|
+| Name                         | Type      | Description                                                                                                                     |
+| ---------------------------- | --------- | ------------------------------------------------------------------------------------------------------------------------------- |
+| ttl                          | number    | Cache expiration time                                                                                                           |
+| disableTransactionCompensate | boolean   | Whether to disable transaction compensation                                                                                     |
+| db                           | ServiceDb | This db object is used when performing transaction compensation. By default, the db object in the context is automatically used |
 
 - `db`: VonaJS supports multiple databases/datasources, so transaction compensation can be precisely controlled through `db`
 
 ## Cache methods
 
-|Name|Description|
-|--|--|
-|get|Read cache|
-|mget|Read multiple caches at once|
-|peek|Retrieve cache without updating its TTL|
-|set|Set cache|
-|mset|Set multiple caches at once|
-|getset|Set new cache and return old value|
-|has|Check if cache exists|
-|del|Delete cache|
-|mdel|Delete multiple caches at once|
-|clear|Clear all caches|
-|expire|Modify cache expiration time|
-|lookupKeys|Get all cache keys|
+| Name       | Description                             |
+| ---------- | --------------------------------------- |
+| get        | Read cache                              |
+| mget       | Read multiple caches at once            |
+| peek       | Retrieve cache without updating its TTL |
+| set        | Set cache                               |
+| mset       | Set multiple caches at once             |
+| getset     | Set new cache and return old value      |
+| has        | Check if cache exists                   |
+| del        | Delete cache                            |
+| mdel       | Delete multiple caches at once          |
+| clear      | Clear all caches                        |
+| expire     | Modify cache expiration time            |
+| lookupKeys | Get all cache keys                      |

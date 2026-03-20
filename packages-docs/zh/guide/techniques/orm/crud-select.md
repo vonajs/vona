@@ -8,7 +8,7 @@
 
 ### 1. select
 
-``` typescript
+```typescript
 class ServicePost {
   async select() {
     return await this.scope.model.post.select();
@@ -18,7 +18,7 @@ class ServicePost {
 
 ### 2. count
 
-``` typescript
+```typescript
 class ServicePost {
   async count() {
     return await this.scope.model.post.count();
@@ -28,7 +28,7 @@ class ServicePost {
 
 ### 3. select and count
 
-``` typescript
+```typescript
 class ServicePost {
   async selectAndCount() {
     return await this.scope.model.post.selectAndCount();
@@ -38,7 +38,7 @@ class ServicePost {
 
 ### 4. get
 
-``` typescript
+```typescript
 class ServicePost {
   async get(id: TableIdentity) {
     return await this.scope.model.post.get({ id });
@@ -48,7 +48,7 @@ class ServicePost {
 
 ### 5. mget
 
-``` typescript
+```typescript
 class ServicePost {
   async mget(ids: TableIdentity[]) {
     return await this.scope.model.post.mget(ids);
@@ -58,7 +58,7 @@ class ServicePost {
 
 ## Select类型定义
 
-``` typescript
+```typescript
 async select<
   T extends IModelSelectParams<TRecord>,
   ModelJoins extends TypeModelsClassLikeGeneral | undefined,
@@ -69,58 +69,62 @@ async select<
 ): Promise<TRecord[]>;
 ```
 
-* 举例：一个相对复杂的 select 查询：
+- 举例：一个相对复杂的 select 查询：
 
-``` typescript
+```typescript
 class ServicePost {
   async select() {
-    return await this.scope.model.post.select({
-      columns: ['id', 'title', 'userId'],
-      where: {
-        'id': { _gt_: 1 },
-        'testVonaUser.id': 1,
+    return await this.scope.model.post.select(
+      {
+        columns: ['id', 'title', 'userId'],
+        where: {
+          id: { _gt_: 1 },
+          'testVonaUser.id': 1,
+        },
+        joins: [['innerJoin', 'testVonaUser', ['userId', 'testVonaUser.id']]],
+        offset: 0,
+        limit: 20,
+        orders: [['createdAt', 'desc']],
       },
-      joins: [['innerJoin', 'testVonaUser', ['userId', 'testVonaUser.id']]],
-      offset: 0,
-      limit: 20,
-      orders: [['createdAt', 'desc']],
-    }, {
-      disableDeleted: false,
-    }, 'test-vona:user');
+      {
+        disableDeleted: false,
+      },
+      'test-vona:user',
+    );
   }
 }
 ```
 
 ## Select参数：Options
 
-|名称|类型|默认值|描述|
-|--|--|--|--|
-|disableDeleted|boolean|false|是否禁止软删除|
-|disableCreateTime|boolean|false|是否禁止自动设置创建时间|
-|disableUpdateTime|boolean|false|是否禁止自动设置更新时间|
-|disableCacheQuery|boolean|false|是否禁用`Cache Query`|
-|disableCacheEntity|boolean|false|是否禁用`Cache Entity`|
-|deleted|boolean|undefined|可以显式设置`deleted`值|
+| 名称               | 类型    | 默认值    | 描述                     |
+| ------------------ | ------- | --------- | ------------------------ |
+| disableDeleted     | boolean | false     | 是否禁止软删除           |
+| disableCreateTime  | boolean | false     | 是否禁止自动设置创建时间 |
+| disableUpdateTime  | boolean | false     | 是否禁止自动设置更新时间 |
+| disableCacheQuery  | boolean | false     | 是否禁用`Cache Query`    |
+| disableCacheEntity | boolean | false     | 是否禁用`Cache Entity`   |
+| deleted            | boolean | undefined | 可以显式设置`deleted`值  |
 
 ## Select参数：Params
 
-|名称|描述|
-|--|--|
-|distinct|是否启用distinct|
-|columns|需要查询的字段列表|
-|where|条件语句|
-|joins|关联表|
-|orders|排序|
-|limit|可用于分页查询|
-|offset|可用于分页查询|
-|include|静态关系|
-|with|动态关系|
+| 名称     | 描述               |
+| -------- | ------------------ |
+| distinct | 是否启用distinct   |
+| columns  | 需要查询的字段列表 |
+| where    | 条件语句           |
+| joins    | 关联表             |
+| orders   | 排序               |
+| limit    | 可用于分页查询     |
+| offset   | 可用于分页查询     |
+| include  | 静态关系           |
+| with     | 动态关系           |
 
 ## orders
 
 是数组类型，可以指定多个 orders：
 
-``` typescript
+```typescript
 async select() {
   return await this.scope.model.post.select({
     orders: [
@@ -135,7 +139,7 @@ async select() {
 
 可以通过`joins`关联多个数据表
 
-``` typescript
+```typescript
 async select() {
   return await this.scope.model.post.select({
     joins: [
@@ -154,11 +158,16 @@ async select() {
 
 前面提到，可以在`Model`中定义多个`Entity`之间的关系，所以，系统自动从 Model 定义的关系中提取 Entity 对应的数据表。Model`Post`的关系定义如下：
 
-``` typescript
+```typescript
 @Model({
   relations: {
     postContent: $relation.hasOne('test-vona:postContent', 'postId', { columns: ['id', 'content'] }),
-    user: $relation.belongsTo(() => ModelPost, () => ModelUser, 'userId', { autoload: true, columns: ['id', 'name'] }),
+    user: $relation.belongsTo(
+      () => ModelPost,
+      () => ModelUser,
+      'userId',
+      { autoload: true, columns: ['id', 'name'] },
+    ),
   },
 })
 class ModelPost {}
@@ -178,7 +187,7 @@ class ModelPost {}
 
 ### 1. 基本用法
 
-``` typescript
+```typescript
 class ServicePost {
   async select() {
     return await this.scope.model.post.select({
@@ -191,7 +200,7 @@ class ServicePost {
 }
 ```
 
-``` typescript
+```typescript
 class ServicePost {
   async select() {
     return await this.scope.model.post.select({
@@ -208,34 +217,34 @@ class ServicePost {
 
 ### 2. 普通操作符清单
 
-|名称|说明|
-|--|--|
-|\_eq_||
-|\_notEq_||
-|\_gt_||
-|\_gte_||
-|\_lt_||
-|\_lte_||
-|\_in_||
-|\_notIn_||
-|\_is_|value值为`null`或`undefined`|
-|\_isNot_|value值为`null`或`undefined`|
-|\_between_||
-|\_notBetween_||
-|\_startsWith_||
-|\_endsWith_||
-|\_includes_||
-|\_startsWithI_|非敏感的字符串操作符|
-|\_endsWithI_|非敏感的字符串操作符|
-|\_includesI_|非敏感的字符串操作符|
-|\_ref_|value为标识符|
-|\_skip_|如果value等于`_skip`，则忽略当前条件|
+| 名称            | 说明                                 |
+| --------------- | ------------------------------------ |
+| \_eq\_          |                                      |
+| \_notEq\_       |                                      |
+| \_gt\_          |                                      |
+| \_gte\_         |                                      |
+| \_lt\_          |                                      |
+| \_lte\_         |                                      |
+| \_in\_          |                                      |
+| \_notIn\_       |                                      |
+| \_is\_          | value值为`null`或`undefined`         |
+| \_isNot\_       | value值为`null`或`undefined`         |
+| \_between\_     |                                      |
+| \_notBetween\_  |                                      |
+| \_startsWith\_  |                                      |
+| \_endsWith\_    |                                      |
+| \_includes\_    |                                      |
+| \_startsWithI\_ | 非敏感的字符串操作符                 |
+| \_endsWithI\_   | 非敏感的字符串操作符                 |
+| \_includesI\_   | 非敏感的字符串操作符                 |
+| \_ref\_         | value为标识符                        |
+| \_skip\_        | 如果value等于`_skip`，则忽略当前条件 |
 
 ### 3. 用法举例
 
-* Array
+- Array
 
-``` typescript
+```typescript
 class ServicePost {
   async select() {
     return await this.scope.model.post.select({
@@ -251,7 +260,7 @@ class ServicePost {
 
 `select * from "testVonaPost" where ("title" in ('ai', 'web'))`
 
-``` typescript
+```typescript
 class ServicePost {
   async select() {
     return await this.scope.model.post.select({
@@ -265,13 +274,13 @@ class ServicePost {
 
 `select * from "testVonaPost" where "title" in ('ai', 'web')`
 
-* 判空
+- 判空
 
-``` typescript
+```typescript
 class ServicePost {
   async select() {
     return await this.scope.model.post.select({
-       where: {
+      where: {
         title: {
           _is_: null,
         },
@@ -283,11 +292,11 @@ class ServicePost {
 
 `select * from "testVonaPost" where ("title" is null)`
 
-``` typescript
+```typescript
 class ServicePost {
   async select() {
     return await this.scope.model.post.select({
-       where: {
+      where: {
         title: null,
       },
     });
@@ -297,13 +306,13 @@ class ServicePost {
 
 `select * from "testVonaPost" where "title" is null`
 
-* \_ref_
+- \_ref\_
 
-``` typescript
+```typescript
 class ServicePost {
   async select() {
     return await this.scope.model.post.select({
-       where: {
+      where: {
         title: {
           _ref_: 'title',
         },
@@ -315,11 +324,11 @@ class ServicePost {
 
 `select * from "testVonaPost" where ("title" = "title")`
 
-``` typescript
+```typescript
 class ServicePost {
   async select() {
     return await this.scope.model.post.select({
-       where: {
+      where: {
         title: {
           _ref_: 'testVonaPost.title',
         },
@@ -331,9 +340,9 @@ class ServicePost {
 
 `select * from "testVonaPost" where ("title" = "testVonaPost"."title")`
 
-* \_skip_
+- \_skip\_
 
-``` typescript
+```typescript
 class ServicePost {
   async select() {
     const where = {
@@ -356,7 +365,7 @@ class ServicePost {
 
 ### 1. 基本用法
 
-``` typescript
+```typescript
 class ServicePost {
   async select() {
     return await this.scope.model.post.select({
@@ -373,7 +382,7 @@ class ServicePost {
 
 `select * from "testVonaPost" where ((("title" like '%ai%')) or (("stars" > 20)))`
 
-``` typescript
+```typescript
 class ServicePost {
   async select() {
     return await this.scope.model.post.select({
@@ -394,19 +403,19 @@ class ServicePost {
 
 ### 2. 连接操作符清单
 
-|名称|说明|
-|--|--|
-|\_and_||
-|\_or_||
-|\_not_||
-|\_exists_||
-|\_notExists_||
+| 名称          | 说明 |
+| ------------- | ---- |
+| \_and\_       |      |
+| \_or\_        |      |
+| \_not\_       |      |
+| \_exists\_    |      |
+| \_notExists\_ |      |
 
 ### 3. 用法举例
 
-* \_not_
+- \_not\_
 
-``` typescript
+```typescript
 class ServicePost {
   async select() {
     return await this.scope.model.post.select({
@@ -423,18 +432,15 @@ class ServicePost {
 
 `select * from "testVonaPost" where not (("title" like '%ai%') and ("stars" > 20))`
 
-* \_exists_
+- \_exists\_
 
-``` typescript
+```typescript
 class ServicePost {
   async select() {
     return await this.scope.model.post.select({
       where: {
         _exists_: function (builder: Knex.QueryBuilder) {
-          builder
-            .select('*')
-            .from('testVonaPostContent')
-            .where('postId', this.scope.model.post.ref('testVonaPost.id'));
+          builder.select('*').from('testVonaPostContent').where('postId', this.scope.model.post.ref('testVonaPost.id'));
         } as any,
       },
     });
@@ -446,7 +452,7 @@ class ServicePost {
 
 ## where：raw
 
-``` typescript
+```typescript
 class ServicePost {
   async select() {
     return await this.scope.model.post.select({
@@ -460,14 +466,14 @@ class ServicePost {
 
 ## where：ref
 
-``` typescript
+```typescript
 class ServicePost {
   async select() {
     return await this.scope.model.post.select({
-       where: {
+      where: {
         title: {
-          '_eq_': this.scope.model.post.ref('title') as any,
-        }
+          _eq_: this.scope.model.post.ref('title') as any,
+        },
       },
     });
   }
@@ -476,14 +482,14 @@ class ServicePost {
 
 `select * from "testVonaPost" where ("title" = "title")`
 
-``` typescript
+```typescript
 class ServicePost {
   async select() {
     return await this.scope.model.post.select({
-       where: {
+      where: {
         title: {
-          '_eq_': this.scope.model.post.ref('testVonaPost.title') as any,
-        }
+          _eq_: this.scope.model.post.ref('testVonaPost.title') as any,
+        },
       },
     });
   }

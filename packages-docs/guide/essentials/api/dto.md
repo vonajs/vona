@@ -6,7 +6,7 @@ For example, we create a Dto `studentCreate` in the module demo-student
 
 ### 1. Cli command
 
-``` bash
+```bash
 $ vona :create:bean dto studentCreate --module=demo-student
 ```
 
@@ -18,7 +18,7 @@ Context Menu - [Module Path]: `Vona Create/Dto`
 
 ## Dto Definition
 
-``` typescript
+```typescript
 @Dto<IDtoOptionsStudentCreate>()
 export class DtoStudentCreate {}
 ```
@@ -29,7 +29,7 @@ Generally speaking, when defining a field, you need to specify the field type, v
 
 The usage of `@Api.field` in `Dto` is the same as that of `Entity`
 
-  - See: [Entity](./entity.md)
+- See: [Entity](./entity.md)
 
 ### Example
 
@@ -37,7 +37,7 @@ The usage of `@Api.field` in `Dto` is the same as that of `Entity`
 
 - `description`: `string, optional, title: 'Description'(supports I18n)`
 
-``` typescript
+```typescript
 class DtoStudentCreate {
   @Api.field(v.title($locale('Name')), v.min(3))
   name: string;
@@ -49,11 +49,11 @@ class DtoStudentCreate {
 
 ## Dto Options
 
-|Name|Description|
-|--|--|
-|independent|Whether to display independently in Swagger/Openapi, default is false|
-|openapi|Metadata related to Swagger/Openapi|
-|fields|Define Fields options|
+| Name        | Description                                                           |
+| ----------- | --------------------------------------------------------------------- |
+| independent | Whether to display independently in Swagger/Openapi, default is false |
+| openapi     | Metadata related to Swagger/Openapi                                   |
+| fields      | Define Fields options                                                 |
 
 - independent: If the Controller Action references an dto, the dto will be automatically output to Swagger/Openapi. If `independent: true` is specified, the dto will always be output to Swagger/Openapi
 
@@ -61,20 +61,20 @@ class DtoStudentCreate {
 
 Provide description metadata for dto so that it can be displayed in Swagger/Openapi
 
-``` typescript
+```typescript
 @Dto({
   openapi: { description: 'Create Student' },
 })
 class DtoStudentCreate {}
 ```
 
-* Support I18n
+- Support I18n
 
 Create language resources:
 
 `src/module/demo-student/src/config/locale/en-us.ts`
 
-``` typescript
+```typescript
 export default {
   CreateStudent: 'Create Student',
 };
@@ -82,7 +82,7 @@ export default {
 
 `src/module/demo-student/src/config/locale/zh-cn.ts`
 
-``` typescript
+```typescript
 export default {
   CreateStudent: '创建学生',
 };
@@ -90,7 +90,7 @@ export default {
 
 Use `$locale` function for language translation
 
-``` typescript
+```typescript
 import { $locale } from '../.metadata/locales.ts';
 
 @Dto({
@@ -103,7 +103,7 @@ class DtoStudentCreate {}
 
 Change the openapi metadata of the field `name` to: `title: 'Student Name'`
 
-``` typescript
+```typescript
 @Dto({
   fields: {
     name: { title: 'Student Name' },
@@ -114,7 +114,7 @@ class DtoStudentCreate {}
 
 Or:
 
-``` typescript
+```typescript
 import z from 'zod';
 
 @Dto({
@@ -131,7 +131,7 @@ Dto options can be configured in App Config
 
 `src/backend/config/config/config.ts`
 
-``` typescript
+```typescript
 // onions
 config.onions = {
   dto: {
@@ -155,7 +155,7 @@ In the above, we define two fields for `DtoStudentCreate`: `name` and `descripti
 
 Extract the two fields `name` and `description` from `EntityStudent` to generate Dto `DtoStudentCreate`
 
-``` typescript
+```typescript
 class DtoStudentCreate extends $Class.pick(EntityStudent, ['name', 'description']) {}
 ```
 
@@ -163,13 +163,13 @@ class DtoStudentCreate extends $Class.pick(EntityStudent, ['name', 'description'
 
 Change all fields in `DtoStudentCreate` to optional and generate Dto `DtoStudentUpdate`
 
-``` typescript
+```typescript
 class DtoStudentUpdate extends $Class.partial(DtoStudentCreate) {}
 ```
 
 Change the field `name` in `DtoStudentCreate` to optional and generate Dto `DtoStudentUpdate`
 
-``` typescript
+```typescript
 class DtoStudentUpdate extends $Class.partial(DtoStudentCreate, ['name']) {}
 ```
 
@@ -177,7 +177,7 @@ class DtoStudentUpdate extends $Class.partial(DtoStudentCreate, ['name']) {}
 
 Exclude the field `id` in `EntityStudent` and generate Dto `DtoStudentOther`
 
-``` typescript
+```typescript
 class DtoStudentOther extends $Class.omit(EntityStudent, ['id']) {}
 ```
 
@@ -185,7 +185,7 @@ class DtoStudentOther extends $Class.omit(EntityStudent, ['id']) {}
 
 Merge the fields in multiple classes to generate a new Dto `DtoStudentOther`
 
-``` typescript
+```typescript
 class DtoStudentOther extends $Class.mixin(EntityStudent, DtoStudentCreate, DtoStudentUpdate) {}
 ```
 
@@ -193,9 +193,8 @@ class DtoStudentOther extends $Class.mixin(EntityStudent, DtoStudentCreate, DtoS
 
 You can combine multiple Mapped tool functions
 
-``` typescript
-class DtoStudentUpdate
-  extends $Class.partial($Class.pick(EntityStudent, ['name', 'description'])) {}
+```typescript
+class DtoStudentUpdate extends $Class.partial($Class.pick(EntityStudent, ['name', 'description'])) {}
 ```
 
 ## DTO infer & generation

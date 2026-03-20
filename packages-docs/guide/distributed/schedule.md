@@ -8,7 +8,7 @@ For example, create a schedule `log` in the module `demo-student`, which will ou
 
 ### 1. Cli Command
 
-``` bash
+```bash
 $ vona :create:bean schedule log --module=demo-student
 ```
 
@@ -20,7 +20,7 @@ Context menu - [Module Path]: `Vona Bean/Schedule`
 
 ## Schedule Definition
 
-``` typescript
+```typescript
 @Schedule({ repeat: { every: 3000 } })
 export class ScheduleLog extends BeanBase implements IScheduleExecute {
   async execute() {
@@ -35,7 +35,7 @@ export class ScheduleLog extends BeanBase implements IScheduleExecute {
 
 Parameters can be configured for schedule
 
-``` typescript
+```typescript
 @Schedule({
   queue: undefined,
   repeat: {
@@ -49,15 +49,15 @@ Parameters can be configured for schedule
 class ScheduleLog {}
 ```
 
-|Name|Type|Description|
-|--|--|--|
-|queue|string|The name of the queue used by the schedule. The default value is empty, thus using the system's built-in queue|
-|repeat.every|number|Interval|
-|repeat.pattern|string|Cron expression. See: [cron-parser](https://github.com/harrisiirak/cron-parser)|
-|templateOptions|Bull.JobSchedulerTemplateOptions|Bull JobScheduler options|
-|dbInfo.level|number|Defaults to datasource level `1`, see: [Datasource Level](./queue/db-level.md)|
-|dbInfo.clientName|string|Defaults to the system's default datasource name|
-|transaction|boolean|Whether to enable database transaction, defaults to `false`|
+| Name              | Type                             | Description                                                                                                    |
+| ----------------- | -------------------------------- | -------------------------------------------------------------------------------------------------------------- |
+| queue             | string                           | The name of the queue used by the schedule. The default value is empty, thus using the system's built-in queue |
+| repeat.every      | number                           | Interval                                                                                                       |
+| repeat.pattern    | string                           | Cron expression. See: [cron-parser](https://github.com/harrisiirak/cron-parser)                                |
+| templateOptions   | Bull.JobSchedulerTemplateOptions | Bull JobScheduler options                                                                                      |
+| dbInfo.level      | number                           | Defaults to datasource level `1`, see: [Datasource Level](./queue/db-level.md)                                 |
+| dbInfo.clientName | string                           | Defaults to the system's default datasource name                                                               |
+| transaction       | boolean                          | Whether to enable database transaction, defaults to `false`                                                    |
 
 ## App Config
 
@@ -65,7 +65,7 @@ Schedule parameters can be configured in App Config
 
 `src/backend/config/config/config.ts`
 
-``` typescript
+```typescript
 // onions
 config.onions = {
   schedule: {
@@ -87,7 +87,7 @@ You can control `enable/disable` of schedule
 
 `src/backend/config/config/config.ts`
 
-``` diff
+```diff
 // onions
 config.onions = {
   schedule: {
@@ -102,14 +102,14 @@ config.onions = {
 
 Allows schedule to take effect in a specified operating environment
 
-|Name|Type|Description|
-|--|--|--|
-|flavor|string\|string[]|See: [Runtime Environments and Flavors](../env-config/mode-flavor/introduction.md)|
-|mode|string\|string[]|See: [Runtime Environments and Flavors](../env-config/mode-flavor/introduction.md)|
+| Name   | Type             | Description                                                                        |
+| ------ | ---------------- | ---------------------------------------------------------------------------------- |
+| flavor | string\|string[] | See: [Runtime Environments and Flavors](../env-config/mode-flavor/introduction.md) |
+| mode   | string\|string[] | See: [Runtime Environments and Flavors](../env-config/mode-flavor/introduction.md) |
 
-* Example
+- Example
 
-``` diff
+```diff
 @Schedule({
   repeat: {},
 + meta: {
@@ -124,7 +124,7 @@ class ScheduleLog {}
 
 You can directly inspect the currently effective schedule list
 
-``` diff
+```diff
 class ControllerStudent {
   @Web.get('test')
   test() {

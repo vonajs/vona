@@ -6,7 +6,7 @@
 
 ## 最简用法
 
-``` diff
+```diff
 import { Caching } from 'vona-module-a-caching';
 
 @Service()
@@ -19,8 +19,8 @@ class ServiceStudent {
 
 `@Caching.get`会自动使用 Summer Cache，伪代码如下:
 
-``` typescript
-const cacheKey='xxx';
+```typescript
+const cacheKey = 'xxx';
 const cacheValue = await this.scope.summerCache.student.get(cacheKey, {
   get: () => findOne(id),
 });
@@ -30,7 +30,7 @@ const cacheValue = await this.scope.summerCache.student.get(cacheKey, {
 
 ## 更多参数1
 
-``` typescript
+```typescript
 @Caching.get({
   cacheName: 'demo-student:student',
   ttl: 2 * 3600 * 1000,
@@ -41,18 +41,18 @@ const cacheValue = await this.scope.summerCache.student.get(cacheKey, {
 })
 ```
 
-|名称|类型|说明|
-|--|--|--|
-|cacheName|string|缓存名|
-|ttl|number|缓存的过期时间|
-|broadcastOnSet|boolean \| 'del'|当设置缓存时，是否需要通过广播设置其他Workers的缓存。设置为`del`，那么就通过广播删除其他Workers的缓存|
-|updateAgeOnGet|boolean|当读取缓存时是否更新ttl|
-|ignoreNull|boolean|是否忽略`null`值|
-|mode|'all' \| 'mem' \| 'redis'|缓存模式|
+| 名称           | 类型                      | 说明                                                                                                  |
+| -------------- | ------------------------- | ----------------------------------------------------------------------------------------------------- |
+| cacheName      | string                    | 缓存名                                                                                                |
+| ttl            | number                    | 缓存的过期时间                                                                                        |
+| broadcastOnSet | boolean \| 'del'          | 当设置缓存时，是否需要通过广播设置其他Workers的缓存。设置为`del`，那么就通过广播删除其他Workers的缓存 |
+| updateAgeOnGet | boolean                   | 当读取缓存时是否更新ttl                                                                               |
+| ignoreNull     | boolean                   | 是否忽略`null`值                                                                                      |
+| mode           | 'all' \| 'mem' \| 'redis' | 缓存模式                                                                                              |
 
 ## 更多参数2
 
-``` typescript
+```typescript
 @Caching.get({
   cacheName: 'demo-student:student',
   enable: true,
@@ -63,30 +63,30 @@ const cacheValue = await this.scope.summerCache.student.get(cacheKey, {
 })
 ```
 
-|名称|类型|说明|
-|--|--|--|
-|enable|boolean|启用/禁用缓存|
-|flavor|string\|string[]|参见: [运行环境与Flavor](../../env-config/mode-flavor/introduction.md)|
-|mode|string\|string[]|参见: [运行环境与Flavor](../../env-config/mode-flavor/introduction.md)|
+| 名称   | 类型             | 说明                                                                   |
+| ------ | ---------------- | ---------------------------------------------------------------------- |
+| enable | boolean          | 启用/禁用缓存                                                          |
+| flavor | string\|string[] | 参见: [运行环境与Flavor](../../env-config/mode-flavor/introduction.md) |
+| mode   | string\|string[] | 参见: [运行环境与Flavor](../../env-config/mode-flavor/introduction.md) |
 
 ## 更多参数3
 
-``` typescript
+```typescript
 @Caching.get({
   cacheName: 'demo-student:student',
   cacheKeyFn: 'customCacheKey',
 })
 ```
 
-|名称|类型|说明|
-|--|--|--|
-|cacheKeyFn|function\|string|用于生成自定义的缓存Key|
+| 名称       | 类型             | 说明                    |
+| ---------- | ---------------- | ----------------------- |
+| cacheKeyFn | function\|string | 用于生成自定义的缓存Key |
 
 ## 自定义缓存Key
 
 可以指定`cacheKeyFn`参数，用于生成自定义的缓存 Key
 
-``` diff
+```diff
 class ServiceStudent {
 + customCacheKey(info: ICachingActionKeyInfo) {
 +   return info.args[0];
@@ -99,23 +99,23 @@ class ServiceStudent {
   async findOne(id: TableIdentity): Promise<EntityStudent | undefined> {
     return await this.scope.model.student.getById(id);
   }
-}  
+}
 ```
 
 如果`cacheKeyFn`返回值是`undefined/null`，则忽略缓存
 
 ## Caching装饰器清单
 
-|名称|说明|
-|--|--|
-|@Caching.get|读取缓存|
-|@Caching.set|设置缓存|
-|@Caching.del|删除缓存|
-|@Caching.clear|清理所有缓存|
+| 名称           | 说明         |
+| -------------- | ------------ |
+| @Caching.get   | 读取缓存     |
+| @Caching.set   | 设置缓存     |
+| @Caching.del   | 删除缓存     |
+| @Caching.clear | 清理所有缓存 |
 
 ## 完整范例
 
-``` diff
+```diff
 class ServiceStudent {
 + @Caching.del({ cacheName: 'demo-student:student', intention: 'create' })
   async create(student: DtoStudentCreate): Promise<EntityStudent> {
@@ -146,4 +146,4 @@ class ServiceStudent {
 这里添加的`@Caching.xxx`装饰器仅用于演示目的。在实际业务当中，不需要在 Service 中使用`@Caching.xxx`。因为 Model 本身内置了更完善的缓存机制
 
 - 参见: [Vona ORM: 缓存](../orm/caching.md)
-:::
+  :::

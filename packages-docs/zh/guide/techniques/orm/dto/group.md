@@ -8,14 +8,14 @@
 
 在 VSCode 中，可以通过右键菜单`Vona Create/Dto`创建 DTO 的代码骨架：
 
-``` typescript
+```typescript
 @Dto()
 export class DtoPostGroup {}
 ```
 
 ### 2. 继承$Dto.group
 
-``` diff
+```diff
 @Dto()
 export class DtoPostGroup
 + extends $Dto.group(() => ModelPost, 'userId', {
@@ -28,7 +28,7 @@ export class DtoPostGroup
 
 以 Controller Post 的 group 方法为例，标注 API 返回值：
 
-``` diff
+```diff
 class ControllerPost {
   @Web.get('group')
 + @Api.body(v.array(DtoPostGroup))

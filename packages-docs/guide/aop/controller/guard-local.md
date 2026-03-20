@@ -6,7 +6,7 @@ For example, create a local guard `admin` in the module demo-student to check wh
 
 ### 1. Cli command
 
-``` bash
+```bash
 $ vona :create:bean guard admin --module=demo-student
 ```
 
@@ -18,7 +18,7 @@ Context Menu - [Module Path]: `Vona Aspect/Guard`
 
 ## Guard Definition
 
-``` typescript
+```typescript
 export interface IGuardOptionsAdmin extends IDecoratorGuardOptions {}
 
 @Guard<IGuardOptionsAdmin>()
@@ -38,7 +38,7 @@ class GuardAdmin {
 
 ### 1. Annotating controller actions
 
-``` diff
+```diff
 import { Aspect } from 'vona-module-a-aspect';
 
 @Controller()
@@ -56,7 +56,7 @@ class ControllerStudent {
 
 You can use guard for controller classes so that all actions in the class will apply this guard
 
-``` diff
+```diff
 import { Aspect } from 'vona-module-a-aspect';
 
 @Controller()
@@ -75,7 +75,7 @@ For example, define the `name` parameter for the admin guard to control the user
 
 ### 1. Defining parameter types
 
-``` diff
+```diff
 export interface IGuardOptionsAdmin extends IDecoratorGuardOptions {
 + name: string;
 }
@@ -83,7 +83,7 @@ export interface IGuardOptionsAdmin extends IDecoratorGuardOptions {
 
 ### 2. Providing default values ​​for parameters
 
-``` diff
+```diff
 @Guard<IGuardOptionsAdmin>({
 + name: 'admin',
 })
@@ -91,7 +91,7 @@ export interface IGuardOptionsAdmin extends IDecoratorGuardOptions {
 
 ### 3. Using Parameters
 
-``` diff
+```diff
 export interface IGuardOptionsAdmin extends IDecoratorGuardOptions {
   name: string;
 }
@@ -114,7 +114,7 @@ export class GuardAdmin extends BeanBase implements IGuardExecute {
 
 You can specify local guard parameters for a specific API
 
-``` diff
+```diff
 class ControllerStudent {
   @Web.get()
 + @Aspect.guard('demo-student:admin', { name: 'other-name' })
@@ -130,7 +130,7 @@ Guard parameters can be configured in App Config
 
 `src/backend/config/config/config.ts`
 
-``` typescript
+```typescript
 // onions
 config.onions = {
   guard: {

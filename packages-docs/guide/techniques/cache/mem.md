@@ -8,7 +8,7 @@ For example, create a Mem Cache `student` in the module `demo-student`, to cache
 
 ### 1. Cli Command
 
-``` bash
+```bash
 $ vona :create:bean cacheMem student --module=demo-student
 ```
 
@@ -20,16 +20,18 @@ Context menu - [Module Path]: `Vona Bean/Cache Mem`
 
 ## Mem Cache Definition
 
-``` typescript
+```typescript
 export type TCacheMemStudentKey = string;
-export interface TCacheMemStudentData { id: string; name: string }
+export interface TCacheMemStudentData {
+  id: string;
+  name: string;
+}
 
 @CacheMem({
   max: 500,
   ttl: 2 * 3600 * 1000,
 })
-export class CacheMemStudent
-  extends BeanCacheMemBase<TCacheMemStudentKey, TCacheMemStudentData> {}
+export class CacheMemStudent extends BeanCacheMemBase<TCacheMemStudentKey, TCacheMemStudentData> {}
 ```
 
 - `TCacheMemStudentKey`: Defines the type of the cache key
@@ -39,7 +41,7 @@ export class CacheMemStudent
 
 Parameters can be configured for Mem Cache
 
-``` typescript
+```typescript
 @CacheMem({
   max: 500,
   ttl: 2 * 3600 * 1000,
@@ -52,15 +54,15 @@ Parameters can be configured for Mem Cache
 class CacheMemStudent {}
 ```
 
-|Name|Type|Default|Description|
-|--|--|--|--|
-|max|number||Maximum number of items allowed in the cache|
-|ttl|number||Cache expiration time|
-|updateAgeOnGet|boolean|true|Whether to update the ttl when reading from the cache|
-|updateAgeOnHas|boolean|false|Whether to update the ttl when checking if the cache exists|
-|broadcastOnSet|boolean | 'del'\|false|Whether to broadcast changes to other Workers when setting the cache. Set to `del` to broadcast deletion to other Workers’ caches|
-|disableInstance|boolean|false|Whether to disable instance isolation. By default, caches between multiple instances are isolated|
-|disableTransactionCompensate|boolean|false|Whether to disable transaction compensation. Enabling transaction compensation ensures cache data consistency|
+| Name                         | Type    | Default      | Description                                                                                                                       |
+| ---------------------------- | ------- | ------------ | --------------------------------------------------------------------------------------------------------------------------------- |
+| max                          | number  |              | Maximum number of items allowed in the cache                                                                                      |
+| ttl                          | number  |              | Cache expiration time                                                                                                             |
+| updateAgeOnGet               | boolean | true         | Whether to update the ttl when reading from the cache                                                                             |
+| updateAgeOnHas               | boolean | false        | Whether to update the ttl when checking if the cache exists                                                                       |
+| broadcastOnSet               | boolean | 'del'\|false | Whether to broadcast changes to other Workers when setting the cache. Set to `del` to broadcast deletion to other Workers’ caches |
+| disableInstance              | boolean | false        | Whether to disable instance isolation. By default, caches between multiple instances are isolated                                 |
+| disableTransactionCompensate | boolean | false        | Whether to disable transaction compensation. Enabling transaction compensation ensures cache data consistency                     |
 
 ## App Config
 
@@ -68,7 +70,7 @@ Mem Cache parameters can be configured in App Config
 
 `src/backend/config/config/config.ts`
 
-``` typescript
+```typescript
 // onions
 config.onions = {
   cacheMem: {
@@ -93,7 +95,7 @@ You can control `enable/disable` of Mem Cache
 
 `src/backend/config/config/config.ts`
 
-``` diff
+```diff
 // onions
 config.onions = {
   cacheMem: {
@@ -108,14 +110,14 @@ config.onions = {
 
 Allows Mem Cache to take effect in a specified operating environment
 
-|Name|Type|Description|
-|--|--|--|
-|flavor|string\|string[]|See: [Runtime Environments and Flavors](../../env-config/mode-flavor/introduction.md)|
-|mode|string\|string[]|See: [Runtime Environments and Flavors](../../env-config/mode-flavor/introduction.md)|
+| Name   | Type             | Description                                                                           |
+| ------ | ---------------- | ------------------------------------------------------------------------------------- |
+| flavor | string\|string[] | See: [Runtime Environments and Flavors](../../env-config/mode-flavor/introduction.md) |
+| mode   | string\|string[] | See: [Runtime Environments and Flavors](../../env-config/mode-flavor/introduction.md) |
 
-* Example
+- Example
 
-``` diff
+```diff
 @CacheMem({
 + meta: {
 +   flavor: 'normal',
@@ -127,7 +129,7 @@ class CacheMemStudent {}
 
 ## Using Mem Cache
 
-``` typescript
+```typescript
 class ControllerStudent {
   @Web.get('test')
   async test() {
@@ -136,7 +138,7 @@ class ControllerStudent {
     const value = this.scope.cacheMem.student.get('1');
     assert.deepEqual(student, value);
   }
-}  
+}
 ```
 
 - `this.scope.cacheMem.student`: Gets the Mem Cache instance through the module scope
@@ -145,7 +147,7 @@ class ControllerStudent {
 
 Take the `set` method as an example to introduce the parameters of the cache method
 
-``` typescript
+```typescript
 this.scope.cacheMem.student.set(student, '1', {
   ttl: 2 * 3600 * 1000,
   broadcastOnSet: 'del',
@@ -154,26 +156,26 @@ this.scope.cacheMem.student.set(student, '1', {
 });
 ```
 
-|Name|Type|Description|
-|--|--|--|
-|ttl|number|Cache expiration time|
-|broadcastOnSet|boolean \| 'del' | Whether to broadcast changes to other Workers when setting the cache. Set to `del` to broadcast deletion to other Workers’ caches|
-|disableTransactionCompensate|boolean|Whether to disable transaction compensation|
-|db| ServiceDb| This db object is used when performing transaction compensation. By default, the db object in the context is automatically used|
+| Name                         | Type             | Description                                                                                                                       |
+| ---------------------------- | ---------------- | --------------------------------------------------------------------------------------------------------------------------------- |
+| ttl                          | number           | Cache expiration time                                                                                                             |
+| broadcastOnSet               | boolean \| 'del' | Whether to broadcast changes to other Workers when setting the cache. Set to `del` to broadcast deletion to other Workers’ caches |
+| disableTransactionCompensate | boolean          | Whether to disable transaction compensation                                                                                       |
+| db                           | ServiceDb        | This db object is used when performing transaction compensation. By default, the db object in the context is automatically used   |
 
 - `db`: VonaJS supports multiple databases/datasources, so transaction compensation can be precisely controlled through `db`
 
 ## Cache methods
 
-|Name|Description|
-|--|--|
-|get|Read cache|
-|mget|Read multiple caches at once|
-|peek|Retrieve cache without updating its TTL|
-|set|Set cache|
-|mset|Set multiple caches at once|
-|getset|Set new cache and return the old value|
-|has|Check if cache exists|
-|del|Delete cache|
-|mdel|Delete multiple caches at once|
-|clear|Clear all caches|
+| Name   | Description                             |
+| ------ | --------------------------------------- |
+| get    | Read cache                              |
+| mget   | Read multiple caches at once            |
+| peek   | Retrieve cache without updating its TTL |
+| set    | Set cache                               |
+| mset   | Set multiple caches at once             |
+| getset | Set new cache and return the old value  |
+| has    | Check if cache exists                   |
+| del    | Delete cache                            |
+| mdel   | Delete multiple caches at once          |
+| clear  | Clear all caches                        |

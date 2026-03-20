@@ -6,7 +6,7 @@ Modules can individually provide their own `Models`
 
 ### 1. Cli command
 
-``` bash
+```bash
 $ vona :create:bean model student --module=demo-student
 ```
 

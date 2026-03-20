@@ -6,7 +6,7 @@
 
 ### 1. 注册新用户
 
-``` typescript
+```typescript
 const jwt = await this.bean.auth.authenticate('auth-simple:simple', {
   clientOptions: {
     username: 'tom',
@@ -23,21 +23,24 @@ const jwt = await this.bean.auth.authenticate('auth-simple:simple', {
 
 `confirmed`: 如果为`true`，意味着用户已经确认，不需要后续的`激活`操作
 
-* 简写方式：
+- 简写方式：
 
-``` typescript
-const jwt = await this.bean.authSimple.authenticate({
-  username: 'tom',
-  password: '123456',
-  email: 'xxx@xxx.com',
-  avatar: ':emoji:flower',
-  confirmed: true,
-}, 'register');
+```typescript
+const jwt = await this.bean.authSimple.authenticate(
+  {
+    username: 'tom',
+    password: '123456',
+    email: 'xxx@xxx.com',
+    avatar: ':emoji:flower',
+    confirmed: true,
+  },
+  'register',
+);
 ```
 
 ### 2. 登录
 
-``` typescript
+```typescript
 const jwt = await this.bean.auth.authenticate('auth-simple:simple', {
   clientOptions: {
     username: 'tom',
@@ -49,18 +52,21 @@ const jwt = await this.bean.auth.authenticate('auth-simple:simple', {
 });
 ```
 
-* 简写方式：
+- 简写方式：
 
-``` typescript
-const jwt = await this.bean.authSimple.authenticate({
-  username: 'tom',
-  password: '123456',
-}, 'login');
+```typescript
+const jwt = await this.bean.authSimple.authenticate(
+  {
+    username: 'tom',
+    password: '123456',
+  },
+  'login',
+);
 ```
 
 ### 3. 退出登录
 
-``` typescript
+```typescript
 await this.bean.passport.signout();
 ```
 
@@ -72,7 +78,7 @@ await this.bean.passport.signout();
 
 `src/backend/config/config/config.ts`
 
-``` typescript
+```typescript
 // modules
 config.modules = {
   'auth-simple': {
@@ -94,7 +100,7 @@ config.modules = {
 
 ### 1. Cli命令
 
-``` bash
+```bash
 $ vona :create:bean authProvider simple --module=auth-simple
 ```
 
@@ -106,7 +112,7 @@ $ vona :create:bean authProvider simple --module=auth-simple
 
 ## Auth Provider定义
 
-``` diff
+```diff
 export interface IAuthProviderSimpleClientRecord extends IAuthProviderClientRecord {}
 
 export interface IAuthProviderSimpleClientOptions extends IAuthProviderClientOptions {
@@ -180,7 +186,7 @@ class AuthProviderSimple {
 
 Profile 具有统一的接口定义:
 
-``` typescript
+```typescript
 export interface IAuthUserProfile {
   id: string;
   username?: string;
@@ -195,4 +201,4 @@ export interface IAuthUserProfile {
 }
 ```
 
-* `confirmed`: 如果为`true`，意味着用户已经确认，不需要后续的`激活`操作
+- `confirmed`: 如果为`true`，意味着用户已经确认，不需要后续的`激活`操作

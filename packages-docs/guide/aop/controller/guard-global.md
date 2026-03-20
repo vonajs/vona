@@ -6,7 +6,7 @@ For example, create a global guard `admin` in the module demo-student to check w
 
 ### 1. Cli command
 
-``` bash
+```bash
 $ vona :create:bean guard admin --module=demo-student --boilerplate=global
 ```
 
@@ -18,7 +18,7 @@ Context Menu - [Module Path]: `Vona Aspect/Guard Global`
 
 ## Guard Definition
 
-``` typescript
+```typescript
 export interface IGuardOptionsAdmin extends IDecoratorGuardOptionsGlobal {}
 
 @Guard<IGuardOptionsAdmin>()
@@ -47,7 +47,7 @@ For example, define the `name` parameter for the admin guard to control the user
 
 ### 1. Defining parameter types
 
-``` diff
+```diff
 export interface IGuardOptionsAdmin extends IDecoratorGuardOptionsGlobal {
 + name: string;
 }
@@ -55,7 +55,7 @@ export interface IGuardOptionsAdmin extends IDecoratorGuardOptionsGlobal {
 
 ### 2. Providing default values ​​for parameters
 
-``` diff
+```diff
 @Guard<IGuardOptionsAdmin>({
 + name: 'admin',
 })
@@ -63,7 +63,7 @@ export interface IGuardOptionsAdmin extends IDecoratorGuardOptionsGlobal {
 
 ### 3. Using Parameters
 
-``` diff
+```diff
 export interface IGuardOptionsAdmin extends IDecoratorGuardOptionsGlobal {
   name: string;
 }
@@ -86,7 +86,7 @@ export class GuardAdmin extends BeanBase implements IGuardExecute {
 
 You can specify global guard parameters for a specific API
 
-``` diff
+```diff
 class ControllerStudent {
   @Web.get()
 + @Aspect.guardGlobal('demo-student:admin', { name: 'other-name' })
@@ -102,7 +102,7 @@ Guard parameters can be configured in App Config
 
 `src/backend/config/config/config.ts`
 
-``` typescript
+```typescript
 // onions
 config.onions = {
   guard: {
@@ -125,7 +125,7 @@ Since global guards ard loaded and enabled by default, VonaJS provides two param
 
 For example, the system has a built-in global guard `a-user:passport`, and we hope that the loading order is as follows: `a-user:passport` > `Current`
 
-``` diff
+```diff
 @Guard({
 + dependencies: 'a-user:passport',
   name: 'admin',
@@ -137,7 +137,7 @@ class GuardAdmin {}
 
 The order of `dependents` is just the opposite of `dependencies`. We hope that the loading order is as follows: `Current` > `a-user:passport`
 
-``` diff
+```diff
 @Guard({
 + dependents: 'a-user:passport',
   name: 'admin',
@@ -151,9 +151,9 @@ You can control `enable/disable` of global guard for certain APIs
 
 ### 1. Enable
 
-* Disable for an API
+- Disable for an API
 
-``` diff
+```diff
 class ControllerStudent {
   @Web.get()
 + @Aspect.guardGlobal('demo-student:admin', { enable: false })
@@ -161,11 +161,11 @@ class ControllerStudent {
 }
 ```
 
-* Disable for all APIs
+- Disable for all APIs
 
 `src/backend/config/config/config.ts`
 
-``` diff
+```diff
 // onions
 config.onions = {
   guard: {
@@ -180,14 +180,14 @@ config.onions = {
 
 Allows global guard to take effect in a specified operating environment
 
-|Name|Type|Description|
-|--|--|--|
-|flavor|string\|string[]|See: [Runtime Environments and Flavors](../../env-config/mode-flavor/introduction.md)|
-|mode|string\|string[]|See: [Runtime Environments and Flavors](../../env-config/mode-flavor/introduction.md)|
+| Name   | Type             | Description                                                                           |
+| ------ | ---------------- | ------------------------------------------------------------------------------------- |
+| flavor | string\|string[] | See: [Runtime Environments and Flavors](../../env-config/mode-flavor/introduction.md) |
+| mode   | string\|string[] | See: [Runtime Environments and Flavors](../../env-config/mode-flavor/introduction.md) |
 
-* Example
+- Example
 
-``` diff
+```diff
 @Guard({
 + meta: {
 +   flavor: 'normal',
@@ -198,19 +198,19 @@ class GuardAdmin {}
 ```
 
 ### 3. match/ignore
-    
-You can enable/disable global guard for some specific APIs    
 
-|Name|Type|Description|
-|--|--|--|
-|match|string\|regexp\|(string\|regexp)[]|For which APIs to enable|
-|ignore|string\|regexp\|(string\|regexp)[]|For which APIs to disable|
+You can enable/disable global guard for some specific APIs
+
+| Name   | Type                               | Description               |
+| ------ | ---------------------------------- | ------------------------- |
+| match  | string\|regexp\|(string\|regexp)[] | For which APIs to enable  |
+| ignore | string\|regexp\|(string\|regexp)[] | For which APIs to disable |
 
 ## Inspect
 
 You can directly inspect the currently effective global guard list in the Controller action
 
-``` diff
+```diff
 class ControllerStudent {
   @Web.get()
   async findMany() {

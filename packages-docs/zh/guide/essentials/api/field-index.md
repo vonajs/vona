@@ -8,7 +8,7 @@ Vona 使用 Bean `meta.index`统一配置模块的字段索引
 
 ### 1. Cli命令
 
-``` bash
+```bash
 $ vona :create:bean meta index --module=demo-student
 ```
 
@@ -20,7 +20,7 @@ $ vona :create:bean meta index --module=demo-student
 
 ## meta.index定义
 
-``` typescript
+```typescript
 @Meta()
 export class MetaIndex extends BeanBase {}
 ```
@@ -43,7 +43,7 @@ class MetaIndex {}
 
 为了让代码质量更高，更容易维护，还可以使用类型化的代码风格
 
-``` typescript
+```typescript
 import { $tableColumns } from 'vona-module-a-ormutils';
 
 @Meta({
@@ -62,7 +62,7 @@ class MetaIndex {}
 
 `src/backend/config/config/config.ts`
 
-``` typescript
+```typescript
 // onions
 config.onions = {
   meta: {

@@ -6,7 +6,7 @@
 
 ## Cli命令
 
-``` bash
+```bash
 $ vona :tools:crudCabloy student --module=demo-student
 ```
 
@@ -18,16 +18,16 @@ $ vona :tools:crudCabloy student --module=demo-student
 
 ## 目录结构
 
-|名称|描述|
-|--|--|
-|controller/student.ts|Controller|
-|service/student.ts|Service|
-|model/student.ts|Model|
-|entity/student.ts|Entity|
-|dto/studentCreate.ts|Create Dto|
-|dto/studentUpdate.ts|Update Dto|
-|bean/meta.version.ts|Meta Version|
-|bean/meta.index.ts|Meta Index|
-|config/locale/en-us.ts|Locale: en-us|
-|config/locale/zh-cn.ts|Locale: zh-cn|
-|test/student.test.ts|Test|
+| 名称                   | 描述          |
+| ---------------------- | ------------- |
+| controller/student.ts  | Controller    |
+| service/student.ts     | Service       |
+| model/student.ts       | Model         |
+| entity/student.ts      | Entity        |
+| dto/studentCreate.ts   | Create Dto    |
+| dto/studentUpdate.ts   | Update Dto    |
+| bean/meta.version.ts   | Meta Version  |
+| bean/meta.index.ts     | Meta Index    |
+| config/locale/en-us.ts | Locale: en-us |
+| config/locale/zh-cn.ts | Locale: zh-cn |
+| test/student.test.ts   | Test          |

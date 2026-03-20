@@ -2,7 +2,7 @@
 
 In VonaJS, each module can provide Assets for server-side use
 
-* `Multi-scenario`: Different types of Assets can be provided for different scenarios and purposes
+- `Multi-scenario`: Different types of Assets can be provided for different scenarios and purposes
 
 ## Initializing the Code Skeleton
 
@@ -10,7 +10,7 @@ For example, creating a new scenario `templates` containing multiple template fi
 
 ### 1. Cli Command
 
-``` bash
+```bash
 $ vona :init:asset templates --module=demo-student
 ```
 
@@ -26,7 +26,7 @@ Executing the above command will automatically create the directory: `assets/tem
 
 Add Assets according to business needs, such as adding two template files:
 
-``` bash
+```bash
 src/module/demo-student/assets/templates/item.ejs
 src/module/demo-student/assets/templates/list.ejs
 ```
@@ -35,14 +35,14 @@ src/module/demo-student/assets/templates/list.ejs
 
 In test and development environments, Assets can be accessed via the following file paths:
 
-``` bash
+```bash
 /path/to/project/src/module/demo-student/assets/templates/item.ejs
 /path/to/project/src/module/demo-student/assets/templates/list.ejs
 ```
 
 In production environments, the file paths are as follows:
 
-``` bash
+```bash
 /path/to/project/dist/normal/assets/templates/demo-student/item.ejs
 /path/to/project/dist/normal/assets/templates/demo-student/list.ejs
 ```
@@ -55,7 +55,7 @@ For example, create `meta.asset` in the module demo-student
 
 ### 1. Cli Command
 
-``` bash
+```bash
 $ vona :create:bean meta asset --module=demo-student
 ```
 
@@ -67,7 +67,7 @@ Context menu - [Module Path]: `Vona Meta/Asset`
 
 ## meta.asset Definition
 
-``` typescript
+```typescript
 export interface IAssetGetPath {
   templates: 'item.ejs' | 'list.ejs';
 }
@@ -80,12 +80,12 @@ export class MetaAsset extends BeanAssetBase<IAssetGetPath> {}
 
 ## Get File Path
 
-``` typescript
+```typescript
 class ControllerStudent {
   test() {
     const path = this.scope.asset.get('templates', 'item.ejs');
   }
-}  
+}
 ```
 
 - `asset.get`: Takes the scenario name and file name as input, generates the file path

@@ -6,7 +6,7 @@ For example, create a local pipe `number` in the module demo-student to convert 
 
 ### 1. Cli command
 
-``` bash
+```bash
 $ vona :create:bean pipe number --module=demo-student
 ```
 
@@ -18,7 +18,7 @@ Context Menu - [Module Path]: `Vona Aspect/Pipe`
 
 ## Pipe Definition
 
-``` typescript
+```typescript
 export type TypePipeNumberData = unknown;
 
 export type TypePipeNumberResult = number;
@@ -44,7 +44,7 @@ class PipeNumber {
 
 ### 1. Annotating controller actions
 
-``` diff
+```diff
 import { Aspect } from 'vona-module-a-aspect';
 
 @Controller()
@@ -62,7 +62,7 @@ class ControllerStudent {
 
 You can use pipe for controller classes so that all actions in the class will apply this pipe
 
-``` diff
+```diff
 import { Aspect } from 'vona-module-a-aspect';
 
 @Controller()
@@ -81,7 +81,7 @@ For example, define the `errorCode` parameter for the number pipe. If the incomi
 
 ### 1. Defining parameter types
 
-``` diff
+```diff
 export interface IPipeOptionsNumber extends IDecoratorPipeOptions {
 + errorCode: number;
 }
@@ -89,7 +89,7 @@ export interface IPipeOptionsNumber extends IDecoratorPipeOptions {
 
 ### 2. Providing default values ​​for parameters
 
-``` diff
+```diff
 @Pipe<IPipeOptionsNumber>({
 + errorCode: 400,
 })
@@ -97,7 +97,7 @@ export interface IPipeOptionsNumber extends IDecoratorPipeOptions {
 
 ### 3. Using Parameters
 
-``` diff
+```diff
 export interface IPipeOptionsNumber extends IDecoratorPipeOptions {
   errorCode: number;
 }
@@ -119,7 +119,7 @@ export class PipeNumber extends BeanBase implements IPipeTransform<TypePipeNumbe
 
 You can specify local pipe parameters for a specific API
 
-``` diff
+```diff
 class ControllerStudent {
   @Web.get(':id')
 + @Aspect.pipe('demo-student:number', { errorCode: 500 })
@@ -135,7 +135,7 @@ Pipe parameters can be configured in App Config
 
 `src/backend/config/config/config.ts`
 
-``` typescript
+```typescript
 // onions
 config.onions = {
   pipe: {

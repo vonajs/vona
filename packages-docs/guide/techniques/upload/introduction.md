@@ -4,18 +4,16 @@ VonaJS implements file upload capabilities based on [busboy](https://github.com/
 
 ## Single File Upload
 
-``` typescript
+```typescript
 class ControllerStudent {
   @Web.post('file')
   @Core.fileUpload()
   @Api.contentType('application/json')
-  async uploadFile(
-    @Arg.file('file1', v.title('Upload Single File')) file1: IUploadFile,
-  ) {
+  async uploadFile(@Arg.file('file1', v.title('Upload Single File')) file1: IUploadFile) {
     console.log(file1);
     return file1.file;
   }
-}  
+}
 ```
 
 - `@Core.fileUpload`: This decorator enables the Upload interceptor. The interceptor parses the uploaded file and stores it in a temporary file. After completing the business logic, the interceptor will automatically clean up the temporary file
@@ -24,13 +22,13 @@ class ControllerStudent {
 
 ### IUploadFile
 
-|Name|Description|
-|--|--|
-|name|File field name|
-|file|Temporary file path|
-|info.filename|File name|
-|info.encoding|File encoding|
-|info.mimeType|File type|
+| Name          | Description         |
+| ------------- | ------------------- |
+| name          | File field name     |
+| file          | Temporary file path |
+| info.filename | File name           |
+| info.encoding | File encoding       |
+| info.mimeType | File type           |
 
 As shown in the image below:
 
@@ -38,14 +36,12 @@ As shown in the image below:
 
 ## Multiple Files Upload
 
-``` typescript
+```typescript
 class ControllerStudent {
   @Web.post('files')
   @Core.fileUpload()
   @Api.contentType('application/json')
-  async uploadFiles(
-    @Arg.files('files', v.title('Upload Multiple Files')) files: IUploadFile[],
-  ) {
+  async uploadFiles(@Arg.files('files', v.title('Upload Multiple Files')) files: IUploadFile[]) {
     console.log(files);
     return files.map(item => item.file);
   }
@@ -62,17 +58,17 @@ For array-type fields, different parameter decorators are needed depending on th
 
 ### 1. @Arg.field
 
-* Frontend
+- Frontend
 
-``` typescript
+```typescript
 const formData = new FormData();
 formData.append('name', 'vona');
 formData.append('tags', ['node', 'typescript']);
 ```
 
-* API
+- API
 
-``` diff
+```diff
 export class ControllerStudent extends BeanBase {
   @Web.post('file')
   @Core.fileUpload()
@@ -93,18 +89,18 @@ export class ControllerStudent extends BeanBase {
 
 ### 2. @Arg.fields
 
-* Frontend
+- Frontend
 
-``` typescript
+```typescript
 const formData = new FormData();
 formData.append('name', 'vona');
 formData.append('tags', 'node');
 formData.append('tags', 'typescript');
 ```
 
-* API
+- API
 
-``` diff
+```diff
 export class ControllerStudent extends BeanBase {
   @Web.post('file')
   @Core.fileUpload()

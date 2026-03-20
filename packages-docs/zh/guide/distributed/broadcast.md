@@ -8,7 +8,7 @@
 
 ### 1. Cli命令
 
-``` bash
+```bash
 $ vona :create:bean broadcast echo --module=demo-student
 ```
 
@@ -20,13 +20,13 @@ $ vona :create:bean broadcast echo --module=demo-student
 
 ## 广播定义
 
-``` typescript
-export interface TypeBroadcastEchoJobData { message: string }
+```typescript
+export interface TypeBroadcastEchoJobData {
+  message: string;
+}
 
 @Broadcast()
-export class BroadcastEcho
-  extends BeanBroadcastBase<TypeBroadcastEchoJobData>
-  implements IBroadcastExecute<TypeBroadcastEchoJobData> {
+export class BroadcastEcho extends BeanBroadcastBase<TypeBroadcastEchoJobData> implements IBroadcastExecute<TypeBroadcastEchoJobData> {
   async execute(data: TypeBroadcastEchoJobData, isEmitter?: boolean) {
     if (!isEmitter) {
       console.log(`pid: ${process.pid} message: ${data.message}`);
@@ -40,21 +40,21 @@ export class BroadcastEcho
 
 * execute 参数
 
-|名称|说明|
-|--|--|
-|data|广播数据|
-|isEmitter|是否是发送广播的工作进程|
+| 名称      | 说明                     |
+| --------- | ------------------------ |
+| data      | 广播数据                 |
+| isEmitter | 是否是发送广播的工作进程 |
 
 ## 发送广播
 
-``` typescript
+```typescript
 class ControllerStudent {
   test() {
     const data = { message: 'Hello world' };
     console.log(`pid: ${process.pid} message: ${data.message}`);
     this.scope.broadcast.echo.emit(data);
   }
-}  
+}
 ```
 
 - `this.scope.broadcast.echo`: 通过模块 scope 取得广播实例
@@ -68,7 +68,7 @@ class ControllerStudent {
 
 可以为广播配置参数
 
-``` typescript
+```typescript
 @Broadcast({
   instance: true,
   transaction: true,
@@ -76,10 +76,10 @@ class ControllerStudent {
 class BroadcastEcho {}
 ```
 
-|名称|说明|
-|--|--|
-|instance|是否确保实例已初始化，缺省值为`true`|
-|transaction|是否启用数据库事务|
+| 名称        | 说明                                 |
+| ----------- | ------------------------------------ |
+| instance    | 是否确保实例已初始化，缺省值为`true` |
+| transaction | 是否启用数据库事务                   |
 
 - `instance`: VonaJS 支持`多实例/多租户`。如果广播的业务逻辑需要操作实例数据，则需要确保实例已初始化
 - `transaction`: 如果设置为 true，系统会自动将广播的`execute`方法放入数据库事务当中
@@ -90,7 +90,7 @@ class BroadcastEcho {}
 
 `src/backend/config/config/config.ts`
 
-``` typescript
+```typescript
 // onions
 config.onions = {
   broadcast: {
@@ -106,7 +106,7 @@ config.onions = {
 
 可以直接输出当前生效的广播清单
 
-``` diff
+```diff
 class ControllerStudent {
   @Web.get('test')
   test() {

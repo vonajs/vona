@@ -6,7 +6,7 @@
 
 在模块 demo-student 查找本模块提供的 ServiceStudent，代码如下：
 
-``` typescript
+```typescript
 class ControllerStudent {
   async findMany() {
     return await this.scope.service.student.findMany();
@@ -20,12 +20,12 @@ class ControllerStudent {
 
 在其他模块查找模块 demo-student 提供的 ServiceStudent，代码如下：
 
-``` typescript
+```typescript
 class ControllerOther {
   async findMany() {
     return await this.$scope.demoStudent.service.student.findMany();
   }
-}  
+}
 ```
 
 通过`this.$scope.demoStudent`获取模块 demo-student 的 scope 对象，从而找到模块 demo-student 提供的 service
@@ -34,7 +34,7 @@ class ControllerOther {
 
 在模块 demo-student 查找模块 a-jwt 提供的全局 service bean `BeanJwt`，代码如下：
 
-``` typescript
+```typescript
 class ControllerStudent {
   async test() {
     return await this.bean.jwt.create({});

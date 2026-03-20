@@ -6,27 +6,27 @@ Vona ORM 采用魔术方法的机制进一步简化操作数据的代码
 
 系统自动从 method name 中解析出参数，然后调用实际的 CRUD 方法
 
-* 举例 1
+- 举例 1
 
-``` typescript
+```typescript
 this.scope.model.student.getByName('Tom');
 ```
 
 系统检测到`getBy`前缀，于是自动解析出参数名称`name`，参数值`'Tom'`，然后调用如下方法:
 
-``` typescript
+```typescript
 this.scope.model.student.get({ name: 'Tom' });
 ```
 
-* 举例 2
+- 举例 2
 
-``` typescript
+```typescript
 this.scope.model.student.getByNameEqI('Tom');
 ```
 
 系统检测到`getBy`前缀，于是自动解析出参数名称`name`，参数值`'Tom'`，条件操作符`eqI`，然后调用如下方法:
 
-``` typescript
+```typescript
 this.scope.model.student.get({ name: { _eqI_: 'Tom' } });
 ```
 
@@ -40,7 +40,7 @@ this.scope.model.student.get({ name: { _eqI_: 'Tom' } });
 
 以字段`id`为例，会提供以下魔术方法:
 
-``` typescript
+```typescript
 this.scope.model.student.getById(id);
 this.scope.model.student.updateById(id, student);
 this.scope.model.student.deleteById(id);
@@ -48,7 +48,7 @@ this.scope.model.student.deleteById(id);
 
 以字段`name`为例，会提供以下魔术方法:
 
-``` typescript
+```typescript
 this.scope.model.student.getByName(name);
 this.scope.model.student.getByNameEqI(name);
 this.scope.model.student.selectByName(name);
@@ -61,7 +61,7 @@ this.scope.model.student.selectByNameEqI(name);
 
 比如，针对字段`title`，提供方法`getByTitle`/`selectByTitle`:
 
-``` typescript
+```typescript
 @Model()
 class ModelPost {
   getByTitle(title: string) {
@@ -80,7 +80,7 @@ class ModelPost {
 
 于是，可以这样使用:
 
-``` typescript
+```typescript
 this.scope.model.post.getByTitle(title);
 this.scope.model.post.selectByTitle(title);
 ```
@@ -91,7 +91,7 @@ this.scope.model.post.selectByTitle(title);
 
 比如，针对字段`name`，提供方法`getByName`:
 
-``` typescript
+```typescript
 @Model()
 class ModelStudent {
   getByName(name: string) {

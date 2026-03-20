@@ -10,7 +10,7 @@ For example, create an event: `echo` in the module `demo-student`, passing the e
 
 ### 1. Cli command
 
-``` bash
+```bash
 $ vona :create:bean event echo --module=demo-student
 ```
 
@@ -22,16 +22,13 @@ Context Menu - [Module Path]: `Vona Bean/Event`
 
 ## Event Definition
 
-``` typescript
+```typescript
 export type TypeEventEchoData = string;
 
 export type TypeEventEchoResult = string | undefined;
 
 @Event()
-export class EventEcho extends BeanEventBase<
-  TypeEventEchoData,
-  TypeEventEchoResult
-> {}
+export class EventEcho extends BeanEventBase<TypeEventEchoData, TypeEventEchoResult> {}
 ```
 
 - `TypeEventEchoData`: Defines the parameter type
@@ -43,7 +40,7 @@ export class EventEcho extends BeanEventBase<
 
 Passing the event parameter `Hello World` when emitting the event, and returning the result
 
-``` diff
+```diff
 class ControllerStudent {
   @Web.get('test')
   async test() {
@@ -59,7 +56,7 @@ class ControllerStudent {
 
 A default method can be provided when emitting the event
 
-``` diff
+```diff
 class ControllerStudent {
   @Web.get('test')
   async test() {
@@ -79,7 +76,7 @@ class ControllerStudent {
 
 Pass the event parameter `Hello World` when emitting the event and return the result
 
-``` diff
+```diff
 class ControllerStudent {
   @Web.get('test')
   async test() {
@@ -95,7 +92,7 @@ class ControllerStudent {
 
 A default method can be provided when emitting the event
 
-``` diff
+```diff
 class ControllerStudent {
   @Web.get('test')
   async test() {

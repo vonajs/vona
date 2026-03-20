@@ -8,7 +8,7 @@ Vona provides a Playground, which allows us to test the code and verify the idea
 
 We need to create a new source code file: `src/backend/play/index.ts`. However, we do not need to create this file manually, but execute the following command to automatically create the file:
 
-``` bash
+```bash
 $ vona play
 ```
 
@@ -16,7 +16,7 @@ $ vona play
 
 In the file `play/index.ts`, we write the test code:
 
-``` diff
+```diff
 export async function main(app: VonaApplication, _argv: IArgv) {
 + console.log('server listen: ', app.config.server.listen);
 }
@@ -24,7 +24,7 @@ export async function main(app: VonaApplication, _argv: IArgv) {
 
 ### 3. Execute play file
 
-``` bash
+```bash
 $ vona play
 ```
 
@@ -34,7 +34,7 @@ To improve performance, VonaJS also provides an Attach mode
 
 If the dev service is already running, you can use Attach mode to execute the play file directly within the dev service
 
-``` bash
+```bash
 $ vona play --attach
 $ vona play -a
 ```
@@ -43,7 +43,7 @@ $ vona play -a
 
 ### 1. Simulate the context object of the request
 
-``` diff
+```diff
 export async function main(app: VonaApplication, _argv: IArgv) {
 + await app.bean.executor.mockCtx(async () => {
 +   // do something in ctx
@@ -55,7 +55,7 @@ export async function main(app: VonaApplication, _argv: IArgv) {
 
 For example, we access the home API:
 
-``` diff
+```diff
 export async function main(app: VonaApplication, _argv: IArgv) {
   await app.bean.executor.mockCtx(async () => {
 +   const homeBody = await app.bean.executor.performAction('get', '//');
@@ -66,7 +66,7 @@ export async function main(app: VonaApplication, _argv: IArgv) {
 
 We can also simulate Chinese ctx and then access the home API:
 
-``` diff
+```diff
 export async function main(app: VonaApplication, _argv: IArgv) {
   await app.bean.executor.mockCtx(async () => {
 +   const homeBody = await app.bean.executor.performAction('get', '//');
@@ -77,7 +77,7 @@ export async function main(app: VonaApplication, _argv: IArgv) {
 
 ### 3. Simulate signin and signout
 
-``` diff
+```diff
 export async function main(app: VonaApplication, _argv: IArgv) {
   await app.bean.executor.mockCtx(async () => {
     // signin as user: admin
