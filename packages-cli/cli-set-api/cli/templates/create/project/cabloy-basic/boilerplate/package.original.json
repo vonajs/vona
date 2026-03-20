@@ -33,14 +33,17 @@
     "start:one": "cross-env SERVER_WORKERS=1 node ./dist/normal/bootstrap.js",
     "start:docker": "cross-env SERVER_WORKERS=1 node ./dist/docker/bootstrap.js",
     "prerun": "vona :tools:deps",
-    "lint": "eslint",
-    "lint:fix": "eslint --fix"
+    "format": "oxfmt --check",
+    "format:fix": "oxfmt --write",
+    "lint": "oxlint",
+    "lint:fix": "oxlint --fix"
   },
   "dependencies": {
     "vona": "^5.0.280"
   },
   "devDependencies": {
-    "@cabloy/lint": "^5.0.16",
-    "eslint": "^10.0.3"
+    "@cabloy/lint": "^5.0.21",
+    "oxfmt": "^0.41.0",
+    "oxlint": "^1.56.0"
   }
 }
