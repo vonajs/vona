@@ -15,7 +15,5 @@
       "path": "modules/auth-github/tsconfig.build.json"
     }
   ],
-  "exclude": [
-    "modules"
-  ]
+  "exclude": ["modules"]
 }

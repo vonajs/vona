@@ -1,5 +1,6 @@
 import type { Next, NextSync } from 'vona';
 import type { IAopMethodExecute, IAopMethodGet, IAopMethodSet, IDecoratorAopMethodOptions } from 'vona-module-a-aspect';
+
 import { BeanAopMethodBase } from 'vona';
 import { AopMethod } from 'vona-module-a-aspect';
 

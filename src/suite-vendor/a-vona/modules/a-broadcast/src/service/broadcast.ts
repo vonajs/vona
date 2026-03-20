@@ -1,9 +1,11 @@
 import type { Redis } from 'ioredis';
-import type { IBroadcastExecute, IBroadcastJobContext } from '../types/broadcast.ts';
+
 import { isNil } from '@cabloy/utils';
 import { BeanBase } from 'vona';
 import { Service } from 'vona-module-a-bean';
 import { getRedisClientKeyPrefix } from 'vona-module-a-redis';
+
+import type { IBroadcastExecute, IBroadcastJobContext } from '../types/broadcast.ts';
 
 @Service()
 export class ServiceBroadcast extends BeanBase {
@@ -61,7 +63,7 @@ export class ServiceBroadcast extends BeanBase {
     return await this.bean.executor.newCtx(
       async () => {
         const beanFullName = broadcastItem.beanOptions.beanFullName;
-        const beanInstance = <IBroadcastExecute<DATA>> this.app.bean._getBean(beanFullName as any);
+        const beanInstance = <IBroadcastExecute<DATA>>this.app.bean._getBean(beanFullName as any);
         return await beanInstance.execute(info.data, isEmitter);
       },
       {

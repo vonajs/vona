@@ -1,4 +1,5 @@
 import type { OmitNever } from 'vona';
+
 import type { BeanModelMeta } from '../bean/bean.model/bean.model_meta.ts';
 import type { IModelSelectParamsJoin } from './model.ts';
 import type { TypeModelColumns, TypeModelWhere } from './modelWhere.ts';
@@ -24,10 +25,14 @@ export interface TypeModelSelectAggrParamsAggrs<TRecord> {
 
 export type TypeEntityTableColumnNamesForAggrs<Entity> = keyof TypeEntityTableColumnsForAggrs<Entity>;
 
-export type TypeEntityTableColumnsForAggrs<Entity> =
-  OmitNever<Omit<{
-    [K in keyof Entity as Entity[K] extends number | undefined ? K : never ]: Entity[K]
-  }, 'id' | 'iid'>>;
+export type TypeEntityTableColumnsForAggrs<Entity> = OmitNever<
+  Omit<
+    {
+      [K in keyof Entity as Entity[K] extends number | undefined ? K : never]: Entity[K];
+    },
+    'id' | 'iid'
+  >
+>;
 
 export interface IBuildModelSelectAggrParams<
   TRecord,
@@ -44,7 +49,7 @@ export interface IBuildModelSelectAggrParamsBasic<
   ColumnNames = keyof TRecord,
   Columns extends {} | undefined = undefined,
 > {
-  distinct?: boolean | (keyof TRecord) | (keyof TRecord)[];
+  distinct?: boolean | keyof TRecord | (keyof TRecord)[];
   aggrs: TypeModelSelectAggrParamsAggrs<TRecord>;
   where?: TypeModelWhere<TRecord, Columns>;
   joins?: IModelSelectParamsJoin<TRecord, TableNames, ColumnNames>[];

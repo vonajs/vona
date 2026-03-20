@@ -1,5 +1,6 @@
 import type { AopAction, AopActionDispose, AopActionGet, AopActionGetter, AopActionInit, AopActionSet, AopActionSetter } from 'vona-module-a-aspect';
 import type { BeanTestCtx } from 'vona-module-test-vona';
+
 import { BeanAopBase } from 'vona';
 import { Aop } from 'vona-module-a-aspect';
 

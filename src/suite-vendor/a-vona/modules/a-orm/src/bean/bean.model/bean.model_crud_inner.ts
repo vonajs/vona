@@ -1,5 +1,9 @@
 import type { Knex } from 'knex';
 import type { TableIdentity } from 'table-identity';
+
+import { isNil } from '@cabloy/utils';
+import { cast } from 'vona';
+
 import type {
   IModelCountParams,
   IModelGetOptionsGeneral,
@@ -11,16 +15,11 @@ import type {
   ITableRecord,
   TypeModelWhere,
 } from '../../types/index.ts';
-import { isNil } from '@cabloy/utils';
-import { cast } from 'vona';
+
 import { BeanModelView } from './bean.model_view.ts';
 
 export class BeanModelCrudInner<TRecord extends {}> extends BeanModelView<TRecord> {
-  protected async _mget(
-    table?: keyof ITableRecord,
-    ids?: TableIdentity[],
-    options?: IModelGetOptionsGeneral<TRecord>,
-  ): Promise<TRecord[]> {
+  protected async _mget(table?: keyof ITableRecord, ids?: TableIdentity[], options?: IModelGetOptionsGeneral<TRecord>): Promise<TRecord[]> {
     const items = await this._mget_original(table, ids, options);
     return items.filter(item => !isNil(item));
   }
@@ -73,7 +72,7 @@ export class BeanModelCrudInner<TRecord extends {}> extends BeanModelView<TRecor
     this.$loggerChild('model').debug(() => `model.select: ${builder.toQuery()}`);
     // datas
     const datas = await builder;
-    return await this.dialect.select(builder, datas, () => this.columns(table)) as TRecord[];
+    return (await this.dialect.select(builder, datas, () => this.columns(table))) as TRecord[];
   }
 
   protected _select_buildParams<T extends IModelSelectGeneralParams<TRecord>>(
@@ -160,7 +159,7 @@ export class BeanModelCrudInner<TRecord extends {}> extends BeanModelView<TRecor
     table = table || this.getTable(params?.where);
     if (!table) return this.scopeOrm.error.ShouldSpecifyTable.throw();
     // params
-    params = params || {} as unknown as IModelIncrementParams<TRecord>;
+    params = params || ({} as unknown as IModelIncrementParams<TRecord>);
     // builder
     const builder = this.builder<TRecord>(table);
     // count
@@ -181,7 +180,7 @@ export class BeanModelCrudInner<TRecord extends {}> extends BeanModelView<TRecor
     options?: IModelMethodOptionsGeneral,
   ): Promise<TRecord | TRecord[]> {
     // data
-    data = data || {} as any;
+    data = data || ({} as any);
     const datasTemp = Array.isArray(data) ? data : [data];
     // table
     table = table || this.getTable(datasTemp[0]);
@@ -257,11 +256,7 @@ export class BeanModelCrudInner<TRecord extends {}> extends BeanModelView<TRecor
     return data;
   }
 
-  protected async _delete(
-    table?: keyof ITableRecord,
-    where?: TypeModelWhere<TRecord>,
-    options?: IModelMethodOptionsGeneral,
-  ): Promise<void> {
+  protected async _delete(table?: keyof ITableRecord, where?: TypeModelWhere<TRecord>, options?: IModelMethodOptionsGeneral): Promise<void> {
     // table
     table = table || this.getTable(where);
     if (!table) return this.scopeOrm.error.ShouldSpecifyTable.throw();

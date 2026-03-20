@@ -1,5 +1,6 @@
-import type { IBroadcastEmitOptions, IBroadcastJobContext } from '../types/broadcast.ts';
 import { BeanBase } from 'vona';
+
+import type { IBroadcastEmitOptions, IBroadcastJobContext } from '../types/broadcast.ts';
 
 export class BeanBroadcastBase<DATA = unknown> extends BeanBase {
   emit(data?: DATA, options?: IBroadcastEmitOptions) {

@@ -1,8 +1,10 @@
 import type { IDecoratorEntityOptions } from 'vona-module-a-orm';
-import type { IAuthProviderClientOptions, IAuthProviderRecord } from '../types/authProvider.ts';
+
 import { Api } from 'vona-module-a-openapiutils';
 import { Entity, EntityBaseSimple } from 'vona-module-a-orm';
 import z from 'zod';
+
+import type { IAuthProviderClientOptions, IAuthProviderRecord } from '../types/authProvider.ts';
 
 export interface IEntityOptionsAuthProvider extends IDecoratorEntityOptions {}
 

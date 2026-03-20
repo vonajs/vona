@@ -1,7 +1,9 @@
 import type { IDecoratorSsrSiteOptions } from 'vona-module-a-ssr';
 import type { IPagePathRecord } from 'zova-rest-test-second';
-import type { DtoTestResult } from '../dto/testResult.tsx';
+
 import { BeanSsrSiteBase, SsrSite } from 'vona-module-a-ssr';
+
+import type { DtoTestResult } from '../dto/testResult.tsx';
 
 declare module 'vona-module-a-ssr' {
   export interface ISsrSitePublicPathRecord {

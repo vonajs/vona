@@ -4,8 +4,7 @@ export interface IRoleNameRecord {
   admin: never;
 }
 
-export interface IRoleIdRecord {
-}
+export interface IRoleIdRecord {}
 
 export interface IRole {
   id: TableIdentity;

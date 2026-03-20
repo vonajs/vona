@@ -1,8 +1,9 @@
 import type { VonaApplication } from 'vona';
-import assert from 'node:assert';
-import { describe, it } from 'node:test';
+
 import { WebSocketClient } from '@cabloy/socket';
 import { catchError } from '@cabloy/utils';
+import assert from 'node:assert';
+import { describe, it } from 'node:test';
 import { $customKey } from 'vona';
 import { app } from 'vona-mock';
 

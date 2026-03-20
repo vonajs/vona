@@ -1,26 +1,18 @@
 {
   "name": "vona-module-a-redlock",
-  "type": "module",
   "version": "5.0.30",
-  "title": "a-redlock",
-  "vonaModule": {
-    "dependencies": {},
-    "globalDependencies": {
-      "@sesamecare-oss/redlock": true
-    },
-    "globalDependenciesDev": {},
-    "metas": {
-      "redlock": {
-        "scopeResource": true,
-        "boilerplate": "boilerplate"
-      }
-    }
-  },
   "description": "",
-  "author": "",
   "keywords": [
     "Vona Module"
   ],
+  "author": "",
+  "files": [
+    "assets",
+    "cli",
+    "dist",
+    "src"
+  ],
+  "type": "module",
   "exports": {
     ".": {
       "types": [
@@ -32,12 +24,6 @@
     },
     "./package.json": "./package.json"
   },
-  "files": [
-    "assets",
-    "cli",
-    "dist",
-    "src"
-  ],
   "scripts": {
     "clean": "rimraf dist tsconfig.build.tsbuildinfo",
     "tsc:publish": "npm run clean && vona :bin:buildModule --sourcemap && tsc -p tsconfig.build.json",
@@ -58,5 +44,19 @@
       "clean-package",
       "exports.\\..import"
     ]
+  },
+  "title": "a-redlock",
+  "vonaModule": {
+    "dependencies": {},
+    "globalDependencies": {
+      "@sesamecare-oss/redlock": true
+    },
+    "globalDependenciesDev": {},
+    "metas": {
+      "redlock": {
+        "scopeResource": true,
+        "boilerplate": "boilerplate"
+      }
+    }
   }
 }

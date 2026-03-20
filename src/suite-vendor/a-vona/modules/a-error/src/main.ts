@@ -1,6 +1,9 @@
 import type { IModuleMain } from 'vona';
-import type { OnerrorOptions } from './lib/onerror.ts';
+
 import { BeanSimple } from 'vona';
+
+import type { OnerrorOptions } from './lib/onerror.ts';
+
 import { __ThisModule__ } from './.metadata/this.ts';
 import { onerror } from './lib/onerror.ts';
 

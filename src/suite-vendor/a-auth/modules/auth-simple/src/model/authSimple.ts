@@ -1,5 +1,7 @@
 import type { IDecoratorModelOptions } from 'vona-module-a-orm';
+
 import { BeanModelBase, Model } from 'vona-module-a-orm';
+
 import { EntityAuthSimple } from '../entity/authSimple.ts';
 
 export interface IModelOptionsAuthSimple extends IDecoratorModelOptions<EntityAuthSimple> {}

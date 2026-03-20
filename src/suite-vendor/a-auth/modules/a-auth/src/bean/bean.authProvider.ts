@@ -1,7 +1,8 @@
-import type { EntityAuthProvider } from '../entity/authProvider.ts';
-import type { IAuthProviderClientRecord, IAuthProviderRecord } from '../types/authProvider.ts';
 import { BeanBase } from 'vona';
 import { Bean } from 'vona-module-a-bean';
+
+import type { EntityAuthProvider } from '../entity/authProvider.ts';
+import type { IAuthProviderClientRecord, IAuthProviderRecord } from '../types/authProvider.ts';
 
 @Bean()
 export class BeanAuthProvider extends BeanBase {

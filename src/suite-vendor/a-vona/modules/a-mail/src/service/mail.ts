@@ -1,10 +1,12 @@
 import type { TableIdentity } from 'table-identity';
-import type { ConfigMailClient, IMailClientRecord } from '../types/config.ts';
+
 import { catchError } from '@cabloy/utils';
 import chalk from 'chalk';
 import nodemailer from 'nodemailer';
 import { BeanBase } from 'vona';
 import { Service } from 'vona-module-a-bean';
+
+import type { ConfigMailClient, IMailClientRecord } from '../types/config.ts';
 
 @Service()
 export class ServiceMail extends BeanBase {
@@ -35,8 +37,7 @@ export class ServiceMail extends BeanBase {
       // log
       if (clientTest) {
         const url = nodemailer.getTestMessageUrl(res);
-        const message =
-          chalk.cyan('Test Mail To: ') + chalk.yellow(mail.to) + chalk.hex('#FF8800')(`\n${url}`);
+        const message = chalk.cyan('Test Mail To: ') + chalk.yellow(mail.to) + chalk.hex('#FF8800')(`\n${url}`);
         this.$logger.silly(message);
       }
       // delete

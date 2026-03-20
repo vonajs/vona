@@ -1,6 +1,7 @@
 import type { ILocaleRecord, OmitNever } from 'vona';
 import type { IMenuGroup } from 'vona-module-a-menu';
 import type { IOnionOptionsEnable, ServiceOnion } from 'vona-module-a-onion';
+
 import type { ISsrSiteRecord } from './ssrSite.ts';
 
 export interface ISsrMenuGroupRecord {}

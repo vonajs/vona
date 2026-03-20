@@ -1,4 +1,5 @@
 import type { IModuleMain, VonaContext } from 'vona';
+
 import { BeanSimple } from 'vona';
 
 export class Main extends BeanSimple implements IModuleMain {

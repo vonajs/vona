@@ -1,7 +1,10 @@
 import type knex from 'knex';
-import type { ServiceDb } from './db_.ts';
+
 import { BeanBase } from 'vona';
 import { Service } from 'vona-module-a-bean';
+
+import type { ServiceDb } from './db_.ts';
+
 import { ServiceDatabase } from './database.ts';
 import { ServiceTransactionFiber } from './transactionFiber_.ts';
 

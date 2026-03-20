@@ -1,7 +1,9 @@
 import type { IDecoratorBeanOptionsBase } from 'vona';
 import type { IHmrReload } from 'vona-module-a-hmr';
+
 import { BeanBase, disposeInstance } from 'vona';
 import { Hmr } from 'vona-module-a-hmr';
+
 import { ServiceEventListener } from '../service/eventListener.ts';
 
 @Hmr()

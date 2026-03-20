@@ -1,17 +1,17 @@
 {
   "name": "vona-module-a-mail",
-  "type": "module",
   "version": "5.0.16",
-  "title": "a-mail",
-  "vonaModule": {
-    "fileVersion": 1,
-    "dependencies": {}
-  },
   "description": "",
-  "author": "",
   "keywords": [
     "Vona Module"
   ],
+  "author": "",
+  "files": [
+    "assets",
+    "dist",
+    "src"
+  ],
+  "type": "module",
   "exports": {
     ".": {
       "types": [
@@ -23,17 +23,20 @@
     },
     "./package.json": "./package.json"
   },
-  "files": [
-    "assets",
-    "dist",
-    "src"
-  ],
   "scripts": {
     "clean": "rimraf dist tsconfig.build.tsbuildinfo",
     "tsc:publish": "npm run clean && vona :bin:buildModule --sourcemap && tsc -p tsconfig.build.json",
     "prepublishOnly": "npm run tsc:publish",
     "prepack": "clean-package",
     "postpack": "clean-package restore && npm run clean"
+  },
+  "dependencies": {
+    "@types/nodemailer": "^7.0.1",
+    "nodemailer": "^7.0.6"
+  },
+  "devDependencies": {
+    "clean-package": "^2.2.0",
+    "rimraf": "^6.0.1"
   },
   "clean-package": {
     "indent": 2,
@@ -43,12 +46,9 @@
       "exports.\\..import"
     ]
   },
-  "dependencies": {
-    "@types/nodemailer": "^7.0.1",
-    "nodemailer": "^7.0.6"
-  },
-  "devDependencies": {
-    "clean-package": "^2.2.0",
-    "rimraf": "^6.0.1"
+  "title": "a-mail",
+  "vonaModule": {
+    "fileVersion": 1,
+    "dependencies": {}
   }
 }

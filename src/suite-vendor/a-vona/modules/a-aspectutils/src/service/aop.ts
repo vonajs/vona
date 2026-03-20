@@ -1,5 +1,6 @@
 import type { Constructable, IBeanRecord } from 'vona';
 import type { IDecoratorAopOptions, IUseAopMethodPropMetadata, IUseAopMethodPropMetadataInner } from 'vona-module-a-aspect';
+
 import { appMetadata, appResource, BeanBase, beanFullNameFromOnionName, deepExtend, ProxyDisable } from 'vona';
 import { SymbolDecoratorUseAopMethod } from 'vona-module-a-aspect';
 import { Service } from 'vona-module-a-bean';

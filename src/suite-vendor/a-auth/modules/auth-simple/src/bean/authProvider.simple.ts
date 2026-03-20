@@ -1,6 +1,14 @@
 import type { ILocaleRecord } from 'vona';
-import type { IAuthenticateStrategyState, IAuthProviderClientOptions, IAuthProviderClientRecord, IAuthProviderVerify, IDecoratorAuthProviderOptions, TypeStrategyVerifyArgs } from 'vona-module-a-auth';
+import type {
+  IAuthenticateStrategyState,
+  IAuthProviderClientOptions,
+  IAuthProviderClientRecord,
+  IAuthProviderVerify,
+  IDecoratorAuthProviderOptions,
+  TypeStrategyVerifyArgs,
+} from 'vona-module-a-auth';
 import type { IAuthUserProfile } from 'vona-module-a-user';
+
 import { BeanBase } from 'vona';
 import { AuthProvider } from 'vona-module-a-auth';
 

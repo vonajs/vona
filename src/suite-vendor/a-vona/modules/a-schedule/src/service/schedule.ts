@@ -1,7 +1,9 @@
 import type { IInstanceRecord } from 'vona';
-import type { IScheduleExecute, IScheduleRecord, TypeScheduleJob } from '../types/schedule.ts';
+
 import { BeanBase, beanFullNameFromOnionName, cast, deepExtend } from 'vona';
 import { Service } from 'vona-module-a-bean';
+
+import type { IScheduleExecute, IScheduleRecord, TypeScheduleJob } from '../types/schedule.ts';
 
 @Service()
 export class ServiceSchedule extends BeanBase {
@@ -19,7 +21,7 @@ export class ServiceSchedule extends BeanBase {
     return await this.bean.executor.newCtx(
       async () => {
         const beanFullName = scheduleItem.beanOptions.beanFullName;
-        const beanInstance = <IScheduleExecute> this.app.bean._getBean(beanFullName as any);
+        const beanInstance = <IScheduleExecute>this.app.bean._getBean(beanFullName as any);
         return await beanInstance.execute(job);
       },
       {
@@ -61,10 +63,7 @@ export class ServiceSchedule extends BeanBase {
     }
     // check if changed
     const scheduleConfig = this.app.bean.onion.schedule.getOnionOptions(scheduleName);
-    const scheduleHashActive = this.$scope.queue.service.queue.getRepeatKey(
-      job.name,
-      job.data!.options!.jobOptions!.repeat!,
-    );
+    const scheduleHashActive = this.$scope.queue.service.queue.getRepeatKey(job.name, job.data!.options!.jobOptions!.repeat!);
     const scheduleKeyConfig = this.getScheduleKey(this.ctx.instanceName, scheduleName);
     const scheduleHashConfig = this.$scope.queue.service.queue.getRepeatKey(scheduleKeyConfig, scheduleConfig!.repeat);
     if (scheduleHashActive !== scheduleHashConfig) {

@@ -1,7 +1,9 @@
 import type { IBroadcastExecute } from 'vona-module-a-broadcast';
-import type { IDecoratorCacheMemOptions } from '../types/cacheMem.ts';
+
 import { cast } from 'vona';
 import { BeanBroadcastBase, Broadcast } from 'vona-module-a-broadcast';
+
+import type { IDecoratorCacheMemOptions } from '../types/cacheMem.ts';
 
 export interface TypeBroadcastMemMultiDelJobData {
   cacheName: string;
@@ -13,7 +15,8 @@ export interface TypeBroadcastMemMultiDelJobData {
 @Broadcast()
 export class BroadcastMemMultiDel
   extends BeanBroadcastBase<TypeBroadcastMemMultiDelJobData>
-  implements IBroadcastExecute<TypeBroadcastMemMultiDelJobData> {
+  implements IBroadcastExecute<TypeBroadcastMemMultiDelJobData>
+{
   async execute(data: TypeBroadcastMemMultiDelJobData, isEmitter?: boolean) {
     const { cacheName, cacheOptions, keysHash, keys } = data;
     if (!isEmitter) {

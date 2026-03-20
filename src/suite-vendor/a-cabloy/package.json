@@ -1,11 +1,11 @@
 {
   "name": "vona-suite-a-cabloy",
-  "type": "module",
   "version": "5.0.3",
-  "title": "a-cabloy",
+  "gitHead": "2d40c063c115b230fdbc89f5a78b4412ebd0dfc9",
   "description": "",
   "author": "",
   "files": [],
+  "type": "module",
   "dependencies": {
     "vona-module-a-cabloy": "workspace:^",
     "vona-module-a-datasharding": "workspace:^",
@@ -15,5 +15,5 @@
     "vona-module-a-ssrhmr": "workspace:^",
     "vona-module-a-status": "workspace:^"
   },
-  "gitHead": "2d40c063c115b230fdbc89f5a78b4412ebd0dfc9"
+  "title": "a-cabloy"
 }

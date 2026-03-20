@@ -1,11 +1,18 @@
 import type { Knex } from 'knex';
 import type { TableIdentity } from 'table-identity';
-import type { ITableColumn } from '../types/columns.ts';
-import type { ConfigDatabaseClient } from '../types/config.ts';
-import type { IDatabaseDialectCapabilities, IFetchDatabasesResultItem, IFetchIndexesResultItem, TypeDatabaseDialectTableColumnsFn } from '../types/dialect.ts';
+
 import { isNil, safeBoolean } from '@cabloy/utils';
 import { BeanBase, Virtual } from 'vona';
 import { Bean } from 'vona-module-a-bean';
+
+import type { ITableColumn } from '../types/columns.ts';
+import type { ConfigDatabaseClient } from '../types/config.ts';
+import type {
+  IDatabaseDialectCapabilities,
+  IFetchDatabasesResultItem,
+  IFetchIndexesResultItem,
+  TypeDatabaseDialectTableColumnsFn,
+} from '../types/dialect.ts';
 
 @Bean()
 @Virtual()
@@ -22,10 +29,7 @@ export class BeanDatabaseDialectBase extends BeanBase {
     return this._configBase;
   }
 
-  async fetchDatabases(
-    _schemaBuilder: Knex.SchemaBuilder,
-    _databasePrefix: string,
-  ): Promise<IFetchDatabasesResultItem[]> {
+  async fetchDatabases(_schemaBuilder: Knex.SchemaBuilder, _databasePrefix: string): Promise<IFetchDatabasesResultItem[]> {
     throw new Error('Not Implemented');
   }
 

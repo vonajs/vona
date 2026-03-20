@@ -1,7 +1,9 @@
 import type { IMetaVersionUpdate, IMetaVersionUpdateOptions } from 'vona-module-a-version';
-import type { IMetaIndexExecute, IMetaOptionsIndex, MetaOptionsIndexModuleIndexes } from '../types/indexes.ts';
+
 import { appResource, BeanBase, cast, deepExtend } from 'vona';
 import { Meta } from 'vona-module-a-meta';
+
+import type { IMetaIndexExecute, IMetaOptionsIndex, MetaOptionsIndexModuleIndexes } from '../types/indexes.ts';
 
 @Meta()
 export class MetaVersion extends BeanBase implements IMetaVersionUpdate {
@@ -14,11 +16,7 @@ export class MetaVersion extends BeanBase implements IMetaVersionUpdate {
       const moduleIndexesFromMeta = indexOptions?.indexes;
       const moduleIndexesFromConfig = this.scope.config.indexes[module.info.relativeName];
       // config>meta
-      const moduleIndexes: MetaOptionsIndexModuleIndexes = deepExtend(
-        {},
-        moduleIndexesFromMeta,
-        moduleIndexesFromConfig,
-      );
+      const moduleIndexes: MetaOptionsIndexModuleIndexes = deepExtend({}, moduleIndexesFromMeta, moduleIndexesFromConfig);
       // execute
       if (beanOptions) {
         const beanIndex = this.bean._getBean<IMetaIndexExecute>(beanFullName as any);

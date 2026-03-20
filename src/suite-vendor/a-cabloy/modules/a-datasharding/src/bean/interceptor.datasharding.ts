@@ -1,8 +1,10 @@
 import type { Next } from 'vona';
 import type { IDecoratorInterceptorOptionsGlobal, IInterceptorExecute } from 'vona-module-a-aspect';
-import type { TypeDatasourceType } from '../types/datasharding.ts';
+
 import { BeanBase, Global } from 'vona';
 import { Interceptor } from 'vona-module-a-aspect';
+
+import type { TypeDatasourceType } from '../types/datasharding.ts';
 
 export interface IInterceptorOptionsDatasharding extends IDecoratorInterceptorOptionsGlobal {
   datasourceType: TypeDatasourceType;

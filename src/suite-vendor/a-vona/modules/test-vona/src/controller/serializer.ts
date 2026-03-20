@@ -1,9 +1,11 @@
 import type { IDecoratorControllerOptions } from 'vona-module-a-web';
+
 import { BeanBase } from 'vona';
 import { Api, v } from 'vona-module-a-openapiutils';
 import { Serializer } from 'vona-module-a-serialization';
 import { Passport } from 'vona-module-a-user';
 import { Arg, Controller, Web } from 'vona-module-a-web';
+
 import { DtoSerializerArray } from '../dto/serializerArray.ts';
 import { DtoSerializerLazy } from '../dto/serializerLazy.ts';
 import { DtoSerializerSimple } from '../dto/serializerSimple.ts';

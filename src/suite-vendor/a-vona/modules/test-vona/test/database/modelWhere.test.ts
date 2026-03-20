@@ -1,4 +1,5 @@
 import type { Knex } from 'knex';
+
 import assert from 'node:assert';
 import { describe, it } from 'node:test';
 import { app } from 'vona-mock';
@@ -74,7 +75,9 @@ describe('modelWhere.test.ts', () => {
       builder = scopeTest.model.post.builder();
       scopeTest.model.post.buildWhere(builder, {
         _exists_: function (this: Knex.QueryBuilder) {
-          this.select('id').from('testVonaUser').where({ 'testVonaUser.id': app.bean.model.ref('userId') });
+          this.select('id')
+            .from('testVonaUser')
+            .where({ 'testVonaUser.id': app.bean.model.ref('userId') });
         } as any,
       });
       sql = builder.toQuery();
@@ -83,7 +86,9 @@ describe('modelWhere.test.ts', () => {
       builder = scopeTest.model.post.builder();
       scopeTest.model.post.buildWhere(builder, {
         _notExists_: function (this: Knex.QueryBuilder) {
-          this.select('id').from('testVonaUser').where({ 'testVonaUser.id': app.bean.model.ref('userId') });
+          this.select('id')
+            .from('testVonaUser')
+            .where({ 'testVonaUser.id': app.bean.model.ref('userId') });
         } as any,
       });
       sql = builder.toQuery();

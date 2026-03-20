@@ -1,7 +1,9 @@
 import type { VonaContext } from 'vona';
 import type { IDecoratorModelOptions, ITableRecord } from 'vona-module-a-orm';
+
 import { DateTime } from 'luxon';
 import { BeanModelBase, Model } from 'vona-module-a-orm';
+
 import { EntityTest } from '../entity/test.ts';
 
 export interface IModelOptionsTestDynamicTable extends IDecoratorModelOptions<EntityTest> {}

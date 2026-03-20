@@ -7,5 +7,4 @@ export type TCacheRedisAuthTokenData = string;
   ttl: 30 * 24 * 60 * 60 * 1000,
   disableTransactionCompensate: true,
 })
-export class CacheRedisAuthToken
-  extends BeanCacheRedisBase<TCacheRedisAuthTokenKey, TCacheRedisAuthTokenData> {}
+export class CacheRedisAuthToken extends BeanCacheRedisBase<TCacheRedisAuthTokenKey, TCacheRedisAuthTokenData> {}

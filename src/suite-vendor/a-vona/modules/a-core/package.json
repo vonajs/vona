@@ -1,57 +1,18 @@
 {
   "name": "vona-module-a-core",
-  "type": "module",
   "version": "5.0.173",
-  "title": "a-core",
-  "vonaModule": {
-    "dependencies": {},
-    "globalDependencies": {
-      "@babel/core": true,
-      "@babel/traverse": true,
-      "@cabloy/deps": true,
-      "@cabloy/json5": true,
-      "@cabloy/module-info:": true,
-      "@cabloy/type-fest": true,
-      "@cabloy/utils": true,
-      "@cabloy/word-utils": true,
-      "bignumber.js": true,
-      "boxen": true,
-      "chalk": true,
-      "cli-table3": true,
-      "fs-extra": true,
-      "luxon": true,
-      "mutate-on-copy": true,
-      "react": true,
-      "retry": true,
-      "uuid": true,
-      "vona-shared": true,
-      "winston": true
-    },
-    "globalDependenciesDev": {
-      "@cabloy/cli": true,
-      "@swc/core": true,
-      "@swc/helpers": true,
-      "@types/babel__core": true,
-      "@types/babel__traverse": true,
-      "@types/koa": true,
-      "@types/luxon": true,
-      "@types/node": true,
-      "@types/react": true,
-      "@types/retry": true,
-      "cross-env": true,
-      "gogocode": true,
-      "ts-node-maintained": true,
-      "tslib": true,
-      "typescript": true,
-      "vona-mock": true,
-      "why-is-node-running": true
-    }
-  },
+  "gitHead": "0eab9dc4a5622caffe89e7b1b3f02c08ccbc4c4b",
   "description": "",
-  "author": "",
   "keywords": [
     "Vona Module"
   ],
+  "author": "",
+  "files": [
+    "assets",
+    "dist",
+    "src"
+  ],
+  "type": "module",
   "exports": {
     ".": {
       "types": [
@@ -63,11 +24,6 @@
     },
     "./package.json": "./package.json"
   },
-  "files": [
-    "assets",
-    "dist",
-    "src"
-  ],
   "scripts": {
     "clean": "rimraf dist tsconfig.build.tsbuildinfo",
     "tsc:publish": "npm run clean && vona :bin:buildModule --sourcemap && tsc -p tsconfig.build.json",
@@ -126,5 +82,49 @@
       "exports.\\..import"
     ]
   },
-  "gitHead": "0eab9dc4a5622caffe89e7b1b3f02c08ccbc4c4b"
+  "title": "a-core",
+  "vonaModule": {
+    "dependencies": {},
+    "globalDependencies": {
+      "@babel/core": true,
+      "@babel/traverse": true,
+      "@cabloy/deps": true,
+      "@cabloy/json5": true,
+      "@cabloy/module-info:": true,
+      "@cabloy/type-fest": true,
+      "@cabloy/utils": true,
+      "@cabloy/word-utils": true,
+      "bignumber.js": true,
+      "boxen": true,
+      "chalk": true,
+      "cli-table3": true,
+      "fs-extra": true,
+      "luxon": true,
+      "mutate-on-copy": true,
+      "react": true,
+      "retry": true,
+      "uuid": true,
+      "vona-shared": true,
+      "winston": true
+    },
+    "globalDependenciesDev": {
+      "@cabloy/cli": true,
+      "@swc/core": true,
+      "@swc/helpers": true,
+      "@types/babel__core": true,
+      "@types/babel__traverse": true,
+      "@types/koa": true,
+      "@types/luxon": true,
+      "@types/node": true,
+      "@types/react": true,
+      "@types/retry": true,
+      "cross-env": true,
+      "gogocode": true,
+      "ts-node-maintained": true,
+      "tslib": true,
+      "typescript": true,
+      "vona-mock": true,
+      "why-is-node-running": true
+    }
+  }
 }

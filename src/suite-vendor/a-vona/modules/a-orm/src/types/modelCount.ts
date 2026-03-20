@@ -20,7 +20,7 @@ export interface IBuildModelSelectCountParamsBasic<
   ColumnNames = keyof TRecord,
   Columns extends {} | undefined = undefined,
 > {
-  distinct?: boolean | (keyof TRecord) | (keyof TRecord)[];
+  distinct?: boolean | keyof TRecord | (keyof TRecord)[];
   column?: TypeModelColumn<TRecord>;
   where?: TypeModelWhere<TRecord, Columns>;
   joins?: IModelSelectParamsJoin<TRecord, TableNames, ColumnNames>[];

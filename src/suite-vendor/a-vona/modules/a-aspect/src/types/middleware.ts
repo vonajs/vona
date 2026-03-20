@@ -13,8 +13,7 @@ export interface IMiddlewareExecute {
 export interface IDecoratorMiddlewareOptions extends TypeOnionOptionsEnableSimple {}
 
 export interface IDecoratorMiddlewareOptionsGlobal
-  extends TypeOnionOptionsBaseSimple<keyof IApiPathRecord>,
-  IOnionOptionsDeps<keyof IMiddlewareRecordGlobal> {}
+  extends TypeOnionOptionsBaseSimple<keyof IApiPathRecord>, IOnionOptionsDeps<keyof IMiddlewareRecordGlobal> {}
 
 declare module 'vona-module-a-onion' {
   export interface BeanOnion {

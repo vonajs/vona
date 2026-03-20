@@ -3,6 +3,7 @@ import type { OmitNever } from 'vona';
 import type { ServiceOnion, TypeOnionOptionsEnableSimple } from 'vona-module-a-onion';
 import type { IDbInfo } from 'vona-module-a-orm';
 import type { IQueueJobContext, IQueueRecord } from 'vona-module-a-queue';
+
 import type { TypeQueueScheduleJobData, TypeQueueScheduleJobResult } from '../bean/queue.schedule.ts';
 
 export type TypeScheduleJob = Bull.Job<IQueueJobContext<TypeQueueScheduleJobData>, TypeQueueScheduleJobResult>;

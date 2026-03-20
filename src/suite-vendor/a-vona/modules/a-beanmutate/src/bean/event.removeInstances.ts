@@ -1,4 +1,5 @@
 import type { IBeanRecord } from 'vona';
+
 import { BeanEventBase, Event } from 'vona-module-a-event';
 
 export interface TypeEventRemoveInstancesData {
@@ -9,7 +10,4 @@ export interface TypeEventRemoveInstancesData {
 export type TypeEventRemoveInstancesResult = void;
 
 @Event()
-export class EventRemoveInstances extends BeanEventBase<
-  TypeEventRemoveInstancesData,
-  TypeEventRemoveInstancesResult
-> {}
+export class EventRemoveInstances extends BeanEventBase<TypeEventRemoveInstancesData, TypeEventRemoveInstancesResult> {}

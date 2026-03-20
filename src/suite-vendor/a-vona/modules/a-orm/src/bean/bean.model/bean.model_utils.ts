@@ -1,8 +1,24 @@
 import type { Knex } from 'knex';
-import type { IModelMethodOptionsGeneral, IModelSelectParamsJoin, IModelSelectParamsPage, ITableColumns, ITableRecord, TypeModelColumn, TypeModelColumns, TypeModelColumnsStrict, TypeModelIncrementParamsColumns, TypeModelSelectAggrParamsAggrs, TypeModelSelectGroupParamsColumns, TypeModelWhere } from '../../types/index.ts';
+
 import { ensureArray, isNil } from '@cabloy/utils';
 import { cast } from 'vona';
 import { $tableDefaults } from 'vona-module-a-ormutils';
+
+import type {
+  IModelMethodOptionsGeneral,
+  IModelSelectParamsJoin,
+  IModelSelectParamsPage,
+  ITableColumns,
+  ITableRecord,
+  TypeModelColumn,
+  TypeModelColumns,
+  TypeModelColumnsStrict,
+  TypeModelIncrementParamsColumns,
+  TypeModelSelectAggrParamsAggrs,
+  TypeModelSelectGroupParamsColumns,
+  TypeModelWhere,
+} from '../../types/index.ts';
+
 import { buildWhere } from '../../common/buildWhere.ts';
 import { isRaw } from '../../common/utils.ts';
 import { BeanModelMeta } from './bean.model_meta.ts';
@@ -44,7 +60,7 @@ export class BeanModelUtils<TRecord extends {}> extends BeanModelMeta<TRecord> {
       return $tableDefaults(this.options.entity) as any;
     }
     table = table || this.getTable(undefined);
-    return await this.db.columns.defaultData(table) as TRecord;
+    return (await this.db.columns.defaultData(table)) as TRecord;
   }
 
   async columns(table?: keyof ITableRecord): Promise<ITableColumns> {
@@ -58,10 +74,7 @@ export class BeanModelUtils<TRecord extends {}> extends BeanModelMeta<TRecord> {
 
   raw(value: Knex.Value): Knex.Raw<any>;
   raw<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(sql: string, binding: Knex.RawBinding): Knex.Raw<TResult2>;
-  raw<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(
-    sql: string,
-    bindings: readonly Knex.RawBinding[] | Knex.ValueDict,
-  ): Knex.Raw<TResult2>;
+  raw<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(sql: string, bindings: readonly Knex.RawBinding[] | Knex.ValueDict): Knex.Raw<TResult2>;
   raw(sql, bindings?) {
     return this.connection.raw(sql, bindings);
   }
@@ -101,7 +114,7 @@ export class BeanModelUtils<TRecord extends {}> extends BeanModelMeta<TRecord> {
     }
   }
 
-  buildDistinct(builder: Knex.QueryBuilder, distinct?: boolean | (keyof TRecord) | (keyof TRecord)[]) {
+  buildDistinct(builder: Knex.QueryBuilder, distinct?: boolean | keyof TRecord | (keyof TRecord)[]) {
     if (distinct === undefined || distinct === false) return;
     if (distinct === true) {
       builder.distinct();
@@ -112,7 +125,7 @@ export class BeanModelUtils<TRecord extends {}> extends BeanModelMeta<TRecord> {
     }
   }
 
-  buildCount(builder: Knex.QueryBuilder, column?: TypeModelColumn<TRecord>, distinct?: boolean | (keyof TRecord) | (keyof TRecord)[]) {
+  buildCount(builder: Knex.QueryBuilder, column?: TypeModelColumn<TRecord>, distinct?: boolean | keyof TRecord | (keyof TRecord)[]) {
     if (column !== undefined) {
       builder.count(column);
     } else if (distinct !== undefined && distinct !== false) {

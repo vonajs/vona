@@ -1,5 +1,6 @@
 import type { Next } from 'vona';
 import type { IDecoratorGuardOptionsGlobal, IGuardExecute } from 'vona-module-a-aspect';
+
 import { catchError } from '@cabloy/utils';
 import { BeanBase, Global } from 'vona';
 import { Guard } from 'vona-module-a-aspect';

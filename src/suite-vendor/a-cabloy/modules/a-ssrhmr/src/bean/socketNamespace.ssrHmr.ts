@@ -1,4 +1,5 @@
 import type { IDecoratorSocketNamespaceOptions } from 'vona-module-a-socket';
+
 import { BeanSocketNamespaceBase, SocketNamespace } from 'vona-module-a-socket';
 
 declare module 'vona-module-a-socket' {

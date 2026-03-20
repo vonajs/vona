@@ -18,12 +18,15 @@ export class BeanStatusBase<IStatusRecord> extends BeanBase {
   }
 
   private async _setInner(name: string, value: any, lock: boolean) {
-    const status = await this._modelStatus.get({
-      module: this[SymbolModuleBelong],
-      name,
-    }, {
-      cache: { force: !lock },
-    });
+    const status = await this._modelStatus.get(
+      {
+        module: this[SymbolModuleBelong],
+        name,
+      },
+      {
+        cache: { force: !lock },
+      },
+    );
     if (status) {
       await this._modelStatus.update({
         id: status.id,

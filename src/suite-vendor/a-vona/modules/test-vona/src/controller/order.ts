@@ -1,10 +1,13 @@
 import type { TableIdentity } from 'table-identity';
 import type { IQueryParams } from 'vona-module-a-orm';
 import type { IDecoratorControllerOptions } from 'vona-module-a-web';
-import type { ModelOrder } from '../model/order.ts';
+
 import { BeanBase } from 'vona';
 import { Api, v } from 'vona-module-a-openapiutils';
 import { Arg, Controller, Web } from 'vona-module-a-web';
+
+import type { ModelOrder } from '../model/order.ts';
+
 import { DtoOrderCreate } from '../dto/orderCreate.ts';
 import { DtoOrderQuery } from '../dto/orderQuery.ts';
 import { DtoOrderQueryPage } from '../dto/orderQueryPage.ts';
@@ -29,9 +32,7 @@ export class ControllerOrder extends BeanBase {
 
   @Web.get('findAll')
   @Api.body(v.array(DtoOrderResult))
-  async findAll(
-    @Arg.filter(DtoOrderQuery) params: IQueryParams<ModelOrder>,
-  ): Promise<DtoOrderResult[]> {
+  async findAll(@Arg.filter(DtoOrderQuery) params: IQueryParams<ModelOrder>): Promise<DtoOrderResult[]> {
     return this.scope.model.order.select({
       ...params,
       include: {
@@ -42,9 +43,7 @@ export class ControllerOrder extends BeanBase {
 
   @Web.get('findMany')
   @Api.body(DtoOrderResultPage)
-  async findMany(
-    @Arg.filter(DtoOrderQueryPage) params: IQueryParams<ModelOrder>,
-  ) {
+  async findMany(@Arg.filter(DtoOrderQueryPage) params: IQueryParams<ModelOrder>) {
     return this.scope.model.order.selectAndCount({
       ...params,
       include: {

@@ -1,9 +1,11 @@
 import type { IDecoratorControllerOptions } from 'vona-module-a-web';
+
 import { BeanBase } from 'vona';
 import { Api, v } from 'vona-module-a-openapiutils';
 import { Ssr } from 'vona-module-a-ssr';
 import { Passport } from 'vona-module-a-user';
 import { Arg, Controller, Web } from 'vona-module-a-web';
+
 import { DtoTestParams } from '../dto/testParams.ts';
 import { DtoTestQuery } from '../dto/testQuery.ts';
 import { DtoTestResult } from '../dto/testResult.tsx';
@@ -18,10 +20,7 @@ export class ControllerToolTwo extends BeanBase {
   @Api.body(v.object(DtoTestResult))
   @Passport.public()
   @Ssr.render('test-ssr:second', '/demo/basic/toolTwo/:id?', undefined, { renderType: 'auto' })
-  async test(
-    @Arg.param(v.object(DtoTestParams)) params: DtoTestParams,
-    @Arg.query(v.object(DtoTestQuery)) query: DtoTestQuery,
-  ) {
+  async test(@Arg.param(v.object(DtoTestParams)) params: DtoTestParams, @Arg.query(v.object(DtoTestQuery)) query: DtoTestQuery) {
     const testResult: DtoTestResult = {
       id: params.id || 1,
       name: query.name,

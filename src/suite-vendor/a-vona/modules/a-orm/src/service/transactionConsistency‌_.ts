@@ -1,4 +1,5 @@
 import type { FunctionAny } from 'vona';
+
 import { AsyncResource } from 'node:async_hooks';
 import { BeanBase } from 'vona';
 import { Service } from 'vona-module-a-bean';

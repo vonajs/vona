@@ -2,17 +2,17 @@ import type { BeanModelMeta } from '../bean/bean.model/bean.model_meta.ts';
 import type { IModelClassRecord } from '../types/onion/model.ts';
 import type { TypeModelClassLike, TypeModelOfModelLike, TypeSymbolKeyEntity } from '../types/relations.ts';
 import type { IModelRelationBelongsToManyDynamic, IModelRelationHasManyDynamic, IModelRelationHasOneDynamic } from '../types/relationsDefDynamic.ts';
-import type { IModelRelationOptionsBelongsToManyMutate, IModelRelationOptionsManyMutate, IModelRelationOptionsOneMutate } from '../types/relationsDefMutate.ts';
+import type {
+  IModelRelationOptionsBelongsToManyMutate,
+  IModelRelationOptionsManyMutate,
+  IModelRelationOptionsOneMutate,
+} from '../types/relationsDefMutate.ts';
 
 function hasOne<
-  MODEL extends BeanModelMeta | (keyof IModelClassRecord),
+  MODEL extends BeanModelMeta | keyof IModelClassRecord,
   KEY extends keyof TypeModelOfModelLike<MODEL>[TypeSymbolKeyEntity],
   OPTIONS extends IModelRelationOptionsOneMutate<TypeModelOfModelLike<MODEL>>,
->(
-  classModel: TypeModelClassLike<MODEL>,
-  key: KEY,
-  options?: OPTIONS,
-): IModelRelationHasOneDynamic<MODEL, KEY, OPTIONS> {
+>(classModel: TypeModelClassLike<MODEL>, key: KEY, options?: OPTIONS): IModelRelationHasOneDynamic<MODEL, KEY, OPTIONS> {
   return { type: 'hasOne', model: classModel, key, options };
 }
 
@@ -30,21 +30,17 @@ function hasOne<
 // }
 
 function hasMany<
-  MODEL extends BeanModelMeta | (keyof IModelClassRecord),
+  MODEL extends BeanModelMeta | keyof IModelClassRecord,
   KEY extends keyof TypeModelOfModelLike<MODEL>[TypeSymbolKeyEntity],
   // not use `| undefined = undefined` or `= {}`
   OPTIONS extends IModelRelationOptionsManyMutate<TypeModelOfModelLike<MODEL>>,
->(
-  classModel: TypeModelClassLike<MODEL>,
-  key: KEY,
-  options?: OPTIONS,
-): IModelRelationHasManyDynamic<MODEL, KEY, OPTIONS> {
+>(classModel: TypeModelClassLike<MODEL>, key: KEY, options?: OPTIONS): IModelRelationHasManyDynamic<MODEL, KEY, OPTIONS> {
   return { type: 'hasMany', model: classModel, key, options };
 }
 
 function belongsToMany<
-  MODELMiddle extends BeanModelMeta | (keyof IModelClassRecord),
-  MODEL extends BeanModelMeta | (keyof IModelClassRecord),
+  MODELMiddle extends BeanModelMeta | keyof IModelClassRecord,
+  MODEL extends BeanModelMeta | keyof IModelClassRecord,
   OPTIONS extends IModelRelationOptionsBelongsToManyMutate<TypeModelOfModelLike<MODEL>>,
 >(
   classModelMiddle: TypeModelClassLike<MODELMiddle>,

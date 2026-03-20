@@ -1,4 +1,5 @@
 import type { IDecoratorControllerOptions } from 'vona-module-a-web';
+
 import { BeanBase } from 'vona';
 import { Controller, Web } from 'vona-module-a-web';
 

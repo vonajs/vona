@@ -1,4 +1,5 @@
 import type { DtoSerializerArray, DtoSerializerLazy, DtoSerializerSimple } from 'vona-module-test-vona';
+
 import assert from 'node:assert';
 import { describe, it } from 'node:test';
 import { app } from 'vona-mock';

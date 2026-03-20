@@ -3,7 +3,7 @@ import type { OpenAPIObject as OpenAPIObject31, SchemaObject as SchemaObject31 }
 import type { Constructable, IDecoratorBeanOptionsBase } from 'vona';
 import type { IOpenapiHeader, IOpenapiOptions, TypeGenerateJsonScene } from 'vona-module-a-openapiutils';
 import type { IDecoratorControllerOptions, RequestMappingMetadata, TypeRequestMethod } from 'vona-module-a-web';
-import type { RouteHandlerArgumentMetaDecorator } from '../types/decorator.ts';
+
 import * as ModuleInfo from '@cabloy/module-info';
 import { isEmptyObject, isNil } from '@cabloy/utils';
 import { toUpperCaseFirstChar } from '@cabloy/word-utils';
@@ -15,6 +15,8 @@ import { Service } from 'vona-module-a-bean';
 import { $schema, bodySchemaWrapperDefault, SymbolOpenApiOptions, SymbolRouteHandlersArgumentsMeta } from 'vona-module-a-openapiutils';
 import { SymbolRequestMappingHandler } from 'vona-module-a-web';
 import { z } from 'zod';
+
+import type { RouteHandlerArgumentMetaDecorator } from '../types/decorator.ts';
 
 const __ArgumentTypes = ['param', 'query', 'body', 'headers', 'fields', 'field', 'files', 'file'];
 
@@ -35,8 +37,10 @@ export class ServiceOpenapi extends BeanBase {
           }
           // requestBody
           if (methodObj.requestBody?.content?.['application/json']?.schema) {
-            methodObj.requestBody.content['application/json'].schema =
-              this._translateSchema(methodObj.requestBody.content['application/json'].schema, generateJsonScene);
+            methodObj.requestBody.content['application/json'].schema = this._translateSchema(
+              methodObj.requestBody.content['application/json'].schema,
+              generateJsonScene,
+            );
           }
         }
       }
@@ -103,9 +107,13 @@ export class ServiceOpenapi extends BeanBase {
       if (!isNil(obj.exclusiveMinimum)) scope.minimum = obj.exclusiveMinimum;
       if (!isNil(obj.maxLength)) scope.maximum = obj.maxLength;
       if (!isNil(obj.exclusiveMaximum)) scope.maximum = obj.exclusiveMaximum;
-      obj.errorMessage[key] = translateError((text: string, ...args: any[]) => {
-        return this.app.meta.text(text, ...args);
-      }, error, scope);
+      obj.errorMessage[key] = translateError(
+        (text: string, ...args: any[]) => {
+          return this.app.meta.text(text, ...args);
+        },
+        error,
+        scope,
+      );
     }
   }
 
@@ -184,31 +192,17 @@ export class ServiceOpenapi extends BeanBase {
     const app = this.app;
 
     // action options: should not extend controllerOpenApiOptions
-    const actionOpenApiOptions = appMetadata.getMetadata<IOpenapiOptions>(
-      SymbolOpenApiOptions,
-      controller.prototype,
-      actionKey,
-    );
+    const actionOpenApiOptions = appMetadata.getMetadata<IOpenapiOptions>(SymbolOpenApiOptions, controller.prototype, actionKey);
     if (actionOpenApiOptions?.exclude) return;
 
     // actionPath/actionMethod
     if (!appMetadata.hasMetadata(SymbolRequestMappingHandler, controller.prototype, actionKey)) return;
-    const handlerMetadata = appMetadata.getMetadata<RequestMappingMetadata>(
-      SymbolRequestMappingHandler,
-      controller.prototype,
-      actionKey,
-    )!;
+    const handlerMetadata = appMetadata.getMetadata<RequestMappingMetadata>(SymbolRequestMappingHandler, controller.prototype, actionKey)!;
     const actionPath: string = handlerMetadata.path || '';
     const actionMethod: TypeRequestMethod = handlerMetadata.method || 'get';
 
     // routePath
-    const routePath = app.util.combineApiPathControllerAndAction(
-      info.relativeName,
-      controllerPath,
-      actionPath,
-      true,
-      true,
-    );
+    const routePath = app.util.combineApiPathControllerAndAction(info.relativeName, controllerPath, actionPath, true, true);
     // :id -> {id}
     const routePath2 = routePath.replace(/:([^/]+)/g, '{$1}');
 
@@ -332,11 +326,7 @@ export class ServiceOpenapi extends BeanBase {
     return request;
   }
 
-  private _collectResponses(
-    controller: Constructable,
-    actionKey: string,
-    actionOpenApiOptions: IOpenapiOptions | undefined,
-  ) {
+  private _collectResponses(controller: Constructable, actionKey: string, actionOpenApiOptions: IOpenapiOptions | undefined) {
     // contentType
     const contentType = actionOpenApiOptions?.contentType || 'application/json';
     // body schema
@@ -355,12 +345,7 @@ export class ServiceOpenapi extends BeanBase {
     return responses;
   }
 
-  private _parseBodySchema(
-    controller: Constructable,
-    actionKey: string,
-    actionOpenApiOptions: IOpenapiOptions | undefined,
-    contentType: string,
-  ) {
+  private _parseBodySchema(controller: Constructable, actionKey: string, actionOpenApiOptions: IOpenapiOptions | undefined, contentType: string) {
     // bodySchema
     let bodySchema: z.ZodType;
     if (actionOpenApiOptions?.bodySchema) {
@@ -383,11 +368,7 @@ export class ServiceOpenapi extends BeanBase {
     controllerOpenApiOptions: IOpenapiOptions | undefined,
   ) {
     // meta
-    let argsMeta = appMetadata.getMetadata<RouteHandlerArgumentMetaDecorator[]>(
-      SymbolRouteHandlersArgumentsMeta,
-      controller.prototype,
-      actionKey,
-    );
+    let argsMeta = appMetadata.getMetadata<RouteHandlerArgumentMetaDecorator[]>(SymbolRouteHandlersArgumentsMeta, controller.prototype, actionKey);
     // headers
     const objHeaders = Object.assign(
       {} as any,

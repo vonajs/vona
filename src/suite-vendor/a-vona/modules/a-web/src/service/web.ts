@@ -1,7 +1,10 @@
 import type { Constructable, MetadataKey } from 'vona';
-import type { RequestMappingMetadata } from '../lib/decorator/request.ts';
+
 import { appMetadata, appResource, BeanBase } from 'vona';
 import { Service } from 'vona-module-a-bean';
+
+import type { RequestMappingMetadata } from '../lib/decorator/request.ts';
+
 import { SymbolRequestMappingHandler } from '../types/request.ts';
 
 @Service()
@@ -19,19 +22,9 @@ export class ServiceWeb extends BeanBase {
     const controllerOptions = beanOptions.options as any;
     const controllerPath = controllerOptions.path;
     // actionPath
-    const handlerMetadata = appMetadata.getMetadata<RequestMappingMetadata>(
-      SymbolRequestMappingHandler,
-      controller.prototype,
-      actionKey,
-    )!;
+    const handlerMetadata = appMetadata.getMetadata<RequestMappingMetadata>(SymbolRequestMappingHandler, controller.prototype, actionKey)!;
     const actionPath: string = handlerMetadata.path || '';
     // combine
-    return this.app.util.combineApiPathControllerAndAction(
-      beanOptions.module,
-      controllerPath,
-      actionPath,
-      prefix,
-      simplify,
-    );
+    return this.app.util.combineApiPathControllerAndAction(beanOptions.module, controllerPath, actionPath, prefix, simplify);
   }
 }

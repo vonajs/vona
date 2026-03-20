@@ -1,4 +1,5 @@
 import type { ConfigLogger, IModuleMain, PowerPartial, VonaApplication } from 'vona';
+
 import { BeanSimple, combineConfigDefault, deepExtend } from 'vona';
 
 export class Main extends BeanSimple implements IModuleMain {

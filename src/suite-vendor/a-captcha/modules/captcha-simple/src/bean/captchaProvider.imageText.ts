@@ -1,4 +1,5 @@
 import type { ICaptchaProviderData, ICaptchaProviderExecute, IDecoratorCaptchaProviderOptions } from 'vona-module-a-captcha';
+
 import { getRandomInt } from '@cabloy/utils';
 import svgCaptcha, { ConfigObject } from '@zhennann/svg-captcha';
 import fse from 'fs-extra';
@@ -26,7 +27,9 @@ export interface ICaptchaProviderOptionsImageText extends IDecoratorCaptchaProvi
   },
 })
 export class CaptchaProviderImageText
-  extends BeanBase implements ICaptchaProviderExecute<TypeCaptchaProviderImageTextToken, TypeCaptchaProviderImageTextPayload> {
+  extends BeanBase
+  implements ICaptchaProviderExecute<TypeCaptchaProviderImageTextToken, TypeCaptchaProviderImageTextPayload>
+{
   async create(options: ICaptchaProviderOptionsImageText): Promise<TypeCaptchaProviderImageTextData> {
     await this._confirmFont(options);
     let type = options.type;

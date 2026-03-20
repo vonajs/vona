@@ -1,5 +1,7 @@
-import type { IDecoratorSerializerTransformOptions, ISerializerTransform, TypeSerializerTransformGetter } from '../types/serializerTransform.ts';
 import { BeanBase } from 'vona';
+
+import type { IDecoratorSerializerTransformOptions, ISerializerTransform, TypeSerializerTransformGetter } from '../types/serializerTransform.ts';
+
 import { SerializerTransform } from '../lib/serializerTransform.ts';
 
 export type TypeSerializerTransformGetterValue = unknown;
@@ -13,12 +15,10 @@ export interface ISerializerTransformOptionsGetter extends IDecoratorSerializerT
 }
 
 @SerializerTransform<ISerializerTransformOptionsGetter>()
-export class SerializerTransformGetter extends BeanBase
-  implements ISerializerTransform<
-    TypeSerializerTransformGetterValue,
-    TypeSerializerTransformGetterData,
-    TypeSerializerTransformGetterResult
-  > {
+export class SerializerTransformGetter
+  extends BeanBase
+  implements ISerializerTransform<TypeSerializerTransformGetterValue, TypeSerializerTransformGetterData, TypeSerializerTransformGetterResult>
+{
   async transform(
     value: TypeSerializerTransformGetterValue,
     data: TypeSerializerTransformGetterData,

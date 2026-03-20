@@ -1,4 +1,5 @@
 import type { VonaApplication } from 'vona';
+
 import type { IConfigDatashardingClient } from '../types/datasharding.ts';
 
 export function config(_app: VonaApplication) {

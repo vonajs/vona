@@ -1,22 +1,25 @@
 import type { Constructable } from 'vona';
+
+import { ensureArray } from '@cabloy/utils';
+import { PickClassInner } from 'vona';
+
 import type { BeanModelMeta } from '../../bean/bean.model/bean.model_meta.ts';
 import type { TypeDtoGroupResult } from '../../types/dto/dtoGroup.ts';
 import type { TypeModelSelectAggrParamsAggrs } from '../../types/modelAggr.ts';
 import type { TypeModelColumnsStrict } from '../../types/modelWhere.ts';
 import type { IModelClassRecord } from '../../types/onion/model.ts';
 import type { TypeModelOfModelLike, TypeSymbolKeyEntity } from '../../types/relations.ts';
-import { ensureArray } from '@cabloy/utils';
-import { PickClassInner } from 'vona';
+
 import { getClassEntityFromClassModel, prepareClassModel } from '../../common/utils.ts';
 import { _DtoAggregate_inner } from './dtoAggregate.ts';
 
 export function DtoGroup<
-  ModelLike extends BeanModelMeta | (keyof IModelClassRecord),
+  ModelLike extends BeanModelMeta | keyof IModelClassRecord,
   Groups extends TypeModelColumnsStrict<TypeModelOfModelLike<ModelLike>[TypeSymbolKeyEntity]>,
   Aggrs extends TypeModelSelectAggrParamsAggrs<TypeModelOfModelLike<ModelLike>[TypeSymbolKeyEntity]> | undefined = undefined,
   Columns extends TypeModelColumnsStrict<TypeModelOfModelLike<ModelLike>[TypeSymbolKeyEntity]> | undefined = undefined,
 >(
-  modelLike: ModelLike extends BeanModelMeta ? ((() => Constructable<ModelLike>) | Constructable<ModelLike>) : ModelLike,
+  modelLike: ModelLike extends BeanModelMeta ? (() => Constructable<ModelLike>) | Constructable<ModelLike> : ModelLike,
   groups: Groups,
   aggrs?: Aggrs,
   columns?: Columns,
@@ -25,12 +28,12 @@ export function DtoGroup<
 }
 
 function _DtoGroup_raw<
-  ModelLike extends BeanModelMeta | (keyof IModelClassRecord),
+  ModelLike extends BeanModelMeta | keyof IModelClassRecord,
   Groups extends TypeModelColumnsStrict<TypeModelOfModelLike<ModelLike>[TypeSymbolKeyEntity]>,
   Aggrs extends TypeModelSelectAggrParamsAggrs<TypeModelOfModelLike<ModelLike>[TypeSymbolKeyEntity]> | undefined = undefined,
   Columns extends TypeModelColumnsStrict<TypeModelOfModelLike<ModelLike>[TypeSymbolKeyEntity]> | undefined = undefined,
 >(
-  modelLike: ModelLike extends BeanModelMeta ? ((() => Constructable<ModelLike>) | Constructable<ModelLike>) : ModelLike,
+  modelLike: ModelLike extends BeanModelMeta ? (() => Constructable<ModelLike>) | Constructable<ModelLike> : ModelLike,
   groups: Groups,
   aggrs?: Aggrs,
   columns?: Columns,

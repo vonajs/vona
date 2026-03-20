@@ -1,9 +1,11 @@
 import type { IInstanceRecord, VonaConfig } from 'vona';
-import type { EntityInstance } from '../entity/instance.ts';
-import type { ConfigInstanceBase } from '../types/instance.ts';
+
 import { isNil } from '@cabloy/utils';
 import { BeanBase } from 'vona';
 import { Bean } from 'vona-module-a-bean';
+
+import type { EntityInstance } from '../entity/instance.ts';
+import type { ConfigInstanceBase } from '../types/instance.ts';
 
 @Bean()
 export class BeanInstance extends BeanBase {

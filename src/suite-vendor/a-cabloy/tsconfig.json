@@ -33,7 +33,5 @@
       "path": "modules/a-ssrhmr/tsconfig.build.json"
     }
   ],
-  "exclude": [
-    "modules"
-  ]
+  "exclude": ["modules"]
 }

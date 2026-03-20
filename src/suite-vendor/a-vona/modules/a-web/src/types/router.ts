@@ -1,5 +1,6 @@
 import type Router from 'find-my-way';
 import type { Constructable } from 'vona';
+
 import type { TypeRequestMethod } from './request.ts';
 
 export interface ContextRouteMetadata {

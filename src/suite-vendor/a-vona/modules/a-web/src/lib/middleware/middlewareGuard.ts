@@ -1,4 +1,5 @@
 import type { Next, VonaContext } from 'vona';
+
 import { composeGuards } from './utils.ts';
 
 export async function middlewareGuard(ctx: VonaContext, next: Next) {

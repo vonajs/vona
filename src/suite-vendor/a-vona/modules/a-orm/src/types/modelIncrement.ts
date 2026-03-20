@@ -1,4 +1,5 @@
 import type { OmitNever } from 'vona';
+
 import type { BeanModelMeta } from '../bean/bean.model/bean.model_meta.ts';
 import type { IModelSelectParamsJoin } from './model.ts';
 import type { TypeModelWhere } from './modelWhere.ts';
@@ -6,10 +7,14 @@ import type { TypeModelsClassLikeGeneral } from './relations.ts';
 import type { TypeEntityTableColumnNamesOfGeneral, TypeEntityTableColumnsOfGeneral } from './relationsColumns.ts';
 import type { TypeEntityTableNamesOfGeneral } from './relationsTables.ts';
 
-export type TypeModelIncrementParamsColumns<Entity> =
-  OmitNever<Omit<{
-    [K in keyof Entity as Entity[K] extends number | undefined ? K : never ]?: number
-  }, 'id' | 'iid'>>;
+export type TypeModelIncrementParamsColumns<Entity> = OmitNever<
+  Omit<
+    {
+      [K in keyof Entity as Entity[K] extends number | undefined ? K : never]?: number;
+    },
+    'id' | 'iid'
+  >
+>;
 
 export interface IBuildModelIncrementParams<
   TRecord,

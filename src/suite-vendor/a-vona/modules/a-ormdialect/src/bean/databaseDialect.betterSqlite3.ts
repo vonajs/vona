@@ -1,9 +1,17 @@
 import type { Knex } from 'knex';
 import type { TableIdentity } from 'table-identity';
-import type { ConfigDatabaseClient, IDatabaseDialectCapabilities, IDecoratorDatabaseDialectOptions, IFetchDatabasesResultItem, IFetchIndexesResultItem, TypeDatabaseDialectTableColumnsFn } from 'vona-module-a-orm';
-import path from 'node:path';
+import type {
+  ConfigDatabaseClient,
+  IDatabaseDialectCapabilities,
+  IDecoratorDatabaseDialectOptions,
+  IFetchDatabasesResultItem,
+  IFetchIndexesResultItem,
+  TypeDatabaseDialectTableColumnsFn,
+} from 'vona-module-a-orm';
+
 import { ensureDir, remove } from 'fs-extra';
 import { globby } from 'globby';
+import path from 'node:path';
 import { BeanDatabaseDialectBase, DatabaseDialect } from 'vona-module-a-orm';
 
 export interface IDatabaseDialectOptionsBetterSqlite3 extends IDecoratorDatabaseDialectOptions {}
@@ -25,10 +33,7 @@ export class DatabaseDialectBetterSqlite3 extends BeanDatabaseDialectBase {
     },
   };
 
-  async fetchDatabases(
-    _schemaBuilder: Knex.SchemaBuilder,
-    databasePrefix: string,
-  ): Promise<IFetchDatabasesResultItem[]> {
+  async fetchDatabases(_schemaBuilder: Knex.SchemaBuilder, databasePrefix: string): Promise<IFetchDatabasesResultItem[]> {
     const dbDir = this._getDbDir();
     const files = await globby(`${databasePrefix}*.db`, {
       cwd: dbDir,

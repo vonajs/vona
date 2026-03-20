@@ -1,8 +1,10 @@
 import type { Next } from 'vona';
 import type { IDecoratorGuardOptions, IGuardExecute } from 'vona-module-a-aspect';
-import type { IRoleNameRecord } from '../types/role.ts';
+
 import { BeanBase } from 'vona';
 import { Guard } from 'vona-module-a-aspect';
+
+import type { IRoleNameRecord } from '../types/role.ts';
 
 export interface IGuardOptionsRoleName extends IDecoratorGuardOptions {
   name?: keyof IRoleNameRecord | (keyof IRoleNameRecord)[];

@@ -1,9 +1,11 @@
 import type { Next, VonaApplication } from 'vona';
 import type { IOnionSlice } from 'vona-module-a-onion';
-import type { IEventRecord, TypeEventOff } from '../types/event.ts';
-import type { IEventExecute, IEventListenerRecord } from '../types/eventListener.ts';
+
 import { BeanBase, compose } from 'vona';
 import { Service } from 'vona-module-a-bean';
+
+import type { IEventRecord, TypeEventOff } from '../types/event.ts';
+import type { IEventExecute, IEventListenerRecord } from '../types/eventListener.ts';
 
 @Service()
 export class ServiceEventListener extends BeanBase {

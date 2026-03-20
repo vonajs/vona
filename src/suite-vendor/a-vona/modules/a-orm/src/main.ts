@@ -1,7 +1,10 @@
 import type { FunctionAny, IModuleMain, PowerPartial, VonaApplication, VonaContext } from 'vona';
-import type { ConfigDatabase } from './types/config.ts';
+
 import { BeanSimple, cast, combineConfigDefault, deepExtend } from 'vona';
 import { ServiceDatabaseAsyncLocalStorage, ServiceTransactionConsistency‌ } from 'vona-module-a-orm';
+
+import type { ConfigDatabase } from './types/config.ts';
+
 import { ExtendKnex } from './extend/index.ts';
 
 const SymbolTransactionConsistency = Symbol('SymbolTransactionConsistency');

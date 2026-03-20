@@ -3,11 +3,14 @@ import type { IPipeRecord, IPipeTransform } from 'vona-module-a-aspect';
 import type { ServiceOnion } from 'vona-module-a-onion';
 import type { IOnionExecuteCustom } from 'vona-module-a-onion';
 import type { RouteHandlerArgumentMeta, RouteHandlerArgumentMetaDecorator } from 'vona-module-a-openapi';
-import type { ContextRoute } from '../../types/router.ts';
+
 import { isNil } from '@cabloy/utils';
 import { appMetadata } from 'vona';
 import { SymbolCacheComposePipes } from 'vona-module-a-aspect';
 import { SymbolRouteHandlersArgumentsMeta, SymbolRouteHandlersArgumentsValue } from 'vona-module-a-openapiutils';
+
+import type { ContextRoute } from '../../types/router.ts';
+
 import { extractValue } from './extractValue.ts';
 
 export async function middlewarePipe(ctx: VonaContext, next: Next) {
@@ -20,10 +23,7 @@ export async function middlewarePipe(ctx: VonaContext, next: Next) {
   return next();
 }
 
-async function _transformArguments(
-  app: VonaApplication,
-  route: ContextRoute,
-): Promise<any[] | undefined> {
+async function _transformArguments(app: VonaApplication, route: ContextRoute): Promise<any[] | undefined> {
   const paramtypes = appMetadata.getMetadata<any[]>('design:paramtypes', route.controller.prototype, route.action);
   if (!paramtypes) return;
 
@@ -88,12 +88,7 @@ async function _extractArgumentValue(ctx: VonaContext, argMeta: RouteHandlerArgu
   return extractValue(ctx, argMeta);
 }
 
-function composePipes(
-  app: VonaApplication,
-  route: ContextRoute,
-  argMeta: RouteHandlerArgumentMetaDecorator,
-  executeCustom: IOnionExecuteCustom,
-) {
+function composePipes(app: VonaApplication, route: ContextRoute, argMeta: RouteHandlerArgumentMetaDecorator, executeCustom: IOnionExecuteCustom) {
   if (!app.meta[SymbolCacheComposePipes]) app.meta[SymbolCacheComposePipes] = {};
   const cacheComposePipes: Record<string, Function[]> = app.meta[SymbolCacheComposePipes];
   const onionPipe = app.bean.onion.pipe;
@@ -123,10 +118,7 @@ function composePipes(
   return cacheComposePipes[key];
 }
 
-function _collectArgumentMiddlewares(
-  onionPipe: ServiceOnion<IPipeRecord>,
-  argMeta: RouteHandlerArgumentMetaDecorator,
-) {
+function _collectArgumentMiddlewares(onionPipe: ServiceOnion<IPipeRecord>, argMeta: RouteHandlerArgumentMetaDecorator) {
   if (!argMeta.pipes) return;
   return argMeta.pipes.map(pipe => {
     const { pipeName, options } = pipe();

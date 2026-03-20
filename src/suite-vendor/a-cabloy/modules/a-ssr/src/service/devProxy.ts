@@ -1,16 +1,17 @@
 import type http from 'node:http';
-import type { IDecoratorSsrSiteOptions } from '../types/ssrSite.ts';
+
 import Server from 'http-proxy';
 import web_outgoing from 'http-proxy/lib/http-proxy/passes/web-outgoing.js';
 import { BeanBase } from 'vona';
 import { Service } from 'vona-module-a-bean';
 import { SymbolStaticGetFullPathInner } from 'vona-module-a-static';
 
+import type { IDecoratorSsrSiteOptions } from '../types/ssrSite.ts';
+
 interface IDevProxyRecord {
   resolve: Function;
   reject: Function;
   options: Server.ServerOptions;
-
 }
 
 const SymbolDevProxyRecordId = Symbol('SymbolDevProxyRecordId');
@@ -25,7 +26,7 @@ export class ServiceDevProxy extends BeanBase {
 
   protected __init__(siteOptions: IDecoratorSsrSiteOptions) {
     this._siteOptions = siteOptions;
-    const devProxy = this._devProxy = Server.createProxyServer();
+    const devProxy = (this._devProxy = Server.createProxyServer());
     devProxy.on('proxyRes', ((
       proxyRes: http.ServerResponse<http.IncomingMessage>,
       req: http.IncomingMessage,
@@ -54,7 +55,7 @@ export class ServiceDevProxy extends BeanBase {
       const record = this._devProxyPromises[req[SymbolDevProxyRecordId]];
       if (!record) return;
       delete this._devProxyPromises[req[SymbolDevProxyRecordId]];
-      if (err.code === 'ECONNREFUSED' as any) {
+      if (err.code === ('ECONNREFUSED' as any)) {
         // this._devProxyNotRunning = true;
         return record.resolve(undefined);
       }

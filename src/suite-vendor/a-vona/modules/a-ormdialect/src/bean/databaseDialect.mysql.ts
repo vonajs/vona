@@ -1,6 +1,13 @@
 import type { Knex } from 'knex';
 import type { TableIdentity } from 'table-identity';
-import type { ConfigDatabaseClient, IDatabaseDialectCapabilities, IDecoratorDatabaseDialectOptions, IFetchDatabasesResultItem, IFetchIndexesResultItem } from 'vona-module-a-orm';
+import type {
+  ConfigDatabaseClient,
+  IDatabaseDialectCapabilities,
+  IDecoratorDatabaseDialectOptions,
+  IFetchDatabasesResultItem,
+  IFetchIndexesResultItem,
+} from 'vona-module-a-orm';
+
 import { promisify } from 'node:util';
 import { BeanDatabaseDialectBase, DatabaseDialect } from 'vona-module-a-orm';
 
@@ -22,10 +29,7 @@ export class DatabaseDialectMysql extends BeanDatabaseDialectBase {
     },
   };
 
-  async fetchDatabases(
-    schemaBuilder: Knex.SchemaBuilder,
-    databasePrefix: string,
-  ): Promise<IFetchDatabasesResultItem[]> {
+  async fetchDatabases(schemaBuilder: Knex.SchemaBuilder, databasePrefix: string): Promise<IFetchDatabasesResultItem[]> {
     const res = await schemaBuilder.raw(`show databases like '${databasePrefix}%'`);
     let dbs = res[0];
     dbs = dbs.map(db => {
@@ -36,9 +40,7 @@ export class DatabaseDialectMysql extends BeanDatabaseDialectBase {
   }
 
   async createDatabase(schemaBuilder: Knex.SchemaBuilder, databaseName: string): Promise<string> {
-    await schemaBuilder.raw(
-      `CREATE DATABASE \`${databaseName}\` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci`,
-    );
+    await schemaBuilder.raw(`CREATE DATABASE \`${databaseName}\` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci`);
     return databaseName;
   }
 
@@ -77,10 +79,7 @@ export class DatabaseDialectMysql extends BeanDatabaseDialectBase {
           AND V.VIEW_DEFINITION LIKE CONCAT('%\`',T.TABLE_NAME,'\`%')
       WHERE T.TABLE_SCHEMA = DATABASE()
     `;
-    const items = await builder
-      .distinct('dep_name')
-      .fromRaw(`(${sqlViews}) as viewDependents`)
-      .where({ ref_name: viewName });
+    const items = await builder.distinct('dep_name').fromRaw(`(${sqlViews}) as viewDependents`).where({ ref_name: viewName });
     return items.map(item => item.dep_name);
   }
 }

@@ -1,5 +1,7 @@
 import type { IDecoratorModelOptions } from 'vona-module-a-orm';
+
 import { BeanModelBase, Model } from 'vona-module-a-orm';
+
 import { EntityVersion } from '../entity/version.ts';
 
 export interface IModelOptionsVersion extends IDecoratorModelOptions<EntityVersion> {}

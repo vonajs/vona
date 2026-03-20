@@ -1,6 +1,6 @@
+import { catchError } from '@cabloy/utils';
 import assert from 'node:assert';
 import { describe, it } from 'node:test';
-import { catchError } from '@cabloy/utils';
 import { cast } from 'vona';
 import { app } from 'vona-mock';
 

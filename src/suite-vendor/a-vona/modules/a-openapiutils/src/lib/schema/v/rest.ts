@@ -1,6 +1,13 @@
-import type { ISchemaObjectExtensionFieldRest, ISchemaObjectExtensionFieldRestScene, TypeRenderComponent, TypeSchemaScene } from 'vona-module-a-openapi';
+import type {
+  ISchemaObjectExtensionFieldRest,
+  ISchemaObjectExtensionFieldRestScene,
+  TypeRenderComponent,
+  TypeSchemaScene,
+} from 'vona-module-a-openapi';
 import type z from 'zod';
+
 import type { TypeSchemaOrderLevel } from '../../../types/order.ts';
+
 import { $order } from '../../utils.ts';
 import { _generalSchemaRest } from './utils.ts';
 

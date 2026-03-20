@@ -1,6 +1,5 @@
 import type { ICaptchaProviderRecord } from './captchaProvider.ts';
 import type { ICaptchaSceneRecord } from './captchaScene.ts';
-
 import 'vona';
 
 export interface ICaptchaDataCache {

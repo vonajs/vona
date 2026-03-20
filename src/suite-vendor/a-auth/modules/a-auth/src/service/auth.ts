@@ -1,14 +1,24 @@
 import type { Constructable } from 'vona';
 import type { IJwtToken } from 'vona-module-a-jwt';
 import type { IAuthUserProfile, IPassport, IUser } from 'vona-module-a-user';
-import type { EntityAuthProvider } from '../entity/authProvider.ts';
-import type { StrategyBase } from '../lib/strategyBase.ts';
-import type { IAuthenticateStrategyState } from '../types/auth.ts';
-import type { IAuthProviderClientOptions, IAuthProviderStrategy, IAuthProviderVerify, IDecoratorAuthProviderOptions, TypeStrategyOptions, TypeStrategyVerifyArgs } from '../types/authProvider.ts';
+
 import { combineQueries, isNil } from '@cabloy/utils';
 import { TableIdentity } from 'table-identity';
 import { BeanBase, deepExtend } from 'vona';
 import { Service } from 'vona-module-a-bean';
+
+import type { EntityAuthProvider } from '../entity/authProvider.ts';
+import type { StrategyBase } from '../lib/strategyBase.ts';
+import type { IAuthenticateStrategyState } from '../types/auth.ts';
+import type {
+  IAuthProviderClientOptions,
+  IAuthProviderStrategy,
+  IAuthProviderVerify,
+  IDecoratorAuthProviderOptions,
+  TypeStrategyOptions,
+  TypeStrategyVerifyArgs,
+} from '../types/authProvider.ts';
+
 import { StrategyMock } from '../lib/strategyMock.ts';
 
 @Service()
@@ -239,9 +249,10 @@ export class ServiceAuth extends BeanBase {
     clientOptions: IAuthProviderClientOptions,
     onionOptions: IDecoratorAuthProviderOptions,
   ): Promise<Constructable<StrategyBase>> {
-    const Strategy = (clientOptions.mockUsername || (this.app.meta.isDev && onionOptions.useMockForDev !== false))
-      ? StrategyMock
-      : await beanAuthProvider.strategy(clientOptions, onionOptions);
+    const Strategy =
+      clientOptions.mockUsername || (this.app.meta.isDev && onionOptions.useMockForDev !== false)
+        ? StrategyMock
+        : await beanAuthProvider.strategy(clientOptions, onionOptions);
     return Strategy;
   }
 }

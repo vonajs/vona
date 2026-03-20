@@ -1,6 +1,8 @@
 import type { IDecoratorSsrMenuGroupOptions } from 'vona-module-a-ssr';
+
 import { BeanBase } from 'vona';
 import { SsrMenuGroup } from 'vona-module-a-ssr';
+
 import { $locale } from '../.metadata/locales.ts';
 
 export interface ISsrMenuGroupOptionsTools extends IDecoratorSsrMenuGroupOptions {}

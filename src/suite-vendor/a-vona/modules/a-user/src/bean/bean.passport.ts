@@ -1,12 +1,15 @@
 import type { IJwtClientRecord, IJwtSignOptions, IJwtToken, IJwtVerifyOptions, IPayloadData } from 'vona-module-a-jwt';
+
+import { catchError, isNil } from '@cabloy/utils';
+import { BeanBase, beanFullNameFromOnionName } from 'vona';
+import { Bean } from 'vona-module-a-bean';
+
 import type { IAuth, IAuthIdRecord, ISigninOptions } from '../types/auth.ts';
 import type { IAuthTokenAdapter } from '../types/authToken.ts';
 import type { IPassport, IPassportAdapter } from '../types/passport.ts';
 import type { IRole, IRoleNameRecord } from '../types/role.ts';
 import type { IUser, IUserNameRecord } from '../types/user.ts';
-import { catchError, isNil } from '@cabloy/utils';
-import { BeanBase, beanFullNameFromOnionName } from 'vona';
-import { Bean } from 'vona-module-a-bean';
+
 import { $getAuthIdSystem } from '../lib/auth.ts';
 
 @Bean()

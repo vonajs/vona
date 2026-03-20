@@ -1,8 +1,11 @@
 import type { Next } from 'vona';
 import type { WebSocket } from 'ws';
+
+import { BeanBase } from 'vona';
+
 import type { TypeSocketPacketEvent } from '../types/socketEvent.ts';
 import type { IDecoratorSocketPacketOptions, ISocketPacketExecute } from '../types/socketPacket.ts';
-import { BeanBase } from 'vona';
+
 import { SocketPacket } from '../lib/socketPacket.ts';
 import { socketEventRecordReverse } from '../types/socketEvent.ts';
 

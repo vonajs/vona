@@ -1,6 +1,7 @@
 import { BeanBase } from 'vona';
 import { Service } from 'vona-module-a-bean';
 import { $relationDynamic } from 'vona-module-a-orm';
+
 import { ModelProduct } from '../model/product.ts';
 
 @Service()
@@ -10,10 +11,7 @@ export class ServiceOrder extends BeanBase {
     const orderCreate = await this.scope.model.order.insert(
       {
         orderNo: 'Order001',
-        products2: [
-          { name: 'Apple' },
-          { name: 'Pear' },
-        ],
+        products2: [{ name: 'Apple' }, { name: 'Pear' }],
       },
       {
         with: {

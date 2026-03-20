@@ -1,5 +1,6 @@
 import type { Constructable, VonaApplication } from 'vona';
 import type { IResourceRecord } from 'vona-module-a-openapi';
+
 import type { ContextRoute } from '../types/router.ts';
 
 export interface IRecordResourceNameToRoutePathItem {

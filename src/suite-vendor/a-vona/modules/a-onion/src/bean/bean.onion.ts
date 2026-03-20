@@ -1,12 +1,9 @@
-import type {
-  IOnionOptionsEnable,
-  IOnionOptionsMatch,
-  IOnionOptionsMeta,
-  TypeOnionOptionsMatchRules,
-} from '../types/onion.ts';
 import { checkMeta, isNil, matchSelector } from '@cabloy/utils';
 import { BeanBase, ProxyDisable } from 'vona';
 import { Bean } from 'vona-module-a-bean';
+
+import type { IOnionOptionsEnable, IOnionOptionsMatch, IOnionOptionsMeta, TypeOnionOptionsMatchRules } from '../types/onion.ts';
+
 import { ServiceOnion } from '../service/onion_.ts';
 
 @ProxyDisable()

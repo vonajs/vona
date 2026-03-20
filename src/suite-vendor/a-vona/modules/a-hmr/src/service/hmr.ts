@@ -1,11 +1,26 @@
 import type { IDecoratorBeanOptionsBase, TypeModuleResourceConfig } from 'vona';
 import type { ServiceOnion } from 'vona-module-a-onion';
-import type { IHmrReload, TypeHmrWatchScene } from '../types/hmr.ts';
-import path from 'node:path';
+
 import { getOnionMetasMeta, getOnionScenesMeta, parseInfoFromPath } from '@cabloy/module-info';
 import { toUpperCaseFirstChar } from '@cabloy/word-utils';
-import { appHmrDeps, appResource, BeanBase, cast, deepExtend, pathToHref, SymbolBeanContainerInstances, SymbolBeanInstancePropsLazy, SymbolCacheAopChains, SymbolCacheAopChainsKey, SymbolHmrStateLoad, SymbolHmrStateSave } from 'vona';
+import path from 'node:path';
+import {
+  appHmrDeps,
+  appResource,
+  BeanBase,
+  cast,
+  deepExtend,
+  pathToHref,
+  SymbolBeanContainerInstances,
+  SymbolBeanInstancePropsLazy,
+  SymbolCacheAopChains,
+  SymbolCacheAopChainsKey,
+  SymbolHmrStateLoad,
+  SymbolHmrStateSave,
+} from 'vona';
 import { Service } from 'vona-module-a-bean';
+
+import type { IHmrReload, TypeHmrWatchScene } from '../types/hmr.ts';
 
 @Service()
 export class ServiceHmr extends BeanBase {
@@ -39,11 +54,7 @@ export class ServiceHmr extends BeanBase {
     const locale = path.basename(file, '.ts');
     // localeModules
     if (!this.app.meta.localeModules[moduleName]) this.app.meta.localeModules[moduleName] = {};
-    this.app.meta.localeModules[moduleName][locale] = Object.assign(
-      {},
-      moduleLocales,
-      this.app.meta.hmrCacheLocaleModules[moduleName]?.[locale],
-    );
+    this.app.meta.localeModules[moduleName][locale] = Object.assign({}, moduleLocales, this.app.meta.hmrCacheLocaleModules[moduleName]?.[locale]);
     // openapi
     await this.bean.openapi.clearAllCaches();
   }
@@ -53,11 +64,7 @@ export class ServiceHmr extends BeanBase {
     const configModule = await config(app, app.options.env);
     await app.util.monkeyModule(app.meta.appMonkey, app.meta.modulesMonkey, true, 'configLoaded', app.meta.modules[moduleName], configModule);
     // app config
-    app.config.modules[moduleName] = deepExtend(
-      {},
-      configModule,
-      app.meta.hmrCacheConfigModules[moduleName],
-    );
+    app.config.modules[moduleName] = deepExtend({}, configModule, app.meta.hmrCacheConfigModules[moduleName]);
     // instance config
     await this.$scope.instance.service.instance.resetAllCaches();
   }

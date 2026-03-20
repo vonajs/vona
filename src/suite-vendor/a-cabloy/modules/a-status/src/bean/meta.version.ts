@@ -1,4 +1,5 @@
 import type { IMetaVersionUpdate, IMetaVersionUpdateOptions } from 'vona-module-a-version';
+
 import { BeanBase } from 'vona';
 import { Meta } from 'vona-module-a-meta';
 

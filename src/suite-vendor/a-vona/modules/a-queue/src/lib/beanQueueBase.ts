@@ -1,6 +1,8 @@
 import type { IInstanceRecord } from 'vona';
-import type { IQueuePushOptions, IQueueRecord } from '../types/queue.ts';
+
 import { BeanBase } from 'vona';
+
+import type { IQueuePushOptions, IQueueRecord } from '../types/queue.ts';
 
 export class BeanQueueBase<DATA = unknown, RESULT = unknown> extends BeanBase {
   async pushAsync(data: DATA, options?: IQueuePushOptions): Promise<RESULT> {
@@ -10,9 +12,7 @@ export class BeanQueueBase<DATA = unknown, RESULT = unknown> extends BeanBase {
   }
 
   push(data: DATA, options?: IQueuePushOptions) {
-    return this.$scope.queue.service.queue.push(
-      this.$scope.queue.service.queue.prepareJobInfo(this.$onionName as any, data, options),
-    );
+    return this.$scope.queue.service.queue.push(this.$scope.queue.service.queue.prepareJobInfo(this.$onionName as any, data, options));
   }
 
   getQueue(instanceName?: keyof IInstanceRecord) {

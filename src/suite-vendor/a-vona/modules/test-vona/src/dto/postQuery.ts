@@ -1,8 +1,10 @@
 import type { IDecoratorDtoOptions } from 'vona-module-a-web';
+
 import { Api, v } from 'vona-module-a-openapiutils';
 import { $Dto } from 'vona-module-a-orm';
 import { Dto } from 'vona-module-a-web';
 import z from 'zod';
+
 import { EntityPost } from '../entity/post.ts';
 
 export interface IDtoOptionsPostQuery extends IDecoratorDtoOptions {}

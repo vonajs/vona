@@ -1,5 +1,5 @@
-import cluster from 'node:cluster';
 import { isNil } from '@cabloy/utils';
+import cluster from 'node:cluster';
 import { BeanBase, uuidv4 } from 'vona';
 import { Bean } from 'vona-module-a-bean';
 

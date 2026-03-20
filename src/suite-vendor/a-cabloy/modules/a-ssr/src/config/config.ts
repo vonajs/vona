@@ -1,4 +1,5 @@
 import type { VonaApplication } from 'vona';
+
 import type { IDecoratorSsrSiteOptions } from '../types/ssrSite.ts';
 
 export function config(_app: VonaApplication) {

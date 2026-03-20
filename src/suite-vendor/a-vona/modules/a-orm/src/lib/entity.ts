@@ -1,6 +1,7 @@
-import type { IDecoratorEntityOptions } from '../types/onion/entity.ts';
 import { createBeanDecorator } from 'vona';
 import { mergeFieldsOpenapiMetadata } from 'vona-module-a-openapiutils';
+
+import type { IDecoratorEntityOptions } from '../types/onion/entity.ts';
 
 // const __tableNames = new Set();
 
@@ -10,7 +11,7 @@ export function Entity<T extends IDecoratorEntityOptions<any>>(table?: T | strin
   if (typeof table === 'string') {
     options = Object.assign({}, options, { table });
   } else {
-    options = table || {} as any;
+    options = table || ({} as any);
   }
   // // tableName
   // const tableName = options.table;

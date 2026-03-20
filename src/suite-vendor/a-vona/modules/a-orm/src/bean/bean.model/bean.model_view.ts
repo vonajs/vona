@@ -1,7 +1,9 @@
 import type { ISwapDepsItem } from '@cabloy/deps';
 import type { Knex } from 'knex';
+
 import { swapDeps } from '@cabloy/deps';
 import { cast } from 'vona';
+
 import { BeanModelKnex } from './bean.model_knex.ts';
 
 export class BeanModelView<TRecord extends {}> extends BeanModelKnex<TRecord> {
@@ -57,11 +59,7 @@ export class BeanModelView<TRecord extends {}> extends BeanModelKnex<TRecord> {
     await this.schema.dropTable(tableName);
   }
 
-  async alterTable(
-    tableName: string,
-    callback: (tableBuilder: Knex.CreateTableBuilder) => any,
-    alterViewAuto?: boolean,
-  ): Promise<void> {
+  async alterTable(tableName: string, callback: (tableBuilder: Knex.CreateTableBuilder) => any, alterViewAuto?: boolean): Promise<void> {
     if (!alterViewAuto) {
       // alter table
       return await this.schema.alterTable(tableName, table => {

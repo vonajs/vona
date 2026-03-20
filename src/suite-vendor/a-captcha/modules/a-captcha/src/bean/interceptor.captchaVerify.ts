@@ -1,10 +1,12 @@
 import type { Next } from 'vona';
 import type { IDecoratorInterceptorOptions, IInterceptorExecute } from 'vona-module-a-aspect';
-import type { DtoCaptchaVerify } from '../dto/captchaVerify.ts';
-import type { ICaptchaSceneRecord } from '../types/captchaScene.ts';
+
 import { zodCustomError } from '@cabloy/utils';
 import { BeanBase } from 'vona';
 import { Interceptor } from 'vona-module-a-aspect';
+
+import type { DtoCaptchaVerify } from '../dto/captchaVerify.ts';
+import type { ICaptchaSceneRecord } from '../types/captchaScene.ts';
 
 export interface IInterceptorOptionsCaptchaVerify extends IDecoratorInterceptorOptions {
   scene?: keyof ICaptchaSceneRecord;

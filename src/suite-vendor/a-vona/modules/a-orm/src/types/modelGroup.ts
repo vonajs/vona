@@ -22,7 +22,7 @@ export interface IBuildModelSelectGroupParamsBasic<
   ColumnNames = keyof TRecord,
   Columns extends {} | undefined = undefined,
 > {
-  distinct?: boolean | (keyof TRecord) | (keyof TRecord)[];
+  distinct?: boolean | keyof TRecord | (keyof TRecord)[];
   aggrs?: TypeModelSelectAggrParamsAggrs<TRecord>;
   groups: TypeModelColumnsStrict<TRecord>;
   columns?: TypeModelColumnsStrict<TRecord>;

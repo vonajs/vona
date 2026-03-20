@@ -1,5 +1,6 @@
 import type { OmitNever, PowerPartial, VonaContext } from 'vona';
 import type { ServiceOnion, TypeUseOnionOmitOptionsEnable } from 'vona-module-a-onion';
+
 import type { ICaptchaProviderRecord } from './captchaProvider.ts';
 
 export interface ICaptchaSceneRecord {}
@@ -13,8 +14,7 @@ export interface ICaptchaSceneOptionsResolverResult<T extends keyof ICaptchaProv
   options: ICaptchaProviderRecord[T];
 }
 
-export type TypeCaptchaSceneOptionsResolver =
-  (ctx: VonaContext, providers: ICaptchaProviderRecord) => Promise<keyof ICaptchaProviderRecord>;
+export type TypeCaptchaSceneOptionsResolver = (ctx: VonaContext, providers: ICaptchaProviderRecord) => Promise<keyof ICaptchaProviderRecord>;
 
 export interface IDecoratorCaptchaSceneOptions {
   resolver?: TypeCaptchaSceneOptionsResolver;

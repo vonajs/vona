@@ -1,4 +1,5 @@
 import type { IPayloadData } from 'vona-module-a-jwt';
+
 import type { IUser } from './user.ts';
 
 export interface IAuthTokenAdapter {

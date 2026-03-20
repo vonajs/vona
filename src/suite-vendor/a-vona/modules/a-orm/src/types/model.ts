@@ -1,5 +1,6 @@
 import type { Knex } from 'knex';
 import type { TSummerCacheActionOptions } from 'vona-module-a-summer';
+
 import type { BeanModelMeta } from '../bean/bean.model/bean.model_meta.ts';
 import type { TypeModelColumn, TypeModelColumns, TypeModelColumnsPatch, TypeModelWhere } from './modelWhere.ts';
 import type { TypeModelOfModelLike, TypeModelParamsInclude, TypeModelsClassLikeGeneral, TypeSymbolKeyEntity } from './relations.ts';
@@ -11,21 +12,20 @@ export type TypeModelCacheType = 'query' | 'entity';
 
 // join
 export type IModelSelectParamsJoinType =
-  | 'join' |
-  'innerJoin' |
-  'leftJoin' |
-  'leftOuterJoin' |
-  'rightJoin' |
-  'rightOuterJoin' |
-  'fullOuterJoin' |
-  'crossJoin';
+  | 'join'
+  | 'innerJoin'
+  | 'leftJoin'
+  | 'leftOuterJoin'
+  | 'rightJoin'
+  | 'rightOuterJoin'
+  | 'fullOuterJoin'
+  | 'crossJoin';
 // export interface IModelSelectParamsJoinOnMap { [key: string]: string | number | boolean | Knex.Raw<any> }
-export type IModelSelectParamsJoin<TRecord, TableNames = undefined, ColumnNames = keyof TRecord> =
-  [
-    IModelSelectParamsJoinType,
-    TableNames,
-    [ColumnNames, ColumnNames] | Knex.JoinCallback,
-  ];
+export type IModelSelectParamsJoin<TRecord, TableNames = undefined, ColumnNames = keyof TRecord> = [
+  IModelSelectParamsJoinType,
+  TableNames,
+  [ColumnNames, ColumnNames] | Knex.JoinCallback,
+];
 
 // order
 export type IModelSelectParamsOrderDirection = 'asc' | 'desc';
@@ -38,9 +38,8 @@ export interface IBuildModelSelectParams<
   TableNames = undefined,
   ColumnNames = keyof TRecord,
   Columns extends {} | undefined = undefined,
-> extends
-  IModelRelationIncludeWrapper<Model>,
-  IBuildModelSelectParamsBasic<TRecord, TypeModelColumn<TRecord>, TableNames, ColumnNames, Columns> {}
+>
+  extends IModelRelationIncludeWrapper<Model>, IBuildModelSelectParamsBasic<TRecord, TypeModelColumn<TRecord>, TableNames, ColumnNames, Columns> {}
 
 export interface IBuildModelSelectParamsBasic<
   TRecord,
@@ -49,7 +48,7 @@ export interface IBuildModelSelectParamsBasic<
   ColumnNames = keyof TRecord,
   Columns extends {} | undefined = undefined,
 > {
-  distinct?: boolean | (keyof TRecord) | (keyof TRecord)[];
+  distinct?: boolean | keyof TRecord | (keyof TRecord)[];
   columns?: TypeModelColumnsPatch<TRecord, COLUMNS>;
   where?: TypeModelWhere<TRecord, Columns>;
   joins?: IModelSelectParamsJoin<TRecord, TableNames, ColumnNames>[];
@@ -83,7 +82,7 @@ export interface IBuildModelCountParams<
   ColumnNames = keyof TRecord,
   Columns extends {} | undefined = undefined,
 > {
-  distinct?: boolean | (keyof TRecord) | (keyof TRecord)[];
+  distinct?: boolean | keyof TRecord | (keyof TRecord)[];
   column?: TypeModelColumn<TRecord>;
   where?: TypeModelWhere<TRecord, Columns>;
   joins?: IModelSelectParamsJoin<TRecord, TableNames, ColumnNames>[];
@@ -119,8 +118,7 @@ export interface IModelMethodOptionsGeneral {
 }
 
 export interface IModelInsertOptionsGeneral<_TRecord, Model extends BeanModelMeta | undefined = undefined>
-  extends IModelMethodOptionsGeneral, IModelMutateRelationIncludeWrapper<Model> {
-}
+  extends IModelMethodOptionsGeneral, IModelMutateRelationIncludeWrapper<Model> {}
 
 export interface IModelUpdateOptionsGeneral<TRecord, Model extends BeanModelMeta | undefined = undefined>
   extends IModelMethodOptionsGeneral, IModelMutateRelationIncludeWrapper<Model> {
@@ -128,8 +126,7 @@ export interface IModelUpdateOptionsGeneral<TRecord, Model extends BeanModelMeta
 }
 
 export interface IModelDeleteOptionsGeneral<_TRecord, Model extends BeanModelMeta | undefined = undefined>
-  extends IModelMethodOptionsGeneral, IModelMutateRelationIncludeWrapper<Model> {
-}
+  extends IModelMethodOptionsGeneral, IModelMutateRelationIncludeWrapper<Model> {}
 
 export interface IModelGetOptionsGeneral<TRecord, Model extends BeanModelMeta | undefined = undefined>
   extends IModelMethodOptionsGeneral, IModelRelationIncludeWrapper<Model> {
@@ -137,8 +134,7 @@ export interface IModelGetOptionsGeneral<TRecord, Model extends BeanModelMeta | 
 }
 
 export interface IModelMutateOptionsGeneral<_TRecord, Model extends BeanModelMeta | undefined = undefined>
-  extends IModelMethodOptionsGeneral, IModelMutateRelationIncludeWrapper<Model> {
-}
+  extends IModelMethodOptionsGeneral, IModelMutateRelationIncludeWrapper<Model> {}
 
 export interface IModelSelectParamsPage {
   index?: number;

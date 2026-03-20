@@ -1,11 +1,13 @@
 import type { Constructable } from 'vona';
-import type { ValidatorOptions } from '../types/validatorOptions.ts';
+
 import { isNil } from '@cabloy/utils';
 import { coerceWithNil } from '@cabloy/zod-query';
 import { BeanBase } from 'vona';
 import { Bean } from 'vona-module-a-bean';
 import { $schema } from 'vona-module-a-openapiutils';
 import { z } from 'zod';
+
+import type { ValidatorOptions } from '../types/validatorOptions.ts';
 
 @Bean()
 export class BeanValidator extends BeanBase {

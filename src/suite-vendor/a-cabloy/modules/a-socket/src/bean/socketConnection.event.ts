@@ -1,8 +1,11 @@
 import type { Next } from 'vona';
 import type { WebSocket } from 'ws';
+
+import { BeanBase, cast } from 'vona';
+
 import type { IDecoratorSocketConnectionOptions, ISocketConnectionExecute } from '../types/socketConnection.ts';
 import type { ISocketEventRecord } from '../types/socketEvent.ts';
-import { BeanBase, cast } from 'vona';
+
 import { SocketConnection } from '../lib/socketConnection.ts';
 import { socketEventRecord } from '../types/socketEvent.ts';
 

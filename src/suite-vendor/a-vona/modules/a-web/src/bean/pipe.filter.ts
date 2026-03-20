@@ -1,11 +1,13 @@
 import type { IDecoratorPipeOptions, IDecoratorPipeOptionsArgument, IPipeTransform } from 'vona-module-a-aspect';
 import type { ISchemaObjectExtensionField, ITableQuery, RouteHandlerArgumentMeta } from 'vona-module-a-openapi';
 import type { ValidatorOptions } from 'vona-module-a-validation';
-import type { IFilterTransformRecord, IFilterTransformWhere, TypeQueryParamsPatch } from '../types/filterTransform.ts';
+
 import { isNil, isNilOrEmptyString } from '@cabloy/utils';
 import { ZodMetadata } from '@cabloy/zod-openapi';
 import { BeanBase, beanFullNameFromOnionName, cast } from 'vona';
 import { createArgumentPipe, Pipe } from 'vona-module-a-aspect';
+
+import type { IFilterTransformRecord, IFilterTransformWhere, TypeQueryParamsPatch } from '../types/filterTransform.ts';
 
 export type TypePipeFilterData = ITableQuery;
 
@@ -26,7 +28,7 @@ export class PipeFilter extends BeanBase implements IPipeTransform<TypePipeFilte
   async transform(value: TypePipeFilterData, metadata: RouteHandlerArgumentMeta, options: IPipeOptionsFilter): Promise<TypePipeFilterResult> {
     if (!options.schema) throw new Error(`should specify the schema of pipeFilter: ${metadata.controller.name}.${metadata.method}#${metadata.index}`);
     // validateSchema
-    value = await this.bean.validator.validateSchema(options.schema, value, options, metadata.field) as TypePipeFilterData;
+    value = (await this.bean.validator.validateSchema(options.schema, value, options, metadata.field)) as TypePipeFilterData;
     // transform
     const params = await this._transform(value, options);
     // ok
@@ -123,10 +125,7 @@ export class PipeFilter extends BeanBase implements IPipeTransform<TypePipeFilte
     if (Object.prototype.hasOwnProperty.call(params.where, fullName)) return;
     // filter transform
     const [transformName, transformOptions] = openapi?.filter?.transform ?? ['a-web:base', undefined];
-    const transformOptions2 = this.bean.onion.filterTransform.getOnionOptionsDynamic(
-      transformName as keyof IFilterTransformRecord,
-      transformOptions,
-    );
+    const transformOptions2 = this.bean.onion.filterTransform.getOnionOptionsDynamic(transformName as keyof IFilterTransformRecord, transformOptions);
     // execute
     const beanFullName = beanFullNameFromOnionName(transformName, 'filterTransform');
     const beanInstance = this.bean._getBean(beanFullName) as unknown as IFilterTransformWhere;

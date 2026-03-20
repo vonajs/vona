@@ -1,8 +1,10 @@
 import type { Next, NextSync } from 'vona';
 import type { IAopMethodExecute, IDecoratorAopMethodOptions } from 'vona-module-a-aspect';
-import type { ITransactionOptions } from '../types/transaction.ts';
+
 import { BeanAopMethodBase } from 'vona';
 import { AopMethod } from 'vona-module-a-aspect';
+
+import type { ITransactionOptions } from '../types/transaction.ts';
 
 export interface IAopMethodOptionsTransaction extends IDecoratorAopMethodOptions, ITransactionOptions {}
 

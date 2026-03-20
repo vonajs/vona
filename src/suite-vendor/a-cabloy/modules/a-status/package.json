@@ -1,21 +1,15 @@
 {
   "name": "vona-module-a-status",
-  "type": "module",
   "version": "5.0.0",
-  "vonaModule": {
-    "fileVersion": 1,
-    "dependencies": {
-      "a-vona": "5.0.0"
-    },
-    "metas": {
-      "status": {
-        "scopeResource": true,
-        "boilerplate": "boilerplate"
-      }
-    }
-  },
   "description": "",
   "author": "zhennann",
+  "files": [
+    "assets",
+    "cli",
+    "dist",
+    "src"
+  ],
+  "type": "module",
   "exports": {
     ".": {
       "types": [
@@ -27,12 +21,6 @@
     },
     "./package.json": "./package.json"
   },
-  "files": [
-    "assets",
-    "cli",
-    "dist",
-    "src"
-  ],
   "scripts": {
     "clean": "rimraf dist tsconfig.build.tsbuildinfo",
     "tsc:publish": "npm run clean && vona :bin:buildModule --sourcemap && tsc -p tsconfig.build.json",
@@ -41,6 +29,10 @@
     "postpack": "clean-package restore && npm run clean"
   },
   "dependencies": {},
+  "devDependencies": {
+    "clean-package": "^2.2.0",
+    "rimraf": "^6.0.1"
+  },
   "clean-package": {
     "indent": 2,
     "remove": [
@@ -48,8 +40,16 @@
       "exports.\\..import"
     ]
   },
-  "devDependencies": {
-    "clean-package": "^2.2.0",
-    "rimraf": "^6.0.1"
+  "vonaModule": {
+    "fileVersion": 1,
+    "dependencies": {
+      "a-vona": "5.0.0"
+    },
+    "metas": {
+      "status": {
+        "scopeResource": true,
+        "boilerplate": "boilerplate"
+      }
+    }
   }
 }

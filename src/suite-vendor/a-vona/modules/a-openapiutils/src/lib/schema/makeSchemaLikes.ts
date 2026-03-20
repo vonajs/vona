@@ -1,9 +1,12 @@
 import type { Constructable } from 'vona';
 import type { ISchemaObjectOptions, TypeOpenapiMetadata } from 'vona-module-a-openapi';
-import type { SchemaLike, SchemaLikeCreate } from '../../types/decorator.ts';
+
 import { isClass } from '@cabloy/utils';
 import { appMetadata, appResource, cast } from 'vona';
 import { z } from 'zod';
+
+import type { SchemaLike, SchemaLikeCreate } from '../../types/decorator.ts';
+
 import { SymbolDecoratorRule } from '../const/decorator.ts';
 import { prepareClassType } from '../utils.ts';
 import { SymbolSchemaDynamicRefId } from './schemaDynamic.ts';
@@ -29,10 +32,7 @@ export function makeSchemaLike<T>(schemaLike: SchemaLike<T> | undefined, schemaP
   if (Object.prototype.hasOwnProperty.call(schemaLike, 'parseAsync')) {
     // schema
     return schemaLike as z.ZodType<T>;
-  } else if (
-    isClass(schemaLike) ||
-    ['String', 'Number', 'Boolean', 'Date', 'BigInt', 'Array'].includes(cast<Function>(schemaLike).name)
-  ) {
+  } else if (isClass(schemaLike) || ['String', 'Number', 'Boolean', 'Date', 'BigInt', 'Array'].includes(cast<Function>(schemaLike).name)) {
     // class
     return $schema(cast<Constructable>(schemaLike)) as z.ZodType<T>;
   } else {

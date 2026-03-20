@@ -1,6 +1,9 @@
 import type { IModuleMain, VonaContext } from 'vona';
-import type { I18nConfigLocale, I18nConfigTz } from './config/config.ts';
+
 import { BeanSimple } from 'vona';
+
+import type { I18nConfigLocale, I18nConfigTz } from './config/config.ts';
+
 import { __ThisModule__ } from './.metadata/this.ts';
 
 const SymbolLocale = Symbol('SymbolLocale');
@@ -108,7 +111,7 @@ function __getLocale(ctx: VonaContext, options: I18nConfigLocale) {
   }
 
   // cookie alias
-  if (locale as string in options.localeAlias) {
+  if ((locale as string) in options.localeAlias) {
     locale = options.localeAlias[locale as string];
   }
 

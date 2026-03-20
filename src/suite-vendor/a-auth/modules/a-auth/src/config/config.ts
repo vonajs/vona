@@ -1,4 +1,5 @@
 import type { VonaApplication } from 'vona';
+
 import { $customKey } from 'vona';
 
 export function config(_app: VonaApplication) {

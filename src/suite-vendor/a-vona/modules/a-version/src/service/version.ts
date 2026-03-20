@@ -1,18 +1,14 @@
 import type { IInstanceRecord } from 'vona';
 import type { ConfigInstanceBase } from 'vona-module-a-instance';
 import type { IInstanceStartupOptions } from 'vona-module-a-startup';
-import type { EntityVersion } from '../entity/version.ts';
-import type { EntityVersionInit } from '../entity/versionInit.ts';
-import type {
-  IMetaVersionInit,
-  IMetaVersionOptions,
-  IMetaVersionOptionsInner,
-  IMetaVersionTest,
-  IMetaVersionUpdate,
-} from '../types/version.ts';
+
 import chalk from 'chalk';
 import { BeanBase } from 'vona';
 import { Service } from 'vona-module-a-bean';
+
+import type { EntityVersion } from '../entity/version.ts';
+import type { EntityVersionInit } from '../entity/versionInit.ts';
+import type { IMetaVersionInit, IMetaVersionOptions, IMetaVersionOptionsInner, IMetaVersionTest, IMetaVersionUpdate } from '../types/version.ts';
 
 @Service()
 export class ServiceVersion extends BeanBase {
@@ -213,8 +209,7 @@ export class ServiceVersion extends BeanBase {
   async __updateModuleTransaction(module, version) {
     // bean
     const beanVersion = this.__getBeanVersion<IMetaVersionUpdate>(module.info.relativeName, true);
-    if (!beanVersion.update)
-      throw new Error(`meta.version.update not exists for ${module.info.relativeName}`);
+    if (!beanVersion.update) throw new Error(`meta.version.update not exists for ${module.info.relativeName}`);
     // clear columns cache
     this.bean.database.current.columns.columnsClear();
     // execute
@@ -264,8 +259,7 @@ export class ServiceVersion extends BeanBase {
   private __getBeanVersion<T>(moduleName: string, throwErrorIfEmpty: boolean): T {
     // bean
     const beanVersion = this.bean._getBean(`${moduleName}.meta.version` as any);
-    if (!beanVersion && throwErrorIfEmpty)
-      throw new Error(`meta.version not exists for ${moduleName}`);
+    if (!beanVersion && throwErrorIfEmpty) throw new Error(`meta.version not exists for ${moduleName}`);
     return beanVersion;
   }
 }

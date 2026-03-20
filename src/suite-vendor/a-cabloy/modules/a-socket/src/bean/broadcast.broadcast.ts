@@ -1,7 +1,9 @@
 import type { IBroadcastExecute } from 'vona-module-a-broadcast';
+
+import { BeanBroadcastBase, Broadcast } from 'vona-module-a-broadcast';
+
 import type { ISendEventOptions } from '../types/socketEvent.ts';
 import type { ISocketNamespaceRecord } from '../types/socketNamespace.ts';
-import { BeanBroadcastBase, Broadcast } from 'vona-module-a-broadcast';
 
 export interface TypeBroadcastBroadcastJobData {
   namespace: keyof ISocketNamespaceRecord;
@@ -11,9 +13,7 @@ export interface TypeBroadcastBroadcastJobData {
 }
 
 @Broadcast()
-export class BroadcastBroadcast
-  extends BeanBroadcastBase<TypeBroadcastBroadcastJobData>
-  implements IBroadcastExecute<TypeBroadcastBroadcastJobData> {
+export class BroadcastBroadcast extends BeanBroadcastBase<TypeBroadcastBroadcastJobData> implements IBroadcastExecute<TypeBroadcastBroadcastJobData> {
   async execute(data: TypeBroadcastBroadcastJobData, isEmitter?: boolean) {
     const { namespace, eventName, data: eventData, options } = data;
     if (!isEmitter) {

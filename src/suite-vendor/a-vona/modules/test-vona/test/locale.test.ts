@@ -1,6 +1,7 @@
 import assert from 'node:assert';
 import { describe, it } from 'node:test';
 import { app, mockModuleInfo } from 'vona-mock';
+
 import { __ThisModule__ } from '../src/.metadata/this.ts';
 
 describe('locale.test.ts', () => {
@@ -13,10 +14,7 @@ describe('locale.test.ts', () => {
         // ctx.locale
         assert.equal(ctx.locale, 'zh-cn');
         // getText
-        assert.equal(
-          app.meta.locale.getText(false, moduleInfo.relativeName, ctx.locale, 'TestHelloWorld'),
-          '您好，世界',
-        );
+        assert.equal(app.meta.locale.getText(false, moduleInfo.relativeName, ctx.locale, 'TestHelloWorld'), '您好，世界');
         assert.equal(app.meta.locale.getText(false, undefined, ctx.locale, 'test-vona::TestHelloWorld'), '您好，世界');
         // scope locale
         const scopeTest = app.scope('test-vona');

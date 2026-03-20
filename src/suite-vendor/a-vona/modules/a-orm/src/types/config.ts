@@ -1,5 +1,6 @@
 import type { Knex } from 'knex';
 import type { VonaContext } from 'vona';
+
 import type { IDatabaseClientDialectRecord, IDatabaseClientRecord } from './database.ts';
 import type { IDatabaseDialectRecord } from './onion/databaseDialect.ts';
 
@@ -18,5 +19,5 @@ export interface ConfigDatabase {
 }
 
 export type IDataBaseConfigDialects = {
-  [KEY in keyof IDatabaseClientDialectRecord]: keyof IDatabaseDialectRecord
+  [KEY in keyof IDatabaseClientDialectRecord]: keyof IDatabaseDialectRecord;
 };

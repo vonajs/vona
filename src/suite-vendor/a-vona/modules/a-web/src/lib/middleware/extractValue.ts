@@ -1,6 +1,7 @@
 import type { VonaContext } from 'vona';
 import type { RouteHandlerArgumentMetaDecorator, RouteHandlerArgumentType } from 'vona-module-a-openapi';
 import type { IUploadValue } from 'vona-module-a-upload';
+
 import { SymbolUploadValue } from 'vona-module-a-upload';
 
 export function extractValue(ctx: VonaContext, argMeta: RouteHandlerArgumentMetaDecorator) {

@@ -1,6 +1,8 @@
 import type { IDecoratorBeanOptionsBase } from 'vona';
-import type { TypeHmrWatchScene } from '../types/hmr.ts';
+
 import { BeanEventBase, Event } from 'vona-module-a-event';
+
+import type { TypeHmrWatchScene } from '../types/hmr.ts';
 
 export interface TypeEventHmrReloadData {
   sceneName: TypeHmrWatchScene;
@@ -11,7 +13,4 @@ export interface TypeEventHmrReloadData {
 export type TypeEventHmrReloadResult = void;
 
 @Event()
-export class EventHmrReload extends BeanEventBase<
-  TypeEventHmrReloadData,
-  TypeEventHmrReloadResult
-> {}
+export class EventHmrReload extends BeanEventBase<TypeEventHmrReloadData, TypeEventHmrReloadResult> {}

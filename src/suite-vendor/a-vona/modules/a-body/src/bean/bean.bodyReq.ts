@@ -1,7 +1,9 @@
-import type { BodyParserOptions, BodyType } from '../types/bodyParser.ts';
 import parser from 'co-body';
 import { BeanBase } from 'vona';
 import { Bean } from 'vona-module-a-bean';
+
+import type { BodyParserOptions, BodyType } from '../types/bodyParser.ts';
+
 import { getIsEnabledBodyAs, getMimeTypes, isTypes } from '../lib/utils.ts';
 
 @Bean()
@@ -27,10 +29,7 @@ export class BeanBodyReq extends BeanBase {
     const mimeTypes = getMimeTypes(options.extendTypes);
 
     const shouldParseBodyAs = (type: BodyType) => {
-      return Boolean(
-        isEnabledBodyAs[type] &&
-        isTypes(ctx.request.get('content-type'), mimeTypes[type]),
-      );
+      return Boolean(isEnabledBodyAs[type] && isTypes(ctx.request.get('content-type'), mimeTypes[type]));
     };
 
     const bodyType =

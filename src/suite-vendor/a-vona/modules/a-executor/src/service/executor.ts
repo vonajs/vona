@@ -1,71 +1,72 @@
 import type { IApiPathRecordMethodMap } from 'vona-module-a-web';
-import type { IGeneralInfoOptions, IPerformActionOptions } from '../types/executor.ts';
+
 import { combineParamsAndQuery } from '@cabloy/utils';
 import { BeanBase, cast, deepExtend } from 'vona';
 import { Aspect } from 'vona-module-a-aspect';
 import { Service } from 'vona-module-a-bean';
+
+import type { IGeneralInfoOptions, IPerformActionOptions } from '../types/executor.ts';
+
 import { SymbolRouterMiddleware } from '../types/executor.ts';
 
 @Service()
 export class ServiceExecutor extends BeanBase {
   @Aspect.aopMethod('a-logger:log', { level: 'debug' })
-  async performActionInner<
-    METHOD extends keyof IApiPathRecordMethodMap,
-  >(method: METHOD,
-    url: string,
-    options?: IPerformActionOptions,
-  ): Promise<any> {
+  async performActionInner<METHOD extends keyof IApiPathRecordMethodMap>(method: METHOD, url: string, options?: IPerformActionOptions): Promise<any> {
     // app
     const app = this.app;
     // new ctx
-    return await this.bean.executor.newCtx(async () => {
-      const ctx = this.ctx;
-      // default status code
-      ctx.res.statusCode = 404;
-      ctx.req.method = method.toUpperCase();
-      // url
-      ctx.req.url = combineParamsAndQuery(url, { params: options?.params, query: options?.query });
-      // headers
-      ctx.req.headers = Object.assign({}, ctx.req.headers, options?.headers);
-      // json
-      if (!ctx.req.headers.accept) {
-        ctx.req.headers.accept = 'application/json';
-      }
-      // authToken
-      if (options?.authToken) {
-        ctx.req.headers.authorization = `Bearer ${options?.authToken}`;
-      }
-      // // query
-      // if (options?.query !== undefined) {
-      //   cast(ctx.req).query = cast(ctx.request).query = options?.query;
-      // }
-      // body
-      cast(ctx.req).body = ctx.request.body = options?.body ?? {}; // body should set {} if undefined/null
-      // onion
-      ctx.onionsDynamic = options?.onions;
-      // invoke middleware
-      await app[SymbolRouterMiddleware](ctx);
-      // check result
-      if (ctx.status === 200) {
-        if (!ctx.body || (ctx.body as any).code === undefined) {
-          // not check code, e.g. text/xml
-          return ctx.body;
+    return await this.bean.executor.newCtx(
+      async () => {
+        const ctx = this.ctx;
+        // default status code
+        ctx.res.statusCode = 404;
+        ctx.req.method = method.toUpperCase();
+        // url
+        ctx.req.url = combineParamsAndQuery(url, { params: options?.params, query: options?.query });
+        // headers
+        ctx.req.headers = Object.assign({}, ctx.req.headers, options?.headers);
+        // json
+        if (!ctx.req.headers.accept) {
+          ctx.req.headers.accept = 'application/json';
         }
-        if ((ctx.body as any).code === 0) {
-          return (ctx.body as any).data;
+        // authToken
+        if (options?.authToken) {
+          ctx.req.headers.authorization = `Bearer ${options?.authToken}`;
         }
-        throw app.util.createError(ctx.body);
-      } else {
-        if (ctx.body && typeof ctx.body === 'object') {
+        // // query
+        // if (options?.query !== undefined) {
+        //   cast(ctx.req).query = cast(ctx.request).query = options?.query;
+        // }
+        // body
+        cast(ctx.req).body = ctx.request.body = options?.body ?? {}; // body should set {} if undefined/null
+        // onion
+        ctx.onionsDynamic = options?.onions;
+        // invoke middleware
+        await app[SymbolRouterMiddleware](ctx);
+        // check result
+        if (ctx.status === 200) {
+          if (!ctx.body || (ctx.body as any).code === undefined) {
+            // not check code, e.g. text/xml
+            return ctx.body;
+          }
+          if ((ctx.body as any).code === 0) {
+            return (ctx.body as any).data;
+          }
           throw app.util.createError(ctx.body);
         } else {
-          throw app.util.createError({
-            code: ctx.status,
-            message: ctx.message,
-          });
+          if (ctx.body && typeof ctx.body === 'object') {
+            throw app.util.createError(ctx.body);
+          } else {
+            throw app.util.createError({
+              code: ctx.status,
+              message: ctx.message,
+            });
+          }
         }
-      }
-    }, { innerAccess: options?.innerAccess, extraData: options?.extraData });
+      },
+      { innerAccess: options?.innerAccess, extraData: options?.extraData },
+    );
   }
 
   prepareGeneralInfo(options?: IGeneralInfoOptions): IGeneralInfoOptions {

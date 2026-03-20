@@ -1,9 +1,11 @@
 import type { TypeEventResolvePathResult } from 'vona-module-a-static';
-import type { IDecoratorSsrSiteOptions, ISsrHandlerRenderOptionsInner } from '../types/ssrSite.ts';
-import path from 'node:path';
+
 import fse from 'fs-extra';
+import path from 'node:path';
 import { BeanBase, pathToHref } from 'vona';
 import { Service } from 'vona-module-a-bean';
+
+import type { IDecoratorSsrSiteOptions, ISsrHandlerRenderOptionsInner } from '../types/ssrSite.ts';
 
 @Service()
 export class ServiceSsrHandler extends BeanBase {

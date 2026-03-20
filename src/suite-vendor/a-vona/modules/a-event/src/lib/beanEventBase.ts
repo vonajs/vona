@@ -1,6 +1,8 @@
+import { BeanBase, cast } from 'vona';
+
 import type { TypeEventOff } from '../types/event.ts';
 import type { EventOn, NextEventStrict, NextEventSyncStrict } from '../types/eventListener.ts';
-import { BeanBase, cast } from 'vona';
+
 import { ServiceEventListener } from '../service/eventListener.ts';
 
 export class BeanEventBase<DATA = unknown, RESULT = unknown> extends BeanBase {
@@ -10,8 +12,8 @@ export class BeanEventBase<DATA = unknown, RESULT = unknown> extends BeanBase {
       typeof nextOrDefault === 'function'
         ? cast<NextEventStrict<DATA, RESULT>>(nextOrDefault)
         : async (): Promise<RESULT> => {
-          return nextOrDefault!;
-        };
+            return nextOrDefault!;
+          };
     return beanEventListener.composer(data, next);
   }
 

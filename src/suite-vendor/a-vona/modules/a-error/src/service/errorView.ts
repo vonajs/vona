@@ -1,8 +1,8 @@
+import cookie from 'cookie';
+import Mustache from 'mustache';
 import fs from 'node:fs';
 import path from 'node:path';
 import util from 'node:util';
-import cookie from 'cookie';
-import Mustache from 'mustache';
 import * as StackTrace from 'stack-trace';
 import { BeanBase, cast } from 'vona';
 import { Service } from 'vona-module-a-bean';
@@ -111,9 +111,7 @@ export class ServiceErrorView extends BeanBase {
 
   serializeFrame(frame) {
     const filename = frame.getFileName();
-    const relativeFileName = filename.includes(process.cwd())
-      ? filename.replace(process.cwd(), '').replace(startingSlashRegex, '')
-      : filename;
+    const relativeFileName = filename.includes(process.cwd()) ? filename.replace(process.cwd(), '').replace(startingSlashRegex, '') : filename;
     const extname = path.extname(filename).replace('.', '');
 
     return {

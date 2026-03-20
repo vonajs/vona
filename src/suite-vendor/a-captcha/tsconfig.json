@@ -12,7 +12,5 @@
       "path": "modules/captcha-simple/tsconfig.build.json"
     }
   ],
-  "exclude": [
-    "modules"
-  ]
+  "exclude": ["modules"]
 }

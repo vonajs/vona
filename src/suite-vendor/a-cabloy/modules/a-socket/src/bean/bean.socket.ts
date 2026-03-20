@@ -1,7 +1,9 @@
 import type { WebSocket } from 'ws';
-import type { ISocketNamespaceRecord } from '../types/socketNamespace.ts';
+
 import { BeanBase } from 'vona';
 import { Bean } from 'vona-module-a-bean';
+
+import type { ISocketNamespaceRecord } from '../types/socketNamespace.ts';
 
 @Bean()
 export class BeanSocket extends BeanBase {

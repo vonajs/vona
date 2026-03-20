@@ -1,11 +1,14 @@
 import type { Constructable, ILocaleMagic } from 'vona';
 import type { TypeOpenapiMetadata } from 'vona-module-a-openapi';
-import type { TypeDecoratorRules } from '../types/decorator.ts';
-import type { TypeSchemaOrderLevel } from '../types/order.ts';
+
 import { isClass, isEmptyObject } from '@cabloy/utils';
 import { ZodMetadata } from '@cabloy/zod-openapi';
 import { appMetadata, appResource, cast, deepExtend, registerMappedClassMetadataKey } from 'vona';
 import { z } from 'zod';
+
+import type { TypeDecoratorRules } from '../types/decorator.ts';
+import type { TypeSchemaOrderLevel } from '../types/order.ts';
+
 import { OrderLevelBaseMap } from './const/database.ts';
 import { SymbolDecoratorRule } from './const/decorator.ts';
 
@@ -79,7 +82,7 @@ export function mergeFieldOpenapiMetadata(target: object, prop: string, fieldRul
 }
 
 export function prepareClassType<T>(classType: (() => Constructable<T>) | Constructable<T>): Constructable<T> {
-  return isClass(classType) ? classType as Constructable<T> : cast(classType)();
+  return isClass(classType) ? (classType as Constructable<T>) : cast(classType)();
 }
 
 export function normalizeErrorParams(params?: string | ILocaleMagic | any, errorDefault?: any) {

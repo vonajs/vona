@@ -1,7 +1,9 @@
-import type { IMiddlewareSystemOptionsCors } from './middlewareSystem.cors.ts';
 import { URL } from 'node:url';
 import { BeanBase } from 'vona';
 import { Bean } from 'vona-module-a-bean';
+
+import type { IMiddlewareSystemOptionsCors } from './middlewareSystem.cors.ts';
+
 import { isSafeDomain } from '../lib/utils.ts';
 
 @Bean()

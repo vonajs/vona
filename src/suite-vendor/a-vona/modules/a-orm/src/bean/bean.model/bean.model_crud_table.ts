@@ -1,4 +1,5 @@
 import type { TableIdentity } from 'table-identity';
+
 import type {
   IModelCountParams,
   IModelGetOptionsGeneral,
@@ -8,18 +9,31 @@ import type {
   ITableRecord,
   TypeModelWhere,
 } from '../../types/index.ts';
+
 import { BeanModelCrudInner } from './bean.model_crud_inner.ts';
 
 export class BeanModelCrudTable<TRecord extends {}> extends BeanModelCrudInner<TRecord> {
-  async mget(table: keyof ITableRecord, ids: TableIdentity[], options?: Omit<IModelGetOptionsGeneral<TRecord>, 'include' | 'with'>): Promise<TRecord[]> {
+  async mget(
+    table: keyof ITableRecord,
+    ids: TableIdentity[],
+    options?: Omit<IModelGetOptionsGeneral<TRecord>, 'include' | 'with'>,
+  ): Promise<TRecord[]> {
     return await this._mget(table, ids, options);
   }
 
-  async select(table: keyof ITableRecord, params?: Omit<IModelSelectParams<TRecord>, 'include' | 'with'>, options?: IModelMethodOptionsGeneral): Promise<TRecord[]> {
+  async select(
+    table: keyof ITableRecord,
+    params?: Omit<IModelSelectParams<TRecord>, 'include' | 'with'>,
+    options?: IModelMethodOptionsGeneral,
+  ): Promise<TRecord[]> {
     return await this._select(table, params, options);
   }
 
-  async get(table: keyof ITableRecord, where: TypeModelWhere<TRecord>, options?: Omit<IModelGetOptionsGeneral<TRecord>, 'include' | 'with'>): Promise<TRecord | undefined> {
+  async get(
+    table: keyof ITableRecord,
+    where: TypeModelWhere<TRecord>,
+    options?: Omit<IModelGetOptionsGeneral<TRecord>, 'include' | 'with'>,
+  ): Promise<TRecord | undefined> {
     return await this._get(table, where, options);
   }
 
@@ -28,11 +42,11 @@ export class BeanModelCrudTable<TRecord extends {}> extends BeanModelCrudInner<T
   }
 
   async insert(table: keyof ITableRecord, data?: Partial<TRecord>, options?: IModelMethodOptionsGeneral): Promise<TRecord> {
-    return await this._insertBulk(table, data, options) as Promise<TRecord>;
+    return (await this._insertBulk(table, data, options)) as Promise<TRecord>;
   }
 
   async insertBulk(table: keyof ITableRecord, data: Partial<TRecord>[], options?: IModelMethodOptionsGeneral): Promise<TRecord[]> {
-    return await this._insertBulk(table, data, options) as Promise<TRecord[]>;
+    return (await this._insertBulk(table, data, options)) as Promise<TRecord[]>;
   }
 
   async update(table: keyof ITableRecord, data: Partial<TRecord>, options?: IModelUpdateOptionsGeneral<TRecord>): Promise<Partial<TRecord>> {

@@ -1,7 +1,9 @@
 import type { IBroadcastExecute } from 'vona-module-a-broadcast';
-import type { IDecoratorCacheMemOptions } from '../types/cacheMem.ts';
+
 import { cast } from 'vona';
 import { BeanBroadcastBase, Broadcast } from 'vona-module-a-broadcast';
+
+import type { IDecoratorCacheMemOptions } from '../types/cacheMem.ts';
 
 export interface TypeBroadcastMemClearJobData {
   cacheName: string;
@@ -9,9 +11,7 @@ export interface TypeBroadcastMemClearJobData {
 }
 
 @Broadcast()
-export class BroadcastMemClear
-  extends BeanBroadcastBase<TypeBroadcastMemClearJobData>
-  implements IBroadcastExecute<TypeBroadcastMemClearJobData> {
+export class BroadcastMemClear extends BeanBroadcastBase<TypeBroadcastMemClearJobData> implements IBroadcastExecute<TypeBroadcastMemClearJobData> {
   async execute(data: TypeBroadcastMemClearJobData, isEmitter?: boolean) {
     const { cacheName, cacheOptions } = data;
     if (!isEmitter) {

@@ -1,6 +1,7 @@
 import { BeanBase } from 'vona';
 import { Service } from 'vona-module-a-bean';
 import { $relationDynamic } from 'vona-module-a-orm';
+
 import { ModelRole } from '../model/role.ts';
 import { ModelRoleUser } from '../model/roleUser.ts';
 
@@ -32,23 +33,27 @@ export class ServiceUser extends BeanBase {
 
   async relationBelongsToMany() {
     // insert: roles
-    const roles = await this.scope.model.role.insertBulk([
-      { name: 'role-family' },
-      { name: 'role-friend' },
-    ]);
+    const roles = await this.scope.model.role.insertBulk([{ name: 'role-family' }, { name: 'role-friend' }]);
     const roleIdFamily = roles[0].id;
     const roleIdFriend = roles[1].id;
     // insert: user
     const userCreate = await this.scope.model.user.insert(
       {
         name: 'Tom',
-        roles: [{
-          id: roleIdFamily,
-        }],
+        roles: [
+          {
+            id: roleIdFamily,
+          },
+        ],
       },
       {
         with: {
-          roles: $relationDynamic.belongsToMany(() => ModelRoleUser, () => ModelRole, 'userId', 'roleId'),
+          roles: $relationDynamic.belongsToMany(
+            () => ModelRoleUser,
+            () => ModelRole,
+            'userId',
+            'roleId',
+          ),
         },
       },
     );
@@ -59,9 +64,15 @@ export class ServiceUser extends BeanBase {
       },
       {
         with: {
-          roles: $relationDynamic.belongsToMany(() => ModelRoleUser, () => ModelRole, 'userId', 'roleId', {
-            columns: ['id', 'name'],
-          }),
+          roles: $relationDynamic.belongsToMany(
+            () => ModelRoleUser,
+            () => ModelRole,
+            'userId',
+            'roleId',
+            {
+              columns: ['id', 'name'],
+            },
+          ),
         },
       },
     );
@@ -78,9 +89,15 @@ export class ServiceUser extends BeanBase {
       },
       {
         with: {
-          roles: $relationDynamic.belongsToMany(() => ModelRoleUser, () => ModelRole, 'userId', 'roleId', {
-            columns: ['id', 'name'],
-          }),
+          roles: $relationDynamic.belongsToMany(
+            () => ModelRoleUser,
+            () => ModelRole,
+            'userId',
+            'roleId',
+            {
+              columns: ['id', 'name'],
+            },
+          ),
         },
       },
     );
@@ -91,7 +108,12 @@ export class ServiceUser extends BeanBase {
       },
       {
         with: {
-          roles: $relationDynamic.belongsToMany(() => ModelRoleUser, () => ModelRole, 'userId', 'roleId'),
+          roles: $relationDynamic.belongsToMany(
+            () => ModelRoleUser,
+            () => ModelRole,
+            'userId',
+            'roleId',
+          ),
         },
       },
     );

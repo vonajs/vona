@@ -1,4 +1,5 @@
 import type { TableIdentity } from 'table-identity';
+
 import type {
   IModelCountParams,
   IModelGetOptionsGeneral,
@@ -7,6 +8,7 @@ import type {
   IModelUpdateOptionsGeneral,
   TypeModelWhere,
 } from '../../types/index.ts';
+
 import { BeanModelCrudInner } from './bean.model_crud_inner.ts';
 
 export class BeanModelCrud<TRecord extends {} = {}> extends BeanModelCrudInner<TRecord> {
@@ -27,11 +29,11 @@ export class BeanModelCrud<TRecord extends {} = {}> extends BeanModelCrudInner<T
   }
 
   async insert(data?: Partial<TRecord>, options?: IModelMethodOptionsGeneral): Promise<TRecord> {
-    return await this._insertBulk(undefined, data, options) as Promise<TRecord>;
+    return (await this._insertBulk(undefined, data, options)) as Promise<TRecord>;
   }
 
   async insertBulk(data: Partial<TRecord>[], options?: IModelMethodOptionsGeneral): Promise<TRecord[]> {
-    return await this._insertBulk(undefined, data, options) as Promise<TRecord[]>;
+    return (await this._insertBulk(undefined, data, options)) as Promise<TRecord[]>;
   }
 
   async update(data: Partial<TRecord>, options?: IModelUpdateOptionsGeneral<TRecord>): Promise<Partial<TRecord>> {

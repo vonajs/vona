@@ -1,9 +1,11 @@
-import type { BeanDatabaseDialectBase } from '../bean/bean.databaseDialectBase.ts';
-import type { ConfigDatabaseClient } from '../types/config.ts';
-import type { IDatabaseClientDialectRecord, IDatabaseClientRecord, IDbInfo } from '../types/database.ts';
 import { isNil } from '@cabloy/utils';
 import { appResource, BeanBase, deepExtend } from 'vona';
 import { Service } from 'vona-module-a-bean';
+
+import type { BeanDatabaseDialectBase } from '../bean/bean.databaseDialectBase.ts';
+import type { ConfigDatabaseClient } from '../types/config.ts';
+import type { IDatabaseClientDialectRecord, IDatabaseClientRecord, IDbInfo } from '../types/database.ts';
+
 import { ServiceDatabaseClient } from './databaseClient_.ts';
 
 @Service()
@@ -67,7 +69,7 @@ export class ServiceDatabase extends BeanBase {
   }
 
   prepareClientName(clientName?: keyof IDatabaseClientRecord): keyof IDatabaseClientRecord {
-    return (!clientName || clientName === 'default') ? this.getDefaultClientName() : clientName;
+    return !clientName || clientName === 'default' ? this.getDefaultClientName() : clientName;
   }
 
   getDefaultClientName(): keyof IDatabaseClientRecord {

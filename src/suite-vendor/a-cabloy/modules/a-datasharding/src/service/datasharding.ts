@@ -1,4 +1,5 @@
 import type { IDatabaseClientRecord } from 'vona-module-a-orm';
+
 import { getRandomInt } from '@cabloy/utils';
 import { BeanBase } from 'vona';
 import { Service } from 'vona-module-a-bean';

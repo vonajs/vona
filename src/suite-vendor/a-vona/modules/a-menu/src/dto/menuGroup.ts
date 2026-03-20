@@ -1,8 +1,10 @@
 import type { IDecoratorDtoOptions } from 'vona-module-a-web';
-import type { IMenuGroup } from '../types/menu.ts';
+
 import { Api, v } from 'vona-module-a-openapiutils';
 import { Dto } from 'vona-module-a-web';
 import { z } from 'zod';
+
+import type { IMenuGroup } from '../types/menu.ts';
 
 export interface IDtoOptionsMenuGroup extends IDecoratorDtoOptions {}
 

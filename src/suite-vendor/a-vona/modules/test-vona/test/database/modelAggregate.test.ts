@@ -12,55 +12,59 @@ describe('modelAggregate.test.ts', () => {
       // scope
       const scopeTest = app.scope('test-vona');
       // insert: roles
-      const roles = await scopeTest.model.role.insertBulk([
-        { name: `${prefix}:family` },
-        { name: `${prefix}:friend` },
-      ]);
+      const roles = await scopeTest.model.role.insertBulk([{ name: `${prefix}:family` }, { name: `${prefix}:friend` }]);
       assert.equal(roles.length, 2);
       assert.equal(roles[0].id !== undefined, true);
       // create: users
-      const users = await scopeTest.model.user.insertBulk([
-        {
-          name: `${prefix}:tom`,
-          age: 3,
-          posts: [
-            {
-              title: `${prefix}:postApple`,
-              stars: 2,
-              postContent: {
-                content: `${prefix}:postContentApple`,
+      const users = await scopeTest.model.user.insertBulk(
+        [
+          {
+            name: `${prefix}:tom`,
+            age: 3,
+            posts: [
+              {
+                title: `${prefix}:postApple`,
+                stars: 2,
+                postContent: {
+                  content: `${prefix}:postContentApple`,
+                },
               },
-            },
-            {
-              title: `${prefix}:postApple2`,
-              stars: 3,
-              postContent: {
-                content: `${prefix}:postContentApple2`,
+              {
+                title: `${prefix}:postApple2`,
+                stars: 3,
+                postContent: {
+                  content: `${prefix}:postContentApple2`,
+                },
               },
-            },
-          ],
-          roles: [{
-            id: roles[0].id,
-          }],
-        },
+            ],
+            roles: [
+              {
+                id: roles[0].id,
+              },
+            ],
+          },
+          {
+            name: `${prefix}:jimmy`,
+            age: 5,
+            posts: [
+              {
+                title: `${prefix}:postPear`,
+                stars: 4,
+                postContent: {
+                  content: `${prefix}:postContentPear`,
+                },
+              },
+            ],
+          },
+          { name: `${prefix}:mike` },
+        ],
         {
-          name: `${prefix}:jimmy`,
-          age: 5,
-          posts: [{
-            title: `${prefix}:postPear`,
-            stars: 4,
-            postContent: {
-              content: `${prefix}:postContentPear`,
-            },
-          }],
+          include: {
+            posts: { include: { postContent: true } },
+            roles: true,
+          },
         },
-        { name: `${prefix}:mike` },
-      ], {
-        include: {
-          posts: { include: { postContent: true } },
-          roles: true,
-        },
-      });
+      );
       // count: user
       const userCount = await scopeTest.model.user.count({
         column: '*',
@@ -152,9 +156,15 @@ describe('modelAggregate.test.ts', () => {
           posts: $relationDynamic.hasMany(() => ModelPost, 'userId', {
             aggrs: { count: '*' },
           }),
-          roles: $relationDynamic.belongsToMany(() => ModelRoleUser, () => ModelRole, 'userId', 'roleId', {
-            aggrs: { count: '*' },
-          }),
+          roles: $relationDynamic.belongsToMany(
+            () => ModelRoleUser,
+            () => ModelRole,
+            'userId',
+            'roleId',
+            {
+              aggrs: { count: '*' },
+            },
+          ),
         },
       });
       assert.equal(usersStats4.length, 3);
@@ -163,33 +173,45 @@ describe('modelAggregate.test.ts', () => {
       assert.equal(cast(usersStats4[0].posts).sum_stars, undefined);
       assert.equal(usersStats4[0].roles?.count_all, 1);
       // aggr: get
-      const userStats4 = await scopeTest.model.userStats.get({
-        id: users[0].id,
-      }, {
-        include: {
-          posts: false,
-          roles: false,
+      const userStats4 = await scopeTest.model.userStats.get(
+        {
+          id: users[0].id,
         },
-        with: {
-          posts: $relationDynamic.hasMany(() => ModelPost, 'userId', {
-            aggrs: { count: '*' },
-          }),
-          roles: $relationDynamic.belongsToMany(() => ModelRoleUser, () => ModelRole, 'userId', 'roleId', {
-            aggrs: { count: '*' },
-          }),
+        {
+          include: {
+            posts: false,
+            roles: false,
+          },
+          with: {
+            posts: $relationDynamic.hasMany(() => ModelPost, 'userId', {
+              aggrs: { count: '*' },
+            }),
+            roles: $relationDynamic.belongsToMany(
+              () => ModelRoleUser,
+              () => ModelRole,
+              'userId',
+              'roleId',
+              {
+                aggrs: { count: '*' },
+              },
+            ),
+          },
         },
-      });
+      );
       assert.equal(userStats4?.posts?.count_all, 2);
       assert.equal(cast(userStats4?.posts).count_title, undefined);
       assert.equal(cast(userStats4?.posts).sum_stars, undefined);
       assert.equal(userStats4?.roles?.count_all, 1);
       // delete: users
-      await scopeTest.model.user.deleteBulk(users.map(item => item.id), {
-        include: {
-          posts: { include: { postContent: true } },
-          roles: true,
+      await scopeTest.model.user.deleteBulk(
+        users.map(item => item.id),
+        {
+          include: {
+            posts: { include: { postContent: true } },
+            roles: true,
+          },
         },
-      });
+      );
       // delete: roles
       await scopeTest.model.role.deleteBulk(roles.map(item => item.id));
     });

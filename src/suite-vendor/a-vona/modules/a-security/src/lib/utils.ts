@@ -1,9 +1,11 @@
 import type { PathMatchingFun } from 'egg-path-matching';
 import type { VonaContext } from 'vona';
-import type { IMiddlewareSystemOptionsSecurities } from '../bean/middlewareSystem.securities.ts';
-import { normalize } from 'node:path';
+
 import IP from '@eggjs/ip';
 import * as matcher from 'matcher';
+import { normalize } from 'node:path';
+
+import type { IMiddlewareSystemOptionsSecurities } from '../bean/middlewareSystem.securities.ts';
 
 /**
  * Check whether a domain is in the safe domain white list or not.

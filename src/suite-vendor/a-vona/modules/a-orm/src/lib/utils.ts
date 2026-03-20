@@ -1,6 +1,7 @@
+import { deepExtend } from 'vona';
+
 import type { IModelRelationIncludeWrapper } from '../types/model.ts';
 import type { IRelationItem } from '../types/relationsDef.ts';
-import { deepExtend } from 'vona';
 
 export function handleRelationsCollection(relationsStatic?: Record<string, any>, includeWrapper?: IModelRelationIncludeWrapper): IRelationItem[] {
   // collect

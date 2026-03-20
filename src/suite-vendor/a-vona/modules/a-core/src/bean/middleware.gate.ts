@@ -1,6 +1,7 @@
 import type { Next } from 'vona';
 import type { IDecoratorMiddlewareOptionsGlobal, IMiddlewareExecute } from 'vona-module-a-aspect';
 import type { IOnionOptionsMeta } from 'vona-module-a-onion';
+
 import { BeanBase, Global } from 'vona';
 import { Middleware } from 'vona-module-a-aspect';
 

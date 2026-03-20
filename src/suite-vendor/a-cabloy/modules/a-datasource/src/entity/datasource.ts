@@ -1,4 +1,5 @@
 import type { ConfigDatabaseClient, IDecoratorEntityOptions } from 'vona-module-a-orm';
+
 import { Api } from 'vona-module-a-openapiutils';
 import { Entity, EntityBaseSimple } from 'vona-module-a-orm';
 

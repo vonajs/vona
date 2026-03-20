@@ -21,8 +21,7 @@ export interface IFilterHtml {
 export interface IDecoratorFilterOptions extends TypeOnionOptionsEnableSimple {}
 
 export interface IDecoratorFilterOptionsGlobal
-  extends TypeOnionOptionsBaseSimple<keyof IApiPathRecord>,
-  IOnionOptionsDeps<keyof IFilterRecordGlobal> {}
+  extends TypeOnionOptionsBaseSimple<keyof IApiPathRecord>, IOnionOptionsDeps<keyof IFilterRecordGlobal> {}
 
 export interface IFilterComposeData {
   err: Error;

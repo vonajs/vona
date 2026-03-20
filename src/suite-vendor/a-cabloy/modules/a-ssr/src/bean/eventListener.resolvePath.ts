@@ -1,18 +1,18 @@
 import type { IEventExecute, NextEvent } from 'vona-module-a-event';
 import type { TypeEventResolvePathData, TypeEventResolvePathResult } from 'vona-module-a-static';
-import type { BeanSsrSiteBase } from '../lib/beanSsrSiteBase.ts';
-import type { IDecoratorSsrSiteOptions } from '../types/ssrSite.ts';
+
 import { isNil } from '@cabloy/utils';
 import { BeanBase } from 'vona';
 import { EventListener } from 'vona-module-a-event';
+
+import type { BeanSsrSiteBase } from '../lib/beanSsrSiteBase.ts';
+import type { IDecoratorSsrSiteOptions } from '../types/ssrSite.ts';
 
 type TypeEventData = TypeEventResolvePathData;
 type TypeEventResult = TypeEventResolvePathResult;
 
 @EventListener({ match: 'a-static:resolvePath' })
-export class EventListenerResolvePath
-  extends BeanBase
-  implements IEventExecute<TypeEventData, TypeEventResult> {
+export class EventListenerResolvePath extends BeanBase implements IEventExecute<TypeEventData, TypeEventResult> {
   async execute(data: TypeEventData, next: NextEvent<TypeEventData, TypeEventResult>): Promise<TypeEventResult> {
     // check sites
     const sites = this.scope.service.ssr.getSitesEnabled();
@@ -31,7 +31,7 @@ export class EventListenerResolvePath
       } else {
         if (data.filename.startsWith(publicPath)) {
           filename = data.filename.substring(publicPath.length);
-        } else if ((`${data.filename}/`).startsWith(publicPath)) {
+        } else if (`${data.filename}/`.startsWith(publicPath)) {
           filename = data.filename.substring(publicPath.length - 1);
         } else {
           continue;

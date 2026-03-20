@@ -1,9 +1,11 @@
 import type { EntityRole } from 'vona-module-home-user';
+
+import { BeanBase } from 'vona';
+import { Service } from 'vona-module-a-bean';
+
 import type { EntityPost } from '../entity/post.ts';
 import type { EntityPostContent } from '../entity/postContent.ts';
 import type { EntityUser } from '../entity/user.ts';
-import { BeanBase } from 'vona';
-import { Service } from 'vona-module-a-bean';
 
 export interface ITestData {
   userTom: EntityUser;
@@ -44,15 +46,7 @@ export class ServiceTestData extends BeanBase {
   }
 
   async drop(data: ITestData) {
-    const {
-      userTom,
-      userJimmy,
-      roleFamily,
-      roleFriend,
-      postApple,
-      postPear,
-      postContentApple,
-    } = data;
+    const { userTom, userJimmy, roleFamily, roleFriend, postApple, postPear, postContentApple } = data;
     const scopeTest = this.scope;
     await scopeTest.model.postContent.delete({ id: postContentApple.id });
     await scopeTest.model.post.delete({ id: postApple.id });

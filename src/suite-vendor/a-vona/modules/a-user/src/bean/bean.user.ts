@@ -1,8 +1,10 @@
 import type { TableIdentity } from 'table-identity';
-import type { IAuthUserProfile } from '../types/authProfile.ts';
-import type { IUser, IUserAdapter } from '../types/user.ts';
+
 import { BeanBase, beanFullNameFromOnionName } from 'vona';
 import { Bean } from 'vona-module-a-bean';
+
+import type { IAuthUserProfile } from '../types/authProfile.ts';
+import type { IUser, IUserAdapter } from '../types/user.ts';
 
 @Bean()
 export class BeanUser extends BeanBase {
@@ -26,7 +28,7 @@ export class BeanUser extends BeanBase {
     // config.user.autoActivate > confirmed
     const autoActivate = this.scope.config.user.autoActivate ? true : confirmed;
     const data = { user, confirmed, autoActivate };
-    return await this.scope.event.register.emit(data, async data => {
+    return (await this.scope.event.register.emit(data, async data => {
       let name = data.user.name;
       if (!name) this.app.throw(403);
       // check if exists
@@ -42,7 +44,7 @@ export class BeanUser extends BeanBase {
         await this.activate(userNew);
       }
       return userNew;
-    }) as IUser;
+    })) as IUser;
   }
 
   async registerByProfile(profile: IAuthUserProfile, randomUsername?: boolean): Promise<IUser> {
@@ -51,9 +53,9 @@ export class BeanUser extends BeanBase {
   }
 
   async createAnonymous(): Promise<IUser> {
-    return await this.scope.event.createAnonymous.emit(undefined, async () => {
+    return (await this.scope.event.createAnonymous.emit(undefined, async () => {
       return await this.userAdapter.createAnonymous();
-    }) as Promise<IUser>;
+    })) as Promise<IUser>;
   }
 
   async findOneByName(name: string): Promise<IUser | undefined> {

@@ -1,5 +1,6 @@
 import type { VonaApplication } from 'vona';
 import type { IOnionOptionsMeta } from 'vona-module-a-onion';
+
 import type { IDecoratorSummerCacheOptions, TSummerCachePreset } from '../types/summerCache.ts';
 
 export const configMem = {

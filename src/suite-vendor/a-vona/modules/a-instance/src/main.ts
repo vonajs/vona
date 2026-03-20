@@ -1,4 +1,5 @@
 import type { IInstanceRecord, IModuleMain, VonaContext } from 'vona';
+
 import { BeanSimple } from 'vona';
 
 const SymbolInstanceName = Symbol('SymbolInstanceName');

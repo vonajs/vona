@@ -1,4 +1,5 @@
 import type { IDecoratorControllerOptions } from 'vona-module-a-web';
+
 import assert from 'node:assert';
 import { BeanBase, cast } from 'vona';
 import { Api } from 'vona-module-a-openapiutils';

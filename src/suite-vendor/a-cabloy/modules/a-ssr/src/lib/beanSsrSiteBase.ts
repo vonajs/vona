@@ -3,14 +3,23 @@ import type { ILocaleRecord } from 'vona';
 import type { IMenuGroup, IMenuItem } from 'vona-module-a-menu';
 import type { IOnionSlice } from 'vona-module-a-onion';
 import type { TypeEventResolvePathData, TypeEventResolvePathResult } from 'vona-module-a-static';
+
+import { catchError, combineParamsAndQuery, combineQueries, defaultPathSerializer } from '@cabloy/utils';
+import path from 'node:path';
+import { BeanBase, cast, deepExtend, SymbolModuleName } from 'vona';
+import { checkErrorJwtExpired } from 'vona-module-a-jwt';
+
 import type { TypeEventRetrieveMenusResult } from '../bean/event.retrieveMenus.ts';
 import type { IDecoratorSsrMenuOptions, ISsrMenuRecord } from '../types/ssrMenu.ts';
 import type { ISsrMenuGroupRecord } from '../types/ssrMenuGroup.ts';
-import type { IDecoratorSsrSiteOptions, ISsrHandlerRenderOptions, ISsrHandlerRenderOptionsInner, ISsrSitePerformActionOptions, TypeSsrSitePerformAction } from '../types/ssrSite.ts';
-import path from 'node:path';
-import { catchError, combineParamsAndQuery, combineQueries, defaultPathSerializer } from '@cabloy/utils';
-import { BeanBase, cast, deepExtend, SymbolModuleName } from 'vona';
-import { checkErrorJwtExpired } from 'vona-module-a-jwt';
+import type {
+  IDecoratorSsrSiteOptions,
+  ISsrHandlerRenderOptions,
+  ISsrHandlerRenderOptionsInner,
+  ISsrSitePerformActionOptions,
+  TypeSsrSitePerformAction,
+} from '../types/ssrSite.ts';
+
 import { ServiceDevProxy } from '../service/devProxy.ts';
 import { ServiceSsrHandler } from '../service/ssrHandler.ts';
 import { SymbolCacheMenus } from './const.ts';
@@ -44,10 +53,8 @@ export class BeanSsrSiteBase<SsrSiteOptions extends IDecoratorSsrSiteOptions = I
     return await this.render(undefined, undefined, { req, res });
   }
 
-  async redirect<
-    PAGEPATH extends keyof SsrSiteOptions['pages'],
-    PAGEOPTIONS extends Omit<SsrSiteOptions['pages'][PAGEPATH], 'data'>,
-  >(pagePath?: PAGEPATH,
+  async redirect<PAGEPATH extends keyof SsrSiteOptions['pages'], PAGEOPTIONS extends Omit<SsrSiteOptions['pages'][PAGEPATH], 'data'>>(
+    pagePath?: PAGEPATH,
     pageOptions?: PAGEOPTIONS,
   ): Promise<undefined | never> {
     // pagePath
@@ -65,10 +72,8 @@ export class BeanSsrSiteBase<SsrSiteOptions extends IDecoratorSsrSiteOptions = I
     }
   }
 
-  async render<
-    PAGEPATH extends keyof SsrSiteOptions['pages'],
-    PAGEOPTIONS extends SsrSiteOptions['pages'][PAGEPATH],
-  >(pagePath?: PAGEPATH,
+  async render<PAGEPATH extends keyof SsrSiteOptions['pages'], PAGEOPTIONS extends SsrSiteOptions['pages'][PAGEPATH]>(
+    pagePath?: PAGEPATH,
     pageOptions?: PAGEOPTIONS,
     renderOptions?: ISsrHandlerRenderOptions,
   ): Promise<TypeEventResolvePathResult> {
@@ -93,18 +98,17 @@ export class BeanSsrSiteBase<SsrSiteOptions extends IDecoratorSsrSiteOptions = I
     // optionsInner
     const req = renderOptions?.req ?? this.ctx.req;
     const res = renderOptions?.res ?? this.ctx.res;
-    const optionsInner: ISsrHandlerRenderOptionsInner =
-      {
-        req,
-        res,
-        performAction,
-        state: {
-          envClient: this.siteOptions.envClient,
-          pagePathFull: pagePathFull as any,
-          pagePath: pagePath as any,
-          pageData: cast(pageOptions)?.data,
-        },
-      };
+    const optionsInner: ISsrHandlerRenderOptionsInner = {
+      req,
+      res,
+      performAction,
+      state: {
+        envClient: this.siteOptions.envClient,
+        pagePathFull: pagePathFull as any,
+        pagePath: pagePath as any,
+        pageData: cast(pageOptions)?.data,
+      },
+    };
     // ssr render
     const html = await this.ssrHandler.render(optionsInner);
     if (!html) return;
@@ -125,19 +129,23 @@ export class BeanSsrSiteBase<SsrSiteOptions extends IDecoratorSsrSiteOptions = I
     if (!this._siteOptions) {
       const onionOptions = this.$onionOptions as IDecoratorSsrSiteOptions;
       const SSR_HMR = process.env.META_MODE === 'dev' ? 'true' : 'false';
-      this._siteOptions = deepExtend({
-        envServer: {
-          SSR_API_BASE_URL: `${this.app.util.protocol}://${this.app.util.host}`,
-          SSR_PROD_PROTOCOL: this.app.util.protocol,
-          SSR_PROD_HOST: this.app.util.host,
-          SSR_HMR,
+      this._siteOptions = deepExtend(
+        {
+          envServer: {
+            SSR_API_BASE_URL: `${this.app.util.protocol}://${this.app.util.host}`,
+            SSR_PROD_PROTOCOL: this.app.util.protocol,
+            SSR_PROD_HOST: this.app.util.host,
+            SSR_HMR,
+          },
+          envClient: {
+            SSR_PROD_PROTOCOL: this.app.util.protocol,
+            SSR_PROD_HOST: this.app.util.host,
+            SSR_HMR,
+          },
         },
-        envClient: {
-          SSR_PROD_PROTOCOL: this.app.util.protocol,
-          SSR_PROD_HOST: this.app.util.host,
-          SSR_HMR,
-        },
-      }, this.$scope.ssr.config.site.default, onionOptions);
+        this.$scope.ssr.config.site.default,
+        onionOptions,
+      );
     }
     return this._siteOptions;
   }
@@ -197,7 +205,7 @@ export class BeanSsrSiteBase<SsrSiteOptions extends IDecoratorSsrSiteOptions = I
         headers,
       });
       // let toJSON take affect
-      return (res && typeof res === 'object') ? JSON.parse(JSON.stringify(res)) : res;
+      return res && typeof res === 'object' ? JSON.parse(JSON.stringify(res)) : res;
     };
   }
 
@@ -236,7 +244,7 @@ export class BeanSsrSiteBase<SsrSiteOptions extends IDecoratorSsrSiteOptions = I
     locale: keyof ILocaleRecord,
     ssrMenus: IOnionSlice<ISsrMenuGroupRecord, T, unknown>[],
   ): IMenuGroup[];
-  private _prepareMenusOrGroups<T extends (keyof ISsrMenuRecord | keyof ISsrMenuGroupRecord)>(
+  private _prepareMenusOrGroups<T extends keyof ISsrMenuRecord | keyof ISsrMenuGroupRecord>(
     locale: keyof ILocaleRecord,
     ssrMenus: IOnionSlice<ISsrMenuRecord & ISsrMenuGroupRecord, T, unknown>[],
   ) {

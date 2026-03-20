@@ -1,4 +1,5 @@
 import type { IDecoratorControllerOptions } from 'vona-module-a-web';
+
 import { BeanBase } from 'vona';
 import { Core } from 'vona-module-a-core';
 import { Api } from 'vona-module-a-openapiutils';

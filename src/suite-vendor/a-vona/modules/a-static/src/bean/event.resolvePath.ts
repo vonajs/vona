@@ -1,5 +1,6 @@
-import type { IMiddlewareSystemOptionsStatic } from './middlewareSystem.static.ts';
 import { BeanEventBase, Event } from 'vona-module-a-event';
+
+import type { IMiddlewareSystemOptionsStatic } from './middlewareSystem.static.ts';
 
 export interface TypeEventResolvePathData {
   dir: string;
@@ -10,7 +11,4 @@ export interface TypeEventResolvePathData {
 export type TypeEventResolvePathResult = string | true | undefined;
 
 @Event()
-export class EventResolvePath extends BeanEventBase<
-  TypeEventResolvePathData,
-  TypeEventResolvePathResult
-> {}
+export class EventResolvePath extends BeanEventBase<TypeEventResolvePathData, TypeEventResolvePathResult> {}

@@ -2,6 +2,7 @@ import assert from 'node:assert';
 import { BeanBase } from 'vona';
 import { Service } from 'vona-module-a-bean';
 import { $relationDynamic } from 'vona-module-a-orm';
+
 import { ModelCategory } from '../model/category.ts';
 
 @Service()
@@ -14,9 +15,7 @@ export class ServiceCategory extends BeanBase {
         children2: [
           {
             name: 'Category-1-1',
-            children2: [
-              { name: 'Category-1-1-1' },
-            ],
+            children2: [{ name: 'Category-1-1-1' }],
           },
           {
             name: 'Category-1-2',
@@ -27,8 +26,7 @@ export class ServiceCategory extends BeanBase {
         with: {
           children2: $relationDynamic.hasMany(() => ModelCategory, 'categoryIdParent', {
             with: {
-              children2: $relationDynamic.hasMany(() => ModelCategory, 'categoryIdParent', {
-              }),
+              children2: $relationDynamic.hasMany(() => ModelCategory, 'categoryIdParent', {}),
             },
           }),
         },
@@ -83,8 +81,7 @@ export class ServiceCategory extends BeanBase {
         with: {
           children2: $relationDynamic.hasMany(() => ModelCategory, 'categoryIdParent', {
             with: {
-              children2: $relationDynamic.hasMany(() => ModelCategory, 'categoryIdParent', {
-              }),
+              children2: $relationDynamic.hasMany(() => ModelCategory, 'categoryIdParent', {}),
             },
           }),
         },
@@ -99,9 +96,7 @@ export class ServiceCategory extends BeanBase {
       children: [
         {
           name: 'Category-1-1',
-          children: [
-            { name: 'Category-1-1-1' },
-          ],
+          children: [{ name: 'Category-1-1-1' }],
         },
         {
           name: 'Category-1-2',
@@ -124,9 +119,7 @@ export class ServiceCategory extends BeanBase {
       children: [
         {
           name: 'Category-1-1',
-          children: [
-            { name: 'Category-1-1-1' },
-          ],
+          children: [{ name: 'Category-1-1-1' }],
         },
         {
           name: 'Category-1-2',

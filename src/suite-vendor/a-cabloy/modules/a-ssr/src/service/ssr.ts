@@ -1,7 +1,10 @@
 import type { IOnionSlice } from 'vona-module-a-onion';
-import type { IDecoratorSsrSiteOptions, ISsrSiteRecord } from '../types/ssrSite.ts';
+
 import { BeanBase } from 'vona';
 import { Service } from 'vona-module-a-bean';
+
+import type { IDecoratorSsrSiteOptions, ISsrSiteRecord } from '../types/ssrSite.ts';
+
 import { SymbolCacheSites } from '../lib/const.ts';
 
 @Service()
@@ -27,8 +30,8 @@ export class ServiceSsr extends BeanBase {
     return this.app.meta[SymbolCacheSites][cacheKey];
   }
 
-  public prepareMenuLink(link?: keyof IDecoratorSsrSiteOptions['pages']): (keyof IDecoratorSsrSiteOptions['pages']) | undefined {
+  public prepareMenuLink(link?: keyof IDecoratorSsrSiteOptions['pages']): keyof IDecoratorSsrSiteOptions['pages'] | undefined {
     if (!link) return link;
-    return this.scope.config.menuItemLinkPreset[link] as any || link;
+    return (this.scope.config.menuItemLinkPreset[link] as any) || link;
   }
 }

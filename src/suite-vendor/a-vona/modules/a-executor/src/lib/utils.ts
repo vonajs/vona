@@ -9,7 +9,7 @@ export function __delegateProperties(ctx, ctxCaller) {
 }
 
 export function __delegateProperty(ctx, ctxCaller, property) {
-  if (!ctxCaller[property])ctxCaller[property] = {};
+  if (!ctxCaller[property]) ctxCaller[property] = {};
   ctx[property] = ctxCaller[property];
 }
 

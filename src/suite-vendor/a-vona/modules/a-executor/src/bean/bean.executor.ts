@@ -1,17 +1,18 @@
 import type { FunctionAsync } from 'vona';
 import type { IApiPathRecordMethodMap } from 'vona-module-a-web';
-import type { INewCtxOptions, IPerformActionOptions } from '../types/executor.ts';
+
 import { isNil } from '@cabloy/utils';
 import { BeanBase } from 'vona';
 import { Bean } from 'vona-module-a-bean';
+
+import type { INewCtxOptions, IPerformActionOptions } from '../types/executor.ts';
+
 import { __delegateProperties } from '../lib/utils.ts';
 
 @Bean()
 export class BeanExecutor extends BeanBase {
-  async performAction<
-    METHOD extends keyof IApiPathRecordMethodMap,
-    PATH extends keyof IApiPathRecordMethodMap[METHOD],
-  >(method: METHOD,
+  async performAction<METHOD extends keyof IApiPathRecordMethodMap, PATH extends keyof IApiPathRecordMethodMap[METHOD]>(
+    method: METHOD,
     path: PATH,
     options?: IPerformActionOptions,
   ): Promise<any> {
@@ -60,14 +61,16 @@ export class BeanExecutor extends BeanBase {
     const innerAccess = options.innerAccess !== false;
     // isolate
     const isolate = !this.ctx || options.instanceName !== undefined || (!innerAccess && this.ctx?.instanceName === null);
-    const ctxCaller = (!isolate && this.ctx) ? this.ctx : undefined;
+    const ctxCaller = !isolate && this.ctx ? this.ctx : undefined;
     // locale/tz/instanceName
     if (!isolate && this.ctx) {
       options.locale = options.locale === undefined ? this.ctx.locale : options.locale;
       options.tz = options.tz === undefined ? this.ctx.tz : options.tz;
       options.instanceName =
         options.instanceName === undefined
-          ? (!innerAccess && this.ctx.instanceName === null ? undefined : this.ctx.instanceName)
+          ? !innerAccess && this.ctx.instanceName === null
+            ? undefined
+            : this.ctx.instanceName
           : options.instanceName;
     }
     // run

@@ -1,4 +1,5 @@
 import type { IMetaVersionTest, IMetaVersionTestOptions, IMetaVersionUpdate, IMetaVersionUpdateOptions } from 'vona-module-a-version';
+
 import { BeanBase } from 'vona';
 import { Meta } from 'vona-module-a-meta';
 
@@ -83,14 +84,17 @@ export class MetaVersion extends BeanBase implements IMetaVersionUpdate, IMetaVe
     // user: Kevin
     const userKevin = await this.scope.model.user.insert({ name: 'Kevin' });
     // create: post/postContent
-    await this.scope.model.post.insert({
-      title: 'test:post001',
-      postContent: {
-        content: 'this is a test post!',
+    await this.scope.model.post.insert(
+      {
+        title: 'test:post001',
+        postContent: {
+          content: 'this is a test post!',
+        },
+        userId: userKevin?.id,
       },
-      userId: userKevin?.id,
-    }, {
-      include: { postContent: true },
-    });
+      {
+        include: { postContent: true },
+      },
+    );
   }
 }

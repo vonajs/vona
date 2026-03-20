@@ -1,4 +1,5 @@
 import type { TableIdentity } from 'table-identity';
+
 import * as passwordHash from 'password-hash-salt';
 import { BeanBase } from 'vona';
 import { Service } from 'vona-module-a-bean';

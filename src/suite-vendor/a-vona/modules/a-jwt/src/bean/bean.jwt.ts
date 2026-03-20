@@ -1,8 +1,11 @@
 import type { IAuthenticateStrategyState } from 'vona-module-a-auth';
-import type { IJwtClientRecord, IJwtSignOptions, IJwtToken, IPayloadData } from '../types/jwt.ts';
+
 import ms from 'ms';
 import { BeanBase } from 'vona';
 import { Bean } from 'vona-module-a-bean';
+
+import type { IJwtClientRecord, IJwtSignOptions, IJwtToken, IPayloadData } from '../types/jwt.ts';
+
 import { ServiceJwtClient } from '../service/jwtClient.ts';
 
 @Bean()

@@ -1,7 +1,17 @@
 import type { CurrencyOptions } from '@zhennann/currency';
-import type { ICaptchaOptions, IResourcePickerOptions, ISelectOptions, ITextareaOptions, IToggleOptions, TypeDateFormat, TypeSchemaScene } from 'vona-module-a-openapi';
+import type {
+  ICaptchaOptions,
+  IResourcePickerOptions,
+  ISelectOptions,
+  ITextareaOptions,
+  IToggleOptions,
+  TypeDateFormat,
+  TypeSchemaScene,
+} from 'vona-module-a-openapi';
 import type z from 'zod';
+
 import type { ISchemaComponentRecord } from '../../../types/component.ts';
+
 import { _generalSchemaRest } from './utils.ts';
 
 const __schemaComponents = {
@@ -14,11 +24,7 @@ const __schemaComponents = {
   textarea: schemaTextarea,
 } as const;
 
-export function schemaComponent<K extends keyof ISchemaComponentRecord>(
-  name: K,
-  options?: ISchemaComponentRecord[K],
-  scene?: TypeSchemaScene,
-) {
+export function schemaComponent<K extends keyof ISchemaComponentRecord>(name: K, options?: ISchemaComponentRecord[K], scene?: TypeSchemaScene) {
   return __schemaComponents[name](options as any, scene);
 }
 

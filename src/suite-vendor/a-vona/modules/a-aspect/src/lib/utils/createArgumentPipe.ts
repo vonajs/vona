@@ -1,19 +1,18 @@
 import type { MetadataKey } from 'vona';
 import type { RouteHandlerArgumentMetaDecorator } from 'vona-module-a-openapi';
-import type { IDecoratorPipeOptionsArgument, IPipeRecord } from '../../types/pipe.ts';
+
 import { isNil } from '@cabloy/utils';
 import { appMetadata } from 'vona';
 import { SymbolRouteHandlersArgumentsMeta } from 'vona-module-a-openapiutils';
+
+import type { IDecoratorPipeOptionsArgument, IPipeRecord } from '../../types/pipe.ts';
 
 export interface ArgumentPipeInfo<T extends keyof IPipeRecord> {
   pipeName: T;
   options?: Partial<IPipeRecord[T]>;
 }
 
-export function createArgumentPipeInfo<T extends keyof IPipeRecord>(
-  pipeName: T,
-  options?: Partial<IPipeRecord[T]>,
-): ArgumentPipeInfo<T> {
+export function createArgumentPipeInfo<T extends keyof IPipeRecord>(pipeName: T, options?: Partial<IPipeRecord[T]>): ArgumentPipeInfo<T> {
   return {
     pipeName,
     options,
@@ -36,12 +35,7 @@ export function setArgumentPipe<T extends keyof IPipeRecord>(
   index: number,
 ) {
   // not inherit
-  const argsMeta = appMetadata.getOwnMetadataArray<RouteHandlerArgumentMetaDecorator>(
-    false,
-    SymbolRouteHandlersArgumentsMeta,
-    target,
-    prop,
-  );
+  const argsMeta = appMetadata.getOwnMetadataArray<RouteHandlerArgumentMetaDecorator>(false, SymbolRouteHandlersArgumentsMeta, target, prop);
 
   const argMeta = argsMeta[index];
   const pipe = () => {

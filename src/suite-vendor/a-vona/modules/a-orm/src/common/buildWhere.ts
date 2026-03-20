@@ -1,8 +1,11 @@
 import type { Knex } from 'knex';
-import type { ServiceDb } from '../service/db_.ts';
-import type { TypeModelColumnValue, TypeModelWhere, TypeModelWhereFieldAll, TypeOpsJoint, TypeOpsNormal } from '../types/modelWhere.ts';
+
 import { isNil } from '@cabloy/utils';
 import { cast } from 'vona';
+
+import type { ServiceDb } from '../service/db_.ts';
+import type { TypeModelColumnValue, TypeModelWhere, TypeModelWhereFieldAll, TypeOpsJoint, TypeOpsNormal } from '../types/modelWhere.ts';
+
 import { Op, OpAggrs, OpJointValues, OpNormalValues } from '../types/modelWhere.ts';
 import { isRaw, isRef } from './utils.ts';
 
@@ -203,15 +206,11 @@ function _buildWhereColumnOpNormal<TRecord>(
 }
 
 function _getOpLikeReal(having: boolean, db: ServiceDb) {
-  return db.dialect.capabilities.like
-    ? (having ? 'havingLike' : 'whereLike')
-    : (having ? 'havingILike' : 'whereILike');
+  return db.dialect.capabilities.like ? (having ? 'havingLike' : 'whereLike') : having ? 'havingILike' : 'whereILike';
 }
 
 function _getOpILikeReal(having: boolean, db: ServiceDb) {
-  return db.dialect.capabilities.ilike
-    ? (having ? 'havingILike' : 'whereILike')
-    : (having ? 'havingLike' : 'whereLike');
+  return db.dialect.capabilities.ilike ? (having ? 'havingILike' : 'whereILike') : having ? 'havingLike' : 'whereLike';
 }
 
 function _checkHavingColumn<TRecord>(db: ServiceDb, column: keyof TRecord | string) {

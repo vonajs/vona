@@ -1,5 +1,6 @@
-import type { IElectionElectOptions, TypeFunctionObtain, TypeFunctionRelease } from '../types/election.ts';
 import { BeanBase, SymbolModuleBelong } from 'vona';
+
+import type { IElectionElectOptions, TypeFunctionObtain, TypeFunctionRelease } from '../types/election.ts';
 
 export class BeanElectionBase<TypeElectionObtainResource extends string> extends BeanBase {
   obtain(resource: TypeElectionObtainResource, fnObtain: TypeFunctionObtain, fnRelease: TypeFunctionRelease, options?: IElectionElectOptions): void {

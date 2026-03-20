@@ -1,4 +1,5 @@
 import type { VonaApplication } from 'vona';
+
 import { ExtendSchemaBuilder } from './schemaBuilder.ts';
 import { ExtendTableBuilder } from './tableBuilder.ts';
 

@@ -1,12 +1,13 @@
-import type { TypeBroadcastReloadFileJobData } from '../bean/broadcast.reloadFile.ts';
-import type { TypeHmrWatchScene } from '../types/hmr.ts';
-import path from 'node:path';
 import { catchError } from '@cabloy/utils';
 import chalk from 'chalk';
 import chokidar, { FSWatcher } from 'chokidar';
 import { globby } from 'globby';
+import path from 'node:path';
 import { BeanBase } from 'vona';
 import { Service } from 'vona-module-a-bean';
+
+import type { TypeBroadcastReloadFileJobData } from '../bean/broadcast.reloadFile.ts';
+import type { TypeHmrWatchScene } from '../types/hmr.ts';
 
 type TypePathWatchStrict = [TypeHmrWatchScene, RegExp];
 
@@ -101,7 +102,7 @@ export class ServiceWatch extends BeanBase {
     });
     const timeEnd = new Date();
     // log
-    const message = `[hmr] reload ${(timeEnd.valueOf() - timeBegin.valueOf())}ms: ${file}`;
+    const message = `[hmr] reload ${timeEnd.valueOf() - timeBegin.valueOf()}ms: ${file}`;
     // eslint-disable-next-line
     console.log(chalk.cyan(message));
   }
@@ -112,9 +113,12 @@ export class ServiceWatch extends BeanBase {
   }
 
   public async _reloadFileWorker(data: TypeBroadcastReloadFileJobData) {
-    return await this.bean.executor.newCtx(async () => {
-      return await this.scope.service.hmr.reloadFile(data.sceneName, data.file);
-    }, { dbInfo: {}, instanceName: '' });
+    return await this.bean.executor.newCtx(
+      async () => {
+        return await this.scope.service.hmr.reloadFile(data.sceneName, data.file);
+      },
+      { dbInfo: {}, instanceName: '' },
+    );
   }
 
   private async _collectWatchDirs() {

@@ -1,6 +1,6 @@
+import { catchError } from '@cabloy/utils';
 import assert from 'node:assert';
 import { describe, it } from 'node:test';
-import { catchError } from '@cabloy/utils';
 import { app } from 'vona-mock';
 
 describe('guardPassport.test.ts', () => {

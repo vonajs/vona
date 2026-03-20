@@ -1,6 +1,8 @@
 import type { IModule } from '@cabloy/module-info';
 import type { IMonkeyAppClosed, IMonkeyModule } from 'vona';
+
 import { BeanSimple } from 'vona';
+
 import { __ThisModule__ } from './.metadata/this.ts';
 
 export class Monkey extends BeanSimple implements IMonkeyModule, IMonkeyAppClosed {

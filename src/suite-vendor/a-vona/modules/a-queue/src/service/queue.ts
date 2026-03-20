@@ -1,4 +1,10 @@
 import type { IInstanceRecord } from 'vona';
+
+import * as Bull from 'bullmq';
+import { BeanBase, beanFullNameFromOnionName, deepExtend, instanceDesp, uuidv4 } from 'vona';
+import { Service } from 'vona-module-a-bean';
+import { getRedisClientKeyPrefix } from 'vona-module-a-redis';
+
 import type {
   IQueueCallbacks,
   IQueueExecute,
@@ -11,10 +17,6 @@ import type {
   IQueueWorks,
   TypeQueueJob,
 } from '../types/queue.ts';
-import * as Bull from 'bullmq';
-import { BeanBase, beanFullNameFromOnionName, deepExtend, instanceDesp, uuidv4 } from 'vona';
-import { Service } from 'vona-module-a-bean';
-import { getRedisClientKeyPrefix } from 'vona-module-a-redis';
 
 @Service()
 export class ServiceQueue extends BeanBase {
@@ -238,20 +240,22 @@ export class ServiceQueue extends BeanBase {
     // async
     return new Promise((resolve, reject) => {
       // queue events
-      return this._queueEventsReady(queueQueue).then(() => {
-        // callback
-        this._queueCallbacks[jobId] = {
-          info,
-          callback: (err, data) => {
-            if (err) return reject(err);
-            resolve(data as unknown as RESULT);
-          },
-        };
-        // add job
-        return queue.add(jobName, info, jobOptions);
-      }).catch(err => {
-        return reject(err);
-      });
+      return this._queueEventsReady(queueQueue)
+        .then(() => {
+          // callback
+          this._queueCallbacks[jobId] = {
+            info,
+            callback: (err, data) => {
+              if (err) return reject(err);
+              resolve(data as unknown as RESULT);
+            },
+          };
+          // add job
+          return queue.add(jobName, info, jobOptions);
+        })
+        .catch(err => {
+          return reject(err);
+        });
     });
   }
 
@@ -275,7 +279,7 @@ export class ServiceQueue extends BeanBase {
     return await this.bean.executor.newCtx(
       async () => {
         const beanFullName = queueItem.beanOptions.beanFullName;
-        const beanInstance = <IQueueExecute<DATA>> this.app.bean._getBean(beanFullName as any);
+        const beanInstance = <IQueueExecute<DATA>>this.app.bean._getBean(beanFullName as any);
         return await beanInstance.execute(info.data, info.options, job);
       },
       {
@@ -293,7 +297,7 @@ export class ServiceQueue extends BeanBase {
     const endDate = repeat.endDate ? new Date(repeat.endDate).getTime() : '';
     const tz = repeat.tz || '';
     const pattern = repeat.pattern;
-    const suffix = (pattern || String(repeat.every)) || '';
+    const suffix = pattern || String(repeat.every) || '';
     return `${jobName}:${endDate}:${tz}:${suffix}`;
   }
 

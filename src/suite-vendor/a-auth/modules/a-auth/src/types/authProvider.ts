@@ -1,6 +1,7 @@
 import type { Constructable, OmitNever } from 'vona';
 import type { ServiceOnion, TypeOnionOptionsEnableSimple } from 'vona-module-a-onion';
 import type { IAuthUserProfile } from 'vona-module-a-user';
+
 import type { StrategyBase } from '../lib/strategyBase.ts';
 import type { IAuthenticateStrategyState } from './auth.ts';
 
@@ -36,8 +37,7 @@ export type TypeStrategyOauth2VerifyArgs<T = IAuthUserProfile> = [accessToken: s
 export interface IDecoratorAuthProviderOptions<
   K extends keyof IAuthProviderClientRecord = keyof IAuthProviderClientRecord,
   T extends IAuthProviderClientOptions = IAuthProviderClientOptions,
->
-  extends TypeOnionOptionsEnableSimple {
+> extends TypeOnionOptionsEnableSimple {
   base?: T;
   clients?: { [prop in K]?: T }; // Record<K, T>;
   useMockForDev?: boolean;

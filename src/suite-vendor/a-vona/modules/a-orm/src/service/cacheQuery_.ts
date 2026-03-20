@@ -1,6 +1,8 @@
+import { Service } from 'vona-module-a-bean';
+
 import type { BeanModelCache } from '../bean/bean.model/bean.model_cache.ts';
 import type { ITableRecord } from '../types/onion/table.ts';
-import { Service } from 'vona-module-a-bean';
+
 import { ModelCacheBase } from '../lib/modelCacheBase.ts';
 
 @Service()

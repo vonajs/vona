@@ -1,4 +1,5 @@
 import type { ICustomKeyRecord, ILocaleRecord, VonaApplication } from 'vona';
+
 import { $customKey } from 'vona';
 
 export interface I18nConfigLocale {

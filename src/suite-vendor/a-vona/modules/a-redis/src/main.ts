@@ -1,6 +1,8 @@
 import type { IModuleMain, PowerPartial, VonaApplication } from 'vona';
-import type { ConfigRedis } from './types/redis.ts';
+
 import { BeanSimple, combineConfigDefault, deepExtend } from 'vona';
+
+import type { ConfigRedis } from './types/redis.ts';
 
 export class Main extends BeanSimple implements IModuleMain {
   async moduleLoading() {

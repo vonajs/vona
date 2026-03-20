@@ -1,6 +1,6 @@
+import { OpenApiGeneratorV31, OpenAPIRegistry } from '@cabloy/zod-to-openapi';
 import assert from 'node:assert';
 import { describe, it } from 'node:test';
-import { OpenApiGeneratorV31, OpenAPIRegistry } from '@cabloy/zod-to-openapi';
 import { appResource, cast } from 'vona';
 import { app } from 'vona-mock';
 import { $schema } from 'vona-module-a-openapiutils';
@@ -39,7 +39,10 @@ describe('dtoLazy.test.ts', () => {
       const generator = new OpenApiGeneratorV31(registry.definitions);
       const apiObj = generator.generateDocument(app.scope('a-openapi').config.generateDocument.V31);
       assert.equal(cast(apiObj).components.schemas['test-vona.dto.userLazy'].properties.user.$ref, '#/components/schemas/test-vona.dto.userLazy');
-      assert.equal(cast(apiObj).components.schemas['test-vona.dto.roleLazy'].properties.users.items.$ref, '#/components/schemas/test-vona.dto.userLazy');
+      assert.equal(
+        cast(apiObj).components.schemas['test-vona.dto.roleLazy'].properties.users.items.$ref,
+        '#/components/schemas/test-vona.dto.userLazy',
+      );
     });
   });
 });

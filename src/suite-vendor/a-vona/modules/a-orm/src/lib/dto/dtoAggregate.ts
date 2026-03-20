@@ -1,18 +1,20 @@
 import type { Constructable } from 'vona';
+
+import { ensureArray } from '@cabloy/utils';
+import { Api, v } from 'vona-module-a-openapiutils';
+import z from 'zod';
+
 import type { BeanModelMeta } from '../../bean/bean.model/bean.model_meta.ts';
 import type { TypeDtoAggrResult } from '../../types/dto/dtoAggregate.ts';
 import type { TypeModelSelectAggrParamsAggrs } from '../../types/modelAggr.ts';
 import type { IModelClassRecord } from '../../types/onion/model.ts';
 import type { TypeModelOfModelLike, TypeSymbolKeyEntity } from '../../types/relations.ts';
-import { ensureArray } from '@cabloy/utils';
-import { Api, v } from 'vona-module-a-openapiutils';
-import z from 'zod';
 
 export function DtoAggregate<
   Aggrs extends TypeModelSelectAggrParamsAggrs<TypeModelOfModelLike<ModelLike>[TypeSymbolKeyEntity]>,
-  ModelLike extends BeanModelMeta | (keyof IModelClassRecord),
+  ModelLike extends BeanModelMeta | keyof IModelClassRecord,
 >(
-  modelLike: ModelLike extends BeanModelMeta ? ((() => Constructable<ModelLike>) | Constructable<ModelLike>) : ModelLike,
+  modelLike: ModelLike extends BeanModelMeta ? (() => Constructable<ModelLike>) | Constructable<ModelLike> : ModelLike,
   aggrs: Aggrs,
 ): Constructable<TypeDtoAggrResult<Aggrs>> {
   return _DtoAggregate_raw(modelLike, aggrs);
@@ -20,9 +22,9 @@ export function DtoAggregate<
 
 function _DtoAggregate_raw<
   Aggrs extends TypeModelSelectAggrParamsAggrs<TypeModelOfModelLike<ModelLike>[TypeSymbolKeyEntity]>,
-  ModelLike extends BeanModelMeta | (keyof IModelClassRecord),
+  ModelLike extends BeanModelMeta | keyof IModelClassRecord,
 >(
-  modelLike: ModelLike extends BeanModelMeta ? ((() => Constructable<ModelLike>) | Constructable<ModelLike>) : ModelLike,
+  modelLike: ModelLike extends BeanModelMeta ? (() => Constructable<ModelLike>) | Constructable<ModelLike> : ModelLike,
   aggrs: Aggrs,
 ): Constructable<TypeDtoAggrResult<Aggrs>> {
   abstract class TargetClass {}
@@ -31,10 +33,10 @@ function _DtoAggregate_raw<
 
 export function _DtoAggregate_inner<
   Aggrs extends TypeModelSelectAggrParamsAggrs<TypeModelOfModelLike<ModelLike>[TypeSymbolKeyEntity]>,
-  ModelLike extends BeanModelMeta | (keyof IModelClassRecord),
+  ModelLike extends BeanModelMeta | keyof IModelClassRecord,
 >(
   classTarget: Constructable,
-  _modelLike: ModelLike extends BeanModelMeta ? ((() => Constructable<ModelLike>) | Constructable<ModelLike>) : ModelLike,
+  _modelLike: ModelLike extends BeanModelMeta ? (() => Constructable<ModelLike>) | Constructable<ModelLike> : ModelLike,
   aggrs: Aggrs,
 ): Constructable<TypeDtoAggrResult<Aggrs>> {
   for (const key in aggrs) {

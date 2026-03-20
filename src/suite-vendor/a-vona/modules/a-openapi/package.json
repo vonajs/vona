@@ -1,27 +1,18 @@
 {
   "name": "vona-module-a-openapi",
-  "type": "module",
   "version": "5.0.72",
-  "title": "a-openapi",
-  "vonaModule": {
-    "capabilities": {
-      "preload": true
-    },
-    "dependencies": {
-      "a-openapiutils": "5.0.0"
-    },
-    "globalDependencies": {
-      "@cabloy/zod-openapi": true,
-      "@cabloy/zod-to-openapi": true,
-      "openapi3-ts": true,
-      "zod": true
-    }
-  },
+  "gitHead": "0eab9dc4a5622caffe89e7b1b3f02c08ccbc4c4b",
   "description": "",
-  "author": "",
   "keywords": [
     "Vona Module"
   ],
+  "author": "",
+  "files": [
+    "assets",
+    "dist",
+    "src"
+  ],
+  "type": "module",
   "exports": {
     ".": {
       "types": [
@@ -33,11 +24,6 @@
     },
     "./package.json": "./package.json"
   },
-  "files": [
-    "assets",
-    "dist",
-    "src"
-  ],
   "scripts": {
     "clean": "rimraf dist tsconfig.build.tsbuildinfo",
     "tsc:publish": "npm run clean && vona :bin:buildModule --sourcemap && tsc -p tsconfig.build.json",
@@ -53,6 +39,10 @@
     "openapi3-ts": "^4.5.0",
     "zod": "^4.1.13"
   },
+  "devDependencies": {
+    "clean-package": "^2.2.0",
+    "rimraf": "^6.0.1"
+  },
   "clean-package": {
     "indent": 2,
     "remove": [
@@ -60,9 +50,19 @@
       "exports.\\..import"
     ]
   },
-  "devDependencies": {
-    "clean-package": "^2.2.0",
-    "rimraf": "^6.0.1"
-  },
-  "gitHead": "0eab9dc4a5622caffe89e7b1b3f02c08ccbc4c4b"
+  "title": "a-openapi",
+  "vonaModule": {
+    "capabilities": {
+      "preload": true
+    },
+    "dependencies": {
+      "a-openapiutils": "5.0.0"
+    },
+    "globalDependencies": {
+      "@cabloy/zod-openapi": true,
+      "@cabloy/zod-to-openapi": true,
+      "openapi3-ts": true,
+      "zod": true
+    }
+  }
 }

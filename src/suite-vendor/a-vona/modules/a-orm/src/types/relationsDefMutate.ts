@@ -8,5 +8,4 @@ export interface IModelRelationOptionsOneMutate<MODEL extends BeanModelMeta>
 export interface IModelRelationOptionsManyMutate<MODEL extends BeanModelMeta>
   extends IModelRelationOptionsMetaWrapper, IModelRelationIncludeWrapper<MODEL> {}
 
-export interface IModelRelationOptionsBelongsToManyMutate<_MODEL extends BeanModelMeta>
-  extends IModelRelationOptionsMetaWrapper {}
+export interface IModelRelationOptionsBelongsToManyMutate<_MODEL extends BeanModelMeta> extends IModelRelationOptionsMetaWrapper {}

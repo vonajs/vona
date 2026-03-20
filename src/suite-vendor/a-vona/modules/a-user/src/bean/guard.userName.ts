@@ -1,8 +1,10 @@
 import type { Next } from 'vona';
 import type { IDecoratorGuardOptions, IGuardExecute } from 'vona-module-a-aspect';
-import type { IUserNameRecord } from '../types/user.ts';
+
 import { BeanBase } from 'vona';
 import { Guard } from 'vona-module-a-aspect';
+
+import type { IUserNameRecord } from '../types/user.ts';
 
 export interface IGuardOptionsUserName extends IDecoratorGuardOptions {
   name?: keyof IUserNameRecord | (keyof IUserNameRecord)[];

@@ -1,8 +1,10 @@
 import type { FunctionAsync } from 'vona';
 import type { IDatabaseClientRecord } from 'vona-module-a-orm';
-import type { IDatashardingSwitchOptions } from '../types/datasharding.ts';
+
 import { BeanBase } from 'vona';
 import { Bean } from 'vona-module-a-bean';
+
+import type { IDatashardingSwitchOptions } from '../types/datasharding.ts';
 
 @Bean()
 export class BeanDatasharding extends BeanBase {

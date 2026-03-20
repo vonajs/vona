@@ -1,4 +1,5 @@
 import type { VonaApplication } from 'vona';
+
 import type { ConfigRedlock } from '../types/redlock.ts';
 
 export function config(app: VonaApplication) {

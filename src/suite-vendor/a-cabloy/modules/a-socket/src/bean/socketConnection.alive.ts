@@ -1,6 +1,7 @@
 import type { Next } from 'vona';
 import type { IDecoratorSocketConnectionOptions, ISocketConnectionExecute } from 'vona-module-a-socket';
 import type { WebSocket } from 'ws';
+
 import { BeanBase } from 'vona';
 import { SocketConnection } from 'vona-module-a-socket';
 

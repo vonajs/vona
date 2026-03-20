@@ -1,6 +1,7 @@
 import type { MetadataKey } from 'vona';
 import type { RouteHandlerArgumentType, TypeExtractValue } from 'vona-module-a-openapi';
 import type { SchemaLike } from 'vona-module-a-openapiutils';
+
 import { appMetadata } from 'vona';
 import { setArgumentPipe } from 'vona-module-a-aspect';
 import { makeSchemaLikes } from 'vona-module-a-openapiutils';
@@ -25,12 +26,18 @@ export function createPipesArgumentDecorator(paramType: RouteHandlerArgumentType
 
       const argSchema = makeSchemaLikes(paramSchemaLikes, metaType);
 
-      setArgumentPipe('a-web:valid', {
-        type: paramType,
-        field: paramField,
-        schema: argSchema,
-        extractValue,
-      }, target, prop, index);
+      setArgumentPipe(
+        'a-web:valid',
+        {
+          type: paramType,
+          field: paramField,
+          schema: argSchema,
+          extractValue,
+        },
+        target,
+        prop,
+        index,
+      );
     };
   };
 }

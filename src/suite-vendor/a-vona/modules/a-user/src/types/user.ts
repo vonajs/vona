@@ -1,5 +1,6 @@
 import type { TableIdentity } from 'table-identity';
 import type { ILocaleRecord } from 'vona';
+
 import type { IAuthUserProfile } from './authProfile.ts';
 
 export interface IUserNameRecord {

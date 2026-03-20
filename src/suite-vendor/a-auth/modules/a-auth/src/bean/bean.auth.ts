@@ -1,11 +1,19 @@
 import type { IJwtToken } from 'vona-module-a-jwt';
-import type { DtoAuth } from '../dto/auth.ts';
-import type { EntityAuth } from '../entity/auth.ts';
-import type { IAuthenticateOptions, IAuthenticateStrategyState } from '../types/auth.ts';
-import type { IAuthProviderClientOptions, IAuthProviderRecord, IAuthProviderStrategy, IAuthProviderVerify, TypeStrategyOptions } from '../types/authProvider.ts';
+
 import { BeanBase, deepExtend } from 'vona';
 import { Bean } from 'vona-module-a-bean';
 import { $apiPath } from 'vona-module-a-openapiutils';
+
+import type { DtoAuth } from '../dto/auth.ts';
+import type { EntityAuth } from '../entity/auth.ts';
+import type { IAuthenticateOptions, IAuthenticateStrategyState } from '../types/auth.ts';
+import type {
+  IAuthProviderClientOptions,
+  IAuthProviderRecord,
+  IAuthProviderStrategy,
+  IAuthProviderVerify,
+  TypeStrategyOptions,
+} from '../types/authProvider.ts';
 
 @Bean()
 export class BeanAuth extends BeanBase {

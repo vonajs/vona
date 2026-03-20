@@ -1,9 +1,11 @@
 import type { IDecoratorControllerOptions } from 'vona-module-a-web';
+
 import assert from 'node:assert';
 import { BeanBase, cast } from 'vona';
 import { Api } from 'vona-module-a-openapiutils';
 import { Passport } from 'vona-module-a-user';
 import { Controller, Web } from 'vona-module-a-web';
+
 import { __ThisModule__ } from '../.metadata/this.ts';
 import { ServiceTest } from '../service/test.ts';
 

@@ -1,5 +1,6 @@
 import type { TypeDecoratorRules } from 'vona-module-a-openapiutils';
 import type z from 'zod';
+
 import assert from 'node:assert';
 import { describe, it } from 'node:test';
 import { app } from 'vona-mock';

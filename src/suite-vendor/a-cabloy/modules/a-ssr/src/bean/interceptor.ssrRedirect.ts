@@ -1,8 +1,10 @@
 import type { Next } from 'vona';
 import type { IDecoratorInterceptorOptions, IInterceptorExecute } from 'vona-module-a-aspect';
-import type { IInterceptorOptionsSsrBase, TypeSsrRenderType } from '../types/ssrInterceptor.ts';
+
 import { BeanBase, deepExtend } from 'vona';
 import { Interceptor } from 'vona-module-a-aspect';
+
+import type { IInterceptorOptionsSsrBase, TypeSsrRenderType } from '../types/ssrInterceptor.ts';
 
 export interface IInterceptorOptionsSsrRedirect extends IDecoratorInterceptorOptions, IInterceptorOptionsSsrBase {
   redirectOnly: boolean;
@@ -30,11 +32,7 @@ export class InterceptorSsrRedirect extends BeanBase implements IInterceptorExec
     const renderType = this._getContentTypeAuto();
     if (renderType !== 'html') return;
     // pageOptions
-    const pageOptions = deepExtend(
-      {},
-      options.pageOptions,
-      { params: this.ctx.request.params, query: this.ctx.request.query },
-    );
+    const pageOptions = deepExtend({}, options.pageOptions, { params: this.ctx.request.params, query: this.ctx.request.query });
     // redirect
     return await this.bean.ssr.redirect(options.site as any, options.pagePath, pageOptions);
   }

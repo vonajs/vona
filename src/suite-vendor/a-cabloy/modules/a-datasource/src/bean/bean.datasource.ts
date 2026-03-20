@@ -1,4 +1,5 @@
 import type { EntityDatasource } from 'vona-module-a-datasource';
+
 import { BeanBase } from 'vona';
 import { Bean } from 'vona-module-a-bean';
 

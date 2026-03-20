@@ -10,10 +10,7 @@ describe('modelRelationsJoins.test.ts', () => {
       const scopeTest = app.scope('test-vona');
       // test data: create
       const testData = await scopeTest.service.testData.create(prefix);
-      const {
-        userTom,
-        userJimmy,
-      } = testData;
+      const { userTom, userJimmy } = testData;
       // joins: auto
       const itemsJoins = await scopeTest.model.post.select({
         joins: [['innerJoin', 'testVonaUser', ['testVonaPost.userId', 'testVonaUser.id']]],
@@ -24,24 +21,35 @@ describe('modelRelationsJoins.test.ts', () => {
       });
       assert.equal(itemsJoins.length, 2);
       // joins: manual
-      const itemsJoins2 = await scopeTest.model.post.select({
-        joins: [['innerJoin', 'testVonaUser', ['testVonaPost.userId', 'testVonaUser.id']]],
-        where: {
-          'testVonaUser.id': userJimmy.id,
+      const itemsJoins2 = await scopeTest.model.post.select(
+        {
+          joins: [['innerJoin', 'testVonaUser', ['testVonaPost.userId', 'testVonaUser.id']]],
+          where: {
+            'testVonaUser.id': userJimmy.id,
+          },
+          orders: [['testVonaUser.id', 'asc']],
         },
-        orders: [['testVonaUser.id', 'asc']],
-      }, {}, ['test-vona:user']);
+        {},
+        ['test-vona:user'],
+      );
       assert.equal(itemsJoins2.length, 0);
       // joins: manual: no table prefix
-      const itemsJoins3 = await scopeTest.model.post.select({
-        columns: ['id', 'title'],
-        joins: [['innerJoin', 'testVonaUser', ['userId', 'testVonaUser.id']]],
-        where: {
-          'testVonaUser.id': userJimmy.id,
-          'userId': userJimmy.id,
+      const itemsJoins3 = await scopeTest.model.post.select(
+        {
+          columns: ['id', 'title'],
+          joins: [['innerJoin', 'testVonaUser', ['userId', 'testVonaUser.id']]],
+          where: {
+            'testVonaUser.id': userJimmy.id,
+            'userId': userJimmy.id,
+          },
+          orders: [
+            ['testVonaUser.id', 'asc'],
+            ['testVonaPost.createdAt', 'asc'],
+          ],
         },
-        orders: [['testVonaUser.id', 'asc'], ['testVonaPost.createdAt', 'asc']],
-      }, {}, ['test-vona:user']);
+        {},
+        ['test-vona:user'],
+      );
       assert.equal(itemsJoins3.length, 0);
       // test data: delete
       await scopeTest.service.testData.drop(testData);

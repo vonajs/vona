@@ -1,4 +1,5 @@
 import type { IBroadcastExecute } from 'vona-module-a-broadcast';
+
 import assert from 'node:assert';
 import { BeanBroadcastBase, Broadcast } from 'vona-module-a-broadcast';
 
@@ -7,9 +8,7 @@ export interface TypeBroadcastTestJobData {
 }
 
 @Broadcast()
-export class BroadcastTest
-  extends BeanBroadcastBase<TypeBroadcastTestJobData>
-  implements IBroadcastExecute<TypeBroadcastTestJobData> {
+export class BroadcastTest extends BeanBroadcastBase<TypeBroadcastTestJobData> implements IBroadcastExecute<TypeBroadcastTestJobData> {
   async execute(data: TypeBroadcastTestJobData, isEmitter?: boolean) {
     if (!isEmitter) {
       // do something

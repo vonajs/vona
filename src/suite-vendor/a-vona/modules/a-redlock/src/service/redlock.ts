@@ -1,19 +1,17 @@
 import type { FunctionAsync, PowerPartial } from 'vona';
-import type { IRedlockClientOptions, IRedlockLockIsolateOptions, IRedlockLockOptions } from '../types/redlock.ts';
+
 import { Redlock } from '@sesamecare-oss/redlock';
 import { BeanBase, deepExtend, instanceDesp } from 'vona';
 import { Service } from 'vona-module-a-bean';
 import { getRedisClientKeyPrefix } from 'vona-module-a-redis';
 
+import type { IRedlockClientOptions, IRedlockLockIsolateOptions, IRedlockLockOptions } from '../types/redlock.ts';
+
 @Service()
 export class ServiceRedlock extends BeanBase {
   private _redlockDefault: Redlock;
 
-  public async lock<RESULT>(
-    resource: string,
-    fn: FunctionAsync<RESULT>,
-    options?: IRedlockLockOptions,
-  ): Promise<RESULT> {
+  public async lock<RESULT>(resource: string, fn: FunctionAsync<RESULT>, options?: IRedlockLockOptions): Promise<RESULT> {
     const instanceName = options?.instanceName === undefined ? this.ctx?.instanceName : options?.instanceName;
     const redlock = options?.redlock ?? this.redlockDefault;
     const lockTTL = options?.lockTTL ?? this.scope.config.lockTTL;
@@ -52,11 +50,7 @@ export class ServiceRedlock extends BeanBase {
     }
   }
 
-  public async lockIsolate<RESULT>(
-    resource: string,
-    fn: FunctionAsync<RESULT>,
-    options?: IRedlockLockIsolateOptions,
-  ): Promise<RESULT> {
+  public async lockIsolate<RESULT>(resource: string, fn: FunctionAsync<RESULT>, options?: IRedlockLockIsolateOptions): Promise<RESULT> {
     return await this.lock(
       resource,
       async () => {
@@ -75,10 +69,7 @@ export class ServiceRedlock extends BeanBase {
   }
 
   public create(options?: PowerPartial<IRedlockClientOptions>): Redlock {
-    const options2: IRedlockClientOptions =
-      options
-        ? deepExtend({}, this.scope.config.base, options)
-        : this.scope.config.base;
+    const options2: IRedlockClientOptions = options ? deepExtend({}, this.scope.config.base, options) : this.scope.config.base;
     return this._create(options2);
   }
 

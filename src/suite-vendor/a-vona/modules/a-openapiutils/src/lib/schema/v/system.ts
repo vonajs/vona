@@ -1,9 +1,12 @@
 import type { Constructable, ILocaleMagic } from 'vona';
 import type { ISchemaObjectOptions } from 'vona-module-a-openapi';
-import type { SchemaLike } from '../../../types/decorator.ts';
+
 import { isNil } from '@cabloy/utils';
 import { coerceWithNil } from '@cabloy/zod-query';
 import { z } from 'zod';
+
+import type { SchemaLike } from '../../../types/decorator.ts';
+
 import { $locale } from '../../../.metadata/locales.ts';
 import { normalizeErrorParams } from '../../utils.ts';
 import { $schema, $schemaLazy, makeSchemaLike } from '../makeSchemaLikes.ts';

@@ -2,8 +2,10 @@ import type { TableIdentityType } from 'table-identity';
 import type { VonaApplication } from 'vona';
 import type { IOnionOptionsMeta } from 'vona-module-a-onion';
 import type { TSummerCachePreset } from 'vona-module-a-summer';
-import type { IDataBaseConfigDialects } from '../types/config.ts';
+
 import { configAll, configRedis } from 'vona-module-a-summer';
+
+import type { IDataBaseConfigDialects } from '../types/config.ts';
 
 export function config(_app: VonaApplication) {
   return {

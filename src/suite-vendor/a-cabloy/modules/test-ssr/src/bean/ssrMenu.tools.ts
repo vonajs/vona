@@ -1,8 +1,11 @@
 import type { IDecoratorSsrMenuOptions } from 'vona-module-a-ssr';
-import type { ISsrSiteOptionsSecond } from './ssrSite.second.ts';
+
 import { BeanBase, useApp } from 'vona';
 import { $apiPath } from 'vona-module-a-openapiutils';
 import { SsrMenu } from 'vona-module-a-ssr';
+
+import type { ISsrSiteOptionsSecond } from './ssrSite.second.ts';
+
 import { $locale } from '../.metadata/locales.ts';
 
 export interface ISsrMenuOptionsTools extends IDecoratorSsrMenuOptions<ISsrSiteOptionsSecond> {}

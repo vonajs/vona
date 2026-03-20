@@ -1,4 +1,5 @@
 import type { IMetadataCustomGenerateOptions } from '@cabloy/cli';
+
 import { toUpperCaseFirstChar } from '@cabloy/word-utils';
 
 export default async function (options: IMetadataCustomGenerateOptions): Promise<string> {

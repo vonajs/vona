@@ -1,5 +1,6 @@
 import type { Next } from 'vona';
 import type { IDecoratorInterceptorOptionsGlobal, IInterceptorExecute } from 'vona-module-a-aspect';
+
 import { BeanBase, Global } from 'vona';
 import { Interceptor } from 'vona-module-a-aspect';
 

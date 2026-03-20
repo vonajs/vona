@@ -1,7 +1,10 @@
 import type { IOpenapiOptions } from 'vona-module-a-openapiutils';
-import type { TypeRequestMethod } from '../../types/request.ts';
+
 import { appMetadata } from 'vona';
 import { SymbolOpenApiOptions } from 'vona-module-a-openapiutils';
+
+import type { TypeRequestMethod } from '../../types/request.ts';
+
 import { SymbolRequestMappingHandler } from '../../types/request.ts';
 
 export interface RequestMappingMetadata {

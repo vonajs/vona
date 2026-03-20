@@ -1,18 +1,17 @@
 {
   "name": "vona-module-auth-github",
-  "type": "module",
   "version": "5.0.5",
-  "title": "auth-github",
-  "vonaModule": {
-    "dependencies": {
-      "a-vona": "5.0.0"
-    }
-  },
   "description": "",
-  "author": "",
   "keywords": [
     "Vona Module"
   ],
+  "author": "",
+  "files": [
+    "assets",
+    "dist",
+    "src"
+  ],
+  "type": "module",
   "exports": {
     ".": {
       "types": [
@@ -24,17 +23,19 @@
     },
     "./package.json": "./package.json"
   },
-  "files": [
-    "assets",
-    "dist",
-    "src"
-  ],
   "scripts": {
     "clean": "rimraf dist tsconfig.build.tsbuildinfo",
     "tsc:publish": "npm run clean && vona :bin:buildModule --sourcemap && tsc -p tsconfig.build.json",
     "prepublishOnly": "npm run tsc:publish",
     "prepack": "clean-package",
     "postpack": "clean-package restore && npm run clean"
+  },
+  "dependencies": {
+    "passport-github": "^1.1.0"
+  },
+  "devDependencies": {
+    "clean-package": "^2.2.0",
+    "rimraf": "^6.0.1"
   },
   "clean-package": {
     "indent": 2,
@@ -43,11 +44,10 @@
       "exports.\\..import"
     ]
   },
-  "dependencies": {
-    "passport-github": "^1.1.0"
-  },
-  "devDependencies": {
-    "clean-package": "^2.2.0",
-    "rimraf": "^6.0.1"
+  "title": "auth-github",
+  "vonaModule": {
+    "dependencies": {
+      "a-vona": "5.0.0"
+    }
   }
 }

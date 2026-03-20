@@ -1,7 +1,9 @@
 import type { TableIdentity } from 'table-identity';
-import type { IRole, IRoleAdapter } from '../types/role.ts';
+
 import { BeanBase, beanFullNameFromOnionName } from 'vona';
 import { Bean } from 'vona-module-a-bean';
+
+import type { IRole, IRoleAdapter } from '../types/role.ts';
 
 @Bean()
 export class BeanRole extends BeanBase {

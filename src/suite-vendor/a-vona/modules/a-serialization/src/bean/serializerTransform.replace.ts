@@ -1,5 +1,7 @@
-import type { IDecoratorSerializerTransformOptions, ISerializerTransform } from '../types/serializerTransform.ts';
 import { BeanBase } from 'vona';
+
+import type { IDecoratorSerializerTransformOptions, ISerializerTransform } from '../types/serializerTransform.ts';
+
 import { SerializerTransform } from '../lib/serializerTransform.ts';
 
 export type TypeSerializerTransformReplaceValue = string | undefined;
@@ -14,12 +16,10 @@ export interface ISerializerTransformOptionsReplace extends IDecoratorSerializer
 }
 
 @SerializerTransform<ISerializerTransformOptionsReplace>()
-export class SerializerTransformReplace extends BeanBase
-  implements ISerializerTransform<
-    TypeSerializerTransformReplaceValue,
-    TypeSerializerTransformReplaceData,
-    TypeSerializerTransformReplaceResult
-  > {
+export class SerializerTransformReplace
+  extends BeanBase
+  implements ISerializerTransform<TypeSerializerTransformReplaceValue, TypeSerializerTransformReplaceData, TypeSerializerTransformReplaceResult>
+{
   async transform(
     value: TypeSerializerTransformReplaceValue,
     _data: TypeSerializerTransformReplaceData,

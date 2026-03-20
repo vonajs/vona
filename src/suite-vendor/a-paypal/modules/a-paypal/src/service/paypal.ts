@@ -1,4 +1,5 @@
 import type { TableIdentity } from 'table-identity';
+
 import { OrdersController, OrderStatus } from '@cabloy/paypal-server-sdk';
 import { BeanBase } from 'vona';
 import { Service } from 'vona-module-a-bean';
@@ -28,7 +29,7 @@ export class ServicePaypal extends BeanBase {
     let netAmount: number;
     let orderResult: {} | undefined;
     if (this.app.meta.isTest) {
-      grossAmount = Number.parseInt(Number.parseFloat(record.payload.total) * 100 as any);
+      grossAmount = Number.parseInt((Number.parseFloat(record.payload.total) * 100) as any);
       payFee = grossAmount * this.scope.config.paypal.payFeeRate;
       netAmount = grossAmount - payFee;
       orderResult = undefined;
@@ -40,11 +41,10 @@ export class ServicePaypal extends BeanBase {
         this.scope.error.TransactionException.throw();
       }
       // update
-      const sellerReceivableBreakdown =
-        res.result.purchaseUnits![0].payments!.captures![0].sellerReceivableBreakdown!;
-      grossAmount = Number.parseInt(Number.parseFloat(sellerReceivableBreakdown.grossAmount.value) * 100 as any);
-      payFee = Number.parseInt(Number.parseFloat(sellerReceivableBreakdown.paypalFee!.value) * 100 as any);
-      netAmount = Number.parseInt(Number.parseFloat(sellerReceivableBreakdown.netAmount!.value) * 100 as any);
+      const sellerReceivableBreakdown = res.result.purchaseUnits![0].payments!.captures![0].sellerReceivableBreakdown!;
+      grossAmount = Number.parseInt((Number.parseFloat(sellerReceivableBreakdown.grossAmount.value) * 100) as any);
+      payFee = Number.parseInt((Number.parseFloat(sellerReceivableBreakdown.paypalFee!.value) * 100) as any);
+      netAmount = Number.parseInt((Number.parseFloat(sellerReceivableBreakdown.netAmount!.value) * 100) as any);
       orderResult = res.result;
     }
     // update status

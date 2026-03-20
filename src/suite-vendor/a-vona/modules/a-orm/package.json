@@ -1,7 +1,53 @@
 {
   "name": "vona-module-a-orm",
-  "type": "module",
   "version": "5.0.96",
+  "gitHead": "0eab9dc4a5622caffe89e7b1b3f02c08ccbc4c4b",
+  "description": "db",
+  "keywords": [
+    "Cabloy Module"
+  ],
+  "author": "zhennann",
+  "files": [
+    "assets",
+    "cli",
+    "dist",
+    "dist-cli",
+    "src"
+  ],
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": [
+        "./src/index.ts",
+        "./dist/index.d.ts"
+      ],
+      "import": "./src/index.ts",
+      "default": "./dist/index.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "scripts": {
+    "clean": "rimraf dist dist-cli tsconfig.build.tsbuildinfo tsconfig.cli.tsbuildinfo",
+    "tsc:publish": "npm run clean && vona :bin:buildModule --sourcemap && tsc -p tsconfig.build.json && tsc -p tsconfig.cli.json",
+    "prepublishOnly": "npm run tsc:publish",
+    "prepack": "clean-package",
+    "postpack": "clean-package restore && npm run clean"
+  },
+  "dependencies": {
+    "knex": "^3.1.0",
+    "table-identity": "^1.0.13"
+  },
+  "devDependencies": {
+    "clean-package": "^2.2.0",
+    "rimraf": "^6.0.1"
+  },
+  "clean-package": {
+    "indent": 2,
+    "remove": [
+      "clean-package",
+      "exports.\\..import"
+    ]
+  },
   "title": "a-orm",
   "vonaModule": {
     "capabilities": {
@@ -38,51 +84,5 @@
         "boilerplate": "databaseDialect/boilerplate"
       }
     }
-  },
-  "description": "db",
-  "author": "zhennann",
-  "keywords": [
-    "Cabloy Module"
-  ],
-  "exports": {
-    ".": {
-      "types": [
-        "./src/index.ts",
-        "./dist/index.d.ts"
-      ],
-      "import": "./src/index.ts",
-      "default": "./dist/index.js"
-    },
-    "./package.json": "./package.json"
-  },
-  "files": [
-    "assets",
-    "cli",
-    "dist",
-    "dist-cli",
-    "src"
-  ],
-  "scripts": {
-    "clean": "rimraf dist dist-cli tsconfig.build.tsbuildinfo tsconfig.cli.tsbuildinfo",
-    "tsc:publish": "npm run clean && vona :bin:buildModule --sourcemap && tsc -p tsconfig.build.json && tsc -p tsconfig.cli.json",
-    "prepublishOnly": "npm run tsc:publish",
-    "prepack": "clean-package",
-    "postpack": "clean-package restore && npm run clean"
-  },
-  "dependencies": {
-    "knex": "^3.1.0",
-    "table-identity": "^1.0.13"
-  },
-  "clean-package": {
-    "indent": 2,
-    "remove": [
-      "clean-package",
-      "exports.\\..import"
-    ]
-  },
-  "devDependencies": {
-    "clean-package": "^2.2.0",
-    "rimraf": "^6.0.1"
-  },
-  "gitHead": "0eab9dc4a5622caffe89e7b1b3f02c08ccbc4c4b"
+  }
 }

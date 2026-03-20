@@ -13,8 +13,7 @@ export interface IInterceptorExecute {
 export interface IDecoratorInterceptorOptions extends TypeOnionOptionsEnableSimple {}
 
 export interface IDecoratorInterceptorOptionsGlobal
-  extends TypeOnionOptionsBaseSimple<keyof IApiPathRecord>,
-  IOnionOptionsDeps<keyof IInterceptorRecordGlobal> {}
+  extends TypeOnionOptionsBaseSimple<keyof IApiPathRecord>, IOnionOptionsDeps<keyof IInterceptorRecordGlobal> {}
 
 declare module 'vona-module-a-onion' {
   export interface BeanOnion {

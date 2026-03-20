@@ -1,4 +1,5 @@
 import type { IInstanceStartupOptions, IStartupExecute } from 'vona-module-a-startup';
+
 import { BeanBase } from 'vona';
 import { Startup } from 'vona-module-a-startup';
 

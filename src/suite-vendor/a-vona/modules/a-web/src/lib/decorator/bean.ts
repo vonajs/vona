@@ -1,11 +1,14 @@
 import type { Constructable } from 'vona';
 import type { IOpenapiOptions } from 'vona-module-a-openapiutils';
-import type { IDecoratorControllerOptions } from '../../types/controller.ts';
-import type { IDecoratorDtoOptions } from '../../types/dto.ts';
-import type { IRecordResourceNameToRoutePathItem } from '../const.ts';
+
 import { appMetadata, appResource, cast, createBeanDecorator, deepExtend, onionNameFromBeanFullName, useApp } from 'vona';
 import { mergeFieldsOpenapiMetadata, SymbolControllerResource } from 'vona-module-a-openapiutils';
 import { SymbolOpenApiOptions } from 'vona-module-a-openapiutils';
+
+import type { IDecoratorControllerOptions } from '../../types/controller.ts';
+import type { IDecoratorDtoOptions } from '../../types/dto.ts';
+import type { IRecordResourceNameToRoutePathItem } from '../const.ts';
+
 import { recordResourceNameToRoutePath } from '../const.ts';
 
 export function Controller<T extends IDecoratorControllerOptions>(options?: T): ClassDecorator;
@@ -14,7 +17,7 @@ export function Controller<T extends IDecoratorControllerOptions>(path?: T | str
   if (typeof path === 'string') {
     options = Object.assign({}, options, { path });
   } else {
-    options = path || {} as any;
+    options = path || ({} as any);
   }
   return createBeanDecorator('controller', options, false, target => {
     // beanOptions
@@ -32,13 +35,7 @@ export function Controller<T extends IDecoratorControllerOptions>(path?: T | str
     const controllerResource = appMetadata.getOwnMetadata(SymbolControllerResource, target);
     if (controllerResource) {
       const app = useApp();
-      const apiPath = app.util.combineApiPathControllerAndAction(
-        beanOptions.module,
-        cast(beanOptions.options).path,
-        undefined,
-        true,
-        true,
-      );
+      const apiPath = app.util.combineApiPathControllerAndAction(beanOptions.module, cast(beanOptions.options).path, undefined, true, true);
       const routePathRaw = app.util.combineApiPathControllerAndActionRaw(beanOptions.module, cast(beanOptions.options).path, undefined, true);
       recordResourceNameToRoutePath[onionName] = { apiPath, routePathRaw, controller: target } as IRecordResourceNameToRoutePathItem;
     } else {

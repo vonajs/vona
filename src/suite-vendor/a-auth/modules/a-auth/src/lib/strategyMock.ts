@@ -1,6 +1,8 @@
-import type { IAuthProviderOauth2ClientOptions, TypeStrategyOptions } from '../types/authProvider.ts';
 import { useApp, uuidv4 } from 'vona';
 import { $apiPath } from 'vona-module-a-openapiutils';
+
+import type { IAuthProviderOauth2ClientOptions, TypeStrategyOptions } from '../types/authProvider.ts';
+
 import { StrategyBase } from './strategyBase.ts';
 
 export class StrategyMock extends StrategyBase {

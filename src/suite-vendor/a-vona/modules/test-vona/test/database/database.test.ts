@@ -1,7 +1,7 @@
-import assert from 'node:assert';
-import { describe, it } from 'node:test';
 import { catchError } from '@cabloy/utils';
 import { DateTime } from 'luxon';
+import assert from 'node:assert';
+import { describe, it } from 'node:test';
 import { app } from 'vona-mock';
 
 describe('database.test.ts', () => {
@@ -14,9 +14,12 @@ describe('database.test.ts', () => {
       // switch
       const clientNames = Object.keys(app.config.database.clients);
       const clientName2 = clientNames.find(item => item !== defaultClientName);
-      await app.bean.database.switchDb(async () => {
-        assert.equal(app.ctx.db.clientName, clientName2);
-      }, { clientName: clientName2 as any });
+      await app.bean.database.switchDb(
+        async () => {
+          assert.equal(app.ctx.db.clientName, clientName2);
+        },
+        { clientName: clientName2 as any },
+      );
       // restore
       assert.equal(app.ctx.db.clientName, defaultClientName);
     });

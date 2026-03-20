@@ -6,7 +6,5 @@
       "path": "modules/basic-siteadmin/tsconfig.build.json"
     }
   ],
-  "exclude": [
-    "modules"
-  ]
+  "exclude": ["modules"]
 }

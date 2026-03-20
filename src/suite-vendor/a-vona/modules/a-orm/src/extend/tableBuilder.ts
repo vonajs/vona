@@ -1,6 +1,8 @@
 import type { TableIdentityType } from 'table-identity';
 import type { VonaApplication } from 'vona';
+
 import knex from 'knex';
+
 import { __ThisModule__ } from '../.metadata/this.ts';
 
 export interface IBasicFieldsOptions {

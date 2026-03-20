@@ -1,7 +1,9 @@
 import type { Address } from 'nodemailer/lib/mailer/index.js';
-import type { IMailClientRecord, IMailOptions } from '../types/config.ts';
+
 import { BeanBase } from 'vona';
 import { Bean } from 'vona-module-a-bean';
+
+import type { IMailClientRecord, IMailOptions } from '../types/config.ts';
 
 @Bean()
 export class BeanMail extends BeanBase {

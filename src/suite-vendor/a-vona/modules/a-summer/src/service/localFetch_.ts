@@ -1,17 +1,13 @@
-import type { ICacheLayeredBase } from '../common/cacheLayeredBase.ts';
-import type {
-  ISummerCacheGet,
-  ISummerCacheMGet,
-  TSummerCacheActionOptions,
-} from '../types/summerCache.ts';
 import { cast } from 'vona';
 import { Service } from 'vona-module-a-bean';
+
+import type { ICacheLayeredBase } from '../common/cacheLayeredBase.ts';
+import type { ISummerCacheGet, ISummerCacheMGet, TSummerCacheActionOptions } from '../types/summerCache.ts';
+
 import { CacheBase } from '../common/cacheBase.ts';
 
 @Service()
-export class ServiceLocalFetch<KEY = any, DATA = any>
-  extends CacheBase<KEY, DATA>
-  implements ICacheLayeredBase<KEY, DATA> {
+export class ServiceLocalFetch<KEY = any, DATA = any> extends CacheBase<KEY, DATA> implements ICacheLayeredBase<KEY, DATA> {
   private _cacheNativeInstance: CacheBase<KEY, DATA> | undefined;
 
   protected async __dispose__() {

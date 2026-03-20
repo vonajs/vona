@@ -1,18 +1,17 @@
 {
   "name": "vona-module-test-captcha",
-  "type": "module",
   "version": "5.0.0",
-  "title": "test-captcha",
-  "vonaModule": {
-    "dependencies": {
-      "a-vona": "5.0.0"
-    }
-  },
   "description": "",
-  "author": "",
   "keywords": [
     "Vona Module"
   ],
+  "author": "",
+  "files": [
+    "assets",
+    "dist",
+    "src"
+  ],
+  "type": "module",
   "exports": {
     ".": {
       "types": [
@@ -24,17 +23,17 @@
     },
     "./package.json": "./package.json"
   },
-  "files": [
-    "assets",
-    "dist",
-    "src"
-  ],
   "scripts": {
     "clean": "rimraf dist tsconfig.build.tsbuildinfo",
     "tsc:publish": "npm run clean && vona :bin:buildModule --sourcemap && tsc -p tsconfig.build.json",
     "prepublishOnly": "npm run tsc:publish",
     "prepack": "clean-package",
     "postpack": "clean-package restore && npm run clean"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "clean-package": "^2.2.0",
+    "rimraf": "^6.0.1"
   },
   "clean-package": {
     "indent": 2,
@@ -44,9 +43,10 @@
       "exports.\\..import"
     ]
   },
-  "dependencies": {},
-  "devDependencies": {
-    "clean-package": "^2.2.0",
-    "rimraf": "^6.0.1"
+  "title": "test-captcha",
+  "vonaModule": {
+    "dependencies": {
+      "a-vona": "5.0.0"
+    }
   }
 }

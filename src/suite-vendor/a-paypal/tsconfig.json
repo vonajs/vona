@@ -6,7 +6,5 @@
       "path": "modules/a-paypal/tsconfig.build.json"
     }
   ],
-  "exclude": [
-    "modules"
-  ]
+  "exclude": ["modules"]
 }

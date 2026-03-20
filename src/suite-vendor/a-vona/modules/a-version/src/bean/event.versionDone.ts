@@ -1,5 +1,6 @@
-import type { IMetaVersionOptions } from '../types/version.ts';
 import { BeanEventBase, Event } from 'vona-module-a-event';
+
+import type { IMetaVersionOptions } from '../types/version.ts';
 
 export type TypeEventVersionDoneData = IMetaVersionOptions;
 

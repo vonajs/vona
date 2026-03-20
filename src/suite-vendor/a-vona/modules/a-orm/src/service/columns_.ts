@@ -1,7 +1,9 @@
-import type { ITableColumns, ITableColumnsDefault } from '../types/columns.ts';
-import type { ServiceDb } from './db_.ts';
 import { BeanBase } from 'vona';
 import { Service } from 'vona-module-a-bean';
+
+import type { ITableColumns, ITableColumnsDefault } from '../types/columns.ts';
+import type { ServiceDb } from './db_.ts';
+
 import { ServiceColumnsCache } from './columnsCache_.ts';
 
 @Service()

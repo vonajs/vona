@@ -1,9 +1,11 @@
 import type { IOpenapiOptions } from 'vona-module-a-openapiutils';
 import type { IDecoratorControllerOptions, IRecordResourceNameToRoutePathItem } from 'vona-module-a-web';
+
 import { appMetadata, BeanBase, deepExtend } from 'vona';
 import { SymbolOpenApiOptions } from 'vona-module-a-openapiutils';
 import { Passport } from 'vona-module-a-user';
 import { Arg, Controller, recordResourceNameToRoutePath, Web } from 'vona-module-a-web';
+
 import { DtoBootstrap } from '../dto/bootstrap.tsx';
 
 export interface IControllerOptionsResource extends IDecoratorControllerOptions {}

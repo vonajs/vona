@@ -1,7 +1,9 @@
 import type { Constructable } from 'vona';
-import type { TypeDtoListAndCountResult } from '../../types/dto/dtoListAndCount.ts';
+
 import { Api, v } from 'vona-module-a-openapiutils';
 import z from 'zod';
+
+import type { TypeDtoListAndCountResult } from '../../types/dto/dtoListAndCount.ts';
 
 export function DtoListAndCount<T>(classRef: Constructable<T>): Constructable<TypeDtoListAndCountResult<T>> {
   abstract class TargetClass {}

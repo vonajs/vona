@@ -1,11 +1,13 @@
 import type { MetadataKey } from 'vona';
 import type { TypeOpenapiMetadata } from 'vona-module-a-openapi';
+
+import { Aspect } from 'vona-module-a-aspect';
+import { mergeFieldOpenapiMetadata } from 'vona-module-a-openapiutils';
+
 import type { ISerializerTransformOptionsCustom } from '../bean/serializerTransform.custom.ts';
 import type { ISerializerTransformOptionsExclude } from '../bean/serializerTransform.exclude.ts';
 import type { ISerializerTransformOptionsGetter } from '../bean/serializerTransform.getter.ts';
 import type { ISerializerTransformRecord, TypeSerializerTransformCustom, TypeSerializerTransformGetter } from '../types/serializerTransform.ts';
-import { Aspect } from 'vona-module-a-aspect';
-import { mergeFieldOpenapiMetadata } from 'vona-module-a-openapiutils';
 
 function Enable(enable: boolean = true): ClassDecorator & MethodDecorator {
   return Aspect.interceptor('a-serialization:serializer', { enable });
@@ -44,9 +46,7 @@ function Exclude(param?: boolean | Partial<ISerializerTransformOptionsExclude>):
   };
 }
 
-function Replace(
-  options: ISerializerTransformRecord['a-serialization:replace'],
-): PropertyDecorator {
+function Replace(options: ISerializerTransformRecord['a-serialization:replace']): PropertyDecorator {
   return function (target: object, prop: MetadataKey) {
     const metadata: TypeOpenapiMetadata = {
       serializerTransforms: {

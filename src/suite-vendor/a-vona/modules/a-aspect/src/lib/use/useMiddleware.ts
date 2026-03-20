@@ -1,4 +1,5 @@
 import type { IMiddlewareRecordLocal } from '../../types/middleware.ts';
+
 import { UseOnionBase } from './useOnionBase.ts';
 
 export function UseMiddleware<T extends keyof IMiddlewareRecordLocal>(

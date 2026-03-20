@@ -1,9 +1,11 @@
 import type { TableIdentity } from 'table-identity';
 import type { IDecoratorControllerOptions } from 'vona-module-a-web';
+
 import { BeanBase } from 'vona';
 import { Api, v } from 'vona-module-a-openapiutils';
 import { $Dto } from 'vona-module-a-orm';
 import { Arg, Controller, Web } from 'vona-module-a-web';
+
 import { DtoCategoryTree } from '../dto/categoryTree.ts';
 import { DtoUserCreate } from '../dto/userCreate.ts';
 import { DtoUserLazy } from '../dto/userLazy.ts';
@@ -20,31 +22,23 @@ export class ControllerDtoTest extends BeanBase {
 
   @Web.get('getUserDynamic')
   @Api.body($Dto.get('test-vona:post'))
-  getPostDynamic() {
-  }
+  getPostDynamic() {}
 
   @Web.get('getUserStats')
   @Api.body($Dto.get('test-vona:userStats'))
-  getUserStats() {
-  }
+  getUserStats() {}
 
   @Web.get('getUserStatsGroup')
   @Api.body($Dto.get('test-vona:userStatsGroup'))
-  getUserStatsGroup() {
-  }
+  getUserStatsGroup() {}
 
   @Web.post('createUser')
-  createUser(
-    @Arg.body(v.object(DtoUserCreate)) user: DtoUserCreate,
-  ) {
+  createUser(@Arg.body(v.object(DtoUserCreate)) user: DtoUserCreate) {
     return this.scope.model.user.insert(user);
   }
 
   @Web.patch('updateUser/:id')
-  updateUser(
-    @Arg.param('id') id: TableIdentity,
-    @Arg.body(v.object(DtoUserUpdate)) user: DtoUserUpdate,
-  ) {
+  updateUser(@Arg.param('id') id: TableIdentity, @Arg.body(v.object(DtoUserUpdate)) user: DtoUserUpdate) {
     return this.scope.model.user.update(user, { where: { id } });
   }
 

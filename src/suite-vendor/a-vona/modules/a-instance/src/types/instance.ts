@@ -1,5 +1,6 @@
 import type { ICustomKeyRecord, IInstanceRecord, VonaConfigOptional, VonaContext } from 'vona';
 import type { IDatabaseClientRecord } from 'vona-module-a-orm';
+
 import type { EntityInstance } from '../entity/instance.ts';
 import 'vona';
 

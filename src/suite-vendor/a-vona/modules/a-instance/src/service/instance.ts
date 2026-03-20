@@ -1,11 +1,13 @@
 import type { IInstanceRecord, VonaConfig } from 'vona';
 import type { IInstanceStartupOptions } from 'vona-module-a-startup';
-import type { IInstanceStartupQueueInfo } from '../entity/instance.ts';
-import type { ConfigInstanceBase } from '../types/instance.ts';
+
 import { isNil, sleep } from '@cabloy/utils';
 import async from 'async';
 import { BeanBase, deepExtend } from 'vona';
 import { Service } from 'vona-module-a-bean';
+
+import type { IInstanceStartupQueueInfo } from '../entity/instance.ts';
+import type { ConfigInstanceBase } from '../types/instance.ts';
 
 const SymbolQueueInstanceStartup = Symbol('SymbolQueueInstanceStartup');
 const SymbolCacheIntancesConfig = Symbol('SymbolCacheIntancesConfig');
@@ -72,9 +74,12 @@ export class ServiceInstance extends BeanBase {
   async resetAllCaches() {
     const instanceNames = Object.keys(this.__cacheIntancesConfig);
     for (const instanceName of instanceNames) {
-      await this.app.bean.executor.newCtx(async () => {
-        await this.resetCache(instanceName as any);
-      }, { dbInfo: { level: 1 }, instanceName: instanceName as any });
+      await this.app.bean.executor.newCtx(
+        async () => {
+          await this.resetCache(instanceName as any);
+        },
+        { dbInfo: { level: 1 }, instanceName: instanceName as any },
+      );
     }
   }
 
@@ -91,21 +96,18 @@ export class ServiceInstance extends BeanBase {
     const configInstanceBase = this.getConfigInstanceBase(instanceName);
     const instanceConfigDb = instance.config ? JSON.parse(instance.config) : undefined;
     // cache configs
-    this.__cacheIntancesConfig[instanceName] = deepExtend(
-      {},
-      this.app.config,
-      configInstanceBase?.config,
-      instanceConfigDb,
-      {
-        instance: undefined,
-      },
-    );
+    this.__cacheIntancesConfig[instanceName] = deepExtend({}, this.app.config, configInstanceBase?.config, instanceConfigDb, {
+      instance: undefined,
+    });
   }
 
   async instanceStartupIsolate(instanceName: keyof IInstanceRecord, options?: IInstanceStartupOptions) {
-    await this.bean.executor.newCtx(async () => {
-      await this.instanceStartup(instanceName, options);
-    }, { dbInfo: { level: 1 }, instanceName });
+    await this.bean.executor.newCtx(
+      async () => {
+        await this.instanceStartup(instanceName, options);
+      },
+      { dbInfo: { level: 1 }, instanceName },
+    );
   }
 
   // options: force/instanceBase
@@ -152,7 +154,7 @@ export class ServiceInstance extends BeanBase {
 
   async initInstance() {
     // instance
-    const instance = this.ctx.instance ?? await this.bean.instance.get(this.ctx.instanceName);
+    const instance = this.ctx.instance ?? (await this.bean.instance.get(this.ctx.instanceName));
     if (!instance) {
       this.$logger.warn(`instance not found: ${this.ctx.instanceName}`);
       return this.app.throw(423); // not this.app.fail(423)

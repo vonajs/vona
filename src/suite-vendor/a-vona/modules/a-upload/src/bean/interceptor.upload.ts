@@ -1,12 +1,15 @@
 import type { BusboyConfig } from 'busboy';
 import type { Next } from 'vona';
 import type { IDecoratorInterceptorOptions, IInterceptorExecute } from 'vona-module-a-aspect';
-import type { IUploadField, IUploadFile } from '../types/upload.ts';
-import { createWriteStream } from 'node:fs';
+
 import Busboy from 'busboy';
+import { createWriteStream } from 'node:fs';
 import tmp from 'tmp';
 import { BeanBase } from 'vona';
 import { Interceptor } from 'vona-module-a-aspect';
+
+import type { IUploadField, IUploadFile } from '../types/upload.ts';
+
 import { SymbolUploadValue } from '../types/upload.ts';
 
 export interface IInterceptorOptionsUpload extends IDecoratorInterceptorOptions {
@@ -34,7 +37,7 @@ export class InterceptorUpload extends BeanBase implements IInterceptorExecute {
     return res;
   }
 
-  async _receive(options: IInterceptorOptionsUpload): Promise<[ IUploadField[], IUploadFile[], Function[] ]> {
+  async _receive(options: IInterceptorOptionsUpload): Promise<[IUploadField[], IUploadFile[], Function[]]> {
     return new Promise((resolve, reject) => {
       const fields: IUploadField[] = [];
       const files: IUploadFile[] = [];

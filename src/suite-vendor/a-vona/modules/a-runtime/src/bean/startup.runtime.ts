@@ -1,8 +1,10 @@
 import type { IStartupExecute } from 'vona-module-a-startup';
-import type { IMetaRuntimeExecute } from '../types/runtime.ts';
+
 import path from 'node:path';
 import { BeanBase, getRuntimePathPhysicalRoot, instanceDesp, saveJSONFile } from 'vona';
 import { Startup } from 'vona-module-a-startup';
+
+import type { IMetaRuntimeExecute } from '../types/runtime.ts';
 
 @Startup({
   instance: true,

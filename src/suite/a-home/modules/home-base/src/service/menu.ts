@@ -1,4 +1,5 @@
 import type { IMenus } from 'vona-module-a-menu';
+
 import { BeanBase } from 'vona';
 import { Service } from 'vona-module-a-bean';
 
@@ -12,9 +13,7 @@ export class ServiceMenu extends BeanBase {
 
   private _getMenusDefault(): IMenus {
     return {
-      menus: [
-        { name: 'home', title: this.$scope.homeIndex.locale.Home(), icon: '::home', link: '/' },
-      ],
+      menus: [{ name: 'home', title: this.$scope.homeIndex.locale.Home(), icon: '::home', link: '/' }],
     };
   }
 }

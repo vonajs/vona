@@ -1,7 +1,9 @@
 import type { IMenus } from 'vona-module-a-menu';
+
+import { BeanEventBase, Event } from 'vona-module-a-event';
+
 import type { BeanSsrSiteBase } from '../lib/beanSsrSiteBase.ts';
 import type { IDecoratorSsrSiteOptions } from '../types/ssrSite.ts';
-import { BeanEventBase, Event } from 'vona-module-a-event';
 
 export interface TypeEventRetrieveMenusData {
   publicPath: string;
@@ -12,7 +14,4 @@ export interface TypeEventRetrieveMenusData {
 export type TypeEventRetrieveMenusResult = IMenus | undefined;
 
 @Event()
-export class EventRetrieveMenus extends BeanEventBase<
-  TypeEventRetrieveMenusData,
-  TypeEventRetrieveMenusResult
-> {}
+export class EventRetrieveMenus extends BeanEventBase<TypeEventRetrieveMenusData, TypeEventRetrieveMenusResult> {}

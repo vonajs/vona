@@ -1,6 +1,8 @@
 import type { Next, VonaApplication, VonaContext } from 'vona';
-import type { ContextRoute } from '../../types/router.ts';
+
 import { SymbolCacheComposeInterceptors } from 'vona-module-a-aspect';
+
+import type { ContextRoute } from '../../types/router.ts';
 
 export async function middlewareInterceptor(ctx: VonaContext, next: Next) {
   // check handler

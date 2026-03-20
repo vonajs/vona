@@ -1,7 +1,10 @@
 import type { Redis } from 'ioredis';
-import type { IRedisClientRecord } from '../types/redis.ts';
+
 import { BeanBase } from 'vona';
 import { Service } from 'vona-module-a-bean';
+
+import type { IRedisClientRecord } from '../types/redis.ts';
+
 import { getRedisClientKeyPrefix, prepareRedisClientKeyPrefix } from '../lib/redis.ts';
 
 @Service()

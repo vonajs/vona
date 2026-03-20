@@ -1,14 +1,16 @@
 import type { IPayloadData } from 'vona-module-a-jwt';
-import type { IAuthTokenAdapter } from '../types/authToken.ts';
-import type { IUser } from '../types/user.ts';
+
 import { BeanBase, createHash, uuidv4 } from 'vona';
 import { Service } from 'vona-module-a-bean';
+
+import type { IAuthTokenAdapter } from '../types/authToken.ts';
+import type { IUser } from '../types/user.ts';
 
 @Service()
 export class ServiceAuthTokenAdapter extends BeanBase implements IAuthTokenAdapter {
   async create(payloadData: IPayloadData): Promise<IPayloadData> {
     const authIdStr = this._getAuthId(payloadData)?.toString();
-    const token = (authIdStr === '-1') ? createHash(authIdStr) : uuidv4();
+    const token = authIdStr === '-1' ? createHash(authIdStr) : uuidv4();
     const payloadDataNew = Object.assign({}, payloadData, { [this.scope.config.payloadData.fields.token]: token });
     await this.scope.service.redisToken.create(payloadDataNew);
     return payloadDataNew;

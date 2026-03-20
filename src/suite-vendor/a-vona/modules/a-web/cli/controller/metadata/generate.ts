@@ -1,4 +1,5 @@
 import type { IMetadataCustomGenerateOptions } from '@cabloy/cli';
+
 import { combineApiPathControllerAndActionRaw } from '@cabloy/utils';
 import { toUpperCaseFirstChar } from '@cabloy/word-utils';
 
@@ -55,15 +56,16 @@ export default async function (options: IMetadataCustomGenerateOptions): Promise
   ${contentRecord}
 }`
     : '';
-  const contentResources2 = contentResources.length > 0
-    ? `import 'vona-module-a-openapi';
+  const contentResources2 =
+    contentResources.length > 0
+      ? `import 'vona-module-a-openapi';
   declare module 'vona-module-a-openapi' {
     export interface IResourceRecord {
       ${contentResources.join('\n')}
     }
   }
   `
-    : '';
+      : '';
   // combine
   const content = `/** ${sceneName}: begin */
 ${contentImports.join('\n')}
@@ -107,10 +109,6 @@ function __parseActionPaths(fileContent: string): [string, string][] {
   return actionPaths;
 }
 
-function __combineApiPath(
-  moduleName: string,
-  controllerPath: string | undefined,
-  actionPath: RegExp | string | undefined,
-) {
+function __combineApiPath(moduleName: string, controllerPath: string | undefined, actionPath: RegExp | string | undefined) {
   return combineApiPathControllerAndActionRaw(moduleName, controllerPath, actionPath, true);
 }

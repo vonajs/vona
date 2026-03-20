@@ -1,5 +1,6 @@
 import type { IUploadField, IUploadFile } from 'vona-module-a-upload';
 import type { IDecoratorControllerOptions } from 'vona-module-a-web';
+
 import assert from 'node:assert';
 import { BeanBase } from 'vona';
 import { Core } from 'vona-module-a-core';
@@ -46,7 +47,7 @@ export class ControllerUpload extends BeanBase {
     @Arg.files(v.title('more files')) files: IUploadFile[],
     @Arg.files('images', v.title('images')) images: IUploadFile[],
     @Arg.file('welcome1', v.title('single file')) file1: IUploadFile,
-    @Arg.file('welcome2')file2: IUploadFile,
+    @Arg.file('welcome2') file2: IUploadFile,
   ) {
     assert.equal(files.find(item => item.name === 'welcome1')?.name, 'welcome1');
     assert.equal(images.find(item => item.name === 'images')?.name, 'images');

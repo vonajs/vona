@@ -23,9 +23,7 @@ export interface IDecoratorPipeOptions extends TypeOnionOptionsEnableSimple {
   argIndex?: number;
 }
 
-export interface IDecoratorPipeOptionsGlobal
-  extends TypeOnionOptionsBaseSimple<keyof IApiPathRecord>,
-  IOnionOptionsDeps<keyof IPipeRecordGlobal> {
+export interface IDecoratorPipeOptionsGlobal extends TypeOnionOptionsBaseSimple<keyof IApiPathRecord>, IOnionOptionsDeps<keyof IPipeRecordGlobal> {
   argIndex?: number;
 }
 

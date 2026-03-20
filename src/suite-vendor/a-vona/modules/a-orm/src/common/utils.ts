@@ -1,9 +1,11 @@
 import type { Constructable } from 'vona';
+
+import { appResource, beanFullNameFromOnionName } from 'vona';
+import { prepareClassType } from 'vona-module-a-openapiutils';
+
 import type { BeanModelMeta } from '../bean/bean.model/bean.model_meta.ts';
 import type { TypeModelColumn, TypeModelColumns } from '../types/modelWhere.ts';
 import type { IDecoratorModelOptions, IModelClassRecord } from '../types/onion/model.ts';
-import { appResource, beanFullNameFromOnionName } from 'vona';
-import { prepareClassType } from 'vona-module-a-openapiutils';
 
 export function isRaw(raw) {
   return typeof raw?.constructor === 'function' && raw?.constructor?.name === 'Raw';
@@ -31,9 +33,9 @@ export function prepareColumns<TRecord>(columns?: TypeModelColumns<TRecord>): Ar
   return columns;
 }
 
-export function prepareClassModel<
-  ModelLike extends BeanModelMeta | (keyof IModelClassRecord),
->(classType: ModelLike extends BeanModelMeta ? ((() => Constructable<ModelLike>) | Constructable<ModelLike>) : ModelLike): Constructable<ModelLike> {
+export function prepareClassModel<ModelLike extends BeanModelMeta | keyof IModelClassRecord>(
+  classType: ModelLike extends BeanModelMeta ? (() => Constructable<ModelLike>) | Constructable<ModelLike> : ModelLike,
+): Constructable<ModelLike> {
   if (typeof classType === 'string') {
     const beanOptions = appResource.getBean(beanFullNameFromOnionName(classType, 'model'));
     return beanOptions!.beanClass as any;

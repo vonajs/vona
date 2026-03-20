@@ -1,7 +1,7 @@
+import fse from 'fs-extra';
 import assert from 'node:assert';
 import path from 'node:path';
 import { describe, it } from 'node:test';
-import fse from 'fs-extra';
 import { loadJSONFile } from 'vona';
 import { app } from 'vona-mock';
 

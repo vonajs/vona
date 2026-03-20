@@ -1,5 +1,6 @@
 import type { IOpenapiObject } from 'vona-module-a-openapiutils';
 import type { IDecoratorControllerOptions } from 'vona-module-a-web';
+
 import { BeanBase } from 'vona';
 import { Caching } from 'vona-module-a-caching';
 import { $apiPath, Api, v } from 'vona-module-a-openapiutils';

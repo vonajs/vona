@@ -1,4 +1,5 @@
 import { appMetadata } from 'vona';
+
 import { SymbolControllerResource } from '../const/decorator.ts';
 
 export function Resource(): ClassDecorator {

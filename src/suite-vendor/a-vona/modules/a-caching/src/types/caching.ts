@@ -21,12 +21,13 @@ export interface ICachingActionValueInfo {
 export type TypeCacheKeyFn = (info: ICachingActionKeyInfo, options: TypeCachingActionOptions) => any;
 export type TypeCacheValueFn = (info: ICachingActionValueInfo, options: TypeCachingActionOptions) => any;
 
-export type TypeCachingActionOptions =
-  Pick<TSummerCacheActionOptions<unknown, unknown>, 'mode' | 'ignoreNull' | 'ttl' | 'updateAgeOnGet' | 'broadcastOnSet'> &
-  {
-    cacheName: keyof ISummerCacheRecord;
-    cacheKey?: any;
-    cacheKeyFn?: TypeCacheKeyFn | string;
-  };
+export type TypeCachingActionOptions = Pick<
+  TSummerCacheActionOptions<unknown, unknown>,
+  'mode' | 'ignoreNull' | 'ttl' | 'updateAgeOnGet' | 'broadcastOnSet'
+> & {
+  cacheName: keyof ISummerCacheRecord;
+  cacheKey?: any;
+  cacheKeyFn?: TypeCacheKeyFn | string;
+};
 
 export type TypeCachingActionClearOptions = Omit<TypeCachingActionOptions, 'cacheKey' | 'cacheKeyFn'>;

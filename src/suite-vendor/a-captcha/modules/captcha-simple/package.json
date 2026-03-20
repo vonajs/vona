@@ -1,16 +1,18 @@
 {
   "name": "vona-module-captcha-simple",
-  "type": "module",
   "version": "5.0.11",
-  "title": "captcha-simple",
-  "vonaModule": {
-    "dependencies": {}
-  },
   "description": "",
-  "author": "",
   "keywords": [
     "Vona Module"
   ],
+  "author": "",
+  "files": [
+    "assets",
+    "dist",
+    "fonts",
+    "src"
+  ],
+  "type": "module",
   "exports": {
     ".": {
       "types": [
@@ -22,26 +24,12 @@
     },
     "./package.json": "./package.json"
   },
-  "files": [
-    "assets",
-    "dist",
-    "fonts",
-    "src"
-  ],
   "scripts": {
     "clean": "rimraf dist tsconfig.build.tsbuildinfo",
     "tsc:publish": "npm run clean && vona :bin:buildModule --sourcemap && tsc -p tsconfig.build.json",
     "prepublishOnly": "npm run tsc:publish",
     "prepack": "clean-package",
     "postpack": "clean-package restore && npm run clean"
-  },
-  "clean-package": {
-    "indent": 2,
-    "remove": [
-      "clean-package",
-      "devDependencies",
-      "exports.\\..import"
-    ]
   },
   "dependencies": {
     "@zhennann/svg-captcha": "^1.5.0",
@@ -51,5 +39,17 @@
   "devDependencies": {
     "clean-package": "^2.2.0",
     "rimraf": "^6.0.1"
+  },
+  "clean-package": {
+    "indent": 2,
+    "remove": [
+      "clean-package",
+      "devDependencies",
+      "exports.\\..import"
+    ]
+  },
+  "title": "captcha-simple",
+  "vonaModule": {
+    "dependencies": {}
   }
 }

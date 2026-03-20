@@ -1,5 +1,7 @@
 import type { IMonkeyAppClose, IMonkeyAppClosed } from 'vona';
+
 import { BeanSimple } from 'vona';
+
 import { __ThisModule__ } from './.metadata/this.ts';
 
 export class Monkey extends BeanSimple implements IMonkeyAppClose, IMonkeyAppClosed {

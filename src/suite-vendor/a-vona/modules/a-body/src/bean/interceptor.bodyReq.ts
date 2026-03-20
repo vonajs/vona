@@ -1,8 +1,10 @@
 import type { Next } from 'vona';
 import type { IDecoratorInterceptorOptionsGlobal, IInterceptorExecute } from 'vona-module-a-aspect';
-import type { BodyParserOptions } from '../types/bodyParser.ts';
+
 import { BeanBase, Global } from 'vona';
 import { Interceptor } from 'vona-module-a-aspect';
+
+import type { BodyParserOptions } from '../types/bodyParser.ts';
 
 export interface IInterceptorOptionsBodyReq extends IDecoratorInterceptorOptionsGlobal {
   parser: BodyParserOptions;

@@ -1,5 +1,6 @@
 import type { Next } from 'vona';
 import type { IDecoratorMiddlewareSystemOptions, IMiddlewareSystemExecute } from 'vona-module-a-aspect';
+
 import overrideMethodImport from 'koa-override';
 import { BeanBase } from 'vona';
 import { MiddlewareSystem } from 'vona-module-a-aspect';

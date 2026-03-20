@@ -1,5 +1,7 @@
 import type { IMetadataCustomGenerateOptions } from '@cabloy/cli';
+
 import { types as t } from '@babel/core';
+
 import { __parseMagics } from './magic.ts';
 
 export default async function (options: IMetadataCustomGenerateOptions): Promise<string> {
@@ -248,7 +250,7 @@ function __parseRelation_options(node: t.Node) {
     }
   } else {
     if (options?.columns.includes('*')) {
-      columns = '\'*\'';
+      columns = "'*'";
     } else {
       columns = __joinColumnsType(options?.columns, false);
     }

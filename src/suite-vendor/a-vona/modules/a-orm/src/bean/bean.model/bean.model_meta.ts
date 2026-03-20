@@ -1,9 +1,22 @@
-import type { ServiceDb } from '../../service/db_.ts';
-import type { IDatabaseClientRecord, IDecoratorModelOptions, IModelClassRecord, IModelMethodOptionsGeneral, IModelUpdateOptionsGeneral, ITableRecord, TypeEntityMeta, TypeModelClassLike, TypeModelOptionsTable, TypeModelRelationOptionsMetaClient } from '../../types/index.ts';
-import type { BeanModel } from '../bean.model.ts';
 import { isNil } from '@cabloy/utils';
 import { appResource, BeanBase, cast } from 'vona';
 import { $tableNameFromEntity } from 'vona-module-a-ormutils';
+
+import type { ServiceDb } from '../../service/db_.ts';
+import type {
+  IDatabaseClientRecord,
+  IDecoratorModelOptions,
+  IModelClassRecord,
+  IModelMethodOptionsGeneral,
+  IModelUpdateOptionsGeneral,
+  ITableRecord,
+  TypeEntityMeta,
+  TypeModelClassLike,
+  TypeModelOptionsTable,
+  TypeModelRelationOptionsMetaClient,
+} from '../../types/index.ts';
+import type { BeanModel } from '../bean.model.ts';
+
 import { getTableOrTableAlias, prepareClassModel } from '../../common/utils.ts';
 import { SymbolKeyEntity, SymbolKeyEntityMeta, SymbolKeyModelOptions } from '../../types/index.ts';
 
@@ -168,7 +181,7 @@ export class BeanModelMeta<TRecord extends {} = {}> extends BeanBase {
     return this.app.bean._newBean(this.$beanFullName as any, client ?? this.db, table);
   }
 
-  public newInstanceTarget<MODEL extends BeanModelMeta | (keyof IModelClassRecord)>(
+  public newInstanceTarget<MODEL extends BeanModelMeta | keyof IModelClassRecord>(
     modelClassTarget: TypeModelClassLike<MODEL>,
     client?: TypeModelRelationOptionsMetaClient,
     table?: TypeModelOptionsTable,

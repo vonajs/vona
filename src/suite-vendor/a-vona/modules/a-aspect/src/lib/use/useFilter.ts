@@ -1,4 +1,5 @@
 import type { IFilterRecordLocal } from '../../types/filter.ts';
+
 import { UseOnionBase } from './useOnionBase.ts';
 
 export function UseFilter<T extends keyof IFilterRecordLocal>(

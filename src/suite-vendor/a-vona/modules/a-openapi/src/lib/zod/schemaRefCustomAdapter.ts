@@ -1,4 +1,5 @@
 import type { VonaApplication } from 'vona';
+
 import { ZodMetadata } from '@cabloy/zod-openapi';
 import { OpenApiGeneratorV31, OpenAPIRegistry } from '@cabloy/zod-to-openapi';
 import { cast } from 'vona';

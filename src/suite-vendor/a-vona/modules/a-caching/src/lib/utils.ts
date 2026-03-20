@@ -1,9 +1,10 @@
-import type { IAopMethodOptionsCachingSet } from '../bean/aopMethod.cachingSet.ts';
-import type { ICachingActionKeyInfo, ICachingActionValueInfo, TypeCachingActionOptions } from '../types/caching.ts';
 import { evaluateExpressions } from '@cabloy/utils';
 import { isNil } from '@cabloy/utils';
 import { cast } from 'vona';
 import { getKeyHash } from 'vona-module-a-cache';
+
+import type { IAopMethodOptionsCachingSet } from '../bean/aopMethod.cachingSet.ts';
+import type { ICachingActionKeyInfo, ICachingActionValueInfo, TypeCachingActionOptions } from '../types/caching.ts';
 
 export function combineCachingKey(info: ICachingActionKeyInfo, options: TypeCachingActionOptions) {
   const { result, args, prop, receiver, intention } = info;
@@ -19,13 +20,15 @@ export function combineCachingKey(info: ICachingActionKeyInfo, options: TypeCach
   }
   // cacheKey
   if (options.cacheKey) {
-    return _hashKey(evaluateExpressions(options.cacheKey, {
-      args,
-      prop,
-      intention,
-      options,
-      self: { ...receiver },
-    }));
+    return _hashKey(
+      evaluateExpressions(options.cacheKey, {
+        args,
+        prop,
+        intention,
+        options,
+        self: { ...receiver },
+      }),
+    );
   }
   // default: only use first arg
   let argsPick: any[];

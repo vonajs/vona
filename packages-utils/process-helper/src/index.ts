@@ -89,8 +89,8 @@ export class ProcessHelper {
 
   private async _formatFileInner({ fileName, logPrefix }) {
     await this.spawnBin({
-      cmd: 'eslint',
-      args: ['--fix', '--no-warn-ignored', fileName],
+      cmd: 'oxfmt',
+      args: ['--fix', '--no-error-on-unmatched-pattern', fileName],
       options: {
         logPrefix,
       },

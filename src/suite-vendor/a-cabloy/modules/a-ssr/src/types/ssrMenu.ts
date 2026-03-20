@@ -3,6 +3,7 @@ import type { IMenuItem } from 'vona-module-a-menu';
 import type { IOnionOptionsEnable, ServiceOnion } from 'vona-module-a-onion';
 import type { IResourceRecord } from 'vona-module-a-openapi';
 import type { TypeRequestMethod } from 'vona-module-a-web';
+
 import type { ISsrMenuGroupRecord } from './ssrMenuGroup.ts';
 import type { IDecoratorSsrSiteOptions, ISsrSiteRecord } from './ssrSite.ts';
 
@@ -45,5 +46,4 @@ declare module 'vona-module-a-menu' {
     api?: string;
     apiMethod?: TypeRequestMethod;
   }
-
 }

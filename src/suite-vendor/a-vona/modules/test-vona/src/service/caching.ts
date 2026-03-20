@@ -1,9 +1,11 @@
 import type { ICachingActionKeyInfo, ICachingActionValueInfo, TypeCachingActionOptions } from 'vona-module-a-caching';
-import type { TSummerCacheTestData } from '../bean/summerCache.test.ts';
+
 import { cel } from '@cabloy/utils';
 import { BeanBase } from 'vona';
 import { Service } from 'vona-module-a-bean';
 import { Caching } from 'vona-module-a-caching';
+
+import type { TSummerCacheTestData } from '../bean/summerCache.test.ts';
 
 function cacheKeyFn(this: ServiceCaching, info: ICachingActionKeyInfo, _options: TypeCachingActionOptions): any {
   return info.args[0];

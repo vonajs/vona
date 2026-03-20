@@ -1,5 +1,7 @@
 import type { IDecoratorModelOptions } from 'vona-module-a-orm';
+
 import { $relation, BeanModelBase, Model } from 'vona-module-a-orm';
+
 import { EntityUser } from '../entity/user.ts';
 import { ModelOrder } from './order.ts';
 import { ModelPost } from './post.ts';

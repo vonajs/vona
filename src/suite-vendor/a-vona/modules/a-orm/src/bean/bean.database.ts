@@ -1,9 +1,12 @@
 import type { FunctionAsync } from 'vona';
+
+import { BeanBase, beanFullNameFromOnionName } from 'vona';
+import { Bean } from 'vona-module-a-bean';
+
 import type { ConfigDatabaseClient } from '../types/config.ts';
 import type { IDatabaseClientDialectRecord, IDatabaseClientRecord, IDbInfo } from '../types/database.ts';
 import type { BeanDatabaseDialectBase } from './bean.databaseDialectBase.ts';
-import { BeanBase, beanFullNameFromOnionName } from 'vona';
-import { Bean } from 'vona-module-a-bean';
+
 import { ServiceDatabaseAsyncLocalStorage } from '../service/databaseAsyncLocalStorage_.ts';
 import { ServiceDatabaseClient } from '../service/databaseClient_.ts';
 import { ServiceTransactionAsyncLocalStorage } from '../service/transactionAsyncLocalStorage_.ts';
@@ -18,11 +21,7 @@ export class BeanDatabase extends BeanBase {
     const dbInfo = this.scope.service.database.prepareDbInfo(dbInfoOrClientName);
     const clientConfigReal = this.scope.service.database.getClientConfig(dbInfo.clientName, clientConfig);
     const selector = this.scope.service.database.prepareClientNameSelector(dbInfo, clientConfigReal.client);
-    return this.app.bean._getBeanSelector(
-      ServiceDatabaseClient,
-      selector,
-      clientConfigReal,
-    );
+    return this.app.bean._getBeanSelector(ServiceDatabaseClient, selector, clientConfigReal);
   }
 
   getDb(dbInfoOrClientName?: Partial<IDbInfo> | keyof IDatabaseClientRecord, clientConfig?: ConfigDatabaseClient) {

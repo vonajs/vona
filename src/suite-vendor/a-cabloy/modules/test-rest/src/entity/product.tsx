@@ -1,8 +1,10 @@
 import type { IDecoratorEntityOptions } from 'vona-module-a-orm';
+
 // import { cel } from '@cabloy/utils';
 // import React from 'react';
 import { Api, v } from 'vona-module-a-openapiutils';
 import { Entity, EntityBase } from 'vona-module-a-orm';
+
 // import { ZZDemoBasicActionView } from 'zova-rest-cabloy-basic-admin';
 import { $locale } from '../.metadata/locales.ts';
 
@@ -66,11 +68,7 @@ export class EntityProduct extends EntityBase {
   )
   name: string;
 
-  @Api.field(
-    v.title($locale('Description')),
-    v.order(2),
-    v.optional(),
-  )
+  @Api.field(v.title($locale('Description')), v.order(2), v.optional())
   description?: string;
 
   @Api.field(
@@ -91,18 +89,9 @@ export class EntityProduct extends EntityBase {
   )
   price: number;
 
-  @Api.field(
-    v.title($locale('Quantity')),
-    v.order(4),
-    v.default(0),
-  )
+  @Api.field(v.title($locale('Quantity')), v.order(4), v.default(0))
   quantity: number;
 
-  @Api.field(
-    v.title($locale('Amount')),
-    v.order(5),
-    v.component('currency'),
-    v.required(),
-  )
+  @Api.field(v.title($locale('Amount')), v.order(5), v.component('currency'), v.required())
   amount: number;
 }

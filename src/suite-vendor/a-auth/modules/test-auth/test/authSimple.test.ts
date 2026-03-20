@@ -1,6 +1,6 @@
+import { catchError } from '@cabloy/utils';
 import assert from 'node:assert';
 import { describe, it } from 'node:test';
-import { catchError } from '@cabloy/utils';
 import { app } from 'vona-mock';
 
 describe('authSimple.test.ts', () => {
@@ -36,11 +36,7 @@ describe('authSimple.test.ts', () => {
       });
       assert.equal(isAuthenticated, true);
       // login again
-      const jwt2 = await app.bean.authSimple.authenticate(
-        { username: 'admin', password },
-        'login',
-        'default',
-      );
+      const jwt2 = await app.bean.authSimple.authenticate({ username: 'admin', password }, 'login', 'default');
       assert.equal(!!jwt2?.accessToken, true);
     });
   });

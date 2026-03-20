@@ -1,10 +1,11 @@
 import type { BeanCliBase } from '@cabloy/cli';
 import type { IGlobBeanFile } from '@cabloy/module-info';
 import type GoGoCode from 'gogocode';
-import { readFileSync } from 'node:fs';
-import path from 'node:path';
+
 import { ensureArray } from '@cabloy/utils';
 import { toUpperCaseFirstChar } from '@cabloy/word-utils';
+import { readFileSync } from 'node:fs';
+import path from 'node:path';
 
 type TypeMagicFieldMethod = 'getBy' | 'selectBy' | 'updateBy' | 'deleteBy';
 type TypeMagicFieldOp = '' | 'eqI';
@@ -68,13 +69,21 @@ export function __parseMagics(cli: BeanCliBase, ast: GoGoCode.GoGoAST, globFile:
         const optional = magicField.optional ? '?' : '';
         const type = fieldName === 'id' ? entityInfo.idType : magicField.type;
         if (method === 'getBy') {
-          contentRecords.push(`${actionName}<T extends IModelGetOptions<${entityName},${className}>>(${fieldName}${optional}: ${type}, options?: T): Promise<TypeModelRelationResult<${entityName}, ${className}, T> | undefined>;`);
+          contentRecords.push(
+            `${actionName}<T extends IModelGetOptions<${entityName},${className}>>(${fieldName}${optional}: ${type}, options?: T): Promise<TypeModelRelationResult<${entityName}, ${className}, T> | undefined>;`,
+          );
         } else if (method === 'selectBy') {
-          contentRecords.push(`${actionName}<T extends IModelSelectParams<${entityName},${className},ModelJoins>, ModelJoins extends TypeModelsClassLikeGeneral | undefined = undefined>(${fieldName}${optional}: ${type}, params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<TypeModelRelationResult<${entityName}, ${className}, T>[]>;`);
+          contentRecords.push(
+            `${actionName}<T extends IModelSelectParams<${entityName},${className},ModelJoins>, ModelJoins extends TypeModelsClassLikeGeneral | undefined = undefined>(${fieldName}${optional}: ${type}, params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<TypeModelRelationResult<${entityName}, ${className}, T>[]>;`,
+          );
         } else if (method === 'updateBy') {
-          contentRecords.push(`${actionName}<T extends IModelUpdateOptions<${entityName},${className}>>(${fieldName}: ${type}${optional ? ' | undefined' : ''}, data: TypeModelMutateRelationData<${entityName},${className}, T>, options?: T): Promise<TypeModelMutateRelationData<${entityName},${className}, T>>;`);
+          contentRecords.push(
+            `${actionName}<T extends IModelUpdateOptions<${entityName},${className}>>(${fieldName}: ${type}${optional ? ' | undefined' : ''}, data: TypeModelMutateRelationData<${entityName},${className}, T>, options?: T): Promise<TypeModelMutateRelationData<${entityName},${className}, T>>;`,
+          );
         } else if (method === 'deleteBy') {
-          contentRecords.push(`${actionName}<T extends IModelDeleteOptions<${entityName},${className}>>(${fieldName}${optional}: ${type}, options?: T): Promise<void>;`);
+          contentRecords.push(
+            `${actionName}<T extends IModelDeleteOptions<${entityName},${className}>>(${fieldName}${optional}: ${type}, options?: T): Promise<void>;`,
+          );
         }
       }
     }

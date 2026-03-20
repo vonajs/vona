@@ -1,7 +1,46 @@
 {
   "name": "vona-module-a-vona",
-  "type": "module",
   "version": "5.0.33",
+  "description": "",
+  "keywords": [
+    "Vona Module"
+  ],
+  "author": "",
+  "files": [
+    "assets",
+    "dist",
+    "src"
+  ],
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": [
+        "./src/index.ts",
+        "./dist/index.d.ts"
+      ],
+      "import": "./src/index.ts",
+      "default": "./dist/index.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "scripts": {
+    "clean": "rimraf dist tsconfig.build.tsbuildinfo",
+    "tsc:publish": "npm run clean && vona :bin:buildModule --sourcemap && tsc -p tsconfig.build.json",
+    "prepublishOnly": "npm run tsc:publish",
+    "prepack": "clean-package",
+    "postpack": "clean-package restore && npm run clean"
+  },
+  "devDependencies": {
+    "clean-package": "^2.2.0",
+    "rimraf": "^6.0.1"
+  },
+  "clean-package": {
+    "indent": 2,
+    "remove": [
+      "clean-package",
+      "exports.\\..import"
+    ]
+  },
   "title": "a-vona",
   "vonaModule": {
     "dependencies": {
@@ -60,44 +99,5 @@
       "a-worker": "5.0.0",
       "a-zod": "5.0.0"
     }
-  },
-  "description": "",
-  "author": "",
-  "keywords": [
-    "Vona Module"
-  ],
-  "exports": {
-    ".": {
-      "types": [
-        "./src/index.ts",
-        "./dist/index.d.ts"
-      ],
-      "import": "./src/index.ts",
-      "default": "./dist/index.js"
-    },
-    "./package.json": "./package.json"
-  },
-  "files": [
-    "assets",
-    "dist",
-    "src"
-  ],
-  "scripts": {
-    "clean": "rimraf dist tsconfig.build.tsbuildinfo",
-    "tsc:publish": "npm run clean && vona :bin:buildModule --sourcemap && tsc -p tsconfig.build.json",
-    "prepublishOnly": "npm run tsc:publish",
-    "prepack": "clean-package",
-    "postpack": "clean-package restore && npm run clean"
-  },
-  "clean-package": {
-    "indent": 2,
-    "remove": [
-      "clean-package",
-      "exports.\\..import"
-    ]
-  },
-  "devDependencies": {
-    "clean-package": "^2.2.0",
-    "rimraf": "^6.0.1"
   }
 }

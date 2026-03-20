@@ -1,11 +1,13 @@
 import type { IInstanceRecord } from 'vona';
 import type { IOnionSlice } from 'vona-module-a-onion';
-import type { IDecoratorStartupOptions, IInstanceStartupOptions, IStartupExecute, IStartupRecord } from '../types/startup.ts';
-import path from 'node:path';
+
 import { isNil } from '@cabloy/utils';
 import fse from 'fs-extra';
+import path from 'node:path';
 import { BeanBase, cast } from 'vona';
 import { Service } from 'vona-module-a-bean';
+
+import type { IDecoratorStartupOptions, IInstanceStartupOptions, IStartupExecute, IStartupRecord } from '../types/startup.ts';
 
 @Service()
 export class ServiceStartup extends BeanBase {
@@ -95,10 +97,8 @@ export class ServiceStartup extends BeanBase {
     // ignore debounce for test
     if (!options?.force && !this.app.meta.isTest) {
       const startupOptions = startup.beanOptions.options as IDecoratorStartupOptions;
-      const cacheKey =
-        `startupDebounce:${startup.name}${!isNil(instanceName) ? `:${this.ctx.instance.id}` : ''}` as const;
-      const debounce =
-        typeof startupOptions.debounce === 'number' ? startupOptions.debounce : this.scope.config.startup.debounce;
+      const cacheKey = `startupDebounce:${startup.name}${!isNil(instanceName) ? `:${this.ctx.instance.id}` : ''}` as const;
+      const debounce = typeof startupOptions.debounce === 'number' ? startupOptions.debounce : this.scope.config.startup.debounce;
       const flag = await this.scope.cacheRedis.startupDebounce.getset(true, cacheKey, { ttl: debounce });
       if (flag) return;
     }
@@ -111,9 +111,7 @@ export class ServiceStartup extends BeanBase {
     instanceName?: keyof IInstanceRecord | null,
     options?: IInstanceStartupOptions,
   ) {
-    this.$logger.silly(
-      `startup${startup.beanOptions?.options?.instance ? ' instance' : ''}: ${startup.name}, pid: ${process.pid}`,
-    );
+    this.$logger.silly(`startup${startup.beanOptions?.options?.instance ? ' instance' : ''}: ${startup.name}, pid: ${process.pid}`);
     const startupOptions = startup.beanOptions.options as IDecoratorStartupOptions;
     // execute
     return await this.bean.executor.newCtx(

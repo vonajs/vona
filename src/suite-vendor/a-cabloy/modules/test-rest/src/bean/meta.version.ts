@@ -1,9 +1,11 @@
 import type { IMetaVersionTest, IMetaVersionTestOptions, IMetaVersionUpdate, IMetaVersionUpdateOptions } from 'vona-module-a-version';
-import type { EntityProduct } from '../entity/product.tsx';
+
 import { getRandomInt } from '@cabloy/utils';
 import { faker } from '@faker-js/faker';
 import { BeanBase } from 'vona';
 import { Meta } from 'vona-module-a-meta';
+
+import type { EntityProduct } from '../entity/product.tsx';
 
 @Meta()
 export class MetaVersion extends BeanBase implements IMetaVersionUpdate, IMetaVersionTest {

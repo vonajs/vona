@@ -1,16 +1,17 @@
 {
   "name": "vona-module-a-jwt",
-  "type": "module",
   "version": "5.0.30",
-  "title": "a-jwt",
-  "vonaModule": {
-    "dependencies": {}
-  },
   "description": "",
-  "author": "",
   "keywords": [
     "Vona Module"
   ],
+  "author": "",
+  "files": [
+    "assets",
+    "dist",
+    "src"
+  ],
+  "type": "module",
   "exports": {
     ".": {
       "types": [
@@ -22,24 +23,12 @@
     },
     "./package.json": "./package.json"
   },
-  "files": [
-    "assets",
-    "dist",
-    "src"
-  ],
   "scripts": {
     "clean": "rimraf dist tsconfig.build.tsbuildinfo",
     "tsc:publish": "npm run clean && vona :bin:buildModule --sourcemap && tsc -p tsconfig.build.json",
     "prepublishOnly": "npm run tsc:publish",
     "prepack": "clean-package",
     "postpack": "clean-package restore && npm run clean"
-  },
-  "clean-package": {
-    "indent": 2,
-    "remove": [
-      "clean-package",
-      "exports.\\..import"
-    ]
   },
   "dependencies": {
     "@types/jsonwebtoken": "^9.0.10",
@@ -50,5 +39,16 @@
   "devDependencies": {
     "clean-package": "^2.2.0",
     "rimraf": "^6.0.1"
+  },
+  "clean-package": {
+    "indent": 2,
+    "remove": [
+      "clean-package",
+      "exports.\\..import"
+    ]
+  },
+  "title": "a-jwt",
+  "vonaModule": {
+    "dependencies": {}
   }
 }

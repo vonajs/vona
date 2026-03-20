@@ -5,10 +5,6 @@ export function getRedisClientKeyPrefix(clientName: string, app: VonaApplication
   return `${clientName}_${app.name}${mode}:`;
 }
 
-export function prepareRedisClientKeyPrefix(
-  keyPrefix: string | true | undefined,
-  clientName: string,
-  app: VonaApplication,
-): string | undefined {
+export function prepareRedisClientKeyPrefix(keyPrefix: string | true | undefined, clientName: string, app: VonaApplication): string | undefined {
   return keyPrefix === true ? getRedisClientKeyPrefix(clientName, app) : keyPrefix;
 }

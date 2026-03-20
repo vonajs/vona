@@ -1,8 +1,11 @@
 import type { TableIdentity } from 'table-identity';
 import type { IQueueExecute, IQueuePushOptions } from 'vona-module-a-queue';
+
 import { BeanQueueBase, Queue } from 'vona-module-a-queue';
 
-export interface TypeQueueMailJobData { mailId: TableIdentity }
+export interface TypeQueueMailJobData {
+  mailId: TableIdentity;
+}
 
 export type TypeQueueMailJobResult = void;
 
@@ -16,7 +19,8 @@ export type TypeQueueMailJobResult = void;
 })
 export class QueueMail
   extends BeanQueueBase<TypeQueueMailJobData, TypeQueueMailJobResult>
-  implements IQueueExecute<TypeQueueMailJobData, TypeQueueMailJobResult> {
+  implements IQueueExecute<TypeQueueMailJobData, TypeQueueMailJobResult>
+{
   async execute(data: TypeQueueMailJobData, _options?: IQueuePushOptions): Promise<TypeQueueMailJobResult> {
     await this.scope.service.mail.sendById(data.mailId);
   }

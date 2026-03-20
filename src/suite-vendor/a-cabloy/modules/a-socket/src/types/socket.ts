@@ -1,8 +1,8 @@
 import type { WebSocket, WebSocketServer } from 'ws';
+
 import type { ISocketNamespaceRecord } from './socketNamespace.ts';
 
 declare module 'vona' {
-
   export interface VonaApplication {
     wss: WebSocketServer;
   }

@@ -1,4 +1,9 @@
 import type { TableIdentity } from 'table-identity';
+
+import { isNil } from '@cabloy/utils';
+import { BeanBase, cast, deepExtend } from 'vona';
+import { Service } from 'vona-module-a-bean';
+
 import type { BeanModelCache } from '../bean/bean.model/bean.model_cache.ts';
 import type { BeanModelCrud } from '../bean/bean.model/bean.model_crud.ts';
 import type { BeanModelMeta } from '../bean/bean.model/bean.model_meta.ts';
@@ -6,9 +11,7 @@ import type { IModelMethodOptions, IModelRelationIncludeWrapper } from '../types
 import type { IModelClassRecord } from '../types/onion/model.ts';
 import type { TypeModelClassLike } from '../types/relations.ts';
 import type { IModelRelationOptionsMetaBasic, IRelationItem } from '../types/relationsDef.ts';
-import { isNil } from '@cabloy/utils';
-import { BeanBase, cast, deepExtend } from 'vona';
-import { Service } from 'vona-module-a-bean';
+
 import { handleRelationsCollection } from '../lib/utils.ts';
 
 @Service()
@@ -71,11 +74,7 @@ export class ServiceRelations extends BeanBase {
     return entitiesResult;
   }
 
-  public async handleRelationsDelete(
-    ids: TableIdentity[],
-    includeWrapper?: IModelRelationIncludeWrapper,
-    methodOptions?: IModelMethodOptions,
-  ) {
+  public async handleRelationsDelete(ids: TableIdentity[], includeWrapper?: IModelRelationIncludeWrapper, methodOptions?: IModelMethodOptions) {
     if (ids.length === 0) return;
     // relations
     const relations = this.handleRelationsCollection(includeWrapper);
@@ -85,11 +84,7 @@ export class ServiceRelations extends BeanBase {
     }
   }
 
-  private async __handleRelationOne<TRecord extends {}>(
-    entity: TRecord,
-    relation: IRelationItem,
-    methodOptions?: IModelMethodOptions,
-  ) {
+  private async __handleRelationOne<TRecord extends {}>(entity: TRecord, relation: IRelationItem, methodOptions?: IModelMethodOptions) {
     const [relationName, relationReal, includeReal, withReal] = relation;
     const { type, modelMiddle, model, keyFrom, keyTo, key, options } = relationReal;
     const modelTarget = this.__getModelTarget(model, options?.meta) as BeanModelCache;
@@ -151,11 +146,7 @@ export class ServiceRelations extends BeanBase {
     }
   }
 
-  private async __handleRelationMany<TRecord extends {}>(
-    entities: TRecord[],
-    relation: IRelationItem,
-    methodOptions?: IModelMethodOptions,
-  ) {
+  private async __handleRelationMany<TRecord extends {}>(entities: TRecord[], relation: IRelationItem, methodOptions?: IModelMethodOptions) {
     const [relationName, relationReal, includeReal, withReal] = relation;
     const { type, modelMiddle, model, keyFrom, keyTo, key, options } = relationReal;
     const modelTarget = this.__getModelTarget(model, options?.meta) as BeanModelCache;
@@ -314,11 +305,7 @@ export class ServiceRelations extends BeanBase {
           if (idsTo.length === 0) {
             idsTarget = [];
           } else {
-            const itemsTarget = await cast(modelTarget).__select_raw(
-              undefined,
-              { where: { [key]: entityId, id: idsTo } },
-              methodOptionsReal,
-            );
+            const itemsTarget = await cast(modelTarget).__select_raw(undefined, { where: { [key]: entityId, id: idsTo } }, methodOptionsReal);
             idsTarget = itemsTarget.map(item => item.id);
           }
           for (const child of entity[relationName]) {
@@ -397,11 +384,7 @@ export class ServiceRelations extends BeanBase {
     return entitiesResult;
   }
 
-  private async __handleRelationDelete(
-    ids: TableIdentity[],
-    relation: IRelationItem,
-    methodOptions?: IModelMethodOptions,
-  ) {
+  private async __handleRelationDelete(ids: TableIdentity[], relation: IRelationItem, methodOptions?: IModelMethodOptions) {
     const [_relationName, relationReal, includeReal, withReal] = relation;
     const { type, modelMiddle, model, keyFrom, key, options } = relationReal;
     const modelTarget = this.__getModelTarget(model, options?.meta) as BeanModelCache;
@@ -448,7 +431,7 @@ export class ServiceRelations extends BeanBase {
     return [options, refKeys];
   }
 
-  private __getModelTarget<MODEL extends BeanModelMeta | (keyof IModelClassRecord)>(
+  private __getModelTarget<MODEL extends BeanModelMeta | keyof IModelClassRecord>(
     modelClassTarget: TypeModelClassLike<MODEL>,
     meta: IModelRelationOptionsMetaBasic | undefined,
   ): BeanModelMeta {

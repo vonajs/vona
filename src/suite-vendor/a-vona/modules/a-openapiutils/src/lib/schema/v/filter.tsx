@@ -1,5 +1,6 @@
 import type { IFilterTransformOptionsDateRange, IFilterTransformRecord, ISchemaObjectExtensionFieldFilter } from 'vona-module-a-web';
 import type z from 'zod';
+
 import React from 'react';
 
 export function schemaFilter(options: ISchemaObjectExtensionFieldFilter) {
@@ -10,10 +11,7 @@ export function schemaFilter(options: ISchemaObjectExtensionFieldFilter) {
   };
 }
 
-export function schemaFilterTransform<T extends keyof IFilterTransformRecord>(
-  filterTransformName: T,
-  options?: Partial<IFilterTransformRecord[T]>,
-) {
+export function schemaFilterTransform<T extends keyof IFilterTransformRecord>(filterTransformName: T, options?: Partial<IFilterTransformRecord[T]>) {
   return function (schema: z.ZodType): z.ZodType {
     return schema.openapi({
       filter: {

@@ -1,6 +1,7 @@
-import type { IElectionElectInfo, IElectionElectOptions, TypeFunctionObtain, TypeFunctionRelease } from '../types/election.ts';
 import { BeanBase, cast } from 'vona';
 import { Service } from 'vona-module-a-bean';
+
+import type { IElectionElectInfo, IElectionElectOptions, TypeFunctionObtain, TypeFunctionRelease } from '../types/election.ts';
 
 @Service()
 export class ServiceElection extends BeanBase {

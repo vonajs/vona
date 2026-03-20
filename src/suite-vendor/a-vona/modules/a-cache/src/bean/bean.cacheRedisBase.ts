@@ -1,8 +1,11 @@
 import type { Redis } from 'ioredis';
-import type { ICacheRedisGetOptions, ICacheRedisSetOptions } from '../types/cache.ts';
-import type { IDecoratorCacheRedisOptions } from '../types/cacheRedis.ts';
+
 import { Virtual } from 'vona';
 import { Bean } from 'vona-module-a-bean';
+
+import type { ICacheRedisGetOptions, ICacheRedisSetOptions } from '../types/cache.ts';
+import type { IDecoratorCacheRedisOptions } from '../types/cacheRedis.ts';
+
 import { CacheBase } from '../common/cacheBase.ts';
 
 @Bean()

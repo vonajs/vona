@@ -1,5 +1,6 @@
 import type { Next, TypeAllErrorCodes } from 'vona';
 import type { IDecoratorFilterOptionsGlobal, IFilterHtml, IFilterJson, IFilterLog } from 'vona-module-a-aspect';
+
 import { BeanBase, cast, errorsInternal, Global } from 'vona';
 import { Filter } from 'vona-module-a-aspect';
 
@@ -11,7 +12,7 @@ export interface IFilterOptionsError extends IDecoratorFilterOptionsGlobal {
   logs: TypeFilterOptionsErrorLogs;
 }
 
-@Filter<IFilterOptionsError>({ logs: { } })
+@Filter<IFilterOptionsError>({ logs: {} })
 @Global()
 export class FilterError extends BeanBase implements IFilterLog, IFilterJson, IFilterHtml {
   async log(err: Error, options: IFilterOptionsError, next: Next): Promise<boolean> {

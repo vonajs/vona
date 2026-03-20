@@ -23,7 +23,7 @@ export type TypeOnionOptionsEnableSimple = IOnionOptionsEnable<'instanceName' | 
 
 export type TypeOnionOptionsMatchFunction = (this: any, ...args: any[]) => boolean;
 export type TypeOnionOptionsMatchRule<T> = T | RegExp | TypeOnionOptionsMatchFunction;
-export type TypeOnionOptionsMatchRules<T> = (TypeOnionOptionsMatchRule<T>)[] | TypeOnionOptionsMatchRule<T>;
+export type TypeOnionOptionsMatchRules<T> = TypeOnionOptionsMatchRule<T>[] | TypeOnionOptionsMatchRule<T>;
 
 export interface IOnionOptionsMatch<T> {
   match?: T[] | T;
@@ -36,8 +36,8 @@ export interface IOnionOptionsDeps<T> {
 }
 
 export interface IOnionOptionsMeta extends VonaOnionOptionsMeta {
-  instanceName?: keyof IInstanceRecord | (Array<keyof IInstanceRecord>);
-  host?: keyof IHostRecord | (Array<keyof IHostRecord>);
+  instanceName?: keyof IInstanceRecord | Array<keyof IInstanceRecord>;
+  host?: keyof IHostRecord | Array<keyof IHostRecord>;
 }
 
 export interface IOnionOptionsBase<T extends string> extends IOnionOptionsEnable, IOnionOptionsMatch<TypeOnionOptionsMatchRule<T>> {}

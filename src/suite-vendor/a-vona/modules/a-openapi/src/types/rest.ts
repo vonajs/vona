@@ -3,6 +3,7 @@ import type { CurrencyOptions } from '@zhennann/currency';
 import type { ILocaleMagic } from 'vona';
 import type { IOpenapiOptions } from 'vona-module-a-openapiutils';
 import type { z } from 'zod';
+
 import type { TypeResourceActionRowRecordRender } from './actions.ts';
 import type { ICaptchaOptions } from './captcha.ts';
 import type { IComponentRecord, ITableCellComponentRecord } from './component.ts';
@@ -88,18 +89,35 @@ export interface TypeRenderComponentJsx {
   type: string;
   key?: string | null;
   props?: TypeRenderComponentJsxProps;
-};
+}
 
 export type TypeSchemaScene = 'table' | 'form' | 'filter';
 
-export type TypeRenderComponentPreset = keyof TypeResourceActionRowRecordRender | 'text' | 'captcha' | 'currency' | 'date' | 'dateRange' | 'textarea' | 'select' | 'checkbox' | 'radio' | 'switch' | 'image' | 'file' | 'color' | 'password' | 'email' | 'url';
+export type TypeRenderComponentPreset =
+  | keyof TypeResourceActionRowRecordRender
+  | 'text'
+  | 'captcha'
+  | 'currency'
+  | 'date'
+  | 'dateRange'
+  | 'textarea'
+  | 'select'
+  | 'checkbox'
+  | 'radio'
+  | 'switch'
+  | 'image'
+  | 'file'
+  | 'color'
+  | 'password'
+  | 'email'
+  | 'url';
 export type TypeRenderComponent = TypeRenderComponentPreset | TypeRenderComponentJsx;
 
 // form
-export type TypeFormFieldRenderComponentProvider = (keyof IComponentRecord) | 'input' | 'textarea' | 'select';
+export type TypeFormFieldRenderComponentProvider = keyof IComponentRecord | 'input' | 'textarea' | 'select';
 
 // table
-export type TypeTableCellRenderComponentProvider = (keyof IComponentRecord) | (keyof ITableCellComponentRecord) | 'text';
+export type TypeTableCellRenderComponentProvider = keyof IComponentRecord | keyof ITableCellComponentRecord | 'text';
 
 export type TypeOpenapiMetadata<T extends z.ZodType = z.ZodType> = Omit<Partial<ZodOpenAPIMetadata<z.input<T>>>, 'title' | 'description'> & {
   title?: string | ILocaleMagic;
@@ -107,9 +125,9 @@ export type TypeOpenapiMetadata<T extends z.ZodType = z.ZodType> = Omit<Partial<
 };
 
 export type TypeEntityOptionsFields<T extends {}, More extends string | undefined = never> = {
-  [key in ((keyof T) | (More extends string ? More : never))]?: TypeOpenapiMetadata | z.ZodType;
+  [key in keyof T | (More extends string ? More : never)]?: TypeOpenapiMetadata | z.ZodType;
 };
 
 export type TypeControllerOptionsActions<T extends {}> = {
-  [key in (keyof T)]?: IOpenapiOptions;
+  [key in keyof T]?: IOpenapiOptions;
 };

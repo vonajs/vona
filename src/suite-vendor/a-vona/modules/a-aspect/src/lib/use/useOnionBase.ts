@@ -1,4 +1,5 @@
 import type { MetadataKey } from 'vona';
+
 import { appMetadata } from 'vona';
 import { SymbolUseOnionLocal, SymbolUseOnionOptions } from 'vona-module-a-onion';
 

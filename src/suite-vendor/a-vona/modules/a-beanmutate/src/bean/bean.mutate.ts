@@ -1,8 +1,10 @@
 import type { Constructable, IBeanRecord } from 'vona';
-import type { TypeEventReloadInstancesData } from './event.reloadInstances.ts';
-import type { TypeEventRemoveInstancesData } from './event.removeInstances.ts';
+
 import { appResource, BeanBase } from 'vona';
 import { Bean } from 'vona-module-a-bean';
+
+import type { TypeEventReloadInstancesData } from './event.reloadInstances.ts';
+import type { TypeEventRemoveInstancesData } from './event.removeInstances.ts';
 
 @Bean()
 export class BeanMutate extends BeanBase {

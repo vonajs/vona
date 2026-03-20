@@ -1,8 +1,10 @@
 import type { Next } from 'vona';
 import type { IAopMethodExecute, IDecoratorAopMethodOptions } from 'vona-module-a-aspect';
-import type { TypeCachingActionClearOptions } from '../types/caching.ts';
+
 import { BeanAopMethodBase, beanFullNameFromOnionName } from 'vona';
 import { AopMethod } from 'vona-module-a-aspect';
+
+import type { TypeCachingActionClearOptions } from '../types/caching.ts';
 
 export interface IAopMethodOptionsCachingClear extends IDecoratorAopMethodOptions, TypeCachingActionClearOptions {}
 

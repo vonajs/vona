@@ -42,7 +42,7 @@ export const OpNormalValues = Object.values(OpNormal);
 export const OpValues = Object.values(Op);
 
 export type TypeOpsJointPostfix<Op> = {
-  [KEY in keyof Op]: Op[KEY] | (KEY extends string ? `_${KEY}_${number}` : never)
+  [KEY in keyof Op]: Op[KEY] | (KEY extends string ? `_${KEY}_${number}` : never);
 };
 
 // not use TypeOpsJointPostfix, which cause type not take affect for table.field
@@ -54,8 +54,9 @@ export type TypeOpsAll = TypeRecordValues<typeof Op>;
 // not use Knex.Raw
 export type TypeModelColumnValue<TRecord, Column> = keyof TRecord | Column | Column[] | null | '_skip_';
 
-export type TypeModelWhere<TRecord, Columns extends {} | undefined = undefined> =
-  Columns extends {} ? TypeModelWhereInner<Columns> : TypeModelWhereInner<TRecord>;
+export type TypeModelWhere<TRecord, Columns extends {} | undefined = undefined> = Columns extends {}
+  ? TypeModelWhereInner<Columns>
+  : TypeModelWhereInner<TRecord>;
 // not use Knex.Raw
 // Columns extends {} ? TypeModelWhereInner<Columns> | Knex.Raw : TypeModelWhereInner<TRecord> | Knex.Raw;
 
@@ -79,5 +80,6 @@ export type TypeModelColumn<TRecord> = keyof TRecord | '*';
 export type TypeModelColumns<TRecord> = TypeModelColumn<TRecord> | Array<TypeModelColumn<TRecord>>;
 export type TypeModelColumnPatch<TRecord, TColumn> = TColumn extends '*' ? TypeModelColumn<TRecord> : TColumn;
 export type TypeModelColumnsPatch<TRecord, TColumn> = [TColumn] extends [string]
-  ? (TypeModelColumnPatch<TRecord, TColumn> | Array<TypeModelColumnPatch<TRecord, TColumn>>) : TColumn;
+  ? TypeModelColumnPatch<TRecord, TColumn> | Array<TypeModelColumnPatch<TRecord, TColumn>>
+  : TColumn;
 export type TypeModelColumnsStrict<TRecord> = keyof TRecord | Array<keyof TRecord>;

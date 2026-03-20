@@ -1,9 +1,11 @@
 import type { IOnionSlice } from 'vona-module-a-onion';
 import type { IScheduleExecute } from 'vona-module-a-schedule';
-import type { IModelRecord, ISoftDeletionPrune } from '../types/onion/model.ts';
-import type { BeanModelCache } from './bean.model/bean.model_cache.ts';
+
 import { BeanBase } from 'vona';
 import { Schedule } from 'vona-module-a-schedule';
+
+import type { IModelRecord, ISoftDeletionPrune } from '../types/onion/model.ts';
+import type { BeanModelCache } from './bean.model/bean.model_cache.ts';
 
 @Schedule({ repeat: { every: 24 * 3600 * 1000 } })
 export class ScheduleSoftDeletionPrune extends BeanBase implements IScheduleExecute {
@@ -29,12 +31,15 @@ export class ScheduleSoftDeletionPrune extends BeanBase implements IScheduleExec
       await handler(this.ctx, modelTarget, { expired });
     } else {
       const expiredTime = new Date(Date.now() - expired);
-      await modelTarget.delete({
-        deleted: true,
-        updatedAt: {
-          _lt_: expiredTime,
-        },
-      } as any, { disableDeleted: true });
+      await modelTarget.delete(
+        {
+          deleted: true,
+          updatedAt: {
+            _lt_: expiredTime,
+          },
+        } as any,
+        { disableDeleted: true },
+      );
     }
   }
 }

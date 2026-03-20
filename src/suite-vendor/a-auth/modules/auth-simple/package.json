@@ -1,19 +1,18 @@
 {
   "name": "vona-module-auth-simple",
-  "type": "module",
   "version": "5.0.41",
-  "title": "auth-simple",
-  "vonaModule": {
-    "fileVersion": 1,
-    "dependencies": {
-      "a-auth": "5.0.0"
-    }
-  },
+  "gitHead": "0eab9dc4a5622caffe89e7b1b3f02c08ccbc4c4b",
   "description": "",
-  "author": "",
   "keywords": [
     "Vona Module"
   ],
+  "author": "",
+  "files": [
+    "assets",
+    "dist",
+    "src"
+  ],
+  "type": "module",
   "exports": {
     ".": {
       "types": [
@@ -25,24 +24,12 @@
     },
     "./package.json": "./package.json"
   },
-  "files": [
-    "assets",
-    "dist",
-    "src"
-  ],
   "scripts": {
     "clean": "rimraf dist tsconfig.build.tsbuildinfo",
     "tsc:publish": "npm run clean && vona :bin:buildModule --sourcemap && tsc -p tsconfig.build.json",
     "prepublishOnly": "npm run tsc:publish",
     "prepack": "clean-package",
     "postpack": "clean-package restore && npm run clean"
-  },
-  "clean-package": {
-    "indent": 2,
-    "remove": [
-      "clean-package",
-      "exports.\\..import"
-    ]
   },
   "dependencies": {
     "password-hash-salt": "^1.0.12"
@@ -51,5 +38,18 @@
     "clean-package": "^2.2.0",
     "rimraf": "^6.0.1"
   },
-  "gitHead": "0eab9dc4a5622caffe89e7b1b3f02c08ccbc4c4b"
+  "clean-package": {
+    "indent": 2,
+    "remove": [
+      "clean-package",
+      "exports.\\..import"
+    ]
+  },
+  "title": "auth-simple",
+  "vonaModule": {
+    "fileVersion": 1,
+    "dependencies": {
+      "a-auth": "5.0.0"
+    }
+  }
 }

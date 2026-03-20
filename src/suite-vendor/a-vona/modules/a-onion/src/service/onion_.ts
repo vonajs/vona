@@ -4,12 +4,23 @@ import type { Next, VonaContext } from 'vona';
 import type { IEventRecord } from 'vona-module-a-event';
 import type { IMetaNameRecord } from 'vona-module-a-meta';
 import type { ContextRouteBase } from 'vona-module-a-web';
-import type { IOnionExecuteCustom, IOnionOptionsDeps, IOnionOptionsEnable, IOnionOptionsMatch, IOnionSlice, TypeOnionOptionsMatchRule, TypeOnionsNormal } from '../types/onion.ts';
-import { isRegExp } from 'node:util/types';
+
 import { swapDeps } from '@cabloy/deps';
 import { getOnionScenesMeta } from '@cabloy/module-info';
+import { isRegExp } from 'node:util/types';
 import { appMetadata, appResource, BeanBase, cast, compose, deepExtend, ProxyDisable, SymbolDecoratorGlobal } from 'vona';
 import { Service } from 'vona-module-a-bean';
+
+import type {
+  IOnionExecuteCustom,
+  IOnionOptionsDeps,
+  IOnionOptionsEnable,
+  IOnionOptionsMatch,
+  IOnionSlice,
+  TypeOnionOptionsMatchRule,
+  TypeOnionsNormal,
+} from '../types/onion.ts';
+
 import { SymbolUseOnionLocal } from '../types/onion.ts';
 
 const SymbolOnionsEnabled = Symbol('SymbolOnionsEnabled');
@@ -162,17 +173,14 @@ export class ServiceOnion<ONIONRECORD> extends BeanBase {
   public _collectOnionsHandler(route: ContextRouteBase | undefined) {
     if (!route?.controller) return [];
     // onionsLocal: controller
-    const controllerOnionsLocal = appMetadata.getMetadata<Record<string, string[]>>(
-      SymbolUseOnionLocal,
-      route.controller,
-    )?.[this.sceneName] as string[];
+    const controllerOnionsLocal = appMetadata.getMetadata<Record<string, string[]>>(SymbolUseOnionLocal, route.controller)?.[
+      this.sceneName
+    ] as string[];
     // onionsLocal: action
     const onionsLocal: IOnionSlice<ONIONRECORD, keyof ONIONRECORD>[] = [];
-    const actionOnionsLocal = appMetadata.getMetadata<Record<string, string[]>>(
-      SymbolUseOnionLocal,
-      route.controller.prototype,
-      route.action,
-    )?.[this.sceneName] as string[];
+    const actionOnionsLocal = appMetadata.getMetadata<Record<string, string[]>>(SymbolUseOnionLocal, route.controller.prototype, route.action)?.[
+      this.sceneName
+    ] as string[];
     const onionsLocalAll: string[] = [];
     if (actionOnionsLocal) {
       actionOnionsLocal.forEach(item => {
@@ -228,15 +236,7 @@ export class ServiceOnion<ONIONRECORD> extends BeanBase {
     if (optionsPrimitive) {
       options = optionsCustom ?? optionsDynamic ?? optionsArgumentPipe ?? optionsRoute ?? optionsInstanceConfig ?? optionsMetaAndConfig;
     } else {
-      options = deepExtend(
-        {},
-        optionsMetaAndConfig,
-        optionsInstanceConfig,
-        optionsRoute,
-        optionsArgumentPipe,
-        optionsDynamic,
-        optionsCustom,
-      );
+      options = deepExtend({}, optionsMetaAndConfig, optionsInstanceConfig, optionsRoute, optionsArgumentPipe, optionsDynamic, optionsCustom);
     }
     // ok
     return options;

@@ -1,6 +1,7 @@
 import type { Next, OmitNever } from 'vona';
 import type { IOnionOptionsDeps, ServiceOnion, TypeOnionOptionsBaseSimple } from 'vona-module-a-onion';
 import type { WebSocket } from 'ws';
+
 import type { ISocketNamespaceRecord } from './socketNamespace.ts';
 
 export interface ISocketConnectionRecord {}
@@ -11,8 +12,7 @@ export interface ISocketConnectionExecute {
 }
 
 export interface IDecoratorSocketConnectionOptions
-  extends TypeOnionOptionsBaseSimple<keyof ISocketNamespaceRecord>,
-  IOnionOptionsDeps<keyof ISocketConnectionRecord> {}
+  extends TypeOnionOptionsBaseSimple<keyof ISocketNamespaceRecord>, IOnionOptionsDeps<keyof ISocketConnectionRecord> {}
 
 export interface ISocketConnectionComposeData {
   method: 'enter' | 'exit';

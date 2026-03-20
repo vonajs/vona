@@ -1,21 +1,21 @@
 import type { TableIdentity } from 'table-identity';
 import type { IQueryParams } from 'vona-module-a-orm';
+
 import { BeanBase } from 'vona';
 import { Service } from 'vona-module-a-bean';
 import { Core } from 'vona-module-a-core';
 import { $relationDynamic } from 'vona-module-a-orm';
+
 import { ModelPost } from '../model/post.ts';
 import { ModelPostContent } from '../model/postContent.ts';
 
 @Service()
 export class ServicePost extends BeanBase {
   async findMany(params?: IQueryParams<ModelPost>) {
-    return await this.scope.model.post.selectAndCount(
-      {
-        ...params,
-        include: { postContent: true },
-      },
-    );
+    return await this.scope.model.post.selectAndCount({
+      ...params,
+      include: { postContent: true },
+    });
   }
 
   async group() {
@@ -50,9 +50,14 @@ export class ServicePost extends BeanBase {
   async relationBelongsTo() {
     const postContent = await this.scope.model.postContent.select({
       with: {
-        post: $relationDynamic.belongsTo(() => ModelPostContent, () => ModelPost, 'postId', {
-          columns: ['id', 'title'],
-        }),
+        post: $relationDynamic.belongsTo(
+          () => ModelPostContent,
+          () => ModelPost,
+          'postId',
+          {
+            columns: ['id', 'title'],
+          },
+        ),
       },
     });
     // eslint-disable-next-line no-console
@@ -149,10 +154,7 @@ export class ServicePost extends BeanBase {
   }
 
   async createBulk() {
-    const posts = await this.scope.model.post.insertBulk([
-      { title: 'Post001' },
-      { title: 'Post002' },
-    ]);
+    const posts = await this.scope.model.post.insertBulk([{ title: 'Post001' }, { title: 'Post002' }]);
     // console.log(posts[0].id, posts[1].id);
     return posts;
   }
@@ -242,19 +244,23 @@ export class ServicePost extends BeanBase {
   }
 
   async select2() {
-    return await this.scope.model.post.select({
-      columns: ['id', 'title', 'userId'],
-      where: {
-        'id': { _gt_: 1 },
-        'testVonaUser.id': 1,
+    return await this.scope.model.post.select(
+      {
+        columns: ['id', 'title', 'userId'],
+        where: {
+          'id': { _gt_: 1 },
+          'testVonaUser.id': 1,
+        },
+        joins: [['innerJoin', 'testVonaUser', ['userId', 'testVonaUser.id']]],
+        offset: 0,
+        limit: 20,
+        orders: [['createdAt', 'desc']],
       },
-      joins: [['innerJoin', 'testVonaUser', ['userId', 'testVonaUser.id']]],
-      offset: 0,
-      limit: 20,
-      orders: [['createdAt', 'desc']],
-    }, {
-      disableDeleted: false,
-    }, 'test-vona:user');
+      {
+        disableDeleted: false,
+      },
+      'test-vona:user',
+    );
   }
 
   async get(id: TableIdentity) {

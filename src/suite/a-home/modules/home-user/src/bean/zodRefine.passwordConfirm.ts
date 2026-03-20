@@ -1,8 +1,12 @@
 import type { IDecoratorZodRefineOptions, IZodRefineExecute, TypeRefinementCtx } from 'vona-module-a-zod';
+
 import { BeanBase } from 'vona';
 import { ZodRefine } from 'vona-module-a-zod';
 
-export interface TypeZodRefinePasswordConfirmData { password: string; passwordConfirm: string }
+export interface TypeZodRefinePasswordConfirmData {
+  password: string;
+  passwordConfirm: string;
+}
 
 export interface IZodRefineOptionsPasswordConfirm extends IDecoratorZodRefineOptions {}
 

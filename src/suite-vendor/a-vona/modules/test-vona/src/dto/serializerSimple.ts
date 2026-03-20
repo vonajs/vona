@@ -1,7 +1,9 @@
 import type { IDecoratorDtoOptions } from 'vona-module-a-web';
+
 import { Api, v } from 'vona-module-a-openapiutils';
 import { Serializer } from 'vona-module-a-serialization';
 import { Dto } from 'vona-module-a-web';
+
 import { SensitiveEmail } from '../lib/serializer.ts';
 
 export interface IDtoOptionsSerializerSimple extends IDecoratorDtoOptions {}
@@ -18,14 +20,11 @@ export class DtoSerializerSimple {
   @Serializer.transform('test-vona:email')
   email: string;
 
-  @Serializer.transform(
-    'a-serialization:replace',
-    {
-      // eslint-disable-next-line
-      patternFrom: /(\w?)(\w+)(\w)(@\w+\.[a-z]+)/,
-      patternTo: '$1****$3$4',
-    },
-  )
+  @Serializer.transform('a-serialization:replace', {
+    // eslint-disable-next-line
+    patternFrom: /(\w?)(\w+)(\w)(@\w+\.[a-z]+)/,
+    patternTo: '$1****$3$4',
+  })
   @Api.field(v.email())
   email2: string;
 
@@ -86,9 +85,12 @@ export class DtoSerializerSimple {
   @Api.field(v.optional())
   fullName: string;
 
-  @Api.field(v.serializerGetter((data: DtoSerializerSimple) => {
-    return `${data.firstName} ${data.lastName}`;
-  }), v.optional())
+  @Api.field(
+    v.serializerGetter((data: DtoSerializerSimple) => {
+      return `${data.firstName} ${data.lastName}`;
+    }),
+    v.optional(),
+  )
   fullName2: string;
 
   @Api.field(v.optional())
@@ -96,8 +98,11 @@ export class DtoSerializerSimple {
     return `${this.firstName} ${this.lastName}`;
   }
 
-  @Api.field(v.serializerCustom((_value, data: DtoSerializerSimple) => {
-    return `${data.firstName} ${data.lastName}`;
-  }), v.optional())
+  @Api.field(
+    v.serializerCustom((_value, data: DtoSerializerSimple) => {
+      return `${data.firstName} ${data.lastName}`;
+    }),
+    v.optional(),
+  )
   fullName4: string;
 }

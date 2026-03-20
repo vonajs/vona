@@ -6,12 +6,13 @@ export interface IModelRelationOptionsManyStatic<
   MODEL extends BeanModelMeta,
   ModelJoins extends TypeModelsClassLikeGeneral | undefined = undefined,
   Group extends boolean | undefined = undefined,
->
-  extends Omit<IModelRelationOptionsManyDynamic<MODEL, ModelJoins, Group>, 'include' | 'with'> {
+> extends Omit<IModelRelationOptionsManyDynamic<MODEL, ModelJoins, Group>, 'include' | 'with'> {
   autoload?: boolean;
 }
 
-export interface IModelRelationOptionsOneStatic<MODEL extends BeanModelMeta>
-  extends Omit<IModelRelationOptionsOneDynamic<MODEL>, 'include' | 'with'> {
+export interface IModelRelationOptionsOneStatic<MODEL extends BeanModelMeta> extends Omit<
+  IModelRelationOptionsOneDynamic<MODEL>,
+  'include' | 'with'
+> {
   autoload?: boolean;
 }

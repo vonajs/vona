@@ -1,4 +1,5 @@
 import type { VonaApplication, VonaConfigEnv } from 'vona';
+
 import type { ConfigJwt } from '../types/jwt.ts';
 
 export function config(_app: VonaApplication, env: VonaConfigEnv) {

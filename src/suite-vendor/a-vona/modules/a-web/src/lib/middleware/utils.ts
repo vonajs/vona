@@ -1,6 +1,8 @@
 import type { VonaApplication } from 'vona';
-import type { ContextRouteBase } from '../../types/router.ts';
+
 import { SymbolCacheComposeGuards } from 'vona-module-a-aspect';
+
+import type { ContextRouteBase } from '../../types/router.ts';
 
 export function composeGuards(app: VonaApplication, route: ContextRouteBase) {
   // compose

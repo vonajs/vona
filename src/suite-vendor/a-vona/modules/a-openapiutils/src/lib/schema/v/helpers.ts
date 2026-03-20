@@ -1,6 +1,8 @@
 import type { ILocaleMagic } from 'vona';
+
 import { useApp } from 'vona';
 import { z } from 'zod';
+
 import { normalizeErrorParams } from '../../utils.ts';
 
 export function schemaEmail(params?: string | ILocaleMagic | z.core.$ZodEmailParams) {

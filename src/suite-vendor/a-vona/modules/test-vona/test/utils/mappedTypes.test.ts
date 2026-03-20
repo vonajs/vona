@@ -1,11 +1,13 @@
 import type { IDecoratorDtoOptions } from 'vona-module-a-web';
+
+import { catchError } from '@cabloy/utils';
 import assert from 'node:assert';
 import { describe, it } from 'node:test';
-import { catchError } from '@cabloy/utils';
 import { $Class, cast } from 'vona';
 import { app } from 'vona-mock';
 import { Api } from 'vona-module-a-openapiutils';
 import { Dto } from 'vona-module-a-web';
+
 import { DtoProfile } from '../../src/dto/profile.ts';
 import { DtoUser } from '../../src/dto/user.ts';
 
@@ -48,11 +50,7 @@ describe('mappedTypes.test.ts', () => {
       });
       assert.deepEqual(dataNew5, {});
       const [dataNew6] = await catchError(async () => {
-        return await serviceValidator.validate(
-          $Class.partial(DtoUser, ['id', 'name']),
-          { married: true },
-          { strict: true },
-        );
+        return await serviceValidator.validate($Class.partial(DtoUser, ['id', 'name']), { married: true }, { strict: true });
       });
       assert.deepEqual(dataNew6, { married: true });
       // MixinClass

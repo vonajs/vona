@@ -1,5 +1,6 @@
 import type { IDecoratorBeanOptionsBase } from 'vona';
 import type { IHmrReload } from 'vona-module-a-hmr';
+
 import { BeanBase } from 'vona';
 import { clearCacheComposesRouter } from 'vona-module-a-aspect';
 import { Hmr } from 'vona-module-a-hmr';

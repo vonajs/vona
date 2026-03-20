@@ -1,4 +1,10 @@
 import type { TableIdentity } from 'table-identity';
+
+import { isNil } from '@cabloy/utils';
+import { parseFirstWord, toLowerCaseFirstChar } from '@cabloy/word-utils';
+import BigNumber from 'bignumber.js';
+import { cast, deepExtend, disposeInstance } from 'vona';
+
 import type { ServiceDb } from '../../service/db_.ts';
 import type {
   IDatabaseClientRecord,
@@ -26,10 +32,7 @@ import type {
   TypeModelWhere,
 } from '../../types/index.ts';
 import type { TypeQueueDoubleDeleteJobData } from '../queue.doubleDelete.ts';
-import { isNil } from '@cabloy/utils';
-import { parseFirstWord, toLowerCaseFirstChar } from '@cabloy/word-utils';
-import BigNumber from 'bignumber.js';
-import { cast, deepExtend, disposeInstance } from 'vona';
+
 import { getTargetColumnName } from '../../common/utils.ts';
 import { getCacheModelsClear } from '../../lib/const.ts';
 import { ServiceCacheEntity } from '../../service/cacheEntity_.ts';
@@ -78,7 +81,7 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
     table = table || this.getTable(items[0]);
     if (!table) return this.scopeOrm.error.ShouldSpecifyTable.throw();
     // insert
-    const res = await this._insertBulk(table, items, options) as TRecord[];
+    const res = (await this._insertBulk(table, items, options)) as TRecord[];
     // delete cache
     const ids = res.map(item => cast(item).id);
     await this.cacheEntityDel(ids, table);
@@ -130,9 +133,11 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
     // insert/update
     const itemsInsertNew = await this.__insertBulk_raw(table, itemsInsert, options);
     await this.__updateBulk_raw(table, itemsUpdate, options);
-    const itemsMutate = itemsInsert.map((item, index) => {
-      return Object.assign({}, item, { id: cast(itemsInsertNew[index]).id });
-    }).concat(itemsUpdate as any);
+    const itemsMutate = itemsInsert
+      .map((item, index) => {
+        return Object.assign({}, item, { id: cast(itemsInsertNew[index]).id });
+      })
+      .concat(itemsUpdate as any);
     let itemsMutateResult = itemsInsertNew.concat(itemsUpdate as any);
     const indexesMutate = indexesInsert.concat(indexesUpdate);
     itemsMutateResult = await this.relations.handleRelationsMutate(itemsMutateResult, itemsMutate as any, options as any, options);
@@ -190,10 +195,7 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
     return this.__filterMGetColumns(items, options?.columns);
   }
 
-  async count<
-    T extends IModelSelectCountParams<TRecord>,
-    ModelJoins extends TypeModelsClassLikeGeneral | undefined,
-  >(
+  async count<T extends IModelSelectCountParams<TRecord>, ModelJoins extends TypeModelsClassLikeGeneral | undefined>(
     params?: T,
     options?: IModelMethodOptions,
     _modelJoins?: ModelJoins,
@@ -204,10 +206,7 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
     return this.extractFirstValue(item);
   }
 
-  async increment<
-    T extends IModelIncrementParams<TRecord>,
-    ModelJoins extends TypeModelsClassLikeGeneral | undefined,
-  >(
+  async increment<T extends IModelIncrementParams<TRecord>, ModelJoins extends TypeModelsClassLikeGeneral | undefined>(
     params: T,
     options?: IModelMethodOptions,
     _modelJoins?: ModelJoins,
@@ -215,10 +214,7 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
     return await this.__increment_raw(undefined, params, options);
   }
 
-  async decrement<
-    T extends IModelIncrementParams<TRecord>,
-    ModelJoins extends TypeModelsClassLikeGeneral | undefined,
-  >(
+  async decrement<T extends IModelIncrementParams<TRecord>, ModelJoins extends TypeModelsClassLikeGeneral | undefined>(
     params: T,
     options?: IModelMethodOptions,
     _modelJoins?: ModelJoins,
@@ -263,10 +259,7 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
     return res;
   }
 
-  async aggregate<
-    T extends IModelSelectAggrParams<TRecord>,
-    ModelJoins extends TypeModelsClassLikeGeneral | undefined,
-  >(
+  async aggregate<T extends IModelSelectAggrParams<TRecord>, ModelJoins extends TypeModelsClassLikeGeneral | undefined>(
     params?: T,
     options?: IModelMethodOptions,
     _modelJoins?: ModelJoins,
@@ -287,15 +280,12 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
     return items;
   }
 
-  async group<
-    T extends IModelSelectGroupParams<TRecord>,
-    ModelJoins extends TypeModelsClassLikeGeneral | undefined,
-  >(
+  async group<T extends IModelSelectGroupParams<TRecord>, ModelJoins extends TypeModelsClassLikeGeneral | undefined>(
     params?: T,
     options?: IModelMethodOptions,
     _modelJoins?: ModelJoins,
   ): Promise<TypeModelGroupRelationResult<TRecord, T>[]> {
-    return await this.__group_raw(undefined, params, options) as any;
+    return (await this.__group_raw(undefined, params, options)) as any;
   }
 
   private async __group_raw(
@@ -310,10 +300,7 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
     return items;
   }
 
-  async selectAndCount<
-    T extends IModelSelectParams<TRecord>,
-    ModelJoins extends TypeModelsClassLikeGeneral | undefined,
-  >(
+  async selectAndCount<T extends IModelSelectParams<TRecord>, ModelJoins extends TypeModelsClassLikeGeneral | undefined>(
     params?: T,
     options?: IModelMethodOptions,
     modelJoins?: ModelJoins,
@@ -338,10 +325,7 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
     return { list, total: count, pageCount, pageSize, pageNo };
   }
 
-  async select<
-    T extends IModelSelectParams<TRecord>,
-    ModelJoins extends TypeModelsClassLikeGeneral | undefined,
-  >(
+  async select<T extends IModelSelectParams<TRecord>, ModelJoins extends TypeModelsClassLikeGeneral | undefined>(
     params?: T,
     options?: IModelMethodOptions,
     _modelJoins?: ModelJoins,
@@ -640,9 +624,12 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
 
   public async cacheEntityDel(id: TableIdentity | TableIdentity[], table?: keyof ITableRecord) {
     await this.cacheEntityDelInner(id, table);
-    this.db.commit(async () => {
-      await this.cacheEntityDelInner(id, table);
-    }, { ignoreIfNotInTransaction: true });
+    this.db.commit(
+      async () => {
+        await this.cacheEntityDelInner(id, table);
+      },
+      { ignoreIfNotInTransaction: true },
+    );
     this._shardingCacheDoubleDelete({
       beanFullName: this.$beanFullName,
       clientName: this.db.clientName,
@@ -659,9 +646,12 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
 
   public async cacheEntityClear(table?: keyof ITableRecord) {
     await this.cacheEntityClearInner(table);
-    this.db.commit(async () => {
-      await this.cacheEntityClearInner(table);
-    }, { ignoreIfNotInTransaction: true });
+    this.db.commit(
+      async () => {
+        await this.cacheEntityClearInner(table);
+      },
+      { ignoreIfNotInTransaction: true },
+    );
     this._shardingCacheDoubleDelete({
       beanFullName: this.$beanFullName,
       clientName: this.db.clientName,
@@ -678,9 +668,12 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
 
   public async cacheQueryClear(table?: keyof ITableRecord) {
     await this.cacheQueryClearInner(table);
-    this.db.commit(async () => {
-      await this.cacheQueryClearInner(table);
-    }, { ignoreIfNotInTransaction: true });
+    this.db.commit(
+      async () => {
+        await this.cacheQueryClearInner(table);
+      },
+      { ignoreIfNotInTransaction: true },
+    );
     this._shardingCacheDoubleDelete({
       beanFullName: this.$beanFullName,
       clientName: this.db.clientName,
@@ -759,9 +752,7 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
     if (!where) return undefined;
     const columnId = this.__checkIfOnlyKey(Object.keys(where), table, noCheckLength);
     if (!columnId) return undefined;
-    return ['number', 'string', 'bigint', 'array'].includes(typeof where[columnId])
-      ? where[columnId]
-      : undefined;
+    return ['number', 'string', 'bigint', 'array'].includes(typeof where[columnId]) ? where[columnId] : undefined;
   }
 
   protected __get__(prop: string) {
@@ -805,13 +796,14 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
 
 function __combineMagicWhere(fieldName: string, op: string, fieldValue?: any) {
   return {
-    [fieldName]: fieldValue === undefined
-      ? undefined
-      : op === 'eq'
-        ? fieldValue
-        : {
-            [`_${op}_`]: fieldValue,
-          },
+    [fieldName]:
+      fieldValue === undefined
+        ? undefined
+        : op === 'eq'
+          ? fieldValue
+          : {
+              [`_${op}_`]: fieldValue,
+            },
   };
 }
 

@@ -1,6 +1,8 @@
 import type { FunctionAsync } from 'vona';
-import type { IRedlockLockIsolateOptions, IRedlockLockOptions } from '../types/redlock.ts';
+
 import { BeanBase, SymbolModuleBelong } from 'vona';
+
+import type { IRedlockLockIsolateOptions, IRedlockLockOptions } from '../types/redlock.ts';
 
 export class BeanRedlockBase<TypeRedlockLockResource, TypeRedlockLockIsolateResource> extends BeanBase {
   async lock<RESULT>(resource: TypeRedlockLockResource, fn: FunctionAsync<RESULT>, options?: IRedlockLockOptions): Promise<RESULT> {

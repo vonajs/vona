@@ -1,6 +1,7 @@
 import type { IJwtToken } from 'vona-module-a-jwt';
 import type { IUser, IUserNameRecord } from 'vona-module-a-user';
 import type { IDecoratorControllerOptions } from 'vona-module-a-web';
+
 import assert from 'node:assert';
 import { BeanBase } from 'vona';
 import { DtoJwtToken } from 'vona-module-a-jwt';

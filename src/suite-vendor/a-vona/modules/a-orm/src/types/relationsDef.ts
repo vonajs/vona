@@ -21,13 +21,12 @@ export type TypeModelRelationType = 'hasOne' | 'belongsTo' | 'hasMany' | 'belong
 
 // use optional ? for app config
 export interface IModelRelationHasOne<
-  MODEL extends BeanModelMeta | (keyof IModelClassRecord),
+  MODEL extends BeanModelMeta | keyof IModelClassRecord,
   KEY extends keyof TypeModelOfModelLike<MODEL>[TypeSymbolKeyEntity] | undefined = keyof TypeModelOfModelLike<MODEL>[TypeSymbolKeyEntity],
   AUTOLOAD extends boolean = false,
-  COLUMNS
-  extends TypeModelColumn<
+  COLUMNS extends TypeModelColumn<TypeModelOfModelLike<MODEL>[TypeSymbolKeyEntity]> | undefined = TypeModelColumn<
     TypeModelOfModelLike<MODEL>[TypeSymbolKeyEntity]
-  > | undefined = TypeModelColumn<TypeModelOfModelLike<MODEL>[TypeSymbolKeyEntity]>,
+  >,
 > {
   type?: 'hasOne';
   model?: TypeModelClassLike<MODEL>;
@@ -36,13 +35,12 @@ export interface IModelRelationHasOne<
 }
 
 export interface IModelRelationBelongsTo<
-  MODELSelf extends BeanModelMeta | (keyof IModelClassRecord),
-  MODEL extends BeanModelMeta | (keyof IModelClassRecord),
+  MODELSelf extends BeanModelMeta | keyof IModelClassRecord,
+  MODEL extends BeanModelMeta | keyof IModelClassRecord,
   AUTOLOAD extends boolean = false,
-  COLUMNS
-  extends TypeModelColumn<
+  COLUMNS extends TypeModelColumn<TypeModelOfModelLike<MODEL>[TypeSymbolKeyEntity]> | undefined = TypeModelColumn<
     TypeModelOfModelLike<MODEL>[TypeSymbolKeyEntity]
-  > | undefined = TypeModelColumn<TypeModelOfModelLike<MODEL>[TypeSymbolKeyEntity]>,
+  >,
 > {
   type?: 'belongsTo';
   model?: TypeModelClassLike<MODEL>;
@@ -51,13 +49,12 @@ export interface IModelRelationBelongsTo<
 }
 
 export interface IModelRelationHasMany<
-  MODEL extends BeanModelMeta | (keyof IModelClassRecord),
+  MODEL extends BeanModelMeta | keyof IModelClassRecord,
   KEY extends keyof TypeModelOfModelLike<MODEL>[TypeSymbolKeyEntity] | undefined = keyof TypeModelOfModelLike<MODEL>[TypeSymbolKeyEntity],
   AUTOLOAD extends boolean = false,
-  COLUMNS
-  extends TypeModelColumn<
+  COLUMNS extends TypeModelColumn<TypeModelOfModelLike<MODEL>[TypeSymbolKeyEntity]> | undefined = TypeModelColumn<
     TypeModelOfModelLike<MODEL>[TypeSymbolKeyEntity]
-  > | undefined = TypeModelColumn<TypeModelOfModelLike<MODEL>[TypeSymbolKeyEntity]>,
+  >,
   ModelJoins extends TypeModelsClassLikeGeneral | undefined = undefined,
   Aggrs extends TypeModelSelectAggrParamsAggrs<TypeModelOfModelLike<MODEL>[TypeSymbolKeyEntity]> | undefined = undefined,
   Groups extends TypeModelColumnsStrict<TypeModelOfModelLike<MODEL>[TypeSymbolKeyEntity]> | undefined = undefined,
@@ -69,13 +66,12 @@ export interface IModelRelationHasMany<
 }
 
 export interface IModelRelationBelongsToMany<
-  MODELMiddle extends BeanModelMeta | (keyof IModelClassRecord),
-  MODEL extends BeanModelMeta | (keyof IModelClassRecord),
+  MODELMiddle extends BeanModelMeta | keyof IModelClassRecord,
+  MODEL extends BeanModelMeta | keyof IModelClassRecord,
   AUTOLOAD extends boolean = false,
-  COLUMNS
-  extends TypeModelColumn<
+  COLUMNS extends TypeModelColumn<TypeModelOfModelLike<MODEL>[TypeSymbolKeyEntity]> | undefined = TypeModelColumn<
     TypeModelOfModelLike<MODEL>[TypeSymbolKeyEntity]
-  > | undefined = TypeModelColumn<TypeModelOfModelLike<MODEL>[TypeSymbolKeyEntity]>,
+  >,
   ModelJoins extends TypeModelsClassLikeGeneral | undefined = undefined,
   Aggrs extends TypeModelSelectAggrParamsAggrs<TypeModelOfModelLike<MODEL>[TypeSymbolKeyEntity]> | undefined = undefined,
   Groups extends TypeModelColumnsStrict<TypeModelOfModelLike<MODEL>[TypeSymbolKeyEntity]> | undefined = undefined,
@@ -92,8 +88,7 @@ export interface IModelRelationOptionsOne<
   MODEL extends BeanModelMeta,
   AUTOLOAD extends boolean = false,
   COLUMNS extends TypeModelColumn<MODEL[TypeSymbolKeyEntity]> | undefined = TypeModelColumn<MODEL[TypeSymbolKeyEntity]>,
-> extends
-  IModelRelationOptionsMetaWrapper {
+> extends IModelRelationOptionsMetaWrapper {
   autoload?: AUTOLOAD;
   columns?: TypeModelColumnsPatch<MODEL[TypeSymbolKeyEntity], COLUMNS>;
 }
@@ -106,9 +101,7 @@ export interface IModelRelationOptionsMany<
   Aggrs extends TypeModelSelectAggrParamsAggrs<MODEL[TypeSymbolKeyEntity]> | undefined = undefined,
   Groups extends TypeModelColumnsStrict<MODEL[TypeSymbolKeyEntity]> | undefined = undefined,
 >
-  extends
-  IModelRelationOptionsMetaWrapper,
-  IModelRelationOptionsMany_Raw<MODEL, AUTOLOAD, COLUMNS, ModelJoins, Aggrs, Groups> {}
+  extends IModelRelationOptionsMetaWrapper, IModelRelationOptionsMany_Raw<MODEL, AUTOLOAD, COLUMNS, ModelJoins, Aggrs, Groups> {}
 
 export type IModelRelationOptionsMany_Raw<
   MODEL extends BeanModelMeta,

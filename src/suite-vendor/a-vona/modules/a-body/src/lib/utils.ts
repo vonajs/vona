@@ -1,16 +1,15 @@
-import type { BodyParserOptions, BodyType } from '../types/bodyParser.ts';
 import typeis from 'type-is';
 import { deepExtend } from 'vona';
+
+import type { BodyParserOptions, BodyType } from '../types/bodyParser.ts';
+
 import { supportedBodyTypes } from '../types/bodyParser.ts';
 
 export class UnsupportedBodyTypeError extends Error {
   constructor(wrongType: string) {
     super();
     this.name = 'UnsupportedBodyTypeError';
-    this.message =
-      `Invalid enabled type '${wrongType}'.` +
-      ' make sure to pass an array contains ' +
-      `supported types ([${supportedBodyTypes}]).`;
+    this.message = `Invalid enabled type '${wrongType}'.` + ' make sure to pass an array contains ' + `supported types ([${supportedBodyTypes}]).`;
   }
 }
 
@@ -32,16 +31,11 @@ export function getIsEnabledBodyAs(enableTypes: BodyType[]) {
   return isEnabledBodyAs;
 }
 
-export function getMimeTypes(
-  extendTypes: NonNullable<BodyParserOptions['extendTypes']>,
-) {
+export function getMimeTypes(extendTypes: NonNullable<BodyParserOptions['extendTypes']>) {
   for (const extendedTypeKey of Object.keys(extendTypes) as BodyType[]) {
     const extendedType = extendTypes[extendedTypeKey];
 
-    if (
-      !supportedBodyTypes.includes(extendedTypeKey) ||
-      !Array.isArray(extendedType)
-    ) {
+    if (!supportedBodyTypes.includes(extendedTypeKey) || !Array.isArray(extendedType)) {
       throw new UnsupportedBodyTypeError(extendedTypeKey);
     }
   }

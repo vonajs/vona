@@ -1,8 +1,9 @@
-import type { IJwtClientOptions, IJwtClientRecord, IJwtPayload, IJwtSignOptions, IJwtVerifyOptions, IPayloadData } from '../types/jwt.ts';
 import { catchError } from '@cabloy/utils';
 import jwt from 'jsonwebtoken';
 import { BeanBase, cast, deepExtend } from 'vona';
 import { Service } from 'vona-module-a-bean';
+
+import type { IJwtClientOptions, IJwtClientRecord, IJwtPayload, IJwtSignOptions, IJwtVerifyOptions, IPayloadData } from '../types/jwt.ts';
 
 @Service()
 export class ServiceJwtClient extends BeanBase {

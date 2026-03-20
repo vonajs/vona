@@ -1,6 +1,8 @@
 import type { IDecoratorDtoOptions } from 'vona-module-a-web';
+
 import { Api, v } from 'vona-module-a-openapiutils';
 import { Dto } from 'vona-module-a-web';
+
 import { DtoSerializerSimple } from './serializerSimple.ts';
 
 export interface IDtoOptionsSerializerLazy extends IDecoratorDtoOptions {}
@@ -21,12 +23,9 @@ export class DtoSerializerLazy {
     }),
     v.title('title'),
     v.optional(),
-    v.lazy(
-      v.description('description'),
-      () => {
-        return DtoSerializerSimple;
-      },
-    ),
+    v.lazy(v.description('description'), () => {
+      return DtoSerializerSimple;
+    }),
   )
   simpleLazy: DtoSerializerSimple;
 }

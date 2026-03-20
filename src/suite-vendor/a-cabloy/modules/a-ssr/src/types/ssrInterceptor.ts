@@ -1,4 +1,5 @@
 import type { IParamsAndQuery } from '@cabloy/utils';
+
 import type { ISsrSiteRecord } from './ssrSite.ts';
 
 export type TypeSsrRenderType = 'auto' | 'html' | 'json';

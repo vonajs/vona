@@ -1,6 +1,7 @@
+import { Aspect } from 'vona-module-a-aspect';
+
 import type { IGuardOptionsRoleName } from '../bean/guard.roleName.ts';
 import type { IGuardOptionsUserName } from '../bean/guard.userName.ts';
-import { Aspect } from 'vona-module-a-aspect';
 
 function Public(_public: boolean = true): ClassDecorator & MethodDecorator {
   return Aspect.guardGlobal('a-user:passport', { public: _public });
@@ -11,21 +12,15 @@ function Activated(activated?: boolean): ClassDecorator & MethodDecorator {
   return Aspect.guardGlobal('a-user:passport', { activated });
 }
 
-function UserName(
-  options?: Partial<IGuardOptionsUserName>,
-): ClassDecorator & MethodDecorator {
+function UserName(options?: Partial<IGuardOptionsUserName>): ClassDecorator & MethodDecorator {
   return Aspect.guard('a-user:userName', options);
 }
 
-function RoleName(
-  options?: Partial<IGuardOptionsRoleName>,
-): ClassDecorator & MethodDecorator {
+function RoleName(options?: Partial<IGuardOptionsRoleName>): ClassDecorator & MethodDecorator {
   return Aspect.guard('a-user:roleName', options);
 }
 
-function Admin(
-  options?: Partial<Omit<IGuardOptionsRoleName, 'name'>>,
-): ClassDecorator & MethodDecorator {
+function Admin(options?: Partial<Omit<IGuardOptionsRoleName, 'name'>>): ClassDecorator & MethodDecorator {
   return Aspect.guard('a-user:roleName', Object.assign({}, options, { name: 'admin' as const }));
 }
 

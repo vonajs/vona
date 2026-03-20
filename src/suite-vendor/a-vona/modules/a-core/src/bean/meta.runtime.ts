@@ -1,4 +1,5 @@
 import type { IMetaRuntimeExecute } from 'vona-module-a-runtime';
+
 import { BeanBase } from 'vona';
 import { Meta } from 'vona-module-a-meta';
 

@@ -1,6 +1,6 @@
+import { getProperty } from '@cabloy/utils';
 import assert from 'node:assert';
 import { describe, it } from 'node:test';
-import { getProperty } from '@cabloy/utils';
 
 describe('cabloyUtils.test.ts', () => {
   it('action:getProperty', async () => {
@@ -8,10 +8,7 @@ describe('cabloyUtils.test.ts', () => {
       id: 1,
       name: 'tom',
       role: { name: 'admin' },
-      books: [
-        { name: 'piao' },
-        { name: 'flying' },
-      ],
+      books: [{ name: 'piao' }, { name: 'flying' }],
     };
     assert.equal(getProperty(user, 'id'), 1);
     assert.equal(getProperty(user, 'role.name'), 'admin');

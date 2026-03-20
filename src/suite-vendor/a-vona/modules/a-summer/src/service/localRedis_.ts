@@ -1,13 +1,14 @@
 import type { BeanCacheRedisBase } from 'vona-module-a-cache';
+
+import { Service } from 'vona-module-a-bean';
+
 import type { ICacheLayeredBase } from '../common/cacheLayeredBase.ts';
 import type { TSummerCacheActionOptions } from '../types/summerCache.ts';
-import { Service } from 'vona-module-a-bean';
+
 import { CacheBase } from '../common/cacheBase.ts';
 
 @Service()
-export class ServiceLocalRedis<KEY = any, DATA = any>
-  extends CacheBase<KEY, DATA>
-  implements ICacheLayeredBase<KEY, DATA> {
+export class ServiceLocalRedis<KEY = any, DATA = any> extends CacheBase<KEY, DATA> implements ICacheLayeredBase<KEY, DATA> {
   private _cacheRedisInstance: BeanCacheRedisBase<KEY, DATA> | undefined;
 
   protected async __dispose__() {
@@ -58,7 +59,7 @@ export class ServiceLocalRedis<KEY = any, DATA = any>
     if (keysMissing.length > 0) {
       const layered = this.__getLayered(options);
       let valuesMissing = await layered.mget(keysMissing, options);
-      valuesMissing = valuesMissing.map(item => item === undefined ? null as any : item);
+      valuesMissing = valuesMissing.map(item => (item === undefined ? (null as any) : item));
       // this.$logger.silly('-------redis:', valuesMissing);
       // set/merge
       await this.cacheRedis.mset(valuesMissing as any, keysMissing, {
@@ -72,7 +73,7 @@ export class ServiceLocalRedis<KEY = any, DATA = any>
       }
     }
     // ok
-    return values.map(item => item === null ? undefined : item);
+    return values.map(item => (item === null ? undefined : item));
   }
 
   async set(value?: DATA, key?: KEY, options?: TSummerCacheActionOptions<KEY, DATA>): Promise<void> {
@@ -85,7 +86,7 @@ export class ServiceLocalRedis<KEY = any, DATA = any>
   }
 
   async mset(values: DATA[], keys: KEY[], options?: TSummerCacheActionOptions<KEY, DATA>): Promise<void> {
-    const values2 = values.map(item => item === undefined ? null : item);
+    const values2 = values.map(item => (item === undefined ? null : item));
     await this.cacheRedis.mset(values2 as any, keys, {
       ttl: options?.ttl,
       db: options?.db,

@@ -1,35 +1,32 @@
 import type { Constructable } from 'vona';
+
+import { ensureArray, hashkey } from '@cabloy/utils';
+import { $Class, appResource } from 'vona';
+import { addSchemaDynamic, Api, getSchemaDynamic, SymbolSchemaDynamicRefId, v } from 'vona-module-a-openapiutils';
+import z from 'zod';
+
 import type { BeanModelMeta } from '../../bean/bean.model/bean.model_meta.ts';
 import type { IDtoGetParams, TypeDtoGetResult } from '../../types/dto/dtoGet.ts';
 import type { TypeDtoMutateType } from '../../types/dto/dtoMutate.ts';
 import type { IModelRelationIncludeWrapper } from '../../types/model.ts';
 import type { IDecoratorModelOptions, IModelClassRecord } from '../../types/onion/model.ts';
 import type { IRelationItem } from '../../types/relationsDef.ts';
-import { ensureArray, hashkey } from '@cabloy/utils';
-import { $Class, appResource } from 'vona';
-import { addSchemaDynamic, Api, getSchemaDynamic, SymbolSchemaDynamicRefId, v } from 'vona-module-a-openapiutils';
-import z from 'zod';
+
 import { getClassEntityFromClassModel, prepareClassModel, prepareColumns } from '../../common/utils.ts';
 import { handleRelationsCollection } from '../utils.ts';
 import { DtoAggregate } from './dtoAggregate.ts';
 import { DtoGroup } from './dtoGroup.ts';
 import { _DtoMutate_raw } from './dtoMutate.ts';
 
-export function DtoGet<
-  ModelLike extends BeanModelMeta | (keyof IModelClassRecord),
-  T extends IDtoGetParams<ModelLike> | undefined = undefined,
->(
-  modelLike: ModelLike extends BeanModelMeta ? ((() => Constructable<ModelLike>) | Constructable<ModelLike>) : ModelLike,
+export function DtoGet<ModelLike extends BeanModelMeta | keyof IModelClassRecord, T extends IDtoGetParams<ModelLike> | undefined = undefined>(
+  modelLike: ModelLike extends BeanModelMeta ? (() => Constructable<ModelLike>) | Constructable<ModelLike> : ModelLike,
   params?: T,
 ): Constructable<TypeDtoGetResult<ModelLike, T>> {
   return _DtoGet_raw(modelLike, params);
 }
 
-function _DtoGet_raw<
-  ModelLike extends BeanModelMeta | (keyof IModelClassRecord),
-  T extends IDtoGetParams<ModelLike> | undefined = undefined,
->(
-  modelLike: ModelLike extends BeanModelMeta ? ((() => Constructable<ModelLike>) | Constructable<ModelLike>) : ModelLike,
+function _DtoGet_raw<ModelLike extends BeanModelMeta | keyof IModelClassRecord, T extends IDtoGetParams<ModelLike> | undefined = undefined>(
+  modelLike: ModelLike extends BeanModelMeta ? (() => Constructable<ModelLike>) | Constructable<ModelLike> : ModelLike,
   params?: T,
 ): Constructable<TypeDtoGetResult<ModelLike, T>> {
   // model
@@ -75,7 +72,7 @@ function _DtoGet_relation_handle<TRecord extends {}>(
     }
     let schema;
     if (type === 'belongsToMany') {
-      schema = v.array(z.object({ id: (v.tableIdentity())(), deleted: z.boolean().optional() }));
+      schema = v.array(z.object({ id: v.tableIdentity()(), deleted: z.boolean().optional() }));
     } else if (type === 'hasOne') {
       const schemaLazy = _DtoGet_relation_handle_schemaLazy(modelTarget, optionsReal, autoload, mutateTypeTopLevel, relation);
       schema = v.lazy(v.visible(false), schemaLazy);
@@ -90,7 +87,7 @@ function _DtoGet_relation_handle<TRecord extends {}>(
     const schemaLazy = _DtoGet_relation_handle_schemaLazy(modelTarget, optionsReal, autoload, mutateTypeTopLevel, relation);
     let schema;
     let optional = false;
-    if ((type === 'hasOne' || type === 'belongsTo')) {
+    if (type === 'hasOne' || type === 'belongsTo') {
       schema = v.lazy(v.visible(false), schemaLazy);
       optional = true;
     } else {
@@ -149,7 +146,7 @@ function _DtoGet_relation_handle_schemaLazy_hashkey(optionsReal, mutateTypeTopLe
   const columns = prepareColumns(optionsReal.columns);
   const aggrs = ensureArray(optionsReal.aggrs);
   const groups = ensureArray(optionsReal.groups);
-  return (columns || aggrs || groups || mutateTypeTopLevel) ? hashkey({ columns, aggrs, groups, mutate: mutateTypeTopLevel }) : 'none';
+  return columns || aggrs || groups || mutateTypeTopLevel ? hashkey({ columns, aggrs, groups, mutate: mutateTypeTopLevel }) : 'none';
 }
 
 function _DtoGet_relations_collection<TModel extends BeanModelMeta>(

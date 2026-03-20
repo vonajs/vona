@@ -20,5 +20,4 @@ declare module 'vona-module-a-orm' {
     /** @internal */
     get scope(): ScopeModuleAOrm;
   }
-
 }

@@ -1,4 +1,5 @@
 import type { IUser } from 'vona-module-a-user';
+
 import { combineQueries, replaceTemplate } from '@cabloy/utils';
 import { BeanBase, uuidv4 } from 'vona';
 import { Bean } from 'vona-module-a-bean';

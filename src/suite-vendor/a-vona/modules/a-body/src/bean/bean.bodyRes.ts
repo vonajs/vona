@@ -1,5 +1,6 @@
 import type { IOpenapiOptions, IResponseHeaders, TypeResponseContentType } from 'vona-module-a-openapiutils';
 import type z from 'zod';
+
 import { appMetadata, BeanBase } from 'vona';
 import { Bean } from 'vona-module-a-bean';
 import { $schema } from 'vona-module-a-openapiutils';

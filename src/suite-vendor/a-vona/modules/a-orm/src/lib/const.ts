@@ -1,4 +1,5 @@
 import type { VonaApplication } from 'vona';
+
 import type { IModelRecord } from '../types/onion/model.ts';
 import type { TypeModelClassLikeGeneral } from '../types/relations.ts';
 

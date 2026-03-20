@@ -1,6 +1,7 @@
 import type { IDecoratorControllerOptions } from 'vona-module-a-web';
-import assert from 'node:assert';
+
 import { sleep } from '@cabloy/utils';
+import assert from 'node:assert';
 import { BeanBase, retry } from 'vona';
 import { Api } from 'vona-module-a-openapiutils';
 import { Passport } from 'vona-module-a-user';

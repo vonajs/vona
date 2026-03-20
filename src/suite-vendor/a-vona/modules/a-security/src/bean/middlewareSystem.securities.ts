@@ -1,21 +1,14 @@
 import type { Next } from 'vona';
 import type { IDecoratorMiddlewareSystemOptions, IMiddlewareSystemExecute } from 'vona-module-a-aspect';
-import assert from 'node:assert';
+
 import { pathMatching } from 'egg-path-matching';
+import assert from 'node:assert';
 import { BeanBase, compose } from 'vona';
 import { MiddlewareSystem } from 'vona-module-a-aspect';
+
 import securityMiddlewares from '../lib/middlewares/index.ts';
 
-export type SecurityMiddlewareName =
-  'csrf' |
-  'hsts' |
-  'methodnoallow' |
-  'noopen' |
-  'nosniff' |
-  'csp' |
-  'xssProtection' |
-  'xframe' |
-  'dta';
+export type SecurityMiddlewareName = 'csrf' | 'hsts' | 'methodnoallow' | 'noopen' | 'nosniff' | 'csp' | 'xssProtection' | 'xframe' | 'dta';
 
 export interface IMiddlewareSystemOptionsSecurities extends IDecoratorMiddlewareSystemOptions {
   domainWhiteList: string[];
@@ -216,10 +209,7 @@ export class MiddlewareSystemSecurities extends BeanBase implements IMiddlewareS
         // );
       }
 
-      assert(
-        opt === false || typeof opt === 'object',
-        `config.security.${middlewareName} must be an object, or false(if you turn it off)`,
-      );
+      assert(opt === false || typeof opt === 'object', `config.security.${middlewareName} must be an object, or false(if you turn it off)`);
 
       if (opt === false || (opt && opt.enable === false)) {
         return;

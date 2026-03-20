@@ -1,10 +1,12 @@
 import type { IArgv } from 'vona';
 import type { IDecoratorControllerOptions } from 'vona-module-a-web';
-import path from 'node:path';
+
 import fse from 'fs-extra';
+import path from 'node:path';
 import { BeanBase, pathToHref } from 'vona';
 import { Arg, Controller, Web } from 'vona-module-a-web';
 import parser from 'yargs-parser';
+
 import { DtoPlay } from '../dto/play.ts';
 
 const __template = `import type { IArgv, VonaApplication } from 'vona';

@@ -1,4 +1,5 @@
 import type { TypeDecoratorRules } from 'vona-module-a-openapiutils';
+
 import assert from 'node:assert';
 import { describe, it } from 'node:test';
 import { app } from 'vona-mock';
@@ -18,18 +19,30 @@ describe('dtoGet.test.ts', () => {
               post: { include: { user: { columns: ['id'] } } },
             },
             with: {
-              post3: $relationDynamic.belongsTo(() => ModelPostContent, () => ModelPost, 'postId', {
-                include: {
-                  postContent: true,
+              post3: $relationDynamic.belongsTo(
+                () => ModelPostContent,
+                () => ModelPost,
+                'postId',
+                {
+                  include: {
+                    postContent: true,
+                  },
                 },
-              }),
+              ),
             },
           },
         },
         with: {
           user3: $relationDynamic.belongsTo(ModelPost, () => ModelUser, 'userId', {
             include: { posts: true },
-            with: { roles: $relationDynamic.belongsToMany(() => ModelRoleUser, () => ModelRole, 'userId', 'roleId') },
+            with: {
+              roles: $relationDynamic.belongsToMany(
+                () => ModelRoleUser,
+                () => ModelRole,
+                'userId',
+                'roleId',
+              ),
+            },
             columns: ['id', 'name'],
           }),
         },

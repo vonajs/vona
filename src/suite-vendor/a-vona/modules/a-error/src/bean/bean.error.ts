@@ -1,8 +1,10 @@
 import type { TypeEventResolvePathResult } from 'vona-module-a-static';
-import type { IErrorRenderOptions } from '../types/error.ts';
+
 import fs from 'node:fs';
 import { BeanBase } from 'vona';
 import { Bean } from 'vona-module-a-bean';
+
+import type { IErrorRenderOptions } from '../types/error.ts';
 
 const __cacheViewTemplates: Record<string, any> = {};
 
@@ -31,8 +33,7 @@ export class BeanError extends BeanBase {
   }
 
   private _getViewTemplate() {
-    const fileTemplate =
-      this.scope.config.error.templatePath || this.scope.asset.get('templates', 'onerror_page.mustache');
+    const fileTemplate = this.scope.config.error.templatePath || this.scope.asset.get('templates', 'onerror_page.mustache');
     if (!__cacheViewTemplates[fileTemplate]) {
       __cacheViewTemplates[fileTemplate] = fs.readFileSync(fileTemplate, 'utf8');
     }

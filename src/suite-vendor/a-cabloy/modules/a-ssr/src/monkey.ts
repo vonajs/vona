@@ -1,4 +1,5 @@
 import type { IMonkeyAppClose } from 'vona';
+
 import { BeanSimple } from 'vona';
 
 export class Monkey extends BeanSimple implements IMonkeyAppClose {

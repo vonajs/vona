@@ -1,17 +1,17 @@
 {
   "name": "vona-suite-cabloy-start",
-  "type": "module",
   "version": "5.0.0",
-  "title": "cabloy-start",
-  "files": [],
   "description": "",
   "author": "",
+  "files": [],
+  "type": "module",
   "scripts": {
     "version": "node ../../../scripts/version-cabloy-start.ts"
   },
   "dependencies": {
-    "vona-suite-a-cabloy": "^5.0.0",
     "vona-module-start-siteadmin": "^5.0.0",
-    "vona-module-start-siteweb": "^5.0.0"
-  }
+    "vona-module-start-siteweb": "^5.0.0",
+    "vona-suite-a-cabloy": "^5.0.0"
+  },
+  "title": "cabloy-start"
 }
