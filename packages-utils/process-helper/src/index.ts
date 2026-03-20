@@ -90,7 +90,7 @@ export class ProcessHelper {
   private async _formatFileInner({ fileName, logPrefix }) {
     await this.spawnBin({
       cmd: 'oxfmt',
-      args: ['--fix', '--no-error-on-unmatched-pattern', fileName],
+      args: ['--write', '--no-error-on-unmatched-pattern', '--threads=1', fileName],
       options: {
         logPrefix,
       },
