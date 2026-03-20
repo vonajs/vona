@@ -1,6 +1,6 @@
 ## Publish Workflow
 
-``` bash
+```bash
 $ lerna version
 $ pnpm publish -r
 ```

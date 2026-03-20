@@ -30,7 +30,7 @@ jobs:
       - run: pnpm install --no-frozen-lockfile
         working-directory: vona-test
       - run: vona :tools:crud student --module=demo-student
-        working-directory: vona-test  
+        working-directory: vona-test
       - run: npm run test
         working-directory: vona-test
       - run: npm run build -- --flavor=ci

@@ -1,6 +1,6 @@
+import fse from 'fs-extra';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import fse from 'fs-extra';
 
 const __specialFiles = ['dist', 'tsconfig.build.tsbuildinfo', 'node_modules', '.rollup.cache', 'src/.metadata/modules.d.ts'];
 

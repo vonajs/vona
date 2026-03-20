@@ -31,4 +31,13 @@
     ],
   },
   "sortPackageJson": true,
+  "overrides": [
+    {
+      "files": ["*.json"],
+      "options": {
+        "printWidth": 120,
+        "trailingComma": "none",
+      },
+    },
+  ],
 }

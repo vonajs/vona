@@ -4,9 +4,9 @@ English | [简体中文](./README.zh-CN.md)
 
 Vona is a fullstack meta-framework for building `SSR/SPA/Website/Admin-Dashboard` all in one codebase
 
-* Pioneers dynamic DTO inference and generation capabilities, significantly improving development efficiency and experience. It can even be said that being able to dynamically infer and generate DTOs is a very important `milestone` for building a more elegant Node.js backend framework
-* Pioneers dual-layer tabs navigation UI/UX, allowing more convenient switching between multiple pages
-* Dynamically render CRUD list pages, entry pages, and search forms, and provides the best practices of `Tanstack Table/Tanstack Form/Tanstack Query`
+- Pioneers dynamic DTO inference and generation capabilities, significantly improving development efficiency and experience. It can even be said that being able to dynamically infer and generate DTOs is a very important `milestone` for building a more elegant Node.js backend framework
+- Pioneers dual-layer tabs navigation UI/UX, allowing more convenient switching between multiple pages
+- Dynamically render CRUD list pages, entry pages, and search forms, and provides the best practices of `Tanstack Table/Tanstack Form/Tanstack Query`
 
 [![LICENSE MIT][license-image]][license-url]
 [![NPM version][npm-image]][npm-url]
@@ -26,8 +26,8 @@ Vona is a fullstack meta-framework for building `SSR/SPA/Website/Admin-Dashboard
 
 Vona works perfectly with Zova, continuing the frontend-backend separation architecture. Frontend projects built with Zova can run independently or have their JS bundle copied into the Vona backend for SSR rendering directly on the backend
 
-* Vona can generate a complete Openapi Schema, which can then generate an API SDK in Zova
-* Zova can generate types for routes and components to provide type hints in Vona
+- Vona can generate a complete Openapi Schema, which can then generate an API SDK in Zova
+- Zova can generate types for routes and components to provide type hints in Vona
 
 ## Documentation
 
@@ -37,12 +37,12 @@ Vona works perfectly with Zova, continuing the frontend-backend separation archi
 
 The Website and Admin-Dashboard of Cabloy Store are built by one codebase
 
-* Website: [https://cabloy.com](https://cabloy.com)
-* Admin-Dashboard: [https://cabloy.com/admin](https://cabloy.com/admin)
+- Website: [https://cabloy.com](https://cabloy.com)
+- Admin-Dashboard: [https://cabloy.com/admin](https://cabloy.com/admin)
 
 ## GIF Demo
 
-* Pioneers dual-layer tabs navigation UI/UX
+- Pioneers dual-layer tabs navigation UI/UX
 
 ![](./packages-docs/zh/assets/img/start/cabloy-start-two-level-tabs.gif)
 
