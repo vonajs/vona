@@ -1,5 +1,4 @@
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
+export const _configDefault = {
   "plugins": ["import", "unicorn"],
   "jsPlugins": [
     "eslint-plugin-antfu",
@@ -1518,4 +1517,8 @@
       }
     }
   ]
+};
+
+export function oxcLintConfig() {
+  return _configDefault;
 }

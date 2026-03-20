@@ -370,12 +370,6 @@ importers:
       '@cabloy/lint':
         specifier: workspace:^
         version: link:packages-utils/lint
-      '@e18e/eslint-plugin':
-        specifier: ^0.2.0
-        version: 0.2.0(eslint@10.0.3)(oxlint@1.56.0)
-      '@eslint/markdown':
-        specifier: ^7.5.1
-        version: 7.5.1
       '@swc/core':
         specifier: ^1.14.0
         version: 1.15.13(@swc/helpers@0.5.19)
@@ -406,12 +400,6 @@ importers:
       cross-env:
         specifier: ^7.0.3
         version: 7.0.3
-      eslint:
-        specifier: ^10.0.3
-        version: 10.0.3
-      eslint-plugin-eslint-comments:
-        specifier: ^3.2.0
-        version: 3.2.0(eslint@10.0.3)
       gogocode:
         specifier: ^1.0.53
         version: 1.0.55(vue@3.5.29(typescript@5.9.3))
@@ -800,15 +788,24 @@ importers:
       '@antfu/eslint-config':
         specifier: ^7.7.2
         version: 7.7.2(@eslint/json@1.1.0)(@typescript-eslint/rule-tester@8.56.1(eslint@10.0.3)(typescript@5.9.3))(@typescript-eslint/typescript-estree@8.57.0(typescript@5.9.3))(@typescript-eslint/utils@8.57.0(eslint@10.0.3)(typescript@5.9.3))(@vue/compiler-sfc@3.5.29)(eslint@10.0.3)(oxlint@1.56.0)(typescript@5.9.3)
+      '@e18e/eslint-plugin':
+        specifier: ^0.2.0
+        version: 0.2.0(eslint@10.0.3)(oxlint@1.56.0)
       '@eslint/json':
         specifier: ^1.1.0
         version: 1.1.0
+      '@eslint/markdown':
+        specifier: ^7.5.1
+        version: 7.5.1
       '@stylistic/eslint-plugin':
         specifier: ^5.10.0
         version: 5.10.0(eslint@10.0.3)
       '@typescript-eslint/parser':
         specifier: ^8.57.0
         version: 8.57.0(eslint@10.0.3)(typescript@5.9.3)
+      eslint-plugin-eslint-comments:
+        specifier: ^3.2.0
+        version: 3.2.0(eslint@10.0.3)
       eslint-plugin-vue:
         specifier: ^10.8.0
         version: 10.8.0(@stylistic/eslint-plugin@5.10.0(eslint@10.0.3))(@typescript-eslint/parser@8.57.0(eslint@10.0.3)(typescript@5.9.3))(eslint@10.0.3)(vue-eslint-parser@10.4.0(eslint@10.0.3))
@@ -3148,10 +3145,6 @@ packages:
 
   '@eslint/config-array@0.23.3':
     resolution: {integrity: sha512-j+eEWmB6YYLwcNOdlwQ6L2OsptI/LO6lNBuLIqe5R7RetD658HLoF+Mn7LzYmAWWNNzdC6cqP+L6r8ujeYXWLw==}
-    engines: {node: ^20.19.0 || ^22.13.0 || >=24}
-
-  '@eslint/config-helpers@0.5.2':
-    resolution: {integrity: sha512-a5MxrdDXEvqnIq+LisyCX6tQMPF/dSJpCfBgBauY+pNZ28yCtSsTvyTYrMhaI+LK26bVyCJfJkT0u8KIj2i1dQ==}
     engines: {node: ^20.19.0 || ^22.13.0 || >=24}
 
   '@eslint/config-helpers@0.5.3':
@@ -10771,10 +10764,6 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@eslint/config-helpers@0.5.2':
-    dependencies:
-      '@eslint/core': 1.1.1
-
   '@eslint/config-helpers@0.5.3':
     dependencies:
       '@eslint/core': 1.1.1
@@ -14149,7 +14138,7 @@ snapshots:
       '@eslint-community/eslint-utils': 4.9.1(eslint@10.0.3)
       '@eslint-community/regexpp': 4.12.2
       '@eslint/config-array': 0.23.3
-      '@eslint/config-helpers': 0.5.2
+      '@eslint/config-helpers': 0.5.3
       '@eslint/core': 1.1.1
       '@eslint/plugin-kit': 0.6.1
       '@humanfs/node': 0.16.7

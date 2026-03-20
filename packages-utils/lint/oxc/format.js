@@ -1,5 +1,4 @@
-{
-  "$schema": "./node_modules/oxfmt/configuration_schema.json",
+export const _configDefault = {
   "ignorePatterns": [
     "*.min.js",
     "*.code-snippets",
@@ -46,4 +45,8 @@
       }
     }
   ]
+}
+
+export function oxcFormatConfig() {
+  return _configDefault;
 }
