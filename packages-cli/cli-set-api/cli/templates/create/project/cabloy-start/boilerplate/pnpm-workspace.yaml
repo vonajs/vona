@@ -15,6 +15,7 @@ publicHoistPattern:
   - '*babel*'
   - '*@babel*'
   - '*eslint*'
+  - '*@eslint*'
   - '*types*'
   - lerna
   - vona
