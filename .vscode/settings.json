@@ -1,9 +1,4 @@
 {
-  "editor.tabSize": 2,
-  // "editor.formatOnSave": true,
-  "editor.formatOnSave": false,
-  "editor.formatOnPaste": false,
-  "files.eol": "\n",
   // typescript
   "ts.disableAutomaticTypeAcquisition": false,
   "ts.format.enable": true,
@@ -15,18 +10,21 @@
   "ts.preferences.importModuleSpecifier": "shortest",
   "ts.preferences.importModuleSpecifierEnding": "js",
   "ts.preferences.includePackageJsonAutoImports": "on",
-  // eslint
+  // oxfmt
+  "oxc.fmt.configPath": ".oxfmtrc.json",
+  "editor.defaultFormatter": "oxc.oxc-vscode",
+  "editor.formatOnSave": true,
+  // oxlint
   "editor.codeActionsOnSave": {
-    "source.fixAll.oxc": "always"
+    "source.fixAll.oxc": "always",
   },
-  "eslint.validate": ["javascript", "javascriptreact", "typescript", "typescriptreact", "vue"],
   // associations
   "files.associations": {
     "*.js.ejs": "javascript",
     "*.css.ejs": "css",
     "*.less.ejs": "less",
     "*.code-snippets": "text",
-    "docker-compose-dockerfile-app": "dockerfile"
+    "docker-compose-dockerfile-app": "dockerfile",
   },
   // search
   "search.exclude": {
@@ -37,9 +35,9 @@
     "/src/backend/app/**": true,
     "/src/backend/logs/**": true,
     "/src/backend/run/**": true,
-    "**/node_modules": true
+    "**/node_modules": true,
   },
   "search.useIgnoreFiles": false,
   "textlint.autoFixOnSave": true,
-  "hide-my-secrets.hideSecrets": false
+  "hide-my-secrets.hideSecrets": false,
 }
