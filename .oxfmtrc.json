@@ -1,5 +1,6 @@
 {
   "$schema": "./node_modules/oxfmt/configuration_schema.json",
+  "ignorePatterns": ["dist/**", "*.min.js", "*.code-snippets", "src/**"],
   "printWidth": 150,
   "tabWidth": 2,
   "useTabs": false,
@@ -7,6 +8,16 @@
   "singleQuote": true,
   "jsxSingleQuote": false,
   "trailingComma": "all",
-  "sortImports": {},
+  "sortImports": {
+    "groups": [
+      "type-import",
+      ["value-builtin", "value-external"],
+      "type-internal",
+      "value-internal",
+      ["type-parent", "type-sibling", "type-index"],
+      ["value-parent", "value-sibling", "value-index"],
+      "unknown",
+    ],
+  },
   "sortPackageJson": true,
 }
