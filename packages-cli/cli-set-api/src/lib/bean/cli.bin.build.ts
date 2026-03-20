@@ -2,8 +2,7 @@ import type { ICliBuildCustomOptions } from '@cabloy/cli';
 import type { glob } from '@cabloy/module-glob';
 import type { VonaConfigMeta, VonaMetaFlavor, VonaMetaMode } from '@cabloy/module-info';
 import type { LogLevel, LogOrStringHandler, OutputOptions, RollupBuild, RollupLog, RollupOptions } from 'rollup';
-import type { VonaBinConfigOptions } from './toolsBin/types.ts';
-import path from 'node:path';
+
 import { BeanCliBase } from '@cabloy/cli';
 import aliasImport from '@rollup/plugin-alias';
 import babelImport from '@rollup/plugin-babel';
@@ -15,8 +14,12 @@ import terserImport from '@rollup/plugin-terser';
 import typescriptImport from '@rollup/plugin-typescript';
 import fse from 'fs-extra';
 import { globby } from 'globby';
+import path from 'node:path';
 import { rimraf } from 'rimraf';
 import { rollup } from 'rollup';
+
+import type { VonaBinConfigOptions } from './toolsBin/types.ts';
+
 import { generateConfigDefine, getAbsolutePathOfModule, getOutDir, getOutReleasesDir } from '../utils.ts';
 import { generateVonaMeta } from './toolsBin/generateVonaMeta.ts';
 
@@ -37,7 +40,18 @@ declare module '@cabloy/cli' {
   }
 }
 
-const __dialectDriversAll = ['pg', 'mysql2', 'better-sqlite3', 'mysql', 'oracledb', 'pg-native', 'pg-query-stream', 'sqlite3', 'tedious', 'cloudflare:sockets'];
+const __dialectDriversAll = [
+  'pg',
+  'mysql2',
+  'better-sqlite3',
+  'mysql',
+  'oracledb',
+  'pg-native',
+  'pg-query-stream',
+  'sqlite3',
+  'tedious',
+  'cloudflare:sockets',
+];
 
 export class CliBinBuild extends BeanCliBase {
   async execute() {
@@ -78,10 +92,7 @@ export class CliBinBuild extends BeanCliBase {
         : path.join(projectPath, process.env.BUILD_COPY_DIST);
       const outDirCopy = path.join(envDist, path.basename(outDir));
       fse.removeSync(outDirCopy);
-      fse.copySync(
-        outDir,
-        outDirCopy,
-      );
+      fse.copySync(outDir, outDirCopy);
     }
     if (process.env.BUILD_COPY_RELEASE) {
       const envRelease = path.isAbsolute(process.env.BUILD_COPY_RELEASE)
@@ -89,10 +100,7 @@ export class CliBinBuild extends BeanCliBase {
         : path.join(projectPath, process.env.BUILD_COPY_RELEASE);
       const outReleasesDirCopy = path.join(envRelease, path.basename(outReleasesDir));
       fse.removeSync(outReleasesDirCopy);
-      fse.copySync(
-        outDir,
-        outReleasesDirCopy,
-      );
+      fse.copySync(outDir, outReleasesDirCopy);
     }
   }
 
@@ -183,16 +191,23 @@ export class CliBinBuild extends BeanCliBase {
       }),
     ];
     if (process.env.BUILD_MINIFY === 'true') {
-      plugins.push(terser({
-        keep_classnames: true,
-      }));
+      plugins.push(
+        terser({
+          keep_classnames: true,
+        }),
+      );
     }
     const inputOptions: RollupOptions = {
       input: path.join(projectPath, '.vona/bootstrap.ts'),
       plugins,
       onLog: (level: LogLevel, log: RollupLog, defaultHandler: LogOrStringHandler) => {
         if (log.code === 'CIRCULAR_DEPENDENCY' && process.env.BUILD_LOG_CIRCULAR_DEPENDENCY === 'false') return;
-        if (log.code === 'THIS_IS_UNDEFINED' && (log.message.includes('ramda/es/partialObject.js') || log.message.includes("The 'this' keyword is equivalent to 'undefined' at the top level of an ES module"))) return;
+        if (
+          log.code === 'THIS_IS_UNDEFINED' &&
+          (log.message.includes('ramda/es/partialObject.js') ||
+            log.message.includes("The 'this' keyword is equivalent to 'undefined' at the top level of an ES module"))
+        )
+          return;
         if (log.code === 'EVAL' && log.message.includes('depd/index.js')) return;
         if (log.code === 'EVAL' && log.message.includes('bluebird/js/release/util.js')) return;
         defaultHandler(level, log);

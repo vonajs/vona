@@ -1,6 +1,7 @@
 import type { ParserOptions } from '@babel/parser';
 import type { IGlobBeanFile, OnionSceneMeta } from '@cabloy/module-info';
 import type { GoGoAST } from 'gogocode';
+
 import type { BeanCliBase } from '../lib/bean.cli.base.ts';
 import type { ICommandContext } from './argv.ts';
 
@@ -39,16 +40,8 @@ export interface IInitData extends ICommandContext {
 }
 
 export type TypeParseLanguage = 'plain' | 'json' | 'gogo' | '';
-export type TypeParseResult<LANGUAGE extends TypeParseLanguage> = LANGUAGE extends 'plain'
-  ? string
-  : LANGUAGE extends 'json'
-    ? any
-    : GoGoAST;
-export type TypeParseOptions<LANGUAGE extends TypeParseLanguage> = LANGUAGE extends 'plain'
-  ? never
-  : LANGUAGE extends 'json'
-    ? never
-    : ParserOptions;
+export type TypeParseResult<LANGUAGE extends TypeParseLanguage> = LANGUAGE extends 'plain' ? string : LANGUAGE extends 'json' ? any : GoGoAST;
+export type TypeParseOptions<LANGUAGE extends TypeParseLanguage> = LANGUAGE extends 'plain' ? never : LANGUAGE extends 'json' ? never : ParserOptions;
 
 export interface ISnippet<LANGUAGE extends TypeParseLanguage = ''> {
   language: LANGUAGE;

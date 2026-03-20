@@ -1,4 +1,5 @@
 import type { OnionMetaMeta, OnionSceneMeta } from '@cabloy/module-info';
+
 import { toUpperCaseFirstChar } from '@cabloy/word-utils';
 import { globby } from 'globby';
 

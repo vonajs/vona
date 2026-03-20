@@ -1,9 +1,12 @@
 import type { VonaConfigMeta } from '@cabloy/module-info';
-import type { VonaBinConfigOptions } from './types.ts';
-import os from 'node:os';
-import path from 'node:path';
+
 import * as dotenv from '@cabloy/dotenv';
 import { glob } from '@cabloy/module-glob';
+import os from 'node:os';
+import path from 'node:path';
+
+import type { VonaBinConfigOptions } from './types.ts';
+
 import { getEnvMeta, getNodeEnv } from '../../utils.ts';
 
 export function createConfigUtils(
@@ -47,7 +50,7 @@ export function createConfigUtils(
       }
     }
     for (const key of ['NODE_ENV', 'SERVER_WORKERS', 'META_FLAVOR', 'META_MODE']) {
-      if (res[key] as any !== false) {
+      if ((res[key] as any) !== false) {
         process.env[key] = res[key];
       }
     }

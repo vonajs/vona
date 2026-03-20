@@ -1,5 +1,6 @@
 import type { IModule } from '@cabloy/module-info';
 import type { IMonkeyModule, IMonkeySystem } from 'vona';
+
 import { BeanSimple } from 'vona';
 
 export class AppMonkey extends BeanSimple implements IMonkeyModule, IMonkeySystem {

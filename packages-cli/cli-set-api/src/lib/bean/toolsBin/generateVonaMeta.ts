@@ -1,5 +1,7 @@
 import type { VonaConfigMeta } from '@cabloy/module-info';
+
 import type { VonaBinConfigOptions } from './types.ts';
+
 import { createConfigUtils } from './configUtils.ts';
 import { generateEntryFiles } from './generateEntryFiles.ts';
 

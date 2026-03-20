@@ -1,5 +1,7 @@
-import type { CmdOptions } from '../types/argv.ts';
 import { glob } from '@cabloy/module-glob';
+
+import type { CmdOptions } from '../types/argv.ts';
+
 import { patchFlavor } from '../utils.ts';
 import { LocalCommon } from './local.common.ts';
 import { LocalConsole } from './local.console.ts';

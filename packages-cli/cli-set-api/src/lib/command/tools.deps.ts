@@ -5,6 +5,5 @@ export default {
     title: 'Cli: Tools: Deps',
     usage: 'vona :tools:deps',
   },
-  options: {
-  },
+  options: {},
 };

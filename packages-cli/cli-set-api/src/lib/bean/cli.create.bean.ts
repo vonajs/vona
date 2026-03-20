@@ -1,10 +1,12 @@
 import type { IModuleInfo } from '@cabloy/module-info';
-import fs from 'node:fs';
-import path from 'node:path';
+
 import { BeanCliBase } from '@cabloy/cli';
 import { getOnionMetasMeta, getOnionScenesMeta } from '@cabloy/module-info';
 import { toUpperCaseFirstChar } from '@cabloy/word-utils';
 import fse from 'fs-extra';
+import fs from 'node:fs';
+import path from 'node:path';
+
 import { __ThisSetName__ } from '../this.ts';
 
 declare module '@cabloy/cli' {
@@ -36,9 +38,7 @@ export class CliCreateBean extends BeanCliBase {
     argv.ssrSiteModuleName = fs.existsSync(path.join(argv.projectPath, 'src/suite/cabloy-start'))
       ? 'vona-module-start-siteadmin'
       : 'vona-module-basic-siteadmin';
-    argv.ssrSiteOnionName = fs.existsSync(path.join(argv.projectPath, 'src/suite/cabloy-start'))
-      ? 'start-siteadmin:admin'
-      : 'basic-siteadmin:admin';
+    argv.ssrSiteOnionName = fs.existsSync(path.join(argv.projectPath, 'src/suite/cabloy-start')) ? 'start-siteadmin:admin' : 'basic-siteadmin:admin';
     argv.ssrSiteGroupName = fs.existsSync(path.join(argv.projectPath, 'src/suite/cabloy-start'))
       ? 'start-siteadmin:management'
       : 'basic-siteadmin:management';

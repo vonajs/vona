@@ -19,7 +19,13 @@
   "editor.codeActionsOnSave": {
     "source.fixAll.oxc": "always"
   },
-  "eslint.validate": ["javascript", "javascriptreact", "typescript", "typescriptreact", "vue"],
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact",
+    "vue"
+  ],
   // associations
   "files.associations": {
     "*.js.ejs": "javascript",

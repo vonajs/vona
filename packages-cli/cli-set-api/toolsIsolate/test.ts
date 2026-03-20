@@ -1,14 +1,15 @@
 import type { VonaApplication } from 'vona-core';
+
+import { catchError, sleep } from '@cabloy/utils';
+import TableClass from 'cli-table3';
+import fse from 'fs-extra';
+import { globby } from 'globby';
 import { createWriteStream } from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import { run } from 'node:test';
 import { lcov, spec } from 'node:test/reporters';
 import { fileURLToPath } from 'node:url';
-import { catchError, sleep } from '@cabloy/utils';
-import TableClass from 'cli-table3';
-import fse from 'fs-extra';
-import { globby } from 'globby';
 import { cast, createGeneralApp } from 'vona-core';
 import whyIsNodeRunning from 'why-is-node-running';
 
@@ -21,7 +22,7 @@ await testRun(projectPath, coverage, patterns);
 
 async function testRun(projectPath: string, coverage: boolean, patterns: string[]) {
   // patterns ignore
-  const patternsIgnore = (!coverage && process.env.TEST_PATTERNS_IGNORE) ? process.env.TEST_PATTERNS_IGNORE.split(',') : undefined;
+  const patternsIgnore = !coverage && process.env.TEST_PATTERNS_IGNORE ? process.env.TEST_PATTERNS_IGNORE.split(',') : undefined;
   // files
   const files = await globby(patterns, {
     cwd: projectPath,
@@ -95,11 +96,9 @@ async function testRun(projectPath: string, coverage: boolean, patterns: string[
       const reporterDir = path.join(projectPath, 'coverage');
       fse.ensureDirSync(reporterDir);
       const reporterLcov = createWriteStream(path.join(reporterDir, 'lcov.info'));
-      testStream.compose(lcov)
-        .pipe(reporterLcov);
+      testStream.compose(lcov).pipe(reporterLcov);
     } else {
-      testStream.compose(spec)
-        .pipe(process.stdout);
+      testStream.compose(spec).pipe(process.stdout);
     }
   });
 }
@@ -172,9 +171,9 @@ interface CoverageTotals {
    * The percentage of functions covered.
    */
   coveredFunctionPercent: number;
-};
+}
 
 function resolveTemplatePath(file: string) {
-  const url = (new URL(path.join('../templates', file), import.meta.url));
+  const url = new URL(path.join('../templates', file), import.meta.url);
   return fileURLToPath(url);
 }

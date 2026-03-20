@@ -1,4 +1,5 @@
 import type { IModuleMain } from 'vona';
+
 import { BeanSimple } from 'vona';
 import { en, zhCN } from 'zod/locales';
 

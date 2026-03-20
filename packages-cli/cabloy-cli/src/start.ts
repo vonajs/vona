@@ -1,6 +1,9 @@
 import type { TypeBrandName } from '@cabloy/module-info';
-import type { ICommandArgv } from './types/argv.ts';
+
 import CommonBin from '@zhennann/common-bin';
+
+import type { ICommandArgv } from './types/argv.ts';
+
 import { BeanCli } from './lib/bean.cli.ts';
 import { CliCommand } from './lib/cli.ts';
 import { collectCommands } from './lib/commands.ts';

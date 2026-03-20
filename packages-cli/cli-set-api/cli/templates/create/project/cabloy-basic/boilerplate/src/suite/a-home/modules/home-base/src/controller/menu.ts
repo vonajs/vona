@@ -1,5 +1,6 @@
 import type { IMenus } from 'vona-module-a-menu';
 import type { IDecoratorControllerOptions } from 'vona-module-a-web';
+
 import { BeanBase } from 'vona';
 import { DtoMenus } from 'vona-module-a-menu';
 import { Api, v } from 'vona-module-a-openapiutils';

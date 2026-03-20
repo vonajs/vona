@@ -1,17 +1,22 @@
 {
   "name": "vona-cli-set-api",
-  "type": "module",
   "version": "1.0.498",
+  "gitHead": "0eab9dc4a5622caffe89e7b1b3f02c08ccbc4c4b",
   "description": "vona cli-set-api",
-  "publishConfig": {
-    "access": "public"
-  },
-  "author": "zhennann",
-  "license": "MIT",
   "keywords": [
     "framework",
     "vona"
   ],
+  "license": "MIT",
+  "author": "zhennann",
+  "files": [
+    "cli",
+    "dist",
+    "dist-cli",
+    "dist-toolsIsolate",
+    "templates"
+  ],
+  "type": "module",
   "exports": {
     ".": {
       "types": [
@@ -23,20 +28,8 @@
     },
     "./package.json": "./package.json"
   },
-  "files": [
-    "cli",
-    "dist",
-    "dist-cli",
-    "dist-toolsIsolate",
-    "templates"
-  ],
-  "clean-package": {
-    "indent": 2,
-    "remove": [
-      "clean-package",
-      "devDependencies",
-      "exports.\\..import"
-    ]
+  "publishConfig": {
+    "access": "public"
   },
   "scripts": {
     "clean": "rimraf dist dist-cli dist-toolsIsolate tsconfig.build.tsbuildinfo tsconfig.cli.tsbuildinfo tsconfig.isolate.tsbuildinfo",
@@ -88,5 +81,12 @@
   "devDependencies": {
     "clean-package": "^2.2.0"
   },
-  "gitHead": "0eab9dc4a5622caffe89e7b1b3f02c08ccbc4c4b"
+  "clean-package": {
+    "indent": 2,
+    "remove": [
+      "clean-package",
+      "devDependencies",
+      "exports.\\..import"
+    ]
+  }
 }

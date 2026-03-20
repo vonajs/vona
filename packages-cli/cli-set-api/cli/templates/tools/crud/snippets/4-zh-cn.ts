@@ -1,4 +1,5 @@
 import { metadataCustomSnippet } from '@cabloy/cli';
+
 import { locale_transform } from '../utils.ts';
 
 const __resources = { Name: '名称', Description: '描述' };

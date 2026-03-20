@@ -1,5 +1,6 @@
-import path from 'node:path';
 import fse from 'fs-extra';
+import path from 'node:path';
+
 import { loadJSONFile } from './utils.ts';
 
 export async function playAttach(projectPath: string, args: string[]) {

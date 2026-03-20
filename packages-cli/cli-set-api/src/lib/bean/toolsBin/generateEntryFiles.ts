@@ -1,10 +1,13 @@
 import type { glob } from '@cabloy/module-glob';
 import type { VonaConfigMeta } from '@cabloy/module-info';
-import type { VonaBinConfigOptions } from './types.ts';
-import path from 'node:path';
+
 import { getEnvFiles } from '@cabloy/dotenv';
 import chalk from 'chalk';
 import fse from 'fs-extra';
+import path from 'node:path';
+
+import type { VonaBinConfigOptions } from './types.ts';
+
 import { resolveTemplatePath } from '../../../utils.ts';
 import { copyTemplateFile, getEnvMeta } from '../../utils.ts';
 import { generateZod } from './generateZod.ts';
@@ -62,7 +65,10 @@ export async function generateEntryFiles(
   }
 
   async function __generateApp() {
-    const templates = [['app/bootstrap.ejs', 'bootstrap.ts'], ['app/app.ejs', 'app.ts']];
+    const templates = [
+      ['app/bootstrap.ejs', 'bootstrap.ts'],
+      ['app/app.ejs', 'app.ts'],
+    ];
     for (const [templateSrc, templateDest] of templates) {
       const fileSrc = resolveTemplatePath(templateSrc);
       const fileDest = path.join(configOptions.appDir, configOptions.runtimeDir, templateDest);

@@ -3,6 +3,7 @@ import BaseCommand from '@zhennann/common-bin';
 import chalk from 'chalk';
 import enquirer from 'enquirer';
 import is from 'is-type-of';
+
 import { BeanCli } from './bean.cli.ts';
 
 const __envFields = ['TERM', 'TERM_PROGRAM', 'TERM_PROGRAM_VERSION', 'SHELL', 'COLOR', 'LANG', 'npm_config_registry'];

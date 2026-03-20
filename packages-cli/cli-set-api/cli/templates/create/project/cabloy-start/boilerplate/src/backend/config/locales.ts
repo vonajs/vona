@@ -1,5 +1,7 @@
 import type { TypeLocaleBase, VonaLocaleOptionalMap } from 'vona';
+
 import { $makeLocaleMagic } from 'vona';
+
 import { localeDefault as localeDefault_en_us, localeModules as localeModules_en_us } from './locale/en-us.ts';
 import { localeDefault as localeDefault_zh_cn, localeModules as localeModules_zh_cn } from './locale/zh-cn.ts';
 

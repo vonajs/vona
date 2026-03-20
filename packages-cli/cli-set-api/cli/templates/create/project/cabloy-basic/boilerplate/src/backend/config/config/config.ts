@@ -2,8 +2,17 @@ import type { ILoggerOptionsClientInfo, VonaApplication, VonaConfigEnv, VonaConf
 import type { IMailClientRecord, TypeMailTransportService } from 'vona-module-a-mail';
 import type { IDatabaseClientRecord } from 'vona-module-a-orm';
 import type * as Winston from 'winston';
+
 import { replaceTemplate } from '@cabloy/utils';
-import { $customKey, formatLoggerAxiosError, formatLoggerCtx, getLoggerPathPhysicalRoot, getPublicPathPhysicalRoot, getSqlite3DatabaseNameDefault, getSqlite3NativeBinding } from 'vona';
+import {
+  $customKey,
+  formatLoggerAxiosError,
+  formatLoggerCtx,
+  getLoggerPathPhysicalRoot,
+  getPublicPathPhysicalRoot,
+  getSqlite3DatabaseNameDefault,
+  getSqlite3NativeBinding,
+} from 'vona';
 
 declare module 'vona' {
   export interface IInstanceRecord {
@@ -184,7 +193,7 @@ export default async function (app: VonaApplication, env: VonaConfigEnv) {
     clients: {
       system: {
         transport: {
-          service: env.MAIL_SYSTEM_TRANSPORT_SERVICE as TypeMailTransportService || undefined,
+          service: (env.MAIL_SYSTEM_TRANSPORT_SERVICE as TypeMailTransportService) || undefined,
           host: env.MAIL_SYSTEM_TRANSPORT_HOST || undefined,
           port: env.MAIL_SYSTEM_TRANSPORT_PORT ? Number.parseInt(env.MAIL_SYSTEM_TRANSPORT_PORT) : undefined,
           secure: env.MAIL_SYSTEM_TRANSPORT_SECURE === 'true',

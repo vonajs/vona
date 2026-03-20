@@ -1,7 +1,9 @@
 import type { IModuleInfo } from '@cabloy/module-info';
+
+import { BeanCliBase } from '@cabloy/cli';
 import fs from 'node:fs';
 import path from 'node:path';
-import { BeanCliBase } from '@cabloy/cli';
+
 import { __ThisSetName__ } from '../this.ts';
 
 declare module '@cabloy/cli' {
@@ -27,9 +29,7 @@ export class CliToolsCrudCabloy extends BeanCliBase {
     argv.ssrSiteModuleName = fs.existsSync(path.join(argv.projectPath, 'src/suite/cabloy-start'))
       ? 'vona-module-start-siteadmin'
       : 'vona-module-basic-siteadmin';
-    argv.ssrSiteOnionName = fs.existsSync(path.join(argv.projectPath, 'src/suite/cabloy-start'))
-      ? 'start-siteadmin:admin'
-      : 'basic-siteadmin:admin';
+    argv.ssrSiteOnionName = fs.existsSync(path.join(argv.projectPath, 'src/suite/cabloy-start')) ? 'start-siteadmin:admin' : 'basic-siteadmin:admin';
     argv.ssrSiteGroupName = fs.existsSync(path.join(argv.projectPath, 'src/suite/cabloy-start'))
       ? 'start-siteadmin:management'
       : 'basic-siteadmin:management';
@@ -52,12 +52,7 @@ export class CliToolsCrudCabloy extends BeanCliBase {
       throw new Error(`resource exists: ${resourceName}`);
     }
     // tools:crud
-    await this.helper.invokeCli([
-      ':tools:crud',
-      resourceName,
-      `--module=${argv.module}`,
-      '--nometadata',
-    ], { cwd: argv.projectPath });
+    await this.helper.invokeCli([':tools:crud', resourceName, `--module=${argv.module}`, '--nometadata'], { cwd: argv.projectPath });
     // render
     await this.template.renderBoilerplateAndSnippets({
       targetDir,

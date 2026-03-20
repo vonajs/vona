@@ -1,5 +1,5 @@
-import { createRequire } from 'node:module';
 import { CabloyCommand } from '@cabloy/cli';
+import { createRequire } from 'node:module';
 
 export class VonaCommand extends CabloyCommand {
   constructor(rawArgv?: any[], disableVersion?: boolean) {

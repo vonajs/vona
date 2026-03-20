@@ -1,7 +1,9 @@
 import type { IPassport, IPassportAdapter } from 'vona-module-a-user';
-import type { IPayloadDataOfPassport } from '../types/jwt.ts';
+
 import { BeanBase } from 'vona';
 import { Service } from 'vona-module-a-bean';
+
+import type { IPayloadDataOfPassport } from '../types/jwt.ts';
 
 @Service()
 export class ServicePassportAdapter extends BeanBase implements IPassportAdapter {

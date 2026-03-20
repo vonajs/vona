@@ -1,10 +1,6 @@
 import type { IProcessHelperSpawnOptions } from '@cabloy/process-helper';
 import type { TableConstructorOptions } from 'cli-table3';
-import type { NameMeta } from '../types/helper.ts';
-import type { BeanCliBase } from './bean.cli.base.ts';
-import { createRequire } from 'node:module';
-import path from 'node:path';
-import { pathToFileURL } from 'node:url';
+
 import * as ModuleInfo from '@cabloy/module-info';
 import { ProcessHelper } from '@cabloy/process-helper';
 import { combineResourceName } from '@cabloy/utils';
@@ -13,7 +9,14 @@ import Chalk from 'chalk';
 import TableClass from 'cli-table3';
 import fse from 'fs-extra';
 import gogocode from 'gogocode';
+import { createRequire } from 'node:module';
+import path from 'node:path';
+import { pathToFileURL } from 'node:url';
 import tmp from 'tmp';
+
+import type { NameMeta } from '../types/helper.ts';
+import type { BeanCliBase } from './bean.cli.base.ts';
+
 import { commandsConfig } from '../config.ts';
 import { getRegistry } from '../registry.ts';
 
@@ -183,35 +186,19 @@ export class LocalHelper {
     return await this.processHelper.formatFile({ fileName, logPrefix });
   }
 
-  async spawnBin({ cmd, args, options }: {
-    cmd: string;
-    args?: string[];
-    options?: IProcessHelperSpawnOptions;
-  }): Promise<string> {
+  async spawnBin({ cmd, args, options }: { cmd: string; args?: string[]; options?: IProcessHelperSpawnOptions }): Promise<string> {
     return await this.processHelper.spawnBin({ cmd, args, options });
   }
 
-  async spawnCmd({ cmd, args, options }: {
-    cmd: string;
-    args?: string[];
-    options?: IProcessHelperSpawnOptions;
-  }): Promise<string> {
+  async spawnCmd({ cmd, args, options }: { cmd: string; args?: string[]; options?: IProcessHelperSpawnOptions }): Promise<string> {
     return await this.processHelper.spawnCmd({ cmd, args, options });
   }
 
-  async spawnExe({ cmd, args, options }: {
-    cmd: string;
-    args?: string[];
-    options?: IProcessHelperSpawnOptions;
-  }): Promise<string> {
+  async spawnExe({ cmd, args, options }: { cmd: string; args?: string[]; options?: IProcessHelperSpawnOptions }): Promise<string> {
     return await this.processHelper.spawnExe({ cmd, args, options });
   }
 
-  async spawn({ cmd, args = [], options = {} }: {
-    cmd: string;
-    args?: string[];
-    options?: IProcessHelperSpawnOptions;
-  }): Promise<string> {
+  async spawn({ cmd, args = [], options = {} }: { cmd: string; args?: string[]; options?: IProcessHelperSpawnOptions }): Promise<string> {
     return await this.processHelper.spawn({ cmd, args, options });
   }
 

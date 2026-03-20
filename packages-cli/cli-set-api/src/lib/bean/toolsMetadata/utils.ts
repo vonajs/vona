@@ -1,8 +1,9 @@
 import type { IGlobBeanFile, OnionSceneMeta } from '@cabloy/module-info';
-import path from 'node:path';
+
 import { stringToCapitalize, toUpperCaseFirstChar } from '@cabloy/word-utils';
 import fse from 'fs-extra';
 import { globby } from 'globby';
+import path from 'node:path';
 
 export function checkIgnoreOfParts(parts: string[]) {
   const indexLast = parts.length - 1;
@@ -17,17 +18,10 @@ export function getScopeModuleName(moduleName: string) {
   return `ScopeModule${stringToCapitalize(moduleName, '-')}`;
 }
 
-export async function globBeanFiles(
-  sceneName: string,
-  sceneMeta: OnionSceneMeta,
-  moduleName: string,
-  modulePath: string,
-): Promise<IGlobBeanFile[]> {
+export async function globBeanFiles(sceneName: string, sceneMeta: OnionSceneMeta, moduleName: string, modulePath: string): Promise<IGlobBeanFile[]> {
   const result: IGlobBeanFile[] = [];
   const sceneNameCapitalize = toUpperCaseFirstChar(sceneName);
-  const pattern = sceneMeta.sceneIsolate
-    ? `src/${sceneName}/*.ts(x)?`
-    : `src/bean/${sceneName}.*.ts(x)?`;
+  const pattern = sceneMeta.sceneIsolate ? `src/${sceneName}/*.ts(x)?` : `src/bean/${sceneName}.*.ts(x)?`;
   const files = await globby(pattern, { cwd: modulePath });
   if (files.length === 0) return result;
   files.sort();
@@ -41,8 +35,7 @@ export async function globBeanFiles(
     const isIgnore = checkIgnoreOfParts(parts);
     const fileNameJS = fileName; // fileName.replace('.ts', '.js');
     const fileNameJSRelative = sceneMeta.sceneIsolate ? `../${sceneName}/${fileNameJS}` : `../bean/${fileNameJS}`;
-    const className =
-      (sceneMeta.sceneIsolate ? sceneNameCapitalize : '') + parts.map(item => toUpperCaseFirstChar(item)).join('');
+    const className = (sceneMeta.sceneIsolate ? sceneNameCapitalize : '') + parts.map(item => toUpperCaseFirstChar(item)).join('');
     const beanName = parts[parts.length - 1];
     const beanNameFull = `${moduleName}:${beanName}`;
     const beanNameCapitalize = toUpperCaseFirstChar(beanName);
@@ -86,9 +79,7 @@ export function extractBeanInfo(sceneName: string, fileContent: string, sceneMet
     }
   }
   // isGlobal
-  const isGlobal = sceneMeta.hasLocal
-    ? fileContent.includes('@Global()')
-    : true;
+  const isGlobal = sceneMeta.hasLocal ? fileContent.includes('@Global()') : true;
   return { optionsCustomInterface, optionsCustomInterfaceFrom, isGlobal };
 }
 

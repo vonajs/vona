@@ -1,5 +1,5 @@
 import type { LogLevel, LogOrStringHandler, OutputOptions, RollupBuild, RollupLog, RollupOptions } from 'rollup';
-import path from 'node:path';
+
 import { BeanCliBase } from '@cabloy/cli';
 import aliasImport from '@rollup/plugin-alias';
 import babelImport from '@rollup/plugin-babel';
@@ -8,8 +8,10 @@ import jsonImport from '@rollup/plugin-json';
 import resolveImport from '@rollup/plugin-node-resolve';
 import terserImport from '@rollup/plugin-terser';
 import typescriptImport from '@rollup/plugin-typescript';
+import path from 'node:path';
 import { rimraf } from 'rimraf';
 import { rollup } from 'rollup';
+
 import { getAbsolutePathOfModule } from '../utils.ts';
 
 const commonjs = commonjsImport as any as typeof commonjsImport.default;
@@ -93,16 +95,23 @@ export class CliBinBuildModule extends BeanCliBase {
       }),
     ];
     if (argv.minify) {
-      plugins.push(terser({
-        keep_classnames: true,
-      }));
+      plugins.push(
+        terser({
+          keep_classnames: true,
+        }),
+      );
     }
     const inputOptions: RollupOptions = {
       input: path.join(projectPath, 'src/index.ts'),
       plugins,
       onLog: (level: LogLevel, log: RollupLog, defaultHandler: LogOrStringHandler) => {
         if (log.code === 'CIRCULAR_DEPENDENCY') return;
-        if (log.code === 'THIS_IS_UNDEFINED' && (log.message.includes('ramda/es/partialObject.js') || log.message.includes("The 'this' keyword is equivalent to 'undefined' at the top level of an ES module"))) return;
+        if (
+          log.code === 'THIS_IS_UNDEFINED' &&
+          (log.message.includes('ramda/es/partialObject.js') ||
+            log.message.includes("The 'this' keyword is equivalent to 'undefined' at the top level of an ES module"))
+        )
+          return;
         if (log.code === 'EVAL' && log.message.includes('depd/index.js')) return;
         if (log.code === 'EVAL' && log.message.includes('bluebird/js/release/util.js')) return;
         defaultHandler(level, log);

@@ -10,10 +10,7 @@
   },
   "exports": {
     ".": {
-      "types": [
-        "./src/index.ts",
-        "./dist/index.d.ts"
-      ],
+      "types": ["./src/index.ts", "./dist/index.d.ts"],
       "import": "./src/index.ts",
       "default": "./dist/index.js"
     },
@@ -22,11 +19,7 @@
   "description": "",
   "keywords": ["Vona Module"],
   "author": "",
-  "files": [
-    "assets",
-    "dist",
-    "src"
-  ],
+  "files": ["assets", "dist", "src"],
   "scripts": {
     "clean": "rimraf dist tsconfig.build.tsbuildinfo",
     "tsc:publish": "npm run clean && vona :bin:buildModule --sourcemap && tsc -p tsconfig.build.json",
@@ -36,11 +29,7 @@
   },
   "clean-package": {
     "indent": 2,
-    "remove": [
-      "clean-package",
-      "devDependencies",
-      "exports.\\..import"
-    ]
+    "remove": ["clean-package", "devDependencies", "exports.\\..import"]
   },
   "dependencies": {},
   "devDependencies": {

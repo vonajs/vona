@@ -1,12 +1,12 @@
-import path from 'node:path';
 import { BeanCliBase } from '@cabloy/cli';
 import fse from 'fs-extra';
 import { globby } from 'globby';
+import path from 'node:path';
+
 import { resolveTemplatePath } from '../../utils.ts';
 
 declare module '@cabloy/cli' {
-  interface ICommandArgv {
-  }
+  interface ICommandArgv {}
 }
 
 export class CliToolsDeps extends BeanCliBase {

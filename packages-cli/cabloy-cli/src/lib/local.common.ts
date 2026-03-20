@@ -1,9 +1,11 @@
 import type { IModule, IModulePackage } from '@cabloy/module-info';
 import type { Stats } from 'fs-extra';
-import type { BeanCliBase } from './bean.cli.base.ts';
-import path from 'node:path';
+
 import fse from 'fs-extra';
 import { globby } from 'globby';
+import path from 'node:path';
+
+import type { BeanCliBase } from './bean.cli.base.ts';
 
 type TypeDeps = Record<string, string>;
 
@@ -151,13 +153,7 @@ export class LocalCommon {
     }
   }
 
-  async _generatePackageJson_saveBack(
-    pkg: IModulePackage,
-    pkgOriginal: IModulePackage,
-    pkgOriginalFile: string,
-    deps: TypeDeps,
-    depsDev: TypeDeps,
-  ) {
+  async _generatePackageJson_saveBack(pkg: IModulePackage, pkgOriginal: IModulePackage, pkgOriginalFile: string, deps: TypeDeps, depsDev: TypeDeps) {
     let changed = false;
     for (const key of ['version', 'gitHead']) {
       if (pkgOriginal[key] !== pkg[key]) {
@@ -198,8 +194,7 @@ function _checkIfModuleOnlyDev(module: IModule) {
 
 function _collectModuleDevs(module: IModule, deps: {}, nameDependencies: string, nameGlobalDependencies: string) {
   const moduleDeps = module.package[nameDependencies];
-  const globalDependencies =
-    module.package.vonaModule?.[nameGlobalDependencies] || module.package.zovaModule?.[nameGlobalDependencies];
+  const globalDependencies = module.package.vonaModule?.[nameGlobalDependencies] || module.package.zovaModule?.[nameGlobalDependencies];
   if (globalDependencies) {
     for (const key in globalDependencies) {
       let version = globalDependencies[key];

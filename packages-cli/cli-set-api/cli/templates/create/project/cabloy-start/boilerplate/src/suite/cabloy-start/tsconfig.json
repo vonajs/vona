@@ -9,7 +9,5 @@
       "path": "modules/start-siteweb/tsconfig.build.json"
     }
   ],
-  "exclude": [
-    "modules"
-  ]
+  "exclude": ["modules"]
 }

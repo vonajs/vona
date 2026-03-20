@@ -1,12 +1,12 @@
 {
   "name": "vona-cli",
-  "title": "zova cli",
-  "type": "module",
   "private": true,
   "description": "vona cli",
-  "author": "zhennann",
-  "license": "MIT",
   "keywords": [
     "vona"
-  ]
+  ],
+  "license": "MIT",
+  "author": "zhennann",
+  "type": "module",
+  "title": "zova cli"
 }

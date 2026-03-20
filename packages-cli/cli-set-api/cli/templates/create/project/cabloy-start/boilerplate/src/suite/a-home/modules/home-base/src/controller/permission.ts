@@ -1,5 +1,6 @@
 import type { IOpenapiPermissions, IResourceRecord } from 'vona-module-a-openapi';
 import type { IDecoratorControllerOptions } from 'vona-module-a-web';
+
 import { BeanBase } from 'vona';
 import { Api, v } from 'vona-module-a-openapiutils';
 import { DtoPermissions } from 'vona-module-a-permission';

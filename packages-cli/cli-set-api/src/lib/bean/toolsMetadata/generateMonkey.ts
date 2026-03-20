@@ -1,5 +1,5 @@
-import path from 'node:path';
 import fse from 'fs-extra';
+import path from 'node:path';
 
 export async function generateMonkey(modulePath: string) {
   const monkeyFile = path.join(modulePath, 'src/monkey.ts');

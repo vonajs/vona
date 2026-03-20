@@ -1,17 +1,21 @@
 {
   "name": "vona-cli",
-  "type": "module",
   "version": "1.0.501",
+  "gitHead": "0eab9dc4a5622caffe89e7b1b3f02c08ccbc4c4b",
   "description": "vona cli",
-  "publishConfig": {
-    "access": "public"
-  },
-  "author": "zhennann",
-  "license": "MIT",
   "keywords": [
     "framework",
     "vona"
   ],
+  "license": "MIT",
+  "author": "zhennann",
+  "bin": {
+    "vona": "dist/bin/vona.js"
+  },
+  "files": [
+    "dist"
+  ],
+  "type": "module",
   "exports": {
     ".": {
       "types": [
@@ -23,19 +27,8 @@
     },
     "./*": "./*"
   },
-  "bin": {
-    "vona": "dist/bin/vona.js"
-  },
-  "files": [
-    "dist"
-  ],
-  "clean-package": {
-    "indent": 2,
-    "remove": [
-      "clean-package",
-      "devDependencies",
-      "exports.\\..import"
-    ]
+  "publishConfig": {
+    "access": "public"
   },
   "scripts": {
     "clean": "rimraf dist tsconfig.tsbuildinfo",
@@ -55,5 +48,12 @@
     "clean-package": "^2.2.0",
     "rimraf": "^6.0.1"
   },
-  "gitHead": "0eab9dc4a5622caffe89e7b1b3f02c08ccbc4c4b"
+  "clean-package": {
+    "indent": 2,
+    "remove": [
+      "clean-package",
+      "devDependencies",
+      "exports.\\..import"
+    ]
+  }
 }

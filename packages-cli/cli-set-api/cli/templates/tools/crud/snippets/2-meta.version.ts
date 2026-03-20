@@ -1,6 +1,6 @@
-import fs from 'node:fs';
 import { metadataCustomSnippet } from '@cabloy/cli';
 import { catchError } from '@cabloy/utils';
+import fs from 'node:fs';
 
 declare module '@cabloy/cli' {
   interface ICommandArgv {
@@ -25,14 +25,9 @@ export default metadataCustomSnippet({
   format: true,
   init: async ({ cli, argv, targetFile }) => {
     await catchError(() => {
-      return cli.helper.invokeCli([
-        ':create:bean',
-        'meta',
-        'version',
-        `--module=${argv.module}`,
-        '--nometadata',
-        '--noformat',
-      ], { cwd: argv.projectPath });
+      return cli.helper.invokeCli([':create:bean', 'meta', 'version', `--module=${argv.module}`, '--nometadata', '--noformat'], {
+        cwd: argv.projectPath,
+      });
     });
     return fs.readFileSync(targetFile).toString('utf8');
   },

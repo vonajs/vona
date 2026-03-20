@@ -1,4 +1,5 @@
 import type { IOpenapiPermissions, IResourceRecord } from 'vona-module-a-openapi';
+
 import { BeanBase } from 'vona';
 import { Service } from 'vona-module-a-bean';
 

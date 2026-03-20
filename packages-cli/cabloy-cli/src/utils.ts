@@ -1,9 +1,11 @@
 import type { VonaMetaFlavor } from '@cabloy/module-info';
-import { createRequire } from 'node:module';
+
 import boxen from 'boxen';
 import chalk from 'chalk';
+import { createRequire } from 'node:module';
 import semver from 'semver';
 import urllib from 'urllib';
+
 import { getRegistry } from './registry.ts';
 
 const boxenOptions = { padding: 1, margin: 1, align: 'center', borderColor: 'yellow', borderStyle: 'round' };

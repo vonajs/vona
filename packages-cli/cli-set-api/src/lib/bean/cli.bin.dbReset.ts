@@ -1,10 +1,13 @@
 import type { glob } from '@cabloy/module-glob';
 import type { VonaConfigMeta, VonaMetaFlavor, VonaMetaMode } from '@cabloy/module-info';
-import type { VonaBinConfigOptions } from './toolsBin/types.ts';
-import path from 'node:path';
+
 import { BeanCliBase } from '@cabloy/cli';
 import fse from 'fs-extra';
+import path from 'node:path';
 import { rimraf } from 'rimraf';
+
+import type { VonaBinConfigOptions } from './toolsBin/types.ts';
+
 import { getImportEsm } from '../utils.ts';
 import { generateVonaMeta } from './toolsBin/generateVonaMeta.ts';
 

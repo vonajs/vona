@@ -1,18 +1,14 @@
 import type { BeanCliBase } from '@cabloy/cli';
 import type { IMetadataCustomGenerateOptions } from '@cabloy/cli';
 import type { OnionSceneMeta } from '@cabloy/module-info';
-import path from 'node:path';
+
 import { toUpperCaseFirstChar } from '@cabloy/word-utils';
 import fse from 'fs-extra';
+import path from 'node:path';
+
 import { globBeanFiles } from './utils.ts';
 
-export async function generateMetadataCustom(
-  cli: BeanCliBase,
-  sceneName: string,
-  sceneMeta: OnionSceneMeta,
-  moduleName: string,
-  modulePath: string,
-) {
+export async function generateMetadataCustom(cli: BeanCliBase, sceneName: string, sceneMeta: OnionSceneMeta, moduleName: string, modulePath: string) {
   const sceneNameCapitalize = toUpperCaseFirstChar(sceneName);
   const globFiles = await globBeanFiles(sceneName, sceneMeta, moduleName, modulePath);
   if (globFiles.length === 0) return '';

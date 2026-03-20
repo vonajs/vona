@@ -1,18 +1,17 @@
 {
   "name": "vona-module-start-siteadmin",
-  "type": "module",
   "version": "5.0.0",
-  "title": "start-siteadmin",
-  "vonaModule": {
-    "dependencies": {
-      "a-vona": "5.0.0"
-    }
-  },
   "description": "",
-  "author": "",
   "keywords": [
     "Vona Module"
   ],
+  "author": "",
+  "files": [
+    "assets",
+    "dist",
+    "zovaRest"
+  ],
+  "type": "module",
   "exports": {
     ".": {
       "types": [
@@ -24,11 +23,6 @@
     },
     "./package.json": "./package.json"
   },
-  "files": [
-    "assets",
-    "dist",
-    "zovaRest"
-  ],
   "scripts": {
     "clean": "rimraf dist tsconfig.build.tsbuildinfo",
     "tsc:publish": "npm run clean && vona :bin:buildModule && tsc -p tsconfig.build.json",
@@ -36,6 +30,11 @@
     "prepack": "clean-package",
     "postpack": "clean-package restore && npm run clean",
     "version": "node ../../../../../scripts/version-cabloy-start.ts"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "clean-package": "^2.2.0",
+    "rimraf": "^6.0.1"
   },
   "clean-package": {
     "indent": 2,
@@ -45,9 +44,10 @@
       "exports.\\..import"
     ]
   },
-  "dependencies": {},
-  "devDependencies": {
-    "clean-package": "^2.2.0",
-    "rimraf": "^6.0.1"
+  "title": "start-siteadmin",
+  "vonaModule": {
+    "dependencies": {
+      "a-vona": "5.0.0"
+    }
   }
 }

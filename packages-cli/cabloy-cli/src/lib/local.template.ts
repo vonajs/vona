@@ -1,14 +1,16 @@
-import type { IEjsData, ISnippet, TypeParseLanguage } from '../types/template.ts';
-import type { BeanCliBase } from './bean.cli.base.ts';
-import fs from 'node:fs';
-import { createRequire } from 'node:module';
-import path from 'node:path';
 import { catchError } from '@cabloy/utils';
 import ejs from '@zhennann/ejs';
 import fse from 'fs-extra';
 import { globby } from 'globby';
 import gogocode from 'gogocode';
 import isTextOrBinary from 'istextorbinary';
+import fs from 'node:fs';
+import { createRequire } from 'node:module';
+import path from 'node:path';
+
+import type { IEjsData, ISnippet, TypeParseLanguage } from '../types/template.ts';
+import type { BeanCliBase } from './bean.cli.base.ts';
+
 import { commandsConfig } from '../config.ts';
 
 export class LocalTemplate {
@@ -229,9 +231,7 @@ export class LocalTemplate {
       onlyFiles: true,
     });
     // snippets sort
-    files = files
-      .filter(item => item[0] !== '-')
-      .sort((a, b) => this._parseSnippetFilePrefix(a) - this._parseSnippetFilePrefix(b));
+    files = files.filter(item => item[0] !== '-').sort((a, b) => this._parseSnippetFilePrefix(a) - this._parseSnippetFilePrefix(b));
     // for
     for (const file of files) {
       const snippetTemplatePath = path.join(snippetsDir, file);

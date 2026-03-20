@@ -1,8 +1,9 @@
 import type { VonaConfigMeta, VonaMetaMode } from '@cabloy/module-info';
-import { createRequire } from 'node:module';
-import { pathToFileURL } from 'node:url';
+
 import fse from 'fs-extra';
 import compileTemplate from 'lodash/template.js';
+import { createRequire } from 'node:module';
+import { pathToFileURL } from 'node:url';
 
 export function getEnvMeta(configMeta: VonaConfigMeta) {
   return { flavor: configMeta.flavor, mode: configMeta.mode, mine: 'mine' };

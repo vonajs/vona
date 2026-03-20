@@ -1,10 +1,13 @@
 import type { glob } from '@cabloy/module-glob';
 import type { VonaConfigMeta, VonaMetaFlavor, VonaMetaMode } from '@cabloy/module-info';
-import type { VonaBinConfigOptions } from './toolsBin/types.ts';
-import path from 'node:path';
+
 import { BeanCliBase } from '@cabloy/cli';
+import path from 'node:path';
 import nodemon from 'nodemon';
 import { rimraf } from 'rimraf';
+
+import type { VonaBinConfigOptions } from './toolsBin/types.ts';
+
 import { getImportEsm } from '../utils.ts';
 import { generateVonaMeta } from './toolsBin/generateVonaMeta.ts';
 
@@ -50,11 +53,7 @@ export class CliBinDev extends BeanCliBase {
         execArgs: [getImportEsm()],
         // execArgs: ['--experimental-transform-types', getImportEsm(), '--trace-deprecation'],
         // signal: 'SIGHUP',
-        watch: [
-          'packages-utils',
-          'packages-vona',
-          './src',
-        ],
+        watch: ['packages-utils', 'packages-vona', './src'],
         ignore: [
           '**/node_modules/**',
           '**/dist/**',
@@ -74,17 +73,19 @@ export class CliBinDev extends BeanCliBase {
           '**/src/entity/*.ts(x)?',
         ],
       });
-      nodemon.on('quit', () => {
-        closed = true;
-        resolve(undefined);
-      }).on('restart', files => {
-        if (closed) {
-          // force exit
-          process.exit(0);
-        }
-        // eslint-disable-next-line
-        console.log('App restarted due to: ', files);
-      });
+      nodemon
+        .on('quit', () => {
+          closed = true;
+          resolve(undefined);
+        })
+        .on('restart', files => {
+          if (closed) {
+            // force exit
+            process.exit(0);
+          }
+          // eslint-disable-next-line
+          console.log('App restarted due to: ', files);
+        });
     });
     // await this.helper.spawnExe({
     //   cmd: 'node',

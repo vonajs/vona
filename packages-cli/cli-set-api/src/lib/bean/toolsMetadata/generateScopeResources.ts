@@ -1,13 +1,10 @@
 import type { OnionSceneMeta } from '@cabloy/module-info';
+
 import { replaceTemplate, toUpperCaseFirstChar } from '@cabloy/word-utils';
+
 import { globBeanFiles } from './utils.ts';
 
-export async function generateScopeResources(
-  sceneName: string,
-  sceneMeta: OnionSceneMeta,
-  moduleName: string,
-  modulePath: string,
-) {
+export async function generateScopeResources(sceneName: string, sceneMeta: OnionSceneMeta, moduleName: string, modulePath: string) {
   const sceneNameCapitalize = toUpperCaseFirstChar(sceneName);
   const globFiles = await globBeanFiles(sceneName, sceneMeta, moduleName, modulePath);
   if (globFiles.length === 0) return '';

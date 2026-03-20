@@ -1,15 +1,12 @@
 import type { OnionSceneMeta } from '@cabloy/module-info';
+
 import { replaceTemplate } from '@cabloy/utils';
 import { toUpperCaseFirstChar } from '@cabloy/word-utils';
 import { beanFullNameFromOnionName } from 'vona-core';
+
 import { extractBeanInfo, getScopeModuleName, globBeanFiles } from './utils.ts';
 
-export async function generateOnions(
-  sceneName: string,
-  sceneMeta: OnionSceneMeta,
-  moduleName: string,
-  modulePath: string,
-) {
+export async function generateOnions(sceneName: string, sceneMeta: OnionSceneMeta, moduleName: string, modulePath: string) {
   const scopeModuleName = getScopeModuleName(moduleName);
   const sceneNameCapitalize = toUpperCaseFirstChar(sceneName);
   const globFiles = await globBeanFiles(sceneName, sceneMeta, moduleName, modulePath);
@@ -40,10 +37,9 @@ export async function generateOnions(
       // valueOptionsCustomInterface
       let valueOptionsCustomInterface = fileInfo.optionsCustomInterface;
       if (valueOptionsCustomInterface && sceneMeta.optionsCustomInterfaceTemplate) {
-        valueOptionsCustomInterface = replaceTemplate(
-          sceneMeta.optionsCustomInterfaceTemplate,
-          { optionsCustomInterface: valueOptionsCustomInterface },
-        );
+        valueOptionsCustomInterface = replaceTemplate(sceneMeta.optionsCustomInterfaceTemplate, {
+          optionsCustomInterface: valueOptionsCustomInterface,
+        });
       }
       // record
       if (fileInfo.isGlobal) {
@@ -102,9 +98,11 @@ export interface I${sceneNameCapitalize}RecordLocal {
   const content = `/** ${sceneName}: begin */
 ${contentExports.join('\n')}
 ${contentImports.join('\n')}
-${needImportOptionsGlobalInterface
-  ? `import { type ${sceneMeta.optionsGlobalInterfaceName} } from '${sceneMeta.optionsGlobalInterfaceFrom || 'vona'}';`
-  : `import '${sceneMeta.optionsGlobalInterfaceFrom || 'vona'}';`}
+${
+  needImportOptionsGlobalInterface
+    ? `import { type ${sceneMeta.optionsGlobalInterfaceName} } from '${sceneMeta.optionsGlobalInterfaceFrom || 'vona'}';`
+    : `import '${sceneMeta.optionsGlobalInterfaceFrom || 'vona'}';`
+}
 declare module '${sceneMeta.optionsGlobalInterfaceFrom || 'vona'}' {
   ${contentRecordsGlobal.length > 0 ? exportRecordsMiddlewareGlobal : ''}
   ${contentRecordsLocal.length > 0 ? exportRecordsMiddlewareLocal : ''}

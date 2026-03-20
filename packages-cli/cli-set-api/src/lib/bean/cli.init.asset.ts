@@ -1,7 +1,8 @@
 import type { IModuleInfo } from '@cabloy/module-info';
-import path from 'node:path';
+
 import { BeanCliBase } from '@cabloy/cli';
 import fse from 'fs-extra';
+import path from 'node:path';
 
 declare module '@cabloy/cli' {
   interface ICommandArgv {

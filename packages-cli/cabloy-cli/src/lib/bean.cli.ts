@@ -1,4 +1,5 @@
 import type { ICommandContext } from '../types/argv.ts';
+
 import { findCommand } from './commands.ts';
 
 export class BeanCli {

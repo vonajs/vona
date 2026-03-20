@@ -1,12 +1,8 @@
 import type { OnionSceneMeta } from '@cabloy/module-info';
+
 import { globBeanFiles } from './utils.ts';
 
-export async function generateBeanGenerals(
-  sceneName: string,
-  sceneMeta: OnionSceneMeta,
-  moduleName: string,
-  modulePath: string,
-) {
+export async function generateBeanGenerals(sceneName: string, sceneMeta: OnionSceneMeta, moduleName: string, modulePath: string) {
   const globFiles = await globBeanFiles(sceneName, sceneMeta, moduleName, modulePath);
   if (globFiles.length === 0) return '';
   //
