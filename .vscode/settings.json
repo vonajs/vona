@@ -16,7 +16,7 @@
   "editor.formatOnSave": true,
   // oxlint
   "editor.codeActionsOnSave": {
-    "source.fixAll.oxc": "always",
+    "source.fixAll.oxc": "always"
   },
   // associations
   "files.associations": {
@@ -24,7 +24,7 @@
     "*.css.ejs": "css",
     "*.less.ejs": "less",
     "*.code-snippets": "text",
-    "docker-compose-dockerfile-app": "dockerfile",
+    "docker-compose-dockerfile-app": "dockerfile"
   },
   // search
   "search.exclude": {
@@ -35,9 +35,9 @@
     "/src/backend/app/**": true,
     "/src/backend/logs/**": true,
     "/src/backend/run/**": true,
-    "**/node_modules": true,
+    "**/node_modules": true
   },
   "search.useIgnoreFiles": false,
   "textlint.autoFixOnSave": true,
-  "hide-my-secrets.hideSecrets": false,
+  "hide-my-secrets.hideSecrets": false
 }
