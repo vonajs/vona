@@ -18,8 +18,7 @@ export interface ISerializerTransformOptionsReplace extends IDecoratorSerializer
 @SerializerTransform<ISerializerTransformOptionsReplace>()
 export class SerializerTransformReplace
   extends BeanBase
-  implements ISerializerTransform<TypeSerializerTransformReplaceValue, TypeSerializerTransformReplaceData, TypeSerializerTransformReplaceResult>
-{
+  implements ISerializerTransform<TypeSerializerTransformReplaceValue, TypeSerializerTransformReplaceData, TypeSerializerTransformReplaceResult> {
   async transform(
     value: TypeSerializerTransformReplaceValue,
     _data: TypeSerializerTransformReplaceData,

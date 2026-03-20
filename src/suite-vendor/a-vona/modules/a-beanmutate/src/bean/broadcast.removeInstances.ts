@@ -11,8 +11,7 @@ export interface TypeBroadcastRemoveInstancesJobData {
 @Broadcast({ instance: false })
 export class BroadcastRemoveInstances
   extends BeanBroadcastBase<TypeBroadcastRemoveInstancesJobData>
-  implements IBroadcastExecute<TypeBroadcastRemoveInstancesJobData>
-{
+  implements IBroadcastExecute<TypeBroadcastRemoveInstancesJobData> {
   async execute(data: TypeBroadcastRemoveInstancesJobData, isEmitter?: boolean) {
     if (!isEmitter) {
       await this.bean.mutate.removeInstancesWorker(data);

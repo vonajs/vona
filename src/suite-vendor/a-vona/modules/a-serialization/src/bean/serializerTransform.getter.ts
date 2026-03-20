@@ -17,8 +17,7 @@ export interface ISerializerTransformOptionsGetter extends IDecoratorSerializerT
 @SerializerTransform<ISerializerTransformOptionsGetter>()
 export class SerializerTransformGetter
   extends BeanBase
-  implements ISerializerTransform<TypeSerializerTransformGetterValue, TypeSerializerTransformGetterData, TypeSerializerTransformGetterResult>
-{
+  implements ISerializerTransform<TypeSerializerTransformGetterValue, TypeSerializerTransformGetterData, TypeSerializerTransformGetterResult> {
   async transform(
     value: TypeSerializerTransformGetterValue,
     data: TypeSerializerTransformGetterData,

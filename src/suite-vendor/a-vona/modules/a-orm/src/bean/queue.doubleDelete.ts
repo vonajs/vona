@@ -20,8 +20,7 @@ export type TypeQueueDoubleDeleteJobResult = void;
 })
 export class QueueDoubleDelete
   extends BeanQueueBase<TypeQueueDoubleDeleteJobData, TypeQueueDoubleDeleteJobResult>
-  implements IQueueExecute<TypeQueueDoubleDeleteJobData, TypeQueueDoubleDeleteJobResult>
-{
+  implements IQueueExecute<TypeQueueDoubleDeleteJobData, TypeQueueDoubleDeleteJobResult> {
   async execute(data: TypeQueueDoubleDeleteJobData, _options?: IQueuePushOptions): Promise<TypeQueueDoubleDeleteJobResult> {
     const beanInstance = this.app.bean._newBean(data.beanFullName as any, data.clientName, data.table);
     await beanInstance[data.method](...data.args);
