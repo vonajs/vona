@@ -93,8 +93,9 @@ export class CliBinBuildGeneral extends BeanCliBase {
           log.code === 'THIS_IS_UNDEFINED' &&
           (log.message.includes('ramda/es/partialObject.js') ||
             log.message.includes("The 'this' keyword is equivalent to 'undefined' at the top level of an ES module"))
-        )
+        ) {
           return;
+        }
         if (log.code === 'EVAL' && log.message.includes('depd/index.js')) return;
         if (log.code === 'EVAL' && log.message.includes('bluebird/js/release/util.js')) return;
         defaultHandler(level, log);

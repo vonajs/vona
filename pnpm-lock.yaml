@@ -412,9 +412,6 @@ importers:
       eslint-plugin-eslint-comments:
         specifier: ^3.2.0
         version: 3.2.0(eslint@10.0.3)
-      eslint-plugin-ts:
-        specifier: ^1.0.0
-        version: 1.0.0
       gogocode:
         specifier: ^1.0.53
         version: 1.0.55(vue@3.5.29(typescript@5.9.3))
@@ -6250,9 +6247,6 @@ packages:
     engines: {node: ^20.19.0 || ^22.13.0 || >=24}
     peerDependencies:
       eslint: '>=9.38.0'
-
-  eslint-plugin-ts@1.0.0:
-    resolution: {integrity: sha512-HB4e16w9lSEf1aewlY4RKn/Os/7tmVph9aLYnyECqyOD//Qs7HcviS3+f3v5Isf6rVM7CHVhWcu018RM70nCPg==}
 
   eslint-plugin-unicorn@63.0.0:
     resolution: {integrity: sha512-Iqecl9118uQEXYh7adylgEmGfkn5es3/mlQTLLkd4pXkIk9CTGrAbeUux+YljSa2ohXCBmQQ0+Ej1kZaFgcfkA==}
@@ -14070,8 +14064,6 @@ snapshots:
       toml-eslint-parser: 1.0.3
     transitivePeerDependencies:
       - supports-color
-
-  eslint-plugin-ts@1.0.0: {}
 
   eslint-plugin-unicorn@63.0.0(eslint@10.0.3):
     dependencies:

@@ -15,7 +15,7 @@ import { DtoTestDetail } from './testDetail.ts';
 
 export interface IDtoOptionsTestResult extends IDecoratorDtoOptions<
   '_custom1' | '_custom2' | '_custom3' | '_custom4' | '_custom5' | '_customCopy' | '_customCopied'
-> {}
+> { }
 
 @Dto<IDtoOptionsTestResult>({
   fields: {
