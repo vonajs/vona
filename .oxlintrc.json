@@ -1,9 +1,6 @@
 {
   "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": [
-    "import",
-    "unicorn"
-  ],
+  "plugins": ["import", "unicorn"],
   "jsPlugins": [
     "eslint-plugin-antfu",
     "eslint-plugin-unused-imports",
@@ -68,7 +65,7 @@
     "package.json",
     "scripts",
     "zovaRest",
-    "assets",
+    "assets"
   ],
   "rules": {
     "accessor-pairs": [
@@ -83,10 +80,7 @@
     "block-scoped-var": "error",
     "constructor-super": "error",
     "default-case-last": "error",
-    "eqeqeq": [
-      "error",
-      "smart"
-    ],
+    "eqeqeq": ["error", "smart"],
     "new-cap": [
       "error",
       {
@@ -102,17 +96,11 @@
     "no-case-declarations": "error",
     "no-class-assign": "error",
     "no-compare-neg-zero": "error",
-    "no-cond-assign": [
-      "error",
-      "always"
-    ],
+    "no-cond-assign": ["error", "always"],
     "no-console": [
       "error",
       {
-        "allow": [
-          "warn",
-          "error"
-        ]
+        "allow": ["warn", "error"]
       }
     ],
     "no-const-assign": "error",
@@ -245,10 +233,7 @@
     "prefer-spread": "error",
     "prefer-template": "error",
     "symbol-description": "error",
-    "unicode-bom": [
-      "error",
-      "never"
-    ],
+    "unicode-bom": ["error", "never"],
     "unused-imports/no-unused-imports": "error",
     "unused-imports/no-unused-vars": [
       "error",
@@ -274,10 +259,7 @@
       }
     ],
     "vars-on-top": "error",
-    "yoda": [
-      "error",
-      "never"
-    ],
+    "yoda": ["error", "never"],
     "eslint-comments/no-aggregating-enable": "error",
     "eslint-comments/no-duplicate-disable": "error",
     "eslint-comments/no-unlimited-disable": "error",
@@ -307,10 +289,7 @@
     "antfu/import-dedupe": "error",
     "antfu/no-import-dist": "error",
     "antfu/no-import-node-modules-by-path": "error",
-    "import/consistent-type-specifier-style": [
-      "error",
-      "prefer-top-level"
-    ],
+    "import/consistent-type-specifier-style": ["error", "prefer-top-level"],
     "import/first": "error",
     "import/no-duplicates": "error",
     "import/no-mutable-exports": "error",
@@ -346,14 +325,8 @@
     "unicorn/prefer-string-starts-ends-with": "error",
     "unicorn/prefer-type-error": "error",
     "unicorn/throw-new-error": "error",
-    "@stylistic/array-bracket-spacing": [
-      "error",
-      "never"
-    ],
-    "@stylistic/arrow-parens": [
-      "error",
-      "as-needed"
-    ],
+    "@stylistic/array-bracket-spacing": ["error", "never"],
+    "@stylistic/arrow-parens": ["error", "as-needed"],
     "@stylistic/arrow-spacing": [
       "error",
       {
@@ -361,10 +334,7 @@
         "before": true
       }
     ],
-    "@stylistic/block-spacing": [
-      "error",
-      "always"
-    ],
+    "@stylistic/block-spacing": ["error", "always"],
     "@stylistic/brace-style": [
       "error",
       "1tbs",
@@ -372,10 +342,7 @@
         "allowSingleLine": true
       }
     ],
-    "@stylistic/comma-dangle": [
-      "error",
-      "always-multiline"
-    ],
+    "@stylistic/comma-dangle": ["error", "always-multiline"],
     "@stylistic/comma-spacing": [
       "error",
       {
@@ -383,10 +350,7 @@
         "before": false
       }
     ],
-    "@stylistic/comma-style": [
-      "error",
-      "last"
-    ],
+    "@stylistic/comma-style": ["error", "last"],
     "@stylistic/computed-property-spacing": [
       "error",
       "never",
@@ -394,10 +358,7 @@
         "enforceForClassMembers": true
       }
     ],
-    "@stylistic/dot-location": [
-      "error",
-      "property"
-    ],
+    "@stylistic/dot-location": ["error", "property"],
     "@stylistic/eol-last": "error",
     "@stylistic/generator-star-spacing": [
       "error",
@@ -487,39 +448,18 @@
         }
       }
     ],
-    "@stylistic/multiline-ternary": [
-      "error",
-      "always-multiline"
-    ],
+    "@stylistic/multiline-ternary": ["error", "always-multiline"],
     "@stylistic/new-parens": "error",
-    "@stylistic/no-extra-parens": [
-      "error",
-      "functions"
-    ],
+    "@stylistic/no-extra-parens": ["error", "functions"],
     "@stylistic/no-floating-decimal": "error",
     "@stylistic/no-mixed-operators": [
       "error",
       {
         "allowSamePrecedence": true,
         "groups": [
-          [
-            "==",
-            "!=",
-            "===",
-            "!==",
-            ">",
-            ">=",
-            "<",
-            "<="
-          ],
-          [
-            "&&",
-            "||"
-          ],
-          [
-            "in",
-            "instanceof"
-          ]
+          ["==", "!=", "===", "!==", ">", ">=", "<", "<="],
+          ["&&", "||"],
+          ["in", "instanceof"]
         ]
       }
     ],
@@ -536,10 +476,7 @@
     "@stylistic/no-tabs": "error",
     "@stylistic/no-trailing-spaces": "error",
     "@stylistic/no-whitespace-before-property": "error",
-    "@stylistic/object-curly-spacing": [
-      "error",
-      "always"
-    ],
+    "@stylistic/object-curly-spacing": ["error", "always"],
     "@stylistic/operator-linebreak": [
       "error",
       "after",
@@ -558,10 +495,7 @@
         "switches": "never"
       }
     ],
-    "@stylistic/quote-props": [
-      "error",
-      "consistent-as-needed"
-    ],
+    "@stylistic/quote-props": ["error", "consistent-as-needed"],
     "@stylistic/quotes": [
       "error",
       "single",
@@ -569,14 +503,8 @@
         "avoidEscape": true
       }
     ],
-    "@stylistic/rest-spread-spacing": [
-      "error",
-      "never"
-    ],
-    "@stylistic/semi": [
-      "error",
-      "always"
-    ],
+    "@stylistic/rest-spread-spacing": ["error", "never"],
+    "@stylistic/semi": ["error", "always"],
     "@stylistic/semi-spacing": [
       "error",
       {
@@ -584,10 +512,7 @@
         "before": false
       }
     ],
-    "@stylistic/space-before-blocks": [
-      "error",
-      "always"
-    ],
+    "@stylistic/space-before-blocks": ["error", "always"],
     "@stylistic/space-before-function-paren": [
       "error",
       {
@@ -596,10 +521,7 @@
         "named": "never"
       }
     ],
-    "@stylistic/space-in-parens": [
-      "error",
-      "never"
-    ],
+    "@stylistic/space-in-parens": ["error", "never"],
     "@stylistic/space-infix-ops": "error",
     "@stylistic/space-unary-ops": [
       "error",
@@ -614,33 +536,18 @@
       {
         "block": {
           "balanced": true,
-          "exceptions": [
-            "*"
-          ],
-          "markers": [
-            "!"
-          ]
+          "exceptions": ["*"],
+          "markers": ["!"]
         },
         "line": {
-          "exceptions": [
-            "/",
-            "#"
-          ],
-          "markers": [
-            "/"
-          ]
+          "exceptions": ["/", "#"],
+          "markers": ["/"]
         }
       }
     ],
     "@stylistic/template-curly-spacing": "error",
-    "@stylistic/template-tag-spacing": [
-      "error",
-      "never"
-    ],
-    "@stylistic/type-annotation-spacing": [
-      "error",
-      {}
-    ],
+    "@stylistic/template-tag-spacing": ["error", "never"],
+    "@stylistic/type-annotation-spacing": ["error", {}],
     "@stylistic/type-generic-spacing": "error",
     "@stylistic/type-named-tuple-spacing": "error",
     "@stylistic/wrap-iife": [
@@ -666,20 +573,11 @@
       }
     ],
     "@stylistic/jsx-curly-newline": "error",
-    "@stylistic/jsx-curly-spacing": [
-      "error",
-      "never"
-    ],
+    "@stylistic/jsx-curly-spacing": ["error", "never"],
     "@stylistic/jsx-equals-spacing": "error",
     "@stylistic/jsx-first-prop-new-line": "error",
-    "@stylistic/jsx-function-call-newline": [
-      "error",
-      "multiline"
-    ],
-    "@stylistic/jsx-indent-props": [
-      "error",
-      2
-    ],
+    "@stylistic/jsx-function-call-newline": ["error", "multiline"],
+    "@stylistic/jsx-indent-props": ["error", 2],
     "@stylistic/jsx-max-props-per-line": [
       "error",
       {
@@ -784,14 +682,9 @@
   },
   "overrides": [
     {
-      "files": [
-        "**/*.?([cm])[jt]s?(x)"
-      ],
+      "files": ["**/*.?([cm])[jt]s?(x)"],
       "rules": {
-        "node/handle-callback-err": [
-          "error",
-          "^(err|error)$"
-        ],
+        "node/handle-callback-err": ["error", "^(err|error)$"],
         "node/no-exports-assign": "error",
         "node/no-new-require": "error",
         "node/no-path-concat": "error",
@@ -806,16 +699,10 @@
         "jsdoc/require-property-name": "warn",
         "jsdoc/require-returns-description": "warn"
       },
-      "plugins": [
-        "node",
-        "jsdoc"
-      ]
+      "plugins": ["node", "jsdoc"]
     },
     {
-      "files": [
-        "**/*.?([cm])ts",
-        "**/*.?([cm])tsx"
-      ],
+      "files": ["**/*.?([cm])ts", "**/*.?([cm])tsx"],
       "rules": {
         "constructor-super": "off",
         "no-class-assign": "off",
@@ -894,10 +781,7 @@
             "variables": true
           }
         ],
-        "@typescript-eslint/consistent-type-definitions": [
-          "error",
-          "interface"
-        ],
+        "@typescript-eslint/consistent-type-definitions": ["error", "interface"],
         "@typescript-eslint/consistent-type-imports": [
           "error",
           {
@@ -908,9 +792,7 @@
         ],
         "@typescript-eslint/no-import-type-side-effects": "error"
       },
-      "plugins": [
-        "typescript"
-      ]
+      "plugins": ["typescript"]
     },
     {
       "files": [
@@ -937,21 +819,11 @@
         "no-unused-expressions": "off",
         "@typescript-eslint/explicit-function-return-type": "off"
       },
-      "jsPlugins": [
-        "eslint-plugin-antfu",
-        "@e18e/eslint-plugin"
-      ],
-      "plugins": [
-        "vitest",
-        "typescript"
-      ]
+      "jsPlugins": ["eslint-plugin-antfu", "@e18e/eslint-plugin"],
+      "plugins": ["vitest", "typescript"]
     },
     {
-      "files": [
-        "**/*.json",
-        "**/*.json5",
-        "**/*.jsonc"
-      ],
+      "files": ["**/*.json", "**/*.json5", "**/*.jsonc"],
       "rules": {
         "jsonc/no-bigint-literals": "error",
         "jsonc/no-binary-expression": "error",
@@ -979,22 +851,10 @@
         "jsonc/space-unary-ops": "error",
         "jsonc/valid-json-number": "error",
         "jsonc/vue-custom-block/no-parsing-error": "error",
-        "jsonc/array-bracket-spacing": [
-          "error",
-          "never"
-        ],
-        "jsonc/comma-dangle": [
-          "error",
-          "never"
-        ],
-        "jsonc/comma-style": [
-          "error",
-          "last"
-        ],
-        "jsonc/indent": [
-          "error",
-          2
-        ],
+        "jsonc/array-bracket-spacing": ["error", "never"],
+        "jsonc/comma-dangle": ["error", "never"],
+        "jsonc/comma-style": ["error", "last"],
+        "jsonc/indent": ["error", 2],
         "jsonc/key-spacing": [
           "error",
           {
@@ -1009,10 +869,7 @@
             "multiline": true
           }
         ],
-        "jsonc/object-curly-spacing": [
-          "error",
-          "always"
-        ],
+        "jsonc/object-curly-spacing": ["error", "always"],
         "jsonc/object-property-newline": [
           "error",
           {
@@ -1022,14 +879,10 @@
         "jsonc/quote-props": "error",
         "jsonc/quotes": "error"
       },
-      "jsPlugins": [
-        "eslint-plugin-jsonc"
-      ]
+      "jsPlugins": ["eslint-plugin-jsonc"]
     },
     {
-      "files": [
-        "**/package.json"
-      ],
+      "files": ["**/package.json"],
       "rules": {
         "jsonc/sort-array-values": [
           "error",
@@ -1117,12 +970,7 @@
             "pathPattern": "^workspaces\\.catalogs\\.[^.]+$"
           },
           {
-            "order": [
-              "types",
-              "import",
-              "require",
-              "default"
-            ],
+            "order": ["types", "import", "require", "default"],
             "pathPattern": "^exports.*$"
           },
           {
@@ -1142,27 +990,15 @@
           }
         ]
       },
-      "jsPlugins": [
-        "eslint-plugin-jsonc"
-      ]
+      "jsPlugins": ["eslint-plugin-jsonc"]
     },
     {
-      "files": [
-        "**/[jt]sconfig.json",
-        "**/[jt]sconfig.*.json"
-      ],
+      "files": ["**/[jt]sconfig.json", "**/[jt]sconfig.*.json"],
       "rules": {
         "jsonc/sort-keys": [
           "error",
           {
-            "order": [
-              "extends",
-              "compilerOptions",
-              "references",
-              "files",
-              "include",
-              "exclude"
-            ],
+            "order": ["extends", "compilerOptions", "references", "files", "include", "exclude"],
             "pathPattern": "^$"
           },
           {
@@ -1263,15 +1099,10 @@
           }
         ]
       },
-      "jsPlugins": [
-        "eslint-plugin-jsonc"
-      ]
+      "jsPlugins": ["eslint-plugin-jsonc"]
     },
     {
-      "files": [
-        "package.json",
-        "**/package.json"
-      ],
+      "files": ["package.json", "**/package.json"],
       "rules": {
         "pnpm/json-prefer-workspace-settings": [
           "error",
@@ -1286,14 +1117,10 @@
           }
         ]
       },
-      "jsPlugins": [
-        "eslint-plugin-pnpm"
-      ]
+      "jsPlugins": ["eslint-plugin-pnpm"]
     },
     {
-      "files": [
-        "pnpm-workspace.yaml"
-      ],
+      "files": ["pnpm-workspace.yaml"],
       "rules": {
         "pnpm/yaml-enforce-settings": [
           "error",
@@ -1377,15 +1204,10 @@
           }
         ]
       },
-      "jsPlugins": [
-        "eslint-plugin-pnpm",
-        "eslint-plugin-yml"
-      ]
+      "jsPlugins": ["eslint-plugin-pnpm", "eslint-plugin-yml"]
     },
     {
-      "files": [
-        "**/*.y?(a)ml"
-      ],
+      "files": ["**/*.y?(a)ml"],
       "rules": {
         "@stylistic/spaced-comment": "off",
         "yml/block-mapping": "error",
@@ -1401,10 +1223,7 @@
         "yml/flow-mapping-curly-spacing": "error",
         "yml/flow-sequence-bracket-newline": "error",
         "yml/flow-sequence-bracket-spacing": "error",
-        "yml/indent": [
-          "error",
-          2
-        ],
+        "yml/indent": ["error", 2],
         "yml/key-spacing": "error",
         "yml/no-tab-indent": "error",
         "yml/quotes": [
@@ -1416,15 +1235,10 @@
         ],
         "yml/spaced-comment": "error"
       },
-      "jsPlugins": [
-        "@stylistic/eslint-plugin",
-        "eslint-plugin-yml"
-      ]
+      "jsPlugins": ["@stylistic/eslint-plugin", "eslint-plugin-yml"]
     },
     {
-      "files": [
-        "**/*.toml"
-      ],
+      "files": ["**/*.toml"],
       "rules": {
         "@stylistic/spaced-comment": "off",
         "toml/comma-style": "error",
@@ -1438,10 +1252,7 @@
         "toml/array-bracket-newline": "error",
         "toml/array-bracket-spacing": "error",
         "toml/array-element-newline": "error",
-        "toml/indent": [
-          "error",
-          2
-        ],
+        "toml/indent": ["error", 2],
         "toml/inline-table-curly-spacing": "error",
         "toml/key-spacing": "error",
         "toml/padding-line-between-pairs": "error",
@@ -1450,15 +1261,10 @@
         "toml/spaced-comment": "error",
         "toml/table-bracket-spacing": "error"
       },
-      "jsPlugins": [
-        "@stylistic/eslint-plugin",
-        "eslint-plugin-toml"
-      ]
+      "jsPlugins": ["@stylistic/eslint-plugin", "eslint-plugin-toml"]
     },
     {
-      "files": [
-        "**/*.md/**/*.?([cm])[jt]s?(x)"
-      ],
+      "files": ["**/*.md/**/*.?([cm])[jt]s?(x)"],
       "rules": {
         "antfu/no-top-level-await": "off",
         "e18e/prefer-static-regex": "off",
@@ -1488,99 +1294,61 @@
         "@stylistic/eslint-plugin",
         "eslint-plugin-unused-imports"
       ],
-      "plugins": [
-        "typescript"
-      ]
+      "plugins": ["typescript"]
     },
     {
-      "files": [
-        "**/scripts/**/*.?([cm])[jt]s?(x)"
-      ],
+      "files": ["**/scripts/**/*.?([cm])[jt]s?(x)"],
       "rules": {
         "antfu/no-top-level-await": "off",
         "no-console": "off",
         "@typescript-eslint/explicit-function-return-type": "off"
       },
-      "jsPlugins": [
-        "eslint-plugin-antfu"
-      ],
-      "plugins": [
-        "typescript"
-      ]
+      "jsPlugins": ["eslint-plugin-antfu"],
+      "plugins": ["typescript"]
     },
     {
-      "files": [
-        "**/cli/**/*.?([cm])[jt]s?(x)",
-        "**/cli.?([cm])[jt]s?(x)"
-      ],
+      "files": ["**/cli/**/*.?([cm])[jt]s?(x)", "**/cli.?([cm])[jt]s?(x)"],
       "rules": {
         "antfu/no-top-level-await": "off",
         "no-console": "off"
       },
-      "jsPlugins": [
-        "eslint-plugin-antfu"
-      ]
+      "jsPlugins": ["eslint-plugin-antfu"]
     },
     {
-      "files": [
-        "**/bin/**/*",
-        "**/bin.?([cm])[jt]s?(x)"
-      ],
+      "files": ["**/bin/**/*", "**/bin.?([cm])[jt]s?(x)"],
       "rules": {
         "antfu/no-import-dist": "off",
         "antfu/no-import-node-modules-by-path": "off"
       },
-      "jsPlugins": [
-        "eslint-plugin-antfu"
-      ]
+      "jsPlugins": ["eslint-plugin-antfu"]
     },
     {
-      "files": [
-        "**/*.d.?([cm])ts"
-      ],
+      "files": ["**/*.d.?([cm])ts"],
       "rules": {
         "eslint-comments/no-unlimited-disable": "off",
         "unused-imports/no-unused-vars": "off"
       },
-      "jsPlugins": [
-        "eslint-plugin-eslint-comments",
-        "eslint-plugin-unused-imports"
-      ]
+      "jsPlugins": ["eslint-plugin-eslint-comments", "eslint-plugin-unused-imports"]
     },
     {
-      "files": [
-        "**/*.js",
-        "**/*.cjs"
-      ],
+      "files": ["**/*.js", "**/*.cjs"],
       "rules": {
         "@typescript-eslint/no-require-imports": "off"
       },
-      "plugins": [
-        "typescript"
-      ]
+      "plugins": ["typescript"]
     },
     {
-      "files": [
-        "**/*.config.?([cm])[jt]s?(x)",
-        "**/*.config.*.?([cm])[jt]s?(x)"
-      ],
+      "files": ["**/*.config.?([cm])[jt]s?(x)", "**/*.config.*.?([cm])[jt]s?(x)"],
       "rules": {
         "antfu/no-top-level-await": "off",
         "no-console": "off",
         "@typescript-eslint/explicit-function-return-type": "off"
       },
-      "jsPlugins": [
-        "eslint-plugin-antfu"
-      ],
-      "plugins": [
-        "typescript"
-      ]
+      "jsPlugins": ["eslint-plugin-antfu"],
+      "plugins": ["typescript"]
     },
     {
-      "files": [
-        "**/*.ts",
-        "**/*.tsx"
-      ],
+      "files": ["**/*.ts", "**/*.tsx"],
       "rules": {
         "e18e/prefer-object-has-own": "off",
         "e18e/prefer-static-regex": "off",
@@ -1591,9 +1359,7 @@
         "no-extend-native": [
           "error",
           {
-            "exceptions": [
-              "Set"
-            ]
+            "exceptions": ["Set"]
           }
         ],
         "no-new-func": "off",
@@ -1609,10 +1375,7 @@
         "no-console": [
           "warn",
           {
-            "allow": [
-              "warn",
-              "error"
-            ]
+            "allow": ["warn", "error"]
           }
         ],
         "no-debugger": "warn",
@@ -1719,7 +1482,7 @@
             "ignoreTemplateLiterals": true,
             "ignoreRegExpLiterals": true
           }
-        ],
+        ]
       },
       "jsPlugins": [
         "@e18e/eslint-plugin",
@@ -1732,9 +1495,7 @@
       "globals": {
         "NodeJS": "writable"
       },
-      "plugins": [
-        "vitest"
-      ],
+      "plugins": ["vitest"],
       "env": {
         "jest": true
       }
