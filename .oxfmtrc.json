@@ -1,6 +1,15 @@
 {
   "$schema": "./node_modules/oxfmt/configuration_schema.json",
-  "ignorePatterns": ["dist/**", "*.min.js", "*.code-snippets", "src/**"],
+  "ignorePatterns": [
+    "dist/**",
+    "*.min.js",
+    "*.code-snippets",
+    "src/**",
+    "packages-cli/**",
+    "packages-docs/**",
+    "packages-utils/**",
+    "packages-vona/**",
+  ],
   "printWidth": 150,
   "tabWidth": 2,
   "useTabs": false,
