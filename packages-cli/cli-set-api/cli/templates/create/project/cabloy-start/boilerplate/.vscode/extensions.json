@@ -1,4 +1,4 @@
 {
-  "recommendations": ["cabloy.vona-vscode", "dbaeumer.vscode-eslint"],
+  "recommendations": ["cabloy.vona-vscode", "oxc.oxc-vscode"],
   "unwantedRecommendations": []
 }

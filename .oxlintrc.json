@@ -323,7 +323,7 @@
     "e18e/prefer-array-to-spliced": "error",
     "e18e/prefer-nullish-coalescing": "error",
     "e18e/prefer-object-has-own": "error",
-    "e18e/prefer-spread-syntax": "error",
+    "e18e/prefer-spread-syntax": "off",
     "e18e/prefer-url-canparse": "error",
     "e18e/prefer-array-from-map": "error",
     "e18e/prefer-timer-args": "error",
@@ -1585,7 +1585,6 @@
         "**/*.tsx"
       ],
       "rules": {
-        "e18e/prefer-spread-syntax": "off",
         "e18e/prefer-object-has-own": "off",
         "e18e/prefer-static-regex": "off",
         "e18e/prefer-array-at": "off",
