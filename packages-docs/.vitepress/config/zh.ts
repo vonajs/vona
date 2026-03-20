@@ -10,7 +10,7 @@ export const zh = defineConfig({
       { text: 'Cabloy', link: '/zh/cabloy/introduction', activeMatch: '/zh/cabloy/' },
       { text: 'Basic', link: '/zh/cabloy-basic/introduction', activeMatch: '/zh/cabloy-basic/' },
       { text: 'Start', link: '/zh/cabloy-start/introduction', activeMatch: '/zh/cabloy-start/' },
-      { text: 'Store', link: 'https://cabloy.com', target:'_self' },
+      { text: 'Store', link: 'https://cabloy.com', target: '_self' },
     ],
     sidebar: {
       '/zh/guide/': { base: '/zh/guide/', items: sidebarGuide() },

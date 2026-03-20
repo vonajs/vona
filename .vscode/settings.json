@@ -17,8 +17,7 @@
   "ts.preferences.includePackageJsonAutoImports": "on",
   // eslint
   "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": "explicit",
-    "source.fixAll.stylelint": "explicit"
+    "source.fixAll.oxc": "always"
   },
   "eslint.validate": ["javascript", "javascriptreact", "typescript", "typescriptreact", "vue"],
   // associations

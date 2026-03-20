@@ -7,6 +7,7 @@ export class StrategyBase extends OAuth2Strategy {
   redirect: (location: string) => void;
   error: (err: Error) => void;
 
+  // oxlint-disable-next-line no-useless-constructor
   constructor(options: TypeStrategyOptions, verify: Function) {
     super(options, verify);
   }

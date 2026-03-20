@@ -10,7 +10,7 @@ export const en = defineConfig({
       { text: 'Cabloy', link: '/cabloy/introduction', activeMatch: '/cabloy/' },
       { text: 'Basic', link: '/cabloy-basic/introduction', activeMatch: '/cabloy-basic/' },
       { text: 'Start', link: '/cabloy-start/introduction', activeMatch: '/cabloy-start/' },
-      { text: 'Store', link: 'https://cabloy.com', target:'_self' },
+      { text: 'Store', link: 'https://cabloy.com', target: '_self' },
     ],
     sidebar: {
       '/guide/': { base: '/guide/', items: sidebarGuide() },
@@ -66,7 +66,7 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
         { text: 'Comparison with Next/Nest/Django', link: 'start/comparison' },
         { text: '1. Quick Start', link: 'start/quick-start' },
         { text: '2. Create the first CRUD', link: 'start/first-crud' },
-        { text: '3. Integrate with Zova', link:'start/with-zova' },
+        { text: '3. Integrate with Zova', link: 'start/with-zova' },
         { text: 'Cli Commands', link: 'start/cli' },
         { text: 'Menu Commands', link: 'start/menu' },
         { text: 'Scripts', link: 'start/scripts' },
