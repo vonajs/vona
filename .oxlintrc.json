@@ -485,6 +485,7 @@
         "overrides": {
           "?": "before",
           ":": "before",
+          "|": "before",
         },
       },
     ],

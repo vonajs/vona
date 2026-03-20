@@ -73,8 +73,8 @@ export type TypeDtoMutateRelationResult<
 > &
   (TModel extends BeanModelMeta
     ? OmitNever<
-        TypeDtoMutateRelationResultMergeInclude<TMutateTypeTopLevel, TypeUtilGetModelOptions<TModel>, TypeUtilGetParamsInlcude<TOptionsRelation>>
-      > &
+      TypeDtoMutateRelationResultMergeInclude<TMutateTypeTopLevel, TypeUtilGetModelOptions<TModel>, TypeUtilGetParamsInlcude<TOptionsRelation>>
+    > &
         OmitNever<TypeDtoMutateModelRelationResultMergeWith<TMutateTypeTopLevel, TypeUtilGetParamsWith<TOptionsRelation>>>
     : {});
 
