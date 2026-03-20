@@ -19,54 +19,6 @@ export const _configDefault = {
     browser: true,
     node: true,
   },
-  ignorePatterns: [
-    '**/node_modules',
-    '**/dist',
-    '**/package-lock.json',
-    '**/yarn.lock',
-    '**/pnpm-lock.yaml',
-    '**/bun.lockb',
-    '**/output',
-    '**/coverage',
-    '**/temp',
-    '**/.temp',
-    '**/tmp',
-    '**/.tmp',
-    '**/.history',
-    '**/.vitepress/cache',
-    '**/.nuxt',
-    '**/.next',
-    '**/.svelte-kit',
-    '**/.vercel',
-    '**/.changeset',
-    '**/.idea',
-    '**/.cache',
-    '**/.output',
-    '**/.vite-inspect',
-    '**/.yarn',
-    '**/vite.config.*.timestamp-*',
-    '**/CHANGELOG*.md',
-    '**/*.min.*',
-    '**/LICENSE*',
-    '**/__snapshots__',
-    '**/auto-import?(s).d.ts',
-    '**/components.d.ts',
-    '**/*.md',
-    '**/*.d.ts',
-    '**/node_modules/**',
-    '**/dist/**',
-    '**/static/**',
-    '**/.rollup.cache/**',
-    '**/.metadata/index.ts',
-    '.vona',
-    '.assets',
-    'coverage',
-    'docker-compose',
-    'package.json',
-    'scripts',
-    'zovaRest',
-    'assets',
-  ],
   rules: {
     'accessor-pairs': [
       'error',
@@ -1519,6 +1471,6 @@ export const _configDefault = {
   ],
 };
 
-export function oxcLintConfig() {
-  return _configDefault;
+export function oxcLintConfig(configCustom) {
+  return Object.assign({}, _configDefault, configCustom);
 }
