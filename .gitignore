@@ -72,7 +72,7 @@ src/backend/typing/mine.d.ts
 !/src/suite-vendor/a-paypal
 !/src/suite-vendor/a-vona
 
-/src/module/*
+# /src/module/*
 !/src/module/.gitkeep
 
 /src/module-vendor/*
