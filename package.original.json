@@ -10,7 +10,11 @@
     "url": "git+https://github.com/vonajs/vona.git"
   },
   "author": "zhennann",
-  "keywords": ["nodejs", "vona", "cabloy"],
+  "keywords": [
+    "nodejs",
+    "vona",
+    "cabloy"
+  ],
   "bugs": {
     "url": "https://github.com/vonajs/vona/issues"
   },
@@ -46,6 +50,12 @@
     "eslint": "^10.0.3",
     "lerna": "^9.0.3",
     "textlint": "^14.8.4",
-    "textlint-rule-ja-space-between-half-and-full-width": "^2.4.2"
+    "textlint-rule-ja-space-between-half-and-full-width": "^2.4.2",
+    "@e18e/eslint-plugin": "^0.2.0",
+    "@eslint/markdown": "^7.5.1",
+    "eslint-plugin-eslint-comments": "^3.2.0",
+    "eslint-plugin-ts": "^1.0.0",
+    "oxfmt": "^0.41.0",
+    "oxlint": "^1.56.0"
   }
 }
