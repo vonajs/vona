@@ -24,7 +24,7 @@ export class CliToolsCrud extends BeanCliBase {
     // super
     await super.execute();
     // noformat
-    argv.noformat = true;
+    // argv.noformat = true;
     // module name/info
     const moduleName = argv.module;
     argv.moduleInfo = this.helper.parseModuleInfo(moduleName);

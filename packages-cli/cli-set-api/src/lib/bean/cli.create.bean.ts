@@ -33,7 +33,7 @@ export class CliCreateBean extends BeanCliBase {
     // super
     await super.execute();
     // noformat
-    argv.noformat = true;
+    // argv.noformat = true;
     // ssrSiteModuleName
     argv.ssrSiteModuleName = fs.existsSync(path.join(argv.projectPath, 'src/suite/cabloy-start'))
       ? 'vona-module-start-siteadmin'
