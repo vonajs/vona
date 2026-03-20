@@ -1,4 +1,5 @@
 import type { IDecoratorBeanInfoOptions } from '../interface/beanOptions.ts';
+
 import { appMetadata } from '../../core/metadata.ts';
 import { SymbolDecoratorBeanInfo } from '../../core/resource.ts';
 

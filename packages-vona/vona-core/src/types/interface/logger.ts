@@ -3,21 +3,20 @@ import type DailyRotateFile from 'winston-daily-rotate-file';
 
 export interface ILoggerOptionsClientInfo {
   clientName: keyof ILoggerClientRecord;
-  level: () => (LoggerLevel | false);
-  child: () => (string[] | undefined);
+  level: () => LoggerLevel | false;
+  child: () => string[] | undefined;
 }
 
 export interface ILoggerFormatFilterOpts {
-  level: (() => (LoggerLevel | false)) | (LoggerLevel | false);
-  child: (() => (string[] | undefined)) | (string[] | undefined);
+  level: (() => LoggerLevel | false) | (LoggerLevel | false);
+  child: (() => string[] | undefined) | (string[] | undefined);
   strict?: boolean;
   silly?: boolean;
 }
 
 export type TypeLoggerOptions = Winston.LoggerOptions | ((clientInfo: ILoggerOptionsClientInfo, winston: typeof Winston) => Winston.LoggerOptions);
 export type TypeLoggerRotateOptions = DailyRotateFile.DailyRotateFileTransportOptions & { enable: boolean };
-export type TypeLoggerRotateOptionsFn =
-  (fileName: string, winston: typeof Winston, clientInfo: ILoggerOptionsClientInfo) => TypeLoggerRotateOptions;
+export type TypeLoggerRotateOptionsFn = (fileName: string, winston: typeof Winston, clientInfo: ILoggerOptionsClientInfo) => TypeLoggerRotateOptions;
 
 export interface ILoggerClientRecord {
   default: never;

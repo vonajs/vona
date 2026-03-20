@@ -1,5 +1,6 @@
 import type { IModuleInfo } from '@cabloy/module-info';
 import type { VonaApplication } from 'vona-core';
+
 import { parseModuleInfo, ParseModuleNameLevelInit } from '@cabloy/module-info-pro';
 import { useApp } from 'vona-core';
 

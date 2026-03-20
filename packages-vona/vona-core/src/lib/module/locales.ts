@@ -1,6 +1,8 @@
 import type { IModule } from '@cabloy/module-info';
+
 import type { TypeModuleResourceLocales, VonaLocaleOptional } from '../../types/index.ts';
 import type { VonaApplication } from '../core/application.ts';
+
 import localesDefault from '../core/locales.ts';
 import { deepExtend } from '../utils/util.ts';
 
@@ -13,7 +15,7 @@ export default async function (app: VonaApplication, modules: Record<string, IMo
   await loadLocales();
 
   async function loadLocales() {
-    const localesAll = (await app.options.locales());
+    const localesAll = await app.options.locales();
     // project locales default
     for (const locale in localesAll.localesDefault) {
       _initLocales(locale, localesAll.localesDefault[locale]);
@@ -56,10 +58,6 @@ export default async function (app: VonaApplication, modules: Record<string, IMo
     app.meta.locales[locale] = Object.assign({}, moduleLocales, app.meta.locales[locale]);
     // localeModules
     if (!app.meta.localeModules[moduleName]) app.meta.localeModules[moduleName] = {};
-    app.meta.localeModules[moduleName][locale] = Object.assign(
-      {},
-      moduleLocales,
-      app.meta.localeModules[moduleName][locale],
-    );
+    app.meta.localeModules[moduleName][locale] = Object.assign({}, moduleLocales, app.meta.localeModules[moduleName][locale]);
   }
 }

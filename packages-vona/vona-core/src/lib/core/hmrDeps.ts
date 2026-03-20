@@ -1,4 +1,5 @@
 import type { Constructable } from '../decorator/type/constructable.ts';
+
 import { BeanSimple } from '../bean/beanSimple.ts';
 import { appResource } from './resource.ts';
 

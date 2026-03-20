@@ -1,4 +1,5 @@
 import type { VonaConfigMeta } from '@cabloy/module-info';
+
 import type { ConfigLogger, IBeanScopeConfig } from '../../index.ts';
 import type { PowerPartial } from '../utils/powerPartial.ts';
 

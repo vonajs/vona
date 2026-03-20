@@ -1,4 +1,5 @@
 import { catchError, catchErrorSync } from '@cabloy/utils';
+
 import { closeApp, useApp } from './useApp.ts';
 
 let __closing = false;

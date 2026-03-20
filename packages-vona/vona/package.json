@@ -1,25 +1,26 @@
 {
   "name": "vona",
-  "type": "module",
   "version": "5.0.280",
+  "gitHead": "0eab9dc4a5622caffe89e7b1b3f02c08ccbc4c4b",
   "description": "Vona is an intuitive, elegant and powerful Node.js framework for rapidly developing enterprise applications of any size",
-  "author": "zhennann",
+  "keywords": [
+    "framework",
+    "nodejs",
+    "vona"
+  ],
   "homepage": "https://github.com/vonajs/vona#readme",
+  "bugs": {
+    "url": "https://github.com/vonajs/vona/issues"
+  },
+  "author": "zhennann",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/vonajs/vona.git"
   },
-  "publishConfig": {
-    "access": "public"
-  },
-  "bugs": {
-    "url": "https://github.com/vonajs/vona/issues"
-  },
-  "keywords": [
-    "nodejs",
-    "framework",
-    "vona"
+  "files": [
+    "dist"
   ],
+  "type": "module",
   "exports": {
     ".": {
       "types": [
@@ -31,11 +32,8 @@
     },
     "./package.json": "./package.json"
   },
-  "files": [
-    "dist"
-  ],
-  "engines": {
-    "node": ">=24.1.0"
+  "publishConfig": {
+    "access": "public"
   },
   "scripts": {
     "clean": "rimraf dist tsconfig.tsbuildinfo",
@@ -51,6 +49,14 @@
     "vona-suite-a-captcha": "^5.0.0",
     "vona-suite-a-vona": "^5.0.275"
   },
+  "devDependencies": {
+    "clean-package": "^2.2.0",
+    "fs-extra": "^11.2.0",
+    "rimraf": "^6.0.1"
+  },
+  "engines": {
+    "node": ">=24.1.0"
+  },
   "clean-package": {
     "indent": 2,
     "remove": [
@@ -58,11 +64,5 @@
       "devDependencies",
       "exports.\\..import"
     ]
-  },
-  "devDependencies": {
-    "clean-package": "^2.2.0",
-    "fs-extra": "^11.2.0",
-    "rimraf": "^6.0.1"
-  },
-  "gitHead": "0eab9dc4a5622caffe89e7b1b3f02c08ccbc4c4b"
+  }
 }

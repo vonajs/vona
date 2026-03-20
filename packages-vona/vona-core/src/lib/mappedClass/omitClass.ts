@@ -1,11 +1,9 @@
 import type { Constructable } from '../decorator/type/constructable.ts';
+
 import { appHmrDeps } from '../core/hmrDeps.ts';
 import { copyMetadataOfClasses, copyPropertiesOfClasses } from './utils.ts';
 
-export function OmitClass<T, K extends keyof T>(
-  classRef: Constructable<T>,
-  keys: K[],
-): Constructable<Omit<T, (typeof keys)[number]>> {
+export function OmitClass<T, K extends keyof T>(classRef: Constructable<T>, keys: K[]): Constructable<Omit<T, (typeof keys)[number]>> {
   appHmrDeps.addBean(classRef);
   abstract class TargetClass {}
   copyMetadataOfClasses(TargetClass.prototype, [classRef.prototype], (rules, key) => {

@@ -1,5 +1,6 @@
 import type { IErrorObject } from './errorObject.ts';
 import type { IModuleError } from './type.ts';
+
 import { BeanSimple } from '../../beanSimple.ts';
 
 const BeanModuleScope = Symbol('BeanScopeError#ModuleScope');

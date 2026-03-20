@@ -1,4 +1,5 @@
 import type { Constructable } from '../decorator/type/constructable.ts';
+
 import { appHmrDeps } from '../core/hmrDeps.ts';
 import { copyMetadataOfClasses, copyPropertiesOfClasses } from './utils.ts';
 

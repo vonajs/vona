@@ -1,6 +1,9 @@
 import type { IModule } from '@cabloy/module-info';
-import type { BeanBase } from '../beanBase.ts';
+
 import { getOnionMetasMeta } from '@cabloy/module-info';
+
+import type { BeanBase } from '../beanBase.ts';
+
 import { BeanBaseSimple, SymbolModuleBelong } from '../beanBaseSimple.ts';
 import { BeanScopeError } from '../resource/error/beanScopeError.ts';
 import { BeanScopeLocale } from '../resource/locale/beanScopeLocale.ts';

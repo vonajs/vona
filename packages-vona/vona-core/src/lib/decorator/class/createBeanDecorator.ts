@@ -1,5 +1,6 @@
 import type { IBeanSceneRecord } from '../interface/beanOptions.ts';
 import type { Constructable } from '../type/constructable.ts';
+
 import { appHmrDeps } from '../../core/hmrDeps.ts';
 import { appResource } from '../../core/resource.ts';
 import { parseModuleFile, parseModuleName } from './util.ts';

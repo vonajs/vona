@@ -1,4 +1,5 @@
 import type { IModule } from '@cabloy/module-info';
+
 import { BeanSimple } from '../bean/beanSimple.ts';
 
 export class ModuleTools extends BeanSimple {

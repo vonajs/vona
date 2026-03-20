@@ -1,8 +1,10 @@
-import type { PowerPartial } from '../../types/utils/powerPartial.ts';
-import type { VonaApplication } from './application.ts';
+import fse from 'fs-extra';
 import os from 'node:os';
 import path from 'node:path';
-import fse from 'fs-extra';
+
+import type { PowerPartial } from '../../types/utils/powerPartial.ts';
+import type { VonaApplication } from './application.ts';
+
 import { deepExtend } from '../utils/util.ts';
 
 export type TypeConfigLoader<T> = (app: VonaApplication) => Promise<PowerPartial<T>>;

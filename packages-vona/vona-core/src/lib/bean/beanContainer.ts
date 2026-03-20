@@ -1,9 +1,11 @@
+import { isClass, isNilOrEmptyString } from '@cabloy/utils';
+
 import type { VonaContext } from '../../types/index.ts';
 import type { VonaApplication } from '../core/application.ts';
 import type { MetadataKey } from '../core/metadata.ts';
 import type { Constructable, ContainerType, IDecoratorUseOptionsBase } from '../decorator/index.ts';
 import type { IBeanRecord, IBeanRecordGlobal, IBeanScopeRecord, TypeBeanScopeRecordKeys } from './type.ts';
-import { isClass, isNilOrEmptyString } from '@cabloy/utils';
+
 import { cast } from '../../types/index.ts';
 import { appMetadata } from '../core/metadata.ts';
 import { appResource, SymbolDecoratorProxyDisable } from '../core/resource.ts';
@@ -129,12 +131,7 @@ export class BeanContainer {
   }
 
   /** @internal */
-  public _newBeanInner<T>(
-    record: boolean,
-    beanFullName: Constructable<T> | string,
-    withSelector?: boolean,
-    ...args
-  ): T {
+  public _newBeanInner<T>(record: boolean, beanFullName: Constructable<T> | string, withSelector?: boolean, ...args): T {
     // bean options
     const beanOptions = appResource.getBean(beanFullName as any);
     if (!beanOptions) {
@@ -236,11 +233,7 @@ export class BeanContainer {
       get() {
         if (!beanInstance[SymbolBeanInstancePropsLazy]) beanInstance[SymbolBeanInstancePropsLazy] = {};
         if (!beanInstance[SymbolBeanInstancePropsLazy][prop]) {
-          beanInstance[SymbolBeanInstancePropsLazy][prop] = self._injectBeanInstanceProp(
-            beanInstance,
-            targetBeanFullName,
-            useOptions,
-          );
+          beanInstance[SymbolBeanInstancePropsLazy][prop] = self._injectBeanInstanceProp(beanInstance, targetBeanFullName, useOptions);
           self.containerType === 'app' && self.app.meta.hmr.addBeanInstanceProp(beanInstance, prop, targetBeanFullName);
         }
         return beanInstance[SymbolBeanInstancePropsLazy][prop];
@@ -257,11 +250,7 @@ export class BeanContainer {
     let targetInstance;
     // selector maybe empty string
     if (injectionScope === 'app') {
-      targetInstance = this.app.bean._getBeanSelectorInner(
-        targetBeanFullName,
-        selectorInfo.withSelector,
-        ...selectorInfo.args,
-      );
+      targetInstance = this.app.bean._getBeanSelectorInner(targetBeanFullName, selectorInfo.withSelector, ...selectorInfo.args);
     } else if (injectionScope === 'ctx') {
       targetInstance = this._getBeanSelectorInner(targetBeanFullName, selectorInfo.withSelector, ...selectorInfo.args);
     } else if (injectionScope === 'new') {
@@ -315,14 +304,7 @@ export class BeanContainer {
           if (__isLifeCycleMethod(prop)) return Reflect.get(target, prop, receiver);
           const methodName = `__get_${prop}__`;
           const methodNameMagic = '__get__';
-          const _aopChainsProp = self._getAopChainsProp(
-            beanFullName,
-            beanInstance,
-            methodName,
-            methodNameMagic,
-            'get',
-            prop,
-          );
+          const _aopChainsProp = self._getAopChainsProp(beanFullName, beanInstance, methodName, methodNameMagic, 'get', prop);
           if (!_aopChainsProp) return Reflect.get(target, prop, receiver);
           // aop
           return _aopChainsProp([receiver, undefined], ([receiver, _]) => {
@@ -442,14 +424,7 @@ export class BeanContainer {
     return this.app;
   }
 
-  private _getAopChainsProp(
-    beanFullName,
-    beanInstance,
-    methodName,
-    methodNameMagic,
-    methodType: 'get' | 'set' | 'method',
-    prop: string,
-  ) {
+  private _getAopChainsProp(beanFullName, beanInstance, methodName, methodNameMagic, methodType: 'get' | 'set' | 'method', prop: string) {
     const self = this;
     const chainsKey = `__aopChains_${methodName}__`;
     const beanOptions = appResource.getBean(beanFullName);

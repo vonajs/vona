@@ -1,4 +1,5 @@
 import type { IModule } from '@cabloy/module-info';
+
 import type { Constructable } from '../../lib/decorator/type/constructable.ts';
 
 export type TypeMonkeyName = keyof IMonkeyModule | keyof IMonkeySystem;

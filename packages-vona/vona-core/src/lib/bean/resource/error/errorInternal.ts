@@ -66,7 +66,7 @@ export const errorsInternal = {
   '510': 'Not Extended',
   '511': 'Network Authentication Required',
   '700': 'Exit',
-  '701': 'Reload'
+  '701': 'Reload',
 };
 
 export type TypeErrorsInternal = typeof errorsInternal;

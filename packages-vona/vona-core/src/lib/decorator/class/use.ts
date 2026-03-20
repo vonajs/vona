@@ -1,14 +1,10 @@
-import type { IBeanRecord } from '../../bean/type.ts';
-import type { MetadataKey } from '../../core/metadata.ts';
-import type {
-  Constructable,
-  IDecoratorUseOptions,
-  IDecoratorUseOptionsBase,
-  IInjectSelectorInfo,
-  IUsePrepareArgResult,
-} from '../index.ts';
 import { evaluateExpressions } from '@cabloy/utils';
 import { isNilOrEmptyString } from '@cabloy/utils';
+
+import type { IBeanRecord } from '../../bean/type.ts';
+import type { MetadataKey } from '../../core/metadata.ts';
+import type { Constructable, IDecoratorUseOptions, IDecoratorUseOptionsBase, IInjectSelectorInfo, IUsePrepareArgResult } from '../index.ts';
+
 import { appMetadata } from '../../core/metadata.ts';
 import { appResource } from '../../core/resource.ts';
 
@@ -66,23 +62,17 @@ export function __prepareInjectSelectorInfo(beanInstance, useOptions: IDecorator
   return selectorInfo ?? { withSelector: false, args: [] };
 }
 
-function __prepareInjectSelectorInfo_descriptor(
-  beanInstance,
-  useOptions: IDecoratorUseOptionsBase,
-): IInjectSelectorInfo | undefined {
+function __prepareInjectSelectorInfo_descriptor(beanInstance, useOptions: IDecoratorUseOptionsBase): IInjectSelectorInfo | undefined {
   const fnGet = useOptions.descriptor?.get;
   if (!fnGet) return;
   const res: IUsePrepareArgResult = fnGet.call(beanInstance);
   if (!res) return;
   const withSelector = res.withSelector ?? false;
-  const args = res.args.map(arg => typeof arg === 'function' ? arg() : arg);
+  const args = res.args.map(arg => (typeof arg === 'function' ? arg() : arg));
   return { withSelector, args };
 }
 
-function __prepareInjectSelectorInfo_init(
-  beanInstance,
-  useOptions: IDecoratorUseOptionsBase,
-): IInjectSelectorInfo | undefined {
+function __prepareInjectSelectorInfo_init(beanInstance, useOptions: IDecoratorUseOptionsBase): IInjectSelectorInfo | undefined {
   const init = useOptions.init;
   if (!init) return;
   const withSelector = init.withSelector ?? false;

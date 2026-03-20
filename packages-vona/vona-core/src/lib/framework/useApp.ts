@@ -1,6 +1,8 @@
-import type { VonaApplication } from '../core/application.ts';
-import path from 'node:path';
 import { sleep } from '@cabloy/utils';
+import path from 'node:path';
+
+import type { VonaApplication } from '../core/application.ts';
+
 import { pathToHref } from '../utils/util.ts';
 
 export function useApp(): VonaApplication {

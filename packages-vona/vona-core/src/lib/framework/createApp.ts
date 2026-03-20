@@ -1,7 +1,9 @@
+import { sleep } from '@cabloy/utils';
+
 import type { VonaAppInfo, VonaApplicationOptions } from '../../types/application/app.ts';
 import type { BootstrapOptions } from '../../types/interface/bootstrap.ts';
 import type { VonaConfigEnv } from '../../types/utils/env.ts';
-import { sleep } from '@cabloy/utils';
+
 import { cast } from '../../types/utils/cast.ts';
 import { VonaApplication } from '../core/application.ts';
 import { jsxEnhance } from '../utils/jsx-enhance.ts';

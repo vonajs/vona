@@ -1,8 +1,10 @@
-import type { VonaApplication } from '../core/application.ts';
+import fse from 'fs-extra';
 import { createRequire } from 'node:module';
 import os from 'node:os';
 import path from 'node:path';
-import fse from 'fs-extra';
+
+import type { VonaApplication } from '../core/application.ts';
+
 import { pathToHref } from './util.ts';
 
 export function getSqlite3DatabaseNameDefault(app: VonaApplication) {
@@ -38,5 +40,5 @@ export async function copySqlite3NativeBinding(projectPath: string, outDir: stri
 
 function prepareNativeBinding(nativeBinding: string | undefined) {
   if (!nativeBinding || nativeBinding === 'false') return null as unknown as undefined;
-  return (nativeBinding === 'true') ? 'node/better_sqlite3.node' : nativeBinding;
+  return nativeBinding === 'true' ? 'node/better_sqlite3.node' : nativeBinding;
 }

@@ -1,5 +1,7 @@
 import type { IModule } from '@cabloy/module-info';
+
 import type { VonaApplication } from '../core/application.ts';
+
 import { deepExtend } from '../utils/util.ts';
 
 export default async function (app: VonaApplication, modules: Record<string, IModule>) {
@@ -15,11 +17,7 @@ export default async function (app: VonaApplication, modules: Record<string, IMo
         const configModule = await module.resource.config(app, app.options.env);
         // configNew is not used by now
         await app.util.monkeyModule(app.meta.appMonkey, app.meta.modulesMonkey, true, 'configLoaded', module, configModule);
-        app.config.modules[module.info.relativeName] = deepExtend(
-          {},
-          configModule,
-          app.config.modules[module.info.relativeName],
-        );
+        app.config.modules[module.info.relativeName] = deepExtend({}, configModule, app.config.modules[module.info.relativeName]);
       }
     }
   }

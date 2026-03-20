@@ -1,5 +1,6 @@
-import cluster from 'node:cluster';
 import chalk from 'chalk';
+import cluster from 'node:cluster';
+
 import { useApp } from './useApp.ts';
 
 let __closing = false;

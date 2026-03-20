@@ -1,14 +1,11 @@
 import type { MetadataKey } from '../core/metadata.ts';
 import type { Constructable } from '../decorator/index.ts';
 import type { IMappedClassMetadataOptions, MappedClassMetadataKeys } from './type.ts';
+
 import { appMetadata } from '../core/metadata.ts';
 import { SymbolMappedClassMetadataKeys } from './type.ts';
 
-export function registerMappedClassMetadataKey(
-  target: object,
-  metadataKey: MetadataKey,
-  options?: IMappedClassMetadataOptions,
-) {
+export function registerMappedClassMetadataKey(target: object, metadataKey: MetadataKey, options?: IMappedClassMetadataOptions) {
   const metadataKeys = appMetadata.getOwnMetadataMap<MetadataKey, IMappedClassMetadataOptions | undefined>(
     true,
     SymbolMappedClassMetadataKeys,

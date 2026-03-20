@@ -1,5 +1,7 @@
-import type { ILocaleRecord, IModuleLocale, IModuleLocaleText } from './type.ts';
 import * as localeutil from '@cabloy/localeutil';
+
+import type { ILocaleRecord, IModuleLocale, IModuleLocaleText } from './type.ts';
+
 import { cast } from '../../../../types/utils/cast.ts';
 import { BeanSimple } from '../../beanSimple.ts';
 import { LocaleModuleNameSeparator } from './type.ts';
@@ -28,11 +30,7 @@ export class AppLocale extends BeanSimple {
     const getText = function (text: string | object, ...args: any[]): string {
       return self.getText(false, moduleScope, undefined, text, ...args);
     };
-    getText.locale = function <T extends keyof ILocaleRecord>(
-      locale: T | undefined,
-      text: string | object,
-      ...args: any[]
-    ): string {
+    getText.locale = function <T extends keyof ILocaleRecord>(locale: T | undefined, text: string | object, ...args: any[]): string {
       return self.getText(false, moduleScope, locale, text, ...args);
     };
     return getText;

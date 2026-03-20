@@ -1,8 +1,10 @@
-import type { ILoggerFormatFilterOpts, ILoggerOptionsClientInfo } from '../../../types/interface/logger.ts';
 import { isEmptyObject } from '@cabloy/utils';
 import chalk from 'chalk';
 import { LEVEL, MESSAGE } from 'triple-beam';
 import * as Winston from 'winston';
+
+import type { ILoggerFormatFilterOpts, ILoggerOptionsClientInfo } from '../../../types/interface/logger.ts';
+
 import { cast } from '../../../types/utils/cast.ts';
 import { useApp } from '../../framework/useApp.ts';
 
@@ -56,7 +58,8 @@ export const formatLoggerFilter = Winston.format(((info: any, opts: ILoggerForma
     if (Winston.config.npm.levels[info.level] === Winston.config.npm.levels[level]) return __formatLoggerFilterCheckInfo(info);
     return false;
   }
-  if (Winston.config.npm.levels[info.level] <= Winston.config.npm.levels[level] || (opts.silly && info.level === 'silly')) return __formatLoggerFilterCheckInfo(info);
+  if (Winston.config.npm.levels[info.level] <= Winston.config.npm.levels[level] || (opts.silly && info.level === 'silly'))
+    return __formatLoggerFilterCheckInfo(info);
   return false;
 }) as any);
 

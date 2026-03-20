@@ -1,6 +1,7 @@
+import { AsyncLocalStorage } from 'node:async_hooks';
+
 import type { VonaContext } from '../../types/context/index.ts';
 import type { VonaApplication } from './application.ts';
-import { AsyncLocalStorage } from 'node:async_hooks';
 
 export class VonaAsyncLocalStorage extends AsyncLocalStorage<VonaContext> {
   app: VonaApplication;
@@ -15,14 +16,18 @@ export class VonaAsyncLocalStorage extends AsyncLocalStorage<VonaContext> {
     if (store === this.app.currentContext) {
       return await callback(...args);
     }
-    return super.run(store, async (...args) => {
-      try {
-        this.app.meta.ctxCounter.increment();
-        return await callback(...args);
-      } finally {
-        await store.bean.dispose();
-        this.app.meta.ctxCounter.decrement();
-      }
-    }, ...args);
+    return super.run(
+      store,
+      async (...args) => {
+        try {
+          this.app.meta.ctxCounter.increment();
+          return await callback(...args);
+        } finally {
+          await store.bean.dispose();
+          this.app.meta.ctxCounter.decrement();
+        }
+      },
+      ...args,
+    );
   }
 }

@@ -1,4 +1,5 @@
 import type { IModuleError } from './type.ts';
+
 import { BeanSimple } from '../../beanSimple.ts';
 import { BeanScopeErrorImpl } from './beanScopeErrorImpl.ts';
 

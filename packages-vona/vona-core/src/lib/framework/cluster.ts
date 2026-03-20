@@ -1,5 +1,7 @@
-import type { BootstrapOptions } from '../../types/interface/bootstrap.ts';
 import cluster from 'node:cluster';
+
+import type { BootstrapOptions } from '../../types/interface/bootstrap.ts';
+
 import { createApp, createAppMaster } from './createApp.ts';
 import { handleProcessMaster } from './processMaster.ts';
 import { handleProcessWork } from './processWorker.ts';

@@ -1,19 +1,29 @@
 import type * as ModuleInfo from '@cabloy/module-info';
 import type { IModule } from '@cabloy/module-info';
 import type { BinaryToTextEncoding, HashOptions } from 'node:crypto';
-import type { IInstanceRecord, TypeMonkeyName, VonaConfigEnv, VonaContext } from '../../types/index.ts';
-import type { IBeanRecord, IBeanScopeRecord, TypeBeanScopeRecordKeys } from '../bean/type.ts';
-import type { IBeanSceneRecord } from '../decorator/interface/beanOptions.ts';
-import type { ZodLocaleErrors } from './zod-enhance.ts';
+
+import { compose as _compose } from '@cabloy/compose';
+import { extend } from '@cabloy/extend';
+import {
+  combineApiPath,
+  combineApiPathControllerAndAction,
+  combineApiPathControllerAndActionRaw,
+  combineResourceName,
+  forEach,
+  forEachSync,
+} from '@cabloy/utils';
+import fse from 'fs-extra';
 import crypto from 'node:crypto';
 import { createRequire } from 'node:module';
 import path from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { compose as _compose } from '@cabloy/compose';
-import { extend } from '@cabloy/extend';
-import { combineApiPath, combineApiPathControllerAndAction, combineApiPathControllerAndActionRaw, combineResourceName, forEach, forEachSync } from '@cabloy/utils';
-import fse from 'fs-extra';
 import * as uuid from 'uuid';
+
+import type { IInstanceRecord, TypeMonkeyName, VonaConfigEnv, VonaContext } from '../../types/index.ts';
+import type { IBeanRecord, IBeanScopeRecord, TypeBeanScopeRecordKeys } from '../bean/type.ts';
+import type { IBeanSceneRecord } from '../decorator/interface/beanOptions.ts';
+import type { ZodLocaleErrors } from './zod-enhance.ts';
+
 import { cast } from '../../types/index.ts';
 import { BeanSimple } from '../bean/beanSimple.ts';
 import { zodSetLocaleErrors } from './zod-enhance.ts';
@@ -81,12 +91,7 @@ export class AppUtil extends BeanSimple {
     return combineApiPathControllerAndAction(moduleName, controllerPath, actionPath, prefix, simplify, this.app.config.server.globalPrefix);
   }
 
-  combineApiPath(
-    path: string | undefined,
-    moduleName?: ModuleInfo.IModuleInfo | string,
-    prefix?: string | boolean,
-    simplify?: boolean,
-  ) {
+  combineApiPath(path: string | undefined, moduleName?: ModuleInfo.IModuleInfo | string, prefix?: string | boolean, simplify?: boolean) {
     return combineApiPath(path, moduleName, prefix, simplify, this.app.config.server.globalPrefix);
   }
 
@@ -136,11 +141,7 @@ export class AppUtil extends BeanSimple {
     return this[SymbolProdRootPath];
   }
 
-  getAssetPathPhysical(
-    moduleName: ModuleInfo.IModuleInfo | string,
-    scene: keyof IModuleAssetSceneRecord,
-    assetPath?: string,
-  ) {
+  getAssetPathPhysical(moduleName: ModuleInfo.IModuleInfo | string, scene: keyof IModuleAssetSceneRecord, assetPath?: string) {
     if (typeof moduleName !== 'string') moduleName = moduleName.relativeName;
     if (this.app.meta.isProd) {
       return combineFilePathSafe(path.join(this.prodRootPath, 'assets', scene, moduleName), assetPath || '');
@@ -269,9 +270,8 @@ export class AppUtil extends BeanSimple {
     return 'html';
   }
 
-  getModuleConfigRaw<
-    K extends TypeBeanScopeRecordKeys,
-  >(moduleName: K,
+  getModuleConfigRaw<K extends TypeBeanScopeRecordKeys>(
+    moduleName: K,
   ): IBeanScopeRecord[K] extends { config?: infer CONFIG } ? CONFIG | undefined : undefined {
     return this.app.config.modules[moduleName as any];
   }

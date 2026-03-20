@@ -2,6 +2,7 @@ import { hashkey, isEmptyObject } from '@cabloy/utils';
 import { ZodMetadata } from '@cabloy/zod-openapi';
 import { extendZodWithOpenApi } from '@cabloy/zod-to-openapi';
 import { z } from 'zod';
+
 import { deepExtend } from './util.ts';
 
 export function zodExtendOpenApi() {

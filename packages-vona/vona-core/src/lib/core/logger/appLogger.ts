@@ -1,8 +1,16 @@
-import type { ILoggerChildRecord, ILoggerClientRecord, ILoggerOptionsClientInfo, LoggerLevel, TypeLoggerOptions } from '../../../types/interface/logger.ts';
 import { catchErrorSync } from '@cabloy/utils';
 import fse from 'fs-extra';
 import * as Winston from 'winston';
 import DailyRotateFile from 'winston-daily-rotate-file';
+
+import type {
+  ILoggerChildRecord,
+  ILoggerClientRecord,
+  ILoggerOptionsClientInfo,
+  LoggerLevel,
+  TypeLoggerOptions,
+} from '../../../types/interface/logger.ts';
+
 import { BeanSimple } from '../../bean/beanSimple.ts';
 import { deepExtend } from '../../utils/util.ts';
 
@@ -83,11 +91,15 @@ export class AppLogger extends BeanSimple {
 
   private _prepareConfigClient(clientName: keyof ILoggerClientRecord, configClient: TypeLoggerOptions) {
     if (typeof configClient !== 'function') return configClient;
-    return configClient.call(this.app, {
-      clientName,
-      level: () => this.getFilterLevel(clientName),
-      child: () => this.getFilterChild(clientName),
-    }, Winston);
+    return configClient.call(
+      this.app,
+      {
+        clientName,
+        level: () => this.getFilterLevel(clientName),
+        child: () => this.getFilterChild(clientName),
+      },
+      Winston,
+    );
   }
 
   public createTransportFile(

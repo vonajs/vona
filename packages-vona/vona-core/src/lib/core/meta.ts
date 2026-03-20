@@ -1,10 +1,13 @@
 import type { IModule } from '@cabloy/module-info';
+
+import chalk from 'chalk';
+
 import type { TypeModuleResourceLocaleModules, TypeModuleResourceLocales, VonaConfigEnv } from '../../types/index.ts';
 import type { IAppMonkey } from '../../types/interface/monkey.ts';
 import type { ErrorClass, IBeanScopeConfig, IModuleLocaleText } from '../bean/index.ts';
 import type { AppMetadata } from './metadata.ts';
 import type { AppResource } from './resource.ts';
-import chalk from 'chalk';
+
 import { EnumAppEvent } from '../../types/index.ts';
 import { BeanSimple } from '../bean/beanSimple.ts';
 import { AppLocale, BeanScopeContainer } from '../bean/index.ts';
@@ -63,7 +66,7 @@ export class AppMeta extends BeanSimple {
     this.ctxCounter = new CtxCounter();
 
     // appMonkey
-    this.appMonkey = this.app.options.AppMonkey ? new (this.app.options.AppMonkey)() : undefined;
+    this.appMonkey = this.app.options.AppMonkey ? new this.app.options.AppMonkey() : undefined;
 
     // logger
     this.logger = this.bean._newBean(AppLogger);

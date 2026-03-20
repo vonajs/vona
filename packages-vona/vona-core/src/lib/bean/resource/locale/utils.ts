@@ -1,5 +1,6 @@
 import type { IBeanScopeLocale } from '../../type.ts';
 import type { ILocaleMagic } from './type.ts';
+
 import { cast } from '../../../../types/utils/cast.ts';
 import { useApp } from '../../../framework/useApp.ts';
 import { LocaleModuleNameSeparator } from './type.ts';

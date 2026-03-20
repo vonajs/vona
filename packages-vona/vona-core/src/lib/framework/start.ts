@@ -1,5 +1,6 @@
 import type { VonaConfig, VonaConfigOptional } from '../../types/index.ts';
 import type { VonaApplication } from '../core/application.ts';
+
 import { EnumAppEvent } from '../../types/index.ts';
 import { ModuleLoader } from '../module/loader.ts';
 import { deepExtend } from '../utils/util.ts';
