@@ -39,7 +39,6 @@ export class LocalConsole {
       }
       // eslint-disable-next-line
       console.log(text);
-
     }
   }
 
