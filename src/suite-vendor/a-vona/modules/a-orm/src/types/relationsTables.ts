@@ -16,10 +16,10 @@ export type TypeEntityTableNames<EntityMeta extends { $table: string } | undefin
 
 export type TypeEntityTableNamesOfModelOptions<TModelOptions extends IDecoratorModelOptions> = TModelOptions['relations'] extends {}
   ? TypeRecordValues<{
-      [RelationName in keyof TModelOptions['relations']]: TypeEntityTableNames<
-        TypeUtilGetRelationEntityMeta<TModelOptions['relations'][RelationName]>
-      >;
-    }>
+    [RelationName in keyof TModelOptions['relations']]: TypeEntityTableNames<
+      TypeUtilGetRelationEntityMeta<TModelOptions['relations'][RelationName]>
+    >;
+  }>
   : never;
 
 export type TypeEntityTableNamesOfModelJoins<TModelJoins extends TypeModelsClassLikeGeneral> = TypeEntityTableNames<
