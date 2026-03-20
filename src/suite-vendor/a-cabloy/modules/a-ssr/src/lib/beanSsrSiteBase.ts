@@ -1,8 +1,9 @@
 import type { IParamsAndQuery } from '@cabloy/utils';
 import type { ILocaleRecord } from 'vona';
-import type { IMenuGroup, IMenuItem, TypeEventRetrieveMenusResult } from 'vona-module-a-menu';
+import type { IMenuGroup, IMenuItem } from 'vona-module-a-menu';
 import type { IOnionSlice } from 'vona-module-a-onion';
 import type { TypeEventResolvePathData, TypeEventResolvePathResult } from 'vona-module-a-static';
+import type { TypeEventRetrieveMenusResult } from '../bean/event.retrieveMenus.ts';
 import type { IDecoratorSsrMenuOptions, ISsrMenuRecord } from '../types/ssrMenu.ts';
 import type { ISsrMenuGroupRecord } from '../types/ssrMenuGroup.ts';
 import type { IDecoratorSsrSiteOptions, ISsrHandlerRenderOptions, ISsrHandlerRenderOptionsInner, ISsrSitePerformActionOptions, TypeSsrSitePerformAction } from '../types/ssrSite.ts';
