@@ -1,6 +1,6 @@
 import type { ILocaleRecord } from 'vona';
-import type { TypeEventRetrieveMenusResult } from 'vona-module-a-menu';
 import type { BeanSsrSiteBase } from '../lib/beanSsrSiteBase.ts';
+import type { TypeEventRetrieveMenusResult } from './event.retrieveMenus.ts';
 import { BeanEventBase, Event } from 'vona-module-a-event';
 
 export interface TypeEventRetrieveMenusSiteData {
