@@ -10,7 +10,7 @@
     "eslint-plugin-eslint-comments",
     "eslint-plugin-command",
     "eslint-plugin-perfectionist",
-    "eslint-plugin-e18e",
+    "@e18e/eslint-plugin",
     "@stylistic/eslint-plugin",
     "eslint-plugin-regexp"
   ],
@@ -66,7 +66,9 @@
     "coverage",
     "docker-compose",
     "package.json",
-    "scripts"
+    "scripts",
+    "zovaRest",
+    "assets",
   ],
   "rules": {
     "accessor-pairs": [
@@ -307,7 +309,7 @@
     "antfu/no-import-node-modules-by-path": "error",
     "import/consistent-type-specifier-style": [
       "error",
-      "top-level"
+      "prefer-top-level"
     ],
     "import/first": "error",
     "import/no-duplicates": "error",
@@ -350,10 +352,7 @@
     ],
     "@stylistic/arrow-parens": [
       "error",
-      "as-needed",
-      {
-        "requireForBlockBody": true
-      }
+      "as-needed"
     ],
     "@stylistic/arrow-spacing": [
       "error",
@@ -368,7 +367,7 @@
     ],
     "@stylistic/brace-style": [
       "error",
-      "stroustrup",
+      "1tbs",
       {
         "allowSingleLine": true
       }
@@ -411,34 +410,29 @@
       "error",
       2,
       {
-        "ArrayExpression": 1,
-        "CallExpression": {
-          "arguments": 1
-        },
-        "flatTernaryExpressions": false,
+        "SwitchCase": 1,
+        "VariableDeclarator": "first",
+        "outerIIFEBody": 1,
+        "MemberExpression": 1,
         "FunctionDeclaration": {
           "body": 1,
-          "parameters": 1,
-          "returnType": 1
+          "parameters": 1
         },
         "FunctionExpression": {
           "body": 1,
-          "parameters": 1,
-          "returnType": 1
+          "parameters": 1
         },
-        "ignoreComments": false,
-        "ignoredNodes": [
-          "TSUnionType",
-          "TSIntersectionType"
-        ],
-        "ImportDeclaration": 1,
-        "MemberExpression": 1,
+        "StaticBlock": {
+          "body": 1
+        },
+        "CallExpression": {
+          "arguments": 1
+        },
+        "ArrayExpression": 1,
         "ObjectExpression": 1,
-        "offsetTernaryExpressions": true,
-        "outerIIFEBody": 1,
-        "SwitchCase": 1,
-        "tabLength": 2,
-        "VariableDeclarator": 1
+        "ImportDeclaration": 1,
+        "flatTernaryExpressions": true,
+        "offsetTernaryExpressions": true
       }
     ],
     "@stylistic/indent-binary-ops": [
@@ -455,8 +449,11 @@
     "@stylistic/keyword-spacing": [
       "error",
       {
-        "after": true,
-        "before": true
+        "overrides": {
+          "this": {
+            "before": true
+          }
+        }
       }
     ],
     "@stylistic/lines-between-class-members": [
@@ -548,7 +545,13 @@
     ],
     "@stylistic/operator-linebreak": [
       "error",
-      "before"
+      "after",
+      {
+        "overrides": {
+          "?": "before",
+          ":": "before"
+        }
+      }
     ],
     "@stylistic/padded-blocks": [
       "error",
@@ -566,8 +569,7 @@
       "error",
       "single",
       {
-        "allowTemplateLiterals": "always",
-        "avoidEscape": false
+        "avoidEscape": true
       }
     ],
     "@stylistic/rest-spread-spacing": [
@@ -659,7 +661,7 @@
       }
     ],
     "@stylistic/jsx-closing-bracket-location": "error",
-    "@stylistic/jsx-closing-tag-location": "error",
+    "@stylistic/jsx-closing-tag-location": "off",
     "@stylistic/jsx-curly-brace-presence": [
       "error",
       {
@@ -940,7 +942,7 @@
       },
       "jsPlugins": [
         "eslint-plugin-antfu",
-        "eslint-plugin-e18e"
+        "@e18e/eslint-plugin"
       ],
       "plugins": [
         "vitest",
@@ -1458,45 +1460,6 @@
     },
     {
       "files": [
-        "**/*.md"
-      ],
-      "rules": {
-        "markdown/fenced-code-language": "off",
-        "markdown/heading-increment": "error",
-        "markdown/no-duplicate-definitions": "error",
-        "markdown/no-empty-definitions": "error",
-        "markdown/no-empty-images": "error",
-        "markdown/no-empty-links": "error",
-        "markdown/no-invalid-label-refs": "error",
-        "markdown/no-missing-atx-heading-space": "error",
-        "markdown/no-missing-label-refs": "off",
-        "markdown/no-missing-link-fragments": "error",
-        "markdown/no-multiple-h1": "error",
-        "markdown/no-reference-like-urls": "error",
-        "markdown/no-reversed-media-syntax": "error",
-        "markdown/no-space-in-emphasis": "error",
-        "markdown/no-unused-definitions": "error",
-        "markdown/require-alt-text": "error",
-        "markdown/table-column-count": "error",
-        "command/command": "off",
-        "no-irregular-whitespace": "off",
-        "perfectionist/sort-exports": "off",
-        "regexp/no-legacy-features": "off",
-        "regexp/no-missing-g-flag": "off",
-        "regexp/no-useless-dollar-replacements": "off",
-        "regexp/no-useless-flag": "off",
-        "@stylistic/indent": "off"
-      },
-      "jsPlugins": [
-        "eslint-plugin-markdown",
-        "eslint-plugin-command",
-        "eslint-plugin-perfectionist",
-        "eslint-plugin-regexp",
-        "@stylistic/eslint-plugin"
-      ]
-    },
-    {
-      "files": [
         "**/*.md/**/*.?([cm])[jt]s?(x)"
       ],
       "rules": {
@@ -1524,7 +1487,7 @@
       },
       "jsPlugins": [
         "eslint-plugin-antfu",
-        "eslint-plugin-e18e",
+        "@e18e/eslint-plugin",
         "@stylistic/eslint-plugin",
         "eslint-plugin-unused-imports"
       ],
@@ -1694,19 +1657,19 @@
           }
         ],
         "prefer-rest-params": "off",
-        "ts/method-signature-style": "off",
-        "ts/no-redeclare": "off",
-        "ts/consistent-type-imports": [
+        "method-signature-style": "off",
+        "no-redeclare": "off",
+        "consistent-type-imports": [
           "error",
           {
             "fixStyle": "separate-type-imports",
             "prefer": "type-imports"
           }
         ],
-        "ts/explicit-function-return-type": "off",
-        "ts/no-namespace": "off",
-        "ts/no-explicit-any": "off",
-        "ts/no-var-requires": "off",
+        "explicit-function-return-type": "off",
+        "no-namespace": "off",
+        "no-explicit-any": "off",
+        "no-var-requires": "off",
         "unused-imports/no-unused-vars": [
           "error",
           {
@@ -1719,7 +1682,7 @@
             "ignoreRestSiblings": true
           }
         ],
-        "ts/no-unused-vars": [
+        "no-unused-vars": [
           "error",
           {
             "args": "all",
@@ -1731,24 +1694,24 @@
             "ignoreRestSiblings": true
           }
         ],
-        "ts/no-this-alias": "off",
-        "ts/no-unsafe-declaration-merging": "off",
-        "ts/ban-ts-comment": [
+        "no-this-alias": "off",
+        "no-unsafe-declaration-merging": "off",
+        "ban-ts-comment": [
           "error",
           {
             "ts-expect-error": "allow-with-description",
             "ts-ignore": "allow-with-description"
           }
         ],
-        "ts/no-empty-object-type": "off",
-        "ts/no-unsafe-function-type": "off",
-        "ts/no-use-before-define": [
+        "no-empty-object-type": "off",
+        "no-unsafe-function-type": "off",
+        "no-use-before-define": [
           "error",
           {
             "functions": false
           }
         ],
-        "style/max-len": [
+        "max-len": [
           "error",
           {
             "code": 150,
@@ -1761,83 +1724,14 @@
             "ignoreRegExpLiterals": true
           }
         ],
-        "style/arrow-parens": [
-          "error",
-          "as-needed"
-        ],
-        "style/brace-style": [
-          "error",
-          "1tbs",
-          {
-            "allowSingleLine": true
-          }
-        ],
-        "style/quotes": [
-          "error",
-          "single",
-          {
-            "avoidEscape": true
-          }
-        ],
-        "style/operator-linebreak": [
-          "error",
-          "after",
-          {
-            "overrides": {
-              "?": "before",
-              ":": "before"
-            }
-          }
-        ],
-        "style/keyword-spacing": [
-          "error",
-          {
-            "overrides": {
-              "this": {
-                "before": true
-              }
-            }
-          }
-        ],
-        "style/indent": [
-          "error",
-          2,
-          {
-            "SwitchCase": 1,
-            "VariableDeclarator": "first",
-            "outerIIFEBody": 1,
-            "MemberExpression": 1,
-            "FunctionDeclaration": {
-              "body": 1,
-              "parameters": 1
-            },
-            "FunctionExpression": {
-              "body": 1,
-              "parameters": 1
-            },
-            "StaticBlock": {
-              "body": 1
-            },
-            "CallExpression": {
-              "arguments": 1
-            },
-            "ArrayExpression": 1,
-            "ObjectExpression": 1,
-            "ImportDeclaration": 1,
-            "flatTernaryExpressions": true,
-            "offsetTernaryExpressions": true
-          }
-        ],
-        "style/jsx-closing-tag-location": "off"
       },
       "jsPlugins": [
-        "eslint-plugin-e18e",
+        "@e18e/eslint-plugin",
         "eslint-plugin-regexp",
         "eslint-plugin-antfu",
         "eslint-plugin-eslint-comments",
         "eslint-plugin-ts",
-        "eslint-plugin-unused-imports",
-        "eslint-plugin-style"
+        "eslint-plugin-unused-imports"
       ],
       "globals": {
         "NodeJS": "writable"

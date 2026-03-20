@@ -29,7 +29,7 @@ export function isSafeDomain(domain: string, whiteList: string[]): boolean {
     // And we don't need to cope with `endWith`.
     if (domain === rule) return true;
     // ensure wwweggjs.com not match eggjs.com
-    if (!/^\./.test(rule)) rule = `.${rule}`;
+    if (!rule.startsWith('.')) rule = `.${rule}`;
     return hostname.endsWith(rule);
   });
 }
