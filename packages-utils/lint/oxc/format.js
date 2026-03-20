@@ -1,19 +1,4 @@
 export const _configDefault = {
-  ignorePatterns: [
-    '*.min.js',
-    '*.code-snippets',
-    '**/dist/**',
-    '**/static/**',
-    '**/.rollup.cache/**',
-    '**/.metadata/index.ts',
-    '.vona',
-    '.assets',
-    'coverage',
-    'docker-compose',
-    'scripts',
-    'zovaRest',
-    'assets',
-  ],
   printWidth: 150,
   tabWidth: 2,
   useTabs: false,
@@ -47,6 +32,6 @@ export const _configDefault = {
   ],
 };
 
-export function oxcFormatConfig() {
-  return _configDefault;
+export function oxcFormatConfig(configCustom) {
+  return Object.assign({}, _configDefault, configCustom);
 }
