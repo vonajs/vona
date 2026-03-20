@@ -23994,6 +23994,8 @@ declare class ZovaSys {
   close(): void;
   private _combineConfig;
   private _prepareEnv;
+  private _prepareEnv_Runtime;
+  private _prepareEnv_Client;
 }
 //#endregion
 //#region packages-zova/zova-core/src/core/context/component.d.ts
@@ -32928,7 +32930,8 @@ declare class ModelSdk extends BeanModelBase {
   getZodSchema(schemaName: string): ZodType<unknown, unknown, $ZodTypeInternals<unknown, unknown>> | null;
   getSchemaDefaultValue(schemaName: string): {} | null;
   createApiSchemas(api: string, apiMethod?: TypeRequestMethod, apiOptions?: IApiSchemaOptions): IOpenapiSchemas;
-  loadSchemaProperties(schema: SchemaObject | undefined, scene: TypeSchemaScene): SchemaObject[] | undefined;
+  loadSchemaProperties(schema: SchemaObject | undefined, scene?: TypeSchemaScene): SchemaObject[] | undefined;
+  schemaToZodSchema<T$1 extends ZodType = ZodType>(schema: SchemaObject): T$1;
 }
 //#endregion
 //#region src/suite-vendor/a-zova/modules/a-openapi/src/config/config.d.ts
@@ -36962,9 +36965,8 @@ declare class SysSsrState extends BeanBase {
   protected [SymbolSSRState]: SSRContextState;
   protected [SymbolSSRStateDefer]: SSRContextStateDefer;
   protected __init__(): Promise<void>;
-  private _patchEnvConfig;
-  get state(): SSRContextState;
-  get stateDefer(): SSRContextStateDefer;
+  get state(): any;
+  get stateDefer(): any;
 }
 //#endregion
 //#region src/suite-vendor/a-zova/modules/a-ssr/src/config/config.d.ts
@@ -43760,7 +43762,7 @@ declare class ModelResource<Entity = any, EntityCreate = Partial<Entity>, Entity
   get apiSchemasUpdate(): IOpenapiSchemas;
   get componentRestPage(): "basic-restpage:restPage";
   get componentRestPageEntry(): "basic-restpage:restPageEntry";
-  get componentTable(): TypeComponentRecordSelectorKeysStrict<"table">;
+  get componentTable(): "a-table:table" | "basic-table:table";
   get componentForm(): "a-form:form";
   getFormSchema(formMeta: IFormMeta): SchemaObject | undefined;
   getFormApiSchemas(formMeta: IFormMeta): IOpenapiSchemas;
