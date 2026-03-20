@@ -1,14 +1,6 @@
 {
   "$schema": "./node_modules/oxfmt/configuration_schema.json",
-  "ignorePatterns": [
-    "dist/**",
-    "*.min.js",
-    "*.code-snippets",
-    "src/**",
-    "packages-cli/**",
-    "packages-utils/**",
-    "packages-vona/**"
-  ],
+  "ignorePatterns": ["dist/**", "*.min.js", "*.code-snippets", "src/**", "packages-cli/**", "packages-vona/**"],
   "printWidth": 150,
   "tabWidth": 2,
   "useTabs": false,
@@ -26,8 +18,8 @@
       "value-internal",
       ["type-parent", "type-sibling", "type-index"],
       ["value-parent", "value-sibling", "value-index"],
-      "unknown"
-    ]
+      "unknown",
+    ],
   },
   "sortPackageJson": true,
   "overrides": [
@@ -35,8 +27,8 @@
       "files": ["*.json"],
       "options": {
         "printWidth": 80,
-        "trailingComma": "none"
-      }
-    }
-  ]
+        "trailingComma": "none",
+      },
+    },
+  ],
 }
