@@ -1,17 +1,18 @@
 {
   "name": "table-identity",
-  "type": "module",
   "version": "1.0.13",
+  "gitHead": "0eab9dc4a5622caffe89e7b1b3f02c08ccbc4c4b",
   "description": "table-identity",
-  "publishConfig": {
-    "access": "public"
-  },
-  "author": "zhennann",
   "keywords": [
-    "password",
     "hash",
+    "password",
     "salt"
   ],
+  "author": "zhennann",
+  "files": [
+    "dist"
+  ],
+  "type": "module",
   "exports": {
     ".": {
       "types": [
@@ -23,15 +24,19 @@
     },
     "./package.json": "./package.json"
   },
-  "files": [
-    "dist"
-  ],
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "clean": "rimraf dist tsconfig.tsbuildinfo",
     "tsc:publish": "npm run clean && vona :bin:buildGeneral && tsc",
     "prepublishOnly": "npm run tsc:publish",
     "prepack": "clean-package",
     "postpack": "clean-package restore"
+  },
+  "devDependencies": {
+    "clean-package": "^2.2.0",
+    "rimraf": "^6.0.1"
   },
   "clean-package": {
     "indent": 2,
@@ -40,10 +45,5 @@
       "devDependencies",
       "exports.\\..import"
     ]
-  },
-  "devDependencies": {
-    "clean-package": "^2.2.0",
-    "rimraf": "^6.0.1"
-  },
-  "gitHead": "0eab9dc4a5622caffe89e7b1b3f02c08ccbc4c4b"
+  }
 }

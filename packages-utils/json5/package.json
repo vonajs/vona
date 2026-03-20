@@ -1,16 +1,17 @@
 {
   "name": "@cabloy/json5",
-  "type": "module",
   "version": "1.0.19",
+  "gitHead": "0eab9dc4a5622caffe89e7b1b3f02c08ccbc4c4b",
   "description": "cabloy json5",
-  "publishConfig": {
-    "access": "public"
-  },
-  "author": "zhennann",
   "keywords": [
-    "framework",
-    "cabloy"
+    "cabloy",
+    "framework"
   ],
+  "author": "zhennann",
+  "files": [
+    "dist"
+  ],
+  "type": "module",
   "exports": {
     ".": {
       "types": [
@@ -22,9 +23,9 @@
     },
     "./package.json": "./package.json"
   },
-  "files": [
-    "dist"
-  ],
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "clean": "rimraf dist tsconfig.tsbuildinfo",
     "tsc:publish": "npm run clean && vona :bin:buildGeneral && tsc",
@@ -35,6 +36,10 @@
   "dependencies": {
     "json5": "^2.1.1"
   },
+  "devDependencies": {
+    "clean-package": "^2.2.0",
+    "rimraf": "^6.0.1"
+  },
   "clean-package": {
     "indent": 2,
     "remove": [
@@ -42,10 +47,5 @@
       "devDependencies",
       "exports.\\..import"
     ]
-  },
-  "devDependencies": {
-    "clean-package": "^2.2.0",
-    "rimraf": "^6.0.1"
-  },
-  "gitHead": "0eab9dc4a5622caffe89e7b1b3f02c08ccbc4c4b"
+  }
 }

@@ -23,8 +23,8 @@ In the test and development environments, a `empty` instance is provided by defa
 config.instance = {
   instances: {
     '': { password: '', title: '', config: {} },
-    shareTest: { password: '', title: '' },
-    isolateTest: { password: '', title: '', id: 1000, isolate: true, isolateClient: 'isolateTest' },
+    'shareTest': { password: '', title: '' },
+    'isolateTest': { password: '', title: '', id: 1000, isolate: true, isolateClient: 'isolateTest' },
   },
 };
 ```
@@ -61,7 +61,7 @@ In the production environment, you need to configure instance information yourse
 config.instance = {
   instances: {
     '': { password: '', title: '', config: {} },
-    vona: { password: '', title: '', config: {} },
+    'vona': { password: '', title: '', config: {} },
   },
 };
 ```

@@ -1,4 +1,7 @@
-export interface ISocketEventPerformActionItem { resolve: Function; reject: Function };
+export interface ISocketEventPerformActionItem {
+  resolve: Function;
+  reject: Function;
+}
 
 export interface ISocketEventRecordSystem {
   sysReady: never;

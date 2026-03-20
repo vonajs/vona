@@ -1,18 +1,17 @@
 import { isNil } from './check.ts';
 
-export interface IParamsAndQuery { params?: Record<string, any>; query?: Record<string, any> }
+export interface IParamsAndQuery {
+  params?: Record<string, any>;
+  query?: Record<string, any>;
+}
 
 export function deprecated(oldUsage, newUsage) {
-  const message = '`'
-    .concat(oldUsage, '` is deprecated and will be removed in a later version. Use `')
-    .concat(newUsage, '` instead');
+  const message = '`'.concat(oldUsage, '` is deprecated and will be removed in a later version. Use `').concat(newUsage, '` instead');
 
   console.warn(message);
 }
 
-export async function catchError<T>(
-  fnMethod: (...args: any[]) => Promise<T>,
-): Promise<[T, undefined] | [undefined, Error]> {
+export async function catchError<T>(fnMethod: (...args: any[]) => Promise<T>): Promise<[T, undefined] | [undefined, Error]> {
   let error: Error | undefined;
   let data: T | undefined;
   try {
@@ -23,9 +22,7 @@ export async function catchError<T>(
   return error ? [undefined, error!] : [data!, undefined];
 }
 
-export function catchErrorSync<T>(
-  fnMethod: (...args: any[]) => T,
-): [T, undefined] | [undefined, Error] {
+export function catchErrorSync<T>(fnMethod: (...args: any[]) => T): [T, undefined] | [undefined, Error] {
   let error: Error | undefined;
   let data: T | undefined;
   try {
@@ -109,7 +106,8 @@ function _getProperty<T>(_obj: object | undefined, name: string, sep: string | u
   for (const _name of names) {
     const [name, index] = _parsePropertyKey(_name);
     if (__keysIgnore.includes(name)) throw new Error(`invalid prop: ${name}`);
-    if (obj[name] === undefined) { // not check obj[name] === null
+    if (obj[name] === undefined) {
+      // not check obj[name] === null
       if (forceObject) {
         if (index === undefined) {
           obj[name] = {};
@@ -130,7 +128,7 @@ function _getProperty<T>(_obj: object | undefined, name: string, sep: string | u
 }
 
 function _parsePropertyKey(name: string): [string, number | undefined] {
-  const matched = name.match((/([^[]+)\[(\d+)\]/));
+  const matched = name.match(/([^[]+)\[(\d+)\]/);
   if (!matched) return [name, undefined];
   return [matched[1], Number.parseInt(matched[2])];
 }
@@ -185,7 +183,7 @@ export function defaultPathSerializer<T extends string | undefined>(
   pathParams = pathParams ?? {};
   for (const item of [PATH_PARAM_RE, PATH_PARAM_RE2]) {
     pathName = pathName!.replace(item, (_, _part: string) => {
-      if (_part.includes('?'))_part = _part.substring(0, _part.length - 1);
+      if (_part.includes('?')) _part = _part.substring(0, _part.length - 1);
       const value = pathParams?.[_part];
       if (value === undefined || value === null) return '';
       if (typeof value === 'object') return encodeURIComponent(JSON.stringify(value));

@@ -1,31 +1,18 @@
 import type z from 'zod';
+
 import type { ZodTypes } from './zod-is-type.ts';
+
 import { isAnyZodType, isZodType } from './zod-is-type.ts';
 
 export class Metadata {
   static unwrapUntil(schema: z.ZodType): z.ZodType;
-  static unwrapUntil<TypeName extends keyof ZodTypes>(
-    schema: z.ZodType,
-    typeName: TypeName | undefined
-  ): ZodTypes[TypeName] | undefined;
-  static unwrapUntil<TypeName extends keyof ZodTypes>(
-    schema: z.ZodType,
-    typeName?: TypeName,
-  ): z.ZodType | undefined {
+  static unwrapUntil<TypeName extends keyof ZodTypes>(schema: z.ZodType, typeName: TypeName | undefined): ZodTypes[TypeName] | undefined;
+  static unwrapUntil<TypeName extends keyof ZodTypes>(schema: z.ZodType, typeName?: TypeName): z.ZodType | undefined {
     if (typeName && isZodType(schema, typeName)) {
       return schema;
     }
 
-    if (
-      isZodType(schema, [
-        'ZodOptional',
-        'ZodNullable',
-        'ZodDefault',
-        'ZodReadonly',
-        'ZodNonOptional',
-      ]) &&
-      isAnyZodType(schema._zod.def.innerType)
-    ) {
+    if (isZodType(schema, ['ZodOptional', 'ZodNullable', 'ZodDefault', 'ZodReadonly', 'ZodNonOptional']) && isAnyZodType(schema._zod.def.innerType)) {
       return this.unwrapUntil(schema._zod.def.innerType, typeName);
     }
 

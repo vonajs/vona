@@ -28,7 +28,7 @@ export interface ZodTypes {
   ZodUnknown: z.ZodUnknown;
   ZodVoid: z.ZodVoid;
   ZodDate: z.ZodDate;
-};
+}
 
 const ZodTypeKeys: Record<keyof ZodTypes, string> = {
   ZodAny: 'any',
@@ -60,29 +60,16 @@ const ZodTypeKeys: Record<keyof ZodTypes, string> = {
   ZodDate: 'date',
 };
 
-export function isZodType<TypeName extends keyof ZodTypes>(
-  schema: object,
-  typeNames: TypeName[],
-): schema is ZodTypes[TypeName];
-export function isZodType<TypeName extends keyof ZodTypes>(
-  schema: object,
-  typeName: TypeName,
-): schema is ZodTypes[TypeName];
-export function isZodType<TypeName extends keyof ZodTypes>(
-  schema: object,
-  typeNames: TypeName | TypeName[],
-): schema is ZodTypes[TypeName] {
+export function isZodType<TypeName extends keyof ZodTypes>(schema: object, typeNames: TypeName[]): schema is ZodTypes[TypeName];
+export function isZodType<TypeName extends keyof ZodTypes>(schema: object, typeName: TypeName): schema is ZodTypes[TypeName];
+export function isZodType<TypeName extends keyof ZodTypes>(schema: object, typeNames: TypeName | TypeName[]): schema is ZodTypes[TypeName] {
   const typeNamesArray = Array.isArray(typeNames) ? typeNames : [typeNames];
 
   return typeNamesArray.some(typeName => {
-    const typeNameMatch =
-      (schema as z.ZodType)?.def?.type === ZodTypeKeys[typeName];
+    const typeNameMatch = (schema as z.ZodType)?.def?.type === ZodTypeKeys[typeName];
 
     if (typeName === 'ZodDiscriminatedUnion') {
-      return (
-        typeNameMatch &&
-        'discriminator' in (schema as z.ZodDiscriminatedUnion).def
-      );
+      return typeNameMatch && 'discriminator' in (schema as z.ZodDiscriminatedUnion).def;
     }
 
     return typeNameMatch;

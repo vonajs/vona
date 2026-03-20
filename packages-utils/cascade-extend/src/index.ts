@@ -2,12 +2,7 @@ import { extend } from '@cabloy/extend';
 
 const __SepDefault = '.';
 
-export function cascadeExtendKeys(
-  scope: object,
-  source: object | undefined,
-  prefix?: string,
-  sep: string = __SepDefault,
-): string[] | undefined {
+export function cascadeExtendKeys(scope: object, source: object | undefined, prefix?: string, sep: string = __SepDefault): string[] | undefined {
   if (!source) return undefined;
   if (prefix === undefined) prefix = '';
   // filter
@@ -30,12 +25,7 @@ export function cascadeExtendKeys(
   return keys.length === 0 ? undefined : keys;
 }
 
-export function cascadeExtend(
-  scope: object,
-  source: object | undefined,
-  prefix?: string,
-  sep: string = __SepDefault,
-): object | undefined {
+export function cascadeExtend(scope: object, source: object | undefined, prefix?: string, sep: string = __SepDefault): object | undefined {
   if (!source) return undefined;
   // keys
   const keys = cascadeExtendKeys(scope, source, prefix, sep);

@@ -1,16 +1,17 @@
 {
   "name": "@cabloy/process-helper",
-  "type": "module",
   "version": "2.0.25",
+  "gitHead": "0eab9dc4a5622caffe89e7b1b3f02c08ccbc4c4b",
   "description": "cabloy process-helper",
-  "publishConfig": {
-    "access": "public"
-  },
-  "author": "zhennann",
   "keywords": [
-    "framework",
-    "cabloy"
+    "cabloy",
+    "framework"
   ],
+  "author": "zhennann",
+  "files": [
+    "dist"
+  ],
+  "type": "module",
   "exports": {
     ".": {
       "types": [
@@ -22,16 +23,8 @@
     },
     "./package.json": "./package.json"
   },
-  "files": [
-    "dist"
-  ],
-  "clean-package": {
-    "indent": 2,
-    "remove": [
-      "clean-package",
-      "devDependencies",
-      "exports.\\..import"
-    ]
+  "publishConfig": {
+    "access": "public"
   },
   "scripts": {
     "clean": "rimraf dist tsconfig.tsbuildinfo",
@@ -44,5 +37,12 @@
     "clean-package": "^2.2.0",
     "rimraf": "^6.0.1"
   },
-  "gitHead": "0eab9dc4a5622caffe89e7b1b3f02c08ccbc4c4b"
+  "clean-package": {
+    "indent": 2,
+    "remove": [
+      "clean-package",
+      "devDependencies",
+      "exports.\\..import"
+    ]
+  }
 }

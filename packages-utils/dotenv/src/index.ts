@@ -1,16 +1,12 @@
 import type { DotenvParseOutput } from 'dotenv';
-import path from 'node:path';
+
 import { cascadeExtendKeys } from 'cascade-extend';
 import dotenv from 'dotenv';
 import dotenvExpand from 'dotenv-expand';
 import { globbySync } from 'globby';
+import path from 'node:path';
 
-export function loadEnvs(
-  meta: object,
-  dir: string,
-  prefix: string = '.env',
-  postfixes?: string | string[],
-): DotenvParseOutput | undefined {
+export function loadEnvs(meta: object, dir: string, prefix: string = '.env', postfixes?: string | string[]): DotenvParseOutput | undefined {
   // envfiles
   const envFiles = getEnvFiles(meta, dir, prefix, postfixes);
   if (!envFiles) return undefined;

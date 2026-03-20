@@ -1,5 +1,6 @@
 import antfu from '@antfu/eslint-config';
 import globals from 'globals';
+
 import { rules } from '../common/rules.js';
 import { rulesVue } from '../common/rulesVue.js';
 
@@ -19,32 +20,40 @@ const globalsMy = {
 };
 
 export default function eslintConfig(config, ...args) {
-  config = Object.assign({
-    stylistic: {
-      indent: 2,
-      quotes: 'single',
-      semi: true,
-      jsx: true,
-    },
-    typescript: true,
-    vue: true,
-    gitignore: false,
-  }, config);
-  return antfu(config, {
-    files: ['**/*.ts', '**/*.tsx'],
-    rules,
-    languageOptions: {
-      parserOptions: {
-        emitDecoratorMetadata: true,
-        experimentalDecorators: true,
+  config = Object.assign(
+    {
+      stylistic: {
+        indent: 2,
+        quotes: 'single',
+        semi: true,
+        jsx: true,
       },
-      globals: globalsMy,
+      typescript: true,
+      vue: true,
+      gitignore: false,
     },
-  }, {
-    files: ['**/*.vue'],
-    rules: Object.assign({}, rules, rulesVue),
-    languageOptions: {
-      globals: globalsMy,
+    config,
+  );
+  return antfu(
+    config,
+    {
+      files: ['**/*.ts', '**/*.tsx'],
+      rules,
+      languageOptions: {
+        parserOptions: {
+          emitDecoratorMetadata: true,
+          experimentalDecorators: true,
+        },
+        globals: globalsMy,
+      },
     },
-  }, ...args);
+    {
+      files: ['**/*.vue'],
+      rules: Object.assign({}, rules, rulesVue),
+      languageOptions: {
+        globals: globalsMy,
+      },
+    },
+    ...args,
+  );
 }

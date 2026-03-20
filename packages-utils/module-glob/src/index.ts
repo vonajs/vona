@@ -1,16 +1,17 @@
 /* eslint-disable no-console */
 import type { IModule, IModulePackage, ISuite, ISuiteModuleBase } from '@cabloy/module-info';
-import type { IModuleGlobContext, IModuleGlobOptions } from './interface.ts';
-import path from 'node:path';
-import {
-  parseInfoPro,
-} from '@cabloy/module-info';
+
+import { parseInfoPro } from '@cabloy/module-info';
 import { checkMeta } from '@cabloy/utils';
 import boxen from 'boxen';
 import chalk from 'chalk';
 import fse from 'fs-extra';
 import { globbySync } from 'globby';
+import path from 'node:path';
 import semver from 'semver';
+
+import type { IModuleGlobContext, IModuleGlobOptions } from './interface.ts';
+
 import { getPathsMeta } from './meta.ts';
 
 export * from './interface.ts';
@@ -183,12 +184,7 @@ function __pushModule(context: IModuleGlobContext, modules: Record<string, IModu
   return true;
 }
 
-function __orderDependencies(
-  context: IModuleGlobContext,
-  modules: Record<string, IModule>,
-  module,
-  moduleRelativeName,
-) {
+function __orderDependencies(context: IModuleGlobContext, modules: Record<string, IModule>, module, moduleRelativeName) {
   if (context.options.disableCheckDependencies) return true;
   const moduleNode = getPackageModuleNode(context.options.projectMode);
   if (!module.package[moduleNode] || !module.package[moduleNode].dependencies) return true;
@@ -199,10 +195,9 @@ function __orderDependencies(
   for (const key in dependencies) {
     const subModule = modules[key];
     if (!subModule) {
-      const message =
-        `${chalk.keyword('orange')(`module ${moduleRelativeName} disabled`)
-        }, because ${
-          chalk.keyword('cyan')(`module ${key} not exists`)}`;
+      const message = `${chalk.keyword('orange')(`module ${moduleRelativeName} disabled`)}, because ${chalk.keyword('cyan')(
+        `module ${key} not exists`,
+      )}`;
       console.log(`\n${boxen(message, boxenOptions)}\n`);
       enabled = false; // process.exit(0);
       continue;
@@ -429,11 +424,7 @@ function __checkSuites(context: IModuleGlobContext, suites: Record<string, ISuit
   }
 }
 
-function _checkSuiteValid(
-  context: IModuleGlobContext,
-  suites: Record<string, ISuite>,
-  suiteRelativeName: string,
-): boolean {
+function _checkSuiteValid(context: IModuleGlobContext, suites: Record<string, ISuite>, suiteRelativeName: string): boolean {
   // suite
   const suite = suites[suiteRelativeName];
   // check if disable

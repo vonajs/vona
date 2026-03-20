@@ -1,16 +1,16 @@
 {
   "name": "@cabloy/lint",
-  "type": "module",
   "version": "5.0.21",
   "description": "Node Style Guide for Cabloy.",
-  "publishConfig": {
-    "access": "public"
-  },
   "files": [
     "api",
     "common",
     "front"
   ],
+  "type": "module",
+  "publishConfig": {
+    "access": "public"
+  },
   "dependencies": {
     "@antfu/eslint-config": "^7.7.2",
     "@eslint/json": "^1.1.0",

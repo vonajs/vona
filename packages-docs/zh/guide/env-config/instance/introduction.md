@@ -23,8 +23,8 @@ VonaJS 支持以下几种`多实例/多租户`模式：
 config.instance = {
   instances: {
     '': { password: '', title: '', config: {} },
-    shareTest: { password: '', title: '' },
-    isolateTest: { password: '', title: '', id: 1000, isolate: true, isolateClient: 'isolateTest' },
+    'shareTest': { password: '', title: '' },
+    'isolateTest': { password: '', title: '', id: 1000, isolate: true, isolateClient: 'isolateTest' },
   },
 };
 ```
@@ -61,7 +61,7 @@ config.instance = {
 config.instance = {
   instances: {
     '': { password: '', title: '', config: {} },
-    vona: { password: '', title: '', config: {} },
+    'vona': { password: '', title: '', config: {} },
   },
 };
 ```

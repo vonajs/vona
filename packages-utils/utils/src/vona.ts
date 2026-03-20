@@ -1,4 +1,5 @@
 import type * as ModuleInfo from '@cabloy/module-info';
+
 import { stringToCapitalize, toLowerCaseFirstChar } from '@cabloy/word-utils';
 
 export function combineResourceNameParts(

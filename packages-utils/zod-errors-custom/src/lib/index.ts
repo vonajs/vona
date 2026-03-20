@@ -1,5 +1,6 @@
-import type { LocaleAdapterFn, LocaleCurrentAdapterFn, ZodLocaleErrors, ZodLocaleErrorsInstance } from './utils.ts';
 import { z } from 'zod';
+
+import type { LocaleAdapterFn, LocaleCurrentAdapterFn, ZodLocaleErrors, ZodLocaleErrorsInstance } from './utils.ts';
 
 export function setLocaleAdapter(localeAdapterFn: LocaleAdapterFn) {
   (z.util as any).setLocaleAdapter(localeAdapterFn);

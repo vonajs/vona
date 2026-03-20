@@ -1,6 +1,7 @@
 import type { ZodTypes } from '@cabloy/zod-to-openapi/dist/lib/zod-is-type.js';
 import type { ZodOpenAPIInternalMetadata } from '@cabloy/zod-to-openapi/dist/zod-extensions.js';
 import type z from 'zod';
+
 import { isZodType, Metadata } from '@cabloy/zod-to-openapi';
 
 export class ZodMetadata {

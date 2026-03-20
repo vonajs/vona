@@ -1,16 +1,17 @@
 {
   "name": "@cabloy/dotenv",
-  "type": "module",
   "version": "1.1.13",
+  "gitHead": "0eab9dc4a5622caffe89e7b1b3f02c08ccbc4c4b",
   "description": "cabloy dotenv",
-  "publishConfig": {
-    "access": "public"
-  },
-  "author": "zhennann",
   "keywords": [
-    "framework",
-    "cabloy"
+    "cabloy",
+    "framework"
   ],
+  "author": "zhennann",
+  "files": [
+    "dist"
+  ],
+  "type": "module",
   "exports": {
     ".": {
       "types": [
@@ -22,9 +23,9 @@
     },
     "./package.json": "./package.json"
   },
-  "files": [
-    "dist"
-  ],
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "clean": "rimraf dist tsconfig.build.tsbuildinfo",
     "tsc:publish": "npm run clean && vona :bin:buildGeneral && tsc -p tsconfig.build.json",
@@ -38,6 +39,10 @@
     "dotenv-expand": "^11.0.6",
     "globby": "^16.0.0"
   },
+  "devDependencies": {
+    "clean-package": "^2.2.0",
+    "rimraf": "^6.0.1"
+  },
   "clean-package": {
     "indent": 2,
     "remove": [
@@ -45,10 +50,5 @@
       "devDependencies",
       "exports.\\..import"
     ]
-  },
-  "devDependencies": {
-    "clean-package": "^2.2.0",
-    "rimraf": "^6.0.1"
-  },
-  "gitHead": "0eab9dc4a5622caffe89e7b1b3f02c08ccbc4c4b"
+  }
 }

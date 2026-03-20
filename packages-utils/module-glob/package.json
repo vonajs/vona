@@ -1,16 +1,17 @@
 {
   "name": "@cabloy/module-glob",
-  "type": "module",
   "version": "5.2.56",
+  "gitHead": "0eab9dc4a5622caffe89e7b1b3f02c08ccbc4c4b",
   "description": "cabloy module-glob",
-  "publishConfig": {
-    "access": "public"
-  },
-  "author": "zhennann",
   "keywords": [
-    "framework",
-    "cabloy"
+    "cabloy",
+    "framework"
   ],
+  "author": "zhennann",
+  "files": [
+    "dist"
+  ],
+  "type": "module",
   "exports": {
     ".": {
       "types": [
@@ -22,9 +23,9 @@
     },
     "./package.json": "./package.json"
   },
-  "files": [
-    "dist"
-  ],
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "clean": "rimraf dist tsconfig.tsbuildinfo",
     "tsc:publish": "npm run clean && vona :bin:buildGeneral && tsc",
@@ -41,6 +42,10 @@
     "globby": "^16.0.0",
     "semver": "^7.7.1"
   },
+  "devDependencies": {
+    "clean-package": "^2.2.0",
+    "rimraf": "^6.0.1"
+  },
   "clean-package": {
     "indent": 2,
     "remove": [
@@ -48,10 +53,5 @@
       "devDependencies",
       "exports.\\..import"
     ]
-  },
-  "devDependencies": {
-    "clean-package": "^2.2.0",
-    "rimraf": "^6.0.1"
-  },
-  "gitHead": "0eab9dc4a5622caffe89e7b1b3f02c08ccbc4c4b"
+  }
 }

@@ -78,7 +78,7 @@ class ServicePost {
       {
         columns: ['id', 'title', 'userId'],
         where: {
-          id: { _gt_: 1 },
+          'id': { _gt_: 1 },
           'testVonaUser.id': 1,
         },
         joins: [['innerJoin', 'testVonaUser', ['userId', 'testVonaUser.id']]],

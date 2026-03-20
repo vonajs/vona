@@ -1,4 +1,5 @@
 import type { IModuleInfo } from '@cabloy/module-info';
+
 import { parseInfoFromPath } from '@cabloy/module-info';
 import StackUtils from 'stack-utils';
 

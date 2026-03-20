@@ -1,4 +1,14 @@
-import type { ISocketEventPerformActionItem, ISocketEventPerformActionOptions, ISocketEventPerformActionOptionsInner, ISocketEventRecord, ISocketEventRecordSystem, IWebSocketOptions, TypeSocketEventPerformActionMethod, TypeSocketPacketEvent } from '../types/socket.ts';
+import type {
+  ISocketEventPerformActionItem,
+  ISocketEventPerformActionOptions,
+  ISocketEventPerformActionOptionsInner,
+  ISocketEventRecord,
+  ISocketEventRecordSystem,
+  IWebSocketOptions,
+  TypeSocketEventPerformActionMethod,
+  TypeSocketPacketEvent,
+} from '../types/socket.ts';
+
 import { socketEventRecord, socketEventRecordReverse } from '../types/socket.ts';
 
 const SymbolPerformActionId = Symbol('SymbolPerformActionId');
@@ -40,7 +50,7 @@ export class WebSocketClient {
   }
 
   private _connect(url: string | URL, protocols?: string | string[]) {
-    const ws = this._ws = new WebSocket(url, protocols);
+    const ws = (this._ws = new WebSocket(url, protocols));
     const onMessage = (event: MessageEvent) => {
       this._parseEvent(event);
     };
@@ -135,11 +145,7 @@ export class WebSocketClient {
     return packet;
   }
 
-  public performAction(
-    method: TypeSocketEventPerformActionMethod,
-    path: string,
-    options?: ISocketEventPerformActionOptions,
-  ): Promise<any> {
+  public performAction(method: TypeSocketEventPerformActionMethod, path: string, options?: ISocketEventPerformActionOptions): Promise<any> {
     const id = (this[SymbolPerformActionId] ?? 0) + 1;
     this[SymbolPerformActionId] = id;
     return new Promise((resolve, reject) => {

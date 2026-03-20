@@ -46,8 +46,7 @@ function _swapDeps(depsDynamic: Record<string, string[]>, items: ISwapDepsItem[]
   let result = false;
   for (const item of items) {
     const name = _getProperty(item, keyName);
-    let deps =
-      (typeof keyDependencies === 'function' ? keyDependencies(item) : _getProperty(item, keyDependencies)) || [];
+    let deps = (typeof keyDependencies === 'function' ? keyDependencies(item) : _getProperty(item, keyDependencies)) || [];
     if (typeof deps === 'string') deps = deps.split(',');
     if (depsDynamic[name]) {
       for (const depDynamic of depsDynamic[name]) {

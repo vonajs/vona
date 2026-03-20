@@ -1,4 +1,5 @@
 import { z } from 'zod';
+
 import { Metadata } from './metadata.ts';
 import { isNil } from './utils.ts';
 import { isZodType } from './zod-is-type.ts';
@@ -11,22 +12,31 @@ interface IParsePayload {
 let ZodMetadata: any;
 export function setParseAdapter(zodMetadata: any) {
   ZodMetadata = zodMetadata;
-  ((z.core) as any).setParseAdapter(__parseAdapter);
+  (z.core as any).setParseAdapter(__parseAdapter);
 }
 
 function __parseAdapter(inst: z.ZodType, parse) {
   return (payload: IParsePayload, _) => {
     const type = inst.type;
     switch (type) {
-      case 'string': return __parseString(inst, parse, payload, _);
-      case 'number': return __parseNumber(inst, parse, payload, _);
-      case 'bigint': return __parseBigInt(inst, parse, payload, _);
-      case 'boolean': return __parseBoolean(inst, parse, payload, _);
-      case 'date': return __parseDate(inst, parse, payload, _);
-      case 'object': return __parseObject(inst, parse, payload, _);
-      case 'array': return __parseArray(inst, parse, payload, _);
-      case 'optional': return __parseOptional(inst, parse, payload, _);
-      case 'default': return __parseDefault(inst, parse, payload, _);
+      case 'string':
+        return __parseString(inst, parse, payload, _);
+      case 'number':
+        return __parseNumber(inst, parse, payload, _);
+      case 'bigint':
+        return __parseBigInt(inst, parse, payload, _);
+      case 'boolean':
+        return __parseBoolean(inst, parse, payload, _);
+      case 'date':
+        return __parseDate(inst, parse, payload, _);
+      case 'object':
+        return __parseObject(inst, parse, payload, _);
+      case 'array':
+        return __parseArray(inst, parse, payload, _);
+      case 'optional':
+        return __parseOptional(inst, parse, payload, _);
+      case 'default':
+        return __parseDefault(inst, parse, payload, _);
     }
     return parse(payload, _);
   };

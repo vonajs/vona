@@ -1,5 +1,6 @@
 /* eslint-disable no-console */
 import path from 'node:path';
+
 import { getEnvFiles, loadEnvs } from '../src/index.ts';
 
 const meta = { serverEnv: 'test' };

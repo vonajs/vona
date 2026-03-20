@@ -1,4 +1,5 @@
 import { Environment } from '@marcbachmann/cel-js';
+
 import { getProperty, hasProperty } from '../utils.ts';
 
 export const celEnvBase = new Environment({

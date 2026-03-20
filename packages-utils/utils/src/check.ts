@@ -17,11 +17,7 @@ export function isPlainObject(fn: any): fn is object {
     return true;
   }
   const ctor = Object.prototype.hasOwnProperty.call(proto, 'constructor') && proto.constructor;
-  return (
-    typeof ctor === 'function' &&
-    ctor instanceof ctor &&
-    Function.prototype.toString.call(ctor) === Function.prototype.toString.call(Object)
-  );
+  return typeof ctor === 'function' && ctor instanceof ctor && Function.prototype.toString.call(ctor) === Function.prototype.toString.call(Object);
 }
 
 export function addLeadingSlash(path?: string): string {
@@ -29,11 +25,7 @@ export function addLeadingSlash(path?: string): string {
 }
 
 export function normalizePath(path?: string): string {
-  return path
-    ? path.startsWith('/')
-      ? (`/${path.replace(/\/+$/, '')}`).replace(/\/+/g, '/')
-      : `/${path.replace(/\/+$/, '')}`
-    : '/';
+  return path ? (path.startsWith('/') ? `/${path.replace(/\/+$/, '')}`.replace(/\/+/g, '/') : `/${path.replace(/\/+$/, '')}`) : '/';
 }
 
 export const stripEndSlash = (path: string) => (path[path.length - 1] === '/' ? path.slice(0, path.length - 1) : path);

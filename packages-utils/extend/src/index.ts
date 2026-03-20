@@ -17,8 +17,7 @@ function isPlainObject(obj) {
   }
 
   const hasOwnConstructor = hasOwn.call(obj, 'constructor');
-  const hasIsPrototypeOf =
-    obj.constructor && obj.constructor.prototype && hasOwn.call(obj.constructor.prototype, 'isPrototypeOf');
+  const hasIsPrototypeOf = obj.constructor && obj.constructor.prototype && hasOwn.call(obj.constructor.prototype, 'isPrototypeOf');
   // Not own constructor property must be Object
   if (obj.constructor && !hasOwnConstructor && !hasIsPrototypeOf) {
     return false;
