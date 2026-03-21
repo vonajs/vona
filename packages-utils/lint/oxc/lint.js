@@ -495,12 +495,7 @@ export const _configDefault = {
         when: 'multiline',
       },
     ],
-    '@stylistic/jsx-one-expression-per-line': [
-      'error',
-      {
-        allow: 'single-child',
-      },
-    ],
+    '@stylistic/jsx-one-expression-per-line': 'off',
     '@stylistic/jsx-quotes': 'error',
     '@stylistic/jsx-tag-spacing': [
       'error',
