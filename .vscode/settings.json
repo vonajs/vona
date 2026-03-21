@@ -1,4 +1,6 @@
 {
+  "editor.bracketPairColorization.enabled": true,
+  "editor.guides.bracketPairs": true,
   // typescript
   "js/ts.tsserver.automaticTypeAcquisition.enabled": true,
   "js/ts.format.enabled": true,
