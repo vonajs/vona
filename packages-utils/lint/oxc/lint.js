@@ -287,13 +287,7 @@ export const _configDefault = {
       },
     ],
     '@stylistic/block-spacing': ['error', 'always'],
-    '@stylistic/brace-style': [
-      'error',
-      '1tbs',
-      {
-        allowSingleLine: true,
-      },
-    ],
+    '@stylistic/brace-style': 'off',
     '@stylistic/comma-dangle': ['error', 'always-multiline'],
     '@stylistic/comma-spacing': [
       'error',
@@ -372,7 +366,7 @@ export const _configDefault = {
         },
       },
     ],
-    '@stylistic/multiline-ternary': ['error', 'always-multiline'],
+    '@stylistic/multiline-ternary': 'off',
     '@stylistic/new-parens': 'error',
     '@stylistic/no-extra-parens': ['error', 'functions'],
     '@stylistic/no-floating-decimal': 'error',
@@ -473,7 +467,7 @@ export const _configDefault = {
     '@stylistic/template-curly-spacing': 'error',
     '@stylistic/template-tag-spacing': ['error', 'never'],
     '@stylistic/type-annotation-spacing': ['error', {}],
-    '@stylistic/type-generic-spacing': 'error',
+    '@stylistic/type-generic-spacing': 'off',
     '@stylistic/type-named-tuple-spacing': 'error',
     '@stylistic/wrap-iife': [
       'error',
