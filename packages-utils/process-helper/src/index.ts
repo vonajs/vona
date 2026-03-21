@@ -199,7 +199,7 @@ export class ProcessHelper {
     const timeBegin = new Date();
     await this.console.log('tsc -b begin');
     await this.spawnBin({
-      cmd: 'tsgo',
+      cmd: 'tsc',
       args,
       options,
     });
