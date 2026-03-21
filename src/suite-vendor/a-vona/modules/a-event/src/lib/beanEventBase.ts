@@ -12,8 +12,8 @@ export class BeanEventBase<DATA = unknown, RESULT = unknown> extends BeanBase {
       typeof nextOrDefault === 'function'
         ? cast<NextEventStrict<DATA, RESULT>>(nextOrDefault)
         : async (): Promise<RESULT> => {
-          return nextOrDefault!;
-        };
+            return nextOrDefault!;
+          };
     return beanEventListener.composer(data, next);
   }
 

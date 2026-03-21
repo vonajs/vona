@@ -29,9 +29,9 @@ export type TypeModelMutateParamsIncludeByModelOptions<ModelOptions extends IDec
 export type TypeModelMutateParamsRelationOptions<Relation> =
   | boolean
   | (IModelRelationOptionsMetaWrapper & {
-    include?: TypeModelMutateParamsInclude<TypeUtilGetRelationModel<Relation>>;
-    with?: Record<string, unknown>;
-  });
+      include?: TypeModelMutateParamsInclude<TypeUtilGetRelationModel<Relation>>;
+      with?: Record<string, unknown>;
+    });
 
 export type TypeModelMutateRelationResultMergeInclude<
   TModelOptions extends IDecoratorModelOptions,
@@ -110,9 +110,9 @@ export type TypeModelMutateRelationData<
 > = (TForInsertResult extends true ? TRecord : Partial<TRecord>) &
   (TModel extends BeanModelMeta
     ? Partial<
-      OmitNever<
-        TypeModelMutateRelationResultMergeInclude<TypeUtilGetModelOptions<TModel>, TypeUtilGetParamsInlcude<TOptionsRelation>, TForInsertResult>
-      >
-    > &
+        OmitNever<
+          TypeModelMutateRelationResultMergeInclude<TypeUtilGetModelOptions<TModel>, TypeUtilGetParamsInlcude<TOptionsRelation>, TForInsertResult>
+        >
+      > &
         Partial<OmitNever<TypeModelMutateRelationResultMergeWith<TypeUtilGetParamsWith<TOptionsRelation>, TForInsertResult>>>
     : {});

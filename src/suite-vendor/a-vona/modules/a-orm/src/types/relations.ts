@@ -57,9 +57,9 @@ export type TypeModelParamsIncludeByModelOptions<ModelOptions extends IDecorator
 export type TypeModelParamsRelationOptions<Relation> =
   | boolean
   | (Omit<TypeUtilGetRelationOptions<Relation>, 'autoload'> & {
-    include?: TypeModelParamsInclude<TypeUtilGetRelationModel<Relation>>;
-    with?: Record<string, unknown>;
-  });
+      include?: TypeModelParamsInclude<TypeUtilGetRelationModel<Relation>>;
+      with?: Record<string, unknown>;
+    });
 
 export type TypeUtilGetRelationType<Relation> = Relation extends { type?: infer TYPE } ? TYPE : undefined;
 export type TypeUtilGetRelationKey<Relation> = Relation extends { key?: infer KEY } ? KEY : undefined;
@@ -129,8 +129,8 @@ export type TypeUtilGetEntityByType<
       ? TypeModelRelationResult<TRecord, TModel, IncludeWrapper, Columns, Aggrs> | undefined
       : Array<TypeModelRelationResult<TRecord, TModel, IncludeWrapper, Columns>>
   : [Depth] extends [never]
-      ? undefined
-      : TypeModelRelationResult<TRecord, TModel, IncludeWrapper, Columns, undefined, undefined, TypeDepthPrev[Depth]> | undefined;
+    ? undefined
+    : TypeModelRelationResult<TRecord, TModel, IncludeWrapper, Columns, undefined, undefined, TypeDepthPrev[Depth]> | undefined;
 
 export type TypeUtilGetParamsAggrs<TParams> = TParams extends { aggrs?: infer Aggrs } ? Aggrs : undefined;
 export type TypeUtilGetParamsGroups<TParams> = TParams extends { groups?: infer Groups } ? Groups : undefined; // not use Groups extends string |string[]

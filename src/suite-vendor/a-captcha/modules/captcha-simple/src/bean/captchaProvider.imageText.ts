@@ -28,7 +28,8 @@ export interface ICaptchaProviderOptionsImageText extends IDecoratorCaptchaProvi
 })
 export class CaptchaProviderImageText
   extends BeanBase
-  implements ICaptchaProviderExecute<TypeCaptchaProviderImageTextToken, TypeCaptchaProviderImageTextPayload> {
+  implements ICaptchaProviderExecute<TypeCaptchaProviderImageTextToken, TypeCaptchaProviderImageTextPayload>
+{
   async create(options: ICaptchaProviderOptionsImageText): Promise<TypeCaptchaProviderImageTextData> {
     await this._confirmFont(options);
     let type = options.type;

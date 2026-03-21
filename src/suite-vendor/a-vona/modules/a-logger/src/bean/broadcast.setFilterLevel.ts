@@ -11,7 +11,8 @@ export interface TypeBroadcastSetFilterLevelJobData {
 @Broadcast({ instance: false })
 export class BroadcastSetFilterLevel
   extends BeanBroadcastBase<TypeBroadcastSetFilterLevelJobData>
-  implements IBroadcastExecute<TypeBroadcastSetFilterLevelJobData> {
+  implements IBroadcastExecute<TypeBroadcastSetFilterLevelJobData>
+{
   async execute(data: TypeBroadcastSetFilterLevelJobData, isEmitter?: boolean) {
     if (!isEmitter) {
       this.app.meta.logger.setFilterLevel(data.level, data.clientName);

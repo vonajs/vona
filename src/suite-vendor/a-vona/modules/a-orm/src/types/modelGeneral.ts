@@ -15,8 +15,8 @@ export interface IBuildModelSelectGeneralParams<
   Columns extends {} | undefined = undefined,
 >
   extends
-  IModelRelationIncludeWrapper<Model>,
-  IBuildModelSelectGeneralParamsBasic<TRecord, TypeModelColumn<TRecord>, TableNames, ColumnNames, Columns> {}
+    IModelRelationIncludeWrapper<Model>,
+    IBuildModelSelectGeneralParamsBasic<TRecord, TypeModelColumn<TRecord>, TableNames, ColumnNames, Columns> {}
 
 export interface IBuildModelSelectGeneralParamsBasic<
   TRecord,

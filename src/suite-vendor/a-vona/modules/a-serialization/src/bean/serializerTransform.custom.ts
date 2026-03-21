@@ -16,7 +16,8 @@ export interface ISerializerTransformOptionsCustom extends IDecoratorSerializerT
 @SerializerTransform<ISerializerTransformOptionsCustom>()
 export class SerializerTransformCustom
   extends BeanBase
-  implements ISerializerTransform<TypeSerializerTransformCustomValue, TypeSerializerTransformCustomData, TypeSerializerTransformCustomResult> {
+  implements ISerializerTransform<TypeSerializerTransformCustomValue, TypeSerializerTransformCustomData, TypeSerializerTransformCustomResult>
+{
   async transform(
     value: TypeSerializerTransformCustomValue,
     data: TypeSerializerTransformCustomData,

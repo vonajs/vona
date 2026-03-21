@@ -11,7 +11,8 @@ export interface TypeBroadcastReloadInstancesJobData {
 @Broadcast({ instance: false })
 export class BroadcastReloadInstances
   extends BeanBroadcastBase<TypeBroadcastReloadInstancesJobData>
-  implements IBroadcastExecute<TypeBroadcastReloadInstancesJobData> {
+  implements IBroadcastExecute<TypeBroadcastReloadInstancesJobData>
+{
   async execute(data: TypeBroadcastReloadInstancesJobData, isEmitter?: boolean) {
     if (!isEmitter) {
       await this.bean.mutate.reloadInstancesWorker(data);

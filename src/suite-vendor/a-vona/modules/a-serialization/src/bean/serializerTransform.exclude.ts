@@ -16,7 +16,8 @@ export interface ISerializerTransformOptionsExclude extends IDecoratorSerializer
 @SerializerTransform<ISerializerTransformOptionsExclude>()
 export class SerializerTransformExclude
   extends BeanBase
-  implements ISerializerTransform<TypeSerializerTransformExcludeValue, TypeSerializerTransformExcludeData, TypeSerializerTransformExcludeResult> {
+  implements ISerializerTransform<TypeSerializerTransformExcludeValue, TypeSerializerTransformExcludeData, TypeSerializerTransformExcludeResult>
+{
   async transform(
     value: TypeSerializerTransformExcludeValue,
     _data: TypeSerializerTransformExcludeData,

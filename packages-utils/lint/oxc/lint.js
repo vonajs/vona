@@ -700,10 +700,7 @@ export const _configDefault = {
             variables: true,
           },
         ],
-        '@typescript-eslint/consistent-type-definitions': [
-          'error',
-          'interface',
-        ],
+        '@typescript-eslint/consistent-type-definitions': ['error', 'interface'],
         '@typescript-eslint/consistent-type-imports': [
           'error',
           {
@@ -920,14 +917,7 @@ export const _configDefault = {
         'jsonc/sort-keys': [
           'error',
           {
-            order: [
-              'extends',
-              'compilerOptions',
-              'references',
-              'files',
-              'include',
-              'exclude',
-            ],
+            order: ['extends', 'compilerOptions', 'references', 'files', 'include', 'exclude'],
             pathPattern: '^$',
           },
           {
@@ -1217,12 +1207,7 @@ export const _configDefault = {
         'no-redeclare': 'off',
         'no-use-before-define': 'off',
       },
-      jsPlugins: [
-        'eslint-plugin-antfu',
-        '@e18e/eslint-plugin',
-        '@stylistic/eslint-plugin',
-        'eslint-plugin-unused-imports',
-      ],
+      jsPlugins: ['eslint-plugin-antfu', '@e18e/eslint-plugin', '@stylistic/eslint-plugin', 'eslint-plugin-unused-imports'],
       plugins: ['typescript'],
     },
     {
@@ -1257,10 +1242,7 @@ export const _configDefault = {
         'eslint-comments/no-unlimited-disable': 'off',
         'unused-imports/no-unused-vars': 'off',
       },
-      jsPlugins: [
-        'eslint-plugin-eslint-comments',
-        'eslint-plugin-unused-imports',
-      ],
+      jsPlugins: ['eslint-plugin-eslint-comments', 'eslint-plugin-unused-imports'],
     },
     {
       files: ['**/*.js', '**/*.cjs'],
@@ -1270,10 +1252,7 @@ export const _configDefault = {
       plugins: ['typescript'],
     },
     {
-      files: [
-        '**/*.config.?([cm])[jt]s?(x)',
-        '**/*.config.*.?([cm])[jt]s?(x)',
-      ],
+      files: ['**/*.config.?([cm])[jt]s?(x)', '**/*.config.*.?([cm])[jt]s?(x)'],
       rules: {
         'antfu/no-top-level-await': 'off',
         'no-console': 'off',

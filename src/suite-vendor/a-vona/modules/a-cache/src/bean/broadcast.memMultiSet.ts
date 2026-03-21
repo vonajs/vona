@@ -18,7 +18,8 @@ export interface TypeBroadcastMemMultiSetJobData {
 @Broadcast()
 export class BroadcastMemMultiSet
   extends BeanBroadcastBase<TypeBroadcastMemMultiSetJobData>
-  implements IBroadcastExecute<TypeBroadcastMemMultiSetJobData> {
+  implements IBroadcastExecute<TypeBroadcastMemMultiSetJobData>
+{
   async execute(data: TypeBroadcastMemMultiSetJobData, isEmitter?: boolean) {
     const { cacheName, cacheOptions, values, keysHash, keys, options } = data;
     if (!isEmitter) {

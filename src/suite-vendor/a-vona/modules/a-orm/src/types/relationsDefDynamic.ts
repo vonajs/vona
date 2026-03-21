@@ -76,9 +76,9 @@ export interface IModelRelationOptionsManyDynamic<
   Group extends boolean | undefined = undefined,
 >
   extends
-  IModelRelationOptionsMetaWrapper,
-  IModelRelationIncludeWrapper<MODEL>,
-  Omit<IModelRelationOptionsManyDynamic_Raw<MODEL, false, TypeModelColumn<MODEL[TypeSymbolKeyEntity]>, ModelJoins, Group>, 'autoload'> {}
+    IModelRelationOptionsMetaWrapper,
+    IModelRelationIncludeWrapper<MODEL>,
+    Omit<IModelRelationOptionsManyDynamic_Raw<MODEL, false, TypeModelColumn<MODEL[TypeSymbolKeyEntity]>, ModelJoins, Group>, 'autoload'> {}
 
 export type IModelRelationOptionsManyDynamic_Raw<
   MODEL extends BeanModelMeta,

@@ -69,8 +69,8 @@ export class BeanExecutor extends BeanBase {
       options.instanceName =
         options.instanceName === undefined
           ? !innerAccess && this.ctx.instanceName === null
-              ? undefined
-              : this.ctx.instanceName
+            ? undefined
+            : this.ctx.instanceName
           : options.instanceName;
     }
     // run

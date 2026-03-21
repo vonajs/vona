@@ -22,7 +22,8 @@ export interface TSummerCacheCachingData {
 })
 export class SummerCacheCaching
   extends BeanSummerCacheBase<TSummerCacheCachingKey, TSummerCacheCachingData>
-  implements ISummerCacheGet<TSummerCacheCachingKey, TSummerCacheCachingData> {
+  implements ISummerCacheGet<TSummerCacheCachingKey, TSummerCacheCachingData>
+{
   async getNative(
     key?: TSummerCacheCachingKey,
     _options?: TSummerCacheActionOptions<TSummerCacheCachingKey, TSummerCacheCachingData>,

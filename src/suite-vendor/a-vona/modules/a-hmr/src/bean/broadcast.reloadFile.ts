@@ -12,7 +12,8 @@ export interface TypeBroadcastReloadFileJobData {
 @Broadcast()
 export class BroadcastReloadFile
   extends BeanBroadcastBase<TypeBroadcastReloadFileJobData>
-  implements IBroadcastExecute<TypeBroadcastReloadFileJobData> {
+  implements IBroadcastExecute<TypeBroadcastReloadFileJobData>
+{
   async execute(data: TypeBroadcastReloadFileJobData, isEmitter?: boolean) {
     if (!isEmitter) {
       await this.scope.service.watch._reloadFileWorker(data);
