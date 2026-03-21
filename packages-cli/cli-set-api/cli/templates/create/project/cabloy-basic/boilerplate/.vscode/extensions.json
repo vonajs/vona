@@ -1,4 +1,4 @@
 {
-  "recommendations": ["cabloy.vona-vscode", "oxc.oxc-vscode", "TypeScriptTeam.native-preview"],
+  "recommendations": ["cabloy.vona-vscode", "oxc.oxc-vscode"],
   "unwantedRecommendations": [],
 }
