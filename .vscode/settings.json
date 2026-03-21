@@ -2,6 +2,7 @@
   "editor.bracketPairColorization.enabled": true,
   "editor.guides.bracketPairs": true,
   // typescript
+  "js/ts.experimental.useTsgo": true,
   "js/ts.tsserver.automaticTypeAcquisition.enabled": true,
   "js/ts.format.enabled": true,
   "js/ts.implementationsCodeLens.enabled": true,
@@ -18,13 +19,13 @@
   "editor.formatOnSave": true,
   // oxlint
   "editor.codeActionsOnSave": {
-    "source.fixAll.oxc": "always"
+    "source.fixAll.oxc": "always",
   },
   "[typescriptreact]": {
-    "editor.defaultFormatter": "oxc.oxc-vscode"
+    "editor.defaultFormatter": "oxc.oxc-vscode",
   },
   "[typescript]": {
-    "editor.defaultFormatter": "oxc.oxc-vscode"
+    "editor.defaultFormatter": "oxc.oxc-vscode",
   },
   // associations
   "files.associations": {
@@ -32,7 +33,7 @@
     "*.css.ejs": "css",
     "*.less.ejs": "less",
     "*.code-snippets": "text",
-    "docker-compose-dockerfile-app": "dockerfile"
+    "docker-compose-dockerfile-app": "dockerfile",
   },
   // search
   "search.exclude": {
@@ -43,9 +44,9 @@
     "/src/backend/app/**": true,
     "/src/backend/logs/**": true,
     "/src/backend/run/**": true,
-    "**/node_modules": true
+    "**/node_modules": true,
   },
   "search.useIgnoreFiles": false,
   "textlint.autoFixOnSave": true,
-  "hide-my-secrets.hideSecrets": false
+  "hide-my-secrets.hideSecrets": false,
 }
