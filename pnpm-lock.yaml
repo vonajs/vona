@@ -467,7 +467,7 @@ importers:
         specifier: ^2.0.0
         version: 2.0.0
       '@cabloy/process-helper':
-        specifier: ^2.0.25
+        specifier: ^3.0.0
         version: link:../../packages-utils/process-helper
       '@cabloy/utils':
         specifier: ^2.0.24
@@ -537,7 +537,7 @@ importers:
         specifier: ^3.0.98
         version: link:../cabloy-cli
       '@cabloy/process-helper':
-        specifier: ^2.0.25
+        specifier: ^3.0.0
         version: link:../../packages-utils/process-helper
       fs-extra:
         specifier: ^11.2.0
