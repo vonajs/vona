@@ -1746,9 +1746,6 @@ importers:
       '@types/retry':
         specifier: ^0.12.5
         version: 0.12.5
-      '@typescript/native-preview':
-        specifier: ^7.0.0-dev.20260321.1
-        version: 7.0.0-dev.20260321.1
       clean-package:
         specifier: ^2.2.0
         version: 2.2.0
