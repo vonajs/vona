@@ -322,16 +322,7 @@ export const _configDefault = {
         beforeColon: false,
       },
     ],
-    '@stylistic/keyword-spacing': [
-      'error',
-      {
-        overrides: {
-          this: {
-            before: true,
-          },
-        },
-      },
-    ],
+    '@stylistic/keyword-spacing': 'off',
     '@stylistic/lines-between-class-members': [
       'error',
       'always',
@@ -533,7 +524,7 @@ export const _configDefault = {
         return: 'parens-new-line',
       },
     ],
-    'antfu/consistent-list-newline': 'error',
+    'antfu/consistent-list-newline': 'off',
     'antfu/consistent-chaining': 'error',
     'antfu/curly': 'error',
     'antfu/if-newline': 'off',
