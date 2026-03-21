@@ -39,7 +39,7 @@
   },
   "dependencies": {
     "@cabloy/cli": "^3.0.98",
-    "@cabloy/process-helper": "^2.0.25",
+    "@cabloy/process-helper": "^3.0.0",
     "fs-extra": "^11.2.0",
     "semver": "^7.6.2",
     "vona-cli-set-api": "^1.0.498"

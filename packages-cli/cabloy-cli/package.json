@@ -38,7 +38,7 @@
     "@babel/parser": "^7.26.5",
     "@cabloy/module-glob": "^5.2.56",
     "@cabloy/module-info": "^2.0.0",
-    "@cabloy/process-helper": "^2.0.25",
+    "@cabloy/process-helper": "^3.0.0",
     "@cabloy/utils": "^2.0.24",
     "@cabloy/word-utils": "^2.0.2",
     "@npmcli/config": "^10.4.2",
