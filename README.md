@@ -46,6 +46,55 @@ The Website and Admin-Dashboard of Cabloy Store are built by one codebase
 
 ![](./packages-docs/zh/assets/img/start/cabloy-start-two-level-tabs.gif)
 
+## Technology Stack
+
+### General
+
+| Name       | Version   |
+| ---------- | --------- |
+| pnpm       | >=10.19.0 |
+| Nodejs     | >=24.8.0  |
+| Typescript | >=5.9.3   |
+
+### Backend(Vona)
+
+| Name       | Version  |
+| ---------- | -------- |
+| Koa        | >=3.0.0  |
+| Knex       | >=3.1.0  |
+| Zod        | >=4.1.13 |
+| Redis      | >=7.2.6  |
+| Sqlite3    | 内置     |
+| MySQL      | >=8      |
+| Postgresql | >=17     |
+
+- `Redis`: VonaJS provides the following capabilities based on Redis:
+  - `Queue, Schedule, Startup, Broadcast, Caching, Two-layer cache, and Redlock`
+- `Sqlite3`: You need to set up the node-gyp environment in advance to ensure that `better_sqlite3.node` can be compiled properly when installing dependencies
+
+### Frontend(Zova)
+
+| Name           | Version  |
+| -------------- | -------- |
+| Vite           | >=8.0.0  |
+| Vue            | >=3.5.6  |
+| Vue Router     | >=4.4.5  |
+| Zod            | >=4.1.13 |
+| Tanstack Query | >=5.92.5 |
+| Tanstack Form  | >=1.23.5 |
+| Tanstack Table | >=8.21.3 |
+
+### UI Libraries
+
+Zova can be used with any UI library and comes with built-in project templates for several UI libraries, making it easy to use out of the box
+
+| Name        | Version  |
+| ----------- | -------- |
+| Daisyui     | >=5.3.2  |
+| Tailwindcss | >=4.1.14 |
+| Quasar      | >=2.18.1 |
+| Vuetify     | >=4.0.1  |
+
 ## Stay In Touch
 
 - [Twitter](https://x.com/zhennann2024)

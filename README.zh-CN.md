@@ -46,6 +46,55 @@ Vona 与 Zova 完美协同，延续前后端分离的架构风格。采用 Zova 
 
 ![](./packages-docs/zh/assets/img/start/cabloy-start-two-level-tabs.gif)
 
+## 技术栈
+
+### 通用
+
+| 名称       | 版本      |
+| ---------- | --------- |
+| pnpm       | >=10.19.0 |
+| Nodejs     | >=24.8.0  |
+| Typescript | >=5.9.3   |
+
+### 后端(Vona)
+
+| 名称       | 版本     |
+| ---------- | -------- |
+| Koa        | >=3.0.0  |
+| Knex       | >=3.1.0  |
+| Zod        | >=4.1.13 |
+| Redis      | >=7.2.6  |
+| Sqlite3    | 内置     |
+| MySQL      | >=8      |
+| Postgresql | >=17     |
+
+- `Redis`: VonaJS 基于 Redis 提供了以下能力:
+  - `队列、定时任务、启动项、广播、缓存、二级缓存、分布式锁`
+- `Sqlite3`: 需要预先准备 node-gyp 环境，确保在安装依赖时可以正常编译出`better_sqlite3.node`
+
+### 前端(Zova)
+
+| 名称           | 版本     |
+| -------------- | -------- |
+| Vite           | >=8.0.0  |
+| Vue            | >=3.5.6  |
+| Vue Router     | >=4.4.5  |
+| Zod            | >=4.1.13 |
+| Tanstack Query | >=5.92.5 |
+| Tanstack Form  | >=1.23.5 |
+| Tanstack Table | >=8.21.3 |
+
+### UI库
+
+Zova 可以搭配任何 UI 库使用，并且内置了几款 UI 库的项目模版，便于开箱即用
+
+| 名称        | 版本     |
+| ----------- | -------- |
+| Daisyui     | >=5.3.2  |
+| Tailwindcss | >=4.1.14 |
+| Quasar      | >=2.18.1 |
+| Vuetify     | >=4.0.1  |
+
 ## 联系方式
 
 - [Twitter](https://x.com/zhennann2024)

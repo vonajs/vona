@@ -80,7 +80,7 @@ The Website and Admin-Dashboard of Cabloy Store are built by one codebase
 
 | Name           | Version  |
 | -------------- | -------- |
-| Vite           | >=7.3.1  |
+| Vite           | >=8.0.0  |
 | Vue            | >=3.5.6  |
 | Vue Router     | >=4.4.5  |
 | Zod            | >=4.1.13 |
