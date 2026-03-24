@@ -47,6 +47,7 @@
     "boxen": "^4.2.0",
     "chalk": "^3.0.0",
     "cli-table3": "^0.6.5",
+    "deep-equal": "^2.2.3",
     "enquirer": "^2.3.6",
     "fs-extra": "^11.2.0",
     "globby": "^16.0.0",

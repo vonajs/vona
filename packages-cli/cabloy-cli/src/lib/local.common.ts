@@ -1,6 +1,7 @@
 import type { IModule, IModulePackage } from '@cabloy/module-info';
 import type { Stats } from 'fs-extra';
 
+import DeepEqual from 'deep-equal';
 import fse from 'fs-extra';
 import { globby } from 'globby';
 import path from 'node:path';
@@ -133,9 +134,12 @@ export class LocalCommon {
     // zovaRest
     await this._generatePackageJson_pkgFromZovaRest(projectPath, pkgOriginal.dependencies);
     // save
-    const strPkgOriginal = `${JSON.stringify(pkgOriginal, null, 2)}\n`;
-    const strPkg = pkg ? `${JSON.stringify(pkg, null, 2)}\n` : '';
-    if (strPkgOriginal !== strPkg) {
+    if (
+      !DeepEqual((pkg as any)?.scripts, (pkgOriginal as any).scripts) ||
+      !DeepEqual((pkg as any)?.dependencies, (pkgOriginal as any).dependencies) ||
+      !DeepEqual((pkg as any)?.devDependencies, (pkgOriginal as any).devDependencies)
+    ) {
+      const strPkgOriginal = `${JSON.stringify(pkgOriginal, null, 2)}\n`;
       await fse.writeFile(pkgFile, strPkgOriginal);
       await this.cli.helper.formatFile({ fileName: pkgFile });
       await this.cli.helper.pnpmInstall();
