@@ -1,0 +1,1 @@
+import{n as e}from"./rolldown-runtime-BJ9pB_0e.js";var t,n=e((()=>{t=(e,t)=>{let n=e.__vccOpts||e;for(let[e,r]of t)n[e]=r;return n}}));export{n,t};

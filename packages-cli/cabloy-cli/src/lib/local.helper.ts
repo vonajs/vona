@@ -181,7 +181,7 @@ export class LocalHelper {
     });
   }
 
-  async formatFile({ fileName, logPrefix }: any) {
+  async formatFile({ fileName, logPrefix }: { fileName: string; logPrefix?: string }) {
     if (_formatFileDisable(fileName)) return;
     return await this.processHelper.formatFile({ fileName, logPrefix });
   }

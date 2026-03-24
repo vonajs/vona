@@ -137,6 +137,7 @@ export class LocalCommon {
     const strPkg = pkg ? `${JSON.stringify(pkg, null, 2)}\n` : '';
     if (strPkgOriginal !== strPkg) {
       await fse.writeFile(pkgFile, strPkgOriginal);
+      await this.cli.helper.formatFile({ fileName: pkgFile });
       await this.cli.helper.pnpmInstall();
       return true;
     }

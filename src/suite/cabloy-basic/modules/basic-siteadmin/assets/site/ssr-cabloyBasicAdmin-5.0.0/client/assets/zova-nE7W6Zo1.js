@@ -1,0 +1,1 @@
+import{n as e}from"./rolldown-runtime-BJ9pB_0e.js";function t(e,t){if(!e)return e;let n=Array.isArray(e)?e.slice():Object.assign({},e),r=t(n);return r===void 0?n:r}var n=e((()=>{}));export{t as n,n as t};
