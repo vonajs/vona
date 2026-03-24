@@ -14,7 +14,7 @@ export class CliInitStatic extends BeanCliBase {
     // super
     await super.execute();
     // noformat
-    argv.noformat = true;
+    // argv.noformat = true;
     // module name/info
     const moduleName = argv._[0];
     if (!moduleName) return;

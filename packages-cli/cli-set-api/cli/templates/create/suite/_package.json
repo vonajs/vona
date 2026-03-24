@@ -1,10 +1,10 @@
 {
   "name": "vona-suite-<%=argv.name%>",
-  "type": "module",
   "version": "5.0.0",
-  "title": "<%=argv.suiteInfo.relativeName%>",
-  "files": [],
   "description": "",
   "author": "",
-  "dependencies": {}
+  "files": [],
+  "type": "module",
+  "dependencies": {},
+  "title": "<%=argv.suiteInfo.relativeName%>"
 }
