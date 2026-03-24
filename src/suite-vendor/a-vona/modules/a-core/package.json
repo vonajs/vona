@@ -90,7 +90,7 @@
       "@babel/traverse": true,
       "@cabloy/deps": true,
       "@cabloy/json5": true,
-      "@cabloy/module-info:": true,
+      "@cabloy/module-info": true,
       "@cabloy/type-fest": true,
       "@cabloy/utils": true,
       "@cabloy/word-utils": true,
