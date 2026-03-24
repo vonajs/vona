@@ -1,4 +1,4 @@
-/* eslint-disable */
+// eslint-disable
 /** middlewareSystem: begin */
 export * from '../bean/middlewareSystem.cors.ts';
 export * from '../bean/middlewareSystem.securities.ts';

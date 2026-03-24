@@ -1,4 +1,4 @@
-/* eslint-disable */
+// eslint-disable
 /** interceptor: begin */
 export * from '../bean/interceptor.upload.ts';
 import type { IInterceptorOptionsUpload } from '../bean/interceptor.upload.ts';

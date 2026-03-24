@@ -1,4 +1,4 @@
-/* eslint-disable */
+// eslint-disable
 /** startup: begin */
 export * from '../bean/startup.printTip.ts';
 

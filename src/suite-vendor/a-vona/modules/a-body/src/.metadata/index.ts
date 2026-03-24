@@ -1,4 +1,4 @@
-/* eslint-disable */
+// eslint-disable
 /** interceptor: begin */
 export * from '../bean/interceptor.bodyReq.ts';
 export * from '../bean/interceptor.bodyRes.ts';

@@ -1,4 +1,4 @@
-/* eslint-disable */
+// eslint-disable
 import type { TypeSymbolKeyFieldsMore } from 'vona-module-a-orm';
 import type { TypeEntityOptionsFields,TypeControllerOptionsActions } from 'vona-module-a-openapi';
 /** dto: begin */

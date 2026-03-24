@@ -1,4 +1,4 @@
-/* eslint-disable */
+// eslint-disable
 /** aopMethod: begin */
 export * from '../bean/aopMethod.transaction.ts';
 import type { IAopMethodOptionsTransaction } from '../bean/aopMethod.transaction.ts';

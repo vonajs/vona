@@ -1,4 +1,4 @@
-/* eslint-disable */
+// eslint-disable
 /** interceptor: begin */
 export * from '../bean/interceptor.serializer.ts';
 import type { IInterceptorOptionsSerializer } from '../bean/interceptor.serializer.ts';

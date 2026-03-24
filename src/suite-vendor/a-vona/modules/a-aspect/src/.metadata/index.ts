@@ -1,4 +1,4 @@
-/* eslint-disable */
+// eslint-disable
 /** hmr: begin */
 export * from '../bean/hmr.aop.ts';
 export * from '../bean/hmr.aopMethod.ts';

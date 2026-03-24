@@ -1,4 +1,4 @@
-/* eslint-disable */
+// eslint-disable
 /** captchaProvider: begin */
 export * from '../bean/captchaProvider.imageText.ts';
 import type { ICaptchaProviderOptionsImageText } from '../bean/captchaProvider.imageText.ts';

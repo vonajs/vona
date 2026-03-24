@@ -1,4 +1,4 @@
-/* eslint-disable */
+// eslint-disable
 /** service: begin */
 export * from '../service/aop.ts';
 export * from '../service/filter.ts';

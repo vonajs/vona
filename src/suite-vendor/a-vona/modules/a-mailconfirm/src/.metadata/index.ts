@@ -1,4 +1,4 @@
-/* eslint-disable */
+// eslint-disable
 import type { TypeControllerOptionsActions } from 'vona-module-a-openapi';
 /** bean: begin */
 export * from '../bean/bean.mailConfirm.ts';

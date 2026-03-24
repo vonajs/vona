@@ -1,4 +1,4 @@
-/* eslint-disable */
+// eslint-disable
 /** aopMethod: begin */
 export * from '../bean/aopMethod.cachingClear.ts';
 export * from '../bean/aopMethod.cachingDel.ts';

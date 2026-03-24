@@ -1,4 +1,4 @@
-/* eslint-disable */
+// eslint-disable
 /** scope: begin */
 import { BeanScopeBase, type BeanScopeUtil } from 'vona';
 import { Scope } from '../lib/scope.ts';

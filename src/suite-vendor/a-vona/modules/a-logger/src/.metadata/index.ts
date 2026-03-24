@@ -1,4 +1,4 @@
-/* eslint-disable */
+// eslint-disable
 /** middlewareSystem: begin */
 export * from '../bean/middlewareSystem.httpLog.ts';
 import type { IMiddlewareSystemOptionsHttpLog } from '../bean/middlewareSystem.httpLog.ts';

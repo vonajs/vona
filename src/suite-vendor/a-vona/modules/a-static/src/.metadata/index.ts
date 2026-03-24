@@ -1,4 +1,4 @@
-/* eslint-disable */
+// eslint-disable
 /** middlewareSystem: begin */
 export * from '../bean/middlewareSystem.static.ts';
 import type { IMiddlewareSystemOptionsStatic } from '../bean/middlewareSystem.static.ts';

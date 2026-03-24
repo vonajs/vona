@@ -1,4 +1,4 @@
-/* eslint-disable */
+// eslint-disable
 /** guard: begin */
 export * from '../bean/guard.passport.ts';
 export * from '../bean/guard.roleName.ts';

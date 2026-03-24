@@ -1,4 +1,4 @@
-/* eslint-disable */
+// eslint-disable
 /** middleware: begin */
 export * from '../bean/middleware.gate.ts';
 import type { IMiddlewareOptionsGate } from '../bean/middleware.gate.ts';

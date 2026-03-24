@@ -1,4 +1,4 @@
-/* eslint-disable */
+// eslint-disable
 /** databaseDialect: begin */
 export * from '../bean/databaseDialect.betterSqlite3.ts';
 export * from '../bean/databaseDialect.mysql.ts';

@@ -1,4 +1,4 @@
-/* eslint-disable */
+// eslint-disable
 /** interceptor: begin */
 export * from '../bean/interceptor.datasharding.ts';
 import type { IInterceptorOptionsDatasharding } from '../bean/interceptor.datasharding.ts';

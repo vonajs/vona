@@ -1,4 +1,4 @@
-/* eslint-disable */
+// eslint-disable
 /** ssrSite: begin */
 export * from '../bean/ssrSite.web.ts';
 import type { ISsrSiteOptionsWeb } from '../bean/ssrSite.web.ts';

@@ -1,4 +1,4 @@
-/* eslint-disable */
+// eslint-disable
 /** bean: begin */
 export * from '../bean/bean.summer.ts';
 export * from '../bean/bean.summerCacheBase.ts';

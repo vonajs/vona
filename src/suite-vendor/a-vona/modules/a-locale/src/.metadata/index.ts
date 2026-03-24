@@ -1,4 +1,4 @@
-/* eslint-disable */
+// eslint-disable
 /** config: begin */
 export * from '../config/config.ts';
 import type { config } from '../config/config.ts';

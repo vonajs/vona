@@ -1,4 +1,4 @@
-/* eslint-disable */
+// eslint-disable
 /** interceptor: begin */
 export * from '../bean/interceptor.ssrRedirect.ts';
 export * from '../bean/interceptor.ssrRender.ts';

@@ -1,4 +1,4 @@
-/* eslint-disable */
+// eslint-disable
 /** locale: begin */
 import { locales } from './locales.ts';
 /** locale: end */

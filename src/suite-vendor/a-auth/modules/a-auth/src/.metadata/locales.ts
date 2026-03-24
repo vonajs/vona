@@ -1,7 +1,5 @@
 import type { TypeLocaleBase } from 'vona';
-
 import { $makeLocaleMagic } from 'vona';
-
 import locale_en_us from '../config/locale/en-us.ts';
 import locale_zh_cn from '../config/locale/zh-cn.ts';
 

@@ -1,4 +1,4 @@
-/* eslint-disable */
+// eslint-disable
 /** pipe: begin */
 export * from '../bean/pipe.filter.ts';
 export * from '../bean/pipe.valid.ts';

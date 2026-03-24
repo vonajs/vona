@@ -1,4 +1,4 @@
-/* eslint-disable */
+// eslint-disable
 import type { TypeControllerOptionsActions } from 'vona-module-a-openapi';
 /** meta: begin */
 export * from '../bean/meta.printTip.ts';

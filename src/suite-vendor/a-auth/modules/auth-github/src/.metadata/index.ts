@@ -1,4 +1,4 @@
-/* eslint-disable */
+// eslint-disable
 /** authProvider: begin */
 export * from '../bean/authProvider.github.ts';
 import type { IAuthProviderOptionsGithub } from '../bean/authProvider.github.ts';

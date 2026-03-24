@@ -1,4 +1,4 @@
-/* eslint-disable */
+// eslint-disable
 /** filter: begin */
 export * from '../bean/filter.error.ts';
 import type { IFilterOptionsError } from '../bean/filter.error.ts';
