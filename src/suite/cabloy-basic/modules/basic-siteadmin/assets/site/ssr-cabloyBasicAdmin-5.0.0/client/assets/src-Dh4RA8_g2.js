@@ -1,1 +1,0 @@
-import{n as e,r as t,t as n}from"./basic-adapter-CFlecr7A.js";n();export{t as MonkeySys,e as ScopeModuleBasicAdapter};

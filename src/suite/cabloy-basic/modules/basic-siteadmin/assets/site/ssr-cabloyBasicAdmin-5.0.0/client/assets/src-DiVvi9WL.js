@@ -1,0 +1,1 @@
+import{n as e,r as t,t as n}from"./basic-adapter-DtbN0Qn9.js";n();export{t as MonkeySys,e as ScopeModuleBasicAdapter};

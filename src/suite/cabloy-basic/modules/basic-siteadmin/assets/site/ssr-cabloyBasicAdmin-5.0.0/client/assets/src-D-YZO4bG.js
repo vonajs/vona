@@ -1,0 +1,1 @@
+import{a as e,i as t,n,o as r,r as i,t as a}from"./a-routertabs-BoHuzM47.js";a();export{e as ControllerRouterViewTabs,r as ModelTabs,n as ScopeModuleARoutertabs,t as ZRouterViewTabs,i as components};

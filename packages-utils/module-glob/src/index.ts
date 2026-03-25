@@ -193,20 +193,22 @@ function __orderDependencies(context: IModuleGlobContext, modules: Record<string
 
   const dependencies = module.package[moduleNode].dependencies;
   for (const key in dependencies) {
-    const subModule = modules[key];
-    if (!subModule) {
-      const message = `${chalk.keyword('orange')(`module ${moduleRelativeName} disabled`)}, because ${chalk.keyword('cyan')(
-        `module ${key} not exists`,
-      )}`;
-      console.log(`\n${boxen(message, boxenOptions)}\n`);
-      enabled = false; // process.exit(0);
-      continue;
-    }
+    if (context.options.check !== false) {
+      const subModule = modules[key];
+      if (!subModule) {
+        const message = `${chalk.keyword('orange')(`module ${moduleRelativeName} disabled`)}, because ${chalk.keyword('cyan')(
+          `module ${key} not exists`,
+        )}`;
+        console.log(`\n${boxen(message, boxenOptions)}\n`);
+        enabled = false; // process.exit(0);
+        continue;
+      }
 
-    const subModuleVersion = dependencies[key];
-    if (semver.lt(subModule.package.version, subModuleVersion)) {
-      console.warn(chalk.cyan(`module ${key} is old`));
-      process.exit(0);
+      const subModuleVersion = dependencies[key];
+      if (semver.lt(subModule.package.version, subModuleVersion)) {
+        console.warn(chalk.cyan(`module ${key} is old`));
+        process.exit(0);
+      }
     }
 
     if (!__pushModule(context, modules, key)) {

@@ -6,6 +6,7 @@ export interface IModuleGlobOptions {
   disabledModules?: string[] | string;
   disabledSuites?: string[] | string;
   log?: boolean;
+  check?: boolean;
   meta?: {};
   disableCheckDependencies?: boolean;
 }

@@ -1,0 +1,1 @@
+import{a as e,c as t,i as n,l as r,n as i,o as a,r as o,s,t as c,u as l}from"./rest-actions-DioTkwUp.js";c();export{l as ActionAlert,r as ActionConfirm,t as ActionCopy,s as ActionCreate,a as ActionDelete,e as ActionEdit,n as ActionSetValue,o as ActionView,i as ScopeModuleRestActions};
