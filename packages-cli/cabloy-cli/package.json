@@ -36,7 +36,7 @@
   },
   "dependencies": {
     "@babel/parser": "^7.26.5",
-    "@cabloy/module-glob": "^5.2.57",
+    "@cabloy/module-glob": "^5.2.58",
     "@cabloy/module-info": "^2.0.0",
     "@cabloy/process-helper": "^3.0.0",
     "@cabloy/utils": "^2.0.24",
