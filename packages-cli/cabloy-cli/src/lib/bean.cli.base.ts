@@ -81,6 +81,7 @@ export class BeanCliBase {
       disabledModules: undefined,
       disabledSuites: undefined,
       log: false,
+      check: false,
       projectMode: process.env.CabloyCliBrandName as any,
     });
   }

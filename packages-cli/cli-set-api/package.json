@@ -45,7 +45,7 @@
     "@cabloy/cli": "^3.0.98",
     "@cabloy/dotenv": "^1.1.13",
     "@cabloy/extend": "^3.1.13",
-    "@cabloy/module-glob": "^5.2.56",
+    "@cabloy/module-glob": "^5.2.57",
     "@cabloy/module-info": "^2.0.0",
     "@cabloy/utils": "^2.0.24",
     "@cabloy/word-utils": "^2.0.2",
