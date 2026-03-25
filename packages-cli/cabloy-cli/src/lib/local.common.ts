@@ -124,6 +124,7 @@ export class LocalCommon {
     function _handleDeps(nameDependencies: string, deps: TypeDeps) {
       for (const key in deps) {
         const version = deps[key];
+        if (!version) throw new Error(`${nameDependencies}.${key}.version should not be empty`);
         if (!pkgOriginal[nameDependencies][key]) {
           pkgOriginal[nameDependencies][key] = version;
         }

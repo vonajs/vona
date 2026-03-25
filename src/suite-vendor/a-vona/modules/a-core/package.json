@@ -55,7 +55,7 @@
     "winston": "^3.17.0"
   },
   "devDependencies": {
-    "@cabloy/cli": "^3.0.98",
+    "@cabloy/cli": "^3.0.102",
     "@swc/core": "^1.14.0",
     "@swc/helpers": "^0.5.17",
     "@types/babel__core": "^7.20.5",

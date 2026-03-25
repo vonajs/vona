@@ -42,7 +42,7 @@
     "@babel/plugin-proposal-decorators": "^7.25.9",
     "@babel/plugin-transform-class-properties": "^7.25.9",
     "@babel/plugin-transform-typescript": "^7.26.8",
-    "@cabloy/cli": "^3.0.98",
+    "@cabloy/cli": "^3.0.102",
     "@cabloy/dotenv": "^1.1.13",
     "@cabloy/extend": "^3.1.13",
     "@cabloy/module-glob": "^5.2.58",
