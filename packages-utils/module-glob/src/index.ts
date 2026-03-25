@@ -193,8 +193,8 @@ function __orderDependencies(context: IModuleGlobContext, modules: Record<string
 
   const dependencies = module.package[moduleNode].dependencies;
   for (const key in dependencies) {
+    const subModule = modules[key];
     if (context.options.check !== false) {
-      const subModule = modules[key];
       if (!subModule) {
         const message = `${chalk.keyword('orange')(`module ${moduleRelativeName} disabled`)}, because ${chalk.keyword('cyan')(
           `module ${key} not exists`,
@@ -211,7 +211,7 @@ function __orderDependencies(context: IModuleGlobContext, modules: Record<string
       }
     }
 
-    if (!__pushModule(context, modules, key)) {
+    if (subModule && !__pushModule(context, modules, key)) {
       enabled = false;
     }
   }
