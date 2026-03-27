@@ -70,7 +70,7 @@ The Website and Admin-Dashboard of Cabloy Store are built by one codebase
 | Redis      | >=7.2.6  |
 | Sqlite3    | 内置     |
 | MySQL      | >=8      |
-| Postgresql | >=17     |
+| Postgresql | >=16     |
 
 - `Redis`: VonaJS provides the following capabilities based on Redis:
   - `Queue, Schedule, Startup, Broadcast, Caching, Two-layer cache, and Redlock`

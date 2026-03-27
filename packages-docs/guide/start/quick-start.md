@@ -9,7 +9,7 @@
 | Redis      | >=7.2.6   |
 | Sqlite3    | Built-in  |
 | MySQL      | >=8       |
-| Postgresql | >=17      |
+| Postgresql | >=16      |
 
 - `Redis`: VonaJS provides the following capabilities based on Redis:
   - `Queue, Schedule, Startup, Broadcast, Caching, Two-layer cache, and Redlock`

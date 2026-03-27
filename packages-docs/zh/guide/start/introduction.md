@@ -74,7 +74,7 @@ Vona 与 Zova 完美协同，延续前后端分离的架构风格。采用 Zova 
 | Redis      | >=7.2.6  |
 | Sqlite3    | 内置     |
 | MySQL      | >=8      |
-| Postgresql | >=17     |
+| Postgresql | >=16     |
 
 - `Redis`: VonaJS 基于 Redis 提供了以下能力:
   - `队列、定时任务、启动项、广播、缓存、二级缓存、分布式锁`
