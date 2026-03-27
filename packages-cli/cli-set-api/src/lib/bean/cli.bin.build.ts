@@ -135,6 +135,7 @@ export class CliBinBuild extends BeanCliBase {
         await fse.copy(scenePath, destPath);
       }
     }
+    await rimraf(`${assetsPath}/**/.DS_Store`, { glob: true });
   }
 
   async _rollup(projectPath: string, env: NodeJS.ProcessEnv, outDir: string) {
