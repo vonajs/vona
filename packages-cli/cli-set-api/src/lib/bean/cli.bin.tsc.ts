@@ -23,7 +23,7 @@ export class CliBinTsc extends BeanCliBase {
     const count = 1 + suiteNames.length + modulesArray.length;
     // begin
     let counter = 0;
-    const timeBegin = new Date();
+    const timeBegin = Date.now();
     // eslint-disable-next-line
     console.log('===> build begin');
     // args
@@ -49,8 +49,8 @@ export class CliBinTsc extends BeanCliBase {
       await this.helper.processHelper.tsc(tscArgs, { cwd: module.root });
     }
     // end
-    const timeEnd = new Date();
+    const timeEnd = Date.now();
     // eslint-disable-next-line
-    console.log(`===> build end: ${(timeEnd.valueOf() - timeBegin.valueOf()) / 1000}s`);
+    console.log(`===> tsc end: ${(timeEnd - timeBegin) / 1000}s`);
   }
 }

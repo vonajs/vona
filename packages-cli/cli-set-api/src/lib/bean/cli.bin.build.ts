@@ -59,7 +59,11 @@ export class CliBinBuild extends BeanCliBase {
     // super
     await super.execute();
     const projectPath = argv.projectPath;
+    const timeBegin = Date.now();
     await this._build(projectPath);
+    const timeEnd = Date.now();
+    // eslint-disable-next-line
+    console.log(`===> build end: ${(timeEnd - timeBegin) / 1000}s`);
   }
 
   async _build(projectPath: string) {
