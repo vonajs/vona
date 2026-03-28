@@ -3,7 +3,7 @@ import type { IHmrReload } from 'vona-module-a-hmr';
 
 import { BeanBase } from 'vona';
 import { clearCacheComposesRouter } from 'vona-module-a-aspect';
-import { Hmr } from 'vona-module-a-hmr';
+import { Hmr } from 'vona-module-a-hmrbase';
 
 @Hmr()
 export class HmrController extends BeanBase implements IHmrReload {
