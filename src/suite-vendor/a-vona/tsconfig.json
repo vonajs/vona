@@ -163,6 +163,9 @@
     },
     {
       "path": "modules/a-permission/tsconfig.build.json"
+    },
+    {
+      "path": "modules/a-hmrbase/tsconfig.build.json"
     }
   ],
   "exclude": ["modules"]

@@ -22,6 +22,7 @@
     "vona-module-a-event": "^5.0.25",
     "vona-module-a-executor": "^5.0.30",
     "vona-module-a-hmr": "^5.0.11",
+    "vona-module-a-hmrbase": "^5.0.0",
     "vona-module-a-index": "^5.0.22",
     "vona-module-a-instance": "^5.0.52",
     "vona-module-a-jwt": "^5.0.30",
