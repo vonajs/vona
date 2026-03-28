@@ -65,7 +65,10 @@ export default async function (app: VonaApplication, env: VonaConfigEnv) {
       port: Number.parseInt(env.SERVER_LISTEN_PORT!),
       disable: env.SERVER_LISTEN_DISABLE === 'true',
     },
-    serve: {},
+    serve: {
+      protocol: env.SERVER_SERVE_PROTOCOL,
+      host: env.SERVER_SERVE_HOST,
+    },
   };
 
   // proxy
