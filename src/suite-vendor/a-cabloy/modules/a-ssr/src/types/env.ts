@@ -8,6 +8,7 @@ export interface ZovaConfigEnv {
   DEV_SERVER_HOST: string | undefined;
   DEV_SERVER_PORT: string | undefined;
   SSR_API_BASE_URL: string | undefined;
+  OPENAPI_BASE_URL_DEFAULT: string | undefined;
   API_BASE_URL: string | undefined;
   API_PREFIX: string | undefined;
   API_JWT: string | undefined;
