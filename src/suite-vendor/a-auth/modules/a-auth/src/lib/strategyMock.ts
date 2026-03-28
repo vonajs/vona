@@ -27,11 +27,11 @@ export class StrategyMock extends StrategyBase {
   }
 
   userProfile(accessToken: string, done: Function) {
-    const mockId = accessToken;
+    const [username, profileId] = accessToken.split(',');
     const profile = {
-      id: mockId,
-      username: mockId,
-      displayName: mockId,
+      id: profileId || username,
+      username: username,
+      displayName: username,
     };
     done(null, profile);
   }

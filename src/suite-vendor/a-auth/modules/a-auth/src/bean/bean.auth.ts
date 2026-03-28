@@ -68,6 +68,7 @@ export class BeanAuth extends BeanBase {
       clientOptions: {
         confirmed: clientOptions.confirmed,
         mockUsername: clientOptions.mockUsername,
+        mockProfileId: clientOptions.mockProfileId,
       },
     } satisfies IAuthenticateStrategyState);
     const strategyStateString = await this.bean.jwt.createOauthState(strategyState);
@@ -86,7 +87,9 @@ export class BeanAuth extends BeanBase {
           return this.ctx.redirect(location);
         }
         // mock
-        this.ctx.request.query.code = clientOptions.mockUsername;
+        this.ctx.request.query.code = clientOptions.mockProfileId
+          ? `${clientOptions.mockUsername},${clientOptions.mockProfileId}`
+          : clientOptions.mockUsername;
         this.ctx.request.query.state = strategyStateString;
         return this.scope.service.auth.authCallback(strategyState).then(resolve).catch(reject);
       };
