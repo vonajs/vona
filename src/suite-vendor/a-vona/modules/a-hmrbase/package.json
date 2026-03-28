@@ -8,6 +8,7 @@
   "author": "",
   "files": [
     "assets",
+    "cli",
     "dist",
     "src"
   ],
@@ -45,8 +46,11 @@
   },
   "title": "a-hmrbase",
   "vonaModule": {
-    "dependencies": {
-      "a-vona": "5.0.0"
+    "dependencies": {},
+    "onions": {
+      "hmr": {
+        "boilerplate": "hmr/boilerplate"
+      }
     }
   }
 }
