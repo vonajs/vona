@@ -140,7 +140,6 @@ export class BeanSsrSiteBase<SsrSiteOptions extends IDecoratorSsrSiteOptions = I
           },
           envClient: {
             API_BASE_URL: baseUrl,
-            OPENAPI_BASE_URL_DEFAULT: baseUrl,
             SSR_PROD_PROTOCOL: this.app.util.protocol,
             SSR_PROD_HOST: this.app.util.host,
             SSR_HMR,
