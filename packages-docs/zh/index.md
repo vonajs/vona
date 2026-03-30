@@ -11,7 +11,7 @@ hero:
       text: 快速开始
       link: /zh/guide/start/introduction
     - theme: alt
-      text: Demo
+      text: 演示
       link: https://cabloy.com/admin
     - theme: alt
       text: GitHub
