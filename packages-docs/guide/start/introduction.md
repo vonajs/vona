@@ -15,7 +15,7 @@ Vona works perfectly with Zova, continuing the frontend-backend separation archi
 - Vona can generate a complete Openapi Schema, which can then generate an API SDK in Zova
 - Zova can generate types for routes and components to provide type hints in Vona
 
-## Demo online
+## Demo Online
 
 The Website and Admin-Dashboard of Cabloy Store are built by one codebase
 

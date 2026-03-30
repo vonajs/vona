@@ -33,7 +33,7 @@ Vona works perfectly with Zova, continuing the frontend-backend separation archi
 
 - [Docs](https://vona.js.org/guide/start/introduction.html)
 
-## Demo online
+## Demo Online
 
 The Website and Admin-Dashboard of Cabloy Store are built by one codebase
 
