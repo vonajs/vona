@@ -11,6 +11,9 @@ hero:
       text: Get Started
       link: /guide/start/introduction
     - theme: alt
+      text: Demo
+      link: https://cabloy.com/admin
+    - theme: alt
       text: GitHub
       link: https://github.com/vonajs/vona
 
