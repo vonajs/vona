@@ -2,9 +2,9 @@
 
 Vona uses multi-dimensional variables to load environment variables and Config configurations, providing a more flexible configuration mechanism and supporting more complex business scenarios
 
-These multi-dimensional variables are the `runtime environments` and `flavors`
+The `multi-dimensional variables` in Vona contain two dimensions: `Runtime Environment` and `Flavor`
 
-## Runtime Environments
+## Runtime Environment
 
 Vona provides three runtime environments:
 
