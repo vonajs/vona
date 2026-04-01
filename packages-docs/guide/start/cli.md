@@ -1,4 +1,4 @@
-# Cli command
+# Cli Commands
 
 Vona provides a large number of Cli commands for generating code skeletons for various resources
 
