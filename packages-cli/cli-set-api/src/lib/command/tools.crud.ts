@@ -2,8 +2,8 @@ export default {
   bean: 'tools.crudCabloy',
   info: {
     version: '5.0.0',
-    title: 'Cli: Tools: Crud Cabloy',
-    usage: 'vona :tools:crudCabloy resourceName [--module=]',
+    title: 'Cli: Tools: Crud',
+    usage: 'vona :tools:crud resourceName [--module=]',
   },
   options: {
     module: {

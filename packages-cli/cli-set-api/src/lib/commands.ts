@@ -23,8 +23,8 @@ import initMain from './command/init.main.ts';
 import initMonkey from './command/init.monkey.ts';
 import initStatic from './command/init.static.ts';
 import initTypes from './command/init.types.ts';
+import toolsCrud from './command/tools.crud.ts';
 import toolsCrudBasic from './command/tools.crudBasic.ts';
-import toolsCrudCabloy from './command/tools.crudCabloy.ts';
 import toolsDeps from './command/tools.deps.ts';
 import toolsMetadata from './command/tools.metadata.ts';
 
@@ -67,6 +67,6 @@ export const commands = {
     deps: toolsDeps,
     metadata: toolsMetadata,
     crudBasic: toolsCrudBasic,
-    crudCabloy: toolsCrudCabloy,
+    crud: toolsCrud,
   },
 };

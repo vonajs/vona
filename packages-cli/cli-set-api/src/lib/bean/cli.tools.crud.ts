@@ -18,7 +18,7 @@ declare module '@cabloy/cli' {
   }
 }
 
-export class CliToolsCrudCabloy extends BeanCliBase {
+export class CliToolsCrud extends BeanCliBase {
   async execute() {
     const { argv } = this.context;
     // super
@@ -52,13 +52,13 @@ export class CliToolsCrudCabloy extends BeanCliBase {
       throw new Error(`resource exists: ${resourceName}`);
     }
     // tools:crud
-    await this.helper.invokeCli([':tools:crud', resourceName, `--module=${argv.module}`, '--nometadata'], { cwd: argv.projectPath });
+    await this.helper.invokeCli([':tools:crudBasic', resourceName, `--module=${argv.module}`, '--nometadata'], { cwd: argv.projectPath });
     // render
     await this.template.renderBoilerplateAndSnippets({
       targetDir,
       setName: __ThisSetName__,
       snippetsPath: null,
-      boilerplatePath: 'tools/crudCabloy/boilerplate',
+      boilerplatePath: 'tools/crud/boilerplate',
     });
     // tools.metadata
     if (!argv.nometadata) {
