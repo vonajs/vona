@@ -34,7 +34,7 @@ $ npm run start:docker
 
 ### 2. How to Determine the Current Runtime Environment
 
-- Determining with `Env`
+- Determine via `Env`
 
 Using Env to determine the current runtime environment supports `tree-shaking` during builds
 
@@ -44,7 +44,7 @@ process.env.META_MODE === 'dev';
 process.env.META_MODE === 'prod';
 ```
 
-- Determined by `Config`
+- Determine via `Config`
 
 ```typescript
 app.config.meta.mode === 'test';
@@ -91,7 +91,7 @@ $ npm run build -- --flavor=ci
 
 ### 3. How to Determine the Current Flavor
 
-- Determining via `Env`
+- Determine via `Env`
 
 Using Env to determine the current flavor supports tree-shaking during builds
 
