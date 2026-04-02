@@ -18,7 +18,7 @@ declare module '@cabloy/cli' {
   }
 }
 
-export class CliToolsCrud extends BeanCliBase {
+export class CliToolsCrudBasic extends BeanCliBase {
   async execute() {
     const { argv } = this.context;
     // super
@@ -50,8 +50,8 @@ export class CliToolsCrud extends BeanCliBase {
     await this.template.renderBoilerplateAndSnippets({
       targetDir,
       setName: __ThisSetName__,
-      snippetsPath: 'tools/crud/snippets',
-      boilerplatePath: 'tools/crud/boilerplate',
+      snippetsPath: 'tools/crudBasic/snippets',
+      boilerplatePath: 'tools/crudBasic/boilerplate',
     });
     // tools.metadata
     if (!argv.nometadata) {
