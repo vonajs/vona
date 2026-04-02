@@ -128,7 +128,7 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
           ],
         },
         {
-          text: 'IOC容器',
+          text: 'IOC控制反转',
           base: '/zh/guide/essentials/ioc/',
           collapsed: true,
           items: [
