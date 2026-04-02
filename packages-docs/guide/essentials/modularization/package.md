@@ -45,10 +45,10 @@ If the module needs to provide global dev dependencies, you need to configure `v
   "vonaModule": {
     "globalDependenciesDev": {
       "@types/koa": true,
-      "@types/node": true,
+      "@types/luxon": true,
     },
   },
 }
 ```
 
-Since the module a-core declares `@types/koa` and `@types/node` as global dev dependencies, the system will put these dependencies into the project's `packages.json`, so that all other modules can directly import and use these modules
+Since the module a-core declares `@types/koa` and `@types/luxon` as global dev dependencies, the system will put these dependencies into the project's `packages.json`, so that all other modules can directly import and use these modules

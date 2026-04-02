@@ -45,10 +45,10 @@
   "vonaModule": {
     "globalDependenciesDev": {
       "@types/koa": true,
-      "@types/node": true,
+      "@types/luxon": true,
     },
   },
 }
 ```
 
-由于模块 a-core 将`@types/koa`和`@types/node`声明为全局开发依赖，那么系统就会将这些依赖项放入项目的 packages.json 当中，从而所有其他模块都可以直接导入并使用这些模块
+由于模块 a-core 将`@types/koa`和`@types/luxon`声明为全局开发依赖，那么系统就会将这些依赖项放入项目的 packages.json 当中，从而所有其他模块都可以直接导入并使用这些模块
