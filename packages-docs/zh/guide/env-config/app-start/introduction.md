@@ -39,7 +39,7 @@ VonaJS 提供了`Hook/Monkey`机制，可以在应用启动时对系统进行深
 
 1. `Module Main`: 在模块代码中响应模块自身的钩子
 2. `Module Monkey`: 在模块代码中响应系统钩子
-3. `App Monkey`: 在应用代码中响应系统钩子
+3. `App Monkey`: 在`src/backend/config/monkey.ts`中响应系统钩子
 
 针对不同的场景，为不同的钩子提供了对应的接口定义，从而规范钩子的使用
 

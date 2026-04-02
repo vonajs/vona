@@ -36,7 +36,7 @@ The system provides three scenarios to respond to application startup/shutdown h
 
 1. `Module Main`: Respond to the module's own hooks in the module code
 2. `Module Monkey`: Respond to system hooks in the module code
-3. `App Monkey`: Respond to system hooks in the app code
+3. `App Monkey`: Respond to system hooks in the file `src/backend/config/monkey.ts`
 
 For different scenarios, corresponding interface definitions are provided for different hooks, thereby standardizing the use of hooks
 
