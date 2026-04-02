@@ -31,7 +31,7 @@ Next, we'll use Vona's built-in code generator to create the CRUD code skeleton.
 ### 1. Cli Command
 
 ```bash
-$ vona :tools:crudCabloy student --module=demo-student
+$ vona :tools:crud student --module=demo-student
 ```
 
 ### 2. Menu Command

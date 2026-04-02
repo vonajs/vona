@@ -1,5 +1,5 @@
 export default {
-  bean: 'tools.crudCabloy',
+  bean: 'tools.crud',
   info: {
     version: '5.0.0',
     title: 'Cli: Tools: Crud',

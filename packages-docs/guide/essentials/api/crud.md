@@ -7,7 +7,7 @@ For example, we create a student CRUD in the module demo-student
 ## Cli command
 
 ```bash
-$ vona :tools:crudCabloy student --module=demo-student
+$ vona :tools:crud student --module=demo-student
 ```
 
 ## Menu command
