@@ -98,7 +98,7 @@ When using OAuth authentication, you need to provide the system's Callback URL o
 
 VonaJS provides a unified Callback URL value and outputs it directly to the console during development for easy use
 
-![](../assets/img/bal/auth-1.png)
+![](../../../assets/img/bal/auth-1.png)
 
 ### 6. Disable `useMockForDev`
 

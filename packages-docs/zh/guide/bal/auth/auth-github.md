@@ -98,7 +98,7 @@ config.onions = {
 
 VonaJS 提供了统一的 Callback URL 值，并且在开发阶段直接输出在控制台，方便我们直接使用
 
-![](../assets/img/bal/auth-1.png)
+![](../../../assets/img/bal/auth-1.png)
 
 ### 6. 禁用`useMockForDev`
 
