@@ -112,11 +112,10 @@ VonaJS 提供了若干内置的环境变量：
 
 ### meta
 
-| 名称        | 说明                              |
-| ----------- | --------------------------------- |
-| META_MODE   | mode                              |
-| META_FLAVOR | flavor                            |
-| NODE_ENV    | `test`/`development`/`production` |
+| 名称        | 说明   |
+| ----------- | ------ |
+| META_MODE   | mode   |
+| META_FLAVOR | flavor |
 
 ### app
 

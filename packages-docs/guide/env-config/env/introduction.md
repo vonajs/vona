@@ -2,7 +2,7 @@
 
 Vona loads environment files based on multi-dimensional variables, providing a more flexible configuration mechanism and supporting more complex business scenarios
 
-## meta & .env file
+## meta & .env files
 
 Vona uses [dotenv](https://github.com/motdotla/dotenv) to load environment variables from the following files in the directory `env`:
 
@@ -112,11 +112,10 @@ VonaJS provides several built-in env variables:
 
 ### meta
 
-| Name        | Description                       |
-| ----------- | --------------------------------- |
-| META_MODE   | mode                              |
-| META_FLAVOR | flavor                            |
-| NODE_ENV    | `test`/`development`/`production` |
+| Name        | Description |
+| ----------- | ----------- |
+| META_MODE   | mode        |
+| META_FLAVOR | flavor      |
 
 ### app
 

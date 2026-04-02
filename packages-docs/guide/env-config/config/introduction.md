@@ -2,7 +2,7 @@
 
 Vona loads config files based on multi-dimensional variables, providing a more flexible configuration mechanism and supporting more complex business scenarios
 
-## meta & config file
+## meta & config files
 
 Vona loads config files from the `src/backend/config/config` directory and supports file loading based on `meta` conditions:
 
