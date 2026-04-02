@@ -34,8 +34,20 @@ a-home
 
 ## Create Suite
 
+### 1. Cli command
+
+```bash
+$ vona :create:suite suiteName
+```
+
+| Name      | Description |
+| --------- | ----------- |
+| suiteName | Suite Name  |
+
+### 2. Menu command
+
 ::: tip
 Context Menu - [Project Path/src/suite]: `Vona Create/Suite`
 :::
 
-Enter the suite name according to the prompt, such as `test-home`, and the VSCode extension will automatically create the code skeleton of the suite
+Enter the suite name according to the prompt, such as `demo-student`, and the VSCode extension will automatically create the code skeleton of the suite
