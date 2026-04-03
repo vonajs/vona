@@ -36,54 +36,9 @@ Vona 提供了一组装饰器函数，用于声明 Bean Class 是可注入的，
 | @Schedule            | Schedule Bean            | schedule            | a-schedule      |
 | @SerializerTransform | SerializerTransform Bean | serializerTransform | a-serialization |
 | @Startup             | Startup Bean             | startup             | a-startup       |
-
-- a-action
-
-| 名称    | 说明        | Scene  | 默认注入范围 |
-| ------- | ----------- | ------ | ------------ |
-| @Action | Action Bean | action | sys          |
-
-- a-api
-
-| 名称       | 说明           | Scene     | 默认注入范围 |
-| ---------- | -------------- | --------- | ------------ |
-| @Api       | Api Bean       | api       | app          |
-| @ApiMeta   | ApiMeta Bean   | apiMeta   | app          |
-| @ApiSchema | ApiSchema Bean | apiSchema | app          |
-
-- a-behavior
-
-| 名称      | 说明          | Scene    | 默认注入范围 |
-| --------- | ------------- | -------- | ------------ |
-| @Behavior | Behavior Bean | behavior | new          |
-
-- a-fetch
-
-| 名称         | 说明             | Scene       | 默认注入范围 |
-| ------------ | ---------------- | ----------- | ------------ |
-| @Interceptor | Interceptor Bean | interceptor | new          |
-
-- a-meta
-
-| 名称  | 说明      | Scene | 默认注入范围 |
-| ----- | --------- | ----- | ------------ |
-| @Meta | Meta Bean | meta  | app          |
-
-- a-model
-
-| 名称   | 说明                                                 | Scene | 默认注入范围 |
-| ------ | ---------------------------------------------------- | ----- | ------------ |
-| @Model | [Model Bean](../../techniques/model/introduction.md) | model | ctx          |
-
-- a-style
-
-| 名称   | 说明                                              | Scene | 默认注入范围 |
-| ------ | ------------------------------------------------- | ----- | ------------ |
-| @Css   | [Css Bean](../../techniques/css-in-js/css.md)     | css   | app          |
-| @Theme | [Theme Bean](../../techniques/css-in-js/theme.md) | theme | app          |
-
-- a-table
-
-| 名称       | 说明           | Scene     | 默认注入范围 |
-| ---------- | -------------- | --------- | ------------ |
-| @TableCell | TableCell Bean | tableCell | sys          |
+| @SummerCache         | SummerCache Bean         | summerCache         | a-summer        |
+| @Controller          | Controller Bean          | controller          | a-web           |
+| @Dto                 | Dto Bean                 | dto                 | a-web           |
+| @FilterTransform     | FilterTransform Bean     | filterTransform     | a-web           |
+| @ZodRefine           | ZodRefine Bean           | zodRefine           | a-zod           |
+| @ZodTransform        | ZodTransform Bean        | zodTransform        | a-zod           |
