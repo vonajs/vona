@@ -2,41 +2,28 @@
 
 All beans can provide two lifecycle methods
 
-| Name          | Description                                                                               |
-| ------------- | ----------------------------------------------------------------------------------------- |
-| `__init__`    | The initialization method executed when creating a bean instance, and supports asynchrony |
-| `__dispose__` | The dispose method executed during bean instance destruction                              |
+| Name          | Description                                                      |
+| ------------- | ---------------------------------------------------------------- |
+| `__init__`    | The initialization method executed when creating a bean instance |
+| `__dispose__` | The dispose method executed during bean instance destruction     |
 
-- Zova provides two code snippets, you can quickly add corresponding lifecycle methods by entering `init` or `dispose`
+- Vona provides two code snippets, you can quickly add corresponding lifecycle methods by entering `init` or `dispose`
 
-## For Example: $useComputed
+## For Example
 
 ```typescript
-export class Counter {
-  count: number = 0;
-  count2: string;
+export class ServiceKnex {
+  private _knex: Knex | undefined;
 
-  protected async __init__() {
-    this.count2 = this.$useComputed(() => {
-      return `=== ${this.count} ===`;
-    });
+  protected __init__() {
+    this._knex = knex();
   }
-}
-```
 
-## For Example: $watch
-
-```typescript
-export class Counter {
-  count: number = 0;
-
-  protected async __init__() {
-    this.$watch(
-      () => this.count,
-      () => {
-        console.log('changed: ', this.count);
-      },
-    );
+  protected async __dispose__() {
+    if (this._knex) {
+      await this._knex.destroy();
+      this._knex = undefined;
+    }
   }
 }
 ```
