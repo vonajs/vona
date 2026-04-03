@@ -134,12 +134,14 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
           items: [
             { text: 'Introduction', link: 'introduction' },
             { text: 'Bean Identifier', link: 'bean-identifier' },
+            { text: 'Bean Scene', link: 'bean-scene' },
             { text: 'Onion Name', link: 'onion-name' },
             { text: 'Create Bean', link: 'bean-create' },
             { text: 'Dependency Injection', link: 'dependency-injection' },
             { text: 'Dependency Lookup', link: 'dependency-lookup' },
             { text: 'Dependency Lookup (API)', link: 'inject-api' },
             { text: 'BeanBase', link: 'bean-base' },
+            { text: 'Lifecycle', link: 'lifecycle' },
           ],
         },
         {
