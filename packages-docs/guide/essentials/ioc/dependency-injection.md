@@ -1,4 +1,4 @@
-# Dependency injection
+# Dependency Injection
 
 Vona injects Bean instances through `@Use` decorator function
 
