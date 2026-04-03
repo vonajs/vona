@@ -25,9 +25,9 @@
 
 ### 内置成员
 
-| 名称          | 说明         |
-| ------------- | ------------ |
-| $beanFullName | Bean标识     |
-| $beanOptions  | Bean Options |
-| $onionName    | Onion名称    |
-| $onionOptions | Bean参数     |
+| 名称          | 说明          |
+| ------------- | ------------- |
+| $beanFullName | Bean标识      |
+| $beanOptions  | Bean Options  |
+| $onionName    | Onion名称     |
+| $onionOptions | Onion Options |

@@ -30,4 +30,4 @@ The reason is to prioritize the use of the `dependency lookup` strategy, resulti
 | $beanFullName | Bean Identifier |
 | $beanOptions  | Bean Options    |
 | $onionName    | Onion Name      |
-| $onionOptions | Bean Parameters |
+| $onionOptions | Onion Options   |
