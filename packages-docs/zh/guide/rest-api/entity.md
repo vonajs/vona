@@ -51,8 +51,8 @@ tableName = moduleName + entityName
 
 `@Api.field`装饰器的参数使用机制，与 Controller 请求参数类似，参见：
 
-- [参数校验](../../techniques/validation/introduction.md)
-- [Swagger/Openapi](../../techniques/openapi/introduction.md)
+- [参数校验](../techniques/validation/introduction.md)
+- [Swagger/Openapi](../techniques/openapi/introduction.md)
 
 ## 字段类型与验证规则
 

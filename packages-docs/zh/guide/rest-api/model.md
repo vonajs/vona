@@ -66,9 +66,9 @@ class ServiceStudent {
 
 在这里，仅介绍基本的 CRUD 操作。更多信息，参见：
 
-- [CRUD(查询)](../../techniques/orm/crud-select.md)
-- [CRUD(插入/更新/删除)](../../techniques/orm/crud-cud.md)
-- [CRUD(魔术方法)](../../techniques/orm/crud-magic.md)
+- [CRUD(查询)](../techniques/orm/crud-select.md)
+- [CRUD(插入/更新/删除)](../techniques/orm/crud-cud.md)
+- [CRUD(魔术方法)](../techniques/orm/crud-magic.md)
 
 ### 1. Create
 
@@ -328,7 +328,7 @@ Vona Model 默认启用了缓存，从而使系统在默认情况下就具备非
 
 Model 支持`二级缓存`/`mem缓存`/`redis缓存`。默认使用的是`redis缓存`。因为`redis缓存`可以在分布式场景下保持数据的一致性，而`mem缓存`在分布式场景下同步数据有延时。如果业务数据变更不频繁，可以使用`mem缓存`或者`二级缓存`，从而获得更高性能
 
-这里简要介绍缓存的基本配置，更详细信息，参见: [Vona ORM: 缓存](../../techniques/orm/caching.md)
+这里简要介绍缓存的基本配置，更详细信息，参见: [Vona ORM: 缓存](../techniques/orm/caching.md)
 
 ### 1. 禁用缓存
 

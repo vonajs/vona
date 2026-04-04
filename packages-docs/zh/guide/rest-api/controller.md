@@ -161,17 +161,17 @@ class ControllerStudent3 {
 
 Vona 基于[Zod](https://zod.dev) 提供了非常简洁、灵活的机制对请求参数作校验
 
-- 参见：[参数校验](../../techniques/validation/introduction.md)
+- 参见：[参数校验](../techniques/validation/introduction.md)
 
 ## Swagger/Openapi
 
-Vona 基于[@asteasolutions/zod-to-openapi](https://github.com/asteasolutions/zod-to-openapi)实现了非常便利的`Swagger/Openapi`。Vona 中的 `Swagger/Openapi` 仍然延续[参数校验](../../techniques/validation/introduction.md)中的装饰器，同时提供扩展工具，用于设置与 Openapi 相关的信息
+Vona 基于[@asteasolutions/zod-to-openapi](https://github.com/asteasolutions/zod-to-openapi)实现了非常便利的`Swagger/Openapi`。Vona 中的 `Swagger/Openapi` 仍然延续[参数校验](../techniques/validation/introduction.md)中的装饰器，同时提供扩展工具，用于设置与 Openapi 相关的信息
 
-- 参见：[Swagger/Openapi](../../techniques/openapi/introduction.md)
+- 参见：[Swagger/Openapi](../techniques/openapi/introduction.md)
 
 ## Response Body
 
-Vona 提供了与[参数校验](../../techniques/validation/introduction.md)类似的机制，指定 Response body 的类型，并自动生成 Swagger/Openapi 元数据
+Vona 提供了与[参数校验](../techniques/validation/introduction.md)类似的机制，指定 Response body 的类型，并自动生成 Swagger/Openapi 元数据
 
 ### 1. 自动推断Zod Schema：基础类型/Dto/Entity
 
@@ -219,7 +219,7 @@ class ControllerStudent {
 
 - 举例：`string[]`
 
-使用装饰器`@Api.body`指定 Zod Schema。Zod Schema 的使用规则与[参数校验](../../techniques/validation/introduction.md)一致
+使用装饰器`@Api.body`指定 Zod Schema。Zod Schema 的使用规则与[参数校验](../techniques/validation/introduction.md)一致
 
 ```diff
 import { Api } from 'vona-module-a-openapiutils';
