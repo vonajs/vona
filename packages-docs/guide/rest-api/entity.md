@@ -224,7 +224,7 @@ Vona provides I18n for Openapi. For example, `title` is `Name`, and the steps to
 
 ### 1. Provide language resources
 
-For how to add language resources, see: [I18n](../../essentials/scope/locale.md)
+For how to add language resources, see: [I18n](../essentials/scope/locale.md)
 
 - English: `src/module/demo-student/src/config/locale/en-us.ts`
 

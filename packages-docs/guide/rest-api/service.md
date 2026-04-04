@@ -27,9 +27,9 @@ export class ServiceStudent extends BeanBase {}
 
 The use of Service can be explained from different dimensions
 
-- [Dependency Injection](../ioc/dependency-injection.md), [Dependency Lookup](../ioc/dependency-lookup.md)
+- [Dependency Injection](../essentials/ioc/dependency-injection.md), [Dependency Lookup](../essentials/ioc/dependency-lookup.md)
 
-- [Module Scope: Service](../scope/service.md)
+- [Module Scope: Service](../essentials/scope/service.md)
 
 ## 1. Dependency injection
 
