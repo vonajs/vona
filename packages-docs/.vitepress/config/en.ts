@@ -164,7 +164,7 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
     {
       collapsed: true,
       text: 'Rest API',
-      base: '/guide/essentials/api/',
+      base: '/guide/rest-api/',
       items: [
         { text: 'Create CRUD', link: 'crud' },
         { text: 'Controller', link: 'controller' },
