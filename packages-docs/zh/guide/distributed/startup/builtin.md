@@ -16,7 +16,7 @@
    - [多实例/多租户](../../env-config/instance/introduction.md)
    - [数据库策略](../../env-config/db-strategy/introduction.md)
 2. 自动执行数据库的架构迁移，即`version.update`方法
-   - [迁移与变更](../../essentials/api/version.md)
+   - [迁移与变更](../../rest-api/version.md)
 
 ### 2. a-version:databaseName
 
@@ -24,9 +24,9 @@
 
 ## 实例启动项
 
-| 名称                     | 说明                                                                                        |
-| ------------------------ | ------------------------------------------------------------------------------------------- |
-| a-version:instanceInit   | 为实例初始化数据，即`version.init`方法。参见: [迁移与变更](../../essentials/api/version.md) |
-| a-printtip:printTip      | 在控制台输出提示信息，比如`Swagger URL`等                                                   |
-| a-queue:loadQueueWorkers | 启动队列的Worker执行体                                                                      |
-| a-schedule:loadSchedules | 启动定时任务                                                                                |
+| 名称                     | 说明                                                                                  |
+| ------------------------ | ------------------------------------------------------------------------------------- |
+| a-version:instanceInit   | 为实例初始化数据，即`version.init`方法。参见: [迁移与变更](../../rest-api/version.md) |
+| a-printtip:printTip      | 在控制台输出提示信息，比如`Swagger URL`等                                             |
+| a-queue:loadQueueWorkers | 启动队列的Worker执行体                                                                |
+| a-schedule:loadSchedules | 启动定时任务                                                                          |

@@ -194,7 +194,7 @@ Both system and global middleware support `match` and `ignore`, but the API path
 - System middleware: `/api/demo/student`
 - Global middleware: `/demo/student`
 
-- For more information about API paths, see: [Controller](../../essentials/api/controller.md)
+- For more information about API paths, see: [Controller](../../rest-api/controller.md)
 
 ## Inspect
 

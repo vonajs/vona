@@ -16,7 +16,7 @@ This startup performs the following logic:
    - [Multi-Instance/Multi-Tenancy](../../env-config/instance/introduction.md)
    - [Database Strategy](../../env-config/db-strategy/introduction.md)
 2. Automatically perform database schema migration, just as the `version.update` method does
-   - [Migration and Changes](../../essentials/api/version.md)
+   - [Migration and Changes](../../rest-api/version.md)
 
 ### 2. a-version:databaseName
 
@@ -24,9 +24,9 @@ Since the test database is automatically created in the local development and te
 
 ## Instance Startup
 
-| Name                     | Description                                                                                                                           |
-| ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------- |
-| a-version:instanceInit   | Initials data for the instance, just as the `version.init` method does. See: [Migration and Changes](../../essentials/api/version.md) |
-| a-printtip:printTip      | Outputs messages to the console, such as `Swagger URL`, etc.                                                                          |
-| a-queue:loadQueueWorkers | Starts the workers of the queues                                                                                                      |
-| a-schedule:loadSchedules | Starts schedules                                                                                                                      |
+| Name                     | Description                                                                                                                     |
+| ------------------------ | ------------------------------------------------------------------------------------------------------------------------------- |
+| a-version:instanceInit   | Initials data for the instance, just as the `version.init` method does. See: [Migration and Changes](../../rest-api/version.md) |
+| a-printtip:printTip      | Outputs messages to the console, such as `Swagger URL`, etc.                                                                    |
+| a-queue:loadQueueWorkers | Starts the workers of the queues                                                                                                |
+| a-schedule:loadSchedules | Starts schedules                                                                                                                |

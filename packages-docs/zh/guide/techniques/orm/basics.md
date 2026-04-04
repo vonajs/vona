@@ -8,7 +8,7 @@
 
 这些 ORM 基础概念在介绍`API`时已经加以说明，参见：
 
-- [API: Entity](../../essentials/api/entity.md)
-- [API: Model](../../essentials/api/model.md)
-- [API: Dto](../../essentials/api/dto.md)
-- [API: 迁移与变更](../../essentials/api/version.md)
+- [API: Entity](../../rest-api/entity.md)
+- [API: Model](../../rest-api/model.md)
+- [API: Dto](../../rest-api/dto.md)
+- [API: 迁移与变更](../../rest-api/version.md)

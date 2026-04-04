@@ -57,7 +57,7 @@ async findOne(id) {
 
 Magic method can be implemented in any class. Taking Service as an example, create a Service `color` in the module demo-student with the following code:
 
-- For information on creating a Service, see: [Service](../../essentials/api/service.md)
+- For information on creating a Service, see: [Service](../../rest-api/service.md)
 
 ```typescript
 import { BeanBase } from 'vona';

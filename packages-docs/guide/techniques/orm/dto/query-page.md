@@ -119,7 +119,7 @@ export class DtoOrderQueryPage
 ```
 
 - `$Class.omit`: Exclude the `pageSize` field from the base class to avoid TypeScript errors
-- For more information about `$Class`, see: [API: Dto](../../../essentials/api/dto.md)
+- For more information about `$Class`, see: [API: Dto](../../../rest-api/dto.md)
 
 Or:
 
@@ -132,4 +132,4 @@ Or:
 export class DtoOrderQueryPage extends $Dto.queryPage(EntityOrder, ['orderNo', 'remark']) {}
 ```
 
-- For more information about `fields`, see: [API: Dto](../../../essentials/api/dto.md)
+- For more information about `fields`, see: [API: Dto](../../../rest-api/dto.md)

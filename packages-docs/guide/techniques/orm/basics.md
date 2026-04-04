@@ -8,7 +8,7 @@ Let's first introduce the basic concepts of Vona ORM:
 
 These basic ORM concepts were explained in the introduction to the `API`. See:
 
-- [API: Entity](../../essentials/api/entity.md)
-- [API: Model](../../essentials/api/model.md)
-- [API: Dto](../../essentials/api/dto.md)
-- [API: Migration and Changes](../../essentials/api/version.md)
+- [API: Entity](../../rest-api/entity.md)
+- [API: Model](../../rest-api/model.md)
+- [API: Dto](../../rest-api/dto.md)
+- [API: Migration and Changes](../../rest-api/version.md)

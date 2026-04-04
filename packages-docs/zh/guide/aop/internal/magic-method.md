@@ -57,7 +57,7 @@ async findOne(id) {
 
 可以在任何 Class 中实现魔术方法。下面，以 Service 为例，在模块 demo-student 中创建一个 Service `color`，代码如下：
 
-- 如何创建 Service，参见: [Service](../../essentials/api/service.md)
+- 如何创建 Service，参见: [Service](../../rest-api/service.md)
 
 ```typescript
 import { BeanBase } from 'vona';

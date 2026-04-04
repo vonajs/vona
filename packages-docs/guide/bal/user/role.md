@@ -59,7 +59,7 @@ class ControllerStudent {
 
 Automatically creates the `admin` role in the `meta.version` of the `home-user` module
 
-- See: [Migration and Changes](../../essentials/api/version.md)
+- See: [Migration and Changes](../../rest-api/version.md)
 
 `src/suite/a-home/modules/home-user/src/bean/meta.version.ts`
 

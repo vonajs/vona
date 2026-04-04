@@ -194,7 +194,7 @@ class MiddlewareSystemLogger {}
 - 系统中间件：`/api/demo/student`
 - 全局中间件：`/demo/student`
 
-- 关于 API Path 的更多信息，参见: [Controller](../../essentials/api/controller.md)
+- 关于 API Path 的更多信息，参见: [Controller](../../rest-api/controller.md)
 
 ## 查看当前生效的系统中间件清单
 

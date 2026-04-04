@@ -119,7 +119,7 @@ export class DtoOrderQueryPage
 ```
 
 - `$Class.omit`：从基类中排除字段`pageSize`，从而避免 Typescript 报错
-- 关于`$Class`的更多信息，参见：[API: Dto](../../../essentials/api/dto.md)
+- 关于`$Class`的更多信息，参见：[API: Dto](../../../rest-api/dto.md)
 
 或者：
 
@@ -132,4 +132,4 @@ export class DtoOrderQueryPage
 export class DtoOrderQueryPage extends $Dto.queryPage(EntityOrder, ['orderNo', 'remark']) {}
 ```
 
-- 关于`fields`的更多信息，参见：[API: Dto](../../../essentials/api/dto.md)
+- 关于`fields`的更多信息，参见：[API: Dto](../../../rest-api/dto.md)

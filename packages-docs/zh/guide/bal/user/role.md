@@ -59,7 +59,7 @@ class ControllerStudent {
 
 在模块`home-user`的`meta.version`中自动创建`admin`角色
 
-- 参见：[迁移与变更](../../essentials/api/version.md)
+- 参见：[迁移与变更](../../rest-api/version.md)
 
 `src/suite/a-home/modules/home-user/src/bean/meta.version.ts`
 

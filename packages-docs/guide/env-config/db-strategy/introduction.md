@@ -21,10 +21,10 @@ $ npm run db:reset
 
 For example, if the project name is `VonaDev`, when running unit tests, the system automatically creates a test database named `vona-test-VonaDev-20250815-161320`
 
-- Benefits of this design: During project development iterations, frequent database schema modifications are inevitable. The typical approach is to open a database management tool and make manual modifications. In Vona, you only need to write your change logic in [meta.version](../../essentials/api/version.md) and run the unit tests for the changes to take effect. In other words, database management tools are rarely used during Vona development
+- Benefits of this design: During project development iterations, frequent database schema modifications are inevitable. The typical approach is to open a database management tool and make manual modifications. In Vona, you only need to write your change logic in [meta.version](../../rest-api/version.md) and run the unit tests for the changes to take effect. In other words, database management tools are rarely used during Vona development
 
 - Some people may ask: If running unit tests creates a new database, does that mean you need to manually re-prepare all the test data?
-  - Vona offers a solution to this problem: write the test data initialization logic directly in the `test` method of [meta.version](../../essentials/api/version.md). This test data will be automatically generated whenever a new test database is created
+  - Vona offers a solution to this problem: write the test data initialization logic directly in the `test` method of [meta.version](../../rest-api/version.md). This test data will be automatically generated whenever a new test database is created
 
 ## Development Environment
 

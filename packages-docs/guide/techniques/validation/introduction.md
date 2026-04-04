@@ -211,12 +211,12 @@ VonaJS puts all the utility methods for extending Zod Schema into the group `v`,
 
 ## Controller
 
-For a more complete guide on using Controller, see: [Controller](../../essentials/api/controller.md)
+For a more complete guide on using Controller, see: [Controller](../../rest-api/controller.md)
 
 ## Entity
 
-The fields of Entity also support Validation. See: [Entity](../../essentials/api/entity.md)
+The fields of Entity also support Validation. See: [Entity](../../rest-api/entity.md)
 
 ## Dto
 
-The fields of Dto also support Validation. See: [Dto](../../essentials/api/dto.md)
+The fields of Dto also support Validation. See: [Dto](../../rest-api/dto.md)
