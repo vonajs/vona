@@ -28,7 +28,7 @@ export class ServiceStudent extends BeanBase {}
 关于 Service 的使用可以从不同维度来讲
 
 - Service 的依赖注入和依赖查找，参见：[依赖注入](../essentials/ioc/dependency-injection.md), [依赖查找](../essentials/ioc/dependency-lookup.md)
-- Service 的模块内部与跨模块使用，参见：[模块Scope：Service](../scope/service.md)
+- Service 的模块内部与跨模块使用，参见：[模块Scope：Service](../essentials/scope/service.md)
 
 ## 1. 依赖注入
 

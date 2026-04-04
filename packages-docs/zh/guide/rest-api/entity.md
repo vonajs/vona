@@ -69,7 +69,7 @@ class EntityStudent {
 }
 ```
 
-![](../../../assets/img/openapi/openapi-17.png)
+![](../../assets/img/openapi/openapi-17.png)
 
 - 举例：`EntityBook`
 
@@ -80,7 +80,7 @@ class EntityStudent {
 }
 ```
 
-![](../../../assets/img/openapi/openapi-18.png)
+![](../../assets/img/openapi/openapi-18.png)
 
 - 可自动推断的类型清单
 
@@ -105,7 +105,7 @@ class EntityStudent {
 }
 ```
 
-![](../../../assets/img/openapi/openapi-19.png)
+![](../../assets/img/openapi/openapi-19.png)
 
 ### 3. 扩展Zod Schema的属性
 
@@ -138,7 +138,7 @@ class EntityStudent {
 }
 ```
 
-![](../../../assets/img/openapi/openapi-20.png)
+![](../../assets/img/openapi/openapi-20.png)
 
 ### 4. 特殊工具：Array
 
@@ -162,7 +162,7 @@ class EntityStudent {
 }
 ```
 
-![](../../../assets/img/openapi/openapi-21.png)
+![](../../assets/img/openapi/openapi-21.png)
 
 - 举例：`EntityBook[]`
 
@@ -173,7 +173,7 @@ class EntityStudent {
 }
 ```
 
-![](../../../assets/img/openapi/openapi-22.png)
+![](../../assets/img/openapi/openapi-22.png)
 
 这些用于扩展 Zod Schema 的工具方法都放入装饰器分组`v`中，从而减轻心智负担
 
@@ -201,7 +201,7 @@ class EntityStudent {
 }
 ```
 
-![](../../../assets/img/openapi/openapi-23.png)
+![](../../assets/img/openapi/openapi-23.png)
 
 ### 2. 举例：v.openapi
 
@@ -216,7 +216,7 @@ class EntityStudent {
 }
 ```
 
-![](../../../assets/img/openapi/openapi-24.png)
+![](../../assets/img/openapi/openapi-24.png)
 
 ## I18n国际化
 
@@ -254,11 +254,11 @@ import { $locale } from '../.metadata/locales.ts';
 
 - 英文
 
-![](../../../assets/img/openapi/openapi-25.png)
+![](../../assets/img/openapi/openapi-25.png)
 
 - 中文
 
-![](../../../assets/img/openapi/openapi-26.png)
+![](../../assets/img/openapi/openapi-26.png)
 
 ## Entity Options
 

@@ -188,7 +188,7 @@ class ControllerStudent {
 }
 ```
 
-![](../../../assets/img/openapi/openapi-10.png)
+![](../../assets/img/openapi/openapi-10.png)
 
 - 举例：`EntityStudent`
 
@@ -201,7 +201,7 @@ class ControllerStudent {
 }
 ```
 
-![](../../../assets/img/openapi/openapi-11.png)
+![](../../assets/img/openapi/openapi-11.png)
 
 - 可自动推断的类型清单
 
@@ -233,7 +233,7 @@ class ControllerStudent {
 }
 ```
 
-![](../../../assets/img/openapi/openapi-12.png)
+![](../../assets/img/openapi/openapi-12.png)
 
 - 举例：`Promise<EntityStudent>`
 
@@ -247,7 +247,7 @@ class ControllerStudent {
 }
 ```
 
-![](../../../assets/img/openapi/openapi-13.png)
+![](../../assets/img/openapi/openapi-13.png)
 
 ## Response Body包装对象
 
@@ -277,7 +277,7 @@ class ControllerStudent {
 }
 ```
 
-![](../../../assets/img/openapi/openapi-14.png)
+![](../../assets/img/openapi/openapi-14.png)
 
 ### 2. 提供自定义包装对象
 
@@ -305,7 +305,7 @@ class ControllerStudent {
 }
 ```
 
-![](../../../assets/img/openapi/openapi-15.png)
+![](../../assets/img/openapi/openapi-15.png)
 
 - 如果 Response body 的类型是`Promise<EntityStudent>`，那么代码如下：
 
@@ -319,7 +319,7 @@ class ControllerStudent {
 }
 ```
 
-![](../../../assets/img/openapi/openapi-16.png)
+![](../../assets/img/openapi/openapi-16.png)
 
 ## 更多Swagger/Openapi配置
 

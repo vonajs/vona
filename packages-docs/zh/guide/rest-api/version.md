@@ -214,7 +214,7 @@ $ npm run dev
 $ npm run start
 ```
 
-![](../../../assets/img/api/version-update.png)
+![](../../assets/img/api/version-update.png)
 
 ## 支持本地开发
 
@@ -232,4 +232,4 @@ $ npm run db:reset
 
 此命令仅用于重新创建数据库，并重新执行迁移代码，不执行单元测试
 
-![](../../../assets/img/api/version-reset.png)
+![](../../assets/img/api/version-reset.png)
