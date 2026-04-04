@@ -51,8 +51,8 @@ In `Entity` You only need to use the `@Api.field` decorator to provide all the a
 
 The parameter usage mechanism of the `@Api.field` decorator is similar to the Controller request parameter, see:
 
-- [Validation](../../techniques/validation/introduction.md)
-- [Swagger/Openapi](../../techniques/openapi/introduction.md)
+- [Validation](../techniques/validation/introduction.md)
+- [Swagger/Openapi](../techniques/openapi/introduction.md)
 
 ## Field type and validation rules
 

@@ -201,4 +201,4 @@ class DtoStudentUpdate extends $Class.partial($Class.pick(EntityStudent, ['name'
 
 Vona ORM pioneers dynamic DTO inference and generation capabilities, significantly improving development efficiency and experience. It can even be said that being able to dynamically infer and generate DTOs is a very important `milestone` in building a more elegant Node.js backend framework
 
-- See: [DTO infer & generation](../../techniques/orm/dto/introduction.md)
+- See: [DTO infer & generation](../techniques/orm/dto/introduction.md)

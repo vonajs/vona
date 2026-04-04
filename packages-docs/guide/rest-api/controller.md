@@ -161,17 +161,17 @@ class ControllerStudent3 {
 
 Vona Based on [Zod](https://zod.dev), a very concise and flexible mechanism is provided to verify request parameters
 
-- See: [Validation](../../techniques/validation/introduction.md)
+- See: [Validation](../techniques/validation/introduction.md)
 
 ## Swagger/Openapi
 
-Vona implements a very convenient `Swagger/Openapi` based on [@asteasolutions/zod-to-openapi](https://github.com/asteasolutions/zod-to-openapi). `Swagger/Openapi` in Vona still uses the decorators in [Validation](../../techniques/validation/introduction.md), and provides extension tools to set metadata related to Openapi
+Vona implements a very convenient `Swagger/Openapi` based on [@asteasolutions/zod-to-openapi](https://github.com/asteasolutions/zod-to-openapi). `Swagger/Openapi` in Vona still uses the decorators in [Validation](../techniques/validation/introduction.md), and provides extension tools to set metadata related to Openapi
 
-- See: [Swagger/Openapi](../../techniques/openapi/introduction.md)
+- See: [Swagger/Openapi](../techniques/openapi/introduction.md)
 
 ## Response Body
 
-Vona provides a mechanism similar to [Validation](../../techniques/validation/introduction.md), which specifies the type of the Response body and automatically generates Swagger/Openapi metadata
+Vona provides a mechanism similar to [Validation](../techniques/validation/introduction.md), which specifies the type of the Response body and automatically generates Swagger/Openapi metadata
 
 ### 1. Automatically infer Zod Schema: Basic type/Dto/Entity
 
@@ -219,7 +219,7 @@ We can also explicitly specify Zod Schema and automatically generate Swagger/Ope
 
 - Example: `string[]`
 
-Use the decorator `@Api.body` to specify Zod Schema. Zod Schema usage rules are consistent with [Validation](../../techniques/validation/introduction.md)
+Use the decorator `@Api.body` to specify Zod Schema. Zod Schema usage rules are consistent with [Validation](../techniques/validation/introduction.md)
 
 ```diff
 import { Api } from 'vona-module-a-openapiutils';
