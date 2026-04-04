@@ -219,7 +219,7 @@ $ npm run dev
 $ npm run start
 ```
 
-![](../../../assets/img/api/version-update.png)
+![](../../assets/img/api/version-update.png)
 
 ## Support local development
 
@@ -237,4 +237,4 @@ $ npm run db:reset
 
 This command is only used to recreate the database and re-execute the migration code; it does not execute unit tests
 
-![](../../../assets/img/api/version-reset.png)
+![](../../assets/img/api/version-reset.png)

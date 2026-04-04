@@ -188,7 +188,7 @@ class ControllerStudent {
 }
 ```
 
-![](../../../assets/img/openapi/openapi-10.png)
+![](../../assets/img/openapi/openapi-10.png)
 
 - Example: `EntityStudent`
 
@@ -201,7 +201,7 @@ class ControllerStudent {
 }
 ```
 
-![](../../../assets/img/openapi/openapi-11.png)
+![](../../assets/img/openapi/openapi-11.png)
 
 - List of types that can be automatically inferred
 
@@ -233,7 +233,7 @@ class ControllerStudent {
 }
 ```
 
-![](../../../assets/img/openapi/openapi-12.png)
+![](../../assets/img/openapi/openapi-12.png)
 
 - Example: `Promise<EntityStudent>`
 
@@ -247,7 +247,7 @@ class ControllerStudent {
 }
 ```
 
-![](../../../assets/img/openapi/openapi-13.png)
+![](../../assets/img/openapi/openapi-13.png)
 
 ## Response Body Wrapper Object
 
@@ -277,7 +277,7 @@ class ControllerStudent {
 }
 ```
 
-![](../../../assets/img/openapi/openapi-14.png)
+![](../../assets/img/openapi/openapi-14.png)
 
 ### 2. Provide a custom wrapper object
 
@@ -305,7 +305,7 @@ class ControllerStudent {
 }
 ```
 
-![](../../../assets/img/openapi/openapi-15.png)
+![](../../assets/img/openapi/openapi-15.png)
 
 - If the type of Response body is `Promise<EntityStudent>`, the code is as follows:
 
@@ -319,7 +319,7 @@ class ControllerStudent {
 }
 ```
 
-![](../../../assets/img/openapi/openapi-16.png)
+![](../../assets/img/openapi/openapi-16.png)
 
 ## More Swagger/Openapi configuration
 

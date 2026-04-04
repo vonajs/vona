@@ -69,7 +69,7 @@ class EntityStudent {
 }
 ```
 
-![](../../../assets/img/openapi/openapi-17.png)
+![](../../assets/img/openapi/openapi-17.png)
 
 - Example: `EntityBook`
 
@@ -80,7 +80,7 @@ class EntityStudent {
 }
 ```
 
-![](../../../assets/img/openapi/openapi-18.png)
+![](../../assets/img/openapi/openapi-18.png)
 
 - List of automatically inferred types
 
@@ -105,7 +105,7 @@ class EntityStudent {
 }
 ```
 
-![](../../../assets/img/openapi/openapi-19.png)
+![](../../assets/img/openapi/openapi-19.png)
 
 ### 3. Extending Zod Schema properties
 
@@ -138,7 +138,7 @@ class EntityStudent {
 }
 ```
 
-![](../../../assets/img/openapi/openapi-20.png)
+![](../../assets/img/openapi/openapi-20.png)
 
 ### 4. Special tool: Array
 
@@ -162,7 +162,7 @@ class EntityStudent {
 }
 ```
 
-![](../../../assets/img/openapi/openapi-21.png)
+![](../../assets/img/openapi/openapi-21.png)
 
 - Example: `EntityBook[]`
 
@@ -173,7 +173,7 @@ class EntityStudent {
 }
 ```
 
-![](../../../assets/img/openapi/openapi-22.png)
+![](../../assets/img/openapi/openapi-22.png)
 
 These utility methods for extending Zod Schema are put into the decorator group `v` to reduce the mental burden
 
@@ -201,7 +201,7 @@ class EntityStudent {
 }
 ```
 
-![](../../../assets/img/openapi/openapi-23.png)
+![](../../assets/img/openapi/openapi-23.png)
 
 ### 2. Example: v.openapi
 
@@ -216,7 +216,7 @@ class EntityStudent {
 }
 ```
 
-![](../../../assets/img/openapi/openapi-24.png)
+![](../../assets/img/openapi/openapi-24.png)
 
 ## I18n
 
@@ -254,11 +254,11 @@ import { $locale } from '../.metadata/locales.ts';
 
 - English
 
-![](../../../assets/img/openapi/openapi-25.png)
+![](../../assets/img/openapi/openapi-25.png)
 
 - Chinese
 
-![](../../../assets/img/openapi/openapi-26.png)
+![](../../assets/img/openapi/openapi-26.png)
 
 ## Entity Options
 
