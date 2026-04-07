@@ -205,7 +205,10 @@ function _collectModuleDevs(module: IModule, deps: {}, nameDependencies: string,
     for (const key in globalDependencies) {
       let version = globalDependencies[key];
       if (version !== false) {
-        if (version === true) version = moduleDeps[key];
+        if (version === true) {
+          if (!moduleDeps) throw new Error(`${nameDependencies} not found: ${module.info.relativeName}`);
+          version = moduleDeps[key];
+        }
         deps[key] = version;
       }
     }
