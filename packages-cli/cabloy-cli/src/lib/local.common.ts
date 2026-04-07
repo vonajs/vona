@@ -178,7 +178,9 @@ export class LocalCommon {
         const isModuleWorkspace = isModule && version.startsWith('workspace:');
         if (isZovaRest && version.includes('file:')) continue;
         if (isModuleWorkspace) continue;
-        if (deps[key] && !isModule) continue;
+        // if (deps[key] && !isModule) continue;
+        if (isModule) continue;
+        if (deps[key]) continue;
         moduleDepsOriginal[key] = version;
         changed = true;
       }
