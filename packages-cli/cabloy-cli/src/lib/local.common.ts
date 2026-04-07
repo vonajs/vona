@@ -35,7 +35,7 @@ export class LocalCommon {
     // all modules: type file
     const promises: Promise<void>[] = [];
     for (const module of this.cli.modulesMeta.modulesArray) {
-      if (module.info.node_modules) continue;
+      if (module.info.node_modules && !fse.existsSync(path.join(module.root, 'src/.metadata'))) continue;
       const moduleTypeFile = path.join(module.root, 'src/.metadata/modules.d.ts');
       promises.push(this._generateTypeModulesFileInner(typeFile, typeFileStat, moduleTypeFile));
     }
