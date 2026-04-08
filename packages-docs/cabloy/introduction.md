@@ -1,4 +1,4 @@
-# CabloyJS
+# Cabloy
 
 ## The relationship between Vona, Zova, and Cabloy
 
