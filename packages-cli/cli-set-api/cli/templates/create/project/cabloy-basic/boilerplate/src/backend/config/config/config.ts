@@ -1,18 +1,9 @@
 import type { ILoggerOptionsClientInfo, VonaApplication, VonaConfigEnv, VonaConfigOptional } from 'vona';
 import type { IMailClientRecord, TypeMailTransportService } from 'vona-module-a-mail';
 import type { IDatabaseClientRecord } from 'vona-module-a-orm';
-import type * as Winston from 'winston';
 
 import { replaceTemplate } from '@cabloy/utils';
-import {
-  $customKey,
-  formatLoggerAxiosError,
-  formatLoggerCtx,
-  getLoggerPathPhysicalRoot,
-  getPublicPathPhysicalRoot,
-  getSqlite3DatabaseNameDefault,
-  getSqlite3NativeBinding,
-} from 'vona';
+import { $customKey, getLoggerPathPhysicalRoot, getPublicPathPhysicalRoot, getSqlite3DatabaseNameDefault, getSqlite3NativeBinding } from 'vona';
 
 declare module 'vona' {
   export interface IInstanceRecord {
@@ -94,15 +85,9 @@ export default async function (app: VonaApplication, env: VonaConfigEnv) {
         maxFiles: env.LOGGER_ROTATE_MAXFILES,
       };
     },
-    base(this: VonaApplication, _clientInfo: ILoggerOptionsClientInfo, winston: typeof Winston) {
+    base(this: VonaApplication) {
       return {
-        format: winston.format.combine(
-          formatLoggerAxiosError({ stack: true }),
-          formatLoggerCtx(),
-          winston.format.errors({ stack: true }),
-          winston.format.splat(),
-          winston.format.timestamp(),
-        ),
+        format: this.bean.logger.makeFormatBase({ stack: true }),
         transports: undefined,
       };
     },
