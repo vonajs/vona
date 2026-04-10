@@ -1,6 +1,6 @@
 {
   "name": "vona-module-a-core",
-  "version": "5.1.0",
+  "version": "5.1.1",
   "gitHead": "0eab9dc4a5622caffe89e7b1b3f02c08ccbc4c4b",
   "description": "",
   "keywords": [
@@ -34,11 +34,11 @@
   "dependencies": {
     "@babel/core": "^7.28.0",
     "@babel/traverse": "^7.28.0",
-    "@cabloy/deps": "^1.1.0",
-    "@cabloy/json5": "^1.1.0",
+    "@cabloy/deps": "^1.1.1",
+    "@cabloy/json5": "^1.1.1",
     "@cabloy/module-info": "^2.0.0",
     "@cabloy/type-fest": "^5.3.1",
-    "@cabloy/utils": "^2.1.0",
+    "@cabloy/utils": "^2.1.1",
     "@cabloy/word-utils": "^2.0.2",
     "bignumber.js": "^9.3.1",
     "boxen": "^8.0.1",
@@ -51,11 +51,11 @@
     "react": "^19.2.3",
     "retry": "^0.13.1",
     "uuid": "^11.0.3",
-    "vona-shared": "^1.1.0",
+    "vona-shared": "^1.1.1",
     "winston": "^3.17.0"
   },
   "devDependencies": {
-    "@cabloy/cli": "^3.1.0",
+    "@cabloy/cli": "^3.1.1",
     "@swc/core": "^1.14.0",
     "@swc/helpers": "^0.5.17",
     "@types/babel__core": "^7.20.5",
@@ -72,7 +72,7 @@
     "ts-node-maintained": "^10.9.6",
     "tslib": "^2.8.1",
     "typescript": "^5.9.3",
-    "vona-mock": "^6.1.0",
+    "vona-mock": "^6.1.1",
     "why-is-node-running": "^3.2.2"
   },
   "clean-package": {

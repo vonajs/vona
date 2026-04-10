@@ -1,6 +1,6 @@
 {
   "name": "vona-cli",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "gitHead": "0eab9dc4a5622caffe89e7b1b3f02c08ccbc4c4b",
   "description": "vona cli",
   "keywords": [
@@ -38,11 +38,11 @@
     "postpack": "clean-package restore"
   },
   "dependencies": {
-    "@cabloy/cli": "^3.1.0",
-    "@cabloy/process-helper": "^3.1.0",
+    "@cabloy/cli": "^3.1.1",
+    "@cabloy/process-helper": "^3.1.1",
     "fs-extra": "^11.2.0",
     "semver": "^7.6.2",
-    "vona-cli-set-api": "^1.1.0"
+    "vona-cli-set-api": "^1.1.1"
   },
   "devDependencies": {
     "clean-package": "^2.2.0",
