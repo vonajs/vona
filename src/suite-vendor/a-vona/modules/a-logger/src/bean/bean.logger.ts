@@ -1,7 +1,8 @@
 import type { ILoggerChildRecord, ILoggerClientRecord, ILoggerOptionsClientInfo, LoggerLevel } from 'vona';
+import type { ILoggerFormatOpts } from 'vona';
 import type * as Transport from 'winston-transport';
 
-import { BeanBase, formatLoggerConsole, formatLoggerDummy, formatLoggerFilter } from 'vona';
+import { BeanBase, formatLoggerAxiosError, formatLoggerConsole, formatLoggerCtx, formatLoggerDummy, formatLoggerFilter } from 'vona';
 import { Bean } from 'vona-module-a-bean';
 import * as Winston from 'winston';
 
@@ -35,6 +36,16 @@ export class BeanLogger extends BeanBase {
 
   public getChild(childName: keyof ILoggerChildRecord, clientName?: keyof ILoggerClientRecord): Winston.Logger {
     return this.app.meta.logger.get(clientName).child({ name: childName });
+  }
+
+  public makeFormatBase(opts: ILoggerFormatOpts) {
+    return Winston.format.combine(
+      formatLoggerAxiosError(opts),
+      formatLoggerCtx(),
+      Winston.format.errors(opts),
+      Winston.format.splat(),
+      Winston.format.timestamp(),
+    );
   }
 
   public makeTransportFile(

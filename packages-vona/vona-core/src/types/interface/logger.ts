@@ -1,6 +1,11 @@
 import type * as Winston from 'winston';
 import type DailyRotateFile from 'winston-daily-rotate-file';
 
+export interface ILoggerFormatOpts {
+  stack?: boolean;
+  cause?: boolean;
+}
+
 export interface ILoggerOptionsClientInfo {
   clientName: keyof ILoggerClientRecord;
   level: () => LoggerLevel | false;
