@@ -2360,7 +2360,7 @@ importers:
   src/suite/cabloy-basic:
     dependencies:
       vona-module-basic-siteadmin:
-        specifier: ^5.1.1
+        specifier: ^5.1.2
         version: link:modules/basic-siteadmin
       vona-suite-a-cabloy:
         specifier: ^5.1.1
