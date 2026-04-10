@@ -1,1 +1,0 @@
-import{n as e,r as t,t as n}from"./home-icon-kuMKMY-n.js";n();export{e as ScopeModuleHomeIcon,t as icons};

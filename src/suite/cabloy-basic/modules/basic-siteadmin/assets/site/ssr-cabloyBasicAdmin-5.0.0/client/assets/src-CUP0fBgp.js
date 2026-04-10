@@ -1,1 +1,0 @@
-import{a as e,i as t,n,r,t as i}from"./a-pinia-Do-FQmwX.js";i();export{e as BeanPiniaStoreBase,r as Monkey,n as ScopeModuleAPinia,t as ServicePinia};

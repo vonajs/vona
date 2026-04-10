@@ -1,1 +1,0 @@
-import{a as e,c as t,i as n,l as r,n as i,o as a,r as o,s,t as c,u as l}from"./basic-form-lcznqFPk.js";c();export{i as $useLocale,t as BehaviorFormField,s as BehaviorFormFieldLayout,l as ControllerFormFieldCaptcha,n as ScopeModuleBasicForm,r as ZFormFieldCaptcha,e as components,a as locale,o as locales};
