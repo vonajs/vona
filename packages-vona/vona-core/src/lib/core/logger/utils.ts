@@ -11,7 +11,7 @@ import { useApp } from '../../framework/useApp.ts';
 const SymbolLoggerMessage = Symbol('SymbolLoggerMessage');
 
 export const formatLoggerAxiosError = Winston.format((einfo, { stack, cause }: any) => {
-  if ((einfo instanceof Error && einfo.constructor.name.includes('AxiosError')) || einfo.name === 'AxiosError') {
+  if ((einfo instanceof Error && einfo.constructor.name.includes('AxiosError')) || einfo.name === 'AxiosError' || einfo.isAxiosError) {
     const info = Object.assign({}, einfo, {
       level: einfo.level,
       [LEVEL]: einfo[LEVEL] || einfo.level,
