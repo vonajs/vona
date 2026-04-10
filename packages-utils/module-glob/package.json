@@ -1,6 +1,6 @@
 {
   "name": "@cabloy/module-glob",
-  "version": "5.2.58",
+  "version": "5.3.0",
   "gitHead": "0eab9dc4a5622caffe89e7b1b3f02c08ccbc4c4b",
   "description": "cabloy module-glob",
   "keywords": [
@@ -35,7 +35,7 @@
   },
   "dependencies": {
     "@cabloy/module-info": "^2.0.0",
-    "@cabloy/utils": "^2.0.24",
+    "@cabloy/utils": "^2.1.0",
     "boxen": "^4.2.0",
     "chalk": "^3.0.0",
     "fs-extra": "^11.3.0",

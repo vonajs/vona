@@ -1,6 +1,6 @@
 {
   "name": "vona",
-  "version": "5.0.280",
+  "version": "5.1.0",
   "gitHead": "0eab9dc4a5622caffe89e7b1b3f02c08ccbc4c4b",
   "description": "Vona is an intuitive, elegant and powerful Node.js framework for rapidly developing enterprise applications of any size",
   "keywords": [
@@ -44,10 +44,10 @@
     "version": "node ../../scripts/version-vona.ts"
   },
   "dependencies": {
-    "vona-core": "^5.0.134",
-    "vona-suite-a-auth": "^5.0.0",
-    "vona-suite-a-captcha": "^5.0.0",
-    "vona-suite-a-vona": "^5.0.275"
+    "vona-core": "^5.1.0",
+    "vona-suite-a-auth": "^5.1.0",
+    "vona-suite-a-captcha": "^5.1.0",
+    "vona-suite-a-vona": "^5.1.0"
   },
   "devDependencies": {
     "clean-package": "^2.2.0",

@@ -1,4 +1,4 @@
-/* eslint-disable */
+// eslint-disable
 import type { TypeControllerOptionsActions } from 'vona-module-a-openapi';
 /** service: begin */
 export * from '../service/menu.ts';

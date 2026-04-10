@@ -1,15 +1,15 @@
 {
   "name": "vona-suite-a-auth",
-  "version": "5.0.0",
+  "version": "5.1.0",
   "description": "",
   "author": "",
   "files": [],
   "type": "module",
   "dependencies": {
-    "vona-module-a-auth": "^5.0.0",
-    "vona-module-auth-github": "^5.0.0",
-    "vona-module-auth-simple": "^5.0.0",
-    "vona-module-test-auth": "^5.0.0"
+    "vona-module-a-auth": "^5.1.0",
+    "vona-module-auth-github": "^5.1.0",
+    "vona-module-auth-simple": "^5.1.0",
+    "vona-module-test-auth": "^5.1.0"
   },
   "title": "a-auth"
 }

@@ -1,6 +1,6 @@
 {
   "name": "vona-module-start-siteweb",
-  "version": "5.0.0",
+  "version": "5.1.0",
   "description": "",
   "keywords": [
     "Vona Module"
@@ -9,6 +9,7 @@
   "files": [
     "assets",
     "dist",
+    "src",
     "zovaRest"
   ],
   "type": "module",
@@ -25,7 +26,7 @@
   },
   "scripts": {
     "clean": "rimraf dist tsconfig.build.tsbuildinfo",
-    "tsc:publish": "npm run clean && vona :bin:buildModule && tsc -p tsconfig.build.json",
+    "tsc:publish": "npm run clean && vona :bin:buildModule --sourcemap && tsc -p tsconfig.build.json",
     "prepublishOnly": "npm run tsc:publish",
     "prepack": "clean-package",
     "postpack": "clean-package restore && npm run clean",

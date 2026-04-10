@@ -1,4 +1,4 @@
-/* eslint-disable */
+// eslint-disable
 /** ssrSite: begin */
 export * from '../bean/ssrSite.admin.ts';
 import type { ISsrSiteOptionsAdmin } from '../bean/ssrSite.admin.ts';

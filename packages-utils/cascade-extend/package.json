@@ -1,6 +1,6 @@
 {
   "name": "cascade-extend",
-  "version": "2.1.12",
+  "version": "2.2.0",
   "gitHead": "0eab9dc4a5622caffe89e7b1b3f02c08ccbc4c4b",
   "description": "cascade-extend",
   "keywords": [
@@ -43,7 +43,7 @@
     "postpack": "clean-package restore"
   },
   "dependencies": {
-    "@cabloy/extend": "^3.1.13"
+    "@cabloy/extend": "^3.2.0"
   },
   "devDependencies": {
     "clean-package": "^2.2.0",

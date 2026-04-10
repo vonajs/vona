@@ -18,4 +18,12 @@ export class ServiceRoleAdapter extends BeanBase implements IRoleAdapter {
     const user = await this.scope.model.user.get({ id: userId }, { include: { roles: true } });
     return user?.roles;
   }
+
+  async addUserId(id: TableIdentity, userId: TableIdentity): Promise<TableIdentity> {
+    const res = await this.scope.model.roleUser.insert({
+      userId,
+      roleId: id,
+    });
+    return res.id;
+  }
 }

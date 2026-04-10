@@ -40,20 +40,24 @@ export class MetaVersion extends BeanBase implements IMetaVersionUpdate, IMetaVe
   async init(options: IMetaVersionInitOptions) {
     if (options.version === 1) {
       // role: admin
-      await this.scope.model.role.insert({
-        name: 'admin',
-      });
+      if (!this.scope.config.disableRoleAdmin) {
+        await this.scope.model.role.insert({
+          name: 'admin',
+        });
+      }
       // user: admin
-      await this.bean.authSimple.authenticate(
-        {
-          username: 'admin',
-          password: options.password || this.scope.config.passwordDefault.admin,
-          avatar: ':emoji:flower',
-          confirmed: true,
-        },
-        'register',
-        'default',
-      );
+      if (!this.scope.config.disableUserAdmin) {
+        await this.bean.authSimple.authenticate(
+          {
+            username: 'admin',
+            password: options.password || this.scope.config.passwordDefault.admin,
+            avatar: ':emoji:flower',
+            confirmed: true,
+          },
+          'register',
+          'default',
+        );
+      }
     }
   }
 }
