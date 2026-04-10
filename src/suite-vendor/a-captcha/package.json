@@ -10,5 +10,6 @@
     "vona-module-captcha-simple": "^5.1.1",
     "vona-module-test-captcha": "^5.1.1"
   },
-  "title": "a-captcha"
+  "title": "a-captcha",
+  "gitHead": "991189da4443b789fcf77872990b901ccf43bccb"
 }

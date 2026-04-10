@@ -9,9 +9,10 @@
     "version": "node ../../../scripts/version-home.ts"
   },
   "dependencies": {
-    "vona-module-home-base": "workspace:^",
-    "vona-module-home-index": "workspace:^",
-    "vona-module-home-user": "workspace:^"
+    "vona-module-home-base": "^5.1.1",
+    "vona-module-home-index": "^5.1.1",
+    "vona-module-home-user": "^5.1.1"
   },
-  "title": "a-home"
+  "title": "a-home",
+  "gitHead": "991189da4443b789fcf77872990b901ccf43bccb"
 }

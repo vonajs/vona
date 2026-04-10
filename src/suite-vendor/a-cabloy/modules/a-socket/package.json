@@ -32,7 +32,7 @@
     "postpack": "clean-package restore && npm run clean"
   },
   "dependencies": {
-    "@cabloy/socket": "workspace:^",
+    "@cabloy/socket": "^2.1.1",
     "@types/ws": "^8.18.0",
     "ws": "^8.18.1"
   },
@@ -76,5 +76,6 @@
     "capabilities": {
       "monkey": true
     }
-  }
+  },
+  "gitHead": "991189da4443b789fcf77872990b901ccf43bccb"
 }

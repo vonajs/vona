@@ -1,7 +1,7 @@
 {
   "name": "vona",
   "version": "5.1.1",
-  "gitHead": "0eab9dc4a5622caffe89e7b1b3f02c08ccbc4c4b",
+  "gitHead": "991189da4443b789fcf77872990b901ccf43bccb",
   "description": "Vona is an intuitive, elegant and powerful Node.js framework for rapidly developing enterprise applications of any size",
   "keywords": [
     "framework",

@@ -8,5 +8,6 @@
   "dependencies": {
     "vona-module-a-paypal": "^5.1.1"
   },
-  "title": "a-paypal"
+  "title": "a-paypal",
+  "gitHead": "991189da4443b789fcf77872990b901ccf43bccb"
 }

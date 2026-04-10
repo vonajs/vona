@@ -11,5 +11,6 @@
     "vona-module-auth-simple": "^5.1.1",
     "vona-module-test-auth": "^5.1.1"
   },
-  "title": "a-auth"
+  "title": "a-auth",
+  "gitHead": "991189da4443b789fcf77872990b901ccf43bccb"
 }

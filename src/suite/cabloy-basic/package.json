@@ -12,5 +12,6 @@
     "vona-module-basic-siteadmin": "^5.1.2",
     "vona-suite-a-cabloy": "^5.1.1"
   },
-  "title": "cabloy-basic"
+  "title": "cabloy-basic",
+  "gitHead": "991189da4443b789fcf77872990b901ccf43bccb"
 }

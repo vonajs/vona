@@ -25,5 +25,6 @@
     "globals": "^17.0.0",
     "typescript-eslint": "^8.57.0",
     "vue-eslint-parser": "^10.4.0"
-  }
+  },
+  "gitHead": "991189da4443b789fcf77872990b901ccf43bccb"
 }
