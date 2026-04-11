@@ -68,7 +68,8 @@ export class CliToolsDeps extends BeanCliBase {
         if (fse.existsSync(moduleZovaRestDest)) {
           const statDest = await fse.stat(path.join(moduleZovaRestDest, 'package.json'));
           const statSrc = await fse.stat(path.join(moduleZovaRestSrc, 'package.json'));
-          if (statDest.mtimeMs >= statSrc.mtimeMs) {
+          // diff: 3s
+          if (statDest.mtimeMs + 3000 >= statSrc.mtimeMs) {
             needCopy = false;
           }
         }
