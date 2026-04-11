@@ -19,28 +19,28 @@ importers:
         specifier: ^7.28.0
         version: 7.29.0
       '@cabloy/deps':
-        specifier: ^1.1.1
+        specifier: ^1.1.2
         version: link:packages-utils/deps
       '@cabloy/json5':
-        specifier: ^1.1.1
+        specifier: ^1.1.2
         version: link:packages-utils/json5
       '@cabloy/module-info':
         specifier: ^2.0.0
         version: 2.0.0
       '@cabloy/socket':
-        specifier: ^2.1.1
+        specifier: ^2.1.2
         version: link:packages-utils/socket
       '@cabloy/type-fest':
         specifier: ^5.3.1
         version: 5.3.1
       '@cabloy/utils':
-        specifier: ^2.1.1
+        specifier: ^2.1.2
         version: link:packages-utils/utils
       '@cabloy/word-utils':
         specifier: ^2.0.2
         version: 2.1.7
       '@cabloy/zod-openapi':
-        specifier: ^1.1.1
+        specifier: ^1.1.2
         version: link:packages-utils/zod-openapi
       '@cabloy/zod-to-openapi':
         specifier: ^8.1.5
@@ -94,7 +94,7 @@ importers:
         specifier: ^0.13.1
         version: 0.13.1
       table-identity:
-        specifier: ^1.1.1
+        specifier: ^1.1.2
         version: link:packages-utils/table-identity
       uuid:
         specifier: ^11.0.3
@@ -316,7 +316,7 @@ importers:
         specifier: workspace:^
         version: link:src/suite-vendor/a-captcha/modules/test-captcha
       vona-shared:
-        specifier: ^1.1.1
+        specifier: ^1.1.2
         version: link:packages-vona/vona-shared
       winston:
         specifier: ^3.18.3
@@ -335,7 +335,7 @@ importers:
         version: file:.zova-rest/test-second
     devDependencies:
       '@cabloy/cli':
-        specifier: ^3.1.1
+        specifier: ^3.1.2
         version: link:packages-cli/cabloy-cli
       '@cabloy/lint':
         specifier: workspace:^
@@ -398,7 +398,7 @@ importers:
         specifier: ^5.9.3
         version: 5.9.3
       vona-mock:
-        specifier: ^6.1.1
+        specifier: ^6.1.2
         version: link:packages-vona/vona-mock
       vona-module-a-hmr:
         specifier: workspace:^
