@@ -66,6 +66,9 @@ export class BeanCliBase {
 
   async execute(): Promise<any> {
     const { argv } = this.context;
+    if (['api:default:list', 'front:default:list'].includes(this.cliFullName) && argv._.includes('error')) {
+      throw new Error('internal error');
+    }
     if ((argv as any).flavor) {
       (argv as any).flavor = patchFlavor((argv as any).flavor);
     }

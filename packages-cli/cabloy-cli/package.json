@@ -42,7 +42,7 @@
     "@cabloy/utils": "^2.1.1",
     "@cabloy/word-utils": "^2.0.2",
     "@npmcli/config": "^10.4.2",
-    "@zhennann/common-bin": "^4.0.0",
+    "@zhennann/common-bin": "^4.0.1",
     "@zhennann/ejs": "^3.0.1",
     "boxen": "^4.2.0",
     "chalk": "^3.0.0",
