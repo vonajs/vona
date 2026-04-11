@@ -29,8 +29,8 @@
       "path": "packages-vona/vona-mock",
     },
   ],
-  "include": [".vona/**/*.ts", "src/backend/package.json", "src/backend/config", "src/backend/play", "src/backend/typing", "src/suite/cabloy-start"],
-  "exclude": [],
+  "include": [".vona/**/*.ts", "src/backend/package.json", "src/backend/config", "src/backend/play", "src/backend/typing"],
+  "exclude": ["src/suite/cabloy-start"],
   "ts-node": {
     "swc": true,
   },
