@@ -1,6 +1,6 @@
 {
   "name": "vona-module-a-ssr",
-  "version": "5.1.2",
+  "version": "5.1.3",
   "description": "",
   "keywords": [
     "Vona Module"
@@ -33,7 +33,7 @@
   },
   "dependencies": {
     "http-proxy": "^1.18.1",
-    "vona-module-a-socket": "^5.1.2"
+    "vona-module-a-socket": "^5.1.3"
   },
   "devDependencies": {
     "@types/http-proxy": "^1.17.16",

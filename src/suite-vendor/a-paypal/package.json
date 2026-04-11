@@ -1,12 +1,12 @@
 {
   "name": "vona-suite-a-paypal",
-  "version": "5.1.2",
+  "version": "5.1.3",
   "description": "",
   "author": "",
   "files": [],
   "type": "module",
   "dependencies": {
-    "vona-module-a-paypal": "^5.1.2"
+    "vona-module-a-paypal": "^5.1.3"
   },
   "title": "a-paypal",
   "gitHead": "a79189b882c17af5911573896a781bbb0046d37d"

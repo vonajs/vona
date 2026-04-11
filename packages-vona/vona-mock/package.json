@@ -1,6 +1,6 @@
 {
   "name": "vona-mock",
-  "version": "6.1.2",
+  "version": "6.1.3",
   "gitHead": "a79189b882c17af5911573896a781bbb0046d37d",
   "description": "vona mock",
   "keywords": [
@@ -35,8 +35,8 @@
   },
   "dependencies": {
     "@cabloy/module-info": "^2.0.0",
-    "@cabloy/module-info-pro": "^1.1.2",
-    "vona-core": "^5.1.2"
+    "@cabloy/module-info-pro": "^1.1.3",
+    "vona-core": "^5.1.3"
   },
   "devDependencies": {
     "clean-package": "^2.2.0",

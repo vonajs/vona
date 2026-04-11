@@ -1,6 +1,6 @@
 {
   "name": "vona-module-a-openapi",
-  "version": "5.1.2",
+  "version": "5.1.3",
   "gitHead": "a79189b882c17af5911573896a781bbb0046d37d",
   "description": "",
   "keywords": [
@@ -32,8 +32,8 @@
     "postpack": "clean-package restore && npm run clean"
   },
   "dependencies": {
-    "@cabloy/zod-openapi": "^1.1.2",
-    "@cabloy/zod-query": "^2.1.2",
+    "@cabloy/zod-openapi": "^1.1.3",
+    "@cabloy/zod-query": "^2.1.3",
     "@cabloy/zod-to-openapi": "^8.1.5",
     "@zhennann/currency": "^2.0.0",
     "openapi3-ts": "^4.5.0",
