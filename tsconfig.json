@@ -30,7 +30,7 @@
     },
   ],
   "include": [".vona/**/*.ts", "src/backend/package.json", "src/backend/config", "src/backend/play", "src/backend/typing"],
-  "exclude": ["src/suite/cabloy-start"],
+  "exclude": [],
   "ts-node": {
     "swc": true,
   },

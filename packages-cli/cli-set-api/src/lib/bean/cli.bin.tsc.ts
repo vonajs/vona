@@ -1,10 +1,4 @@
-import type { VonaConfigMeta, VonaMetaFlavor, VonaMetaMode } from '@cabloy/module-info';
-
 import { BeanCliBase } from '@cabloy/cli';
-
-import type { VonaBinConfigOptions } from './toolsBin/types.ts';
-
-import { generateVonaMeta } from './toolsBin/generateVonaMeta.ts';
 
 declare module '@cabloy/cli' {
   interface ICommandArgv {
@@ -23,18 +17,8 @@ export class CliBinTsc extends BeanCliBase {
   }
 
   async _tsc(projectPath: string, force: boolean) {
-    const { argv } = this.context;
-    const mode: VonaMetaMode = 'test';
-    const flavor: VonaMetaFlavor = argv.flavor || 'normal';
-    const configMeta: VonaConfigMeta = { flavor, mode };
-    const configOptions: VonaBinConfigOptions = {
-      appDir: projectPath,
-      runtimeDir: '.vona',
-      workers: 1,
-    };
-    const { modulesMeta } = await generateVonaMeta(configMeta, configOptions);
-    const suiteNames = Object.keys(modulesMeta.suites).filter(suiteName => !modulesMeta.suites[suiteName].info.node_modules);
-    const modulesArray = modulesMeta.modulesArray.filter(item => !item.suite && !item.info.node_modules);
+    const suiteNames = Object.keys(this.modulesMeta.suites).filter(suiteName => !this.modulesMeta.suites[suiteName].info.node_modules);
+    const modulesArray = this.modulesMeta.modulesArray.filter(item => !item.suite && !item.info.node_modules);
     // count
     const count = 1 + suiteNames.length + modulesArray.length;
     // begin
@@ -53,7 +37,7 @@ export class CliBinTsc extends BeanCliBase {
     await this.helper.processHelper.tsc(tscArgs, { cwd: projectPath });
     // suites
     for (const key of suiteNames) {
-      const suite = modulesMeta.suites[key];
+      const suite = this.modulesMeta.suites[key];
       // eslint-disable-next-line
       console.log(`===>  ${++counter}/${count} suite: ${suite.info.originalName}`);
       await this.helper.processHelper.tsc(tscArgs, { cwd: suite.root });
