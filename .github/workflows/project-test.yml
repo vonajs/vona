@@ -24,7 +24,7 @@ jobs:
         with:
           version: 10.19.0
       - run: npm i vona-cli -g
-      - run: vona :create:project vona-test --template=basic
+      - run: vona :create:project vona-test --template=cabloy-basic
       - run: vona :create:module demo-student --suite --ci
         working-directory: vona-test
       - run: pnpm install --no-frozen-lockfile
