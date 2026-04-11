@@ -40,8 +40,7 @@
     "lint:fix": "oxlint --fix"
   },
   "dependencies": {
-    "vona": "workspace:^",
-    "@cabloy/socket": "workspace:^"
+    "vona": "workspace:^"
   },
   "devDependencies": {
     "@cabloy/lint": "workspace:^",
