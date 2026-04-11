@@ -1,6 +1,6 @@
 {
   "name": "vona-suite-cabloy-basic",
-  "version": "5.1.3",
+  "version": "5.1.4",
   "description": "",
   "author": "",
   "files": [],
@@ -9,9 +9,9 @@
     "version": "node ../../../scripts/version-cabloy-basic.ts"
   },
   "dependencies": {
-    "vona-module-basic-siteadmin": "^5.1.3",
-    "vona-suite-a-cabloy": "^5.1.2"
+    "vona-module-basic-siteadmin": "^5.1.4",
+    "vona-suite-a-cabloy": "^5.1.3"
   },
   "title": "cabloy-basic",
-  "gitHead": "991189da4443b789fcf77872990b901ccf43bccb"
+  "gitHead": "a79189b882c17af5911573896a781bbb0046d37d"
 }

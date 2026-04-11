@@ -1,6 +1,6 @@
 {
   "name": "vona-suite-a-home",
-  "version": "5.1.2",
+  "version": "5.1.3",
   "description": "",
   "author": "zhennann",
   "files": [],
@@ -9,10 +9,10 @@
     "version": "node ../../../scripts/version-home.ts"
   },
   "dependencies": {
-    "vona-module-home-base": "^5.1.2",
-    "vona-module-home-index": "^5.1.2",
-    "vona-module-home-user": "^5.1.2"
+    "vona-module-home-base": "^5.1.3",
+    "vona-module-home-index": "^5.1.3",
+    "vona-module-home-user": "^5.1.3"
   },
   "title": "a-home",
-  "gitHead": "991189da4443b789fcf77872990b901ccf43bccb"
+  "gitHead": "a79189b882c17af5911573896a781bbb0046d37d"
 }
