@@ -3,7 +3,7 @@ import chalk from 'chalk';
 import { LEVEL, MESSAGE } from 'triple-beam';
 import * as Winston from 'winston';
 
-import type { ILoggerFormatFilterOpts, ILoggerOptionsClientInfo } from '../../../types/interface/logger.ts';
+import type { ILoggerFormatFilterOpts, ILoggerFormatOpts, ILoggerOptionsClientInfo } from '../../../types/interface/logger.ts';
 
 import { cast } from '../../../types/utils/cast.ts';
 import { useApp } from '../../framework/useApp.ts';
@@ -29,6 +29,10 @@ export const formatLoggerAxiosError = Winston.format((einfo, { stack, cause }: a
   }
   return einfo;
 });
+
+export const formatLoggerErrors = (opts: ILoggerFormatOpts) => {
+  return Winston.format.combine(formatLoggerAxiosError(opts), Winston.format.errors(opts));
+};
 
 export const formatLoggerCtx = Winston.format((info, _opts: any) => {
   const app = useApp();
