@@ -1,6 +1,6 @@
 {
   "name": "vona-module-home-index",
-  "version": "5.1.1",
+  "version": "5.1.2",
   "description": "",
   "keywords": [
     "Vona Module"
@@ -47,5 +47,6 @@
     "dependencies": {
       "a-vona": "5.0.0"
     }
-  }
+  },
+  "gitHead": "991189da4443b789fcf77872990b901ccf43bccb"
 }
