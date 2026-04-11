@@ -1,6 +1,6 @@
 {
   "name": "@cabloy/zod-errors-custom",
-  "version": "2.1.1",
+  "version": "2.1.2",
   "gitHead": "991189da4443b789fcf77872990b901ccf43bccb",
   "description": "zod-errors-custom",
   "keywords": [

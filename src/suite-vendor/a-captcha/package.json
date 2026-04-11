@@ -1,14 +1,14 @@
 {
   "name": "vona-suite-a-captcha",
-  "version": "5.1.1",
+  "version": "5.1.2",
   "description": "",
   "author": "",
   "files": [],
   "type": "module",
   "dependencies": {
-    "vona-module-a-captcha": "^5.1.1",
-    "vona-module-captcha-simple": "^5.1.1",
-    "vona-module-test-captcha": "^5.1.1"
+    "vona-module-a-captcha": "^5.1.2",
+    "vona-module-captcha-simple": "^5.1.2",
+    "vona-module-test-captcha": "^5.1.2"
   },
   "title": "a-captcha",
   "gitHead": "991189da4443b789fcf77872990b901ccf43bccb"

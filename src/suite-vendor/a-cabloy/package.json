@@ -1,19 +1,19 @@
 {
   "name": "vona-suite-a-cabloy",
-  "version": "5.1.1",
+  "version": "5.1.2",
   "gitHead": "991189da4443b789fcf77872990b901ccf43bccb",
   "description": "",
   "author": "",
   "files": [],
   "type": "module",
   "dependencies": {
-    "vona-module-a-cabloy": "^5.1.1",
-    "vona-module-a-datasharding": "^5.1.1",
-    "vona-module-a-datasource": "^5.1.1",
-    "vona-module-a-socket": "^5.1.1",
-    "vona-module-a-ssr": "^5.1.1",
-    "vona-module-a-ssrhmr": "^5.1.1",
-    "vona-module-a-status": "^5.1.1"
+    "vona-module-a-cabloy": "^5.1.2",
+    "vona-module-a-datasharding": "^5.1.2",
+    "vona-module-a-datasource": "^5.1.2",
+    "vona-module-a-socket": "^5.1.2",
+    "vona-module-a-ssr": "^5.1.2",
+    "vona-module-a-ssrhmr": "^5.1.2",
+    "vona-module-a-status": "^5.1.2"
   },
   "title": "a-cabloy"
 }

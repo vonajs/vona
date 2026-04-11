@@ -1,6 +1,6 @@
 {
   "name": "vona-module-auth-simple",
-  "version": "5.1.1",
+  "version": "5.1.2",
   "gitHead": "991189da4443b789fcf77872990b901ccf43bccb",
   "description": "",
   "keywords": [
@@ -32,7 +32,7 @@
     "postpack": "clean-package restore && npm run clean"
   },
   "dependencies": {
-    "password-hash-salt": "^1.1.1"
+    "password-hash-salt": "^1.1.2"
   },
   "devDependencies": {
     "clean-package": "^2.2.0",

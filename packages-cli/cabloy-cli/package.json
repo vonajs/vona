@@ -1,6 +1,6 @@
 {
   "name": "@cabloy/cli",
-  "version": "3.1.1",
+  "version": "3.1.2",
   "gitHead": "991189da4443b789fcf77872990b901ccf43bccb",
   "description": "@cabloy/cli",
   "keywords": [
@@ -36,10 +36,10 @@
   },
   "dependencies": {
     "@babel/parser": "^7.26.5",
-    "@cabloy/module-glob": "^5.3.1",
+    "@cabloy/module-glob": "^5.3.2",
     "@cabloy/module-info": "^2.0.0",
-    "@cabloy/process-helper": "^3.1.1",
-    "@cabloy/utils": "^2.1.1",
+    "@cabloy/process-helper": "^3.1.2",
+    "@cabloy/utils": "^2.1.2",
     "@cabloy/word-utils": "^2.0.2",
     "@npmcli/config": "^10.4.2",
     "@zhennann/common-bin": "^4.0.1",
