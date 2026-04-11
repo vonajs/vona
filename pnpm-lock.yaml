@@ -13,34 +13,34 @@ importers:
   .:
     dependencies:
       '@babel/core':
-        specifier: ^7.28.0
+        specifier: ^7.29.0
         version: 7.29.0
       '@babel/traverse':
-        specifier: ^7.28.0
+        specifier: ^7.29.0
         version: 7.29.0
       '@cabloy/deps':
-        specifier: ^1.1.2
+        specifier: workspace:^
         version: link:packages-utils/deps
       '@cabloy/json5':
-        specifier: ^1.1.2
+        specifier: workspace:^
         version: link:packages-utils/json5
       '@cabloy/module-info':
         specifier: ^2.0.0
         version: 2.0.0
       '@cabloy/socket':
-        specifier: ^2.1.2
+        specifier: workspace:^
         version: link:packages-utils/socket
       '@cabloy/type-fest':
         specifier: ^5.3.1
         version: 5.3.1
       '@cabloy/utils':
-        specifier: ^2.1.2
+        specifier: workspace:^
         version: link:packages-utils/utils
       '@cabloy/word-utils':
-        specifier: ^2.0.2
+        specifier: ^2.1.7
         version: 2.1.7
       '@cabloy/zod-openapi':
-        specifier: ^1.1.2
+        specifier: workspace:^
         version: link:packages-utils/zod-openapi
       '@cabloy/zod-to-openapi':
         specifier: ^8.1.5
@@ -49,7 +49,7 @@ importers:
         specifier: ^1.4.0
         version: 1.4.0(ioredis@5.10.1)
       better-sqlite3:
-        specifier: ^12.5.0
+        specifier: ^12.8.0
         version: 12.8.0
       bignumber.js:
         specifier: ^9.3.1
@@ -58,7 +58,7 @@ importers:
         specifier: ^8.0.1
         version: 8.0.1
       bullmq:
-        specifier: ^5.70.1
+        specifier: ^5.73.4
         version: 5.73.4
       chalk:
         specifier: ^5.6.2
@@ -67,19 +67,19 @@ importers:
         specifier: ^0.6.5
         version: 0.6.5
       fs-extra:
-        specifier: ^11.2.0
+        specifier: ^11.3.4
         version: 11.3.4
       ioredis:
-        specifier: ^5.9.3
+        specifier: ^5.10.1
         version: 5.10.1
       knex:
-        specifier: ^3.1.0
+        specifier: ^3.2.9
         version: 3.2.9(better-sqlite3@12.8.0)
       luxon:
         specifier: ^3.7.2
         version: 3.7.2
       mutate-on-copy:
-        specifier: ^1.0.1
+        specifier: ^1.1.7
         version: 1.1.7
       openapi3-ts:
         specifier: ^4.5.0
@@ -88,16 +88,16 @@ importers:
         specifier: ^1.8.0
         version: 1.8.0
       react:
-        specifier: ^19.2.3
+        specifier: ^19.2.5
         version: 19.2.5
       retry:
         specifier: ^0.13.1
         version: 0.13.1
       table-identity:
-        specifier: ^1.1.2
+        specifier: workspace:^
         version: link:packages-utils/table-identity
       uuid:
-        specifier: ^11.0.3
+        specifier: ^11.1.0
         version: 11.1.0
       vona:
         specifier: workspace:^
@@ -316,41 +316,41 @@ importers:
         specifier: workspace:^
         version: link:src/suite-vendor/a-captcha/modules/test-captcha
       vona-shared:
-        specifier: ^1.1.2
+        specifier: workspace:^
         version: link:packages-vona/vona-shared
       winston:
-        specifier: ^3.18.3
+        specifier: ^3.19.0
         version: 3.19.0
       winston-transport:
         specifier: ^4.9.0
         version: 4.9.0
       zod:
-        specifier: ^4.1.13
+        specifier: ^4.3.6
         version: 4.3.6
       zova-rest-cabloy-basic-admin:
-        specifier: file:./.zova-rest/cabloy-basic-admin
+        specifier: file:.zova-rest/cabloy-basic-admin
         version: file:.zova-rest/cabloy-basic-admin(typescript@5.9.3)
       zova-rest-test-second:
-        specifier: file:./.zova-rest/test-second
+        specifier: file:.zova-rest/test-second
         version: file:.zova-rest/test-second
     devDependencies:
       '@cabloy/cli':
-        specifier: ^3.1.2
+        specifier: workspace:^
         version: link:packages-cli/cabloy-cli
       '@cabloy/lint':
         specifier: workspace:^
         version: link:packages-utils/lint
       '@swc/core':
-        specifier: ^1.14.0
+        specifier: ^1.15.24
         version: 1.15.24(@swc/helpers@0.5.21)
       '@swc/helpers':
-        specifier: ^0.5.17
+        specifier: ^0.5.21
         version: 0.5.21
       '@types/babel__core':
         specifier: ^7.20.5
         version: 7.20.5
       '@types/babel__traverse':
-        specifier: ^7.20.5
+        specifier: ^7.28.0
         version: 7.28.0
       '@types/koa':
         specifier: ^2.15.0
@@ -359,7 +359,7 @@ importers:
         specifier: ^3.7.1
         version: 3.7.1
       '@types/node':
-        specifier: ^22.10.2
+        specifier: ^22.19.17
         version: 22.19.17
       '@types/react':
         specifier: npm:@cabloy/types-react@^19.2.13
@@ -371,16 +371,16 @@ importers:
         specifier: ^7.0.3
         version: 7.0.3
       gogocode:
-        specifier: ^1.0.53
+        specifier: ^1.0.55
         version: 1.0.55(vue@3.5.32(typescript@5.9.3))
       lerna:
-        specifier: ^9.0.3
+        specifier: ^9.0.7
         version: 9.0.7(@swc/core@1.15.24(@swc/helpers@0.5.21))(@types/node@22.19.17)
       oxfmt:
         specifier: ^0.41.0
         version: 0.41.0
       oxlint:
-        specifier: ^1.56.0
+        specifier: ^1.59.0
         version: 1.59.0
       textlint:
         specifier: ^14.8.4
@@ -398,7 +398,7 @@ importers:
         specifier: ^5.9.3
         version: 5.9.3
       vona-mock:
-        specifier: ^6.1.2
+        specifier: workspace:^
         version: link:packages-vona/vona-mock
       vona-module-a-hmr:
         specifier: workspace:^
