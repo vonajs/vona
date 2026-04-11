@@ -32,11 +32,11 @@
     "postpack": "clean-package restore && npm run clean"
   },
   "dependencies": {
-    "bullmq": "^5.70.1"
+    "bullmq": "^5.73.4"
   },
   "devDependencies": {
     "clean-package": "^2.2.0",
-    "rimraf": "^6.0.1"
+    "rimraf": "^6.1.3"
   },
   "clean-package": {
     "indent": 2,

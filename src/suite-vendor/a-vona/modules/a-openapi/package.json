@@ -32,16 +32,16 @@
     "postpack": "clean-package restore && npm run clean"
   },
   "dependencies": {
-    "@cabloy/zod-openapi": "^1.1.3",
-    "@cabloy/zod-query": "^2.1.3",
+    "@cabloy/zod-openapi": "workspace:^",
+    "@cabloy/zod-query": "workspace:^",
     "@cabloy/zod-to-openapi": "^8.1.5",
-    "@zhennann/currency": "^2.0.0",
+    "@zhennann/currency": "^2.0.4",
     "openapi3-ts": "^4.5.0",
-    "zod": "^4.1.13"
+    "zod": "^4.3.6"
   },
   "devDependencies": {
     "clean-package": "^2.2.0",
-    "rimraf": "^6.0.1"
+    "rimraf": "^6.1.3"
   },
   "clean-package": {
     "indent": 2,

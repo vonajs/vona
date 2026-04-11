@@ -43,11 +43,11 @@
     "postpack": "clean-package restore"
   },
   "dependencies": {
-    "@cabloy/extend": "^3.2.3"
+    "@cabloy/extend": "workspace:^"
   },
   "devDependencies": {
     "clean-package": "^2.2.0",
-    "rimraf": "^6.0.1"
+    "rimraf": "^6.1.3"
   },
   "clean-package": {
     "indent": 2,

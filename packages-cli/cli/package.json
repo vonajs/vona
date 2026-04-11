@@ -38,15 +38,15 @@
     "postpack": "clean-package restore"
   },
   "dependencies": {
-    "@cabloy/cli": "^3.1.3",
-    "@cabloy/process-helper": "^3.1.3",
-    "fs-extra": "^11.2.0",
-    "semver": "^7.6.2",
-    "vona-cli-set-api": "^1.1.7"
+    "@cabloy/cli": "workspace:^",
+    "@cabloy/process-helper": "workspace:^",
+    "fs-extra": "^11.3.4",
+    "semver": "^7.7.4",
+    "vona-cli-set-api": "workspace:^"
   },
   "devDependencies": {
     "clean-package": "^2.2.0",
-    "rimraf": "^6.0.1"
+    "rimraf": "^6.1.3"
   },
   "clean-package": {
     "indent": 2,

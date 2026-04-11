@@ -328,10 +328,10 @@ importers:
         specifier: ^4.3.6
         version: 4.3.6
       zova-rest-cabloy-basic-admin:
-        specifier: file:.zova-rest/cabloy-basic-admin
+        specifier: file:./.zova-rest/cabloy-basic-admin
         version: file:.zova-rest/cabloy-basic-admin(typescript@5.9.3)
       zova-rest-test-second:
-        specifier: file:.zova-rest/test-second
+        specifier: file:./.zova-rest/test-second
         version: file:.zova-rest/test-second
     devDependencies:
       '@cabloy/cli':
@@ -425,25 +425,25 @@ importers:
   packages-cli/cabloy-cli:
     dependencies:
       '@babel/parser':
-        specifier: ^7.26.5
+        specifier: ^7.29.2
         version: 7.29.2
       '@cabloy/module-glob':
-        specifier: ^5.3.3
+        specifier: workspace:^
         version: link:../../packages-utils/module-glob
       '@cabloy/module-info':
         specifier: ^2.0.0
         version: 2.0.0
       '@cabloy/process-helper':
-        specifier: ^3.1.3
+        specifier: workspace:^
         version: link:../../packages-utils/process-helper
       '@cabloy/utils':
-        specifier: ^2.1.3
+        specifier: workspace:^
         version: link:../../packages-utils/utils
       '@cabloy/word-utils':
-        specifier: ^2.0.2
+        specifier: ^2.1.7
         version: 2.1.7
       '@npmcli/config':
-        specifier: ^10.4.2
+        specifier: ^10.8.1
         version: 10.8.1
       '@zhennann/common-bin':
         specifier: ^4.0.1
@@ -464,31 +464,31 @@ importers:
         specifier: ^2.2.3
         version: 2.2.3
       enquirer:
-        specifier: ^2.3.6
+        specifier: ^2.4.1
         version: 2.4.1
       fs-extra:
-        specifier: ^11.2.0
+        specifier: ^11.3.4
         version: 11.3.4
       globby:
-        specifier: ^16.0.0
+        specifier: ^16.2.0
         version: 16.2.0
       gogocode:
-        specifier: ^1.0.53
+        specifier: ^1.0.55
         version: 1.0.55(vue@3.5.32(typescript@5.9.3))
       is-type-of:
-        specifier: ^2.1.0
+        specifier: ^2.2.0
         version: 2.2.0
       istextorbinary:
         specifier: ^3.3.0
         version: 3.3.0
       semver:
-        specifier: ^7.6.2
+        specifier: ^7.7.4
         version: 7.7.4
       tmp:
-        specifier: ^0.2.3
+        specifier: ^0.2.5
         version: 0.2.5
       urllib:
-        specifier: ^3.24.0
+        specifier: ^3.27.3
         version: 3.27.3
     devDependencies:
       '@types/fs-extra':
@@ -498,65 +498,65 @@ importers:
         specifier: ^2.2.0
         version: 2.2.0
       rimraf:
-        specifier: ^6.0.1
+        specifier: ^6.1.3
         version: 6.1.3
 
   packages-cli/cli:
     dependencies:
       '@cabloy/cli':
-        specifier: ^3.1.3
+        specifier: workspace:^
         version: link:../cabloy-cli
       '@cabloy/process-helper':
-        specifier: ^3.1.3
+        specifier: workspace:^
         version: link:../../packages-utils/process-helper
       fs-extra:
-        specifier: ^11.2.0
+        specifier: ^11.3.4
         version: 11.3.4
       semver:
-        specifier: ^7.6.2
+        specifier: ^7.7.4
         version: 7.7.4
       vona-cli-set-api:
-        specifier: ^1.1.7
+        specifier: workspace:^
         version: link:../cli-set-api
     devDependencies:
       clean-package:
         specifier: ^2.2.0
         version: 2.2.0
       rimraf:
-        specifier: ^6.0.1
+        specifier: ^6.1.3
         version: 6.1.3
 
   packages-cli/cli-set-api:
     dependencies:
       '@babel/plugin-proposal-decorators':
-        specifier: ^7.25.9
+        specifier: ^7.29.0
         version: 7.29.0(@babel/core@7.29.0)
       '@babel/plugin-transform-class-properties':
-        specifier: ^7.25.9
+        specifier: ^7.28.6
         version: 7.28.6(@babel/core@7.29.0)
       '@babel/plugin-transform-typescript':
-        specifier: ^7.26.8
+        specifier: ^7.28.6
         version: 7.28.6(@babel/core@7.29.0)
       '@cabloy/cli':
-        specifier: ^3.1.3
+        specifier: workspace:^
         version: link:../cabloy-cli
       '@cabloy/dotenv':
-        specifier: ^1.2.3
+        specifier: workspace:^
         version: link:../../packages-utils/dotenv
       '@cabloy/extend':
-        specifier: ^3.2.3
+        specifier: workspace:^
         version: link:../../packages-utils/extend
       '@cabloy/module-glob':
-        specifier: ^5.3.3
+        specifier: workspace:^
         version: link:../../packages-utils/module-glob
       '@cabloy/module-info':
         specifier: ^2.0.0
         version: 2.0.0
       '@cabloy/utils':
-        specifier: ^2.1.3
+        specifier: workspace:^
         version: link:../../packages-utils/utils
       '@cabloy/word-utils':
-        specifier: ^2.0.2
+        specifier: ^2.1.7
         version: 2.1.7
       '@lcov-viewer/cli':
         specifier: ^1.3.0
@@ -565,19 +565,19 @@ importers:
         specifier: ^5.1.1
         version: 5.1.1(rollup@4.60.1)
       '@rollup/plugin-babel':
-        specifier: ^6.0.4
+        specifier: ^6.1.0
         version: 6.1.0(@babel/core@7.29.0)(@types/babel__core@7.20.5)(rollup@4.60.1)
       '@rollup/plugin-commonjs':
-        specifier: ^28.0.8
+        specifier: ^28.0.9
         version: 28.0.9(rollup@4.60.1)
       '@rollup/plugin-json':
         specifier: ^6.1.0
         version: 6.1.0(rollup@4.60.1)
       '@rollup/plugin-node-resolve':
-        specifier: ^16.0.0
+        specifier: ^16.0.3
         version: 16.0.3(rollup@4.60.1)
       '@rollup/plugin-replace':
-        specifier: ^6.0.2
+        specifier: ^6.0.3
         version: 6.0.3(rollup@4.60.1)
       '@rollup/plugin-terser':
         specifier: ^0.4.4
@@ -589,7 +589,7 @@ importers:
         specifier: ^0.3.2
         version: 0.3.2(@babel/core@7.29.0)(@babel/traverse@7.29.0)
       babel-plugin-vona-bean-module:
-        specifier: ^1.1.3
+        specifier: workspace:^
         version: link:../../packages-utils/babel-plugin-vona-bean-module
       chalk:
         specifier: ^3.0.0
@@ -598,43 +598,43 @@ importers:
         specifier: ^0.6.5
         version: 0.6.5
       compressing:
-        specifier: ^1.10.0
+        specifier: ^1.10.4
         version: 1.10.4
       fs-extra:
-        specifier: ^11.2.0
+        specifier: ^11.3.4
         version: 11.3.4
       globby:
-        specifier: ^16.0.0
+        specifier: ^16.2.0
         version: 16.2.0
       gogocode:
-        specifier: ^1.0.53
+        specifier: ^1.0.55
         version: 1.0.55(vue@3.5.32(typescript@5.9.3))
       lodash:
-        specifier: ^4.17.21
+        specifier: ^4.18.1
         version: 4.18.1
       nodemon:
-        specifier: ^3.1.9
+        specifier: ^3.1.14
         version: 3.1.14
       randomatic:
         specifier: ^3.1.1
         version: 3.1.1
       rimraf:
-        specifier: ^6.0.1
+        specifier: ^6.1.3
         version: 6.1.3
       rollup:
-        specifier: ^4.34.8
+        specifier: ^4.60.1
         version: 4.60.1
       ts-node-maintained:
         specifier: ^10.9.6
-        version: 10.9.6(@swc/core@1.15.24(@swc/helpers@0.5.21))(@types/node@22.19.17)(typescript@5.9.3)
+        version: 10.9.6(@swc/core@1.15.24(@swc/helpers@0.5.21))(@types/node@25.6.0)(typescript@5.9.3)
       urllib:
-        specifier: ^4.6.11
+        specifier: ^4.9.0
         version: 4.9.0
       uuid:
         specifier: ^11.1.0
         version: 11.1.0
       vona-core:
-        specifier: ^5.1.3
+        specifier: workspace:^
         version: link:../../packages-vona/vona-core
       why-is-node-running:
         specifier: ^3.2.2
@@ -650,48 +650,48 @@ importers:
   packages-docs:
     devDependencies:
       vitepress:
-        specifier: ^1.1.4
-        version: 1.6.4(@algolia/client-search@5.50.1)(@cabloy/types-react@19.2.13)(@types/node@22.19.17)(axios@1.15.0)(change-case@5.4.4)(postcss@8.5.9)(react@19.2.5)(search-insights@2.17.3)(terser@5.46.1)(typescript@5.9.3)
+        specifier: ^1.6.4
+        version: 1.6.4(@algolia/client-search@5.50.1)(@cabloy/types-react@19.2.13)(@types/node@25.6.0)(axios@1.15.0)(change-case@5.4.4)(postcss@8.5.9)(react@19.2.5)(search-insights@2.17.3)(terser@5.46.1)(typescript@5.9.3)
 
   packages-utils/babel-plugin-vona-bean-module:
     dependencies:
       '@babel/core':
-        specifier: ^7.28.0
+        specifier: ^7.29.0
         version: 7.29.0
       '@babel/traverse':
-        specifier: ^7.28.0
+        specifier: ^7.29.0
         version: 7.29.0
       '@cabloy/module-info':
         specifier: ^2.0.0
         version: 2.0.0
       '@cabloy/word-utils':
-        specifier: ^2.0.2
+        specifier: ^2.1.7
         version: 2.1.7
     devDependencies:
       '@types/babel__core':
         specifier: ^7.20.5
         version: 7.20.5
       '@types/babel__traverse':
-        specifier: ^7.20.5
+        specifier: ^7.28.0
         version: 7.28.0
       clean-package:
         specifier: ^2.2.0
         version: 2.2.0
       rimraf:
-        specifier: ^6.0.1
+        specifier: ^6.1.3
         version: 6.1.3
 
   packages-utils/cascade-extend:
     dependencies:
       '@cabloy/extend':
-        specifier: ^3.2.3
+        specifier: workspace:^
         version: link:../extend
     devDependencies:
       clean-package:
         specifier: ^2.2.0
         version: 2.2.0
       rimraf:
-        specifier: ^6.0.1
+        specifier: ^6.1.3
         version: 6.1.3
 
   packages-utils/compose:
@@ -700,7 +700,7 @@ importers:
         specifier: ^2.2.0
         version: 2.2.0
       rimraf:
-        specifier: ^6.0.1
+        specifier: ^6.1.3
         version: 6.1.3
 
   packages-utils/deps:
@@ -709,29 +709,29 @@ importers:
         specifier: ^2.2.0
         version: 2.2.0
       rimraf:
-        specifier: ^6.0.1
+        specifier: ^6.1.3
         version: 6.1.3
 
   packages-utils/dotenv:
     dependencies:
       cascade-extend:
-        specifier: ^2.2.3
+        specifier: workspace:^
         version: link:../cascade-extend
       dotenv:
-        specifier: ^16.4.5
+        specifier: ^16.6.1
         version: 16.6.1
       dotenv-expand:
-        specifier: ^11.0.6
+        specifier: ^11.0.7
         version: 11.0.7
       globby:
-        specifier: ^16.0.0
+        specifier: ^16.2.0
         version: 16.2.0
     devDependencies:
       clean-package:
         specifier: ^2.2.0
         version: 2.2.0
       rimraf:
-        specifier: ^6.0.1
+        specifier: ^6.1.3
         version: 6.1.3
 
   packages-utils/extend:
@@ -740,32 +740,32 @@ importers:
         specifier: ^2.2.0
         version: 2.2.0
       rimraf:
-        specifier: ^6.0.1
+        specifier: ^6.1.3
         version: 6.1.3
 
   packages-utils/json5:
     dependencies:
       json5:
-        specifier: ^2.1.1
+        specifier: ^2.2.3
         version: 2.2.3
     devDependencies:
       clean-package:
         specifier: ^2.2.0
         version: 2.2.0
       rimraf:
-        specifier: ^6.0.1
+        specifier: ^6.1.3
         version: 6.1.3
 
   packages-utils/lint:
     dependencies:
       '@antfu/eslint-config':
-        specifier: ^7.7.2
+        specifier: ^7.7.3
         version: 7.7.3(@eslint/json@1.2.0)(@typescript-eslint/rule-tester@8.58.1(eslint@10.2.0)(typescript@5.9.3))(@typescript-eslint/typescript-estree@8.58.1(typescript@5.9.3))(@typescript-eslint/utils@8.58.1(eslint@10.2.0)(typescript@5.9.3))(@vue/compiler-sfc@3.5.32)(eslint@10.2.0)(oxlint@1.59.0)(typescript@5.9.3)
       '@e18e/eslint-plugin':
         specifier: ^0.2.0
         version: 0.2.0(eslint@10.2.0)(oxlint@1.59.0)
       '@eslint/json':
-        specifier: ^1.1.0
+        specifier: ^1.2.0
         version: 1.2.0
       '@eslint/markdown':
         specifier: ^7.5.1
@@ -774,7 +774,7 @@ importers:
         specifier: ^5.10.0
         version: 5.10.0(eslint@10.2.0)
       '@typescript-eslint/parser':
-        specifier: ^8.57.0
+        specifier: ^8.58.1
         version: 8.58.1(eslint@10.2.0)(typescript@5.9.3)
       eslint-plugin-eslint-comments:
         specifier: ^3.2.0
@@ -783,10 +783,10 @@ importers:
         specifier: ^10.8.0
         version: 10.8.0(@stylistic/eslint-plugin@5.10.0(eslint@10.2.0))(@typescript-eslint/parser@8.58.1(eslint@10.2.0)(typescript@5.9.3))(eslint@10.2.0)(vue-eslint-parser@10.4.0(eslint@10.2.0))
       globals:
-        specifier: ^17.0.0
+        specifier: ^17.4.0
         version: 17.4.0
       typescript-eslint:
-        specifier: ^8.57.0
+        specifier: ^8.58.1
         version: 8.58.1(eslint@10.2.0)(typescript@5.9.3)
       vue-eslint-parser:
         specifier: ^10.4.0
@@ -798,7 +798,7 @@ importers:
         specifier: ^2.2.0
         version: 2.2.0
       rimraf:
-        specifier: ^6.0.1
+        specifier: ^6.1.3
         version: 6.1.3
 
   packages-utils/module-glob:
@@ -807,7 +807,7 @@ importers:
         specifier: ^2.0.0
         version: 2.0.0
       '@cabloy/utils':
-        specifier: ^2.1.3
+        specifier: workspace:^
         version: link:../utils
       boxen:
         specifier: ^4.2.0
@@ -816,20 +816,20 @@ importers:
         specifier: ^3.0.0
         version: 3.0.0
       fs-extra:
-        specifier: ^11.3.0
+        specifier: ^11.3.4
         version: 11.3.4
       globby:
-        specifier: ^16.0.0
+        specifier: ^16.2.0
         version: 16.2.0
       semver:
-        specifier: ^7.7.1
+        specifier: ^7.7.4
         version: 7.7.4
     devDependencies:
       clean-package:
         specifier: ^2.2.0
         version: 2.2.0
       rimraf:
-        specifier: ^6.0.1
+        specifier: ^6.1.3
         version: 6.1.3
 
   packages-utils/module-info-pro:
@@ -845,7 +845,7 @@ importers:
         specifier: ^2.2.0
         version: 2.2.0
       rimraf:
-        specifier: ^6.0.1
+        specifier: ^6.1.3
         version: 6.1.3
 
   packages-utils/password-hash-salt:
@@ -854,7 +854,7 @@ importers:
         specifier: ^2.2.0
         version: 2.2.0
       rimraf:
-        specifier: ^6.0.1
+        specifier: ^6.1.3
         version: 6.1.3
 
   packages-utils/process-helper:
@@ -863,7 +863,7 @@ importers:
         specifier: ^2.2.0
         version: 2.2.0
       rimraf:
-        specifier: ^6.0.1
+        specifier: ^6.1.3
         version: 6.1.3
 
   packages-utils/socket:
@@ -872,7 +872,7 @@ importers:
         specifier: ^2.2.0
         version: 2.2.0
       rimraf:
-        specifier: ^6.0.1
+        specifier: ^6.1.3
         version: 6.1.3
 
   packages-utils/table-identity:
@@ -881,7 +881,7 @@ importers:
         specifier: ^2.2.0
         version: 2.2.0
       rimraf:
-        specifier: ^6.0.1
+        specifier: ^6.1.3
         version: 6.1.3
 
   packages-utils/utils:
@@ -890,10 +890,10 @@ importers:
         specifier: ^2.0.0
         version: 2.0.0
       '@cabloy/word-utils':
-        specifier: ^2.0.2
+        specifier: ^2.1.7
         version: 2.1.7
       '@marcbachmann/cel-js':
-        specifier: ^7.2.0
+        specifier: ^7.6.0
         version: 7.6.0
       object-hash:
         specifier: ^3.0.0
@@ -903,20 +903,20 @@ importers:
         specifier: ^2.2.0
         version: 2.2.0
       rimraf:
-        specifier: ^6.0.1
+        specifier: ^6.1.3
         version: 6.1.3
 
   packages-utils/zod-errors-custom:
     dependencies:
       '@cabloy/word-utils':
-        specifier: ^2.0.2
+        specifier: ^2.1.7
         version: 2.1.7
     devDependencies:
       clean-package:
         specifier: ^2.2.0
         version: 2.2.0
       rimraf:
-        specifier: ^6.0.1
+        specifier: ^6.1.3
         version: 6.1.3
 
   packages-utils/zod-openapi:
@@ -929,7 +929,7 @@ importers:
         specifier: ^2.2.0
         version: 2.2.0
       rimraf:
-        specifier: ^6.0.1
+        specifier: ^6.1.3
         version: 6.1.3
 
   packages-utils/zod-query:
@@ -938,71 +938,71 @@ importers:
         specifier: ^2.2.0
         version: 2.2.0
       rimraf:
-        specifier: ^6.0.1
+        specifier: ^6.1.3
         version: 6.1.3
 
   packages-vona/vona:
     dependencies:
       vona-core:
-        specifier: ^5.1.3
+        specifier: workspace:^
         version: link:../vona-core
       vona-suite-a-auth:
-        specifier: ^5.1.3
+        specifier: workspace:^
         version: link:../../src/suite-vendor/a-auth
       vona-suite-a-captcha:
-        specifier: ^5.1.3
+        specifier: workspace:^
         version: link:../../src/suite-vendor/a-captcha
       vona-suite-a-vona:
-        specifier: ^5.1.3
+        specifier: workspace:^
         version: link:../../src/suite-vendor/a-vona
     devDependencies:
       clean-package:
         specifier: ^2.2.0
         version: 2.2.0
       fs-extra:
-        specifier: ^11.2.0
+        specifier: ^11.3.4
         version: 11.3.4
       rimraf:
-        specifier: ^6.0.1
+        specifier: ^6.1.3
         version: 6.1.3
 
   packages-vona/vona-core:
     dependencies:
       '@cabloy/compose':
-        specifier: ^2.1.3
+        specifier: workspace:^
         version: link:../../packages-utils/compose
       '@cabloy/extend':
-        specifier: ^3.2.3
+        specifier: workspace:^
         version: link:../../packages-utils/extend
       '@cabloy/json5':
-        specifier: ^1.1.3
+        specifier: workspace:^
         version: link:../../packages-utils/json5
       '@cabloy/localeutil':
-        specifier: ^2.1.3
+        specifier: workspace:^
         version: link:../../packages-utils/localeutil
       '@cabloy/module-info':
         specifier: ^2.0.0
         version: 2.0.0
       '@cabloy/module-info-pro':
-        specifier: ^1.1.3
+        specifier: workspace:^
         version: link:../../packages-utils/module-info-pro
       '@cabloy/type-fest':
         specifier: ^5.3.1
         version: 5.3.1
       '@cabloy/utils':
-        specifier: ^2.1.3
+        specifier: workspace:^
         version: link:../../packages-utils/utils
       '@cabloy/word-utils':
-        specifier: ^2.0.2
+        specifier: ^2.1.7
         version: 2.1.7
       '@cabloy/zod-errors-custom':
-        specifier: ^2.1.3
+        specifier: workspace:^
         version: link:../../packages-utils/zod-errors-custom
       '@cabloy/zod-openapi':
-        specifier: ^1.1.3
+        specifier: workspace:^
         version: link:../../packages-utils/zod-openapi
       '@cabloy/zod-query':
-        specifier: ^2.1.3
+        specifier: workspace:^
         version: link:../../packages-utils/zod-query
       '@cabloy/zod-to-openapi':
         specifier: ^8.1.5
@@ -1011,16 +1011,16 @@ importers:
         specifier: npm:@cabloy/types-react@^19.2.13
         version: '@cabloy/types-react@19.2.13'
       chalk:
-        specifier: ^5.3.0
+        specifier: ^5.6.2
         version: 5.6.2
       fs-extra:
         specifier: ^10.1.0
         version: 10.1.0
       koa:
-        specifier: ^3.0.0
+        specifier: ^3.2.0
         version: 3.2.0
       react:
-        specifier: ^19.2.3
+        specifier: ^19.2.5
         version: 19.2.5
       reflect-metadata:
         specifier: ^0.2.2
@@ -1032,10 +1032,10 @@ importers:
         specifier: ^1.4.1
         version: 1.4.1
       uuid:
-        specifier: ^11.0.3
+        specifier: ^11.1.0
         version: 11.1.0
       winston:
-        specifier: ^3.18.3
+        specifier: ^3.19.0
         version: 3.19.0
       winston-daily-rotate-file:
         specifier: ^5.0.0
@@ -1044,7 +1044,7 @@ importers:
         specifier: ^4.9.0
         version: 4.9.0
       zod:
-        specifier: ^4.1.5
+        specifier: ^4.3.6
         version: 4.3.6
     devDependencies:
       '@types/koa':
@@ -1057,7 +1057,7 @@ importers:
         specifier: ^2.2.0
         version: 2.2.0
       rimraf:
-        specifier: ^6.0.1
+        specifier: ^6.1.3
         version: 6.1.3
 
   packages-vona/vona-mock:
@@ -1066,17 +1066,17 @@ importers:
         specifier: ^2.0.0
         version: 2.0.0
       '@cabloy/module-info-pro':
-        specifier: ^1.1.3
+        specifier: workspace:^
         version: link:../../packages-utils/module-info-pro
       vona-core:
-        specifier: ^5.1.3
+        specifier: workspace:^
         version: link:../vona-core
     devDependencies:
       clean-package:
         specifier: ^2.2.0
         version: 2.2.0
       rimraf:
-        specifier: ^6.0.1
+        specifier: ^6.1.3
         version: 6.1.3
 
   packages-vona/vona-shared:
@@ -1085,22 +1085,22 @@ importers:
         specifier: ^2.2.0
         version: 2.2.0
       rimraf:
-        specifier: ^6.0.1
+        specifier: ^6.1.3
         version: 6.1.3
 
   src/suite-vendor/a-auth:
     dependencies:
       vona-module-a-auth:
-        specifier: ^5.1.3
+        specifier: workspace:^
         version: link:modules/a-auth
       vona-module-auth-github:
-        specifier: ^5.1.3
+        specifier: workspace:^
         version: link:modules/auth-github
       vona-module-auth-simple:
-        specifier: ^5.1.3
+        specifier: workspace:^
         version: link:modules/auth-simple
       vona-module-test-auth:
-        specifier: ^5.1.3
+        specifier: workspace:^
         version: link:modules/test-auth
 
   src/suite-vendor/a-auth/modules/a-auth:
@@ -1113,7 +1113,7 @@ importers:
         specifier: ^2.2.0
         version: 2.2.0
       rimraf:
-        specifier: ^6.0.1
+        specifier: ^6.1.3
         version: 6.1.3
 
   src/suite-vendor/a-auth/modules/auth-github:
@@ -1126,20 +1126,20 @@ importers:
         specifier: ^2.2.0
         version: 2.2.0
       rimraf:
-        specifier: ^6.0.1
+        specifier: ^6.1.3
         version: 6.1.3
 
   src/suite-vendor/a-auth/modules/auth-simple:
     dependencies:
       password-hash-salt:
-        specifier: ^1.1.3
+        specifier: workspace:^
         version: link:../../../../../packages-utils/password-hash-salt
     devDependencies:
       clean-package:
         specifier: ^2.2.0
         version: 2.2.0
       rimraf:
-        specifier: ^6.0.1
+        specifier: ^6.1.3
         version: 6.1.3
 
   src/suite-vendor/a-auth/modules/test-auth:
@@ -1148,31 +1148,31 @@ importers:
         specifier: ^2.2.0
         version: 2.2.0
       rimraf:
-        specifier: ^6.0.1
+        specifier: ^6.1.3
         version: 6.1.3
 
   src/suite-vendor/a-cabloy:
     dependencies:
       vona-module-a-cabloy:
-        specifier: ^5.1.3
+        specifier: workspace:^
         version: link:modules/a-cabloy
       vona-module-a-datasharding:
-        specifier: ^5.1.3
+        specifier: workspace:^
         version: link:modules/a-datasharding
       vona-module-a-datasource:
-        specifier: ^5.1.3
+        specifier: workspace:^
         version: link:modules/a-datasource
       vona-module-a-socket:
-        specifier: ^5.1.3
+        specifier: workspace:^
         version: link:modules/a-socket
       vona-module-a-ssr:
-        specifier: ^5.1.3
+        specifier: workspace:^
         version: link:modules/a-ssr
       vona-module-a-ssrhmr:
-        specifier: ^5.1.3
+        specifier: workspace:^
         version: link:modules/a-ssrhmr
       vona-module-a-status:
-        specifier: ^5.1.3
+        specifier: workspace:^
         version: link:modules/a-status
 
   src/suite-vendor/a-cabloy/modules/a-cabloy:
@@ -1181,7 +1181,7 @@ importers:
         specifier: ^2.2.0
         version: 2.2.0
       rimraf:
-        specifier: ^6.0.1
+        specifier: ^6.1.3
         version: 6.1.3
 
   src/suite-vendor/a-cabloy/modules/a-datasharding:
@@ -1190,7 +1190,7 @@ importers:
         specifier: ^2.2.0
         version: 2.2.0
       rimraf:
-        specifier: ^6.0.1
+        specifier: ^6.1.3
         version: 6.1.3
 
   src/suite-vendor/a-cabloy/modules/a-datasource:
@@ -1199,26 +1199,26 @@ importers:
         specifier: ^2.2.0
         version: 2.2.0
       rimraf:
-        specifier: ^6.0.1
+        specifier: ^6.1.3
         version: 6.1.3
 
   src/suite-vendor/a-cabloy/modules/a-socket:
     dependencies:
       '@cabloy/socket':
-        specifier: ^2.1.3
+        specifier: workspace:^
         version: link:../../../../../packages-utils/socket
       '@types/ws':
-        specifier: ^8.18.0
+        specifier: ^8.18.1
         version: 8.18.1
       ws:
-        specifier: ^8.18.1
+        specifier: ^8.20.0
         version: 8.20.0
     devDependencies:
       clean-package:
         specifier: ^2.2.0
         version: 2.2.0
       rimraf:
-        specifier: ^6.0.1
+        specifier: ^6.1.3
         version: 6.1.3
 
   src/suite-vendor/a-cabloy/modules/a-ssr:
@@ -1227,17 +1227,17 @@ importers:
         specifier: ^1.18.1
         version: 1.18.1
       vona-module-a-socket:
-        specifier: ^5.1.3
+        specifier: workspace:^
         version: link:../a-socket
     devDependencies:
       '@types/http-proxy':
-        specifier: ^1.17.16
+        specifier: ^1.17.17
         version: 1.17.17
       clean-package:
         specifier: ^2.2.0
         version: 2.2.0
       rimraf:
-        specifier: ^6.0.1
+        specifier: ^6.1.3
         version: 6.1.3
 
   src/suite-vendor/a-cabloy/modules/a-ssrhmr:
@@ -1246,7 +1246,7 @@ importers:
         specifier: ^2.2.0
         version: 2.2.0
       rimraf:
-        specifier: ^6.0.1
+        specifier: ^6.1.3
         version: 6.1.3
 
   src/suite-vendor/a-cabloy/modules/a-status:
@@ -1255,7 +1255,7 @@ importers:
         specifier: ^2.2.0
         version: 2.2.0
       rimraf:
-        specifier: ^6.0.1
+        specifier: ^6.1.3
         version: 6.1.3
 
   src/suite-vendor/a-cabloy/modules/test-cabloy:
@@ -1264,20 +1264,20 @@ importers:
         specifier: ^2.2.0
         version: 2.2.0
       rimraf:
-        specifier: ^6.0.1
+        specifier: ^6.1.3
         version: 6.1.3
 
   src/suite-vendor/a-cabloy/modules/test-rest:
     dependencies:
       '@faker-js/faker':
-        specifier: ^10.0.0
+        specifier: ^10.4.0
         version: 10.4.0
     devDependencies:
       clean-package:
         specifier: ^2.2.0
         version: 2.2.0
       rimraf:
-        specifier: ^6.0.1
+        specifier: ^6.1.3
         version: 6.1.3
 
   src/suite-vendor/a-cabloy/modules/test-ssr:
@@ -1286,19 +1286,19 @@ importers:
         specifier: ^2.2.0
         version: 2.2.0
       rimraf:
-        specifier: ^6.0.1
+        specifier: ^6.1.3
         version: 6.1.3
 
   src/suite-vendor/a-captcha:
     dependencies:
       vona-module-a-captcha:
-        specifier: ^5.1.3
+        specifier: workspace:^
         version: link:modules/a-captcha
       vona-module-captcha-simple:
-        specifier: ^5.1.3
+        specifier: workspace:^
         version: link:modules/captcha-simple
       vona-module-test-captcha:
-        specifier: ^5.1.3
+        specifier: workspace:^
         version: link:modules/test-captcha
 
   src/suite-vendor/a-captcha/modules/a-captcha:
@@ -1307,7 +1307,7 @@ importers:
         specifier: ^2.2.0
         version: 2.2.0
       rimraf:
-        specifier: ^6.0.1
+        specifier: ^6.1.3
         version: 6.1.3
 
   src/suite-vendor/a-captcha/modules/captcha-simple:
@@ -1326,7 +1326,7 @@ importers:
         specifier: ^2.2.0
         version: 2.2.0
       rimraf:
-        specifier: ^6.0.1
+        specifier: ^6.1.3
         version: 6.1.3
 
   src/suite-vendor/a-captcha/modules/test-captcha:
@@ -1335,13 +1335,13 @@ importers:
         specifier: ^2.2.0
         version: 2.2.0
       rimraf:
-        specifier: ^6.0.1
+        specifier: ^6.1.3
         version: 6.1.3
 
   src/suite-vendor/a-paypal:
     dependencies:
       vona-module-a-paypal:
-        specifier: ^5.1.3
+        specifier: workspace:^
         version: link:modules/a-paypal
 
   src/suite-vendor/a-paypal/modules/a-paypal:
@@ -1354,172 +1354,172 @@ importers:
         specifier: ^2.2.0
         version: 2.2.0
       rimraf:
-        specifier: ^6.0.1
+        specifier: ^6.1.3
         version: 6.1.3
 
   src/suite-vendor/a-vona:
     dependencies:
       vona-module-a-actions:
-        specifier: ^5.1.3
+        specifier: workspace:^
         version: link:modules/a-actions
       vona-module-a-aspect:
-        specifier: ^5.1.3
+        specifier: workspace:^
         version: link:modules/a-aspect
       vona-module-a-aspectutils:
-        specifier: ^5.1.3
+        specifier: workspace:^
         version: link:modules/a-aspectutils
       vona-module-a-bean:
-        specifier: ^5.1.3
+        specifier: workspace:^
         version: link:modules/a-bean
       vona-module-a-beanmutate:
-        specifier: ^5.1.3
+        specifier: workspace:^
         version: link:modules/a-beanmutate
       vona-module-a-body:
-        specifier: ^5.1.3
+        specifier: workspace:^
         version: link:modules/a-body
       vona-module-a-broadcast:
-        specifier: ^5.1.3
+        specifier: workspace:^
         version: link:modules/a-broadcast
       vona-module-a-cache:
-        specifier: ^5.1.3
+        specifier: workspace:^
         version: link:modules/a-cache
       vona-module-a-caching:
-        specifier: ^5.1.3
+        specifier: workspace:^
         version: link:modules/a-caching
       vona-module-a-core:
-        specifier: ^5.1.3
+        specifier: workspace:^
         version: link:modules/a-core
       vona-module-a-election:
-        specifier: ^5.1.3
+        specifier: workspace:^
         version: link:modules/a-election
       vona-module-a-error:
-        specifier: ^5.1.3
+        specifier: workspace:^
         version: link:modules/a-error
       vona-module-a-event:
-        specifier: ^5.1.3
+        specifier: workspace:^
         version: link:modules/a-event
       vona-module-a-executor:
-        specifier: ^5.1.3
+        specifier: workspace:^
         version: link:modules/a-executor
       vona-module-a-hmr:
-        specifier: ^5.1.3
+        specifier: workspace:^
         version: link:modules/a-hmr
       vona-module-a-hmrbase:
-        specifier: ^5.1.3
+        specifier: workspace:^
         version: link:modules/a-hmrbase
       vona-module-a-index:
-        specifier: ^5.1.3
+        specifier: workspace:^
         version: link:modules/a-index
       vona-module-a-instance:
-        specifier: ^5.1.3
+        specifier: workspace:^
         version: link:modules/a-instance
       vona-module-a-jwt:
-        specifier: ^5.1.3
+        specifier: workspace:^
         version: link:modules/a-jwt
       vona-module-a-locale:
-        specifier: ^5.1.3
+        specifier: workspace:^
         version: link:modules/a-locale
       vona-module-a-logger:
-        specifier: ^5.1.3
+        specifier: workspace:^
         version: link:modules/a-logger
       vona-module-a-mail:
-        specifier: ^5.1.3
+        specifier: workspace:^
         version: link:modules/a-mail
       vona-module-a-mailconfirm:
-        specifier: ^5.1.3
+        specifier: workspace:^
         version: link:modules/a-mailconfirm
       vona-module-a-menu:
-        specifier: ^5.1.3
+        specifier: workspace:^
         version: link:modules/a-menu
       vona-module-a-meta:
-        specifier: ^5.1.3
+        specifier: workspace:^
         version: link:modules/a-meta
       vona-module-a-onion:
-        specifier: ^5.1.3
+        specifier: workspace:^
         version: link:modules/a-onion
       vona-module-a-openapi:
-        specifier: ^5.1.3
+        specifier: workspace:^
         version: link:modules/a-openapi
       vona-module-a-openapischema:
-        specifier: ^5.1.3
+        specifier: workspace:^
         version: link:modules/a-openapischema
       vona-module-a-openapiutils:
-        specifier: ^5.1.3
+        specifier: workspace:^
         version: link:modules/a-openapiutils
       vona-module-a-orm:
-        specifier: ^5.1.3
+        specifier: workspace:^
         version: link:modules/a-orm
       vona-module-a-ormdialect:
-        specifier: ^5.1.3
+        specifier: workspace:^
         version: link:modules/a-ormdialect
       vona-module-a-ormutils:
-        specifier: ^5.1.3
+        specifier: workspace:^
         version: link:modules/a-ormutils
       vona-module-a-permission:
-        specifier: ^5.1.3
+        specifier: workspace:^
         version: link:modules/a-permission
       vona-module-a-play:
-        specifier: ^5.1.3
+        specifier: workspace:^
         version: link:modules/a-play
       vona-module-a-printtip:
-        specifier: ^5.1.3
+        specifier: workspace:^
         version: link:modules/a-printtip
       vona-module-a-queue:
-        specifier: ^5.1.3
+        specifier: workspace:^
         version: link:modules/a-queue
       vona-module-a-redis:
-        specifier: ^5.1.3
+        specifier: workspace:^
         version: link:modules/a-redis
       vona-module-a-redlock:
-        specifier: ^5.1.3
+        specifier: workspace:^
         version: link:modules/a-redlock
       vona-module-a-runtime:
-        specifier: ^5.1.3
+        specifier: workspace:^
         version: link:modules/a-runtime
       vona-module-a-schedule:
-        specifier: ^5.1.3
+        specifier: workspace:^
         version: link:modules/a-schedule
       vona-module-a-security:
-        specifier: ^5.1.3
+        specifier: workspace:^
         version: link:modules/a-security
       vona-module-a-serialization:
-        specifier: ^5.1.3
+        specifier: workspace:^
         version: link:modules/a-serialization
       vona-module-a-startup:
-        specifier: ^5.1.3
+        specifier: workspace:^
         version: link:modules/a-startup
       vona-module-a-static:
-        specifier: ^5.1.3
+        specifier: workspace:^
         version: link:modules/a-static
       vona-module-a-summer:
-        specifier: ^5.1.3
+        specifier: workspace:^
         version: link:modules/a-summer
       vona-module-a-swagger:
-        specifier: ^5.1.3
+        specifier: workspace:^
         version: link:modules/a-swagger
       vona-module-a-upload:
-        specifier: ^5.1.3
+        specifier: workspace:^
         version: link:modules/a-upload
       vona-module-a-user:
-        specifier: ^5.1.3
+        specifier: workspace:^
         version: link:modules/a-user
       vona-module-a-validation:
-        specifier: ^5.1.3
+        specifier: workspace:^
         version: link:modules/a-validation
       vona-module-a-version:
-        specifier: ^5.1.3
+        specifier: workspace:^
         version: link:modules/a-version
       vona-module-a-vona:
-        specifier: ^5.1.3
+        specifier: workspace:^
         version: link:modules/a-vona
       vona-module-a-web:
-        specifier: ^5.1.3
+        specifier: workspace:^
         version: link:modules/a-web
       vona-module-a-worker:
-        specifier: ^5.1.3
+        specifier: workspace:^
         version: link:modules/a-worker
       vona-module-a-zod:
-        specifier: ^5.1.3
+        specifier: workspace:^
         version: link:modules/a-zod
 
   src/suite-vendor/a-vona/modules/a-actions:
@@ -1528,7 +1528,7 @@ importers:
         specifier: ^2.2.0
         version: 2.2.0
       rimraf:
-        specifier: ^6.0.1
+        specifier: ^6.1.3
         version: 6.1.3
 
   src/suite-vendor/a-vona/modules/a-aspect:
@@ -1537,7 +1537,7 @@ importers:
         specifier: ^2.2.0
         version: 2.2.0
       rimraf:
-        specifier: ^6.0.1
+        specifier: ^6.1.3
         version: 6.1.3
 
   src/suite-vendor/a-vona/modules/a-aspectutils:
@@ -1546,7 +1546,7 @@ importers:
         specifier: ^2.2.0
         version: 2.2.0
       rimraf:
-        specifier: ^6.0.1
+        specifier: ^6.1.3
         version: 6.1.3
 
   src/suite-vendor/a-vona/modules/a-bean:
@@ -1555,7 +1555,7 @@ importers:
         specifier: ^2.2.0
         version: 2.2.0
       rimraf:
-        specifier: ^6.0.1
+        specifier: ^6.1.3
         version: 6.1.3
 
   src/suite-vendor/a-vona/modules/a-beanmutate:
@@ -1564,7 +1564,7 @@ importers:
         specifier: ^2.2.0
         version: 2.2.0
       rimraf:
-        specifier: ^6.0.1
+        specifier: ^6.1.3
         version: 6.1.3
 
   src/suite-vendor/a-vona/modules/a-body:
@@ -1580,7 +1580,7 @@ importers:
         specifier: ^2.2.0
         version: 2.2.0
       rimraf:
-        specifier: ^6.0.1
+        specifier: ^6.1.3
         version: 6.1.3
 
   src/suite-vendor/a-vona/modules/a-broadcast:
@@ -1589,20 +1589,20 @@ importers:
         specifier: ^2.2.0
         version: 2.2.0
       rimraf:
-        specifier: ^6.0.1
+        specifier: ^6.1.3
         version: 6.1.3
 
   src/suite-vendor/a-vona/modules/a-cache:
     dependencies:
       lru-cache:
-        specifier: ^11.0.2
+        specifier: ^11.3.3
         version: 11.3.3
     devDependencies:
       clean-package:
         specifier: ^2.2.0
         version: 2.2.0
       rimraf:
-        specifier: ^6.0.1
+        specifier: ^6.1.3
         version: 6.1.3
 
   src/suite-vendor/a-vona/modules/a-caching:
@@ -1611,22 +1611,22 @@ importers:
         specifier: ^2.2.0
         version: 2.2.0
       rimraf:
-        specifier: ^6.0.1
+        specifier: ^6.1.3
         version: 6.1.3
 
   src/suite-vendor/a-vona/modules/a-core:
     dependencies:
       '@babel/core':
-        specifier: ^7.28.0
+        specifier: ^7.29.0
         version: 7.29.0
       '@babel/traverse':
-        specifier: ^7.28.0
+        specifier: ^7.29.0
         version: 7.29.0
       '@cabloy/deps':
-        specifier: ^1.1.3
+        specifier: workspace:^
         version: link:../../../../../packages-utils/deps
       '@cabloy/json5':
-        specifier: ^1.1.3
+        specifier: workspace:^
         version: link:../../../../../packages-utils/json5
       '@cabloy/module-info':
         specifier: ^2.0.0
@@ -1635,10 +1635,10 @@ importers:
         specifier: ^5.3.1
         version: 5.3.1
       '@cabloy/utils':
-        specifier: ^2.1.3
+        specifier: workspace:^
         version: link:../../../../../packages-utils/utils
       '@cabloy/word-utils':
-        specifier: ^2.0.2
+        specifier: ^2.1.7
         version: 2.1.7
       bignumber.js:
         specifier: ^9.3.1
@@ -1653,7 +1653,7 @@ importers:
         specifier: ^0.6.5
         version: 0.6.5
       fs-extra:
-        specifier: ^11.2.0
+        specifier: ^11.3.4
         version: 11.3.4
       koa-override:
         specifier: ^4.0.0
@@ -1662,38 +1662,38 @@ importers:
         specifier: ^3.7.2
         version: 3.7.2
       mutate-on-copy:
-        specifier: ^1.0.1
+        specifier: ^1.1.7
         version: 1.1.7
       react:
-        specifier: ^19.2.3
+        specifier: ^19.2.5
         version: 19.2.5
       retry:
         specifier: ^0.13.1
         version: 0.13.1
       uuid:
-        specifier: ^11.0.3
+        specifier: ^11.1.0
         version: 11.1.0
       vona-shared:
-        specifier: ^1.1.3
+        specifier: workspace:^
         version: link:../../../../../packages-vona/vona-shared
       winston:
-        specifier: ^3.17.0
+        specifier: ^3.19.0
         version: 3.19.0
     devDependencies:
       '@cabloy/cli':
-        specifier: ^3.1.3
+        specifier: workspace:^
         version: link:../../../../../packages-cli/cabloy-cli
       '@swc/core':
-        specifier: ^1.14.0
+        specifier: ^1.15.24
         version: 1.15.24(@swc/helpers@0.5.21)
       '@swc/helpers':
-        specifier: ^0.5.17
+        specifier: ^0.5.21
         version: 0.5.21
       '@types/babel__core':
         specifier: ^7.20.5
         version: 7.20.5
       '@types/babel__traverse':
-        specifier: ^7.20.5
+        specifier: ^7.28.0
         version: 7.28.0
       '@types/koa':
         specifier: ^2.15.0
@@ -1702,7 +1702,7 @@ importers:
         specifier: ^3.7.1
         version: 3.7.1
       '@types/node':
-        specifier: ^22.10.2
+        specifier: ^22.19.17
         version: 22.19.17
       '@types/react':
         specifier: npm:@cabloy/types-react@^19.2.13
@@ -1717,10 +1717,10 @@ importers:
         specifier: ^7.0.3
         version: 7.0.3
       gogocode:
-        specifier: ^1.0.53
+        specifier: ^1.0.55
         version: 1.0.55(vue@3.5.32(typescript@5.9.3))
       rimraf:
-        specifier: ^6.0.1
+        specifier: ^6.1.3
         version: 6.1.3
       ts-node-maintained:
         specifier: ^10.9.6
@@ -1732,7 +1732,7 @@ importers:
         specifier: ^5.9.3
         version: 5.9.3
       vona-mock:
-        specifier: ^6.1.3
+        specifier: workspace:^
         version: link:../../../../../packages-vona/vona-mock
       why-is-node-running:
         specifier: ^3.2.2
@@ -1744,19 +1744,19 @@ importers:
         specifier: ^2.2.0
         version: 2.2.0
       rimraf:
-        specifier: ^6.0.1
+        specifier: ^6.1.3
         version: 6.1.3
 
   src/suite-vendor/a-vona/modules/a-error:
     dependencies:
       cookie:
-        specifier: ^1.0.2
+        specifier: ^1.1.1
         version: 1.1.1
       mustache:
         specifier: ^4.2.0
         version: 4.2.0
       stack-trace:
-        specifier: ^1.0.0-pre2
+        specifier: 1.0.0-pre2
         version: 1.0.0-pre2
       stream-wormhole:
         specifier: ^2.0.1
@@ -1766,7 +1766,7 @@ importers:
         specifier: ^2.2.0
         version: 2.2.0
       rimraf:
-        specifier: ^6.0.1
+        specifier: ^6.1.3
         version: 6.1.3
 
   src/suite-vendor/a-vona/modules/a-event:
@@ -1775,7 +1775,7 @@ importers:
         specifier: ^2.2.0
         version: 2.2.0
       rimraf:
-        specifier: ^6.0.1
+        specifier: ^6.1.3
         version: 6.1.3
 
   src/suite-vendor/a-vona/modules/a-executor:
@@ -1788,7 +1788,7 @@ importers:
         specifier: ^2.2.0
         version: 2.2.0
       rimraf:
-        specifier: ^6.0.1
+        specifier: ^6.1.3
         version: 6.1.3
 
   src/suite-vendor/a-vona/modules/a-hmr:
@@ -1800,14 +1800,14 @@ importers:
         specifier: ^3.0.0
         version: 3.0.0
       globby:
-        specifier: ^16.0.0
+        specifier: ^16.2.0
         version: 16.2.0
     devDependencies:
       clean-package:
         specifier: ^2.2.0
         version: 2.2.0
       rimraf:
-        specifier: ^6.0.1
+        specifier: ^6.1.3
         version: 6.1.3
 
   src/suite-vendor/a-vona/modules/a-hmrbase:
@@ -1816,7 +1816,7 @@ importers:
         specifier: ^2.2.0
         version: 2.2.0
       rimraf:
-        specifier: ^6.0.1
+        specifier: ^6.1.3
         version: 6.1.3
 
   src/suite-vendor/a-vona/modules/a-index:
@@ -1825,7 +1825,7 @@ importers:
         specifier: ^2.2.0
         version: 2.2.0
       rimraf:
-        specifier: ^6.0.1
+        specifier: ^6.1.3
         version: 6.1.3
 
   src/suite-vendor/a-vona/modules/a-instance:
@@ -1838,7 +1838,7 @@ importers:
         specifier: ^2.2.0
         version: 2.2.0
       rimraf:
-        specifier: ^6.0.1
+        specifier: ^6.1.3
         version: 6.1.3
 
   src/suite-vendor/a-vona/modules/a-jwt:
@@ -1860,7 +1860,7 @@ importers:
         specifier: ^2.2.0
         version: 2.2.0
       rimraf:
-        specifier: ^6.0.1
+        specifier: ^6.1.3
         version: 6.1.3
 
   src/suite-vendor/a-vona/modules/a-locale:
@@ -1869,16 +1869,16 @@ importers:
         specifier: ^2.2.0
         version: 2.2.0
       rimraf:
-        specifier: ^6.0.1
+        specifier: ^6.1.3
         version: 6.1.3
 
   src/suite-vendor/a-vona/modules/a-logger:
     dependencies:
       pino-std-serializers:
-        specifier: ^7.0.0
+        specifier: ^7.1.0
         version: 7.1.0
       winston:
-        specifier: ^3.18.3
+        specifier: ^3.19.0
         version: 3.19.0
       winston-transport:
         specifier: ^4.9.0
@@ -1888,23 +1888,23 @@ importers:
         specifier: ^2.2.0
         version: 2.2.0
       rimraf:
-        specifier: ^6.0.1
+        specifier: ^6.1.3
         version: 6.1.3
 
   src/suite-vendor/a-vona/modules/a-mail:
     dependencies:
       '@types/nodemailer':
-        specifier: ^7.0.1
+        specifier: ^7.0.11
         version: 7.0.11
       nodemailer:
-        specifier: ^7.0.6
+        specifier: ^7.0.13
         version: 7.0.13
     devDependencies:
       clean-package:
         specifier: ^2.2.0
         version: 2.2.0
       rimraf:
-        specifier: ^6.0.1
+        specifier: ^6.1.3
         version: 6.1.3
 
   src/suite-vendor/a-vona/modules/a-mailconfirm:
@@ -1913,7 +1913,7 @@ importers:
         specifier: ^2.2.0
         version: 2.2.0
       rimraf:
-        specifier: ^6.0.1
+        specifier: ^6.1.3
         version: 6.1.3
 
   src/suite-vendor/a-vona/modules/a-menu:
@@ -1922,7 +1922,7 @@ importers:
         specifier: ^2.2.0
         version: 2.2.0
       rimraf:
-        specifier: ^6.0.1
+        specifier: ^6.1.3
         version: 6.1.3
 
   src/suite-vendor/a-vona/modules/a-meta:
@@ -1931,7 +1931,7 @@ importers:
         specifier: ^2.2.0
         version: 2.2.0
       rimraf:
-        specifier: ^6.0.1
+        specifier: ^6.1.3
         version: 6.1.3
 
   src/suite-vendor/a-vona/modules/a-onion:
@@ -1940,35 +1940,35 @@ importers:
         specifier: ^2.2.0
         version: 2.2.0
       rimraf:
-        specifier: ^6.0.1
+        specifier: ^6.1.3
         version: 6.1.3
 
   src/suite-vendor/a-vona/modules/a-openapi:
     dependencies:
       '@cabloy/zod-openapi':
-        specifier: ^1.1.3
+        specifier: workspace:^
         version: link:../../../../../packages-utils/zod-openapi
       '@cabloy/zod-query':
-        specifier: ^2.1.3
+        specifier: workspace:^
         version: link:../../../../../packages-utils/zod-query
       '@cabloy/zod-to-openapi':
         specifier: ^8.1.5
         version: 8.1.5(zod@4.3.6)
       '@zhennann/currency':
-        specifier: ^2.0.0
+        specifier: ^2.0.4
         version: 2.0.4
       openapi3-ts:
         specifier: ^4.5.0
         version: 4.5.0
       zod:
-        specifier: ^4.1.13
+        specifier: ^4.3.6
         version: 4.3.6
     devDependencies:
       clean-package:
         specifier: ^2.2.0
         version: 2.2.0
       rimraf:
-        specifier: ^6.0.1
+        specifier: ^6.1.3
         version: 6.1.3
 
   src/suite-vendor/a-vona/modules/a-openapischema:
@@ -1977,51 +1977,51 @@ importers:
         specifier: ^2.2.0
         version: 2.2.0
       rimraf:
-        specifier: ^6.0.1
+        specifier: ^6.1.3
         version: 6.1.3
 
   src/suite-vendor/a-vona/modules/a-openapiutils:
     dependencies:
       '@zhennann/currency':
-        specifier: ^2.0.0
+        specifier: ^2.0.4
         version: 2.0.4
     devDependencies:
       clean-package:
         specifier: ^2.2.0
         version: 2.2.0
       rimraf:
-        specifier: ^6.0.1
+        specifier: ^6.1.3
         version: 6.1.3
 
   src/suite-vendor/a-vona/modules/a-orm:
     dependencies:
       knex:
-        specifier: ^3.1.0
+        specifier: ^3.2.9
         version: 3.2.9(better-sqlite3@12.8.0)
       table-identity:
-        specifier: ^1.1.3
+        specifier: workspace:^
         version: link:../../../../../packages-utils/table-identity
     devDependencies:
       clean-package:
         specifier: ^2.2.0
         version: 2.2.0
       rimraf:
-        specifier: ^6.0.1
+        specifier: ^6.1.3
         version: 6.1.3
 
   src/suite-vendor/a-vona/modules/a-ormdialect:
     dependencies:
       better-sqlite3:
-        specifier: ^12.5.0
+        specifier: ^12.8.0
         version: 12.8.0
       globby:
-        specifier: ^16.0.0
+        specifier: ^16.2.0
         version: 16.2.0
       mysql2:
-        specifier: ^3.15.0
-        version: 3.22.0(@types/node@22.19.17)
+        specifier: ^3.22.0
+        version: 3.22.0(@types/node@25.6.0)
       pg:
-        specifier: ^8.16.3
+        specifier: ^8.20.0
         version: 8.20.0
       pg-types:
         specifier: ^4.1.0
@@ -2031,7 +2031,7 @@ importers:
         specifier: ^2.2.0
         version: 2.2.0
       rimraf:
-        specifier: ^6.0.1
+        specifier: ^6.1.3
         version: 6.1.3
 
   src/suite-vendor/a-vona/modules/a-ormutils:
@@ -2040,7 +2040,7 @@ importers:
         specifier: ^2.2.0
         version: 2.2.0
       rimraf:
-        specifier: ^6.0.1
+        specifier: ^6.1.3
         version: 6.1.3
 
   src/suite-vendor/a-vona/modules/a-permission:
@@ -2049,7 +2049,7 @@ importers:
         specifier: ^2.2.0
         version: 2.2.0
       rimraf:
-        specifier: ^6.0.1
+        specifier: ^6.1.3
         version: 6.1.3
 
   src/suite-vendor/a-vona/modules/a-play:
@@ -2062,7 +2062,7 @@ importers:
         specifier: ^2.2.0
         version: 2.2.0
       rimraf:
-        specifier: ^6.0.1
+        specifier: ^6.1.3
         version: 6.1.3
 
   src/suite-vendor/a-vona/modules/a-printtip:
@@ -2071,33 +2071,33 @@ importers:
         specifier: ^2.2.0
         version: 2.2.0
       rimraf:
-        specifier: ^6.0.1
+        specifier: ^6.1.3
         version: 6.1.3
 
   src/suite-vendor/a-vona/modules/a-queue:
     dependencies:
       bullmq:
-        specifier: ^5.70.1
+        specifier: ^5.73.4
         version: 5.73.4
     devDependencies:
       clean-package:
         specifier: ^2.2.0
         version: 2.2.0
       rimraf:
-        specifier: ^6.0.1
+        specifier: ^6.1.3
         version: 6.1.3
 
   src/suite-vendor/a-vona/modules/a-redis:
     dependencies:
       ioredis:
-        specifier: ^5.9.3
+        specifier: ^5.10.1
         version: 5.10.1
     devDependencies:
       clean-package:
         specifier: ^2.2.0
         version: 2.2.0
       rimraf:
-        specifier: ^6.0.1
+        specifier: ^6.1.3
         version: 6.1.3
 
   src/suite-vendor/a-vona/modules/a-redlock:
@@ -2110,7 +2110,7 @@ importers:
         specifier: ^2.2.0
         version: 2.2.0
       rimraf:
-        specifier: ^6.0.1
+        specifier: ^6.1.3
         version: 6.1.3
 
   src/suite-vendor/a-vona/modules/a-runtime:
@@ -2119,7 +2119,7 @@ importers:
         specifier: ^2.2.0
         version: 2.2.0
       rimraf:
-        specifier: ^6.0.1
+        specifier: ^6.1.3
         version: 6.1.3
 
   src/suite-vendor/a-vona/modules/a-schedule:
@@ -2128,7 +2128,7 @@ importers:
         specifier: ^2.2.0
         version: 2.2.0
       rimraf:
-        specifier: ^6.0.1
+        specifier: ^6.1.3
         version: 6.1.3
 
   src/suite-vendor/a-vona/modules/a-security:
@@ -2153,7 +2153,7 @@ importers:
         specifier: ^2.2.0
         version: 2.2.0
       rimraf:
-        specifier: ^6.0.1
+        specifier: ^6.1.3
         version: 6.1.3
 
   src/suite-vendor/a-vona/modules/a-serialization:
@@ -2162,7 +2162,7 @@ importers:
         specifier: ^2.2.0
         version: 2.2.0
       rimraf:
-        specifier: ^6.0.1
+        specifier: ^6.1.3
         version: 6.1.3
 
   src/suite-vendor/a-vona/modules/a-startup:
@@ -2171,7 +2171,7 @@ importers:
         specifier: ^2.2.0
         version: 2.2.0
       rimraf:
-        specifier: ^6.0.1
+        specifier: ^6.1.3
         version: 6.1.3
 
   src/suite-vendor/a-vona/modules/a-static:
@@ -2190,7 +2190,7 @@ importers:
         specifier: ^2.2.0
         version: 2.2.0
       rimraf:
-        specifier: ^6.0.1
+        specifier: ^6.1.3
         version: 6.1.3
 
   src/suite-vendor/a-vona/modules/a-summer:
@@ -2199,7 +2199,7 @@ importers:
         specifier: ^2.2.0
         version: 2.2.0
       rimraf:
-        specifier: ^6.0.1
+        specifier: ^6.1.3
         version: 6.1.3
 
   src/suite-vendor/a-vona/modules/a-swagger:
@@ -2208,7 +2208,7 @@ importers:
         specifier: ^2.2.0
         version: 2.2.0
       rimraf:
-        specifier: ^6.0.1
+        specifier: ^6.1.3
         version: 6.1.3
 
   src/suite-vendor/a-vona/modules/a-upload:
@@ -2220,14 +2220,14 @@ importers:
         specifier: ^1.6.0
         version: 1.6.0
       tmp:
-        specifier: ^0.2.3
+        specifier: ^0.2.5
         version: 0.2.5
     devDependencies:
       clean-package:
         specifier: ^2.2.0
         version: 2.2.0
       rimraf:
-        specifier: ^6.0.1
+        specifier: ^6.1.3
         version: 6.1.3
 
   src/suite-vendor/a-vona/modules/a-user:
@@ -2236,7 +2236,7 @@ importers:
         specifier: ^2.2.0
         version: 2.2.0
       rimraf:
-        specifier: ^6.0.1
+        specifier: ^6.1.3
         version: 6.1.3
 
   src/suite-vendor/a-vona/modules/a-validation:
@@ -2245,7 +2245,7 @@ importers:
         specifier: ^2.2.0
         version: 2.2.0
       rimraf:
-        specifier: ^6.0.1
+        specifier: ^6.1.3
         version: 6.1.3
 
   src/suite-vendor/a-vona/modules/a-version:
@@ -2254,7 +2254,7 @@ importers:
         specifier: ^2.2.0
         version: 2.2.0
       rimraf:
-        specifier: ^6.0.1
+        specifier: ^6.1.3
         version: 6.1.3
 
   src/suite-vendor/a-vona/modules/a-vona:
@@ -2263,20 +2263,20 @@ importers:
         specifier: ^2.2.0
         version: 2.2.0
       rimraf:
-        specifier: ^6.0.1
+        specifier: ^6.1.3
         version: 6.1.3
 
   src/suite-vendor/a-vona/modules/a-web:
     dependencies:
       find-my-way:
-        specifier: ^9.2.0
+        specifier: ^9.5.0
         version: 9.5.0
     devDependencies:
       clean-package:
         specifier: ^2.2.0
         version: 2.2.0
       rimraf:
-        specifier: ^6.0.1
+        specifier: ^6.1.3
         version: 6.1.3
 
   src/suite-vendor/a-vona/modules/a-worker:
@@ -2285,7 +2285,7 @@ importers:
         specifier: ^2.2.0
         version: 2.2.0
       rimraf:
-        specifier: ^6.0.1
+        specifier: ^6.1.3
         version: 6.1.3
 
   src/suite-vendor/a-vona/modules/a-zod:
@@ -2294,7 +2294,7 @@ importers:
         specifier: ^2.2.0
         version: 2.2.0
       rimraf:
-        specifier: ^6.0.1
+        specifier: ^6.1.3
         version: 6.1.3
 
   src/suite-vendor/a-vona/modules/test-vona:
@@ -2303,19 +2303,19 @@ importers:
         specifier: ^2.2.0
         version: 2.2.0
       rimraf:
-        specifier: ^6.0.1
+        specifier: ^6.1.3
         version: 6.1.3
 
   src/suite/a-home:
     dependencies:
       vona-module-home-base:
-        specifier: ^5.1.3
+        specifier: workspace:^
         version: link:modules/home-base
       vona-module-home-index:
-        specifier: ^5.1.3
+        specifier: workspace:^
         version: link:modules/home-index
       vona-module-home-user:
-        specifier: ^5.1.3
+        specifier: workspace:^
         version: link:modules/home-user
 
   src/suite/a-home/modules/home-base:
@@ -2324,7 +2324,7 @@ importers:
         specifier: ^2.2.0
         version: 2.2.0
       rimraf:
-        specifier: ^6.0.1
+        specifier: ^6.1.3
         version: 6.1.3
 
   src/suite/a-home/modules/home-index:
@@ -2333,7 +2333,7 @@ importers:
         specifier: ^2.2.0
         version: 2.2.0
       rimraf:
-        specifier: ^6.0.1
+        specifier: ^6.1.3
         version: 6.1.3
 
   src/suite/a-home/modules/home-user:
@@ -2342,16 +2342,16 @@ importers:
         specifier: ^2.2.0
         version: 2.2.0
       rimraf:
-        specifier: ^6.0.1
+        specifier: ^6.1.3
         version: 6.1.3
 
   src/suite/cabloy-basic:
     dependencies:
       vona-module-basic-siteadmin:
-        specifier: ^5.1.4
+        specifier: workspace:^
         version: link:modules/basic-siteadmin
       vona-suite-a-cabloy:
-        specifier: ^5.1.3
+        specifier: workspace:^
         version: link:../../suite-vendor/a-cabloy
 
   src/suite/cabloy-basic/modules/basic-siteadmin:
@@ -2360,7 +2360,7 @@ importers:
         specifier: ^2.2.0
         version: 2.2.0
       rimraf:
-        specifier: ^6.0.1
+        specifier: ^6.1.3
         version: 6.1.3
 
 packages:
@@ -4426,6 +4426,9 @@ packages:
 
   '@types/node@22.19.17':
     resolution: {integrity: sha512-wGdMcf+vPYM6jikpS/qhg6WiqSV/OhG+jeeHT/KlVqxYfD40iYJf9/AE1uQxVWFvU7MipKRkRv8NSHiCGgPr8Q==}
+
+  '@types/node@25.6.0':
+    resolution: {integrity: sha512-+qIYRKdNYJwY3vRCZMdJbPLJAtGjQBudzZzdzwQYkEPQd+PJGixUL5QfvCLDaULoLv+RhT3LDkwEfKaAkgSmNQ==}
 
   '@types/nodemailer@7.0.11':
     resolution: {integrity: sha512-E+U4RzR2dKrx+u3N4DlsmLaDC6mMZOM/TPROxA0UAPiTgI0y4CEFBmZE+coGWTjakDriRsXG368lNk1u9Q0a2g==}
@@ -9222,6 +9225,9 @@ packages:
   undici-types@6.21.0:
     resolution: {integrity: sha512-iwDZqg0QAGrg9Rav5H4n0M64c3mkR59cJ6wQp+7C4nI0gsmExaedaYLNO44eT4AtBBwjbTiGPMlt2Md0T9H9JQ==}
 
+  undici-types@7.19.2:
+    resolution: {integrity: sha512-qYVnV5OEm2AW8cJMCpdV20CDyaN3g0AjDlOGf1OW4iaDEx8MwdtChUp4zu4H0VP3nDRF/8RKWH+IPp9uW0YGZg==}
+
   undici@5.29.0:
     resolution: {integrity: sha512-raqeBD6NQK4SkWhQzeYKd1KmIG6dllBOTt55Rmkt4HtI9mwdWtJljnrXjAFUBLTSN67HWrOIZ3EPF4kjUw80Bg==}
     engines: {node: '>=14.0'}
@@ -10934,7 +10940,7 @@ snapshots:
       lru-cache: 11.3.3
       npm-pick-manifest: 11.0.3
       proc-log: 6.1.0
-      semver: 7.7.4
+      semver: 7.7.2
       which: 6.0.1
 
   '@npmcli/installed-package-contents@3.0.0':
@@ -11794,7 +11800,7 @@ snapshots:
 
   '@types/busboy@1.5.4':
     dependencies:
-      '@types/node': 22.19.17
+      '@types/node': 25.6.0
 
   '@types/connect@3.4.38':
     dependencies:
@@ -11833,7 +11839,7 @@ snapshots:
   '@types/fs-extra@11.0.4':
     dependencies:
       '@types/jsonfile': 6.1.4
-      '@types/node': 22.19.17
+      '@types/node': 25.6.0
 
   '@types/hast@3.0.4':
     dependencies:
@@ -11845,7 +11851,7 @@ snapshots:
 
   '@types/http-proxy@1.17.17':
     dependencies:
-      '@types/node': 22.19.17
+      '@types/node': 25.6.0
 
   '@types/js-cookie@3.0.6': {}
 
@@ -11853,12 +11859,12 @@ snapshots:
 
   '@types/jsonfile@6.1.4':
     dependencies:
-      '@types/node': 22.19.17
+      '@types/node': 25.6.0
 
   '@types/jsonwebtoken@9.0.10':
     dependencies:
       '@types/ms': 2.1.0
-      '@types/node': 22.19.17
+      '@types/node': 25.6.0
 
   '@types/keygrip@1.0.6': {}
 
@@ -11904,9 +11910,13 @@ snapshots:
     dependencies:
       undici-types: 6.21.0
 
+  '@types/node@25.6.0':
+    dependencies:
+      undici-types: 7.19.2
+
   '@types/nodemailer@7.0.11':
     dependencies:
-      '@types/node': 22.19.17
+      '@types/node': 25.6.0
 
   '@types/normalize-package-data@2.4.4': {}
 
@@ -11937,7 +11947,7 @@ snapshots:
 
   '@types/ws@8.18.1':
     dependencies:
-      '@types/node': 22.19.17
+      '@types/node': 25.6.0
 
   '@typescript-eslint/eslint-plugin@8.58.1(@typescript-eslint/parser@8.58.1(eslint@10.2.0)(typescript@5.9.3))(eslint@10.2.0)(typescript@5.9.3)':
     dependencies:
@@ -12046,9 +12056,9 @@ snapshots:
 
   '@ungap/structured-clone@1.3.0': {}
 
-  '@vitejs/plugin-vue@5.2.4(vite@5.4.21(@types/node@22.19.17)(terser@5.46.1))(vue@3.5.32(typescript@5.9.3))':
+  '@vitejs/plugin-vue@5.2.4(vite@5.4.21(@types/node@25.6.0)(terser@5.46.1))(vue@3.5.32(typescript@5.9.3))':
     dependencies:
-      vite: 5.4.21(@types/node@22.19.17)(terser@5.46.1)
+      vite: 5.4.21(@types/node@25.6.0)(terser@5.46.1)
       vue: 3.5.32(typescript@5.9.3)
 
   '@vitest/eslint-plugin@1.6.15(@typescript-eslint/eslint-plugin@8.58.1(@typescript-eslint/parser@8.58.1(eslint@10.2.0)(typescript@5.9.3))(eslint@10.2.0)(typescript@5.9.3))(eslint@10.2.0)(typescript@5.9.3)':
@@ -15569,9 +15579,9 @@ snapshots:
 
   mute-stream@2.0.0: {}
 
-  mysql2@3.22.0(@types/node@22.19.17):
+  mysql2@3.22.0(@types/node@25.6.0):
     dependencies:
-      '@types/node': 22.19.17
+      '@types/node': 25.6.0
       aws-ssl-profiles: 1.1.2
       denque: 2.1.0
       generate-function: 2.3.1
@@ -17339,6 +17349,26 @@ snapshots:
     optionalDependencies:
       '@swc/core': 1.15.24(@swc/helpers@0.5.21)
 
+  ts-node-maintained@10.9.6(@swc/core@1.15.24(@swc/helpers@0.5.21))(@types/node@25.6.0)(typescript@5.9.3):
+    dependencies:
+      '@cspotcode/source-map-support': 0.8.1
+      '@tsconfig/node10': 1.0.12
+      '@tsconfig/node12': 1.0.11
+      '@tsconfig/node14': 1.0.3
+      '@tsconfig/node16': 1.0.4
+      '@types/node': 25.6.0
+      acorn: 8.16.0
+      acorn-walk: 8.3.5
+      arg: 4.1.3
+      create-require: 1.1.1
+      diff: 4.0.4
+      make-error: 1.3.6
+      typescript: 5.9.3
+      v8-compile-cache-lib: 3.0.1
+      yn: 3.1.1
+    optionalDependencies:
+      '@swc/core': 1.15.24(@swc/helpers@0.5.21)
+
   tsconfig-paths@4.2.0:
     dependencies:
       json5: 2.2.3
@@ -17420,6 +17450,8 @@ snapshots:
   undefsafe@2.0.5: {}
 
   undici-types@6.21.0: {}
+
+  undici-types@7.19.2: {}
 
   undici@5.29.0:
     dependencies:
@@ -17576,17 +17608,17 @@ snapshots:
       '@types/unist': 3.0.3
       vfile-message: 4.0.3
 
-  vite@5.4.21(@types/node@22.19.17)(terser@5.46.1):
+  vite@5.4.21(@types/node@25.6.0)(terser@5.46.1):
     dependencies:
       esbuild: 0.21.5
       postcss: 8.5.9
       rollup: 4.60.1
     optionalDependencies:
-      '@types/node': 22.19.17
+      '@types/node': 25.6.0
       fsevents: 2.3.3
       terser: 5.46.1
 
-  vitepress@1.6.4(@algolia/client-search@5.50.1)(@cabloy/types-react@19.2.13)(@types/node@22.19.17)(axios@1.15.0)(change-case@5.4.4)(postcss@8.5.9)(react@19.2.5)(search-insights@2.17.3)(terser@5.46.1)(typescript@5.9.3):
+  vitepress@1.6.4(@algolia/client-search@5.50.1)(@cabloy/types-react@19.2.13)(@types/node@25.6.0)(axios@1.15.0)(change-case@5.4.4)(postcss@8.5.9)(react@19.2.5)(search-insights@2.17.3)(terser@5.46.1)(typescript@5.9.3):
     dependencies:
       '@docsearch/css': 3.8.2
       '@docsearch/js': 3.8.2(@algolia/client-search@5.50.1)(@cabloy/types-react@19.2.13)(react@19.2.5)(search-insights@2.17.3)
@@ -17595,7 +17627,7 @@ snapshots:
       '@shikijs/transformers': 2.5.0
       '@shikijs/types': 2.5.0
       '@types/markdown-it': 14.1.2
-      '@vitejs/plugin-vue': 5.2.4(vite@5.4.21(@types/node@22.19.17)(terser@5.46.1))(vue@3.5.32(typescript@5.9.3))
+      '@vitejs/plugin-vue': 5.2.4(vite@5.4.21(@types/node@25.6.0)(terser@5.46.1))(vue@3.5.32(typescript@5.9.3))
       '@vue/devtools-api': 7.7.9
       '@vue/shared': 3.5.32
       '@vueuse/core': 12.8.2(typescript@5.9.3)
@@ -17604,7 +17636,7 @@ snapshots:
       mark.js: 8.11.1
       minisearch: 7.2.0
       shiki: 2.5.0
-      vite: 5.4.21(@types/node@22.19.17)(terser@5.46.1)
+      vite: 5.4.21(@types/node@25.6.0)(terser@5.46.1)
       vue: 3.5.32(typescript@5.9.3)
     optionalDependencies:
       postcss: 8.5.9

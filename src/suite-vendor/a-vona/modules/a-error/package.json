@@ -31,14 +31,14 @@
     "postpack": "clean-package restore && npm run clean"
   },
   "dependencies": {
-    "cookie": "^1.0.2",
+    "cookie": "^1.1.1",
     "mustache": "^4.2.0",
-    "stack-trace": "^1.0.0-pre2",
+    "stack-trace": "1.0.0-pre2",
     "stream-wormhole": "^2.0.1"
   },
   "devDependencies": {
     "clean-package": "^2.2.0",
-    "rimraf": "^6.0.1"
+    "rimraf": "^6.1.3"
   },
   "clean-package": {
     "indent": 2,
