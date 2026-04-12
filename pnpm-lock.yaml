@@ -626,7 +626,7 @@ importers:
         version: 4.60.1
       ts-node-maintained:
         specifier: ^10.9.6
-        version: 10.9.6(@swc/core@1.15.24(@swc/helpers@0.5.21))(@types/node@25.6.0)(typescript@5.9.3)
+        version: 10.9.6(@swc/core@1.15.24(@swc/helpers@0.5.21))(@types/node@22.19.17)(typescript@5.9.3)
       urllib:
         specifier: ^4.9.0
         version: 4.9.0
@@ -2013,7 +2013,7 @@ importers:
         version: 16.2.0
       mysql2:
         specifier: ^3.22.0
-        version: 3.22.0(@types/node@25.6.0)
+        version: 3.22.0(@types/node@22.19.17)
       pg:
         specifier: ^8.20.0
         version: 8.20.0
@@ -2345,7 +2345,7 @@ importers:
         specifier: workspace:^
         version: link:modules/basic-siteadmin
       vona-suite-a-cabloy:
-        specifier: workspace:^
+        specifier: ^5.1.4
         version: link:../../suite-vendor/a-cabloy
 
   src/suite/cabloy-basic/modules/basic-siteadmin:
@@ -14695,9 +14695,9 @@ snapshots:
 
   mute-stream@2.0.0: {}
 
-  mysql2@3.22.0(@types/node@25.6.0):
+  mysql2@3.22.0(@types/node@22.19.17):
     dependencies:
-      '@types/node': 25.6.0
+      '@types/node': 22.19.17
       aws-ssl-profiles: 1.1.2
       denque: 2.1.0
       generate-function: 2.3.1
@@ -16366,26 +16366,6 @@ snapshots:
       '@tsconfig/node14': 1.0.3
       '@tsconfig/node16': 1.0.4
       '@types/node': 22.19.17
-      acorn: 8.16.0
-      acorn-walk: 8.3.5
-      arg: 4.1.3
-      create-require: 1.1.1
-      diff: 4.0.4
-      make-error: 1.3.6
-      typescript: 5.9.3
-      v8-compile-cache-lib: 3.0.1
-      yn: 3.1.1
-    optionalDependencies:
-      '@swc/core': 1.15.24(@swc/helpers@0.5.21)
-
-  ts-node-maintained@10.9.6(@swc/core@1.15.24(@swc/helpers@0.5.21))(@types/node@25.6.0)(typescript@5.9.3):
-    dependencies:
-      '@cspotcode/source-map-support': 0.8.1
-      '@tsconfig/node10': 1.0.12
-      '@tsconfig/node12': 1.0.11
-      '@tsconfig/node14': 1.0.3
-      '@tsconfig/node16': 1.0.4
-      '@types/node': 25.6.0
       acorn: 8.16.0
       acorn-walk: 8.3.5
       arg: 4.1.3
