@@ -34,7 +34,9 @@ export class ServiceSocket extends BeanBase {
   }
 
   async appClose() {
-    this.app.wss.close();
+    if (this.app.wss) {
+      this.app.wss.close();
+    }
     this.bean.socket.close();
   }
 
