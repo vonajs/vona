@@ -1,0 +1,1 @@
+import{n as r}from"./rolldown-runtime-DSSfW_98.js";import{n}from"./vue-D6YT8ZyB.js";function t(r,n,t){return Array.isArray(r)?(r.length=Math.max(r.length,n),r.splice(n,1,t),t):(r[n]=t,t)}var a=r(()=>{n(),n()});export{t as n,a as t};

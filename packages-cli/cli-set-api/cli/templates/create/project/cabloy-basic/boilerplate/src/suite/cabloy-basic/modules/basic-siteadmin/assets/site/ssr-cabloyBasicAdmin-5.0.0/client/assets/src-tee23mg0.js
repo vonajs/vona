@@ -1,3 +1,0 @@
-import { a as routes, c as ZPageItem, d as ControllerPageItemSchemaParams, f as ControllerPageItemSchemaQuery, i as pagePathSchemas, l as ControllerPageTodo, m as ModelTodo, n as ScopeModuleDemoTodo, o as ZPageTodo, p as ApiTodo, r as pageNameSchemas, s as NSControllerPageItem, t as init_src, u as ControllerPageItem } from "./demo-todo-DxMQY-u8.js";
-init_src();
-export { ApiTodo, ControllerPageItem, ControllerPageItemSchemaParams, ControllerPageItemSchemaQuery, ControllerPageTodo, ModelTodo, NSControllerPageItem, ScopeModuleDemoTodo, ZPageItem, ZPageTodo, pageNameSchemas, pagePathSchemas, routes };

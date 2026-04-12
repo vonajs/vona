@@ -92,6 +92,4039 @@ declare const locales$7: {
 };
 //#endregion
 //#region src/suite/a-home/modules/home-api/src/api/openapi/types.d.ts
+interface paths$1 {
+  '/api/auth/mock/authorize': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get: operations$1['AuthMock_authorize'];
+    put?: never;
+    post: operations$1['AuthMock_authorizePost'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/captcha/create': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    put?: never;
+    post: operations$1['Captcha_create'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/captcha/refresh': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    put?: never;
+    post: operations$1['Captcha_refresh'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/captcha/verifyImmediate': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    put?: never;
+    post: operations$1['Captcha_verifyImmediate'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/mailconfirm/mail/emailConfirmCallback': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get: operations$1['MailconfirmMail_emailConfirmCallback'];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/mailconfirm/mail/passwordResetCallback': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get: operations$1['MailconfirmMail_passwordResetCallback'];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/home/base/menu/{publicPath?}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get: operations$1['HomeBaseMenu_retrieveMenus'];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/home/base/permission/{resource}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get: operations$1['HomeBasePermission_retrievePermissions'];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    }; /** @description Home */
+    get: operations$1['Home_index'];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/home/user/passport/current': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get: operations$1['HomeUserPassport_current'];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/home/user/passport/logout': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    put?: never;
+    post: operations$1['HomeUserPassport_logout'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/home/user/passport/register': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    put?: never;
+    post: operations$1['HomeUserPassport_register'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/home/user/passport/login': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    put?: never;
+    post: operations$1['HomeUserPassport_login'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/home/user/passport/login/{module}/{providerName}/{clientName?}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get: operations$1['HomeUserPassport_loginOauth'];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/home/user/passport/associate/{module}/{providerName}/{clientName?}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get: operations$1['HomeUserPassport_associate'];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/home/user/passport/migrate/{module}/{providerName}/{clientName?}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get: operations$1['HomeUserPassport_migrate'];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/home/user/passport/refreshAuthToken': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    put?: never;
+    post: operations$1['HomeUserPassport_refreshAuthToken'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/home/user/passport/createPassportJwtFromOauthCode': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    put?: never;
+    post: operations$1['HomeUserPassport_createPassportJwtFromOauthCode'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/home/user/passport/createTempAuthToken': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    put?: never;
+    post: operations$1['HomeUserPassport_createTempAuthToken'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/test/auth/passport/isAuthenticated': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get: operations$1['TestAuthPassport_isAuthenticated'];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/test/auth/passport/current': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get: operations$1['TestAuthPassport_current'];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/test/rest/product': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get: operations$1['TestRestProduct_select'];
+    put?: never;
+    post: operations$1['TestRestProduct_create'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/test/rest/product/{id}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get: operations$1['TestRestProduct_view'];
+    put?: never;
+    post?: never;
+    delete: operations$1['TestRestProduct_delete'];
+    options?: never;
+    head?: never;
+    patch: operations$1['TestRestProduct_update'];
+    trace?: never;
+  };
+  '/api/test/ssr/toolOne/test/{id?}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get: operations$1['TestSsrToolOne_testGet'];
+    put?: never;
+    post: operations$1['TestSsrToolOne_test'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/test/ssr/toolTwo/test/{id?}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get: operations$1['TestSsrToolTwo_test'];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/test/captcha/signin': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    put?: never;
+    post: operations$1['TestCaptcha_signin'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/paypal/getRecord/{recordId}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get: operations$1['Paypal_getRecord'];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/paypal/captureOrder/{recordId}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    put?: never;
+    post: operations$1['Paypal_captureOrder'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/paypal/cancelOrder/{recordId}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    put?: never;
+    post: operations$1['Paypal_cancelOrder'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/play': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    put?: never;
+    post: operations$1['Play_index'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/test/vona/dtoTest/getUserLazy': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get: operations$1['TestVonaDtoTest_getUserLazy'];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/test/vona/dtoTest/getUserDynamic': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get: operations$1['TestVonaDtoTest_getPostDynamic'];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/test/vona/dtoTest/getUserStats': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get: operations$1['TestVonaDtoTest_getUserStats'];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/test/vona/dtoTest/getUserStatsGroup': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get: operations$1['TestVonaDtoTest_getUserStatsGroup'];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/test/vona/dtoTest/createUser': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    put?: never;
+    post: operations$1['TestVonaDtoTest_createUser'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/test/vona/dtoTest/updateUser/{id}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch: operations$1['TestVonaDtoTest_updateUser'];
+    trace?: never;
+  };
+  '/api/test/vona/dtoTest/getCategoryTree': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get: operations$1['TestVonaDtoTest_getCategoryTree'];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/test/vona/dtoTest/getCategoryTree2': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get: operations$1['TestVonaDtoTest_getCategoryTree2'];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/test/vona/guardPassport/testUserName': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get: operations$1['TestVonaGuardPassport_testUserName'];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/test/vona/guardPassport/testUserNameFail': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get: operations$1['TestVonaGuardPassport_testUserNameFail'];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/test/vona/guardPassport/testRoleName': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get: operations$1['TestVonaGuardPassport_testRoleName'];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/test/vona/guardPassport/testRoleNameFail': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get: operations$1['TestVonaGuardPassport_testRoleNameFail'];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get: operations$1['Onion_index'];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/echo': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    put?: never;
+    post: operations$1['Onion_echo'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/test/vona/onion/echo2/{userId}/{userName}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    put?: never;
+    post: operations$1['Onion_echo2'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/test/vona/onion/echo3/{userId}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get: operations$1['Onion_echo3'];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/test/vona/onion/echo4': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    put?: never;
+    post: operations$1['Onion_echo4'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/test/vona/onion/echo5': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get: operations$1['Onion_echo5'];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/test/vona/onion/echo6': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get: operations$1['Onion_echo6'];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/test/vona/order/create': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    put?: never;
+    post: operations$1['TestVonaOrder_create'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/test/vona/order/update/{id}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    put?: never;
+    post: operations$1['TestVonaOrder_update'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/test/vona/order/findAll': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get: operations$1['TestVonaOrder_findAll'];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/test/vona/order/findMany': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get: operations$1['TestVonaOrder_findMany'];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/test/vona/post/group': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get: operations$1['TestVonaPost_group'];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/test/vona/post/aggregate': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get: operations$1['TestVonaPost_aggregate'];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/test/vona/post/findManyEcho': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get: operations$1['TestVonaPost_findManyEcho'];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/test/vona/post/findMany': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get: operations$1['TestVonaPost_findMany'];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/test/vona/serializer/echoSimple': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    put?: never;
+    post: operations$1['TestVonaSerializer_echoSimple'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/test/vona/serializer/echoArray': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    put?: never;
+    post: operations$1['TestVonaSerializer_echoArray'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/test/vona/serializer/echoLazy': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    put?: never;
+    post: operations$1['TestVonaSerializer_echoLazy'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/test/vona/upload/fields': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    put?: never;
+    post: operations$1['TestVonaUpload_fields'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/test/vona/upload/file': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    put?: never;
+    post: operations$1['TestVonaUpload_file'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/test/vona/upload/files': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    put?: never;
+    post: operations$1['TestVonaUpload_files'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+}
+interface components$1 {
+  schemas: {
+    'test-vona.dto.postCreate': {
+      /** @description Title */title: string;
+      userId: number | string;
+      stars?: number | undefined;
+    };
+    'test-vona.dto.userCreate': {
+      name: string;
+      age?: number | undefined;
+      scores?: number | undefined;
+      posts?: {
+        /** @description Title */title: string;
+      }[] | undefined;
+      roles?: {
+        id: number | string;
+        deleted?: boolean | undefined;
+      }[] | undefined;
+    };
+    'test-vona.entity.product': {
+      /**
+       * Format: date
+       * @description Created At
+       */
+      createdAt: Date;
+      /**
+       * Format: date
+       * @description Updated At
+       */
+      updatedAt: Date;
+      /**
+       * @description Deleted
+       * @default false
+       */
+      deleted?: boolean;
+      /**
+       * @description Instance ID
+       * @default 0
+       */
+      iid?: number; /** @description ID */
+      id: number | string; /** @description Name */
+      name: string; /** @description Price */
+      price: number; /** @description Quantity */
+      quantity: number; /** @description Amount */
+      amount: number;
+      orderId: number | string;
+    };
+    'a-captcha.dto.captchaData': {
+      id: string;
+      provider: string;
+      token?: unknown;
+      payload?: unknown;
+    };
+    'a-menu.dto.menus': {
+      menus?: components$1['schemas']['a-menu.dto.menuItem'][] | undefined;
+      groups?: components$1['schemas']['a-menu.dto.menuGroup'][] | undefined;
+    };
+    'a-menu.dto.menuItem': {
+      name: string;
+      title?: string | undefined;
+      description?: string | undefined;
+      icon?: string | undefined;
+      order?: number | undefined;
+      group?: string | string[] | undefined;
+      separator?: boolean | undefined;
+      link?: string | undefined;
+      external?: boolean | undefined;
+      target?: string | undefined;
+      meta?: components$1['schemas']['a-menu.dto.menuItemMeta'];
+    };
+    'a-menu.dto.menuItemMeta': {
+      params?: unknown;
+      query?: unknown;
+    } | undefined;
+    'a-menu.dto.menuGroup': {
+      name: string;
+      title?: string | undefined;
+      description?: string | undefined;
+      icon?: string | undefined;
+      order?: number | undefined;
+      group?: string | string[] | undefined;
+      collapsed?: boolean | undefined;
+    };
+    'a-permission.dto.permissions': {
+      roleIds?: (number | string)[] | undefined;
+      roleNames?: string[] | undefined;
+      actions?: unknown;
+    };
+    'home-user.dto.passport': {
+      user: components$1['schemas']['home-user.entity.user'];
+      auth: components$1['schemas']['a-auth.dto.auth'];
+      roles: components$1['schemas']['home-user.entity.role'][];
+    } | undefined; /** @description User */
+    'home-user.entity.user': {
+      /**
+       * Format: date
+       * @description Created At
+       */
+      createdAt: Date;
+      /**
+       * Format: date
+       * @description Updated At
+       */
+      updatedAt: Date;
+      /**
+       * @description Deleted
+       * @default false
+       */
+      deleted?: boolean;
+      /**
+       * @description Instance ID
+       * @default 0
+       */
+      iid?: number; /** @description ID */
+      id: number | string; /** @description User Name */
+      name: string; /** @description Avatar */
+      avatar?: string | undefined; /** @description Email */
+      email?: string | undefined; /** @description Mobile */
+      mobile?: string | undefined;
+      /**
+       * @description Activated
+       * @default false
+       */
+      activated?: boolean; /** @description Language */
+      locale?: string | undefined; /** @description Timezone */
+      tz?: string | undefined;
+    };
+    'a-auth.dto.auth': {
+      /** @description ID */id: number | string;
+      profileId: string;
+      authProvider?: {
+        /** @description ID */id: number;
+        providerName: string;
+        clientName: string;
+      };
+    }; /** @description Role */
+    'home-user.entity.role': {
+      /**
+       * Format: date
+       * @description Created At
+       */
+      createdAt: Date;
+      /**
+       * Format: date
+       * @description Updated At
+       */
+      updatedAt: Date;
+      /**
+       * @description Deleted
+       * @default false
+       */
+      deleted?: boolean;
+      /**
+       * @description Instance ID
+       * @default 0
+       */
+      iid?: number; /** @description ID */
+      id: number | string; /** @description Role Name */
+      name: string;
+    };
+    'home-user.dto.passportJwt': {
+      passport: components$1['schemas']['home-user.dto.passport'];
+      jwt: components$1['schemas']['a-jwt.dto.jwtToken'];
+    };
+    'a-jwt.dto.jwtToken': {
+      accessToken: string;
+      refreshToken: string;
+      expiresIn: number;
+    };
+    'home-user.dto.register': {
+      username: string; /** Format: email */
+      email: string;
+      password: string;
+      passwordConfirm: string;
+      captcha: components$1['schemas']['a-captcha.dto.captchaVerify_c3cd80b1eeafe39bfe4433491bb081d68e84797e'];
+    };
+    'a-captcha.dto.captchaVerify_c3cd80b1eeafe39bfe4433491bb081d68e84797e': {
+      id: string;
+      token: string;
+    };
+    'home-user.dto.login': {
+      username: string;
+      password: string;
+      captcha: components$1['schemas']['a-captcha.dto.captchaVerify_c3cd80b1eeafe39bfe4433491bb081d68e84797e_3218e7d152830e08f6e764b9e0c3796df929ee2b'];
+    };
+    'a-captcha.dto.captchaVerify_c3cd80b1eeafe39bfe4433491bb081d68e84797e_3218e7d152830e08f6e764b9e0c3796df929ee2b': {
+      id: string;
+      token: string;
+    }; /** @description Create Product */
+    'test-rest.dto.productCreate': {
+      /** @description Name */name: string; /** @description Description */
+      description?: string | undefined; /** @description Price */
+      price: number;
+      /**
+       * @description Quantity
+       * @default 0
+       */
+      quantity?: number; /** @description Amount */
+      amount: number; /** @description Custom */
+      _custom?: unknown; /** @description Test */
+      _test?: unknown;
+    };
+    'test-rest.dto.productQueryRes': {
+      list: {
+        /**
+         * Format: date
+         * @description Created At
+         */
+        createdAt: Date;
+        /**
+         * Format: date
+         * @description Updated At
+         */
+        updatedAt: Date;
+        /**
+         * @description Deleted
+         * @default false
+         */
+        deleted?: boolean;
+        /**
+         * @description Instance ID
+         * @default 0
+         */
+        iid?: number; /** @description ID */
+        id: number | string; /** @description Name */
+        name: string; /** @description Description */
+        description?: string | undefined; /** @description Price */
+        price: number;
+        /**
+         * @description Quantity
+         * @default 0
+         */
+        quantity?: number; /** @description Amount */
+        amount: number; /** @description Custom */
+        _custom?: unknown;
+      }[];
+      total: string;
+      pageCount: number;
+      pageSize: number;
+      pageNo: number;
+    }; /** @description Product Info */
+    'test-rest.entity.product': {
+      /**
+       * Format: date
+       * @description Created At
+       */
+      createdAt: Date;
+      /**
+       * Format: date
+       * @description Updated At
+       */
+      updatedAt: Date;
+      /**
+       * @description Deleted
+       * @default false
+       */
+      deleted?: boolean;
+      /**
+       * @description Instance ID
+       * @default 0
+       */
+      iid?: number; /** @description ID */
+      id: number | string; /** @description Name */
+      name: string; /** @description Description */
+      description?: string | undefined; /** @description Price */
+      price: number;
+      /**
+       * @description Quantity
+       * @default 0
+       */
+      quantity?: number; /** @description Amount */
+      amount: number; /** @description Custom */
+      _custom?: unknown;
+    } | undefined; /** @description Update Product */
+    'test-rest.dto.productUpdate': {
+      /** @description Name */name: string; /** @description Description */
+      description?: string | undefined; /** @description Price */
+      price: number;
+      /**
+       * @description Quantity
+       * @default 0
+       */
+      quantity?: number; /** @description Amount */
+      amount: number; /** @description Custom */
+      _custom?: unknown;
+    };
+    'test-ssr.dto.testResult': {
+      id: number | string;
+      /**
+       * @description Name
+       * @default tom
+       */
+      name?: string;
+      married: boolean;
+      details: components$1['schemas']['test-ssr.dto.testDetail'][]; /** @default custom */
+      _custom1?: string | undefined; /** @default custom */
+      _custom2?: string | undefined; /** @default custom */
+      _custom3?: string | undefined; /** @default custom */
+      _custom4?: string | undefined; /** @default custom */
+      _custom5?: string | undefined;
+      _customCopy?: string | undefined;
+      _customCopied?: boolean | undefined;
+    };
+    'test-ssr.dto.testDetail': {
+      name: string;
+      price: number;
+      quantity: number;
+      amount: number;
+    };
+    'test-ssr.dto.testBody': {
+      id: number | string;
+      /**
+       * @description Name
+       * @default tom
+       */
+      name?: string;
+      married: boolean;
+      details: components$1['schemas']['test-ssr.dto.testDetail'][]; /** @default custom */
+      _custom1?: string | undefined; /** @default custom */
+      _custom2?: string | undefined; /** @default custom */
+      _custom3?: string | undefined; /** @default custom */
+      _custom4?: string | undefined; /** @default custom */
+      _custom5?: string | undefined;
+      _customCopy?: string | undefined;
+      _customCopied?: boolean | undefined;
+    };
+    'test-captcha.dto.signin': {
+      username: string;
+      password: string;
+      captcha?: unknown;
+    };
+    'a-paypal.entity.paypalRecord': {
+      /**
+       * Format: date
+       * @description Created At
+       */
+      createdAt: Date;
+      /**
+       * Format: date
+       * @description Updated At
+       */
+      updatedAt: Date;
+      /**
+       * @description Deleted
+       * @default false
+       */
+      deleted?: boolean;
+      /**
+       * @description Instance ID
+       * @default 0
+       */
+      iid?: number; /** @description ID */
+      id: number | string;
+      userId: number | string; /** @default 0 */
+      status?: number;
+      prepayId: string;
+      payload: components$1['schemas']['a-paypal.dto.paypalOrderRecordPayload'];
+      options: components$1['schemas']['a-paypal.dto.paypalOrderRecordOptions'];
+    };
+    'a-paypal.dto.paypalOrderRecordPayload': {
+      remark: string;
+      total: string;
+      currencyCode: string;
+    };
+    'a-paypal.dto.paypalOrderRecordOptions': {
+      brandName: string;
+      returnUrl: string;
+      cancelUrl: string;
+      returnTo: string;
+      scene: string;
+      orderId: number | string;
+    };
+    'a-play.dto.play': {
+      args: string[];
+      projectPath: string;
+    };
+    'test-vona.dto.userLazy': {
+      name: string;
+      user?: components$1['schemas']['test-vona.dto.userLazy'];
+      roles?: components$1['schemas']['test-vona.dto.roleLazy'][] | undefined;
+    };
+    'test-vona.dto.roleLazy': {
+      name: string;
+      users?: components$1['schemas']['test-vona.dto.userLazy'][] | undefined;
+    };
+    'test-vona.entity.user_2c7d642ee581efa300341e343180fbb0ecdc785d_1816ff740d81c738ec055c7038bbd93beb9405a7': {
+      /** @description ID */id: number | string;
+      name: string;
+    };
+    'test-vona.entity.post_a6ba2076b5b70a3c098374cc82d418bd1ab226c3': {
+      count_all?: string | undefined;
+      count_title?: string | undefined;
+      sum_stars?: string | undefined;
+    };
+    'test-vona.entity.post_729883d7de16ce4401b26f75bebe618c8948ff64': {
+      /** @description Title */title: string;
+      count_all?: string | undefined;
+      count_title?: string | undefined;
+      sum_stars?: string | undefined;
+    };
+    'test-vona.dto.userUpdate': {
+      name: string;
+      age?: number | undefined;
+      scores?: number | undefined;
+      posts?: {
+        /**
+         * @description Deleted
+         * @default false
+         */
+        deleted?: boolean | undefined; /** @description ID */
+        id?: number | string | undefined; /** @description Title */
+        title: string;
+      }[] | undefined;
+    };
+    'test-vona.entity.category_2c7d642ee581efa300341e343180fbb0ecdc785d': {
+      /** @description ID */id: number | string;
+      name: string;
+      children: components$1['schemas']['test-vona.entity.category_2c7d642ee581efa300341e343180fbb0ecdc785d'][];
+    };
+    'test-vona.dto.categoryTree': {
+      /** @description ID */id: number | string;
+      name: string;
+      children: components$1['schemas']['test-vona.entity.category_2c7d642ee581efa300341e343180fbb0ecdc785d'][];
+    }; /** @description User */
+    'test-vona.dto.user': {
+      /** @description User ID */id: number | string;
+      name: string;
+      married: boolean;
+    };
+    'test-vona.dto.orderCreate': {
+      /**
+       * @description Order No
+       * @default
+       */
+      orderNo?: string; /** @description Remark */
+      remark?: string | undefined;
+      products?: components$1['schemas']['test-vona.entity.product_29731960f3f38d3572bc2f8a01a7498bfe927055'][] | undefined;
+    };
+    'test-vona.entity.product_29731960f3f38d3572bc2f8a01a7498bfe927055': {
+      /** @description Name */name: string; /** @description Price */
+      price: number; /** @description Quantity */
+      quantity: number; /** @description Amount */
+      amount: number;
+    };
+    'test-vona.dto.orderUpdate': {
+      /**
+       * @description Order No
+       * @default
+       */
+      orderNo?: string; /** @description Remark */
+      remark?: string | undefined;
+      products?: components$1['schemas']['test-vona.entity.product_9cf2c6bcd41713270c34bcfce21b7b4942e3fbc6'][] | undefined;
+    };
+    'test-vona.entity.product_9cf2c6bcd41713270c34bcfce21b7b4942e3fbc6': {
+      /**
+       * @description Deleted
+       * @default false
+       */
+      deleted?: boolean | undefined; /** @description ID */
+      id?: number | string | undefined; /** @description Name */
+      name: string; /** @description Price */
+      price: number; /** @description Quantity */
+      quantity: number; /** @description Amount */
+      amount: number;
+    };
+    'test-vona.dto.orderResult': {
+      /**
+       * Format: date
+       * @description Created At
+       */
+      createdAt: Date;
+      /**
+       * Format: date
+       * @description Updated At
+       */
+      updatedAt: Date;
+      /**
+       * @description Deleted
+       * @default false
+       */
+      deleted?: boolean;
+      /**
+       * @description Instance ID
+       * @default 0
+       */
+      iid?: number; /** @description ID */
+      id: number | string;
+      /**
+       * @description Order No
+       * @default
+       */
+      orderNo?: string; /** @description Remark */
+      remark?: string | undefined;
+      userId: number | string;
+      user?: components$1['schemas']['test-vona.entity.user_2c7d642ee581efa300341e343180fbb0ecdc785d_1816ff740d81c738ec055c7038bbd93beb9405a7'];
+      products: components$1['schemas']['test-vona.entity.product_bce173590aaef19772f1ae3a82196493c2633e2e'][];
+    };
+    'test-vona.entity.product_bce173590aaef19772f1ae3a82196493c2633e2e': {
+      /** @description ID */id: number | string; /** @description Name */
+      name: string; /** @description Price */
+      price: number; /** @description Quantity */
+      quantity: number; /** @description Amount */
+      amount: number;
+    };
+    'test-vona.dto.orderResultPage': {
+      list: {
+        /**
+         * Format: date
+         * @description Created At
+         */
+        createdAt: Date;
+        /**
+         * Format: date
+         * @description Updated At
+         */
+        updatedAt: Date;
+        /**
+         * @description Deleted
+         * @default false
+         */
+        deleted?: boolean;
+        /**
+         * @description Instance ID
+         * @default 0
+         */
+        iid?: number; /** @description ID */
+        id: number | string;
+        /**
+         * @description Order No
+         * @default
+         */
+        orderNo?: string; /** @description Remark */
+        remark?: string | undefined;
+        userId: number | string;
+        user?: components$1['schemas']['test-vona.entity.user_2c7d642ee581efa300341e343180fbb0ecdc785d_1816ff740d81c738ec055c7038bbd93beb9405a7'];
+        products: components$1['schemas']['test-vona.entity.product_bce173590aaef19772f1ae3a82196493c2633e2e'][];
+      }[];
+      total: string;
+      pageCount: number;
+      pageSize: number;
+      pageNo: number;
+    };
+    'test-vona.dto.postGroup': {
+      userId: number | string;
+      count_all?: string | undefined;
+      sum_stars?: string | undefined;
+    };
+    'test-vona.dto.postAggregate': {
+      count_all?: string | undefined;
+      count_stars?: string | undefined;
+      sum_stars?: string | undefined;
+      avg_stars?: string | undefined;
+      min_stars?: string | undefined;
+      max_stars?: string | undefined;
+    };
+    'test-vona.dto.postQueryRes': {
+      list: {
+        /**
+         * Format: date
+         * @description Created At
+         */
+        createdAt: Date;
+        /**
+         * Format: date
+         * @description Updated At
+         */
+        updatedAt: Date;
+        /**
+         * @description Deleted
+         * @default false
+         */
+        deleted?: boolean;
+        /**
+         * @description Instance ID
+         * @default 0
+         */
+        iid?: number; /** @description ID */
+        id: number | string; /** @description Title */
+        title: string;
+        userId: number | string;
+        stars?: number | undefined;
+        postContent?: {
+          /** @description ID */id: number | string;
+          content: string;
+        };
+        user?: components$1['schemas']['test-vona.entity.user_2c7d642ee581efa300341e343180fbb0ecdc785d_1816ff740d81c738ec055c7038bbd93beb9405a7'];
+      }[];
+      total: string;
+      pageCount: number;
+      pageSize: number;
+      pageNo: number;
+    };
+    'test-vona.dto.serializerSimple': {
+      password: string;
+      password2: string;
+      email?: unknown; /** Format: email */
+      email2: string; /** Format: email */
+      email3: string;
+      email4?: unknown; /** Format: email */
+      email5: string; /** Format: email */
+      email6: string; /** Format: email */
+      email7: string;
+      firstName: string;
+      lastName: string;
+      fullName?: string | undefined;
+      fullName2?: string | undefined;
+      fullName3?: string | undefined;
+      fullName4?: string | undefined;
+    };
+    'test-vona.dto.serializerArray': {
+      /** @description Simple */simples: components$1['schemas']['test-vona.dto.serializerSimple'][]; /** @description Simple */
+      simplesLazy: components$1['schemas']['test-vona.dto.serializerSimple'][];
+    };
+    'test-vona.dto.serializerLazy': {
+      simple: components$1['schemas']['test-vona.dto.serializerSimple_1c4b95bcfe8fe28a56dbcc7028097cf11836b4fc'];
+      simpleLazy?: components$1['schemas']['test-vona.dto.serializerSimple_542f7be0da9b85a67248a6a1a3629e72de5fdb33_cff0ae112a392da58caf5aa905749f3c4444c4ab'];
+    };
+    'test-vona.dto.serializerSimple_1c4b95bcfe8fe28a56dbcc7028097cf11836b4fc': {
+      password: string;
+      password2: string;
+      email?: unknown; /** Format: email */
+      email2: string; /** Format: email */
+      email3: string;
+      email4?: unknown; /** Format: email */
+      email5: string; /** Format: email */
+      email6: string; /** Format: email */
+      email7: string;
+      firstName: string;
+      lastName: string;
+      fullName?: string | undefined;
+      fullName2?: string | undefined;
+      fullName3?: string | undefined;
+      fullName4?: string | undefined;
+    };
+    /**
+     * title
+     * @description description
+     */
+    'test-vona.dto.serializerSimple_542f7be0da9b85a67248a6a1a3629e72de5fdb33_cff0ae112a392da58caf5aa905749f3c4444c4ab': {
+      password: string;
+      password2: string;
+      email?: unknown; /** Format: email */
+      email2: string; /** Format: email */
+      email3: string;
+      email4?: unknown; /** Format: email */
+      email5: string; /** Format: email */
+      email6: string; /** Format: email */
+      email7: string;
+      firstName: string;
+      lastName: string;
+      fullName?: string | undefined;
+      fullName2?: string | undefined;
+      fullName3?: string | undefined;
+      fullName4?: string | undefined;
+    };
+  };
+  responses: never;
+  parameters: never;
+  requestBodies: never;
+  headers: never;
+  pathItems: never;
+}
+interface operations$1 {
+  AuthMock_authorize: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            code: string;
+            message: string;
+            data?: unknown;
+          };
+        };
+      };
+    };
+  };
+  AuthMock_authorizePost: {
+    parameters: {
+      query: {
+        redirect_uri: string;
+        state: string;
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': {
+          username: string;
+        };
+      };
+    };
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            code: string;
+            message: string;
+            data?: unknown;
+          };
+        };
+      };
+    };
+  };
+  Captcha_create: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': {
+          scene: string;
+        };
+      };
+    };
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            code: string;
+            message: string;
+            data: components$1['schemas']['a-captcha.dto.captchaData'];
+          };
+        };
+      };
+    };
+  };
+  Captcha_refresh: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': {
+          id: string;
+          scene: string;
+        };
+      };
+    };
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            code: string;
+            message: string;
+            data: components$1['schemas']['a-captcha.dto.captchaData'];
+          };
+        };
+      };
+    };
+  };
+  Captcha_verifyImmediate: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': {
+          id: string;
+          token?: unknown;
+        };
+      };
+    };
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            code: string;
+            message: string;
+            data: string;
+          };
+        };
+      };
+    };
+  };
+  MailconfirmMail_emailConfirmCallback: {
+    parameters: {
+      query: {
+        token: string;
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            code: string;
+            message: string;
+            data?: unknown;
+          };
+        };
+      };
+    };
+  };
+  MailconfirmMail_passwordResetCallback: {
+    parameters: {
+      query: {
+        token: string;
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            code: string;
+            message: string;
+            data?: unknown;
+          };
+        };
+      };
+    };
+  };
+  HomeBaseMenu_retrieveMenus: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        publicPath: ((string | undefined) | undefined) | undefined;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            code: string;
+            message: string;
+            data: components$1['schemas']['a-menu.dto.menus'];
+          };
+        };
+      };
+    };
+  };
+  HomeBasePermission_retrievePermissions: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        resource: string;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            code: string;
+            message: string;
+            data: components$1['schemas']['a-permission.dto.permissions'];
+          };
+        };
+      };
+    };
+    authToken: true;
+  };
+  Home_index: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            code: string;
+            message: string;
+            data?: unknown;
+          };
+        };
+      };
+    };
+  };
+  HomeUserPassport_current: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            code: string;
+            message: string;
+            data?: components$1['schemas']['home-user.dto.passport'];
+          };
+        };
+      };
+    };
+  };
+  HomeUserPassport_logout: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            code: string;
+            message: string;
+            data?: unknown;
+          };
+        };
+      };
+    };
+    authToken: true;
+  };
+  HomeUserPassport_register: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components$1['schemas']['home-user.dto.register'];
+      };
+    };
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            code: string;
+            message: string;
+            data: components$1['schemas']['home-user.dto.passportJwt'];
+          };
+        };
+      };
+    };
+  };
+  HomeUserPassport_login: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components$1['schemas']['home-user.dto.login'];
+      };
+    };
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            code: string;
+            message: string;
+            data: components$1['schemas']['home-user.dto.passportJwt'];
+          };
+        };
+      };
+    };
+  };
+  HomeUserPassport_loginOauth: {
+    parameters: {
+      query?: {
+        redirect?: string | undefined;
+      };
+      header?: never;
+      path: {
+        module: string;
+        providerName: string;
+        clientName: ((string | undefined) | undefined) | undefined;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            code: string;
+            message: string;
+            data?: unknown;
+          };
+        };
+      };
+    };
+  };
+  HomeUserPassport_associate: {
+    parameters: {
+      query?: {
+        redirect?: string | undefined;
+      };
+      header?: never;
+      path: {
+        module: string;
+        providerName: string;
+        clientName: ((string | undefined) | undefined) | undefined;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            code: string;
+            message: string;
+            data: components$1['schemas']['home-user.dto.passportJwt'];
+          };
+        };
+      };
+    };
+    authToken: true;
+  };
+  HomeUserPassport_migrate: {
+    parameters: {
+      query?: {
+        redirect?: string | undefined;
+      };
+      header?: never;
+      path: {
+        module: string;
+        providerName: string;
+        clientName: ((string | undefined) | undefined) | undefined;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            code: string;
+            message: string;
+            data: components$1['schemas']['home-user.dto.passportJwt'];
+          };
+        };
+      };
+    };
+    authToken: true;
+  };
+  HomeUserPassport_refreshAuthToken: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': {
+          refreshToken: string;
+        };
+      };
+    };
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            code: string;
+            message: string;
+            data: components$1['schemas']['a-jwt.dto.jwtToken'];
+          };
+        };
+      };
+    };
+  };
+  HomeUserPassport_createPassportJwtFromOauthCode: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': {
+          code: string;
+        };
+      };
+    };
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            code: string;
+            message: string;
+            data: components$1['schemas']['home-user.dto.passportJwt'];
+          };
+        };
+      };
+    };
+  };
+  HomeUserPassport_createTempAuthToken: {
+    parameters: {
+      query?: {
+        path?: string | undefined;
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            code: string;
+            message: string;
+            data: string;
+          };
+        };
+      };
+    };
+    authToken: true;
+  };
+  TestAuthPassport_isAuthenticated: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            code: string;
+            message: string;
+            data: boolean;
+          };
+        };
+      };
+    };
+    authToken: true;
+  };
+  TestAuthPassport_current: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            code: string;
+            message: string;
+            data?: unknown;
+          };
+        };
+      };
+    };
+    authToken: true;
+  };
+  TestRestProduct_select: {
+    parameters: {
+      query?: {
+        columns?: string[] | undefined;
+        where?: {
+          [key: string]: unknown;
+        } | undefined;
+        orders?: string | string[][] | undefined;
+        pageNo?: number;
+        pageSize?: number;
+        createdAt?: string | undefined;
+        name?: string | undefined;
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            code: string;
+            message: string;
+            data: components$1['schemas']['test-rest.dto.productQueryRes'];
+          };
+        };
+      };
+    };
+    authToken: true;
+  };
+  TestRestProduct_create: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components$1['schemas']['test-rest.dto.productCreate'];
+      };
+    };
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            code: string;
+            message: string;
+            data: number | string;
+          };
+        };
+      };
+    };
+    authToken: true;
+  };
+  TestRestProduct_view: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number | string;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            code: string;
+            message: string;
+            data?: components$1['schemas']['test-rest.entity.product'];
+          };
+        };
+      };
+    };
+    authToken: true;
+  };
+  TestRestProduct_delete: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number | string;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            code: string;
+            message: string;
+            data?: unknown;
+          };
+        };
+      };
+    };
+    authToken: true;
+  };
+  TestRestProduct_update: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number | string;
+      };
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components$1['schemas']['test-rest.dto.productUpdate'];
+      };
+    };
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            code: string;
+            message: string;
+            data?: unknown;
+          };
+        };
+      };
+    };
+    authToken: true;
+  };
+  TestSsrToolOne_testGet: {
+    parameters: {
+      query: {
+        name: string;
+      };
+      header?: never;
+      path: {
+        id: ((number | undefined) | (string | undefined) | (undefined | undefined)) | undefined;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            code: string;
+            message: string;
+            data?: unknown;
+          };
+        };
+      };
+    };
+    authToken: true;
+  };
+  TestSsrToolOne_test: {
+    parameters: {
+      query: {
+        name: string;
+      };
+      header?: never;
+      path: {
+        id: ((number | undefined) | (string | undefined) | (undefined | undefined)) | undefined;
+      };
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components$1['schemas']['test-ssr.dto.testBody'];
+      };
+    };
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            code: string;
+            message: string;
+            data: components$1['schemas']['test-ssr.dto.testResult'];
+          };
+        };
+      };
+    };
+    authToken: true;
+  };
+  TestSsrToolTwo_test: {
+    parameters: {
+      query: {
+        name: string;
+      };
+      header?: never;
+      path: {
+        id: ((number | undefined) | (string | undefined) | (undefined | undefined)) | undefined;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            code: string;
+            message: string;
+            data: components$1['schemas']['test-ssr.dto.testResult'];
+          };
+        };
+      };
+    };
+  };
+  TestCaptcha_signin: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components$1['schemas']['test-captcha.dto.signin'];
+      };
+    };
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            code: string;
+            message: string;
+            data?: unknown;
+          };
+        };
+      };
+    };
+  };
+  Paypal_getRecord: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        recordId: number | string;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            code: string;
+            message: string;
+            data: components$1['schemas']['a-paypal.entity.paypalRecord'];
+          };
+        };
+      };
+    };
+    authToken: true;
+  };
+  Paypal_captureOrder: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        recordId: number | string;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            code: string;
+            message: string;
+            data?: unknown;
+          };
+        };
+      };
+    };
+    authToken: true;
+  };
+  Paypal_cancelOrder: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        recordId: number | string;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            code: string;
+            message: string;
+            data?: unknown;
+          };
+        };
+      };
+    };
+    authToken: true;
+  };
+  Play_index: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components$1['schemas']['a-play.dto.play'];
+      };
+    };
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            code: string;
+            message: string;
+            data?: unknown;
+          };
+        };
+      };
+    };
+    authToken: true;
+  };
+  TestVonaDtoTest_getUserLazy: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            code: string;
+            message: string;
+            data: components$1['schemas']['test-vona.dto.userLazy'];
+          };
+        };
+      };
+    };
+    authToken: true;
+  };
+  TestVonaDtoTest_getPostDynamic: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            code: string;
+            message: string;
+            data: {
+              /**
+               * Created At
+               * Format: date
+               */
+              createdAt: Date;
+              /**
+               * Updated At
+               * Format: date
+               */
+              updatedAt: Date;
+              /**
+               * Deleted
+               * @default false
+               */
+              deleted?: boolean;
+              /**
+               * Instance ID
+               * @default 0
+               */
+              iid?: number; /** ID */
+              id: number | string; /** Title */
+              title: string;
+              userId: number | string;
+              stars?: number | undefined;
+              user?: components$1['schemas']['test-vona.entity.user_2c7d642ee581efa300341e343180fbb0ecdc785d_1816ff740d81c738ec055c7038bbd93beb9405a7'];
+            };
+          };
+        };
+      };
+    };
+    authToken: true;
+  };
+  TestVonaDtoTest_getUserStats: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            code: string;
+            message: string;
+            data: {
+              /**
+               * Created At
+               * Format: date
+               */
+              createdAt: Date;
+              /**
+               * Updated At
+               * Format: date
+               */
+              updatedAt: Date;
+              /**
+               * Deleted
+               * @default false
+               */
+              deleted?: boolean;
+              /**
+               * Instance ID
+               * @default 0
+               */
+              iid?: number; /** ID */
+              id: number | string;
+              name: string;
+              age?: number | undefined;
+              scores?: number | undefined;
+              posts?: components$1['schemas']['test-vona.entity.post_a6ba2076b5b70a3c098374cc82d418bd1ab226c3'];
+            };
+          };
+        };
+      };
+    };
+    authToken: true;
+  };
+  TestVonaDtoTest_getUserStatsGroup: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            code: string;
+            message: string;
+            data: {
+              /**
+               * Created At
+               * Format: date
+               */
+              createdAt: Date;
+              /**
+               * Updated At
+               * Format: date
+               */
+              updatedAt: Date;
+              /**
+               * Deleted
+               * @default false
+               */
+              deleted?: boolean;
+              /**
+               * Instance ID
+               * @default 0
+               */
+              iid?: number; /** ID */
+              id: number | string;
+              name: string;
+              age?: number | undefined;
+              scores?: number | undefined;
+              posts: components$1['schemas']['test-vona.entity.post_729883d7de16ce4401b26f75bebe618c8948ff64'][];
+            };
+          };
+        };
+      };
+    };
+    authToken: true;
+  };
+  TestVonaDtoTest_createUser: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components$1['schemas']['test-vona.dto.userCreate'];
+      };
+    };
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            code: string;
+            message: string;
+            data?: unknown;
+          };
+        };
+      };
+    };
+    authToken: true;
+  };
+  TestVonaDtoTest_updateUser: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: unknown;
+      };
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components$1['schemas']['test-vona.dto.userUpdate'];
+      };
+    };
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            code: string;
+            message: string;
+            data?: unknown;
+          };
+        };
+      };
+    };
+    authToken: true;
+  };
+  TestVonaDtoTest_getCategoryTree: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            code: string;
+            message: string;
+            data: {
+              /** ID */id: number | string;
+              name: string;
+              children: components$1['schemas']['test-vona.entity.category_2c7d642ee581efa300341e343180fbb0ecdc785d'][];
+            }[];
+          };
+        };
+      };
+    };
+    authToken: true;
+  };
+  TestVonaDtoTest_getCategoryTree2: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            code: string;
+            message: string;
+            data: components$1['schemas']['test-vona.dto.categoryTree'][];
+          };
+        };
+      };
+    };
+    authToken: true;
+  };
+  TestVonaGuardPassport_testUserName: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            code: string;
+            message: string;
+            data?: unknown;
+          };
+        };
+      };
+    };
+    authToken: true;
+  };
+  TestVonaGuardPassport_testUserNameFail: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            code: string;
+            message: string;
+            data?: unknown;
+          };
+        };
+      };
+    };
+    authToken: true;
+  };
+  TestVonaGuardPassport_testRoleName: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            code: string;
+            message: string;
+            data?: unknown;
+          };
+        };
+      };
+    };
+    authToken: true;
+  };
+  TestVonaGuardPassport_testRoleNameFail: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            code: string;
+            message: string;
+            data?: unknown;
+          };
+        };
+      };
+    };
+    authToken: true;
+  };
+  Onion_index: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            code: string;
+            message: string;
+            data?: unknown;
+          };
+        };
+      };
+    };
+  };
+  Onion_echo: {
+    parameters: {
+      query?: {
+        id?: number;
+        name?: number | undefined;
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': {
+          /** @description User ID */id: number;
+        };
+      };
+    };
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            code: string;
+            message: string;
+            data?: string | undefined;
+          };
+        };
+      };
+    };
+  };
+  Onion_echo2: {
+    parameters: {
+      query: {
+        id: number | string;
+        name: string;
+        married: boolean;
+      };
+      header?: never;
+      path: {
+        userId: number;
+        userName: string;
+      };
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': {
+          /** @description User ID */id: number;
+        };
+      };
+    };
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            code: string;
+            message: string;
+            data: components$1['schemas']['test-vona.dto.user'];
+          };
+        };
+      };
+    };
+  };
+  Onion_echo3: {
+    parameters: {
+      query?: {
+        id?: number | undefined;
+      };
+      header: {
+        Accept: string;
+      };
+      path: {
+        userId: number;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            code: string;
+            message: string;
+            data?: unknown;
+          };
+        };
+      };
+    };
+  };
+  Onion_echo4: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: {
+      content: {
+        'application/json': components$1['schemas']['test-vona.dto.user'][] | undefined;
+      };
+    };
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            code: string;
+            message: string;
+            data: components$1['schemas']['test-vona.dto.user'][];
+          };
+        };
+      };
+    };
+  };
+  Onion_echo5: {
+    parameters: {
+      query?: {
+        ids?: number[];
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            code: string;
+            message: string;
+            data?: unknown;
+          };
+        };
+      };
+    };
+  };
+  Onion_echo6: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            code: string;
+            message: string;
+            data?: unknown;
+          };
+        };
+      };
+    };
+    authToken: true;
+  };
+  TestVonaOrder_create: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components$1['schemas']['test-vona.dto.orderCreate'];
+      };
+    };
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            code: string;
+            message: string;
+            data: number | string;
+          };
+        };
+      };
+    };
+    authToken: true;
+  };
+  TestVonaOrder_update: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: unknown;
+      };
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components$1['schemas']['test-vona.dto.orderUpdate'];
+      };
+    };
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            code: string;
+            message: string;
+            data?: unknown;
+          };
+        };
+      };
+    };
+    authToken: true;
+  };
+  TestVonaOrder_findAll: {
+    parameters: {
+      query?: {
+        columns?: string[] | undefined;
+        where?: {
+          [key: string]: unknown;
+        } | undefined;
+        orders?: string | string[][] | undefined;
+        orderNo?: string | undefined;
+        remark?: string | undefined;
+        userName?: string | undefined;
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            code: string;
+            message: string;
+            data: components$1['schemas']['test-vona.dto.orderResult'][];
+          };
+        };
+      };
+    };
+    authToken: true;
+  };
+  TestVonaOrder_findMany: {
+    parameters: {
+      query?: {
+        columns?: string[] | undefined;
+        where?: {
+          [key: string]: unknown;
+        } | undefined;
+        orders?: string | string[][] | undefined;
+        pageNo?: number;
+        orderNo?: string | undefined;
+        remark?: string | undefined;
+        pageSize?: number;
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            code: string;
+            message: string;
+            data: components$1['schemas']['test-vona.dto.orderResultPage'];
+          };
+        };
+      };
+    };
+    authToken: true;
+  };
+  TestVonaPost_group: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            code: string;
+            message: string;
+            data: components$1['schemas']['test-vona.dto.postGroup'][];
+          };
+        };
+      };
+    };
+    authToken: true;
+  };
+  TestVonaPost_aggregate: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            code: string;
+            message: string;
+            data: components$1['schemas']['test-vona.dto.postAggregate'];
+          };
+        };
+      };
+    };
+    authToken: true;
+  };
+  TestVonaPost_findManyEcho: {
+    parameters: {
+      query?: {
+        columns?: string[] | undefined;
+        where?: {
+          [key: string]: unknown;
+        } | undefined;
+        orders?: string | string[][] | undefined;
+        pageNo?: number;
+        pageSize?: number;
+        createdAt?: string | undefined;
+        title?: string | undefined;
+        userName?: string | undefined;
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            code: string;
+            message: string;
+            data: components$1['schemas']['test-vona.dto.postQueryRes'];
+          };
+        };
+      };
+    };
+  };
+  TestVonaPost_findMany: {
+    parameters: {
+      query?: {
+        columns?: string[] | undefined;
+        where?: {
+          [key: string]: unknown;
+        } | undefined;
+        orders?: string | string[][] | undefined;
+        pageNo?: number;
+        pageSize?: number;
+        createdAt?: string | undefined;
+        title?: string | undefined;
+        userName?: string | undefined;
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            code: string;
+            message: string;
+            data: components$1['schemas']['test-vona.dto.postQueryRes'];
+          };
+        };
+      };
+    };
+  };
+  TestVonaSerializer_echoSimple: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components$1['schemas']['test-vona.dto.serializerSimple'];
+      };
+    };
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            code: string;
+            message: string;
+            data: components$1['schemas']['test-vona.dto.serializerSimple'];
+          };
+        };
+      };
+    };
+  };
+  TestVonaSerializer_echoArray: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components$1['schemas']['test-vona.dto.serializerArray'][];
+      };
+    };
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            code: string;
+            message: string;
+            data: components$1['schemas']['test-vona.dto.serializerArray'][];
+          };
+        };
+      };
+    };
+  };
+  TestVonaSerializer_echoLazy: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components$1['schemas']['test-vona.dto.serializerLazy'];
+      };
+    };
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            code: string;
+            message: string;
+            data: components$1['schemas']['test-vona.dto.serializerLazy'];
+          };
+        };
+      };
+    };
+  };
+  TestVonaUpload_fields: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'multipart/form-data': {
+          checkes: string[];
+          /**
+           * your name
+           * @default zhennann
+           */
+          name?: string;
+        };
+      };
+    };
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            code: string;
+            message: string;
+            data?: unknown;
+          };
+        };
+      };
+    };
+  };
+  TestVonaUpload_file: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'multipart/form-data': {
+          /** @default zhennann */name?: string; /** Format: binary */
+          welcome: Blob;
+        };
+      };
+    };
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            code: string;
+            message: string;
+            data?: unknown;
+          };
+        };
+      };
+    };
+  };
+  TestVonaUpload_files: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'multipart/form-data': {
+          /** images */images: Blob[];
+          /**
+           * single file
+           * Format: binary
+           */
+          welcome1: Blob; /** Format: binary */
+          welcome2: Blob; /** more files */
+          blobs: Blob[];
+        };
+      };
+    };
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            code: string;
+            message: string;
+            data?: unknown;
+          };
+        };
+      };
+    };
+  };
+}
+//#endregion
+//#region src/suite/a-home/modules/home-api/src/api/openapi/schemas.d.ts
+type ApiSchemaAMenuDtoMenuItem$1 = components$1['schemas']['a-menu.dto.menuItem'];
+type ApiSchemaAMenuDtoMenuGroup$1 = components$1['schemas']['a-menu.dto.menuGroup'];
+type ApiSchemaTestSsrDtoTestResult$1 = components$1['schemas']['test-ssr.dto.testResult'];
+type ApiSchemaTestSsrDtoTestBody$1 = components$1['schemas']['test-ssr.dto.testBody'];
+type ApiSchemaTestSsrDtoTestBodyPartial$1 = Partial<ApiSchemaTestSsrDtoTestBody$1>;
+//#endregion
+//#region src/suite/a-home/modules/home-api/src/api/captcha.d.ts
+type ApiApiCaptchacreateRequestBody = {
+  scene: string;
+};
+type ApiApiCaptcharefreshRequestBody = {
+  id: string;
+  scene: string;
+};
+type ApiApiCaptchaverifyImmediateRequestBody = {
+  id: string;
+  token?: unknown;
+};
+declare class ApiCaptcha extends BeanApiBase {
+  create(body: ApiApiCaptchacreateRequestBody, options?: IApiActionOptions): Promise<{
+    id: string;
+    provider: string;
+    token?: unknown;
+    payload?: unknown;
+  }>;
+  refresh(body: ApiApiCaptcharefreshRequestBody, options?: IApiActionOptions): Promise<{
+    id: string;
+    provider: string;
+    token?: unknown;
+    payload?: unknown;
+  }>;
+  verifyImmediate(body: ApiApiCaptchaverifyImmediateRequestBody, options?: IApiActionOptions): Promise<string>;
+}
+//#endregion
+//#region src/suite/a-home/modules/home-api/src/api/home.d.ts
+declare class ApiHome extends BeanApiBase {
+  /** @description Home */
+  index(options?: IApiActionOptions): Promise<unknown>;
+}
+//#endregion
+//#region src/suite/a-home/modules/home-api/src/api/homeBaseMenu.d.ts
+/** HomeBaseMenu_retrieveMenus */
+declare const ApiApiHomeBaseMenuretrieveMenusPath$1 = "/api/home/base/menu/{publicPath?}";
+type ApiApiHomeBaseMenuretrieveMenusPath$1 = '/api/home/base/menu/{publicPath?}';
+type ApiApiHomeBaseMenuretrieveMenusMethod$1 = 'get';
+type ApiApiHomeBaseMenuretrieveMenusRequestParams$1 = paths$1[ApiApiHomeBaseMenuretrieveMenusPath$1][ApiApiHomeBaseMenuretrieveMenusMethod$1]['parameters']['path'];
+declare class ApiHomeBaseMenu$1 extends BeanApiBase {
+  retrieveMenus(options: {
+    params: ApiApiHomeBaseMenuretrieveMenusRequestParams$1;
+  } & IApiActionOptions): Promise<{
+    menus?: components$1['schemas']['a-menu.dto.menuItem'][] | undefined;
+    groups?: components$1['schemas']['a-menu.dto.menuGroup'][] | undefined;
+  }>;
+}
+//#endregion
+//#region src/suite/a-home/modules/home-api/src/api/homeBasePermission.d.ts
+/** HomeBasePermission_retrievePermissions */
+declare const ApiApiHomeBasePermissionretrievePermissionsPath = "/api/home/base/permission/{resource}";
+type ApiApiHomeBasePermissionretrievePermissionsPath = '/api/home/base/permission/{resource}';
+type ApiApiHomeBasePermissionretrievePermissionsMethod = 'get';
+type ApiApiHomeBasePermissionretrievePermissionsRequestParams = paths$1[ApiApiHomeBasePermissionretrievePermissionsPath][ApiApiHomeBasePermissionretrievePermissionsMethod]['parameters']['path'];
+declare class ApiHomeBasePermission extends BeanApiBase {
+  retrievePermissions(options: {
+    params: ApiApiHomeBasePermissionretrievePermissionsRequestParams;
+  } & IApiActionOptions): Promise<{
+    roleIds?: (number | string)[] | undefined;
+    roleNames?: string[] | undefined;
+    actions?: unknown;
+  }>;
+}
+//#endregion
+//#region src/suite/a-home/modules/home-api/src/api/homeUserPassport.d.ts
+type ApiApiHomeUserPassportregisterRequestBody = components$1['schemas']['home-user.dto.register'];
+type ApiApiHomeUserPassportloginRequestBody = components$1['schemas']['home-user.dto.login'];
+/** HomeUserPassport_loginOauth */
+declare const ApiApiHomeUserPassportloginOauthPath = "/api/home/user/passport/login/{module}/{providerName}/{clientName?}";
+type ApiApiHomeUserPassportloginOauthPath = '/api/home/user/passport/login/{module}/{providerName}/{clientName?}';
+type ApiApiHomeUserPassportloginOauthMethod = 'get';
+type ApiApiHomeUserPassportloginOauthRequestParams = paths$1[ApiApiHomeUserPassportloginOauthPath][ApiApiHomeUserPassportloginOauthMethod]['parameters']['path'];
+type ApiApiHomeUserPassportloginOauthRequestQuery = paths$1[ApiApiHomeUserPassportloginOauthPath][ApiApiHomeUserPassportloginOauthMethod]['parameters']['query'];
+/** HomeUserPassport_associate */
+declare const ApiApiHomeUserPassportassociatePath = "/api/home/user/passport/associate/{module}/{providerName}/{clientName?}";
+type ApiApiHomeUserPassportassociatePath = '/api/home/user/passport/associate/{module}/{providerName}/{clientName?}';
+type ApiApiHomeUserPassportassociateMethod = 'get';
+type ApiApiHomeUserPassportassociateRequestParams = paths$1[ApiApiHomeUserPassportassociatePath][ApiApiHomeUserPassportassociateMethod]['parameters']['path'];
+type ApiApiHomeUserPassportassociateRequestQuery = paths$1[ApiApiHomeUserPassportassociatePath][ApiApiHomeUserPassportassociateMethod]['parameters']['query'];
+/** HomeUserPassport_migrate */
+declare const ApiApiHomeUserPassportmigratePath = "/api/home/user/passport/migrate/{module}/{providerName}/{clientName?}";
+type ApiApiHomeUserPassportmigratePath = '/api/home/user/passport/migrate/{module}/{providerName}/{clientName?}';
+type ApiApiHomeUserPassportmigrateMethod = 'get';
+type ApiApiHomeUserPassportmigrateRequestParams = paths$1[ApiApiHomeUserPassportmigratePath][ApiApiHomeUserPassportmigrateMethod]['parameters']['path'];
+type ApiApiHomeUserPassportmigrateRequestQuery = paths$1[ApiApiHomeUserPassportmigratePath][ApiApiHomeUserPassportmigrateMethod]['parameters']['query'];
+type ApiApiHomeUserPassportrefreshAuthTokenRequestBody = {
+  refreshToken: string;
+};
+type ApiApiHomeUserPassportcreatePassportJwtFromOauthCodeRequestBody = {
+  code: string;
+};
+/** HomeUserPassport_createTempAuthToken */
+declare const ApiApiHomeUserPassportcreateTempAuthTokenPath = "/api/home/user/passport/createTempAuthToken";
+type ApiApiHomeUserPassportcreateTempAuthTokenPath = '/api/home/user/passport/createTempAuthToken';
+type ApiApiHomeUserPassportcreateTempAuthTokenMethod = 'post';
+type ApiApiHomeUserPassportcreateTempAuthTokenRequestQuery = paths$1[ApiApiHomeUserPassportcreateTempAuthTokenPath][ApiApiHomeUserPassportcreateTempAuthTokenMethod]['parameters']['query'];
+declare class ApiHomeUserPassport extends BeanApiBase {
+  current(options?: IApiActionOptions): Promise<{
+    user: components$1['schemas']['home-user.entity.user'];
+    auth: components$1['schemas']['a-auth.dto.auth'];
+    roles: components$1['schemas']['home-user.entity.role'][];
+  } | undefined>;
+  logout(body?: undefined, options?: IApiActionOptions): Promise<unknown>;
+  register(body: ApiApiHomeUserPassportregisterRequestBody, options?: IApiActionOptions): Promise<{
+    passport: components$1['schemas']['home-user.dto.passport'];
+    jwt: components$1['schemas']['a-jwt.dto.jwtToken'];
+  }>;
+  login(body: ApiApiHomeUserPassportloginRequestBody, options?: IApiActionOptions): Promise<{
+    passport: components$1['schemas']['home-user.dto.passport'];
+    jwt: components$1['schemas']['a-jwt.dto.jwtToken'];
+  }>;
+  loginOauth(options: {
+    params: ApiApiHomeUserPassportloginOauthRequestParams;
+    query?: ApiApiHomeUserPassportloginOauthRequestQuery;
+  } & IApiActionOptions): Promise<unknown>;
+  associate(options: {
+    params: ApiApiHomeUserPassportassociateRequestParams;
+    query?: ApiApiHomeUserPassportassociateRequestQuery;
+  } & IApiActionOptions): Promise<{
+    passport: components$1['schemas']['home-user.dto.passport'];
+    jwt: components$1['schemas']['a-jwt.dto.jwtToken'];
+  }>;
+  migrate(options: {
+    params: ApiApiHomeUserPassportmigrateRequestParams;
+    query?: ApiApiHomeUserPassportmigrateRequestQuery;
+  } & IApiActionOptions): Promise<{
+    passport: components$1['schemas']['home-user.dto.passport'];
+    jwt: components$1['schemas']['a-jwt.dto.jwtToken'];
+  }>;
+  refreshAuthToken(body: ApiApiHomeUserPassportrefreshAuthTokenRequestBody, options?: IApiActionOptions): Promise<{
+    accessToken: string;
+    refreshToken: string;
+    expiresIn: number;
+  }>;
+  createPassportJwtFromOauthCode(body: ApiApiHomeUserPassportcreatePassportJwtFromOauthCodeRequestBody, options?: IApiActionOptions): Promise<{
+    passport: components$1['schemas']['home-user.dto.passport'];
+    jwt: components$1['schemas']['a-jwt.dto.jwtToken'];
+  }>;
+  createTempAuthToken(body?: undefined, options?: {
+    query?: ApiApiHomeUserPassportcreateTempAuthTokenRequestQuery;
+  } & IApiActionOptions): Promise<string>;
+}
+//#endregion
+//#region src/suite/a-home/modules/home-api/src/api/testSsrToolOne.d.ts
+/** TestSsrToolOne_testGet */
+declare const ApiApiTestSsrToolOnetestGetPath = "/api/test/ssr/toolOne/test/{id?}";
+type ApiApiTestSsrToolOnetestGetPath = '/api/test/ssr/toolOne/test/{id?}';
+type ApiApiTestSsrToolOnetestGetMethod = 'get';
+type ApiApiTestSsrToolOnetestGetRequestParams = paths$1[ApiApiTestSsrToolOnetestGetPath][ApiApiTestSsrToolOnetestGetMethod]['parameters']['path'];
+type ApiApiTestSsrToolOnetestGetRequestQuery = paths$1[ApiApiTestSsrToolOnetestGetPath][ApiApiTestSsrToolOnetestGetMethod]['parameters']['query'];
+/** TestSsrToolOne_test */
+declare const ApiApiTestSsrToolOnetestPath = "/api/test/ssr/toolOne/test/{id?}";
+type ApiApiTestSsrToolOnetestPath = '/api/test/ssr/toolOne/test/{id?}';
+type ApiApiTestSsrToolOnetestMethod = 'post';
+type ApiApiTestSsrToolOnetestRequestParams = paths$1[ApiApiTestSsrToolOnetestPath][ApiApiTestSsrToolOnetestMethod]['parameters']['path'];
+type ApiApiTestSsrToolOnetestRequestQuery = paths$1[ApiApiTestSsrToolOnetestPath][ApiApiTestSsrToolOnetestMethod]['parameters']['query'];
+type ApiApiTestSsrToolOnetestRequestBody = components$1['schemas']['test-ssr.dto.testBody'];
+declare class ApiTestSsrToolOne extends BeanApiBase {
+  testGet(options: {
+    params: ApiApiTestSsrToolOnetestGetRequestParams;
+    query: ApiApiTestSsrToolOnetestGetRequestQuery;
+  } & IApiActionOptions): Promise<unknown>;
+  test(body: ApiApiTestSsrToolOnetestRequestBody, options: {
+    params: ApiApiTestSsrToolOnetestRequestParams;
+    query: ApiApiTestSsrToolOnetestRequestQuery;
+  } & IApiActionOptions): Promise<{
+    id: number | string;
+    name?: string;
+    married: boolean;
+    details: components$1['schemas']['test-ssr.dto.testDetail'][];
+    _custom1?: string | undefined;
+    _custom2?: string | undefined;
+    _custom3?: string | undefined;
+    _custom4?: string | undefined;
+    _custom5?: string | undefined;
+    _customCopy?: string | undefined;
+    _customCopied?: boolean | undefined;
+  }>;
+}
+//#endregion
+//#region src/suite/a-home/modules/home-api/src/apiSchema/captcha.d.ts
+declare class ApiSchemaCaptcha extends BeanBase {
+  create(options?: IApiSchemaOptions): _$zova_module_a_openapi0.IOpenapiSchemas;
+  refresh(options?: IApiSchemaOptions): _$zova_module_a_openapi0.IOpenapiSchemas;
+  verifyImmediate(options?: IApiSchemaOptions): _$zova_module_a_openapi0.IOpenapiSchemas;
+}
+//#endregion
+//#region src/suite/a-home/modules/home-api/src/apiSchema/home.d.ts
+declare class ApiSchemaHome extends BeanBase {
+  index(options?: IApiSchemaOptions): _$zova_module_a_openapi0.IOpenapiSchemas;
+}
+//#endregion
+//#region src/suite/a-home/modules/home-api/src/apiSchema/homeBaseMenu.d.ts
+declare class ApiSchemaHomeBaseMenu$1 extends BeanBase {
+  retrieveMenus(options?: IApiSchemaOptions): _$zova_module_a_openapi0.IOpenapiSchemas;
+}
+//#endregion
+//#region src/suite/a-home/modules/home-api/src/apiSchema/homeBasePermission.d.ts
+declare class ApiSchemaHomeBasePermission extends BeanBase {
+  retrievePermissions(options?: IApiSchemaOptions): _$zova_module_a_openapi0.IOpenapiSchemas;
+}
+//#endregion
+//#region src/suite/a-home/modules/home-api/src/apiSchema/homeUserPassport.d.ts
+declare class ApiSchemaHomeUserPassport extends BeanBase {
+  current(options?: IApiSchemaOptions): _$zova_module_a_openapi0.IOpenapiSchemas;
+  logout(options?: IApiSchemaOptions): _$zova_module_a_openapi0.IOpenapiSchemas;
+  register(options?: IApiSchemaOptions): _$zova_module_a_openapi0.IOpenapiSchemas;
+  login(options?: IApiSchemaOptions): _$zova_module_a_openapi0.IOpenapiSchemas;
+  loginOauth(options?: IApiSchemaOptions): _$zova_module_a_openapi0.IOpenapiSchemas;
+  associate(options?: IApiSchemaOptions): _$zova_module_a_openapi0.IOpenapiSchemas;
+  migrate(options?: IApiSchemaOptions): _$zova_module_a_openapi0.IOpenapiSchemas;
+  refreshAuthToken(options?: IApiSchemaOptions): _$zova_module_a_openapi0.IOpenapiSchemas;
+  createPassportJwtFromOauthCode(options?: IApiSchemaOptions): _$zova_module_a_openapi0.IOpenapiSchemas;
+  createTempAuthToken(options?: IApiSchemaOptions): _$zova_module_a_openapi0.IOpenapiSchemas;
+}
+//#endregion
+//#region src/suite/a-home/modules/home-api/src/apiSchema/testSsrToolOne.d.ts
+declare class ApiSchemaTestSsrToolOne extends BeanBase {
+  testGet(options?: IApiSchemaOptions): _$zova_module_a_openapi0.IOpenapiSchemas;
+  test(options?: IApiSchemaOptions): _$zova_module_a_openapi0.IOpenapiSchemas;
+}
+//#endregion
+//#region src/suite/a-home/modules/home-api/src/service/jwtAdapter.d.ts
+declare class ServiceJwtAdapter extends BeanBase implements IJwtAdapter {
+  protected __init__(): Promise<void>;
+  getJwtInfo(): Promise<IJwtInfo | undefined>;
+  refreshAuthToken(refreshToken: string): Promise<IJwtInfo>;
+}
+//#endregion
+//#region src/suite/a-home/modules/home-api/src/.metadata/index.d.ts
+declare module 'zova' {}
+declare module 'zova-module-home-api' {
+  interface ApiCaptcha {}
+  interface ApiCaptcha {
+    get $beanFullName(): 'home-api.api.captcha';
+    get $onionName(): 'home-api:captcha';
+  }
+  interface ApiHome {}
+  interface ApiHome {
+    get $beanFullName(): 'home-api.api.home';
+    get $onionName(): 'home-api:home';
+  }
+  interface ApiHomeBaseMenu {}
+  interface ApiHomeBaseMenu {
+    get $beanFullName(): 'home-api.api.homeBaseMenu';
+    get $onionName(): 'home-api:homeBaseMenu';
+  }
+  interface ApiHomeBasePermission {}
+  interface ApiHomeBasePermission {
+    get $beanFullName(): 'home-api.api.homeBasePermission';
+    get $onionName(): 'home-api:homeBasePermission';
+  }
+  interface ApiHomeUserPassport {}
+  interface ApiHomeUserPassport {
+    get $beanFullName(): 'home-api.api.homeUserPassport';
+    get $onionName(): 'home-api:homeUserPassport';
+  }
+  interface ApiTestSsrToolOne {}
+  interface ApiTestSsrToolOne {
+    get $beanFullName(): 'home-api.api.testSsrToolOne';
+    get $onionName(): 'home-api:testSsrToolOne';
+  }
+}
+/** api: end */
+/** api: begin */
+interface IModuleApi$2 {
+  'captcha': ApiCaptcha;
+  'home': ApiHome;
+  'homeBaseMenu': ApiHomeBaseMenu$1;
+  'homeBasePermission': ApiHomeBasePermission;
+  'homeUserPassport': ApiHomeUserPassport;
+  'testSsrToolOne': ApiTestSsrToolOne;
+}
+declare module 'zova' {
+  interface IBeanRecordGeneral {
+    'home-api.api.captcha': ApiCaptcha;
+    'home-api.api.home': ApiHome;
+    'home-api.api.homeBaseMenu': ApiHomeBaseMenu$1;
+    'home-api.api.homeBasePermission': ApiHomeBasePermission;
+    'home-api.api.homeUserPassport': ApiHomeUserPassport;
+    'home-api.api.testSsrToolOne': ApiTestSsrToolOne;
+  }
+}
+/** api: end */
+/** openapi: begin */
+declare module 'zova' {}
+declare module 'zova-module-home-api' {
+  interface ApiSchemaCaptcha {}
+  interface ApiSchemaCaptcha {
+    get $beanFullName(): 'home-api.apiSchema.captcha';
+    get $onionName(): 'home-api:captcha';
+  }
+  interface ApiSchemaHome {}
+  interface ApiSchemaHome {
+    get $beanFullName(): 'home-api.apiSchema.home';
+    get $onionName(): 'home-api:home';
+  }
+  interface ApiSchemaHomeBaseMenu {}
+  interface ApiSchemaHomeBaseMenu {
+    get $beanFullName(): 'home-api.apiSchema.homeBaseMenu';
+    get $onionName(): 'home-api:homeBaseMenu';
+  }
+  interface ApiSchemaHomeBasePermission {}
+  interface ApiSchemaHomeBasePermission {
+    get $beanFullName(): 'home-api.apiSchema.homeBasePermission';
+    get $onionName(): 'home-api:homeBasePermission';
+  }
+  interface ApiSchemaHomeUserPassport {}
+  interface ApiSchemaHomeUserPassport {
+    get $beanFullName(): 'home-api.apiSchema.homeUserPassport';
+    get $onionName(): 'home-api:homeUserPassport';
+  }
+  interface ApiSchemaTestSsrToolOne {}
+  interface ApiSchemaTestSsrToolOne {
+    get $beanFullName(): 'home-api.apiSchema.testSsrToolOne';
+    get $onionName(): 'home-api:testSsrToolOne';
+  }
+}
+/** apiSchema: end */
+/** apiSchema: begin */
+interface IModuleApiSchema$1 {
+  'captcha': ApiSchemaCaptcha;
+  'home': ApiSchemaHome;
+  'homeBaseMenu': ApiSchemaHomeBaseMenu$1;
+  'homeBasePermission': ApiSchemaHomeBasePermission;
+  'homeUserPassport': ApiSchemaHomeUserPassport;
+  'testSsrToolOne': ApiSchemaTestSsrToolOne;
+}
+declare module 'zova' {
+  interface IBeanRecordGeneral {
+    'home-api.apiSchema.captcha': ApiSchemaCaptcha;
+    'home-api.apiSchema.home': ApiSchemaHome;
+    'home-api.apiSchema.homeBaseMenu': ApiSchemaHomeBaseMenu$1;
+    'home-api.apiSchema.homeBasePermission': ApiSchemaHomeBasePermission;
+    'home-api.apiSchema.homeUserPassport': ApiSchemaHomeUserPassport;
+    'home-api.apiSchema.testSsrToolOne': ApiSchemaTestSsrToolOne;
+  }
+}
+/** apiSchema: end */
+/** service: begin */
+declare module 'zova-module-a-bean' {
+  interface IServiceRecord {
+    'home-api:jwtAdapter': never;
+  }
+}
+declare module 'zova-module-home-api' {
+  interface ServiceJwtAdapter {}
+  interface ServiceJwtAdapter {
+    get $beanFullName(): 'home-api.service.jwtAdapter';
+    get $onionName(): 'home-api:jwtAdapter';
+  }
+}
+/** service: end */
+/** service: begin */
+declare module 'zova' {
+  interface IBeanRecordGeneral {
+    'home-api.service.jwtAdapter': ServiceJwtAdapter;
+  }
+}
+/** service: end */
+/** scope: begin */
+declare class ScopeModuleHomeApi extends BeanScopeBase {}
+interface ScopeModuleHomeApi {
+  util: BeanScopeUtil;
+  api: IModuleApi$2;
+  apiSchema: IModuleApiSchema$1;
+}
+declare module 'zova' {
+  interface IBeanScopeRecord {
+    'home-api': ScopeModuleHomeApi;
+  }
+}
+/** scope: end */
+//#endregion
+//#region src/suite/a-home/modules/home-api/src/types/api.d.ts
+declare module 'zova' {
+  interface BeanBase {
+    $api: IModuleApi$2;
+    $apiSchema: IModuleApiSchema$1;
+  }
+}
+//#endregion
+//#region src/module/demo-student/src/model/menu.d.ts
+interface IModelOptionsMenu extends IDecoratorModelOptions {}
+declare class ModelMenu extends BeanModelBase {
+  retrieveMenus(): _$vue.UnwrapNestedRefs<_$_tanstack_vue_query0.UseQueryReturnType<{
+    menus?: components$1['schemas']['a-menu.dto.menuItem'][] | undefined;
+    groups?: components$1['schemas']['a-menu.dto.menuGroup'][] | undefined;
+  }, Error>>;
+}
+//#endregion
+//#region src/module/demo-student/src/model/test.d.ts
+interface IModelOptionsTest$1 extends IDecoratorModelOptions {}
+declare class ModelTest$1 extends BeanModelBase {
+  protected __init__(): Promise<void>;
+}
+//#endregion
+//#region src/module/demo-student/src/api/openapi/types.d.ts
 interface paths {
   '/api/auth/mock/authorize': {
     parameters: {
@@ -391,182 +4424,6 @@ interface paths {
     get?: never;
     put?: never;
     post: operations['HomeUserPassport_createTempAuthToken'];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/cabloy/store/cabloyModule': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get: operations['CabloyStoreCabloyModule_select'];
-    put?: never;
-    post: operations['CabloyStoreCabloyModule_create'];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/cabloy/store/cabloyModule/{id}': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get: operations['CabloyStoreCabloyModule_view'];
-    put?: never;
-    post?: never;
-    delete: operations['CabloyStoreCabloyModule_delete'];
-    options?: never;
-    head?: never;
-    patch: operations['CabloyStoreCabloyModule_update'];
-    trace?: never;
-  };
-  '/api/cabloy/store/cabloyModule/viewByName/{name}': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get: operations['CabloyStoreCabloyModule_viewByName'];
-    put?: never;
-    post?: never;
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/cabloy/store/cabloyProvider': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get: operations['CabloyStoreCabloyProvider_select'];
-    put?: never;
-    post: operations['CabloyStoreCabloyProvider_create'];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/cabloy/store/cabloyProvider/{id}': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get: operations['CabloyStoreCabloyProvider_view'];
-    put?: never;
-    post?: never;
-    delete: operations['CabloyStoreCabloyProvider_delete'];
-    options?: never;
-    head?: never;
-    patch: operations['CabloyStoreCabloyProvider_update'];
-    trace?: never;
-  };
-  '/api/store/purchaseOrder': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get: operations['StorePurchaseOrder_select'];
-    put?: never;
-    post: operations['StorePurchaseOrder_create'];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/store/purchaseOrder/{id}': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get: operations['StorePurchaseOrder_view'];
-    put?: never;
-    post?: never;
-    delete: operations['StorePurchaseOrder_delete'];
-    options?: never;
-    head?: never;
-    patch: operations['StorePurchaseOrder_update'];
-    trace?: never;
-  };
-  '/api/store/purchaseRecord': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get: operations['StorePurchaseRecord_select'];
-    put?: never;
-    post: operations['StorePurchaseRecord_create'];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/store/purchaseRecord/{id}': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get: operations['StorePurchaseRecord_view'];
-    put?: never;
-    post?: never;
-    delete: operations['StorePurchaseRecord_delete'];
-    options?: never;
-    head?: never;
-    patch: operations['StorePurchaseRecord_update'];
-    trace?: never;
-  };
-  '/api/store/purchaseRecord/getByCurrentUser/{moduleId}': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get: operations['StorePurchaseRecord_getByCurrentUser'];
-    put?: never;
-    post?: never;
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/store/purchaseRecord/purchasePaypal': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get?: never;
-    put?: never;
-    post: operations['StorePurchaseRecord_purchasePaypal'];
     delete?: never;
     options?: never;
     head?: never;
@@ -1278,6 +5135,7 @@ interface paths {
     trace?: never;
   };
 }
+type webhooks = Record<string, never>;
 interface components {
   schemas: {
     'test-vona.dto.postCreate': {
@@ -1466,575 +5324,6 @@ interface components {
     'a-captcha.dto.captchaVerify_c3cd80b1eeafe39bfe4433491bb081d68e84797e_3218e7d152830e08f6e764b9e0c3796df929ee2b': {
       id: string;
       token: string;
-    };
-    'cabloy-store.dto.cabloyModuleCreate': {
-      /** @description Name */name: string; /** @description Title */
-      title: string; /** @description Description */
-      description?: string | undefined; /** @description Description(Chinese) */
-      descriptionZhcn?: string | undefined; /** @description Version */
-      version: string; /** @description Repository */
-      repoUrl?: string | undefined; /** @description Demo */
-      demoUrl?: string | undefined; /** @description License */
-      license: number;
-      /**
-       * @description Price
-       * @default 0
-       */
-      price?: number | undefined;
-      providerId: number | string;
-      userId?: number | string | undefined;
-      /**
-       * @description Language
-       * @default en-us
-       */
-      _locale?: string;
-      content?: components['schemas']['cabloy-store.entity.cabloyModuleContent_81badf1cb6c91a163ef245059a4656a90b23a2f0_1816ff740d81c738ec055c7038bbd93beb9405a7'];
-      _content?: unknown;
-      _contentZhcn?: unknown;
-    };
-    'cabloy-store.entity.cabloyModuleContent_81badf1cb6c91a163ef245059a4656a90b23a2f0_1816ff740d81c738ec055c7038bbd93beb9405a7': {
-      /** @description Content */content: string; /** @description Content(Chinese) */
-      contentZhcn: string;
-    };
-    'cabloy-store.dto.cabloyModuleQueryRes': {
-      list: components['schemas']['cabloy-store.dto.cabloyModuleQueryResItem'][];
-      total: string;
-      pageCount: number;
-      pageSize: number;
-      pageNo: number;
-    };
-    'cabloy-store.dto.cabloyModuleQueryResItem': {
-      /**
-       * Format: date
-       * @description Created At
-       */
-      createdAt: Date;
-      /**
-       * Format: date
-       * @description Updated At
-       */
-      updatedAt: Date;
-      /**
-       * @description Deleted
-       * @default false
-       */
-      deleted?: boolean;
-      /**
-       * @description Instance ID
-       * @default 0
-       */
-      iid?: number; /** @description ID */
-      id: number | string; /** @description Name */
-      name: string; /** @description Title */
-      title: string; /** @description Description */
-      description?: string | undefined; /** @description Description(Chinese) */
-      descriptionZhcn?: string | undefined; /** @description Version */
-      version: string; /** @description Repository */
-      repoUrl?: string | undefined; /** @description Demo */
-      demoUrl?: string | undefined; /** @description License */
-      license: number;
-      /**
-       * @description Price
-       * @default 0
-       */
-      price?: number | undefined;
-      providerId: number | string; /** @description Published */
-      published?: boolean | undefined;
-      userId?: number | string | undefined;
-      /**
-       * @description Language
-       * @default en-us
-       */
-      _locale?: string;
-      provider?: components['schemas']['cabloy-store.entity.cabloyProvider_2c7d642ee581efa300341e343180fbb0ecdc785d_1816ff740d81c738ec055c7038bbd93beb9405a7'];
-    };
-    'cabloy-store.entity.cabloyProvider_2c7d642ee581efa300341e343180fbb0ecdc785d_1816ff740d81c738ec055c7038bbd93beb9405a7': {
-      /** @description ID */id: number | string; /** @description Name */
-      name: string;
-    };
-    'cabloy-store.dto.cabloyModuleView': {
-      /**
-       * Format: date
-       * @description Created At
-       */
-      createdAt: Date;
-      /**
-       * Format: date
-       * @description Updated At
-       */
-      updatedAt: Date;
-      /**
-       * @description Deleted
-       * @default false
-       */
-      deleted?: boolean;
-      /**
-       * @description Instance ID
-       * @default 0
-       */
-      iid?: number; /** @description ID */
-      id: number | string; /** @description Name */
-      name: string; /** @description Title */
-      title: string; /** @description Description */
-      description?: string | undefined; /** @description Description(Chinese) */
-      descriptionZhcn?: string | undefined; /** @description Version */
-      version: string; /** @description Repository */
-      repoUrl?: string | undefined; /** @description Demo */
-      demoUrl?: string | undefined; /** @description License */
-      license: number;
-      /**
-       * @description Price
-       * @default 0
-       */
-      price?: number | undefined;
-      providerId: number | string; /** @description Published */
-      published?: boolean | undefined;
-      userId?: number | string | undefined;
-      /**
-       * @description Language
-       * @default en-us
-       */
-      _locale?: string;
-      content?: components['schemas']['cabloy-store.entity.cabloyModuleContent_1c9d53f3af6f7dcc5939f31fcb21323dc5f0c0f2_1816ff740d81c738ec055c7038bbd93beb9405a7'];
-      provider?: components['schemas']['cabloy-store.entity.cabloyProvider_2c7d642ee581efa300341e343180fbb0ecdc785d_1816ff740d81c738ec055c7038bbd93beb9405a7'];
-      _content?: unknown;
-      _contentZhcn?: unknown;
-    } | undefined;
-    'cabloy-store.entity.cabloyModuleContent_1c9d53f3af6f7dcc5939f31fcb21323dc5f0c0f2_1816ff740d81c738ec055c7038bbd93beb9405a7': {
-      /** @description ID */id: number | string; /** @description Content */
-      content: string; /** @description Content(Chinese) */
-      contentZhcn: string;
-    };
-    'cabloy-store.dto.cabloyModuleUpdate': {
-      /** @description Name */name: string; /** @description Title */
-      title: string; /** @description Description */
-      description?: string | undefined; /** @description Description(Chinese) */
-      descriptionZhcn?: string | undefined; /** @description Version */
-      version: string; /** @description Repository */
-      repoUrl?: string | undefined; /** @description Demo */
-      demoUrl?: string | undefined; /** @description License */
-      license: number;
-      /**
-       * @description Price
-       * @default 0
-       */
-      price?: number | undefined;
-      providerId: number | string;
-      /**
-       * @description Language
-       * @default en-us
-       */
-      _locale?: string;
-      content?: components['schemas']['cabloy-store.entity.cabloyModuleContent_e7b4a0d4d4633f151e39304b0c3e984921d39abe_1816ff740d81c738ec055c7038bbd93beb9405a7'];
-      _content?: unknown;
-      _contentZhcn?: unknown;
-    };
-    'cabloy-store.entity.cabloyModuleContent_e7b4a0d4d4633f151e39304b0c3e984921d39abe_1816ff740d81c738ec055c7038bbd93beb9405a7': {
-      /**
-       * @description Deleted
-       * @default false
-       */
-      deleted?: boolean | undefined; /** @description ID */
-      id?: number | string | undefined; /** @description Content */
-      content: string; /** @description Content(Chinese) */
-      contentZhcn: string;
-    };
-    'cabloy-store.dto.cabloyModuleViewByName': {
-      /**
-       * Format: date
-       * @description Created At
-       */
-      createdAt: Date;
-      /**
-       * Format: date
-       * @description Updated At
-       */
-      updatedAt: Date;
-      /**
-       * @description Deleted
-       * @default false
-       */
-      deleted?: boolean;
-      /**
-       * @description Instance ID
-       * @default 0
-       */
-      iid?: number; /** @description ID */
-      id: number | string; /** @description Name */
-      name: string; /** @description Title */
-      title: string; /** @description Description */
-      description?: string | undefined; /** @description Description(Chinese) */
-      descriptionZhcn?: string | undefined; /** @description Version */
-      version: string; /** @description Repository */
-      repoUrl?: string | undefined; /** @description Demo */
-      demoUrl?: string | undefined; /** @description License */
-      license: number;
-      /**
-       * @description Price
-       * @default 0
-       */
-      price?: number | undefined;
-      providerId: number | string; /** @description Published */
-      published?: boolean | undefined;
-      userId?: number | string | undefined;
-      /**
-       * @description Language
-       * @default en-us
-       */
-      _locale?: string;
-      provider?: components['schemas']['cabloy-store.entity.cabloyProvider_2c7d642ee581efa300341e343180fbb0ecdc785d_1816ff740d81c738ec055c7038bbd93beb9405a7'];
-      html?: {
-        /** @description ID */id: number | string;
-        html: string;
-        htmlZhcn: string;
-      };
-    } | undefined;
-    'cabloy-store.dto.cabloyProviderCreate': {
-      /** @description Name */name: string; /** @description Description */
-      description?: string | undefined;
-      /**
-       * @description GitHub Account
-       * @default false
-       */
-      githubAccount?: boolean | undefined;
-      userId?: number | string | undefined;
-    };
-    'cabloy-store.dto.cabloyProviderQueryRes': {
-      list: {
-        /**
-         * Format: date
-         * @description Created At
-         */
-        createdAt: Date;
-        /**
-         * Format: date
-         * @description Updated At
-         */
-        updatedAt: Date;
-        /**
-         * @description Deleted
-         * @default false
-         */
-        deleted?: boolean;
-        /**
-         * @description Instance ID
-         * @default 0
-         */
-        iid?: number; /** @description ID */
-        id: number | string; /** @description Name */
-        name: string; /** @description Description */
-        description?: string | undefined;
-        /**
-         * @description GitHub Account
-         * @default false
-         */
-        githubAccount?: boolean | undefined;
-        userId?: number | string | undefined;
-      }[];
-      total: string;
-      pageCount: number;
-      pageSize: number;
-      pageNo: number;
-    }; /** @description Provider */
-    'cabloy-store.entity.cabloyProvider': {
-      /**
-       * Format: date
-       * @description Created At
-       */
-      createdAt: Date;
-      /**
-       * Format: date
-       * @description Updated At
-       */
-      updatedAt: Date;
-      /**
-       * @description Deleted
-       * @default false
-       */
-      deleted?: boolean;
-      /**
-       * @description Instance ID
-       * @default 0
-       */
-      iid?: number; /** @description ID */
-      id: number | string; /** @description Name */
-      name: string; /** @description Description */
-      description?: string | undefined;
-      /**
-       * @description GitHub Account
-       * @default false
-       */
-      githubAccount?: boolean | undefined;
-      userId?: number | string | undefined;
-    } | undefined;
-    'cabloy-store.dto.cabloyProviderUpdate': {
-      /** @description Name */name: string; /** @description Description */
-      description?: string | undefined;
-      /**
-       * @description GitHub Account
-       * @default false
-       */
-      githubAccount?: boolean | undefined;
-    };
-    'store-purchase.dto.purchaseOrderCreate': {
-      userId: number | string;
-      moduleId: number | string; /** @description Remark */
-      remark?: string | undefined; /** @description License */
-      license: number; /** @description Amount */
-      amount: number; /** @default 0 */
-      status?: number;
-      paypalRecordId?: number | string | undefined; /** @description Gross Amount */
-      grossAmount: number; /** @description Paypal Fee */
-      paypalFee: number; /** @description Net Amount */
-      netAmount: number;
-    };
-    'store-purchase.dto.purchaseOrderQueryRes': {
-      list: {
-        /**
-         * Format: date
-         * @description Created At
-         */
-        createdAt: Date;
-        /**
-         * Format: date
-         * @description Updated At
-         */
-        updatedAt: Date;
-        /**
-         * @description Deleted
-         * @default false
-         */
-        deleted?: boolean;
-        /**
-         * @description Instance ID
-         * @default 0
-         */
-        iid?: number; /** @description ID */
-        id: number | string;
-        userId: number | string;
-        moduleId: number | string; /** @description Remark */
-        remark?: string | undefined; /** @description License */
-        license: number; /** @description Amount */
-        amount: number; /** @default 0 */
-        status?: number;
-        paypalRecordId?: number | string | undefined; /** @description Gross Amount */
-        grossAmount: number; /** @description Paypal Fee */
-        paypalFee: number; /** @description Net Amount */
-        netAmount: number;
-      }[];
-      total: string;
-      pageCount: number;
-      pageSize: number;
-      pageNo: number;
-    }; /** @description Purchase Order */
-    'store-purchase.entity.purchaseOrder': {
-      /**
-       * Format: date
-       * @description Created At
-       */
-      createdAt: Date;
-      /**
-       * Format: date
-       * @description Updated At
-       */
-      updatedAt: Date;
-      /**
-       * @description Deleted
-       * @default false
-       */
-      deleted?: boolean;
-      /**
-       * @description Instance ID
-       * @default 0
-       */
-      iid?: number; /** @description ID */
-      id: number | string;
-      userId: number | string;
-      moduleId: number | string; /** @description Remark */
-      remark?: string | undefined; /** @description License */
-      license: number; /** @description Amount */
-      amount: number; /** @default 0 */
-      status?: number;
-      paypalRecordId?: number | string | undefined; /** @description Gross Amount */
-      grossAmount: number; /** @description Paypal Fee */
-      paypalFee: number; /** @description Net Amount */
-      netAmount: number;
-    } | undefined;
-    'store-purchase.dto.purchaseOrderUpdate': {
-      userId: number | string;
-      moduleId: number | string; /** @description Remark */
-      remark?: string | undefined; /** @description License */
-      license: number; /** @description Amount */
-      amount: number; /** @default 0 */
-      status?: number;
-      paypalRecordId?: number | string | undefined; /** @description Gross Amount */
-      grossAmount: number; /** @description Paypal Fee */
-      paypalFee: number; /** @description Net Amount */
-      netAmount: number;
-    };
-    'store-purchase.dto.purchaseRecordCreate': {
-      userId: number | string;
-      moduleId: number | string;
-      /**
-       * Format: date
-       * @description Last Purchase Time
-       */
-      lastPurchaseTime: Date;
-      /**
-       * Format: date
-       * @description Expiration Date
-       */
-      expirationDate?: Date;
-    };
-    'store-purchase.dto.purchaseRecordQueryRes': {
-      list: {
-        /**
-         * Format: date
-         * @description Created At
-         */
-        createdAt: Date;
-        /**
-         * Format: date
-         * @description Updated At
-         */
-        updatedAt: Date;
-        /**
-         * @description Deleted
-         * @default false
-         */
-        deleted?: boolean;
-        /**
-         * @description Instance ID
-         * @default 0
-         */
-        iid?: number; /** @description ID */
-        id: number | string;
-        userId: number | string;
-        moduleId: number | string;
-        /**
-         * Format: date
-         * @description Last Purchase Time
-         */
-        lastPurchaseTime: Date;
-        /**
-         * Format: date
-         * @description Expiration Date
-         */
-        expirationDate?: Date;
-        user?: components['schemas']['home-user.entity.user_2c7d642ee581efa300341e343180fbb0ecdc785d_1816ff740d81c738ec055c7038bbd93beb9405a7'];
-        module?: components['schemas']['cabloy-store.entity.cabloyModule_2c7d642ee581efa300341e343180fbb0ecdc785d_1816ff740d81c738ec055c7038bbd93beb9405a7'];
-      }[];
-      total: string;
-      pageCount: number;
-      pageSize: number;
-      pageNo: number;
-    };
-    'home-user.entity.user_2c7d642ee581efa300341e343180fbb0ecdc785d_1816ff740d81c738ec055c7038bbd93beb9405a7': {
-      /** @description ID */id: number | string; /** @description User Name */
-      name: string;
-    };
-    'cabloy-store.entity.cabloyModule_2c7d642ee581efa300341e343180fbb0ecdc785d_1816ff740d81c738ec055c7038bbd93beb9405a7': {
-      /** @description ID */id: number | string; /** @description Name */
-      name: string;
-      content?: components['schemas']['cabloy-store.entity.cabloyModuleContent_1c9d53f3af6f7dcc5939f31fcb21323dc5f0c0f2_1816ff740d81c738ec055c7038bbd93beb9405a7'];
-      provider?: components['schemas']['cabloy-store.entity.cabloyProvider_2c7d642ee581efa300341e343180fbb0ecdc785d_1816ff740d81c738ec055c7038bbd93beb9405a7'];
-    }; /** @description Purchase Record */
-    'store-purchase.entity.purchaseRecord': {
-      /**
-       * Format: date
-       * @description Created At
-       */
-      createdAt: Date;
-      /**
-       * Format: date
-       * @description Updated At
-       */
-      updatedAt: Date;
-      /**
-       * @description Deleted
-       * @default false
-       */
-      deleted?: boolean;
-      /**
-       * @description Instance ID
-       * @default 0
-       */
-      iid?: number; /** @description ID */
-      id: number | string;
-      userId: number | string;
-      moduleId: number | string;
-      /**
-       * Format: date
-       * @description Last Purchase Time
-       */
-      lastPurchaseTime: Date;
-      /**
-       * Format: date
-       * @description Expiration Date
-       */
-      expirationDate?: Date;
-    } | undefined;
-    'store-purchase.dto.purchaseRecordUpdate': {
-      userId: number | string;
-      moduleId: number | string;
-      /**
-       * Format: date
-       * @description Last Purchase Time
-       */
-      lastPurchaseTime: Date;
-      /**
-       * Format: date
-       * @description Expiration Date
-       */
-      expirationDate?: Date;
-    };
-    'store-purchase.dto.purchaseRecordView': {
-      /**
-       * Format: date
-       * @description Created At
-       */
-      createdAt: Date;
-      /**
-       * Format: date
-       * @description Updated At
-       */
-      updatedAt: Date;
-      /**
-       * @description Deleted
-       * @default false
-       */
-      deleted?: boolean;
-      /**
-       * @description Instance ID
-       * @default 0
-       */
-      iid?: number; /** @description ID */
-      id: number | string;
-      userId: number | string;
-      moduleId: number | string;
-      /**
-       * Format: date
-       * @description Last Purchase Time
-       */
-      lastPurchaseTime: Date;
-      /**
-       * Format: date
-       * @description Expiration Date
-       */
-      expirationDate?: Date;
-      user?: components['schemas']['home-user.entity.user_2c7d642ee581efa300341e343180fbb0ecdc785d_1816ff740d81c738ec055c7038bbd93beb9405a7'];
-      module?: components['schemas']['cabloy-store.entity.cabloyModule_2c7d642ee581efa300341e343180fbb0ecdc785d_1816ff740d81c738ec055c7038bbd93beb9405a7'];
-    } | undefined;
-    'store-purchase.dto.purchasePaypalResBody': {
-      orderId: number | string;
-      approveUrl: string;
-    };
-    'store-purchase.dto.purchasePaypalReqBody': {
-      moduleId: number | string;
-      remark: string;
-      returnTo: string;
-      returnUrl: string;
-      cancelUrl: string;
     }; /** @description Create Product */
     'test-rest.dto.productCreate': {
       /** @description Name */name: string; /** @description Description */
@@ -2509,6 +5798,7 @@ interface components {
   headers: never;
   pathItems: never;
 }
+type $defs = Record<string, never>;
 interface operations {
   AuthMock_authorize: {
     parameters: {
@@ -3046,658 +6336,6 @@ interface operations {
             code: string;
             message: string;
             data: string;
-          };
-        };
-      };
-    };
-    authToken: true;
-  };
-  CabloyStoreCabloyModule_select: {
-    parameters: {
-      query?: {
-        columns?: string[] | undefined;
-        where?: {
-          [key: string]: unknown;
-        } | undefined;
-        orders?: string | string[][] | undefined;
-        pageNo?: number;
-        pageSize?: number;
-        createdAt?: string | undefined;
-        name?: string | undefined;
-      };
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': {
-            code: string;
-            message: string;
-            data: components['schemas']['cabloy-store.dto.cabloyModuleQueryRes'];
-          };
-        };
-      };
-    };
-    authToken: true;
-  };
-  CabloyStoreCabloyModule_create: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        'application/json': components['schemas']['cabloy-store.dto.cabloyModuleCreate'];
-      };
-    };
-    responses: {
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': {
-            code: string;
-            message: string;
-            data: number | string;
-          };
-        };
-      };
-    };
-    authToken: true;
-  };
-  CabloyStoreCabloyModule_view: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        id: number | string;
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': {
-            code: string;
-            message: string;
-            data?: components['schemas']['cabloy-store.dto.cabloyModuleView'];
-          };
-        };
-      };
-    };
-    authToken: true;
-  };
-  CabloyStoreCabloyModule_delete: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        id: number | string;
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': {
-            code: string;
-            message: string;
-            data?: unknown;
-          };
-        };
-      };
-    };
-    authToken: true;
-  };
-  CabloyStoreCabloyModule_update: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        id: number | string;
-      };
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        'application/json': components['schemas']['cabloy-store.dto.cabloyModuleUpdate'];
-      };
-    };
-    responses: {
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': {
-            code: string;
-            message: string;
-            data?: unknown;
-          };
-        };
-      };
-    };
-    authToken: true;
-  };
-  CabloyStoreCabloyModule_viewByName: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        name: string;
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': {
-            code: string;
-            message: string;
-            data?: components['schemas']['cabloy-store.dto.cabloyModuleViewByName'];
-          };
-        };
-      };
-    };
-  };
-  CabloyStoreCabloyProvider_select: {
-    parameters: {
-      query?: {
-        columns?: string[] | undefined;
-        where?: {
-          [key: string]: unknown;
-        } | undefined;
-        orders?: string | string[][] | undefined;
-        pageNo?: number;
-        pageSize?: number;
-        createdAt?: string | undefined;
-        name?: string | undefined;
-      };
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': {
-            code: string;
-            message: string;
-            data: components['schemas']['cabloy-store.dto.cabloyProviderQueryRes'];
-          };
-        };
-      };
-    };
-    authToken: true;
-  };
-  CabloyStoreCabloyProvider_create: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        'application/json': components['schemas']['cabloy-store.dto.cabloyProviderCreate'];
-      };
-    };
-    responses: {
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': {
-            code: string;
-            message: string;
-            data: number | string;
-          };
-        };
-      };
-    };
-    authToken: true;
-  };
-  CabloyStoreCabloyProvider_view: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        id: number | string;
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': {
-            code: string;
-            message: string;
-            data?: components['schemas']['cabloy-store.entity.cabloyProvider'];
-          };
-        };
-      };
-    };
-    authToken: true;
-  };
-  CabloyStoreCabloyProvider_delete: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        id: number | string;
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': {
-            code: string;
-            message: string;
-            data?: unknown;
-          };
-        };
-      };
-    };
-    authToken: true;
-  };
-  CabloyStoreCabloyProvider_update: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        id: number | string;
-      };
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        'application/json': components['schemas']['cabloy-store.dto.cabloyProviderUpdate'];
-      };
-    };
-    responses: {
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': {
-            code: string;
-            message: string;
-            data?: unknown;
-          };
-        };
-      };
-    };
-    authToken: true;
-  };
-  StorePurchaseOrder_select: {
-    parameters: {
-      query?: {
-        columns?: string[] | undefined;
-        where?: {
-          [key: string]: unknown;
-        } | undefined;
-        orders?: string | string[][] | undefined;
-        pageNo?: number;
-        pageSize?: number;
-        createdAt?: string | undefined;
-      };
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': {
-            code: string;
-            message: string;
-            data: components['schemas']['store-purchase.dto.purchaseOrderQueryRes'];
-          };
-        };
-      };
-    };
-    authToken: true;
-  };
-  StorePurchaseOrder_create: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        'application/json': components['schemas']['store-purchase.dto.purchaseOrderCreate'];
-      };
-    };
-    responses: {
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': {
-            code: string;
-            message: string;
-            data: number | string;
-          };
-        };
-      };
-    };
-    authToken: true;
-  };
-  StorePurchaseOrder_view: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        id: number | string;
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': {
-            code: string;
-            message: string;
-            data?: components['schemas']['store-purchase.entity.purchaseOrder'];
-          };
-        };
-      };
-    };
-    authToken: true;
-  };
-  StorePurchaseOrder_delete: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        id: number | string;
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': {
-            code: string;
-            message: string;
-            data?: unknown;
-          };
-        };
-      };
-    };
-    authToken: true;
-  };
-  StorePurchaseOrder_update: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        id: number | string;
-      };
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        'application/json': components['schemas']['store-purchase.dto.purchaseOrderUpdate'];
-      };
-    };
-    responses: {
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': {
-            code: string;
-            message: string;
-            data?: unknown;
-          };
-        };
-      };
-    };
-    authToken: true;
-  };
-  StorePurchaseRecord_select: {
-    parameters: {
-      query?: {
-        columns?: string[] | undefined;
-        where?: {
-          [key: string]: unknown;
-        } | undefined;
-        orders?: string | string[][] | undefined;
-        pageNo?: number;
-        pageSize?: number;
-        createdAt?: string | undefined;
-      };
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': {
-            code: string;
-            message: string;
-            data: components['schemas']['store-purchase.dto.purchaseRecordQueryRes'];
-          };
-        };
-      };
-    };
-    authToken: true;
-  };
-  StorePurchaseRecord_create: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        'application/json': components['schemas']['store-purchase.dto.purchaseRecordCreate'];
-      };
-    };
-    responses: {
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': {
-            code: string;
-            message: string;
-            data: number | string;
-          };
-        };
-      };
-    };
-    authToken: true;
-  };
-  StorePurchaseRecord_view: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        id: number | string;
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': {
-            code: string;
-            message: string;
-            data?: components['schemas']['store-purchase.entity.purchaseRecord'];
-          };
-        };
-      };
-    };
-    authToken: true;
-  };
-  StorePurchaseRecord_delete: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        id: number | string;
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': {
-            code: string;
-            message: string;
-            data?: unknown;
-          };
-        };
-      };
-    };
-    authToken: true;
-  };
-  StorePurchaseRecord_update: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        id: number | string;
-      };
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        'application/json': components['schemas']['store-purchase.dto.purchaseRecordUpdate'];
-      };
-    };
-    responses: {
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': {
-            code: string;
-            message: string;
-            data?: unknown;
-          };
-        };
-      };
-    };
-    authToken: true;
-  };
-  StorePurchaseRecord_getByCurrentUser: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        moduleId: number | string;
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': {
-            code: string;
-            message: string;
-            data?: components['schemas']['store-purchase.dto.purchaseRecordView'];
-          };
-        };
-      };
-    };
-  };
-  StorePurchaseRecord_purchasePaypal: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        'application/json': components['schemas']['store-purchase.dto.purchasePaypalReqBody'];
-      };
-    };
-    responses: {
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': {
-            code: string;
-            message: string;
-            data: components['schemas']['store-purchase.dto.purchasePaypalResBody'];
           };
         };
       };
@@ -5116,53 +7754,128 @@ interface operations {
   };
 }
 //#endregion
-//#region src/suite/a-home/modules/home-api/src/api/openapi/schemas.d.ts
+//#region src/module/demo-student/src/api/openapi/baseURL.d.ts
+declare const OpenApiBaseURL: (sys: ZovaSys) => string;
+//#endregion
+//#region src/module/demo-student/src/api/openapi/schemas.d.ts
+type ApiSchemaTestVonaDtoPostCreate = components['schemas']['test-vona.dto.postCreate'];
+type ApiSchemaTestVonaDtoPostCreatePartial = Partial<ApiSchemaTestVonaDtoPostCreate>;
+type ApiSchemaTestVonaDtoUserCreate = components['schemas']['test-vona.dto.userCreate'];
+type ApiSchemaTestVonaDtoUserCreatePartial = Partial<ApiSchemaTestVonaDtoUserCreate>;
+type ApiSchemaTestVonaEntityProduct = components['schemas']['test-vona.entity.product'];
+type ApiSchemaTestVonaEntityProductPartial = Partial<ApiSchemaTestVonaEntityProduct>;
+type ApiSchemaACaptchaDtoCaptchaData = components['schemas']['a-captcha.dto.captchaData'];
+type ApiSchemaACaptchaDtoCaptchaDataPartial = Partial<ApiSchemaACaptchaDtoCaptchaData>;
+type ApiSchemaAMenuDtoMenus = components['schemas']['a-menu.dto.menus'];
+type ApiSchemaAMenuDtoMenusPartial = Partial<ApiSchemaAMenuDtoMenus>;
 type ApiSchemaAMenuDtoMenuItem = components['schemas']['a-menu.dto.menuItem'];
+type ApiSchemaAMenuDtoMenuItemPartial = Partial<ApiSchemaAMenuDtoMenuItem>;
+type ApiSchemaAMenuDtoMenuItemMeta = components['schemas']['a-menu.dto.menuItemMeta'];
+type ApiSchemaAMenuDtoMenuItemMetaPartial = Partial<ApiSchemaAMenuDtoMenuItemMeta>;
 type ApiSchemaAMenuDtoMenuGroup = components['schemas']['a-menu.dto.menuGroup'];
+type ApiSchemaAMenuDtoMenuGroupPartial = Partial<ApiSchemaAMenuDtoMenuGroup>;
+type ApiSchemaAPermissionDtoPermissions = components['schemas']['a-permission.dto.permissions'];
+type ApiSchemaAPermissionDtoPermissionsPartial = Partial<ApiSchemaAPermissionDtoPermissions>;
+type ApiSchemaHomeUserDtoPassport = components['schemas']['home-user.dto.passport'];
+type ApiSchemaHomeUserDtoPassportPartial = Partial<ApiSchemaHomeUserDtoPassport>;
+type ApiSchemaHomeUserEntityUser = components['schemas']['home-user.entity.user'];
+type ApiSchemaHomeUserEntityUserPartial = Partial<ApiSchemaHomeUserEntityUser>;
+type ApiSchemaAAuthDtoAuth = components['schemas']['a-auth.dto.auth'];
+type ApiSchemaAAuthDtoAuthPartial = Partial<ApiSchemaAAuthDtoAuth>;
+type ApiSchemaHomeUserEntityRole = components['schemas']['home-user.entity.role'];
+type ApiSchemaHomeUserEntityRolePartial = Partial<ApiSchemaHomeUserEntityRole>;
+type ApiSchemaHomeUserDtoPassportJwt = components['schemas']['home-user.dto.passportJwt'];
+type ApiSchemaHomeUserDtoPassportJwtPartial = Partial<ApiSchemaHomeUserDtoPassportJwt>;
+type ApiSchemaAJwtDtoJwtToken = components['schemas']['a-jwt.dto.jwtToken'];
+type ApiSchemaAJwtDtoJwtTokenPartial = Partial<ApiSchemaAJwtDtoJwtToken>;
+type ApiSchemaHomeUserDtoRegister = components['schemas']['home-user.dto.register'];
+type ApiSchemaHomeUserDtoRegisterPartial = Partial<ApiSchemaHomeUserDtoRegister>;
+type ApiSchemaACaptchaDtoCaptchaVerify_c3cd80b1eeafe39bfe4433491bb081d68e84797e = components['schemas']['a-captcha.dto.captchaVerify_c3cd80b1eeafe39bfe4433491bb081d68e84797e'];
+type ApiSchemaACaptchaDtoCaptchaVerify_c3cd80b1eeafe39bfe4433491bb081d68e84797ePartial = Partial<ApiSchemaACaptchaDtoCaptchaVerify_c3cd80b1eeafe39bfe4433491bb081d68e84797e>;
+type ApiSchemaHomeUserDtoLogin = components['schemas']['home-user.dto.login'];
+type ApiSchemaHomeUserDtoLoginPartial = Partial<ApiSchemaHomeUserDtoLogin>;
+type ApiSchemaACaptchaDtoCaptchaVerify_c3cd80b1eeafe39bfe4433491bb081d68e84797e_3218e7d152830e08f6e764b9e0c3796df929ee2b = components['schemas']['a-captcha.dto.captchaVerify_c3cd80b1eeafe39bfe4433491bb081d68e84797e_3218e7d152830e08f6e764b9e0c3796df929ee2b'];
+type ApiSchemaACaptchaDtoCaptchaVerify_c3cd80b1eeafe39bfe4433491bb081d68e84797e_3218e7d152830e08f6e764b9e0c3796df929ee2bPartial = Partial<ApiSchemaACaptchaDtoCaptchaVerify_c3cd80b1eeafe39bfe4433491bb081d68e84797e_3218e7d152830e08f6e764b9e0c3796df929ee2b>;
+type ApiSchemaTestRestDtoProductCreate = components['schemas']['test-rest.dto.productCreate'];
+type ApiSchemaTestRestDtoProductCreatePartial = Partial<ApiSchemaTestRestDtoProductCreate>;
+type ApiSchemaTestRestDtoProductQueryRes = components['schemas']['test-rest.dto.productQueryRes'];
+type ApiSchemaTestRestDtoProductQueryResPartial = Partial<ApiSchemaTestRestDtoProductQueryRes>;
+type ApiSchemaTestRestEntityProduct = components['schemas']['test-rest.entity.product'];
+type ApiSchemaTestRestEntityProductPartial = Partial<ApiSchemaTestRestEntityProduct>;
+type ApiSchemaTestRestDtoProductUpdate = components['schemas']['test-rest.dto.productUpdate'];
+type ApiSchemaTestRestDtoProductUpdatePartial = Partial<ApiSchemaTestRestDtoProductUpdate>;
 type ApiSchemaTestSsrDtoTestResult = components['schemas']['test-ssr.dto.testResult'];
+type ApiSchemaTestSsrDtoTestResultPartial = Partial<ApiSchemaTestSsrDtoTestResult>;
+type ApiSchemaTestSsrDtoTestDetail = components['schemas']['test-ssr.dto.testDetail'];
+type ApiSchemaTestSsrDtoTestDetailPartial = Partial<ApiSchemaTestSsrDtoTestDetail>;
 type ApiSchemaTestSsrDtoTestBody = components['schemas']['test-ssr.dto.testBody'];
 type ApiSchemaTestSsrDtoTestBodyPartial = Partial<ApiSchemaTestSsrDtoTestBody>;
+type ApiSchemaTestCaptchaDtoSignin = components['schemas']['test-captcha.dto.signin'];
+type ApiSchemaTestCaptchaDtoSigninPartial = Partial<ApiSchemaTestCaptchaDtoSignin>;
+type ApiSchemaAPaypalEntityPaypalRecord = components['schemas']['a-paypal.entity.paypalRecord'];
+type ApiSchemaAPaypalEntityPaypalRecordPartial = Partial<ApiSchemaAPaypalEntityPaypalRecord>;
+type ApiSchemaAPaypalDtoPaypalOrderRecordPayload = components['schemas']['a-paypal.dto.paypalOrderRecordPayload'];
+type ApiSchemaAPaypalDtoPaypalOrderRecordPayloadPartial = Partial<ApiSchemaAPaypalDtoPaypalOrderRecordPayload>;
+type ApiSchemaAPaypalDtoPaypalOrderRecordOptions = components['schemas']['a-paypal.dto.paypalOrderRecordOptions'];
+type ApiSchemaAPaypalDtoPaypalOrderRecordOptionsPartial = Partial<ApiSchemaAPaypalDtoPaypalOrderRecordOptions>;
+type ApiSchemaAPlayDtoPlay = components['schemas']['a-play.dto.play'];
+type ApiSchemaAPlayDtoPlayPartial = Partial<ApiSchemaAPlayDtoPlay>;
+type ApiSchemaTestVonaDtoUserLazy = components['schemas']['test-vona.dto.userLazy'];
+type ApiSchemaTestVonaDtoUserLazyPartial = Partial<ApiSchemaTestVonaDtoUserLazy>;
+type ApiSchemaTestVonaDtoRoleLazy = components['schemas']['test-vona.dto.roleLazy'];
+type ApiSchemaTestVonaDtoRoleLazyPartial = Partial<ApiSchemaTestVonaDtoRoleLazy>;
+type ApiSchemaTestVonaEntityUser_2c7d642ee581efa300341e343180fbb0ecdc785d_1816ff740d81c738ec055c7038bbd93beb9405a7 = components['schemas']['test-vona.entity.user_2c7d642ee581efa300341e343180fbb0ecdc785d_1816ff740d81c738ec055c7038bbd93beb9405a7'];
+type ApiSchemaTestVonaEntityUser_2c7d642ee581efa300341e343180fbb0ecdc785d_1816ff740d81c738ec055c7038bbd93beb9405a7Partial = Partial<ApiSchemaTestVonaEntityUser_2c7d642ee581efa300341e343180fbb0ecdc785d_1816ff740d81c738ec055c7038bbd93beb9405a7>;
+type ApiSchemaTestVonaEntityPost_a6ba2076b5b70a3c098374cc82d418bd1ab226c3 = components['schemas']['test-vona.entity.post_a6ba2076b5b70a3c098374cc82d418bd1ab226c3'];
+type ApiSchemaTestVonaEntityPost_a6ba2076b5b70a3c098374cc82d418bd1ab226c3Partial = Partial<ApiSchemaTestVonaEntityPost_a6ba2076b5b70a3c098374cc82d418bd1ab226c3>;
+type ApiSchemaTestVonaEntityPost_729883d7de16ce4401b26f75bebe618c8948ff64 = components['schemas']['test-vona.entity.post_729883d7de16ce4401b26f75bebe618c8948ff64'];
+type ApiSchemaTestVonaEntityPost_729883d7de16ce4401b26f75bebe618c8948ff64Partial = Partial<ApiSchemaTestVonaEntityPost_729883d7de16ce4401b26f75bebe618c8948ff64>;
+type ApiSchemaTestVonaDtoUserUpdate = components['schemas']['test-vona.dto.userUpdate'];
+type ApiSchemaTestVonaDtoUserUpdatePartial = Partial<ApiSchemaTestVonaDtoUserUpdate>;
+type ApiSchemaTestVonaEntityCategory_2c7d642ee581efa300341e343180fbb0ecdc785d = components['schemas']['test-vona.entity.category_2c7d642ee581efa300341e343180fbb0ecdc785d'];
+type ApiSchemaTestVonaEntityCategory_2c7d642ee581efa300341e343180fbb0ecdc785dPartial = Partial<ApiSchemaTestVonaEntityCategory_2c7d642ee581efa300341e343180fbb0ecdc785d>;
+type ApiSchemaTestVonaDtoCategoryTree = components['schemas']['test-vona.dto.categoryTree'];
+type ApiSchemaTestVonaDtoCategoryTreePartial = Partial<ApiSchemaTestVonaDtoCategoryTree>;
+type ApiSchemaTestVonaDtoUser = components['schemas']['test-vona.dto.user'];
+type ApiSchemaTestVonaDtoUserPartial = Partial<ApiSchemaTestVonaDtoUser>;
+type ApiSchemaTestVonaDtoOrderCreate = components['schemas']['test-vona.dto.orderCreate'];
+type ApiSchemaTestVonaDtoOrderCreatePartial = Partial<ApiSchemaTestVonaDtoOrderCreate>;
+type ApiSchemaTestVonaEntityProduct_29731960f3f38d3572bc2f8a01a7498bfe927055 = components['schemas']['test-vona.entity.product_29731960f3f38d3572bc2f8a01a7498bfe927055'];
+type ApiSchemaTestVonaEntityProduct_29731960f3f38d3572bc2f8a01a7498bfe927055Partial = Partial<ApiSchemaTestVonaEntityProduct_29731960f3f38d3572bc2f8a01a7498bfe927055>;
+type ApiSchemaTestVonaDtoOrderUpdate = components['schemas']['test-vona.dto.orderUpdate'];
+type ApiSchemaTestVonaDtoOrderUpdatePartial = Partial<ApiSchemaTestVonaDtoOrderUpdate>;
+type ApiSchemaTestVonaEntityProduct_9cf2c6bcd41713270c34bcfce21b7b4942e3fbc6 = components['schemas']['test-vona.entity.product_9cf2c6bcd41713270c34bcfce21b7b4942e3fbc6'];
+type ApiSchemaTestVonaEntityProduct_9cf2c6bcd41713270c34bcfce21b7b4942e3fbc6Partial = Partial<ApiSchemaTestVonaEntityProduct_9cf2c6bcd41713270c34bcfce21b7b4942e3fbc6>;
+type ApiSchemaTestVonaDtoOrderResult = components['schemas']['test-vona.dto.orderResult'];
+type ApiSchemaTestVonaDtoOrderResultPartial = Partial<ApiSchemaTestVonaDtoOrderResult>;
+type ApiSchemaTestVonaEntityProduct_bce173590aaef19772f1ae3a82196493c2633e2e = components['schemas']['test-vona.entity.product_bce173590aaef19772f1ae3a82196493c2633e2e'];
+type ApiSchemaTestVonaEntityProduct_bce173590aaef19772f1ae3a82196493c2633e2ePartial = Partial<ApiSchemaTestVonaEntityProduct_bce173590aaef19772f1ae3a82196493c2633e2e>;
+type ApiSchemaTestVonaDtoOrderResultPage = components['schemas']['test-vona.dto.orderResultPage'];
+type ApiSchemaTestVonaDtoOrderResultPagePartial = Partial<ApiSchemaTestVonaDtoOrderResultPage>;
+type ApiSchemaTestVonaDtoPostGroup = components['schemas']['test-vona.dto.postGroup'];
+type ApiSchemaTestVonaDtoPostGroupPartial = Partial<ApiSchemaTestVonaDtoPostGroup>;
+type ApiSchemaTestVonaDtoPostAggregate = components['schemas']['test-vona.dto.postAggregate'];
+type ApiSchemaTestVonaDtoPostAggregatePartial = Partial<ApiSchemaTestVonaDtoPostAggregate>;
+type ApiSchemaTestVonaDtoPostQueryRes = components['schemas']['test-vona.dto.postQueryRes'];
+type ApiSchemaTestVonaDtoPostQueryResPartial = Partial<ApiSchemaTestVonaDtoPostQueryRes>;
+type ApiSchemaTestVonaDtoSerializerSimple = components['schemas']['test-vona.dto.serializerSimple'];
+type ApiSchemaTestVonaDtoSerializerSimplePartial = Partial<ApiSchemaTestVonaDtoSerializerSimple>;
+type ApiSchemaTestVonaDtoSerializerArray = components['schemas']['test-vona.dto.serializerArray'];
+type ApiSchemaTestVonaDtoSerializerArrayPartial = Partial<ApiSchemaTestVonaDtoSerializerArray>;
+type ApiSchemaTestVonaDtoSerializerLazy = components['schemas']['test-vona.dto.serializerLazy'];
+type ApiSchemaTestVonaDtoSerializerLazyPartial = Partial<ApiSchemaTestVonaDtoSerializerLazy>;
+type ApiSchemaTestVonaDtoSerializerSimple_1c4b95bcfe8fe28a56dbcc7028097cf11836b4fc = components['schemas']['test-vona.dto.serializerSimple_1c4b95bcfe8fe28a56dbcc7028097cf11836b4fc'];
+type ApiSchemaTestVonaDtoSerializerSimple_1c4b95bcfe8fe28a56dbcc7028097cf11836b4fcPartial = Partial<ApiSchemaTestVonaDtoSerializerSimple_1c4b95bcfe8fe28a56dbcc7028097cf11836b4fc>;
+type ApiSchemaTestVonaDtoSerializerSimple_542f7be0da9b85a67248a6a1a3629e72de5fdb33_cff0ae112a392da58caf5aa905749f3c4444c4ab = components['schemas']['test-vona.dto.serializerSimple_542f7be0da9b85a67248a6a1a3629e72de5fdb33_cff0ae112a392da58caf5aa905749f3c4444c4ab'];
+type ApiSchemaTestVonaDtoSerializerSimple_542f7be0da9b85a67248a6a1a3629e72de5fdb33_cff0ae112a392da58caf5aa905749f3c4444c4abPartial = Partial<ApiSchemaTestVonaDtoSerializerSimple_542f7be0da9b85a67248a6a1a3629e72de5fdb33_cff0ae112a392da58caf5aa905749f3c4444c4ab>;
 //#endregion
-//#region src/suite/a-home/modules/home-api/src/api/captcha.d.ts
-interface ApiApiCaptchacreateRequestBody {
-  scene: string;
-}
-interface ApiApiCaptcharefreshRequestBody {
-  id: string;
-  scene: string;
-}
-interface ApiApiCaptchaverifyImmediateRequestBody {
-  id: string;
-  token?: unknown;
-}
-declare class ApiCaptcha extends BeanApiBase {
-  create(body: ApiApiCaptchacreateRequestBody, options?: IApiActionOptions): Promise<{
-    id: string;
-    provider: string;
-    token?: unknown;
-    payload?: unknown;
-  }>;
-  refresh(body: ApiApiCaptcharefreshRequestBody, options?: IApiActionOptions): Promise<{
-    id: string;
-    provider: string;
-    token?: unknown;
-    payload?: unknown;
-  }>;
-  verifyImmediate(body: ApiApiCaptchaverifyImmediateRequestBody, options?: IApiActionOptions): Promise<string>;
-}
-//#endregion
-//#region src/suite/a-home/modules/home-api/src/api/home.d.ts
-declare class ApiHome extends BeanApiBase {
-  /** @description Home */
-  index(options?: IApiActionOptions): Promise<unknown>;
-}
-//#endregion
-//#region src/suite/a-home/modules/home-api/src/api/homeBaseMenu.d.ts
+//#region src/module/demo-student/src/api/homeBaseMenu.d.ts
 /** HomeBaseMenu_retrieveMenus */
 declare const ApiApiHomeBaseMenuretrieveMenusPath = "/api/home/base/menu/{publicPath?}";
 type ApiApiHomeBaseMenuretrieveMenusPath = '/api/home/base/menu/{publicPath?}';
 type ApiApiHomeBaseMenuretrieveMenusMethod = 'get';
 type ApiApiHomeBaseMenuretrieveMenusRequestParams = paths[ApiApiHomeBaseMenuretrieveMenusPath][ApiApiHomeBaseMenuretrieveMenusMethod]['parameters']['path'];
+type ApiApiHomeBaseMenuretrieveMenusResponseBody = paths[ApiApiHomeBaseMenuretrieveMenusPath][ApiApiHomeBaseMenuretrieveMenusMethod]['responses']['200']['content']['application/json']['data'];
 declare class ApiHomeBaseMenu extends BeanApiBase {
   retrieveMenus(options: {
     params: ApiApiHomeBaseMenuretrieveMenusRequestParams;
@@ -5172,378 +7885,9 @@ declare class ApiHomeBaseMenu extends BeanApiBase {
   }>;
 }
 //#endregion
-//#region src/suite/a-home/modules/home-api/src/api/homeBasePermission.d.ts
-/** HomeBasePermission_retrievePermissions */
-declare const ApiApiHomeBasePermissionretrievePermissionsPath = "/api/home/base/permission/{resource}";
-type ApiApiHomeBasePermissionretrievePermissionsPath = '/api/home/base/permission/{resource}';
-type ApiApiHomeBasePermissionretrievePermissionsMethod = 'get';
-type ApiApiHomeBasePermissionretrievePermissionsRequestParams = paths[ApiApiHomeBasePermissionretrievePermissionsPath][ApiApiHomeBasePermissionretrievePermissionsMethod]['parameters']['path'];
-declare class ApiHomeBasePermission extends BeanApiBase {
-  retrievePermissions(options: {
-    params: ApiApiHomeBasePermissionretrievePermissionsRequestParams;
-  } & IApiActionOptions): Promise<{
-    roleIds?: (number | string)[] | undefined;
-    roleNames?: string[] | undefined;
-    actions?: unknown;
-  }>;
-}
-//#endregion
-//#region src/suite/a-home/modules/home-api/src/api/homeUserPassport.d.ts
-type ApiApiHomeUserPassportregisterRequestBody = components['schemas']['home-user.dto.register'];
-type ApiApiHomeUserPassportloginRequestBody = components['schemas']['home-user.dto.login'];
-/** HomeUserPassport_loginOauth */
-declare const ApiApiHomeUserPassportloginOauthPath = "/api/home/user/passport/login/{module}/{providerName}/{clientName?}";
-type ApiApiHomeUserPassportloginOauthPath = '/api/home/user/passport/login/{module}/{providerName}/{clientName?}';
-type ApiApiHomeUserPassportloginOauthMethod = 'get';
-type ApiApiHomeUserPassportloginOauthRequestParams = paths[ApiApiHomeUserPassportloginOauthPath][ApiApiHomeUserPassportloginOauthMethod]['parameters']['path'];
-type ApiApiHomeUserPassportloginOauthRequestQuery = paths[ApiApiHomeUserPassportloginOauthPath][ApiApiHomeUserPassportloginOauthMethod]['parameters']['query'];
-/** HomeUserPassport_associate */
-declare const ApiApiHomeUserPassportassociatePath = "/api/home/user/passport/associate/{module}/{providerName}/{clientName?}";
-type ApiApiHomeUserPassportassociatePath = '/api/home/user/passport/associate/{module}/{providerName}/{clientName?}';
-type ApiApiHomeUserPassportassociateMethod = 'get';
-type ApiApiHomeUserPassportassociateRequestParams = paths[ApiApiHomeUserPassportassociatePath][ApiApiHomeUserPassportassociateMethod]['parameters']['path'];
-type ApiApiHomeUserPassportassociateRequestQuery = paths[ApiApiHomeUserPassportassociatePath][ApiApiHomeUserPassportassociateMethod]['parameters']['query'];
-/** HomeUserPassport_migrate */
-declare const ApiApiHomeUserPassportmigratePath = "/api/home/user/passport/migrate/{module}/{providerName}/{clientName?}";
-type ApiApiHomeUserPassportmigratePath = '/api/home/user/passport/migrate/{module}/{providerName}/{clientName?}';
-type ApiApiHomeUserPassportmigrateMethod = 'get';
-type ApiApiHomeUserPassportmigrateRequestParams = paths[ApiApiHomeUserPassportmigratePath][ApiApiHomeUserPassportmigrateMethod]['parameters']['path'];
-type ApiApiHomeUserPassportmigrateRequestQuery = paths[ApiApiHomeUserPassportmigratePath][ApiApiHomeUserPassportmigrateMethod]['parameters']['query'];
-interface ApiApiHomeUserPassportrefreshAuthTokenRequestBody {
-  refreshToken: string;
-}
-interface ApiApiHomeUserPassportcreatePassportJwtFromOauthCodeRequestBody {
-  code: string;
-}
-/** HomeUserPassport_createTempAuthToken */
-declare const ApiApiHomeUserPassportcreateTempAuthTokenPath = "/api/home/user/passport/createTempAuthToken";
-type ApiApiHomeUserPassportcreateTempAuthTokenPath = '/api/home/user/passport/createTempAuthToken';
-type ApiApiHomeUserPassportcreateTempAuthTokenMethod = 'post';
-type ApiApiHomeUserPassportcreateTempAuthTokenRequestQuery = paths[ApiApiHomeUserPassportcreateTempAuthTokenPath][ApiApiHomeUserPassportcreateTempAuthTokenMethod]['parameters']['query'];
-declare class ApiHomeUserPassport extends BeanApiBase {
-  current(options?: IApiActionOptions): Promise<{
-    user: components['schemas']['home-user.entity.user'];
-    auth: components['schemas']['a-auth.dto.auth'];
-    roles: components['schemas']['home-user.entity.role'][];
-  } | undefined>;
-  logout(body?: undefined, options?: IApiActionOptions): Promise<unknown>;
-  register(body: ApiApiHomeUserPassportregisterRequestBody, options?: IApiActionOptions): Promise<{
-    passport: components['schemas']['home-user.dto.passport'];
-    jwt: components['schemas']['a-jwt.dto.jwtToken'];
-  }>;
-  login(body: ApiApiHomeUserPassportloginRequestBody, options?: IApiActionOptions): Promise<{
-    passport: components['schemas']['home-user.dto.passport'];
-    jwt: components['schemas']['a-jwt.dto.jwtToken'];
-  }>;
-  loginOauth(options: {
-    params: ApiApiHomeUserPassportloginOauthRequestParams;
-    query?: ApiApiHomeUserPassportloginOauthRequestQuery;
-  } & IApiActionOptions): Promise<unknown>;
-  associate(options: {
-    params: ApiApiHomeUserPassportassociateRequestParams;
-    query?: ApiApiHomeUserPassportassociateRequestQuery;
-  } & IApiActionOptions): Promise<{
-    passport: components['schemas']['home-user.dto.passport'];
-    jwt: components['schemas']['a-jwt.dto.jwtToken'];
-  }>;
-  migrate(options: {
-    params: ApiApiHomeUserPassportmigrateRequestParams;
-    query?: ApiApiHomeUserPassportmigrateRequestQuery;
-  } & IApiActionOptions): Promise<{
-    passport: components['schemas']['home-user.dto.passport'];
-    jwt: components['schemas']['a-jwt.dto.jwtToken'];
-  }>;
-  refreshAuthToken(body: ApiApiHomeUserPassportrefreshAuthTokenRequestBody, options?: IApiActionOptions): Promise<{
-    accessToken: string;
-    refreshToken: string;
-    expiresIn: number;
-  }>;
-  createPassportJwtFromOauthCode(body: ApiApiHomeUserPassportcreatePassportJwtFromOauthCodeRequestBody, options?: IApiActionOptions): Promise<{
-    passport: components['schemas']['home-user.dto.passport'];
-    jwt: components['schemas']['a-jwt.dto.jwtToken'];
-  }>;
-  createTempAuthToken(body?: undefined, options?: {
-    query?: ApiApiHomeUserPassportcreateTempAuthTokenRequestQuery;
-  } & IApiActionOptions): Promise<string>;
-}
-//#endregion
-//#region src/suite/a-home/modules/home-api/src/api/testSsrToolOne.d.ts
-/** TestSsrToolOne_testGet */
-declare const ApiApiTestSsrToolOnetestGetPath = "/api/test/ssr/toolOne/test/{id?}";
-type ApiApiTestSsrToolOnetestGetPath = '/api/test/ssr/toolOne/test/{id?}';
-type ApiApiTestSsrToolOnetestGetMethod = 'get';
-type ApiApiTestSsrToolOnetestGetRequestParams = paths[ApiApiTestSsrToolOnetestGetPath][ApiApiTestSsrToolOnetestGetMethod]['parameters']['path'];
-type ApiApiTestSsrToolOnetestGetRequestQuery = paths[ApiApiTestSsrToolOnetestGetPath][ApiApiTestSsrToolOnetestGetMethod]['parameters']['query'];
-/** TestSsrToolOne_test */
-declare const ApiApiTestSsrToolOnetestPath = "/api/test/ssr/toolOne/test/{id?}";
-type ApiApiTestSsrToolOnetestPath = '/api/test/ssr/toolOne/test/{id?}';
-type ApiApiTestSsrToolOnetestMethod = 'post';
-type ApiApiTestSsrToolOnetestRequestParams = paths[ApiApiTestSsrToolOnetestPath][ApiApiTestSsrToolOnetestMethod]['parameters']['path'];
-type ApiApiTestSsrToolOnetestRequestQuery = paths[ApiApiTestSsrToolOnetestPath][ApiApiTestSsrToolOnetestMethod]['parameters']['query'];
-type ApiApiTestSsrToolOnetestRequestBody = components['schemas']['test-ssr.dto.testBody'];
-declare class ApiTestSsrToolOne extends BeanApiBase {
-  testGet(options: {
-    params: ApiApiTestSsrToolOnetestGetRequestParams;
-    query: ApiApiTestSsrToolOnetestGetRequestQuery;
-  } & IApiActionOptions): Promise<unknown>;
-  test(body: ApiApiTestSsrToolOnetestRequestBody, options: {
-    params: ApiApiTestSsrToolOnetestRequestParams;
-    query: ApiApiTestSsrToolOnetestRequestQuery;
-  } & IApiActionOptions): Promise<{
-    id: number | string;
-    name?: string;
-    married: boolean;
-    details: components['schemas']['test-ssr.dto.testDetail'][];
-    _custom1?: string | undefined;
-    _custom2?: string | undefined;
-    _custom3?: string | undefined;
-    _custom4?: string | undefined;
-    _custom5?: string | undefined;
-    _customCopy?: string | undefined;
-    _customCopied?: boolean | undefined;
-  }>;
-}
-//#endregion
-//#region src/suite/a-home/modules/home-api/src/apiSchema/captcha.d.ts
-declare class ApiSchemaCaptcha extends BeanBase {
-  create(options?: IApiSchemaOptions): _$zova_module_a_openapi0.IOpenapiSchemas;
-  refresh(options?: IApiSchemaOptions): _$zova_module_a_openapi0.IOpenapiSchemas;
-  verifyImmediate(options?: IApiSchemaOptions): _$zova_module_a_openapi0.IOpenapiSchemas;
-}
-//#endregion
-//#region src/suite/a-home/modules/home-api/src/apiSchema/home.d.ts
-declare class ApiSchemaHome extends BeanBase {
-  index(options?: IApiSchemaOptions): _$zova_module_a_openapi0.IOpenapiSchemas;
-}
-//#endregion
-//#region src/suite/a-home/modules/home-api/src/apiSchema/homeBaseMenu.d.ts
+//#region src/module/demo-student/src/apiSchema/homeBaseMenu.d.ts
 declare class ApiSchemaHomeBaseMenu extends BeanBase {
   retrieveMenus(options?: IApiSchemaOptions): _$zova_module_a_openapi0.IOpenapiSchemas;
-}
-//#endregion
-//#region src/suite/a-home/modules/home-api/src/apiSchema/homeBasePermission.d.ts
-declare class ApiSchemaHomeBasePermission extends BeanBase {
-  retrievePermissions(options?: IApiSchemaOptions): _$zova_module_a_openapi0.IOpenapiSchemas;
-}
-//#endregion
-//#region src/suite/a-home/modules/home-api/src/apiSchema/homeUserPassport.d.ts
-declare class ApiSchemaHomeUserPassport extends BeanBase {
-  current(options?: IApiSchemaOptions): _$zova_module_a_openapi0.IOpenapiSchemas;
-  logout(options?: IApiSchemaOptions): _$zova_module_a_openapi0.IOpenapiSchemas;
-  register(options?: IApiSchemaOptions): _$zova_module_a_openapi0.IOpenapiSchemas;
-  login(options?: IApiSchemaOptions): _$zova_module_a_openapi0.IOpenapiSchemas;
-  loginOauth(options?: IApiSchemaOptions): _$zova_module_a_openapi0.IOpenapiSchemas;
-  associate(options?: IApiSchemaOptions): _$zova_module_a_openapi0.IOpenapiSchemas;
-  migrate(options?: IApiSchemaOptions): _$zova_module_a_openapi0.IOpenapiSchemas;
-  refreshAuthToken(options?: IApiSchemaOptions): _$zova_module_a_openapi0.IOpenapiSchemas;
-  createPassportJwtFromOauthCode(options?: IApiSchemaOptions): _$zova_module_a_openapi0.IOpenapiSchemas;
-  createTempAuthToken(options?: IApiSchemaOptions): _$zova_module_a_openapi0.IOpenapiSchemas;
-}
-//#endregion
-//#region src/suite/a-home/modules/home-api/src/apiSchema/testSsrToolOne.d.ts
-declare class ApiSchemaTestSsrToolOne extends BeanBase {
-  testGet(options?: IApiSchemaOptions): _$zova_module_a_openapi0.IOpenapiSchemas;
-  test(options?: IApiSchemaOptions): _$zova_module_a_openapi0.IOpenapiSchemas;
-}
-//#endregion
-//#region src/suite/a-home/modules/home-api/src/service/jwtAdapter.d.ts
-declare class ServiceJwtAdapter extends BeanBase implements IJwtAdapter {
-  protected __init__(): Promise<void>;
-  getJwtInfo(): Promise<IJwtInfo | undefined>;
-  refreshAuthToken(refreshToken: string): Promise<IJwtInfo>;
-}
-//#endregion
-//#region src/suite/a-home/modules/home-api/src/.metadata/index.d.ts
-declare module 'zova' {}
-declare module 'zova-module-home-api' {
-  interface ApiCaptcha {}
-  interface ApiCaptcha {
-    get $beanFullName(): 'home-api.api.captcha';
-    get $onionName(): 'home-api:captcha';
-  }
-  interface ApiHome {}
-  interface ApiHome {
-    get $beanFullName(): 'home-api.api.home';
-    get $onionName(): 'home-api:home';
-  }
-  interface ApiHomeBaseMenu {}
-  interface ApiHomeBaseMenu {
-    get $beanFullName(): 'home-api.api.homeBaseMenu';
-    get $onionName(): 'home-api:homeBaseMenu';
-  }
-  interface ApiHomeBasePermission {}
-  interface ApiHomeBasePermission {
-    get $beanFullName(): 'home-api.api.homeBasePermission';
-    get $onionName(): 'home-api:homeBasePermission';
-  }
-  interface ApiHomeUserPassport {}
-  interface ApiHomeUserPassport {
-    get $beanFullName(): 'home-api.api.homeUserPassport';
-    get $onionName(): 'home-api:homeUserPassport';
-  }
-  interface ApiTestSsrToolOne {}
-  interface ApiTestSsrToolOne {
-    get $beanFullName(): 'home-api.api.testSsrToolOne';
-    get $onionName(): 'home-api:testSsrToolOne';
-  }
-}
-/** api: end */
-/** api: begin */
-interface IModuleApi$2 {
-  'captcha': ApiCaptcha;
-  'home': ApiHome;
-  'homeBaseMenu': ApiHomeBaseMenu;
-  'homeBasePermission': ApiHomeBasePermission;
-  'homeUserPassport': ApiHomeUserPassport;
-  'testSsrToolOne': ApiTestSsrToolOne;
-}
-declare module 'zova' {
-  interface IBeanRecordGeneral {
-    'home-api.api.captcha': ApiCaptcha;
-    'home-api.api.home': ApiHome;
-    'home-api.api.homeBaseMenu': ApiHomeBaseMenu;
-    'home-api.api.homeBasePermission': ApiHomeBasePermission;
-    'home-api.api.homeUserPassport': ApiHomeUserPassport;
-    'home-api.api.testSsrToolOne': ApiTestSsrToolOne;
-  }
-}
-/** api: end */
-/** openapi: begin */
-declare module 'zova' {}
-declare module 'zova-module-home-api' {
-  interface ApiSchemaCaptcha {}
-  interface ApiSchemaCaptcha {
-    get $beanFullName(): 'home-api.apiSchema.captcha';
-    get $onionName(): 'home-api:captcha';
-  }
-  interface ApiSchemaHome {}
-  interface ApiSchemaHome {
-    get $beanFullName(): 'home-api.apiSchema.home';
-    get $onionName(): 'home-api:home';
-  }
-  interface ApiSchemaHomeBaseMenu {}
-  interface ApiSchemaHomeBaseMenu {
-    get $beanFullName(): 'home-api.apiSchema.homeBaseMenu';
-    get $onionName(): 'home-api:homeBaseMenu';
-  }
-  interface ApiSchemaHomeBasePermission {}
-  interface ApiSchemaHomeBasePermission {
-    get $beanFullName(): 'home-api.apiSchema.homeBasePermission';
-    get $onionName(): 'home-api:homeBasePermission';
-  }
-  interface ApiSchemaHomeUserPassport {}
-  interface ApiSchemaHomeUserPassport {
-    get $beanFullName(): 'home-api.apiSchema.homeUserPassport';
-    get $onionName(): 'home-api:homeUserPassport';
-  }
-  interface ApiSchemaTestSsrToolOne {}
-  interface ApiSchemaTestSsrToolOne {
-    get $beanFullName(): 'home-api.apiSchema.testSsrToolOne';
-    get $onionName(): 'home-api:testSsrToolOne';
-  }
-}
-/** apiSchema: end */
-/** apiSchema: begin */
-interface IModuleApiSchema {
-  'captcha': ApiSchemaCaptcha;
-  'home': ApiSchemaHome;
-  'homeBaseMenu': ApiSchemaHomeBaseMenu;
-  'homeBasePermission': ApiSchemaHomeBasePermission;
-  'homeUserPassport': ApiSchemaHomeUserPassport;
-  'testSsrToolOne': ApiSchemaTestSsrToolOne;
-}
-declare module 'zova' {
-  interface IBeanRecordGeneral {
-    'home-api.apiSchema.captcha': ApiSchemaCaptcha;
-    'home-api.apiSchema.home': ApiSchemaHome;
-    'home-api.apiSchema.homeBaseMenu': ApiSchemaHomeBaseMenu;
-    'home-api.apiSchema.homeBasePermission': ApiSchemaHomeBasePermission;
-    'home-api.apiSchema.homeUserPassport': ApiSchemaHomeUserPassport;
-    'home-api.apiSchema.testSsrToolOne': ApiSchemaTestSsrToolOne;
-  }
-}
-/** apiSchema: end */
-/** service: begin */
-declare module 'zova-module-a-bean' {
-  interface IServiceRecord {
-    'home-api:jwtAdapter': never;
-  }
-}
-declare module 'zova-module-home-api' {
-  interface ServiceJwtAdapter {}
-  interface ServiceJwtAdapter {
-    get $beanFullName(): 'home-api.service.jwtAdapter';
-    get $onionName(): 'home-api:jwtAdapter';
-  }
-}
-/** service: end */
-/** service: begin */
-declare module 'zova' {
-  interface IBeanRecordGeneral {
-    'home-api.service.jwtAdapter': ServiceJwtAdapter;
-  }
-}
-/** service: end */
-/** scope: begin */
-declare class ScopeModuleHomeApi extends BeanScopeBase {}
-interface ScopeModuleHomeApi {
-  util: BeanScopeUtil;
-  api: IModuleApi$2;
-  apiSchema: IModuleApiSchema;
-}
-declare module 'zova' {
-  interface IBeanScopeRecord {
-    'home-api': ScopeModuleHomeApi;
-  }
-}
-/** scope: end */
-//#endregion
-//#region src/suite/a-home/modules/home-api/src/types/api.d.ts
-declare module 'zova' {
-  interface BeanBase {
-    $api: IModuleApi$2;
-    $apiSchema: IModuleApiSchema;
-  }
-}
-//#endregion
-//#region src/module/demo-student/src/model/menu.d.ts
-interface IModelOptionsMenu extends IDecoratorModelOptions {}
-declare class ModelMenu extends BeanModelBase {
-  retrieveMenus(): _$vue.UnwrapNestedRefs<_$_tanstack_vue_query0.UseQueryReturnType<{
-    menus?: components['schemas']['a-menu.dto.menuItem'][] | undefined;
-    groups?: components['schemas']['a-menu.dto.menuGroup'][] | undefined;
-  }, Error>>;
-}
-//#endregion
-//#region src/module/demo-student/src/model/test.d.ts
-interface IModelOptionsTest$1 extends IDecoratorModelOptions {}
-declare class ModelTest$1 extends BeanModelBase {
-  protected __init__(): Promise<void>;
-}
-//#endregion
-//#region src/module/demo-student/src/api/menu.d.ts
-interface ApiMenuRetrieveMenusResult {
-  title: string;
-  link: string;
-}
-declare class ApiMenu extends BeanApiBase {
-  retrieveMenus(): Promise<ApiMenuRetrieveMenusResult>;
-}
-//#endregion
-//#region src/module/demo-student/src/api/test.d.ts
-interface ApiTestEchoResult {
-  message: string;
-}
-declare class ApiTest extends BeanApiBase {
-  echo(): Promise<ApiTestEchoResult>;
-}
-//#endregion
-//#region src/module/demo-student/src/api/test3.d.ts
-interface ApiTest3EchoResult {
-  message: string;
-}
-declare class ApiTest3 extends BeanApiBase {
-  echo(): Promise<ApiTest3EchoResult>;
 }
 //#endregion
 //#region src/module/demo-student/src/bean/bean.test.d.ts
@@ -6097,39 +8441,43 @@ declare module 'zova' {
 /** api: begin */
 declare module 'zova' {}
 declare module 'zova-module-demo-student' {
-  interface ApiMenu {}
-  interface ApiMenu {
-    get $beanFullName(): 'demo-student.api.menu';
-    get $onionName(): 'demo-student:menu';
-  }
-  interface ApiTest {}
-  interface ApiTest {
-    get $beanFullName(): 'demo-student.api.test';
-    get $onionName(): 'demo-student:test';
-  }
-  interface ApiTest3 {}
-  interface ApiTest3 {
-    get $beanFullName(): 'demo-student.api.test3';
-    get $onionName(): 'demo-student:test3';
+  interface ApiHomeBaseMenu {}
+  interface ApiHomeBaseMenu {
+    get $beanFullName(): 'demo-student.api.homeBaseMenu';
+    get $onionName(): 'demo-student:homeBaseMenu';
   }
 }
 /** api: end */
 /** api: begin */
 interface IModuleApi$1 {
-  'menu': ApiMenu;
-  'test': ApiTest;
-  'test3': ApiTest3;
+  'homeBaseMenu': ApiHomeBaseMenu;
 }
 declare module 'zova' {
   interface IBeanRecordGeneral {
-    'demo-student.api.menu': ApiMenu;
-    'demo-student.api.test': ApiTest;
-    'demo-student.api.test3': ApiTest3;
+    'demo-student.api.homeBaseMenu': ApiHomeBaseMenu;
   }
 }
 /** api: end */
 /** openapi: begin */
-/** openapi: end */
+declare module 'zova' {}
+declare module 'zova-module-demo-student' {
+  interface ApiSchemaHomeBaseMenu {}
+  interface ApiSchemaHomeBaseMenu {
+    get $beanFullName(): 'demo-student.apiSchema.homeBaseMenu';
+    get $onionName(): 'demo-student:homeBaseMenu';
+  }
+}
+/** apiSchema: end */
+/** apiSchema: begin */
+interface IModuleApiSchema {
+  'homeBaseMenu': ApiSchemaHomeBaseMenu;
+}
+declare module 'zova' {
+  interface IBeanRecordGeneral {
+    'demo-student.apiSchema.homeBaseMenu': ApiSchemaHomeBaseMenu;
+  }
+}
+/** apiSchema: end */
 /** bean: begin */
 declare module 'zova' {}
 declare module 'zova-module-demo-student' {
@@ -6314,6 +8662,7 @@ interface ScopeModuleDemoStudent {
   locale: TypeModuleLocales<(typeof locales$7)[TypeLocaleBase]>;
   constant: TypeModuleConstants<typeof constants>;
   api: IModuleApi$1;
+  apiSchema: IModuleApiSchema;
 }
 declare module 'zova' {
   interface IBeanScopeRecord {
@@ -6485,7 +8834,7 @@ declare class ModelTest extends BeanModelBase {
     id: number | string;
     name?: string;
     married: boolean;
-    details: components['schemas']['test-ssr.dto.testDetail'][];
+    details: components$1['schemas']['test-ssr.dto.testDetail'][];
     _custom1?: string | undefined;
     _custom2?: string | undefined;
     _custom3?: string | undefined;
@@ -6511,7 +8860,7 @@ declare const V$1: typeof _$vue;
 declare function set<T>(target: any, key: any, val: T): T;
 declare function del(target: any, key: any): void;
 //#endregion
-//#region node_modules/.pnpm/pinia@2.3.1_typescript@5.9.3_vue@3.5.30_typescript@5.9.3_/node_modules/pinia/dist/pinia.d.ts
+//#region node_modules/.pnpm/pinia@2.3.1_typescript@5.9.3_vue@3.5.32_typescript@5.9.3_/node_modules/pinia/dist/pinia.d.ts
 /**
  * Type of an object of Actions. For internal usage only.
  * For internal use **only**
@@ -7181,10 +9530,10 @@ declare class ControllerPageToolOne$1 extends BeanControllerPageFormBase {
   $$modelTest: ModelTest;
   controllerForm: ControllerForm;
   fieldName: string;
-  formData: ApiSchemaTestSsrDtoTestBodyPartial;
+  formData: ApiSchemaTestSsrDtoTestBodyPartial$1;
   formMeta: IFormMeta;
   protected __init__(): Promise<void>;
-  onSubmit(data: TypeFormOnSubmitData<ApiSchemaTestSsrDtoTestBodyPartial>): Promise<void>;
+  onSubmit(data: TypeFormOnSubmitData<ApiSchemaTestSsrDtoTestBodyPartial$1>): Promise<void>;
 }
 //#endregion
 //#region src/suite/a-demo/modules/demo-basic/src/page/toolTwo/controller.d.ts
@@ -7195,7 +9544,7 @@ declare const ControllerPageToolTwoSchemaQuery: z.ZodObject<{
   name: z.ZodOptional<z.ZodString>;
 }, z.core.$strip>;
 declare class ControllerPageToolTwo extends BeanControllerPageBase {
-  $$modelPageData: ModelPageData<ApiSchemaTestSsrDtoTestResult | undefined>;
+  $$modelPageData: ModelPageData<ApiSchemaTestSsrDtoTestResult$1 | undefined>;
   protected __init__(): Promise<void>;
   protected render(): _$vue_jsx_runtime0.JSX.Element;
 }
@@ -8479,11 +10828,11 @@ declare module 'zova' {
 /** scope: end */
 //#endregion
 //#region src/suite/a-home/modules/home-layout/src/model/menu.d.ts
-type TypeMenuGroup = ApiSchemaAMenuDtoMenuGroup & {
+type TypeMenuGroup = ApiSchemaAMenuDtoMenuGroup$1 & {
   folder: true;
   children: TypeMenuItem[];
 };
-type TypeMenuItem = (ApiSchemaAMenuDtoMenuItem & {
+type TypeMenuItem = (ApiSchemaAMenuDtoMenuItem$1 & {
   folder: false;
 }) | TypeMenuGroup;
 type TypeMenuTree = TypeMenuItem[];
@@ -8494,7 +10843,7 @@ declare class ModelMenu$1 extends BeanModelBase {
   protected __init__(): Promise<void>;
   protected __dispose__(): void;
   retrieveMenus(): _$vue.UnwrapNestedRefs<_$_tanstack_vue_query0.UseQueryReturnType<{
-    groups?: components['schemas']['a-menu.dto.menuGroup'][] | undefined;
+    groups?: components$1['schemas']['a-menu.dto.menuGroup'][] | undefined;
     menus: {
       name: string;
       title?: string | undefined;
@@ -8506,13 +10855,13 @@ declare class ModelMenu$1 extends BeanModelBase {
       link?: string | undefined;
       external?: boolean | undefined;
       target?: string | undefined;
-      meta?: components['schemas']['a-menu.dto.menuItemMeta'];
+      meta?: components$1['schemas']['a-menu.dto.menuItemMeta'];
     }[] | undefined;
   }, Error>>;
   findMenuItem(search: {
     name?: string;
     link?: string;
-  }): ApiSchemaAMenuDtoMenuItem | undefined;
+  }): ApiSchemaAMenuDtoMenuItem$1 | undefined;
   private _prepareMenuTree;
 }
 //#endregion
@@ -9997,7 +12346,7 @@ declare function BBZRouterstackRouterViewStack(_props: TypeControllerRouterViewS
 type TypeControllerRouterViewTabsPublicProps = TypeRenderComponentJsxPropsPublic & ControllerRouterViewTabsProps;
 declare function BBZRoutertabsRouterViewTabs(_props: TypeControllerRouterViewTabsPublicProps): string;
 declare namespace index_d_exports {
-  export { $iconName, AopCounterLog, AopHome, AopHome3, ApiMenu, ApiMenuRetrieveMenusResult, ApiTest, ApiTest3, ApiTest3EchoResult, ApiTestEchoResult, ApiTodo, ApiTodoEntity, ApiTodoIntertBody, ApiTodoUpdateBody, BBAActionsLog, BBARestActionsAlert, BBARestActionsConfirm, BBARestActionsCopy, BBARestActionsCreate, BBARestActionsDelete, BBARestActionsEdit, BBARestActionsSetValue, BBARestActionsView, BBFBasicDateRange, BBFBasicFormCaptcha, BBFCurrency, BBFDemoBasicTest, BBFFormWrapper, BBPBasicRestpage, BBPBasicRestpageEntry, BBTBasicTableActionOperationsRow, BBTBasicTableActionView, BBTCTest, BBTCurrency, BBTDate, BBTDemoBasicTest, BBZApp, BBZBasicDateRange, BBZBasicRestpageWrapperFilter, BBZBasicTable, BBZBasicTableActionOperationsTable, BBZBehavior, BBZDemoBasicActionView, BBZDemoBasicCard, BBZDemoBasicTableCellTest, BBZDemoStudentCard, BBZDemoStudentTest, BBZForm, BBZFormField, BBZFormSubscribe, BBZHomeBasePage, BBZHomeLayoutEmpty, BBZHomeLayoutEssentialLink, BBZHomeLayoutTabs, BBZIcon, BBZRouterViewEmpty, BBZRouterstackRouterViewStack, BBZRoutertabsRouterViewTabs, BBZTable, BeanTest, BehaviorFormFieldLayout, BehaviorFormFieldLayoutLogin, ControllerActionView, ControllerActionViewProps, ControllerCardModels, ControllerFormFieldTest, ControllerFormFieldTestProps, ControllerPage, ControllerPageAuthCallback, ControllerPageAuthCallbackSchemaQuery, ControllerPageComponent, ControllerPageCounterSchemaParams, ControllerPageCounterSchemaQuery, ControllerPageErrorExpired, ControllerPageErrorExpiredSchemaQuery, ControllerPageErrorNotFound, ControllerPageHome, ControllerPageItem, ControllerPageItemSchemaParams, ControllerPageItemSchemaQuery, ControllerPageLocale, ControllerPageLogin$1 as ControllerPageLogin, ControllerPagePinia, ControllerPageProps, ControllerPageRouteParams, ControllerPageRouteParamsSchemaParams, ControllerPageRouteParamsSchemaQuery, ControllerPageRouteQuery, ControllerPageRouteQueryB, ControllerPageRouteQueryBSchemaParams, ControllerPageRouteQueryBSchemaQuery, ControllerPageRouteQuerySchemaParams, ControllerPageRouteQuerySchemaQuery, ControllerPageState, ControllerPageStyle, ControllerPageTest, ControllerPageTest3, ControllerPageTodo, ControllerPageToolOne$1 as ControllerPageToolOne, ControllerPageToolOneSchemaParams, ControllerPageToolOneSchemaQuery, ControllerPageToolTwo, ControllerPageToolTwoSchemaParams, ControllerPageToolTwoSchemaQuery, ControllerTableCellTest, ControllerTableCellTestProps, ControllerTest, CssDefault, ErrorMessageJwtExpired, IBehaviorOptionsFormFieldLayout, IBehaviorOptionsFormFieldLayoutLogin, IBehaviorPropsInputFormFieldLayout, IBehaviorPropsInputFormFieldLayoutLogin, IBehaviorPropsOutputFormFieldLayout, IBehaviorPropsOutputFormFieldLayoutLogin, ICssOptionsDefault, IIconRecord, IModelOptionsMenu, IModelOptionsTodo, IPagePathRecord, IThemeOptionsDefault, IThemeOptionsOrange, MainSys, ModelMenu, ModelTodo, NSControllerPageAuthCallback, NSControllerPageCounter, NSControllerPageErrorExpired, NSControllerPageItem, NSControllerPageRouteParams, NSControllerPageRouteQuery, NSControllerPageRouteQueryB, NSControllerPageToolOne, NSControllerPageToolTwo, RenderCard, RenderPage, RenderPageCounter, RenderPageLogin, RenderPageMore, RenderPageToolOne, ScopeModuleAC, ScopeModuleDemoBasic, ScopeModuleDemoStudent, ScopeModuleDemoTodo, ScopeModuleHomeBase, ScopeModuleHomeIcon, ScopeModuleHomeIndex, ScopeModuleHomeLogin, ServiceCounter, ServiceData, ServiceRouterGuards, ServiceSsr, ServiceTest3, ServiceTest4, StoreCounter, StoreTest, StylePageCounter$1 as StylePageCounter, StylePageMore, ThemeDefault, ThemeOrange, ThemeTokenCustom, TypeControllerActionViewPublicProps, TypeControllerFormFieldTestPublicProps, TypeControllerPagePublicProps, TypeControllerTableCellTestPublicProps, TypeControllerTestPublicProps, ZActionView, ZFormFieldTest, ZPage, ZPageAuthCallback, ZPageComponent, ZPageErrorExpired, ZPageErrorNotFound, ZPageHome, ZPageItem, ZPageLocale, ZPageLogin, ZPagePinia, ZPageRouteParams, ZPageRouteQuery, ZPageRouteQueryB, ZPageState, ZPageStyle, ZPageTest, ZPageTest3, ZPageTodo, ZPageToolOne, ZPageToolTwo, ZTableCellTest, ZTest, config, constants, definePropertyScopeBase, errors, icons };
+  export { $defs, $iconName, AopCounterLog, AopHome, AopHome3, ApiApiHomeBaseMenuretrieveMenusMethod, ApiApiHomeBaseMenuretrieveMenusPath, ApiApiHomeBaseMenuretrieveMenusRequestParams, ApiApiHomeBaseMenuretrieveMenusResponseBody, ApiHomeBaseMenu, ApiSchemaAAuthDtoAuth, ApiSchemaAAuthDtoAuthPartial, ApiSchemaACaptchaDtoCaptchaData, ApiSchemaACaptchaDtoCaptchaDataPartial, ApiSchemaACaptchaDtoCaptchaVerify_c3cd80b1eeafe39bfe4433491bb081d68e84797e, ApiSchemaACaptchaDtoCaptchaVerify_c3cd80b1eeafe39bfe4433491bb081d68e84797ePartial, ApiSchemaACaptchaDtoCaptchaVerify_c3cd80b1eeafe39bfe4433491bb081d68e84797e_3218e7d152830e08f6e764b9e0c3796df929ee2b, ApiSchemaACaptchaDtoCaptchaVerify_c3cd80b1eeafe39bfe4433491bb081d68e84797e_3218e7d152830e08f6e764b9e0c3796df929ee2bPartial, ApiSchemaAJwtDtoJwtToken, ApiSchemaAJwtDtoJwtTokenPartial, ApiSchemaAMenuDtoMenuGroup, ApiSchemaAMenuDtoMenuGroupPartial, ApiSchemaAMenuDtoMenuItem, ApiSchemaAMenuDtoMenuItemMeta, ApiSchemaAMenuDtoMenuItemMetaPartial, ApiSchemaAMenuDtoMenuItemPartial, ApiSchemaAMenuDtoMenus, ApiSchemaAMenuDtoMenusPartial, ApiSchemaAPaypalDtoPaypalOrderRecordOptions, ApiSchemaAPaypalDtoPaypalOrderRecordOptionsPartial, ApiSchemaAPaypalDtoPaypalOrderRecordPayload, ApiSchemaAPaypalDtoPaypalOrderRecordPayloadPartial, ApiSchemaAPaypalEntityPaypalRecord, ApiSchemaAPaypalEntityPaypalRecordPartial, ApiSchemaAPermissionDtoPermissions, ApiSchemaAPermissionDtoPermissionsPartial, ApiSchemaAPlayDtoPlay, ApiSchemaAPlayDtoPlayPartial, ApiSchemaHomeBaseMenu, ApiSchemaHomeUserDtoLogin, ApiSchemaHomeUserDtoLoginPartial, ApiSchemaHomeUserDtoPassport, ApiSchemaHomeUserDtoPassportJwt, ApiSchemaHomeUserDtoPassportJwtPartial, ApiSchemaHomeUserDtoPassportPartial, ApiSchemaHomeUserDtoRegister, ApiSchemaHomeUserDtoRegisterPartial, ApiSchemaHomeUserEntityRole, ApiSchemaHomeUserEntityRolePartial, ApiSchemaHomeUserEntityUser, ApiSchemaHomeUserEntityUserPartial, ApiSchemaTestCaptchaDtoSignin, ApiSchemaTestCaptchaDtoSigninPartial, ApiSchemaTestRestDtoProductCreate, ApiSchemaTestRestDtoProductCreatePartial, ApiSchemaTestRestDtoProductQueryRes, ApiSchemaTestRestDtoProductQueryResPartial, ApiSchemaTestRestDtoProductUpdate, ApiSchemaTestRestDtoProductUpdatePartial, ApiSchemaTestRestEntityProduct, ApiSchemaTestRestEntityProductPartial, ApiSchemaTestSsrDtoTestBody, ApiSchemaTestSsrDtoTestBodyPartial, ApiSchemaTestSsrDtoTestDetail, ApiSchemaTestSsrDtoTestDetailPartial, ApiSchemaTestSsrDtoTestResult, ApiSchemaTestSsrDtoTestResultPartial, ApiSchemaTestVonaDtoCategoryTree, ApiSchemaTestVonaDtoCategoryTreePartial, ApiSchemaTestVonaDtoOrderCreate, ApiSchemaTestVonaDtoOrderCreatePartial, ApiSchemaTestVonaDtoOrderResult, ApiSchemaTestVonaDtoOrderResultPage, ApiSchemaTestVonaDtoOrderResultPagePartial, ApiSchemaTestVonaDtoOrderResultPartial, ApiSchemaTestVonaDtoOrderUpdate, ApiSchemaTestVonaDtoOrderUpdatePartial, ApiSchemaTestVonaDtoPostAggregate, ApiSchemaTestVonaDtoPostAggregatePartial, ApiSchemaTestVonaDtoPostCreate, ApiSchemaTestVonaDtoPostCreatePartial, ApiSchemaTestVonaDtoPostGroup, ApiSchemaTestVonaDtoPostGroupPartial, ApiSchemaTestVonaDtoPostQueryRes, ApiSchemaTestVonaDtoPostQueryResPartial, ApiSchemaTestVonaDtoRoleLazy, ApiSchemaTestVonaDtoRoleLazyPartial, ApiSchemaTestVonaDtoSerializerArray, ApiSchemaTestVonaDtoSerializerArrayPartial, ApiSchemaTestVonaDtoSerializerLazy, ApiSchemaTestVonaDtoSerializerLazyPartial, ApiSchemaTestVonaDtoSerializerSimple, ApiSchemaTestVonaDtoSerializerSimplePartial, ApiSchemaTestVonaDtoSerializerSimple_1c4b95bcfe8fe28a56dbcc7028097cf11836b4fc, ApiSchemaTestVonaDtoSerializerSimple_1c4b95bcfe8fe28a56dbcc7028097cf11836b4fcPartial, ApiSchemaTestVonaDtoSerializerSimple_542f7be0da9b85a67248a6a1a3629e72de5fdb33_cff0ae112a392da58caf5aa905749f3c4444c4ab, ApiSchemaTestVonaDtoSerializerSimple_542f7be0da9b85a67248a6a1a3629e72de5fdb33_cff0ae112a392da58caf5aa905749f3c4444c4abPartial, ApiSchemaTestVonaDtoUser, ApiSchemaTestVonaDtoUserCreate, ApiSchemaTestVonaDtoUserCreatePartial, ApiSchemaTestVonaDtoUserLazy, ApiSchemaTestVonaDtoUserLazyPartial, ApiSchemaTestVonaDtoUserPartial, ApiSchemaTestVonaDtoUserUpdate, ApiSchemaTestVonaDtoUserUpdatePartial, ApiSchemaTestVonaEntityCategory_2c7d642ee581efa300341e343180fbb0ecdc785d, ApiSchemaTestVonaEntityCategory_2c7d642ee581efa300341e343180fbb0ecdc785dPartial, ApiSchemaTestVonaEntityPost_729883d7de16ce4401b26f75bebe618c8948ff64, ApiSchemaTestVonaEntityPost_729883d7de16ce4401b26f75bebe618c8948ff64Partial, ApiSchemaTestVonaEntityPost_a6ba2076b5b70a3c098374cc82d418bd1ab226c3, ApiSchemaTestVonaEntityPost_a6ba2076b5b70a3c098374cc82d418bd1ab226c3Partial, ApiSchemaTestVonaEntityProduct, ApiSchemaTestVonaEntityProductPartial, ApiSchemaTestVonaEntityProduct_29731960f3f38d3572bc2f8a01a7498bfe927055, ApiSchemaTestVonaEntityProduct_29731960f3f38d3572bc2f8a01a7498bfe927055Partial, ApiSchemaTestVonaEntityProduct_9cf2c6bcd41713270c34bcfce21b7b4942e3fbc6, ApiSchemaTestVonaEntityProduct_9cf2c6bcd41713270c34bcfce21b7b4942e3fbc6Partial, ApiSchemaTestVonaEntityProduct_bce173590aaef19772f1ae3a82196493c2633e2e, ApiSchemaTestVonaEntityProduct_bce173590aaef19772f1ae3a82196493c2633e2ePartial, ApiSchemaTestVonaEntityUser_2c7d642ee581efa300341e343180fbb0ecdc785d_1816ff740d81c738ec055c7038bbd93beb9405a7, ApiSchemaTestVonaEntityUser_2c7d642ee581efa300341e343180fbb0ecdc785d_1816ff740d81c738ec055c7038bbd93beb9405a7Partial, ApiTodo, ApiTodoEntity, ApiTodoIntertBody, ApiTodoUpdateBody, BBAActionsLog, BBARestActionsAlert, BBARestActionsConfirm, BBARestActionsCopy, BBARestActionsCreate, BBARestActionsDelete, BBARestActionsEdit, BBARestActionsSetValue, BBARestActionsView, BBFBasicDateRange, BBFBasicFormCaptcha, BBFCurrency, BBFDemoBasicTest, BBFFormWrapper, BBPBasicRestpage, BBPBasicRestpageEntry, BBTBasicTableActionOperationsRow, BBTBasicTableActionView, BBTCTest, BBTCurrency, BBTDate, BBTDemoBasicTest, BBZApp, BBZBasicDateRange, BBZBasicRestpageWrapperFilter, BBZBasicTable, BBZBasicTableActionOperationsTable, BBZBehavior, BBZDemoBasicActionView, BBZDemoBasicCard, BBZDemoBasicTableCellTest, BBZDemoStudentCard, BBZDemoStudentTest, BBZForm, BBZFormField, BBZFormSubscribe, BBZHomeBasePage, BBZHomeLayoutEmpty, BBZHomeLayoutEssentialLink, BBZHomeLayoutTabs, BBZIcon, BBZRouterViewEmpty, BBZRouterstackRouterViewStack, BBZRoutertabsRouterViewTabs, BBZTable, BeanTest, BehaviorFormFieldLayout, BehaviorFormFieldLayoutLogin, ControllerActionView, ControllerActionViewProps, ControllerCardModels, ControllerFormFieldTest, ControllerFormFieldTestProps, ControllerPage, ControllerPageAuthCallback, ControllerPageAuthCallbackSchemaQuery, ControllerPageComponent, ControllerPageCounterSchemaParams, ControllerPageCounterSchemaQuery, ControllerPageErrorExpired, ControllerPageErrorExpiredSchemaQuery, ControllerPageErrorNotFound, ControllerPageHome, ControllerPageItem, ControllerPageItemSchemaParams, ControllerPageItemSchemaQuery, ControllerPageLocale, ControllerPageLogin$1 as ControllerPageLogin, ControllerPagePinia, ControllerPageProps, ControllerPageRouteParams, ControllerPageRouteParamsSchemaParams, ControllerPageRouteParamsSchemaQuery, ControllerPageRouteQuery, ControllerPageRouteQueryB, ControllerPageRouteQueryBSchemaParams, ControllerPageRouteQueryBSchemaQuery, ControllerPageRouteQuerySchemaParams, ControllerPageRouteQuerySchemaQuery, ControllerPageState, ControllerPageStyle, ControllerPageTest, ControllerPageTest3, ControllerPageTodo, ControllerPageToolOne$1 as ControllerPageToolOne, ControllerPageToolOneSchemaParams, ControllerPageToolOneSchemaQuery, ControllerPageToolTwo, ControllerPageToolTwoSchemaParams, ControllerPageToolTwoSchemaQuery, ControllerTableCellTest, ControllerTableCellTestProps, ControllerTest, CssDefault, ErrorMessageJwtExpired, IBehaviorOptionsFormFieldLayout, IBehaviorOptionsFormFieldLayoutLogin, IBehaviorPropsInputFormFieldLayout, IBehaviorPropsInputFormFieldLayoutLogin, IBehaviorPropsOutputFormFieldLayout, IBehaviorPropsOutputFormFieldLayoutLogin, ICssOptionsDefault, IIconRecord, IModelOptionsMenu, IModelOptionsTodo, IModuleApiSchema, IPagePathRecord, IThemeOptionsDefault, IThemeOptionsOrange, MainSys, ModelMenu, ModelTodo, NSControllerPageAuthCallback, NSControllerPageCounter, NSControllerPageErrorExpired, NSControllerPageItem, NSControllerPageRouteParams, NSControllerPageRouteQuery, NSControllerPageRouteQueryB, NSControllerPageToolOne, NSControllerPageToolTwo, OpenApiBaseURL, RenderCard, RenderPage, RenderPageCounter, RenderPageLogin, RenderPageMore, RenderPageToolOne, ScopeModuleAC, ScopeModuleDemoBasic, ScopeModuleDemoStudent, ScopeModuleDemoTodo, ScopeModuleHomeBase, ScopeModuleHomeIcon, ScopeModuleHomeIndex, ScopeModuleHomeLogin, ServiceCounter, ServiceData, ServiceRouterGuards, ServiceSsr, ServiceTest3, ServiceTest4, StoreCounter, StoreTest, StylePageCounter$1 as StylePageCounter, StylePageMore, ThemeDefault, ThemeOrange, ThemeTokenCustom, TypeControllerActionViewPublicProps, TypeControllerFormFieldTestPublicProps, TypeControllerPagePublicProps, TypeControllerTableCellTestPublicProps, TypeControllerTestPublicProps, ZActionView, ZFormFieldTest, ZPage, ZPageAuthCallback, ZPageComponent, ZPageErrorExpired, ZPageErrorNotFound, ZPageHome, ZPageItem, ZPageLocale, ZPageLogin, ZPagePinia, ZPageRouteParams, ZPageRouteQuery, ZPageRouteQueryB, ZPageState, ZPageStyle, ZPageTest, ZPageTest3, ZPageTodo, ZPageToolOne, ZPageToolTwo, ZTableCellTest, ZTest, config, constants, definePropertyScopeBase, errors, icons, operations, paths, webhooks };
 }
 declare function $iconName<K extends keyof IIconRecord$1>(name: K): any;
 declare module 'zova-module-a-router' {
@@ -10009,4 +12358,4 @@ declare module 'zova-module-a-router' {
   }
 }
 //#endregion
-export { $iconName, AopCounterLog, AopHome, AopHome3, ApiMenu, ApiMenuRetrieveMenusResult, ApiTest, ApiTest3, ApiTest3EchoResult, ApiTestEchoResult, ApiTodo, ApiTodoEntity, ApiTodoIntertBody, ApiTodoUpdateBody, BBAActionsLog, BBARestActionsAlert, BBARestActionsConfirm, BBARestActionsCopy, BBARestActionsCreate, BBARestActionsDelete, BBARestActionsEdit, BBARestActionsSetValue, BBARestActionsView, BBFBasicDateRange, BBFBasicFormCaptcha, BBFCurrency, BBFDemoBasicTest, BBFFormWrapper, BBPBasicRestpage, BBPBasicRestpageEntry, BBTBasicTableActionOperationsRow, BBTBasicTableActionView, BBTCTest, BBTCurrency, BBTDate, BBTDemoBasicTest, BBZApp, BBZBasicDateRange, BBZBasicRestpageWrapperFilter, BBZBasicTable, BBZBasicTableActionOperationsTable, BBZBehavior, BBZDemoBasicActionView, BBZDemoBasicCard, BBZDemoBasicTableCellTest, BBZDemoStudentCard, BBZDemoStudentTest, BBZForm, BBZFormField, BBZFormSubscribe, BBZHomeBasePage, BBZHomeLayoutEmpty, BBZHomeLayoutEssentialLink, BBZHomeLayoutTabs, BBZIcon, BBZRouterViewEmpty, BBZRouterstackRouterViewStack, BBZRoutertabsRouterViewTabs, BBZTable, BeanTest, BehaviorFormFieldLayout, BehaviorFormFieldLayoutLogin, ControllerActionView, ControllerActionViewProps, ControllerCardModels, ControllerFormFieldTest, ControllerFormFieldTestProps, ControllerPage, ControllerPageAuthCallback, ControllerPageAuthCallbackSchemaQuery, ControllerPageComponent, ControllerPageCounterSchemaParams, ControllerPageCounterSchemaQuery, ControllerPageErrorExpired, ControllerPageErrorExpiredSchemaQuery, ControllerPageErrorNotFound, ControllerPageHome, ControllerPageItem, ControllerPageItemSchemaParams, ControllerPageItemSchemaQuery, ControllerPageLocale, ControllerPageLogin$1 as ControllerPageLogin, ControllerPagePinia, ControllerPageProps, ControllerPageRouteParams, ControllerPageRouteParamsSchemaParams, ControllerPageRouteParamsSchemaQuery, ControllerPageRouteQuery, ControllerPageRouteQueryB, ControllerPageRouteQueryBSchemaParams, ControllerPageRouteQueryBSchemaQuery, ControllerPageRouteQuerySchemaParams, ControllerPageRouteQuerySchemaQuery, ControllerPageState, ControllerPageStyle, ControllerPageTest, ControllerPageTest3, ControllerPageTodo, ControllerPageToolOne$1 as ControllerPageToolOne, ControllerPageToolOneSchemaParams, ControllerPageToolOneSchemaQuery, ControllerPageToolTwo, ControllerPageToolTwoSchemaParams, ControllerPageToolTwoSchemaQuery, ControllerTableCellTest, ControllerTableCellTestProps, ControllerTest, CssDefault, ErrorMessageJwtExpired, IBehaviorOptionsFormFieldLayout, IBehaviorOptionsFormFieldLayoutLogin, IBehaviorPropsInputFormFieldLayout, IBehaviorPropsInputFormFieldLayoutLogin, IBehaviorPropsOutputFormFieldLayout, IBehaviorPropsOutputFormFieldLayoutLogin, ICssOptionsDefault, type IIconRecord, IModelOptionsMenu, IModelOptionsTodo, type IPagePathRecord, IThemeOptionsDefault, IThemeOptionsOrange, MainSys, ModelMenu, ModelTodo, NSControllerPageAuthCallback, NSControllerPageCounter, NSControllerPageErrorExpired, NSControllerPageItem, NSControllerPageRouteParams, NSControllerPageRouteQuery, NSControllerPageRouteQueryB, NSControllerPageToolOne, NSControllerPageToolTwo, RenderCard, RenderPage, RenderPageCounter, RenderPageLogin, RenderPageMore, RenderPageToolOne, ScopeModuleAC, ScopeModuleDemoBasic, ScopeModuleDemoStudent, ScopeModuleDemoTodo, ScopeModuleHomeBase, ScopeModuleHomeIcon, ScopeModuleHomeIndex, ScopeModuleHomeLogin, ServiceCounter, ServiceData, ServiceRouterGuards, ServiceSsr, ServiceTest3, ServiceTest4, StoreCounter, StoreTest, StylePageCounter$1 as StylePageCounter, StylePageMore, ThemeDefault, ThemeOrange, ThemeTokenCustom, TypeControllerActionViewPublicProps, TypeControllerFormFieldTestPublicProps, TypeControllerPagePublicProps, TypeControllerTableCellTestPublicProps, TypeControllerTestPublicProps, ZActionView, ZFormFieldTest, ZPage, ZPageAuthCallback, ZPageComponent, ZPageErrorExpired, ZPageErrorNotFound, ZPageHome, ZPageItem, ZPageLocale, ZPageLogin, ZPagePinia, ZPageRouteParams, ZPageRouteQuery, ZPageRouteQueryB, ZPageState, ZPageStyle, ZPageTest, ZPageTest3, ZPageTodo, ZPageToolOne, ZPageToolTwo, ZTableCellTest, ZTest, config, constants, definePropertyScopeBase, errors, icons };
+export { $defs, $iconName, AopCounterLog, AopHome, AopHome3, ApiApiHomeBaseMenuretrieveMenusMethod, ApiApiHomeBaseMenuretrieveMenusPath, ApiApiHomeBaseMenuretrieveMenusRequestParams, ApiApiHomeBaseMenuretrieveMenusResponseBody, ApiHomeBaseMenu, ApiSchemaAAuthDtoAuth, ApiSchemaAAuthDtoAuthPartial, ApiSchemaACaptchaDtoCaptchaData, ApiSchemaACaptchaDtoCaptchaDataPartial, ApiSchemaACaptchaDtoCaptchaVerify_c3cd80b1eeafe39bfe4433491bb081d68e84797e, ApiSchemaACaptchaDtoCaptchaVerify_c3cd80b1eeafe39bfe4433491bb081d68e84797ePartial, ApiSchemaACaptchaDtoCaptchaVerify_c3cd80b1eeafe39bfe4433491bb081d68e84797e_3218e7d152830e08f6e764b9e0c3796df929ee2b, ApiSchemaACaptchaDtoCaptchaVerify_c3cd80b1eeafe39bfe4433491bb081d68e84797e_3218e7d152830e08f6e764b9e0c3796df929ee2bPartial, ApiSchemaAJwtDtoJwtToken, ApiSchemaAJwtDtoJwtTokenPartial, ApiSchemaAMenuDtoMenuGroup, ApiSchemaAMenuDtoMenuGroupPartial, ApiSchemaAMenuDtoMenuItem, ApiSchemaAMenuDtoMenuItemMeta, ApiSchemaAMenuDtoMenuItemMetaPartial, ApiSchemaAMenuDtoMenuItemPartial, ApiSchemaAMenuDtoMenus, ApiSchemaAMenuDtoMenusPartial, ApiSchemaAPaypalDtoPaypalOrderRecordOptions, ApiSchemaAPaypalDtoPaypalOrderRecordOptionsPartial, ApiSchemaAPaypalDtoPaypalOrderRecordPayload, ApiSchemaAPaypalDtoPaypalOrderRecordPayloadPartial, ApiSchemaAPaypalEntityPaypalRecord, ApiSchemaAPaypalEntityPaypalRecordPartial, ApiSchemaAPermissionDtoPermissions, ApiSchemaAPermissionDtoPermissionsPartial, ApiSchemaAPlayDtoPlay, ApiSchemaAPlayDtoPlayPartial, ApiSchemaHomeBaseMenu, ApiSchemaHomeUserDtoLogin, ApiSchemaHomeUserDtoLoginPartial, ApiSchemaHomeUserDtoPassport, ApiSchemaHomeUserDtoPassportJwt, ApiSchemaHomeUserDtoPassportJwtPartial, ApiSchemaHomeUserDtoPassportPartial, ApiSchemaHomeUserDtoRegister, ApiSchemaHomeUserDtoRegisterPartial, ApiSchemaHomeUserEntityRole, ApiSchemaHomeUserEntityRolePartial, ApiSchemaHomeUserEntityUser, ApiSchemaHomeUserEntityUserPartial, ApiSchemaTestCaptchaDtoSignin, ApiSchemaTestCaptchaDtoSigninPartial, ApiSchemaTestRestDtoProductCreate, ApiSchemaTestRestDtoProductCreatePartial, ApiSchemaTestRestDtoProductQueryRes, ApiSchemaTestRestDtoProductQueryResPartial, ApiSchemaTestRestDtoProductUpdate, ApiSchemaTestRestDtoProductUpdatePartial, ApiSchemaTestRestEntityProduct, ApiSchemaTestRestEntityProductPartial, ApiSchemaTestSsrDtoTestBody, ApiSchemaTestSsrDtoTestBodyPartial, ApiSchemaTestSsrDtoTestDetail, ApiSchemaTestSsrDtoTestDetailPartial, ApiSchemaTestSsrDtoTestResult, ApiSchemaTestSsrDtoTestResultPartial, ApiSchemaTestVonaDtoCategoryTree, ApiSchemaTestVonaDtoCategoryTreePartial, ApiSchemaTestVonaDtoOrderCreate, ApiSchemaTestVonaDtoOrderCreatePartial, ApiSchemaTestVonaDtoOrderResult, ApiSchemaTestVonaDtoOrderResultPage, ApiSchemaTestVonaDtoOrderResultPagePartial, ApiSchemaTestVonaDtoOrderResultPartial, ApiSchemaTestVonaDtoOrderUpdate, ApiSchemaTestVonaDtoOrderUpdatePartial, ApiSchemaTestVonaDtoPostAggregate, ApiSchemaTestVonaDtoPostAggregatePartial, ApiSchemaTestVonaDtoPostCreate, ApiSchemaTestVonaDtoPostCreatePartial, ApiSchemaTestVonaDtoPostGroup, ApiSchemaTestVonaDtoPostGroupPartial, ApiSchemaTestVonaDtoPostQueryRes, ApiSchemaTestVonaDtoPostQueryResPartial, ApiSchemaTestVonaDtoRoleLazy, ApiSchemaTestVonaDtoRoleLazyPartial, ApiSchemaTestVonaDtoSerializerArray, ApiSchemaTestVonaDtoSerializerArrayPartial, ApiSchemaTestVonaDtoSerializerLazy, ApiSchemaTestVonaDtoSerializerLazyPartial, ApiSchemaTestVonaDtoSerializerSimple, ApiSchemaTestVonaDtoSerializerSimplePartial, ApiSchemaTestVonaDtoSerializerSimple_1c4b95bcfe8fe28a56dbcc7028097cf11836b4fc, ApiSchemaTestVonaDtoSerializerSimple_1c4b95bcfe8fe28a56dbcc7028097cf11836b4fcPartial, ApiSchemaTestVonaDtoSerializerSimple_542f7be0da9b85a67248a6a1a3629e72de5fdb33_cff0ae112a392da58caf5aa905749f3c4444c4ab, ApiSchemaTestVonaDtoSerializerSimple_542f7be0da9b85a67248a6a1a3629e72de5fdb33_cff0ae112a392da58caf5aa905749f3c4444c4abPartial, ApiSchemaTestVonaDtoUser, ApiSchemaTestVonaDtoUserCreate, ApiSchemaTestVonaDtoUserCreatePartial, ApiSchemaTestVonaDtoUserLazy, ApiSchemaTestVonaDtoUserLazyPartial, ApiSchemaTestVonaDtoUserPartial, ApiSchemaTestVonaDtoUserUpdate, ApiSchemaTestVonaDtoUserUpdatePartial, ApiSchemaTestVonaEntityCategory_2c7d642ee581efa300341e343180fbb0ecdc785d, ApiSchemaTestVonaEntityCategory_2c7d642ee581efa300341e343180fbb0ecdc785dPartial, ApiSchemaTestVonaEntityPost_729883d7de16ce4401b26f75bebe618c8948ff64, ApiSchemaTestVonaEntityPost_729883d7de16ce4401b26f75bebe618c8948ff64Partial, ApiSchemaTestVonaEntityPost_a6ba2076b5b70a3c098374cc82d418bd1ab226c3, ApiSchemaTestVonaEntityPost_a6ba2076b5b70a3c098374cc82d418bd1ab226c3Partial, ApiSchemaTestVonaEntityProduct, ApiSchemaTestVonaEntityProductPartial, ApiSchemaTestVonaEntityProduct_29731960f3f38d3572bc2f8a01a7498bfe927055, ApiSchemaTestVonaEntityProduct_29731960f3f38d3572bc2f8a01a7498bfe927055Partial, ApiSchemaTestVonaEntityProduct_9cf2c6bcd41713270c34bcfce21b7b4942e3fbc6, ApiSchemaTestVonaEntityProduct_9cf2c6bcd41713270c34bcfce21b7b4942e3fbc6Partial, ApiSchemaTestVonaEntityProduct_bce173590aaef19772f1ae3a82196493c2633e2e, ApiSchemaTestVonaEntityProduct_bce173590aaef19772f1ae3a82196493c2633e2ePartial, ApiSchemaTestVonaEntityUser_2c7d642ee581efa300341e343180fbb0ecdc785d_1816ff740d81c738ec055c7038bbd93beb9405a7, ApiSchemaTestVonaEntityUser_2c7d642ee581efa300341e343180fbb0ecdc785d_1816ff740d81c738ec055c7038bbd93beb9405a7Partial, ApiTodo, ApiTodoEntity, ApiTodoIntertBody, ApiTodoUpdateBody, BBAActionsLog, BBARestActionsAlert, BBARestActionsConfirm, BBARestActionsCopy, BBARestActionsCreate, BBARestActionsDelete, BBARestActionsEdit, BBARestActionsSetValue, BBARestActionsView, BBFBasicDateRange, BBFBasicFormCaptcha, BBFCurrency, BBFDemoBasicTest, BBFFormWrapper, BBPBasicRestpage, BBPBasicRestpageEntry, BBTBasicTableActionOperationsRow, BBTBasicTableActionView, BBTCTest, BBTCurrency, BBTDate, BBTDemoBasicTest, BBZApp, BBZBasicDateRange, BBZBasicRestpageWrapperFilter, BBZBasicTable, BBZBasicTableActionOperationsTable, BBZBehavior, BBZDemoBasicActionView, BBZDemoBasicCard, BBZDemoBasicTableCellTest, BBZDemoStudentCard, BBZDemoStudentTest, BBZForm, BBZFormField, BBZFormSubscribe, BBZHomeBasePage, BBZHomeLayoutEmpty, BBZHomeLayoutEssentialLink, BBZHomeLayoutTabs, BBZIcon, BBZRouterViewEmpty, BBZRouterstackRouterViewStack, BBZRoutertabsRouterViewTabs, BBZTable, BeanTest, BehaviorFormFieldLayout, BehaviorFormFieldLayoutLogin, ControllerActionView, ControllerActionViewProps, ControllerCardModels, ControllerFormFieldTest, ControllerFormFieldTestProps, ControllerPage, ControllerPageAuthCallback, ControllerPageAuthCallbackSchemaQuery, ControllerPageComponent, ControllerPageCounterSchemaParams, ControllerPageCounterSchemaQuery, ControllerPageErrorExpired, ControllerPageErrorExpiredSchemaQuery, ControllerPageErrorNotFound, ControllerPageHome, ControllerPageItem, ControllerPageItemSchemaParams, ControllerPageItemSchemaQuery, ControllerPageLocale, ControllerPageLogin$1 as ControllerPageLogin, ControllerPagePinia, ControllerPageProps, ControllerPageRouteParams, ControllerPageRouteParamsSchemaParams, ControllerPageRouteParamsSchemaQuery, ControllerPageRouteQuery, ControllerPageRouteQueryB, ControllerPageRouteQueryBSchemaParams, ControllerPageRouteQueryBSchemaQuery, ControllerPageRouteQuerySchemaParams, ControllerPageRouteQuerySchemaQuery, ControllerPageState, ControllerPageStyle, ControllerPageTest, ControllerPageTest3, ControllerPageTodo, ControllerPageToolOne$1 as ControllerPageToolOne, ControllerPageToolOneSchemaParams, ControllerPageToolOneSchemaQuery, ControllerPageToolTwo, ControllerPageToolTwoSchemaParams, ControllerPageToolTwoSchemaQuery, ControllerTableCellTest, ControllerTableCellTestProps, ControllerTest, CssDefault, ErrorMessageJwtExpired, IBehaviorOptionsFormFieldLayout, IBehaviorOptionsFormFieldLayoutLogin, IBehaviorPropsInputFormFieldLayout, IBehaviorPropsInputFormFieldLayoutLogin, IBehaviorPropsOutputFormFieldLayout, IBehaviorPropsOutputFormFieldLayoutLogin, ICssOptionsDefault, type IIconRecord, IModelOptionsMenu, IModelOptionsTodo, IModuleApiSchema, type IPagePathRecord, IThemeOptionsDefault, IThemeOptionsOrange, MainSys, ModelMenu, ModelTodo, NSControllerPageAuthCallback, NSControllerPageCounter, NSControllerPageErrorExpired, NSControllerPageItem, NSControllerPageRouteParams, NSControllerPageRouteQuery, NSControllerPageRouteQueryB, NSControllerPageToolOne, NSControllerPageToolTwo, OpenApiBaseURL, RenderCard, RenderPage, RenderPageCounter, RenderPageLogin, RenderPageMore, RenderPageToolOne, ScopeModuleAC, ScopeModuleDemoBasic, ScopeModuleDemoStudent, ScopeModuleDemoTodo, ScopeModuleHomeBase, ScopeModuleHomeIcon, ScopeModuleHomeIndex, ScopeModuleHomeLogin, ServiceCounter, ServiceData, ServiceRouterGuards, ServiceSsr, ServiceTest3, ServiceTest4, StoreCounter, StoreTest, StylePageCounter$1 as StylePageCounter, StylePageMore, ThemeDefault, ThemeOrange, ThemeTokenCustom, TypeControllerActionViewPublicProps, TypeControllerFormFieldTestPublicProps, TypeControllerPagePublicProps, TypeControllerTableCellTestPublicProps, TypeControllerTestPublicProps, ZActionView, ZFormFieldTest, ZPage, ZPageAuthCallback, ZPageComponent, ZPageErrorExpired, ZPageErrorNotFound, ZPageHome, ZPageItem, ZPageLocale, ZPageLogin, ZPagePinia, ZPageRouteParams, ZPageRouteQuery, ZPageRouteQueryB, ZPageState, ZPageStyle, ZPageTest, ZPageTest3, ZPageTodo, ZPageToolOne, ZPageToolTwo, ZTableCellTest, ZTest, config, constants, definePropertyScopeBase, errors, icons, operations, paths, webhooks };
