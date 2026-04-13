@@ -22,7 +22,7 @@ The `cabloy-basic` template has a built-in suite `vona-suite-cabloy-basic`, whic
 ### 1. Clone the Zova source code
 
 ```bash
-$ git clone git@github.com:zovajs/zova.git
+$ git clone https://github.com/zovajs/zova.git
 $ cd zova
 ```
 

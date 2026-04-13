@@ -5,7 +5,7 @@
 ## 1. 克隆Zova源码
 
 ```bash
-$ git clone git@github.com:zovajs/zova.git
+$ git clone https://github.com/zovajs/zova.git
 $ cd zova
 ```
 
