@@ -8,7 +8,7 @@ import { ActionExpr, ActionLog } from 'vona-module-a-actions';
 import { $makeSchema, Api, v } from 'vona-module-a-openapiutils';
 import { Dto } from 'vona-module-a-web';
 import z from 'zod';
-import { $iconName, AARestActionsCopy, AARestActionsSetValue, ZZIcon } from 'zova-rest-test-second';
+import { $iconName, BBARestActionsCopy, BBARestActionsSetValue, BBZIcon } from 'zova-rest-test-second';
 
 import { $locale } from '../.metadata/locales.ts';
 import { DtoTestDetail } from './testDetail.ts';
@@ -52,14 +52,14 @@ export interface IDtoOptionsTestResult extends IDecoratorDtoOptions<
                 <div>{$locale('TestApples_', 0)}</div>
                 <div>{text`I have ${$locale('TestApples_', 1)}`}</div>
                 <div>{text`cel://name+": ${$locale('TestApples_', 2)}"`}</div>
-                <ZZIcon
+                <BBZIcon
                   name={$iconName('::home')}
                   nativeOnClick={
                     <action>
                       <ActionLog message="sss"></ActionLog>
                     </action>
                   }
-                ></ZZIcon>
+                ></BBZIcon>
               </div>
             ),
           },
@@ -134,22 +134,22 @@ export interface IDtoOptionsTestResult extends IDecoratorDtoOptions<
                   value={cel('getValue("name")')}
                   onInput={
                     <action>
-                      <AARestActionsSetValue name="name"></AARestActionsSetValue>
-                      <AARestActionsSetValue name="_customCopied" value={false}></AARestActionsSetValue>
+                      <BBARestActionsSetValue name="name"></BBARestActionsSetValue>
+                      <BBARestActionsSetValue name="_customCopied" value={false}></BBARestActionsSetValue>
                     </action>
                   }
                 ></input>
-                <ZZIcon
+                <BBZIcon
                   v-if={cel('getValue("_customCopied")==false')}
                   style={{ cursor: 'pointer' }}
                   name={$iconName(':outline:copy-outline')}
                   nativeOnClick={
                     <action>
-                      <AARestActionsCopy text={cel('getValue("name")')}></AARestActionsCopy>
-                      <AARestActionsSetValue name="_customCopied" value={true}></AARestActionsSetValue>
+                      <BBARestActionsCopy text={cel('getValue("name")')}></BBARestActionsCopy>
+                      <BBARestActionsSetValue name="_customCopied" value={true}></BBARestActionsSetValue>
                     </action>
                   }
-                ></ZZIcon>
+                ></BBZIcon>
                 <span v-if={cel('getValue("_customCopied")==true')}>Copied!</span>
               </div>
             ),
