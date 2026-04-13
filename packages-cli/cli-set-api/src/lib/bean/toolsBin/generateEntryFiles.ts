@@ -10,7 +10,7 @@ import type { VonaBinConfigOptions } from './types.ts';
 
 import { resolveTemplatePath } from '../../../utils.ts';
 import { copyTemplateFile, getEnvMeta } from '../../utils.ts';
-import { generateZod } from './generateZod.ts';
+// import { generateZod } from './generateZod.ts';
 
 export async function generateEntryFiles(
   configMeta: VonaConfigMeta,
@@ -29,7 +29,7 @@ export async function generateEntryFiles(
   // others
   await __generateOthers();
   // zod
-  await generateZod(configOptions);
+  // await generateZod(configOptions);
 
   //////////////////////////////
 
