@@ -67,7 +67,7 @@ export class DatabaseDialectBetterSqlite3 extends BeanDatabaseDialectBase {
     return items;
   }
 
-  async insert(builder: Knex.QueryBuilder, datas: any[]): Promise<TableIdentity[]> {
+  async insert(builder: Knex.QueryBuilder, datas: any[]): Promise<[TableIdentity[], Knex.QueryBuilder]> {
     return await this.insertAsMysql(builder, datas);
   }
 

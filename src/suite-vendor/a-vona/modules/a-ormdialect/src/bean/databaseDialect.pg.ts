@@ -51,7 +51,7 @@ export class DatabaseDialectPg extends BeanDatabaseDialectBase {
     return items;
   }
 
-  async insert(builder: Knex.QueryBuilder, datas: any[]): Promise<TableIdentity[]> {
+  async insert(builder: Knex.QueryBuilder, datas: any[]): Promise<[TableIdentity[], Knex.QueryBuilder]> {
     return await this.insertAsPg(builder, datas);
   }
 

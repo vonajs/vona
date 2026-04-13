@@ -45,7 +45,7 @@ export class BeanDatabaseDialectBase extends BeanBase {
     throw new Error('Not Implemented');
   }
 
-  async insert(_builder: Knex.QueryBuilder, _datas: any[]): Promise<TableIdentity[]> {
+  async insert(_builder: Knex.QueryBuilder, _datas: any[]): Promise<[TableIdentity[], Knex.QueryBuilder]> {
     throw new Error('Not Implemented');
   }
 
@@ -89,34 +89,36 @@ export class BeanDatabaseDialectBase extends BeanBase {
     return datas;
   }
 
-  protected async insertAsMysql(builder: Knex.QueryBuilder, datas: any[]): Promise<TableIdentity[]> {
-    if (datas.length === 0) return [];
+  protected async insertAsMysql(builder: Knex.QueryBuilder, datas: any[]): Promise<[TableIdentity[], Knex.QueryBuilder]> {
+    if (datas.length === 0) return [[], builder];
     if (isNil(datas[0].id)) {
+      let builderFirst: Knex.QueryBuilder | undefined = undefined;
       const ids: TableIdentity[] = [];
       for (const data of datas) {
         const builder2 = builder.clone();
         builder2.insert(data);
         const items = await builder2;
         ids.push(items[0]);
+        if (!builderFirst) builderFirst = builder2;
       }
-      return ids;
+      return [ids, builderFirst ?? builder];
     } else {
       builder.insert(datas);
       await builder;
-      return datas.map(item => item.id);
+      return [datas.map(item => item.id), builder];
     }
   }
 
-  protected async insertAsPg(builder: Knex.QueryBuilder, datas: any[]): Promise<TableIdentity[]> {
-    if (datas.length === 0) return [];
+  protected async insertAsPg(builder: Knex.QueryBuilder, datas: any[]): Promise<[TableIdentity[], Knex.QueryBuilder]> {
+    if (datas.length === 0) return [[], builder];
     if (isNil(datas[0].id)) {
       builder.insert(datas).returning('id');
       const items = await builder;
-      return items.map(item => item.id);
+      return [items.map(item => item.id), builder];
     } else {
       builder.insert(datas);
       await builder;
-      return datas.map(item => item.id);
+      return [datas.map(item => item.id), builder];
     }
   }
 

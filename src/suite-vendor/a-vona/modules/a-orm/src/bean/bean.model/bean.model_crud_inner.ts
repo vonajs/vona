@@ -210,7 +210,7 @@ export class BeanModelCrudInner<TRecord extends {}> extends BeanModelView<TRecor
     // builder
     const builder = this.builder<TRecord>(table);
     // dialect insert
-    const ids = await this.dialect.insert(builder, datas);
+    const [ids, builder2] = await this.dialect.insert(builder, datas);
     // debug
     this.$loggerChild('model').debug(() => {
       let tip = String(ids.length);
@@ -218,7 +218,7 @@ export class BeanModelCrudInner<TRecord extends {}> extends BeanModelView<TRecor
       if (!isNil(id)) {
         tip = `${tip}/${id}`;
       }
-      const query = this._ellipsis‌Logger(builder.toQuery());
+      const query = this._ellipsis‌Logger(builder2.toQuery());
       return `model.insert: ${tip}, ${query}`;
     });
     // combine

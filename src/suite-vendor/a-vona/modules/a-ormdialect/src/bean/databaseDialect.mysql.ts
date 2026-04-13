@@ -59,7 +59,7 @@ export class DatabaseDialectMysql extends BeanDatabaseDialectBase {
     return items;
   }
 
-  async insert(builder: Knex.QueryBuilder, datas: any[]): Promise<TableIdentity[]> {
+  async insert(builder: Knex.QueryBuilder, datas: any[]): Promise<[TableIdentity[], Knex.QueryBuilder]> {
     return await this.insertAsMysql(builder, datas);
   }
 
@@ -73,8 +73,8 @@ export class DatabaseDialectMysql extends BeanDatabaseDialectBase {
         T.TABLE_NAME ref_name,
         V.TABLE_NAME dep_name,
         T.TABLE_TYPE type
-      FROM INFORMATION_SCHEMA.TABLES T 
-        INNER JOIN INFORMATION_SCHEMA.VIEWS V 
+      FROM INFORMATION_SCHEMA.TABLES T
+        INNER JOIN INFORMATION_SCHEMA.VIEWS V
           ON V.TABLE_SCHEMA = T.TABLE_SCHEMA
           AND V.VIEW_DEFINITION LIKE CONCAT('%\`',T.TABLE_NAME,'\`%')
       WHERE T.TABLE_SCHEMA = DATABASE()
