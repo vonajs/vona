@@ -56,5 +56,8 @@ export function config(_app: VonaApplication) {
         client: 'model',
       },
     },
+    logger: {
+      maxLength: 256,
+    },
   };
 }
