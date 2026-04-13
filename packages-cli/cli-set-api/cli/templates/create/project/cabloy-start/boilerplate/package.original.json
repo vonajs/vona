@@ -42,7 +42,7 @@
     "vona": "^5.1.5"
   },
   "devDependencies": {
-    "@cabloy/lint": "^5.0.21",
+    "@cabloy/lint": "^5.1.7",
     "oxfmt": "^0.44.0",
     "oxlint": "^1.56.0"
   }
