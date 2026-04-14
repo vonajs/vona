@@ -1,0 +1,1 @@
+import{a,c as s,d as o,i as r,l as m,n as p,o as t,r as d,s as e,t as i,u as l}from"./a-model-rFZyeSvk.js";i();export{p as $QueriesAutoLoad,d as $QueryAutoLoad,m as BeanModelBase,r as Model,t as Monkey,a as ScopeModuleAModel,s as ServiceStorage,e as config,l as resolveMaxAgeTime,o as resolveStaleTime};
