@@ -1,1 +1,0 @@
-import{a,i as s,n as r,o,r as t,t as p}from"./a-routertabs-D7KSecRo.js";p();export{a as ControllerRouterViewTabs,o as ModelTabs,r as ScopeModuleARoutertabs,s as ZRouterViewTabs,t as components};
