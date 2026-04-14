@@ -43,7 +43,7 @@
   },
   "devDependencies": {
     "@cabloy/lint": "^5.1.7",
-    "oxfmt": "^0.44.0",
+    "oxfmt": "^0.45.0",
     "oxlint": "^1.56.0"
   }
 }
