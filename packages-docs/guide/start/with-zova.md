@@ -5,7 +5,7 @@ When creating a Vona project using the `cabloy-basic` template, the latest versi
 ## 1. Clone the Zova source code
 
 ```bash
-$ git clone https://github.com/zovajs/zova.git
+$ git clone --depth 1 https://github.com/zovajs/zova.git
 $ cd zova
 ```
 

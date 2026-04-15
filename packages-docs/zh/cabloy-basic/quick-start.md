@@ -22,7 +22,7 @@ $ cd projectName
 ### 1. 克隆Zova源码
 
 ```bash
-$ git clone https://github.com/zovajs/zova.git
+$ git clone --depth 1 https://github.com/zovajs/zova.git
 $ cd zova
 ```
 
