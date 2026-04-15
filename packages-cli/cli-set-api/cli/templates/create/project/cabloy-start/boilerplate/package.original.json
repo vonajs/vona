@@ -45,5 +45,10 @@
     "@cabloy/lint": "^5.1.7",
     "oxfmt": "^0.45.0",
     "oxlint": "^1.56.0"
+  },
+  "pnpm": {
+    "overrides": {
+      "zod": "npm:@cabloy/zod@4.3.6"
+    }
   }
 }

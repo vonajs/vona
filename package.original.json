@@ -49,5 +49,10 @@
     "textlint-rule-ja-space-between-half-and-full-width": "^2.4.2",
     "oxfmt": "^0.45.0",
     "oxlint": "^1.59.0"
+  },
+  "pnpm": {
+    "overrides": {
+      "zod": "npm:@cabloy/zod@4.3.6"
+    }
   }
 }
