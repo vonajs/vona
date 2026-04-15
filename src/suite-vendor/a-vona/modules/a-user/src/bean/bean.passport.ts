@@ -77,7 +77,7 @@ export class BeanPassport extends BeanBase {
     await this.scope.event.signin.emit(passport);
     // serialize: payloadData for client certificate
     if (!options?.authToken) {
-      options = Object.assign({}, options, { authToken: this.scope.config.passport.signin });
+      options = Object.assign({}, options, { authToken: this.scope.config.authToken.signin });
     }
     const payloadData = await this._passportSerialize(passport, options);
     // jwt token
@@ -152,7 +152,7 @@ export class BeanPassport extends BeanBase {
     let payloadData = await this.checkAuthToken(refreshToken, 'refresh');
     if (!payloadData) return this.app.throw(401);
     // refreshAuthToken
-    const configRefreshAuthToken = this.scope.config.passport.refreshAuthToken;
+    const configRefreshAuthToken = this.scope.config.authToken.refreshAuthToken;
     payloadData = await this._handlePayloadData(payloadData, { authToken: configRefreshAuthToken });
     // jwt token
     return await this.bean.jwt.create(payloadData);
