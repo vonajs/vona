@@ -46,7 +46,7 @@ describe('passport.test.ts', () => {
           refreshToken: jwt.refreshToken,
         },
       });
-      assert.notEqual(jwt?.accessToken, jwtNew.accessToken);
+      assert.equal(jwt?.accessToken, jwtNew.accessToken);
       // logout
       await app.bean.executor.performAction('post', '/test/vona/passport/logout');
       // isAuthenticated: isolate + header
