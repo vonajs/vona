@@ -37,7 +37,7 @@ export class ServiceAuth extends BeanBase {
     // issuePassport
     const passport = await this.issuePassport(profileUser, entityAuthProvider, clientOptions, state);
     // signin
-    const jwtToken = await this.bean.passport.signin(passport, { authToken: 'recreate' });
+    const jwtToken = await this.bean.passport.signin(passport);
     return jwtToken;
   }
 

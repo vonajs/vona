@@ -76,6 +76,9 @@ export class BeanPassport extends BeanBase {
     // event
     await this.scope.event.signin.emit(passport);
     // serialize: payloadData for client certificate
+    if (!options?.authToken) {
+      options = Object.assign({}, options, { authToken: this.scope.config.passport.signin });
+    }
     const payloadData = await this._passportSerialize(passport, options);
     // jwt token
     return await this.bean.jwt.create(payloadData, { dev: passport.auth?.id.toString() === '-1' });

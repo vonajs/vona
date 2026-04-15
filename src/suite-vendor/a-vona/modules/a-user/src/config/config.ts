@@ -9,8 +9,8 @@ export function config(_app: VonaApplication) {
       autoActivate: false,
     },
     passport: {
-      // 'recreate': not support different clients
-      refreshAuthToken: 'refresh' as TypeAuthToken,
+      refreshAuthToken: 'refresh' as TypeAuthToken, // 'recreate': not support different clients
+      signin: 'refresh' as TypeAuthToken,
     },
     adapter: {
       authToken: 'a-user:authTokenAdapter' as keyof IServiceRecord,
