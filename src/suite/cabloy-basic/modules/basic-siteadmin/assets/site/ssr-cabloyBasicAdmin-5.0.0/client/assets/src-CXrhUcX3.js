@@ -1,0 +1,1 @@
+import{a,c as s,d as o,i as r,l as m,n as t,o as d,r as e,s as i,t as l,u as p}from"./a-model-Cz-f4sX3.js";l();export{t as $QueriesAutoLoad,e as $QueryAutoLoad,m as BeanModelBase,r as Model,d as Monkey,a as ScopeModuleAModel,s as ServiceStorage,i as config,p as resolveMaxAgeTime,o as resolveStaleTime};

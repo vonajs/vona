@@ -18,8 +18,8 @@
     "openapi3-ts": "^4.5.0",
     "vue": "^3.5.32",
     "zod": "^4.3.6",
-    "zova": "^5.1.28",
-    "zova-jsx": "^1.1.14",
+    "zova": "^5.1.29",
+    "zova-jsx": "^1.1.15",
     "zova-module-a-action": "^5.1.11",
     "zova-module-a-actions": "^5.1.9",
     "zova-module-a-api": "^5.1.8",
@@ -38,7 +38,7 @@
     "zova-module-a-routertabs": "^5.1.12",
     "zova-module-a-ssr": "^5.1.9",
     "zova-module-a-table": "^5.1.9",
-    "zova-module-a-zod": "^5.1.10",
+    "zova-module-a-zod": "^5.1.11",
     "zova-module-rest-actions": "^5.1.10",
     "zova-module-rest-resource": "^5.1.10"
   }
