@@ -1,1 +1,0 @@
-import{a,c as s,i as o,n as r,o as t,r as i,s as p,t as m}from"./a-api-tvNunzaD.js";m();export{r as Api,i as ApiMeta,o as ApiSchema,s as BeanApiBase,t as Monkey,a as ScopeModuleAApi,p as config};

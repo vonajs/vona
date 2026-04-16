@@ -1,0 +1,1 @@
+import{n as o,r,t as s}from"./home-icon-CDlV4gRr.js";s();export{o as ScopeModuleHomeIcon,r as icons};

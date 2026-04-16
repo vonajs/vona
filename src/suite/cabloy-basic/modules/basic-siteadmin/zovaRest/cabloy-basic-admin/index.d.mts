@@ -1,33 +1,32 @@
 import { ControllerIconProps, IIconRecord, IIconRecord as IIconRecord$1 } from "zova-module-a-icon";
 import { BeanRouter, BeanRouterGuardsBase, IPagePathRecord, ModelPageData, TypePagePathSchema } from "zova-module-a-router";
-import * as _$zova_jsx0 from "zova-jsx";
-import { TypeRenderComponentJsxPropsPublic } from "zova-jsx";
-import { BeanBehaviorBase, ControllerBehaviorProps, IDecoratorBehaviorOptions, NextBehavior } from "zova-module-a-behavior";
-import { ControllerFormFieldCurrencyProps, ITableCellOptionsCurrency } from "zova-module-a-currency";
-import { ITableCellOptionsDate } from "zova-module-a-date";
-import * as _$zova_module_a_form0 from "zova-module-a-form";
-import { BeanControllerPageFormBase, ControllerForm, ControllerFormField, ControllerFormFieldProps, ControllerFormFieldWrapperProps, ControllerFormProps, ControllerFormSubscribeProps, IFormFieldLayoutOptionsBase, IFormFieldOptions, IFormFieldRenderContext, IFormMeta, IFormProvider, TypeFormOnSubmitData } from "zova-module-a-form";
-import * as _$zova_module_a_table0 from "zova-module-a-table";
-import { BeanControllerTableBase, ControllerTable, ControllerTableProps, IDecoratorTableCellOptions, IJsxRenderContextTableCell, ITableCellRender, NextTableCellRender, TypeTableGetColumnsNext } from "zova-module-a-table";
-import { BeanAopBase, BeanBase, BeanContainer, BeanControllerBase, BeanControllerPageBase, BeanRenderBase, BeanScopeBase, BeanScopeUtil, BeanSimple, BeanStyleBase, DefineModelOptions, IComponentOptions, IModuleMainSys, ISlot, TypeControllerInnerProps, TypeEventOff, TypeLocaleBase, TypeModuleConfig, TypeModuleConstants, TypeModuleErrors, TypeModuleLocales, TypePropUpdateFromModel, TypePropValueFromModel, ZovaSys } from "zova";
-import { z } from "zod";
+import { BeanAopBase, BeanBase, BeanContainer, BeanControllerBase, BeanControllerPageBase, BeanRenderBase, BeanScopeBase, BeanScopeUtil, BeanSimple, BeanStyleBase, DefineModelOptions, IComponentOptions, IModuleMain, IMonkeyAppClose, IMonkeyAppInitialize, IMonkeyBeanInit, ISlot, TypeControllerInnerProps, TypeEventOff, TypeLocaleBase, TypeModuleConfig, TypeModuleLocales, TypePropUpdateFromModel, TypePropValueFromModel, ZovaSys } from "zova";
+import { AopAction, AopActionDispose, AopActionInit, IDecoratorAopOptions } from "zova-module-a-bean";
+import * as _$vue_jsx_runtime0 from "vue/jsx-runtime";
 import * as _$vue from "vue";
 import { VNode } from "vue";
+import * as _$zova_module_a_table0 from "zova-module-a-table";
+import { BeanControllerTableBase, ControllerTable, ControllerTableProps, IDecoratorTableCellOptions, IJsxRenderContextTableCell, ITableCellRender, NextTableCellRender, TypeTableGetColumnsNext } from "zova-module-a-table";
+import * as _$zova_jsx0 from "zova-jsx";
+import { TypeRenderComponentJsxPropsPublic } from "zova-jsx";
+import { z } from "zod";
 import { BeanApiBase, IApiActionOptions, IApiSchemaOptions } from "zova-module-a-api";
 import * as _$zova_module_a_openapi0 from "zova-module-a-openapi";
 import { ICaptchaData, ICaptchaOptions, IJsxRenderContextBase, ITablePaged, ITableQuery, ITableResPaged } from "zova-module-a-openapi";
 import { IJwtAdapter, IJwtInfo } from "zova-module-a-interceptor";
-import { AopAction, AopActionDispose, AopActionInit, IDecoratorAopOptions } from "zova-module-a-bean";
 import * as _$_tanstack_vue_query0 from "@tanstack/vue-query";
 import { BeanModelBase, IDecoratorModelOptions } from "zova-module-a-model";
-import * as _$vue_jsx_runtime0 from "vue/jsx-runtime";
-import { BeanThemeBase, IDecoratorCssOptions, IDecoratorThemeOptions, IThemeApplyParams, IThemeApplyResult, IThemeBase } from "zova-module-a-style";
 import { BeanPiniaStoreBase, PiniaStore } from "zova-module-a-pinia";
+import * as _$zova_module_a_form0 from "zova-module-a-form";
+import { BeanControllerPageFormBase, ControllerForm, ControllerFormField, ControllerFormFieldProps, ControllerFormFieldWrapperProps, ControllerFormProps, ControllerFormSubscribeProps, IFormFieldLayoutOptionsBase, IFormFieldOptions, IFormFieldRenderContext, IFormMeta, IFormProvider, TypeFormOnSubmitData } from "zova-module-a-form";
 import * as _$openapi3_ts_oas310 from "openapi3-ts/oas31";
 import { SchemaObject } from "openapi3-ts/oas31";
+import { BeanBehaviorBase, ControllerBehaviorProps, IDecoratorBehaviorOptions, NextBehavior } from "zova-module-a-behavior";
 import * as _$_tanstack_query_core0 from "@tanstack/query-core";
+import { ControllerFormFieldCurrencyProps, ITableCellOptionsCurrency } from "zova-module-a-currency";
+import { ITableCellOptionsDate } from "zova-module-a-date";
 import { ScopeModuleASsr } from "zova-module-a-ssr";
-import { ControllerRouterViewTabsProps, ModelTabs } from "zova-module-a-routertabs";
+import { ControllerRouterViewTabsProps, ModelTabs, RouteTab } from "zova-module-a-routertabs";
 import { ToolV } from "zova-module-a-zod";
 import { ControllerPageEntry, ControllerPageResource, IPageEntryWrapperScope, IPageWrapperScope, ModelResource } from "zova-module-rest-resource";
 import { celEnvBase } from "@cabloy/utils";
@@ -39,4092 +38,150 @@ export * from "zova-module-rest-resource";
 
 //#region \0rolldown/runtime.js
 //#endregion
-//#region src/suite-vendor/a-zova/modules/a-app/rest/component/app.d.ts
-type TypeControllerAppPublicProps = TypeRenderComponentJsxPropsPublic;
-declare function BBZApp(_props: TypeControllerAppPublicProps): string;
-//#endregion
-//#region src/suite-vendor/a-zova/modules/a-behavior/rest/component/behavior.d.ts
-type TypeControllerBehaviorPublicProps = TypeRenderComponentJsxPropsPublic & ControllerBehaviorProps;
-declare function BBZBehavior(_props: TypeControllerBehaviorPublicProps): string;
-//#endregion
-//#region src/suite-vendor/a-zova/modules/a-currency/rest/component/formFieldCurrency.d.ts
-type TypeControllerFormFieldCurrencyPublicProps = TypeRenderComponentJsxPropsPublic & ControllerFormFieldCurrencyProps;
-declare function BBFCurrency(_props: TypeControllerFormFieldCurrencyPublicProps): string;
-//#endregion
-//#region src/suite-vendor/a-zova/modules/a-currency/rest/tableCell/currency.d.ts
-declare function BBTCurrency(_props: ITableCellOptionsCurrency): string;
-//#endregion
-//#region src/suite-vendor/a-zova/modules/a-date/rest/tableCell/date.d.ts
-declare function BBTDate(_props: ITableCellOptionsDate): string;
-//#endregion
-//#region src/suite-vendor/a-zova/modules/a-form/rest/component/form.d.ts
-type TypeControllerFormPublicProps<TFormData extends {} = {}, TSubmitMeta = never> = TypeRenderComponentJsxPropsPublic & ControllerFormProps<TFormData, TSubmitMeta>;
-declare function BBZForm<TFormData extends {} = {}, TSubmitMeta = never>(_props: TypeControllerFormPublicProps<TFormData, TSubmitMeta>): string;
-//#endregion
-//#region src/suite-vendor/a-zova/modules/a-form/rest/component/formField.d.ts
-type TypeControllerFormFieldPublicProps<TParentData extends {} = {}> = TypeRenderComponentJsxPropsPublic & ControllerFormFieldProps<TParentData>;
-declare function BBZFormField<TParentData extends {} = {}>(_props: TypeControllerFormFieldPublicProps<TParentData>): string;
-//#endregion
-//#region src/suite-vendor/a-zova/modules/a-form/rest/component/formFieldWrapper.d.ts
-type TypeControllerFormFieldWrapperPublicProps<TParentData extends {} = {}> = TypeRenderComponentJsxPropsPublic & ControllerFormFieldWrapperProps<TParentData>;
-declare function BBFFormWrapper<TParentData extends {} = {}>(_props: TypeControllerFormFieldWrapperPublicProps<TParentData>): string;
-//#endregion
-//#region src/suite-vendor/a-zova/modules/a-form/rest/component/formSubscribe.d.ts
-type TypeControllerFormSubscribePublicProps<TFormData extends {} = {}, TSubmitMeta = never> = TypeRenderComponentJsxPropsPublic & ControllerFormSubscribeProps<TFormData, TSubmitMeta>;
-declare function BBZFormSubscribe<TFormData extends {} = {}, TSubmitMeta = never>(_props: TypeControllerFormSubscribePublicProps<TFormData, TSubmitMeta>): string;
-//#endregion
-//#region src/suite-vendor/a-zova/modules/a-icon/rest/component/icon.d.ts
-type TypeControllerIconPublicProps = TypeRenderComponentJsxPropsPublic & ControllerIconProps;
-declare function BBZIcon(_props: TypeControllerIconPublicProps): string;
-//#endregion
-//#region src/suite-vendor/a-zova/modules/a-router/rest/component/routerViewEmpty.d.ts
-type TypeControllerRouterViewEmptyPublicProps = TypeRenderComponentJsxPropsPublic;
-declare function BBZRouterViewEmpty(_props: TypeControllerRouterViewEmptyPublicProps): string;
-//#endregion
-//#region src/suite-vendor/a-zova/modules/a-table/rest/component/table.d.ts
-type TypeControllerTablePublicProps$1<TData extends {} = {}> = TypeRenderComponentJsxPropsPublic & ControllerTableProps<TData>;
-declare function BBZTable<TData extends {} = {}>(_props: TypeControllerTablePublicProps$1<TData>): string;
-//#endregion
-//#region src/module/demo-student/src/.metadata/locales.d.ts
-declare const locales$7: {
-  'en-us': {};
-  'zh-cn': {};
-};
-//#endregion
-//#region src/suite/a-home/modules/home-api/src/api/openapi/types.d.ts
-interface paths$1 {
-  '/api/auth/mock/authorize': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get: operations$1['AuthMock_authorize'];
-    put?: never;
-    post: operations$1['AuthMock_authorizePost'];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/captcha/create': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get?: never;
-    put?: never;
-    post: operations$1['Captcha_create'];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/captcha/refresh': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get?: never;
-    put?: never;
-    post: operations$1['Captcha_refresh'];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/captcha/verifyImmediate': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get?: never;
-    put?: never;
-    post: operations$1['Captcha_verifyImmediate'];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/mailconfirm/mail/emailConfirmCallback': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get: operations$1['MailconfirmMail_emailConfirmCallback'];
-    put?: never;
-    post?: never;
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/mailconfirm/mail/passwordResetCallback': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get: operations$1['MailconfirmMail_passwordResetCallback'];
-    put?: never;
-    post?: never;
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/home/base/menu/{publicPath?}': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get: operations$1['HomeBaseMenu_retrieveMenus'];
-    put?: never;
-    post?: never;
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/home/base/permission/{resource}': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get: operations$1['HomeBasePermission_retrievePermissions'];
-    put?: never;
-    post?: never;
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    }; /** @description Home */
-    get: operations$1['Home_index'];
-    put?: never;
-    post?: never;
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/home/user/passport/current': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get: operations$1['HomeUserPassport_current'];
-    put?: never;
-    post?: never;
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/home/user/passport/logout': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get?: never;
-    put?: never;
-    post: operations$1['HomeUserPassport_logout'];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/home/user/passport/register': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get?: never;
-    put?: never;
-    post: operations$1['HomeUserPassport_register'];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/home/user/passport/login': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get?: never;
-    put?: never;
-    post: operations$1['HomeUserPassport_login'];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/home/user/passport/login/{module}/{providerName}/{clientName?}': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get: operations$1['HomeUserPassport_loginOauth'];
-    put?: never;
-    post?: never;
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/home/user/passport/associate/{module}/{providerName}/{clientName?}': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get: operations$1['HomeUserPassport_associate'];
-    put?: never;
-    post?: never;
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/home/user/passport/migrate/{module}/{providerName}/{clientName?}': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get: operations$1['HomeUserPassport_migrate'];
-    put?: never;
-    post?: never;
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/home/user/passport/refreshAuthToken': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get?: never;
-    put?: never;
-    post: operations$1['HomeUserPassport_refreshAuthToken'];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/home/user/passport/createPassportJwtFromOauthCode': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get?: never;
-    put?: never;
-    post: operations$1['HomeUserPassport_createPassportJwtFromOauthCode'];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/home/user/passport/createTempAuthToken': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get?: never;
-    put?: never;
-    post: operations$1['HomeUserPassport_createTempAuthToken'];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/test/auth/passport/isAuthenticated': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get: operations$1['TestAuthPassport_isAuthenticated'];
-    put?: never;
-    post?: never;
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/test/auth/passport/current': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get: operations$1['TestAuthPassport_current'];
-    put?: never;
-    post?: never;
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/test/rest/product': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get: operations$1['TestRestProduct_select'];
-    put?: never;
-    post: operations$1['TestRestProduct_create'];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/test/rest/product/{id}': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get: operations$1['TestRestProduct_view'];
-    put?: never;
-    post?: never;
-    delete: operations$1['TestRestProduct_delete'];
-    options?: never;
-    head?: never;
-    patch: operations$1['TestRestProduct_update'];
-    trace?: never;
-  };
-  '/api/test/ssr/toolOne/test/{id?}': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get: operations$1['TestSsrToolOne_testGet'];
-    put?: never;
-    post: operations$1['TestSsrToolOne_test'];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/test/ssr/toolTwo/test/{id?}': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get: operations$1['TestSsrToolTwo_test'];
-    put?: never;
-    post?: never;
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/test/captcha/signin': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get?: never;
-    put?: never;
-    post: operations$1['TestCaptcha_signin'];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/paypal/getRecord/{recordId}': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get: operations$1['Paypal_getRecord'];
-    put?: never;
-    post?: never;
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/paypal/captureOrder/{recordId}': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get?: never;
-    put?: never;
-    post: operations$1['Paypal_captureOrder'];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/paypal/cancelOrder/{recordId}': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get?: never;
-    put?: never;
-    post: operations$1['Paypal_cancelOrder'];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/play': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get?: never;
-    put?: never;
-    post: operations$1['Play_index'];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/test/vona/dtoTest/getUserLazy': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get: operations$1['TestVonaDtoTest_getUserLazy'];
-    put?: never;
-    post?: never;
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/test/vona/dtoTest/getUserDynamic': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get: operations$1['TestVonaDtoTest_getPostDynamic'];
-    put?: never;
-    post?: never;
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/test/vona/dtoTest/getUserStats': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get: operations$1['TestVonaDtoTest_getUserStats'];
-    put?: never;
-    post?: never;
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/test/vona/dtoTest/getUserStatsGroup': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get: operations$1['TestVonaDtoTest_getUserStatsGroup'];
-    put?: never;
-    post?: never;
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/test/vona/dtoTest/createUser': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get?: never;
-    put?: never;
-    post: operations$1['TestVonaDtoTest_createUser'];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/test/vona/dtoTest/updateUser/{id}': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get?: never;
-    put?: never;
-    post?: never;
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch: operations$1['TestVonaDtoTest_updateUser'];
-    trace?: never;
-  };
-  '/api/test/vona/dtoTest/getCategoryTree': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get: operations$1['TestVonaDtoTest_getCategoryTree'];
-    put?: never;
-    post?: never;
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/test/vona/dtoTest/getCategoryTree2': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get: operations$1['TestVonaDtoTest_getCategoryTree2'];
-    put?: never;
-    post?: never;
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/test/vona/guardPassport/testUserName': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get: operations$1['TestVonaGuardPassport_testUserName'];
-    put?: never;
-    post?: never;
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/test/vona/guardPassport/testUserNameFail': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get: operations$1['TestVonaGuardPassport_testUserNameFail'];
-    put?: never;
-    post?: never;
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/test/vona/guardPassport/testRoleName': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get: operations$1['TestVonaGuardPassport_testRoleName'];
-    put?: never;
-    post?: never;
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/test/vona/guardPassport/testRoleNameFail': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get: operations$1['TestVonaGuardPassport_testRoleNameFail'];
-    put?: never;
-    post?: never;
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get: operations$1['Onion_index'];
-    put?: never;
-    post?: never;
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/echo': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get?: never;
-    put?: never;
-    post: operations$1['Onion_echo'];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/test/vona/onion/echo2/{userId}/{userName}': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get?: never;
-    put?: never;
-    post: operations$1['Onion_echo2'];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/test/vona/onion/echo3/{userId}': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get: operations$1['Onion_echo3'];
-    put?: never;
-    post?: never;
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/test/vona/onion/echo4': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get?: never;
-    put?: never;
-    post: operations$1['Onion_echo4'];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/test/vona/onion/echo5': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get: operations$1['Onion_echo5'];
-    put?: never;
-    post?: never;
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/test/vona/onion/echo6': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get: operations$1['Onion_echo6'];
-    put?: never;
-    post?: never;
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/test/vona/order/create': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get?: never;
-    put?: never;
-    post: operations$1['TestVonaOrder_create'];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/test/vona/order/update/{id}': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get?: never;
-    put?: never;
-    post: operations$1['TestVonaOrder_update'];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/test/vona/order/findAll': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get: operations$1['TestVonaOrder_findAll'];
-    put?: never;
-    post?: never;
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/test/vona/order/findMany': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get: operations$1['TestVonaOrder_findMany'];
-    put?: never;
-    post?: never;
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/test/vona/post/group': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get: operations$1['TestVonaPost_group'];
-    put?: never;
-    post?: never;
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/test/vona/post/aggregate': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get: operations$1['TestVonaPost_aggregate'];
-    put?: never;
-    post?: never;
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/test/vona/post/findManyEcho': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get: operations$1['TestVonaPost_findManyEcho'];
-    put?: never;
-    post?: never;
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/test/vona/post/findMany': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get: operations$1['TestVonaPost_findMany'];
-    put?: never;
-    post?: never;
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/test/vona/serializer/echoSimple': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get?: never;
-    put?: never;
-    post: operations$1['TestVonaSerializer_echoSimple'];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/test/vona/serializer/echoArray': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get?: never;
-    put?: never;
-    post: operations$1['TestVonaSerializer_echoArray'];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/test/vona/serializer/echoLazy': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get?: never;
-    put?: never;
-    post: operations$1['TestVonaSerializer_echoLazy'];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/test/vona/upload/fields': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get?: never;
-    put?: never;
-    post: operations$1['TestVonaUpload_fields'];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/test/vona/upload/file': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get?: never;
-    put?: never;
-    post: operations$1['TestVonaUpload_file'];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/test/vona/upload/files': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get?: never;
-    put?: never;
-    post: operations$1['TestVonaUpload_files'];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-}
-interface components$1 {
-  schemas: {
-    'test-vona.dto.postCreate': {
-      /** @description Title */title: string;
-      userId: number | string;
-      stars?: number | undefined;
-    };
-    'test-vona.dto.userCreate': {
-      name: string;
-      age?: number | undefined;
-      scores?: number | undefined;
-      posts?: {
-        /** @description Title */title: string;
-      }[] | undefined;
-      roles?: {
-        id: number | string;
-        deleted?: boolean | undefined;
-      }[] | undefined;
-    };
-    'test-vona.entity.product': {
-      /**
-       * Format: date
-       * @description Created At
-       */
-      createdAt: Date;
-      /**
-       * Format: date
-       * @description Updated At
-       */
-      updatedAt: Date;
-      /**
-       * @description Deleted
-       * @default false
-       */
-      deleted?: boolean;
-      /**
-       * @description Instance ID
-       * @default 0
-       */
-      iid?: number; /** @description ID */
-      id: number | string; /** @description Name */
-      name: string; /** @description Price */
-      price: number; /** @description Quantity */
-      quantity: number; /** @description Amount */
-      amount: number;
-      orderId: number | string;
-    };
-    'a-captcha.dto.captchaData': {
-      id: string;
-      provider: string;
-      token?: unknown;
-      payload?: unknown;
-    };
-    'a-menu.dto.menus': {
-      menus?: components$1['schemas']['a-menu.dto.menuItem'][] | undefined;
-      groups?: components$1['schemas']['a-menu.dto.menuGroup'][] | undefined;
-    };
-    'a-menu.dto.menuItem': {
-      name: string;
-      title?: string | undefined;
-      description?: string | undefined;
-      icon?: string | undefined;
-      order?: number | undefined;
-      group?: string | string[] | undefined;
-      separator?: boolean | undefined;
-      link?: string | undefined;
-      external?: boolean | undefined;
-      target?: string | undefined;
-      meta?: components$1['schemas']['a-menu.dto.menuItemMeta'];
-    };
-    'a-menu.dto.menuItemMeta': {
-      params?: unknown;
-      query?: unknown;
-    } | undefined;
-    'a-menu.dto.menuGroup': {
-      name: string;
-      title?: string | undefined;
-      description?: string | undefined;
-      icon?: string | undefined;
-      order?: number | undefined;
-      group?: string | string[] | undefined;
-      collapsed?: boolean | undefined;
-    };
-    'a-permission.dto.permissions': {
-      roleIds?: (number | string)[] | undefined;
-      roleNames?: string[] | undefined;
-      actions?: unknown;
-    };
-    'home-user.dto.passport': {
-      user: components$1['schemas']['home-user.entity.user'];
-      auth: components$1['schemas']['a-auth.dto.auth'];
-      roles: components$1['schemas']['home-user.entity.role'][];
-    } | undefined; /** @description User */
-    'home-user.entity.user': {
-      /**
-       * Format: date
-       * @description Created At
-       */
-      createdAt: Date;
-      /**
-       * Format: date
-       * @description Updated At
-       */
-      updatedAt: Date;
-      /**
-       * @description Deleted
-       * @default false
-       */
-      deleted?: boolean;
-      /**
-       * @description Instance ID
-       * @default 0
-       */
-      iid?: number; /** @description ID */
-      id: number | string; /** @description User Name */
-      name: string; /** @description Avatar */
-      avatar?: string | undefined; /** @description Email */
-      email?: string | undefined; /** @description Mobile */
-      mobile?: string | undefined;
-      /**
-       * @description Activated
-       * @default false
-       */
-      activated?: boolean; /** @description Language */
-      locale?: string | undefined; /** @description Timezone */
-      tz?: string | undefined;
-    };
-    'a-auth.dto.auth': {
-      /** @description ID */id: number | string;
-      profileId: string;
-      authProvider?: {
-        /** @description ID */id: number;
-        providerName: string;
-        clientName: string;
-      };
-    }; /** @description Role */
-    'home-user.entity.role': {
-      /**
-       * Format: date
-       * @description Created At
-       */
-      createdAt: Date;
-      /**
-       * Format: date
-       * @description Updated At
-       */
-      updatedAt: Date;
-      /**
-       * @description Deleted
-       * @default false
-       */
-      deleted?: boolean;
-      /**
-       * @description Instance ID
-       * @default 0
-       */
-      iid?: number; /** @description ID */
-      id: number | string; /** @description Role Name */
-      name: string;
-    };
-    'home-user.dto.passportJwt': {
-      passport: components$1['schemas']['home-user.dto.passport'];
-      jwt: components$1['schemas']['a-jwt.dto.jwtToken'];
-    };
-    'a-jwt.dto.jwtToken': {
-      accessToken: string;
-      refreshToken: string;
-      expiresIn: number;
-    };
-    'home-user.dto.register': {
-      username: string; /** Format: email */
-      email: string;
-      password: string;
-      passwordConfirm: string;
-      captcha: components$1['schemas']['a-captcha.dto.captchaVerify_c3cd80b1eeafe39bfe4433491bb081d68e84797e'];
-    };
-    'a-captcha.dto.captchaVerify_c3cd80b1eeafe39bfe4433491bb081d68e84797e': {
-      id: string;
-      token: string;
-    };
-    'home-user.dto.login': {
-      username: string;
-      password: string;
-      captcha: components$1['schemas']['a-captcha.dto.captchaVerify_c3cd80b1eeafe39bfe4433491bb081d68e84797e_3218e7d152830e08f6e764b9e0c3796df929ee2b'];
-    };
-    'a-captcha.dto.captchaVerify_c3cd80b1eeafe39bfe4433491bb081d68e84797e_3218e7d152830e08f6e764b9e0c3796df929ee2b': {
-      id: string;
-      token: string;
-    }; /** @description Create Product */
-    'test-rest.dto.productCreate': {
-      /** @description Name */name: string; /** @description Description */
-      description?: string | undefined; /** @description Price */
-      price: number;
-      /**
-       * @description Quantity
-       * @default 0
-       */
-      quantity?: number; /** @description Amount */
-      amount: number; /** @description Custom */
-      _custom?: unknown; /** @description Test */
-      _test?: unknown;
-    };
-    'test-rest.dto.productQueryRes': {
-      list: {
-        /**
-         * Format: date
-         * @description Created At
-         */
-        createdAt: Date;
-        /**
-         * Format: date
-         * @description Updated At
-         */
-        updatedAt: Date;
-        /**
-         * @description Deleted
-         * @default false
-         */
-        deleted?: boolean;
-        /**
-         * @description Instance ID
-         * @default 0
-         */
-        iid?: number; /** @description ID */
-        id: number | string; /** @description Name */
-        name: string; /** @description Description */
-        description?: string | undefined; /** @description Price */
-        price: number;
-        /**
-         * @description Quantity
-         * @default 0
-         */
-        quantity?: number; /** @description Amount */
-        amount: number; /** @description Custom */
-        _custom?: unknown;
-      }[];
-      total: string;
-      pageCount: number;
-      pageSize: number;
-      pageNo: number;
-    }; /** @description Product Info */
-    'test-rest.entity.product': {
-      /**
-       * Format: date
-       * @description Created At
-       */
-      createdAt: Date;
-      /**
-       * Format: date
-       * @description Updated At
-       */
-      updatedAt: Date;
-      /**
-       * @description Deleted
-       * @default false
-       */
-      deleted?: boolean;
-      /**
-       * @description Instance ID
-       * @default 0
-       */
-      iid?: number; /** @description ID */
-      id: number | string; /** @description Name */
-      name: string; /** @description Description */
-      description?: string | undefined; /** @description Price */
-      price: number;
-      /**
-       * @description Quantity
-       * @default 0
-       */
-      quantity?: number; /** @description Amount */
-      amount: number; /** @description Custom */
-      _custom?: unknown;
-    } | undefined; /** @description Update Product */
-    'test-rest.dto.productUpdate': {
-      /** @description Name */name: string; /** @description Description */
-      description?: string | undefined; /** @description Price */
-      price: number;
-      /**
-       * @description Quantity
-       * @default 0
-       */
-      quantity?: number; /** @description Amount */
-      amount: number; /** @description Custom */
-      _custom?: unknown;
-    };
-    'test-ssr.dto.testResult': {
-      id: number | string;
-      /**
-       * @description Name
-       * @default tom
-       */
-      name?: string;
-      married: boolean;
-      details: components$1['schemas']['test-ssr.dto.testDetail'][]; /** @default custom */
-      _custom1?: string | undefined; /** @default custom */
-      _custom2?: string | undefined; /** @default custom */
-      _custom3?: string | undefined; /** @default custom */
-      _custom4?: string | undefined; /** @default custom */
-      _custom5?: string | undefined;
-      _customCopy?: string | undefined;
-      _customCopied?: boolean | undefined;
-    };
-    'test-ssr.dto.testDetail': {
-      name: string;
-      price: number;
-      quantity: number;
-      amount: number;
-    };
-    'test-ssr.dto.testBody': {
-      id: number | string;
-      /**
-       * @description Name
-       * @default tom
-       */
-      name?: string;
-      married: boolean;
-      details: components$1['schemas']['test-ssr.dto.testDetail'][]; /** @default custom */
-      _custom1?: string | undefined; /** @default custom */
-      _custom2?: string | undefined; /** @default custom */
-      _custom3?: string | undefined; /** @default custom */
-      _custom4?: string | undefined; /** @default custom */
-      _custom5?: string | undefined;
-      _customCopy?: string | undefined;
-      _customCopied?: boolean | undefined;
-    };
-    'test-captcha.dto.signin': {
-      username: string;
-      password: string;
-      captcha?: unknown;
-    };
-    'a-paypal.entity.paypalRecord': {
-      /**
-       * Format: date
-       * @description Created At
-       */
-      createdAt: Date;
-      /**
-       * Format: date
-       * @description Updated At
-       */
-      updatedAt: Date;
-      /**
-       * @description Deleted
-       * @default false
-       */
-      deleted?: boolean;
-      /**
-       * @description Instance ID
-       * @default 0
-       */
-      iid?: number; /** @description ID */
-      id: number | string;
-      userId: number | string; /** @default 0 */
-      status?: number;
-      prepayId: string;
-      payload: components$1['schemas']['a-paypal.dto.paypalOrderRecordPayload'];
-      options: components$1['schemas']['a-paypal.dto.paypalOrderRecordOptions'];
-    };
-    'a-paypal.dto.paypalOrderRecordPayload': {
-      remark: string;
-      total: string;
-      currencyCode: string;
-    };
-    'a-paypal.dto.paypalOrderRecordOptions': {
-      brandName: string;
-      returnUrl: string;
-      cancelUrl: string;
-      returnTo: string;
-      scene: string;
-      orderId: number | string;
-    };
-    'a-play.dto.play': {
-      args: string[];
-      projectPath: string;
-    };
-    'test-vona.dto.userLazy': {
-      name: string;
-      user?: components$1['schemas']['test-vona.dto.userLazy'];
-      roles?: components$1['schemas']['test-vona.dto.roleLazy'][] | undefined;
-    };
-    'test-vona.dto.roleLazy': {
-      name: string;
-      users?: components$1['schemas']['test-vona.dto.userLazy'][] | undefined;
-    };
-    'test-vona.entity.user_2c7d642ee581efa300341e343180fbb0ecdc785d_1816ff740d81c738ec055c7038bbd93beb9405a7': {
-      /** @description ID */id: number | string;
-      name: string;
-    };
-    'test-vona.entity.post_a6ba2076b5b70a3c098374cc82d418bd1ab226c3': {
-      count_all?: string | undefined;
-      count_title?: string | undefined;
-      sum_stars?: string | undefined;
-    };
-    'test-vona.entity.post_729883d7de16ce4401b26f75bebe618c8948ff64': {
-      /** @description Title */title: string;
-      count_all?: string | undefined;
-      count_title?: string | undefined;
-      sum_stars?: string | undefined;
-    };
-    'test-vona.dto.userUpdate': {
-      name: string;
-      age?: number | undefined;
-      scores?: number | undefined;
-      posts?: {
-        /**
-         * @description Deleted
-         * @default false
-         */
-        deleted?: boolean | undefined; /** @description ID */
-        id?: number | string | undefined; /** @description Title */
-        title: string;
-      }[] | undefined;
-    };
-    'test-vona.entity.category_2c7d642ee581efa300341e343180fbb0ecdc785d': {
-      /** @description ID */id: number | string;
-      name: string;
-      children: components$1['schemas']['test-vona.entity.category_2c7d642ee581efa300341e343180fbb0ecdc785d'][];
-    };
-    'test-vona.dto.categoryTree': {
-      /** @description ID */id: number | string;
-      name: string;
-      children: components$1['schemas']['test-vona.entity.category_2c7d642ee581efa300341e343180fbb0ecdc785d'][];
-    }; /** @description User */
-    'test-vona.dto.user': {
-      /** @description User ID */id: number | string;
-      name: string;
-      married: boolean;
-    };
-    'test-vona.dto.orderCreate': {
-      /**
-       * @description Order No
-       * @default
-       */
-      orderNo?: string; /** @description Remark */
-      remark?: string | undefined;
-      products?: components$1['schemas']['test-vona.entity.product_29731960f3f38d3572bc2f8a01a7498bfe927055'][] | undefined;
-    };
-    'test-vona.entity.product_29731960f3f38d3572bc2f8a01a7498bfe927055': {
-      /** @description Name */name: string; /** @description Price */
-      price: number; /** @description Quantity */
-      quantity: number; /** @description Amount */
-      amount: number;
-    };
-    'test-vona.dto.orderUpdate': {
-      /**
-       * @description Order No
-       * @default
-       */
-      orderNo?: string; /** @description Remark */
-      remark?: string | undefined;
-      products?: components$1['schemas']['test-vona.entity.product_9cf2c6bcd41713270c34bcfce21b7b4942e3fbc6'][] | undefined;
-    };
-    'test-vona.entity.product_9cf2c6bcd41713270c34bcfce21b7b4942e3fbc6': {
-      /**
-       * @description Deleted
-       * @default false
-       */
-      deleted?: boolean | undefined; /** @description ID */
-      id?: number | string | undefined; /** @description Name */
-      name: string; /** @description Price */
-      price: number; /** @description Quantity */
-      quantity: number; /** @description Amount */
-      amount: number;
-    };
-    'test-vona.dto.orderResult': {
-      /**
-       * Format: date
-       * @description Created At
-       */
-      createdAt: Date;
-      /**
-       * Format: date
-       * @description Updated At
-       */
-      updatedAt: Date;
-      /**
-       * @description Deleted
-       * @default false
-       */
-      deleted?: boolean;
-      /**
-       * @description Instance ID
-       * @default 0
-       */
-      iid?: number; /** @description ID */
-      id: number | string;
-      /**
-       * @description Order No
-       * @default
-       */
-      orderNo?: string; /** @description Remark */
-      remark?: string | undefined;
-      userId: number | string;
-      user?: components$1['schemas']['test-vona.entity.user_2c7d642ee581efa300341e343180fbb0ecdc785d_1816ff740d81c738ec055c7038bbd93beb9405a7'];
-      products: components$1['schemas']['test-vona.entity.product_bce173590aaef19772f1ae3a82196493c2633e2e'][];
-    };
-    'test-vona.entity.product_bce173590aaef19772f1ae3a82196493c2633e2e': {
-      /** @description ID */id: number | string; /** @description Name */
-      name: string; /** @description Price */
-      price: number; /** @description Quantity */
-      quantity: number; /** @description Amount */
-      amount: number;
-    };
-    'test-vona.dto.orderResultPage': {
-      list: {
-        /**
-         * Format: date
-         * @description Created At
-         */
-        createdAt: Date;
-        /**
-         * Format: date
-         * @description Updated At
-         */
-        updatedAt: Date;
-        /**
-         * @description Deleted
-         * @default false
-         */
-        deleted?: boolean;
-        /**
-         * @description Instance ID
-         * @default 0
-         */
-        iid?: number; /** @description ID */
-        id: number | string;
-        /**
-         * @description Order No
-         * @default
-         */
-        orderNo?: string; /** @description Remark */
-        remark?: string | undefined;
-        userId: number | string;
-        user?: components$1['schemas']['test-vona.entity.user_2c7d642ee581efa300341e343180fbb0ecdc785d_1816ff740d81c738ec055c7038bbd93beb9405a7'];
-        products: components$1['schemas']['test-vona.entity.product_bce173590aaef19772f1ae3a82196493c2633e2e'][];
-      }[];
-      total: string;
-      pageCount: number;
-      pageSize: number;
-      pageNo: number;
-    };
-    'test-vona.dto.postGroup': {
-      userId: number | string;
-      count_all?: string | undefined;
-      sum_stars?: string | undefined;
-    };
-    'test-vona.dto.postAggregate': {
-      count_all?: string | undefined;
-      count_stars?: string | undefined;
-      sum_stars?: string | undefined;
-      avg_stars?: string | undefined;
-      min_stars?: string | undefined;
-      max_stars?: string | undefined;
-    };
-    'test-vona.dto.postQueryRes': {
-      list: {
-        /**
-         * Format: date
-         * @description Created At
-         */
-        createdAt: Date;
-        /**
-         * Format: date
-         * @description Updated At
-         */
-        updatedAt: Date;
-        /**
-         * @description Deleted
-         * @default false
-         */
-        deleted?: boolean;
-        /**
-         * @description Instance ID
-         * @default 0
-         */
-        iid?: number; /** @description ID */
-        id: number | string; /** @description Title */
-        title: string;
-        userId: number | string;
-        stars?: number | undefined;
-        postContent?: {
-          /** @description ID */id: number | string;
-          content: string;
-        };
-        user?: components$1['schemas']['test-vona.entity.user_2c7d642ee581efa300341e343180fbb0ecdc785d_1816ff740d81c738ec055c7038bbd93beb9405a7'];
-      }[];
-      total: string;
-      pageCount: number;
-      pageSize: number;
-      pageNo: number;
-    };
-    'test-vona.dto.serializerSimple': {
-      password: string;
-      password2: string;
-      email?: unknown; /** Format: email */
-      email2: string; /** Format: email */
-      email3: string;
-      email4?: unknown; /** Format: email */
-      email5: string; /** Format: email */
-      email6: string; /** Format: email */
-      email7: string;
-      firstName: string;
-      lastName: string;
-      fullName?: string | undefined;
-      fullName2?: string | undefined;
-      fullName3?: string | undefined;
-      fullName4?: string | undefined;
-    };
-    'test-vona.dto.serializerArray': {
-      /** @description Simple */simples: components$1['schemas']['test-vona.dto.serializerSimple'][]; /** @description Simple */
-      simplesLazy: components$1['schemas']['test-vona.dto.serializerSimple'][];
-    };
-    'test-vona.dto.serializerLazy': {
-      simple: components$1['schemas']['test-vona.dto.serializerSimple_1c4b95bcfe8fe28a56dbcc7028097cf11836b4fc'];
-      simpleLazy?: components$1['schemas']['test-vona.dto.serializerSimple_542f7be0da9b85a67248a6a1a3629e72de5fdb33_cff0ae112a392da58caf5aa905749f3c4444c4ab'];
-    };
-    'test-vona.dto.serializerSimple_1c4b95bcfe8fe28a56dbcc7028097cf11836b4fc': {
-      password: string;
-      password2: string;
-      email?: unknown; /** Format: email */
-      email2: string; /** Format: email */
-      email3: string;
-      email4?: unknown; /** Format: email */
-      email5: string; /** Format: email */
-      email6: string; /** Format: email */
-      email7: string;
-      firstName: string;
-      lastName: string;
-      fullName?: string | undefined;
-      fullName2?: string | undefined;
-      fullName3?: string | undefined;
-      fullName4?: string | undefined;
-    };
-    /**
-     * title
-     * @description description
-     */
-    'test-vona.dto.serializerSimple_542f7be0da9b85a67248a6a1a3629e72de5fdb33_cff0ae112a392da58caf5aa905749f3c4444c4ab': {
-      password: string;
-      password2: string;
-      email?: unknown; /** Format: email */
-      email2: string; /** Format: email */
-      email3: string;
-      email4?: unknown; /** Format: email */
-      email5: string; /** Format: email */
-      email6: string; /** Format: email */
-      email7: string;
-      firstName: string;
-      lastName: string;
-      fullName?: string | undefined;
-      fullName2?: string | undefined;
-      fullName3?: string | undefined;
-      fullName4?: string | undefined;
-    };
-  };
-  responses: never;
-  parameters: never;
-  requestBodies: never;
-  headers: never;
-  pathItems: never;
-}
-interface operations$1 {
-  AuthMock_authorize: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': {
-            code: string;
-            message: string;
-            data?: unknown;
-          };
-        };
-      };
-    };
-  };
-  AuthMock_authorizePost: {
-    parameters: {
-      query: {
-        redirect_uri: string;
-        state: string;
-      };
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        'application/json': {
-          username: string;
-        };
-      };
-    };
-    responses: {
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': {
-            code: string;
-            message: string;
-            data?: unknown;
-          };
-        };
-      };
-    };
-  };
-  Captcha_create: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        'application/json': {
-          scene: string;
-        };
-      };
-    };
-    responses: {
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': {
-            code: string;
-            message: string;
-            data: components$1['schemas']['a-captcha.dto.captchaData'];
-          };
-        };
-      };
-    };
-  };
-  Captcha_refresh: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        'application/json': {
-          id: string;
-          scene: string;
-        };
-      };
-    };
-    responses: {
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': {
-            code: string;
-            message: string;
-            data: components$1['schemas']['a-captcha.dto.captchaData'];
-          };
-        };
-      };
-    };
-  };
-  Captcha_verifyImmediate: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        'application/json': {
-          id: string;
-          token?: unknown;
-        };
-      };
-    };
-    responses: {
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': {
-            code: string;
-            message: string;
-            data: string;
-          };
-        };
-      };
-    };
-  };
-  MailconfirmMail_emailConfirmCallback: {
-    parameters: {
-      query: {
-        token: string;
-      };
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': {
-            code: string;
-            message: string;
-            data?: unknown;
-          };
-        };
-      };
-    };
-  };
-  MailconfirmMail_passwordResetCallback: {
-    parameters: {
-      query: {
-        token: string;
-      };
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': {
-            code: string;
-            message: string;
-            data?: unknown;
-          };
-        };
-      };
-    };
-  };
-  HomeBaseMenu_retrieveMenus: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        publicPath: ((string | undefined) | undefined) | undefined;
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': {
-            code: string;
-            message: string;
-            data: components$1['schemas']['a-menu.dto.menus'];
-          };
-        };
-      };
-    };
-  };
-  HomeBasePermission_retrievePermissions: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        resource: string;
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': {
-            code: string;
-            message: string;
-            data: components$1['schemas']['a-permission.dto.permissions'];
-          };
-        };
-      };
-    };
-    authToken: true;
-  };
-  Home_index: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': {
-            code: string;
-            message: string;
-            data?: unknown;
-          };
-        };
-      };
-    };
-  };
-  HomeUserPassport_current: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': {
-            code: string;
-            message: string;
-            data?: components$1['schemas']['home-user.dto.passport'];
-          };
-        };
-      };
-    };
-  };
-  HomeUserPassport_logout: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': {
-            code: string;
-            message: string;
-            data?: unknown;
-          };
-        };
-      };
-    };
-    authToken: true;
-  };
-  HomeUserPassport_register: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        'application/json': components$1['schemas']['home-user.dto.register'];
-      };
-    };
-    responses: {
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': {
-            code: string;
-            message: string;
-            data: components$1['schemas']['home-user.dto.passportJwt'];
-          };
-        };
-      };
-    };
-  };
-  HomeUserPassport_login: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        'application/json': components$1['schemas']['home-user.dto.login'];
-      };
-    };
-    responses: {
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': {
-            code: string;
-            message: string;
-            data: components$1['schemas']['home-user.dto.passportJwt'];
-          };
-        };
-      };
-    };
-  };
-  HomeUserPassport_loginOauth: {
-    parameters: {
-      query?: {
-        redirect?: string | undefined;
-      };
-      header?: never;
-      path: {
-        module: string;
-        providerName: string;
-        clientName: ((string | undefined) | undefined) | undefined;
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': {
-            code: string;
-            message: string;
-            data?: unknown;
-          };
-        };
-      };
-    };
-  };
-  HomeUserPassport_associate: {
-    parameters: {
-      query?: {
-        redirect?: string | undefined;
-      };
-      header?: never;
-      path: {
-        module: string;
-        providerName: string;
-        clientName: ((string | undefined) | undefined) | undefined;
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': {
-            code: string;
-            message: string;
-            data: components$1['schemas']['home-user.dto.passportJwt'];
-          };
-        };
-      };
-    };
-    authToken: true;
-  };
-  HomeUserPassport_migrate: {
-    parameters: {
-      query?: {
-        redirect?: string | undefined;
-      };
-      header?: never;
-      path: {
-        module: string;
-        providerName: string;
-        clientName: ((string | undefined) | undefined) | undefined;
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': {
-            code: string;
-            message: string;
-            data: components$1['schemas']['home-user.dto.passportJwt'];
-          };
-        };
-      };
-    };
-    authToken: true;
-  };
-  HomeUserPassport_refreshAuthToken: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        'application/json': {
-          refreshToken: string;
-        };
-      };
-    };
-    responses: {
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': {
-            code: string;
-            message: string;
-            data: components$1['schemas']['a-jwt.dto.jwtToken'];
-          };
-        };
-      };
-    };
-  };
-  HomeUserPassport_createPassportJwtFromOauthCode: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        'application/json': {
-          code: string;
-        };
-      };
-    };
-    responses: {
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': {
-            code: string;
-            message: string;
-            data: components$1['schemas']['home-user.dto.passportJwt'];
-          };
-        };
-      };
-    };
-  };
-  HomeUserPassport_createTempAuthToken: {
-    parameters: {
-      query?: {
-        path?: string | undefined;
-      };
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': {
-            code: string;
-            message: string;
-            data: string;
-          };
-        };
-      };
-    };
-    authToken: true;
-  };
-  TestAuthPassport_isAuthenticated: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': {
-            code: string;
-            message: string;
-            data: boolean;
-          };
-        };
-      };
-    };
-    authToken: true;
-  };
-  TestAuthPassport_current: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': {
-            code: string;
-            message: string;
-            data?: unknown;
-          };
-        };
-      };
-    };
-    authToken: true;
-  };
-  TestRestProduct_select: {
-    parameters: {
-      query?: {
-        columns?: string[] | undefined;
-        where?: {
-          [key: string]: unknown;
-        } | undefined;
-        orders?: string | string[][] | undefined;
-        pageNo?: number;
-        pageSize?: number;
-        createdAt?: string | undefined;
-        name?: string | undefined;
-      };
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': {
-            code: string;
-            message: string;
-            data: components$1['schemas']['test-rest.dto.productQueryRes'];
-          };
-        };
-      };
-    };
-    authToken: true;
-  };
-  TestRestProduct_create: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        'application/json': components$1['schemas']['test-rest.dto.productCreate'];
-      };
-    };
-    responses: {
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': {
-            code: string;
-            message: string;
-            data: number | string;
-          };
-        };
-      };
-    };
-    authToken: true;
-  };
-  TestRestProduct_view: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        id: number | string;
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': {
-            code: string;
-            message: string;
-            data?: components$1['schemas']['test-rest.entity.product'];
-          };
-        };
-      };
-    };
-    authToken: true;
-  };
-  TestRestProduct_delete: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        id: number | string;
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': {
-            code: string;
-            message: string;
-            data?: unknown;
-          };
-        };
-      };
-    };
-    authToken: true;
-  };
-  TestRestProduct_update: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        id: number | string;
-      };
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        'application/json': components$1['schemas']['test-rest.dto.productUpdate'];
-      };
-    };
-    responses: {
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': {
-            code: string;
-            message: string;
-            data?: unknown;
-          };
-        };
-      };
-    };
-    authToken: true;
-  };
-  TestSsrToolOne_testGet: {
-    parameters: {
-      query: {
-        name: string;
-      };
-      header?: never;
-      path: {
-        id: ((number | undefined) | (string | undefined) | (undefined | undefined)) | undefined;
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': {
-            code: string;
-            message: string;
-            data?: unknown;
-          };
-        };
-      };
-    };
-    authToken: true;
-  };
-  TestSsrToolOne_test: {
-    parameters: {
-      query: {
-        name: string;
-      };
-      header?: never;
-      path: {
-        id: ((number | undefined) | (string | undefined) | (undefined | undefined)) | undefined;
-      };
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        'application/json': components$1['schemas']['test-ssr.dto.testBody'];
-      };
-    };
-    responses: {
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': {
-            code: string;
-            message: string;
-            data: components$1['schemas']['test-ssr.dto.testResult'];
-          };
-        };
-      };
-    };
-    authToken: true;
-  };
-  TestSsrToolTwo_test: {
-    parameters: {
-      query: {
-        name: string;
-      };
-      header?: never;
-      path: {
-        id: ((number | undefined) | (string | undefined) | (undefined | undefined)) | undefined;
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': {
-            code: string;
-            message: string;
-            data: components$1['schemas']['test-ssr.dto.testResult'];
-          };
-        };
-      };
-    };
-  };
-  TestCaptcha_signin: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        'application/json': components$1['schemas']['test-captcha.dto.signin'];
-      };
-    };
-    responses: {
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': {
-            code: string;
-            message: string;
-            data?: unknown;
-          };
-        };
-      };
-    };
-  };
-  Paypal_getRecord: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        recordId: number | string;
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': {
-            code: string;
-            message: string;
-            data: components$1['schemas']['a-paypal.entity.paypalRecord'];
-          };
-        };
-      };
-    };
-    authToken: true;
-  };
-  Paypal_captureOrder: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        recordId: number | string;
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': {
-            code: string;
-            message: string;
-            data?: unknown;
-          };
-        };
-      };
-    };
-    authToken: true;
-  };
-  Paypal_cancelOrder: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        recordId: number | string;
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': {
-            code: string;
-            message: string;
-            data?: unknown;
-          };
-        };
-      };
-    };
-    authToken: true;
-  };
-  Play_index: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        'application/json': components$1['schemas']['a-play.dto.play'];
-      };
-    };
-    responses: {
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': {
-            code: string;
-            message: string;
-            data?: unknown;
-          };
-        };
-      };
-    };
-    authToken: true;
-  };
-  TestVonaDtoTest_getUserLazy: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': {
-            code: string;
-            message: string;
-            data: components$1['schemas']['test-vona.dto.userLazy'];
-          };
-        };
-      };
-    };
-    authToken: true;
-  };
-  TestVonaDtoTest_getPostDynamic: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': {
-            code: string;
-            message: string;
-            data: {
-              /**
-               * Created At
-               * Format: date
-               */
-              createdAt: Date;
-              /**
-               * Updated At
-               * Format: date
-               */
-              updatedAt: Date;
-              /**
-               * Deleted
-               * @default false
-               */
-              deleted?: boolean;
-              /**
-               * Instance ID
-               * @default 0
-               */
-              iid?: number; /** ID */
-              id: number | string; /** Title */
-              title: string;
-              userId: number | string;
-              stars?: number | undefined;
-              user?: components$1['schemas']['test-vona.entity.user_2c7d642ee581efa300341e343180fbb0ecdc785d_1816ff740d81c738ec055c7038bbd93beb9405a7'];
-            };
-          };
-        };
-      };
-    };
-    authToken: true;
-  };
-  TestVonaDtoTest_getUserStats: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': {
-            code: string;
-            message: string;
-            data: {
-              /**
-               * Created At
-               * Format: date
-               */
-              createdAt: Date;
-              /**
-               * Updated At
-               * Format: date
-               */
-              updatedAt: Date;
-              /**
-               * Deleted
-               * @default false
-               */
-              deleted?: boolean;
-              /**
-               * Instance ID
-               * @default 0
-               */
-              iid?: number; /** ID */
-              id: number | string;
-              name: string;
-              age?: number | undefined;
-              scores?: number | undefined;
-              posts?: components$1['schemas']['test-vona.entity.post_a6ba2076b5b70a3c098374cc82d418bd1ab226c3'];
-            };
-          };
-        };
-      };
-    };
-    authToken: true;
-  };
-  TestVonaDtoTest_getUserStatsGroup: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': {
-            code: string;
-            message: string;
-            data: {
-              /**
-               * Created At
-               * Format: date
-               */
-              createdAt: Date;
-              /**
-               * Updated At
-               * Format: date
-               */
-              updatedAt: Date;
-              /**
-               * Deleted
-               * @default false
-               */
-              deleted?: boolean;
-              /**
-               * Instance ID
-               * @default 0
-               */
-              iid?: number; /** ID */
-              id: number | string;
-              name: string;
-              age?: number | undefined;
-              scores?: number | undefined;
-              posts: components$1['schemas']['test-vona.entity.post_729883d7de16ce4401b26f75bebe618c8948ff64'][];
-            };
-          };
-        };
-      };
-    };
-    authToken: true;
-  };
-  TestVonaDtoTest_createUser: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        'application/json': components$1['schemas']['test-vona.dto.userCreate'];
-      };
-    };
-    responses: {
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': {
-            code: string;
-            message: string;
-            data?: unknown;
-          };
-        };
-      };
-    };
-    authToken: true;
-  };
-  TestVonaDtoTest_updateUser: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        id: unknown;
-      };
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        'application/json': components$1['schemas']['test-vona.dto.userUpdate'];
-      };
-    };
-    responses: {
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': {
-            code: string;
-            message: string;
-            data?: unknown;
-          };
-        };
-      };
-    };
-    authToken: true;
-  };
-  TestVonaDtoTest_getCategoryTree: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': {
-            code: string;
-            message: string;
-            data: {
-              /** ID */id: number | string;
-              name: string;
-              children: components$1['schemas']['test-vona.entity.category_2c7d642ee581efa300341e343180fbb0ecdc785d'][];
-            }[];
-          };
-        };
-      };
-    };
-    authToken: true;
-  };
-  TestVonaDtoTest_getCategoryTree2: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': {
-            code: string;
-            message: string;
-            data: components$1['schemas']['test-vona.dto.categoryTree'][];
-          };
-        };
-      };
-    };
-    authToken: true;
-  };
-  TestVonaGuardPassport_testUserName: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': {
-            code: string;
-            message: string;
-            data?: unknown;
-          };
-        };
-      };
-    };
-    authToken: true;
-  };
-  TestVonaGuardPassport_testUserNameFail: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': {
-            code: string;
-            message: string;
-            data?: unknown;
-          };
-        };
-      };
-    };
-    authToken: true;
-  };
-  TestVonaGuardPassport_testRoleName: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': {
-            code: string;
-            message: string;
-            data?: unknown;
-          };
-        };
-      };
-    };
-    authToken: true;
-  };
-  TestVonaGuardPassport_testRoleNameFail: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': {
-            code: string;
-            message: string;
-            data?: unknown;
-          };
-        };
-      };
-    };
-    authToken: true;
-  };
-  Onion_index: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': {
-            code: string;
-            message: string;
-            data?: unknown;
-          };
-        };
-      };
-    };
-  };
-  Onion_echo: {
-    parameters: {
-      query?: {
-        id?: number;
-        name?: number | undefined;
-      };
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        'application/json': {
-          /** @description User ID */id: number;
-        };
-      };
-    };
-    responses: {
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': {
-            code: string;
-            message: string;
-            data?: string | undefined;
-          };
-        };
-      };
-    };
-  };
-  Onion_echo2: {
-    parameters: {
-      query: {
-        id: number | string;
-        name: string;
-        married: boolean;
-      };
-      header?: never;
-      path: {
-        userId: number;
-        userName: string;
-      };
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        'application/json': {
-          /** @description User ID */id: number;
-        };
-      };
-    };
-    responses: {
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': {
-            code: string;
-            message: string;
-            data: components$1['schemas']['test-vona.dto.user'];
-          };
-        };
-      };
-    };
-  };
-  Onion_echo3: {
-    parameters: {
-      query?: {
-        id?: number | undefined;
-      };
-      header: {
-        Accept: string;
-      };
-      path: {
-        userId: number;
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': {
-            code: string;
-            message: string;
-            data?: unknown;
-          };
-        };
-      };
-    };
-  };
-  Onion_echo4: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody?: {
-      content: {
-        'application/json': components$1['schemas']['test-vona.dto.user'][] | undefined;
-      };
-    };
-    responses: {
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': {
-            code: string;
-            message: string;
-            data: components$1['schemas']['test-vona.dto.user'][];
-          };
-        };
-      };
-    };
-  };
-  Onion_echo5: {
-    parameters: {
-      query?: {
-        ids?: number[];
-      };
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': {
-            code: string;
-            message: string;
-            data?: unknown;
-          };
-        };
-      };
-    };
-  };
-  Onion_echo6: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': {
-            code: string;
-            message: string;
-            data?: unknown;
-          };
-        };
-      };
-    };
-    authToken: true;
-  };
-  TestVonaOrder_create: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        'application/json': components$1['schemas']['test-vona.dto.orderCreate'];
-      };
-    };
-    responses: {
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': {
-            code: string;
-            message: string;
-            data: number | string;
-          };
-        };
-      };
-    };
-    authToken: true;
-  };
-  TestVonaOrder_update: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        id: unknown;
-      };
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        'application/json': components$1['schemas']['test-vona.dto.orderUpdate'];
-      };
-    };
-    responses: {
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': {
-            code: string;
-            message: string;
-            data?: unknown;
-          };
-        };
-      };
-    };
-    authToken: true;
-  };
-  TestVonaOrder_findAll: {
-    parameters: {
-      query?: {
-        columns?: string[] | undefined;
-        where?: {
-          [key: string]: unknown;
-        } | undefined;
-        orders?: string | string[][] | undefined;
-        orderNo?: string | undefined;
-        remark?: string | undefined;
-        userName?: string | undefined;
-      };
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': {
-            code: string;
-            message: string;
-            data: components$1['schemas']['test-vona.dto.orderResult'][];
-          };
-        };
-      };
-    };
-    authToken: true;
-  };
-  TestVonaOrder_findMany: {
-    parameters: {
-      query?: {
-        columns?: string[] | undefined;
-        where?: {
-          [key: string]: unknown;
-        } | undefined;
-        orders?: string | string[][] | undefined;
-        pageNo?: number;
-        orderNo?: string | undefined;
-        remark?: string | undefined;
-        pageSize?: number;
-      };
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': {
-            code: string;
-            message: string;
-            data: components$1['schemas']['test-vona.dto.orderResultPage'];
-          };
-        };
-      };
-    };
-    authToken: true;
-  };
-  TestVonaPost_group: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': {
-            code: string;
-            message: string;
-            data: components$1['schemas']['test-vona.dto.postGroup'][];
-          };
-        };
-      };
-    };
-    authToken: true;
-  };
-  TestVonaPost_aggregate: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': {
-            code: string;
-            message: string;
-            data: components$1['schemas']['test-vona.dto.postAggregate'];
-          };
-        };
-      };
-    };
-    authToken: true;
-  };
-  TestVonaPost_findManyEcho: {
-    parameters: {
-      query?: {
-        columns?: string[] | undefined;
-        where?: {
-          [key: string]: unknown;
-        } | undefined;
-        orders?: string | string[][] | undefined;
-        pageNo?: number;
-        pageSize?: number;
-        createdAt?: string | undefined;
-        title?: string | undefined;
-        userName?: string | undefined;
-      };
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': {
-            code: string;
-            message: string;
-            data: components$1['schemas']['test-vona.dto.postQueryRes'];
-          };
-        };
-      };
-    };
-  };
-  TestVonaPost_findMany: {
-    parameters: {
-      query?: {
-        columns?: string[] | undefined;
-        where?: {
-          [key: string]: unknown;
-        } | undefined;
-        orders?: string | string[][] | undefined;
-        pageNo?: number;
-        pageSize?: number;
-        createdAt?: string | undefined;
-        title?: string | undefined;
-        userName?: string | undefined;
-      };
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': {
-            code: string;
-            message: string;
-            data: components$1['schemas']['test-vona.dto.postQueryRes'];
-          };
-        };
-      };
-    };
-  };
-  TestVonaSerializer_echoSimple: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        'application/json': components$1['schemas']['test-vona.dto.serializerSimple'];
-      };
-    };
-    responses: {
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': {
-            code: string;
-            message: string;
-            data: components$1['schemas']['test-vona.dto.serializerSimple'];
-          };
-        };
-      };
-    };
-  };
-  TestVonaSerializer_echoArray: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        'application/json': components$1['schemas']['test-vona.dto.serializerArray'][];
-      };
-    };
-    responses: {
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': {
-            code: string;
-            message: string;
-            data: components$1['schemas']['test-vona.dto.serializerArray'][];
-          };
-        };
-      };
-    };
-  };
-  TestVonaSerializer_echoLazy: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        'application/json': components$1['schemas']['test-vona.dto.serializerLazy'];
-      };
-    };
-    responses: {
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': {
-            code: string;
-            message: string;
-            data: components$1['schemas']['test-vona.dto.serializerLazy'];
-          };
-        };
-      };
-    };
-  };
-  TestVonaUpload_fields: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        'multipart/form-data': {
-          checkes: string[];
-          /**
-           * your name
-           * @default zhennann
-           */
-          name?: string;
-        };
-      };
-    };
-    responses: {
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': {
-            code: string;
-            message: string;
-            data?: unknown;
-          };
-        };
-      };
-    };
-  };
-  TestVonaUpload_file: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        'multipart/form-data': {
-          /** @default zhennann */name?: string; /** Format: binary */
-          welcome: Blob;
-        };
-      };
-    };
-    responses: {
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': {
-            code: string;
-            message: string;
-            data?: unknown;
-          };
-        };
-      };
-    };
-  };
-  TestVonaUpload_files: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        'multipart/form-data': {
-          /** images */images: Blob[];
-          /**
-           * single file
-           * Format: binary
-           */
-          welcome1: Blob; /** Format: binary */
-          welcome2: Blob; /** more files */
-          blobs: Blob[];
-        };
-      };
-    };
-    responses: {
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': {
-            code: string;
-            message: string;
-            data?: unknown;
-          };
-        };
-      };
-    };
-  };
+//#region src/suite/a-c/modules/a-c/src/service/data.d.ts
+declare class ServiceData extends BeanBase {
+  count: number;
+  increment(): void;
+  decrement(): void;
 }
 //#endregion
-//#region src/suite/a-home/modules/home-api/src/api/openapi/schemas.d.ts
-type ApiSchemaAMenuDtoMenuItem$1 = components$1['schemas']['a-menu.dto.menuItem'];
-type ApiSchemaAMenuDtoMenuGroup$1 = components$1['schemas']['a-menu.dto.menuGroup'];
-type ApiSchemaTestSsrDtoTestResult$1 = components$1['schemas']['test-ssr.dto.testResult'];
-type ApiSchemaTestSsrDtoTestBody$1 = components$1['schemas']['test-ssr.dto.testBody'];
-type ApiSchemaTestSsrDtoTestBodyPartial$1 = Partial<ApiSchemaTestSsrDtoTestBody$1>;
-//#endregion
-//#region src/suite/a-home/modules/home-api/src/api/captcha.d.ts
-type ApiApiCaptchacreateRequestBody = {
-  scene: string;
-};
-type ApiApiCaptcharefreshRequestBody = {
-  id: string;
-  scene: string;
-};
-type ApiApiCaptchaverifyImmediateRequestBody = {
-  id: string;
-  token?: unknown;
-};
-declare class ApiCaptcha extends BeanApiBase {
-  create(body: ApiApiCaptchacreateRequestBody, options?: IApiActionOptions): Promise<{
-    id: string;
-    provider: string;
-    token?: unknown;
-    payload?: unknown;
-  }>;
-  refresh(body: ApiApiCaptcharefreshRequestBody, options?: IApiActionOptions): Promise<{
-    id: string;
-    provider: string;
-    token?: unknown;
-    payload?: unknown;
-  }>;
-  verifyImmediate(body: ApiApiCaptchaverifyImmediateRequestBody, options?: IApiActionOptions): Promise<string>;
-}
-//#endregion
-//#region src/suite/a-home/modules/home-api/src/api/home.d.ts
-declare class ApiHome extends BeanApiBase {
-  /** @description Home */
-  index(options?: IApiActionOptions): Promise<unknown>;
-}
-//#endregion
-//#region src/suite/a-home/modules/home-api/src/api/homeBaseMenu.d.ts
-/** HomeBaseMenu_retrieveMenus */
-declare const ApiApiHomeBaseMenuretrieveMenusPath$1 = "/api/home/base/menu/{publicPath?}";
-type ApiApiHomeBaseMenuretrieveMenusPath$1 = '/api/home/base/menu/{publicPath?}';
-type ApiApiHomeBaseMenuretrieveMenusMethod$1 = 'get';
-type ApiApiHomeBaseMenuretrieveMenusRequestParams$1 = paths$1[ApiApiHomeBaseMenuretrieveMenusPath$1][ApiApiHomeBaseMenuretrieveMenusMethod$1]['parameters']['path'];
-declare class ApiHomeBaseMenu$1 extends BeanApiBase {
-  retrieveMenus(options: {
-    params: ApiApiHomeBaseMenuretrieveMenusRequestParams$1;
-  } & IApiActionOptions): Promise<{
-    menus?: components$1['schemas']['a-menu.dto.menuItem'][] | undefined;
-    groups?: components$1['schemas']['a-menu.dto.menuGroup'][] | undefined;
-  }>;
-}
-//#endregion
-//#region src/suite/a-home/modules/home-api/src/api/homeBasePermission.d.ts
-/** HomeBasePermission_retrievePermissions */
-declare const ApiApiHomeBasePermissionretrievePermissionsPath = "/api/home/base/permission/{resource}";
-type ApiApiHomeBasePermissionretrievePermissionsPath = '/api/home/base/permission/{resource}';
-type ApiApiHomeBasePermissionretrievePermissionsMethod = 'get';
-type ApiApiHomeBasePermissionretrievePermissionsRequestParams = paths$1[ApiApiHomeBasePermissionretrievePermissionsPath][ApiApiHomeBasePermissionretrievePermissionsMethod]['parameters']['path'];
-declare class ApiHomeBasePermission extends BeanApiBase {
-  retrievePermissions(options: {
-    params: ApiApiHomeBasePermissionretrievePermissionsRequestParams;
-  } & IApiActionOptions): Promise<{
-    roleIds?: (number | string)[] | undefined;
-    roleNames?: string[] | undefined;
-    actions?: unknown;
-  }>;
-}
-//#endregion
-//#region src/suite/a-home/modules/home-api/src/api/homeUserPassport.d.ts
-type ApiApiHomeUserPassportregisterRequestBody = components$1['schemas']['home-user.dto.register'];
-type ApiApiHomeUserPassportloginRequestBody = components$1['schemas']['home-user.dto.login'];
-/** HomeUserPassport_loginOauth */
-declare const ApiApiHomeUserPassportloginOauthPath = "/api/home/user/passport/login/{module}/{providerName}/{clientName?}";
-type ApiApiHomeUserPassportloginOauthPath = '/api/home/user/passport/login/{module}/{providerName}/{clientName?}';
-type ApiApiHomeUserPassportloginOauthMethod = 'get';
-type ApiApiHomeUserPassportloginOauthRequestParams = paths$1[ApiApiHomeUserPassportloginOauthPath][ApiApiHomeUserPassportloginOauthMethod]['parameters']['path'];
-type ApiApiHomeUserPassportloginOauthRequestQuery = paths$1[ApiApiHomeUserPassportloginOauthPath][ApiApiHomeUserPassportloginOauthMethod]['parameters']['query'];
-/** HomeUserPassport_associate */
-declare const ApiApiHomeUserPassportassociatePath = "/api/home/user/passport/associate/{module}/{providerName}/{clientName?}";
-type ApiApiHomeUserPassportassociatePath = '/api/home/user/passport/associate/{module}/{providerName}/{clientName?}';
-type ApiApiHomeUserPassportassociateMethod = 'get';
-type ApiApiHomeUserPassportassociateRequestParams = paths$1[ApiApiHomeUserPassportassociatePath][ApiApiHomeUserPassportassociateMethod]['parameters']['path'];
-type ApiApiHomeUserPassportassociateRequestQuery = paths$1[ApiApiHomeUserPassportassociatePath][ApiApiHomeUserPassportassociateMethod]['parameters']['query'];
-/** HomeUserPassport_migrate */
-declare const ApiApiHomeUserPassportmigratePath = "/api/home/user/passport/migrate/{module}/{providerName}/{clientName?}";
-type ApiApiHomeUserPassportmigratePath = '/api/home/user/passport/migrate/{module}/{providerName}/{clientName?}';
-type ApiApiHomeUserPassportmigrateMethod = 'get';
-type ApiApiHomeUserPassportmigrateRequestParams = paths$1[ApiApiHomeUserPassportmigratePath][ApiApiHomeUserPassportmigrateMethod]['parameters']['path'];
-type ApiApiHomeUserPassportmigrateRequestQuery = paths$1[ApiApiHomeUserPassportmigratePath][ApiApiHomeUserPassportmigrateMethod]['parameters']['query'];
-type ApiApiHomeUserPassportrefreshAuthTokenRequestBody = {
-  refreshToken: string;
-};
-type ApiApiHomeUserPassportcreatePassportJwtFromOauthCodeRequestBody = {
-  code: string;
-};
-/** HomeUserPassport_createTempAuthToken */
-declare const ApiApiHomeUserPassportcreateTempAuthTokenPath = "/api/home/user/passport/createTempAuthToken";
-type ApiApiHomeUserPassportcreateTempAuthTokenPath = '/api/home/user/passport/createTempAuthToken';
-type ApiApiHomeUserPassportcreateTempAuthTokenMethod = 'post';
-type ApiApiHomeUserPassportcreateTempAuthTokenRequestQuery = paths$1[ApiApiHomeUserPassportcreateTempAuthTokenPath][ApiApiHomeUserPassportcreateTempAuthTokenMethod]['parameters']['query'];
-declare class ApiHomeUserPassport extends BeanApiBase {
-  current(options?: IApiActionOptions): Promise<{
-    user: components$1['schemas']['home-user.entity.user'];
-    auth: components$1['schemas']['a-auth.dto.auth'];
-    roles: components$1['schemas']['home-user.entity.role'][];
-  } | undefined>;
-  logout(body?: undefined, options?: IApiActionOptions): Promise<unknown>;
-  register(body: ApiApiHomeUserPassportregisterRequestBody, options?: IApiActionOptions): Promise<{
-    passport: components$1['schemas']['home-user.dto.passport'];
-    jwt: components$1['schemas']['a-jwt.dto.jwtToken'];
-  }>;
-  login(body: ApiApiHomeUserPassportloginRequestBody, options?: IApiActionOptions): Promise<{
-    passport: components$1['schemas']['home-user.dto.passport'];
-    jwt: components$1['schemas']['a-jwt.dto.jwtToken'];
-  }>;
-  loginOauth(options: {
-    params: ApiApiHomeUserPassportloginOauthRequestParams;
-    query?: ApiApiHomeUserPassportloginOauthRequestQuery;
-  } & IApiActionOptions): Promise<unknown>;
-  associate(options: {
-    params: ApiApiHomeUserPassportassociateRequestParams;
-    query?: ApiApiHomeUserPassportassociateRequestQuery;
-  } & IApiActionOptions): Promise<{
-    passport: components$1['schemas']['home-user.dto.passport'];
-    jwt: components$1['schemas']['a-jwt.dto.jwtToken'];
-  }>;
-  migrate(options: {
-    params: ApiApiHomeUserPassportmigrateRequestParams;
-    query?: ApiApiHomeUserPassportmigrateRequestQuery;
-  } & IApiActionOptions): Promise<{
-    passport: components$1['schemas']['home-user.dto.passport'];
-    jwt: components$1['schemas']['a-jwt.dto.jwtToken'];
-  }>;
-  refreshAuthToken(body: ApiApiHomeUserPassportrefreshAuthTokenRequestBody, options?: IApiActionOptions): Promise<{
-    accessToken: string;
-    refreshToken: string;
-    expiresIn: number;
-  }>;
-  createPassportJwtFromOauthCode(body: ApiApiHomeUserPassportcreatePassportJwtFromOauthCodeRequestBody, options?: IApiActionOptions): Promise<{
-    passport: components$1['schemas']['home-user.dto.passport'];
-    jwt: components$1['schemas']['a-jwt.dto.jwtToken'];
-  }>;
-  createTempAuthToken(body?: undefined, options?: {
-    query?: ApiApiHomeUserPassportcreateTempAuthTokenRequestQuery;
-  } & IApiActionOptions): Promise<string>;
-}
-//#endregion
-//#region src/suite/a-home/modules/home-api/src/api/testSsrToolOne.d.ts
-/** TestSsrToolOne_testGet */
-declare const ApiApiTestSsrToolOnetestGetPath = "/api/test/ssr/toolOne/test/{id?}";
-type ApiApiTestSsrToolOnetestGetPath = '/api/test/ssr/toolOne/test/{id?}';
-type ApiApiTestSsrToolOnetestGetMethod = 'get';
-type ApiApiTestSsrToolOnetestGetRequestParams = paths$1[ApiApiTestSsrToolOnetestGetPath][ApiApiTestSsrToolOnetestGetMethod]['parameters']['path'];
-type ApiApiTestSsrToolOnetestGetRequestQuery = paths$1[ApiApiTestSsrToolOnetestGetPath][ApiApiTestSsrToolOnetestGetMethod]['parameters']['query'];
-/** TestSsrToolOne_test */
-declare const ApiApiTestSsrToolOnetestPath = "/api/test/ssr/toolOne/test/{id?}";
-type ApiApiTestSsrToolOnetestPath = '/api/test/ssr/toolOne/test/{id?}';
-type ApiApiTestSsrToolOnetestMethod = 'post';
-type ApiApiTestSsrToolOnetestRequestParams = paths$1[ApiApiTestSsrToolOnetestPath][ApiApiTestSsrToolOnetestMethod]['parameters']['path'];
-type ApiApiTestSsrToolOnetestRequestQuery = paths$1[ApiApiTestSsrToolOnetestPath][ApiApiTestSsrToolOnetestMethod]['parameters']['query'];
-type ApiApiTestSsrToolOnetestRequestBody = components$1['schemas']['test-ssr.dto.testBody'];
-declare class ApiTestSsrToolOne extends BeanApiBase {
-  testGet(options: {
-    params: ApiApiTestSsrToolOnetestGetRequestParams;
-    query: ApiApiTestSsrToolOnetestGetRequestQuery;
-  } & IApiActionOptions): Promise<unknown>;
-  test(body: ApiApiTestSsrToolOnetestRequestBody, options: {
-    params: ApiApiTestSsrToolOnetestRequestParams;
-    query: ApiApiTestSsrToolOnetestRequestQuery;
-  } & IApiActionOptions): Promise<{
-    id: number | string;
-    name?: string;
-    married: boolean;
-    details: components$1['schemas']['test-ssr.dto.testDetail'][];
-    _custom1?: string | undefined;
-    _custom2?: string | undefined;
-    _custom3?: string | undefined;
-    _custom4?: string | undefined;
-    _custom5?: string | undefined;
-    _customCopy?: string | undefined;
-    _customCopied?: boolean | undefined;
-  }>;
-}
-//#endregion
-//#region src/suite/a-home/modules/home-api/src/apiSchema/captcha.d.ts
-declare class ApiSchemaCaptcha extends BeanBase {
-  create(options?: IApiSchemaOptions): _$zova_module_a_openapi0.IOpenapiSchemas;
-  refresh(options?: IApiSchemaOptions): _$zova_module_a_openapi0.IOpenapiSchemas;
-  verifyImmediate(options?: IApiSchemaOptions): _$zova_module_a_openapi0.IOpenapiSchemas;
-}
-//#endregion
-//#region src/suite/a-home/modules/home-api/src/apiSchema/home.d.ts
-declare class ApiSchemaHome extends BeanBase {
-  index(options?: IApiSchemaOptions): _$zova_module_a_openapi0.IOpenapiSchemas;
-}
-//#endregion
-//#region src/suite/a-home/modules/home-api/src/apiSchema/homeBaseMenu.d.ts
-declare class ApiSchemaHomeBaseMenu$1 extends BeanBase {
-  retrieveMenus(options?: IApiSchemaOptions): _$zova_module_a_openapi0.IOpenapiSchemas;
-}
-//#endregion
-//#region src/suite/a-home/modules/home-api/src/apiSchema/homeBasePermission.d.ts
-declare class ApiSchemaHomeBasePermission extends BeanBase {
-  retrievePermissions(options?: IApiSchemaOptions): _$zova_module_a_openapi0.IOpenapiSchemas;
-}
-//#endregion
-//#region src/suite/a-home/modules/home-api/src/apiSchema/homeUserPassport.d.ts
-declare class ApiSchemaHomeUserPassport extends BeanBase {
-  current(options?: IApiSchemaOptions): _$zova_module_a_openapi0.IOpenapiSchemas;
-  logout(options?: IApiSchemaOptions): _$zova_module_a_openapi0.IOpenapiSchemas;
-  register(options?: IApiSchemaOptions): _$zova_module_a_openapi0.IOpenapiSchemas;
-  login(options?: IApiSchemaOptions): _$zova_module_a_openapi0.IOpenapiSchemas;
-  loginOauth(options?: IApiSchemaOptions): _$zova_module_a_openapi0.IOpenapiSchemas;
-  associate(options?: IApiSchemaOptions): _$zova_module_a_openapi0.IOpenapiSchemas;
-  migrate(options?: IApiSchemaOptions): _$zova_module_a_openapi0.IOpenapiSchemas;
-  refreshAuthToken(options?: IApiSchemaOptions): _$zova_module_a_openapi0.IOpenapiSchemas;
-  createPassportJwtFromOauthCode(options?: IApiSchemaOptions): _$zova_module_a_openapi0.IOpenapiSchemas;
-  createTempAuthToken(options?: IApiSchemaOptions): _$zova_module_a_openapi0.IOpenapiSchemas;
-}
-//#endregion
-//#region src/suite/a-home/modules/home-api/src/apiSchema/testSsrToolOne.d.ts
-declare class ApiSchemaTestSsrToolOne extends BeanBase {
-  testGet(options?: IApiSchemaOptions): _$zova_module_a_openapi0.IOpenapiSchemas;
-  test(options?: IApiSchemaOptions): _$zova_module_a_openapi0.IOpenapiSchemas;
-}
-//#endregion
-//#region src/suite/a-home/modules/home-api/src/service/jwtAdapter.d.ts
-declare class ServiceJwtAdapter extends BeanBase implements IJwtAdapter {
+//#region src/suite/a-c/modules/a-c/src/service/test.d.ts
+declare class ServiceTest extends BeanBase {
   protected __init__(): Promise<void>;
-  getJwtInfo(): Promise<IJwtInfo | undefined>;
-  refreshAuthToken(refreshToken: string): Promise<IJwtInfo>;
 }
 //#endregion
-//#region src/suite/a-home/modules/home-api/src/.metadata/index.d.ts
-declare module 'zova' {}
-declare module 'zova-module-home-api' {
-  interface ApiCaptcha {}
-  interface ApiCaptcha {
-    get $beanFullName(): 'home-api.api.captcha';
-    get $onionName(): 'home-api:captcha';
-  }
-  interface ApiHome {}
-  interface ApiHome {
-    get $beanFullName(): 'home-api.api.home';
-    get $onionName(): 'home-api:home';
-  }
-  interface ApiHomeBaseMenu {}
-  interface ApiHomeBaseMenu {
-    get $beanFullName(): 'home-api.api.homeBaseMenu';
-    get $onionName(): 'home-api:homeBaseMenu';
-  }
-  interface ApiHomeBasePermission {}
-  interface ApiHomeBasePermission {
-    get $beanFullName(): 'home-api.api.homeBasePermission';
-    get $onionName(): 'home-api:homeBasePermission';
-  }
-  interface ApiHomeUserPassport {}
-  interface ApiHomeUserPassport {
-    get $beanFullName(): 'home-api.api.homeUserPassport';
-    get $onionName(): 'home-api:homeUserPassport';
-  }
-  interface ApiTestSsrToolOne {}
-  interface ApiTestSsrToolOne {
-    get $beanFullName(): 'home-api.api.testSsrToolOne';
-    get $onionName(): 'home-api:testSsrToolOne';
-  }
+//#region src/suite/a-c/modules/a-c/src/page/counter/controller.d.ts
+declare class ControllerPageCounter extends BeanControllerPageBase {
+  count: number;
+  increment(): void;
+  decrement(): void;
+  protected render(): _$vue_jsx_runtime0.JSX.Element;
 }
-/** api: end */
-/** api: begin */
-interface IModuleApi$2 {
-  'captcha': ApiCaptcha;
-  'home': ApiHome;
-  'homeBaseMenu': ApiHomeBaseMenu$1;
-  'homeBasePermission': ApiHomeBasePermission;
-  'homeUserPassport': ApiHomeUserPassport;
-  'testSsrToolOne': ApiTestSsrToolOne;
+//#endregion
+//#region src/suite/a-c/modules/a-c/src/page/test/controller.d.ts
+declare class ControllerPageTest extends BeanControllerPageBase {
+  $$serviceData: ServiceData;
+  $$serviceData2: ServiceData;
+  $$serviceData3: ServiceData;
+  $$serviceData4: ServiceData;
+  protected render(): _$vue_jsx_runtime0.JSX.Element;
 }
-declare module 'zova' {
-  interface IBeanRecordGeneral {
-    'home-api.api.captcha': ApiCaptcha;
-    'home-api.api.home': ApiHome;
-    'home-api.api.homeBaseMenu': ApiHomeBaseMenu$1;
-    'home-api.api.homeBasePermission': ApiHomeBasePermission;
-    'home-api.api.homeUserPassport': ApiHomeUserPassport;
-    'home-api.api.testSsrToolOne': ApiTestSsrToolOne;
-  }
+//#endregion
+//#region src/suite/a-c/modules/a-c/src/page/test3/controller.d.ts
+declare class ControllerPageTest3 extends BeanControllerPageBase {
+  protected __init__(): Promise<void>;
+  protected render(): null;
 }
-/** api: end */
-/** openapi: begin */
-declare module 'zova' {}
-declare module 'zova-module-home-api' {
-  interface ApiSchemaCaptcha {}
-  interface ApiSchemaCaptcha {
-    get $beanFullName(): 'home-api.apiSchema.captcha';
-    get $onionName(): 'home-api:captcha';
-  }
-  interface ApiSchemaHome {}
-  interface ApiSchemaHome {
-    get $beanFullName(): 'home-api.apiSchema.home';
-    get $onionName(): 'home-api:home';
-  }
-  interface ApiSchemaHomeBaseMenu {}
-  interface ApiSchemaHomeBaseMenu {
-    get $beanFullName(): 'home-api.apiSchema.homeBaseMenu';
-    get $onionName(): 'home-api:homeBaseMenu';
-  }
-  interface ApiSchemaHomeBasePermission {}
-  interface ApiSchemaHomeBasePermission {
-    get $beanFullName(): 'home-api.apiSchema.homeBasePermission';
-    get $onionName(): 'home-api:homeBasePermission';
-  }
-  interface ApiSchemaHomeUserPassport {}
-  interface ApiSchemaHomeUserPassport {
-    get $beanFullName(): 'home-api.apiSchema.homeUserPassport';
-    get $onionName(): 'home-api:homeUserPassport';
-  }
-  interface ApiSchemaTestSsrToolOne {}
-  interface ApiSchemaTestSsrToolOne {
-    get $beanFullName(): 'home-api.apiSchema.testSsrToolOne';
-    get $onionName(): 'home-api:testSsrToolOne';
-  }
+//#endregion
+//#region src/suite/a-c/modules/a-c/src/.metadata/page/counter.d.ts
+declare const ZPageCounter: _$vue.DefineSetupFnComponent<Record<string, any>, {}, {}, Record<string, any> & {}, _$vue.PublicProps>;
+//#endregion
+//#region src/suite/a-c/modules/a-c/src/.metadata/page/test.d.ts
+declare const ZPageTest: _$vue.DefineSetupFnComponent<Record<string, any>, {}, {}, Record<string, any> & {}, _$vue.PublicProps>;
+//#endregion
+//#region src/suite/a-c/modules/a-c/src/.metadata/page/test3.d.ts
+declare const ZPageTest3: _$vue.DefineSetupFnComponent<Record<string, any>, {}, {}, Record<string, any> & {}, _$vue.PublicProps>;
+//#endregion
+//#region src/suite/a-c/modules/a-c/src/bean/tableCell.test.d.ts
+interface ITableCellOptionsTest$1 extends IDecoratorTableCellOptions {}
+declare class TableCellTest$1 extends BeanBase implements ITableCellRender {
+  render(_options: ITableCellOptionsTest$1, _renderContext: IJsxRenderContextTableCell, next: NextTableCellRender): any;
 }
-/** apiSchema: end */
-/** apiSchema: begin */
-interface IModuleApiSchema$1 {
-  'captcha': ApiSchemaCaptcha;
-  'home': ApiSchemaHome;
-  'homeBaseMenu': ApiSchemaHomeBaseMenu$1;
-  'homeBasePermission': ApiSchemaHomeBasePermission;
-  'homeUserPassport': ApiSchemaHomeUserPassport;
-  'testSsrToolOne': ApiSchemaTestSsrToolOne;
-}
-declare module 'zova' {
-  interface IBeanRecordGeneral {
-    'home-api.apiSchema.captcha': ApiSchemaCaptcha;
-    'home-api.apiSchema.home': ApiSchemaHome;
-    'home-api.apiSchema.homeBaseMenu': ApiSchemaHomeBaseMenu$1;
-    'home-api.apiSchema.homeBasePermission': ApiSchemaHomeBasePermission;
-    'home-api.apiSchema.homeUserPassport': ApiSchemaHomeUserPassport;
-    'home-api.apiSchema.testSsrToolOne': ApiSchemaTestSsrToolOne;
-  }
-}
-/** apiSchema: end */
-/** service: begin */
+//#endregion
+//#region src/suite/a-c/modules/a-c/src/.metadata/index.d.ts
 declare module 'zova-module-a-bean' {
   interface IServiceRecord {
-    'home-api:jwtAdapter': never;
+    'a-c:data': never;
+    'a-c:test': never;
   }
 }
-declare module 'zova-module-home-api' {
-  interface ServiceJwtAdapter {}
-  interface ServiceJwtAdapter {
-    get $beanFullName(): 'home-api.service.jwtAdapter';
-    get $onionName(): 'home-api:jwtAdapter';
+declare module 'zova-module-a-c' {
+  interface ServiceData {}
+  interface ServiceData {
+    get $beanFullName(): 'a-c.service.data';
+    get $onionName(): 'a-c:data';
+  }
+  interface ServiceTest {}
+  interface ServiceTest {
+    get $beanFullName(): 'a-c.service.test';
+    get $onionName(): 'a-c:test';
   }
 }
 /** service: end */
 /** service: begin */
 declare module 'zova' {
   interface IBeanRecordGeneral {
-    'home-api.service.jwtAdapter': ServiceJwtAdapter;
+    'a-c.service.data': ServiceData;
+    'a-c.service.test': ServiceTest;
   }
 }
 /** service: end */
+/** controller: begin */
+declare module 'zova' {}
+declare module 'zova-module-a-c' {
+  interface ControllerPageCounter {}
+  interface ControllerPageTest {}
+  interface ControllerPageTest3 {}
+}
+/** controller: end */
+/** controller: begin */
+declare module 'zova' {
+  interface IBeanRecordLocal {
+    'a-c.controller.pageCounter': ControllerPageCounter;
+    'a-c.controller.pageTest': ControllerPageTest;
+    'a-c.controller.pageTest3': ControllerPageTest3;
+  }
+}
+/** controller: end */
+/** pages: begin */
+declare module 'zova-module-a-router' {
+  interface IPagePathRecord {
+    '/a/c/counter': TypePagePathSchema<undefined, undefined>;
+    '/a/c/test': TypePagePathSchema<undefined, undefined>;
+    '/a/c/test3': TypePagePathSchema<undefined, undefined>;
+  }
+  interface IPageNameRecord {}
+}
+declare module 'zova-module-a-c' {}
+/** pages: end */
+/** tableCell: begin */
+declare module 'zova-module-a-table' {
+  interface ITableCellRecord {
+    'a-c:test': ITableCellOptionsTest$1;
+  }
+}
+declare module 'zova-module-a-c' {
+  interface TableCellTest {}
+  interface TableCellTest {
+    get $beanFullName(): 'a-c.tableCell.test';
+    get $onionName(): 'a-c:test';
+    get $onionOptions(): ITableCellOptionsTest$1;
+  }
+}
+/** tableCell: end */
+/** tableCell: begin */
+declare module 'zova' {
+  interface IBeanRecordGeneral {
+    'a-c.tableCell.test': TableCellTest$1;
+  }
+}
+/** tableCell: end */
 /** scope: begin */
-declare class ScopeModuleHomeApi extends BeanScopeBase {}
-interface ScopeModuleHomeApi {
+declare class ScopeModuleAC extends BeanScopeBase {}
+interface ScopeModuleAC {
   util: BeanScopeUtil;
-  api: IModuleApi$2;
-  apiSchema: IModuleApiSchema$1;
 }
 declare module 'zova' {
   interface IBeanScopeRecord {
-    'home-api': ScopeModuleHomeApi;
+    'a-c': ScopeModuleAC;
   }
 }
 /** scope: end */
 //#endregion
-//#region src/suite/a-home/modules/home-api/src/types/api.d.ts
-declare module 'zova' {
-  interface BeanBase {
-    $api: IModuleApi$2;
-    $apiSchema: IModuleApiSchema$1;
-  }
-}
+//#region src/suite/a-c/modules/a-c/rest/tableCell/test.d.ts
+declare function BBTCTest(_props: ITableCellOptionsTest$1): string;
 //#endregion
-//#region src/module/demo-student/src/model/menu.d.ts
-interface IModelOptionsMenu extends IDecoratorModelOptions {}
-declare class ModelMenu extends BeanModelBase {
-  retrieveMenus(): _$vue.UnwrapNestedRefs<_$_tanstack_vue_query0.UseQueryReturnType<{
-    menus?: components$1['schemas']['a-menu.dto.menuItem'][] | undefined;
-    groups?: components$1['schemas']['a-menu.dto.menuGroup'][] | undefined;
-  }, Error>>;
-}
-//#endregion
-//#region src/module/demo-student/src/model/test.d.ts
-interface IModelOptionsTest$1 extends IDecoratorModelOptions {}
-declare class ModelTest$1 extends BeanModelBase {
-  protected __init__(): Promise<void>;
-}
-//#endregion
-//#region src/module/demo-student/src/api/openapi/types.d.ts
+//#region src/suite/a-home/modules/home-api/src/api/openapi/types.d.ts
 interface paths {
   '/api/auth/mock/authorize': {
     parameters: {
@@ -5135,7 +1192,6 @@ interface paths {
     trace?: never;
   };
 }
-type webhooks = Record<string, never>;
 interface components {
   schemas: {
     'test-vona.dto.postCreate': {
@@ -5798,7 +1854,6 @@ interface components {
   headers: never;
   pathItems: never;
 }
-type $defs = Record<string, never>;
 interface operations {
   AuthMock_authorize: {
     parameters: {
@@ -7754,128 +3809,53 @@ interface operations {
   };
 }
 //#endregion
-//#region src/module/demo-student/src/api/openapi/baseURL.d.ts
-declare const OpenApiBaseURL: (sys: ZovaSys) => string;
-//#endregion
-//#region src/module/demo-student/src/api/openapi/schemas.d.ts
-type ApiSchemaTestVonaDtoPostCreate = components['schemas']['test-vona.dto.postCreate'];
-type ApiSchemaTestVonaDtoPostCreatePartial = Partial<ApiSchemaTestVonaDtoPostCreate>;
-type ApiSchemaTestVonaDtoUserCreate = components['schemas']['test-vona.dto.userCreate'];
-type ApiSchemaTestVonaDtoUserCreatePartial = Partial<ApiSchemaTestVonaDtoUserCreate>;
-type ApiSchemaTestVonaEntityProduct = components['schemas']['test-vona.entity.product'];
-type ApiSchemaTestVonaEntityProductPartial = Partial<ApiSchemaTestVonaEntityProduct>;
-type ApiSchemaACaptchaDtoCaptchaData = components['schemas']['a-captcha.dto.captchaData'];
-type ApiSchemaACaptchaDtoCaptchaDataPartial = Partial<ApiSchemaACaptchaDtoCaptchaData>;
-type ApiSchemaAMenuDtoMenus = components['schemas']['a-menu.dto.menus'];
-type ApiSchemaAMenuDtoMenusPartial = Partial<ApiSchemaAMenuDtoMenus>;
+//#region src/suite/a-home/modules/home-api/src/api/openapi/schemas.d.ts
 type ApiSchemaAMenuDtoMenuItem = components['schemas']['a-menu.dto.menuItem'];
-type ApiSchemaAMenuDtoMenuItemPartial = Partial<ApiSchemaAMenuDtoMenuItem>;
-type ApiSchemaAMenuDtoMenuItemMeta = components['schemas']['a-menu.dto.menuItemMeta'];
-type ApiSchemaAMenuDtoMenuItemMetaPartial = Partial<ApiSchemaAMenuDtoMenuItemMeta>;
 type ApiSchemaAMenuDtoMenuGroup = components['schemas']['a-menu.dto.menuGroup'];
-type ApiSchemaAMenuDtoMenuGroupPartial = Partial<ApiSchemaAMenuDtoMenuGroup>;
-type ApiSchemaAPermissionDtoPermissions = components['schemas']['a-permission.dto.permissions'];
-type ApiSchemaAPermissionDtoPermissionsPartial = Partial<ApiSchemaAPermissionDtoPermissions>;
-type ApiSchemaHomeUserDtoPassport = components['schemas']['home-user.dto.passport'];
-type ApiSchemaHomeUserDtoPassportPartial = Partial<ApiSchemaHomeUserDtoPassport>;
-type ApiSchemaHomeUserEntityUser = components['schemas']['home-user.entity.user'];
-type ApiSchemaHomeUserEntityUserPartial = Partial<ApiSchemaHomeUserEntityUser>;
-type ApiSchemaAAuthDtoAuth = components['schemas']['a-auth.dto.auth'];
-type ApiSchemaAAuthDtoAuthPartial = Partial<ApiSchemaAAuthDtoAuth>;
-type ApiSchemaHomeUserEntityRole = components['schemas']['home-user.entity.role'];
-type ApiSchemaHomeUserEntityRolePartial = Partial<ApiSchemaHomeUserEntityRole>;
-type ApiSchemaHomeUserDtoPassportJwt = components['schemas']['home-user.dto.passportJwt'];
-type ApiSchemaHomeUserDtoPassportJwtPartial = Partial<ApiSchemaHomeUserDtoPassportJwt>;
-type ApiSchemaAJwtDtoJwtToken = components['schemas']['a-jwt.dto.jwtToken'];
-type ApiSchemaAJwtDtoJwtTokenPartial = Partial<ApiSchemaAJwtDtoJwtToken>;
-type ApiSchemaHomeUserDtoRegister = components['schemas']['home-user.dto.register'];
-type ApiSchemaHomeUserDtoRegisterPartial = Partial<ApiSchemaHomeUserDtoRegister>;
-type ApiSchemaACaptchaDtoCaptchaVerify_c3cd80b1eeafe39bfe4433491bb081d68e84797e = components['schemas']['a-captcha.dto.captchaVerify_c3cd80b1eeafe39bfe4433491bb081d68e84797e'];
-type ApiSchemaACaptchaDtoCaptchaVerify_c3cd80b1eeafe39bfe4433491bb081d68e84797ePartial = Partial<ApiSchemaACaptchaDtoCaptchaVerify_c3cd80b1eeafe39bfe4433491bb081d68e84797e>;
-type ApiSchemaHomeUserDtoLogin = components['schemas']['home-user.dto.login'];
-type ApiSchemaHomeUserDtoLoginPartial = Partial<ApiSchemaHomeUserDtoLogin>;
-type ApiSchemaACaptchaDtoCaptchaVerify_c3cd80b1eeafe39bfe4433491bb081d68e84797e_3218e7d152830e08f6e764b9e0c3796df929ee2b = components['schemas']['a-captcha.dto.captchaVerify_c3cd80b1eeafe39bfe4433491bb081d68e84797e_3218e7d152830e08f6e764b9e0c3796df929ee2b'];
-type ApiSchemaACaptchaDtoCaptchaVerify_c3cd80b1eeafe39bfe4433491bb081d68e84797e_3218e7d152830e08f6e764b9e0c3796df929ee2bPartial = Partial<ApiSchemaACaptchaDtoCaptchaVerify_c3cd80b1eeafe39bfe4433491bb081d68e84797e_3218e7d152830e08f6e764b9e0c3796df929ee2b>;
-type ApiSchemaTestRestDtoProductCreate = components['schemas']['test-rest.dto.productCreate'];
-type ApiSchemaTestRestDtoProductCreatePartial = Partial<ApiSchemaTestRestDtoProductCreate>;
-type ApiSchemaTestRestDtoProductQueryRes = components['schemas']['test-rest.dto.productQueryRes'];
-type ApiSchemaTestRestDtoProductQueryResPartial = Partial<ApiSchemaTestRestDtoProductQueryRes>;
-type ApiSchemaTestRestEntityProduct = components['schemas']['test-rest.entity.product'];
-type ApiSchemaTestRestEntityProductPartial = Partial<ApiSchemaTestRestEntityProduct>;
-type ApiSchemaTestRestDtoProductUpdate = components['schemas']['test-rest.dto.productUpdate'];
-type ApiSchemaTestRestDtoProductUpdatePartial = Partial<ApiSchemaTestRestDtoProductUpdate>;
 type ApiSchemaTestSsrDtoTestResult = components['schemas']['test-ssr.dto.testResult'];
-type ApiSchemaTestSsrDtoTestResultPartial = Partial<ApiSchemaTestSsrDtoTestResult>;
-type ApiSchemaTestSsrDtoTestDetail = components['schemas']['test-ssr.dto.testDetail'];
-type ApiSchemaTestSsrDtoTestDetailPartial = Partial<ApiSchemaTestSsrDtoTestDetail>;
 type ApiSchemaTestSsrDtoTestBody = components['schemas']['test-ssr.dto.testBody'];
 type ApiSchemaTestSsrDtoTestBodyPartial = Partial<ApiSchemaTestSsrDtoTestBody>;
-type ApiSchemaTestCaptchaDtoSignin = components['schemas']['test-captcha.dto.signin'];
-type ApiSchemaTestCaptchaDtoSigninPartial = Partial<ApiSchemaTestCaptchaDtoSignin>;
-type ApiSchemaAPaypalEntityPaypalRecord = components['schemas']['a-paypal.entity.paypalRecord'];
-type ApiSchemaAPaypalEntityPaypalRecordPartial = Partial<ApiSchemaAPaypalEntityPaypalRecord>;
-type ApiSchemaAPaypalDtoPaypalOrderRecordPayload = components['schemas']['a-paypal.dto.paypalOrderRecordPayload'];
-type ApiSchemaAPaypalDtoPaypalOrderRecordPayloadPartial = Partial<ApiSchemaAPaypalDtoPaypalOrderRecordPayload>;
-type ApiSchemaAPaypalDtoPaypalOrderRecordOptions = components['schemas']['a-paypal.dto.paypalOrderRecordOptions'];
-type ApiSchemaAPaypalDtoPaypalOrderRecordOptionsPartial = Partial<ApiSchemaAPaypalDtoPaypalOrderRecordOptions>;
-type ApiSchemaAPlayDtoPlay = components['schemas']['a-play.dto.play'];
-type ApiSchemaAPlayDtoPlayPartial = Partial<ApiSchemaAPlayDtoPlay>;
-type ApiSchemaTestVonaDtoUserLazy = components['schemas']['test-vona.dto.userLazy'];
-type ApiSchemaTestVonaDtoUserLazyPartial = Partial<ApiSchemaTestVonaDtoUserLazy>;
-type ApiSchemaTestVonaDtoRoleLazy = components['schemas']['test-vona.dto.roleLazy'];
-type ApiSchemaTestVonaDtoRoleLazyPartial = Partial<ApiSchemaTestVonaDtoRoleLazy>;
-type ApiSchemaTestVonaEntityUser_2c7d642ee581efa300341e343180fbb0ecdc785d_1816ff740d81c738ec055c7038bbd93beb9405a7 = components['schemas']['test-vona.entity.user_2c7d642ee581efa300341e343180fbb0ecdc785d_1816ff740d81c738ec055c7038bbd93beb9405a7'];
-type ApiSchemaTestVonaEntityUser_2c7d642ee581efa300341e343180fbb0ecdc785d_1816ff740d81c738ec055c7038bbd93beb9405a7Partial = Partial<ApiSchemaTestVonaEntityUser_2c7d642ee581efa300341e343180fbb0ecdc785d_1816ff740d81c738ec055c7038bbd93beb9405a7>;
-type ApiSchemaTestVonaEntityPost_a6ba2076b5b70a3c098374cc82d418bd1ab226c3 = components['schemas']['test-vona.entity.post_a6ba2076b5b70a3c098374cc82d418bd1ab226c3'];
-type ApiSchemaTestVonaEntityPost_a6ba2076b5b70a3c098374cc82d418bd1ab226c3Partial = Partial<ApiSchemaTestVonaEntityPost_a6ba2076b5b70a3c098374cc82d418bd1ab226c3>;
-type ApiSchemaTestVonaEntityPost_729883d7de16ce4401b26f75bebe618c8948ff64 = components['schemas']['test-vona.entity.post_729883d7de16ce4401b26f75bebe618c8948ff64'];
-type ApiSchemaTestVonaEntityPost_729883d7de16ce4401b26f75bebe618c8948ff64Partial = Partial<ApiSchemaTestVonaEntityPost_729883d7de16ce4401b26f75bebe618c8948ff64>;
-type ApiSchemaTestVonaDtoUserUpdate = components['schemas']['test-vona.dto.userUpdate'];
-type ApiSchemaTestVonaDtoUserUpdatePartial = Partial<ApiSchemaTestVonaDtoUserUpdate>;
-type ApiSchemaTestVonaEntityCategory_2c7d642ee581efa300341e343180fbb0ecdc785d = components['schemas']['test-vona.entity.category_2c7d642ee581efa300341e343180fbb0ecdc785d'];
-type ApiSchemaTestVonaEntityCategory_2c7d642ee581efa300341e343180fbb0ecdc785dPartial = Partial<ApiSchemaTestVonaEntityCategory_2c7d642ee581efa300341e343180fbb0ecdc785d>;
-type ApiSchemaTestVonaDtoCategoryTree = components['schemas']['test-vona.dto.categoryTree'];
-type ApiSchemaTestVonaDtoCategoryTreePartial = Partial<ApiSchemaTestVonaDtoCategoryTree>;
-type ApiSchemaTestVonaDtoUser = components['schemas']['test-vona.dto.user'];
-type ApiSchemaTestVonaDtoUserPartial = Partial<ApiSchemaTestVonaDtoUser>;
-type ApiSchemaTestVonaDtoOrderCreate = components['schemas']['test-vona.dto.orderCreate'];
-type ApiSchemaTestVonaDtoOrderCreatePartial = Partial<ApiSchemaTestVonaDtoOrderCreate>;
-type ApiSchemaTestVonaEntityProduct_29731960f3f38d3572bc2f8a01a7498bfe927055 = components['schemas']['test-vona.entity.product_29731960f3f38d3572bc2f8a01a7498bfe927055'];
-type ApiSchemaTestVonaEntityProduct_29731960f3f38d3572bc2f8a01a7498bfe927055Partial = Partial<ApiSchemaTestVonaEntityProduct_29731960f3f38d3572bc2f8a01a7498bfe927055>;
-type ApiSchemaTestVonaDtoOrderUpdate = components['schemas']['test-vona.dto.orderUpdate'];
-type ApiSchemaTestVonaDtoOrderUpdatePartial = Partial<ApiSchemaTestVonaDtoOrderUpdate>;
-type ApiSchemaTestVonaEntityProduct_9cf2c6bcd41713270c34bcfce21b7b4942e3fbc6 = components['schemas']['test-vona.entity.product_9cf2c6bcd41713270c34bcfce21b7b4942e3fbc6'];
-type ApiSchemaTestVonaEntityProduct_9cf2c6bcd41713270c34bcfce21b7b4942e3fbc6Partial = Partial<ApiSchemaTestVonaEntityProduct_9cf2c6bcd41713270c34bcfce21b7b4942e3fbc6>;
-type ApiSchemaTestVonaDtoOrderResult = components['schemas']['test-vona.dto.orderResult'];
-type ApiSchemaTestVonaDtoOrderResultPartial = Partial<ApiSchemaTestVonaDtoOrderResult>;
-type ApiSchemaTestVonaEntityProduct_bce173590aaef19772f1ae3a82196493c2633e2e = components['schemas']['test-vona.entity.product_bce173590aaef19772f1ae3a82196493c2633e2e'];
-type ApiSchemaTestVonaEntityProduct_bce173590aaef19772f1ae3a82196493c2633e2ePartial = Partial<ApiSchemaTestVonaEntityProduct_bce173590aaef19772f1ae3a82196493c2633e2e>;
-type ApiSchemaTestVonaDtoOrderResultPage = components['schemas']['test-vona.dto.orderResultPage'];
-type ApiSchemaTestVonaDtoOrderResultPagePartial = Partial<ApiSchemaTestVonaDtoOrderResultPage>;
-type ApiSchemaTestVonaDtoPostGroup = components['schemas']['test-vona.dto.postGroup'];
-type ApiSchemaTestVonaDtoPostGroupPartial = Partial<ApiSchemaTestVonaDtoPostGroup>;
-type ApiSchemaTestVonaDtoPostAggregate = components['schemas']['test-vona.dto.postAggregate'];
-type ApiSchemaTestVonaDtoPostAggregatePartial = Partial<ApiSchemaTestVonaDtoPostAggregate>;
-type ApiSchemaTestVonaDtoPostQueryRes = components['schemas']['test-vona.dto.postQueryRes'];
-type ApiSchemaTestVonaDtoPostQueryResPartial = Partial<ApiSchemaTestVonaDtoPostQueryRes>;
-type ApiSchemaTestVonaDtoSerializerSimple = components['schemas']['test-vona.dto.serializerSimple'];
-type ApiSchemaTestVonaDtoSerializerSimplePartial = Partial<ApiSchemaTestVonaDtoSerializerSimple>;
-type ApiSchemaTestVonaDtoSerializerArray = components['schemas']['test-vona.dto.serializerArray'];
-type ApiSchemaTestVonaDtoSerializerArrayPartial = Partial<ApiSchemaTestVonaDtoSerializerArray>;
-type ApiSchemaTestVonaDtoSerializerLazy = components['schemas']['test-vona.dto.serializerLazy'];
-type ApiSchemaTestVonaDtoSerializerLazyPartial = Partial<ApiSchemaTestVonaDtoSerializerLazy>;
-type ApiSchemaTestVonaDtoSerializerSimple_1c4b95bcfe8fe28a56dbcc7028097cf11836b4fc = components['schemas']['test-vona.dto.serializerSimple_1c4b95bcfe8fe28a56dbcc7028097cf11836b4fc'];
-type ApiSchemaTestVonaDtoSerializerSimple_1c4b95bcfe8fe28a56dbcc7028097cf11836b4fcPartial = Partial<ApiSchemaTestVonaDtoSerializerSimple_1c4b95bcfe8fe28a56dbcc7028097cf11836b4fc>;
-type ApiSchemaTestVonaDtoSerializerSimple_542f7be0da9b85a67248a6a1a3629e72de5fdb33_cff0ae112a392da58caf5aa905749f3c4444c4ab = components['schemas']['test-vona.dto.serializerSimple_542f7be0da9b85a67248a6a1a3629e72de5fdb33_cff0ae112a392da58caf5aa905749f3c4444c4ab'];
-type ApiSchemaTestVonaDtoSerializerSimple_542f7be0da9b85a67248a6a1a3629e72de5fdb33_cff0ae112a392da58caf5aa905749f3c4444c4abPartial = Partial<ApiSchemaTestVonaDtoSerializerSimple_542f7be0da9b85a67248a6a1a3629e72de5fdb33_cff0ae112a392da58caf5aa905749f3c4444c4ab>;
 //#endregion
-//#region src/module/demo-student/src/api/homeBaseMenu.d.ts
+//#region src/suite/a-home/modules/home-api/src/api/captcha.d.ts
+type ApiApiCaptchacreateRequestBody = {
+  scene: string;
+};
+type ApiApiCaptcharefreshRequestBody = {
+  id: string;
+  scene: string;
+};
+type ApiApiCaptchaverifyImmediateRequestBody = {
+  id: string;
+  token?: unknown;
+};
+declare class ApiCaptcha extends BeanApiBase {
+  create(body: ApiApiCaptchacreateRequestBody, options?: IApiActionOptions): Promise<{
+    id: string;
+    provider: string;
+    token?: unknown;
+    payload?: unknown;
+  }>;
+  refresh(body: ApiApiCaptcharefreshRequestBody, options?: IApiActionOptions): Promise<{
+    id: string;
+    provider: string;
+    token?: unknown;
+    payload?: unknown;
+  }>;
+  verifyImmediate(body: ApiApiCaptchaverifyImmediateRequestBody, options?: IApiActionOptions): Promise<string>;
+}
+//#endregion
+//#region src/suite/a-home/modules/home-api/src/api/home.d.ts
+declare class ApiHome extends BeanApiBase {
+  /** @description Home */
+  index(options?: IApiActionOptions): Promise<unknown>;
+}
+//#endregion
+//#region src/suite/a-home/modules/home-api/src/api/homeBaseMenu.d.ts
 /** HomeBaseMenu_retrieveMenus */
 declare const ApiApiHomeBaseMenuretrieveMenusPath = "/api/home/base/menu/{publicPath?}";
 type ApiApiHomeBaseMenuretrieveMenusPath = '/api/home/base/menu/{publicPath?}';
 type ApiApiHomeBaseMenuretrieveMenusMethod = 'get';
 type ApiApiHomeBaseMenuretrieveMenusRequestParams = paths[ApiApiHomeBaseMenuretrieveMenusPath][ApiApiHomeBaseMenuretrieveMenusMethod]['parameters']['path'];
-type ApiApiHomeBaseMenuretrieveMenusResponseBody = paths[ApiApiHomeBaseMenuretrieveMenusPath][ApiApiHomeBaseMenuretrieveMenusMethod]['responses']['200']['content']['application/json']['data'];
 declare class ApiHomeBaseMenu extends BeanApiBase {
   retrieveMenus(options: {
     params: ApiApiHomeBaseMenuretrieveMenusRequestParams;
@@ -7885,947 +3865,339 @@ declare class ApiHomeBaseMenu extends BeanApiBase {
   }>;
 }
 //#endregion
-//#region src/module/demo-student/src/apiSchema/homeBaseMenu.d.ts
+//#region src/suite/a-home/modules/home-api/src/api/homeBasePermission.d.ts
+/** HomeBasePermission_retrievePermissions */
+declare const ApiApiHomeBasePermissionretrievePermissionsPath = "/api/home/base/permission/{resource}";
+type ApiApiHomeBasePermissionretrievePermissionsPath = '/api/home/base/permission/{resource}';
+type ApiApiHomeBasePermissionretrievePermissionsMethod = 'get';
+type ApiApiHomeBasePermissionretrievePermissionsRequestParams = paths[ApiApiHomeBasePermissionretrievePermissionsPath][ApiApiHomeBasePermissionretrievePermissionsMethod]['parameters']['path'];
+declare class ApiHomeBasePermission extends BeanApiBase {
+  retrievePermissions(options: {
+    params: ApiApiHomeBasePermissionretrievePermissionsRequestParams;
+  } & IApiActionOptions): Promise<{
+    roleIds?: (number | string)[] | undefined;
+    roleNames?: string[] | undefined;
+    actions?: unknown;
+  }>;
+}
+//#endregion
+//#region src/suite/a-home/modules/home-api/src/api/homeUserPassport.d.ts
+type ApiApiHomeUserPassportregisterRequestBody = components['schemas']['home-user.dto.register'];
+type ApiApiHomeUserPassportloginRequestBody = components['schemas']['home-user.dto.login'];
+/** HomeUserPassport_loginOauth */
+declare const ApiApiHomeUserPassportloginOauthPath = "/api/home/user/passport/login/{module}/{providerName}/{clientName?}";
+type ApiApiHomeUserPassportloginOauthPath = '/api/home/user/passport/login/{module}/{providerName}/{clientName?}';
+type ApiApiHomeUserPassportloginOauthMethod = 'get';
+type ApiApiHomeUserPassportloginOauthRequestParams = paths[ApiApiHomeUserPassportloginOauthPath][ApiApiHomeUserPassportloginOauthMethod]['parameters']['path'];
+type ApiApiHomeUserPassportloginOauthRequestQuery = paths[ApiApiHomeUserPassportloginOauthPath][ApiApiHomeUserPassportloginOauthMethod]['parameters']['query'];
+/** HomeUserPassport_associate */
+declare const ApiApiHomeUserPassportassociatePath = "/api/home/user/passport/associate/{module}/{providerName}/{clientName?}";
+type ApiApiHomeUserPassportassociatePath = '/api/home/user/passport/associate/{module}/{providerName}/{clientName?}';
+type ApiApiHomeUserPassportassociateMethod = 'get';
+type ApiApiHomeUserPassportassociateRequestParams = paths[ApiApiHomeUserPassportassociatePath][ApiApiHomeUserPassportassociateMethod]['parameters']['path'];
+type ApiApiHomeUserPassportassociateRequestQuery = paths[ApiApiHomeUserPassportassociatePath][ApiApiHomeUserPassportassociateMethod]['parameters']['query'];
+/** HomeUserPassport_migrate */
+declare const ApiApiHomeUserPassportmigratePath = "/api/home/user/passport/migrate/{module}/{providerName}/{clientName?}";
+type ApiApiHomeUserPassportmigratePath = '/api/home/user/passport/migrate/{module}/{providerName}/{clientName?}';
+type ApiApiHomeUserPassportmigrateMethod = 'get';
+type ApiApiHomeUserPassportmigrateRequestParams = paths[ApiApiHomeUserPassportmigratePath][ApiApiHomeUserPassportmigrateMethod]['parameters']['path'];
+type ApiApiHomeUserPassportmigrateRequestQuery = paths[ApiApiHomeUserPassportmigratePath][ApiApiHomeUserPassportmigrateMethod]['parameters']['query'];
+type ApiApiHomeUserPassportrefreshAuthTokenRequestBody = {
+  refreshToken: string;
+};
+type ApiApiHomeUserPassportcreatePassportJwtFromOauthCodeRequestBody = {
+  code: string;
+};
+/** HomeUserPassport_createTempAuthToken */
+declare const ApiApiHomeUserPassportcreateTempAuthTokenPath = "/api/home/user/passport/createTempAuthToken";
+type ApiApiHomeUserPassportcreateTempAuthTokenPath = '/api/home/user/passport/createTempAuthToken';
+type ApiApiHomeUserPassportcreateTempAuthTokenMethod = 'post';
+type ApiApiHomeUserPassportcreateTempAuthTokenRequestQuery = paths[ApiApiHomeUserPassportcreateTempAuthTokenPath][ApiApiHomeUserPassportcreateTempAuthTokenMethod]['parameters']['query'];
+declare class ApiHomeUserPassport extends BeanApiBase {
+  current(options?: IApiActionOptions): Promise<{
+    user: components['schemas']['home-user.entity.user'];
+    auth: components['schemas']['a-auth.dto.auth'];
+    roles: components['schemas']['home-user.entity.role'][];
+  } | undefined>;
+  logout(body?: undefined, options?: IApiActionOptions): Promise<unknown>;
+  register(body: ApiApiHomeUserPassportregisterRequestBody, options?: IApiActionOptions): Promise<{
+    passport: components['schemas']['home-user.dto.passport'];
+    jwt: components['schemas']['a-jwt.dto.jwtToken'];
+  }>;
+  login(body: ApiApiHomeUserPassportloginRequestBody, options?: IApiActionOptions): Promise<{
+    passport: components['schemas']['home-user.dto.passport'];
+    jwt: components['schemas']['a-jwt.dto.jwtToken'];
+  }>;
+  loginOauth(options: {
+    params: ApiApiHomeUserPassportloginOauthRequestParams;
+    query?: ApiApiHomeUserPassportloginOauthRequestQuery;
+  } & IApiActionOptions): Promise<unknown>;
+  associate(options: {
+    params: ApiApiHomeUserPassportassociateRequestParams;
+    query?: ApiApiHomeUserPassportassociateRequestQuery;
+  } & IApiActionOptions): Promise<{
+    passport: components['schemas']['home-user.dto.passport'];
+    jwt: components['schemas']['a-jwt.dto.jwtToken'];
+  }>;
+  migrate(options: {
+    params: ApiApiHomeUserPassportmigrateRequestParams;
+    query?: ApiApiHomeUserPassportmigrateRequestQuery;
+  } & IApiActionOptions): Promise<{
+    passport: components['schemas']['home-user.dto.passport'];
+    jwt: components['schemas']['a-jwt.dto.jwtToken'];
+  }>;
+  refreshAuthToken(body: ApiApiHomeUserPassportrefreshAuthTokenRequestBody, options?: IApiActionOptions): Promise<{
+    accessToken: string;
+    refreshToken: string;
+    expiresIn: number;
+  }>;
+  createPassportJwtFromOauthCode(body: ApiApiHomeUserPassportcreatePassportJwtFromOauthCodeRequestBody, options?: IApiActionOptions): Promise<{
+    passport: components['schemas']['home-user.dto.passport'];
+    jwt: components['schemas']['a-jwt.dto.jwtToken'];
+  }>;
+  createTempAuthToken(body?: undefined, options?: {
+    query?: ApiApiHomeUserPassportcreateTempAuthTokenRequestQuery;
+  } & IApiActionOptions): Promise<string>;
+}
+//#endregion
+//#region src/suite/a-home/modules/home-api/src/api/testSsrToolOne.d.ts
+/** TestSsrToolOne_testGet */
+declare const ApiApiTestSsrToolOnetestGetPath = "/api/test/ssr/toolOne/test/{id?}";
+type ApiApiTestSsrToolOnetestGetPath = '/api/test/ssr/toolOne/test/{id?}';
+type ApiApiTestSsrToolOnetestGetMethod = 'get';
+type ApiApiTestSsrToolOnetestGetRequestParams = paths[ApiApiTestSsrToolOnetestGetPath][ApiApiTestSsrToolOnetestGetMethod]['parameters']['path'];
+type ApiApiTestSsrToolOnetestGetRequestQuery = paths[ApiApiTestSsrToolOnetestGetPath][ApiApiTestSsrToolOnetestGetMethod]['parameters']['query'];
+/** TestSsrToolOne_test */
+declare const ApiApiTestSsrToolOnetestPath = "/api/test/ssr/toolOne/test/{id?}";
+type ApiApiTestSsrToolOnetestPath = '/api/test/ssr/toolOne/test/{id?}';
+type ApiApiTestSsrToolOnetestMethod = 'post';
+type ApiApiTestSsrToolOnetestRequestParams = paths[ApiApiTestSsrToolOnetestPath][ApiApiTestSsrToolOnetestMethod]['parameters']['path'];
+type ApiApiTestSsrToolOnetestRequestQuery = paths[ApiApiTestSsrToolOnetestPath][ApiApiTestSsrToolOnetestMethod]['parameters']['query'];
+type ApiApiTestSsrToolOnetestRequestBody = components['schemas']['test-ssr.dto.testBody'];
+declare class ApiTestSsrToolOne extends BeanApiBase {
+  testGet(options: {
+    params: ApiApiTestSsrToolOnetestGetRequestParams;
+    query: ApiApiTestSsrToolOnetestGetRequestQuery;
+  } & IApiActionOptions): Promise<unknown>;
+  test(body: ApiApiTestSsrToolOnetestRequestBody, options: {
+    params: ApiApiTestSsrToolOnetestRequestParams;
+    query: ApiApiTestSsrToolOnetestRequestQuery;
+  } & IApiActionOptions): Promise<{
+    id: number | string;
+    name?: string;
+    married: boolean;
+    details: components['schemas']['test-ssr.dto.testDetail'][];
+    _custom1?: string | undefined;
+    _custom2?: string | undefined;
+    _custom3?: string | undefined;
+    _custom4?: string | undefined;
+    _custom5?: string | undefined;
+    _customCopy?: string | undefined;
+    _customCopied?: boolean | undefined;
+  }>;
+}
+//#endregion
+//#region src/suite/a-home/modules/home-api/src/apiSchema/captcha.d.ts
+declare class ApiSchemaCaptcha extends BeanBase {
+  create(options?: IApiSchemaOptions): _$zova_module_a_openapi0.IOpenapiSchemas;
+  refresh(options?: IApiSchemaOptions): _$zova_module_a_openapi0.IOpenapiSchemas;
+  verifyImmediate(options?: IApiSchemaOptions): _$zova_module_a_openapi0.IOpenapiSchemas;
+}
+//#endregion
+//#region src/suite/a-home/modules/home-api/src/apiSchema/home.d.ts
+declare class ApiSchemaHome extends BeanBase {
+  index(options?: IApiSchemaOptions): _$zova_module_a_openapi0.IOpenapiSchemas;
+}
+//#endregion
+//#region src/suite/a-home/modules/home-api/src/apiSchema/homeBaseMenu.d.ts
 declare class ApiSchemaHomeBaseMenu extends BeanBase {
   retrieveMenus(options?: IApiSchemaOptions): _$zova_module_a_openapi0.IOpenapiSchemas;
 }
 //#endregion
-//#region src/module/demo-student/src/bean/bean.test.d.ts
-declare class BeanTest extends BeanBase {
+//#region src/suite/a-home/modules/home-api/src/apiSchema/homeBasePermission.d.ts
+declare class ApiSchemaHomeBasePermission extends BeanBase {
+  retrievePermissions(options?: IApiSchemaOptions): _$zova_module_a_openapi0.IOpenapiSchemas;
+}
+//#endregion
+//#region src/suite/a-home/modules/home-api/src/apiSchema/homeUserPassport.d.ts
+declare class ApiSchemaHomeUserPassport extends BeanBase {
+  current(options?: IApiSchemaOptions): _$zova_module_a_openapi0.IOpenapiSchemas;
+  logout(options?: IApiSchemaOptions): _$zova_module_a_openapi0.IOpenapiSchemas;
+  register(options?: IApiSchemaOptions): _$zova_module_a_openapi0.IOpenapiSchemas;
+  login(options?: IApiSchemaOptions): _$zova_module_a_openapi0.IOpenapiSchemas;
+  loginOauth(options?: IApiSchemaOptions): _$zova_module_a_openapi0.IOpenapiSchemas;
+  associate(options?: IApiSchemaOptions): _$zova_module_a_openapi0.IOpenapiSchemas;
+  migrate(options?: IApiSchemaOptions): _$zova_module_a_openapi0.IOpenapiSchemas;
+  refreshAuthToken(options?: IApiSchemaOptions): _$zova_module_a_openapi0.IOpenapiSchemas;
+  createPassportJwtFromOauthCode(options?: IApiSchemaOptions): _$zova_module_a_openapi0.IOpenapiSchemas;
+  createTempAuthToken(options?: IApiSchemaOptions): _$zova_module_a_openapi0.IOpenapiSchemas;
+}
+//#endregion
+//#region src/suite/a-home/modules/home-api/src/apiSchema/testSsrToolOne.d.ts
+declare class ApiSchemaTestSsrToolOne extends BeanBase {
+  testGet(options?: IApiSchemaOptions): _$zova_module_a_openapi0.IOpenapiSchemas;
+  test(options?: IApiSchemaOptions): _$zova_module_a_openapi0.IOpenapiSchemas;
+}
+//#endregion
+//#region src/suite/a-home/modules/home-api/src/service/jwtAdapter.d.ts
+declare class ServiceJwtAdapter extends BeanBase implements IJwtAdapter {
   protected __init__(): Promise<void>;
+  getJwtInfo(): Promise<IJwtInfo | undefined>;
+  refreshAuthToken(refreshToken: string): Promise<IJwtInfo>;
 }
 //#endregion
-//#region src/module/demo-student/src/page/counter/service.counter.d.ts
-declare class ServiceCounter extends BeanBase {
-  count: number;
-  increment(): void;
-  decrement(): void;
-}
-//#endregion
-//#region src/module/demo-student/src/page/counter/service.test.d.ts
-declare class ServiceTest$1 extends BeanBase {
-  protected __init__(): Promise<void>;
-}
-//#endregion
-//#region src/module/demo-student/src/page/counter/service.test3.d.ts
-declare class ServiceTest3 extends BeanBase {
-  protected __init__(): Promise<void>;
-}
-//#endregion
-//#region src/module/demo-student/src/page/counter/service.test4.d.ts
-declare class ServiceTest4 extends BeanBase {
-  protected __init__(): Promise<void>;
-}
-//#endregion
-//#region src/module/demo-student/src/bean/store.test.d.ts
-declare class StoreTest extends BeanBase {
-  protected __init__(): Promise<void>;
-}
-//#endregion
-//#region src/module/demo-student/src/component/card/controller.d.ts
-interface ControllerCardProps$1<_T = unknown> {
-  content?: string;
-  onReset?: () => void;
-  slotHeader?: ISlot;
-  slotDefault?: (name: string) => VNode;
-  titleModifiers?: {
-    capitalize: boolean;
-  };
-}
-interface ControllerCardModels<_T = unknown> {
-  'vModel:title'?: string;
-  'vModel:title_capitalize'?: string;
-  'vModel'?: number;
-}
-declare class ControllerCard$1 extends BeanControllerBase {
-  static $propsDefault: {
-    title: string;
-    modelValue: number;
-    content: string;
-  };
-  modelValue: number;
-  modelTitle: string;
-  protected __init__(): Promise<void>;
-  protected _render(): _$vue_jsx_runtime0.JSX.Element;
-}
-//#endregion
-//#region src/suite/a-home/modules/home-base/src/service/routerGuards.d.ts
-declare class ServiceRouterGuards extends BeanRouterGuardsBase {
-  protected onRouterGuards(router: BeanRouter): void;
-}
-//#endregion
-//#region src/suite/a-home/modules/home-base/src/service/ssr.d.ts
-declare const ErrorMessageJwtExpired = "jwt expired";
-declare class ServiceSsr extends BeanBase {
-  initialize(): Promise<void>;
-  private _ssrErrorHandler;
-}
-//#endregion
-//#region src/suite/a-home/modules/home-base/src/component/page/controller.d.ts
-interface ControllerPageProps {}
-declare class ControllerPage extends BeanControllerBase {
-  static $propsDefault: {};
-  cPage: string;
-  protected __init__(): Promise<void>;
-  protected render(): _$vue_jsx_runtime0.JSX.Element;
-}
-//#endregion
-//#region src/suite/a-home/modules/home-base/src/page/authCallback/controller.d.ts
-declare const ControllerPageAuthCallbackSchemaQuery: z.ZodObject<{
-  returnTo: z.ZodOptional<z.ZodString>;
-  'x-vona-oauth-code': z.ZodOptional<z.ZodString>;
-}, z.core.$strip>;
-declare class ControllerPageAuthCallback extends BeanControllerPageBase {
-  protected __init__(): Promise<void>;
-  private _handleAuth;
-  protected render(): null;
-}
-//#endregion
-//#region src/suite/a-home/modules/home-base/src/page/errorExpired/controller.d.ts
-declare const ControllerPageErrorExpiredSchemaQuery: z.ZodObject<{
-  returnTo: z.ZodOptional<z.ZodString>;
-}, z.core.$strip>;
-declare class ControllerPageErrorExpired extends BeanControllerPageBase {
-  $$jwtAdapter: ServiceJwtAdapter;
-  protected __init__(): Promise<void>;
-  private _refreshToken;
-  protected render(): null;
-}
-//#endregion
-//#region src/suite/a-home/modules/home-base/src/page/errorNotFound/controller.d.ts
-declare class ControllerPageErrorNotFound extends BeanControllerPageBase {
-  cTitle: string;
-  cDescription: string;
-  protected __init__(): Promise<void>;
-  protected render(): _$vue_jsx_runtime0.JSX.Element;
-}
-//#endregion
-//#region src/suite/a-home/modules/home-base/src/.metadata/page/authCallback.d.ts
-declare namespace NSControllerPageAuthCallback {
-  const querySchema: z.ZodObject<{
-    returnTo: z.ZodOptional<z.ZodString>;
-    'x-vona-oauth-code': z.ZodOptional<z.ZodString>;
-  }, z.core.$strip>;
-  type QueryInput = z.input<typeof ControllerPageAuthCallbackSchemaQuery>;
-  type QueryOutput = z.output<typeof ControllerPageAuthCallbackSchemaQuery>;
-}
-declare const ZPageAuthCallback: _$vue.DefineSetupFnComponent<Record<string, any>, {}, {}, Record<string, any> & {}, _$vue.PublicProps>;
-//#endregion
-//#region src/suite/a-home/modules/home-base/src/.metadata/page/errorExpired.d.ts
-declare namespace NSControllerPageErrorExpired {
-  const querySchema: z.ZodObject<{
-    returnTo: z.ZodOptional<z.ZodString>;
-  }, z.core.$strip>;
-  type QueryInput = z.input<typeof ControllerPageErrorExpiredSchemaQuery>;
-  type QueryOutput = z.output<typeof ControllerPageErrorExpiredSchemaQuery>;
-}
-declare const ZPageErrorExpired: _$vue.DefineSetupFnComponent<Record<string, any>, {}, {}, Record<string, any> & {}, _$vue.PublicProps>;
-//#endregion
-//#region src/suite/a-home/modules/home-base/src/.metadata/page/errorNotFound.d.ts
-declare const ZPageErrorNotFound: _$vue.DefineSetupFnComponent<Record<string, any>, {}, {}, Record<string, any> & {}, _$vue.PublicProps>;
-//#endregion
-//#region src/suite/a-home/modules/home-base/src/.metadata/component/page.d.ts
-type TypeControllerPagePublicProps = {
-  controllerRef?: (ref: ControllerPage) => void;
-} & ControllerPageProps;
-type ControllerInnerProps$15 = TypeControllerInnerProps<ControllerPageProps, keyof typeof ControllerPage.$propsDefault>;
-declare module 'zova-module-home-base' {
-  interface ControllerPage {
-    $props: ControllerInnerProps$15;
-  }
-}
-declare const ZPage: _$vue.DefineSetupFnComponent<TypeControllerPagePublicProps, _$vue.EmitsOptions, _$vue.SlotsType<Record<string, any>>, {
-  controllerRef?: (ref: ControllerPage) => void;
-} & ControllerPageProps & ({
-  [x: `on${Capitalize<string>}`]: ((...args: any[]) => any) | undefined;
-} | {
-  [x: `on${Capitalize<string>}`]: ((...args: never) => any) | undefined;
-}), _$vue.PublicProps>;
-//#endregion
-//#region src/suite/a-home/modules/home-base/src/bean/css.default.d.ts
-interface ICssOptionsDefault extends IDecoratorCssOptions {}
-declare class CssDefault extends BeanBase {
-  textCenter: string;
-  buttonPrimary: string;
-  protected __init__(): Promise<void>;
-}
-//#endregion
-//#region src/suite/a-home/modules/home-base/src/bean/theme.default.d.ts
-interface IThemeOptionsDefault extends IDecoratorThemeOptions {}
-declare class ThemeDefault extends BeanThemeBase implements IThemeBase {
-  apply({
-    name,
-    dark
-  }: IThemeApplyParams): Promise<IThemeApplyResult>;
-}
-//#endregion
-//#region src/suite/a-home/modules/home-base/src/.metadata/locales.d.ts
-declare const locales$6: {
-  'en-us': {
-    Home: string;
-  };
-  'zh-cn': {
-    Home: string;
-  };
-};
-//#endregion
-//#region src/suite/a-home/modules/home-base/src/.metadata/index.d.ts
-declare module 'zova-module-a-bean' {
-  interface IServiceRecord {
-    'home-base:routerGuards': never;
-    'home-base:ssr': never;
-  }
-}
-declare module 'zova-module-home-base' {
-  interface ServiceRouterGuards {}
-  interface ServiceRouterGuards {
-    get $beanFullName(): 'home-base.service.routerGuards';
-    get $onionName(): 'home-base:routerGuards';
-  }
-  interface ServiceSsr {}
-  interface ServiceSsr {
-    get $beanFullName(): 'home-base.service.ssr';
-    get $onionName(): 'home-base:ssr';
-  }
-}
-/** service: end */
-/** service: begin */
-declare module 'zova' {
-  interface IBeanRecordGeneral {
-    'home-base.service.routerGuards': ServiceRouterGuards;
-    'home-base.service.ssr': ServiceSsr;
-  }
-}
-/** service: end */
-/** controller: begin */
+//#region src/suite/a-home/modules/home-api/src/.metadata/index.d.ts
 declare module 'zova' {}
-declare module 'zova-module-home-base' {
-  interface ControllerPage {}
-  interface ControllerPageAuthCallback {}
-  interface ControllerPageErrorExpired {}
-  interface ControllerPageErrorNotFound {}
-}
-/** controller: end */
-/** controller: begin */
-declare module 'zova' {
-  interface IBeanRecordLocal {
-    'home-base.controller.page': ControllerPage;
-    'home-base.controller.pageAuthCallback': ControllerPageAuthCallback;
-    'home-base.controller.pageErrorExpired': ControllerPageErrorExpired;
-    'home-base.controller.pageErrorNotFound': ControllerPageErrorNotFound;
+declare module 'zova-module-home-api' {
+  interface ApiCaptcha {}
+  interface ApiCaptcha {
+    get $beanFullName(): 'home-api.api.captcha';
+    get $onionName(): 'home-api:captcha';
   }
-}
-/** controller: end */
-/** pages: begin */
-declare module 'zova-module-a-router' {
-  interface IPagePathRecord {
-    '/home/base/authCallback': TypePagePathSchema<undefined, NSControllerPageAuthCallback.QueryInput>;
-    '/home/base/errorExpired': TypePagePathSchema<undefined, NSControllerPageErrorExpired.QueryInput>;
-    '/home/base//:catchAll(.*)*': TypePagePathSchema<undefined, undefined>;
+  interface ApiHome {}
+  interface ApiHome {
+    get $beanFullName(): 'home-api.api.home';
+    get $onionName(): 'home-api:home';
   }
-  interface IPageNameRecord {}
-}
-declare module 'zova-module-home-base' {
-  interface ControllerPageAuthCallback {
-    $query: NSControllerPageAuthCallback.QueryOutput;
-  }
-  interface ControllerPageErrorExpired {
-    $query: NSControllerPageErrorExpired.QueryOutput;
-  }
-}
-/** pages: end */
-/** components: begin */
-declare module 'zova' {
-  interface IComponentRecord {
-    'home-base:page': ControllerPage;
-  }
-  interface IZovaComponentRecord {
-    'home-base:page': typeof ZPage;
-  }
-}
-/** components: end */
-/** css: begin */
-declare module 'zova-module-a-style' {
-  interface ICssRecord {
-    'home-base:default': ICssOptionsDefault;
-  }
-}
-declare module 'zova-module-home-base' {
-  interface CssDefault {}
-  interface CssDefault {
-    get $beanFullName(): 'home-base.css.default';
-    get $onionName(): 'home-base:default';
-    get $onionOptions(): ICssOptionsDefault;
-  }
-}
-/** css: end */
-/** css: begin */
-declare module 'zova' {
-  interface IBeanRecordLocal {
-    'home-base.css.default': CssDefault;
-  }
-}
-/** css: end */
-/** theme: begin */
-declare module 'zova-module-a-style' {
-  interface IThemeRecord {
-    'home-base:default': IThemeOptionsDefault;
-  }
-}
-declare module 'zova-module-home-base' {
-  interface ThemeDefault {}
-  interface ThemeDefault {
-    get $beanFullName(): 'home-base.theme.default';
-    get $onionName(): 'home-base:default';
-    get $onionOptions(): IThemeOptionsDefault;
-  }
-}
-/** theme: end */
-/** theme: begin */
-declare module 'zova' {
-  interface IBeanRecordLocal {
-    'home-base.theme.default': ThemeDefault;
-  }
-}
-/** theme: end */
-/** locale: begin */
-declare class ScopeModuleHomeBase extends BeanScopeBase {}
-interface ScopeModuleHomeBase {
-  util: BeanScopeUtil;
-  locale: TypeModuleLocales<(typeof locales$6)[TypeLocaleBase]>;
-}
-declare module 'zova' {
-  interface IBeanScopeRecord {
-    'home-base': ScopeModuleHomeBase;
-  }
-  interface IBeanScopeLocale {
-    'home-base': (typeof locales$6)[TypeLocaleBase];
-  }
-}
-//#endregion
-//#region src/suite/a-home/modules/home-base/src/lib/utils.d.ts
-declare function definePropertyScopeBase(bean: BeanContainer, beanInstance: BeanBase): void;
-//#endregion
-//#region src/suite/a-home/modules/home-base/src/types/style.d.ts
-declare module 'zova' {
-  interface BeanBase {
-    $scopeBase: ScopeModuleHomeBase;
-    $css: CssDefault;
-  }
-}
-//#endregion
-//#region src/suite/a-home/modules/home-base/src/types/themeToken.d.ts
-interface ThemeTokenCustom {
-  color: {
-    primary: string;
-  };
-  var: {
-    borderColor: string;
-  };
-  component: {
-    page: {
-      background: string;
-      color: string;
-    };
-  };
-}
-declare module 'zova-module-a-style' {
-  interface ThemeToken extends ThemeTokenCustom {}
-}
-//#endregion
-//#region src/module/demo-student/src/component/test/controller.d.ts
-declare module '@cabloy/module-info' {
-  interface ZovaMetaFlavorExtend {
-    sss: never;
-  }
-}
-declare class ControllerTest extends BeanControllerBase {
-  $$scopeHomeBase: ScopeModuleHomeBase;
-  protected __init__(): Promise<void>;
-  retrieveMenus(): Promise<void>;
-  protected render(): _$vue_jsx_runtime0.JSX.Element;
-}
-//#endregion
-//#region src/module/demo-student/src/page/counter/controller.d.ts
-declare const ControllerPageCounterSchemaQuery: z.ZodObject<{
-  name: z.ZodOptional<z.ZodString>;
-  age: z.ZodOptional<z.ZodNumber>;
-}, z.core.$strip>;
-declare const ControllerPageCounterSchemaParams: z.ZodObject<{
-  id: z.ZodDefault<z.ZodOptional<z.ZodNumber>>;
-}, z.core.$strip>;
-declare class ControllerPageCounter$2 extends BeanControllerPageBase {
-  count: number;
-  title: string;
-  cardRef: ControllerCard$1;
-  increment(): void;
-  decrement(): void;
-  protected _render(): _$vue_jsx_runtime0.JSX.Element;
-}
-//#endregion
-//#region src/module/demo-student/src/.metadata/page/counter.d.ts
-declare namespace NSControllerPageCounter {
-  const paramsSchema: z.ZodObject<{
-    id: z.ZodDefault<z.ZodOptional<z.ZodNumber>>;
-  }, z.core.$strip>;
-  type ParamsInput = z.input<typeof ControllerPageCounterSchemaParams>;
-  type ParamsOutput = z.output<typeof ControllerPageCounterSchemaParams>;
-  const querySchema: z.ZodObject<{
-    name: z.ZodOptional<z.ZodString>;
-    age: z.ZodOptional<z.ZodNumber>;
-  }, z.core.$strip>;
-  type QueryInput = z.input<typeof ControllerPageCounterSchemaQuery>;
-  type QueryOutput = z.output<typeof ControllerPageCounterSchemaQuery>;
-}
-declare module 'zova-module-demo-student' {
-  interface StylePageCounter extends ControllerPageCounter {}
-  interface StylePageMore extends ControllerPageCounter {}
-  interface RenderPageCounter extends StylePageCounter {}
-  interface RenderPageMore extends StylePageCounter {}
-}
-//#endregion
-//#region src/module/demo-student/src/.metadata/component/card.d.ts
-type TypeModelArguments$1<_T = unknown> = { [KEY in keyof ControllerCardModels<_T> as TypePropValueFromModel<KEY>]: ControllerCardModels<_T>[KEY] };
-type ControllerInnerProps$14<_T = unknown> = TypeControllerInnerProps<ControllerCardProps$1<_T> & { [KEY in keyof ControllerCardModels<_T> as TypePropValueFromModel<KEY>]: ControllerCardModels<_T>[KEY] }, keyof typeof ControllerCard$1.$propsDefault>;
-declare module 'zova-module-demo-student' {
-  interface ControllerCard<_T = unknown> {
-    $props: ControllerInnerProps$14<_T>;
-    $useModel<K extends keyof TypeModelArguments$1<_T>>(name: K, options?: DefineModelOptions<TypeModelArguments$1<_T>[K]>): ControllerInnerProps$14<_T>[K];
-    $useModel(options?: DefineModelOptions<TypeModelArguments$1<_T>['modelValue']>): ControllerInnerProps$14<_T>['modelValue'];
-  }
-}
-declare module 'zova-module-demo-student' {
-  interface RenderCard<_T = unknown> extends ControllerCard$1<_T> {}
-}
-declare const ZCard$1: new <_T = unknown>(props: ({
-  controllerRef?: ((ref: ControllerCard$1<_T>) => void) | undefined;
-} & ControllerCardProps$1<_T> & ControllerCardModels<_T> & {
-  modelValue?: number | undefined;
-  title?: string | undefined;
-} & {
-  "onUpdate:modelValue"?: ((value: number | undefined) => void) | undefined;
-  "onUpdate:title"?: ((value: string | undefined) => void) | undefined;
-} & ({
-  [x: `on${Capitalize<string>}`]: ((...args: any[]) => any) | undefined;
-} | {
-  [x: `on${Capitalize<string>}`]: ((...args: never) => any) | undefined;
-})) & _$vue.VNodeProps & _$vue.AllowedComponentProps & _$vue.ComponentCustomProps) => _$vue.CreateComponentPublicInstanceWithMixins<{
-  controllerRef?: ((ref: ControllerCard$1<_T>) => void) | undefined;
-} & ControllerCardProps$1<_T> & ControllerCardModels<_T> & {
-  modelValue?: number | undefined;
-  title?: string | undefined;
-} & {
-  "onUpdate:modelValue"?: ((value: number | undefined) => void) | undefined;
-  "onUpdate:title"?: ((value: string | undefined) => void) | undefined;
-} & ({
-  [x: `on${Capitalize<string>}`]: ((...args: any[]) => any) | undefined;
-} | {
-  [x: `on${Capitalize<string>}`]: ((...args: never) => any) | undefined;
-}), {}, {}, {}, {}, _$vue.ComponentOptionsMixin, _$vue.ComponentOptionsMixin, _$vue.EmitsOptions, _$vue.PublicProps, {}, false, {}, _$vue.SlotsType<Record<string, any>>, {}, {}, string, {}, any, _$vue.ComponentProvideOptions, {
-  P: {};
-  B: {};
-  D: {};
-  C: {};
-  M: {};
-  Defaults: {};
-}, {} & ({
-  controllerRef?: ((ref: ControllerCard$1<_T>) => void) | undefined;
-} & ControllerCardProps$1<_T> & ControllerCardModels<_T> & {
-  modelValue?: number | undefined;
-  title?: string | undefined;
-} & {
-  "onUpdate:modelValue"?: ((value: number | undefined) => void) | undefined;
-  "onUpdate:title"?: ((value: string | undefined) => void) | undefined;
-} & ({
-  [x: `on${Capitalize<string>}`]: ((...args: any[]) => any) | undefined;
-} | {
-  [x: `on${Capitalize<string>}`]: ((...args: never) => any) | undefined;
-})), {}, {}, {}, {}, {}>;
-//#endregion
-//#region src/module/demo-student/src/.metadata/component/test.d.ts
-type TypeControllerTestPublicProps = {
-  controllerRef?: (ref: ControllerTest) => void;
-};
-declare const ZTest: _$vue.DefineSetupFnComponent<TypeControllerTestPublicProps, _$vue.EmitsOptions, _$vue.SlotsType<Record<string, any>>, TypeControllerTestPublicProps & ({
-  [x: `on${Capitalize<string>}`]: ((...args: any[]) => any) | undefined;
-} | {
-  [x: `on${Capitalize<string>}`]: ((...args: never) => any) | undefined;
-}), _$vue.PublicProps>;
-//#endregion
-//#region src/module/demo-student/src/component/card/render.d.ts
-declare class RenderCard extends BeanRenderBase {
-  render(): void;
-}
-//#endregion
-//#region src/module/demo-student/src/page/counter/render.more.d.ts
-declare class RenderPageMore extends BeanRenderBase {
-  render(): void;
-}
-//#endregion
-//#region src/module/demo-student/src/page/counter/render.d.ts
-declare class RenderPageCounter extends BeanRenderBase {
-  $$renderMore: RenderPageMore;
-  render(): _$vue_jsx_runtime0.JSX.Element;
-}
-//#endregion
-//#region src/module/demo-student/src/page/render.d.ts
-declare class RenderPage extends BeanRenderBase {
-  render(): void;
-}
-//#endregion
-//#region src/module/demo-student/src/page/counter/style.more.d.ts
-declare class StylePageMore extends BeanStyleBase {
-  protected __init__(): Promise<void>;
-}
-//#endregion
-//#region src/module/demo-student/src/page/counter/style.d.ts
-declare class StylePageCounter$1 extends BeanStyleBase {
-  $$styleMore: StylePageMore;
-  cTextCenter: string;
-  protected __init__(): Promise<void>;
-}
-//#endregion
-//#region src/module/demo-student/src/bean/aop.counterLog.d.ts
-declare class AopCounterLog extends BeanAopBase {
-  render: (_args: any, next: any, _receiver: any) => any;
-}
-//#endregion
-//#region src/module/demo-student/src/config/config.d.ts
-declare const config: (_sys: ZovaSys) => {
-  title: string;
-};
-//#endregion
-//#region src/module/demo-student/src/config/constants.d.ts
-declare const constants: {};
-//#endregion
-//#region src/module/demo-student/src/config/errors.d.ts
-declare const errors: {};
-//#endregion
-//#region src/module/demo-student/src/mainSys.d.ts
-declare class MainSys extends BeanSimple implements IModuleMainSys {
-  moduleLoading(): Promise<void>;
-  moduleLoaded(): Promise<void>;
-  configLoaded(_config: any): Promise<void>;
-}
-//#endregion
-//#region src/module/demo-student/src/.metadata/index.d.ts
-declare module 'zova-module-a-model' {
-  interface IModelRecord {
-    'demo-student:menu': IModelOptionsMenu;
-    'demo-student:test': IModelOptionsTest$1;
-  }
-}
-declare module 'zova-module-demo-student' {
-  interface ModelMenu {}
-  interface ModelMenu {
-    get $beanFullName(): 'demo-student.model.menu';
-    get $onionName(): 'demo-student:menu';
-    get $onionOptions(): IModelOptionsMenu;
-  }
-  interface ModelTest {}
-  interface ModelTest {
-    get $beanFullName(): 'demo-student.model.test';
-    get $onionName(): 'demo-student:test';
-    get $onionOptions(): IModelOptionsTest$1;
-  }
-}
-/** model: end */
-/** model: begin */
-declare module 'zova' {
-  interface IBeanRecordGeneral {
-    'demo-student.model.menu': ModelMenu;
-    'demo-student.model.test': ModelTest$1;
-  }
-}
-/** model: end */
-/** api: begin */
-declare module 'zova' {}
-declare module 'zova-module-demo-student' {
   interface ApiHomeBaseMenu {}
   interface ApiHomeBaseMenu {
-    get $beanFullName(): 'demo-student.api.homeBaseMenu';
-    get $onionName(): 'demo-student:homeBaseMenu';
+    get $beanFullName(): 'home-api.api.homeBaseMenu';
+    get $onionName(): 'home-api:homeBaseMenu';
+  }
+  interface ApiHomeBasePermission {}
+  interface ApiHomeBasePermission {
+    get $beanFullName(): 'home-api.api.homeBasePermission';
+    get $onionName(): 'home-api:homeBasePermission';
+  }
+  interface ApiHomeUserPassport {}
+  interface ApiHomeUserPassport {
+    get $beanFullName(): 'home-api.api.homeUserPassport';
+    get $onionName(): 'home-api:homeUserPassport';
+  }
+  interface ApiTestSsrToolOne {}
+  interface ApiTestSsrToolOne {
+    get $beanFullName(): 'home-api.api.testSsrToolOne';
+    get $onionName(): 'home-api:testSsrToolOne';
   }
 }
 /** api: end */
 /** api: begin */
 interface IModuleApi$1 {
+  'captcha': ApiCaptcha;
+  'home': ApiHome;
   'homeBaseMenu': ApiHomeBaseMenu;
+  'homeBasePermission': ApiHomeBasePermission;
+  'homeUserPassport': ApiHomeUserPassport;
+  'testSsrToolOne': ApiTestSsrToolOne;
 }
 declare module 'zova' {
   interface IBeanRecordGeneral {
-    'demo-student.api.homeBaseMenu': ApiHomeBaseMenu;
+    'home-api.api.captcha': ApiCaptcha;
+    'home-api.api.home': ApiHome;
+    'home-api.api.homeBaseMenu': ApiHomeBaseMenu;
+    'home-api.api.homeBasePermission': ApiHomeBasePermission;
+    'home-api.api.homeUserPassport': ApiHomeUserPassport;
+    'home-api.api.testSsrToolOne': ApiTestSsrToolOne;
   }
 }
 /** api: end */
 /** openapi: begin */
 declare module 'zova' {}
-declare module 'zova-module-demo-student' {
+declare module 'zova-module-home-api' {
+  interface ApiSchemaCaptcha {}
+  interface ApiSchemaCaptcha {
+    get $beanFullName(): 'home-api.apiSchema.captcha';
+    get $onionName(): 'home-api:captcha';
+  }
+  interface ApiSchemaHome {}
+  interface ApiSchemaHome {
+    get $beanFullName(): 'home-api.apiSchema.home';
+    get $onionName(): 'home-api:home';
+  }
   interface ApiSchemaHomeBaseMenu {}
   interface ApiSchemaHomeBaseMenu {
-    get $beanFullName(): 'demo-student.apiSchema.homeBaseMenu';
-    get $onionName(): 'demo-student:homeBaseMenu';
+    get $beanFullName(): 'home-api.apiSchema.homeBaseMenu';
+    get $onionName(): 'home-api:homeBaseMenu';
+  }
+  interface ApiSchemaHomeBasePermission {}
+  interface ApiSchemaHomeBasePermission {
+    get $beanFullName(): 'home-api.apiSchema.homeBasePermission';
+    get $onionName(): 'home-api:homeBasePermission';
+  }
+  interface ApiSchemaHomeUserPassport {}
+  interface ApiSchemaHomeUserPassport {
+    get $beanFullName(): 'home-api.apiSchema.homeUserPassport';
+    get $onionName(): 'home-api:homeUserPassport';
+  }
+  interface ApiSchemaTestSsrToolOne {}
+  interface ApiSchemaTestSsrToolOne {
+    get $beanFullName(): 'home-api.apiSchema.testSsrToolOne';
+    get $onionName(): 'home-api:testSsrToolOne';
   }
 }
 /** apiSchema: end */
 /** apiSchema: begin */
 interface IModuleApiSchema {
+  'captcha': ApiSchemaCaptcha;
+  'home': ApiSchemaHome;
   'homeBaseMenu': ApiSchemaHomeBaseMenu;
+  'homeBasePermission': ApiSchemaHomeBasePermission;
+  'homeUserPassport': ApiSchemaHomeUserPassport;
+  'testSsrToolOne': ApiSchemaTestSsrToolOne;
 }
 declare module 'zova' {
   interface IBeanRecordGeneral {
-    'demo-student.apiSchema.homeBaseMenu': ApiSchemaHomeBaseMenu;
+    'home-api.apiSchema.captcha': ApiSchemaCaptcha;
+    'home-api.apiSchema.home': ApiSchemaHome;
+    'home-api.apiSchema.homeBaseMenu': ApiSchemaHomeBaseMenu;
+    'home-api.apiSchema.homeBasePermission': ApiSchemaHomeBasePermission;
+    'home-api.apiSchema.homeUserPassport': ApiSchemaHomeUserPassport;
+    'home-api.apiSchema.testSsrToolOne': ApiSchemaTestSsrToolOne;
   }
 }
 /** apiSchema: end */
-/** bean: begin */
-declare module 'zova' {}
-declare module 'zova-module-demo-student' {
-  interface BeanTest {}
-  interface BeanTest {
-    get $beanFullName(): 'demo-student.bean.test';
-    get $onionName(): 'demo-student:test';
-  }
-}
-/** bean: end */
-/** bean: begin */
-declare module 'zova' {
-  interface IBeanRecordGeneral {
-    'demo-student.bean.test': BeanTest;
-  }
-}
-/** bean: end */
 /** service: begin */
 declare module 'zova-module-a-bean' {
   interface IServiceRecord {
-    'demo-student:counter': never;
-    'demo-student:test': never;
-    'demo-student:test3': never;
-    'demo-student:test4': never;
+    'home-api:jwtAdapter': never;
   }
 }
-declare module 'zova-module-demo-student' {
-  interface ServiceCounter {}
-  interface ServiceCounter {
-    get $beanFullName(): 'demo-student.service.counter';
-    get $onionName(): 'demo-student:counter';
-  }
-  interface ServiceTest {}
-  interface ServiceTest {
-    get $beanFullName(): 'demo-student.service.test';
-    get $onionName(): 'demo-student:test';
-  }
-  interface ServiceTest3 {}
-  interface ServiceTest3 {
-    get $beanFullName(): 'demo-student.service.test3';
-    get $onionName(): 'demo-student:test3';
-  }
-  interface ServiceTest4 {}
-  interface ServiceTest4 {
-    get $beanFullName(): 'demo-student.service.test4';
-    get $onionName(): 'demo-student:test4';
+declare module 'zova-module-home-api' {
+  interface ServiceJwtAdapter {}
+  interface ServiceJwtAdapter {
+    get $beanFullName(): 'home-api.service.jwtAdapter';
+    get $onionName(): 'home-api:jwtAdapter';
   }
 }
 /** service: end */
 /** service: begin */
 declare module 'zova' {
   interface IBeanRecordGeneral {
-    'demo-student.service.counter': ServiceCounter;
-    'demo-student.service.test': ServiceTest$1;
-    'demo-student.service.test3': ServiceTest3;
-    'demo-student.service.test4': ServiceTest4;
+    'home-api.service.jwtAdapter': ServiceJwtAdapter;
   }
 }
 /** service: end */
-/** store: begin */
-declare module 'zova' {}
-declare module 'zova-module-demo-student' {
-  interface StoreTest {}
-  interface StoreTest {
-    get $beanFullName(): 'demo-student.store.test';
-    get $onionName(): 'demo-student:test';
-  }
-}
-/** store: end */
-/** store: begin */
-declare module 'zova' {
-  interface IBeanRecordGeneral {
-    'demo-student.store.test': StoreTest;
-  }
-}
-/** store: end */
-/** controller: begin */
-declare module 'zova' {}
-declare module 'zova-module-demo-student' {
-  interface ControllerCard {}
-  interface ControllerTest {}
-  interface ControllerPageCounter {}
-}
-/** controller: end */
-/** controller: begin */
-declare module 'zova' {
-  interface IBeanRecordLocal {
-    'demo-student.controller.card': ControllerCard$1;
-    'demo-student.controller.test': ControllerTest;
-    'demo-student.controller.pageCounter': ControllerPageCounter$2;
-  }
-}
-/** controller: end */
-/** pages: begin */
-declare module 'zova-module-a-router' {
-  interface IPagePathRecord {
-    '/demo/student/counter': TypePagePathSchema<NSControllerPageCounter.ParamsInput, NSControllerPageCounter.QueryInput>;
-  }
-  interface IPageNameRecord {}
-}
-declare module 'zova-module-demo-student' {
-  interface ControllerPageCounter {
-    $params: NSControllerPageCounter.ParamsOutput;
-    $query: NSControllerPageCounter.QueryOutput;
-  }
-}
-/** pages: end */
-/** components: begin */
-declare module 'zova' {
-  interface IComponentRecord {
-    'demo-student:card': ControllerCard$1;
-    'demo-student:test': ControllerTest;
-  }
-  interface IZovaComponentRecord {
-    'demo-student:card': typeof ZCard$1;
-    'demo-student:test': typeof ZTest;
-  }
-}
-/** components: end */
-/** render: begin */
-declare module 'zova' {}
-declare module 'zova-module-demo-student' {
-  interface RenderCard {}
-  interface RenderPageMore {}
-  interface RenderPageCounter {}
-  interface RenderPage {}
-}
-/** render: end */
-/** render: begin */
-declare module 'zova' {
-  interface IBeanRecordLocal {
-    'demo-student.render.card': RenderCard;
-    'demo-student.render.pageMore': RenderPageMore;
-    'demo-student.render.pageCounter': RenderPageCounter;
-    'demo-student.render.page': RenderPage;
-  }
-}
-/** render: end */
-/** style: begin */
-declare module 'zova' {}
-declare module 'zova-module-demo-student' {
-  interface StylePageMore {}
-  interface StylePageCounter {}
-}
-/** style: end */
-/** style: begin */
-declare module 'zova' {
-  interface IBeanRecordLocal {
-    'demo-student.style.pageMore': StylePageMore;
-    'demo-student.style.pageCounter': StylePageCounter$1;
-  }
-}
-/** style: end */
-/** aop: begin */
-declare module 'zova-module-a-bean' {
-  interface IAopRecord {
-    'demo-student:counterLog': IDecoratorAopOptions;
-  }
-}
-declare module 'zova-module-demo-student' {
-  interface AopCounterLog {}
-  interface AopCounterLog {
-    get $beanFullName(): 'demo-student.aop.counterLog';
-    get $onionName(): 'demo-student:counterLog';
-    get $onionOptions(): IDecoratorAopOptions;
-  }
-}
-/** aop: end */
-/** aop: begin */
-declare module 'zova' {
-  interface IBeanRecordLocal {
-    'demo-student.aop.counterLog': AopCounterLog;
-  }
-}
-/** aop: end */
-/** config: begin */
-declare class ScopeModuleDemoStudent extends BeanScopeBase {}
-interface ScopeModuleDemoStudent {
+/** scope: begin */
+declare class ScopeModuleHomeApi extends BeanScopeBase {}
+interface ScopeModuleHomeApi {
   util: BeanScopeUtil;
-  config: TypeModuleConfig<typeof config>;
-  error: TypeModuleErrors<typeof errors>;
-  locale: TypeModuleLocales<(typeof locales$7)[TypeLocaleBase]>;
-  constant: TypeModuleConstants<typeof constants>;
   api: IModuleApi$1;
   apiSchema: IModuleApiSchema;
 }
 declare module 'zova' {
   interface IBeanScopeRecord {
-    'demo-student': ScopeModuleDemoStudent;
-  }
-  interface IBeanScopeConfig {
-    'demo-student': ReturnType<typeof config>;
-  }
-  interface IBeanScopeLocale {
-    'demo-student': (typeof locales$7)[TypeLocaleBase];
-  }
-  interface IBeanScopeErrors {
-    'demo-student': typeof errors;
-  }
-}
-//#endregion
-//#region src/module/demo-student/rest/component/card.d.ts
-type TypeControllerCardPublicProps$2<_T = unknown> = TypeRenderComponentJsxPropsPublic & ControllerCardProps$1<_T> & ControllerCardModels<_T> & { [KEY in keyof ControllerCardModels<_T> as TypePropValueFromModel<KEY>]: ControllerCardModels<_T>[KEY] } & { [KEY in keyof ControllerCardModels<_T> as TypePropUpdateFromModel<KEY>]: (value: ControllerCardModels<_T>[KEY]) => void };
-declare function BBZDemoStudentCard<_T = unknown>(_props: TypeControllerCardPublicProps$2<_T>): string;
-//#endregion
-//#region src/module/demo-student/rest/component/test.d.ts
-type TypeControllerTestPublicProps$1 = TypeRenderComponentJsxPropsPublic;
-declare function BBZDemoStudentTest(_props: TypeControllerTestPublicProps$1): string;
-//#endregion
-//#region src/suite/a-c/modules/a-c/src/service/data.d.ts
-declare class ServiceData extends BeanBase {
-  count: number;
-  increment(): void;
-  decrement(): void;
-}
-//#endregion
-//#region src/suite/a-c/modules/a-c/src/service/test.d.ts
-declare class ServiceTest extends BeanBase {
-  protected __init__(): Promise<void>;
-}
-//#endregion
-//#region src/suite/a-c/modules/a-c/src/page/counter/controller.d.ts
-declare class ControllerPageCounter$1 extends BeanControllerPageBase {
-  count: number;
-  increment(): void;
-  decrement(): void;
-  protected render(): _$vue_jsx_runtime0.JSX.Element;
-}
-//#endregion
-//#region src/suite/a-c/modules/a-c/src/page/test/controller.d.ts
-declare class ControllerPageTest extends BeanControllerPageBase {
-  $$serviceData: ServiceData;
-  $$serviceData2: ServiceData;
-  $$serviceData3: ServiceData;
-  $$serviceData4: ServiceData;
-  protected render(): _$vue_jsx_runtime0.JSX.Element;
-}
-//#endregion
-//#region src/suite/a-c/modules/a-c/src/page/test3/controller.d.ts
-declare class ControllerPageTest3 extends BeanControllerPageBase {
-  protected __init__(): Promise<void>;
-  protected render(): null;
-}
-//#endregion
-//#region src/suite/a-c/modules/a-c/src/.metadata/page/test.d.ts
-declare const ZPageTest: _$vue.DefineSetupFnComponent<Record<string, any>, {}, {}, Record<string, any> & {}, _$vue.PublicProps>;
-//#endregion
-//#region src/suite/a-c/modules/a-c/src/.metadata/page/test3.d.ts
-declare const ZPageTest3: _$vue.DefineSetupFnComponent<Record<string, any>, {}, {}, Record<string, any> & {}, _$vue.PublicProps>;
-//#endregion
-//#region src/suite/a-c/modules/a-c/src/bean/tableCell.test.d.ts
-interface ITableCellOptionsTest$1 extends IDecoratorTableCellOptions {}
-declare class TableCellTest$1 extends BeanBase implements ITableCellRender {
-  render(_options: ITableCellOptionsTest$1, _renderContext: IJsxRenderContextTableCell, next: NextTableCellRender): any;
-}
-//#endregion
-//#region src/suite/a-c/modules/a-c/src/.metadata/index.d.ts
-declare module 'zova-module-a-bean' {
-  interface IServiceRecord {
-    'a-c:data': never;
-    'a-c:test': never;
-  }
-}
-declare module 'zova-module-a-c' {
-  interface ServiceData {}
-  interface ServiceData {
-    get $beanFullName(): 'a-c.service.data';
-    get $onionName(): 'a-c:data';
-  }
-  interface ServiceTest {}
-  interface ServiceTest {
-    get $beanFullName(): 'a-c.service.test';
-    get $onionName(): 'a-c:test';
-  }
-}
-/** service: end */
-/** service: begin */
-declare module 'zova' {
-  interface IBeanRecordGeneral {
-    'a-c.service.data': ServiceData;
-    'a-c.service.test': ServiceTest;
-  }
-}
-/** service: end */
-/** controller: begin */
-declare module 'zova' {}
-declare module 'zova-module-a-c' {
-  interface ControllerPageCounter {}
-  interface ControllerPageTest {}
-  interface ControllerPageTest3 {}
-}
-/** controller: end */
-/** controller: begin */
-declare module 'zova' {
-  interface IBeanRecordLocal {
-    'a-c.controller.pageCounter': ControllerPageCounter$1;
-    'a-c.controller.pageTest': ControllerPageTest;
-    'a-c.controller.pageTest3': ControllerPageTest3;
-  }
-}
-/** controller: end */
-/** pages: begin */
-declare module 'zova-module-a-router' {
-  interface IPagePathRecord {
-    '/a/c/counter': TypePagePathSchema<undefined, undefined>;
-    '/a/c/test': TypePagePathSchema<undefined, undefined>;
-    '/a/c/test3': TypePagePathSchema<undefined, undefined>;
-  }
-  interface IPageNameRecord {}
-}
-declare module 'zova-module-a-c' {}
-/** pages: end */
-/** tableCell: begin */
-declare module 'zova-module-a-table' {
-  interface ITableCellRecord {
-    'a-c:test': ITableCellOptionsTest$1;
-  }
-}
-declare module 'zova-module-a-c' {
-  interface TableCellTest {}
-  interface TableCellTest {
-    get $beanFullName(): 'a-c.tableCell.test';
-    get $onionName(): 'a-c:test';
-    get $onionOptions(): ITableCellOptionsTest$1;
-  }
-}
-/** tableCell: end */
-/** tableCell: begin */
-declare module 'zova' {
-  interface IBeanRecordGeneral {
-    'a-c.tableCell.test': TableCellTest$1;
-  }
-}
-/** tableCell: end */
-/** scope: begin */
-declare class ScopeModuleAC extends BeanScopeBase {}
-interface ScopeModuleAC {
-  util: BeanScopeUtil;
-}
-declare module 'zova' {
-  interface IBeanScopeRecord {
-    'a-c': ScopeModuleAC;
+    'home-api': ScopeModuleHomeApi;
   }
 }
 /** scope: end */
 //#endregion
-//#region src/suite/a-c/modules/a-c/rest/tableCell/test.d.ts
-declare function BBTCTest(_props: ITableCellOptionsTest$1): string;
+//#region src/suite/a-home/modules/home-api/src/types/api.d.ts
+declare module 'zova' {
+  interface BeanBase {
+    $api: IModuleApi$1;
+    $apiSchema: IModuleApiSchema;
+  }
+}
 //#endregion
 //#region src/suite/a-demo/modules/demo-basic/src/model/test.d.ts
 interface IModelOptionsTest extends IDecoratorModelOptions {}
@@ -8834,7 +4206,7 @@ declare class ModelTest extends BeanModelBase {
     id: number | string;
     name?: string;
     married: boolean;
-    details: components$1['schemas']['test-ssr.dto.testDetail'][];
+    details: components['schemas']['test-ssr.dto.testDetail'][];
     _custom1?: string | undefined;
     _custom2?: string | undefined;
     _custom3?: string | undefined;
@@ -9530,10 +4902,10 @@ declare class ControllerPageToolOne$1 extends BeanControllerPageFormBase {
   $$modelTest: ModelTest;
   controllerForm: ControllerForm;
   fieldName: string;
-  formData: ApiSchemaTestSsrDtoTestBodyPartial$1;
+  formData: ApiSchemaTestSsrDtoTestBodyPartial;
   formMeta: IFormMeta;
   protected __init__(): Promise<void>;
-  onSubmit(data: TypeFormOnSubmitData<ApiSchemaTestSsrDtoTestBodyPartial$1>): Promise<void>;
+  onSubmit(data: TypeFormOnSubmitData<ApiSchemaTestSsrDtoTestBodyPartial>): Promise<void>;
 }
 //#endregion
 //#region src/suite/a-demo/modules/demo-basic/src/page/toolTwo/controller.d.ts
@@ -9544,7 +4916,7 @@ declare const ControllerPageToolTwoSchemaQuery: z.ZodObject<{
   name: z.ZodOptional<z.ZodString>;
 }, z.core.$strip>;
 declare class ControllerPageToolTwo extends BeanControllerPageBase {
-  $$modelPageData: ModelPageData<ApiSchemaTestSsrDtoTestResult$1 | undefined>;
+  $$modelPageData: ModelPageData<ApiSchemaTestSsrDtoTestResult | undefined>;
   protected __init__(): Promise<void>;
   protected render(): _$vue_jsx_runtime0.JSX.Element;
 }
@@ -9650,10 +5022,10 @@ declare const ZPageToolTwo: _$vue.DefineSetupFnComponent<Record<string, any>, {}
 type TypeControllerActionViewPublicProps = {
   controllerRef?: (ref: ControllerActionView) => void;
 } & ControllerActionViewProps;
-type ControllerInnerProps$13 = TypeControllerInnerProps<ControllerActionViewProps, keyof typeof ControllerActionView.$propsDefault>;
+type ControllerInnerProps$14 = TypeControllerInnerProps<ControllerActionViewProps, keyof typeof ControllerActionView.$propsDefault>;
 declare module 'zova-module-demo-basic' {
   interface ControllerActionView {
-    $props: ControllerInnerProps$13;
+    $props: ControllerInnerProps$14;
   }
 }
 declare const ZActionView: _$vue.DefineSetupFnComponent<TypeControllerActionViewPublicProps, _$vue.EmitsOptions, _$vue.SlotsType<Record<string, any>>, {
@@ -9665,16 +5037,16 @@ declare const ZActionView: _$vue.DefineSetupFnComponent<TypeControllerActionView
 }), _$vue.PublicProps>;
 //#endregion
 //#region src/suite/a-demo/modules/demo-basic/src/.metadata/component/card.d.ts
-type TypeControllerCardPublicProps$1 = {
+type TypeControllerCardPublicProps = {
   controllerRef?: (ref: ControllerCard) => void;
 } & ControllerCardProps;
-type ControllerInnerProps$12 = TypeControllerInnerProps<ControllerCardProps, keyof typeof ControllerCard.$propsDefault>;
+type ControllerInnerProps$13 = TypeControllerInnerProps<ControllerCardProps, keyof typeof ControllerCard.$propsDefault>;
 declare module 'zova-module-demo-basic' {
   interface ControllerCard {
-    $props: ControllerInnerProps$12;
+    $props: ControllerInnerProps$13;
   }
 }
-declare const ZCard: _$vue.DefineSetupFnComponent<TypeControllerCardPublicProps$1, _$vue.EmitsOptions, _$vue.SlotsType<Record<string, any>>, {
+declare const ZCard: _$vue.DefineSetupFnComponent<TypeControllerCardPublicProps, _$vue.EmitsOptions, _$vue.SlotsType<Record<string, any>>, {
   controllerRef?: (ref: ControllerCard) => void;
 } & ControllerCardProps & ({
   [x: `on${Capitalize<string>}`]: ((...args: any[]) => any) | undefined;
@@ -9686,10 +5058,10 @@ declare const ZCard: _$vue.DefineSetupFnComponent<TypeControllerCardPublicProps$
 type TypeControllerFormFieldTestPublicProps = {
   controllerRef?: (ref: ControllerFormFieldTest) => void;
 } & ControllerFormFieldTestProps;
-type ControllerInnerProps$11 = TypeControllerInnerProps<ControllerFormFieldTestProps, keyof typeof ControllerFormFieldTest.$propsDefault>;
+type ControllerInnerProps$12 = TypeControllerInnerProps<ControllerFormFieldTestProps, keyof typeof ControllerFormFieldTest.$propsDefault>;
 declare module 'zova-module-demo-basic' {
   interface ControllerFormFieldTest {
-    $props: ControllerInnerProps$11;
+    $props: ControllerInnerProps$12;
   }
 }
 declare const ZFormFieldTest: _$vue.DefineSetupFnComponent<TypeControllerFormFieldTestPublicProps, _$vue.EmitsOptions, _$vue.SlotsType<Record<string, any>>, {
@@ -9704,10 +5076,10 @@ declare const ZFormFieldTest: _$vue.DefineSetupFnComponent<TypeControllerFormFie
 type TypeControllerTableCellTestPublicProps = {
   controllerRef?: (ref: ControllerTableCellTest) => void;
 } & ControllerTableCellTestProps;
-type ControllerInnerProps$10 = TypeControllerInnerProps<ControllerTableCellTestProps, keyof typeof ControllerTableCellTest.$propsDefault>;
+type ControllerInnerProps$11 = TypeControllerInnerProps<ControllerTableCellTestProps, keyof typeof ControllerTableCellTest.$propsDefault>;
 declare module 'zova-module-demo-basic' {
   interface ControllerTableCellTest {
-    $props: ControllerInnerProps$10;
+    $props: ControllerInnerProps$11;
   }
 }
 declare const ZTableCellTest: _$vue.DefineSetupFnComponent<TypeControllerTableCellTestPublicProps, _$vue.EmitsOptions, _$vue.SlotsType<Record<string, any>>, {
@@ -9790,15 +5162,6 @@ declare class BehaviorFormFieldLayout extends BeanBehaviorBase<IBehaviorOptionsF
   protected render(_props: IBehaviorPropsInputFormFieldLayout, next: NextBehavior<IBehaviorPropsOutputFormFieldLayout>): VNode;
 }
 //#endregion
-//#region src/suite/a-demo/modules/demo-basic/src/bean/theme.orange.d.ts
-interface IThemeOptionsOrange extends IDecoratorThemeOptions {}
-declare class ThemeOrange extends BeanThemeBase implements IThemeBase {
-  apply({
-    name,
-    dark
-  }: IThemeApplyParams): Promise<IThemeApplyResult>;
-}
-//#endregion
 //#region src/suite/a-demo/modules/demo-basic/src/bean/tableCell.test.d.ts
 interface ITableCellOptionsTest extends IDecoratorTableCellOptions {
   iconPrefix?: string;
@@ -9808,7 +5171,7 @@ declare class TableCellTest extends BeanBase implements ITableCellRender {
 }
 //#endregion
 //#region src/suite/a-demo/modules/demo-basic/src/.metadata/locales.d.ts
-declare const locales$5: {
+declare const locales$6: {
   'en-us': {
     HelloWorld: string;
     ChangeLanguage: string;
@@ -10039,28 +5402,6 @@ declare module 'vue/jsx-runtime' {
   }
 }
 /** behaviors: end */
-/** theme: begin */
-declare module 'zova-module-a-style' {
-  interface IThemeRecord {
-    'demo-basic:orange': IThemeOptionsOrange;
-  }
-}
-declare module 'zova-module-demo-basic' {
-  interface ThemeOrange {}
-  interface ThemeOrange {
-    get $beanFullName(): 'demo-basic.theme.orange';
-    get $onionName(): 'demo-basic:orange';
-    get $onionOptions(): IThemeOptionsOrange;
-  }
-}
-/** theme: end */
-/** theme: begin */
-declare module 'zova' {
-  interface IBeanRecordLocal {
-    'demo-basic.theme.orange': ThemeOrange;
-  }
-}
-/** theme: end */
 /** tableCell: begin */
 declare module 'zova-module-a-table' {
   interface ITableCellRecord {
@@ -10087,14 +5428,14 @@ declare module 'zova' {
 declare class ScopeModuleDemoBasic extends BeanScopeBase {}
 interface ScopeModuleDemoBasic {
   util: BeanScopeUtil;
-  locale: TypeModuleLocales<(typeof locales$5)[TypeLocaleBase]>;
+  locale: TypeModuleLocales<(typeof locales$6)[TypeLocaleBase]>;
 }
 declare module 'zova' {
   interface IBeanScopeRecord {
     'demo-basic': ScopeModuleDemoBasic;
   }
   interface IBeanScopeLocale {
-    'demo-basic': (typeof locales$5)[TypeLocaleBase];
+    'demo-basic': (typeof locales$6)[TypeLocaleBase];
   }
 }
 //#endregion
@@ -10103,8 +5444,8 @@ type TypeControllerActionViewPublicProps$1 = TypeRenderComponentJsxPropsPublic &
 declare function BBZDemoBasicActionView(_props: TypeControllerActionViewPublicProps$1): string;
 //#endregion
 //#region src/suite/a-demo/modules/demo-basic/rest/component/card.d.ts
-type TypeControllerCardPublicProps = TypeRenderComponentJsxPropsPublic & ControllerCardProps;
-declare function BBZDemoBasicCard(_props: TypeControllerCardPublicProps): string;
+type TypeControllerCardPublicProps$1 = TypeRenderComponentJsxPropsPublic & ControllerCardProps;
+declare function BBZDemoBasicCard(_props: TypeControllerCardPublicProps$1): string;
 //#endregion
 //#region src/suite/a-demo/modules/demo-basic/rest/component/formFieldTest.d.ts
 type TypeControllerFormFieldTestPublicProps$1 = TypeRenderComponentJsxPropsPublic & ControllerFormFieldTestProps;
@@ -10554,6 +5895,353 @@ declare module 'zova' {
 }
 /** scope: end */
 //#endregion
+//#region src/suite-vendor/a-zova/modules/a-app/rest/component/app.d.ts
+type TypeControllerAppPublicProps = TypeRenderComponentJsxPropsPublic;
+declare function BBZApp(_props: TypeControllerAppPublicProps): string;
+//#endregion
+//#region src/suite-vendor/a-zova/modules/a-behavior/rest/component/behavior.d.ts
+type TypeControllerBehaviorPublicProps = TypeRenderComponentJsxPropsPublic & ControllerBehaviorProps;
+declare function BBZBehavior(_props: TypeControllerBehaviorPublicProps): string;
+//#endregion
+//#region src/suite-vendor/a-zova/modules/a-currency/rest/component/formFieldCurrency.d.ts
+type TypeControllerFormFieldCurrencyPublicProps = TypeRenderComponentJsxPropsPublic & ControllerFormFieldCurrencyProps;
+declare function BBFCurrency(_props: TypeControllerFormFieldCurrencyPublicProps): string;
+//#endregion
+//#region src/suite-vendor/a-zova/modules/a-currency/rest/tableCell/currency.d.ts
+declare function BBTCurrency(_props: ITableCellOptionsCurrency): string;
+//#endregion
+//#region src/suite-vendor/a-zova/modules/a-date/rest/tableCell/date.d.ts
+declare function BBTDate(_props: ITableCellOptionsDate): string;
+//#endregion
+//#region src/suite-vendor/a-zova/modules/a-form/rest/component/form.d.ts
+type TypeControllerFormPublicProps<TFormData extends {} = {}, TSubmitMeta = never> = TypeRenderComponentJsxPropsPublic & ControllerFormProps<TFormData, TSubmitMeta>;
+declare function BBZForm<TFormData extends {} = {}, TSubmitMeta = never>(_props: TypeControllerFormPublicProps<TFormData, TSubmitMeta>): string;
+//#endregion
+//#region src/suite-vendor/a-zova/modules/a-form/rest/component/formField.d.ts
+type TypeControllerFormFieldPublicProps<TParentData extends {} = {}> = TypeRenderComponentJsxPropsPublic & ControllerFormFieldProps<TParentData>;
+declare function BBZFormField<TParentData extends {} = {}>(_props: TypeControllerFormFieldPublicProps<TParentData>): string;
+//#endregion
+//#region src/suite-vendor/a-zova/modules/a-form/rest/component/formFieldWrapper.d.ts
+type TypeControllerFormFieldWrapperPublicProps<TParentData extends {} = {}> = TypeRenderComponentJsxPropsPublic & ControllerFormFieldWrapperProps<TParentData>;
+declare function BBFFormWrapper<TParentData extends {} = {}>(_props: TypeControllerFormFieldWrapperPublicProps<TParentData>): string;
+//#endregion
+//#region src/suite-vendor/a-zova/modules/a-form/rest/component/formSubscribe.d.ts
+type TypeControllerFormSubscribePublicProps<TFormData extends {} = {}, TSubmitMeta = never> = TypeRenderComponentJsxPropsPublic & ControllerFormSubscribeProps<TFormData, TSubmitMeta>;
+declare function BBZFormSubscribe<TFormData extends {} = {}, TSubmitMeta = never>(_props: TypeControllerFormSubscribePublicProps<TFormData, TSubmitMeta>): string;
+//#endregion
+//#region src/suite-vendor/a-zova/modules/a-icon/rest/component/icon.d.ts
+type TypeControllerIconPublicProps = TypeRenderComponentJsxPropsPublic & ControllerIconProps;
+declare function BBZIcon(_props: TypeControllerIconPublicProps): string;
+//#endregion
+//#region src/suite-vendor/a-zova/modules/a-router/rest/component/routerViewEmpty.d.ts
+type TypeControllerRouterViewEmptyPublicProps = TypeRenderComponentJsxPropsPublic;
+declare function BBZRouterViewEmpty(_props: TypeControllerRouterViewEmptyPublicProps): string;
+//#endregion
+//#region src/suite-vendor/a-zova/modules/a-table/rest/component/table.d.ts
+type TypeControllerTablePublicProps$1<TData extends {} = {}> = TypeRenderComponentJsxPropsPublic & ControllerTableProps<TData>;
+declare function BBZTable<TData extends {} = {}>(_props: TypeControllerTablePublicProps$1<TData>): string;
+//#endregion
+//#region src/suite/a-home/modules/home-base/src/service/routerGuards.d.ts
+declare class ServiceRouterGuards extends BeanRouterGuardsBase {
+  protected onRouterGuards(router: BeanRouter): void;
+}
+//#endregion
+//#region src/suite/a-home/modules/home-base/src/service/ssr.d.ts
+declare const ErrorMessageJwtExpired = "jwt expired";
+declare class ServiceSsr extends BeanBase {
+  initialize(): Promise<void>;
+  private _ssrErrorHandler;
+}
+//#endregion
+//#region src/suite/a-home/modules/home-base/src/service/ssrLayout.d.ts
+interface IServiceSsrLayoutOptions {
+  sidebarLeftOpenPC?: boolean;
+}
+declare class ServiceSsrLayout extends BeanBase {
+  $$scopeSsr: ScopeModuleASsr;
+  options?: IServiceSsrLayoutOptions;
+  protected __init__(options?: IServiceSsrLayoutOptions): Promise<void>;
+  private _getJsHandlerPageContainer;
+  private _getJsHandlerSidebar;
+}
+//#endregion
+//#region src/suite/a-home/modules/home-base/src/component/itemLink/controller.d.ts
+interface ControllerItemLinkProps {
+  title: string;
+  description?: string;
+  icon?: keyof IIconRecord$1;
+  href?: string;
+  to?: string | object;
+}
+declare class ControllerItemLink extends BeanControllerBase {
+  static $propsDefault: {
+    description: string;
+    icon: string;
+  };
+  _renderLink(): _$vue_jsx_runtime0.JSX.Element;
+  protected render(): _$vue_jsx_runtime0.JSX.Element;
+}
+//#endregion
+//#region src/suite/a-home/modules/home-base/src/component/page/controller.d.ts
+interface ControllerPageProps {}
+declare class ControllerPage extends BeanControllerBase {
+  static $propsDefault: {};
+  cPage: string;
+  protected __init__(): Promise<void>;
+  protected render(): _$vue_jsx_runtime0.JSX.Element;
+}
+//#endregion
+//#region src/suite/a-home/modules/home-base/src/page/authCallback/controller.d.ts
+declare const ControllerPageAuthCallbackSchemaQuery: z.ZodObject<{
+  returnTo: z.ZodOptional<z.ZodString>;
+  'x-vona-oauth-code': z.ZodOptional<z.ZodString>;
+}, z.core.$strip>;
+declare class ControllerPageAuthCallback extends BeanControllerPageBase {
+  protected __init__(): Promise<void>;
+  private _handleAuth;
+  protected render(): null;
+}
+//#endregion
+//#region src/suite/a-home/modules/home-base/src/page/errorExpired/controller.d.ts
+declare const ControllerPageErrorExpiredSchemaQuery: z.ZodObject<{
+  returnTo: z.ZodOptional<z.ZodString>;
+}, z.core.$strip>;
+declare class ControllerPageErrorExpired extends BeanControllerPageBase {
+  $$jwtAdapter: ServiceJwtAdapter;
+  protected __init__(): Promise<void>;
+  private _refreshToken;
+  protected render(): null;
+}
+//#endregion
+//#region src/suite/a-home/modules/home-base/src/page/errorNotFound/controller.d.ts
+declare class ControllerPageErrorNotFound extends BeanControllerPageBase {
+  cTitle: string;
+  cDescription: string;
+  protected __init__(): Promise<void>;
+  protected render(): _$vue_jsx_runtime0.JSX.Element;
+}
+//#endregion
+//#region src/suite/a-home/modules/home-base/src/.metadata/page/authCallback.d.ts
+declare namespace NSControllerPageAuthCallback {
+  const querySchema: z.ZodObject<{
+    returnTo: z.ZodOptional<z.ZodString>;
+    'x-vona-oauth-code': z.ZodOptional<z.ZodString>;
+  }, z.core.$strip>;
+  type QueryInput = z.input<typeof ControllerPageAuthCallbackSchemaQuery>;
+  type QueryOutput = z.output<typeof ControllerPageAuthCallbackSchemaQuery>;
+}
+declare const ZPageAuthCallback: _$vue.DefineSetupFnComponent<Record<string, any>, {}, {}, Record<string, any> & {}, _$vue.PublicProps>;
+//#endregion
+//#region src/suite/a-home/modules/home-base/src/.metadata/page/errorExpired.d.ts
+declare namespace NSControllerPageErrorExpired {
+  const querySchema: z.ZodObject<{
+    returnTo: z.ZodOptional<z.ZodString>;
+  }, z.core.$strip>;
+  type QueryInput = z.input<typeof ControllerPageErrorExpiredSchemaQuery>;
+  type QueryOutput = z.output<typeof ControllerPageErrorExpiredSchemaQuery>;
+}
+declare const ZPageErrorExpired: _$vue.DefineSetupFnComponent<Record<string, any>, {}, {}, Record<string, any> & {}, _$vue.PublicProps>;
+//#endregion
+//#region src/suite/a-home/modules/home-base/src/.metadata/page/errorNotFound.d.ts
+declare const ZPageErrorNotFound: _$vue.DefineSetupFnComponent<Record<string, any>, {}, {}, Record<string, any> & {}, _$vue.PublicProps>;
+//#endregion
+//#region src/suite/a-home/modules/home-base/src/.metadata/component/itemLink.d.ts
+type TypeControllerItemLinkPublicProps = {
+  controllerRef?: (ref: ControllerItemLink) => void;
+} & ControllerItemLinkProps;
+type ControllerInnerProps$10 = TypeControllerInnerProps<ControllerItemLinkProps, keyof typeof ControllerItemLink.$propsDefault>;
+declare module 'zova-module-home-base' {
+  interface ControllerItemLink {
+    $props: ControllerInnerProps$10;
+  }
+}
+declare const ZItemLink: _$vue.DefineSetupFnComponent<TypeControllerItemLinkPublicProps, _$vue.EmitsOptions, _$vue.SlotsType<Record<string, any>>, {
+  controllerRef?: (ref: ControllerItemLink) => void;
+} & ControllerItemLinkProps & ({
+  [x: `on${Capitalize<string>}`]: ((...args: any[]) => any) | undefined;
+} | {
+  [x: `on${Capitalize<string>}`]: ((...args: never) => any) | undefined;
+}), _$vue.PublicProps>;
+//#endregion
+//#region src/suite/a-home/modules/home-base/src/.metadata/component/page.d.ts
+type TypeControllerPagePublicProps = {
+  controllerRef?: (ref: ControllerPage) => void;
+} & ControllerPageProps;
+type ControllerInnerProps$9 = TypeControllerInnerProps<ControllerPageProps, keyof typeof ControllerPage.$propsDefault>;
+declare module 'zova-module-home-base' {
+  interface ControllerPage {
+    $props: ControllerInnerProps$9;
+  }
+}
+declare const ZPage: _$vue.DefineSetupFnComponent<TypeControllerPagePublicProps, _$vue.EmitsOptions, _$vue.SlotsType<Record<string, any>>, {
+  controllerRef?: (ref: ControllerPage) => void;
+} & ControllerPageProps & ({
+  [x: `on${Capitalize<string>}`]: ((...args: any[]) => any) | undefined;
+} | {
+  [x: `on${Capitalize<string>}`]: ((...args: never) => any) | undefined;
+}), _$vue.PublicProps>;
+//#endregion
+//#region src/suite/a-home/modules/home-base/src/config/config.d.ts
+declare const config: (_sys: ZovaSys) => {
+  layout: {
+    sidebar: {
+      width: number;
+    };
+    navbar: {
+      height: number;
+    };
+  };
+};
+//#endregion
+//#region src/suite/a-home/modules/home-base/src/.metadata/locales.d.ts
+declare const locales$5: {
+  'en-us': {
+    Home: string;
+  };
+  'zh-cn': {
+    Home: string;
+  };
+};
+//#endregion
+//#region src/suite/a-home/modules/home-base/src/monkey.d.ts
+declare class Monkey extends BeanSimple implements IMonkeyAppInitialize, IMonkeyAppClose, IMonkeyBeanInit {
+  serviceRouterGuards: ServiceRouterGuards;
+  serviceSsr: ServiceSsr;
+  appInitialize(): Promise<void>;
+  appClose(): void;
+  beanInit(bean: BeanContainer, beanInstance: BeanBase): Promise<void>;
+}
+//#endregion
+//#region src/suite/a-home/modules/home-base/src/monkeySys.d.ts
+declare class MonkeySys extends BeanSimple implements IMonkeyBeanInit {
+  beanInit(bean: BeanContainer, beanInstance: BeanBase): Promise<void>;
+}
+//#endregion
+//#region src/suite/a-home/modules/home-base/src/main.d.ts
+declare class Main extends BeanSimple implements IModuleMain {
+  moduleLoading(): Promise<void>;
+  moduleLoaded(): Promise<void>;
+}
+//#endregion
+//#region src/suite/a-home/modules/home-base/src/.metadata/index.d.ts
+declare module 'zova-module-a-bean' {
+  interface IServiceRecord {
+    'home-base:routerGuards': never;
+    'home-base:ssr': never;
+    'home-base:ssrLayout': never;
+  }
+}
+declare module 'zova-module-home-base' {
+  interface ServiceRouterGuards {}
+  interface ServiceRouterGuards {
+    get $beanFullName(): 'home-base.service.routerGuards';
+    get $onionName(): 'home-base:routerGuards';
+  }
+  interface ServiceSsr {}
+  interface ServiceSsr {
+    get $beanFullName(): 'home-base.service.ssr';
+    get $onionName(): 'home-base:ssr';
+  }
+  interface ServiceSsrLayout {}
+  interface ServiceSsrLayout {
+    get $beanFullName(): 'home-base.service.ssrLayout';
+    get $onionName(): 'home-base:ssrLayout';
+  }
+}
+/** service: end */
+/** service: begin */
+declare module 'zova' {
+  interface IBeanRecordGeneral {
+    'home-base.service.routerGuards': ServiceRouterGuards;
+    'home-base.service.ssr': ServiceSsr;
+    'home-base.service.ssrLayout': ServiceSsrLayout;
+  }
+}
+/** service: end */
+/** controller: begin */
+declare module 'zova' {}
+declare module 'zova-module-home-base' {
+  interface ControllerItemLink {}
+  interface ControllerPage {}
+  interface ControllerPageAuthCallback {}
+  interface ControllerPageErrorExpired {}
+  interface ControllerPageErrorNotFound {}
+}
+/** controller: end */
+/** controller: begin */
+declare module 'zova' {
+  interface IBeanRecordLocal {
+    'home-base.controller.itemLink': ControllerItemLink;
+    'home-base.controller.page': ControllerPage;
+    'home-base.controller.pageAuthCallback': ControllerPageAuthCallback;
+    'home-base.controller.pageErrorExpired': ControllerPageErrorExpired;
+    'home-base.controller.pageErrorNotFound': ControllerPageErrorNotFound;
+  }
+}
+/** controller: end */
+/** pages: begin */
+declare module 'zova-module-a-router' {
+  interface IPagePathRecord {
+    '/home/base/authCallback': TypePagePathSchema<undefined, NSControllerPageAuthCallback.QueryInput>;
+    '/home/base/errorExpired': TypePagePathSchema<undefined, NSControllerPageErrorExpired.QueryInput>;
+    '/home/base//:catchAll(.*)*': TypePagePathSchema<undefined, undefined>;
+  }
+  interface IPageNameRecord {}
+}
+declare module 'zova-module-home-base' {
+  interface ControllerPageAuthCallback {
+    $query: NSControllerPageAuthCallback.QueryOutput;
+  }
+  interface ControllerPageErrorExpired {
+    $query: NSControllerPageErrorExpired.QueryOutput;
+  }
+}
+/** pages: end */
+/** components: begin */
+declare module 'zova' {
+  interface IComponentRecord {
+    'home-base:itemLink': ControllerItemLink;
+    'home-base:page': ControllerPage;
+  }
+  interface IZovaComponentRecord {
+    'home-base:itemLink': typeof ZItemLink;
+    'home-base:page': typeof ZPage;
+  }
+}
+/** components: end */
+/** config: begin */
+declare class ScopeModuleHomeBase extends BeanScopeBase {}
+interface ScopeModuleHomeBase {
+  util: BeanScopeUtil;
+  config: TypeModuleConfig<typeof config>;
+  locale: TypeModuleLocales<(typeof locales$5)[TypeLocaleBase]>;
+}
+declare module 'zova' {
+  interface IBeanScopeRecord {
+    'home-base': ScopeModuleHomeBase;
+  }
+  interface IBeanScopeConfig {
+    'home-base': ReturnType<typeof config>;
+  }
+  interface IBeanScopeLocale {
+    'home-base': (typeof locales$5)[TypeLocaleBase];
+  }
+}
+//#endregion
+//#region src/suite/a-home/modules/home-base/src/lib/utils.d.ts
+declare function definePropertyScopeBase(bean: BeanContainer, beanInstance: BeanBase): void;
+//#endregion
+//#region src/suite/a-home/modules/home-base/src/types/scopeBase.d.ts
+declare module 'zova' {
+  interface BeanBase {
+    $scopeBase: ScopeModuleHomeBase;
+  }
+}
+//#endregion
+//#region src/suite/a-home/modules/home-base/rest/component/itemLink.d.ts
+type TypeControllerItemLinkPublicProps$1 = TypeRenderComponentJsxPropsPublic & ControllerItemLinkProps;
+declare function BBZHomeBaseItemLink(_props: TypeControllerItemLinkPublicProps$1): string;
+//#endregion
 //#region src/suite/a-home/modules/home-base/rest/component/page.d.ts
 type TypeControllerPagePublicProps$1 = TypeRenderComponentJsxPropsPublic & ControllerPageProps;
 declare function BBZHomeBasePage(_props: TypeControllerPagePublicProps$1): string;
@@ -10614,6 +6302,7 @@ declare module 'zova-module-a-icon' {
     '::arrow-up-right': true;
     '::arrow-up': true;
     '::article': true;
+    '::asterisk': true;
     '::attachment-line': true;
     '::book': true;
     '::checkbox-checked': true;
@@ -10827,112 +6516,20 @@ declare module 'zova' {
 }
 /** scope: end */
 //#endregion
-//#region src/suite/a-home/modules/home-layout/src/model/menu.d.ts
-type TypeMenuGroup = ApiSchemaAMenuDtoMenuGroup$1 & {
-  folder: true;
-  children: TypeMenuItem[];
-};
-type TypeMenuItem = (ApiSchemaAMenuDtoMenuItem$1 & {
-  folder: false;
-}) | TypeMenuGroup;
-type TypeMenuTree = TypeMenuItem[];
-interface IModelOptionsMenu$1 extends IDecoratorModelOptions {}
-declare class ModelMenu$1 extends BeanModelBase {
-  menuTree?: TypeMenuTree;
-  private _eventSsrHmrReload;
-  protected __init__(): Promise<void>;
-  protected __dispose__(): void;
-  retrieveMenus(): _$vue.UnwrapNestedRefs<_$_tanstack_vue_query0.UseQueryReturnType<{
-    groups?: components$1['schemas']['a-menu.dto.menuGroup'][] | undefined;
-    menus: {
-      name: string;
-      title?: string | undefined;
-      description?: string | undefined;
-      icon?: string | undefined;
-      order?: number | undefined;
-      group?: string | string[] | undefined;
-      separator?: boolean | undefined;
-      link?: string | undefined;
-      external?: boolean | undefined;
-      target?: string | undefined;
-      meta?: components$1['schemas']['a-menu.dto.menuItemMeta'];
-    }[] | undefined;
-  }, Error>>;
-  findMenuItem(search: {
-    name?: string;
-    link?: string;
-  }): ApiSchemaAMenuDtoMenuItem$1 | undefined;
-  private _prepareMenuTree;
-}
-//#endregion
-//#region src/suite/a-home/modules/home-layout/src/service/ssr.d.ts
-declare class ServiceSsr$1 extends BeanBase {
-  $$scopeSsr: ScopeModuleASsr;
-  protected __init__(): Promise<void>;
-}
-//#endregion
-//#region src/suite/a-home/modules/home-layout/src/component/essentialLink/controller.d.ts
-interface ControllerEssentialLinkProps {
-  title: string;
-  description?: string;
-  icon?: keyof IIconRecord$1;
-  href?: string;
-  to?: string | object;
-}
-declare class ControllerEssentialLink extends BeanControllerBase {
-  static $propsDefault: {
-    description: string;
-    icon: string;
-  };
-  _renderLink(): _$vue_jsx_runtime0.JSX.Element;
-  protected render(): _$vue_jsx_runtime0.JSX.Element;
-}
-//#endregion
-//#region src/suite/a-home/modules/home-layout/src/component/layoutEmpty/controller.d.ts
+//#region src/suite/a-home/modules/home-layoutempty/src/component/layoutEmpty/controller.d.ts
 interface ControllerLayoutEmptyProps {}
 declare class ControllerLayoutEmpty extends BeanControllerBase {
   static $propsDefault: {};
-  $$ssr: ServiceSsr$1;
+  $$serviceSsrLayout: ServiceSsrLayout;
   protected render(): _$vue_jsx_runtime0.JSX.Element;
 }
 //#endregion
-//#region src/suite/a-home/modules/home-layout/src/component/layoutTabs/controller.d.ts
-interface ControllerLayoutTabsProps {}
-declare class ControllerLayoutTabs extends BeanControllerBase {
-  static $propsDefault: {};
-  $$modelTabs: ModelTabs;
-  $$modelMenu: ModelMenu$1;
-  $$ssr: ServiceSsr$1;
-  leftDrawerOpen: boolean;
-  protected __init__(): Promise<void>;
-  private _initTabs;
-  toggleLeftDrawer(): void;
-}
-//#endregion
-//#region src/suite/a-home/modules/home-layout/src/.metadata/component/essentialLink.d.ts
-type TypeControllerEssentialLinkPublicProps$1 = {
-  controllerRef?: (ref: ControllerEssentialLink) => void;
-} & ControllerEssentialLinkProps;
-type ControllerInnerProps$9 = TypeControllerInnerProps<ControllerEssentialLinkProps, keyof typeof ControllerEssentialLink.$propsDefault>;
-declare module 'zova-module-home-layout' {
-  interface ControllerEssentialLink {
-    $props: ControllerInnerProps$9;
-  }
-}
-declare const ZEssentialLink: _$vue.DefineSetupFnComponent<TypeControllerEssentialLinkPublicProps$1, _$vue.EmitsOptions, _$vue.SlotsType<Record<string, any>>, {
-  controllerRef?: (ref: ControllerEssentialLink) => void;
-} & ControllerEssentialLinkProps & ({
-  [x: `on${Capitalize<string>}`]: ((...args: any[]) => any) | undefined;
-} | {
-  [x: `on${Capitalize<string>}`]: ((...args: never) => any) | undefined;
-}), _$vue.PublicProps>;
-//#endregion
-//#region src/suite/a-home/modules/home-layout/src/.metadata/component/layoutEmpty.d.ts
+//#region src/suite/a-home/modules/home-layoutempty/src/.metadata/component/layoutEmpty.d.ts
 type TypeControllerLayoutEmptyPublicProps$1 = {
   controllerRef?: (ref: ControllerLayoutEmpty) => void;
 } & ControllerLayoutEmptyProps;
 type ControllerInnerProps$8 = TypeControllerInnerProps<ControllerLayoutEmptyProps, keyof typeof ControllerLayoutEmpty.$propsDefault>;
-declare module 'zova-module-home-layout' {
+declare module 'zova-module-home-layoutempty' {
   interface ControllerLayoutEmpty {
     $props: ControllerInnerProps$8;
   }
@@ -10945,17 +6542,117 @@ declare const ZLayoutEmpty: _$vue.DefineSetupFnComponent<TypeControllerLayoutEmp
   [x: `on${Capitalize<string>}`]: ((...args: never) => any) | undefined;
 }), _$vue.PublicProps>;
 //#endregion
-//#region src/suite/a-home/modules/home-layout/src/.metadata/component/layoutTabs.d.ts
+//#region src/suite/a-home/modules/home-layoutempty/src/.metadata/index.d.ts
+declare module 'zova' {}
+declare module 'zova-module-home-layoutempty' {
+  interface ControllerLayoutEmpty {}
+}
+/** controller: end */
+/** controller: begin */
+declare module 'zova' {
+  interface IBeanRecordLocal {
+    'home-layoutempty.controller.layoutEmpty': ControllerLayoutEmpty;
+  }
+}
+/** controller: end */
+/** components: begin */
+declare module 'zova' {
+  interface IComponentRecord {
+    'home-layoutempty:layoutEmpty': ControllerLayoutEmpty;
+  }
+  interface IZovaComponentRecord {
+    'home-layoutempty:layoutEmpty': typeof ZLayoutEmpty;
+  }
+}
+/** components: end */
+/** scope: begin */
+declare class ScopeModuleHomeLayoutempty extends BeanScopeBase {}
+interface ScopeModuleHomeLayoutempty {
+  util: BeanScopeUtil;
+}
+declare module 'zova' {
+  interface IBeanScopeRecord {
+    'home-layoutempty': ScopeModuleHomeLayoutempty;
+  }
+}
+/** scope: end */
+//#endregion
+//#region src/suite/a-home/modules/home-layoutempty/rest/component/layoutEmpty.d.ts
+type TypeControllerLayoutEmptyPublicProps = TypeRenderComponentJsxPropsPublic & ControllerLayoutEmptyProps;
+declare function BBZHomeLayoutemptyLayoutEmpty(_props: TypeControllerLayoutEmptyPublicProps): string;
+//#endregion
+//#region src/suite/a-home/modules/home-layouttabs/src/model/menu.d.ts
+type TypeMenuGroup = ApiSchemaAMenuDtoMenuGroup & {
+  folder: true;
+  children: TypeMenuItem[];
+};
+type TypeMenuItem = (ApiSchemaAMenuDtoMenuItem & {
+  folder: false;
+}) | TypeMenuGroup;
+type TypeMenuTree = TypeMenuItem[];
+interface IModelOptionsMenu extends IDecoratorModelOptions {}
+declare class ModelMenu extends BeanModelBase {
+  menuTree?: TypeMenuTree;
+  private _eventSsrHmrReload;
+  protected __init__(): Promise<void>;
+  protected __dispose__(): void;
+  retrieveMenus(): _$vue.UnwrapNestedRefs<_$_tanstack_vue_query0.UseQueryReturnType<{
+    groups?: components['schemas']['a-menu.dto.menuGroup'][] | undefined;
+    menus: {
+      name: string;
+      title?: string | undefined;
+      description?: string | undefined;
+      icon?: string | undefined;
+      order?: number | undefined;
+      group?: string | string[] | undefined;
+      separator?: boolean | undefined;
+      link?: string | undefined;
+      external?: boolean | undefined;
+      target?: string | undefined;
+      meta?: components['schemas']['a-menu.dto.menuItemMeta'];
+    }[] | undefined;
+  }, Error>>;
+  findMenuItem(search: {
+    name?: string;
+    link?: string;
+  }): ApiSchemaAMenuDtoMenuItem | undefined;
+  private _prepareMenuTree;
+}
+//#endregion
+//#region src/suite/a-home/modules/home-layouttabs/src/model/layout.d.ts
+declare class ModelLayout extends BeanModelBase {
+  leftDrawerOpenPC: boolean;
+  $$scopeSsr: ScopeModuleASsr;
+  protected __init__(): Promise<void>;
+}
+//#endregion
+//#region src/suite/a-home/modules/home-layouttabs/src/component/layoutTabs/controller.d.ts
+interface ControllerLayoutTabsProps {}
+declare class ControllerLayoutTabs extends BeanControllerBase {
+  static $propsDefault: {};
+  $$modelTabs: ModelTabs;
+  $$modelMenu: ModelMenu;
+  $$modelLayout: ModelLayout;
+  $$serviceSsrLayout: ServiceSsrLayout;
+  leftDrawerOpen: boolean;
+  leftDrawerOpenMobile: boolean;
+  belowBreakpoint: boolean;
+  protected __init__(): Promise<void>;
+  private _initTabs;
+  toggleLeftDrawer(): void;
+}
+//#endregion
+//#region src/suite/a-home/modules/home-layouttabs/src/.metadata/component/layoutTabs.d.ts
 type TypeControllerLayoutTabsPublicProps$1 = {
   controllerRef?: (ref: ControllerLayoutTabs) => void;
 } & ControllerLayoutTabsProps;
 type ControllerInnerProps$7 = TypeControllerInnerProps<ControllerLayoutTabsProps, keyof typeof ControllerLayoutTabs.$propsDefault>;
-declare module 'zova-module-home-layout' {
+declare module 'zova-module-home-layouttabs' {
   interface ControllerLayoutTabs {
     $props: ControllerInnerProps$7;
   }
 }
-declare module 'zova-module-home-layout' {
+declare module 'zova-module-home-layouttabs' {
   interface StyleLayoutTabs extends ControllerLayoutTabs {}
   interface RenderLayoutTabs extends StyleLayoutTabs {}
   interface RenderContent extends StyleLayoutTabs {}
@@ -10975,18 +6672,18 @@ declare const ZLayoutTabs: _$vue.DefineSetupFnComponent<TypeControllerLayoutTabs
   [x: `on${Capitalize<string>}`]: ((...args: never) => any) | undefined;
 }), _$vue.PublicProps>;
 //#endregion
-//#region src/suite/a-home/modules/home-layout/src/component/layoutTabs/render.header.d.ts
+//#region src/suite/a-home/modules/home-layouttabs/src/component/layoutTabs/render.header.d.ts
 declare class RenderHeader extends BeanRenderBase {
   $$r: RenderLayoutTabs;
   render(): _$vue_jsx_runtime0.JSX.Element;
 }
 //#endregion
-//#region src/suite/a-home/modules/home-layout/src/component/layoutTabs/render.locale.d.ts
+//#region src/suite/a-home/modules/home-layouttabs/src/component/layoutTabs/render.locale.d.ts
 declare class RenderLocale extends BeanRenderBase {
   render(): _$vue_jsx_runtime0.JSX.Element;
 }
 //#endregion
-//#region src/suite/a-home/modules/home-layout/src/component/layoutTabs/render.menu.d.ts
+//#region src/suite/a-home/modules/home-layouttabs/src/component/layoutTabs/render.menu.d.ts
 declare class RenderMenu extends BeanRenderBase {
   _renderMenuItem(item: TypeMenuItem): _$vue_jsx_runtime0.JSX.Element;
   _renderMenuItems(items?: TypeMenuTree): VNode<_$vue.RendererNode, _$vue.RendererElement, {
@@ -10995,30 +6692,32 @@ declare class RenderMenu extends BeanRenderBase {
   render(): _$vue_jsx_runtime0.JSX.Element | undefined;
 }
 //#endregion
-//#region src/suite/a-home/modules/home-layout/src/component/layoutTabs/render.sidebar.d.ts
+//#region src/suite/a-home/modules/home-layouttabs/src/component/layoutTabs/render.sidebar.d.ts
 declare class RenderSidebar extends BeanRenderBase {
   $$r: RenderLayoutTabs;
   render(): _$vue_jsx_runtime0.JSX.Element;
 }
 //#endregion
-//#region src/suite/a-home/modules/home-layout/src/component/layoutTabs/render.tabs.d.ts
+//#region src/suite/a-home/modules/home-layouttabs/src/component/layoutTabs/render.tabs.d.ts
 declare class RenderTabs extends BeanRenderBase {
-  render(): _$vue_jsx_runtime0.JSX.Element | undefined;
+  renderTabs(): _$vue_jsx_runtime0.JSX.Element | undefined;
+  getTabIcon(tab: RouteTab): string;
+  renderTabItems(): _$vue_jsx_runtime0.JSX.Element | undefined;
   _renderRouterViewTabs(): _$vue_jsx_runtime0.JSX.Element;
 }
 //#endregion
-//#region src/suite/a-home/modules/home-layout/src/component/layoutTabs/render.theme.d.ts
+//#region src/suite/a-home/modules/home-layouttabs/src/component/layoutTabs/render.theme.d.ts
 declare class RenderTheme extends BeanRenderBase {
   renderThemeDark(): _$vue_jsx_runtime0.JSX.Element;
   renderThemeName(): _$vue_jsx_runtime0.JSX.Element;
 }
 //#endregion
-//#region src/suite/a-home/modules/home-layout/src/component/layoutTabs/render.user.d.ts
+//#region src/suite/a-home/modules/home-layouttabs/src/component/layoutTabs/render.user.d.ts
 declare class RenderUser extends BeanRenderBase {
   render(): _$vue_jsx_runtime0.JSX.Element;
 }
 //#endregion
-//#region src/suite/a-home/modules/home-layout/src/component/layoutTabs/render.d.ts
+//#region src/suite/a-home/modules/home-layouttabs/src/component/layoutTabs/render.d.ts
 declare class RenderLayoutTabs extends BeanRenderBase {
   $$renderHeader: RenderHeader;
   $$renderContent: RenderContent;
@@ -11031,19 +6730,19 @@ declare class RenderLayoutTabs extends BeanRenderBase {
   render(): _$vue_jsx_runtime0.JSX.Element;
 }
 //#endregion
-//#region src/suite/a-home/modules/home-layout/src/component/layoutTabs/render.content.d.ts
+//#region src/suite/a-home/modules/home-layouttabs/src/component/layoutTabs/render.content.d.ts
 declare class RenderContent extends BeanRenderBase {
   $$r: RenderLayoutTabs;
   render(): _$vue_jsx_runtime0.JSX.Element;
 }
 //#endregion
-//#region src/suite/a-home/modules/home-layout/src/component/layoutTabs/style.d.ts
+//#region src/suite/a-home/modules/home-layouttabs/src/component/layoutTabs/style.d.ts
 declare class StyleLayoutTabs$1 extends BeanStyleBase {
   cTab: string;
   protected __init__(): Promise<void>;
 }
 //#endregion
-//#region src/suite/a-home/modules/home-layout/src/config/config.d.ts
+//#region src/suite/a-home/modules/home-layouttabs/src/config/config.d.ts
 declare const config$1: (_sys: ZovaSys) => {
   tabs: {
     scene: string;
@@ -11051,9 +6750,12 @@ declare const config$1: (_sys: ZovaSys) => {
     maxItems: number;
     cache: boolean;
   };
+  tabItem: {
+    maxWidth: string;
+  };
 };
 //#endregion
-//#region src/suite/a-home/modules/home-layout/src/.metadata/locales.d.ts
+//#region src/suite/a-home/modules/home-layouttabs/src/.metadata/locales.d.ts
 declare const locales$4: {
   'en-us': {
     Home: string;
@@ -11099,83 +6801,54 @@ declare const locales$4: {
   };
 };
 //#endregion
-//#region src/suite/a-home/modules/home-layout/src/.metadata/index.d.ts
+//#region src/suite/a-home/modules/home-layouttabs/src/.metadata/index.d.ts
 declare module 'zova-module-a-model' {
   interface IModelRecord {
-    'home-layout:menu': IModelOptionsMenu$1;
+    'home-layouttabs:menu': IModelOptionsMenu;
   }
 }
-declare module 'zova-module-home-layout' {
+declare module 'zova-module-home-layouttabs' {
   interface ModelMenu {}
   interface ModelMenu {
-    get $beanFullName(): 'home-layout.model.menu';
-    get $onionName(): 'home-layout:menu';
-    get $onionOptions(): IModelOptionsMenu$1;
+    get $beanFullName(): 'home-layouttabs.model.menu';
+    get $onionName(): 'home-layouttabs:menu';
+    get $onionOptions(): IModelOptionsMenu;
   }
 }
 /** model: end */
 /** model: begin */
 declare module 'zova' {
   interface IBeanRecordGeneral {
-    'home-layout.model.menu': ModelMenu$1;
+    'home-layouttabs.model.menu': ModelMenu;
   }
 }
 /** model: end */
-/** service: begin */
-declare module 'zova-module-a-bean' {
-  interface IServiceRecord {
-    'home-layout:ssr': never;
-  }
-}
-declare module 'zova-module-home-layout' {
-  interface ServiceSsr {}
-  interface ServiceSsr {
-    get $beanFullName(): 'home-layout.service.ssr';
-    get $onionName(): 'home-layout:ssr';
-  }
-}
-/** service: end */
-/** service: begin */
-declare module 'zova' {
-  interface IBeanRecordGeneral {
-    'home-layout.service.ssr': ServiceSsr$1;
-  }
-}
-/** service: end */
 /** controller: begin */
 declare module 'zova' {}
-declare module 'zova-module-home-layout' {
-  interface ControllerEssentialLink {}
-  interface ControllerLayoutEmpty {}
+declare module 'zova-module-home-layouttabs' {
   interface ControllerLayoutTabs {}
 }
 /** controller: end */
 /** controller: begin */
 declare module 'zova' {
   interface IBeanRecordLocal {
-    'home-layout.controller.essentialLink': ControllerEssentialLink;
-    'home-layout.controller.layoutEmpty': ControllerLayoutEmpty;
-    'home-layout.controller.layoutTabs': ControllerLayoutTabs;
+    'home-layouttabs.controller.layoutTabs': ControllerLayoutTabs;
   }
 }
 /** controller: end */
 /** components: begin */
 declare module 'zova' {
   interface IComponentRecord {
-    'home-layout:essentialLink': ControllerEssentialLink;
-    'home-layout:layoutEmpty': ControllerLayoutEmpty;
-    'home-layout:layoutTabs': ControllerLayoutTabs;
+    'home-layouttabs:layoutTabs': ControllerLayoutTabs;
   }
   interface IZovaComponentRecord {
-    'home-layout:essentialLink': typeof ZEssentialLink;
-    'home-layout:layoutEmpty': typeof ZLayoutEmpty;
-    'home-layout:layoutTabs': typeof ZLayoutTabs;
+    'home-layouttabs:layoutTabs': typeof ZLayoutTabs;
   }
 }
 /** components: end */
 /** render: begin */
 declare module 'zova' {}
-declare module 'zova-module-home-layout' {
+declare module 'zova-module-home-layouttabs' {
   interface RenderContent {}
   interface RenderHeader {}
   interface RenderLocale {}
@@ -11190,61 +6863,53 @@ declare module 'zova-module-home-layout' {
 /** render: begin */
 declare module 'zova' {
   interface IBeanRecordLocal {
-    'home-layout.render.content': RenderContent;
-    'home-layout.render.header': RenderHeader;
-    'home-layout.render.locale': RenderLocale;
-    'home-layout.render.menu': RenderMenu;
-    'home-layout.render.sidebar': RenderSidebar;
-    'home-layout.render.tabs': RenderTabs;
-    'home-layout.render.theme': RenderTheme;
-    'home-layout.render.layoutTabs': RenderLayoutTabs;
-    'home-layout.render.user': RenderUser;
+    'home-layouttabs.render.content': RenderContent;
+    'home-layouttabs.render.header': RenderHeader;
+    'home-layouttabs.render.locale': RenderLocale;
+    'home-layouttabs.render.menu': RenderMenu;
+    'home-layouttabs.render.sidebar': RenderSidebar;
+    'home-layouttabs.render.tabs': RenderTabs;
+    'home-layouttabs.render.theme': RenderTheme;
+    'home-layouttabs.render.layoutTabs': RenderLayoutTabs;
+    'home-layouttabs.render.user': RenderUser;
   }
 }
 /** render: end */
 /** style: begin */
 declare module 'zova' {}
-declare module 'zova-module-home-layout' {
+declare module 'zova-module-home-layouttabs' {
   interface StyleLayoutTabs {}
 }
 /** style: end */
 /** style: begin */
 declare module 'zova' {
   interface IBeanRecordLocal {
-    'home-layout.style.layoutTabs': StyleLayoutTabs$1;
+    'home-layouttabs.style.layoutTabs': StyleLayoutTabs$1;
   }
 }
 /** style: end */
 /** config: begin */
-declare class ScopeModuleHomeLayout extends BeanScopeBase {}
-interface ScopeModuleHomeLayout {
+declare class ScopeModuleHomeLayouttabs extends BeanScopeBase {}
+interface ScopeModuleHomeLayouttabs {
   util: BeanScopeUtil;
   config: TypeModuleConfig<typeof config$1>;
   locale: TypeModuleLocales<(typeof locales$4)[TypeLocaleBase]>;
 }
 declare module 'zova' {
   interface IBeanScopeRecord {
-    'home-layout': ScopeModuleHomeLayout;
+    'home-layouttabs': ScopeModuleHomeLayouttabs;
   }
   interface IBeanScopeConfig {
-    'home-layout': ReturnType<typeof config$1>;
+    'home-layouttabs': ReturnType<typeof config$1>;
   }
   interface IBeanScopeLocale {
-    'home-layout': (typeof locales$4)[TypeLocaleBase];
+    'home-layouttabs': (typeof locales$4)[TypeLocaleBase];
   }
 }
 //#endregion
-//#region src/suite/a-home/modules/home-layout/rest/component/essentialLink.d.ts
-type TypeControllerEssentialLinkPublicProps = TypeRenderComponentJsxPropsPublic & ControllerEssentialLinkProps;
-declare function BBZHomeLayoutEssentialLink(_props: TypeControllerEssentialLinkPublicProps): string;
-//#endregion
-//#region src/suite/a-home/modules/home-layout/rest/component/layoutEmpty.d.ts
-type TypeControllerLayoutEmptyPublicProps = TypeRenderComponentJsxPropsPublic & ControllerLayoutEmptyProps;
-declare function BBZHomeLayoutEmpty(_props: TypeControllerLayoutEmptyPublicProps): string;
-//#endregion
-//#region src/suite/a-home/modules/home-layout/rest/component/layoutTabs.d.ts
+//#region src/suite/a-home/modules/home-layouttabs/rest/component/layoutTabs.d.ts
 type TypeControllerLayoutTabsPublicProps = TypeRenderComponentJsxPropsPublic & ControllerLayoutTabsProps;
-declare function BBZHomeLayoutTabs(_props: TypeControllerLayoutTabsPublicProps): string;
+declare function BBZHomeLayouttabsLayoutTabs(_props: TypeControllerLayoutTabsPublicProps): string;
 //#endregion
 //#region src/suite/a-home/modules/home-login/src/page/login/controller.d.ts
 declare class ControllerPageLogin$1 extends BeanControllerPageBase {
@@ -11877,6 +7542,7 @@ declare class ControllerRestPageEntry<TData extends {} = {}> extends BeanControl
     suspense: () => Promise<_$_tanstack_query_core0.QueryObserverResult<NonNullable<Awaited<TData>> | null, Error>>;
   } | undefined;
   onSubmit(data: TypeFormOnSubmitData<TData>): Promise<void>;
+  setPageMeta(data: any | undefined, pageDirty?: boolean): void;
 }
 //#endregion
 //#region src/suite/cabloy-basic/modules/basic-restpage/src/component/wrapperFilter/controller.d.ts
@@ -12346,7 +8012,7 @@ declare function BBZRouterstackRouterViewStack(_props: TypeControllerRouterViewS
 type TypeControllerRouterViewTabsPublicProps = TypeRenderComponentJsxPropsPublic & ControllerRouterViewTabsProps;
 declare function BBZRoutertabsRouterViewTabs(_props: TypeControllerRouterViewTabsPublicProps): string;
 declare namespace index_d_exports {
-  export { $defs, $iconName, AopCounterLog, AopHome, AopHome3, ApiApiHomeBaseMenuretrieveMenusMethod, ApiApiHomeBaseMenuretrieveMenusPath, ApiApiHomeBaseMenuretrieveMenusRequestParams, ApiApiHomeBaseMenuretrieveMenusResponseBody, ApiHomeBaseMenu, ApiSchemaAAuthDtoAuth, ApiSchemaAAuthDtoAuthPartial, ApiSchemaACaptchaDtoCaptchaData, ApiSchemaACaptchaDtoCaptchaDataPartial, ApiSchemaACaptchaDtoCaptchaVerify_c3cd80b1eeafe39bfe4433491bb081d68e84797e, ApiSchemaACaptchaDtoCaptchaVerify_c3cd80b1eeafe39bfe4433491bb081d68e84797ePartial, ApiSchemaACaptchaDtoCaptchaVerify_c3cd80b1eeafe39bfe4433491bb081d68e84797e_3218e7d152830e08f6e764b9e0c3796df929ee2b, ApiSchemaACaptchaDtoCaptchaVerify_c3cd80b1eeafe39bfe4433491bb081d68e84797e_3218e7d152830e08f6e764b9e0c3796df929ee2bPartial, ApiSchemaAJwtDtoJwtToken, ApiSchemaAJwtDtoJwtTokenPartial, ApiSchemaAMenuDtoMenuGroup, ApiSchemaAMenuDtoMenuGroupPartial, ApiSchemaAMenuDtoMenuItem, ApiSchemaAMenuDtoMenuItemMeta, ApiSchemaAMenuDtoMenuItemMetaPartial, ApiSchemaAMenuDtoMenuItemPartial, ApiSchemaAMenuDtoMenus, ApiSchemaAMenuDtoMenusPartial, ApiSchemaAPaypalDtoPaypalOrderRecordOptions, ApiSchemaAPaypalDtoPaypalOrderRecordOptionsPartial, ApiSchemaAPaypalDtoPaypalOrderRecordPayload, ApiSchemaAPaypalDtoPaypalOrderRecordPayloadPartial, ApiSchemaAPaypalEntityPaypalRecord, ApiSchemaAPaypalEntityPaypalRecordPartial, ApiSchemaAPermissionDtoPermissions, ApiSchemaAPermissionDtoPermissionsPartial, ApiSchemaAPlayDtoPlay, ApiSchemaAPlayDtoPlayPartial, ApiSchemaHomeBaseMenu, ApiSchemaHomeUserDtoLogin, ApiSchemaHomeUserDtoLoginPartial, ApiSchemaHomeUserDtoPassport, ApiSchemaHomeUserDtoPassportJwt, ApiSchemaHomeUserDtoPassportJwtPartial, ApiSchemaHomeUserDtoPassportPartial, ApiSchemaHomeUserDtoRegister, ApiSchemaHomeUserDtoRegisterPartial, ApiSchemaHomeUserEntityRole, ApiSchemaHomeUserEntityRolePartial, ApiSchemaHomeUserEntityUser, ApiSchemaHomeUserEntityUserPartial, ApiSchemaTestCaptchaDtoSignin, ApiSchemaTestCaptchaDtoSigninPartial, ApiSchemaTestRestDtoProductCreate, ApiSchemaTestRestDtoProductCreatePartial, ApiSchemaTestRestDtoProductQueryRes, ApiSchemaTestRestDtoProductQueryResPartial, ApiSchemaTestRestDtoProductUpdate, ApiSchemaTestRestDtoProductUpdatePartial, ApiSchemaTestRestEntityProduct, ApiSchemaTestRestEntityProductPartial, ApiSchemaTestSsrDtoTestBody, ApiSchemaTestSsrDtoTestBodyPartial, ApiSchemaTestSsrDtoTestDetail, ApiSchemaTestSsrDtoTestDetailPartial, ApiSchemaTestSsrDtoTestResult, ApiSchemaTestSsrDtoTestResultPartial, ApiSchemaTestVonaDtoCategoryTree, ApiSchemaTestVonaDtoCategoryTreePartial, ApiSchemaTestVonaDtoOrderCreate, ApiSchemaTestVonaDtoOrderCreatePartial, ApiSchemaTestVonaDtoOrderResult, ApiSchemaTestVonaDtoOrderResultPage, ApiSchemaTestVonaDtoOrderResultPagePartial, ApiSchemaTestVonaDtoOrderResultPartial, ApiSchemaTestVonaDtoOrderUpdate, ApiSchemaTestVonaDtoOrderUpdatePartial, ApiSchemaTestVonaDtoPostAggregate, ApiSchemaTestVonaDtoPostAggregatePartial, ApiSchemaTestVonaDtoPostCreate, ApiSchemaTestVonaDtoPostCreatePartial, ApiSchemaTestVonaDtoPostGroup, ApiSchemaTestVonaDtoPostGroupPartial, ApiSchemaTestVonaDtoPostQueryRes, ApiSchemaTestVonaDtoPostQueryResPartial, ApiSchemaTestVonaDtoRoleLazy, ApiSchemaTestVonaDtoRoleLazyPartial, ApiSchemaTestVonaDtoSerializerArray, ApiSchemaTestVonaDtoSerializerArrayPartial, ApiSchemaTestVonaDtoSerializerLazy, ApiSchemaTestVonaDtoSerializerLazyPartial, ApiSchemaTestVonaDtoSerializerSimple, ApiSchemaTestVonaDtoSerializerSimplePartial, ApiSchemaTestVonaDtoSerializerSimple_1c4b95bcfe8fe28a56dbcc7028097cf11836b4fc, ApiSchemaTestVonaDtoSerializerSimple_1c4b95bcfe8fe28a56dbcc7028097cf11836b4fcPartial, ApiSchemaTestVonaDtoSerializerSimple_542f7be0da9b85a67248a6a1a3629e72de5fdb33_cff0ae112a392da58caf5aa905749f3c4444c4ab, ApiSchemaTestVonaDtoSerializerSimple_542f7be0da9b85a67248a6a1a3629e72de5fdb33_cff0ae112a392da58caf5aa905749f3c4444c4abPartial, ApiSchemaTestVonaDtoUser, ApiSchemaTestVonaDtoUserCreate, ApiSchemaTestVonaDtoUserCreatePartial, ApiSchemaTestVonaDtoUserLazy, ApiSchemaTestVonaDtoUserLazyPartial, ApiSchemaTestVonaDtoUserPartial, ApiSchemaTestVonaDtoUserUpdate, ApiSchemaTestVonaDtoUserUpdatePartial, ApiSchemaTestVonaEntityCategory_2c7d642ee581efa300341e343180fbb0ecdc785d, ApiSchemaTestVonaEntityCategory_2c7d642ee581efa300341e343180fbb0ecdc785dPartial, ApiSchemaTestVonaEntityPost_729883d7de16ce4401b26f75bebe618c8948ff64, ApiSchemaTestVonaEntityPost_729883d7de16ce4401b26f75bebe618c8948ff64Partial, ApiSchemaTestVonaEntityPost_a6ba2076b5b70a3c098374cc82d418bd1ab226c3, ApiSchemaTestVonaEntityPost_a6ba2076b5b70a3c098374cc82d418bd1ab226c3Partial, ApiSchemaTestVonaEntityProduct, ApiSchemaTestVonaEntityProductPartial, ApiSchemaTestVonaEntityProduct_29731960f3f38d3572bc2f8a01a7498bfe927055, ApiSchemaTestVonaEntityProduct_29731960f3f38d3572bc2f8a01a7498bfe927055Partial, ApiSchemaTestVonaEntityProduct_9cf2c6bcd41713270c34bcfce21b7b4942e3fbc6, ApiSchemaTestVonaEntityProduct_9cf2c6bcd41713270c34bcfce21b7b4942e3fbc6Partial, ApiSchemaTestVonaEntityProduct_bce173590aaef19772f1ae3a82196493c2633e2e, ApiSchemaTestVonaEntityProduct_bce173590aaef19772f1ae3a82196493c2633e2ePartial, ApiSchemaTestVonaEntityUser_2c7d642ee581efa300341e343180fbb0ecdc785d_1816ff740d81c738ec055c7038bbd93beb9405a7, ApiSchemaTestVonaEntityUser_2c7d642ee581efa300341e343180fbb0ecdc785d_1816ff740d81c738ec055c7038bbd93beb9405a7Partial, ApiTodo, ApiTodoEntity, ApiTodoIntertBody, ApiTodoUpdateBody, BBAActionsLog, BBARestActionsAlert, BBARestActionsConfirm, BBARestActionsCopy, BBARestActionsCreate, BBARestActionsDelete, BBARestActionsEdit, BBARestActionsSetValue, BBARestActionsView, BBFBasicDateRange, BBFBasicFormCaptcha, BBFCurrency, BBFDemoBasicTest, BBFFormWrapper, BBPBasicRestpage, BBPBasicRestpageEntry, BBTBasicTableActionOperationsRow, BBTBasicTableActionView, BBTCTest, BBTCurrency, BBTDate, BBTDemoBasicTest, BBZApp, BBZBasicDateRange, BBZBasicRestpageWrapperFilter, BBZBasicTable, BBZBasicTableActionOperationsTable, BBZBehavior, BBZDemoBasicActionView, BBZDemoBasicCard, BBZDemoBasicTableCellTest, BBZDemoStudentCard, BBZDemoStudentTest, BBZForm, BBZFormField, BBZFormSubscribe, BBZHomeBasePage, BBZHomeLayoutEmpty, BBZHomeLayoutEssentialLink, BBZHomeLayoutTabs, BBZIcon, BBZRouterViewEmpty, BBZRouterstackRouterViewStack, BBZRoutertabsRouterViewTabs, BBZTable, BeanTest, BehaviorFormFieldLayout, BehaviorFormFieldLayoutLogin, ControllerActionView, ControllerActionViewProps, ControllerCardModels, ControllerFormFieldTest, ControllerFormFieldTestProps, ControllerPage, ControllerPageAuthCallback, ControllerPageAuthCallbackSchemaQuery, ControllerPageComponent, ControllerPageCounterSchemaParams, ControllerPageCounterSchemaQuery, ControllerPageErrorExpired, ControllerPageErrorExpiredSchemaQuery, ControllerPageErrorNotFound, ControllerPageHome, ControllerPageItem, ControllerPageItemSchemaParams, ControllerPageItemSchemaQuery, ControllerPageLocale, ControllerPageLogin$1 as ControllerPageLogin, ControllerPagePinia, ControllerPageProps, ControllerPageRouteParams, ControllerPageRouteParamsSchemaParams, ControllerPageRouteParamsSchemaQuery, ControllerPageRouteQuery, ControllerPageRouteQueryB, ControllerPageRouteQueryBSchemaParams, ControllerPageRouteQueryBSchemaQuery, ControllerPageRouteQuerySchemaParams, ControllerPageRouteQuerySchemaQuery, ControllerPageState, ControllerPageStyle, ControllerPageTest, ControllerPageTest3, ControllerPageTodo, ControllerPageToolOne$1 as ControllerPageToolOne, ControllerPageToolOneSchemaParams, ControllerPageToolOneSchemaQuery, ControllerPageToolTwo, ControllerPageToolTwoSchemaParams, ControllerPageToolTwoSchemaQuery, ControllerTableCellTest, ControllerTableCellTestProps, ControllerTest, CssDefault, ErrorMessageJwtExpired, IBehaviorOptionsFormFieldLayout, IBehaviorOptionsFormFieldLayoutLogin, IBehaviorPropsInputFormFieldLayout, IBehaviorPropsInputFormFieldLayoutLogin, IBehaviorPropsOutputFormFieldLayout, IBehaviorPropsOutputFormFieldLayoutLogin, ICssOptionsDefault, IIconRecord, IModelOptionsMenu, IModelOptionsTodo, IModuleApiSchema, IPagePathRecord, IThemeOptionsDefault, IThemeOptionsOrange, MainSys, ModelMenu, ModelTodo, NSControllerPageAuthCallback, NSControllerPageCounter, NSControllerPageErrorExpired, NSControllerPageItem, NSControllerPageRouteParams, NSControllerPageRouteQuery, NSControllerPageRouteQueryB, NSControllerPageToolOne, NSControllerPageToolTwo, OpenApiBaseURL, RenderCard, RenderPage, RenderPageCounter, RenderPageLogin, RenderPageMore, RenderPageToolOne, ScopeModuleAC, ScopeModuleDemoBasic, ScopeModuleDemoStudent, ScopeModuleDemoTodo, ScopeModuleHomeBase, ScopeModuleHomeIcon, ScopeModuleHomeIndex, ScopeModuleHomeLogin, ServiceCounter, ServiceData, ServiceRouterGuards, ServiceSsr, ServiceTest3, ServiceTest4, StoreCounter, StoreTest, StylePageCounter$1 as StylePageCounter, StylePageMore, ThemeDefault, ThemeOrange, ThemeTokenCustom, TypeControllerActionViewPublicProps, TypeControllerFormFieldTestPublicProps, TypeControllerPagePublicProps, TypeControllerTableCellTestPublicProps, TypeControllerTestPublicProps, ZActionView, ZFormFieldTest, ZPage, ZPageAuthCallback, ZPageComponent, ZPageErrorExpired, ZPageErrorNotFound, ZPageHome, ZPageItem, ZPageLocale, ZPageLogin, ZPagePinia, ZPageRouteParams, ZPageRouteQuery, ZPageRouteQueryB, ZPageState, ZPageStyle, ZPageTest, ZPageTest3, ZPageTodo, ZPageToolOne, ZPageToolTwo, ZTableCellTest, ZTest, config, constants, definePropertyScopeBase, errors, icons, operations, paths, webhooks };
+  export { $iconName, AopHome, AopHome3, ApiTodo, ApiTodoEntity, ApiTodoIntertBody, ApiTodoUpdateBody, BBAActionsLog, BBARestActionsAlert, BBARestActionsConfirm, BBARestActionsCopy, BBARestActionsCreate, BBARestActionsDelete, BBARestActionsEdit, BBARestActionsSetValue, BBARestActionsView, BBFBasicDateRange, BBFBasicFormCaptcha, BBFCurrency, BBFDemoBasicTest, BBFFormWrapper, BBPBasicRestpage, BBPBasicRestpageEntry, BBTBasicTableActionOperationsRow, BBTBasicTableActionView, BBTCTest, BBTCurrency, BBTDate, BBTDemoBasicTest, BBZApp, BBZBasicDateRange, BBZBasicRestpageWrapperFilter, BBZBasicTable, BBZBasicTableActionOperationsTable, BBZBehavior, BBZDemoBasicActionView, BBZDemoBasicCard, BBZDemoBasicTableCellTest, BBZForm, BBZFormField, BBZFormSubscribe, BBZHomeBaseItemLink, BBZHomeBasePage, BBZHomeLayoutemptyLayoutEmpty, BBZHomeLayouttabsLayoutTabs, BBZIcon, BBZRouterViewEmpty, BBZRouterstackRouterViewStack, BBZRoutertabsRouterViewTabs, BBZTable, BehaviorFormFieldLayout, BehaviorFormFieldLayoutLogin, ControllerActionView, ControllerActionViewProps, ControllerCard, ControllerCardProps, ControllerFormFieldTest, ControllerFormFieldTestProps, ControllerItemLink, ControllerItemLinkProps, ControllerPage, ControllerPageAuthCallback, ControllerPageAuthCallbackSchemaQuery, ControllerPageComponent, ControllerPageCounter, ControllerPageErrorExpired, ControllerPageErrorExpiredSchemaQuery, ControllerPageErrorNotFound, ControllerPageHome, ControllerPageItem, ControllerPageItemSchemaParams, ControllerPageItemSchemaQuery, ControllerPageLocale, ControllerPageLogin$1 as ControllerPageLogin, ControllerPagePinia, ControllerPageProps, ControllerPageRouteParams, ControllerPageRouteParamsSchemaParams, ControllerPageRouteParamsSchemaQuery, ControllerPageRouteQuery, ControllerPageRouteQueryB, ControllerPageRouteQueryBSchemaParams, ControllerPageRouteQueryBSchemaQuery, ControllerPageRouteQuerySchemaParams, ControllerPageRouteQuerySchemaQuery, ControllerPageState, ControllerPageStyle, ControllerPageTest, ControllerPageTest3, ControllerPageTodo, ControllerPageToolOne$1 as ControllerPageToolOne, ControllerPageToolOneSchemaParams, ControllerPageToolOneSchemaQuery, ControllerPageToolTwo, ControllerPageToolTwoSchemaParams, ControllerPageToolTwoSchemaQuery, ControllerTableCellTest, ControllerTableCellTestProps, ErrorMessageJwtExpired, IBehaviorOptionsFormFieldLayout, IBehaviorOptionsFormFieldLayoutLogin, IBehaviorPropsInputFormFieldLayout, IBehaviorPropsInputFormFieldLayoutLogin, IBehaviorPropsOutputFormFieldLayout, IBehaviorPropsOutputFormFieldLayoutLogin, IIconRecord, IModelOptionsTest, IModelOptionsTodo, IModuleApi, IPagePathRecord, IServiceSsrLayoutOptions, Main, ModelTest, ModelTodo, Monkey, MonkeySys, NSControllerPageAuthCallback, NSControllerPageErrorExpired, NSControllerPageItem, NSControllerPageRouteParams, NSControllerPageRouteQuery, NSControllerPageRouteQueryB, NSControllerPageToolOne, NSControllerPageToolTwo, RenderPageLogin, RenderPageToolOne, ScopeModuleAC, ScopeModuleDemoBasic, ScopeModuleDemoTodo, ScopeModuleHomeBase, ScopeModuleHomeIcon, ScopeModuleHomeIndex, ScopeModuleHomeLogin, ServiceData, ServiceRouterGuards, ServiceSsr, ServiceSsrLayout, ServiceTest, StoreCounter, TypeControllerActionViewPublicProps, TypeControllerCardPublicProps, TypeControllerFormFieldTestPublicProps, TypeControllerItemLinkPublicProps, TypeControllerPagePublicProps, TypeControllerTableCellTestPublicProps, ZActionView, ZCard, ZFormFieldTest, ZItemLink, ZPage, ZPageAuthCallback, ZPageComponent, ZPageCounter, ZPageErrorExpired, ZPageErrorNotFound, ZPageHome, ZPageItem, ZPageLocale, ZPageLogin, ZPagePinia, ZPageRouteParams, ZPageRouteQuery, ZPageRouteQueryB, ZPageState, ZPageStyle, ZPageTest, ZPageTest3, ZPageTodo, ZPageToolOne, ZPageToolTwo, ZTableCellTest, config, definePropertyScopeBase, icons };
 }
 declare function $iconName<K extends keyof IIconRecord$1>(name: K): any;
 declare module 'zova-module-a-router' {
@@ -12358,4 +8024,4 @@ declare module 'zova-module-a-router' {
   }
 }
 //#endregion
-export { $defs, $iconName, AopCounterLog, AopHome, AopHome3, ApiApiHomeBaseMenuretrieveMenusMethod, ApiApiHomeBaseMenuretrieveMenusPath, ApiApiHomeBaseMenuretrieveMenusRequestParams, ApiApiHomeBaseMenuretrieveMenusResponseBody, ApiHomeBaseMenu, ApiSchemaAAuthDtoAuth, ApiSchemaAAuthDtoAuthPartial, ApiSchemaACaptchaDtoCaptchaData, ApiSchemaACaptchaDtoCaptchaDataPartial, ApiSchemaACaptchaDtoCaptchaVerify_c3cd80b1eeafe39bfe4433491bb081d68e84797e, ApiSchemaACaptchaDtoCaptchaVerify_c3cd80b1eeafe39bfe4433491bb081d68e84797ePartial, ApiSchemaACaptchaDtoCaptchaVerify_c3cd80b1eeafe39bfe4433491bb081d68e84797e_3218e7d152830e08f6e764b9e0c3796df929ee2b, ApiSchemaACaptchaDtoCaptchaVerify_c3cd80b1eeafe39bfe4433491bb081d68e84797e_3218e7d152830e08f6e764b9e0c3796df929ee2bPartial, ApiSchemaAJwtDtoJwtToken, ApiSchemaAJwtDtoJwtTokenPartial, ApiSchemaAMenuDtoMenuGroup, ApiSchemaAMenuDtoMenuGroupPartial, ApiSchemaAMenuDtoMenuItem, ApiSchemaAMenuDtoMenuItemMeta, ApiSchemaAMenuDtoMenuItemMetaPartial, ApiSchemaAMenuDtoMenuItemPartial, ApiSchemaAMenuDtoMenus, ApiSchemaAMenuDtoMenusPartial, ApiSchemaAPaypalDtoPaypalOrderRecordOptions, ApiSchemaAPaypalDtoPaypalOrderRecordOptionsPartial, ApiSchemaAPaypalDtoPaypalOrderRecordPayload, ApiSchemaAPaypalDtoPaypalOrderRecordPayloadPartial, ApiSchemaAPaypalEntityPaypalRecord, ApiSchemaAPaypalEntityPaypalRecordPartial, ApiSchemaAPermissionDtoPermissions, ApiSchemaAPermissionDtoPermissionsPartial, ApiSchemaAPlayDtoPlay, ApiSchemaAPlayDtoPlayPartial, ApiSchemaHomeBaseMenu, ApiSchemaHomeUserDtoLogin, ApiSchemaHomeUserDtoLoginPartial, ApiSchemaHomeUserDtoPassport, ApiSchemaHomeUserDtoPassportJwt, ApiSchemaHomeUserDtoPassportJwtPartial, ApiSchemaHomeUserDtoPassportPartial, ApiSchemaHomeUserDtoRegister, ApiSchemaHomeUserDtoRegisterPartial, ApiSchemaHomeUserEntityRole, ApiSchemaHomeUserEntityRolePartial, ApiSchemaHomeUserEntityUser, ApiSchemaHomeUserEntityUserPartial, ApiSchemaTestCaptchaDtoSignin, ApiSchemaTestCaptchaDtoSigninPartial, ApiSchemaTestRestDtoProductCreate, ApiSchemaTestRestDtoProductCreatePartial, ApiSchemaTestRestDtoProductQueryRes, ApiSchemaTestRestDtoProductQueryResPartial, ApiSchemaTestRestDtoProductUpdate, ApiSchemaTestRestDtoProductUpdatePartial, ApiSchemaTestRestEntityProduct, ApiSchemaTestRestEntityProductPartial, ApiSchemaTestSsrDtoTestBody, ApiSchemaTestSsrDtoTestBodyPartial, ApiSchemaTestSsrDtoTestDetail, ApiSchemaTestSsrDtoTestDetailPartial, ApiSchemaTestSsrDtoTestResult, ApiSchemaTestSsrDtoTestResultPartial, ApiSchemaTestVonaDtoCategoryTree, ApiSchemaTestVonaDtoCategoryTreePartial, ApiSchemaTestVonaDtoOrderCreate, ApiSchemaTestVonaDtoOrderCreatePartial, ApiSchemaTestVonaDtoOrderResult, ApiSchemaTestVonaDtoOrderResultPage, ApiSchemaTestVonaDtoOrderResultPagePartial, ApiSchemaTestVonaDtoOrderResultPartial, ApiSchemaTestVonaDtoOrderUpdate, ApiSchemaTestVonaDtoOrderUpdatePartial, ApiSchemaTestVonaDtoPostAggregate, ApiSchemaTestVonaDtoPostAggregatePartial, ApiSchemaTestVonaDtoPostCreate, ApiSchemaTestVonaDtoPostCreatePartial, ApiSchemaTestVonaDtoPostGroup, ApiSchemaTestVonaDtoPostGroupPartial, ApiSchemaTestVonaDtoPostQueryRes, ApiSchemaTestVonaDtoPostQueryResPartial, ApiSchemaTestVonaDtoRoleLazy, ApiSchemaTestVonaDtoRoleLazyPartial, ApiSchemaTestVonaDtoSerializerArray, ApiSchemaTestVonaDtoSerializerArrayPartial, ApiSchemaTestVonaDtoSerializerLazy, ApiSchemaTestVonaDtoSerializerLazyPartial, ApiSchemaTestVonaDtoSerializerSimple, ApiSchemaTestVonaDtoSerializerSimplePartial, ApiSchemaTestVonaDtoSerializerSimple_1c4b95bcfe8fe28a56dbcc7028097cf11836b4fc, ApiSchemaTestVonaDtoSerializerSimple_1c4b95bcfe8fe28a56dbcc7028097cf11836b4fcPartial, ApiSchemaTestVonaDtoSerializerSimple_542f7be0da9b85a67248a6a1a3629e72de5fdb33_cff0ae112a392da58caf5aa905749f3c4444c4ab, ApiSchemaTestVonaDtoSerializerSimple_542f7be0da9b85a67248a6a1a3629e72de5fdb33_cff0ae112a392da58caf5aa905749f3c4444c4abPartial, ApiSchemaTestVonaDtoUser, ApiSchemaTestVonaDtoUserCreate, ApiSchemaTestVonaDtoUserCreatePartial, ApiSchemaTestVonaDtoUserLazy, ApiSchemaTestVonaDtoUserLazyPartial, ApiSchemaTestVonaDtoUserPartial, ApiSchemaTestVonaDtoUserUpdate, ApiSchemaTestVonaDtoUserUpdatePartial, ApiSchemaTestVonaEntityCategory_2c7d642ee581efa300341e343180fbb0ecdc785d, ApiSchemaTestVonaEntityCategory_2c7d642ee581efa300341e343180fbb0ecdc785dPartial, ApiSchemaTestVonaEntityPost_729883d7de16ce4401b26f75bebe618c8948ff64, ApiSchemaTestVonaEntityPost_729883d7de16ce4401b26f75bebe618c8948ff64Partial, ApiSchemaTestVonaEntityPost_a6ba2076b5b70a3c098374cc82d418bd1ab226c3, ApiSchemaTestVonaEntityPost_a6ba2076b5b70a3c098374cc82d418bd1ab226c3Partial, ApiSchemaTestVonaEntityProduct, ApiSchemaTestVonaEntityProductPartial, ApiSchemaTestVonaEntityProduct_29731960f3f38d3572bc2f8a01a7498bfe927055, ApiSchemaTestVonaEntityProduct_29731960f3f38d3572bc2f8a01a7498bfe927055Partial, ApiSchemaTestVonaEntityProduct_9cf2c6bcd41713270c34bcfce21b7b4942e3fbc6, ApiSchemaTestVonaEntityProduct_9cf2c6bcd41713270c34bcfce21b7b4942e3fbc6Partial, ApiSchemaTestVonaEntityProduct_bce173590aaef19772f1ae3a82196493c2633e2e, ApiSchemaTestVonaEntityProduct_bce173590aaef19772f1ae3a82196493c2633e2ePartial, ApiSchemaTestVonaEntityUser_2c7d642ee581efa300341e343180fbb0ecdc785d_1816ff740d81c738ec055c7038bbd93beb9405a7, ApiSchemaTestVonaEntityUser_2c7d642ee581efa300341e343180fbb0ecdc785d_1816ff740d81c738ec055c7038bbd93beb9405a7Partial, ApiTodo, ApiTodoEntity, ApiTodoIntertBody, ApiTodoUpdateBody, BBAActionsLog, BBARestActionsAlert, BBARestActionsConfirm, BBARestActionsCopy, BBARestActionsCreate, BBARestActionsDelete, BBARestActionsEdit, BBARestActionsSetValue, BBARestActionsView, BBFBasicDateRange, BBFBasicFormCaptcha, BBFCurrency, BBFDemoBasicTest, BBFFormWrapper, BBPBasicRestpage, BBPBasicRestpageEntry, BBTBasicTableActionOperationsRow, BBTBasicTableActionView, BBTCTest, BBTCurrency, BBTDate, BBTDemoBasicTest, BBZApp, BBZBasicDateRange, BBZBasicRestpageWrapperFilter, BBZBasicTable, BBZBasicTableActionOperationsTable, BBZBehavior, BBZDemoBasicActionView, BBZDemoBasicCard, BBZDemoBasicTableCellTest, BBZDemoStudentCard, BBZDemoStudentTest, BBZForm, BBZFormField, BBZFormSubscribe, BBZHomeBasePage, BBZHomeLayoutEmpty, BBZHomeLayoutEssentialLink, BBZHomeLayoutTabs, BBZIcon, BBZRouterViewEmpty, BBZRouterstackRouterViewStack, BBZRoutertabsRouterViewTabs, BBZTable, BeanTest, BehaviorFormFieldLayout, BehaviorFormFieldLayoutLogin, ControllerActionView, ControllerActionViewProps, ControllerCardModels, ControllerFormFieldTest, ControllerFormFieldTestProps, ControllerPage, ControllerPageAuthCallback, ControllerPageAuthCallbackSchemaQuery, ControllerPageComponent, ControllerPageCounterSchemaParams, ControllerPageCounterSchemaQuery, ControllerPageErrorExpired, ControllerPageErrorExpiredSchemaQuery, ControllerPageErrorNotFound, ControllerPageHome, ControllerPageItem, ControllerPageItemSchemaParams, ControllerPageItemSchemaQuery, ControllerPageLocale, ControllerPageLogin$1 as ControllerPageLogin, ControllerPagePinia, ControllerPageProps, ControllerPageRouteParams, ControllerPageRouteParamsSchemaParams, ControllerPageRouteParamsSchemaQuery, ControllerPageRouteQuery, ControllerPageRouteQueryB, ControllerPageRouteQueryBSchemaParams, ControllerPageRouteQueryBSchemaQuery, ControllerPageRouteQuerySchemaParams, ControllerPageRouteQuerySchemaQuery, ControllerPageState, ControllerPageStyle, ControllerPageTest, ControllerPageTest3, ControllerPageTodo, ControllerPageToolOne$1 as ControllerPageToolOne, ControllerPageToolOneSchemaParams, ControllerPageToolOneSchemaQuery, ControllerPageToolTwo, ControllerPageToolTwoSchemaParams, ControllerPageToolTwoSchemaQuery, ControllerTableCellTest, ControllerTableCellTestProps, ControllerTest, CssDefault, ErrorMessageJwtExpired, IBehaviorOptionsFormFieldLayout, IBehaviorOptionsFormFieldLayoutLogin, IBehaviorPropsInputFormFieldLayout, IBehaviorPropsInputFormFieldLayoutLogin, IBehaviorPropsOutputFormFieldLayout, IBehaviorPropsOutputFormFieldLayoutLogin, ICssOptionsDefault, type IIconRecord, IModelOptionsMenu, IModelOptionsTodo, IModuleApiSchema, type IPagePathRecord, IThemeOptionsDefault, IThemeOptionsOrange, MainSys, ModelMenu, ModelTodo, NSControllerPageAuthCallback, NSControllerPageCounter, NSControllerPageErrorExpired, NSControllerPageItem, NSControllerPageRouteParams, NSControllerPageRouteQuery, NSControllerPageRouteQueryB, NSControllerPageToolOne, NSControllerPageToolTwo, OpenApiBaseURL, RenderCard, RenderPage, RenderPageCounter, RenderPageLogin, RenderPageMore, RenderPageToolOne, ScopeModuleAC, ScopeModuleDemoBasic, ScopeModuleDemoStudent, ScopeModuleDemoTodo, ScopeModuleHomeBase, ScopeModuleHomeIcon, ScopeModuleHomeIndex, ScopeModuleHomeLogin, ServiceCounter, ServiceData, ServiceRouterGuards, ServiceSsr, ServiceTest3, ServiceTest4, StoreCounter, StoreTest, StylePageCounter$1 as StylePageCounter, StylePageMore, ThemeDefault, ThemeOrange, ThemeTokenCustom, TypeControllerActionViewPublicProps, TypeControllerFormFieldTestPublicProps, TypeControllerPagePublicProps, TypeControllerTableCellTestPublicProps, TypeControllerTestPublicProps, ZActionView, ZFormFieldTest, ZPage, ZPageAuthCallback, ZPageComponent, ZPageErrorExpired, ZPageErrorNotFound, ZPageHome, ZPageItem, ZPageLocale, ZPageLogin, ZPagePinia, ZPageRouteParams, ZPageRouteQuery, ZPageRouteQueryB, ZPageState, ZPageStyle, ZPageTest, ZPageTest3, ZPageTodo, ZPageToolOne, ZPageToolTwo, ZTableCellTest, ZTest, config, constants, definePropertyScopeBase, errors, icons, operations, paths, webhooks };
+export { $iconName, AopHome, AopHome3, ApiTodo, ApiTodoEntity, ApiTodoIntertBody, ApiTodoUpdateBody, BBAActionsLog, BBARestActionsAlert, BBARestActionsConfirm, BBARestActionsCopy, BBARestActionsCreate, BBARestActionsDelete, BBARestActionsEdit, BBARestActionsSetValue, BBARestActionsView, BBFBasicDateRange, BBFBasicFormCaptcha, BBFCurrency, BBFDemoBasicTest, BBFFormWrapper, BBPBasicRestpage, BBPBasicRestpageEntry, BBTBasicTableActionOperationsRow, BBTBasicTableActionView, BBTCTest, BBTCurrency, BBTDate, BBTDemoBasicTest, BBZApp, BBZBasicDateRange, BBZBasicRestpageWrapperFilter, BBZBasicTable, BBZBasicTableActionOperationsTable, BBZBehavior, BBZDemoBasicActionView, BBZDemoBasicCard, BBZDemoBasicTableCellTest, BBZForm, BBZFormField, BBZFormSubscribe, BBZHomeBaseItemLink, BBZHomeBasePage, BBZHomeLayoutemptyLayoutEmpty, BBZHomeLayouttabsLayoutTabs, BBZIcon, BBZRouterViewEmpty, BBZRouterstackRouterViewStack, BBZRoutertabsRouterViewTabs, BBZTable, BehaviorFormFieldLayout, BehaviorFormFieldLayoutLogin, ControllerActionView, ControllerActionViewProps, ControllerCard, ControllerCardProps, ControllerFormFieldTest, ControllerFormFieldTestProps, ControllerItemLink, ControllerItemLinkProps, ControllerPage, ControllerPageAuthCallback, ControllerPageAuthCallbackSchemaQuery, ControllerPageComponent, ControllerPageCounter, ControllerPageErrorExpired, ControllerPageErrorExpiredSchemaQuery, ControllerPageErrorNotFound, ControllerPageHome, ControllerPageItem, ControllerPageItemSchemaParams, ControllerPageItemSchemaQuery, ControllerPageLocale, ControllerPageLogin$1 as ControllerPageLogin, ControllerPagePinia, ControllerPageProps, ControllerPageRouteParams, ControllerPageRouteParamsSchemaParams, ControllerPageRouteParamsSchemaQuery, ControllerPageRouteQuery, ControllerPageRouteQueryB, ControllerPageRouteQueryBSchemaParams, ControllerPageRouteQueryBSchemaQuery, ControllerPageRouteQuerySchemaParams, ControllerPageRouteQuerySchemaQuery, ControllerPageState, ControllerPageStyle, ControllerPageTest, ControllerPageTest3, ControllerPageTodo, ControllerPageToolOne$1 as ControllerPageToolOne, ControllerPageToolOneSchemaParams, ControllerPageToolOneSchemaQuery, ControllerPageToolTwo, ControllerPageToolTwoSchemaParams, ControllerPageToolTwoSchemaQuery, ControllerTableCellTest, ControllerTableCellTestProps, ErrorMessageJwtExpired, IBehaviorOptionsFormFieldLayout, IBehaviorOptionsFormFieldLayoutLogin, IBehaviorPropsInputFormFieldLayout, IBehaviorPropsInputFormFieldLayoutLogin, IBehaviorPropsOutputFormFieldLayout, IBehaviorPropsOutputFormFieldLayoutLogin, type IIconRecord, IModelOptionsTest, IModelOptionsTodo, IModuleApi, type IPagePathRecord, IServiceSsrLayoutOptions, Main, ModelTest, ModelTodo, Monkey, MonkeySys, NSControllerPageAuthCallback, NSControllerPageErrorExpired, NSControllerPageItem, NSControllerPageRouteParams, NSControllerPageRouteQuery, NSControllerPageRouteQueryB, NSControllerPageToolOne, NSControllerPageToolTwo, RenderPageLogin, RenderPageToolOne, ScopeModuleAC, ScopeModuleDemoBasic, ScopeModuleDemoTodo, ScopeModuleHomeBase, ScopeModuleHomeIcon, ScopeModuleHomeIndex, ScopeModuleHomeLogin, ServiceData, ServiceRouterGuards, ServiceSsr, ServiceSsrLayout, ServiceTest, StoreCounter, TypeControllerActionViewPublicProps, TypeControllerCardPublicProps, TypeControllerFormFieldTestPublicProps, TypeControllerItemLinkPublicProps, TypeControllerPagePublicProps, TypeControllerTableCellTestPublicProps, ZActionView, ZCard, ZFormFieldTest, ZItemLink, ZPage, ZPageAuthCallback, ZPageComponent, ZPageCounter, ZPageErrorExpired, ZPageErrorNotFound, ZPageHome, ZPageItem, ZPageLocale, ZPageLogin, ZPagePinia, ZPageRouteParams, ZPageRouteQuery, ZPageRouteQueryB, ZPageState, ZPageStyle, ZPageTest, ZPageTest3, ZPageTodo, ZPageToolOne, ZPageToolTwo, ZTableCellTest, config, definePropertyScopeBase, icons };
