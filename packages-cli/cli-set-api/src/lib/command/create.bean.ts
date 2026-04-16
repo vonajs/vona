@@ -23,7 +23,7 @@ export default {
           type: 'input',
           message: 'sceneName',
           initial: {
-            expression: 'context.argv._[0]',
+            expression: 'arg0',
           },
           required: true,
         },
@@ -31,7 +31,7 @@ export default {
           type: 'input',
           message: 'beanName',
           initial: {
-            expression: 'context.argv._[1]',
+            expression: 'arg1',
           },
           required: true,
         },
