@@ -5,6 +5,7 @@ import DeepEqual from 'deep-equal';
 import fse from 'fs-extra';
 import { globby } from 'globby';
 import path from 'node:path';
+import semver from 'semver';
 
 import type { BeanCliBase } from './bean.cli.base.ts';
 
@@ -97,19 +98,26 @@ export class LocalCommon {
     const depsDev: TypeDeps = {};
     // all modules
     this.cli.modulesMeta.modulesArray.forEach(module => {
-      const onlyDev = _checkIfModuleOnlyDev(module);
       const version = module.info.node_modules ? `^${module.package.version}` : 'workspace:^';
-      if (onlyDev) {
-        depsDev[module.package.name] = version;
-      } else {
-        deps[module.package.name] = version;
-      }
+      deps[module.package.name] = version;
     });
     // all globalDependencies of modules
     this.cli.modulesMeta.modulesArray.forEach(module => {
       _collectModuleDevs(module, deps, 'dependencies', 'globalDependencies');
       _collectModuleDevs(module, depsDev, 'devDependencies', 'globalDependenciesDev');
     });
+    // all modules of suites
+    for (const suiteName in this.cli.modulesMeta.suites) {
+      const suite = this.cli.modulesMeta.suites[suiteName];
+      if (!suite.info.node_modules) continue;
+      for (const moduleName in suite.package.dependencies) {
+        const version = suite.package.dependencies[moduleName];
+        const versionCurrent = deps[moduleName];
+        if (!versionCurrent || semver.lt(versionCurrent.substring(1), version.substring(1))) {
+          deps[moduleName] = version;
+        }
+      }
+    }
     return { deps, depsDev };
   }
 
@@ -193,13 +201,6 @@ export class LocalCommon {
   }
 }
 
-function _checkIfModuleOnlyDev(module: IModule) {
-  const meta = module.package.vonaModule?.capabilities?.meta || module.package.zovaModule?.capabilities?.meta;
-  if (!meta || !meta.mode) return false;
-  const modes = Array.isArray(meta.mode) ? meta.mode : [meta.mode];
-  return !modes.some(mode => ['prod', 'production'].includes(mode));
-}
-
 function _collectModuleDevs(module: IModule, deps: {}, nameDependencies: string, nameGlobalDependencies: string) {
   const moduleDeps = module.package[nameDependencies];
   const globalDependencies = module.package.vonaModule?.[nameGlobalDependencies] || module.package.zovaModule?.[nameGlobalDependencies];
@@ -217,3 +218,10 @@ function _collectModuleDevs(module: IModule, deps: {}, nameDependencies: string,
   }
   return deps;
 }
+
+// function _checkIfModuleOnlyDev(module: IModule) {
+//   const meta = module.package.vonaModule?.capabilities?.meta || module.package.zovaModule?.capabilities?.meta;
+//   if (!meta || !meta.mode) return false;
+//   const modes = Array.isArray(meta.mode) ? meta.mode : [meta.mode];
+//   return !modes.some(mode => ['prod', 'production'].includes(mode));
+// }
