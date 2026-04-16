@@ -44,7 +44,7 @@
   "devDependencies": {
     "@cabloy/lint": "^5.1.7",
     "oxfmt": "^0.45.0",
-    "oxlint": "^1.56.0"
+    "oxlint": "^1.60.0"
   },
   "pnpm": {
     "overrides": {
