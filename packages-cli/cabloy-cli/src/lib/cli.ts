@@ -1,4 +1,4 @@
-import { evaluate } from '@cabloy/utils';
+import { evaluate, isNil } from '@cabloy/utils';
 import BaseCommand from '@zhennann/common-bin';
 import chalk from 'chalk';
 import enquirer from 'enquirer';
@@ -120,7 +120,7 @@ export class CliCommand extends BaseCommand {
     const varsWant: any = [];
     for (const key in group.questions) {
       const value = argv[key];
-      if (value !== undefined) continue;
+      if (!isNil(value)) continue;
       const question = group.questions[key];
       const varWant = this._prepareQuestion({ group, question, key, context });
       if (varWant) {
@@ -142,7 +142,20 @@ export class CliCommand extends BaseCommand {
     const expression = question[propName] && question[propName].expression;
     if (!expression) return null;
     return function (value) {
-      return evaluate(expression, { value, group, question, key, context });
+      const res = evaluate(expression, {
+        value,
+        group,
+        question,
+        key,
+        context,
+        arg0: context.argv._[0] ?? null,
+        arg1: context.argv._[1] ?? null,
+        arg2: context.argv._[2] ?? null,
+        arg3: context.argv._[3] ?? null,
+        arg4: context.argv._[4] ?? null,
+        arg5: context.argv._[5] ?? null,
+      });
+      return res === null ? undefined : res;
     };
   }
 
@@ -164,7 +177,7 @@ export class CliCommand extends BaseCommand {
     let initial = varWant.initial;
     if (initial && is.function(initial)) {
       initial = initial();
-      if (initial !== undefined) {
+      if (!isNil(initial)) {
         argv[key] = initial;
         return null;
       }
@@ -209,7 +222,7 @@ export class CliCommand extends BaseCommand {
     if (options) {
       for (const key in options) {
         const option = options[key];
-        if (option.alias && argv[key] === undefined) {
+        if (option.alias && isNil(argv[key])) {
           argv[key] = argv[option.alias];
         }
       }
