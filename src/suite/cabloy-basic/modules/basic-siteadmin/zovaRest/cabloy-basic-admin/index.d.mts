@@ -1213,12 +1213,12 @@ interface components {
     };
     'test-vona.entity.product': {
       /**
-       * Format: date
+       * Format: date-time
        * @description Created At
        */
       createdAt: Date;
       /**
-       * Format: date
+       * Format: date-time
        * @description Updated At
        */
       updatedAt: Date;
@@ -1287,12 +1287,12 @@ interface components {
     } | undefined; /** @description User */
     'home-user.entity.user': {
       /**
-       * Format: date
+       * Format: date-time
        * @description Created At
        */
       createdAt: Date;
       /**
-       * Format: date
+       * Format: date-time
        * @description Updated At
        */
       updatedAt: Date;
@@ -1330,12 +1330,12 @@ interface components {
     }; /** @description Role */
     'home-user.entity.role': {
       /**
-       * Format: date
+       * Format: date-time
        * @description Created At
        */
       createdAt: Date;
       /**
-       * Format: date
+       * Format: date-time
        * @description Updated At
        */
       updatedAt: Date;
@@ -1397,12 +1397,12 @@ interface components {
     'test-rest.dto.productQueryRes': {
       list: {
         /**
-         * Format: date
+         * Format: date-time
          * @description Created At
          */
         createdAt: Date;
         /**
-         * Format: date
+         * Format: date-time
          * @description Updated At
          */
         updatedAt: Date;
@@ -1435,12 +1435,12 @@ interface components {
     }; /** @description Product Info */
     'test-rest.entity.product': {
       /**
-       * Format: date
+       * Format: date-time
        * @description Created At
        */
       createdAt: Date;
       /**
-       * Format: date
+       * Format: date-time
        * @description Updated At
        */
       updatedAt: Date;
@@ -1525,12 +1525,12 @@ interface components {
     };
     'a-paypal.entity.paypalRecord': {
       /**
-       * Format: date
+       * Format: date-time
        * @description Created At
        */
       createdAt: Date;
       /**
-       * Format: date
+       * Format: date-time
        * @description Updated At
        */
       updatedAt: Date;
@@ -1659,12 +1659,12 @@ interface components {
     };
     'test-vona.dto.orderResult': {
       /**
-       * Format: date
+       * Format: date-time
        * @description Created At
        */
       createdAt: Date;
       /**
-       * Format: date
+       * Format: date-time
        * @description Updated At
        */
       updatedAt: Date;
@@ -1699,12 +1699,12 @@ interface components {
     'test-vona.dto.orderResultPage': {
       list: {
         /**
-         * Format: date
+         * Format: date-time
          * @description Created At
          */
         createdAt: Date;
         /**
-         * Format: date
+         * Format: date-time
          * @description Updated At
          */
         updatedAt: Date;
@@ -1750,12 +1750,12 @@ interface components {
     'test-vona.dto.postQueryRes': {
       list: {
         /**
-         * Format: date
+         * Format: date-time
          * @description Created At
          */
         createdAt: Date;
         /**
-         * Format: date
+         * Format: date-time
          * @description Updated At
          */
         updatedAt: Date;
@@ -2853,12 +2853,12 @@ interface operations {
             data: {
               /**
                * Created At
-               * Format: date
+               * Format: date-time
                */
               createdAt: Date;
               /**
                * Updated At
-               * Format: date
+               * Format: date-time
                */
               updatedAt: Date;
               /**
@@ -2903,12 +2903,12 @@ interface operations {
             data: {
               /**
                * Created At
-               * Format: date
+               * Format: date-time
                */
               createdAt: Date;
               /**
                * Updated At
-               * Format: date
+               * Format: date-time
                */
               updatedAt: Date;
               /**
@@ -2953,12 +2953,12 @@ interface operations {
             data: {
               /**
                * Created At
-               * Format: date
+               * Format: date-time
                */
               createdAt: Date;
               /**
                * Updated At
-               * Format: date
+               * Format: date-time
                */
               updatedAt: Date;
               /**
@@ -6581,6 +6581,14 @@ declare module 'zova' {
 type TypeControllerLayoutEmptyPublicProps = TypeRenderComponentJsxPropsPublic & ControllerLayoutEmptyProps;
 declare function BBZHomeLayoutemptyLayoutEmpty(_props: TypeControllerLayoutEmptyPublicProps): string;
 //#endregion
+//#region src/suite/a-home/modules/home-layouttabs/src/model/layout.d.ts
+interface IModelOptionsLayout extends IDecoratorModelOptions {}
+declare class ModelLayout extends BeanModelBase {
+  leftDrawerOpenPC: boolean;
+  $$scopeSsr: ScopeModuleASsr;
+  protected __init__(): Promise<void>;
+}
+//#endregion
 //#region src/suite/a-home/modules/home-layouttabs/src/model/menu.d.ts
 type TypeMenuGroup = ApiSchemaAMenuDtoMenuGroup & {
   folder: true;
@@ -6617,13 +6625,6 @@ declare class ModelMenu extends BeanModelBase {
     link?: string;
   }): ApiSchemaAMenuDtoMenuItem | undefined;
   private _prepareMenuTree;
-}
-//#endregion
-//#region src/suite/a-home/modules/home-layouttabs/src/model/layout.d.ts
-declare class ModelLayout extends BeanModelBase {
-  leftDrawerOpenPC: boolean;
-  $$scopeSsr: ScopeModuleASsr;
-  protected __init__(): Promise<void>;
 }
 //#endregion
 //#region src/suite/a-home/modules/home-layouttabs/src/component/layoutTabs/controller.d.ts
@@ -6804,10 +6805,17 @@ declare const locales$4: {
 //#region src/suite/a-home/modules/home-layouttabs/src/.metadata/index.d.ts
 declare module 'zova-module-a-model' {
   interface IModelRecord {
+    'home-layouttabs:layout': IModelOptionsLayout;
     'home-layouttabs:menu': IModelOptionsMenu;
   }
 }
 declare module 'zova-module-home-layouttabs' {
+  interface ModelLayout {}
+  interface ModelLayout {
+    get $beanFullName(): 'home-layouttabs.model.layout';
+    get $onionName(): 'home-layouttabs:layout';
+    get $onionOptions(): IModelOptionsLayout;
+  }
   interface ModelMenu {}
   interface ModelMenu {
     get $beanFullName(): 'home-layouttabs.model.menu';
@@ -6819,6 +6827,7 @@ declare module 'zova-module-home-layouttabs' {
 /** model: begin */
 declare module 'zova' {
   interface IBeanRecordGeneral {
+    'home-layouttabs.model.layout': ModelLayout;
     'home-layouttabs.model.menu': ModelMenu;
   }
 }
