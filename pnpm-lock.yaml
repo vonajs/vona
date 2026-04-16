@@ -36,7 +36,7 @@ importers:
         specifier: workspace:^
         version: link:packages-utils/utils
       '@cabloy/word-utils':
-        specifier: ^2.1.7
+        specifier: ^2.1.8
         version: 2.1.8
       '@cabloy/zod-openapi':
         specifier: workspace:^
@@ -48,7 +48,7 @@ importers:
         specifier: ^1.4.0
         version: 1.4.0(ioredis@5.10.1)
       better-sqlite3:
-        specifier: ^12.8.0
+        specifier: ^12.9.0
         version: 12.9.0
       bignumber.js:
         specifier: ^9.3.1
@@ -57,7 +57,7 @@ importers:
         specifier: ^8.0.1
         version: 8.0.1
       bullmq:
-        specifier: ^5.73.4
+        specifier: ^5.74.1
         version: 5.74.1
       chalk:
         specifier: ^5.6.2
@@ -78,7 +78,7 @@ importers:
         specifier: ^3.7.2
         version: 3.7.2
       mutate-on-copy:
-        specifier: ^1.1.7
+        specifier: ^1.1.8
         version: 1.1.8
       openapi3-ts:
         specifier: ^4.5.0
@@ -358,7 +358,7 @@ importers:
         specifier: workspace:^
         version: link:packages-utils/lint
       '@swc/core':
-        specifier: ^1.15.24
+        specifier: ^1.15.26
         version: 1.15.26(@swc/helpers@0.5.21)
       '@swc/helpers':
         specifier: ^0.5.21
@@ -439,7 +439,7 @@ importers:
         specifier: workspace:^
         version: link:../../packages-utils/utils
       '@cabloy/word-utils':
-        specifier: ^2.1.7
+        specifier: ^2.1.8
         version: 2.1.8
       '@npmcli/config':
         specifier: ^10.8.1
@@ -555,7 +555,7 @@ importers:
         specifier: workspace:^
         version: link:../../packages-utils/utils
       '@cabloy/word-utils':
-        specifier: ^2.1.7
+        specifier: ^2.1.8
         version: 2.1.8
       '@lcov-viewer/cli':
         specifier: ^1.3.0
@@ -664,7 +664,7 @@ importers:
         specifier: ^2.0.0
         version: 2.0.0
       '@cabloy/word-utils':
-        specifier: ^2.1.7
+        specifier: ^2.1.8
         version: 2.1.8
     devDependencies:
       '@types/babel__core':
@@ -883,7 +883,7 @@ importers:
         specifier: ^2.0.0
         version: 2.0.0
       '@cabloy/word-utils':
-        specifier: ^2.1.7
+        specifier: ^2.1.8
         version: 2.1.8
       '@marcbachmann/cel-js':
         specifier: ^7.6.0
@@ -902,7 +902,7 @@ importers:
   packages-utils/zod-errors-custom:
     dependencies:
       '@cabloy/word-utils':
-        specifier: ^2.1.7
+        specifier: ^2.1.8
         version: 2.1.8
     devDependencies:
       clean-package:
@@ -986,7 +986,7 @@ importers:
         specifier: workspace:^
         version: link:../../packages-utils/utils
       '@cabloy/word-utils':
-        specifier: ^2.1.7
+        specifier: ^2.1.8
         version: 2.1.8
       '@cabloy/zod-errors-custom':
         specifier: workspace:^
@@ -1631,7 +1631,7 @@ importers:
         specifier: workspace:^
         version: link:../../../../../packages-utils/utils
       '@cabloy/word-utils':
-        specifier: ^2.1.7
+        specifier: ^2.1.8
         version: 2.1.8
       bignumber.js:
         specifier: ^9.3.1
@@ -1655,7 +1655,7 @@ importers:
         specifier: ^3.7.2
         version: 3.7.2
       mutate-on-copy:
-        specifier: ^1.1.7
+        specifier: ^1.1.8
         version: 1.1.8
       react:
         specifier: ^19.2.5
@@ -1677,7 +1677,7 @@ importers:
         specifier: workspace:^
         version: link:../../../../../packages-cli/cabloy-cli
       '@swc/core':
-        specifier: ^1.15.24
+        specifier: ^1.15.26
         version: 1.15.26(@swc/helpers@0.5.21)
       '@swc/helpers':
         specifier: ^0.5.21
@@ -2005,7 +2005,7 @@ importers:
   src/suite-vendor/a-vona/modules/a-ormdialect:
     dependencies:
       better-sqlite3:
-        specifier: ^12.8.0
+        specifier: ^12.9.0
         version: 12.9.0
       globby:
         specifier: ^16.2.0
@@ -2070,7 +2070,7 @@ importers:
   src/suite-vendor/a-vona/modules/a-queue:
     dependencies:
       bullmq:
-        specifier: ^5.73.4
+        specifier: ^5.74.1
         version: 5.74.1
     devDependencies:
       clean-package:
