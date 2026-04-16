@@ -1,6 +1,7 @@
 {
   "name": "babel-plugin-vona-bean-module",
   "version": "1.1.4",
+  "gitHead": "a79189b882c17af5911573896a781bbb0046d37d",
   "description": "babel-plugin-vona-bean-module",
   "keywords": [
     "framework",
@@ -39,7 +40,7 @@
     "@babel/core": "^7.29.0",
     "@babel/traverse": "^7.29.0",
     "@cabloy/module-info": "^2.0.0",
-    "@cabloy/word-utils": "^2.1.7"
+    "@cabloy/word-utils": "^2.1.8"
   },
   "devDependencies": {
     "@types/babel__core": "^7.20.5",
@@ -55,6 +56,5 @@
       "exports.\\..import",
       "exports.\\..require"
     ]
-  },
-  "gitHead": "a79189b882c17af5911573896a781bbb0046d37d"
+  }
 }

@@ -1,6 +1,7 @@
 {
   "name": "vona-module-a-ormdialect",
   "version": "5.1.5",
+  "gitHead": "a79189b882c17af5911573896a781bbb0046d37d",
   "description": "",
   "keywords": [
     "Vona Module"
@@ -31,7 +32,7 @@
     "postpack": "clean-package restore && npm run clean"
   },
   "dependencies": {
-    "better-sqlite3": "^12.8.0",
+    "better-sqlite3": "^12.9.0",
     "globby": "^16.2.0",
     "mysql2": "^3.22.0",
     "pg": "^8.20.0",
@@ -54,6 +55,5 @@
     "globalDependencies": {
       "better-sqlite3": true
     }
-  },
-  "gitHead": "a79189b882c17af5911573896a781bbb0046d37d"
+  }
 }
