@@ -56,3 +56,8 @@ $ npm run build:rest:cabloyBasicAdmin
 ```bash
 $ npm run dev:ssr:cabloyBasicAdmin
 ```
+
+| URL                   | 说明     |
+| --------------------- | -------- |
+| http://localhost:9000 | Zova前端 |
+| http://localhost:7102 | Vona后端 |

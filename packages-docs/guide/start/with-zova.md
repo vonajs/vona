@@ -56,3 +56,8 @@ You can directly start the Zova development server and perform joint debugging w
 ```bash
 $ npm run dev:ssr:cabloyBasicAdmin
 ```
+
+| URL                   | Description   |
+| --------------------- | ------------- |
+| http://localhost:9000 | Zova Frontend |
+| http://localhost:7102 | Vona Backend  |
