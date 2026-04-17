@@ -51,7 +51,7 @@ $ npm run build:rest:cabloyBasicAdmin
 
 ## 6. Start the development server
 
-You can directly start the Zova development server to facilitate frontend code debugging
+You can directly start the Zova development server and perform joint debugging with the Vona backend
 
 ```bash
 $ npm run dev:ssr:cabloyBasicAdmin
