@@ -32,7 +32,7 @@ $ vona play
 
 To improve performance, VonaJS also provides an Attach mode
 
-If the dev service is already running, you can use Attach mode to execute the play file directly within the dev service
+If the dev server is already running, you can use Attach mode to execute the play file directly within the dev server
 
 ```bash
 $ vona play --attach
