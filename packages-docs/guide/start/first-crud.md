@@ -44,7 +44,11 @@ Enter the resource name `student` as prompted. The VSCode extension will automat
 
 ## CRUD Admin Page
 
-Open http://localhost:7102 to directly perform CRUD operations for Student
+```bash
+$ npm run dev
+```
+
+Restart Dev Server, then open http://localhost:7102 to directly perform CRUD operations for Student
 
 ## Swagger/Rapidoc
 

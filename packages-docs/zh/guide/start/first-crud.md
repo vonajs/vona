@@ -44,7 +44,11 @@ $ vona :tools:crud student --module=demo-student
 
 ## CRUD管理页面
 
-打开http://localhost:7102，可以直接进行 Student 的 CRUD 管理操作
+```bash
+$ npm run dev
+```
+
+重启开发服务，然后打开http://localhost:7102，可以直接进行 Student 的 CRUD 管理操作
 
 ## Swagger/Rapidoc
 
