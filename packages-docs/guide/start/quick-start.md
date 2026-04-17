@@ -65,6 +65,8 @@ REDIS_DEFAULT_PASSWORD =
 $ npm run dev
 ```
 
+> Username/Password: admin/123456
+
 4. Unit test
 
 ```bash
