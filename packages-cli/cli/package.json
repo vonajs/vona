@@ -9,9 +9,6 @@
   ],
   "license": "MIT",
   "author": "zhennann",
-  "bin": {
-    "vona": "dist/bin/vona.js"
-  },
   "files": [
     "dist"
   ],
@@ -50,6 +47,10 @@
   },
   "clean-package": {
     "indent": 2,
+    "replace": {
+      "bin.vona": "dist/bin/vona.js",
+      "exports.\\..types": "./dist/index.d.ts"
+    },
     "remove": [
       "clean-package",
       "devDependencies",
