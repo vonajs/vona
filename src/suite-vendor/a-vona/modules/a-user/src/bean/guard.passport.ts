@@ -4,7 +4,7 @@ import type { IDecoratorGuardOptionsGlobal, IGuardExecute } from 'vona-module-a-
 import { catchError } from '@cabloy/utils';
 import { BeanBase, Global } from 'vona';
 import { Guard } from 'vona-module-a-aspect';
-import { checkErrorJwtExpired } from 'vona-module-a-jwt';
+import { checkErrorJwtExpiredAndThrow } from 'vona-module-a-jwt';
 
 export interface IGuardOptionsPassport extends IDecoratorGuardOptionsGlobal {
   public: boolean;
@@ -25,7 +25,7 @@ export class GuardPassport extends BeanBase implements IGuardExecute {
         });
         if (err && !options.public) throw err;
         // throw error only when ErrorMessageJwtExpired
-        checkErrorJwtExpired(err, this.ctx.headers);
+        checkErrorJwtExpiredAndThrow(err, this.ctx.headers);
       }
     }
     // check current

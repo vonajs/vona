@@ -1,1 +1,2 @@
-export const ErrorMessageJwtExpired = 'jwt expired';
+export const ErrorJwtExpiredMessage = 'jwt expired';
+export const ErrorJwtExpiredName = 'TokenExpiredError';
