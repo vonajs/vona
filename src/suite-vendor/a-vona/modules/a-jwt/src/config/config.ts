@@ -3,7 +3,7 @@ import type { VonaApplication, VonaConfigEnv } from 'vona';
 import type { ConfigJwt } from '../types/jwt.ts';
 
 export function config(_app: VonaApplication, env: VonaConfigEnv) {
-  return {
+  const configJwt: ConfigJwt = {
     field: {
       payload: {
         client: 'client',
@@ -15,7 +15,6 @@ export function config(_app: VonaApplication, env: VonaConfigEnv) {
         headerAuth: 'authorization',
         headerAuthScheme: 'bearer',
         query: 'auth_token',
-        cookie: 'token',
       },
     },
     tempAuthToken: {
@@ -43,5 +42,6 @@ export function config(_app: VonaApplication, env: VonaConfigEnv) {
         signOptions: { expiresIn: 3 * 60 },
       },
     },
-  } as ConfigJwt;
+  };
+  return configJwt;
 }

@@ -45,7 +45,7 @@ export interface ConfigJwt {
       headerAuth: string;
       headerAuthScheme: string;
       query: string;
-      cookie: string;
+      // cookie: string;
     };
   };
   tempAuthToken: {
