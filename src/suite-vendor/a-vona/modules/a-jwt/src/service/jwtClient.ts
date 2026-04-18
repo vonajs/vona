@@ -1,4 +1,4 @@
-import { catchError } from '@cabloy/utils';
+import { catchError, isNil } from '@cabloy/utils';
 import jwt from 'jsonwebtoken';
 import { BeanBase, cast, deepExtend } from 'vona';
 import { Service } from 'vona-module-a-bean';
@@ -73,7 +73,7 @@ export class ServiceJwtClient extends BeanBase {
   }
 
   async verify(token?: string, options?: IJwtVerifyOptions): Promise<IPayloadData | undefined> {
-    if (!token && this._clientName === 'access') token = this.scope.service.jwtExtract.fromAllWays();
+    if (isNil(token) && this._clientName === 'access') token = this.scope.service.jwtExtract.fromAllWays();
     const [res, error] = await catchError(() => {
       return this._verifyInner(token, options);
     });

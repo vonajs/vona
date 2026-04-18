@@ -186,7 +186,7 @@ export class BeanSsrSiteBase<SsrSiteOptions extends IDecoratorSsrSiteOptions = I
         await this.$scope.instance.service.instance.initInstance();
         // auth token
         if (!this.bean.passport.current) {
-          const accessToken = this.$scope.jwt.service.jwtExtract.fromAuthHeaderWithScheme(headers.Authorization ?? headers.authorization);
+          const accessToken = this.$scope.jwt.service.jwtExtract.fromAuthHeaderWithScheme(headers.Authorization ?? headers.authorization) ?? '';
           const [_, err] = await catchError(() => {
             return this.bean.passport.checkAuthToken(accessToken);
           });
