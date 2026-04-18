@@ -1,9 +1,9 @@
 import type { Next } from 'vona';
 import type { IDecoratorMiddlewareOptionsGlobal, IMiddlewareExecute } from 'vona-module-a-aspect';
 
+import { checkErrorJwtExpired } from '@cabloy/utils';
 import { BeanBase, beanFullNameFromOnionName, Global } from 'vona';
 import { Middleware } from 'vona-module-a-aspect';
-import { checkErrorJwtExpiredRaw } from 'vona-module-a-jwt';
 
 export interface IMiddlewareOptionsSsrPassport extends IDecoratorMiddlewareOptionsGlobal {}
 
@@ -27,7 +27,7 @@ export class MiddlewareSsrPassport extends BeanBase implements IMiddlewareExecut
     if (!onionOptions) onionOptions = this._getInterceptorOptions('a-ssr:ssrRender');
     if (!onionOptions) return;
     // pagePath
-    const pagePath = checkErrorJwtExpiredRaw(err) ? 'presetErrorExpired' : 'presetLogin';
+    const pagePath = checkErrorJwtExpired(err) ? 'presetErrorExpired' : 'presetLogin';
     return await this.bean.ssr.redirect(onionOptions.site as any, pagePath, {
       query: { returnTo: this.app.util.getAbsoluteUrl(this.ctx.req.url as any) },
     });
