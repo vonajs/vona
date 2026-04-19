@@ -18,9 +18,9 @@ export interface IAuth {
   authProvider?: IAuthProvider;
 }
 
-export type TypeAuthToken = 'recreate' | 'refresh' | 'nochange';
+export type AuthTokenStrategy = 'reissue' | 'refresh' | 'reuse';
 
 export interface ISigninOptions {
   /** default: refresh */
-  authToken?: TypeAuthToken;
+  authTokenStrategy?: AuthTokenStrategy;
 }

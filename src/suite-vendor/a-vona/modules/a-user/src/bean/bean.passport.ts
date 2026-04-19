@@ -76,8 +76,8 @@ export class BeanPassport extends BeanBase {
     // event
     await this.scope.event.signin.emit(passport);
     // serialize: payloadData for client certificate
-    if (!options?.authToken) {
-      options = Object.assign({}, options, { authToken: this.scope.config.authToken.signin });
+    if (!options?.authTokenStrategy) {
+      options = Object.assign({}, options, { authTokenStrategy: this.scope.config.authToken.strategy.signin });
     }
     const payloadData = await this._passportSerialize(passport, options);
     // jwt token
@@ -152,8 +152,8 @@ export class BeanPassport extends BeanBase {
     let payloadData = await this.checkAuthToken(refreshToken, 'refresh');
     if (!payloadData) return this.app.throw(401);
     // refreshAuthToken
-    const configRefreshAuthToken = this.scope.config.authToken.refreshAuthToken;
-    payloadData = await this._handlePayloadData(payloadData, { authToken: configRefreshAuthToken });
+    const configRefreshAuthToken = this.scope.config.authToken.strategy.refreshAuthToken;
+    payloadData = await this._handlePayloadData(payloadData, { authTokenStrategy: configRefreshAuthToken });
     // jwt token
     return await this.bean.jwt.create(payloadData);
   }
@@ -164,7 +164,7 @@ export class BeanPassport extends BeanBase {
     const passport = this.current;
     if (!passport) return this.app.throw(401);
     // payloadData
-    const payloadData = await this._passportSerialize(passport, { authToken: 'nochange' });
+    const payloadData = await this._passportSerialize(passport, { authTokenStrategy: 'reuse' });
     // jwt token
     return await this.bean.jwt.createTempAuthToken(payloadData, options);
   }
@@ -174,7 +174,7 @@ export class BeanPassport extends BeanBase {
     const passport = this.current;
     if (!passport) return this.app.throw(401);
     // payloadData
-    const payloadData = await this._passportSerialize(passport, { authToken: 'nochange' });
+    const payloadData = await this._passportSerialize(passport, { authTokenStrategy: 'reuse' });
     // jwt token
     return await this.bean.jwt.createOauthAuthToken(payloadData, options);
   }
@@ -184,7 +184,7 @@ export class BeanPassport extends BeanBase {
     const passport = this.current;
     if (!passport) return this.app.throw(401);
     // payloadData
-    const payloadData = await this._passportSerialize(passport, { authToken: 'nochange' });
+    const payloadData = await this._passportSerialize(passport, { authTokenStrategy: 'reuse' });
     // code
     return await this.bean.jwt.createOauthCode(payloadData, options);
   }
@@ -233,8 +233,8 @@ export class BeanPassport extends BeanBase {
 
   private async _handlePayloadData(payloadData: IPayloadData, options?: ISigninOptions) {
     // auth token
-    const authToken = options?.authToken ?? 'refresh';
-    if (authToken === 'recreate') {
+    const authToken = options?.authTokenStrategy ?? 'refresh';
+    if (authToken === 'reissue') {
       return await this.authTokenAdapter.create(payloadData);
     } else {
       const payloadData2 = await this.authTokenAdapter.retrieve(payloadData);
@@ -243,7 +243,7 @@ export class BeanPassport extends BeanBase {
       }
       if (authToken === 'refresh') {
         await this.authTokenAdapter.refresh(payloadData2);
-      } else if (authToken === 'nochange') {
+      } else if (authToken === 'reuse') {
         // do nothing
       }
       return payloadData2;

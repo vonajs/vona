@@ -1,7 +1,7 @@
 import type { VonaApplication } from 'vona';
 import type { IServiceRecord } from 'vona-module-a-bean';
 
-import type { TypeAuthToken } from '../types/auth.ts';
+import type { AuthTokenStrategy } from '../types/auth.ts';
 
 export function config(_app: VonaApplication) {
   return {
@@ -9,8 +9,10 @@ export function config(_app: VonaApplication) {
       autoActivate: false,
     },
     authToken: {
-      refreshAuthToken: 'refresh' as TypeAuthToken, // 'recreate': not support different clients
-      signin: 'refresh' as TypeAuthToken,
+      strategy: {
+        refreshAuthToken: 'refresh' as AuthTokenStrategy, // 'reissue': not support different clients
+        signin: 'refresh' as AuthTokenStrategy,
+      },
     },
     adapter: {
       authToken: 'a-user:authTokenAdapter' as keyof IServiceRecord,
