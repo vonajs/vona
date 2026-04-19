@@ -12,7 +12,7 @@ Vona 是一款全栈元框架，可在同一个代码库中实现`SSR/SPA/Web网
 - 首创双层页签导航 UI/UX，可以更加便捷的在多个页面中切换
 - 可动态渲染 CRUD 的列表页、条目页、搜索表单，并且提供了`Tanstack Table/Tanstack Form/Tanstack Query`的最佳实践
 
-## 全栈原理
+## 全栈机制
 
 Vona 与 Zova 完美协同，延续前后端分离的架构风格。采用 Zova 构建的前端项目，既可以独立运行，也可以将 JS bundle 放入 Vona 后端，在后端直接进行 SSR 渲染
 

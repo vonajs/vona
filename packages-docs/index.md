@@ -24,8 +24,8 @@ features:
     details: Dynamically render CRUD list pages, entry pages, and search forms, and provides the best practices of Tanstack Table/Tanstack Form/Tanstack Query
   - title: DTO Infer & Generation
     details: Pioneers dynamic DTO inference and generation capabilities, significantly improving development efficiency and experience
-  - title: Dual-layer Tabs UI/UX
-    details: Pioneers dual-layer tabs navigation UI/UX, allowing more convenient switching between multiple pages
+  - title: Dual-layer Tabs Navigation
+    details: Pioneers dual-layer tabs navigation, allowing more convenient switching between multiple pages
   - title: IOC & AOP
     details: Recommended to use the `dependency lookup` strategy, so as to use fewer decorator functions and fewer type annotations, making the IOC container more concise and intuitive
   - title: Multi-tenancy

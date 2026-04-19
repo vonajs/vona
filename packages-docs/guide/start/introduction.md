@@ -8,7 +8,7 @@ Vona is a fullstack meta-framework for building `SSR/SPA/Website/Admin-Dashboard
 - Pioneers dual-layer tabs navigation UI/UX, allowing more convenient switching between multiple pages
 - Dynamically render CRUD list pages, entry pages, and search forms, and provides the best practices of `Tanstack Table/Tanstack Form/Tanstack Query`
 
-## Fullstack Principles
+## Fullstack Mechanism
 
 Vona works perfectly with Zova, continuing the frontend-backend separation architecture. Frontend projects built with Zova can run independently or have their JS bundle copied into the Vona backend for SSR rendering directly on the backend
 
