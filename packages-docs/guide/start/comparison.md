@@ -14,7 +14,7 @@
   - Zova can generate types for routes and components, providing type hints in Vona
 - `Backend Capability`: Vona provides more powerful and complete backend capabilities, easily handling the development of large business systems, including `multi-tenancy`, `multi-database`, `multi-datasource`, `two-layer cache`, `queues`, `broadcast`, `scheduled tasks`, `distributed locks`, `DTO dynamic inference and generation`, and more
 - `Admin-Dashboard Supports SSR`: Vona provides full SSR support for the `Admin-Dashboard` applications. Interface elements such as the `sidebar`, `multi-language`, `light and dark themes`, and `brand color themes` all support SSR, significantly reducing interface flicker when refreshing the page and improving user interaction experience
-- `Dual-layer Tabs Navigation `: Vona pioneers dual-layer tabs navigation, allowing more convenient switching between multiple pages while maintaining page states, enabling the simultaneous handling of multiple tasks and enhancing user interaction experience
+- `Dual-layer Tabs Navigation`: Vona pioneers dual-layer tabs navigation, allowing more convenient switching between multiple pages while maintaining page states, enabling the simultaneous handling of multiple tasks and enhancing user interaction experience
 
 ## Comparison with Nest
 
@@ -27,7 +27,7 @@
 
 - `Zod Schema`: Vona generates a unified schema based on Zod4, which can be used for `validation`, `Swagger/OpenAPI documentation generation`, `Form/Table dynamic rendering`, `Response data serialization`, and other scenarios
 - `DTO Dynamic Inference and Generation`: Vona pioneers dynamic DTO inference and generation capabilities, significantly improving development efficiency and experience
-- `Multi-Tenant, Multi-Database, Multi-Datasource`: Vona has built-in capabilities for multi-tenancy, multi-database, and multi-Datasource, making it easy to handle large-scale business system development
+- `Multi-Tenant, Multi-Database, Multi-Datasource`: Vona has built-in capabilities for multi-tenancy, multi-database, and multi-datasource, making it easy to handle large-scale business system development
 - `AOP Programming`: Vona provides more complete AOP programming capabilities, including `controller aspect`, `internal aspect`, and `external aspect`. Nest only implements `controller aspect`
 
 > What is controller aspect?
@@ -38,7 +38,7 @@
 
 | Feature                    | Vona                             | Django Admin                           |
 | -------------------------- | -------------------------------- | -------------------------------------- |
-| Backend Tech Stack         | NodeJS + Typescript              | Python + server-side template language |
+| Backend Tech Stack         | NodeJS + Typescript              | Python + Server-side template language |
 | Frontend Tech Stack        | Zova + Vue3 + Vite8 + Typescript | HTML + CSS + JS                        |
 | SSR Mechanism              | Isomorphic SSR                   | Server-side template rendering         |
 | Dual-layer Tabs Navigation | ✅                               | ❌                                     |
