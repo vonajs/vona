@@ -36,9 +36,11 @@
 
 ## 与Django Admin对比
 
-| 特性         | Vona                      | Django Admin            |
-| ------------ | ------------------------- | ----------------------- |
-| 后端技术栈   | NodeJS + Typescript       | Python + 服务端模板语言 |
-| 前端技术栈   | Vue3 + Vite8 + Typescript | HTML + CSS + JS         |
-| SSR机制      | 同构SSR                   | 服务端模版渲染          |
-| 双层页签导航 | ✅                        | ❌                      |
+| 特性         | Vona                             | Django Admin            |
+| ------------ | -------------------------------- | ----------------------- |
+| 后端技术栈   | NodeJS + Typescript              | Python + 服务端模板语言 |
+| 前端技术栈   | Zova + Vue3 + Vite8 + Typescript | HTML + CSS + JS         |
+| SSR机制      | 同构SSR                          | 服务端模版渲染          |
+| 双层页签导航 | ✅                               | ❌                      |
+
+- Vona 采用前后端分离的架构来实现 CRUD。前端采用 Zova 框架，界面更美观、代码更简洁，可以更加自由的定制界面，添加新功能
