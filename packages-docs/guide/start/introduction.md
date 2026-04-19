@@ -30,7 +30,8 @@ The Website and Admin-Dashboard of Cabloy Store are built by one codebase
 
 ## Features
 
-- `Fullstack`: Building `SSR/SPA/Website/Admin-Dashboard` all in one codebase. The Admin-Dashboard also supports SSR with intuitive and elegant code
+- `Fullstack`: Building `SSR/SPA/Website/Admin-Dashboard` all in one codebase
+- `Admin-Dashboard Supports SSR`: Provides full SSR support for the `Admin-Dashboard` applications. Interface elements such as the `sidebar`, `multi-language`, `light and dark themes`, and `brand color themes` all support SSR, significantly reducing interface flicker when refreshing the page and improving user interaction experience
 - `CRUD Dynamic Rendering`: Dynamically render CRUD list pages, entry pages, and search forms, and provides the best practices of `Tanstack Table/Tanstack Form/Tanstack Query`
 - `Dynamic DTO Inference and Generation`: Pioneers dynamic DTO inference and generation capabilities, significantly improving development efficiency and experience
 - `Dual-layer Tabs Navigation`: Pioneers dual-layer tabs navigation, allowing more convenient switching between multiple pages while maintaining page states, enabling the simultaneous handling of multiple tasks and enhancing user interaction experience

@@ -18,4 +18,4 @@
 
 1. Vona implements CRUD with a frontend-backend separation architecture. The frontend uses Zova, providing a more beautiful interface, cleaner code, and greater freedom to customize the interface and add new features
 2. Vona can implement `SSR/SPA/Website/Admin-Dashboard` in the same codebase
-3. The Admin-Dashboard also supports SSR, with intuitive and elegant code
+3. Provides full SSR support for the `Admin-Dashboard` applications. Interface elements such as the `sidebar`, `multi-language`, `light and dark themes`, and `brand color themes` all support SSR, significantly reducing interface flicker when refreshing the page and improving user interaction experience
