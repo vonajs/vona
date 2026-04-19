@@ -5,7 +5,7 @@
 Vona 是一款全栈元框架，可在同一个代码库中实现`SSR/SPA/Web网站/Admin中后台`
 
 - 首创 DTO 动态推断与生成能力，解放我们的双手，显著提升生产力。甚至可以说，对于构建更加优雅的 Node.js 后端框架而言，能够动态推断与生成 DTO，是非常重要的`里程碑`
-- 首创双层页签导航 UI/UX，可以更加便捷的在多个页面中切换
+- 首创双层页签导航，可以更加便捷的在多个页面中切换，并保持页面状态，从而可以同时处理多个业务，提升用户交互体验
 - 可动态渲染 CRUD 的列表页、条目页、搜索表单，并且提供了`Tanstack Table/Tanstack Form/Tanstack Query`的最佳实践
 
 [![LICENSE MIT][license-image]][license-url]
@@ -42,7 +42,7 @@ Vona 与 Zova 完美协同，延续前后端分离的架构风格。采用 Zova 
 
 ## 动图演示
 
-- 首创双层页签导航 UI/UX
+- 首创双层页签导航
 
 ![](./packages-docs/zh/assets/img/start/cabloy-start-two-level-tabs.gif)
 
