@@ -19,7 +19,9 @@ hero:
 
 features:
   - title: Fullstack
-    details: Building SSR/SPA/Website/Admin-Dashboard all in one codebase. The Admin-Dashboard also supports SSR with intuitive and elegant code
+    details: Building SSR/SPA/Website/Admin-Dashboard all in one codebase
+  - title: Admin-Dashboard Supports SSR
+    details: Provides full SSR support for the `Admin-Dashboard` applications. Interface elements such as the `sidebar`, `multi-language`, `light and dark themes`, and `brand color themes` all support SSR, significantly reducing interface flicker when refreshing the page and improving user interaction experience
   - title: CRUD Dynamic Rendering
     details: Dynamically render CRUD list pages, entry pages, and search forms, and provides the best practices of Tanstack Table/Tanstack Form/Tanstack Query
   - title: DTO Infer & Generation
@@ -32,7 +34,6 @@ features:
     details: Built-in out-of-the-box multi-tenancy capabilities, supporting both shared and isolated modes
   - title: Multi-database & Multi-datasource
     details: Supports multi-database and multi-datasource, and provides out-of-the-box read-write splitting and dynamic datasource capabilities
-
   - title: Menu Commands
     details: Execute Cli commands through the menus, significantly reducing mental overhead and improving the development experience
 ---
