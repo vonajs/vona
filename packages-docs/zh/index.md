@@ -4,8 +4,8 @@ layout: home
 
 hero:
   name: 'Vona'
-  text: '是一款全栈元框架'
-  tagline: 可在同一个代码库中实现SSR/SPA/Web网站/Admin中后台
+  text: '是一款全栈框架'
+  tagline: 同一个代码库实现SSR/SPA/Web网站/Admin中后台
   actions:
     - theme: brand
       text: 快速开始
