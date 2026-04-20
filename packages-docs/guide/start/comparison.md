@@ -18,12 +18,12 @@
 
 ## Comparison with Nest
 
-| Feature                                        | Vona                                                | Nest              |
-| ---------------------------------------------- | --------------------------------------------------- | ----------------- |
-| Validation/OpenAPI                             | One mechanism                                       | Two mechanisms    |
-| DTO Infer and Generation                       | ✅                                                  | ❌                |
-| Multi-Tenant, Multi-Database, Multi-Datasource | Built-in                                            | Third-party       |
-| AOP Programming                                | Controller Aspect, Internal Aspect, External Aspect | Controller Aspect |
+| Feature                                        | Vona                                                | Nest                        |
+| ---------------------------------------------- | --------------------------------------------------- | --------------------------- |
+| Validation/OpenAPI                             | Unified Configuration                               | Has Redundant Configuration |
+| DTO Infer and Generation                       | ✅                                                  | ❌                          |
+| Multi-Tenant, Multi-Database, Multi-Datasource | Built-in                                            | Third-party                 |
+| AOP Programming                                | Controller Aspect, Internal Aspect, External Aspect | Controller Aspect           |
 
 - `Zod Schema`: Vona generates a unified schema based on Zod4, which can be used for `validation`, `Swagger/OpenAPI documentation generation`, `Form/Table dynamic rendering`, `Response data serialization`, and other scenarios
 - `DTO Infer and Generation`: Vona dynamically infer and generate DTOs to eliminate redundant type definitions and boost development productivity
