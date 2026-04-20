@@ -104,11 +104,23 @@ Zova can be used with any UI library and comes with built-in project templates f
 
 ### 1. About Coding
 
-Many frameworks showcase design elegance with the simplest cases, while ignoring the coding challenges of real business complexity. As business grows and changes, project code can quickly degrade and become hard to maintain. Zova addresses large-scale business complexity with a set of engineering solutions, allowing elegant and intuitive code even in complex systems. This improves development efficiency and experience, while making subsequent iteration and maintenance easier
+Many frameworks showcase design elegance with the simplest cases, while ignoring the coding challenges of real business complexity.
+
+As business grows and changes, project code can quickly degrade and become hard to maintain.
+
+Zova addresses large-scale business complexity with a set of engineering solutions, allowing elegant and intuitive code even in complex systems.
+
+This improves development efficiency and experience, while making subsequent iteration and maintenance easier
 
 ### 2. About Performance
 
-Many frameworks showcase high performance with simplified use cases, neglecting the challenges posed by real business complexity. As systems scale, performance often suffers, requiring increasingly complex optimizations that bloat the codebase. Vona takes a different approach: it integrates caching strategies into its core, providing built-in mechanisms such as two-layer cache, query cache, and entity cache. This allows you to build large-scale systems elegantly while maintaining performance without extensive custom optimization code
+Many frameworks showcase high performance with simplified use cases, neglecting the challenges posed by real business complexity.
+
+As systems scale, performance often suffers, requiring increasingly complex optimizations that bloat the codebase.
+
+Vona takes a different approach: it integrates caching strategies into its core, providing built-in mechanisms such as two-layer cache, query cache, and entity cache.
+
+This allows you to build large-scale systems elegantly while maintaining performance without extensive custom optimization code
 
 ## Stay In Touch
 
