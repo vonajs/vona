@@ -4,7 +4,7 @@ import { catchError, isNil } from '@cabloy/utils';
 import { BeanBase, beanFullNameFromOnionName } from 'vona';
 import { Bean } from 'vona-module-a-bean';
 
-import type { IAuth, IAuthIdRecord, ISigninOptions } from '../types/auth.ts';
+import type { IAuth, IAuthIdRecord, IAuthTokenOptions, ISigninOptions } from '../types/auth.ts';
 import type { IAuthTokenAdapter } from '../types/authToken.ts';
 import type { IPassport, IPassportAdapter } from '../types/passport.ts';
 import type { IRole, IRoleNameRecord } from '../types/role.ts';
@@ -76,10 +76,20 @@ export class BeanPassport extends BeanBase {
     // event
     await this.scope.event.signin.emit(passport);
     // serialize: payloadData for client certificate
-    if (!options?.authTokenStrategy) {
-      options = Object.assign({}, options, { authTokenStrategy: this.scope.config.authToken.strategy.signin });
-    }
-    const payloadData = await this._passportSerialize(passport, options);
+    const { clientOptions } = await this.bean.authProvider.getClientOptions(
+      {
+        id: passport.auth!.authProvider!.id as number,
+      },
+      { authTokenOptions: options?.authToken },
+      {
+        authTokenOptions: {
+          strategy: this.scope.config.authToken.strategy.signin,
+          ttl: this.scope.config.authToken.ttl,
+        },
+      },
+    );
+    if (!clientOptions) this.app.throw(403);
+    const payloadData = await this._passportSerialize(passport, clientOptions.authTokenOptions);
     // jwt token
     return await this.bean.jwt.create(payloadData, { dev: passport.auth?.id.toString() === '-1' });
   }
@@ -152,8 +162,21 @@ export class BeanPassport extends BeanBase {
     let payloadData = await this.checkAuthToken(refreshToken, 'refresh');
     if (!payloadData) return this.app.throw(401);
     // refreshAuthToken
-    const configRefreshAuthToken = this.scope.config.authToken.strategy.refreshAuthToken;
-    payloadData = await this._handlePayloadData(payloadData, { authTokenStrategy: configRefreshAuthToken });
+    const authId = payloadData[this.scope.config.payloadData.fields.authId];
+    const { clientOptions } = await this.bean.authProvider.getClientOptions(
+      {
+        id: authId,
+      },
+      undefined,
+      {
+        authTokenOptions: {
+          strategy: this.scope.config.authToken.strategy.refreshAuthToken,
+          ttl: this.scope.config.authToken.ttl,
+        },
+      },
+    );
+    if (!clientOptions) this.app.throw(403);
+    payloadData = await this._handlePayloadData(payloadData, clientOptions.authTokenOptions);
     // jwt token
     return await this.bean.jwt.create(payloadData);
   }
@@ -164,7 +187,7 @@ export class BeanPassport extends BeanBase {
     const passport = this.current;
     if (!passport) return this.app.throw(401);
     // payloadData
-    const payloadData = await this._passportSerialize(passport, { authTokenStrategy: 'reuse' });
+    const payloadData = await this._passportSerialize(passport, { strategy: 'reuse' });
     // jwt token
     return await this.bean.jwt.createTempAuthToken(payloadData, options);
   }
@@ -174,7 +197,7 @@ export class BeanPassport extends BeanBase {
     const passport = this.current;
     if (!passport) return this.app.throw(401);
     // payloadData
-    const payloadData = await this._passportSerialize(passport, { authTokenStrategy: 'reuse' });
+    const payloadData = await this._passportSerialize(passport, { strategy: 'reuse' });
     // jwt token
     return await this.bean.jwt.createOauthAuthToken(payloadData, options);
   }
@@ -184,7 +207,7 @@ export class BeanPassport extends BeanBase {
     const passport = this.current;
     if (!passport) return this.app.throw(401);
     // payloadData
-    const payloadData = await this._passportSerialize(passport, { authTokenStrategy: 'reuse' });
+    const payloadData = await this._passportSerialize(passport, { strategy: 'reuse' });
     // code
     return await this.bean.jwt.createOauthCode(payloadData, options);
   }
@@ -225,25 +248,25 @@ export class BeanPassport extends BeanBase {
     return true;
   }
 
-  private async _passportSerialize(passport: IPassport, options?: ISigninOptions) {
+  private async _passportSerialize(passport: IPassport, authTokenOptions?: IAuthTokenOptions) {
     // serialize
     const payloadData = await this.passportAdapter.serialize(passport);
-    return await this._handlePayloadData(payloadData, options);
+    return await this._handlePayloadData(payloadData, authTokenOptions);
   }
 
-  private async _handlePayloadData(payloadData: IPayloadData, options?: ISigninOptions) {
+  private async _handlePayloadData(payloadData: IPayloadData, authTokenOptions?: IAuthTokenOptions) {
     // auth token
-    const authToken = options?.authTokenStrategy ?? 'refresh';
-    if (authToken === 'reissue') {
+    const strategy = authTokenOptions?.strategy ?? 'refresh';
+    if (strategy === 'reissue') {
       return await this.authTokenAdapter.create(payloadData);
     } else {
       const payloadData2 = await this.authTokenAdapter.retrieve(payloadData);
       if (!payloadData2) {
         return await this.authTokenAdapter.create(payloadData);
       }
-      if (authToken === 'refresh') {
+      if (strategy === 'refresh') {
         await this.authTokenAdapter.refresh(payloadData2);
-      } else if (authToken === 'reuse') {
+      } else if (strategy === 'reuse') {
         // do nothing
       }
       return payloadData2;
