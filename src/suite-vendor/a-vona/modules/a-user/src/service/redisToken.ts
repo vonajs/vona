@@ -21,16 +21,16 @@ export class ServiceRedisToken extends BeanBase {
     return { ...payloadData, [this.scope.config.payloadData.fields.token]: token };
   }
 
-  async create(payloadData: IPayloadData) {
+  async create(payloadData: IPayloadData, ttl?: number) {
     const key = this._getAuthRedisKey(payloadData);
     if (!key || !this._getToken(payloadData)) return this.app.throw(401);
-    await this.scope.cacheRedis.authToken.set(this._getToken(payloadData), key);
+    await this.scope.cacheRedis.authToken.set(this._getToken(payloadData), key, { ttl });
   }
 
-  async refresh(payloadData: IPayloadData) {
+  async refresh(payloadData: IPayloadData, ttl?: number) {
     const key = this._getAuthRedisKey(payloadData);
     if (!key) return this.app.throw(401);
-    await this.scope.cacheRedis.authToken.expire(key);
+    await this.scope.cacheRedis.authToken.expire(key, { ttl });
   }
 
   async remove(payloadData: IPayloadData) {

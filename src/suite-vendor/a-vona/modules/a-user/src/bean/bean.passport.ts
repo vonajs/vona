@@ -257,15 +257,16 @@ export class BeanPassport extends BeanBase {
   private async _handlePayloadData(payloadData: IPayloadData, authTokenOptions?: IAuthTokenOptions) {
     // auth token
     const strategy = authTokenOptions?.strategy ?? 'refresh';
+    const ttl = authTokenOptions?.ttl;
     if (strategy === 'reissue') {
-      return await this.authTokenAdapter.create(payloadData);
+      return await this.authTokenAdapter.create(payloadData, ttl);
     } else {
       const payloadData2 = await this.authTokenAdapter.retrieve(payloadData);
       if (!payloadData2) {
-        return await this.authTokenAdapter.create(payloadData);
+        return await this.authTokenAdapter.create(payloadData, ttl);
       }
       if (strategy === 'refresh') {
-        await this.authTokenAdapter.refresh(payloadData2);
+        await this.authTokenAdapter.refresh(payloadData2, ttl);
       } else if (strategy === 'reuse') {
         // do nothing
       }

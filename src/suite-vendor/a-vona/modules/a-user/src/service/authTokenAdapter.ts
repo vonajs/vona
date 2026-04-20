@@ -8,11 +8,11 @@ import type { IUser } from '../types/user.ts';
 
 @Service()
 export class ServiceAuthTokenAdapter extends BeanBase implements IAuthTokenAdapter {
-  async create(payloadData: IPayloadData): Promise<IPayloadData> {
+  async create(payloadData: IPayloadData, ttl?: number): Promise<IPayloadData> {
     const authIdStr = this._getAuthId(payloadData)?.toString();
     const token = authIdStr === '-1' ? createHash(authIdStr) : uuidv4();
     const payloadDataNew = Object.assign({}, payloadData, { [this.scope.config.payloadData.fields.token]: token });
-    await this.scope.service.redisToken.create(payloadDataNew);
+    await this.scope.service.redisToken.create(payloadDataNew, ttl);
     return payloadDataNew;
   }
 
@@ -24,8 +24,8 @@ export class ServiceAuthTokenAdapter extends BeanBase implements IAuthTokenAdapt
     return await this.scope.service.redisToken.verify(payloadData);
   }
 
-  async refresh(payloadData: IPayloadData): Promise<void> {
-    await this.scope.service.redisToken.refresh(payloadData);
+  async refresh(payloadData: IPayloadData, ttl?: number): Promise<void> {
+    await this.scope.service.redisToken.refresh(payloadData, ttl);
   }
 
   async remove(payloadData: IPayloadData): Promise<void> {
