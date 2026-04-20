@@ -14,7 +14,7 @@
   - Zova can generate types for routes and components, providing type hints in Vona
 - `Backend Capability`: Vona provides more powerful and complete backend capabilities, easily handling the development of large business systems, including `multi-tenancy`, `multi-database`, `multi-datasource`, `two-layer cache`, `queues`, `broadcast`, `scheduled tasks`, `distributed locks`, `DTO dynamic inference and generation`, and more
 - `Admin-Dashboard Supports SSR`: Vona provides full SSR support for the `Admin-Dashboard` applications. Interface elements such as the `sidebar`, `multi-language`, `light and dark themes`, and `brand color themes` all support SSR, significantly reducing interface flicker when refreshing the page and improving user interaction experience
-- `Dual-layer Tabs Navigation`: Vona pioneers dual-layer tabs navigation, allowing more convenient switching between multiple pages while maintaining page states, enabling the simultaneous handling of multiple tasks and enhancing user interaction experience
+- `Dual-layer Tabs Navigation`: Vona supports dual-layer tabs navigation, enabling efficient page switching while maintaining page state
 
 ## Comparison with Nest
 

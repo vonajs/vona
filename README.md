@@ -5,7 +5,7 @@ English | [简体中文](./README.zh-CN.md)
 Vona is a fullstack meta-framework for building `SSR/SPA/Website/Admin-Dashboard` all in one codebase
 
 - Pioneers dynamic DTO inference and generation capabilities, significantly improving development efficiency and experience. It can even be said that being able to dynamically infer and generate DTOs is a very important `milestone` for building a more elegant Node.js backend framework
-- Pioneers dual-layer tabs navigation, allowing more convenient switching between multiple pages while maintaining page states, enabling the simultaneous handling of multiple tasks and enhancing user interaction experience
+- Supports dual-layer tabs navigation, enabling efficient page switching while maintaining page state
 - Dynamically render CRUD list pages, entry pages, and search forms, and provides the best practices of `Tanstack Table/Tanstack Form/Tanstack Query`
 
 [![LICENSE MIT][license-image]][license-url]
@@ -42,7 +42,7 @@ The Website and Admin-Dashboard of Cabloy Store are built by one codebase
 
 ## GIF Demo
 
-- Pioneers dual-layer tabs navigation
+- Dual-layer tabs navigation
 
 ![](./packages-docs/assets/img/start/cabloy-start-two-level-tabs.gif)
 
