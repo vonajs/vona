@@ -25,7 +25,7 @@ features:
   - title: CRUD动态渲染
     details: 可动态渲染CRUD的列表页、条目页、搜索表单，并且提供了Tanstack Table/Tanstack Form/Tanstack Query的最佳实践
   - title: DTO动态推断与生成
-    details: 首创 DTO 动态推断与生成能力，解放我们的双手，显著提升生产力。甚至可以说，对于构建更加优雅的 Node.js 后端框架而言，能够动态推断与生成 DTO，是非常重要的`里程碑`
+    details: 提供 DTO 动态推断与生成能力，减少重复的类型定义工作，提升开发效率
   - title: 双层页签导航
     details: 支持双层页签导航，实现高效页面切换，并保持页面状态
   - title: IOC & AOP

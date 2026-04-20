@@ -2,7 +2,7 @@ English | [简体中文](./README.zh-CN.md)
 
 # Vona
 
-Vona is a fullstack meta-framework for building `SSR/SPA/Website/Admin-Dashboard` all in one codebase
+Vona is a fullstack framework for building SSR/SPA/Website/Admin-Dashboard in one codebase, with built-in DTO generation and type safety across frontend and backend
 
 - Pioneers dynamic DTO inference and generation capabilities, significantly improving development efficiency and experience. It can even be said that being able to dynamically infer and generate DTOs is a very important `milestone` for building a more elegant Node.js backend framework
 - Supports dual-layer tabs navigation, enabling efficient page switching while maintaining page state
