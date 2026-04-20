@@ -5,7 +5,7 @@ English | [简体中文](./README.zh-CN.md)
 Vona is a fullstack framework for building SSR/SPA/Website/Admin-Dashboard in one codebase, with built-in DTO generation and type safety across frontend and backend
 
 - Supports dual-layer tabs navigation, enabling efficient page switching while maintaining page state
-- Dynamically render CRUD list pages, entry pages, and search forms, and provides the best practices of `Tanstack Table/Tanstack Form/Tanstack Query`
+- Dynamically render CRUD list pages, entry pages, and search forms, while demonstrating best practices for Tanstack Table, Tanstack Form, and Tanstack Query
 - Dynamically infer and generate DTOs to eliminate redundant type definitions and boost development productivity
 
 [![LICENSE MIT][license-image]][license-url]

@@ -23,7 +23,7 @@ features:
   - title: Admin-Dashboard Supports SSR
     details: Provides full SSR support for the `Admin-Dashboard` applications. Interface elements such as the `sidebar`, `multi-language`, `light and dark themes`, and `brand color themes` all support SSR, significantly reducing interface flicker when refreshing the page and improving user interaction experience
   - title: CRUD Dynamic Rendering
-    details: Dynamically render CRUD list pages, entry pages, and search forms, and provides the best practices of Tanstack Table/Tanstack Form/Tanstack Query
+    details: Dynamically render CRUD list pages, entry pages, and search forms, while demonstrating best practices for Tanstack Table, Tanstack Form, and Tanstack Query
   - title: DTO Infer & Generation
     details: Dynamically infer and generate DTOs to eliminate redundant type definitions and boost development productivity
   - title: Dual-layer Tabs Navigation

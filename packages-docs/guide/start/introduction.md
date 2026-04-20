@@ -5,7 +5,7 @@
 Vona is a fullstack framework for building SSR/SPA/Website/Admin-Dashboard in one codebase, with built-in DTO generation and type safety across frontend and backend
 
 - Supports dual-layer tabs navigation, enabling efficient page switching while maintaining page state
-- Dynamically render CRUD list pages, entry pages, and search forms, and provides the best practices of `Tanstack Table/Tanstack Form/Tanstack Query`
+- Dynamically render CRUD list pages, entry pages, and search forms, while demonstrating best practices for Tanstack Table, Tanstack Form, and Tanstack Query
 - Dynamically infer and generate DTOs to eliminate redundant type definitions and boost development productivity
 
 ## Fullstack Mechanism
@@ -32,7 +32,7 @@ The Website and Admin-Dashboard of Cabloy Store are built by one codebase
 
 - `Fullstack`: Building `SSR/SPA/Website/Admin-Dashboard` in one codebase
 - `Admin-Dashboard Supports SSR`: Provides full SSR support for the `Admin-Dashboard` applications. Interface elements such as the `sidebar`, `multi-language`, `light and dark themes`, and `brand color themes` all support SSR, significantly reducing interface flicker when refreshing the page and improving user interaction experience
-- `CRUD Dynamic Rendering`: Dynamically render CRUD list pages, entry pages, and search forms, and provides the best practices of `Tanstack Table/Tanstack Form/Tanstack Query`
+- `CRUD Dynamic Rendering`: Dynamically render CRUD list pages, entry pages, and search forms, while demonstrating best practices for Tanstack Table, Tanstack Form, and Tanstack Query
 - `DTO Infer and Generation`: Dynamically infer and generate DTOs to eliminate redundant type definitions and boost development productivity
 - `Dual-layer Tabs Navigation`: Supports dual-layer tabs navigation, enabling efficient page switching while maintaining page state
 - `Developed in TypeScript`: Provides comprehensive TypeScript type hints
