@@ -1,19 +1,13 @@
 import type { IJwtToken } from 'vona-module-a-jwt';
 
-import { BeanBase, deepExtend } from 'vona';
+import { BeanBase } from 'vona';
 import { Bean } from 'vona-module-a-bean';
 import { $apiPath } from 'vona-module-a-openapiutils';
 
 import type { DtoAuth } from '../dto/auth.ts';
 import type { EntityAuth } from '../entity/auth.ts';
 import type { IAuthenticateOptions, IAuthenticateStrategyState } from '../types/auth.ts';
-import type {
-  IAuthProviderClientOptions,
-  IAuthProviderRecord,
-  IAuthProviderStrategy,
-  IAuthProviderVerify,
-  TypeStrategyOptions,
-} from '../types/authProvider.ts';
+import type { IAuthProviderRecord, IAuthProviderStrategy, IAuthProviderVerify, TypeStrategyOptions } from '../types/authProvider.ts';
 
 @Bean()
 export class BeanAuth extends BeanBase {
@@ -25,24 +19,17 @@ export class BeanAuth extends BeanBase {
     const clientName = options?.clientName ?? 'default';
     // stateIntention
     const stateIntention = options?.state?.intention ?? 'login';
-    // onionSlice
-    const onionSlice = this.bean.onion.authProvider.getOnionSliceEnabled(true, authProviderName);
-    if (!onionSlice) throw new Error(`Auth provider not found: ${authProviderName}`);
-    const onionOptions = onionSlice.beanOptions.options!;
-    // authProvider
-    const entityAuthProvider = await this.bean.authProvider.get({ providerName: authProviderName, clientName });
-    if (!entityAuthProvider || entityAuthProvider?.disabled) return this.app.throw(403);
     // clientOptions
-    const optionsMeta = onionSlice.beanOptions.options;
-    const clientOptions: IAuthProviderClientOptions = deepExtend(
-      {},
-      optionsMeta?.base,
-      optionsMeta?.clients?.[clientName as any],
-      entityAuthProvider.clientOptions,
+    const { entityAuthProvider, disabled, beanFullName, onionOptions, clientOptions } = await this.bean.authProvider.getClientOptions(
+      {
+        providerName: authProviderName,
+        clientName,
+      },
       options?.clientOptions,
     );
+    if (!entityAuthProvider || disabled) return this.app.throw(403);
     // execute
-    const beanAuthProvider = this.app.bean._getBean<IAuthProviderVerify & IAuthProviderStrategy>(onionSlice.beanOptions.beanFullName as any);
+    const beanAuthProvider = this.app.bean._getBean<IAuthProviderVerify & IAuthProviderStrategy>(beanFullName as any);
     // strategy: no
     if (!beanAuthProvider.strategy) {
       return await this.scope.service.auth.authenticateCallback(
