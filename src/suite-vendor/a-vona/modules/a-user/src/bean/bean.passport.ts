@@ -77,7 +77,7 @@ export class BeanPassport extends BeanBase {
     // event
     await this.scope.event.signin.emit(passport);
     // serialize: payloadData for client certificate
-    const authTokenOptions = await this._combineAuthTokenOptions(passport.auth!.id, passport.auth!.authProviderId, options?.authToken, {
+    const authTokenOptions = await this._combineAuthTokenOptions(passport.auth!.authProviderId, options?.authToken, {
       strategy: this.scope.config.authToken.strategy.signin,
       ttl: this.scope.config.authToken.ttl,
     });
@@ -155,7 +155,7 @@ export class BeanPassport extends BeanBase {
     if (!checkRes) return this.app.throw(401);
     let { payloadData, passport } = checkRes;
     // refreshAuthToken
-    const authTokenOptions = await this._combineAuthTokenOptions(passport.auth!.id, passport.auth!.authProviderId, undefined, {
+    const authTokenOptions = await this._combineAuthTokenOptions(passport.auth!.authProviderId, undefined, {
       strategy: this.scope.config.authToken.strategy.refreshAuthToken,
       ttl: this.scope.config.authToken.ttl,
     });
@@ -259,12 +259,11 @@ export class BeanPassport extends BeanBase {
   }
 
   private async _combineAuthTokenOptions(
-    authId: TableIdentity,
     authProviderId: number | undefined,
     authTokenOptionsCustom: IAuthTokenOptions | undefined,
     authTokenOptionsDefault: IAuthTokenOptions,
   ) {
-    if (authId === '-1') return authTokenOptionsDefault;
+    if (!authProviderId) return authTokenOptionsDefault;
     const { clientOptions } = await this.bean.authProvider.getClientOptions(
       {
         id: authProviderId,
