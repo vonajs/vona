@@ -1,4 +1,3 @@
-import type { TableIdentity } from 'table-identity';
 import type { IJwtClientRecord, IJwtSignOptions, IJwtToken, IJwtVerifyOptions, IPayloadData } from 'vona-module-a-jwt';
 
 import { catchError, isNil } from '@cabloy/utils';
