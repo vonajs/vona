@@ -19,7 +19,7 @@
 
 2023 年，在经过充分的评估和验证之后，CabloyJS V5 采用全新的架构理念进行彻底的重构。基于 Typescript 开发，采用前后端分离，于是孵化出两个全新的底层框架：
 
-- `ZovaJS`: 一款更直观的前端框架，汲取 Vue3、React 和 Angular 的精华，用于开发优雅、快速、可靠的系统
+- `ZovaJS`: 直观的前端框架 = Vue3 响应式 + React TSX + Angular IOC
 - `VonaJS`: 一款全栈框架，用于在同一个代码库中构建`SSR/SPA/Web网站/Admin中后台`，提供内置的 DTO 生成和前后端类型安全保障
 
 ### 3. 2026年：V5发布
