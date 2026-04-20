@@ -1,6 +1,6 @@
 import type { Constructable, OmitNever } from 'vona';
 import type { ServiceOnion, TypeOnionOptionsEnableSimple } from 'vona-module-a-onion';
-import type { IAuthUserProfile } from 'vona-module-a-user';
+import type { IAuthTokenOptions, IAuthUserProfile } from 'vona-module-a-user';
 
 import type { StrategyBase } from '../lib/strategyBase.ts';
 import type { IAuthenticateStrategyState } from './auth.ts';
@@ -15,6 +15,7 @@ export interface IAuthProviderClientOptions {
   confirmed?: boolean;
   mockUsername?: string;
   mockProfileId?: string;
+  authTokenOptions?: IAuthTokenOptions;
 }
 
 export interface IAuthProviderOauth2ClientOptions extends IAuthProviderClientOptions {

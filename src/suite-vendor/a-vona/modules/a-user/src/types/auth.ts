@@ -49,7 +49,11 @@ export interface ConfigUser {
   };
 }
 
+export interface IAuthTokenOptions {
+  strategy?: TypeAuthTokenStrategy;
+  ttl?: number;
+}
+
 export interface ISigninOptions {
-  /** default: refresh */
-  authTokenStrategy?: TypeAuthTokenStrategy;
+  authToken?: IAuthTokenOptions;
 }
