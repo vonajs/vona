@@ -2,8 +2,11 @@ import type { Constructable, OmitNever } from 'vona';
 import type { ServiceOnion, TypeOnionOptionsEnableSimple } from 'vona-module-a-onion';
 import type { IAuthTokenOptions, IAuthUserProfile } from 'vona-module-a-user';
 
+import type { EntityAuthProvider } from '../entity/authProvider.ts';
 import type { StrategyBase } from '../lib/strategyBase.ts';
 import type { IAuthenticateStrategyState } from './auth.ts';
+
+export type TypeAuthProviderPick = Partial<Pick<EntityAuthProvider, 'id' | 'providerName' | 'clientName'>>;
 
 export interface IAuthProviderRecord {}
 

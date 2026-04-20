@@ -1,20 +1,12 @@
-import { BeanBase } from 'vona';
+import { BeanBase, deepExtend } from 'vona';
 import { Bean } from 'vona-module-a-bean';
 
 import type { EntityAuthProvider } from '../entity/authProvider.ts';
-import type { IAuthProviderClientRecord, IAuthProviderRecord } from '../types/authProvider.ts';
+import type { IAuthProviderClientOptions, TypeAuthProviderPick } from '../types/authProvider.ts';
 
 @Bean()
 export class BeanAuthProvider extends BeanBase {
-  async getByProviderName(providerName: keyof IAuthProviderRecord, clientName?: keyof IAuthProviderClientRecord) {
-    return await this.get({ providerName, clientName });
-  }
-
-  async getById(id: number) {
-    return await this.get({ id });
-  }
-
-  async get(data: Partial<EntityAuthProvider>) {
+  async get(data: TypeAuthProviderPick) {
     if (!data.id && !data.clientName) data = { ...data, clientName: 'default' };
     const res = await this.scope.model.authProvider.get(data);
     if (res) return res;
@@ -25,7 +17,7 @@ export class BeanAuthProvider extends BeanBase {
     });
   }
 
-  private async _registerAuthProviderLock(data: Partial<EntityAuthProvider>) {
+  private async _registerAuthProviderLock(data: TypeAuthProviderPick) {
     // get
     const res = await this.scope.model.authProvider.get(data, { cache: { force: true } });
     if (res) return res;
@@ -37,5 +29,29 @@ export class BeanAuthProvider extends BeanBase {
     };
     // create
     return await this.scope.model.authProvider.insert(dataNew);
+  }
+
+  public async getClientOptions<T extends IAuthProviderClientOptions>(data: TypeAuthProviderPick, clientOptionsCustom?: T) {
+    // authProvider
+    const entityAuthProvider = await this.bean.authProvider.get(data);
+    if (!entityAuthProvider) return { entityAuthProvider: undefined };
+    const disabled = entityAuthProvider?.disabled;
+    const authProviderName = entityAuthProvider.providerName;
+    // clientName
+    const clientName = entityAuthProvider.clientName ?? 'default';
+    // onionSlice
+    const onionSlice = this.bean.onion.authProvider.getOnionSliceEnabled(true, authProviderName as any);
+    if (!onionSlice) throw new Error(`Auth provider not found: ${authProviderName}`);
+    const beanFullName = onionSlice.beanOptions.beanFullName;
+    const onionOptions = onionSlice.beanOptions.options ?? {};
+    // clientOptions
+    const clientOptions: IAuthProviderClientOptions = deepExtend(
+      {},
+      onionOptions?.base,
+      onionOptions?.clients?.[clientName as any],
+      entityAuthProvider.clientOptions,
+      clientOptionsCustom,
+    );
+    return { entityAuthProvider, disabled, beanFullName, onionOptions, clientOptions };
   }
 }

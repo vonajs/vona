@@ -4,7 +4,7 @@ import type { IAuthUserProfile, IPassport, IUser } from 'vona-module-a-user';
 
 import { combineQueries, isNil } from '@cabloy/utils';
 import { TableIdentity } from 'table-identity';
-import { BeanBase, deepExtend } from 'vona';
+import { BeanBase } from 'vona';
 import { Service } from 'vona-module-a-bean';
 
 import type { EntityAuthProvider } from '../entity/authProvider.ts';
@@ -37,7 +37,7 @@ export class ServiceAuth extends BeanBase {
     // issuePassport
     const passport = await this.issuePassport(profileUser, entityAuthProvider, clientOptions, state);
     // signin
-    const jwtToken = await this.bean.passport.signin(passport);
+    const jwtToken = await this.bean.passport.signin(passport, { authToken: clientOptions.authTokenOptions });
     return jwtToken;
   }
 
@@ -187,27 +187,16 @@ export class ServiceAuth extends BeanBase {
   }
 
   public async authCallback(strategyState: IAuthenticateStrategyState): Promise<IJwtToken> {
-    // authProvider
-    const entityAuthProvider = await this.bean.authProvider.get({ id: strategyState.authProviderId });
-    if (!entityAuthProvider || entityAuthProvider?.disabled) return this.app.throw(403);
-    const authProviderName = entityAuthProvider.providerName;
-    // clientName
-    const clientName = entityAuthProvider.clientName ?? 'default';
-    // onionSlice
-    const onionSlice = this.bean.onion.authProvider.getOnionSliceEnabled(true, authProviderName as any);
-    if (!onionSlice) throw new Error(`Auth provider not found: ${authProviderName}`);
-    const onionOptions = onionSlice.beanOptions.options!;
     // clientOptions
-    const optionsMeta = onionSlice.beanOptions.options;
-    const clientOptions: IAuthProviderClientOptions = deepExtend(
-      {},
-      optionsMeta?.base,
-      optionsMeta?.clients?.[clientName as any],
-      entityAuthProvider.clientOptions,
+    const { entityAuthProvider, disabled, beanFullName, onionOptions, clientOptions } = await this.bean.authProvider.getClientOptions(
+      {
+        id: strategyState.authProviderId,
+      },
       strategyState.clientOptions,
     );
+    if (!entityAuthProvider || disabled) return this.app.throw(403);
     // execute
-    const beanAuthProvider = this.app.bean._getBean<IAuthProviderVerify & IAuthProviderStrategy>(onionSlice.beanOptions.beanFullName as any);
+    const beanAuthProvider = this.app.bean._getBean<IAuthProviderVerify & IAuthProviderStrategy>(beanFullName as any);
     // strategy
     if (!beanAuthProvider.strategy) return this.app.throw(401);
     const strategyOptions: TypeStrategyOptions = clientOptions;
