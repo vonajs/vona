@@ -47,7 +47,7 @@ Vona 提供了两个项目模版:
 | cabloy-basic | Daisyui + Tailwindcss | 提供开箱即用的`Admin中后台`            |
 | cabloy-start | VuetifyJS             | 提供开箱即用的`Web网站`和`Admin中后台` |
 
-> 关于 Vona、Zova 和 Cabloy 之间的关系，参见: [Cabloy](../../cabloy/introduction.md)
+> 参见: [Cabloy: 项目模版](../../cabloy/templates.md)
 
 2. 修改.env 文件
 
