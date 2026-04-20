@@ -1,13 +1,13 @@
 # Introduction
 
-Vona ORM is an intuitive, elegant, and powerful ORM engine. Built on TypeScript, it provides comprehensive type hints and pioneers dynamic DTO inference and generation capabilities, significantly improving development efficiency and experience
+Vona ORM is an intuitive, elegant, and powerful ORM engine. Built on TypeScript, it provides comprehensive type hints and dynamically infer and generate DTOs to eliminate redundant type definitions and boost development productivity
 
 ## Features
 
 - Supports multiple databases, multiple datasources, and dynamic datasources
 - Supports sharded databases and tables
 - Supports read-write separation
-- Supports dynamic DTO inference and generation
+- Supports dynamic DTO infer and generation
 - Supports statistical queries such as aggregation and grouping
 - Supports various relationship-based queries and statistics
 - Supports dynamic relationships

@@ -2,11 +2,11 @@
 
 ## What is Vona?
 
-Vona is a fullstack meta-framework for building `SSR/SPA/Website/Admin-Dashboard` all in one codebase
+Vona is a fullstack framework for building SSR/SPA/Website/Admin-Dashboard in one codebase, with built-in DTO generation and type safety across frontend and backend
 
-- Pioneers dynamic DTO inference and generation capabilities, significantly improving development efficiency and experience. It can even be said that being able to dynamically infer and generate DTOs is a very important `milestone` for building a more elegant Node.js backend framework
 - Supports dual-layer tabs navigation, enabling efficient page switching while maintaining page state
 - Dynamically render CRUD list pages, entry pages, and search forms, and provides the best practices of `Tanstack Table/Tanstack Form/Tanstack Query`
+- Dynamically infer and generate DTOs to eliminate redundant type definitions and boost development productivity
 
 ## Fullstack Mechanism
 
@@ -33,7 +33,7 @@ The Website and Admin-Dashboard of Cabloy Store are built by one codebase
 - `Fullstack`: Building `SSR/SPA/Website/Admin-Dashboard` all in one codebase
 - `Admin-Dashboard Supports SSR`: Provides full SSR support for the `Admin-Dashboard` applications. Interface elements such as the `sidebar`, `multi-language`, `light and dark themes`, and `brand color themes` all support SSR, significantly reducing interface flicker when refreshing the page and improving user interaction experience
 - `CRUD Dynamic Rendering`: Dynamically render CRUD list pages, entry pages, and search forms, and provides the best practices of `Tanstack Table/Tanstack Form/Tanstack Query`
-- `Dynamic DTO Inference and Generation`: Pioneers dynamic DTO inference and generation capabilities, significantly improving development efficiency and experience
+- `DTO Infer and Generation`: Dynamically infer and generate DTOs to eliminate redundant type definitions and boost development productivity
 - `Dual-layer Tabs Navigation`: Supports dual-layer tabs navigation, enabling efficient page switching while maintaining page state
 - `Developed in TypeScript`: Provides comprehensive TypeScript type hints
 - `Using ESM modules throughout`: Faster project startup

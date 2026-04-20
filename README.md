@@ -4,9 +4,9 @@ English | [简体中文](./README.zh-CN.md)
 
 Vona is a fullstack framework for building SSR/SPA/Website/Admin-Dashboard in one codebase, with built-in DTO generation and type safety across frontend and backend
 
-- Pioneers dynamic DTO inference and generation capabilities, significantly improving development efficiency and experience. It can even be said that being able to dynamically infer and generate DTOs is a very important `milestone` for building a more elegant Node.js backend framework
 - Supports dual-layer tabs navigation, enabling efficient page switching while maintaining page state
 - Dynamically render CRUD list pages, entry pages, and search forms, and provides the best practices of `Tanstack Table/Tanstack Form/Tanstack Query`
+- Dynamically infer and generate DTOs to eliminate redundant type definitions and boost development productivity
 
 [![LICENSE MIT][license-image]][license-url]
 [![NPM version][npm-image]][npm-url]

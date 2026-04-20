@@ -12,7 +12,7 @@
 - `Fullstack Mechanism`: Vona works perfectly with Zova, continuing the frontend-backend separation architecture. Frontend projects built with Zova can run independently or have their JS bundle copied into the Vona backend for SSR rendering directly on the backend
   - Vona can generate a complete OpenAPI Schema, enabling the generation of API SDKs in Zova
   - Zova can generate types for routes and components, providing type hints in Vona
-- `Backend Capability`: Vona provides more powerful and complete backend capabilities, easily handling the development of large business systems, including `multi-tenancy`, `multi-database`, `multi-datasource`, `two-layer cache`, `queues`, `broadcast`, `scheduled tasks`, `distributed locks`, `DTO dynamic inference and generation`, and more
+- `Backend Capability`: Vona provides more powerful and complete backend capabilities, easily handling the development of large business systems, including `multi-tenancy`, `multi-database`, `multi-datasource`, `two-layer cache`, `queues`, `broadcast`, `scheduled tasks`, `distributed locks`, `DTO infer and generation`, and more
 - `Admin-Dashboard Supports SSR`: Vona provides full SSR support for the `Admin-Dashboard` applications. Interface elements such as the `sidebar`, `multi-language`, `light and dark themes`, and `brand color themes` all support SSR, significantly reducing interface flicker when refreshing the page and improving user interaction experience
 - `Dual-layer Tabs Navigation`: Vona supports dual-layer tabs navigation, enabling efficient page switching while maintaining page state
 
@@ -21,12 +21,12 @@
 | Feature                                        | Vona                                                | Nest              |
 | ---------------------------------------------- | --------------------------------------------------- | ----------------- |
 | Validation/OpenAPI                             | One mechanism                                       | Two mechanisms    |
-| DTO Dynamic Inference and Generation           | ✅                                                  | ❌                |
+| DTO Infer and Generation                       | ✅                                                  | ❌                |
 | Multi-Tenant, Multi-Database, Multi-Datasource | Built-in                                            | Third-party       |
 | AOP Programming                                | Controller Aspect, Internal Aspect, External Aspect | Controller Aspect |
 
 - `Zod Schema`: Vona generates a unified schema based on Zod4, which can be used for `validation`, `Swagger/OpenAPI documentation generation`, `Form/Table dynamic rendering`, `Response data serialization`, and other scenarios
-- `DTO Dynamic Inference and Generation`: Vona pioneers dynamic DTO inference and generation capabilities, significantly improving development efficiency and experience
+- `DTO Infer and Generation`: Vona dynamically infer and generate DTOs to eliminate redundant type definitions and boost development productivity
 - `Multi-Tenant, Multi-Database, Multi-Datasource`: Vona has built-in capabilities for multi-tenancy, multi-database, and multi-datasource, making it easy to handle large-scale business system development
 - `AOP Programming`: Vona provides more complete AOP programming capabilities, including `controller aspect`, `internal aspect`, and `external aspect`. Nest only implements `controller aspect`
 

@@ -1,6 +1,6 @@
 # Relations(Dynamic)
 
-In large-scale business systems, we create numerous models with numerous relations between them. It's impossible to declare all relations using `static relations`. This is especially true when there are numerous business modules with models scattered across them. Declaring all relations using `static relations` becomes impractical. Without pre-defined `static relations`, we need to implement a mechanism for using `dynamic relations` in our code to enable querying, type inference, and DTO inference and generation
+In large-scale business systems, we create numerous models with numerous relations between them. It's impossible to declare all relations using `static relations`. This is especially true when there are numerous business modules with models scattered across them. Declaring all relations using `static relations` becomes impractical. Without pre-defined `static relations`, we need to implement a mechanism for using `dynamic relations` in our code to enable querying, type inference, and DTO infer and generation
 
 The following uses `test-vona` module as an example to explain how to use `dynamic relations`
 

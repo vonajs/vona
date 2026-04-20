@@ -198,6 +198,6 @@ class DtoStudentUpdate extends $Class.partial($Class.pick(EntityStudent, ['name'
 
 ## DTO推断与生成
 
-Vona ORM 首创 DTO 动态推断与生成能力，解放我们的双手，显著提升生产力。甚至可以说，对于构建更加优雅的 Node.js 后端框架而言，能够动态推断与生成 DTO，是非常重要的`里程碑`
+Vona ORM 提供 DTO 动态推断与生成能力，减少重复的类型定义工作，提升开发效率
 
 - 参见：[DTO推断与生成](../techniques/orm/dto/introduction.md)
