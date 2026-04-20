@@ -21,7 +21,7 @@ features:
   - title: Fullstack
     details: Building SSR/SPA/Website/Admin-Dashboard in one codebase
   - title: Admin-Dashboard Supports SSR
-    details: Provides full SSR support for the `Admin-Dashboard` applications. Interface elements such as the `sidebar`, `multi-language`, `light and dark themes`, and `brand color themes` all support SSR, significantly reducing interface flicker when refreshing the page and improving user interaction experience
+    details: Provides full SSR support for Admin-Dashboard applications, including sidebar, multilingual support, light/dark themes, and brand color themes. This reduces page flicker on refresh and delivers a smoother user interaction experience
   - title: CRUD Dynamic Rendering
     details: Dynamically render CRUD list pages, entry pages, and search forms, while demonstrating best practices for Tanstack Table, Tanstack Form, and Tanstack Query
   - title: DTO Infer & Generation

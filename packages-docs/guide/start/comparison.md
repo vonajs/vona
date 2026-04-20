@@ -13,7 +13,7 @@
   - Vona can generate a complete OpenAPI Schema, enabling the generation of API SDKs in Zova
   - Zova can generate types for routes and components, providing type hints in Vona
 - `Backend Capability`: Vona provides more powerful and complete backend capabilities, easily handling the development of large business systems, including `multi-tenancy`, `multi-database`, `multi-datasource`, `two-layer cache`, `queues`, `broadcast`, `scheduled tasks`, `distributed locks`, `DTO infer and generation`, and more
-- `Admin-Dashboard Supports SSR`: Vona provides full SSR support for the `Admin-Dashboard` applications. Interface elements such as the `sidebar`, `multi-language`, `light and dark themes`, and `brand color themes` all support SSR, significantly reducing interface flicker when refreshing the page and improving user interaction experience
+- `Admin-Dashboard Supports SSR`: Provides full SSR support for Admin-Dashboard applications, including sidebar, multilingual support, light/dark themes, and brand color themes. This reduces page flicker on refresh and delivers a smoother user interaction experience
 - `Dual-layer Tabs Navigation`: Vona supports dual-layer tabs navigation, enabling efficient page switching while maintaining page state
 
 ## Comparison with Nest

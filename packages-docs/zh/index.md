@@ -21,7 +21,7 @@ features:
   - title: 全栈能力
     details: 可在同一个代码库中实现SSR/SPA/Web网站/Admin中后台
   - title: Admin中后台支持SSR
-    details: 对`Admin中后台`应用提供了完整的 SSR 支持，`侧边栏`、`多语言`、`明暗主题`、`品牌色主题`等界面元素均支持 SSR，当再次刷新页面时，显著减少界面跳动，提升用户交互体验
+    details: 为`Admin中后台`应用提供完整的 SSR 支持，侧边栏、多语言、明暗主题、品牌色主题等界面元素均支持 SSR。这样在刷新页面时可显著减少界面跳动，提升用户交互体验
   - title: CRUD动态渲染
     details: 可动态渲染CRUD的列表页、条目页、搜索表单，并且提供了Tanstack Table/Tanstack Form/Tanstack Query的最佳实践
   - title: DTO动态推断与生成

@@ -10,7 +10,7 @@
 ## Features
 
 - Building `SSR/SPA/Website/Admin-Dashboard` in one codebase
-- Provides full SSR support for the `Admin-Dashboard` applications. Interface elements such as the `sidebar`, `multi-language`, `light and dark themes`, and `brand color themes` all support SSR, significantly reducing interface flicker when refreshing the page and improving user interaction experience
+- Provides full SSR support for Admin-Dashboard applications, including sidebar, multilingual support, light/dark themes, and brand color themes. This reduces page flicker on refresh and delivers a smoother user interaction experience
 - Dynamically render CRUD list pages, entry pages, and search forms, while demonstrating best practices for Tanstack Table, Tanstack Form, and Tanstack Query
 - Supports dual-layer tabs navigation, enabling efficient page switching while maintaining page state
 - UI library uses the latest version of `Daisyui + Tailwindcss`
