@@ -1,3 +1,4 @@
+import type { TableIdentity } from 'table-identity';
 import type { IJwtClientRecord, IJwtSignOptions, IJwtToken, IJwtVerifyOptions, IPayloadData } from 'vona-module-a-jwt';
 
 import { catchError, isNil } from '@cabloy/utils';
@@ -76,20 +77,11 @@ export class BeanPassport extends BeanBase {
     // event
     await this.scope.event.signin.emit(passport);
     // serialize: payloadData for client certificate
-    const { clientOptions } = await this.bean.authProvider.getClientOptions(
-      {
-        id: passport.auth!.authProvider!.id as number,
-      },
-      { authTokenOptions: options?.authToken },
-      {
-        authTokenOptions: {
-          strategy: this.scope.config.authToken.strategy.signin,
-          ttl: this.scope.config.authToken.ttl,
-        },
-      },
-    );
-    if (!clientOptions) this.app.throw(403);
-    const payloadData = await this._passportSerialize(passport, clientOptions.authTokenOptions);
+    const authTokenOptions = await this._combineAuthTokenOptions(passport.auth!.id, passport.auth!.authProviderId, options?.authToken, {
+      strategy: this.scope.config.authToken.strategy.signin,
+      ttl: this.scope.config.authToken.ttl,
+    });
+    const payloadData = await this._passportSerialize(passport, authTokenOptions);
     // jwt token
     return await this.bean.jwt.create(payloadData, { dev: passport.auth?.id.toString() === '-1' });
   }
@@ -154,29 +146,20 @@ export class BeanPassport extends BeanBase {
     const passport = await this.passportAdapter.deserialize(payloadData);
     if (!passport) return this.app.throw(401);
     await this.setCurrent(passport);
-    return payloadData;
+    return { payloadData, passport };
   }
 
   public async refreshAuthToken(refreshToken: string) {
     // checkAuthToken by code
-    let payloadData = await this.checkAuthToken(refreshToken, 'refresh');
-    if (!payloadData) return this.app.throw(401);
+    let checkRes = await this.checkAuthToken(refreshToken, 'refresh');
+    if (!checkRes) return this.app.throw(401);
+    let { payloadData, passport } = checkRes;
     // refreshAuthToken
-    const authId = payloadData[this.scope.config.payloadData.fields.authId];
-    const { clientOptions } = await this.bean.authProvider.getClientOptions(
-      {
-        id: authId,
-      },
-      undefined,
-      {
-        authTokenOptions: {
-          strategy: this.scope.config.authToken.strategy.refreshAuthToken,
-          ttl: this.scope.config.authToken.ttl,
-        },
-      },
-    );
-    if (!clientOptions) this.app.throw(403);
-    payloadData = await this._handlePayloadData(payloadData, clientOptions.authTokenOptions);
+    const authTokenOptions = await this._combineAuthTokenOptions(passport.auth!.id, passport.auth!.authProviderId, undefined, {
+      strategy: this.scope.config.authToken.strategy.refreshAuthToken,
+      ttl: this.scope.config.authToken.ttl,
+    });
+    payloadData = await this._handlePayloadData(payloadData, authTokenOptions);
     // jwt token
     return await this.bean.jwt.create(payloadData);
   }
@@ -222,8 +205,9 @@ export class BeanPassport extends BeanBase {
 
   public async createAuthTokenFromOauthCode(code: string) {
     // checkAuthToken by code
-    const payloadData = await this.checkAuthToken(code, 'code');
-    if (!payloadData) return this.app.throw(401);
+    const checkRes = await this.checkAuthToken(code, 'code');
+    if (!checkRes) return this.app.throw(401);
+    const { payloadData } = checkRes;
     // jwt token
     return await this.bean.jwt.create(payloadData);
   }
@@ -272,5 +256,25 @@ export class BeanPassport extends BeanBase {
       }
       return payloadData2;
     }
+  }
+
+  private async _combineAuthTokenOptions(
+    authId: TableIdentity,
+    authProviderId: number | undefined,
+    authTokenOptionsCustom: IAuthTokenOptions | undefined,
+    authTokenOptionsDefault: IAuthTokenOptions,
+  ) {
+    if (authId === '-1') return authTokenOptionsDefault;
+    const { clientOptions } = await this.bean.authProvider.getClientOptions(
+      {
+        id: authProviderId,
+      },
+      { authTokenOptions: authTokenOptionsCustom ?? {} },
+      {
+        authTokenOptions: authTokenOptionsDefault,
+      },
+    );
+    if (!clientOptions) this.app.throw(403);
+    return clientOptions.authTokenOptions!;
   }
 }

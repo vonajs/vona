@@ -8,7 +8,7 @@ export interface IAuthIdRecord {
 }
 
 export interface IAuthProvider {
-  id: TableIdentity;
+  id: number;
   providerName: keyof IAuthProviderRecord;
   clientName: string;
 }
@@ -16,6 +16,7 @@ export interface IAuthProvider {
 export interface IAuth {
   id: TableIdentity;
   profileId?: string;
+  authProviderId?: number;
   authProvider?: IAuthProvider;
 }
 
