@@ -1,24 +1,24 @@
 import type { VonaApplication } from 'vona';
-import type { IServiceRecord } from 'vona-module-a-bean';
 
-import type { AuthTokenStrategy } from '../types/auth.ts';
+import type { ConfigUser } from '../types/auth.ts';
 
 export function config(_app: VonaApplication) {
-  return {
+  const configUser: ConfigUser = {
     user: {
       autoActivate: false,
     },
     authToken: {
       strategy: {
-        refreshAuthToken: 'refresh' as AuthTokenStrategy, // 'reissue': not support different clients
-        signin: 'refresh' as AuthTokenStrategy,
+        refreshAuthToken: 'refresh',
+        signin: 'refresh',
       },
+      ttl: 30 * 24 * 60 * 60 * 1000,
     },
     adapter: {
-      authToken: 'a-user:authTokenAdapter' as keyof IServiceRecord,
-      passport: 'home-user:passportAdapter' as keyof IServiceRecord,
-      user: 'home-user:userAdapter' as keyof IServiceRecord,
-      role: 'home-user:roleAdapter' as keyof IServiceRecord,
+      authToken: 'a-user:authTokenAdapter',
+      passport: 'home-user:passportAdapter',
+      user: 'home-user:userAdapter',
+      role: 'home-user:roleAdapter',
     },
     payloadData: {
       fields: {
@@ -28,4 +28,5 @@ export function config(_app: VonaApplication) {
       },
     },
   };
+  return configUser;
 }

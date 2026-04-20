@@ -1,5 +1,6 @@
 import type { TableIdentity } from 'table-identity';
 import type { IAuthProviderRecord } from 'vona-module-a-auth';
+import type { IServiceRecord } from 'vona-module-a-bean';
 
 export interface IAuthIdRecord {
   '-1': 'dev';
@@ -18,9 +19,37 @@ export interface IAuth {
   authProvider?: IAuthProvider;
 }
 
-export type AuthTokenStrategy = 'reissue' | 'refresh' | 'reuse';
+export type TypeAuthTokenStrategy = 'reissue' | 'refresh' | 'reuse';
+
+export interface IAuthTokenConfig {
+  strategy: {
+    refreshAuthToken: TypeAuthTokenStrategy;
+    signin: TypeAuthTokenStrategy;
+  };
+  ttl: number;
+}
+
+export interface ConfigUser {
+  user: {
+    autoActivate: boolean;
+  };
+  authToken: IAuthTokenConfig;
+  adapter: {
+    authToken: keyof IServiceRecord;
+    passport: keyof IServiceRecord;
+    user: keyof IServiceRecord;
+    role: keyof IServiceRecord;
+  };
+  payloadData: {
+    fields: {
+      authId: string;
+      userId: string;
+      token: string;
+    };
+  };
+}
 
 export interface ISigninOptions {
   /** default: refresh */
-  authTokenStrategy?: AuthTokenStrategy;
+  authTokenStrategy?: TypeAuthTokenStrategy;
 }
