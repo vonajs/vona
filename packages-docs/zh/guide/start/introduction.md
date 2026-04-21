@@ -14,10 +14,12 @@ Vona 是一款全栈框架，用于在同一个代码库中构建`SSR/SPA/Web网
 
 ## 全栈机制
 
-Vona 与 Zova 完美协同，延续前后端分离的架构风格。采用 Zova 构建的前端项目，既可以独立运行，也可以将 JS bundle 放入 Vona 后端，在后端直接进行 SSR 渲染
+Vona 采用前后端分离的架构。前端使用 Zova 框架，将构建生成的 JS bundle 放入 Vona 后端，在后端直接进行 SSR 渲染
 
-- Vona 可以生成完整的 Openapi Schema，从而在 Zova 中生成 Api SDK
-- Zova 可以生成路由和组件的类型，从而在 Vona 中提供类型提示
+前后端类型共享机制:
+
+- 后端生成 Swagger/Openapi Schema，用于在前端生成 Api SDK
+- 前端生成图标、路由和组件的类型，用于在后端提供类型提示
 
 ## 在线演示
 
