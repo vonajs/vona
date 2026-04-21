@@ -1105,7 +1105,7 @@ importers:
         specifier: workspace:^
         version: link:modules/auth-github
       vona-module-auth-oauth:
-        specifier: ^5.0.0
+        specifier: ^5.0.1
         version: link:modules/auth-oauth
       vona-module-auth-simple:
         specifier: workspace:^
@@ -2375,7 +2375,7 @@ importers:
         specifier: workspace:^
         version: link:modules/basic-siteadmin
       vona-suite-a-cabloy:
-        specifier: ^5.1.8
+        specifier: ^5.1.9
         version: link:../../suite-vendor/a-cabloy
 
   src/suite/cabloy-basic/modules/basic-siteadmin:
