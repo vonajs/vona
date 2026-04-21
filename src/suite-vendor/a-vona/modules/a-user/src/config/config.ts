@@ -8,6 +8,7 @@ export function config(_app: VonaApplication) {
       autoActivate: false,
     },
     authToken: {
+      stateless: false,
       strategy: {
         refreshAuthToken: 'refresh',
         signin: 'refresh',

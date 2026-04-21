@@ -23,6 +23,7 @@ export interface IAuth {
 export type TypeAuthTokenStrategy = 'reissue' | 'refresh' | 'reuse';
 
 export interface IAuthTokenConfig {
+  stateless: boolean;
   strategy: {
     refreshAuthToken: TypeAuthTokenStrategy;
     signin: TypeAuthTokenStrategy;
@@ -51,6 +52,7 @@ export interface ConfigUser {
 }
 
 export interface IAuthTokenOptions {
+  stateless?: boolean;
   strategy?: TypeAuthTokenStrategy;
   ttl?: number;
 }

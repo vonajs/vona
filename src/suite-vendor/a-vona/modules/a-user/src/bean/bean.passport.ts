@@ -77,6 +77,7 @@ export class BeanPassport extends BeanBase {
     await this.scope.event.signin.emit(passport);
     // serialize: payloadData for client certificate
     const authTokenOptions = await this._combineAuthTokenOptions(passport.auth!.authProviderId, options?.authToken, {
+      stateless: this.scope.config.authToken.stateless,
       strategy: this.scope.config.authToken.strategy.signin,
       ttl: this.scope.config.authToken.ttl,
     });
@@ -140,10 +141,17 @@ export class BeanPassport extends BeanBase {
       throw err;
     }
     if (!payloadData) return; // no jwt token
-    const verified = await this.authTokenAdapter.verify(payloadData);
-    if (!verified) return this.app.throw(401);
     const passport = await this.passportAdapter.deserialize(payloadData);
     if (!passport) return this.app.throw(401);
+    // verified
+    const authTokenOptions = await this._combineAuthTokenOptions(passport.auth!.authProviderId, undefined, {
+      stateless: this.scope.config.authToken.stateless,
+    });
+    if (!authTokenOptions.stateless) {
+      const verified = await this.authTokenAdapter.verify(payloadData);
+      if (!verified) return this.app.throw(401);
+    }
+    // setCurrent
     await this.setCurrent(passport);
     return { payloadData, passport };
   }
@@ -155,6 +163,7 @@ export class BeanPassport extends BeanBase {
     let { payloadData, passport } = checkRes;
     // refreshAuthToken
     const authTokenOptions = await this._combineAuthTokenOptions(passport.auth!.authProviderId, undefined, {
+      stateless: this.scope.config.authToken.stateless,
       strategy: this.scope.config.authToken.strategy.refreshAuthToken,
       ttl: this.scope.config.authToken.ttl,
     });
@@ -239,9 +248,13 @@ export class BeanPassport extends BeanBase {
 
   private async _handlePayloadData(payloadData: IPayloadData, authTokenOptions?: IAuthTokenOptions) {
     // auth token
+    const stateless = authTokenOptions?.stateless;
     const strategy = authTokenOptions?.strategy ?? 'refresh';
     const ttl = authTokenOptions?.ttl;
-    if (strategy === 'reissue') {
+    if (stateless) {
+      // do nothing
+      return payloadData;
+    } else if (strategy === 'reissue') {
       return await this.authTokenAdapter.create(payloadData, ttl);
     } else {
       const payloadData2 = await this.authTokenAdapter.retrieve(payloadData);
