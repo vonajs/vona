@@ -8,7 +8,7 @@ export interface IAuthProvider<%=argv.beanNameCapitalize%>ClientRecord extends I
 export interface IAuthProvider<%=argv.beanNameCapitalize%>ClientOptions extends IAuthProviderClientOptions {}
 
 export interface IAuthProviderOptions<%=argv.beanNameCapitalize%> extends IDecoratorAuthProviderOptions<
-  keyof IAuthProvider<%=argv.beanNameCapitalize%>ClientRecord,
+  IAuthProvider<%=argv.beanNameCapitalize%>ClientRecord,
   IAuthProvider<%=argv.beanNameCapitalize%>ClientOptions
 > {}
 

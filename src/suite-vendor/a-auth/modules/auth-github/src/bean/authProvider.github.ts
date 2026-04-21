@@ -12,7 +12,7 @@ export interface IAuthProviderGithubClientOptions extends IAuthProviderOauth2Cli
 }
 
 export interface IAuthProviderOptionsGithub extends IDecoratorAuthProviderOptions<
-  keyof IAuthProviderGithubClientRecord,
+  IAuthProviderGithubClientRecord,
   IAuthProviderGithubClientOptions
 > {}
 

@@ -23,7 +23,7 @@ export interface IAuthProviderSimpleClientOptions extends IAuthProviderClientOpt
 }
 
 export interface IAuthProviderOptionsSimple extends IDecoratorAuthProviderOptions<
-  keyof IAuthProviderSimpleClientRecord,
+  IAuthProviderSimpleClientRecord,
   IAuthProviderSimpleClientOptions
 > {}
 
