@@ -1,3 +1,0 @@
-import { a as components, c as RenderRestPageEntry, d as ZWrapperFilter, f as RenderWrapperFilter, h as ControllerRestPage, i as ScopeModuleBasicRestpage, l as ZRestPage, m as ControllerRestPageEntry, n as $useLocale, o as locale, p as ControllerWrapperFilter, r as locales, s as ZRestPageEntry, t as init_src, u as RenderRestPage } from "./basic-restpage-9EzlQGrG.js";
-init_src();
-export { $useLocale, ControllerRestPage, ControllerRestPageEntry, ControllerWrapperFilter, RenderRestPage, RenderRestPageEntry, RenderWrapperFilter, ScopeModuleBasicRestpage, ZRestPage, ZRestPageEntry, ZWrapperFilter, components, locale, locales };
