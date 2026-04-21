@@ -1,0 +1,1 @@
+import{n as a,t as o}from"./a-boundary-vIL1DIQM.js";o();export{a as ScopeModuleABoundary};

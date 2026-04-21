@@ -1,0 +1,1 @@
+import{n as o}from"./rolldown-runtime-DSSfW_98.js";import{h as a,k as s}from"./zova-Dx1VY5Wz.js";import{t as r}from"./zova-BZ2p5I9H.js";import{o as m,t}from"./a-bean-C0o0NFKD.js";var e,n,d,i,p=o(()=>{r(),t(),e=m(),n=s({module:"a-boundary"}),i=e(d=n(d=class ScopeModuleABoundary extends a{})||d)||d}),l=o(()=>{p()});export{i as n,l as t};
