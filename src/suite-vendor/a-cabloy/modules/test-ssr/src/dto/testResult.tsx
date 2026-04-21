@@ -135,7 +135,7 @@ export interface IDtoOptionsTestResult extends IDecoratorDtoOptions<
                   onInput={
                     <action>
                       <BBARestActionsSetValue name="name"></BBARestActionsSetValue>
-                      <BBARestActionsSetValue name="_customCopied" value={false}></BBARestActionsSetValue>
+                      <BBARestActionsSetValue name="_customCopied" value={false} disableNotifyChanged></BBARestActionsSetValue>
                     </action>
                   }
                 ></input>
