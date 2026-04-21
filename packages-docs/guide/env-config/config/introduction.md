@@ -65,7 +65,7 @@ config.normal.dev.mine.ts
 The config files support asynchronous loading
 
 ```typescript
-export default async function (app: VonaApplication, env: VonaConfigEnv) {
+export default async function (app: VonaApplication) {
   const config: VonaConfigOptional = {};
 
   // async load remote config

@@ -47,4 +47,4 @@ export interface VonaApplicationOptions {
   AppMonkey?: AppMonkeyConstructable;
 }
 
-export type TypeAppInfoConfig = (app: VonaApplication, env: VonaConfigEnv) => VonaConfigOptional | Promise<VonaConfigOptional>;
+export type TypeAppInfoConfig = (app: VonaApplication) => VonaConfigOptional | Promise<VonaConfigOptional>;

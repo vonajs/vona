@@ -1,6 +1,6 @@
-import type { VonaApplication, VonaConfigEnv, VonaConfigOptional } from 'vona';
+import type { VonaApplication, VonaConfigOptional } from 'vona';
 
-export default async function (_app: VonaApplication, _env: VonaConfigEnv) {
+export default async function (_app: VonaApplication) {
   const config: VonaConfigOptional = {};
 
   // proxy

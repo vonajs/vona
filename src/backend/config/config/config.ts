@@ -1,4 +1,4 @@
-import type { ILoggerOptionsClientInfo, VonaApplication, VonaConfigEnv, VonaConfigOptional } from 'vona';
+import type { ILoggerOptionsClientInfo, VonaApplication, VonaConfigOptional } from 'vona';
 import type { IMailClientRecord, TypeMailTransportService } from 'vona-module-a-mail';
 import type { IDatabaseClientRecord } from 'vona-module-a-orm';
 
@@ -18,8 +18,9 @@ declare module 'vona-module-a-orm' {
   }
 }
 
-export default async function (app: VonaApplication, env: VonaConfigEnv) {
+export default async function (app: VonaApplication) {
   const config: VonaConfigOptional = {};
+  const env = app.meta.env;
 
   // modules
   config.modules = {};

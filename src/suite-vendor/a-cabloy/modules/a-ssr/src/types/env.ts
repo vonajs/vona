@@ -21,5 +21,5 @@ export interface ZovaConfigEnv {
   SSR_COOKIE_THEMEDARK: string | undefined;
   SSR_COOKIE_THEMEDARK_DEFAULT: string | undefined;
   SSR_BODYREADYOBSERVER: string | undefined;
-  SSR_HMR: string | undefined;
+  SSR_WITH_VONA: string | undefined;
 }

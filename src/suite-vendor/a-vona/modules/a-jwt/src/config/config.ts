@@ -1,8 +1,9 @@
-import type { VonaApplication, VonaConfigEnv } from 'vona';
+import type { VonaApplication } from 'vona';
 
 import type { ConfigJwt } from '../types/jwt.ts';
 
-export function config(_app: VonaApplication, env: VonaConfigEnv) {
+export function config(app: VonaApplication) {
+  const env = app.meta.env;
   const configJwt: ConfigJwt = {
     field: {
       payload: {

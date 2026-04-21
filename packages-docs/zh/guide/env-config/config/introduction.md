@@ -65,7 +65,7 @@ config.normal.dev.mine.ts
 config 文件支持异步加载
 
 ```typescript
-export default async function (app: VonaApplication, env: VonaConfigEnv) {
+export default async function (app: VonaApplication) {
   const config: VonaConfigOptional = {};
 
   // async load remote config
