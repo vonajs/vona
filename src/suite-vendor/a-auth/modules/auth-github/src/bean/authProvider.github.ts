@@ -19,8 +19,8 @@ export interface IAuthProviderOptionsGithub extends IDecoratorAuthProviderOption
 @AuthProvider<IAuthProviderOptionsGithub>({
   base: {
     confirmed: true,
-    clientID: 'xxxxxx',
-    clientSecret: 'xxxxxx',
+    clientID: 'Shoule specify clientID',
+    clientSecret: 'Shoule specify clientSecret',
   },
 })
 export class AuthProviderGithub extends BeanAuthProviderOauth2Base {

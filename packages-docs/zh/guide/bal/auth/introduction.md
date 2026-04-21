@@ -43,12 +43,6 @@ class ControllerStudent {
 
 - 举例：`GitHub`认证
 
-`GitHub`认证是独立的模块，需要安装到项目中：
-
-```bash
-$ pnpm add vona-module-auth-github -w
-```
-
 ```typescript
 class ControllerStudent {
   @Web.get('login')

@@ -1,37 +1,31 @@
-import type {
-  IAuthenticateStrategyState,
-  IAuthProviderClientOptions,
-  IAuthProviderClientRecord,
-  IAuthProviderVerify,
-  IDecoratorAuthProviderOptions,
-  TypeStrategyVerifyArgs,
-} from 'vona-module-a-auth';
-import type { IAuthUserProfile } from 'vona-module-a-user';
+import type { IAuthProviderClientRecord, IAuthProviderOauth2ClientOptions, IDecoratorAuthProviderOptions, StrategyBase } from 'vona-module-a-auth';
 
-import { BeanBase } from 'vona';
-import { AuthProvider } from 'vona-module-a-auth';
+import { type Constructable } from 'vona';
+import { AuthProvider, BeanAuthProviderOauth2Base } from 'vona-module-a-auth';
 
-export interface IAuthProviderOauthClientRecord extends IAuthProviderClientRecord {}
+export interface IAuthProviderOauthClientRecord extends IAuthProviderClientRecord {
+  github: never;
+}
 
-export interface IAuthProviderOauthClientOptions extends IAuthProviderClientOptions {}
+export interface IAuthProviderOauthClientOptions extends IAuthProviderOauth2ClientOptions {
+  Strategy?: Constructable<StrategyBase>;
+}
 
-export interface IAuthProviderOptionsOauth extends IDecoratorAuthProviderOptions<
-  keyof IAuthProviderOauthClientRecord,
-  IAuthProviderOauthClientOptions
-> {}
+export interface IAuthProviderOptionsOauth extends IDecoratorAuthProviderOptions<IAuthProviderOauthClientRecord, IAuthProviderOauthClientOptions> {}
 
-@AuthProvider<IAuthProviderOptionsOauth>()
-export class AuthProviderOauth extends BeanBase implements IAuthProviderVerify {
-  async verify(
-    _args: TypeStrategyVerifyArgs,
-    _clientOptions: IAuthProviderOauthClientOptions,
-    _options: IAuthProviderOptionsOauth,
-    _state?: IAuthenticateStrategyState,
-  ): Promise<IAuthUserProfile> {
-    // profile
-    const profile: IAuthUserProfile = {
-      id: '',
-    };
-    return profile;
+@AuthProvider<IAuthProviderOptionsOauth>({
+  base: {
+    confirmed: true,
+    clientID: 'Shoule specify clientID',
+    clientSecret: 'Shoule specify clientSecret',
+  },
+  clients: {
+    github: {},
+  },
+})
+export class AuthProviderOauth extends BeanAuthProviderOauth2Base {
+  async strategy(clientOptions: IAuthProviderOauthClientOptions, _options: IAuthProviderOptionsOauth): Promise<Constructable<StrategyBase>> {
+    if (!clientOptions.Strategy) throw new Error('Should specify Strategy for oauth provider');
+    return clientOptions.Strategy;
   }
 }

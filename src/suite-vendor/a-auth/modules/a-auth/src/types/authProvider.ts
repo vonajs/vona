@@ -40,11 +40,11 @@ export type TypeStrategyVerifyArgs = any[];
 export type TypeStrategyOauth2VerifyArgs<T = IAuthUserProfile> = [accessToken: string, refreshToken: string, profile: T];
 
 export interface IDecoratorAuthProviderOptions<
-  K extends keyof IAuthProviderClientRecord = keyof IAuthProviderClientRecord,
+  R extends IAuthProviderClientRecord = IAuthProviderClientRecord,
   T extends IAuthProviderClientOptions = IAuthProviderClientOptions,
 > extends TypeOnionOptionsEnableSimple {
   base?: T;
-  clients?: { [prop in K]?: T }; // Record<K, T>;
+  clients?: { [prop in keyof R]?: T }; // Record<K, T>;
   useMockForDev?: boolean;
 }
 

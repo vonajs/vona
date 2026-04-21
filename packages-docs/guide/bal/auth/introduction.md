@@ -46,12 +46,6 @@ class ControllerStudent {
 
 - Example: `GitHub` Authentication
 
-`GitHub` authentication is a separate module and needs to be installed in the project:
-
-```bash
-$ pnpm add vona-module-auth-github -w
-```
-
 ```typescript
 class ControllerStudent {
   @Web.get('login')
