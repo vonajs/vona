@@ -13,6 +13,9 @@
     },
     {
       "path": "modules/auth-github/tsconfig.build.json"
+    },
+    {
+      "path": "modules/auth-oauth/tsconfig.build.json"
     }
   ],
   "exclude": ["modules"]
