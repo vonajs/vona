@@ -18,8 +18,11 @@ export interface IAuthenticateStrategyState extends IAuthenticateState {
   clientOptions?: IAuthProviderClientOptions;
 }
 
-export interface IAuthenticateOptions<T extends IDecoratorAuthProviderOptions = IDecoratorAuthProviderOptions> {
+export interface IAuthenticateOptions<
+  T extends IDecoratorAuthProviderOptions = IDecoratorAuthProviderOptions,
+  K extends keyof NonNullable<T['clients']> = keyof NonNullable<T['clients']>,
+> {
   state?: IAuthenticateState;
-  clientName?: Extract<keyof T['clients'], 'string'> | 'default' | undefined;
-  clientOptions?: PowerPartial<T['base']>;
+  clientName?: K;
+  clientOptions?: NonNullable<T['clients']>[K] extends undefined ? PowerPartial<T['base']> : PowerPartial<NonNullable<T['clients']>[K]>;
 }

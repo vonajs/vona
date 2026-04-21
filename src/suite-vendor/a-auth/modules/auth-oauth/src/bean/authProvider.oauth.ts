@@ -3,8 +3,13 @@ import type { IAuthProviderClientRecord, IAuthProviderOauth2ClientOptions, IDeco
 import { type Constructable } from 'vona';
 import { AuthProvider, BeanAuthProviderOauth2Base } from 'vona-module-a-auth';
 
+export interface IAuthProviderOauthClientOptionsGithub extends IAuthProviderOauth2ClientOptions {
+  userProfileURL?: string;
+  userAgent?: string;
+}
+
 export interface IAuthProviderOauthClientRecord extends IAuthProviderClientRecord {
-  github: never;
+  github: IAuthProviderOauthClientOptionsGithub;
 }
 
 export interface IAuthProviderOauthClientOptions extends IAuthProviderOauth2ClientOptions {
@@ -18,9 +23,6 @@ export interface IAuthProviderOptionsOauth extends IDecoratorAuthProviderOptions
     confirmed: true,
     clientID: 'Shoule specify clientID',
     clientSecret: 'Shoule specify clientSecret',
-  },
-  clients: {
-    github: {},
   },
 })
 export class AuthProviderOauth extends BeanAuthProviderOauth2Base {

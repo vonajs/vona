@@ -11,10 +11,11 @@ import type { IAuthProviderRecord, IAuthProviderStrategy, IAuthProviderVerify, T
 
 @Bean()
 export class BeanAuth extends BeanBase {
-  async authenticate<T extends keyof IAuthProviderRecord>(
-    authProviderName: T,
-    options?: IAuthenticateOptions<IAuthProviderRecord[T]>,
-  ): Promise<IJwtToken | undefined> {
+  async authenticate<
+    N extends keyof IAuthProviderRecord,
+    T extends IAuthProviderRecord[N] = IAuthProviderRecord[N],
+    K extends keyof NonNullable<T['clients']> = keyof NonNullable<T['clients']>,
+  >(authProviderName: N, options?: IAuthenticateOptions<T, K>): Promise<IJwtToken | undefined> {
     // clientName
     const clientName = options?.clientName ?? 'default';
     // stateIntention
@@ -23,9 +24,9 @@ export class BeanAuth extends BeanBase {
     const { entityAuthProvider, disabled, beanFullName, onionOptions, clientOptions } = await this.bean.authProvider.getClientOptions(
       {
         providerName: authProviderName,
-        clientName,
+        clientName: clientName as string,
       },
-      options?.clientOptions,
+      options?.clientOptions as any,
     );
     if (!entityAuthProvider || disabled) return this.app.throw(403);
     // execute
