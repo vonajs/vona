@@ -69,8 +69,6 @@ REDIS_DEFAULT_PASSWORD =
 $ npm run dev
 ```
 
-> 用户名/密码: admin/123456
-
 4. 单元测试
 
 ```bash
