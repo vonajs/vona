@@ -17,7 +17,7 @@ export async function combineConfigDefault<T>(
   configTest?: TypeConfigLoader<T>,
 ): Promise<PowerPartial<T>> {
   let config = (await configDefault(app))!;
-  const mode = app.config.meta.mode;
+  const mode = app.meta.env.META_MODE;
   if (mode === 'dev' && configDev) {
     config = deepExtend(config, await configDev(app));
   } else if (mode === 'prod' && configProd) {
@@ -29,7 +29,7 @@ export async function combineConfigDefault<T>(
 }
 
 export function getLoggerPathPhysicalRoot(app: VonaApplication) {
-  const mode = app.configMeta.mode;
+  const mode = app.meta.env.META_MODE;
   let loggerDir: string;
   if (mode === 'test' || mode === 'dev') {
     loggerDir = path.join(app.projectPath, '.app/logs');
@@ -41,7 +41,7 @@ export function getLoggerPathPhysicalRoot(app: VonaApplication) {
 }
 
 export function getPublicPathPhysicalRoot(app: VonaApplication) {
-  const mode = app.configMeta.mode;
+  const mode = app.meta.env.META_MODE;
   let publicDir: string;
   if (mode === 'test' || mode === 'dev') {
     publicDir = path.join(app.projectPath, '.app/public');
@@ -53,7 +53,7 @@ export function getPublicPathPhysicalRoot(app: VonaApplication) {
 }
 
 export function getRuntimePathPhysicalRoot(app: VonaApplication) {
-  const mode = app.config.meta.mode;
+  const mode = app.meta.env.META_MODE;
   let runtimeDir: string;
   if (mode === 'test' || mode === 'dev') {
     runtimeDir = path.join(app.options.projectPath, '.app/runtime');

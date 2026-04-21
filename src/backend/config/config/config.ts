@@ -30,8 +30,8 @@ export default async function (app: VonaApplication) {
 
   // meta
   config.meta = {
-    flavor: app.configMeta.flavor,
-    mode: app.configMeta.mode,
+    flavor: env.META_FLAVOR,
+    mode: env.META_MODE,
   };
 
   // instance

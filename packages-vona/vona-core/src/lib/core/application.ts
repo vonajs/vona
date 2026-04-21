@@ -56,10 +56,6 @@ export class VonaApplication extends KoaApplication {
     return this.options.projectPath;
   }
 
-  get configMeta() {
-    return this.options.configMeta;
-  }
-
   get ctx(): VonaContext {
     return this.currentContext as unknown as VonaContext;
   }

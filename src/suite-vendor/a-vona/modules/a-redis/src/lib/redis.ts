@@ -1,7 +1,7 @@
 import type { VonaApplication } from 'vona';
 
 export function getRedisClientKeyPrefix(clientName: string, app: VonaApplication): string {
-  const mode = ['test', 'dev'].includes(app.configMeta.mode) ? '_local' : '';
+  const mode = ['test', 'dev'].includes(app.config.meta.mode) ? '_local' : '';
   return `${clientName}_${app.name}${mode}:`;
 }
 

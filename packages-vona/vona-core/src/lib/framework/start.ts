@@ -78,7 +78,7 @@ async function __prepareConfig(app: VonaApplication): Promise<VonaConfigOptional
   const configItems = (await app.options.config()).default;
   const configItemsPromise: (VonaConfigOptional | Promise<VonaConfigOptional>)[] = [];
   for (const configItem of configItems) {
-    configItemsPromise.push(configItem(app, app.options.env));
+    configItemsPromise.push(configItem(app));
   }
   const configItemsRes = await Promise.all(configItemsPromise);
   for (const configItem of configItemsRes) {

@@ -33,13 +33,11 @@ export interface KoaApplicationOptions {
 export interface VonaAppInfo {
   name: string;
   projectPath: string;
-  configMeta: VonaConfigMeta;
 }
 
 export interface VonaApplicationOptions {
   name: string;
   projectPath: string;
-  configMeta: VonaConfigMeta;
   modulesMeta: TypeBootstrapOptionsModulesMeta;
   locales: TypeBootstrapOptionsLocales;
   config: TypeBootstrapOptionsConfig;

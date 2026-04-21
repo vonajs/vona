@@ -20,6 +20,7 @@ declare module 'vona-module-a-orm' {
 
 export default async function (app: VonaApplication) {
   const config: VonaConfigOptional = {};
+  const env = app.meta.env;
 
   // modules
   config.modules = {};
@@ -29,8 +30,8 @@ export default async function (app: VonaApplication) {
 
   // meta
   config.meta = {
-    flavor: app.configMeta.flavor,
-    mode: app.configMeta.mode,
+    flavor: env.META_FLAVOR,
+    mode: env.META_MODE,
   };
 
   // instance

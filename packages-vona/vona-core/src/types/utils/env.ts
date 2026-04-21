@@ -1,6 +1,8 @@
 import type { VonaMetaFlavor, VonaMetaMode } from '@cabloy/module-info';
 
 export interface VonaConfigEnv {
+  META_FLAVOR: VonaMetaFlavor;
+  META_MODE: VonaMetaMode;
   APP_NAME: string | undefined;
   APP_TITLE: string | undefined;
   APP_VERSION: string | undefined;

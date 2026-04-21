@@ -4,7 +4,6 @@ import type { VonaAppInfo, VonaApplicationOptions } from '../../types/applicatio
 import type { BootstrapOptions } from '../../types/interface/bootstrap.ts';
 import type { VonaConfigEnv } from '../../types/utils/env.ts';
 
-import { cast } from '../../types/utils/cast.ts';
 import { VonaApplication } from '../core/application.ts';
 import { jsxEnhance } from '../utils/jsx-enhance.ts';
 import { prepareEnv } from '../utils/util.ts';
@@ -61,7 +60,6 @@ function __createApp({ modulesMeta, locales, config, env, AppMonkey }: Bootstrap
   const options: VonaApplicationOptions = {
     name: appInfo.name,
     projectPath: appInfo.projectPath,
-    configMeta: appInfo.configMeta,
     modulesMeta,
     locales,
     config,
@@ -75,9 +73,5 @@ function prepareAppInfo(env: VonaConfigEnv): VonaAppInfo {
   return {
     name: env.APP_NAME!,
     projectPath: process.cwd(),
-    configMeta: {
-      flavor: cast(env).META_FLAVOR,
-      mode: cast(env).META_MODE,
-    },
   };
 }
