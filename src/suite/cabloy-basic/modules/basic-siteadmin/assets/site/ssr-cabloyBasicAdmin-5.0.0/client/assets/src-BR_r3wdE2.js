@@ -1,1 +1,0 @@
-import{n as a,r,t as s}from"./basic-adapter-n74jpoXU.js";s();export{r as MonkeySys,a as ScopeModuleBasicAdapter};
