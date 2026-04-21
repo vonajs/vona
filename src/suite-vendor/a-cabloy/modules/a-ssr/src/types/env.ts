@@ -1,4 +1,9 @@
+import type { ZovaMetaAppMode, ZovaMetaFlavor, ZovaMetaMode } from '@cabloy/module-info';
+
 export interface ZovaConfigEnv {
+  META_FLAVOR: ZovaMetaFlavor;
+  META_MODE: ZovaMetaMode;
+  META_APP_MODE: ZovaMetaAppMode;
   APP_ROUTER_MODE: 'hash' | 'history' | 'abstract' | undefined;
   APP_ROUTER_BASE: string | undefined;
   APP_PUBLIC_PATH: string | undefined;

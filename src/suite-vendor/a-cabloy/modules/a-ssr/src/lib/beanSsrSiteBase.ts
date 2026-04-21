@@ -1,3 +1,4 @@
+import type { ZovaMetaMode } from '@cabloy/module-info';
 import type { IParamsAndQuery } from '@cabloy/utils';
 import type { ILocaleRecord } from 'vona';
 import type { IMenuGroup, IMenuItem } from 'vona-module-a-menu';
@@ -129,6 +130,7 @@ export class BeanSsrSiteBase<SsrSiteOptions extends IDecoratorSsrSiteOptions = I
     if (!this._siteOptions) {
       const onionOptions = this.$onionOptions as IDecoratorSsrSiteOptions;
       const SSR_HMR = process.env.META_MODE === 'dev' ? 'true' : 'false';
+      const META_MODE: ZovaMetaMode = process.env.META_MODE === 'dev' ? 'development' : 'production';
       const baseUrl = `${this.app.util.protocol}://${this.app.util.host}`;
       this._siteOptions = deepExtend(
         {
@@ -137,12 +139,14 @@ export class BeanSsrSiteBase<SsrSiteOptions extends IDecoratorSsrSiteOptions = I
             SSR_PROD_PROTOCOL: this.app.util.protocol,
             SSR_PROD_HOST: this.app.util.host,
             SSR_HMR,
+            META_MODE,
           },
           envClient: {
             API_BASE_URL: baseUrl,
             SSR_PROD_PROTOCOL: this.app.util.protocol,
             SSR_PROD_HOST: this.app.util.host,
             SSR_HMR,
+            META_MODE,
           },
         },
         this.$scope.ssr.config.site.default,
