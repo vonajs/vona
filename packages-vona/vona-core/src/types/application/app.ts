@@ -1,4 +1,4 @@
-import type { IModule, VonaConfigMeta } from '@cabloy/module-info';
+import type { IModule } from '@cabloy/module-info';
 
 import type { VonaApplication } from '../../lib/core/application.ts';
 import type { VonaConfigOptional } from '../config/config.ts';
