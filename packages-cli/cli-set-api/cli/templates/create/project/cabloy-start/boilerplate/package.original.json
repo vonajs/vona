@@ -39,7 +39,7 @@
     "lint:fix": "oxlint --fix"
   },
   "dependencies": {
-    "vona": "^5.1.12"
+    "vona": "^5.1.13"
   },
   "devDependencies": {
     "@cabloy/lint": "^5.1.7",
