@@ -10,6 +10,7 @@ export class BeanAuthProvider extends BeanBase {
     if (!data.id && !data.clientName) data = { ...data, clientName: 'default' };
     const res = await this.scope.model.authProvider.get(data);
     if (res) return res;
+    if (data.id) throw new Error(`not found auth provider: ${data.id}`);
     if (!data.providerName) throw new Error('Invalid auth provider');
     // lock
     return await this.scope.redlock.lockIsolate('authProvider.register', async () => {
