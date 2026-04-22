@@ -11,17 +11,17 @@ function __patchJSON() {
   // 2020-03-13T00:44:15Z
   // eslint-disable-next-line
   const __dateTest = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(\.\d{3})?Z$/;
-  function __jsonReviver(k, v, reviver) {
+  function __jsonReviver(self: any, k, v, reviver: Function | undefined) {
     if (v && typeof v === 'string' && __dateTest.test(v)) {
       v = new Date(v);
     }
     if (!reviver) return v;
-    return reviver(k, v);
+    return reviver.call(self, k, v);
   }
 
-  function __jsonReplacer(k, v, replacer) {
+  function __jsonReplacer(self: any, k, v, replacer: Function | undefined) {
     if (replacer) {
-      v = replacer(k, v);
+      v = replacer.call(self, k, v);
     }
     if (typeof v === 'bigint') {
       v = String(v);
@@ -32,8 +32,8 @@ function __patchJSON() {
   // json
   const _jsonParse = JSON.parse;
   JSON.parse = function (source, reviver) {
-    return _jsonParse(source, (k, v) => {
-      return __jsonReviver(k, v, reviver);
+    return _jsonParse(source, function (this: any, k, v) {
+      return __jsonReviver(this, k, v, reviver);
     });
   };
 
@@ -41,8 +41,8 @@ function __patchJSON() {
   JSON.stringify = function (value, replacer, space) {
     return _jsonStringify(
       value,
-      (k, v) => {
-        return __jsonReplacer(k, v, replacer);
+      function (this: any, k, v) {
+        return __jsonReplacer(this, k, v, replacer);
       },
       space,
     );
@@ -52,8 +52,8 @@ function __patchJSON() {
   const _json5Parse = json5.parse;
   // @ts-ignore ignore parse
   const parse = function (source, reviver) {
-    return _json5Parse(source, (k, v) => {
-      return __jsonReviver(k, v, reviver);
+    return _json5Parse(source, function (this: any, k, v) {
+      return __jsonReviver(this, k, v, reviver);
     });
   };
 
@@ -62,8 +62,8 @@ function __patchJSON() {
   const stringify = function (value, replacer, space) {
     return _json5Stringify(
       value,
-      (k, v) => {
-        return __jsonReplacer(k, v, replacer);
+      function (this: any, k, v) {
+        return __jsonReplacer(this, k, v, replacer);
       },
       space,
     );
