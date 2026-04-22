@@ -1,5 +1,5 @@
 import { ControllerIconProps, IIconRecord, IIconRecord as IIconRecord$1 } from "zova-module-a-icon";
-import { BeanRouter, BeanRouterGuardsBase, IPagePathRecord, ModelPageData, TypePagePathSchema } from "zova-module-a-router";
+import { BeanRouter, BeanRouterGuardsBase, IPagePathRecord, IRouteViewRouteItem, ModelPageData, TypePagePathSchema } from "zova-module-a-router";
 import * as _$zova_jsx0 from "zova-jsx";
 import { TypeRenderComponentJsxPropsPublic } from "zova-jsx";
 import { z } from "zod";
@@ -6180,6 +6180,8 @@ declare module 'zova-module-a-icon' {
     '::developer-board': true;
     '::done': true;
     '::dot': true;
+    '::draft-add': true;
+    '::draft-edit': true;
     '::draft': true;
     '::drive-file-move': true;
     '::edit': true;
@@ -6558,8 +6560,9 @@ declare class RenderSidebar extends BeanRenderBase {
 //#region src/suite/a-home/modules/home-layouttabs/src/component/layoutTabs/render.tabs.d.ts
 declare class RenderTabs extends BeanRenderBase {
   renderTabs(): _$vue_jsx_runtime0.JSX.Element | undefined;
-  getTabIcon(tab: RouteTab): string;
   renderTabItems(): _$vue_jsx_runtime0.JSX.Element | undefined;
+  getTabIcon(tab: RouteTab): string;
+  getTabItemIcon(tabItem: IRouteViewRouteItem): keyof IIconRecord$1 | '';
   _renderRouterViewTabs(): _$vue_jsx_runtime0.JSX.Element;
 }
 //#endregion
