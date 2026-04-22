@@ -2,7 +2,7 @@ import type { Environment, ParseResult } from '@marcbachmann/cel-js';
 
 import { isNil } from '../check.ts';
 import { celEnvBase } from './base.ts';
-import { StringPrefixCel, StringPrefixRaw, StringPrefixRegexp } from './types.ts';
+import { StringPrefixCel, StringPrefixRaw, StringPrefixRegexp, StringPresetThis, StringPresetThisDef } from './types.ts';
 import { evaluateSimple } from './utils.ts';
 
 export function evaluateExpressions<T = any>(expressions: any, context?: object, celEnv?: Environment, dry?: boolean): T {
@@ -37,6 +37,10 @@ export function evaluate<T = any>(expression: string, context?: object, celEnv?:
     return expression.substring(StringPrefixRaw.length) as any;
   } else if (expression.startsWith(StringPrefixRegexp)) {
     return evaluateSimple(expression.substring(StringPrefixRegexp.length));
+  } else if (expression === StringPresetThis) {
+    return (context ?? {}) as T;
+  } else if (expression === StringPresetThisDef) {
+    return (celEnv ?? celEnvBase).getDefinitions() as T;
   }
   return (celEnv ?? celEnvBase).evaluate(expression, context);
 }

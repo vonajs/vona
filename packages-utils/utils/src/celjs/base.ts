@@ -67,6 +67,14 @@ celEnvBase.registerFunction('exists(map,string):bool', (obj, name) => {
   return hasProperty(obj, name);
 });
 
+// stringify/parse
+celEnvBase.registerFunction('stringify(dyn):string', dyn => {
+  return JSON.stringify(dyn, null, 2);
+});
+celEnvBase.registerFunction('parse(string):dyn', str => {
+  return JSON.parse(str);
+});
+
 function _concat(...args: any[]): any[] {
   return [].concat(...args);
 }

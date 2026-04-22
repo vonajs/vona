@@ -16,7 +16,8 @@ export interface IActionVarOptions extends IActionOptionsNone {
 }
 
 export interface IActionLogOptions extends IActionOptionsNone {
-  message: string;
+  name?: string;
+  message: any;
 }
 
 export interface IActionViewOptions extends IActionOptionsNone {

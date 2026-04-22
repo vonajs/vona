@@ -19,12 +19,33 @@ function __patchJSON() {
     return reviver(k, v);
   }
 
+  function __jsonReplacer(k, v, replacer) {
+    if (replacer) {
+      v = replacer(k, v);
+    }
+    if (typeof v === 'bigint') {
+      v = String(v);
+    }
+    return v;
+  }
+
   // json
   const _jsonParse = JSON.parse;
   JSON.parse = function (source, reviver) {
     return _jsonParse(source, (k, v) => {
       return __jsonReviver(k, v, reviver);
     });
+  };
+
+  const _jsonStringify = JSON.stringify;
+  JSON.stringify = function (value, replacer, space) {
+    return _jsonStringify(
+      value,
+      (k, v) => {
+        return __jsonReplacer(k, v, replacer);
+      },
+      space,
+    );
   };
 
   // json5
@@ -36,8 +57,20 @@ function __patchJSON() {
     });
   };
 
+  const _json5Stringify = json5.stringify;
+  // @ts-ignore ignore parse
+  const stringify = function (value, replacer, space) {
+    return _json5Stringify(
+      value,
+      (k, v) => {
+        return __jsonReplacer(k, v, replacer);
+      },
+      space,
+    );
+  };
+
   globalThis.JSON5 = {
     parse,
-    stringify: json5.stringify,
+    stringify,
   } as typeof json5;
 }

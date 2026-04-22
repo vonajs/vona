@@ -63,7 +63,7 @@
     "@types/koa": "^2.15.0",
     "@types/luxon": "^3.7.1",
     "@types/node": "^22.19.17",
-    "@types/react": "npm:@cabloy/types-react@^19.2.13",
+    "@types/react": "npm:@cabloy/types-react@^19.2.15",
     "@types/retry": "^0.12.5",
     "clean-package": "^2.2.0",
     "cross-env": "^7.0.3",

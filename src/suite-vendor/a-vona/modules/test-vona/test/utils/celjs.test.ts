@@ -46,6 +46,13 @@ describe('celjs.test.ts', () => {
       assert.equal(evaluateExpressions(cel('exists(a, "b.c")'), { a: { b: { c: null } } }), true);
       assert.equal(evaluateExpressions(cel('exists(a, "b.c")'), { a: { b: {} } }), false);
       assert.equal(evaluateExpressions(cel('exists(a, "b.c")'), { a: {} }), false);
+      // this
+      assert.deepEqual(evaluateExpressions(cel('this'), { a: 1 }), { a: 1 });
+      // stringify/parse
+      assert.equal(evaluateExpressions(cel('stringify(2)')), '"2"');
+      assert.equal(evaluateExpressions(cel('stringify({"a": 1})')), '{\n  "a": "1"\n}');
+      assert.equal(evaluateExpressions(cel('parse(\'"2"\')')), '2');
+      assert.deepEqual(evaluateExpressions(cel('parse(\'{"a": 1}\')')), { a: 1 });
     });
   });
 });
