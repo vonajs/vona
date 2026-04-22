@@ -1,0 +1,1 @@
+import{n as a,t as o}from"./a-boundary-TWHpzegx.js";o();export{a as ScopeModuleABoundary};
