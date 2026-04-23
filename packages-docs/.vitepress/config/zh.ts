@@ -35,7 +35,6 @@ export const zh = defineConfig({
 function sidebarCabloy(): DefaultTheme.SidebarItem[] {
   return [
     { text: '介绍', link: 'introduction' },
-    { text: '项目模版', link: 'templates' },
     { text: 'a-datasource: 动态数据源', link: 'dynamic-datasource' },
     { text: 'a-datasharding: 读写分离', link: 'sharding' },
   ];
