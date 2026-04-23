@@ -1,1 +1,0 @@
-import{a,c as s,i as o,n as r,o as i,r as p,s as t,t as m}from"./a-api-BU2KDT85.js";m();export{r as Api,p as ApiMeta,o as ApiSchema,s as BeanApiBase,i as Monkey,a as ScopeModuleAApi,t as config};

@@ -1,1 +1,0 @@
-import{a,i as s,n as r,o,r as t,t as e}from"./a-routertabs-Ctu1bEiS.js";e();export{a as ControllerRouterViewTabs,o as ModelTabs,r as ScopeModuleARoutertabs,s as ZRouterViewTabs,t as components};
