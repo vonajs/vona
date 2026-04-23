@@ -1,0 +1,1 @@
+import{n as a,r,t as s}from"./basic-adapter-DDOCovdE.js";s();export{r as MonkeySys,a as ScopeModuleBasicAdapter};
