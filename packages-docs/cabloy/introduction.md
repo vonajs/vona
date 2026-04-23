@@ -16,6 +16,8 @@ This suite includes the following modules:
 
 ## 2. Zova Suite: zova-suite-a-cabloy (MIT)
 
+This suite includes the following modules:
+
 | Name          | Description                                                                                                                                                |
 | ------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | rest-actions  | Actions for Zova JSX. Includes: alert/confirm/copy/create/delete/edit/setValue/view                                                                        |

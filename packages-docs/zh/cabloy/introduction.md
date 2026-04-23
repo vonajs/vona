@@ -16,6 +16,8 @@ CabloyJS 不是独立的框架，而是基于`Vona/Zova套件`的形式提供一
 
 ## 2. Zova套件: zova-suite-a-cabloy (MIT)
 
+该套件包含如下模块:
+
 | 名称          | 说明                                                                                                      |
 | ------------- | --------------------------------------------------------------------------------------------------------- |
 | rest-actions  | 用于Zova JSX的Actions。包括： alert/confirm/copy/create/delete/edit/setValue/view                         |
