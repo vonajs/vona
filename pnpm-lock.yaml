@@ -9206,14 +9206,14 @@ packages:
   zova-core@5.1.14:
     resolution: {integrity: sha512-vEFy8jqJHXg11xwaJ4fwbTwy1Mu/2uvXp+gxqdYmmXF0FAqwJsUudN15pk4fjt1UF8SiDNXrTaBh/uaidwWK0A==}
 
-  zova-core@5.1.21:
-    resolution: {integrity: sha512-BozaorDDWNt/G1MbtL+nwNVWCuRWfy8PqyRWMx/2zee07CjHX98VtjoUiuuUWhlM2X4pD7WZRzV1aHeh3kb2Vg==}
+  zova-core@5.1.22:
+    resolution: {integrity: sha512-cQ1tMuzk2ggdwGriwJiTGrV5S4BblOMGOB3l4gKnTO+M6SYFTyumkRNANYulttl7jIMd8Y7zfC7GwYF4gWNxYw==}
 
   zova-jsx@1.1.14:
     resolution: {integrity: sha512-ldZsX71PQYoHetvnt7HvOEK1Q6yC83buHC3gIGgnW+5dFvPctMtoALOxgmqoUO0ojjfbumahzQI2z75XXsp9Rw==}
 
-  zova-jsx@1.1.23:
-    resolution: {integrity: sha512-Dp0SZ0rPs733CoCuWcyFEPHV1256sbRge/BNXG7bIhPSafd2oKm1zAa51xOaAHUi8/SBpoQZt3mUG/g3lejqew==}
+  zova-jsx@1.1.24:
+    resolution: {integrity: sha512-ng2CEfBsv/AinLS3+oH89V3LyjO73bYCjJ1riKwKoTEztGUS6/iYqW6p9QEb0usHLR20LXu5yEytWW+8CLHkHw==}
 
   zova-module-a-action@5.1.11:
     resolution: {integrity: sha512-jCoBdeRTD4xKIZTUiUIPRRAic+HG7OrQtE3xgPi5Bgs7De2IljIgX07ftMus5B1nySVVV+uEnYYQ+r4Ru4ReVw==}
@@ -9245,6 +9245,9 @@ packages:
   zova-module-a-currency@5.1.9:
     resolution: {integrity: sha512-NltSNd7G0dEYGHTeeSrKEtW+3nYetdNqOsq3KeDRwUfCUc3KfWkTmWGmu4eRt3JvqaNhZyFJW/ZeiRcXF2ARXg==}
 
+  zova-module-a-date@5.1.10:
+    resolution: {integrity: sha512-Az/zuzXTUo69tsoivYKuFXcnIEU3y3WYJA0n7BkjSn/WGAydfq6+svGuAM7G+07+pxE0mqecM4Q8R2NcdH7k8w==}
+
   zova-module-a-date@5.1.9:
     resolution: {integrity: sha512-LOtMvj42TVtpQqTf2Nvduv3JNN9p5+Cv7nJZHSGlfE7hTBnrCyQE+LhIOUTMBQ2bFO3qghKe3cBUFJL5MPrVNQ==}
 
@@ -9275,8 +9278,8 @@ packages:
   zova-module-a-model@5.1.9:
     resolution: {integrity: sha512-iOkm7DdRRKksRWzBpgSDuAA9Tu+Uyj4Wx6iaGxbk4IpwydaamGWynGCH191vYZXQi8riscQ42QDyyaMb4uBjRQ==}
 
-  zova-module-a-openapi@5.1.10:
-    resolution: {integrity: sha512-RPTmQRgz/loOkVk0XlSBJocXSO8TqsSBjCOE6dIHadyaHK037h6S2PIP0qA+I1kMDXQRfzXU0OkexWcSJM0gdA==}
+  zova-module-a-openapi@5.1.11:
+    resolution: {integrity: sha512-vzQny5UlpV8ZoP6TOGPyXOtkiE14dVIb7N+kRlGttlgf0MMAcG0AvV6XYqV0D2w5oZbrRCWs/QGL8SCWvrBGug==}
 
   zova-module-a-openapi@5.1.8:
     resolution: {integrity: sha512-DyDVKLPuWWyd1pAb9wzSw/U/S1WISU2ysvaQZG7/mofcaeAGm7bTLDAJG/sjV22SkR9/8eTG6sQa31nSj2hj/A==}
@@ -9332,8 +9335,8 @@ packages:
   zova-module-a-zova@5.1.16:
     resolution: {integrity: sha512-3fpLaZ30ix8fBjI4UyLuqZYRNRTTc8ZlXONnOGowc+LI7KTMEQUWgilVm52p2qwXt26bnzSCg9OTaj3R5LZ88Q==}
 
-  zova-module-a-zova@5.1.27:
-    resolution: {integrity: sha512-4+dFQ4rXck/ZzulN/UkyFThr/Gyd+9yiJAvtDSnw/z+dZv+IbMbWmu0QQIE9QHep43KGWm8wQ4IfASk7+qvYQw==}
+  zova-module-a-zova@5.1.28:
+    resolution: {integrity: sha512-zUbHUTF15Agk8OACwzskHjSNXx2dAHNYWMfPGO9hqaAsA3Z94sfBhj4OT5GrO3y+QyIIPsnejp3axR31/R29qw==}
 
   zova-module-rest-actions@5.1.10:
     resolution: {integrity: sha512-dIDFgtsrfpyNufx382QHNxRt83Bj/78v5GICe85b8H8uigmK3Kx6d6sY8bZCs+SNoWfXxVWJb7Fs6IVLql4kuA==}
@@ -9353,14 +9356,14 @@ packages:
   zova-suite-a-zova@5.1.25:
     resolution: {integrity: sha512-wQu1n1ODgTXoPHEDLjDqNIhQlnpxbgpJmJbZ5/MxqT8rLsKFBvHgxxpwkYqZNbWAjmRdBCgyuj37M3eDjmlBCw==}
 
-  zova-suite-a-zova@5.1.39:
-    resolution: {integrity: sha512-fJavWvVs7GNXSj1RNItAiTh59kptkbB72jl8tI5BHVsTqNJBkAI6+yqYAwJFwBY2oQFrkDqR1jFPSgSad3jjwQ==}
+  zova-suite-a-zova@5.1.41:
+    resolution: {integrity: sha512-sMADp7oOguT8n3VcCVCJJSDkUROQNRjsnt9wYne8FpzEh9BB05sw7rR1+9PgON3ZspZGzinWtBrvCYlB1EPhnQ==}
 
   zova@5.1.26:
     resolution: {integrity: sha512-Zpw2TOewsTB7p12CahMGUz4QrlW2nyICyUrB8PwpcCt2DBZdEZ+xK+dW4zwQxReTqeMRQc88C1PYNNeTEqUvxw==}
 
-  zova@5.1.40:
-    resolution: {integrity: sha512-u/v0e4K3hf4LrJHI+bw5mpyz6c42TBLpq7Z1PuGn5LeLyRjVdoRTl8OIA+oo2ICfMzzRWCn5KXxqxPIQeJiCHw==}
+  zova@5.1.42:
+    resolution: {integrity: sha512-tz/8dclC/D1XJ59lTOxAIN/gY2+m1+O77DlnHZxULLPJFl11cfZMjnktkcszqkyHZJK1FlRHgEkx8SwcumaUrA==}
 
   zwitch@1.0.5:
     resolution: {integrity: sha512-V50KMwwzqJV0NpZIZFwfOD5/lyny3WlSzRiXgA0G7VUnRlqttta1L6UQIHzd6EuBY/cHGfwTIck7w1yH6Q5zUw==}
@@ -17049,7 +17052,7 @@ snapshots:
     transitivePeerDependencies:
       - typescript
 
-  zova-core@5.1.21(typescript@5.9.3):
+  zova-core@5.1.22(typescript@5.9.3):
     dependencies:
       '@cabloy/compose': link:packages-utils/compose
       '@cabloy/extend': link:packages-utils/extend
@@ -17089,14 +17092,14 @@ snapshots:
     transitivePeerDependencies:
       - typescript
 
-  zova-jsx@1.1.23(typescript@5.9.3):
+  zova-jsx@1.1.24(typescript@5.9.3):
     dependencies:
       '@cabloy/compose': link:packages-utils/compose
       '@cabloy/utils': link:packages-utils/utils
       '@cabloy/word-utils': 2.1.8
       typestyle: 2.4.0
       vue: 3.5.32(typescript@5.9.3)
-      zova-core: 5.1.21(typescript@5.9.3)
+      zova-core: 5.1.22(typescript@5.9.3)
     transitivePeerDependencies:
       - typescript
 
@@ -17123,6 +17126,8 @@ snapshots:
   zova-module-a-currency@5.1.9:
     dependencies:
       '@zhennann/currency': 2.0.4
+
+  zova-module-a-date@5.1.10: {}
 
   zova-module-a-date@5.1.9: {}
 
@@ -17175,7 +17180,7 @@ snapshots:
       - '@vue/composition-api'
       - vue
 
-  zova-module-a-openapi@5.1.10:
+  zova-module-a-openapi@5.1.11:
     dependencies:
       '@cabloy/json-schema-to-zod': 2.6.4
       '@zhennann/currency': 2.0.4
@@ -17276,7 +17281,7 @@ snapshots:
       - typescript
       - vue
 
-  zova-module-a-zova@5.1.27(typescript@5.9.3)(vue@3.5.32(typescript@5.9.3)):
+  zova-module-a-zova@5.1.28(typescript@5.9.3)(vue@3.5.32(typescript@5.9.3)):
     dependencies:
       '@cabloy/compose': link:packages-utils/compose
       '@cabloy/deps': link:packages-utils/deps
@@ -17287,7 +17292,7 @@ snapshots:
       '@cabloy/word-utils': 2.1.8
       defu: 6.1.7
       luxon: 3.7.2
-      zova-jsx: 1.1.23(typescript@5.9.3)
+      zova-jsx: 1.1.24(typescript@5.9.3)
     transitivePeerDependencies:
       - typescript
       - vue
@@ -17306,20 +17311,20 @@ snapshots:
       openapi3-ts: 4.5.0
       vue: 3.5.32(typescript@5.9.3)
       zod: '@cabloy/zod@4.3.6'
-      zova: 5.1.40(typescript@5.9.3)(vue@3.5.32(typescript@5.9.3))
-      zova-jsx: 1.1.23(typescript@5.9.3)
+      zova: 5.1.42(typescript@5.9.3)(vue@3.5.32(typescript@5.9.3))
+      zova-jsx: 1.1.24(typescript@5.9.3)
       zova-module-a-action: 5.1.11
       zova-module-a-actions: 5.1.10
       zova-module-a-api: 5.1.8
       zova-module-a-bean: 5.1.10
       zova-module-a-behavior: 5.1.9
       zova-module-a-currency: 5.1.9
-      zova-module-a-date: 5.1.9
+      zova-module-a-date: 5.1.10
       zova-module-a-form: 5.1.9(vue@3.5.32(typescript@5.9.3))
       zova-module-a-icon: 5.1.11
       zova-module-a-interceptor: 5.1.14
       zova-module-a-model: 5.1.11(vue@3.5.32(typescript@5.9.3))
-      zova-module-a-openapi: 5.1.10
+      zova-module-a-openapi: 5.1.11
       zova-module-a-pinia: 5.1.8(typescript@5.9.3)(vue@3.5.32(typescript@5.9.3))
       zova-module-a-router: 5.1.12
       zova-module-a-routerstack: 5.1.9
@@ -17408,7 +17413,7 @@ snapshots:
       - typescript
       - vue
 
-  zova-suite-a-zova@5.1.39(typescript@5.9.3)(vue@3.5.32(typescript@5.9.3)):
+  zova-suite-a-zova@5.1.41(typescript@5.9.3)(vue@3.5.32(typescript@5.9.3)):
     dependencies:
       zova-module-a-action: 5.1.11
       zova-module-a-actions: 5.1.10
@@ -17419,7 +17424,7 @@ snapshots:
       zova-module-a-behaviors: 5.1.8
       zova-module-a-boundary: 5.1.8
       zova-module-a-currency: 5.1.9
-      zova-module-a-date: 5.1.9
+      zova-module-a-date: 5.1.10
       zova-module-a-fetch: 5.1.8
       zova-module-a-form: 5.1.9(vue@3.5.32(typescript@5.9.3))
       zova-module-a-icon: 5.1.11
@@ -17427,7 +17432,7 @@ snapshots:
       zova-module-a-logger: 5.1.9
       zova-module-a-meta: 5.1.8
       zova-module-a-model: 5.1.11(vue@3.5.32(typescript@5.9.3))
-      zova-module-a-openapi: 5.1.10
+      zova-module-a-openapi: 5.1.11
       zova-module-a-pinia: 5.1.8(typescript@5.9.3)(vue@3.5.32(typescript@5.9.3))
       zova-module-a-router: 5.1.12
       zova-module-a-routerstack: 5.1.9
@@ -17438,7 +17443,7 @@ snapshots:
       zova-module-a-style: 5.1.12
       zova-module-a-table: 5.1.9(vue@3.5.32(typescript@5.9.3))
       zova-module-a-zod: 5.1.11
-      zova-module-a-zova: 5.1.27(typescript@5.9.3)(vue@3.5.32(typescript@5.9.3))
+      zova-module-a-zova: 5.1.28(typescript@5.9.3)(vue@3.5.32(typescript@5.9.3))
     transitivePeerDependencies:
       - '@vue/composition-api'
       - debug
@@ -17455,10 +17460,10 @@ snapshots:
       - typescript
       - vue
 
-  zova@5.1.40(typescript@5.9.3)(vue@3.5.32(typescript@5.9.3)):
+  zova@5.1.42(typescript@5.9.3)(vue@3.5.32(typescript@5.9.3)):
     dependencies:
-      zova-core: 5.1.21(typescript@5.9.3)
-      zova-suite-a-zova: 5.1.39(typescript@5.9.3)(vue@3.5.32(typescript@5.9.3))
+      zova-core: 5.1.22(typescript@5.9.3)
+      zova-suite-a-zova: 5.1.41(typescript@5.9.3)(vue@3.5.32(typescript@5.9.3))
     transitivePeerDependencies:
       - '@vue/composition-api'
       - debug
