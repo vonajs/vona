@@ -39,7 +39,6 @@ CabloyJS 不是独立的框架，而是基于`Vona/Zova套件`的形式提供一
 | Form/Table动态渲染                                      | 提供基于Daisyui的UI组件                                  | 提供基于VuetifyJS的UI组件              |
 | 双层页签导航                                            | ✅                                                       | ✅                                     |
 | Admin中后台支持 SSR                                     | ✅                                                       | ✅                                     |
-| 全新的 CRUD 开发范式                                    | ✅                                                       | ✅                                     |
 | `Tanstack Table/Tanstack Form/Tanstack Query`的最佳实践 | ✅                                                       | ✅                                     |
 
 ## 研发历程
