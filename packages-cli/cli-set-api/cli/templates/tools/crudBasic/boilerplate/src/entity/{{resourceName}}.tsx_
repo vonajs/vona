@@ -12,7 +12,7 @@ export class Entity<%=argv.resourceNameCapitalize%> extends EntityBase {
     v.order(1),
     v.render('actionView', 'table'),
     v.required(),
-    v.min(3),
+    v.min(2),
   )
   name: string;
 
