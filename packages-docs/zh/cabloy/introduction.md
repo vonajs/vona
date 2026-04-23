@@ -37,8 +37,8 @@ CabloyJS 不是独立的框架，而是基于`Vona/Zova套件`的形式提供一
 | 全栈能力                                                | 提供开箱即用的`Admin中后台`。可自行补充开发`Web网站`能力 | 提供开箱即用的`Web网站`和`Admin中后台` |
 | UI库                                                    | Daisyui + Tailwindcss                                    | VuetifyJS                              |
 | Form/Table动态渲染                                      | 提供基于Daisyui的UI组件                                  | 提供基于VuetifyJS的UI组件              |
-| 双层页签导航                                            | ✅                                                       | ✅                                     |
 | Admin中后台支持 SSR                                     | ✅                                                       | ✅                                     |
+| 双层页签导航                                            | ✅                                                       | ✅                                     |
 | `Tanstack Table/Tanstack Form/Tanstack Query`的最佳实践 | ✅                                                       | ✅                                     |
 
 ## 研发历程

@@ -35,8 +35,8 @@ export const en = defineConfig({
 function sidebarCabloy(): DefaultTheme.SidebarItem[] {
   return [
     { text: 'Introduction', link: 'introduction' },
-    { text: 'a-datasource: Dynamic Datasource', link: 'dynamic-datasource' },
     { text: 'a-datasharding: Sharding', link: 'sharding' },
+    { text: 'a-datasource: Dynamic Datasource', link: 'dynamic-datasource' },
   ];
 }
 

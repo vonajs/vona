@@ -37,8 +37,8 @@ CabloyJS provides two project templates for different UI libraries
 | Fullstack Capabilities                                           | Provides out-of-the-box `Admin-Dashboard`. Website capabilities can be added by self-development | Provides out-of-the-box `Website` and `Admin-Dashboard` |
 | UI Library                                                       | Daisyui + Tailwindcss                                                                            | VuetifyJS                                               |
 | Dynamic Form/Table Rendering                                     | Provides UI components based on Daisyui                                                          | Provides UI components based on VuetifyJS               |
-| Dual-layer Tabs Navigation                                       | ✅                                                                                               | ✅                                                      |
 | Admin-Dashboard SSR Support                                      | ✅                                                                                               | ✅                                                      |
+| Dual-layer Tabs Navigation                                       | ✅                                                                                               | ✅                                                      |
 | Best Practices for `Tanstack Table/Tanstack Form/Tanstack Query` | ✅                                                                                               | ✅                                                      |
 
 ## Development History
