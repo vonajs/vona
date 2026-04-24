@@ -1,10 +1,10 @@
 # 分布式锁
 
-VonaJS 基于[Redlock](https://github.com/sesamecare/redlock/)提供了直观、易用的分布式锁
+VonaJS 基于[Redlock](https://github.com/sesamecare/redlock/)提供了直观、易用的分布式锁。
 
 ## 创建分布式锁
 
-比如，在模块 demo-student 中创建分布式锁
+比如，在模块 demo-student 中创建分布式锁。
 
 ### 1. Cli命令
 
@@ -57,7 +57,7 @@ class ControllerStudent {
 
 ## `lock/lockIsolate`
 
-VonaJS 提供了两个锁方法: `lock/lockIsolate`。二者的区别是：`lockIsolate`自动实现了`数据源分级`，从而避免因数据源竞争而导致的死锁情况
+VonaJS 提供了两个锁方法: `lock/lockIsolate`。二者的区别是：`lockIsolate`自动实现了`数据源分级`，从而避免因数据源竞争而导致的死锁情况。
 
 - 参见: [数据源分级](./queue/db-level.md)
 
@@ -87,14 +87,14 @@ class ControllerStudent {
 
 锁资源还可以是`字面量模版`
 
-比如，如果要为不同的用户单独提供锁资源，那么可以使用形如`user-${userId}`的字符串，作为锁资源名称
+比如，如果要为不同的用户单独提供锁资源，那么可以使用形如`user-${userId}`的字符串，作为锁资源名称。
 
 ```diff
 - export type TypeRedlockLockIsolateResource = 'name';
 + export type TypeRedlockLockIsolateResource = 'name' | `user-${string}`;
 ```
 
-这样，在使用`lockIsolate`方法时同样可以提供类型提示
+这样，在使用`lockIsolate`方法时同样可以提供类型提示。
 
 ```typescript
 class ControllerStudent {
@@ -110,7 +110,7 @@ class ControllerStudent {
 
 ## 查看当前生效的分布式锁清单
 
-可以直接输出当前生效的分布式锁清单
+可以直接输出当前生效的分布式锁清单。
 
 ```diff
 class ControllerStudent {

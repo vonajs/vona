@@ -1,10 +1,10 @@
 # CRUD(查询)
 
-下面以模块`test-vona`为例，讲解 CRUD 中`Select`的用法
+下面以模块`test-vona`为例，讲解 CRUD 中`Select`的用法。
 
 ## 基本查询
 
-模块`test-vona`中定义了 Model`Post`，可以这样查询`Post`的数据
+模块`test-vona`中定义了 Model`Post`，可以这样查询`Post`的数据。
 
 ### 1. select
 
@@ -137,7 +137,7 @@ async select() {
 
 ## joins
 
-可以通过`joins`关联多个数据表
+可以通过`joins`关联多个数据表。
 
 ```typescript
 async select() {
@@ -173,7 +173,7 @@ async select() {
 class ModelPost {}
 ```
 
-在一个大型的业务系统中，Model 可能并不会定义所有的关系。那么，也可以通过参数`_modelJoins`指定需要关联的 Models，系统从这些 Models 中提取对应的数据表
+在一个大型的业务系统中，Model 可能并不会定义所有的关系。那么，也可以通过参数`_modelJoins`指定需要关联的 Models，系统从这些 Models 中提取对应的数据表。
 
 比如，模块`test-vona`中定义了 model`order`。那么，可以这样使用`joins`:
 

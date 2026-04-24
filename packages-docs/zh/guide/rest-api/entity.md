@@ -27,7 +27,7 @@ export class EntityStudent extends EntityBase {}
 
 ## 数据表名
 
-Vona 是模块化系统，不同的模块可以独立管理自身的数据表。为了避免表名的冲突，Vona 约定了数据表名默认的组合机制。当然，你也可以提供自己的表名，但需要自行评估表名冲突的风险
+Vona 是模块化系统，不同的模块可以独立管理自身的数据表。为了避免表名的冲突，Vona 约定了数据表名默认的组合机制。当然，你也可以提供自己的表名，但需要自行评估表名冲突的风险。
 
 ### 1. 常规格式
 
@@ -39,15 +39,15 @@ tableName = moduleName + entityName
 
 ### 2. 简化规则
 
-如果`entityName`与`moduleName`重名，那么自动去除重复部分
+如果`entityName`与`moduleName`重名，那么自动去除重复部分。
 
 比如，模块 demo-student 的 entity `student`，对应的数据表名是：`demoStudent`
 
 ## @Api.field
 
-一般而言，在定义字段时，需要指定字段的类型、验证规则、Swagger/Openapi 元数据
+一般而言，在定义字段时，需要指定字段的类型、验证规则、Swagger/Openapi 元数据。
 
-在 Entity 中只需要使用`@Api.field`装饰器即可提供以上所有信息，从而让代码更加简洁、直观
+在 Entity 中只需要使用`@Api.field`装饰器即可提供以上所有信息，从而让代码更加简洁、直观。
 
 `@Api.field`装饰器的参数使用机制，与 Controller 请求参数类似，参见：
 
@@ -58,7 +58,7 @@ tableName = moduleName + entityName
 
 ### 1. 自动推断Zod Schema：基础类型/Dto/Entity
 
-如果字段类型是`基础类型/Dto/Entity`，那么，系统就会自动推断出对应的 Zod Schema，并自动生成 Swagger/Openapi
+如果字段类型是`基础类型/Dto/Entity`，那么，系统就会自动推断出对应的 Zod Schema，并自动生成 Swagger/Openapi。
 
 - 举例：`string`
 
@@ -94,7 +94,7 @@ class EntityStudent {
 
 ### 2. 指定Zod Schema
 
-还可以显式的指定 Zod Schema，并自动生成 Swagger/Openapi
+还可以显式的指定 Zod Schema，并自动生成 Swagger/Openapi。
 
 - 举例：`number，>=18`
 
@@ -109,7 +109,7 @@ class EntityStudent {
 
 ### 3. 扩展Zod Schema的属性
 
-还可以在现有的 Zod Schema 基础之上扩展新的属性
+还可以在现有的 Zod Schema 基础之上扩展新的属性。
 
 - 举例：`number，可选，默认值为18`
 
@@ -142,7 +142,7 @@ class EntityStudent {
 
 ### 4. 特殊工具：Array
 
-对于 Array 类型的参数，Vona 也提供了便利的工具
+对于 Array 类型的参数，Vona 也提供了便利的工具。
 
 - 举例：`number[]`
 
@@ -175,11 +175,11 @@ class EntityStudent {
 
 ![](../../assets/img/openapi/openapi-22.png)
 
-这些用于扩展 Zod Schema 的工具方法都放入装饰器分组`v`中，从而减轻心智负担
+这些用于扩展 Zod Schema 的工具方法都放入装饰器分组`v`中，从而减轻心智负担。
 
 ## Swagger/Openapi
 
-Vona 还提供了许多扩展工具，用于设置与 Openapi 相关的元数据
+Vona 还提供了许多扩展工具，用于设置与 Openapi 相关的元数据。
 
 | 名称          | 说明        |
 | ------------- | ----------- |
@@ -205,7 +205,7 @@ class EntityStudent {
 
 ### 2. 举例：v.openapi
 
-可以使用`v.openapi`一次设置更多的元数据
+可以使用`v.openapi`一次设置更多的元数据。
 
 `title='Name', example='Tom'`
 
@@ -244,7 +244,7 @@ export default {
 
 ### 2. 使用$locale
 
-使用`$locale`方法进行语言翻译，支持语言资源的类型自动提示
+使用`$locale`方法进行语言翻译，支持语言资源的类型自动提示。
 
 ```typescript
 import { $locale } from '../.metadata/locales.ts';
@@ -273,7 +273,7 @@ import { $locale } from '../.metadata/locales.ts';
 
 ### 1. 举例：openapi
 
-为 entity 提供 description 信息，从而在 Swagger/Openapi 中显示
+为 entity 提供 description 信息，从而在 Swagger/Openapi 中显示。
 
 ```typescript
 @Entity({
@@ -327,7 +327,7 @@ class EntityStudent {}
 
 ## App Config
 
-可以在 App Config 中配置 Entity options
+可以在 App Config 中配置 Entity options。
 
 `src/backend/config/config/config.ts`
 
@@ -350,7 +350,7 @@ config.onions = {
 
 ## 基类：EntityBase
 
-默认情况下，entity 继承自基类`EntityBase`。EntityBase 内置提供了几个常用字段。可以根据业务需要实现自己的基类
+默认情况下，entity 继承自基类`EntityBase`。EntityBase 内置提供了几个常用字段。可以根据业务需要实现自己的基类。
 
 | 名称      | 类型          | 说明                                    |
 | --------- | ------------- | --------------------------------------- |
@@ -362,7 +362,7 @@ config.onions = {
 
 ## id: TableIdentity
 
-关键字段`id`使用`TableIdentity`类型，从而支持任何规模的业务系统。当使用`int64`作为数据库字段类型时，从数据库读取出来的值是`string`类型
+关键字段`id`使用`TableIdentity`类型，从而支持任何规模的业务系统。当使用`int64`作为数据库字段类型时，从数据库读取出来的值是`string`类型。
 
 ```typescript
 export type TableIdentity = string | number;

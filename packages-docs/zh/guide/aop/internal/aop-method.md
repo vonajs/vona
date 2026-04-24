@@ -1,10 +1,10 @@
 # AOP Method
 
-`AOP Method`允许我们直接在 Class Method 上通过装饰器切入逻辑
+`AOP Method`允许我们直接在 Class Method 上通过装饰器切入逻辑。
 
 ## 创建AOP Method
 
-比如，在模块 demo-student 中创建一个 AOP Method: `log`，用于输出方法的执行时长
+比如，在模块 demo-student 中创建一个 AOP Method: `log`，用于输出方法的执行时长。
 
 ### 1. Cli命令
 
@@ -40,7 +40,7 @@ class AopMethodLog {
 
 ## 使用AOP Method
 
-可以在任何 Class 的任何方法上使用 AOP Method
+可以在任何 Class 的任何方法上使用 AOP Method。
 
 ### 1. 标注Controller方法
 
@@ -71,9 +71,9 @@ class ServiceStudent {
 
 ## AOP Method参数
 
-可以为 AOP Method 定义参数，通过参数更灵活的配置 AOP Method 逻辑
+可以为 AOP Method 定义参数，通过参数更灵活的配置 AOP Method 逻辑。
 
-比如，为 log AOP Method 定义`prefix`参数，用于控制输出格式
+比如，为 log AOP Method 定义`prefix`参数，用于控制输出格式。
 
 ### 1. 定义参数类型
 
@@ -115,7 +115,7 @@ class AopMethodLog {
 
 ### 4. 使用时指定参数
 
-可以针对某个 Class Method 单独指定 AOP Method 的参数
+可以针对某个 Class Method 单独指定 AOP Method 的参数。
 
 ```diff
 class ControllerStudent {
@@ -129,7 +129,7 @@ class ControllerStudent {
 
 ### 5. App Config
 
-可以在 App Config 中配置 AOP Method 参数
+可以在 App Config 中配置 AOP Method 参数。
 
 `src/backend/config/config/config.ts`
 
@@ -181,7 +181,7 @@ config.onions = {
 
 ### 2. Meta
 
-可以让 AOP Method 在指定的运行环境生效
+可以让 AOP Method 在指定的运行环境生效。
 
 | 名称   | 类型             | 说明                                                                   |
 | ------ | ---------------- | ---------------------------------------------------------------------- |

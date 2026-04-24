@@ -40,7 +40,7 @@ $ npm run cov
 
 ## tsc
 
-执行类型校验
+执行类型校验。
 
 ```bash
 $ npm run tsc
@@ -48,7 +48,7 @@ $ npm run tsc
 
 ## play
 
-自动运行 Playground 源码文件，如果文件不存在则自动创建
+自动运行 Playground 源码文件，如果文件不存在则自动创建。
 
 ```bash
 $ vona play
@@ -57,7 +57,7 @@ $ vona play -a
 
 ## db:reset
 
-重建数据库
+重建数据库。
 
 ```bash
 $ npm run db:reset

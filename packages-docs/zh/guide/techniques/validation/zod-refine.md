@@ -1,10 +1,10 @@
 # Zod Refine
 
-可以使用`Zod Refine`实现更灵活的验证规则
+可以使用`Zod Refine`实现更灵活的验证规则。
 
 ## 创建Zod Refine
 
-比如，在模块 demo-student 中创建一个 Zod Refine: `nameExists`，判断学生名是否已经存在
+比如，在模块 demo-student 中创建一个 Zod Refine: `nameExists`，判断学生名是否已经存在。
 
 ### 1. Cli命令
 
@@ -63,9 +63,9 @@ class ControllerStudent {
 
 ## Zod Refine参数
 
-可以为 Zod Refine 定义参数，通过参数更灵活的配置 Zod Refine 逻辑
+可以为 Zod Refine 定义参数，通过参数更灵活的配置 Zod Refine 逻辑。
 
-比如，为 `nameExists` zod refine 定义`errorMessage`参数，用于提供自定义错误消息
+比如，为 `nameExists` zod refine 定义`errorMessage`参数，用于提供自定义错误消息。
 
 ### 1. 定义参数类型
 
@@ -112,7 +112,7 @@ class ZodRefineNameExists {
 
 ### 4. 使用时指定参数
 
-可以在使用时指定 Zod Refine 参数
+可以在使用时指定 Zod Refine 参数。
 
 ```diff
 class ControllerStudent {
@@ -123,7 +123,7 @@ class ControllerStudent {
 
 ### 5. App Config
 
-可以在 App Config 中配置 Zod Refine 参数
+可以在 App Config 中配置 Zod Refine 参数。
 
 `src/backend/config/config/config.ts`
 

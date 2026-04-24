@@ -1,6 +1,6 @@
 # 启动项
 
-VonaJS 提供了`启动项`，允许在系统启动时或者实例初始化时，执行初始化逻辑
+VonaJS 提供了`启动项`，允许在系统启动时或者实例初始化时，执行初始化逻辑。
 
 ## 启动项分类
 
@@ -11,7 +11,7 @@ VonaJS 提供了两类启动项：
 
 ## 创建启动项
 
-比如，在模块 demo-student 中创建一个启动项: `log`，在系统启动时在控制台输出当前时间
+比如，在模块 demo-student 中创建一个启动项: `log`，在系统启动时在控制台输出当前时间。
 
 ### 1. Cli命令
 
@@ -40,7 +40,7 @@ export class StartupLog extends BeanBase implements IStartupExecute {
 
 ## 启动项参数
 
-可以为启动项配置参数
+可以为启动项配置参数。
 
 ```typescript
 @Startup({
@@ -69,7 +69,7 @@ export class StartupLog {}
 
 ## App Config
 
-可以在 App Config 中配置启动项参数
+可以在 App Config 中配置启动项参数。
 
 `src/backend/config/config/config.ts`
 
@@ -89,7 +89,7 @@ config.onions = {
 
 ## 启动项顺序
 
-由于启动项是默认加载并执行的，所以，VonaJS 提供了两个参数，用于控制启动项的加载顺序
+由于启动项是默认加载并执行的，所以，VonaJS 提供了两个参数，用于控制启动项的加载顺序。
 
 ### 1. dependencies
 
@@ -134,7 +134,7 @@ config.onions = {
 
 ### 2. Meta
 
-可以让启动项在指定的运行环境生效
+可以让启动项在指定的运行环境生效。
 
 | 名称   | 类型             | 说明                                                                   |
 | ------ | ---------------- | ---------------------------------------------------------------------- |
@@ -155,7 +155,7 @@ class StartupLog {}
 
 ## 查看当前生效的启动项清单
 
-可以直接输出当前生效的启动项清单
+可以直接输出当前生效的启动项清单。
 
 ```diff
 class ControllerStudent {

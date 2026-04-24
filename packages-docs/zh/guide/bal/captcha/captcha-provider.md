@@ -1,6 +1,6 @@
 # Captcha Provider
 
-这里对模块`captcha-simple`的核心源码进行解析，从而说明如何开发一个新的 Captcha Provider
+这里对模块`captcha-simple`的核心源码进行解析，从而说明如何开发一个新的 Captcha Provider。
 
 ## 创建Captcha Provider
 
@@ -65,7 +65,7 @@ class CaptchaProviderImageText {
 
 ## App Config
 
-可以在 App Config 中配置 Captcha Provider 参数
+可以在 App Config 中配置 Captcha Provider 参数。
 
 `src/backend/config/config/config.ts`
 

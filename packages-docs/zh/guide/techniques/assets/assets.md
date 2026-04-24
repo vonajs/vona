@@ -1,12 +1,12 @@
 # Assets
 
-在 VonaJS 框架中，每个模块都可以提供 Assets，供服务端使用
+在 VonaJS 框架中，每个模块都可以提供 Assets，供服务端使用。
 
 - `多场景`：可以针对不同的场景、不同的用途提供不同类型的 Assets
 
 ## 初始化代码骨架
 
-比如，创建一个新的场景`templates`，其中包含多个模版文件
+比如，创建一个新的场景`templates`，其中包含多个模版文件。
 
 ### 1. Cli命令
 
@@ -47,7 +47,7 @@ src/module/demo-student/assets/templates/list.ejs
 /path/to/project/dist/normal/assets/templates/demo-student/list.ejs
 ```
 
-可以使用`meta.asset`通过类型化的方式获取 Assets 的文件路径
+可以使用`meta.asset`通过类型化的方式获取 Assets 的文件路径。
 
 ## 创建meta.asset
 

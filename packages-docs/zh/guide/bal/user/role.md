@@ -2,7 +2,7 @@
 
 ## a-user: IRole
 
-模块`a-user`提供了接口`IRole`，约定了 Role 的基础字段
+模块`a-user`提供了接口`IRole`，约定了 Role 的基础字段。
 
 ```typescript
 export interface IRole {
@@ -13,7 +13,7 @@ export interface IRole {
 
 ## a-user: bean.role
 
-模块`a-user`提供了全局 Bean `bean.role`，为业务提供了通用的调用规范
+模块`a-user`提供了全局 Bean `bean.role`，为业务提供了通用的调用规范。
 
 ```typescript
 // find role
@@ -33,7 +33,7 @@ const roles = await this.bean.role.findAllByUserId(userId);
 
 ## home-user适配器: ServiceRoleAdapter
 
-模块`home-user`提供了适配器`ServiceRoleAdapter`，允许我们定制角色的操作逻辑。业务代码调用`bean.role`，`bean.role`调用`ServiceRoleAdapter`，从而实现了`开箱即用`与`灵活定制`的完美结合
+模块`home-user`提供了适配器`ServiceRoleAdapter`，允许我们定制角色的操作逻辑。业务代码调用`bean.role`，`bean.role`调用`ServiceRoleAdapter`，从而实现了`开箱即用`与`灵活定制`的完美结合。
 
 `src/suite/a-home/modules/home-user/src/service/roleAdapter.ts`
 
@@ -57,7 +57,7 @@ class ControllerStudent {
 
 ## 角色: admin
 
-在模块`home-user`的`meta.version`中自动创建`admin`角色
+在模块`home-user`的`meta.version`中自动创建`admin`角色。
 
 - 参见：[迁移与变更](../../rest-api/version.md)
 

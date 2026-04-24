@@ -1,6 +1,6 @@
 # 与Zova整合
 
-当使用`cabloy-basic`模版创建 Vona 项目时，已经内置了最新版的 Zova JS bundle。因此，可以直接渲染 CRUD 管理页面。我们也可以创建 Zova 前端项目，与 Vona 后端整合，从而开发更高级的全栈系统
+当使用`cabloy-basic`模版创建 Vona 项目时，已经内置了最新版的 Zova JS bundle。因此，可以直接渲染 CRUD 管理页面。我们也可以创建 Zova 前端项目，与 Vona 后端整合，从而开发更高级的全栈系统。
 
 ## 1. 克隆Zova源码
 
@@ -51,7 +51,7 @@ $ npm run build:rest:cabloyBasicAdmin
 
 ## 6. 启动开发服务
 
-可以直接启动 Zova 开发服务，与 Vona 后端进行联调
+可以直接启动 Zova 开发服务，与 Vona 后端进行联调。
 
 ```bash
 $ npm run dev:ssr:cabloyBasicAdmin

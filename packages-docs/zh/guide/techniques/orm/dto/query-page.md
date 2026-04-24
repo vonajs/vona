@@ -1,6 +1,6 @@
 # $Dto.queryPage/DtoQueryPageBase
 
-`$Dto.queryPage/DtoQueryPageBase`用于标注带分页的 Query 参数
+`$Dto.queryPage/DtoQueryPageBase`用于标注带分页的 Query 参数。
 
 ## DtoQueryPageBase的用法
 

@@ -1,10 +1,10 @@
 # Zod Transform
 
-可以使用`Zod Transform`实现更灵活的转换逻辑
+可以使用`Zod Transform`实现更灵活的转换逻辑。
 
 ## 创建Zod Transform
 
-比如，在模块 demo-student 中创建一个 Zod Transform: `nameCapitalize`，将学生名的首字符改为大写
+比如，在模块 demo-student 中创建一个 Zod Transform: `nameCapitalize`，将学生名的首字符改为大写。
 
 ### 1. Cli命令
 
@@ -64,9 +64,9 @@ class ControllerStudent {
 
 ## Zod Transform参数
 
-可以为 Zod Transform 定义参数，通过参数更灵活的配置 Zod Transform 逻辑
+可以为 Zod Transform 定义参数，通过参数更灵活的配置 Zod Transform 逻辑。
 
-比如，为 `nameCapitalize` zod transform 定义`lowercase`参数，用于指定是否将首字符转为小写
+比如，为 `nameCapitalize` zod transform 定义`lowercase`参数，用于指定是否将首字符转为小写。
 
 ### 1. 定义参数类型
 
@@ -113,7 +113,7 @@ class ZodTransformNameCapitalize {
 
 ### 4. 使用时指定参数
 
-可以在使用时指定 Zod Transform 参数
+可以在使用时指定 Zod Transform 参数。
 
 ```diff
 class ControllerStudent {
@@ -124,7 +124,7 @@ class ControllerStudent {
 
 ### 5. App Config
 
-可以在 App Config 中配置 Zod Transform 参数
+可以在 App Config 中配置 Zod Transform 参数。
 
 `src/backend/config/config/config.ts`
 

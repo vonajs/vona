@@ -2,7 +2,7 @@
 
 ## 创建守卫
 
-比如，在模块 demo-student 中创建一个局部守卫: `admin`，用于判断当前用户名是否为`admin`，如果不是则抛出异常
+比如，在模块 demo-student 中创建一个局部守卫: `admin`，用于判断当前用户名是否为`admin`，如果不是则抛出异常。
 
 ### 1. Cli命令
 
@@ -54,7 +54,7 @@ class ControllerStudent {
 
 ### 2. 标注控制器类
 
-可以针对控制器类使用守卫，从而类中所有方法都会应用此守卫
+可以针对控制器类使用守卫，从而类中所有方法都会应用此守卫。
 
 ```diff
 import { Aspect } from 'vona-module-a-aspect';
@@ -69,9 +69,9 @@ class ControllerStudent {
 
 ## 守卫参数
 
-可以为守卫定义参数，通过参数更灵活的配置守卫逻辑
+可以为守卫定义参数，通过参数更灵活的配置守卫逻辑。
 
-比如，为 admin 守卫定义`name`参数，用于控制需要判断的用户名
+比如，为 admin 守卫定义`name`参数，用于控制需要判断的用户名。
 
 ### 1. 定义参数类型
 
@@ -112,7 +112,7 @@ export class GuardAdmin extends BeanBase implements IGuardExecute {
 
 ### 4. 使用时指定参数
 
-可以针对某个 API 单独指定局部守卫的参数
+可以针对某个 API 单独指定局部守卫的参数。
 
 ```diff
 class ControllerStudent {
@@ -126,7 +126,7 @@ class ControllerStudent {
 
 ### 5. App Config
 
-可以在 App Config 中配置守卫参数
+可以在 App Config 中配置守卫参数。
 
 `src/backend/config/config/config.ts`
 

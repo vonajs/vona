@@ -1,6 +1,6 @@
 # 外部切面
 
-在不改变 Class 源码的前提下，从外部为任何 Class 的任何方法切入逻辑
+在不改变 Class 源码的前提下，从外部为任何 Class 的任何方法切入逻辑。
 
 ## 创建目标Class
 
@@ -39,7 +39,7 @@ export class ServiceTest extends BeanBase {
 
 ## 创建外部切面
 
-接下来，创建一个外部切面`log`，为 Class `ServiceTest`的属性和方法分别提供扩展逻辑
+接下来，创建一个外部切面`log`，为 Class `ServiceTest`的属性和方法分别提供扩展逻辑。
 
 ### 1. Cli命令
 
@@ -72,7 +72,7 @@ export class AopLog extends BeanAopBase {}
 
 ## 切面：同步方法
 
-为`ServiceTest#actionSync`输出运行时长
+为`ServiceTest#actionSync`输出运行时长。
 
 在 VSCode 编辑器中，输入代码片段`aopactionsync`，自动生成代码骨架:
 
@@ -82,7 +82,7 @@ action: AopAction<ClassSome, 'action'> = (_args, next, _receiver) => {
 };
 ```
 
-调整代码，然后添加 log 逻辑
+调整代码，然后添加 log 逻辑。
 
 ```typescript
 actionSync: AopAction<ServiceTest, 'actionSync'> = (_args, next, _receiver) => {
@@ -98,7 +98,7 @@ actionSync: AopAction<ServiceTest, 'actionSync'> = (_args, next, _receiver) => {
 
 ## 切面：异步方法
 
-为`ServiceTest#actionAsync`输出运行时长
+为`ServiceTest#actionAsync`输出运行时长。
 
 在 VSCode 编辑器中，输入代码片段`aopaction`，自动生成代码骨架:
 
@@ -108,7 +108,7 @@ action: AopAction<ClassSome, 'action'> = async (_args, next, _receiver) => {
 };
 ```
 
-调整代码，然后添加 log 逻辑
+调整代码，然后添加 log 逻辑。
 
 ```typescript
 actionAsync: AopAction<ServiceTest, 'actionAsync'> = async (_args, next, _receiver) => {
@@ -124,7 +124,7 @@ actionAsync: AopAction<ServiceTest, 'actionAsync'> = async (_args, next, _receiv
 
 ## 切面：getter
 
-为`ServiceTest#get name`输出运行时长
+为`ServiceTest#get name`输出运行时长。
 
 在 VSCode 编辑器中，输入代码片段`aopgetter`，自动生成代码骨架:
 
@@ -135,7 +135,7 @@ protected __get_xxx__: AopActionGetter<ClassSome, 'xxx'> = function (next, _rece
 };
 ```
 
-调整代码，然后添加 log 逻辑
+调整代码，然后添加 log 逻辑。
 
 ```typescript
 protected __get_name__: AopActionGetter<ServiceTest, 'name'> = function (next, _receiver) {
@@ -151,7 +151,7 @@ protected __get_name__: AopActionGetter<ServiceTest, 'name'> = function (next, _
 
 ## 切面：setter
 
-为`ServiceTest#set name`输出运行时长
+为`ServiceTest#set name`输出运行时长。
 
 在 VSCode 编辑器中，输入代码片段`aopsetter`，自动生成代码骨架:
 
@@ -161,7 +161,7 @@ protected __set_xxx__: AopActionSetter<ClassSome, 'xxx'> = function (value, next
 }
 ```
 
-调整代码，然后添加 log 逻辑
+调整代码，然后添加 log 逻辑。
 
 ```typescript
 protected __set_name__: AopActionSetter<ServiceTest, 'name'> = function (value, next, _receiver) {
@@ -177,7 +177,7 @@ protected __set_name__: AopActionSetter<ServiceTest, 'name'> = function (value, 
 
 ## 切面：`__init__`
 
-为`ServiceTest#__init__`输出运行时长
+为`ServiceTest#__init__`输出运行时长。
 
 在 VSCode 编辑器中，输入代码片段`aopinit`，自动生成代码骨架:
 
@@ -187,7 +187,7 @@ protected __init__: AopActionInit<ClassSome> = (_args, next, _receiver) => {
 };
 ```
 
-调整代码，然后添加 log 逻辑
+调整代码，然后添加 log 逻辑。
 
 ```typescript
 protected __init__: AopActionInit<ServiceTest> = (_args, next, _receiver) => {
@@ -202,7 +202,7 @@ protected __init__: AopActionInit<ServiceTest> = (_args, next, _receiver) => {
 
 ## 切面：`__dispose__`
 
-为`ServiceTest#__dispose__`输出运行时长
+为`ServiceTest#__dispose__`输出运行时长。
 
 在 VSCode 编辑器中，输入代码片段`aopdispose`，自动生成代码骨架:
 
@@ -212,7 +212,7 @@ protected __dispose__: AopActionDispose<ClassSome> = async (_args, next, _receiv
 };
 ```
 
-调整代码，然后添加 log 逻辑
+调整代码，然后添加 log 逻辑。
 
 ```typescript
 protected __dispose__: AopActionDispose<ServiceTest> = async (_args, next, _receiver) => {
@@ -227,7 +227,7 @@ protected __dispose__: AopActionDispose<ServiceTest> = async (_args, next, _rece
 
 ## 切面：`__get__`
 
-为`ServiceTest`扩展魔术方法
+为`ServiceTest`扩展魔术方法。
 
 - 参见: [魔术方法](../internal/magic-method.md)
 
@@ -252,7 +252,7 @@ protected __get__: AopActionGet<ServiceTest> = (prop, next, _receiver) => {
 
 - `__get__`: 约定的魔术方法名称
 
-通过接口类型合并的机制为颜色提供类型定义
+通过接口类型合并的机制为颜色提供类型定义。
 
 ```typescript
 declare module 'vona-module-demo-student' {
@@ -264,7 +264,7 @@ declare module 'vona-module-demo-student' {
 
 ## 切面：`__set__`
 
-为`ServiceTest`扩展魔术方法
+为`ServiceTest`扩展魔术方法。
 
 - 参见: [魔术方法](../internal/magic-method.md)
 
@@ -276,7 +276,7 @@ protected __set__: AopActionSet<ClassSome> = (_prop, value, next, _receiver) => 
 };
 ```
 
-调整代码，为自定义字段`red`设置值
+调整代码，为自定义字段`red`设置值。
 
 ```typescript
 private _colorRed: string | undefined;
@@ -306,7 +306,7 @@ protected __get__: AopActionGet<ServiceTest> = (prop, next, _receiver) => {
 
 ## 切面：`__method__`
 
-为`ServiceTest`的任何方法扩展逻辑
+为`ServiceTest`的任何方法扩展逻辑。
 
 在 VSCode 编辑器中，输入代码片段`aopmethod`，自动生成代码骨架:
 
@@ -316,7 +316,7 @@ protected __method__: AopActionMethod<ClassSome> = (_method, _args, next, _recei
 };
 ```
 
-调整代码，然后为方法`actionSync`和`actionAsync`添加 log 逻辑
+调整代码，然后为方法`actionSync`和`actionAsync`添加 log 逻辑。
 
 ```typescript
 protected __method__: AopActionMethod<ServiceTest> = (method, _args, next, _receiver) => {
@@ -344,7 +344,7 @@ protected __method__: AopActionMethod<ServiceTest> = (method, _args, next, _rece
 
 ## AOP顺序
 
-针对同一个目标 Class，可以关联多个 AOP。所以，VonaJS 提供了两个参数，用于控制 AOP 的执行顺序
+针对同一个目标 Class，可以关联多个 AOP。所以，VonaJS 提供了两个参数，用于控制 AOP 的执行顺序。
 
 ### 1. dependencies
 
@@ -391,7 +391,7 @@ config.onions = {
 
 ### 2. Meta
 
-可以让 AOP 在指定的运行环境生效
+可以让 AOP 在指定的运行环境生效。
 
 | 名称   | 类型             | 说明                                                                   |
 | ------ | ---------------- | ---------------------------------------------------------------------- |
@@ -412,7 +412,7 @@ class AopLog {}
 
 ## 查看当前生效的AOP清单
 
-可以直接在目标 Class action 中输出当前生效的 AOP 清单
+可以直接在目标 Class action 中输出当前生效的 AOP 清单。
 
 ```diff
 class ServiceTest {

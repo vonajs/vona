@@ -1,6 +1,6 @@
 # Upload文件上传
 
-VonaJS 基于[busboy](https://github.com/mscdex/busboy)实现了文件上传的能力
+VonaJS 基于[busboy](https://github.com/mscdex/busboy)实现了文件上传的能力。
 
 ## 单文件上传
 
@@ -52,9 +52,9 @@ class ControllerStudent {
 
 ## 表单字段
 
-在上传文件的同时，也可以附加多个表单字段
+在上传文件的同时，也可以附加多个表单字段。
 
-对于数组类型的字段，前端在构造上传数据时，采用的方式不同，就需要使用不同的参数装饰器
+对于数组类型的字段，前端在构造上传数据时，采用的方式不同，就需要使用不同的参数装饰器。
 
 ### 1. @Arg.field
 

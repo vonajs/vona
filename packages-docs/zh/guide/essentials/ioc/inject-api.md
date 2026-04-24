@@ -1,6 +1,6 @@
 # 依赖查找(API)
 
-Vona 还提供了一组 API，使我们可以更加灵活的查找 bean 实例
+Vona 还提供了一组 API，使我们可以更加灵活的查找 bean 实例。
 
 ## \_getBean
 
@@ -16,7 +16,7 @@ class ControllerStudent {
 }
 ```
 
-this.bean === this.app.bean，就是 app 容器
+this.bean === this.app.bean，就是 app 容器。
 
 ### 2. 基于 Bean 标识查找
 
@@ -45,7 +45,7 @@ class ControllerStudent {
 
 ### 4. 请求级别
 
-如果要创建请求级别的 Bean 实例，那么，只需要调用 ctx 容器的`_getBean`方法
+如果要创建请求级别的 Bean 实例，那么，只需要调用 ctx 容器的`_getBean`方法。
 
 ```typescript
 class ControllerStudent {

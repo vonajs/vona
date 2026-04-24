@@ -1,8 +1,8 @@
 # 基于关系的聚合
 
-下面以模块`test-vona`为例，讲解`基于关系的聚合`的用法
+下面以模块`test-vona`为例，讲解`基于关系的聚合`的用法。
 
-比如，Model User 和 Model Post 是`1:n`的关系。在查询 User 数据时，可以基于关系查询相应 Post 的聚合数据
+比如，Model User 和 Model Post 是`1:n`的关系。在查询 User 数据时，可以基于关系查询相应 Post 的聚合数据。
 
 ## 动态关系
 
@@ -24,7 +24,7 @@ class ServiceUser {
 }
 ```
 
-Vona ORM 自动推断出`users`的类型
+Vona ORM 自动推断出`users`的类型。
 
 ![](../../../assets/img/orm/aggr-group/aggr-group-3.png)
 
@@ -72,13 +72,13 @@ class ServiceUser {
 }
 ```
 
-Vona ORM 自动推断出`users`的类型
+Vona ORM 自动推断出`users`的类型。
 
 ![](../../../assets/img/orm/aggr-group/aggr-group-4.png)
 
 ## autoload
 
-也可以将静态关系设为`autoload: true`，从而实现自动加载，也可以让代码进一步简化
+也可以将静态关系设为`autoload: true`，从而实现自动加载，也可以让代码进一步简化。
 
 ### 1. 定义关系
 

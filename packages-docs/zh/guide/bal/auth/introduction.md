@@ -1,6 +1,6 @@
 # 认证体系
 
-模块`a-auth`提供了通用的认证体系，使用`Auth Provider`支持各种认证方式
+模块`a-auth`提供了通用的认证体系，使用`Auth Provider`支持各种认证方式。
 
 ## 特性
 
@@ -11,7 +11,7 @@
 
 ## bean.auth
 
-模块`a-auth`提供了全局 Bean `bean.auth`，可以通过统一的方式使用所有 Provider 提供的认证能力
+模块`a-auth`提供了全局 Bean `bean.auth`，可以通过统一的方式使用所有 Provider 提供的认证能力。
 
 - 举例：`用户名/密码`认证
 
@@ -55,7 +55,7 @@ class ControllerStudent {
 
 ## 设置OAuth认证凭据
 
-仍以`GitHub`为例，在 App Config 中设置认证凭据
+仍以`GitHub`为例，在 App Config 中设置认证凭据。
 
 `src/backend/config/config/config.ts`
 
@@ -125,9 +125,9 @@ config.onions = {
 
 ## OAuth认证Callback URL
 
-在使用 OAuth 认证时，需要在 OAuth 网站提供系统的 Callback URL
+在使用 OAuth 认证时，需要在 OAuth 网站提供系统的 Callback URL。
 
-VonaJS 提供了统一的 Callback URL 值，并且在开发阶段直接输出在控制台，方便我们直接使用
+VonaJS 提供了统一的 Callback URL 值，并且在开发阶段直接输出在控制台，方便我们直接使用。
 
 ![](../../../assets/img/bal/auth-1.png)
 
@@ -186,7 +186,7 @@ async authenticate<T extends keyof IAuthProviderRecord>(
 
 ## Passport API
 
-模块`home-user`提供了一组`开箱即用`的 Passport API，也可以在此基础之上扩展自定义的业务逻辑
+模块`home-user`提供了一组`开箱即用`的 Passport API，也可以在此基础之上扩展自定义的业务逻辑。
 
 `src/suite/a-home/modules/home-user/src/controller/passport.ts`
 

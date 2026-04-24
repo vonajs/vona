@@ -1,6 +1,6 @@
 # 扩展数据
 
-在使用`push/pushAsync`方法推送任务时，可以传入扩展数据
+在使用`push/pushAsync`方法推送任务时，可以传入扩展数据。
 
 ## 举例
 
@@ -36,4 +36,4 @@ class QueueAdd {
 
 ## Headers透传
 
-VonaJS 提供了一个约定：对于以`x-vona-data-`为前缀的 Headers，会自动追加至`扩展数据`，从而透传至任务中
+VonaJS 提供了一个约定：对于以`x-vona-data-`为前缀的 Headers，会自动追加至`扩展数据`，从而透传至任务中。

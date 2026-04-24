@@ -1,6 +1,6 @@
 # Zod整合
 
-VonaJS 内置了大量参数管道，基于[Zod](https://zod.dev) 提供了非常简洁、灵活的机制对请求参数作校验
+VonaJS 内置了大量参数管道，基于[Zod](https://zod.dev) 提供了非常简洁、灵活的机制对请求参数作校验。
 
 - 参见: [参数校验](../../techniques/validation/introduction.md)
 
@@ -16,7 +16,7 @@ class ControllerStudent {
 }
 ```
 
-只需设置`id`的类型为`number`即可
+只需设置`id`的类型为`number`即可。
 
 也可以明确指定 Zod Schema `z.number()`
 

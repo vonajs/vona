@@ -1,6 +1,6 @@
 # $Dto.update
 
-`$Dto.update`用于标注 Update 参数
+`$Dto.update`用于标注 Update 参数。
 
 ## 参数
 
@@ -22,11 +22,11 @@ $Dto.update(() => ModelOrder, { columns: ['orderNo', 'remark'] });
 
 ## 2. 静态关系
 
-以 Order/Product 为例，演示`1:n`关系
+以 Order/Product 为例，演示`1:n`关系。
 
 ### Model关系定义
 
-先在 Model Order 中定义与 Model Product 的`1:n`关系
+先在 Model Order 中定义与 Model Product 的`1:n`关系。
 
 ```typescript
 @Model({

@@ -1,6 +1,6 @@
 # 迁移与变更
 
-Vona 提供了与众不同的迁移机制，适应大型项目的开发与持续迭代
+Vona 提供了与众不同的迁移机制，适应大型项目的开发与持续迭代。
 
 ## 特性
 
@@ -13,7 +13,7 @@ Vona 提供了与众不同的迁移机制，适应大型项目的开发与持续
 
 ## 定义数据版本
 
-在模块的`package.json`中配置模块的当前数据版本
+在模块的`package.json`中配置模块的当前数据版本。
 
 `src/module/demo-student/package.json`
 
@@ -30,7 +30,7 @@ Vona 提供了与众不同的迁移机制，适应大型项目的开发与持续
 
 ## 创建meta.version
 
-Vona 使用 Bean `meta.version`统一管理模块的迁移代码
+Vona 使用 Bean `meta.version`统一管理模块的迁移代码。
 
 ### 1. Cli命令
 
@@ -53,7 +53,7 @@ export class MetaVersion extends BeanBase {}
 
 ## 变更场景
 
-Vona 提供了三个变更场景，可以根据业务需求，继承相应的接口，并实现约定的方法即可
+Vona 提供了三个变更场景，可以根据业务需求，继承相应的接口，并实现约定的方法即可。
 
 | 场景   | 接口               | 方法   | 说明                                           |
 | ------ | ------------------ | ------ | ---------------------------------------------- |
@@ -85,7 +85,7 @@ export class MetaVersion extends BeanBase implements IMetaVersionUpdate {
 
 Vona 底层采用 knex，更多细节，参见：[knex](https://knexjs.org/)
 
-为了让代码质量更高，更容易维护，还可以使用类型化的代码风格
+为了让代码质量更高，更容易维护，还可以使用类型化的代码风格。
 
 ```typescript
 @Meta()
@@ -105,7 +105,7 @@ export class MetaVersion extends BeanBase implements IMetaVersionUpdate {
 
 ## init：初始化数据
 
-比如，初始化一个学生数据
+比如，初始化一个学生数据。
 
 ```typescript
 @Meta()
@@ -135,11 +135,11 @@ export class MetaVersion extends BeanBase implements IMetaVersionInit {
 }
 ```
 
-其中`iid: 1`就是当前实例/租户的 Id。因此，如果有多个实例/租户，那么就会针对每个实例/租户执行一次`init`方法。因此，实例/租户的数据是隔离的
+其中`iid: 1`就是当前实例/租户的 Id。因此，如果有多个实例/租户，那么就会针对每个实例/租户执行一次`init`方法。因此，实例/租户的数据是隔离的。
 
 ## test：测试数据
 
-比如，添加一个学生数据，此数据只在测试环境中使用
+比如，添加一个学生数据，此数据只在测试环境中使用。
 
 ```typescript
 @Meta()
@@ -183,7 +183,7 @@ export class EntityBook {
 
 ### 3. 修改update/init/test
 
-根据需要，在`update/init/test`中编写迁移代码。在这里，仅需在`update`中创建新的数据表
+根据需要，在`update/init/test`中编写迁移代码。在这里，仅需在`update`中创建新的数据表。
 
 ```typescript
 @Meta()
@@ -205,7 +205,7 @@ export class MetaVersion extends BeanBase implements IMetaVersionUpdate {
 
 ### 4. 执行迁移代码
 
-当系统启动时，会自动检测模块是否需要变更，并且会自动执行迁移代码
+当系统启动时，会自动检测模块是否需要变更，并且会自动执行迁移代码。
 
 ```bash
 # 开发环境
@@ -218,18 +218,18 @@ $ npm run start
 
 ## 支持本地开发
 
-在本地开发时，针对当前的数据版本，需要频繁的更新数据库架构。那么，并不需要修改`fileVersion`，而是执行以下命令，让迁移代码生效
+在本地开发时，针对当前的数据版本，需要频繁的更新数据库架构。那么，并不需要修改`fileVersion`，而是执行以下命令，让迁移代码生效。
 
 ```bash
 $ npm run test
 ```
 
-当执行单元测试时，系统就会自动删除旧数据库，并创建一个新的数据库，从而会重新执行迁移代码，然后执行单元测试
+当执行单元测试时，系统就会自动删除旧数据库，并创建一个新的数据库，从而会重新执行迁移代码，然后执行单元测试。
 
 ```bash
 $ npm run db:reset
 ```
 
-此命令仅用于重新创建数据库，并重新执行迁移代码，不执行单元测试
+此命令仅用于重新创建数据库，并重新执行迁移代码，不执行单元测试。
 
 ![](../../assets/img/api/version-reset.png)

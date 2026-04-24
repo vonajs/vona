@@ -6,7 +6,7 @@
 
 ## 禁用日志输出
 
-可以针对某个 API 禁用某些 Error 的日志输出，下面以模块 demo-student 的 create 方法为例
+可以针对某个 API 禁用某些 Error 的日志输出，下面以模块 demo-student 的 create 方法为例。
 
 ### 1. 禁用内置Error
 
@@ -72,7 +72,7 @@ class ControllerStudent {
 
 ## App Config
 
-可以在 App Config 中配置过滤器参数，从而对所有 API 生效
+可以在 App Config 中配置过滤器参数，从而对所有 API 生效。
 
 `src/backend/config/config/config.ts`
 

@@ -1,6 +1,6 @@
 # Model
 
-模块可以单独提供自己的 Models
+模块可以单独提供自己的 Models。
 
 ## 创建Model
 
@@ -18,7 +18,7 @@ $ vona :create:bean model student --module=demo-student
 
 ## 本模块使用Model
 
-可以通过 Scope 实例获取模块的 Model
+可以通过 Scope 实例获取模块的 Model。
 
 ```diff
 class ServiceStudent {

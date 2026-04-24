@@ -25,9 +25,9 @@ export class DtoStudentCreate {}
 
 ## @Api.field
 
-一般而言，在定义字段时，需要指定字段的类型、验证规则、Swagger/Openapi 元数据
+一般而言，在定义字段时，需要指定字段的类型、验证规则、Swagger/Openapi 元数据。
 
-Dto 中`@Api.field`的使用方式与 Entity 一致
+Dto 中`@Api.field`的使用方式与 Entity 一致。
 
 - 参见：[Entity](./entity.md)
 
@@ -58,7 +58,7 @@ class DtoStudentCreate {
 
 ### 1. 举例：openapi
 
-为 dto 提供 description 信息，从而在 Swagger/Openapi 中显示
+为 dto 提供 description 信息，从而在 Swagger/Openapi 中显示。
 
 ```typescript
 @Dto({
@@ -87,7 +87,7 @@ export default {
 };
 ```
 
-使用`$locale`函数进行语言翻译
+使用`$locale`函数进行语言翻译。
 
 ```typescript
 import { $locale } from '../.metadata/locales.ts';
@@ -126,7 +126,7 @@ class DtoStudentCreate {}
 
 ## App Config
 
-可以在 App Config 中配置 Dto options
+可以在 App Config 中配置 Dto options。
 
 `src/backend/config/config/config.ts`
 
@@ -148,7 +148,7 @@ config.onions = {
 
 ## Mapped Class
 
-在上面为`DtoStudentCreate`定义了两个字段：`name`和`description`。事实上这两个字段在`EntityStudent`中也有定义。为了实现代码复用，提升开发效率，Vona 提供了 4 个 Mapped 工具函数，用于从现有 Class 中派生出目标 Class
+在上面为`DtoStudentCreate`定义了两个字段：`name`和`description`。事实上这两个字段在`EntityStudent`中也有定义。为了实现代码复用，提升开发效率，Vona 提供了 4 个 Mapped 工具函数，用于从现有 Class 中派生出目标 Class。
 
 ### 1. $Class.pick
 
@@ -190,7 +190,7 @@ class DtoStudentOther extends $Class.mixin(EntityStudent, DtoStudentCreate, DtoS
 
 ### 5. 组合
 
-可以将多个 Mapped 工具函数组合使用
+可以将多个 Mapped 工具函数组合使用。
 
 ```typescript
 class DtoStudentUpdate extends $Class.partial($Class.pick(EntityStudent, ['name', 'description'])) {}
@@ -198,6 +198,6 @@ class DtoStudentUpdate extends $Class.partial($Class.pick(EntityStudent, ['name'
 
 ## DTO推断与生成
 
-Vona ORM 提供 DTO 动态推断与生成能力，减少重复的类型定义工作，提升开发效率
+Vona ORM 提供 DTO 动态推断与生成能力，减少重复的类型定义工作，提升开发效率。
 
 - 参见：[DTO推断与生成](../techniques/orm/dto/introduction.md)

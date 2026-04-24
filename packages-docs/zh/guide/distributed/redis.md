@@ -1,6 +1,6 @@
 # Redis
 
-VonaJS 基于[ioredis](https://github.com/redis/node-redis)提供了强大而灵活的 Redis 客户端
+VonaJS 基于[ioredis](https://github.com/redis/node-redis)提供了强大而灵活的 Redis 客户端。
 
 ## App Config
 
@@ -57,9 +57,9 @@ REDIS_DEFAULT_DB = 0
 
 ## 独立配置
 
-所有分布式组件默认使用相同的 Redis 配置
+所有分布式组件默认使用相同的 Redis 配置。
 
-对于大型项目，可以为不同的组件提供独立的配置
+对于大型项目，可以为不同的组件提供独立的配置。
 
 `src/backend/config/config/config.ts`
 
@@ -87,7 +87,7 @@ config.redis = {
 
 ### 1. 添加类型定义
 
-采用接口合并机制添加新 Client 的类型定义，比如`order`，为订单业务提供独立的 Redis Client，使用独立的 Redis 服务，从而提升系统性能
+采用接口合并机制添加新 Client 的类型定义，比如`order`，为订单业务提供独立的 Redis Client，使用独立的 Redis 服务，从而提升系统性能。
 
 在 VSCode 编辑器中，输入代码片段`recordredisclient`，自动生成代码骨架:
 

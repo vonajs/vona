@@ -1,10 +1,10 @@
 # 通行证
 
-当用户访问后端 API 时，系统会校验 jwt token，如果校验通过就会创建一个通行证`Passport`。该通行证包含`当前用户`和`认证`等信息
+当用户访问后端 API 时，系统会校验 jwt token，如果校验通过就会创建一个通行证`Passport`。该通行证包含`当前用户`和`认证`等信息。
 
 ## a-user: IPassport
 
-模块`a-user`提供了接口`IPassport`，约定了 Passport 的基础字段
+模块`a-user`提供了接口`IPassport`，约定了 Passport 的基础字段。
 
 ```typescript
 export interface IPassport {
@@ -16,7 +16,7 @@ export interface IPassport {
 
 ## a-user: bean.passport
 
-模块`a-user`提供了全局 Bean `bean.passport`，为业务提供了通用的调用规范
+模块`a-user`提供了全局 Bean `bean.passport`，为业务提供了通用的调用规范。
 
 ```typescript
 // get the current passport
@@ -49,7 +49,7 @@ this.bean.passport.signinMock();
 
 ## home-user适配器: ServicePassportAdapter
 
-模块`home-user`提供了适配器`ServicePassportAdapter`，允许我们定制 Passport 的操作逻辑。业务代码调用`bean.passport`，`bean.passport`调用`ServicePassportAdapter`，从而实现了`开箱即用`与`灵活定制`的完美结合
+模块`home-user`提供了适配器`ServicePassportAdapter`，允许我们定制 Passport 的操作逻辑。业务代码调用`bean.passport`，`bean.passport`调用`ServicePassportAdapter`，从而实现了`开箱即用`与`灵活定制`的完美结合。
 
 `src/suite/a-home/modules/home-user/src/service/passportAdapter.ts`
 
@@ -86,7 +86,7 @@ class ControllerStudent {
 
 ## a-user: Passport装饰器
 
-模块`a-user`提供了一组 Passport 装饰器，用于对当前用户进行权限校验
+模块`a-user`提供了一组 Passport 装饰器，用于对当前用户进行权限校验。
 
 对于许多中小型项目，这套 Passport 装饰器足以应对需求。如需更高级的权限校验，可以自行开发`Guard`，参见：
 
@@ -115,7 +115,7 @@ import { Passport } from 'vona-module-a-user';
 
 ## home-user: Passport API
 
-模块`home-user`提供了一组`开箱即用`的 Passport API，也可以在此基础之上扩展自定义的业务逻辑
+模块`home-user`提供了一组`开箱即用`的 Passport API，也可以在此基础之上扩展自定义的业务逻辑。
 
 `src/suite/a-home/modules/home-user/src/controller/passport.ts`
 

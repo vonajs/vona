@@ -1,6 +1,6 @@
 # 广播
 
-可以向系统的多个工作进程发送广播，从而让每个工作进程执行业务逻辑
+可以向系统的多个工作进程发送广播，从而让每个工作进程执行业务逻辑。
 
 ## 创建广播
 
@@ -66,7 +66,7 @@ class ControllerStudent {
 
 ## 广播参数
 
-可以为广播配置参数
+可以为广播配置参数。
 
 ```typescript
 @Broadcast({
@@ -86,7 +86,7 @@ class BroadcastEcho {}
 
 ## App Config
 
-可以在 App Config 中配置广播参数
+可以在 App Config 中配置广播参数。
 
 `src/backend/config/config/config.ts`
 
@@ -104,7 +104,7 @@ config.onions = {
 
 ## 查看当前生效的广播清单
 
-可以直接输出当前生效的广播清单
+可以直接输出当前生效的广播清单。
 
 ```diff
 class ControllerStudent {

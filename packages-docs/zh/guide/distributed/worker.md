@@ -1,10 +1,10 @@
 # Worker
 
-VonaJS 采用的是分布式体系，允许多个工作进程同时提供服务。也支持在 Docker 环境中单进程执行
+VonaJS 采用的是分布式体系，允许多个工作进程同时提供服务。也支持在 Docker 环境中单进程执行。
 
 ## bean.worker
 
-模块`a-worker`提供了全局 Bean `bean.worker`，用于管理工作进程
+模块`a-worker`提供了全局 Bean `bean.worker`，用于管理工作进程。
 
 - 属性
 

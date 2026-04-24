@@ -70,7 +70,7 @@ config.database = {
 
 ## env配置
 
-为了方便配置，内置数据源从 env 环境变量获取配置参数。因此，对于内置数据源我们可以直接通过 env 来提供配置信息
+为了方便配置，内置数据源从 env 环境变量获取配置参数。因此，对于内置数据源我们可以直接通过 env 来提供配置信息。
 
 `env/.env`
 
@@ -98,7 +98,7 @@ DATABASE_CLIENT_MYSQL_DATABASE = mysql
 
 ### 1. 添加类型定义
 
-采用接口合并机制添加新数据源的类型定义
+采用接口合并机制添加新数据源的类型定义。
 
 在 VSCode 编辑器中，输入代码片段`recorddatabaseclient`，自动生成代码骨架:
 
@@ -156,7 +156,7 @@ const pgOrder = app.bean.database.getDb('pgOrder');
 
 ### 2. 获取默认数据源
 
-默认数据源由配置项`defaultClient`决定
+默认数据源由配置项`defaultClient`决定。
 
 ```typescript
 const dbDefault = app.bean.database.getDb('default');
@@ -164,7 +164,7 @@ const dbDefault = app.bean.database.getDb('default');
 
 ### 3. 获取数据源对应的 knex 实例
 
-系统为不同的数据源创建了不同的 knex 实例，使用 knex 实例操作数据库
+系统为不同的数据源创建了不同的 knex 实例，使用 knex 实例操作数据库。
 
 ```typescript
 const pg = app.bean.database.getDb('pg');

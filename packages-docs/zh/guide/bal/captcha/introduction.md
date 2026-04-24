@@ -1,6 +1,6 @@
 # 验证码体系
 
-模块`a-captcha`提供了通用的验证码体系，使用`Captcha Provider`支持各种验证码方式，并且使用`Captcha Scene`支持不同场景的验证码使用策略
+模块`a-captcha`提供了通用的验证码体系，使用`Captcha Provider`支持各种验证码方式，并且使用`Captcha Scene`支持不同场景的验证码使用策略。
 
 ## 特性
 
@@ -11,13 +11,13 @@
 
 ## bean.captcha
 
-模块`a-captcha`提供了全局 Bean `bean.captcha`，可以通过统一的方式使用所有 Provider/Scene 提供的验证码能力
+模块`a-captcha`提供了全局 Bean `bean.captcha`，可以通过统一的方式使用所有 Provider/Scene 提供的验证码能力。
 
-模块`captcha-simple`提供了一个 Provider `captcha-simple:imageText`，基于[svg-captcha](https://github.com/produck/svg-captcha)实现文字图片的验证码能力
+模块`captcha-simple`提供了一个 Provider `captcha-simple:imageText`，基于[svg-captcha](https://github.com/produck/svg-captcha)实现文字图片的验证码能力。
 
 模块`captcha-simple`提供了一个 Scene `captcha-simple:simple`。该 Scene 只使用一个 Provider，即`captcha-simple:imageText`
 
-下面演示如何使用模块`captcha-simple`提供的验证码能力
+下面演示如何使用模块`captcha-simple`提供的验证码能力。
 
 ### 1. create
 
@@ -75,7 +75,7 @@ const tokenOrFalse = await this.bean.captcha.verifyImmediate(captchaId, '1234');
 
 ## interceptor.captchaVerify
 
-模块`a-captcha`提供了一个局部拦截器`a-captcha:captchaVerify`，可以针对 API 启用验证码校验
+模块`a-captcha`提供了一个局部拦截器`a-captcha:captchaVerify`，可以针对 API 启用验证码校验。
 
 `src/suite/a-home/modules/home-user/src/controller/passport.ts`
 
@@ -94,7 +94,7 @@ class ControllerPassport {
 
 ## Captcha API
 
-模块`a-captcha`提供了一组`开箱即用`的 Captcha API，对`bean.captcha`的能力进行了封装
+模块`a-captcha`提供了一组`开箱即用`的 Captcha API，对`bean.captcha`的能力进行了封装。
 
 `src/suite-vendor/a-vona/modules/a-captcha/src/controller/captcha.ts`
 
@@ -112,7 +112,7 @@ class ControllerPassport {
 
 ## 参数配置
 
-可以在 App Config 中修改模块`a-captcha`的参数配置
+可以在 App Config 中修改模块`a-captcha`的参数配置。
 
 `src/backend/config/config/config.ts`
 

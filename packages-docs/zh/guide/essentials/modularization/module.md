@@ -1,10 +1,10 @@
 # 模块
 
-在 Vona 中可以通过模块把 Controller、Service、Model、Entity、Dto、配置、语言等资源打包成内聚的功能块，每个模块聚焦于一个特性场景、业务领域、工作流或通用工具
+在 Vona 中可以通过模块把 Controller、Service、Model、Entity、Dto、配置、语言等资源打包成内聚的功能块，每个模块聚焦于一个特性场景、业务领域、工作流或通用工具。
 
 ## 为什么要实现模块化体系？
 
-在一个大型的 Web 业务系统当中，随着业务的增长和变更，为了避免代码失控，也有必要将系统拆分为一个个相对独立的模块，这就是 Vona 采用模块化体系的缘由。因此，在 Vona 中，实际的业务代码开发都是在模块中进行
+在一个大型的 Web 业务系统当中，随着业务的增长和变更，为了避免代码失控，也有必要将系统拆分为一个个相对独立的模块，这就是 Vona 采用模块化体系的缘由。因此，在 Vona 中，实际的业务代码开发都是在模块中进行。
 
 ## 模块化体系的意义
 
@@ -53,4 +53,4 @@ $ vona :create:module moduleName [--suite=]
 右键菜单 - [项目路径/src/suite/suite-name/modules]: `Vona Create/Module`
 :::
 
-依据提示输入模块名称，比如`demo-student`，VSCode 插件会自动创建模块的代码骨架
+依据提示输入模块名称，比如`demo-student`，VSCode 插件会自动创建模块的代码骨架。

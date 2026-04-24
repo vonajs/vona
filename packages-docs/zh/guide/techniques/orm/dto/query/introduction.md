@@ -1,6 +1,6 @@
 # $Dto.query/DtoQueryBase
 
-`$Dto.query/DtoQueryBase`用于标注 Query 参数
+`$Dto.query/DtoQueryBase`用于标注 Query 参数。
 
 ## DtoQueryBase的用法
 
@@ -74,7 +74,7 @@ export class DtoOrderQuery
 
 ## 添加自定义字段
 
-还可以直接在 DTO 中添加自定义字段
+还可以直接在 DTO 中添加自定义字段。
 
 ```diff
 @Dto()
@@ -90,11 +90,11 @@ export class DtoOrderQuery
 
 ## v.openapi/v.filter
 
-还可以指定 Openapi 参数，从而支持更多能力
+还可以指定 Openapi 参数，从而支持更多能力。
 
 ### 1. Relations
 
-比如，Model Order 与 Model User 是`n:1`的关系，可以在 Query 参数中传入`userName`作为查询条件。那么，需要在 DTO 中添加`userName`字段，并且设置 Openapi 参数
+比如，Model Order 与 Model User 是`n:1`的关系，可以在 Query 参数中传入`userName`作为查询条件。那么，需要在 DTO 中添加`userName`字段，并且设置 Openapi 参数。
 
 ```typescript
 @Dto()
@@ -145,7 +145,7 @@ export class DtoOrderQuery extends $Dto.query(EntityOrder, ['orderNo', 'remark']
 
 ### 2. App Config
 
-可以在 App Config 中配置 Openapi 参数
+可以在 App Config 中配置 Openapi 参数。
 
 ```typescript
 config.onions = {

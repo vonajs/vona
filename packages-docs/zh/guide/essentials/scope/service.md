@@ -1,6 +1,6 @@
 # Service
 
-模块可以单独提供自己的 Services
+模块可以单独提供自己的 Services。
 
 ## 创建Service
 
@@ -18,7 +18,7 @@ $ vona :create:bean service student --module=demo-student
 
 ## 本模块使用Service
 
-可以通过 Scope 实例获取模块的 Service
+可以通过 Scope 实例获取模块的 Service。
 
 ```diff
 class ControllerStudent {

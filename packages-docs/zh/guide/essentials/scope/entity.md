@@ -1,6 +1,6 @@
 # Entity
 
-模块可以单独提供自己的 Entities
+模块可以单独提供自己的 Entities。
 
 ## 创建Entity
 
@@ -18,7 +18,7 @@ $ vona :create:bean entity student --module=demo-student
 
 ## 本模块使用Entity
 
-可以通过 Scope 实例获取模块的 Entity
+可以通过 Scope 实例获取模块的 Entity。
 
 ```diff
 class ControllerStudent {

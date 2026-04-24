@@ -1,6 +1,6 @@
 # $Dto.selectAndCount
 
-`$Dto.selectAndCount`用于标注带分页的返回结果
+`$Dto.selectAndCount`用于标注带分页的返回结果。
 
 ## 如何使用
 

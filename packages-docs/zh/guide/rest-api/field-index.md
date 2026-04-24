@@ -1,10 +1,10 @@
 # 字段索引
 
-Vona 提供了创建字段索引的机制。只需声明字段索引，系统就会自动创建
+Vona 提供了创建字段索引的机制。只需声明字段索引，系统就会自动创建。
 
 ## 创建meta.index
 
-Vona 使用 Bean `meta.index`统一配置模块的字段索引
+Vona 使用 Bean `meta.index`统一配置模块的字段索引。
 
 ### 1. Cli命令
 
@@ -41,7 +41,7 @@ class MetaIndex {}
 
 ## 配置字段索引：类型化风格
 
-为了让代码质量更高，更容易维护，还可以使用类型化的代码风格
+为了让代码质量更高，更容易维护，还可以使用类型化的代码风格。
 
 ```typescript
 import { $tableColumns } from 'vona-module-a-ormutils';
@@ -58,7 +58,7 @@ class MetaIndex {}
 
 ## App Config
 
-可以在 App Config 中配置字段索引
+可以在 App Config 中配置字段索引。
 
 `src/backend/config/config/config.ts`
 

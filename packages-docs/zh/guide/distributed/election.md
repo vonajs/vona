@@ -40,7 +40,7 @@ export class MetaElection extends BeanElectionBase<TypeElectionObtainResource> {
 
 ## 创建 Module Monkey
 
-接下来创建`Module Monkey`，响应`appStarted`和`appClose`钩子
+接下来创建`Module Monkey`，响应`appStarted`和`appClose`钩子。
 
 - 参见: [应用启动自定义](../env-config/app-start/introduction.md)
 

@@ -1,10 +1,10 @@
 # 快速上手
 
-在这里，我们分别创建一个 Vona 项目和一个 Zova 项目，并整合到一起，搭建一个完整的全栈开发环境
+在这里，我们分别创建一个 Vona 项目和一个 Zova 项目，并整合到一起，搭建一个完整的全栈开发环境。
 
 ## 创建Vona项目
 
-使用`cabloy-basic`模版创建 Vona 项目
+使用`cabloy-basic`模版创建 Vona 项目。
 
 ```bash
 $ vona :create:project projectName --template=cabloy-basic
@@ -80,7 +80,7 @@ $ npm run dev
 
 ### 2. 启动Zova开发服务
 
-可以直接启动 Zova 开发服务，方便调试前端代码。此时，Vona 可以作为 API 服务供前端访问
+可以直接启动 Zova 开发服务，方便调试前端代码。此时，Vona 可以作为 API 服务供前端访问。
 
 ```bash
 $ npm run dev:ssr:cabloyBasicAdmin

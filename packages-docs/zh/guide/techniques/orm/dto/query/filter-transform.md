@@ -5,11 +5,11 @@
 - `orderNo`是 string 类型，系统自动转换为条件语句`'orderNo': { _includesI_: 'some input' }`
 - `userName`也是 string 类型，系统自动转换为条件语句`'name': { _includesI_: 'some input' }`
 
-为了支持更复杂的业务需求，可以提供自定义 Filter Transform
+为了支持更复杂的业务需求，可以提供自定义 Filter Transform。
 
 ## 创建Filter Transform
 
-比如，在模块 demo-student 中创建一个 Filter Transform: `dateRange`，将日期范围转换为条件语句
+比如，在模块 demo-student 中创建一个 Filter Transform: `dateRange`，将日期范围转换为条件语句。
 
 比如，当前时区为`Asia/Tokyo (+9:00)`。传入字段`createdAt`值为`2025-12-01~2025-12-02`，转换后的条件语句为:
 
@@ -77,7 +77,7 @@ class DtoStudentQuery {
 
 ### 2. App Config
 
-可以在 App Config 中配置 createdAt 参数
+可以在 App Config 中配置 createdAt 参数。
 
 ```typescript
 config.onions = {
@@ -93,9 +93,9 @@ config.onions = {
 
 ## Filter Transform参数
 
-可以为 Filter Transform 定义参数，通过参数更灵活的配置 Filter Transform 逻辑
+可以为 Filter Transform 定义参数，通过参数更灵活的配置 Filter Transform 逻辑。
 
-比如，为 `dateRange` Filter Transform 定义`separator`参数，用于指定日期范围的分隔符
+比如，为 `dateRange` Filter Transform 定义`separator`参数，用于指定日期范围的分隔符。
 
 ### 1. 定义参数类型
 
@@ -140,7 +140,7 @@ export class FilterTransformDateRange extends BeanBase implements IFilterTransfo
 
 ### 4. 使用时指定参数
 
-可以在使用时指定 Filter Transform 参数
+可以在使用时指定 Filter Transform 参数。
 
 - 一般用法
 
@@ -156,7 +156,7 @@ class DtoStudentQuery {
 
 - App Config
 
-可以在 App Config 中配置 createdAt 参数
+可以在 App Config 中配置 createdAt 参数。
 
 ```diff
 config.onions = {
@@ -176,7 +176,7 @@ config.onions = {
 
 ### 5. App Config
 
-可以在 App Config 中配置 Filter Transform 参数
+可以在 App Config 中配置 Filter Transform 参数。
 
 `src/backend/config/config/config.ts`
 

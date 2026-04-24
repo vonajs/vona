@@ -1,6 +1,6 @@
 # 多实例/多租户
 
-VonaJS 通过`多实例`的概念来支持多租户 SAAS 系统的开发。只需启动一个后端服务，即可支持多个实例同时运行
+VonaJS 通过`多实例`的概念来支持多租户 SAAS 系统的开发。只需启动一个后端服务，即可支持多个实例同时运行。
 
 VonaJS 支持以下几种`多实例/多租户`模式：
 
@@ -52,7 +52,7 @@ config.instance = {
 
 ### 2. 生产环境
 
-在生产环境，需要自行配置实例信息
+在生产环境，需要自行配置实例信息。
 
 `src/backend/config/config/config.prod.ts`
 
@@ -72,7 +72,7 @@ config.instance = {
 
 ### 1. 添加类型定义
 
-采用接口合并机制添加新实例的类型定义
+采用接口合并机制添加新实例的类型定义。
 
 在 VSCode 编辑器中，输入代码片段`recordinstance`，自动生成代码骨架:
 
@@ -115,7 +115,7 @@ config.instance = {
 
 ## 获取当前实例名的规则
 
-当用户访问后端 API 时，后端会自动根据规则获取当前实例名，然后根据实例名获取实例信息
+当用户访问后端 API 时，后端会自动根据规则获取当前实例名，然后根据实例名获取实例信息。
 
 ### 1. App Config
 
@@ -138,7 +138,7 @@ config.instance = {
 
 ### 2. 规则次序
 
-系统按以下次序，依次判断当前实例名，当获取到实例名时则停止判断流程
+系统按以下次序，依次判断当前实例名，当获取到实例名时则停止判断流程。
 
 1. 如果提供了`getInstanceName`，则调用此函数
 2. 如果`queryField`不为空，则从 request query 中获取
@@ -147,7 +147,7 @@ config.instance = {
 
 ### 3. 如何从域名中解析实例名
 
-比如，域名为`https://cabloy.com`，那么对应的实例名是`cabloy`。可以通过配置`SERVER_SUBDOMAINOFFSET`来修改计算规则
+比如，域名为`https://cabloy.com`，那么对应的实例名是`cabloy`。可以通过配置`SERVER_SUBDOMAINOFFSET`来修改计算规则。
 
 `env/.env`
 
@@ -185,7 +185,7 @@ const iid = this.ctx.instance.id;
 
 ### 2. 使用Model操作数据库
 
-由于多实例的数据是相互隔离的，因此在操作数据库时，需要指定`实例Id`。VonaJS 提供了非常强大的`Model`对象，从而可以透明的处理多实例
+由于多实例的数据是相互隔离的，因此在操作数据库时，需要指定`实例Id`。VonaJS 提供了非常强大的`Model`对象，从而可以透明的处理多实例。
 
 ```typescript
 // create

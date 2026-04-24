@@ -1,6 +1,6 @@
 # $Dto.get
 
-`$Dto.get`用于标注返回结果
+`$Dto.get`用于标注返回结果。
 
 ## 参数
 
@@ -22,11 +22,11 @@ $Dto.get(() => ModelOrder, { columns: ['id', 'orderNo', 'remark'] });
 
 ## 2. 静态关系
 
-以 Order/Product 为例，演示`1:n`关系
+以 Order/Product 为例，演示`1:n`关系。
 
 ### Model关系定义
 
-先在 Model Order 中定义与 Model Product 的`1:n`关系
+先在 Model Order 中定义与 Model Product 的`1:n`关系。
 
 ```typescript
 @Model({
@@ -64,11 +64,11 @@ $Dto.get(() => ModelOrder, {
 
 ## 4. 基于静态关系的聚合
 
-以 Order/Product 为例，演示`1:n`关系
+以 Order/Product 为例，演示`1:n`关系。
 
 ### Model关系定义
 
-先在 Model OrderStats 中定义与 Model Product 的`1:n`关系
+先在 Model OrderStats 中定义与 Model Product 的`1:n`关系。
 
 ```typescript
 @Model({
@@ -112,11 +112,11 @@ $Dto.get(() => ModelOrder, {
 
 ## 6. 基于静态关系的分组
 
-以 Order/Product 为例，演示`1:n`关系
+以 Order/Product 为例，演示`1:n`关系。
 
 ### Model关系定义
 
-先在 Model OrderStats 中定义与 Model Product 的`1:n`关系
+先在 Model OrderStats 中定义与 Model Product 的`1:n`关系。
 
 ```typescript
 @Model({

@@ -2,7 +2,7 @@
 
 ## 创建过滤器
 
-比如，在模块 demo-student 中创建一个局部过滤器: `test`，对自定义错误`demo-student:1001`定制日志输出
+比如，在模块 demo-student 中创建一个局部过滤器: `test`，对自定义错误`demo-student:1001`定制日志输出。
 
 ### 1. Cli命令
 
@@ -59,7 +59,7 @@ class ControllerStudent {
 
 ### 2. 标注控制器类
 
-可以针对控制器类使用过滤器，从而类中所有方法都会应用此过滤器
+可以针对控制器类使用过滤器，从而类中所有方法都会应用此过滤器。
 
 ```diff
 import { Aspect } from 'vona-module-a-aspect';
@@ -74,9 +74,9 @@ class ControllerStudent {
 
 ## 过滤器参数
 
-可以为过滤器定义参数，通过参数更灵活的配置过滤器逻辑
+可以为过滤器定义参数，通过参数更灵活的配置过滤器逻辑。
 
-比如，为 test 过滤器定义`prefix`参数，用于定制日志输出的格式
+比如，为 test 过滤器定义`prefix`参数，用于定制日志输出的格式。
 
 ### 1. 定义参数类型
 
@@ -121,7 +121,7 @@ export class FilterTest extends BeanBase implements IFilterLog {
 
 ### 4. 使用时指定参数
 
-可以针对某个 API 单独指定局部过滤器的参数
+可以针对某个 API 单独指定局部过滤器的参数。
 
 ```diff
 class ControllerStudent {
@@ -135,7 +135,7 @@ class ControllerStudent {
 
 ### 5. App Config
 
-可以在 App Config 中配置过滤器参数
+可以在 App Config 中配置过滤器参数。
 
 `src/backend/config/config/config.ts`
 

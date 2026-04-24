@@ -1,6 +1,6 @@
 # 工具函数
 
-VonaJS 提供了一组工具函数，可以更加便利的使用序列化能力
+VonaJS 提供了一组工具函数，可以更加便利的使用序列化能力。
 
 ## 工具清单
 
@@ -21,7 +21,7 @@ VonaJS 提供了一组工具函数，可以更加便利的使用序列化能力
 
 ## @Serializer.transform/v.serializerTransform
 
-比如，将`EntityStudent`中的`name`字段值转化为大写
+比如，将`EntityStudent`中的`name`字段值转化为大写。
 
 我们直接使用[序列化](./introduction.md)中创建的 Serializer Transform `upper`
 
@@ -46,7 +46,7 @@ class EntityStudent {
 
 ### 3. App Config
 
-可以在 App Config 中修改配置
+可以在 App Config 中修改配置。
 
 `src/backend/config/config/config.ts`
 
@@ -84,7 +84,7 @@ config.onions = {
 
 ## @Serializer.exclude/v.serializerExclude
 
-比如，排除`EntityStudent`中的`name`字段
+比如，排除`EntityStudent`中的`name`字段。
 
 ### 1. @Serializer.exclude
 
@@ -107,7 +107,7 @@ class EntityStudent {
 
 ### 3. App Config
 
-可以在 App Config 中修改配置
+可以在 App Config 中修改配置。
 
 `src/backend/config/config/config.ts`
 
@@ -145,7 +145,7 @@ config.onions = {
 
 ## @Serializer.replace/v.serializerReplace
 
-比如，将`EntityStudent`中的`name`字段值进行脱敏处理
+比如，将`EntityStudent`中的`name`字段值进行脱敏处理。
 
 比如，name 原始值为`tom`，脱敏之后为`t***m`
 
@@ -173,7 +173,7 @@ class EntityStudent {
 
 ### 3. App Config
 
-可以在 App Config 中修改配置
+可以在 App Config 中修改配置。
 
 `src/backend/config/config/config.ts`
 
@@ -197,7 +197,7 @@ config.onions = {
 };
 ```
 
-`a-serialization:replace`: `a-serialization`模块提供的 Serializer Transform
+`a-serialization:replace`: `a-serialization`模块提供的 Serializer Transform。
 
 - 方法 2: 构造一个新的 schema
 
@@ -224,7 +224,7 @@ config.onions = {
 
 ## @Serializer.getter/v.serializerGetter
 
-比如，`EntityStudent`中的`fullName`字段由`firstName`和`lastName`字段组合而成
+比如，`EntityStudent`中的`fullName`字段由`firstName`和`lastName`字段组合而成。
 
 ### 1. getter
 
@@ -268,7 +268,7 @@ class EntityStudent {
 
 ### 4. App Config
 
-可以在 App Config 中修改配置
+可以在 App Config 中修改配置。
 
 `src/backend/config/config/config.ts`
 
@@ -291,7 +291,7 @@ config.onions = {
 };
 ```
 
-`a-serialization:getter`: `a-serialization`模块提供的 Serializer Transform
+`a-serialization:getter`: `a-serialization`模块提供的 Serializer Transform。
 
 - 方法 2: 构造一个新的 schema
 
@@ -317,7 +317,7 @@ config.onions = {
 
 ## @Serializer.custom/v.serializerCustom
 
-比如，将`EntityStudent`中的`name`字段值转换为大写
+比如，将`EntityStudent`中的`name`字段值转换为大写。
 
 ### 1. @Serializer.custom
 
@@ -347,7 +347,7 @@ class EntityStudent {
 
 ### 3. App Config
 
-可以在 App Config 中修改配置
+可以在 App Config 中修改配置。
 
 `src/backend/config/config/config.ts`
 
@@ -370,7 +370,7 @@ config.onions = {
 };
 ```
 
-`a-serialization:custom`: `a-serialization`模块提供的 Serializer Transform
+`a-serialization:custom`: `a-serialization`模块提供的 Serializer Transform。
 
 - 方法 2: 构造一个新的 schema
 

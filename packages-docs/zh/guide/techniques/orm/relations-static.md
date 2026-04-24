@@ -1,6 +1,6 @@
 # 静态关系
 
-下面以模块`test-vona`为例，讲解`静态关系`的用法
+下面以模块`test-vona`为例，讲解`静态关系`的用法。
 
 ## 4种关系
 
@@ -43,7 +43,7 @@ class ModelPost {}
 
 ### 2. 使用关系
 
-在 Model 中定义的 hasOne 关系可以用于所有 CRUD 操作。通过`include`指定需要操作的关系，比如`postContent: true`，那么，系统在操作 Model Post 的同时，也会操作 Model PostContent
+在 Model 中定义的 hasOne 关系可以用于所有 CRUD 操作。通过`include`指定需要操作的关系，比如`postContent: true`，那么，系统在操作 Model Post 的同时，也会操作 Model PostContent。
 
 ```typescript
 class ServicePost {
@@ -133,7 +133,7 @@ class ModelPostContent {}
 
 ### 2. 使用关系
 
-在 Model 中定义的 belongsTo 关系只用于查询操作。通过`include`指定需要查询的关系，比如`post: true`，那么，系统在查询 Model PostContent 的同时，也会查询 Model Post
+在 Model 中定义的 belongsTo 关系只用于查询操作。通过`include`指定需要查询的关系，比如`post: true`，那么，系统在查询 Model PostContent 的同时，也会查询 Model Post。
 
 ```typescript
 class ServicePost {
@@ -176,7 +176,7 @@ class ModelOrder {}
 
 ### 2. 使用关系
 
-在 Model 中定义的 hasMany 关系可以用于所有 CRUD 操作。通过`include`指定需要操作的关系，比如`products: true`，那么，系统在操作 Model Order 的同时，也会操作 Model Product
+在 Model 中定义的 hasMany 关系可以用于所有 CRUD 操作。通过`include`指定需要操作的关系，比如`products: true`，那么，系统在操作 Model Order 的同时，也会操作 Model Product。
 
 ```typescript
 class ServicePost {
@@ -246,7 +246,7 @@ class ServicePost {
 
 ### 1. 定义关系
 
-定义`n:n`关系需要中间 Model。比如，Model User 和 Model Role 是`n:n`，需要提供中间 Model RoleUser
+定义`n:n`关系需要中间 Model。比如，Model User 和 Model Role 是`n:n`，需要提供中间 Model RoleUser。
 
 ```typescript
 @Model({
@@ -270,7 +270,7 @@ class ModelUser {}
 
 ### 2. 使用关系
 
-在 Model 中定义的 belongsToMany 关系可以用于所有 CRUD 操作。需要强调的是，这里的 CRUD 操作是针对中间 Model，而不是目标 Model。通过`include`指定需要操作的关系，比如`roles: true`，那么，系统在操作 Model User 的同时，也会操作中间 Model RoleUser
+在 Model 中定义的 belongsToMany 关系可以用于所有 CRUD 操作。需要强调的是，这里的 CRUD 操作是针对中间 Model，而不是目标 Model。通过`include`指定需要操作的关系，比如`roles: true`，那么，系统在操作 Model User 的同时，也会操作中间 Model RoleUser。
 
 ```typescript
 class ServiceUser {
@@ -340,13 +340,13 @@ class ServiceUser {
 
 ## autoload
 
-通过前面的演示可以看到，如果要对关系进行操作，需要通过`include`指定对应的关系选项
+通过前面的演示可以看到，如果要对关系进行操作，需要通过`include`指定对应的关系选项。
 
-如果需要关联的关系属于频繁操作，那么可以设置关系`autoload: true`，从而省去`include`选项
+如果需要关联的关系属于频繁操作，那么可以设置关系`autoload: true`，从而省去`include`选项。
 
 ## 树形结构
 
-接下来实现一棵目录树，来演示如何利用`autoload`实现一个树形结构
+接下来实现一棵目录树，来演示如何利用`autoload`实现一个树形结构。
 
 ### 1. 定义关系
 
@@ -422,7 +422,7 @@ class ServiceCategory {
 
 ## 树形结构（反向查询）
 
-前面演示的是如何从父级向子级查询一棵目录树，接下来演示从子级向父级查询目录树
+前面演示的是如何从父级向子级查询一棵目录树，接下来演示从子级向父级查询目录树。
 
 ### 1. 定义关系
 

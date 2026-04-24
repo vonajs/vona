@@ -56,7 +56,7 @@ class ControllerStudent {
 
 ### 2. 标注控制器类
 
-可以针对控制器类使用拦截器，从而类中所有方法都会应用此拦截器
+可以针对控制器类使用拦截器，从而类中所有方法都会应用此拦截器。
 
 ```diff
 import { Aspect } from 'vona-module-a-aspect';
@@ -71,9 +71,9 @@ class ControllerStudent {
 
 ## 拦截器参数
 
-可以为拦截器定义参数，通过参数更灵活的配置拦截器逻辑
+可以为拦截器定义参数，通过参数更灵活的配置拦截器逻辑。
 
-比如，为 logger 拦截器定义`prefix`参数，用于控制输出格式
+比如，为 logger 拦截器定义`prefix`参数，用于控制输出格式。
 
 ### 1. 定义参数类型
 
@@ -115,7 +115,7 @@ class InterceptorLogger {
 
 ### 4. 使用时指定参数
 
-可以针对某个 API 单独指定局部拦截器的参数
+可以针对某个 API 单独指定局部拦截器的参数。
 
 ```diff
 class ControllerStudent {
@@ -129,7 +129,7 @@ class ControllerStudent {
 
 ### 5. App Config
 
-可以在 App Config 中配置拦截器参数
+可以在 App Config 中配置拦截器参数。
 
 `src/backend/config/config/config.ts`
 

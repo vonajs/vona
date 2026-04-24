@@ -7,7 +7,7 @@ VonaJS 为了兼顾`开箱即用`与`灵活定制`的架构设计理念，将用
 
 ## a-user: IUser
 
-模块`a-user`提供了接口`IUser`，约定了 User 的基础字段
+模块`a-user`提供了接口`IUser`，约定了 User 的基础字段。
 
 ```typescript
 export interface IUser {
@@ -24,7 +24,7 @@ export interface IUser {
 
 ## a-user: bean.user
 
-模块`a-user`提供了全局 Bean `bean.user`，为业务提供了通用的调用规范
+模块`a-user`提供了全局 Bean `bean.user`，为业务提供了通用的调用规范。
 
 ```typescript
 // find user
@@ -51,7 +51,7 @@ this.bean.user.activate(user);
 
 ## home-user适配器: ServiceUserAdapter
 
-模块`home-user`提供了适配器`ServiceUserAdapter`，允许我们定制用户的操作逻辑。业务代码调用`bean.user`，`bean.user`调用`ServiceUserAdapter`，从而实现了`开箱即用`与`灵活定制`的完美结合
+模块`home-user`提供了适配器`ServiceUserAdapter`，允许我们定制用户的操作逻辑。业务代码调用`bean.user`，`bean.user`调用`ServiceUserAdapter`，从而实现了`开箱即用`与`灵活定制`的完美结合。
 
 `src/suite/a-home/modules/home-user/src/service/userAdapter.ts`
 
@@ -107,7 +107,7 @@ class ControllerStudent {
 
 ## 匿名用户
 
-当匿名用户访问 API 时，系统会自动创建一个匿名 user 对象
+当匿名用户访问 API 时，系统会自动创建一个匿名 user 对象。
 
 ```diff
 class ControllerStudent {
@@ -120,7 +120,7 @@ class ControllerStudent {
 
 ## 注册用户
 
-可以调用`bean.user.register`注册一个新用户，该方法会引发`a-user:register`事件，模块`home-user`监听该事件，从而实现逻辑定制
+可以调用`bean.user.register`注册一个新用户，该方法会引发`a-user:register`事件，模块`home-user`监听该事件，从而实现逻辑定制。
 
 `src/suite/a-home/modules/home-user/src/bean/eventListener.register.ts`
 
@@ -149,7 +149,7 @@ class EventListenerRegister {
 
 ## 激活用户
 
-可以调用`bean.user.activate`激活用户，该方法会引发`a-user:activate`事件，模块`home-user`监听该事件，从而实现逻辑定制
+可以调用`bean.user.activate`激活用户，该方法会引发`a-user:activate`事件，模块`home-user`监听该事件，从而实现逻辑定制。
 
 `src/suite/a-home/modules/home-user/src/bean/eventListener.activate.ts`
 
@@ -178,9 +178,9 @@ class EventListenerActivate {
 
 ## 禁用激活操作
 
-在默认情况下，新注册用户需要进行激活操作
+在默认情况下，新注册用户需要进行激活操作。
 
-可以在 App Config 中启用`自动激活`配置
+可以在 App Config 中启用`自动激活`配置。
 
 `src/backend/config/config/config.mine.ts`
 
@@ -197,7 +197,7 @@ config.modules = {
 
 ## 用户: admin
 
-在模块`home-user`的`meta.version`中自动创建`admin`用户
+在模块`home-user`的`meta.version`中自动创建`admin`用户。
 
 - 参见：[迁移与变更](../../rest-api/version.md)
 
@@ -222,7 +222,7 @@ async init(options) {
 
 ## 默认密码
 
-`admin`用户的默认密码为`123456`，可以在 app config 中修改
+`admin`用户的默认密码为`123456`，可以在 app config 中修改。
 
 `src/backend/config/config/config.ts`
 

@@ -33,7 +33,7 @@ VonaJS AOP 编程包括三个方面的能力：
 
 ### 1. AOP Method
 
-直接在 Class Method 上通过装饰器切入逻辑
+直接在 Class Method 上通过装饰器切入逻辑。
 
 #### 举例：数据库事务
 
@@ -63,7 +63,7 @@ class ServiceStudent {
 
 ### 2. 魔术方法
 
-可以在 Class 内部通过`__get__`和`__set__`切入动态属性或方法
+可以在 Class 内部通过`__get__`和`__set__`切入动态属性或方法。
 
 #### 举例：获取 model 实例
 

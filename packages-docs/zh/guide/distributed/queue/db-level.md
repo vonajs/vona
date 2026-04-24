@@ -1,8 +1,8 @@
 # 数据源分级
 
-在分布式场景中，需要避免因数据源竞争而引发的死锁问题
+在分布式场景中，需要避免因数据源竞争而引发的死锁问题。
 
-VonaJS 采用`Async Local Storage`为不同的上下文提供不同的`数据源分级`，从而创建不同的数据库连接池，避免数据源竞争的发生
+VonaJS 采用`Async Local Storage`为不同的上下文提供不同的`数据源分级`，从而创建不同的数据库连接池，避免数据源竞争的发生。
 
 ::: warning
 `Sqlite3`只支持一个写连接，因此不支持`数据源分级`
@@ -53,9 +53,9 @@ class QueueAdd {
 
 ## 解决方案
 
-事实上，以上的潜在死锁情况在 VonaJS 中是不会发生的。因为 VonaJS 提供了`数据源分级`的机制
+事实上，以上的潜在死锁情况在 VonaJS 中是不会发生的。因为 VonaJS 提供了`数据源分级`的机制。
 
-VonaJS 采用`Async Local Storage`为不同的上下文提供不同的`数据源分级`，从而创建不同的数据库连接池，避免数据源竞争的发生
+VonaJS 采用`Async Local Storage`为不同的上下文提供不同的`数据源分级`，从而创建不同的数据库连接池，避免数据源竞争的发生。
 
 ::: tip
 在 VonaJS 中，在分布式场景下，将数据库连接池的最大连接数设为`1`，也不会发生因数据源竞争而导致的死锁情况
@@ -97,7 +97,7 @@ class ControllerStudent {
 
 ## 推送任务
 
-当使用`push/pushAsync`方法推送任务时，系统会自动传入`current.level + 1`，从而实现数据源分级，避免死锁发生
+当使用`push/pushAsync`方法推送任务时，系统会自动传入`current.level + 1`，从而实现数据源分级，避免死锁发生。
 
 ```typescript
 await this.scope.queue.add.pushAsync(data);

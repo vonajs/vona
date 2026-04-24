@@ -1,10 +1,10 @@
 # 事件监听器
 
-一个`事件`可以有多个`事件监听器`，这些`事件监听器`在执行时采用洋葱模型
+一个`事件`可以有多个`事件监听器`，这些`事件监听器`在执行时采用洋葱模型。
 
 ## 创建Event Listener
 
-比如，在模块 demo-student 中创建一个 Event Listener: `echo`，在响应事件时，将事件参数`Hello World`添加`!`后缀，并将新参数传入`next`方法
+比如，在模块 demo-student 中创建一个 Event Listener: `echo`，在响应事件时，将事件参数`Hello World`添加`!`后缀，并将新参数传入`next`方法。
 
 ### 1. Cli命令
 
@@ -72,7 +72,7 @@ export class EventListenerEcho
 
 ## Event Listener顺序
 
-针对同一个事件，可以关联多个 Event Listener。所以，VonaJS 提供了两个参数，用于控制 Event Listener 的执行顺序
+针对同一个事件，可以关联多个 Event Listener。所以，VonaJS 提供了两个参数，用于控制 Event Listener 的执行顺序。
 
 ### 1. dependencies
 
@@ -119,7 +119,7 @@ config.onions = {
 
 ### 2. Meta
 
-可以让 Event Listener 在指定的运行环境生效
+可以让 Event Listener 在指定的运行环境生效。
 
 | 名称   | 类型             | 说明                                                                   |
 | ------ | ---------------- | ---------------------------------------------------------------------- |
@@ -140,7 +140,7 @@ class EventListenerEcho {}
 
 ## 查看当前生效的Event Listener清单
 
-可以直接输出当前生效的 Event Listener 清单
+可以直接输出当前生效的 Event Listener 清单。
 
 ```diff
 class ControllerStudent {

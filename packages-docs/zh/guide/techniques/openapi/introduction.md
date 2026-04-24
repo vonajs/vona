@@ -1,6 +1,6 @@
 # Swagger/Openapi
 
-Vona 基于[@asteasolutions/zod-to-openapi](https://github.com/asteasolutions/zod-to-openapi)实现了非常便利的`Swagger/Openapi`。Vona 中的 `Swagger/Openapi` 仍然延续[参数校验](../validation/introduction.md)中的装饰器，同时提供扩展工具，用于设置与 Openapi 相关的元数据
+Vona 基于[@asteasolutions/zod-to-openapi](https://github.com/asteasolutions/zod-to-openapi)实现了非常便利的`Swagger/Openapi`。Vona 中的 `Swagger/Openapi` 仍然延续[参数校验](../validation/introduction.md)中的装饰器，同时提供扩展工具，用于设置与 Openapi 相关的元数据。
 
 ## URL
 
@@ -15,7 +15,7 @@ Vona 内置了 Swagger 模块，可以直接通过 URL 访问：
 
 - Openapi json 默认是`V3.1`
 
-此外，Vona 还内置了[RapiDoc](https://rapidocweb.com/)，提供了更加优雅的 UI
+此外，Vona 还内置了[RapiDoc](https://rapidocweb.com/)，提供了更加优雅的 UI。
 
 | 名称    | URL                           |
 | ------- | ----------------------------- |
@@ -23,7 +23,7 @@ Vona 内置了 Swagger 模块，可以直接通过 URL 访问：
 
 ## bean.openapi
 
-模块`a-openapi`提供了全局 Bean `bean.openapi`，内置了多个操作 Swagger/Openapi 的实用工具
+模块`a-openapi`提供了全局 Bean `bean.openapi`，内置了多个操作 Swagger/Openapi 的实用工具。
 
 | 名称                           | 说明                                 |
 | ------------------------------ | ------------------------------------ |
@@ -34,7 +34,7 @@ Vona 内置了 Swagger 模块，可以直接通过 URL 访问：
 
 ## 1. 自动推断Zod Schema：基础类型/Dto/Entity
 
-如果参数类型是`基础类型/Dto/Entity`，那么，系统就会自动推断出对应的 Zod Schema，从而自动生成 Openapi 元数据
+如果参数类型是`基础类型/Dto/Entity`，那么，系统就会自动推断出对应的 Zod Schema，从而自动生成 Openapi 元数据。
 
 比如，`findOne(@Arg.query('id') id: number)`，id 的类型是`number`，那么自动推断出来的 Schema 就是：`z.number()`。那么，自动生成的 Swagger/Openapi 如下：
 
@@ -72,7 +72,7 @@ Vona 内置了 Swagger 模块，可以直接通过 URL 访问：
 
 ## 扩展工具
 
-Vona 还提供了许多扩展工具，用于设置与 Openapi 相关的元数据
+Vona 还提供了许多扩展工具，用于设置与 Openapi 相关的元数据。
 
 | 名称          | 说明                                                        |
 | ------------- | ----------------------------------------------------------- |
@@ -140,7 +140,7 @@ export default {
 
 ### 2. 使用$locale
 
-使用`$locale`方法进行语言翻译，支持语言资源的类型自动提示
+使用`$locale`方法进行语言翻译，支持语言资源的类型自动提示。
 
 ```typescript
 import { $locale } from '../.metadata/locales.ts';
@@ -163,7 +163,7 @@ class ControllerStudent3 {
 
 ## 配置
 
-Swagger/Openapi 能力由模块`a-openapi`提供，因此可以在 App Config 中修改`a-openapi`的模块配置
+Swagger/Openapi 能力由模块`a-openapi`提供，因此可以在 App Config 中修改`a-openapi`的模块配置。
 
 `src/backend/config/config/config.ts`
 

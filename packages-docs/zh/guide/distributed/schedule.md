@@ -1,10 +1,10 @@
 # 定时任务
 
-VonaJS 基于[BullMQ](https://github.com/taskforcesh/bullmq)提供了直观、易用的定时任务。因为定时任务是队列的特例
+VonaJS 基于[BullMQ](https://github.com/taskforcesh/bullmq)提供了直观、易用的定时任务。因为定时任务是队列的特例。
 
 ## 创建定时任务
 
-比如，在模块 demo-student 中创建一个定时任务: `log`，按指定的时间间隔在控制台输出当前时间
+比如，在模块 demo-student 中创建一个定时任务: `log`，按指定的时间间隔在控制台输出当前时间。
 
 ### 1. Cli命令
 
@@ -33,7 +33,7 @@ export class ScheduleLog extends BeanBase implements IScheduleExecute {
 
 ## 定时任务参数
 
-可以为定时任务配置参数
+可以为定时任务配置参数。
 
 ```typescript
 @Schedule({
@@ -61,7 +61,7 @@ class ScheduleLog {}
 
 ## App Config
 
-可以在 App Config 中配置定时任务参数
+可以在 App Config 中配置定时任务参数。
 
 `src/backend/config/config/config.ts`
 
@@ -100,7 +100,7 @@ config.onions = {
 
 ### 2. Meta
 
-可以让定时任务在指定的运行环境生效
+可以让定时任务在指定的运行环境生效。
 
 | 名称   | 类型             | 说明                                                                |
 | ------ | ---------------- | ------------------------------------------------------------------- |
@@ -122,7 +122,7 @@ class ScheduleLog {}
 
 ## 查看当前生效的定时任务清单
 
-可以直接输出当前生效的定时任务清单
+可以直接输出当前生效的定时任务清单。
 
 ```diff
 class ControllerStudent {

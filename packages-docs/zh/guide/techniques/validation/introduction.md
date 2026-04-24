@@ -1,10 +1,10 @@
 # Validation参数校验
 
-Vona 基于[Zod](https://zod.dev) 提供了非常简洁、灵活的机制对请求参数作校验
+Vona 基于[Zod](https://zod.dev) 提供了非常简洁、灵活的机制对请求参数作校验。
 
 ## 1. 自动推断Zod Schema：基础类型/Dto/Entity
 
-如果参数类型是`基础类型/Dto/Entity`，那么，系统就会自动推断出对应的 Zod Schema，从而进行校验
+如果参数类型是`基础类型/Dto/Entity`，那么，系统就会自动推断出对应的 Zod Schema，从而进行校验。
 
 比如，`findOne(@Arg.query('id') id: number)`，id 的类型是`number`，那么自动推断出来的 Schema 就是：`z.number()`
 
@@ -35,7 +35,7 @@ class ControllerStudent3 {
 
 ## 3. 扩展Zod Schema的属性
 
-还可以在现有的 Zod Schema 基础之上扩展新的属性
+还可以在现有的 Zod Schema 基础之上扩展新的属性。
 
 比如，指定 id 为`number`，并且是`可选`，默认值为`3`
 
@@ -137,7 +137,7 @@ export class DtoUserLazy {
 
 ## 工具清单
 
-VonaJS 将用于扩展 Zod Schema 的工具方法都放入分组`v`中，从而减轻心智负担
+VonaJS 将用于扩展 Zod Schema 的工具方法都放入分组`v`中，从而减轻心智负担。
 
 ### 1. Basic Tools
 

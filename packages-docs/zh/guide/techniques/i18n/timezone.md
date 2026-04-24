@@ -14,7 +14,7 @@ this.ctx.tz = 'America/New_York';
 
 ## 获取当前Timezone的规则
 
-当用户访问后端 API 时，后端会自动根据规则获取当前 Timezone
+当用户访问后端 API 时，后端会自动根据规则获取当前 Timezone。
 
 ### 1. 模块配置
 
@@ -45,6 +45,6 @@ config.modules = {
 
 ### 2. 规则次序
 
-系统按以下次序，依次判断当前 timezone
+系统按以下次序，依次判断当前 timezone。
 
 `queryField` > `headerField` > `cookieField` > `user tz` > `defaultTz` > `undefined(system timezone)`

@@ -1,6 +1,6 @@
 # Event事件
 
-VonaJS 提供了事件机制，由`事件`和`事件监听器`组成
+VonaJS 提供了事件机制，由`事件`和`事件监听器`组成。
 
 一个`事件`可以有多个`事件监听器`，这些`事件监听器`在执行时采用`洋葱模型`
 
@@ -38,7 +38,7 @@ export class EventEcho extends BeanEventBase<TypeEventEchoData, TypeEventEchoRes
 
 ### 1. emit
 
-触发事件时传入事件参数`Hello World`，并返回结果
+触发事件时传入事件参数`Hello World`，并返回结果。
 
 ```diff
 class ControllerStudent {
@@ -54,7 +54,7 @@ class ControllerStudent {
 
 ### 2. 缺省方法
 
-在触发事件时可以提供缺省方法
+在触发事件时可以提供缺省方法。
 
 ```diff
 class ControllerStudent {
@@ -74,7 +74,7 @@ class ControllerStudent {
 
 ### 1. emitSync
 
-触发事件时传入事件参数`Hello World`，并返回结果
+触发事件时传入事件参数`Hello World`，并返回结果。
 
 ```diff
 class ControllerStudent {
@@ -90,7 +90,7 @@ class ControllerStudent {
 
 ### 2. 缺省方法
 
-在触发事件时可以提供缺省方法
+在触发事件时可以提供缺省方法。
 
 ```diff
 class ControllerStudent {

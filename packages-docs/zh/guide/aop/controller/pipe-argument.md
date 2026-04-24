@@ -4,7 +4,7 @@
 
 ## 创建参数管道
 
-参数管道并不是独立存在的，而是在`局部管道`的基础上创建。下面以局部管道`number`为例，演示如何创建参数管道
+参数管道并不是独立存在的，而是在`局部管道`的基础上创建。下面以局部管道`number`为例，演示如何创建参数管道。
 
 ```diff
 + import { createArgumentPipe, Pipe } from 'vona-module-a-aspect';
@@ -25,7 +25,7 @@ class PipeNumber {
 
 ## 使用参数管道
 
-直接在方法的参数上使用参数管道
+直接在方法的参数上使用参数管道。
 
 ```diff
 class ControllerStudent {
@@ -39,7 +39,7 @@ class ControllerStudent {
 
 ## 使用时指定参数
 
-可以在使用管道时，指定管道参数
+可以在使用管道时，指定管道参数。
 
 ```diff
 class ControllerStudent {

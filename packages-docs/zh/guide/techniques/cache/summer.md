@@ -1,10 +1,10 @@
 # Summer缓存(二级缓存)
 
-`Summer缓存`基于 Mem 缓存和 Redis 缓存实现
+`Summer缓存`基于 Mem 缓存和 Redis 缓存实现。
 
 ## 创建Summer缓存
 
-比如，在模块 demo-student 中创建一个 Summer 缓存: `student`，用于缓存学生数据
+比如，在模块 demo-student 中创建一个 Summer 缓存: `student`，用于缓存学生数据。
 
 ### 1. Cli命令
 
@@ -57,9 +57,9 @@ export class SummerCacheStudent
 
 ## mgetNative
 
-可以提供`mgetNative`方法支持同时读取多个缓存
+可以提供`mgetNative`方法支持同时读取多个缓存。
 
-如果没有提供`mgetNative`方法，在同时读取多个缓存时，系统会自动循环调用`getNative`方法
+如果没有提供`mgetNative`方法，在同时读取多个缓存时，系统会自动循环调用`getNative`方法。
 
 ```diff
 export class SummerCacheStudent
@@ -88,7 +88,7 @@ export class SummerCacheStudent
 
 ## Summer缓存参数
 
-可以为 Summer 缓存配置参数
+可以为 Summer 缓存配置参数。
 
 ```typescript
 @SummerCache({
@@ -124,7 +124,7 @@ class SummerCacheStudent {}
 
 ## App Config
 
-可以在 App Config 中配置 Summer 缓存参数
+可以在 App Config 中配置 Summer 缓存参数。
 
 `src/backend/config/config/config.ts`
 
@@ -169,7 +169,7 @@ config.onions = {
 
 ### 2. Meta
 
-可以让 Summer 缓存在指定的运行环境生效
+可以让 Summer 缓存在指定的运行环境生效。
 
 | 名称   | 类型             | 说明                                                                   |
 | ------ | ---------------- | ---------------------------------------------------------------------- |
@@ -206,7 +206,7 @@ class ControllerStudent {
 
 ## 缓存方法参数
 
-以`get方法`为例介绍缓存方法的参数
+以`get方法`为例介绍缓存方法的参数。
 
 ```typescript
 await this.scope.summerCache.student.get('2', {

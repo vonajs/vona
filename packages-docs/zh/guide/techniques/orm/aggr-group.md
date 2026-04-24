@@ -1,6 +1,6 @@
 # 聚合与分组
 
-下面以模块`test-vona`为例，讲解`聚合与分组`的用法
+下面以模块`test-vona`为例，讲解`聚合与分组`的用法。
 
 ## count
 
@@ -40,7 +40,7 @@ class ServicePost {
 }
 ```
 
-Vona ORM 自动从参数`aggrs`推断出`result`的类型
+Vona ORM 自动从参数`aggrs`推断出`result`的类型。
 
 ![](../../../assets/img/orm/aggr-group/aggr-group-1.png)
 
@@ -70,7 +70,7 @@ class ServicePost {
 }
 ```
 
-Vona ORM 自动从参数`groups`和`aggrs`推断出`result`的类型
+Vona ORM 自动从参数`groups`和`aggrs`推断出`result`的类型。
 
 ![](../../../assets/img/orm/aggr-group/aggr-group-2.png)
 

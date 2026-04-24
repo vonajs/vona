@@ -25,7 +25,7 @@ export class ServiceStudent extends BeanBase {}
 
 ## 使用Service
 
-关于 Service 的使用可以从不同维度来讲
+关于 Service 的使用可以从不同维度来讲。
 
 - Service 的依赖注入和依赖查找，参见：[依赖注入](../essentials/ioc/dependency-injection.md), [依赖查找](../essentials/ioc/dependency-lookup.md)
 - Service 的模块内部与跨模块使用，参见：[模块Scope：Service](../essentials/scope/service.md)
@@ -56,7 +56,7 @@ export class ControllerStudent {
 }
 ```
 
-由于导入的 ServiceStudent 是 type，因此需要指定 Service 的 Bean 标识
+由于导入的 ServiceStudent 是 type，因此需要指定 Service 的 Bean 标识。
 
 ## 2. 依赖查找
 
@@ -96,7 +96,7 @@ class ControllerStudent {
 }
 ```
 
-this.bean === this.app.bean，就是 app 容器
+this.bean === this.app.bean，就是 app 容器。
 
 2. 基于 Bean 标识查找
 
@@ -110,7 +110,7 @@ class ControllerStudent {
 
 ### 请求级别
 
-如果要创建请求级别的 Bean 实例，那么，只需要调用 ctx 容器的`_getBean`方法
+如果要创建请求级别的 Bean 实例，那么，只需要调用 ctx 容器的`_getBean`方法。
 
 ```typescript
 class ControllerStudent {

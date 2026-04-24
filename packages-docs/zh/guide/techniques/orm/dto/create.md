@@ -1,6 +1,6 @@
 # $Dto.create
 
-`$Dto.create`用于标注 Create 参数
+`$Dto.create`用于标注 Create 参数。
 
 ## 参数
 
@@ -22,11 +22,11 @@ $Dto.create(() => ModelOrder, { columns: ['orderNo', 'remark'] });
 
 ## 2. 静态关系
 
-以 Order/Product 为例，演示`1:n`关系
+以 Order/Product 为例，演示`1:n`关系。
 
 ### Model关系定义
 
-先在 Model Order 中定义与 Model Product 的`1:n`关系
+先在 Model Order 中定义与 Model Product 的`1:n`关系。
 
 ```typescript
 @Model({

@@ -1,8 +1,8 @@
 # 动态关系
 
-在大型业务系统中，我们会创建大量 Models，这些 Models 之间的关联众多，我们不可能将所有关联通过`静态关系`的机制事先声明出来。特别是当存在大量业务模块，这些 Models 散落在不同的业务模块中，那么通过`静态关系`事先声明所有的关联关系也变得不太现实。如果事先没有定义`静态关系`，在实际代码中，我们就需要提供一种使用`动态关系`的机制，让我们的查询、类型推断、DTO 推断与生成等能力得以正常使用
+在大型业务系统中，我们会创建大量 Models，这些 Models 之间的关联众多，我们不可能将所有关联通过`静态关系`的机制事先声明出来。特别是当存在大量业务模块，这些 Models 散落在不同的业务模块中，那么通过`静态关系`事先声明所有的关联关系也变得不太现实。如果事先没有定义`静态关系`，在实际代码中，我们就需要提供一种使用`动态关系`的机制，让我们的查询、类型推断、DTO 推断与生成等能力得以正常使用。
 
-下面以模块`test-vona`为例，讲解`动态关系`的用法
+下面以模块`test-vona`为例，讲解`动态关系`的用法。
 
 ## 4种关系
 
@@ -17,7 +17,7 @@ Vona ORM 提供了 4 种动态关系：
 
 ## hasOne
 
-直接在 CRUD 操作中通过`with`指定动态关系
+直接在 CRUD 操作中通过`with`指定动态关系。
 
 ```typescript
 class ServicePost {
@@ -89,7 +89,7 @@ class ServicePost {
 
 ## belongsTo
 
-belongsTo 关系只用于查询操作。直接在查询操作中通过`with`指定动态关系
+belongsTo 关系只用于查询操作。直接在查询操作中通过`with`指定动态关系。
 
 ```typescript
 class ServicePost {
@@ -122,7 +122,7 @@ class ServicePost {
 
 ## hasMany
 
-直接在 CRUD 操作中通过`with`指定动态关系
+直接在 CRUD 操作中通过`with`指定动态关系。
 
 ```typescript
 class ServiceOrder {
@@ -200,7 +200,7 @@ class ServiceOrder {
 
 ## belongsToMany
 
-直接在 CRUD 操作中通过`with`指定动态关系，需要提供中间 Model RoleUser。需要强调的是，这里的 CRUD 操作是针对中间 Model，而不是目标 Model
+直接在 CRUD 操作中通过`with`指定动态关系，需要提供中间 Model RoleUser。需要强调的是，这里的 CRUD 操作是针对中间 Model，而不是目标 Model。
 
 ```typescript
 class ServiceUser {
@@ -306,9 +306,9 @@ class ServiceUser {
 
 ## 树形结构
 
-由于树形结构是与自身关联的多级关系，因此使用`autoload: true`的`静态关系`最方便，代码也最简洁
+由于树形结构是与自身关联的多级关系，因此使用`autoload: true`的`静态关系`最方便，代码也最简洁。
 
-为了演示起见，我们仍然通过`动态关系`来实现树形结构
+为了演示起见，我们仍然通过`动态关系`来实现树形结构。
 
 ```typescript
 class ServiceCategory {

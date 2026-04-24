@@ -1,12 +1,12 @@
 # 应用启动自定义
 
-VonaJS 提供了`Hook/Monkey`机制，可以在应用启动时对系统进行深度的定制
+VonaJS 提供了`Hook/Monkey`机制，可以在应用启动时对系统进行深度的定制。
 
 ::: tip
 当然，对于常规业务需求，一般只需创建[启动项](../../distributed/startup/introduction.md)即可
 :::
 
-在解释`Hook/Monkey`机制之前，有必要先了解应用启动/停止的时序
+在解释`Hook/Monkey`机制之前，有必要先了解应用启动/停止的时序。
 
 ## 应用启动时序
 
@@ -41,7 +41,7 @@ VonaJS 提供了`Hook/Monkey`机制，可以在应用启动时对系统进行深
 2. `Module Monkey`: 在`{module}/src/monkey.ts`中响应系统钩子
 3. `App Monkey`: 在`{project}/src/backend/config/monkey.ts`中响应系统钩子
 
-针对不同的场景，VonaJS 为不同的钩子提供了对应的接口定义，从而规范钩子的使用
+针对不同的场景，VonaJS 为不同的钩子提供了对应的接口定义，从而规范钩子的使用。
 
 | 钩子          | Module Main 接口 | Module Monkey 接口                | App Monkey 接口                   |
 | ------------- | ---------------- | --------------------------------- | --------------------------------- |

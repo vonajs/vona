@@ -2,7 +2,7 @@
 
 ## 创建管道
 
-比如，在模块 demo-student 中创建一个局部管道: `number`，将请求参数转换为`number`类型
+比如，在模块 demo-student 中创建一个局部管道: `number`，将请求参数转换为`number`类型。
 
 ### 1. Cli命令
 
@@ -60,7 +60,7 @@ class ControllerStudent {
 
 ### 2. 标注控制器类
 
-可以针对控制器类使用管道，从而类中所有方法都会应用此管道
+可以针对控制器类使用管道，从而类中所有方法都会应用此管道。
 
 ```diff
 import { Aspect } from 'vona-module-a-aspect';
@@ -75,7 +75,7 @@ class ControllerStudent {
 
 ## 管道参数
 
-可以为管道定义参数，通过参数更灵活的配置管道逻辑
+可以为管道定义参数，通过参数更灵活的配置管道逻辑。
 
 比如，为 number 管道定义`errorCode`参数，如果传入的请求参数不是 number 类型就抛出异常，错误代码为`errorCode`
 
@@ -117,7 +117,7 @@ export class PipeNumber extends BeanBase implements IPipeTransform<TypePipeNumbe
 
 ### 4. 使用时指定参数
 
-可以针对某个 API 单独指定局部管道的参数
+可以针对某个 API 单独指定局部管道的参数。
 
 ```diff
 class ControllerStudent {
@@ -131,7 +131,7 @@ class ControllerStudent {
 
 ### 5. App Config
 
-可以在 App Config 中配置管道参数
+可以在 App Config 中配置管道参数。
 
 `src/backend/config/config/config.ts`
 

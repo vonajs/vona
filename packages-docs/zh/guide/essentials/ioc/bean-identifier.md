@@ -10,7 +10,7 @@
 
 ## 全局Service Bean
 
-为了进一步简化 Bean 的使用，Vona 提供了全局 Service Bean 的概念。如果一个 Bean class 的 sceneName 值是`bean`，那么这个 bean class 就是全局 Service Bean
+为了进一步简化 Bean 的使用，Vona 提供了全局 Service Bean 的概念。如果一个 Bean class 的 sceneName 值是`bean`，那么这个 bean class 就是全局 Service Bean。
 
 全局 Service Bean 的 Bean 标识就是`beanName`
 

@@ -1,6 +1,6 @@
 # JWT
 
-VonaJS 基于[jsonwebtoken](https://github.com/auth0/node-jsonwebtoken)提供了强大而灵活的 JWT
+VonaJS 基于[jsonwebtoken](https://github.com/auth0/node-jsonwebtoken)提供了强大而灵活的 JWT。
 
 ## App Config
 
@@ -42,11 +42,11 @@ config.modules = {
 
 ## 添加新Client
 
-下面通过添加新 Client 解释 Client 的配置
+下面通过添加新 Client 解释 Client 的配置。
 
 ### 1. 添加类型定义
 
-采用接口合并机制添加新 Client 的类型定义，比如`test`，为测试场景生成 JWT token
+采用接口合并机制添加新 Client 的类型定义，比如`test`，为测试场景生成 JWT token。
 
 在 VSCode 编辑器中，输入代码片段`recordjwtclient`，自动生成代码骨架:
 
@@ -154,7 +154,7 @@ class ControllerStudent {
 
 ## 生成临时accessToken
 
-在一些场景中，需要在 URL Query 中使用 accessToken。这时就需要生成临时 accessToken。临时 accessToken 的`expiresIn`比常规 accessToken 小，因而更加安全
+在一些场景中，需要在 URL Query 中使用 accessToken。这时就需要生成临时 accessToken。临时 accessToken 的`expiresIn`比常规 accessToken 小，因而更加安全。
 
 生成临时 accessToken 有两种方式:
 

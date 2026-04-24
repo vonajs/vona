@@ -34,9 +34,9 @@ export class ControllerStudent extends BeanBase {
 
 ## 路由
 
-与`Fastify`一样，Vona 也采用[find-my-way](https://github.com/delvedor/find-my-way)作为路由库。所有使用了`@Web`装饰器的 Controller Action，会自动注册到路由表中
+与`Fastify`一样，Vona 也采用[find-my-way](https://github.com/delvedor/find-my-way)作为路由库。所有使用了`@Web`装饰器的 Controller Action，会自动注册到路由表中。
 
-路由路径由 Controller Path 和 Action Path 组合而成
+路由路径由 Controller Path 和 Action Path 组合而成。
 
 ### 常规格式
 
@@ -56,7 +56,7 @@ Route Path = GlobalPrefix + Module Url + Controller Path + Action Path
 
 ### 简化规则1
 
-如果 Controller Path 与模块名称重名，那么自动去除重复部分
+如果 Controller Path 与模块名称重名，那么自动去除重复部分。
 
 比如，模块 demo-student 中的 Controller `student`，路由如下：
 
@@ -67,7 +67,7 @@ Route Path = GlobalPrefix + Module Url + Controller Path + Action Path
 
 ### 简化规则2
 
-如果 Controller Path 或者 Action Path 以`/`为前缀，那么就自动去除 Module Url
+如果 Controller Path 或者 Action Path 以`/`为前缀，那么就自动去除 Module Url。
 
 | Controller Path | Action Path | Route Path       |
 | --------------- | ----------- | ---------------- |
@@ -76,7 +76,7 @@ Route Path = GlobalPrefix + Module Url + Controller Path + Action Path
 
 ### 简化规则3
 
-如果 Controller Path 或者 Action Path 以`//`为前缀，那么就自动去除 GlobalPrefix 和 Module Url
+如果 Controller Path 或者 Action Path 以`//`为前缀，那么就自动去除 GlobalPrefix 和 Module Url。
 
 | Controller Path | Action Path | Route Path   |
 | --------------- | ----------- | ------------ |
@@ -125,7 +125,7 @@ class ControllerStudent3 {
 }
 ```
 
-根据参数的特点，不同类型的参数允许指定字段名称，比如在 query 装饰器中指定`id`。也可以不指定字段名称，从而取得整个 query 对象
+根据参数的特点，不同类型的参数允许指定字段名称，比如在 query 装饰器中指定`id`。也可以不指定字段名称，从而取得整个 query 对象。
 
 比如，URL 为`/?id=1&name=tom`:
 
@@ -159,23 +159,23 @@ class ControllerStudent3 {
 
 ## 参数校验
 
-Vona 基于[Zod](https://zod.dev) 提供了非常简洁、灵活的机制对请求参数作校验
+Vona 基于[Zod](https://zod.dev) 提供了非常简洁、灵活的机制对请求参数作校验。
 
 - 参见：[参数校验](../techniques/validation/introduction.md)
 
 ## Swagger/Openapi
 
-Vona 基于[@asteasolutions/zod-to-openapi](https://github.com/asteasolutions/zod-to-openapi)实现了非常便利的`Swagger/Openapi`。Vona 中的 `Swagger/Openapi` 仍然延续[参数校验](../techniques/validation/introduction.md)中的装饰器，同时提供扩展工具，用于设置与 Openapi 相关的信息
+Vona 基于[@asteasolutions/zod-to-openapi](https://github.com/asteasolutions/zod-to-openapi)实现了非常便利的`Swagger/Openapi`。Vona 中的 `Swagger/Openapi` 仍然延续[参数校验](../techniques/validation/introduction.md)中的装饰器，同时提供扩展工具，用于设置与 Openapi 相关的信息。
 
 - 参见：[Swagger/Openapi](../techniques/openapi/introduction.md)
 
 ## Response Body
 
-Vona 提供了与[参数校验](../techniques/validation/introduction.md)类似的机制，指定 Response body 的类型，并自动生成 Swagger/Openapi 元数据
+Vona 提供了与[参数校验](../techniques/validation/introduction.md)类似的机制，指定 Response body 的类型，并自动生成 Swagger/Openapi 元数据。
 
 ### 1. 自动推断Zod Schema：基础类型/Dto/Entity
 
-如果 body 类型是`基础类型/Dto/Entity`，那么，系统就会自动推断出对应的 Zod Schema，并自动生成 Swagger/Openapi
+如果 body 类型是`基础类型/Dto/Entity`，那么，系统就会自动推断出对应的 Zod Schema，并自动生成 Swagger/Openapi。
 
 - 举例：`string`
 
@@ -215,11 +215,11 @@ class ControllerStudent {
 
 ### 2. 指定Zod Schema
 
-还可以显式的指定 Zod Schema，并自动生成 Swagger/Openapi
+还可以显式的指定 Zod Schema，并自动生成 Swagger/Openapi。
 
 - 举例：`string[]`
 
-使用装饰器`@Api.body`指定 Zod Schema。Zod Schema 的使用规则与[参数校验](../techniques/validation/introduction.md)一致
+使用装饰器`@Api.body`指定 Zod Schema。Zod Schema 的使用规则与[参数校验](../techniques/validation/introduction.md)一致。
 
 ```diff
 import { Api } from 'vona-module-a-openapiutils';
@@ -261,11 +261,11 @@ class ControllerStudent {
 }
 ```
 
-还可以使用装饰器`@Api.bodyCustom`来自定义包装对象
+还可以使用装饰器`@Api.bodyCustom`来自定义包装对象。
 
 ### 1. 禁用包装对象
 
-可以禁用包装对象，直接返回 Response body 本身
+可以禁用包装对象，直接返回 Response body 本身。
 
 ```diff
 class ControllerStudent {
@@ -325,7 +325,7 @@ class ControllerStudent {
 
 ### 1. @Api.contentType
 
-设置 Response 的响应类型
+设置 Response 的响应类型。
 
 ```typescript
 @Api.contentType('application/xml')
@@ -333,7 +333,7 @@ class ControllerStudent {
 
 ### 2. @Api.exclude
 
-不在 Swagger/Openapi 元数据中显示此 API。此装饰器可作用于 Controller/Action
+不在 Swagger/Openapi 元数据中显示此 API。此装饰器可作用于 Controller/Action。
 
 ```typescript
 @Api.exclude()
@@ -341,7 +341,7 @@ class ControllerStudent {
 
 ### 3. @Api.header/@Api.headers
 
-定义 Request headers
+定义 Request headers。
 
 ```typescript
 @Api.header({ name: 'x-request-header', description: 'request header' })
@@ -351,7 +351,7 @@ class ControllerStudent {
 
 ### 4. @Api.httpCode
 
-设置 Response 的响应码
+设置 Response 的响应码。
 
 ```typescript
 @Api.httpCode(400)
@@ -359,7 +359,7 @@ class ControllerStudent {
 
 ### 5. @Api.setHeader
 
-设置 Response 的 Headers
+设置 Response 的 Headers。
 
 ```typescript
 @Api.setHeader('x-response-header', 'value')
@@ -369,7 +369,7 @@ class ControllerStudent {
 
 ### 6. @Api.tags
 
-设置在 Swagger/Openapi 中的分组信息。此装饰器可作用于 Controller/Action
+设置在 Swagger/Openapi 中的分组信息。此装饰器可作用于 Controller/Action。
 
 ```typescript
 @Api.tags(['Student'])
@@ -379,7 +379,7 @@ class ControllerStudent {
 
 ### 1. 举例
 
-可以在定义 Action 的请求方法时传递更多选项
+可以在定义 Action 的请求方法时传递更多选项。
 
 ```typescript
 class ControllerStudent {
@@ -414,7 +414,7 @@ export default {
 };
 ```
 
-使用`$locale`方法进行语言翻译，支持语言资源的类型自动提示
+使用`$locale`方法进行语言翻译，支持语言资源的类型自动提示。
 
 ```typescript
 import { $locale } from '../.metadata/locales.ts';
@@ -444,7 +444,7 @@ import { $locale } from '../.metadata/locales.ts';
 
 ### 1. 举例
 
-可以在定义 Controller 时传递更多选项
+可以在定义 Controller 时传递更多选项。
 
 ```typescript
 @Controller('student', {
@@ -469,9 +469,9 @@ class ControllerStudent {}
 
 ### 3. App Config
 
-可以在 App Config 中配置 Controller options
+可以在 App Config 中配置 Controller options。
 
-比如，在默认情况下，`http://localhost:7102/swagger`只能在`test`/`dev`环境有效。如果要让 Swagger 在`prod`环境也能访问，那么，可以在 App Config 中进行配置
+比如，在默认情况下，`http://localhost:7102/swagger`只能在`test`/`dev`环境有效。如果要让 Swagger 在`prod`环境也能访问，那么，可以在 App Config 中进行配置。
 
 `src/backend/config/config/config.prod.ts`
 
@@ -490,7 +490,7 @@ config.onions = {
 
 ### 4. actions
 
-在 Controller options 中提供 actions 选项，从而允许我们在 App Config 中配置任何 Controller 中的 Action options
+在 Controller options 中提供 actions 选项，从而允许我们在 App Config 中配置任何 Controller 中的 Action options。
 
 比如，在 App Config 中设置`ControllerStudent`类中的`findOne`的 action options：
 

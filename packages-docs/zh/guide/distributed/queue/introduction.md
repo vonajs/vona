@@ -1,10 +1,10 @@
 # 队列
 
-VonaJS 基于[BullMQ](https://github.com/taskforcesh/bullmq)提供了强大的队列组件
+VonaJS 基于[BullMQ](https://github.com/taskforcesh/bullmq)提供了强大的队列组件。
 
 ## 创建队列
 
-比如，在模块 demo-student 中创建一个队列: `add`，将传入的参数作加法运算
+比如，在模块 demo-student 中创建一个队列: `add`，将传入的参数作加法运算。
 
 ### 1. Cli命令
 
@@ -108,7 +108,7 @@ async pushAsync(data: DATA, options?: IQueuePushOptions): Promise<RESULT>;
 
 ## 队列参数
 
-可以为队列配置参数
+可以为队列配置参数。
 
 ```typescript
 @Queue({
@@ -137,7 +137,7 @@ class QueueAdd {}
 
 ## App Config
 
-可以在 App Config 中配置队列参数
+可以在 App Config 中配置队列参数。
 
 `src/backend/config/config/config.ts`
 
@@ -180,7 +180,7 @@ config.onions = {
 
 ### 2. Meta
 
-可以让队列在指定的运行环境生效
+可以让队列在指定的运行环境生效。
 
 | 名称   | 类型             | 说明                                                                   |
 | ------ | ---------------- | ---------------------------------------------------------------------- |
@@ -201,7 +201,7 @@ class QueueAdd {}
 
 ## 查看当前生效的队列清单
 
-可以直接输出当前生效的队列清单
+可以直接输出当前生效的队列清单。
 
 ```diff
 class ControllerStudent {

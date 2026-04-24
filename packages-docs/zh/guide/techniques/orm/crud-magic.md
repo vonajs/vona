@@ -1,10 +1,10 @@
 # CRUD(魔术方法)
 
-Vona ORM 采用魔术方法的机制进一步简化操作数据的代码
+Vona ORM 采用魔术方法的机制进一步简化操作数据的代码。
 
 ## 什么是魔术方法
 
-系统自动从 method name 中解析出参数，然后调用实际的 CRUD 方法
+系统自动从 method name 中解析出参数，然后调用实际的 CRUD 方法。
 
 - 举例 1
 
@@ -36,7 +36,7 @@ this.scope.model.student.get({ name: { _eqI_: 'Tom' } });
 
 - `id/name/enabled/disabled/closed/active`
 
-因此，不需任何额外代码，即可享受魔术方法带来的便利
+因此，不需任何额外代码，即可享受魔术方法带来的便利。
 
 以字段`id`为例，会提供以下魔术方法:
 
@@ -57,7 +57,7 @@ this.scope.model.student.selectByNameEqI(name);
 
 ## 自定义方法
 
-如果需要对其他字段实现类似魔术方法的风格，可以直接在 Model 中定义相应的方法
+如果需要对其他字段实现类似魔术方法的风格，可以直接在 Model 中定义相应的方法。
 
 比如，针对字段`title`，提供方法`getByTitle`/`selectByTitle`:
 
@@ -87,7 +87,7 @@ this.scope.model.post.selectByTitle(title);
 
 ## 自定义方法优先
 
-如果在 Model 中提供了自定义方法，那么相应的魔术方法就会失效
+如果在 Model 中提供了自定义方法，那么相应的魔术方法就会失效。
 
 比如，针对字段`name`，提供方法`getByName`:
 

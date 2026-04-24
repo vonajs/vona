@@ -1,6 +1,6 @@
 # 依赖注入
 
-Vona 通过`@Use`装饰器函数注入 Bean 实例
+Vona 通过`@Use`装饰器函数注入 Bean 实例。
 
 ## 注入方式
 
@@ -33,4 +33,4 @@ export class ControllerOther {
 }
 ```
 
-由于导入的 ServiceStudent 是 type，因此需要指定 Service 的 Bean 标识
+由于导入的 ServiceStudent 是 type，因此需要指定 Service 的 Bean 标识。

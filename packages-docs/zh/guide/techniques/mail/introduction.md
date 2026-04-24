@@ -1,6 +1,6 @@
 # Mail发送邮件
 
-VonaJS 基于[Nodemailer](https://github.com/nodemailer/nodemailer)实现了发送邮件的能力
+VonaJS 基于[Nodemailer](https://github.com/nodemailer/nodemailer)实现了发送邮件的能力。
 
 ## 特性
 
@@ -62,7 +62,7 @@ config.modules = {
 | auth.user | 账户名称                                                              |
 | auth.pass | 账户密码                                                              |
 
-`service: test`: VonaJS 提供了内置的`test`服务。方便在开发阶段测试邮件发送能力，而不需要提供真实的邮件服务器
+`service: test`: VonaJS 提供了内置的`test`服务。方便在开发阶段测试邮件发送能力，而不需要提供真实的邮件服务器。
 
 ## env配置
 
@@ -88,7 +88,7 @@ MAIL_SYSTEM_DEFAULTS_FROM = no.reply@cabloy.com
 
 ### 1. 添加类型定义
 
-采用接口合并机制添加新 Client 的类型定义，比如`order`，用于发送与订单相关的邮件
+采用接口合并机制添加新 Client 的类型定义，比如`order`，用于发送与订单相关的邮件。
 
 在 VSCode 编辑器中，输入代码片段`recordmailclient`，自动生成代码骨架:
 
@@ -133,7 +133,7 @@ config.modules = {
 
 ## bean.mail
 
-VonaJS 通过模块`a-mail`提供了全局 Bean `bean.mail`，可用于发送邮件
+VonaJS 通过模块`a-mail`提供了全局 Bean `bean.mail`，可用于发送邮件。
 
 ```typescript
 import type { IMailOptions } from 'vona-module-a-mail';
@@ -151,7 +151,7 @@ class ControllerStudent {
 }
 ```
 
-可以在发送邮件时指定使用哪个 Client
+可以在发送邮件时指定使用哪个 Client。
 
 ```typescript
 await this.bean.mail.send(mail, 'order');
@@ -159,7 +159,7 @@ await this.bean.mail.send(mail, 'order');
 
 ## 队列配置
 
-VonaJS 采用一个内置队列发送邮件。可以在 App Config 中修改队列配置
+VonaJS 采用一个内置队列发送邮件。可以在 App Config 中修改队列配置。
 
 ```typescript
 // onions

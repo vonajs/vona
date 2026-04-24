@@ -1,6 +1,6 @@
 ## `用户名/密码`认证
 
-模块`auth-simple`提供了开箱即用的`用户名/密码`认证
+模块`auth-simple`提供了开箱即用的`用户名/密码`认证。
 
 ## 如何使用
 
@@ -21,7 +21,7 @@ const jwt = await this.bean.auth.authenticate('auth-simple:simple', {
 });
 ```
 
-`confirmed`: 如果为`true`，意味着用户已经确认，不需要后续的`激活`操作
+`confirmed`: 如果为`true`，意味着用户已经确认，不需要后续的`激活`操作。
 
 - 简写方式：
 
@@ -72,9 +72,9 @@ await this.bean.passport.signout();
 
 ### 4. 参数配置
 
-模块`auth-simple`采用[password-hash-salt](https://www.npmjs.com/package/password-hash-salt)对 Password 进行 hash 处理
+模块`auth-simple`采用[password-hash-salt](https://www.npmjs.com/package/password-hash-salt)对 Password 进行 hash 处理。
 
-可以在 App Config 中修改参数配置
+可以在 App Config 中修改参数配置。
 
 `src/backend/config/config/config.ts`
 
@@ -94,7 +94,7 @@ config.modules = {
 
 ## 源码解析
 
-这里对模块`auth-simple`的核心源码进行解析，从而说明如何开发一个新的 Auth Provider
+这里对模块`auth-simple`的核心源码进行解析，从而说明如何开发一个新的 Auth Provider。
 
 比如，在模块`auth-simple`中创建一个 Auth Provider: `simple`
 

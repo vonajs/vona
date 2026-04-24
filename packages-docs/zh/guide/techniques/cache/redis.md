@@ -1,10 +1,10 @@
 # Redis缓存
 
-`Redis缓存`基于[Redis](../../distributed/redis.md)实现
+`Redis缓存`基于[Redis](../../distributed/redis.md)实现。
 
 ## 创建Redis缓存
 
-比如，在模块 demo-student 中创建一个 Redis 缓存: `student`，用于缓存学生数据
+比如，在模块 demo-student 中创建一个 Redis 缓存: `student`，用于缓存学生数据。
 
 ### 1. Cli命令
 
@@ -38,7 +38,7 @@ export class CacheRedisStudent extends BeanCacheRedisBase<TCacheRedisStudentKey,
 
 ## Redis缓存参数
 
-可以为 Redis 缓存配置参数
+可以为 Redis 缓存配置参数。
 
 ```typescript
 @CacheRedis({
@@ -61,7 +61,7 @@ class CacheRedisStudent {}
 
 ## App Config
 
-可以在 App Config 中配置 Redis 缓存参数
+可以在 App Config 中配置 Redis 缓存参数。
 
 `src/backend/config/config/config.ts`
 
@@ -101,7 +101,7 @@ config.onions = {
 
 ### 2. Meta
 
-可以让 Redis 缓存在指定的运行环境生效
+可以让 Redis 缓存在指定的运行环境生效。
 
 | 名称   | 类型             | 说明                                                                   |
 | ------ | ---------------- | ---------------------------------------------------------------------- |
@@ -138,7 +138,7 @@ class ControllerStudent {
 
 ## 缓存方法参数
 
-以`set方法`为例介绍缓存方法的参数
+以`set方法`为例介绍缓存方法的参数。
 
 ```typescript
 await this.scope.cacheRedis.student.set(student, '1', {

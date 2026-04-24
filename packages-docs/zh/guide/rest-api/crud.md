@@ -1,8 +1,8 @@
 # 创建CRUD
 
-可以使用`Cli命令`或者`菜单命令`创建一个 crud 的代码骨架
+可以使用`Cli命令`或者`菜单命令`创建一个 crud 的代码骨架。
 
-比如，在模块 demo-student 中创建一个 student 的 CRUD
+比如，在模块 demo-student 中创建一个 student 的 CRUD。
 
 ## Cli命令
 

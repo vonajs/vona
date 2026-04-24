@@ -2,7 +2,7 @@
 
 ## 创建管道
 
-比如，在模块 demo-student 中创建一个全局管道: `number`，将请求参数转换为`number`类型
+比如，在模块 demo-student 中创建一个全局管道: `number`，将请求参数转换为`number`类型。
 
 ### 1. Cli命令
 
@@ -43,11 +43,11 @@ class PipeNumber {
 
 ## 使用管道
 
-与局部管道不同，系统会自动加载全局管道，并使其生效
+与局部管道不同，系统会自动加载全局管道，并使其生效。
 
 ## 管道参数
 
-可以为管道定义参数，通过参数更灵活的配置管道逻辑
+可以为管道定义参数，通过参数更灵活的配置管道逻辑。
 
 比如，为 number 管道定义`errorCode`参数，如果传入的请求参数不是 number 类型就抛出异常，错误代码为`errorCode`
 
@@ -89,7 +89,7 @@ export class PipeNumber extends BeanBase implements IPipeTransform<TypePipeNumbe
 
 ### 4. 使用时指定参数
 
-可以针对某个 API 单独指定全局管道的参数
+可以针对某个 API 单独指定全局管道的参数。
 
 ```diff
 class ControllerStudent {
@@ -103,7 +103,7 @@ class ControllerStudent {
 
 ### 5. App Config
 
-可以在 App Config 中配置管道参数
+可以在 App Config 中配置管道参数。
 
 `src/backend/config/config/config.ts`
 
@@ -124,7 +124,7 @@ config.onions = {
 
 ## 管道顺序
 
-由于全局管道是默认加载并生效的，所以，VonaJS 提供了两个参数，用于控制管道的加载顺序
+由于全局管道是默认加载并生效的，所以，VonaJS 提供了两个参数，用于控制管道的加载顺序。
 
 ### 1. dependencies
 
@@ -183,7 +183,7 @@ config.onions = {
 
 ### 2. Meta
 
-可以让全局管道在指定的运行环境生效
+可以让全局管道在指定的运行环境生效。
 
 | 名称   | 类型             | 说明                                                                   |
 | ------ | ---------------- | ---------------------------------------------------------------------- |
@@ -204,7 +204,7 @@ class PipeNumber {}
 
 ### 3. match/ignore
 
-可以针对指定的 API 启用/禁用全局管道
+可以针对指定的 API 启用/禁用全局管道。
 
 | 名称   | 类型                               | 说明            |
 | ------ | ---------------------------------- | --------------- |
@@ -213,7 +213,7 @@ class PipeNumber {}
 
 ## 查看当前生效的全局管道清单
 
-可以直接在 Controller action 中输出当前生效的全局管道清单
+可以直接在 Controller action 中输出当前生效的全局管道清单。
 
 ```diff
 class ControllerStudent {

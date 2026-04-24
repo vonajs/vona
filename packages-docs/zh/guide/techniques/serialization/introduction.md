@@ -1,12 +1,12 @@
 # Serialization序列化/数据脱敏
 
-VonaJS 提供了`序列化`能力，可以对 API 的响应数据进行转换，比如：排除密码字段，对 Email 和 Mobile 进行脱敏处理，等等
+VonaJS 提供了`序列化`能力，可以对 API 的响应数据进行转换，比如：排除密码字段，对 Email 和 Mobile 进行脱敏处理，等等。
 
-先介绍通用的序列化机制，再介绍一组工具函数。通过工具函数可以更加便利的使用序列化能力
+先介绍通用的序列化机制，再介绍一组工具函数。通过工具函数可以更加便利的使用序列化能力。
 
 ## 创建Serializer Transform
 
-比如，在模块 demo-student 中创建一个 Serializer Transform: `upper`，将字段值转化为大写
+比如，在模块 demo-student 中创建一个 Serializer Transform: `upper`，将字段值转化为大写。
 
 ### 1. Cli命令
 
@@ -51,11 +51,11 @@ export class SerializerTransformUpper extends BeanBase {
 
 ## 使用Serializer Transform
 
-比如学生 API`findOne`方法返回的结果类型是`EntityStudent`。下面将`EntityStudent`的`name`字段转为大写
+比如学生 API`findOne`方法返回的结果类型是`EntityStudent`。下面将`EntityStudent`的`name`字段转为大写。
 
 ### 1. 开启序列化
 
-需要为 API 开启序列化
+需要为 API 开启序列化。
 
 ```diff
 class ControllerStudent {
@@ -84,9 +84,9 @@ class EntityStudent {
 
 ## Filter参数
 
-可以为 Serializer Transform 传入 Filter 参数。系统先执行 Filter 函数，根据结果来控制当前 Serializer Transform 是否需要执行
+可以为 Serializer Transform 传入 Filter 参数。系统先执行 Filter 函数，根据结果来控制当前 Serializer Transform 是否需要执行。
 
-比如，如果当前用户名是`admin`则不执行`upper`的转换逻辑
+比如，如果当前用户名是`admin`则不执行`upper`的转换逻辑。
 
 ```diff
 class EntityStudent {
@@ -102,9 +102,9 @@ class EntityStudent {
 
 ## Serializer Transform参数
 
-可以为 Serializer Transform 定义参数，通过参数更灵活的配置转换逻辑
+可以为 Serializer Transform 定义参数，通过参数更灵活的配置转换逻辑。
 
-比如，为 Serializer Transform `upper`定义`first`参数，用于控制是否只将首字母转为大写
+比如，为 Serializer Transform `upper`定义`first`参数，用于控制是否只将首字母转为大写。
 
 ### 1. 定义参数类型
 
@@ -146,7 +146,7 @@ class SerializerTransformUpper {
 
 ### 4. 使用时指定参数
 
-可以指定`@Serializer.transform`的参数
+可以指定`@Serializer.transform`的参数。
 
 ```diff
 class EntityStudent {
@@ -158,7 +158,7 @@ class EntityStudent {
 
 ### 5. App Config
 
-可以在 App Config 中配置 Serializer Transform 参数
+可以在 App Config 中配置 Serializer Transform 参数。
 
 `src/backend/config/config/config.ts`
 

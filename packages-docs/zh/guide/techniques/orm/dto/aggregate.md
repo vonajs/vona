@@ -1,6 +1,6 @@
 # $Dto.aggregate
 
-`$Dto.aggregate`用于标注聚合操作的返回结果
+`$Dto.aggregate`用于标注聚合操作的返回结果。
 
 ## 如何使用
 

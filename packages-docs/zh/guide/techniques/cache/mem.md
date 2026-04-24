@@ -1,10 +1,10 @@
 # Mem缓存
 
-`Mem缓存`基于[lru-cache](https://github.com/isaacs/node-lru-cache)实现
+`Mem缓存`基于[lru-cache](https://github.com/isaacs/node-lru-cache)实现。
 
 ## 创建Mem缓存
 
-比如，在模块 demo-student 中创建一个 Mem 缓存: `student`，用于缓存学生数据
+比如，在模块 demo-student 中创建一个 Mem 缓存: `student`，用于缓存学生数据。
 
 ### 1. Cli命令
 
@@ -39,7 +39,7 @@ export class CacheMemStudent extends BeanCacheMemBase<TCacheMemStudentKey, TCach
 
 ## Mem缓存参数
 
-可以为 Mem 缓存配置参数
+可以为 Mem 缓存配置参数。
 
 ```typescript
 @CacheMem({
@@ -66,7 +66,7 @@ class CacheMemStudent {}
 
 ## App Config
 
-可以在 App Config 中配置 Mem 缓存参数
+可以在 App Config 中配置 Mem 缓存参数。
 
 `src/backend/config/config/config.ts`
 
@@ -108,7 +108,7 @@ config.onions = {
 
 ### 2. Meta
 
-可以让 Redis 缓存在指定的运行环境生效
+可以让 Redis 缓存在指定的运行环境生效。
 
 | 名称   | 类型             | 说明                                                                   |
 | ------ | ---------------- | ---------------------------------------------------------------------- |
@@ -145,7 +145,7 @@ class ControllerStudent {
 
 ## 缓存方法参数
 
-以`set方法`为例介绍缓存方法的参数
+以`set方法`为例介绍缓存方法的参数。
 
 ```typescript
 this.scope.cacheMem.student.set(student, '1', {

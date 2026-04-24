@@ -1,6 +1,6 @@
 # 日志分级
 
-可以基于分级控制写入日志文件的消息内容
+可以基于分级控制写入日志文件的消息内容。
 
 ## NPM分级
 
@@ -20,7 +20,7 @@ const levels = {
 
 ## 输出方法
 
-与分级对应的是一组输出方法
+与分级对应的是一组输出方法。
 
 ```typescript
 this.$logger.error('test');
@@ -34,11 +34,11 @@ this.$logger.silly('test');
 
 ## 默认分级
 
-VonaJS 的默认分级是`info`，从而可以控制只有`<=info`的分级日志才写入文件
+VonaJS 的默认分级是`info`，从而可以控制只有`<=info`的分级日志才写入文件。
 
 ### 1. makeTransportFile
 
-我们再新建`order` Client，可以通过`makeTransportFile`方法实现此策略: 只有`<=info`的分级日志才写入文件
+我们再新建`order` Client，可以通过`makeTransportFile`方法实现此策略: 只有`<=info`的分级日志才写入文件。
 
 ```diff
 // logger
@@ -57,7 +57,7 @@ config.logger = {
 
 ### 2. makeTransportFile: 独立文件
 
-如果需要强制某个分级的日志写入独立的文件，可以再增加一个文件通道。比如，将`debug`分级的日志写入文件`order-debug`中
+如果需要强制某个分级的日志写入独立的文件，可以再增加一个文件通道。比如，将`debug`分级的日志写入文件`order-debug`中。
 
 ```diff
 // logger
@@ -77,7 +77,7 @@ config.logger = {
 
 ### 3. makeTransportConsole
 
-对于控制台通道，有一个特殊约定：凡是`silly`分级的日志，都会输出到控制台。因此，通过`makeTransportConsole`方法实现此策略
+对于控制台通道，有一个特殊约定：凡是`silly`分级的日志，都会输出到控制台。因此，通过`makeTransportConsole`方法实现此策略。
 
 ```diff
 // logger
@@ -96,9 +96,9 @@ config.logger = {
 
 ## 默认分级配置
 
-可以通过.env 文件修改默认的分级配置
+可以通过.env 文件修改默认的分级配置。
 
-由于可以配置多个 Clients，因此，Clients 可以单独配置自己的默认分级
+由于可以配置多个 Clients，因此，Clients 可以单独配置自己的默认分级。
 
 ### 1. Client: `default`
 
@@ -145,9 +145,9 @@ class ControllerStudent {
 
 ## 动态修改分级
 
-在系统运行中可以动态修改分级，从而在不停机、不重启的情况下，随时控制基于分级的写入策略
+在系统运行中可以动态修改分级，从而在不停机、不重启的情况下，随时控制基于分级的写入策略。
 
-当调用`setLevel`方法时，系统会自动广播至所有 Workers，从而修改每个工作进程中的当前分级
+当调用`setLevel`方法时，系统会自动广播至所有 Workers，从而修改每个工作进程中的当前分级。
 
 ```typescript
 class ControllerStudent {

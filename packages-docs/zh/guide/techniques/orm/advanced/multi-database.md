@@ -8,11 +8,11 @@ Vona ORM 支持`多数据库/多数据源`，特性如下：
 2. 支持多数据源
 3. 支持跨数据源的关联查询
 
-下面以 Model User/Order 为例，通过查询用户的订单列表，来演示`多数据库/多数据源`的使用方法
+下面以 Model User/Order 为例，通过查询用户的订单列表，来演示`多数据库/多数据源`的使用方法。
 
 ## 准备Models
 
-先准备两个 Models：User/Order
+先准备两个 Models：User/Order。
 
 1. Model Order
 
@@ -37,7 +37,7 @@ class ModelUser {}
 
 ## 查询数据
 
-然后查询用户的订单列表
+然后查询用户的订单列表。
 
 ```typescript
 class ServiceOrder {
@@ -57,7 +57,7 @@ class ServiceOrder {
 }
 ```
 
-到目前为止，使用`系统默认数据源`查询`userId=1`的用户信息，和该用户的所有订单列表
+到目前为止，使用`系统默认数据源`查询`userId=1`的用户信息，和该用户的所有订单列表。
 
 ## 创建多数据源
 
@@ -137,7 +137,7 @@ class ServiceOrder {
 
 - `newInstance`: 传入要使用的数据源，返回新的 Model 实例
 
-到目前为止，使用数据源`user-pg`查询用户信息，使用`系统默认数据源`查询订单列表
+到目前为止，使用数据源`user-pg`查询用户信息，使用`系统默认数据源`查询订单列表。
 
 ## 使用数据源：Relation动态选项
 
@@ -168,11 +168,11 @@ class ServiceOrder {
 
 - `meta.client`: 指定 relation `orders`要使用的数据源
 
-到目前为止，使用数据源`user-pg`查询用户信息，使用数据源`order-mysql`查询订单列表
+到目前为止，使用数据源`user-pg`查询用户信息，使用数据源`order-mysql`查询订单列表。
 
 ## 使用数据源：Model配置
 
-也可以直接在 Model 中配置数据源，从而简化查询代码
+也可以直接在 Model 中配置数据源，从而简化查询代码。
 
 1. Model Order
 
@@ -199,7 +199,7 @@ class ModelUser {}
 
 3. 查询数据
 
-现在，又可以使用常规的方式查询用户的订单列表
+现在，又可以使用常规的方式查询用户的订单列表。
 
 ```typescript
 class ServiceOrder {
@@ -239,7 +239,7 @@ config.onions = {
 };
 ```
 
-于是，也可以使用常规的方式查询用户的订单列表
+于是，也可以使用常规的方式查询用户的订单列表。
 
 ## 使用数据源：Relation静态选项
 
@@ -260,4 +260,4 @@ config.onions = {
 class ModelUser {}
 ```
 
-同样，也可以使用常规的方式查询用户的订单列表
+同样，也可以使用常规的方式查询用户的订单列表。

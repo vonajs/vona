@@ -56,7 +56,7 @@ class ControllerStudent {
 
 ### 2. 标注控制器类
 
-可以针对控制器类使用中间件，从而类中所有方法都会应用此中间件
+可以针对控制器类使用中间件，从而类中所有方法都会应用此中间件。
 
 ```diff
 import { Aspect } from 'vona-module-a-aspect';
@@ -71,9 +71,9 @@ class ControllerStudent {
 
 ## 中间件参数
 
-可以为中间件定义参数，通过参数更灵活的配置中间件逻辑
+可以为中间件定义参数，通过参数更灵活的配置中间件逻辑。
 
-比如，为 logger 中间件定义`prefix`参数，用于控制输出格式
+比如，为 logger 中间件定义`prefix`参数，用于控制输出格式。
 
 ### 1. 定义参数类型
 
@@ -115,7 +115,7 @@ class MiddlewareLogger {
 
 ### 4. 使用时指定参数
 
-可以针对某个 API 单独指定局部中间件的参数
+可以针对某个 API 单独指定局部中间件的参数。
 
 ```diff
 class ControllerStudent {
@@ -129,7 +129,7 @@ class ControllerStudent {
 
 ### 5. App Config
 
-可以在 App Config 中配置中间件参数
+可以在 App Config 中配置中间件参数。
 
 `src/backend/config/config/config.ts`
 

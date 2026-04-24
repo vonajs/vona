@@ -1,6 +1,6 @@
 # Github认证
 
-此模块提供了`Github认证`，并且支持在开发环境采用模拟用户登录，使得开发与调试非常方便
+此模块提供了`Github认证`，并且支持在开发环境采用模拟用户登录，使得开发与调试非常方便。
 
 ## 如何使用
 
@@ -24,7 +24,7 @@ await this.bean.passport.signout();
 
 ### 3. 设置认证凭据
 
-在 App Config 中设置认证凭据
+在 App Config 中设置认证凭据。
 
 `src/backend/config/config/config.ts`
 
@@ -94,15 +94,15 @@ config.onions = {
 
 ### 5. OAuth认证Callback URL
 
-在使用 OAuth 认证时，需要在 OAuth 网站提供系统的 Callback URL
+在使用 OAuth 认证时，需要在 OAuth 网站提供系统的 Callback URL。
 
-VonaJS 提供了统一的 Callback URL 值，并且在开发阶段直接输出在控制台，方便我们直接使用
+VonaJS 提供了统一的 Callback URL 值，并且在开发阶段直接输出在控制台，方便我们直接使用。
 
 ![](../../../assets/img/bal/auth-1.png)
 
 ### 6. 禁用`useMockForDev`
 
-在默认情况下，允许在开发环境模拟用户登录
+在默认情况下，允许在开发环境模拟用户登录。
 
 可以在 App Config 中禁用`useMockForDev`
 
@@ -121,7 +121,7 @@ config.onions = {
 
 ## 源码解析
 
-这里对模块`auth-github`的核心源码进行解析，从而说明如何开发一个新的 Auth Provider
+这里对模块`auth-github`的核心源码进行解析，从而说明如何开发一个新的 Auth Provider。
 
 比如，在模块`auth-github`中创建一个 Auth Provider: `github`
 

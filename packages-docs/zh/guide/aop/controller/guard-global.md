@@ -2,7 +2,7 @@
 
 ## 创建守卫
 
-比如，在模块 demo-student 中创建一个全局守卫: `admin`，用于判断当前用户名是否为`admin`，如果不是则抛出异常
+比如，在模块 demo-student 中创建一个全局守卫: `admin`，用于判断当前用户名是否为`admin`，如果不是则抛出异常。
 
 ### 1. Cli命令
 
@@ -37,13 +37,13 @@ export class GuardAdmin {
 
 ## 使用守卫
 
-与局部守卫不同，系统会自动加载全局守卫，并使其生效
+与局部守卫不同，系统会自动加载全局守卫，并使其生效。
 
 ## 守卫参数
 
-可以为守卫定义参数，通过参数更灵活的配置守卫逻辑
+可以为守卫定义参数，通过参数更灵活的配置守卫逻辑。
 
-比如，为 admin 守卫定义`name`参数，用于控制需要判断的用户名
+比如，为 admin 守卫定义`name`参数，用于控制需要判断的用户名。
 
 ### 1. 定义参数类型
 
@@ -84,7 +84,7 @@ export class GuardAdmin extends BeanBase implements IGuardExecute {
 
 ### 4. 使用时指定参数
 
-可以针对某个 API 单独指定全局守卫的参数
+可以针对某个 API 单独指定全局守卫的参数。
 
 ```diff
 class ControllerStudent {
@@ -98,7 +98,7 @@ class ControllerStudent {
 
 ### 5. App Config
 
-可以在 App Config 中配置守卫参数
+可以在 App Config 中配置守卫参数。
 
 `src/backend/config/config/config.ts`
 
@@ -119,7 +119,7 @@ config.onions = {
 
 ## 守卫顺序
 
-由于全局守卫是默认加载并生效的，所以，VonaJS 提供了两个参数，用于控制守卫的加载顺序
+由于全局守卫是默认加载并生效的，所以，VonaJS 提供了两个参数，用于控制守卫的加载顺序。
 
 ### 1. dependencies
 
@@ -178,7 +178,7 @@ config.onions = {
 
 ### 2. Meta
 
-可以让全局守卫在指定的运行环境生效
+可以让全局守卫在指定的运行环境生效。
 
 | 名称   | 类型             | 说明                                                                   |
 | ------ | ---------------- | ---------------------------------------------------------------------- |
@@ -199,7 +199,7 @@ class GuardAdmin {}
 
 ### 3. match/ignore
 
-可以针对指定的 API 启用/禁用全局守卫
+可以针对指定的 API 启用/禁用全局守卫。
 
 | 名称   | 类型                               | 说明            |
 | ------ | ---------------------------------- | --------------- |
@@ -208,7 +208,7 @@ class GuardAdmin {}
 
 ## 查看当前生效的全局守卫清单
 
-可以直接在 Controller action 中输出当前生效的全局守卫清单
+可以直接在 Controller action 中输出当前生效的全局守卫清单。
 
 ```diff
 class ControllerStudent {

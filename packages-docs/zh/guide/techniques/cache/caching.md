@@ -1,8 +1,8 @@
 # Caching装饰器
 
-使用装饰器为任何 Class 的任何 Method 提供缓存能力
+使用装饰器为任何 Class 的任何 Method 提供缓存能力。
 
-在文档[Summer缓存(二级缓存)](./summer.md)中创建了一个 Summer Cache `demo-student:student`。下面演示如果通过 Caching 装饰器使用 Summer Cache
+在文档[Summer缓存(二级缓存)](./summer.md)中创建了一个 Summer Cache `demo-student:student`。下面演示如果通过 Caching 装饰器使用 Summer Cache。
 
 ## 最简用法
 
@@ -84,7 +84,7 @@ const cacheValue = await this.scope.summerCache.student.get(cacheKey, {
 
 ## 自定义缓存Key
 
-可以指定`cacheKeyFn`参数，用于生成自定义的缓存 Key
+可以指定`cacheKeyFn`参数，用于生成自定义的缓存 Key。
 
 ```diff
 class ServiceStudent {
@@ -102,7 +102,7 @@ class ServiceStudent {
 }
 ```
 
-如果`cacheKeyFn`返回值是`undefined/null`，则忽略缓存
+如果`cacheKeyFn`返回值是`undefined/null`，则忽略缓存。
 
 ## Caching装饰器清单
 
@@ -143,7 +143,7 @@ class ServiceStudent {
   - `intention: 'create'`: 指示 @Caching.del 从 create 方法的返回值中取得 Id 值
 
 ::: warning
-这里添加的`@Caching.xxx`装饰器仅用于演示目的。在实际业务当中，不需要在 Service 中使用`@Caching.xxx`。因为 Model 本身内置了更完善的缓存机制
+这里添加的`@Caching.xxx`装饰器仅用于演示目的。在实际业务当中，不需要在 Service 中使用`@Caching.xxx`。因为 Model 本身内置了更完善的缓存机制。
 
 - 参见: [Vona ORM: 缓存](../orm/caching.md)
   :::
