@@ -37,7 +37,8 @@
     "format": "oxfmt --check",
     "format:fix": "oxfmt --write",
     "lint": "oxlint",
-    "lint:fix": "oxlint --fix"
+    "lint:fix": "oxlint --fix",
+    "docs:fix": "textlint --fix packages-docs/**/*.md"
   },
   "dependencies": {
     "vona": "workspace:^"
