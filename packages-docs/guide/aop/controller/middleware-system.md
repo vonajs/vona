@@ -7,7 +7,7 @@ The difference between system middleware, global middleware, and local middlewar
 
 ## Create Middleware
 
-For example, we create a System Middleware `logger` in the module demo-student
+For example, we create a System Middleware `logger` in the module demo-student.
 
 ### 1. Cli command
 
@@ -43,13 +43,13 @@ export class MiddlewareLogger extends BeanBase implements IMiddlewareExecute {
 
 ## Using Middleware
 
-Unlike local middleware, the system automatically loads system middlewares and makes them effective
+Unlike local middleware, the system automatically loads system middlewares and makes them effective.
 
 ## Middleware Parameters
 
-You can define parameters for middleware, allowing for more flexible configuration of middleware logic
+You can define parameters for middleware, allowing for more flexible configuration of middleware logic.
 
-For example, define the `prefix` parameter for the logger middleware to control the output format
+For example, define the `prefix` parameter for the logger middleware to control the output format.
 
 ### 1. Defining parameter types
 
@@ -91,7 +91,7 @@ class MiddlewareSystemLogger {
 
 ### 4. App Config
 
-Middleware parameters can be configured in App Config
+Middleware parameters can be configured in App Config.
 
 `src/backend/config/config/config.ts`
 
@@ -112,7 +112,7 @@ config.onions = {
 
 ## Middleware Order
 
-Since system middlewares ard loaded and enabled by default, VonaJS provides two parameters to control the order in which middleware is loaded
+Since system middlewares ard loaded and enabled by default, VonaJS provides two parameters to control the order in which middleware is loaded.
 
 ### 1. dependencies
 
@@ -140,7 +140,7 @@ class MiddlewareSystemLogger {}
 
 ## Middleware Enable/Disable
 
-You can control `enable/disable` of system middleware for certain APIs
+You can control `enable/disable` of system middleware for certain APIs.
 
 ### 1. Enable
 
@@ -161,7 +161,7 @@ config.onions = {
 
 ### 2. Meta
 
-Allows system middleware to take effect in a specified operating environment
+Allows system middleware to take effect in a specified operating environment.
 
 | Name   | Type             | Description                                                                           |
 | ------ | ---------------- | ------------------------------------------------------------------------------------- |
@@ -182,7 +182,7 @@ class MiddlewareSystemLogger {}
 
 ### 3. match/ignore
 
-You can enable/disable system middleware for some specific APIs
+You can enable/disable system middleware for some specific APIs.
 
 | Name   | Type                               | Description               |
 | ------ | ---------------------------------- | ------------------------- |
@@ -198,7 +198,7 @@ Both system and global middleware support `match` and `ignore`, but the API path
 
 ## Inspect
 
-You can directly inspect the currently effective system middleware list in the Controller action
+You can directly inspect the currently effective system middleware list in the Controller action.
 
 ```diff
 class ControllerStudent {

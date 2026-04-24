@@ -4,7 +4,7 @@ To further optimize the daily development experience and improve development eff
 
 ## Test Environment
 
-In the test environment, you don't need to specify a database name (leave it as the default). Instead, the system automatically creates a test database. Whenever unit tests are executed, the system deletes the old test database and creates a new one
+In the test environment, you don't need to specify a database name (leave it as the default). Instead, the system automatically creates a test database. Whenever unit tests are executed, the system deletes the old test database and creates a new one.
 
 - Recreate database + Unit-test
 
@@ -28,7 +28,7 @@ For example, if the project name is `VonaDev`, when running unit tests, the syst
 
 ## Development Environment
 
-In the development environment, you don't need to specify a database name (leave it as the default). Whenever the backend development server is started, it will always check for an available test database. If one is not found (for example, if no unit tests have been executed), a new test database will be automatically created
+In the development environment, you don't need to specify a database name (leave it as the default). Whenever the backend development server is started, it will always check for an available test database. If one is not found (for example, if no unit tests have been executed), a new test database will be automatically created.
 
 ```bash
 $ npm run dev

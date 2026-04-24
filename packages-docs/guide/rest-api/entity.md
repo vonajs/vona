@@ -2,7 +2,7 @@
 
 ## Create Entity
 
-For example, we create an Entity `student` in the module demo-student
+For example, we create an Entity `student` in the module demo-student.
 
 ### 1. Cli command
 
@@ -27,7 +27,7 @@ export class EntityStudent extends EntityBase {}
 
 ## table name
 
-Vona is a modular system, and different modules can manage their own data tables independently. In order to avoid table name conflicts, Vona has agreed on a default combination mechanism for data table names. Of course, you can also provide your own table name, but you need to evaluate the risk of table name conflicts yourself
+Vona is a modular system, and different modules can manage their own data tables independently. In order to avoid table name conflicts, Vona has agreed on a default combination mechanism for data table names. Of course, you can also provide your own table name, but you need to evaluate the risk of table name conflicts yourself.
 
 ### 1. General format
 
@@ -39,15 +39,15 @@ For example, the entity `book` of the module demo-student has a corresponding da
 
 ### 2. Simplified rules
 
-If `entityName` has the same name as `moduleName`, the duplicate part will be automatically removed
+If `entityName` has the same name as `moduleName`, the duplicate part will be automatically removed.
 
 For example, the entity `student` of the module demo-student has a corresponding data table name of: `demoStudent`
 
 ## @Api.field
 
-Generally speaking, when defining a field, you need to specify the field type, validation rules, and Swagger/Openapi metadata
+Generally speaking, when defining a field, you need to specify the field type, validation rules, and Swagger/Openapi metadata.
 
-In `Entity` You only need to use the `@Api.field` decorator to provide all the above information, making the code more concise and intuitive
+In `Entity` You only need to use the `@Api.field` decorator to provide all the above information, making the code more concise and intuitive.
 
 The parameter usage mechanism of the `@Api.field` decorator is similar to the Controller request parameter, see:
 
@@ -58,7 +58,7 @@ The parameter usage mechanism of the `@Api.field` decorator is similar to the Co
 
 ### 1. Automatically infer Zod Schema: Basic type/Dto/Entity
 
-If the field type is `Basic type/Dto/Entity`, then the system will automatically infer the corresponding Zod Schema and automatically generate Swagger/Openapi
+If the field type is `Basic type/Dto/Entity`, then the system will automatically infer the corresponding Zod Schema and automatically generate Swagger/Openapi.
 
 - Example: `string`
 
@@ -94,7 +94,7 @@ class EntityStudent {
 
 ### 2. Specify Zod Schema
 
-We can also explicitly specify Zod Schema and automatically generate Swagger/Openapi
+We can also explicitly specify Zod Schema and automatically generate Swagger/Openapi.
 
 - Example: `number, >=18`
 
@@ -109,7 +109,7 @@ class EntityStudent {
 
 ### 3. Extending Zod Schema properties
 
-We can also extend new properties based on the existing Zod Schema
+We can also extend new properties based on the existing Zod Schema.
 
 - Example: `number, optional, default value is 18`
 
@@ -142,7 +142,7 @@ class EntityStudent {
 
 ### 4. Special tool: Array
 
-For Array type parameters, Vona also provides convenient tools
+For Array type parameters, Vona also provides convenient tools.
 
 - Example: `number[]`
 
@@ -175,11 +175,11 @@ class EntityStudent {
 
 ![](../../assets/img/openapi/openapi-22.png)
 
-These utility methods for extending Zod Schema are put into the decorator group `v` to reduce the mental burden
+These utility methods for extending Zod Schema are put into the decorator group `v` to reduce the mental burden.
 
 ## Swagger/Openapi
 
-Vona also provides many extension tools for setting metadata related to Openapi
+Vona also provides many extension tools for setting metadata related to Openapi.
 
 | Name          | Description |
 | ------------- | ----------- |
@@ -205,7 +205,7 @@ class EntityStudent {
 
 ### 2. Example: v.openapi
 
-We can use `v.openapi` to set more metadata at once
+We can use `v.openapi` to set more metadata at once.
 
 `title='Name', example='Tom'`
 
@@ -244,7 +244,7 @@ export default {
 
 ### 2. Use $locale
 
-Use the `$locale` method for language translation, and support automatic type hints for language resources
+Use the `$locale` method for language translation, and support automatic type hints for language resources.
 
 ```typescript
 import { $locale } from '../.metadata/locales.ts';
@@ -273,7 +273,7 @@ import { $locale } from '../.metadata/locales.ts';
 
 ### 1. Example: openapi
 
-Provide description information for entity so that it can be displayed in Swagger/Openapi
+Provide description information for entity so that it can be displayed in Swagger/Openapi.
 
 ```typescript
 @Entity({
@@ -327,7 +327,7 @@ class EntityStudent {}
 
 ## App Config
 
-Entity options can be configured in App Config
+Entity options can be configured in App Config.
 
 `src/backend/config/config/config.ts`
 
@@ -350,7 +350,7 @@ config.onions = {
 
 ## Base class: EntityBase
 
-By default, entity inherits from the base class `EntityBase`. EntityBase provides several commonly used fields. You can implement your own base class according to business needs
+By default, entity inherits from the base class `EntityBase`. EntityBase provides several commonly used fields. You can implement your own base class according to business needs.
 
 | Name      | Type          | Description                                        |
 | --------- | ------------- | -------------------------------------------------- |
@@ -364,7 +364,7 @@ By default, entity inherits from the base class `EntityBase`. EntityBase provide
 
 ## id: TableIdentity
 
-The key field `id` uses the `TableIdentity` type to support business systems of any size. When we use `int64` as the database field type, the value read from the database is of `string` type
+The key field `id` uses the `TableIdentity` type to support business systems of any size. When we use `int64` as the database field type, the value read from the database is of `string` type.
 
 ```typescript
 export type TableIdentity = string | number;

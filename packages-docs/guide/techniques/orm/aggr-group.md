@@ -40,7 +40,7 @@ class ServicePost {
 }
 ```
 
-Vona ORM automatically infers the type of `result` from the `aggrs` parameter
+Vona ORM automatically infers the type of `result` from the `aggrs` parameter.
 
 ![](../../../assets/img/orm/aggr-group/aggr-group-1.png)
 

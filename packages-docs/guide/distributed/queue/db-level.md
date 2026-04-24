@@ -1,8 +1,8 @@
 # Datasource Level
 
-In distributed scenarios, it's crucial to avoid deadlocks caused by datasource contention
+In distributed scenarios, it's crucial to avoid deadlocks caused by datasource contention.
 
-VonaJS uses `Async Local Storage` to provide different `datasource level` for different contexts, thereby creating different database connection pools and preventing datasource contention
+VonaJS uses `Async Local Storage` to provide different `datasource level` for different contexts, thereby creating different database connection pools and preventing datasource contention.
 
 ::: warning
 `Sqlite3` only supports one write connection, so `datasource level` is not supported
@@ -53,9 +53,9 @@ class QueueAdd {
 
 ## Solution
 
-In fact, the above potential deadlock situation will not occur in VonaJS. Because VonaJS provides a `datasource level` mechanism
+In fact, the above potential deadlock situation will not occur in VonaJS. Because VonaJS provides a `datasource level` mechanism.
 
-VonaJS uses `Async Local Storage` to provide different `datasource level` for different contexts, thereby creating different database connection pools and avoiding datasource contention
+VonaJS uses `Async Local Storage` to provide different `datasource level` for different contexts, thereby creating different database connection pools and avoiding datasource contention.
 
 ::: tip
 In VonaJS, in a distributed scenario, setting the connection maximum of the database connection pool to `1` will not cause deadlocks due to datasource contention
@@ -97,7 +97,7 @@ class ControllerStudent {
 
 ## Push Job
 
-When using the `push/pushAsync` method to push a job, the system automatically passes in `current.level + 1`, thus implementing datasource leveling and avoiding deadlocks
+When using the `push/pushAsync` method to push a job, the system automatically passes in `current.level + 1`, thus implementing datasource leveling and avoiding deadlocks.
 
 ```typescript
 await this.scope.queue.add.pushAsync(data);

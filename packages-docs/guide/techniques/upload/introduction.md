@@ -52,9 +52,9 @@ class ControllerStudent {
 
 ## Form Fields
 
-Multiple form fields can be attached along with the uploaded file
+Multiple form fields can be attached along with the uploaded file.
 
-For array-type fields, different parameter decorators are needed depending on the method used by the front-end to construct the uploaded data
+For array-type fields, different parameter decorators are needed depending on the method used by the front-end to construct the uploaded data.
 
 ### 1. @Arg.field
 

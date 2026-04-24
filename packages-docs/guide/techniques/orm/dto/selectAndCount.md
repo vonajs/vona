@@ -1,6 +1,6 @@
 # $Dto.selectAndCount
 
-`$Dto.selectAndCount` is used to annotate the return result with paging
+`$Dto.selectAndCount` is used to annotate the return result with paging.
 
 ## How to use
 

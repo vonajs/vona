@@ -1,12 +1,12 @@
 # Captcha System
 
-The `a-captcha` module provides a general Captcha system. It uses `Captcha Provider` to support various Captcha methods and `Captcha Scene` to support Captcha usage strategies for different scenarios
+The `a-captcha` module provides a general Captcha system. It uses `Captcha Provider` to support various Captcha methods and `Captcha Scene` to support Captcha usage strategies for different scenarios.
 
 ## Features
 
-- `Captcha Provider`: Supports various Captcha methods, such as image-text Captcha, SMS Captcha, etc.
+- `Captcha Provider`: Supports various Captcha methods, such as image-text Captcha, SMS Captcha, etc
 
-- `Captcha Scene`: Supports Captcha usage strategies for different scenarios. For example, in a given scenario, multiple Captcha Providers can be rotated, or different difficulty Captcha Providers can be used based on the user's status, etc.
+- `Captcha Scene`: Supports Captcha usage strategies for different scenarios. For example, in a given scenario, multiple Captcha Providers can be rotated, or different difficulty Captcha Providers can be used based on the user's status, etc
 
 - `Immediate Verification`: The frontend can immediately verify the Captcha token entered by the user. Even after `immediate verification`, a second verification is still required when submitting the form
 
@@ -14,7 +14,7 @@ The `a-captcha` module provides a general Captcha system. It uses `Captcha Provi
 
 ## bean.captcha
 
-The module `a-captcha` provides a global Bean `bean.captcha`, which allows for unified use of Captcha capabilities provided by all Providers/Scenes
+The module `a-captcha` provides a global Bean `bean.captcha`, which allows for unified use of Captcha capabilities provided by all Providers/Scenes.
 
 The module `captcha-simple` provides a Provider `captcha-simple:imageText`, which implements image-text Captcha capabilities based on [svg-captcha](https://github.com/produck/svg-captcha)
 
@@ -65,7 +65,7 @@ const passed = await this.bean.captcha.verify(captchaId, '1234', 'captcha-simple
 
 ### 4. verifyImmediate
 
-The frontend can perform `immediate verification` on the user-entered Captcha token. Even after `immediate verification`, `secondary verification` is still required when submitting the form
+The frontend can perform `immediate verification` on the user-entered Captcha token. Even after `immediate verification`, `secondary verification` is still required when submitting the form.
 
 ```typescript
 // verifyImmediate captcha
@@ -78,7 +78,7 @@ const tokenOrFalse = await this.bean.captcha.verifyImmediate(captchaId, '1234');
 
 ## interceptor.captchaVerify
 
-The module `a-captcha` provides a local interceptor `a-captcha:captchaVerify`, which can enable Captcha verification for the API
+The module `a-captcha` provides a local interceptor `a-captcha:captchaVerify`, which can enable Captcha verification for the API.
 
 `src/suite/a-home/modules/home-user/src/controller/passport.ts`
 
@@ -115,7 +115,7 @@ Because the `bean.captcha.verify` method is used for the local interceptor `a-ca
 
 ## Configuration
 
-You can modify the configuration of the module `a-captcha` in the App Config
+You can modify the configuration of the module `a-captcha` in the App Config.
 
 `src/backend/config/config/config.ts`
 

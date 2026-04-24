@@ -1,6 +1,6 @@
 # Locale
 
-Modules can individually provide their own `Locale` language resources
+Modules can individually provide their own `Locale` language resources.
 
 ## Initialize code skeleton
 
@@ -43,7 +43,7 @@ export default {
 
 ## Use language resources
 
-The `I18n` language resources of the module can be obtained through the `locale` object of the `Scope` instance
+The `I18n` language resources of the module can be obtained through the `locale` object of the `Scope` instance.
 
 ```typescript
 class ControllerStudent {
@@ -79,7 +79,7 @@ class ControllerStudent {
 
 ## Override language resources
 
-You can use `project-level` language resources to override `module-level` language resources
+You can use `project-level` language resources to override `module-level` language resources.
 
 - English
 
@@ -127,7 +127,7 @@ const localeDefault = this.$scope.locale.config.locale.defaultLocale;
 
 ## Rules for Getting the Current Locale
 
-When a user accesses the backend API, the backend will automatically obtain the current locale according to the rules
+When a user accesses the backend API, the backend will automatically obtain the current locale according to the rules.
 
 ### 1. Module Configuration
 
@@ -168,7 +168,7 @@ VonaJS provides two default languages: `en-us` and `zh-cn`. The following demons
 
 ### 1. Adding Type Definition
 
-Adding a new language type definition using the interface merging mechanism
+Adding a new language type definition using the interface merging mechanism.
 
 In the VSCode editor, enter the code snippet `recordlocale`, which will automatically generate a code skeleton:
 
@@ -192,7 +192,7 @@ declare module 'vona' {
 
 ### 2. Adding Language Resources
 
-Create a new language file `zh-tw.ts`, and then add language resources
+Create a new language file `zh-tw.ts`, and then add language resources.
 
 `src/module/demo-student/src/config/locale/zh-tw.ts`
 
@@ -247,7 +247,7 @@ no apples, one apple, 2 apples
 
 ## Plurals: Multiple Parameters
 
-If the language resource supports multiple parameters, then you can explicitly specify which parameter supports plurals
+If the language resource supports multiple parameters, then you can explicitly specify which parameter supports plurals.
 
 ### 1. Defining Language Resources
 
@@ -292,13 +292,13 @@ Tom has no apples, Tom has one apple, Tom has 2 apples
 
 ## Swagger/Openapi
 
-VonaJS provides a set of utility functions for implementing I18n for Swagger/Openapi
+VonaJS provides a set of utility functions for implementing I18n for Swagger/Openapi.
 
 For example, providing I18n `title` information for the `name` field of `EntityStudent`
 
 ### 1. $localeScope
 
-When setting the field title information, use `Language Resource FullKey`. When actually generating Swagger/Openapi metadata, the system automatically translates the `Language Resource FullKey` into the specified language
+When setting the field title information, use `Language Resource FullKey`. When actually generating Swagger/Openapi metadata, the system automatically translates the `Language Resource FullKey` into the specified language.
 
 ```diff
 + import { $localeScope } from 'vona';

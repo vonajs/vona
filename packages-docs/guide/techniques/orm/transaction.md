@@ -101,7 +101,7 @@ class ServicePost {
 
 ## Transaction parameter: propagation
 
-Vona ORM supports database transaction propagation mechanism
+Vona ORM supports database transaction propagation mechanism.
 
 | Name          | Description                                                                                                                                                                                                                                                                        |
 | ------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -114,7 +114,7 @@ Vona ORM supports database transaction propagation mechanism
 
 ## Transaction Compensation Mechanism
 
-Executes logic when a transaction succeeds or fails
+Executes logic when a transaction succeeds or fails.
 
 ### 1. Success Compensation
 
@@ -134,11 +134,11 @@ this.bean.database.current.compensate(async () => {
 
 ## Transaction and Cache Data Consistency {#transaction-cache-consistency}
 
-Many frameworks use minimal use cases to demonstrate high performance, ignoring the performance challenges brought about by business complexity. As business grows and changes, project performance can plummet. Various optimization and mitigation measures can lead to cumbersome and lengthy code. Vona, however, addresses the complexity of large-scale businesses by integrating caching strategies into its core framework. It implements mechanisms such as `two-layer cache`, `query cache`, and `entity cache`, making it easy to develop large-scale business systems while maintaining elegant and intuitive code
+Many frameworks use minimal use cases to demonstrate high performance, ignoring the performance challenges brought about by business complexity. As business grows and changes, project performance can plummet. Various optimization and mitigation measures can lead to cumbersome and lengthy code. Vona, however, addresses the complexity of large-scale businesses by integrating caching strategies into its core framework. It implements mechanisms such as `two-layer cache`, `query cache`, and `entity cache`, making it easy to develop large-scale business systems while maintaining elegant and intuitive code.
 
-The Vona system adapts database transactions to the cache. When a database transaction fails, it automatically performs cache compensation operations, ensuring that the database data and cached data always remain consistent
+The Vona system adapts database transactions to the cache. When a database transaction fails, it automatically performs cache compensation operations, ensuring that the database data and cached data always remain consistent.
 
-For this scenario, Vona provides a built-in solution
+For this scenario, Vona provides a built-in solution.
 
 ### 1. Using the current datasource
 

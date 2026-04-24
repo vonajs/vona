@@ -65,7 +65,7 @@ import { Passport } from 'vona-module-a-user';
 
 ## Determine the current username
 
-Determine the current username. If it is `admin`, complete the check. If it is not, throw an exception
+Determine the current username. If it is `admin`, complete the check. If it is not, throw an exception.
 
 - General usage:
 
@@ -85,7 +85,7 @@ import { Passport } from 'vona-module-a-user';
 
 ## Determine the current user's role name
 
-Determine the current role name. If it is `admin`, complete the check. If it is not, throw an exception
+Determine the current role name. If it is `admin`, complete the check. If it is not, throw an exception.
 
 - General usage:
 

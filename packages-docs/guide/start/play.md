@@ -1,6 +1,6 @@
 # Playground
 
-Vona provides a Playground, which allows us to test the code and verify the ideas very conveniently and quickly
+Vona provides a Playground, which allows us to test the code and verify the ideas very conveniently and quickly.
 
 ## Steps
 
@@ -30,9 +30,9 @@ $ vona play
 
 ## Attach Mode
 
-To improve performance, VonaJS also provides an Attach mode
+To improve performance, VonaJS also provides an Attach mode.
 
-If the dev server is already running, you can use Attach mode to execute the play file directly within the dev server
+If the dev server is already running, you can use Attach mode to execute the play file directly within the dev server.
 
 ```bash
 $ vona play --attach

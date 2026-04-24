@@ -1,6 +1,6 @@
 # $Dto.aggregate
 
-`$Dto.aggregate` is used to annotate the return result of the aggregation operation
+`$Dto.aggregate` is used to annotate the return result of the aggregation operation.
 
 ## How to use
 

@@ -1,8 +1,8 @@
 # CRUD(Insert/Update/Delete)
 
-The following uses the `test-vona` module as an example to explain the usage of `Insert/Update/Delete` in CRUD
+The following uses the `test-vona` module as an example to explain the usage of `Insert/Update/Delete` in CRUD.
 
-In addition, Vona ORM provides `Mutate` operations, which can perform corresponding `Insert/Update/Delete` operations based on the characteristics of the input data
+In addition, Vona ORM provides `Mutate` operations, which can perform corresponding `Insert/Update/Delete` operations based on the characteristics of the input data.
 
 ## insert
 
@@ -112,7 +112,7 @@ class ServicePost {
 
 ## mutate
 
-`mutate` is a hybrid operation of `insert/update/delete`. The system will perform corresponding change operations based on the characteristics of the input data
+`mutate` is a hybrid operation of `insert/update/delete`. The system will perform corresponding change operations based on the characteristics of the input data.
 
 | Data characteristics                                          | Change operations |
 | ------------------------------------------------------------- | ----------------- |

@@ -1,6 +1,6 @@
 # Dependency Injection
 
-Vona injects Bean instances through `@Use` decorator function
+Vona injects Bean instances through `@Use` decorator function.
 
 ## Injection methods
 
@@ -33,4 +33,4 @@ export class ControllerStudent {
 }
 ```
 
-Since the imported `ServiceStudent` is of `type`, the Bean identifier of the Service needs to be specified
+Since the imported `ServiceStudent` is of `type`, the Bean identifier of the Service needs to be specified.

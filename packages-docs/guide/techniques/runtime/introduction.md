@@ -1,6 +1,6 @@
 # Runtime
 
-VonaJS outputs runtime data to the `Runtime` file during system startup for troubleshooting or developing other management tools
+VonaJS outputs runtime data to the `Runtime` file during system startup for troubleshooting or developing other management tools.
 
 ## Runtime Directory
 
@@ -14,7 +14,7 @@ Different Runtime directories are used for different runtime environments:
 
 Custom runtime data can be added through `Runtime`
 
-For example, create `meta.runtime` in the module demo-student. Output `accessToken` to the `Runtime` file during system startup
+For example, create `meta.runtime` in the module demo-student. Output `accessToken` to the `Runtime` file during system startup.
 
 ### 1. Cli Command
 

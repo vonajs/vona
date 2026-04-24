@@ -13,7 +13,7 @@ VonaJS provides `Election` for this scenario, which works as follows:
 
 ## Create meta.election
 
-For example, create `meta.election` in the module demo-student. Start a timer in the selected Worker to output `Hello World` every 2 seconds
+For example, create `meta.election` in the module demo-student. Start a timer in the selected Worker to output `Hello World` every 2 seconds.
 
 ### 1. Cli Command
 
@@ -40,7 +40,7 @@ export class MetaElection extends BeanElectionBase<TypeElectionObtainResource> {
 
 ## Create Module Monkey
 
-Next, create a `Module Monkey` that responds to the `appStarted` and `appClose` hooks
+Next, create a `Module Monkey` that responds to the `appStarted` and `appClose` hooks.
 
 - See also: [App Startup Customization](../env-config/app-start/introduction.md)
 

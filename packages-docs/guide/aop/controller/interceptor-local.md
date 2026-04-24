@@ -2,7 +2,7 @@
 
 ## Create Interceptor
 
-For example, we create a Local Interceptor `logger` in the module demo-student
+For example, we create a Local Interceptor `logger` in the module demo-student.
 
 ### 1. Cli command
 
@@ -56,7 +56,7 @@ class ControllerStudent {
 
 ### 2. Annotating controller class
 
-You can use interceptor for controller classes so that all actions in the class will apply this interceptor
+You can use interceptor for controller classes so that all actions in the class will apply this interceptor.
 
 ```diff
 import { Aspect } from 'vona-module-a-aspect';
@@ -71,9 +71,9 @@ class ControllerStudent {
 
 ## Interceptor Parameters
 
-You can define parameters for interceptor, allowing for more flexible configuration of interceptor logic
+You can define parameters for interceptor, allowing for more flexible configuration of interceptor logic.
 
-For example, define the `prefix` parameter for the logger interceptor to control the output format
+For example, define the `prefix` parameter for the logger interceptor to control the output format.
 
 ### 1. Defining parameter types
 
@@ -115,7 +115,7 @@ class InterceptorLogger {
 
 ### 4. Specify parameters when using
 
-You can specify local interceptor parameters for a specific API
+You can specify local interceptor parameters for a specific API.
 
 ```diff
 class ControllerStudent {
@@ -129,7 +129,7 @@ class ControllerStudent {
 
 ### 5. App Config
 
-Interceptor parameters can be configured in App Config
+Interceptor parameters can be configured in App Config.
 
 `src/backend/config/config/config.ts`
 

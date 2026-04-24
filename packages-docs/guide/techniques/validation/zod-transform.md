@@ -1,10 +1,10 @@
 # Zod Transform
 
-You can use `Zod Transform` to implement more flexible transform logic
+You can use `Zod Transform` to implement more flexible transform logic.
 
 ## Create Zod Transform
 
-For example, create a Zod Transform `nameCapitalize` in the module demo-student to capitalize the first character of a student's name
+For example, create a Zod Transform `nameCapitalize` in the module demo-student to capitalize the first character of a student's name.
 
 ### 1. Cli command
 
@@ -64,9 +64,9 @@ class ControllerStudent {
 
 ## Zod Transform Parameters
 
-You can define parameters for Zod Transform, allowing for more flexible configuration of Zod Transform logic
+You can define parameters for Zod Transform, allowing for more flexible configuration of Zod Transform logic.
 
-For example, define the `lowercase` parameter for the `nameCapitalize` Zod Transform to specify whether to convert the first character to lowercase
+For example, define the `lowercase` parameter for the `nameCapitalize` Zod Transform to specify whether to convert the first character to lowercase.
 
 ### 1. Defining parameter types
 
@@ -113,7 +113,7 @@ class ZodTransformNameCapitalize {
 
 ### 4. Specify parameters when using
 
-You can specify Zod Transform parameters when using
+You can specify Zod Transform parameters when using.
 
 ```diff
 class ControllerStudent {
@@ -124,7 +124,7 @@ class ControllerStudent {
 
 ### 5. App Config
 
-Zod Transform parameters can be configured in App Config
+Zod Transform parameters can be configured in App Config.
 
 `src/backend/config/config/config.ts`
 

@@ -1,6 +1,6 @@
 # Config
 
-Modules can individually provide their own `Config` configuration
+Modules can individually provide their own `Config` configuration.
 
 ## Initialize code skeleton
 
@@ -30,11 +30,11 @@ export function config(_app: VonaApplication) {
 }
 ```
 
-Just define the required configuration fields directly, and the system will automatically extract the type information of config
+Just define the required configuration fields directly, and the system will automatically extract the type information of config.
 
 ## Use Config
 
-The `Config` configuration of the module can be obtained through the `Scope` instance
+The `Config` configuration of the module can be obtained through the `Scope` instance.
 
 ```diff
 class ControllerStudent {
@@ -56,7 +56,7 @@ class ControllerOther {
 
 ## Override Config
 
-You can use `project-level` Config to override `module-level` Config
+You can use `project-level` Config to override `module-level` Config.
 
 `src/backend/config/config/config.ts`
 

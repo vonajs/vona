@@ -1,6 +1,6 @@
 # $Dto.get
 
-`$Dto.get` is used to annotate the return result
+`$Dto.get` is used to annotate the return result.
 
 ## Parameters
 
@@ -22,7 +22,7 @@ $Dto.get(() => ModelOrder, { columns: ['id', 'orderNo', 'remark'] });
 
 ## 2. Static Relation
 
-Take Order/Product as an example to demonstrate the `1:n` relation
+Take Order/Product as an example to demonstrate the `1:n` relation.
 
 ### Model relation definition
 
@@ -64,7 +64,7 @@ $Dto.get(() => ModelOrder, {
 
 ## 4. Aggregation based on static relation
 
-Take Order/Product as an example to demonstrate the `1:n` relation
+Take Order/Product as an example to demonstrate the `1:n` relation.
 
 ### Model relation definition
 
@@ -112,7 +112,7 @@ $Dto.get(() => ModelOrder, {
 
 ## 6. Grouping based on static relation
 
-Take Order/Product as an example to demonstrate the `1:n` relation
+Take Order/Product as an example to demonstrate the `1:n` relation.
 
 ### Model relation definition
 

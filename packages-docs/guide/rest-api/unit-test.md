@@ -1,8 +1,8 @@
 # Unit Test
 
-Vona strongly recommends test-driven development. Test-driven development can effectively accumulate development results and identify potential problems as soon as possible when code changes occur, thereby significantly improving the robustness of the code
+Vona strongly recommends test-driven development. Test-driven development can effectively accumulate development results and identify potential problems as soon as possible when code changes occur, thereby significantly improving the robustness of the code.
 
-Vona uses a `parallel mechanism` to run test files, thereby significantly improving test efficiency
+Vona uses a `parallel mechanism` to run test files, thereby significantly improving test efficiency.
 
 ::: warning
 `Sqlite3` only supports one write connection, so `parallel mechanism` is not supported
@@ -40,7 +40,7 @@ When this command is executed, the system will perform the following steps:
 $ npm run db:reset
 ```
 
-Unlike the `test` command, `db:reset` only executes the first `four` steps and does not execute the unit test files
+Unlike the `test` command, `db:reset` only executes the first `four` steps and does not execute the unit test files.
 
 ## Test coverage
 
@@ -153,7 +153,7 @@ await app.bean.passport.signout();
 
 ### 8. Tools: assert
 
-Vona uses Node's built-in assertion library
+Vona uses Node's built-in assertion library.
 
 ```typescript
 import assert from 'node:assert';
@@ -165,7 +165,7 @@ await app.bean.executor.mockCtx(async () => {
 
 ### 9. Tool: catchError
 
-`catchError` can capture error exception more elegantly
+`catchError` can capture error exception more elegantly.
 
 - General writing
 

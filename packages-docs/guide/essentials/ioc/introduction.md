@@ -1,6 +1,6 @@
 # Introduction
 
-We know that `IOC`(Inversion of Control) is an effective architectural design for system decoupling, and is also a supporting tool for the development of large-scale business systems
+We know that `IOC`(Inversion of Control) is an effective architectural design for system decoupling, and is also a supporting tool for the development of large-scale business systems.
 
 ## IOC Containers
 
@@ -11,7 +11,7 @@ There are two types of ioc containers in Vona:
 
 ## Bean Class
 
-Vona adopts a modular system, and Bean Classes are provided by different modules
+Vona adopts a modular system, and Bean Classes are provided by different modules.
 
 ## Injection Scope
 

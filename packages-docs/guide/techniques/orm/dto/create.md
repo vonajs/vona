@@ -1,6 +1,6 @@
 # $Dto.create
 
-`$Dto.create` is used to annotate the `Create` parameters
+`$Dto.create` is used to annotate the `Create` parameters.
 
 ## Parameters
 
@@ -22,7 +22,7 @@ $Dto.create(() => ModelOrder, { columns: ['orderNo', 'remark'] });
 
 ## 2. Static Relation
 
-Take Order/Product as an example to demonstrate the `1:n` relation
+Take Order/Product as an example to demonstrate the `1:n` relation.
 
 ### Model relation definition
 

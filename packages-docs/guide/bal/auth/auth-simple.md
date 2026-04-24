@@ -1,6 +1,6 @@
 # Username/Password Authentication
 
-The module `auth-simple` provides out-of-the-box username/password authentication
+The module `auth-simple` provides out-of-the-box username/password authentication.
 
 ## How to Use
 
@@ -21,7 +21,7 @@ const jwt = await this.bean.auth.authenticate('auth-simple:simple', {
 });
 ```
 
-`confirmed`: If `true`, it means the user has already confirmed and no further `activation` operation is needed
+`confirmed`: If `true`, it means the user has already confirmed and no further `activation` operation is needed.
 
 - Shorthand:
 
@@ -72,9 +72,9 @@ await this.bean.passport.signout();
 
 ### 4. Configuration
 
-The module `auth-simple` uses [password-hash-salt](https://www.npmjs.com/package/password-hash-salt) to hash the password
+The module `auth-simple` uses [password-hash-salt](https://www.npmjs.com/package/password-hash-salt) to hash the password.
 
-Configuration can be modified in App Config
+Configuration can be modified in App Config.
 
 `src/backend/config/config/config.ts`
 
@@ -94,7 +94,7 @@ config.modules = {
 
 ## Source Code Analysis
 
-This section analyzes the core source code of the module `auth-simple` to explain how to develop a new Auth Provider
+This section analyzes the core source code of the module `auth-simple` to explain how to develop a new Auth Provider.
 
 For example, create an Auth Provider in the module `auth-simple`: `simple`
 

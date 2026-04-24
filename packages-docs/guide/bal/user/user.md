@@ -8,7 +8,7 @@ To balance the `out-of-the-box` and `flexible customization` architectural desig
 
 ## a-user: IUser
 
-The module `a-user` provides the interface `IUser`, defining the basic fields of the User
+The module `a-user` provides the interface `IUser`, defining the basic fields of the User.
 
 ```typescript
 export interface IUser {
@@ -25,7 +25,7 @@ export interface IUser {
 
 ## a-user: bean.user
 
-The module `a-user` provides the global Bean `bean.user`, providing a general calling convention for business logic
+The module `a-user` provides the global Bean `bean.user`, providing a general calling convention for business logic.
 
 ```typescript
 // find user
@@ -108,7 +108,7 @@ class ControllerStudent {
 
 ## Anonymous User
 
-When an anonymous user accesses the API, the system automatically creates an anonymous user object
+When an anonymous user accesses the API, the system automatically creates an anonymous user object.
 
 ```diff
 class ControllerStudent {
@@ -121,7 +121,7 @@ class ControllerStudent {
 
 ## Register User
 
-You can call `bean.user.register` to register a new user. This method will trigger the `a-user:register` event. The `home-user` module listens for this event, thus enabling customized logic
+You can call `bean.user.register` to register a new user. This method will trigger the `a-user:register` event. The `home-user` module listens for this event, thus enabling customized logic.
 
 `src/suite/a-home/modules/home-user/src/bean/eventListener.register.ts`
 
@@ -152,7 +152,7 @@ class EventListenerRegister {
 
 ## Activate User
 
-Users can be activated by calling `bean.user.activate`. This method will trigger the `a-user:activate` event. The module `home-user` listens for this event, thus enabling logic customization
+Users can be activated by calling `bean.user.activate`. This method will trigger the `a-user:activate` event. The module `home-user` listens for this event, thus enabling logic customization.
 
 `src/suite/a-home/modules/home-user/src/bean/eventListener.activate.ts`
 
@@ -181,9 +181,9 @@ class EventListenerActivate {
 
 ## Disable activation operation
 
-By default, newly registered users need to perform an activation operation
+By default, newly registered users need to perform an activation operation.
 
-You can enable the `autoActivate` configuration in App Config
+You can enable the `autoActivate` configuration in App Config.
 
 `src/backend/config/config/config.mine.ts`
 
@@ -226,7 +226,7 @@ async init(options) {
 
 ## Default Password
 
-The default password for the `admin` user is `123456`, which can be modified in the app config
+The default password for the `admin` user is `123456`, which can be modified in the app config.
 
 `src/backend/config/config/config.ts`
 

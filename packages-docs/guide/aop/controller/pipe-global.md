@@ -2,7 +2,7 @@
 
 ## Create Pipe
 
-For example, create a global pipe `number` in the module demo-student to convert the request parameter to `number` type
+For example, create a global pipe `number` in the module demo-student to convert the request parameter to `number` type.
 
 ### 1. Cli command
 
@@ -43,11 +43,11 @@ class PipeNumber {
 
 ## Using Pipe
 
-Unlike local pipe, the system automatically loads global pipes and makes them effective
+Unlike local pipe, the system automatically loads global pipes and makes them effective.
 
 ## Pipe Parameters
 
-You can define parameters for pipe, allowing for more flexible configuration of pipe logic
+You can define parameters for pipe, allowing for more flexible configuration of pipe logic.
 
 For example, define the `errorCode` parameter for the number pipe. If the incoming request parameter is not of type number, an exception is thrown with the error code `errorCode`
 
@@ -89,7 +89,7 @@ export class PipeNumber extends BeanBase implements IPipeTransform<TypePipeNumbe
 
 ### 4. Specify parameters when using
 
-You can specify global pipe parameters for a specific API
+You can specify global pipe parameters for a specific API.
 
 ```diff
 class ControllerStudent {
@@ -103,7 +103,7 @@ class ControllerStudent {
 
 ### 5. App Config
 
-Pipe parameters can be configured in App Config
+Pipe parameters can be configured in App Config.
 
 `src/backend/config/config/config.ts`
 
@@ -124,7 +124,7 @@ config.onions = {
 
 ## Pipe Order
 
-Since global pipes ard loaded and enabled by default, VonaJS provides two parameters to control the order in which pipe is loaded
+Since global pipes ard loaded and enabled by default, VonaJS provides two parameters to control the order in which pipe is loaded.
 
 ### 1. dependencies
 
@@ -152,7 +152,7 @@ class PipeNumber {}
 
 ## Pipe Enable/Disable
 
-You can control `enable/disable` of global pipe for certain APIs
+You can control `enable/disable` of global pipe for certain APIs.
 
 ### 1. Enable
 
@@ -183,7 +183,7 @@ config.onions = {
 
 ### 2. Meta
 
-Allows global pipe to take effect in a specified operating environment
+Allows global pipe to take effect in a specified operating environment.
 
 | Name   | Type             | Description                                                                           |
 | ------ | ---------------- | ------------------------------------------------------------------------------------- |
@@ -204,7 +204,7 @@ class PipeNumber {}
 
 ### 3. match/ignore
 
-You can enable/disable global pipe for some specific APIs
+You can enable/disable global pipe for some specific APIs.
 
 | Name   | Type                               | Description               |
 | ------ | ---------------------------------- | ------------------------- |
@@ -213,7 +213,7 @@ You can enable/disable global pipe for some specific APIs
 
 ## Inspect
 
-You can directly inspect the currently effective global pipe list in the Controller action
+You can directly inspect the currently effective global pipe list in the Controller action.
 
 ```diff
 class ControllerStudent {

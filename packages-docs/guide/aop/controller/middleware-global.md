@@ -2,7 +2,7 @@
 
 ## Create Middleware
 
-For example, we create a Global Middleware `logger` in the module demo-student
+For example, we create a Global Middleware `logger` in the module demo-student.
 
 ### 1. Cli command
 
@@ -39,13 +39,13 @@ export class MiddlewareLogger extends BeanBase implements IMiddlewareExecute {
 
 ## Using Middleware
 
-Unlike local middleware, the system automatically loads global middlewares and makes them effective
+Unlike local middleware, the system automatically loads global middlewares and makes them effective.
 
 ## Middleware Parameters
 
-You can define parameters for middleware, allowing for more flexible configuration of middleware logic
+You can define parameters for middleware, allowing for more flexible configuration of middleware logic.
 
-For example, define the `prefix` parameter for the logger middleware to control the output format
+For example, define the `prefix` parameter for the logger middleware to control the output format.
 
 ### 1. Defining parameter types
 
@@ -87,7 +87,7 @@ class MiddlewareLogger {
 
 ### 4. Specify parameters when using
 
-You can specify global middleware parameters for a specific API
+You can specify global middleware parameters for a specific API.
 
 ```diff
 class ControllerStudent {
@@ -101,7 +101,7 @@ class ControllerStudent {
 
 ### 5. App Config
 
-Middleware parameters can be configured in App Config
+Middleware parameters can be configured in App Config.
 
 `src/backend/config/config/config.ts`
 
@@ -122,7 +122,7 @@ config.onions = {
 
 ## Middleware Order
 
-Since global middlewares ard loaded and enabled by default, VonaJS provides two parameters to control the order in which middleware is loaded
+Since global middlewares ard loaded and enabled by default, VonaJS provides two parameters to control the order in which middleware is loaded.
 
 ### 1. dependencies
 
@@ -150,7 +150,7 @@ class MiddlewareLogger {}
 
 ## Middleware Enable/Disable
 
-You can control `enable/disable` of global middleware for certain APIs
+You can control `enable/disable` of global middleware for certain APIs.
 
 ### 1. Enable
 
@@ -181,7 +181,7 @@ config.onions = {
 
 ### 2. Meta
 
-Allows global middleware to take effect in a specified operating environment
+Allows global middleware to take effect in a specified operating environment.
 
 | Name   | Type             | Description                                                                           |
 | ------ | ---------------- | ------------------------------------------------------------------------------------- |
@@ -202,7 +202,7 @@ class MiddlewareLogger {}
 
 ### 3. match/ignore
 
-You can enable/disable global middleware for some specific APIs
+You can enable/disable global middleware for some specific APIs.
 
 | Name   | Type                               | Description               |
 | ------ | ---------------------------------- | ------------------------- |
@@ -211,7 +211,7 @@ You can enable/disable global middleware for some specific APIs
 
 ## Inspect
 
-You can directly inspect the currently effective global middleware list in the Controller action
+You can directly inspect the currently effective global middleware list in the Controller action.
 
 ```diff
 class ControllerStudent {

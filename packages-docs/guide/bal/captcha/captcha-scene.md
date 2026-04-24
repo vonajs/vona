@@ -2,7 +2,7 @@
 
 Use `Captcha Scene` to support different captcha usage strategies in different scenarios. For example, in a given scenario, you can rotate between multiple Captcha Providers, or use Captcha Providers of varying difficulty based on the user's state, etc.
 
-This section analyzes the core source code of the module `captcha-simple` to illustrate how to develop a new Captcha Scene
+This section analyzes the core source code of the module `captcha-simple` to illustrate how to develop a new Captcha Scene.
 
 ## Creating a Captcha Scene
 
@@ -47,7 +47,7 @@ export class CaptchaSceneSimple extends BeanBase {}
 
 ## App Config
 
-Captcha Scene parameters can be configured in the App Config
+Captcha Scene parameters can be configured in the App Config.
 
 `src/backend/config/config/config.ts`
 

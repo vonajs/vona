@@ -43,7 +43,7 @@ Any changes to the `relations` node require executing `Vona Tools: Generate .met
 
 ### 2. Using relations
 
-The `hasOne` relation defined in the model can be used for all `CRUD` operations. Use `include` to specify the relation to be operated on, for example, `postContent: true`. Then, when the system operates on the Model Post, it will also operate on the Model PostContent
+The `hasOne` relation defined in the model can be used for all `CRUD` operations. Use `include` to specify the relation to be operated on, for example, `postContent: true`. Then, when the system operates on the Model Post, it will also operate on the Model PostContent.
 
 ```typescript
 class ServicePost {
@@ -133,7 +133,7 @@ class ModelPostContent {}
 
 ### 2. Using relations
 
-The `belongsTo` relation defined in the Model is only used for query operation. Use `include` to specify the relation to be queried, such as `post: true`, then the system will query the Model Post while querying the Model PostContent
+The `belongsTo` relation defined in the Model is only used for query operation. Use `include` to specify the relation to be queried, such as `post: true`, then the system will query the Model Post while querying the Model PostContent.
 
 ```typescript
 class ServicePost {
@@ -176,7 +176,7 @@ class ModelOrder {}
 
 ### 2. Using relations
 
-The `hasMany` relation defined in the Model can be used for all `CRUD` operations. Use `include` to specify the relation to be operated, such as `products: true`, then the system will operate on the Model Product while operating on the Model Order
+The `hasMany` relation defined in the Model can be used for all `CRUD` operations. Use `include` to specify the relation to be operated, such as `products: true`, then the system will operate on the Model Product while operating on the Model Order.
 
 ```typescript
 class ServiceOrder {
@@ -246,7 +246,7 @@ class ServiceOrder {
 
 ### 1. Define the relation
 
-Defining an `n:n` relation requires an intermediate Model. For example, if the Model User and Model Role are `n:n`, you need to provide an intermediate Model RoleUser
+Defining an `n:n` relation requires an intermediate Model. For example, if the Model User and Model Role are `n:n`, you need to provide an intermediate Model RoleUser.
 
 ```typescript
 @Model({
@@ -270,7 +270,7 @@ class ModelUser {}
 
 ### 2. Using relations
 
-The `belongsToMany` relation defined in the Model can be used for all `CRUD` operations. It is important to emphasize that the CRUD operations here are for the intermediate Model, not the target Model. By specifying the relation to be operated on by `include`, such as `roles: true`, the system will operate on the intermediate Model RoleUser at the same time as the Model User
+The `belongsToMany` relation defined in the Model can be used for all `CRUD` operations. It is important to emphasize that the CRUD operations here are for the intermediate Model, not the target Model. By specifying the relation to be operated on by `include`, such as `roles: true`, the system will operate on the intermediate Model RoleUser at the same time as the Model User.
 
 ```typescript
 class ServiceUser {
@@ -342,11 +342,11 @@ class ServiceUser {
 
 As you can see from the previous demonstration, if you want to operate on a relation, you need to specify the corresponding relation option using `include`
 
-If the relation you want to operate on is frequently, you can set `autoload: true` on the relation, thus omitting the `include` option
+If the relation you want to operate on is frequently, you can set `autoload: true` on the relation, thus omitting the `include` option.
 
 ## Tree structure
 
-Next, we implement a directory tree to demonstrate how to use `autoload` to implement a tree structure
+Next, we implement a directory tree to demonstrate how to use `autoload` to implement a tree structure.
 
 ### 1. Define the relation
 
@@ -422,7 +422,7 @@ class ServiceCategory {
 
 ## Tree structure (reverse query)
 
-The previous demonstration shows how to query a directory tree from the parent to the children. The following demonstration shows how to query a directory tree from the child to the parent
+The previous demonstration shows how to query a directory tree from the parent to the children. The following demonstration shows how to query a directory tree from the child to the parent.
 
 ### 1. Define the relation
 

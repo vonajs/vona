@@ -1,12 +1,12 @@
 # Assets
 
-In VonaJS, each module can provide Assets for server-side use
+In VonaJS, each module can provide Assets for server-side use.
 
 - `Multi-scenario`: Different types of Assets can be provided for different scenarios and purposes
 
 ## Initializing the Code Skeleton
 
-For example, creating a new scenario `templates` containing multiple template files
+For example, creating a new scenario `templates` containing multiple template files.
 
 ### 1. Cli Command
 
@@ -47,11 +47,11 @@ In production environments, the file paths are as follows:
 /path/to/project/dist/normal/assets/templates/demo-student/list.ejs
 ```
 
-You can use `meta.asset` to get the file path of Assets in a typed way
+You can use `meta.asset` to get the file path of Assets in a typed way.
 
 ## Create meta.asset
 
-For example, create `meta.asset` in the module demo-student
+For example, create `meta.asset` in the module demo-student.
 
 ### 1. Cli Command
 

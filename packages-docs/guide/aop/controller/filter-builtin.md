@@ -2,11 +2,11 @@
 
 ## Global Filter: a-error:error
 
-Filters are commonly used for error handling and logging. To simplify usage, VonaJS provides a built-in global filter: `a-error:error`. `a-error:error` can meet daily business needs. If you need more in-depth customization, you can create local or global filters
+Filters are commonly used for error handling and logging. To simplify usage, VonaJS provides a built-in global filter: `a-error:error`. `a-error:error` can meet daily business needs. If you need more in-depth customization, you can create local or global filters.
 
 ## Disabling Logging
 
-You can disable logging for certain errors for a specific API. The following example uses the `create` method of the `demo-student` module
+You can disable logging for certain errors for a specific API. The following example uses the `create` method of the `demo-student` module.
 
 ### 1. Disabling Built-in Errors
 
@@ -72,7 +72,7 @@ class ControllerStudent {
 
 ## App Config
 
-Filter parameters can be configured in App Config to apply to all APIs
+Filter parameters can be configured in App Config to apply to all APIs.
 
 `src/backend/config/config/config.ts`
 

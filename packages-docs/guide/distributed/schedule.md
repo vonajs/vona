@@ -1,10 +1,10 @@
 # Schedule
 
-VonaJS provides intuitive and easy-to-use schedule based on [BullMQ](https://github.com/taskforcesh/bullmq). Because schedule is a special case of queue
+VonaJS provides intuitive and easy-to-use schedule based on [BullMQ](https://github.com/taskforcesh/bullmq). Because schedule is a special case of queue.
 
 ## Create Schedule
 
-For example, create a schedule `log` in the module `demo-student`, which will output the current time to the console at specified time intervals
+For example, create a schedule `log` in the module `demo-student`, which will output the current time to the console at specified time intervals.
 
 ### 1. Cli Command
 
@@ -33,7 +33,7 @@ export class ScheduleLog extends BeanBase implements IScheduleExecute {
 
 ## Schedule Parameters
 
-Parameters can be configured for schedule
+Parameters can be configured for schedule.
 
 ```typescript
 @Schedule({
@@ -61,7 +61,7 @@ class ScheduleLog {}
 
 ## App Config
 
-Schedule parameters can be configured in App Config
+Schedule parameters can be configured in App Config.
 
 `src/backend/config/config/config.ts`
 
@@ -81,7 +81,7 @@ config.onions = {
 
 ## Schedule Enable/Disable
 
-You can control `enable/disable` of schedule
+You can control `enable/disable` of schedule.
 
 ### 1. Enable
 
@@ -100,7 +100,7 @@ config.onions = {
 
 ### 2. Meta
 
-Allows schedule to take effect in a specified operating environment
+Allows schedule to take effect in a specified operating environment.
 
 | Name   | Type             | Description                                                                        |
 | ------ | ---------------- | ---------------------------------------------------------------------------------- |
@@ -122,7 +122,7 @@ class ScheduleLog {}
 
 ## Inspect
 
-You can directly inspect the currently effective schedule list
+You can directly inspect the currently effective schedule list.
 
 ```diff
 class ControllerStudent {

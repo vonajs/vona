@@ -2,7 +2,7 @@
 
 ## What is Vona?
 
-Vona is a fullstack framework for building SSR/SPA/Website/Admin-Dashboard in one codebase, featuring frontend and backend separation and native type sharing
+Vona is a fullstack framework for building SSR/SPA/Website/Admin-Dashboard in one codebase, featuring frontend and backend separation and native type sharing.
 
 - Supports dual-layer tabs navigation, enabling efficient page switching while maintaining page state
 - Dynamically render CRUD list pages, entry pages, and search forms, while demonstrating best practices for Tanstack Table, Tanstack Form, and Tanstack Query
@@ -10,7 +10,7 @@ Vona is a fullstack framework for building SSR/SPA/Website/Admin-Dashboard in on
 
 ## Fullstack Mechanism
 
-Vona adopts a frontend-backend separation architecture. The frontend uses the Zova framework, and the built JS bundle is placed into the Vona backend for direct SSR rendering on the backend
+Vona adopts a frontend-backend separation architecture. The frontend uses the Zova framework, and the built JS bundle is placed into the Vona backend for direct SSR rendering on the backend.
 
 Frontend-backend type sharing mechanism:
 
@@ -19,7 +19,7 @@ Frontend-backend type sharing mechanism:
 
 ## Demo Online
 
-The Website and Admin-Dashboard of Cabloy Store are built by one codebase
+The Website and Admin-Dashboard of Cabloy Store are built by one codebase.
 
 - Website: [https://cabloy.com](https://cabloy.com)
 - Admin-Dashboard: [https://cabloy.com/admin](https://cabloy.com/admin)
@@ -93,7 +93,7 @@ The Website and Admin-Dashboard of Cabloy Store are built by one codebase
 
 ### UI Libraries
 
-Zova can be used with any UI library and comes with built-in project templates for several UI libraries, making it easy to use out of the box
+Zova can be used with any UI library and comes with built-in project templates for several UI libraries, making it easy to use out of the box.
 
 | Name        | Version  |
 | ----------- | -------- |
@@ -112,7 +112,7 @@ As business grows and changes, project code can quickly degrade and become hard 
 
 Zova addresses large-scale business complexity with a set of engineering solutions, allowing elegant and intuitive code even in complex systems.
 
-This improves development efficiency and experience, while making subsequent iteration and maintenance easier
+This improves development efficiency and experience, while making subsequent iteration and maintenance easier.
 
 ### 2. About Performance
 
@@ -122,7 +122,7 @@ As systems scale, performance often suffers, requiring increasingly complex opti
 
 Vona takes a different approach: it integrates caching strategies into its core, providing built-in mechanisms such as two-layer cache, query cache, and entity cache.
 
-This allows you to build large-scale systems elegantly while maintaining performance without extensive custom optimization code
+This allows you to build large-scale systems elegantly while maintaining performance without extensive custom optimization code.
 
 ## Stay In Touch
 
@@ -131,6 +131,6 @@ This allows you to build large-scale systems elegantly while maintaining perform
 
 ## License
 
-MIT License
+MIT License.
 
-Copyright (c) 2016-present, Vona
+Copyright (c) 2016-present, Vona.

@@ -21,7 +21,7 @@
 
 ## a-core:gate
 
-Enables the API to be effective in a specific runtime environment
+Enables the API to be effective in a specific runtime environment.
 
 | Name         | Type             | Description                                                                           |
 | ------------ | ---------------- | ------------------------------------------------------------------------------------- |

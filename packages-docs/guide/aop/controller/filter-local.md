@@ -59,7 +59,7 @@ class ControllerStudent {
 
 ### 2. Annotating controller class
 
-You can use filter for controller classes so that all actions in the class will apply this filter
+You can use filter for controller classes so that all actions in the class will apply this filter.
 
 ```diff
 import { Aspect } from 'vona-module-a-aspect';
@@ -74,9 +74,9 @@ class ControllerStudent {
 
 ## Filter Parameters
 
-You can define parameters for filter, allowing for more flexible configuration of filter logic
+You can define parameters for filter, allowing for more flexible configuration of filter logic.
 
-For example, define the `prefix` parameter for the test filter to customize the format of the log output
+For example, define the `prefix` parameter for the test filter to customize the format of the log output.
 
 ### 1. Defining parameter types
 
@@ -121,7 +121,7 @@ export class FilterTest extends BeanBase implements IFilterLog {
 
 ### 4. Specify parameters when using
 
-You can specify local filter parameters for a specific API
+You can specify local filter parameters for a specific API.
 
 ```diff
 class ControllerStudent {
@@ -135,7 +135,7 @@ class ControllerStudent {
 
 ### 5. App Config
 
-Filter parameters can be configured in App Config
+Filter parameters can be configured in App Config.
 
 `src/backend/config/config/config.ts`
 

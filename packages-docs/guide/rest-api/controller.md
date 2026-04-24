@@ -34,9 +34,9 @@ export class ControllerStudent extends BeanBase {
 
 ## Routes
 
-Like `Fastify`, Vona also uses [find-my-way](https://github.com/delvedor/find-my-way) as the routing library. All Controller Actions that use the `@Web` decorator will be automatically registered in the routing table
+Like `Fastify`, Vona also uses [find-my-way](https://github.com/delvedor/find-my-way) as the routing library. All Controller Actions that use the `@Web` decorator will be automatically registered in the routing table.
 
-The route path is composed of the Controller Path and the Action Path
+The route path is composed of the Controller Path and the Action Path.
 
 ### General format
 
@@ -56,7 +56,7 @@ For example, the route of Controller `teacher` in module demo-student is as foll
 
 ### Simplification rule 1
 
-If the Controller Path is the same as the module name, the duplicate part will be automatically removed
+If the Controller Path is the same as the module name, the duplicate part will be automatically removed.
 
 For example, the route of Controller `student` in module demo-student is as follows:
 
@@ -67,7 +67,7 @@ For example, the route of Controller `student` in module demo-student is as foll
 
 ### Simplification rule 2
 
-If the Controller Path or Action Path is prefixed with `/`, then the Module Url is automatically removed
+If the Controller Path or Action Path is prefixed with `/`, then the Module Url is automatically removed.
 
 | Controller Path | Action Path | Route Path       |
 | --------------- | ----------- | ---------------- |
@@ -76,7 +76,7 @@ If the Controller Path or Action Path is prefixed with `/`, then the Module Url 
 
 ### Simplification rule 3
 
-If the Controller Path or Action Path is prefixed with `//`, then the GlobalPrefix and Module Url are automatically removed
+If the Controller Path or Action Path is prefixed with `//`, then the GlobalPrefix and Module Url are automatically removed.
 
 | Controller Path | Action Path | Route Path   |
 | --------------- | ----------- | ------------ |
@@ -125,7 +125,7 @@ class ControllerStudent3 {
 }
 ```
 
-Depending on the characteristics of the parameters, different types of parameters allow the specification of field names, such as specifying `id` in the query decorator. We can also obtain the entire query object without specifying the field name
+Depending on the characteristics of the parameters, different types of parameters allow the specification of field names, such as specifying `id` in the query decorator. We can also obtain the entire query object without specifying the field name.
 
 For example, the URL is `/?id=1&name=tom`:
 
@@ -159,23 +159,23 @@ class ControllerStudent3 {
 
 ## Parameter Validation
 
-Vona Based on [Zod](https://zod.dev), a very concise and flexible mechanism is provided to verify request parameters
+Vona Based on [Zod](https://zod.dev), a very concise and flexible mechanism is provided to verify request parameters.
 
 - See: [Validation](../techniques/validation/introduction.md)
 
 ## Swagger/Openapi
 
-Vona implements a very convenient `Swagger/Openapi` based on [@asteasolutions/zod-to-openapi](https://github.com/asteasolutions/zod-to-openapi). `Swagger/Openapi` in Vona still uses the decorators in [Validation](../techniques/validation/introduction.md), and provides extension tools to set metadata related to Openapi
+Vona implements a very convenient `Swagger/Openapi` based on [@asteasolutions/zod-to-openapi](https://github.com/asteasolutions/zod-to-openapi). `Swagger/Openapi` in Vona still uses the decorators in [Validation](../techniques/validation/introduction.md), and provides extension tools to set metadata related to Openapi.
 
 - See: [Swagger/Openapi](../techniques/openapi/introduction.md)
 
 ## Response Body
 
-Vona provides a mechanism similar to [Validation](../techniques/validation/introduction.md), which specifies the type of the Response body and automatically generates Swagger/Openapi metadata
+Vona provides a mechanism similar to [Validation](../techniques/validation/introduction.md), which specifies the type of the Response body and automatically generates Swagger/Openapi metadata.
 
 ### 1. Automatically infer Zod Schema: Basic type/Dto/Entity
 
-If the body type is `Basic type/Dto/Entity`, then the system will automatically infer the corresponding Zod Schema and automatically generate Swagger/Openapi
+If the body type is `Basic type/Dto/Entity`, then the system will automatically infer the corresponding Zod Schema and automatically generate Swagger/Openapi.
 
 - Example: `string`
 
@@ -215,7 +215,7 @@ class ControllerStudent {
 
 ### 2. Specify Zod Schema
 
-We can also explicitly specify Zod Schema and automatically generate Swagger/Openapi
+We can also explicitly specify Zod Schema and automatically generate Swagger/Openapi.
 
 - Example: `string[]`
 
@@ -261,11 +261,11 @@ By default, Vona automatically provides a wrapper object for the Response body. 
 }
 ```
 
-We can also use the decorator `@Api.bodyCustom` to customize the wrapper object
+We can also use the decorator `@Api.bodyCustom` to customize the wrapper object.
 
 ### 1. Disable the wrapper object
 
-You can disable the wrapper object and directly return the Response body itself
+You can disable the wrapper object and directly return the Response body itself.
 
 ```diff
 class ControllerStudent {
@@ -325,7 +325,7 @@ class ControllerStudent {
 
 ### 1. @Api.contentType
 
-Set the response content type
+Set the response content type.
 
 ```typescript
 @Api.contentType('application/xml')
@@ -333,7 +333,7 @@ Set the response content type
 
 ### 2. @Api.exclude
 
-Do not display this API in Swagger/Openapi metadata. This decorator can be used in Controller/Action
+Do not display this API in Swagger/Openapi metadata. This decorator can be used in Controller/Action.
 
 ```typescript
 @Api.exclude()
@@ -341,7 +341,7 @@ Do not display this API in Swagger/Openapi metadata. This decorator can be used 
 
 ### 3. @Api.header/@Api.headers
 
-Define Request headers
+Define Request headers.
 
 ```typescript
 @Api.header({ name: 'x-request-header', description: 'request header' })
@@ -351,7 +351,7 @@ Define Request headers
 
 ### 4. @Api.httpCode
 
-Set the response http code
+Set the response http code.
 
 ```typescript
 @Api.httpCode(400)
@@ -359,7 +359,7 @@ Set the response http code
 
 ### 5. @Api.setHeader
 
-Set the response headers
+Set the response headers.
 
 ```typescript
 @Api.setHeader('x-response-header', 'value')
@@ -369,7 +369,7 @@ Set the response headers
 
 ### 6. @Api.tags
 
-Set the grouping information in Swagger/Openapi. This decorator can be used for Controller/Action
+Set the grouping information in Swagger/Openapi. This decorator can be used for Controller/Action.
 
 ```typescript
 @Api.tags(['Student'])
@@ -379,7 +379,7 @@ Set the grouping information in Swagger/Openapi. This decorator can be used for 
 
 ### 1. Example
 
-You can pass more options when defining the request method of Action
+You can pass more options when defining the request method of Action.
 
 ```typescript
 class ControllerStudent {
@@ -414,7 +414,7 @@ export default {
 };
 ```
 
-Use the `$locale` method for language translation, and support automatic type hints for language resources
+Use the `$locale` method for language translation, and support automatic type hints for language resources.
 
 ```typescript
 import { $locale } from '../.metadata/locales.ts';
@@ -444,7 +444,7 @@ import { $locale } from '../.metadata/locales.ts';
 
 ### 1. Example
 
-You can pass more options when defining a Controller
+You can pass more options when defining a Controller.
 
 ```typescript
 @Controller('student', {
@@ -469,9 +469,9 @@ class ControllerStudent {}
 
 ### 3. App Config
 
-Controller options can be configured in App Config
+Controller options can be configured in App Config.
 
-For example, by default, `http://localhost:7102/swagger` is only valid in `test`/`dev` environment. If you want to make Swagger accessible in the `prod` environment, you can configure it in App Config
+For example, by default, `http://localhost:7102/swagger` is only valid in `test`/`dev` environment. If you want to make Swagger accessible in the `prod` environment, you can configure it in App Config.
 
 `src/backend/config/config/config.prod.ts`
 
@@ -490,7 +490,7 @@ config.onions = {
 
 ### 4. actions
 
-Provide `actions` options in Controller options, allowing us to configure the Action options in any Controller in App Config
+Provide `actions` options in Controller options, allowing us to configure the Action options in any Controller in App Config.
 
 For example, we set the action options of `findOne` in the `ControllerStudent` class in App Config:
 

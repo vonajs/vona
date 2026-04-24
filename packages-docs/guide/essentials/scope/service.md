@@ -18,7 +18,7 @@ Context Menu - [Module Path]: `Vona Create/Service`
 
 ## Use Service
 
-The `Service` of the module can be obtained through the `Scope` instance
+The `Service` of the module can be obtained through the `Scope` instance.
 
 ```diff
 class ControllerStudent {

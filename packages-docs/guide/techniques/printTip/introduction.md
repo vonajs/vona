@@ -8,7 +8,7 @@ Custom messages can be added using `PrintTip`
 
 ## Create meta.printTip
 
-For example, create `meta.printTip` in the module demo-student. Output `=== Hello World ===` to the console upon system startup
+For example, create `meta.printTip` in the module demo-student. Output `=== Hello World ===` to the console upon system startup.
 
 ### 1. Cli Command
 

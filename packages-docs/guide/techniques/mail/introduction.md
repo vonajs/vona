@@ -88,7 +88,7 @@ MAIL_SYSTEM_DEFAULTS_FROM = no.reply@cabloy.com
 
 ### 1. Adding Type Definition
 
-Add a new client type definition using the interface merging mechanism, such as `order`, for sending order-related emails
+Add a new client type definition using the interface merging mechanism, such as `order`, for sending order-related emails.
 
 In VSCode In the editor, enter the code snippet `recordmailclient` to automatically generate the code skeleton:
 
@@ -133,7 +133,7 @@ config.modules = {
 
 ## bean.mail
 
-VonaJS provides a global bean `bean.mail` through the module `a-mail`, which can be used to send emails
+VonaJS provides a global bean `bean.mail` through the module `a-mail`, which can be used to send emails.
 
 ```typescript
 import type { IMailOptions } from 'vona-module-a-mail';
@@ -151,7 +151,7 @@ class ControllerStudent {
 }
 ```
 
-You can specify which client to use when sending emails
+You can specify which client to use when sending emails.
 
 ```typescript
 await this.bean.mail.send(mail, 'order');
@@ -159,7 +159,7 @@ await this.bean.mail.send(mail, 'order');
 
 ## Queue Configuration
 
-VonaJS uses a built-in queue to send emails. You can modify the queue configuration in App Config
+VonaJS uses a built-in queue to send emails. You can modify the queue configuration in App Config.
 
 ```typescript
 // onions

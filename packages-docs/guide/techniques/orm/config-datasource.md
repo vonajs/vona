@@ -98,7 +98,7 @@ If we want to add a new datasource, named `pgOrder`, using the database dialect 
 
 ### 1. Add Type Definitions
 
-Using the interface merging mechanism to add the type definition for the new datasource
+Using the interface merging mechanism to add the type definition for the new datasource.
 
 In the VSCode editor, enter the code snippet `recorddatabaseclient` to automatically generate a code skeleton:
 
@@ -156,7 +156,7 @@ const pgOrder = app.bean.database.getDb('pgOrder');
 
 ### 2. Obtaining the Default Datasource
 
-The default datasource is determined by the `defaultClient` configuration option
+The default datasource is determined by the `defaultClient` configuration option.
 
 ```typescript
 const dbDefault = app.bean.database.getDb('default');
@@ -164,7 +164,7 @@ const dbDefault = app.bean.database.getDb('default');
 
 ### 3. Obtaining the Knex Instance Corresponding to the Datasource
 
-The system creates different Knex instances for different datasources. Use these Knex instances to operate the database
+The system creates different Knex instances for different datasources. Use these Knex instances to operate the database.
 
 ```typescript
 const pg = app.bean.database.getDb('pg');

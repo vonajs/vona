@@ -1,10 +1,10 @@
 # Menu System
 
-The `a-ssr` module provides a generic ssr menu system. In fact, this `menu system` can be completely ignored, and your own menu retrieval logic can be provided. However, using a system-defined menu system facilitates the sharing and reuse of code resources within the community, significantly improving the system's scalability and maintainability
+The `a-ssr` module provides a generic ssr menu system. In fact, this `menu system` can be completely ignored, and your own menu retrieval logic can be provided. However, using a system-defined menu system facilitates the sharing and reuse of code resources within the community, significantly improving the system's scalability and maintainability.
 
 ## bean.ssr
 
-The module `a-ssr` provides a global bean `bean.ssr`, which allows for the unified retrieval of menus
+The module `a-ssr` provides a global bean `bean.ssr`, which allows for the unified retrieval of menus.
 
 Taking the module `home-base` as an example:
 

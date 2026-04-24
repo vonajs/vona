@@ -1,10 +1,10 @@
 # Module
 
-In Vona, `Modules` consolidate controllers, services, models, entities, dtos, configurations, languages, errors ​​and other resources into cohesive blocks of functionality, each focused on a feature scene, application business domain, workflow, or common collection of utilities
+In Vona, `Modules` consolidate controllers, services, models, entities, dtos, configurations, languages, errors ​​and other resources into cohesive blocks of functionality, each focused on a feature scene, application business domain, workflow, or common collection of utilities.
 
 ## Why need Modularization?
 
-In a large web business system, as the business grows and changes, it is also necessary to divide the system into relatively independent modules in order to avoid code bloating. This is why Vona introduces modularization
+In a large web business system, as the business grows and changes, it is also necessary to divide the system into relatively independent modules in order to avoid code bloating. This is why Vona introduces modularization.
 
 ## Benefits of Modularization
 
@@ -53,4 +53,4 @@ Context Menu - [Project Path/src/module]: `Vona Create/Module`
 Context Menu - [Project Path/src/suite/suite-name/modules]: `Vona Create/Module`
 :::
 
-Enter the module name according to the prompt, such as `demo-student`, and the VSCode extension will automatically create the code skeleton of the module
+Enter the module name according to the prompt, such as `demo-student`, and the VSCode extension will automatically create the code skeleton of the module.

@@ -1,6 +1,6 @@
 # Swagger/Openapi
 
-Vona implements a very convenient `Swagger/Openapi` based on [@asteasolutions/zod-to-openapi](https://github.com/asteasolutions/zod-to-openapi). `Swagger/Openapi` in Vona still uses the decorators in [Validation](../validation/introduction.md), and provides extension tools to set metadata related to Openapi
+Vona implements a very convenient `Swagger/Openapi` based on [@asteasolutions/zod-to-openapi](https://github.com/asteasolutions/zod-to-openapi). `Swagger/Openapi` in Vona still uses the decorators in [Validation](../validation/introduction.md), and provides extension tools to set metadata related to Openapi.
 
 ## URL
 
@@ -15,7 +15,7 @@ Vona has a built-in `Swagger` module, which we can access directly through the U
 
 - The default version of Openapi json is `V3.1`
 
-In addition, Vona also has built-in [RapiDoc](https://rapidocweb.com/), which provides a more elegant UI
+In addition, Vona also has built-in [RapiDoc](https://rapidocweb.com/), which provides a more elegant UI.
 
 | Name    | URL                           |
 | ------- | ----------------------------- |
@@ -23,7 +23,7 @@ In addition, Vona also has built-in [RapiDoc](https://rapidocweb.com/), which pr
 
 ## bean.openapi
 
-The module `a-openapi` provides a global bean `bean.openapi`, which includes several built-in utilities for manipulating Swagger/Openapi
+The module `a-openapi` provides a global bean `bean.openapi`, which includes several built-in utilities for manipulating Swagger/Openapi.
 
 | Name                           | Description                                         |
 | ------------------------------ | --------------------------------------------------- |
@@ -34,7 +34,7 @@ The module `a-openapi` provides a global bean `bean.openapi`, which includes sev
 
 ## 1. Automatically infer Zod Schema: Basic type/Dto/Entity
 
-If the parameter type is `Basic type/Dto/Entity`, then the system will automatically infer the corresponding Zod Schema, and automatically generate Openapi metadata
+If the parameter type is `Basic type/Dto/Entity`, then the system will automatically infer the corresponding Zod Schema, and automatically generate Openapi metadata.
 
 For example, `findOne(@Arg.query('id') id: number)`, the type of id is `number`, then the automatically inferred Schema is: `z.number()`. Then, the automatically generated Swagger/Openapi is as follows:
 
@@ -72,7 +72,7 @@ For example, `findOne(@Arg.query('ids', v.array(Number)) ids: number[])`, we spe
 
 ## Extension tools
 
-Vona also provides many extension tools for setting metadata related to Openapi
+Vona also provides many extension tools for setting metadata related to Openapi.
 
 | Name          | Description                                                                                |
 | ------------- | ------------------------------------------------------------------------------------------ |
@@ -86,7 +86,7 @@ Vona also provides many extension tools for setting metadata related to Openapi
 
 ### 1. Example: v.title
 
-For example, we can specify `title` as `Name` for Openapi
+For example, we can specify `title` as `Name` for Openapi.
 
 ```typescript
 class ControllerStudent3 {
@@ -101,7 +101,7 @@ The automatically generated Swagger/Openapi is as follows: (Since Swagger do not
 
 ### 2. Example: v.openapi
 
-We can use `v.openapi` to set more metadata at once. For example, we can specify `title` as `Name` and `example` as `Tom` for Openapi
+We can use `v.openapi` to set more metadata at once. For example, we can specify `title` as `Name` and `example` as `Tom` for Openapi.
 
 ```typescript
 class ControllerStudent3 {
@@ -140,7 +140,7 @@ export default {
 
 ### 2. Use $locale
 
-Use the `$locale` method for language translation, and support auto-complete hints for language resources
+Use the `$locale` method for language translation, and support auto-complete hints for language resources.
 
 ```typescript
 import { $locale } from '../.metadata/locales.ts';
@@ -163,7 +163,7 @@ The automatically generated Swagger/Openapi are as follows:
 
 ## Configuration
 
-`Swagger/Openapi` capabilities are provided by the `a-openapi` module, so you can modify the `a-openapi` module configuration in App Config
+`Swagger/Openapi` capabilities are provided by the `a-openapi` module, so you can modify the `a-openapi` module configuration in App Config.
 
 `src/backend/config/config/config.ts`
 

@@ -1,6 +1,6 @@
 # Runtime Environments and Flavors
 
-Vona uses multi-dimensional variables to load environment variables and Config configurations, providing a more flexible configuration mechanism and supporting more complex business scenarios
+Vona uses multi-dimensional variables to load environment variables and Config configurations, providing a more flexible configuration mechanism and supporting more complex business scenarios.
 
 The `multi-dimensional variables` in Vona contain two dimensions: `Runtime Environment` and `Flavor`
 
@@ -16,7 +16,7 @@ Vona provides three runtime environments:
 
 ### 1. Enabling the Runtime Environment
 
-Enabling the corresponding runtime environment by executing different commands
+Enabling the corresponding runtime environment by executing different commands.
 
 ```bash
 # test
@@ -36,7 +36,7 @@ $ npm run start:docker
 
 - Determine via `Env`
 
-Using Env to determine the current runtime environment supports `tree-shaking` during builds
+Using Env to determine the current runtime environment supports `tree-shaking` during builds.
 
 ```typescript
 process.env.META_MODE === 'test';
@@ -62,7 +62,7 @@ app.meta.isProd;
 
 ## Flavor
 
-For more complex business scenarios, we often need to provide configuration capabilities for more scenarios. Vona specifically provides a `Flavor` mechanism. The combination of `runtime environments` and `flavors` allows us to conveniently define configuration information for various scenarios
+For more complex business scenarios, we often need to provide configuration capabilities for more scenarios. Vona specifically provides a `Flavor` mechanism. The combination of `runtime environments` and `flavors` allows us to conveniently define configuration information for various scenarios.
 
 ### 1. Built-in Flavors
 
@@ -93,7 +93,7 @@ $ npm run build -- --flavor=ci
 
 - Determine via `Env`
 
-Using Env to determine the current flavor supports tree-shaking during builds
+Using Env to determine the current flavor supports tree-shaking during builds.
 
 ```typescript
 process.env.META_FLAVOR === 'normal';
@@ -113,7 +113,7 @@ app.config.meta.flavor === 'ci';
 
 You can create a flavor based on any business need, such as customer, project, organization, etc.
 
-For example, let's assign a flavor named `customA` to customer A, providing a separate env/config configuration for customer A
+For example, let's assign a flavor named `customA` to customer A, providing a separate env/config configuration for customer A.
 
 - Enabling the Flavor
 
@@ -130,9 +130,9 @@ app.config.meta.flavor === 'customA';
 
 ### 5. Add Flavor Type Definition
 
-You can add a Flavor type definition to provide type hints
+You can add a Flavor type definition to provide type hints.
 
-In the VSCode editor, enter the code snippet `recordflavor` to automatically generate a code skeleton, and then add a custom Flavor type definition
+In the VSCode editor, enter the code snippet `recordflavor` to automatically generate a code skeleton, and then add a custom Flavor type definition.
 
 ```diff
 declare module '@cabloy/module-info' {

@@ -37,7 +37,7 @@ class ModelUser {}
 
 ## Query data
 
-Then query the user's order list
+Then query the user's order list.
 
 ```typescript
 class ServiceOrder {
@@ -57,7 +57,7 @@ class ServiceOrder {
 }
 ```
 
-So far, `system default datasource` has been used to query the user information of `userId=1` and the order list of this user
+So far, `system default datasource` has been used to query the user information of `userId=1` and the order list of this user.
 
 ## Create Datasources
 
@@ -137,7 +137,7 @@ class ServiceOrder {
 
 - `newInstance`: Passes the datasource to use and returns a new model instance
 
-So far, we've used the `user-pg` datasource to query user information and the `system default datasource` to query order list
+So far, we've used the `user-pg` datasource to query user information and the `system default datasource` to query order list.
 
 ## Using Datasources: Relation dynamic options
 
@@ -168,11 +168,11 @@ class ServiceOrder {
 
 - `meta.client`: specifies the datasource to be used by relation `orders`
 
-So far, we use the datasource `user-pg` to query user information and the datasource `order-mysql` to query order list
+So far, we use the datasource `user-pg` to query user information and the datasource `order-mysql` to query order list.
 
 ## Using Datasources: Model options
 
-You can also configure the datasource directly in the Model options to simplify the query code
+You can also configure the datasource directly in the Model options to simplify the query code.
 
 1. Model Order
 
@@ -199,7 +199,7 @@ class ModelUser {}
 
 3. Query data
 
-Now, you can query the user's order list in the usual way
+Now, you can query the user's order list in the usual way.
 
 ```typescript
 class ServiceOrder {
@@ -239,7 +239,7 @@ config.onions = {
 };
 ```
 
-Therefore, you can also use the usual way to query the user's order list
+Therefore, you can also use the usual way to query the user's order list.
 
 ## Using Datasources: Relation static options
 
@@ -260,4 +260,4 @@ Static options can also be specified when defining a Relation:
 class ModelUser {}
 ```
 
-Similarly, you can also use the usual way to query the user's order list
+Similarly, you can also use the usual way to query the user's order list.

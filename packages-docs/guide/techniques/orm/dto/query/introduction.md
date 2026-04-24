@@ -1,6 +1,6 @@
 # $Dto.query/DtoQueryBase
 
-`$Dto.query/DtoQueryBase` is used to annotate the `Query` parameters
+`$Dto.query/DtoQueryBase` is used to annotate the `Query` parameters.
 
 ## Usage of DtoQueryBase
 
@@ -74,7 +74,7 @@ The automatically generated Swagger/Openapi is as follows:
 
 ## Add custom fields
 
-You can also add custom fields directly in the DTO
+You can also add custom fields directly in the DTO.
 
 ```diff
 @Dto()
@@ -90,11 +90,11 @@ export class DtoOrderQuery
 
 ## v.openapi/v.filter
 
-We can also specify OpenAPI parameters to support more capabilities
+We can also specify OpenAPI parameters to support more capabilities.
 
 ### 1. Relations
 
-For example, if the Model `Order` and Model `User` have an `n:1` relation, we can pass `userName` as the query condition in the Query parameters. Then, we need to add the `userName` field in the DTO and set the OpenAPI parameters
+For example, if the Model `Order` and Model `User` have an `n:1` relation, we can pass `userName` as the query condition in the Query parameters. Then, we need to add the `userName` field in the DTO and set the OpenAPI parameters.
 
 ```typescript
 @Dto()
@@ -145,7 +145,7 @@ The automatically generated Swagger/Openapi is as follows:
 
 ### 2. App Config
 
-Openapi parameters can be configured in App Config
+Openapi parameters can be configured in App Config.
 
 ```typescript
 config.onions = {

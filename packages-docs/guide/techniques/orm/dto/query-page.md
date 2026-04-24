@@ -1,6 +1,6 @@
 # $Dto.queryPage/DtoQueryPageBase
 
-`$Dto.queryPage/DtoQueryPageBase` is used to annotate the `Query` parameters with paging
+`$Dto.queryPage/DtoQueryPageBase` is used to annotate the `Query` parameters with paging.
 
 ## Usage of DtoQueryPageBase
 

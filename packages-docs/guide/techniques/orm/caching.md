@@ -1,10 +1,10 @@
 # Caching
 
-Many frameworks use the simplest use cases to demonstrate high performance, ignoring the performance challenges presented by business complexity. As business grows and changes, project performance plummets, and various optimization and mitigation measures lead to cumbersome and lengthy code. Vona, however, addresses the complexity of large-scale businesses and incorporates caching strategies into the framework's core, implementing mechanisms such as `two-layer cache`, `query cache`, and `entity cache`. This makes it easy to develop large-scale business systems, ensuring that code remains elegant and intuitive
+Many frameworks use the simplest use cases to demonstrate high performance, ignoring the performance challenges presented by business complexity. As business grows and changes, project performance plummets, and various optimization and mitigation measures lead to cumbersome and lengthy code. Vona, however, addresses the complexity of large-scale businesses and incorporates caching strategies into the framework's core, implementing mechanisms such as `two-layer cache`, `query cache`, and `entity cache`. This makes it easy to develop large-scale business systems, ensuring that code remains elegant and intuitive.
 
 ## Out-of-the-Box
 
-Vona ORM provides an `out-of-the-box` caching mechanism. Simply operate the ORM as usual, and the system will handle caching internally and ensure cached data consistency
+Vona ORM provides an `out-of-the-box` caching mechanism. Simply operate the ORM as usual, and the system will handle caching internally and ensure cached data consistency.
 
 ## Entity Cache
 
@@ -79,7 +79,7 @@ class ServiceUser extends BeanBase {
 
 ### 2. Aggregate and Group
 
-`Aggregate and Group` only requires one step, directly saving the query results to the cache
+`Aggregate and Group` only requires one step, directly saving the query results to the cache.
 
 Therefore, the `Query Cache` rules for `Aggregate and Group` are as follows:
 
@@ -116,7 +116,7 @@ class ServiceUser extends BeanBase {
 
 ## Cache Configuration
 
-For `out-of-the-box` performance, the system provides a default cache configuration. Custom configurations are also available
+For `out-of-the-box` performance, the system provides a default cache configuration. Custom configurations are also available.
 
 ### 1. Model Options
 
@@ -159,7 +159,7 @@ class ModelUser {}
 
 ### 2. App Config
 
-Model options can be configured in App Config
+Model options can be configured in App Config.
 
 `src/backend/config/config/config.ts`
 
@@ -220,6 +220,6 @@ class ModelUser {}
 
 3. Database Transactions and Cache Data Consistency
 
-The Vona system adapts to database transaction and caching. When a database transaction fails, it automatically performs cache compensation operations, ensuring that database and cache data remain consistent
+The Vona system adapts to database transaction and caching. When a database transaction fails, it automatically performs cache compensation operations, ensuring that database and cache data remain consistent.
 
 - See: [Transaction and Cache Data Consistency](./transaction.md#transaction-cache-consistency)

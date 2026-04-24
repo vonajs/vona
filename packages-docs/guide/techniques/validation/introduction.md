@@ -4,7 +4,7 @@ Vona provides a very concise and flexible mechanism for verifying request parame
 
 ## 1. Automatically infer Zod Schema: Basic type/Dto/Entity
 
-If the parameter type is `Basic type/Dto/Entity`, then the system will automatically infer the corresponding Zod Schema for verification
+If the parameter type is `Basic type/Dto/Entity`, then the system will automatically infer the corresponding Zod Schema for verification.
 
 For example, `findOne(@Arg.query('id') id: number)`, the type of id is `number`, then the automatically inferred Schema is: `z.number()`
 
@@ -35,7 +35,7 @@ class ControllerStudent3 {
 
 ## 3. Extending Zod Schema properties
 
-We can also extend new properties based on the existing Zod Schema
+We can also extend new properties based on the existing Zod Schema.
 
 For example, we want to specify id as `number`, and it is `optional`, with a default value of `3`
 
@@ -137,7 +137,7 @@ export class DtoUserLazy {
 
 ## Tool List
 
-VonaJS puts all the utility methods for extending Zod Schema into the group `v`, thus reducing the mental burden
+VonaJS puts all the utility methods for extending Zod Schema into the group `v`, thus reducing the mental burden.
 
 ### 1. Basic Tools
 

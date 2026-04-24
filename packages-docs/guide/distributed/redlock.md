@@ -57,7 +57,7 @@ class ControllerStudent {
 
 ## `lock/lockIsolate`
 
-VonaJS provides two lock methods: `lock/lockIsolate`. The difference between the two is that `lockIsolate` automatically implements `datasource level`, thus avoiding deadlocks caused by datasource contention
+VonaJS provides two lock methods: `lock/lockIsolate`. The difference between the two is that `lockIsolate` automatically implements `datasource level`, thus avoiding deadlocks caused by datasource contention.
 
 - See: [Datasource level](./queue/db-level.md)
 
@@ -85,16 +85,16 @@ class ControllerStudent {
 
 ## Defining Lock Resources: Literal Template
 
-Lock resources can also be literal templates
+Lock resources can also be literal templates.
 
-For example, if you want to provide separate lock resources for different users, you can use a string like `user-${userId}` as the lock resource name
+For example, if you want to provide separate lock resources for different users, you can use a string like `user-${userId}` as the lock resource name.
 
 ```diff
 - export type TypeRedlockLockIsolateResource = 'name';
 + export type TypeRedlockLockIsolateResource = 'name' | `user-${string}`;
 ```
 
-This way, type hints can also be provided when using the `lockIsolate` method
+This way, type hints can also be provided when using the `lockIsolate` method.
 
 ```typescript
 class ControllerStudent {
@@ -110,7 +110,7 @@ class ControllerStudent {
 
 ## Inspect
 
-You can directly inspect the currently effective redlock list
+You can directly inspect the currently effective redlock list.
 
 ```diff
 class ControllerStudent {

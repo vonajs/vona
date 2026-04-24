@@ -1,8 +1,8 @@
 # Create CRUD
 
-We can use `Cli command` or `Menu command` to create a crud code skeleton
+We can use `Cli command` or `Menu command` to create a crud code skeleton.
 
-For example, we create a student CRUD in the module demo-student
+For example, we create a student CRUD in the module demo-student.
 
 ## Cli command
 

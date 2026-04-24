@@ -1,10 +1,10 @@
 # Field Indexes
 
-Vona provides a mechanism to create field indexes. Just declare the field indexes and the system will automatically create them
+Vona provides a mechanism to create field indexes. Just declare the field indexes and the system will automatically create them.
 
 ## Create meta.index
 
-Vona uses Bean `meta.index` to uniformly configure the field indexes of the module
+Vona uses Bean `meta.index` to uniformly configure the field indexes of the module.
 
 ### 1. Cli command
 
@@ -41,7 +41,7 @@ class MetaIndex {}
 
 ## Configure field indexes: typed style
 
-In order to make the code higher quality and easier to maintain, we can also use a typed code style
+In order to make the code higher quality and easier to maintain, we can also use a typed code style.
 
 ```typescript
 import { $tableColumns } from 'vona-module-a-ormutils';
@@ -58,7 +58,7 @@ class MetaIndex {}
 
 ## App Config
 
-Field indexes can be configured in App Config
+Field indexes can be configured in App Config.
 
 `src/backend/config/config/config.ts`
 

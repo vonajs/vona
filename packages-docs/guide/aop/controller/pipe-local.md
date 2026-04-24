@@ -2,7 +2,7 @@
 
 ## Create Pipe
 
-For example, create a local pipe `number` in the module demo-student to convert the request parameter to `number` type
+For example, create a local pipe `number` in the module demo-student to convert the request parameter to `number` type.
 
 ### 1. Cli command
 
@@ -60,7 +60,7 @@ class ControllerStudent {
 
 ### 2. Annotating controller class
 
-You can use pipe for controller classes so that all actions in the class will apply this pipe
+You can use pipe for controller classes so that all actions in the class will apply this pipe.
 
 ```diff
 import { Aspect } from 'vona-module-a-aspect';
@@ -75,7 +75,7 @@ class ControllerStudent {
 
 ## Pipe Parameters
 
-You can define parameters for pipe, allowing for more flexible configuration of pipe logic
+You can define parameters for pipe, allowing for more flexible configuration of pipe logic.
 
 For example, define the `errorCode` parameter for the number pipe. If the incoming request parameter is not of type number, an exception is thrown with the error code `errorCode`
 
@@ -117,7 +117,7 @@ export class PipeNumber extends BeanBase implements IPipeTransform<TypePipeNumbe
 
 ### 4. Specify parameters when using
 
-You can specify local pipe parameters for a specific API
+You can specify local pipe parameters for a specific API.
 
 ```diff
 class ControllerStudent {
@@ -131,7 +131,7 @@ class ControllerStudent {
 
 ### 5. App Config
 
-Pipe parameters can be configured in App Config
+Pipe parameters can be configured in App Config.
 
 `src/backend/config/config/config.ts`
 

@@ -1,10 +1,10 @@
 # Zod Refine
 
-You can use `Zod Refine` to implement more flexible validation rules
+You can use `Zod Refine` to implement more flexible validation rules.
 
 ## Create Zod Refine
 
-For example, create a Zod Refine `nameExists` in the module demo-student to check if the student name already exists
+For example, create a Zod Refine `nameExists` in the module demo-student to check if the student name already exists.
 
 ### 1. Cli command
 
@@ -63,9 +63,9 @@ class ControllerStudent {
 
 ## Zod Refine Parameters
 
-You can define parameters for Zod Refine, allowing for more flexible configuration of Zod Refine logic
+You can define parameters for Zod Refine, allowing for more flexible configuration of Zod Refine logic.
 
-For example, define the `errorMessage` parameter for the `nameExists` Zod Refine to provide custom error message
+For example, define the `errorMessage` parameter for the `nameExists` Zod Refine to provide custom error message.
 
 ### 1. Defining parameter types
 
@@ -112,7 +112,7 @@ class ZodRefineNameExists {
 
 ### 4. Specify parameters when using
 
-You can specify Zod Refine parameters when using
+You can specify Zod Refine parameters when using.
 
 ```diff
 class ControllerStudent {
@@ -123,7 +123,7 @@ class ControllerStudent {
 
 ### 5. App Config
 
-Zod Refine parameters can be configured in App Config
+Zod Refine parameters can be configured in App Config.
 
 `src/backend/config/config/config.ts`
 

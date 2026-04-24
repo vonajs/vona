@@ -2,7 +2,7 @@
 
 ## Create Middleware
 
-For example, we create a Local Middleware `logger` in the module demo-student
+For example, we create a Local Middleware `logger` in the module demo-student.
 
 ### 1. Cli command
 
@@ -56,7 +56,7 @@ class ControllerStudent {
 
 ### 2. Annotating controller class
 
-You can use middleware for controller classes so that all actions in the class will apply this middleware
+You can use middleware for controller classes so that all actions in the class will apply this middleware.
 
 ```diff
 import { Aspect } from 'vona-module-a-aspect';
@@ -71,9 +71,9 @@ class ControllerStudent {
 
 ## Middleware Parameters
 
-You can define parameters for middleware, allowing for more flexible configuration of middleware logic
+You can define parameters for middleware, allowing for more flexible configuration of middleware logic.
 
-For example, define the `prefix` parameter for the logger middleware to control the output format
+For example, define the `prefix` parameter for the logger middleware to control the output format.
 
 ### 1. Defining parameter types
 
@@ -115,7 +115,7 @@ class MiddlewareLogger {
 
 ### 4. Specify parameters when using
 
-You can specify local middleware parameters for a specific API
+You can specify local middleware parameters for a specific API.
 
 ```diff
 class ControllerStudent {
@@ -129,7 +129,7 @@ class ControllerStudent {
 
 ### 5. App Config
 
-Middleware parameters can be configured in App Config
+Middleware parameters can be configured in App Config.
 
 `src/backend/config/config/config.ts`
 

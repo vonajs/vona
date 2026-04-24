@@ -2,7 +2,7 @@
 
 ## Create Service
 
-For example, we create a Service `student` in the module demo-student
+For example, we create a Service `student` in the module demo-student.
 
 ### 1. Cli command
 
@@ -25,7 +25,7 @@ export class ServiceStudent extends BeanBase {}
 
 ## Use Service
 
-The use of Service can be explained from different dimensions
+The use of Service can be explained from different dimensions.
 
 - [Dependency Injection](../essentials/ioc/dependency-injection.md), [Dependency Lookup](../essentials/ioc/dependency-lookup.md)
 
@@ -57,7 +57,7 @@ export class ControllerStudent {
 }
 ```
 
-Since the imported `ServiceStudent` is a `type`, the Bean identifier of Service needs to be specified
+Since the imported `ServiceStudent` is a `type`, the Bean identifier of Service needs to be specified.
 
 ## 2. Dependency lookup
 
@@ -97,7 +97,7 @@ class ControllerStudent {
 }
 ```
 
-this.bean === this.app.bean, which is the app container
+this.bean === this.app.bean, which is the app container.
 
 2. Lookup based on Bean identifier
 
@@ -111,7 +111,7 @@ class ControllerStudent {
 
 ### Request scope
 
-If we want to create a request-scope Bean instance, then we only need to invoke the `_getBean` method of the ctx container
+If we want to create a request-scope Bean instance, then we only need to invoke the `_getBean` method of the ctx container.
 
 ```typescript
 class ControllerStudent {

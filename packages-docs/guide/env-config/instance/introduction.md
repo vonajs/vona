@@ -1,6 +1,6 @@
 # Multi-Instance/Multi-Tenancy
 
-VonaJS supports the development of `multi-tenancy` SaaS systems through the concept of `multi-instance`. Simply launch a single backend service and you can run multiple instances simultaneously
+VonaJS supports the development of `multi-tenancy` SaaS systems through the concept of `multi-instance`. Simply launch a single backend service and you can run multiple instances simultaneously.
 
 VonaJS supports the following `Multi-Instance/Multi-Tenancy` modes:
 
@@ -52,7 +52,7 @@ config.instance = {
 
 ### 2. Production Environment
 
-In the production environment, you need to configure instance information yourself
+In the production environment, you need to configure instance information yourself.
 
 `src/backend/config/config/config.prod.ts`
 
@@ -72,7 +72,7 @@ The following example demonstrates how to add a new instance using the `shareTes
 
 ### 1. Adding Type Definitions
 
-Using the interface merging mechanism to add the type definition for the new instance
+Using the interface merging mechanism to add the type definition for the new instance.
 
 In the VSCode editor, enter the code snippet `recordinstance` to automatically generate a code skeleton:
 
@@ -115,7 +115,7 @@ config.instance = {
 
 ## Rules for Obtaining the Current Instance Name
 
-When a user accesses the backend API, the backend automatically obtains the current instance name based on the rules and then retrieves instance information based on the instance name
+When a user accesses the backend API, the backend automatically obtains the current instance name based on the rules and then retrieves instance information based on the instance name.
 
 ### 1. App Config
 
@@ -138,7 +138,7 @@ config.instance = {
 
 ### 2. Rule Order
 
-The system determines the current instance name in the following order. The determination process stops when the instance name is obtained
+The system determines the current instance name in the following order. The determination process stops when the instance name is obtained.
 
 1. If `getInstanceName` is provided, this function is called
 2. If `queryField` is not empty, the instance name is obtained from the request query
@@ -185,7 +185,7 @@ const iid = this.ctx.instance.id;
 
 ### 2. Using the Model to query data
 
-Since data across multi-instance is isolated, you must specify the `instance id` when querying data. VonaJS provides a very powerful `Model` object, which can transparently handle multi-instance
+Since data across multi-instance is isolated, you must specify the `instance id` when querying data. VonaJS provides a very powerful `Model` object, which can transparently handle multi-instance.
 
 ```typescript
 // create
@@ -204,7 +204,7 @@ When we use the `student` model to manipulate data, the system automatically set
 
 ### 3. Using Query Builder to query data
 
-If you use the `builder()` method to query data, you need to add `Instance Id` yourself
+If you use the `builder()` method to query data, you need to add `Instance Id` yourself.
 
 ```typescript
 await this.scope.model.student.builder().where({
@@ -223,7 +223,7 @@ await this.scope.model.student.builderSelect().where({
 
 ### 4. Using Raw SQL to query data
 
-If you use `Raw SQL` to query data, you will need to add `Instance Id` yourself
+If you use `Raw SQL` to query data, you will need to add `Instance Id` yourself.
 
 ```typescript
 await this.scope.model.student.query('select * from demoStudent where iid=?', [this.ctx.instance.id]);

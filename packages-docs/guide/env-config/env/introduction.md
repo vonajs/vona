@@ -1,6 +1,6 @@
 # Env
 
-Vona loads environment files based on multi-dimensional variables, providing a more flexible configuration mechanism and supporting more complex business scenarios
+Vona loads environment files based on multi-dimensional variables, providing a more flexible configuration mechanism and supporting more complex business scenarios.
 
 ## meta & .env files
 
@@ -80,7 +80,7 @@ if ('build' === 'dev') {
 }
 ```
 
-Since the condition is false, tree-shaking is performed
+Since the condition is false, tree-shaking is performed.
 
 ## Obtaining Environment Variables
 
@@ -98,7 +98,7 @@ process.env.NODE_ENV;
 
 ### 2. app.meta.env
 
-For environment variables that don't support tree-shaking, use `app.meta.env` to obtain them
+For environment variables that don't support tree-shaking, use `app.meta.env` to obtain them.
 
 ```typescript
 this.app.meta.env.APP_NAME;

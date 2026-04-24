@@ -1,10 +1,10 @@
 # Quick Start
 
-Here, we create a Vona project and a Zova project and combine them to create a complete fullstack development environment
+Here, we create a Vona project and a Zova project and combine them to create a complete fullstack development environment.
 
 ## Create a Vona project
 
-Create a Vona project using the `cabloy-basic` template
+Create a Vona project using the `cabloy-basic` template.
 
 ```bash
 $ vona :create:project projectName --template=cabloy-basic
@@ -80,7 +80,7 @@ $ npm run dev
 
 ### 2. Start Zova development server
 
-You can directly start Zova development server to debug the frontend code. At this point, Vona can be accessed by the frontend as an API service
+You can directly start Zova development server to debug the frontend code. At this point, Vona can be accessed by the frontend as an API service.
 
 ```bash
 $ npm run dev:ssr:cabloyBasicAdmin

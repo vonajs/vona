@@ -1,6 +1,6 @@
 # Table-partitioning
 
-For scenarios with high concurrency and large amounts of data, table-partitioning is often considered for optimization. Below, we take the `User/Order` model as an example to demonstrate how to use table-partitioning by querying the user's order list
+For scenarios with high concurrency and large amounts of data, table-partitioning is often considered for optimization. Below, we take the `User/Order` model as an example to demonstrate how to use table-partitioning by querying the user's order list.
 
 ## Partitioning rules
 
@@ -74,7 +74,7 @@ class ServiceOrder {
 }
 ```
 
-So far, we've used the `default` table to query user information of `userId=129` and the order list of this user
+So far, we've used the `default` table to query user information of `userId=129` and the order list of this user.
 
 ## Using Table-partitioning: Dynamic Way
 
@@ -97,7 +97,7 @@ class ServiceOrder {
 
 - `newInstance`: Passes the table name to use and returns a new model instance
 
-So far, we've used the `table-partitioning` to query order list
+So far, we've used the `table-partitioning` to query order list.
 
 ## Using Table-partitioning: Relation dynamic options
 
@@ -125,11 +125,11 @@ class ServiceOrder {
 
 - `meta.table`: specifies the table name to be used by relation `orders`
 
-So far, we use the `defalut` table to query user information and the `table-partitioning` to query order list
+So far, we use the `defalut` table to query user information and the `table-partitioning` to query order list.
 
 ## Using Table-partitioning: Model options
 
-You can also configure the `table-partitioning` directly in the Model options to simplify the query code
+You can also configure the `table-partitioning` directly in the Model options to simplify the query code.
 
 1. Model Order
 
@@ -149,7 +149,7 @@ class ModelOrder{}
 
 2. Query data
 
-Now, you can query the user's order list in the usual way
+Now, you can query the user's order list in the usual way.
 
 ```typescript
 class ServiceOrder {
@@ -203,7 +203,7 @@ config.onions = {
 };
 ```
 
-Therefore, you can also use the usual way to query the user's order list
+Therefore, you can also use the usual way to query the user's order list.
 
 ## Using Table-partitioning: Relation static options
 
@@ -227,4 +227,4 @@ Static options can also be specified when defining a Relation:
 class ModelUser {}
 ```
 
-Similarly, you can also use the usual way to query the user's order list
+Similarly, you can also use the usual way to query the user's order list.

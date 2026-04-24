@@ -5,11 +5,11 @@ For custom fields, Vona ORM provides built-in Transform rules. Take `DtoOrderQue
 - `orderNo` is a string, so the system automatically converts it to the conditional statement `'orderNo': { _includesI_: 'some input' }`
 - `userName` is also a string, so the system automatically converts it to the conditional statement `'name': { _includesI_: 'some input' }`
 
-To support more complex business needs, you can provide a custom Filter Transform
+To support more complex business needs, you can provide a custom Filter Transform.
 
 ## Create Filter Transform
 
-For example, create a Filter Transform: `dateRange` in the module demo-student to convert the date range into a conditional statement
+For example, create a Filter Transform: `dateRange` in the module demo-student to convert the date range into a conditional statement.
 
 For example, the current time zone is `Asia/Tokyo (+9:00)`. The incoming field `createdAt` has a value of `2025-12-01~2025-12-02`, and the converted conditional statement is:
 
@@ -77,7 +77,7 @@ class DtoStudentQuery {
 
 ### 2. App Config
 
-`createdAt` parameters can be configured in App Config
+`createdAt` parameters can be configured in App Config.
 
 ```typescript
 config.onions = {
@@ -93,9 +93,9 @@ config.onions = {
 
 ## Filter Transform Parameters
 
-You can define parameters for Filter Transform, allowing for more flexible configuration of Filter Transform logic
+You can define parameters for Filter Transform, allowing for more flexible configuration of Filter Transform logic.
 
-For example, define the `separator` parameter for the `dateRange` Filter Transform to provide custom separator
+For example, define the `separator` parameter for the `dateRange` Filter Transform to provide custom separator.
 
 ### 1. Defining parameter types
 
@@ -140,7 +140,7 @@ export class FilterTransformDateRange extends BeanBase implements IFilterTransfo
 
 ### 4. Specify parameters when using
 
-You can specify Filter Transform parameters when using
+You can specify Filter Transform parameters when using.
 
 - General Usage
 
@@ -156,7 +156,7 @@ class DtoStudentQuery {
 
 - App Config
 
-`createdAt` parameters can be configured in App Config
+`createdAt` parameters can be configured in App Config.
 
 ```diff
 config.onions = {
@@ -176,7 +176,7 @@ config.onions = {
 
 ### 5. App Config
 
-Filter Transform parameters can be configured in App Config
+Filter Transform parameters can be configured in App Config.
 
 `src/backend/config/config/config.ts`
 

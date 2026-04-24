@@ -2,7 +2,7 @@
 
 ## Create Dto
 
-For example, we create a Dto `studentCreate` in the module demo-student
+For example, we create a Dto `studentCreate` in the module demo-student.
 
 ### 1. Cli command
 
@@ -25,7 +25,7 @@ export class DtoStudentCreate {}
 
 ## @Api.field
 
-Generally speaking, when defining a field, you need to specify the field type, validation rules, and Swagger/Openapi metadata
+Generally speaking, when defining a field, you need to specify the field type, validation rules, and Swagger/Openapi metadata.
 
 The usage of `@Api.field` in `Dto` is the same as that of `Entity`
 
@@ -59,7 +59,7 @@ class DtoStudentCreate {
 
 ### 1. Example: openapi
 
-Provide description metadata for dto so that it can be displayed in Swagger/Openapi
+Provide description metadata for dto so that it can be displayed in Swagger/Openapi.
 
 ```typescript
 @Dto({
@@ -88,7 +88,7 @@ export default {
 };
 ```
 
-Use `$locale` function for language translation
+Use `$locale` function for language translation.
 
 ```typescript
 import { $locale } from '../.metadata/locales.ts';
@@ -127,7 +127,7 @@ class DtoStudentCreate {}
 
 ## App Config
 
-Dto options can be configured in App Config
+Dto options can be configured in App Config.
 
 `src/backend/config/config/config.ts`
 
@@ -149,7 +149,7 @@ config.onions = {
 
 ## Mapped Class
 
-In the above, we define two fields for `DtoStudentCreate`: `name` and `description`. In fact, these two fields are also defined in `EntityStudent`. In order to achieve code reuse and improve development efficiency, Vona provides `4` Mapped tool functions to derive the target class from the existing class
+In the above, we define two fields for `DtoStudentCreate`: `name` and `description`. In fact, these two fields are also defined in `EntityStudent`. In order to achieve code reuse and improve development efficiency, Vona provides `4` Mapped tool functions to derive the target class from the existing class.
 
 ### 1. $Class.pick
 
@@ -191,7 +191,7 @@ class DtoStudentOther extends $Class.mixin(EntityStudent, DtoStudentCreate, DtoS
 
 ### 5. Combination
 
-You can combine multiple Mapped tool functions
+You can combine multiple Mapped tool functions.
 
 ```typescript
 class DtoStudentUpdate extends $Class.partial($Class.pick(EntityStudent, ['name', 'description'])) {}
@@ -199,6 +199,6 @@ class DtoStudentUpdate extends $Class.partial($Class.pick(EntityStudent, ['name'
 
 ## DTO infer & generation
 
-Vona ORM dynamically infer and generate DTOs to eliminate redundant type definitions and boost development productivity
+Vona ORM dynamically infer and generate DTOs to eliminate redundant type definitions and boost development productivity.
 
 - See: [DTO infer & generation](../techniques/orm/dto/introduction.md)

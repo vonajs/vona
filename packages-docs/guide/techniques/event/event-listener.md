@@ -4,7 +4,7 @@ An `event` can have multiple `event listeners`, which execute using the `onion m
 
 ## Create Event Listener
 
-For example, create an Event Listener `echo` in the module `demo-student`. When responding to an event, add a `!` suffix to the event parameter `Hello World` and pass the new parameter to the `next` method
+For example, create an Event Listener `echo` in the module `demo-student`. When responding to an event, add a `!` suffix to the event parameter `Hello World` and pass the new parameter to the `next` method.
 
 ### 1. Cli command
 
@@ -72,7 +72,7 @@ export class EventListenerEcho
 
 ## Event Listener Order
 
-Multiple Event Listeners can be associated with the same event. Therefore, VonaJS provides two parameters to control the execution order of Event Listeners
+Multiple Event Listeners can be associated with the same event. Therefore, VonaJS provides two parameters to control the execution order of Event Listeners.
 
 ### 1. dependencies
 
@@ -100,7 +100,7 @@ class EventListenerEcho {}
 
 ## Event Listener Enable/Disable
 
-You can control `enable/disable` of Event Listeners
+You can control `enable/disable` of Event Listeners.
 
 ### 1. Enable
 
@@ -119,7 +119,7 @@ config.onions = {
 
 ### 2. Meta
 
-Allows Event Listeners to take effect in a specified operating environment
+Allows Event Listeners to take effect in a specified operating environment.
 
 | Name   | Type             | Description                                                                           |
 | ------ | ---------------- | ------------------------------------------------------------------------------------- |
@@ -140,7 +140,7 @@ class EventListenerEcho {}
 
 ## Inspect
 
-You can directly inspect the currently effective event listener list
+You can directly inspect the currently effective event listener list.
 
 ```diff
 class ControllerStudent {

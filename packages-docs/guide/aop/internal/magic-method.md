@@ -4,7 +4,7 @@ You can access dynamic properties or methods within a class using `__get__` and 
 
 ## Example: Module Scope
 
-To make using the IOC container more concise and intuitive, VonaJS recommends prioritizing the `dependency lookup` strategy, which reduces the use of decorator functions and type annotations. Accessing module resources through the `Module Scope` object is one mechanism for implementing the `dependency lookup` strategy
+To make using the IOC container more concise and intuitive, VonaJS recommends prioritizing the `dependency lookup` strategy, which reduces the use of decorator functions and type annotations. Accessing module resources through the `Module Scope` object is one mechanism for implementing the `dependency lookup` strategy.
 
 - See: [Module Scope](../../essentials/scope/introduction.md)
 
@@ -31,7 +31,7 @@ async findMany(params) {
 
 ## Example: CRUD (Magic Method)
 
-Vona ORM uses magic method to further simplify data manipulation code
+Vona ORM uses magic method to further simplify data manipulation code.
 
 - See: [CRUD (Magic Methods)](../../techniques/orm/crud-magic.md)
 
@@ -69,7 +69,7 @@ export class ServiceColor extends BeanBase {}
 
 ## `__get__`
 
-Then, use `__get__` to retrieve the color values
+Then, use `__get__` to retrieve the color values.
 
 ### 1. Add a code skeleton
 
@@ -101,7 +101,7 @@ export class ServiceColor extends BeanBase {
 
 ### 3. Adding Type Merging
 
-Providing type definitions for colors using interface type merging
+Providing type definitions for colors using interface type merging.
 
 ```typescript
 declare module 'vona-module-demo-student' {
@@ -125,7 +125,7 @@ async test() {
 
 ## `__set__`
 
-Then, use `__set__` to set the color values
+Then, use `__set__` to set the color values.
 
 ### 1. Add a code skeleton
 
@@ -164,7 +164,7 @@ export class ServiceColor extends BeanBase {
 
 ### 3. Add type merging
 
-Provide type definitions for colors using the interface type merging mechanism
+Provide type definitions for colors using the interface type merging mechanism.
 
 ```diff
 declare module 'vona-module-demo-student' {

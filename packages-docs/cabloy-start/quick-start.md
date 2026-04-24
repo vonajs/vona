@@ -1,10 +1,10 @@
 # Quick Start
 
-Here, we create a Vona project and a Zova project and combine them to create a complete fullstack development environment
+Here, we create a Vona project and a Zova project and combine them to create a complete fullstack development environment.
 
 ## Create a Vona project
 
-Create a Vona project using the `cabloy-start` template
+Create a Vona project using the `cabloy-start` template.
 
 ```bash
 $ vona :create:project projectName --template=cabloy-start
@@ -22,7 +22,7 @@ The `cabloy-start` template has a built-in suite `vona-suite-cabloy-start`, whic
 
 ### 1. Create a project
 
-Create a Zova project using the `vuetify` template
+Create a Zova project using the `vuetify` template.
 
 ```bash
 $ zova :create:project projectName --template=vuetify
@@ -31,7 +31,7 @@ $ cd projectName
 
 ### 2. Clone the zova-suite-cabloy-start source code
 
-Automatically gain access to the GitHub repository after purchase
+Automatically gain access to the GitHub repository after purchase.
 
 ```bash
 $ git clone git@github.com:cabloy/zova-suite-cabloy-start.git src/suite/cabloy-start
@@ -39,7 +39,7 @@ $ git clone git@github.com:cabloy/zova-suite-cabloy-start.git src/suite/cabloy-s
 
 ### 3. Modify the .env file
 
-Modify the environment parameter configuration of the two flavors of `Website` and `Admin-Dashboard` respectively
+Modify the environment parameter configuration of the two flavors of `Website` and `Admin-Dashboard` respectively.
 
 - `env/.env.ssr.cabloyStartAdmin`:
 
@@ -91,7 +91,7 @@ $ npm run dev
 
 ### 2. Start Zova development server
 
-You can directly start Zova development server to debug the frontend code. At this point, Vona can be accessed by the frontend as an API service
+You can directly start Zova development server to debug the frontend code. At this point, Vona can be accessed by the frontend as an API service.
 
 ```bash
 $ npm run dev:ssr:cabloyStartWeb

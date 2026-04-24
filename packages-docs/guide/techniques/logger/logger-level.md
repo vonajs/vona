@@ -1,6 +1,6 @@
 # Logger Level
 
-You can control the messages written to log files based on levels
+You can control the messages written to log files based on levels.
 
 ## NPM Levels
 
@@ -20,7 +20,7 @@ const levels = {
 
 ## Log Methods
 
-A set of log methods corresponds to the levels
+A set of log methods corresponds to the levels.
 
 ```typescript
 this.$logger.error('test');
@@ -34,11 +34,11 @@ this.$logger.silly('test');
 
 ## Default Logger Level
 
-VonaJS's default logger level is `info`, allowing you to control that only messages with level `<=info` are written to the file
+VonaJS's default logger level is `info`, allowing you to control that only messages with level `<=info` are written to the file.
 
 ### 1. makeTransportFile
 
-When creating a new `order` Client, you can implement this strategy using the `makeTransportFile` method: only messages with level `<=info` are written to the file
+When creating a new `order` Client, you can implement this strategy using the `makeTransportFile` method: only messages with level `<=info` are written to the file.
 
 ```diff
 // logger
@@ -77,7 +77,7 @@ config.logger = {
 
 ### 3. makeTransportConsole
 
-For the console transport, there is a special convention: all `silly` level messages will be output to the console. Therefore, this strategy is implemented through the `makeTransportConsole` method
+For the console transport, there is a special convention: all `silly` level messages will be output to the console. Therefore, this strategy is implemented through the `makeTransportConsole` method.
 
 ```diff
 // logger
@@ -96,9 +96,9 @@ config.logger = {
 
 ## Default Level Configuration
 
-The default level configuration can be modified through the .env file
+The default level configuration can be modified through the .env file.
 
-Since multiple Clients can be configured, each Client can configure its own default level
+Since multiple Clients can be configured, each Client can configure its own default level.
 
 ### 1. Client: `default`
 
@@ -145,9 +145,9 @@ class ControllerStudent {
 
 ## Dynamically Modifying the Level
 
-The level can be dynamically modified during system running, allowing control over the level-based write strategy at any time without downtime or restart
+The level can be dynamically modified during system running, allowing control over the level-based write strategy at any time without downtime or restart.
 
-When the `setLevel` method is called, the system automatically broadcasts it to all Workers, thereby modifying the current level in each worker process
+When the `setLevel` method is called, the system automatically broadcasts it to all Workers, thereby modifying the current level in each worker process.
 
 ```typescript
 class ControllerStudent {

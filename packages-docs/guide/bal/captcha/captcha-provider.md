@@ -1,6 +1,6 @@
 # Captcha Provider
 
-This section analyzes the core source code of the module `captcha-simple` to illustrate how to develop a new Captcha Provider
+This section analyzes the core source code of the module `captcha-simple` to illustrate how to develop a new Captcha Provider.
 
 ## Creating a Captcha Provider
 
@@ -68,7 +68,7 @@ class CaptchaProviderImageText {
 
 ## App Config
 
-Captcha Provider parameters can be configured in the App Config
+Captcha Provider parameters can be configured in the App Config.
 
 `src/backend/config/config/config.ts`
 

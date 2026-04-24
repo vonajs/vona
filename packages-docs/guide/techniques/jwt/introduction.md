@@ -42,11 +42,11 @@ config.modules = {
 
 ## Adding a New Client
 
-The following explains the Client configuration by adding a new Client
+The following explains the Client configuration by adding a new Client.
 
 ### 1. Adding Type Definition
 
-Add a new Client type definition using the interface merging mechanism, such as `test`, to generate JWT tokens for testing scenarios
+Add a new Client type definition using the interface merging mechanism, such as `test`, to generate JWT tokens for testing scenarios.
 
 In the VSCode editor, enter the code snippet `recordjwtclient`, and the code skeleton will be automatically generated:
 
@@ -136,7 +136,7 @@ class ControllerStudent {
 
 ## Generate JWT Tokens
 
-Can generate `accessToken/refreshToken` at the same time
+Can generate `accessToken/refreshToken` at the same time.
 
 ```typescript
 class ControllerStudent {
@@ -154,7 +154,7 @@ As shown in the figure below:
 
 ## Generate temporary accessToken
 
-In certain scenarios, an accessToken needs to be used in the URL query. In this case, a temporary accessToken needs to be generated. The `expiresIn` of a temporary accessToken is shorter than that of a regular accessToken, making it more secure
+In certain scenarios, an accessToken needs to be used in the URL query. In this case, a temporary accessToken needs to be generated. The `expiresIn` of a temporary accessToken is shorter than that of a regular accessToken, making it more secure.
 
 There are two ways to generate a temporary accessToken:
 

@@ -1,6 +1,6 @@
 # Relations(Dynamic)
 
-In large-scale business systems, we create numerous models with numerous relations between them. It's impossible to declare all relations using `static relations`. This is especially true when there are numerous business modules with models scattered across them. Declaring all relations using `static relations` becomes impractical. Without pre-defined `static relations`, we need to implement a mechanism for using `dynamic relations` in our code to enable querying, type inference, and DTO infer and generation
+In large-scale business systems, we create numerous models with numerous relations between them. It's impossible to declare all relations using `static relations`. This is especially true when there are numerous business modules with models scattered across them. Declaring all relations using `static relations` becomes impractical. Without pre-defined `static relations`, we need to implement a mechanism for using `dynamic relations` in our code to enable querying, type inference, and DTO infer and generation.
 
 The following uses `test-vona` module as an example to explain how to use `dynamic relations`
 
@@ -200,7 +200,7 @@ class ServiceOrder {
 
 ## belongsToMany
 
-Directly specifying a dynamic relation using `with` in CRUD operations requires providing the intermediate model `RoleUser`. It should be emphasized that the CRUD operations here are for the intermediate model, not the target model
+Directly specifying a dynamic relation using `with` in CRUD operations requires providing the intermediate model `RoleUser`. It should be emphasized that the CRUD operations here are for the intermediate model, not the target model.
 
 ```typescript
 class ServiceUser {
@@ -306,7 +306,7 @@ class ServiceUser {
 
 ## Tree structure
 
-Since the tree structure references itself, using a `static relation` with `autoload: true` is most convenient and concise way to write code
+Since the tree structure references itself, using a `static relation` with `autoload: true` is most convenient and concise way to write code.
 
 For demonstration purposes, we'll still implement the tree structure using a `dynamic relation`
 

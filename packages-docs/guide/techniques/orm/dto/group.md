@@ -1,6 +1,6 @@
 # $Dto.group
 
-`$Dto.group` is used to annotate the return result of the grouping operation
+`$Dto.group` is used to annotate the return result of the grouping operation.
 
 ## How to use
 

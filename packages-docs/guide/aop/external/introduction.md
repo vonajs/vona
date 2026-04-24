@@ -1,6 +1,6 @@
 # External Aspect
 
-Applies logic to any method of any class from the outside without changing the class source code
+Applies logic to any method of any class from the outside without changing the class source code.
 
 ## Create Target Class
 
@@ -82,7 +82,7 @@ action: AopAction<ClassSome, 'action'> = (_args, next, _receiver) => {
 };
 ```
 
-Adjust the code and add log logic
+Adjust the code and add log logic.
 
 ```typescript
 actionSync: AopAction<ServiceTest, 'actionSync'> = (_args, next, _receiver) => {
@@ -108,7 +108,7 @@ action: AopAction<ClassSome, 'action'> = async (_args, next, _receiver) => {
 };
 ```
 
-Adjust the code and add log logic
+Adjust the code and add log logic.
 
 ```typescript
 actionAsync: AopAction<ServiceTest, 'actionAsync'> = async (_args, next, _receiver) => {
@@ -135,7 +135,7 @@ protected __get_xxx__: AopActionGetter<ClassSome, 'xxx'> = function (next, _rece
 };
 ```
 
-Adjust the code and add log logic
+Adjust the code and add log logic.
 
 ```typescript
 protected __get_name__: AopActionGetter<ServiceTest, 'name'> = function (next, _receiver) {
@@ -161,7 +161,7 @@ protected __set_xxx__: AopActionSetter<ClassSome, 'xxx'> = function (value, next
 }
 ```
 
-Adjust the code and add log logic
+Adjust the code and add log logic.
 
 ```typescript
 protected __set_name__: AopActionSetter<ServiceTest, 'name'> = function (value, next, _receiver) {
@@ -187,7 +187,7 @@ protected __init__: AopActionInit<ClassSome> = (_args, next, _receiver) => {
 };
 ```
 
-Adjust the code and add log logic
+Adjust the code and add log logic.
 
 ```typescript
 protected __init__: AopActionInit<ServiceTest> = (_args, next, _receiver) => {
@@ -212,7 +212,7 @@ protected __dispose__: AopActionDispose<ClassSome> = async (_args, next, _receiv
 };
 ```
 
-Adjust the code and add log logic
+Adjust the code and add log logic.
 
 ```typescript
 protected __dispose__: AopActionDispose<ServiceTest> = async (_args, next, _receiver) => {
@@ -252,7 +252,7 @@ protected __get__: AopActionGet<ServiceTest> = (prop, next, _receiver) => {
 
 - `__get__`: Conventional magic method name
 
-Provide type definitions for colors using the interface type merging mechanism
+Provide type definitions for colors using the interface type merging mechanism.
 
 ```typescript
 declare module 'vona-module-demo-student' {
@@ -344,7 +344,7 @@ protected __method__: AopActionMethod<ServiceTest> = (method, _args, next, _rece
 
 ## AOP Order
 
-For the same target Class, multiple AOPs can be associated. Therefore, VonaJS provides two parameters to control the execution order of AOPs
+For the same target Class, multiple AOPs can be associated. Therefore, VonaJS provides two parameters to control the execution order of AOPs.
 
 ### 1. dependencies
 
@@ -372,7 +372,7 @@ class AopLog {}
 
 ## AOP Enable/Disable
 
-You can control `enable/disable` of AOPs
+You can control `enable/disable` of AOPs.
 
 ### 1. Enable
 
@@ -391,7 +391,7 @@ config.onions = {
 
 ### 2. Meta
 
-Allows AOPs to take effect in a specified operating environment
+Allows AOPs to take effect in a specified operating environment.
 
 | Name   | Type             | Description                                                                           |
 | ------ | ---------------- | ------------------------------------------------------------------------------------- |
@@ -412,7 +412,7 @@ class AopLog {}
 
 ## Inspect
 
-You can directly inspect the currently effective AOP list in the target class action
+You can directly inspect the currently effective AOP list in the target class action.
 
 ```diff
 class ServiceTest {

@@ -1,10 +1,10 @@
 # CRUD(Magic Methods)
 
-Vona ORM uses magic methods to further simplify data manipulation code
+Vona ORM uses magic methods to further simplify data manipulation code.
 
 ## What are Magic Methods?
 
-The system automatically parses the parameters from the method name and then invokes the actual CRUD method
+The system automatically parses the parameters from the method name and then invokes the actual CRUD method.
 
 - Example 1
 
@@ -36,7 +36,7 @@ The system automatically detects the following commonly used fields. If a field 
 
 - `id/name/enabled/disabled/closed/active`
 
-Thus, we can enjoy the convenience of magic methods without any additional code
+Thus, we can enjoy the convenience of magic methods without any additional code.
 
 For example, the field `id` provides the following magic methods:
 
@@ -57,7 +57,7 @@ this.scope.model.student.selectByNameEqI(name);
 
 ## Custom Methods
 
-If you need to implement a magic method-like style for other fields, you can define the corresponding methods directly in the model
+If you need to implement a magic method-like style for other fields, you can define the corresponding methods directly in the model.
 
 For example, for the `title` field, provide the `getByTitle`/`selectByTitle` methods:
 
@@ -87,7 +87,7 @@ this.scope.model.post.selectByTitle(title);
 
 ## Custom methods take precedence
 
-If a custom method is provided in the model, the corresponding magic method will be invalid
+If a custom method is provided in the model, the corresponding magic method will be invalid.
 
 For example, for the field `name`, provide the method `getByName`:
 

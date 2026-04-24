@@ -2,7 +2,7 @@
 
 ## Create Guard
 
-For example, create a global guard `admin` in the module demo-student to check whether the current username is `admin`. If not, an exception is thrown
+For example, create a global guard `admin` in the module demo-student to check whether the current username is `admin`. If not, an exception is thrown.
 
 ### 1. Cli command
 
@@ -37,13 +37,13 @@ export class GuardAdmin {
 
 ## Using Guard
 
-Unlike local guard, the system automatically loads global guards and makes them effective
+Unlike local guard, the system automatically loads global guards and makes them effective.
 
 ## Guard Parameters
 
-You can define parameters for guard, allowing for more flexible configuration of guard logic
+You can define parameters for guard, allowing for more flexible configuration of guard logic.
 
-For example, define the `name` parameter for the admin guard to control the username that needs to be judged
+For example, define the `name` parameter for the admin guard to control the username that needs to be judged.
 
 ### 1. Defining parameter types
 
@@ -84,7 +84,7 @@ export class GuardAdmin extends BeanBase implements IGuardExecute {
 
 ### 4. Specify parameters when using
 
-You can specify global guard parameters for a specific API
+You can specify global guard parameters for a specific API.
 
 ```diff
 class ControllerStudent {
@@ -98,7 +98,7 @@ class ControllerStudent {
 
 ### 5. App Config
 
-Guard parameters can be configured in App Config
+Guard parameters can be configured in App Config.
 
 `src/backend/config/config/config.ts`
 
@@ -119,7 +119,7 @@ config.onions = {
 
 ## Guard Order
 
-Since global guards ard loaded and enabled by default, VonaJS provides two parameters to control the order in which guard is loaded
+Since global guards ard loaded and enabled by default, VonaJS provides two parameters to control the order in which guard is loaded.
 
 ### 1. dependencies
 
@@ -147,7 +147,7 @@ class GuardAdmin {}
 
 ## Guard Enable/Disable
 
-You can control `enable/disable` of global guard for certain APIs
+You can control `enable/disable` of global guard for certain APIs.
 
 ### 1. Enable
 
@@ -178,7 +178,7 @@ config.onions = {
 
 ### 2. Meta
 
-Allows global guard to take effect in a specified operating environment
+Allows global guard to take effect in a specified operating environment.
 
 | Name   | Type             | Description                                                                           |
 | ------ | ---------------- | ------------------------------------------------------------------------------------- |
@@ -199,7 +199,7 @@ class GuardAdmin {}
 
 ### 3. match/ignore
 
-You can enable/disable global guard for some specific APIs
+You can enable/disable global guard for some specific APIs.
 
 | Name   | Type                               | Description               |
 | ------ | ---------------------------------- | ------------------------- |
@@ -208,7 +208,7 @@ You can enable/disable global guard for some specific APIs
 
 ## Inspect
 
-You can directly inspect the currently effective global guard list in the Controller action
+You can directly inspect the currently effective global guard list in the Controller action.
 
 ```diff
 class ControllerStudent {

@@ -1,6 +1,6 @@
 # Startup
 
-VonaJS provides `startup`, which allow initialization logic to be executed when system starting or when instance initializing
+VonaJS provides `startup`, which allow initialization logic to be executed when system starting or when instance initializing.
 
 ## Startup Types
 
@@ -11,7 +11,7 @@ VonaJS provides two types of startups:
 
 ## Create Startup
 
-For example, create a startup `log` in the module `demo-student` to output the current time to the console when system starting
+For example, create a startup `log` in the module `demo-student` to output the current time to the console when system starting.
 
 ### 1. Cli Command
 
@@ -40,7 +40,7 @@ export class StartupLog extends BeanBase implements IStartupExecute {
 
 ## Startup Parameters
 
-Parameters can be configured for startup
+Parameters can be configured for startup.
 
 ```typescript
 @Startup({
@@ -69,7 +69,7 @@ export class StartupLog {}
 
 ## App Config
 
-You can configure startup parameters in App Config
+You can configure startup parameters in App Config.
 
 `src/backend/config/config/config.ts`
 
@@ -89,7 +89,7 @@ config.onions = {
 
 ## Startup Order
 
-Since startups ard loaded and enabled by default, VonaJS provides two parameters to control the order in which startup is loaded
+Since startups ard loaded and enabled by default, VonaJS provides two parameters to control the order in which startup is loaded.
 
 ### 1. dependencies
 
@@ -115,7 +115,7 @@ class StartupLog {}
 
 ## Startup Enable/Disable
 
-You can control `enable/disable` of startup
+You can control `enable/disable` of startup.
 
 ### 1. Enable
 
@@ -134,7 +134,7 @@ config.onions = {
 
 ### 2. Meta
 
-Allows startup to take effect in a specified operating environment
+Allows startup to take effect in a specified operating environment.
 
 | Name   | Type             | Description                                                                           |
 | ------ | ---------------- | ------------------------------------------------------------------------------------- |
@@ -155,7 +155,7 @@ class StartupLog {}
 
 ## Inspect
 
-You can directly inspect the currently effective startup list
+You can directly inspect the currently effective startup list.
 
 ```diff
 class ControllerStudent {

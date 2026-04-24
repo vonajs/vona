@@ -33,7 +33,7 @@ If the module needs to provide global dependencies, you need to configure `vonaM
 }
 ```
 
-Since the module a-core declares `chalk` and `luxon` as global dependencies, the system will put these dependencies into the project's `packages.json`, so that all other modules can directly import and use these modules
+Since the module a-core declares `chalk` and `luxon` as global dependencies, the system will put these dependencies into the project's `packages.json`, so that all other modules can directly import and use these modules.
 
 ## vonaModule.globalDependenciesDev
 
@@ -51,4 +51,4 @@ If the module needs to provide global dev dependencies, you need to configure `v
 }
 ```
 
-Since the module a-core declares `@types/koa` and `@types/luxon` as global dev dependencies, the system will put these dependencies into the project's `packages.json`, so that all other modules can directly import and use these modules
+Since the module a-core declares `@types/koa` and `@types/luxon` as global dev dependencies, the system will put these dependencies into the project's `packages.json`, so that all other modules can directly import and use these modules.

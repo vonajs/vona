@@ -4,7 +4,7 @@ VonaJS provides a powerful queue component based on [BullMQ](https://github.com/
 
 ## Create Queue
 
-For example, create a queue `add` in the module `demo-student`, which performs addition on the passed parameters
+For example, create a queue `add` in the module `demo-student`, which performs addition on the passed parameters.
 
 ### 1. Cli Command
 
@@ -108,7 +108,7 @@ async pushAsync(data: DATA, options?: IQueuePushOptions): Promise<RESULT>;
 
 ## Queue Parameters
 
-Parameters can be configured for queue
+Parameters can be configured for queue.
 
 ```typescript
 @Queue({
@@ -137,7 +137,7 @@ class QueueAdd {}
 
 ## App Config
 
-You can configure queue parameters in the App Config
+You can configure queue parameters in the App Config.
 
 `src/backend/config/config/config.ts`
 
@@ -161,7 +161,7 @@ config.onions = {
 
 ## Queue Enable/Disable
 
-You can control `enable/disable` of queue
+You can control `enable/disable` of queue.
 
 ### 1. Enable
 
@@ -180,7 +180,7 @@ config.onions = {
 
 ### 2. Meta
 
-Allows queue to take effect in a specified operating environment
+Allows queue to take effect in a specified operating environment.
 
 | Name   | Type             | Description                                                                           |
 | ------ | ---------------- | ------------------------------------------------------------------------------------- |
@@ -201,7 +201,7 @@ class QueueAdd {}
 
 ## Inspect
 
-You can directly inspect the currently effective queue list
+You can directly inspect the currently effective queue list.
 
 ```diff
 class ControllerStudent {

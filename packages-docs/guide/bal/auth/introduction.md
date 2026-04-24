@@ -1,10 +1,10 @@
 # Authentication System
 
-The module `a-auth` provides a general authentication system, using `Auth Provider` to support various authentication methods
+The module `a-auth` provides a general authentication system, using `Auth Provider` to support various authentication methods.
 
 ## Features
 
-- `Auth Provider`: Supports various authentication methods, such as username/password authentication, OAuth authentication (GitHub), etc.
+- `Auth Provider`: Supports various authentication methods, such as username/password authentication, OAuth authentication (GitHub), etc
 
 - `Clients`: A single provider can provide multiple credentials
 
@@ -14,7 +14,7 @@ The module `a-auth` provides a general authentication system, using `Auth Provid
 
 ## bean.auth
 
-The module `a-auth` provides a global Bean `bean.auth`, allowing the use of authentication capabilities provided by all providers in a unified way
+The module `a-auth` provides a global Bean `bean.auth`, allowing the use of authentication capabilities provided by all providers in a unified way.
 
 - Example: `Username/Password` Authentication
 
@@ -58,7 +58,7 @@ class ControllerStudent {
 
 ## OAuth Credentials
 
-Using `GitHub` as an example, set the authentication credentials in the App Config
+Using `GitHub` as an example, set the authentication credentials in the App Config.
 
 `src/backend/config/config/config.ts`
 
@@ -128,9 +128,9 @@ config.onions = {
 
 ## OAuth Authentication Callback URL
 
-When using OAuth authentication, you need to provide the system's Callback URL on the OAuth website
+When using OAuth authentication, you need to provide the system's Callback URL on the OAuth website.
 
-VonaJS provides a unified Callback URL value and outputs it directly to the console during development, making it convenient for us to use directly
+VonaJS provides a unified Callback URL value and outputs it directly to the console during development, making it convenient for us to use directly.
 
 ![](../../../assets/img/bal/auth-1.png)
 
@@ -190,7 +190,7 @@ The frontend obtains the `x-vona-oauth-code` value and then calls the backend AP
 
 ## Passport API
 
-The `home-user` module provides a set of `out-of-the-box` Passport API. The API can also be used to extend custom business logic
+The `home-user` module provides a set of `out-of-the-box` Passport API. The API can also be used to extend custom business logic.
 
 `src/suite/a-home/modules/home-user/src/controller/passport.ts`
 

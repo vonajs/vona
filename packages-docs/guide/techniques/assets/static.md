@@ -1,6 +1,6 @@
 # Static
 
-In VonaJS, each module can provide static resources, accessible via a URL
+In VonaJS, each module can provide static resources, accessible via a URL.
 
 ## Initializing the Code Skeleton
 
@@ -36,11 +36,11 @@ http://localhost:7102/api/static/demo/student/img/vona.png
 http://localhost:7102/api/static/demo/student/img/vona.svg
 ```
 
-You can use `meta.static` to get the URL of a static resource in a typed way
+You can use `meta.static` to get the URL of a static resource in a typed way.
 
 ## Create meta.static
 
-For example, create `meta.static` in the module demo-student
+For example, create `meta.static` in the module demo-student.
 
 ### 1. Cli Command
 
@@ -113,7 +113,7 @@ Then, executing the method `static.getURL` will return the URL `https://cabloy.c
 
 ### 2. Instance Config
 
-VonaJS supports `multi-instance/multi-tenancy`, allowing you to specify different configuration for specific instances
+VonaJS supports `multi-instance/multi-tenancy`, allowing you to specify different configuration for specific instances.
 
 ```typescript
 // instance

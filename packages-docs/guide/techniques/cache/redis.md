@@ -4,7 +4,7 @@
 
 ## Create Redis Cache
 
-For example, create a Redis Cache `student` in the module `demo-student`, to cache student data
+For example, create a Redis Cache `student` in the module `demo-student`, to cache student data.
 
 ### 1. Cli Command
 
@@ -38,7 +38,7 @@ export class CacheRedisStudent extends BeanCacheRedisBase<TCacheRedisStudentKey,
 
 ## Redis Cache Parameters
 
-Parameters can be configured for Redis Cache
+Parameters can be configured for Redis Cache.
 
 ```typescript
 @CacheRedis({
@@ -61,7 +61,7 @@ class CacheRedisStudent {}
 
 ## App Config
 
-Redis Cache parameters can be configured in App Config
+Redis Cache parameters can be configured in App Config.
 
 `src/backend/config/config/config.ts`
 
@@ -82,7 +82,7 @@ config.onions = {
 
 ## Redis Cache Enable/Disable
 
-You can control `enable/disable` of Redis Cache
+You can control `enable/disable` of Redis Cache.
 
 ### 1. Enable
 
@@ -101,7 +101,7 @@ config.onions = {
 
 ### 2. Meta
 
-Allows Redis Cache to take effect in a specified operating environment
+Allows Redis Cache to take effect in a specified operating environment.
 
 | Name   | Type             | Description                                                                           |
 | ------ | ---------------- | ------------------------------------------------------------------------------------- |
@@ -138,7 +138,7 @@ class ControllerStudent {
 
 ## Cache method parameters
 
-Take the `set` method as an example to introduce the parameters of the cache method
+Take the `set` method as an example to introduce the parameters of the cache method.
 
 ```typescript
 await this.scope.cacheRedis.student.set(student, '1', {

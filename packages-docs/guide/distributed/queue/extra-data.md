@@ -1,6 +1,6 @@
 # Extra Data
 
-When using the `push/pushAsync` method to push jobs, you can pass extra data
+When using the `push/pushAsync` method to push jobs, you can pass extra data.
 
 ## Example
 
@@ -36,4 +36,4 @@ class QueueAdd {
 
 ## Headers Passthrough
 
-VonaJS provides a convention: for headers prefixed with `x-vona-data-`, they are automatically appended to `extra data`, thus passing them through to the job
+VonaJS provides a convention: for headers prefixed with `x-vona-data-`, they are automatically appended to `extra data`, thus passing them through to the job.

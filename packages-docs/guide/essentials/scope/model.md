@@ -18,7 +18,7 @@ Context Menu - [Module Path]: `Vona Create/Model`
 
 ## Use Model
 
-The `Model` of the module can be obtained through the `Scope` instance
+The `Model` of the module can be obtained through the `Scope` instance.
 
 ```diff
 class ServiceStudent {

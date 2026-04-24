@@ -2,7 +2,7 @@
 
 The following uses the `test-vona` module as an example to explain how to use `Group on Relations`
 
-For example, the `User` model and the `Post` model have a `1:n` relation. When querying `User` data, we can query the grouped data for the corresponding `Post` based on the relation
+For example, the `User` model and the `Post` model have a `1:n` relation. When querying `User` data, we can query the grouped data for the corresponding `Post` based on the relation.
 
 ## Dynamic Relation
 
@@ -82,7 +82,7 @@ Vona ORM automatically infers the type of `users`
 
 ## autoload
 
-You can also set the static relation to `autoload: true` to achieve automatic loading, which can also further simplify the code
+You can also set the static relation to `autoload: true` to achieve automatic loading, which can also further simplify the code.
 
 ### 1. Define the relation
 

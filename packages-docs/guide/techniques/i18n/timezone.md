@@ -14,7 +14,7 @@ this.ctx.tz = 'America/New_York';
 
 ## Rules for Getting the Current Timezone
 
-When a user accesses the backend API, the backend will automatically obtain the current Timezone according to the rules
+When a user accesses the backend API, the backend will automatically obtain the current Timezone according to the rules.
 
 ### 1. Module Configuration
 

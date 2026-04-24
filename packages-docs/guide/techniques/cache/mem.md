@@ -4,7 +4,7 @@
 
 ## Create Mem Cache
 
-For example, create a Mem Cache `student` in the module `demo-student`, to cache student data
+For example, create a Mem Cache `student` in the module `demo-student`, to cache student data.
 
 ### 1. Cli Command
 
@@ -39,7 +39,7 @@ export class CacheMemStudent extends BeanCacheMemBase<TCacheMemStudentKey, TCach
 
 ## Mem Cache Parameters
 
-Parameters can be configured for Mem Cache
+Parameters can be configured for Mem Cache.
 
 ```typescript
 @CacheMem({
@@ -66,7 +66,7 @@ class CacheMemStudent {}
 
 ## App Config
 
-Mem Cache parameters can be configured in App Config
+Mem Cache parameters can be configured in App Config.
 
 `src/backend/config/config/config.ts`
 
@@ -89,7 +89,7 @@ config.onions = {
 
 ## Mem Cache Enable/Disable
 
-You can control `enable/disable` of Mem Cache
+You can control `enable/disable` of Mem Cache.
 
 ### 1. Enable
 
@@ -108,7 +108,7 @@ config.onions = {
 
 ### 2. Meta
 
-Allows Mem Cache to take effect in a specified operating environment
+Allows Mem Cache to take effect in a specified operating environment.
 
 | Name   | Type             | Description                                                                           |
 | ------ | ---------------- | ------------------------------------------------------------------------------------- |
@@ -145,7 +145,7 @@ class ControllerStudent {
 
 ## Cache method parameters
 
-Take the `set` method as an example to introduce the parameters of the cache method
+Take the `set` method as an example to introduce the parameters of the cache method.
 
 ```typescript
 this.scope.cacheMem.student.set(student, '1', {

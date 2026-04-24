@@ -6,7 +6,7 @@ An `event` can have multiple `event listeners`, which execute using the `onion m
 
 ## Create Event
 
-For example, create an event: `echo` in the module `demo-student`, passing the event parameter `Hello World` when the event is emitted
+For example, create an event: `echo` in the module `demo-student`, passing the event parameter `Hello World` when the event is emitted.
 
 ### 1. Cli command
 
@@ -38,7 +38,7 @@ export class EventEcho extends BeanEventBase<TypeEventEchoData, TypeEventEchoRes
 
 ### 1. emit
 
-Passing the event parameter `Hello World` when emitting the event, and returning the result
+Passing the event parameter `Hello World` when emitting the event, and returning the result.
 
 ```diff
 class ControllerStudent {
@@ -54,7 +54,7 @@ class ControllerStudent {
 
 ### 2. Default Method
 
-A default method can be provided when emitting the event
+A default method can be provided when emitting the event.
 
 ```diff
 class ControllerStudent {
@@ -74,7 +74,7 @@ class ControllerStudent {
 
 ### 1. emitSync
 
-Pass the event parameter `Hello World` when emitting the event and return the result
+Pass the event parameter `Hello World` when emitting the event and return the result.
 
 ```diff
 class ControllerStudent {
@@ -90,7 +90,7 @@ class ControllerStudent {
 
 ### 2. Default method
 
-A default method can be provided when emitting the event
+A default method can be provided when emitting the event.
 
 ```diff
 class ControllerStudent {

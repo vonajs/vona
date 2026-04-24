@@ -40,7 +40,7 @@ $ npm run cov
 
 ## tsc
 
-Perform type checking
+Perform type checking.
 
 ```bash
 $ npm run tsc
@@ -48,7 +48,7 @@ $ npm run tsc
 
 ## play
 
-Automatically run the Playground source code file and automatically create it if it does not exist
+Automatically run the Playground source code file and automatically create it if it does not exist.
 
 ```bash
 $ vona play
@@ -57,7 +57,7 @@ $ vona play -a
 
 ## db:reset
 
-Recreate database
+Recreate database.
 
 ```bash
 $ npm run db:reset

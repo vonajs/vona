@@ -33,7 +33,7 @@ Internal aspects provide two mechanisms: `AOP Method` and `Magic Method`
 
 ### 1. AOP Method
 
-Implement aspect logic directly on Class Method through decorator
+Implement aspect logic directly on Class Method through decorator.
 
 #### Example: Database Transaction
 
@@ -63,7 +63,7 @@ class ServiceStudent {
 
 ### 2. Magic Method
 
-Dynamic properties or methods can be implemented through `__get__` and `__set__` within the Class
+Dynamic properties or methods can be implemented through `__get__` and `__set__` within the Class.
 
 #### Example: Obtaining a model instance
 

@@ -1,6 +1,6 @@
 # Dependency Lookup (API)
 
-Vona also provides a set of APIs that allow us to lookup bean instances more flexibly
+Vona also provides a set of APIs that allow us to lookup bean instances more flexibly.
 
 ## \_getBean
 
@@ -16,7 +16,7 @@ class ControllerStudent {
 }
 ```
 
-this.bean === this.app.bean, which is the app container
+this.bean === this.app.bean, which is the app container.
 
 ### 2. Lookup based on Bean identifier
 
@@ -45,7 +45,7 @@ class ControllerStudent {
 
 ### 4. Request scope
 
-If create a request-scope Bean instance, we only need to invoke the `_getBean` method of the ctx container
+If create a request-scope Bean instance, we only need to invoke the `_getBean` method of the ctx container.
 
 ```typescript
 class ControllerStudent {

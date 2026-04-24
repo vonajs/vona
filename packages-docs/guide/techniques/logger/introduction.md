@@ -17,7 +17,7 @@ Different log directories are used by default for different runtime environments
 
 - `Production`: `{home}/vona/{project name}/logs`
 
-Configuration can be modified in the App Config or .env file
+Configuration can be modified in the App Config or .env file.
 
 ### 1. App Config
 
@@ -64,7 +64,7 @@ config.logger = {
 
 ## Rotate
 
-The system provides a default rotation configuration, which is enabled. You can modify the configuration in the App Config or .env file
+The system provides a default rotation configuration, which is enabled. You can modify the configuration in the App Config or .env file.
 
 ### 1. App Config
 
@@ -108,11 +108,11 @@ LOGGER_ROTATE_MAXFILES = 7d
 
 ## Adding a New Client
 
-The following explains the Client configuration by adding a new Client
+The following explains the Client configuration by adding a new Client.
 
 ### 1. Adding Type Definition
 
-Add a new Client type definition using the interface merging mechanism, such as `order`, to output independent order-related logs
+Add a new Client type definition using the interface merging mechanism, such as `order`, to output independent order-related logs.
 
 In the VSCode editor, enter the code snippet `recordloggerclient`, and the code skeleton will be automatically generated:
 
@@ -187,7 +187,7 @@ class ControllerStudent extends BeanBase {
 }
 ```
 
-`Method 2` is not only more concise, but it also automatically includes the `beanFullName` of the current Bean Class in the logs, making it easier to troubleshoot problems
+`Method 2` is not only more concise, but it also automatically includes the `beanFullName` of the current Bean Class in the logs, making it easier to troubleshoot problems.
 
 - Example:
 
@@ -211,9 +211,9 @@ The image outputs beanFullName: `[demo-student.controller.student]`
 
 ## Obtaining Logger Child Instance
 
-For the same Logger Client, multiple Child instances can be generated, each corresponding to a different scenario
+For the same Logger Client, multiple Child instances can be generated, each corresponding to a different scenario.
 
-For example, generating a Child `pay` will clearly display the `pay` information in the log
+For example, generating a Child `pay` will clearly display the `pay` information in the log.
 
 ```typescript
 // child of logger-default
@@ -228,7 +228,7 @@ The image outputs Child name: `[pay]`
 
 ### Adding Type Definition
 
-Similarly, a type definition for `pay` is required to support type hints
+Similarly, a type definition for `pay` is required to support type hints.
 
 In the VSCode editor, enter the code snippet `recordloggerchild`, and the code skeleton will be automatically generated:
 
@@ -268,7 +268,7 @@ this.$logger.info('%s has %d apples', 'Tom', 3);
 
 ### 3. Delayed Messages
 
-Due to log level, some leveled messages are not written to files. Therefore, constructing excessively large message contents will waste system resources
+Due to log level, some leveled messages are not written to files. Therefore, constructing excessively large message contents will waste system resources.
 
 - Example
 
@@ -277,11 +277,11 @@ const obj = { data: 'more info' };
 this.$logger.debug(JSON.stringify(obj));
 ```
 
-If the current level is `info`, then logs at the `debug` level will not be written to the file. Therefore, `JSON.stringify` will waste system resources
+If the current level is `info`, then logs at the `debug` level will not be written to the file. Therefore, `JSON.stringify` will waste system resources.
 
 - Solution
 
-A callback function can be provided. This function is executed only when writing to a file is required, thus generating the actual message
+A callback function can be provided. This function is executed only when writing to a file is required, thus generating the actual message.
 
 ```typescript
 const obj = { data: 'more info' };
@@ -292,7 +292,7 @@ this.$logger.debug(() => {
 
 ### 4. Multi-Child
 
-Multi-Child Loggers can be created from the current Logger instance, thus passing more metadata to the log message
+Multi-Child Loggers can be created from the current Logger instance, thus passing more metadata to the log message.
 
 ```typescript
 this.$logger.child({ requestId: '451' }).child({ extra: 'some info' }).info('test');

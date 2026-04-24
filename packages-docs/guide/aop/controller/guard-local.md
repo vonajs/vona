@@ -2,7 +2,7 @@
 
 ## Create Guard
 
-For example, create a local guard `admin` in the module demo-student to check whether the current username is `admin`. If not, an exception is thrown
+For example, create a local guard `admin` in the module demo-student to check whether the current username is `admin`. If not, an exception is thrown.
 
 ### 1. Cli command
 
@@ -54,7 +54,7 @@ class ControllerStudent {
 
 ### 2. Annotating controller class
 
-You can use guard for controller classes so that all actions in the class will apply this guard
+You can use guard for controller classes so that all actions in the class will apply this guard.
 
 ```diff
 import { Aspect } from 'vona-module-a-aspect';
@@ -69,9 +69,9 @@ class ControllerStudent {
 
 ## Guard Parameters
 
-You can define parameters for guard, allowing for more flexible configuration of guard logic
+You can define parameters for guard, allowing for more flexible configuration of guard logic.
 
-For example, define the `name` parameter for the admin guard to control the username that needs to be judged
+For example, define the `name` parameter for the admin guard to control the username that needs to be judged.
 
 ### 1. Defining parameter types
 
@@ -112,7 +112,7 @@ export class GuardAdmin extends BeanBase implements IGuardExecute {
 
 ### 4. Specify parameters when using
 
-You can specify local guard parameters for a specific API
+You can specify local guard parameters for a specific API.
 
 ```diff
 class ControllerStudent {
@@ -126,7 +126,7 @@ class ControllerStudent {
 
 ### 5. App Config
 
-Guard parameters can be configured in App Config
+Guard parameters can be configured in App Config.
 
 `src/backend/config/config/config.ts`
 

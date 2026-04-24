@@ -2,7 +2,7 @@
 
 ## Create Interceptor
 
-For example, we create a Global Interceptor `logger` in the module demo-student
+For example, we create a Global Interceptor `logger` in the module demo-student.
 
 ### 1. Cli command
 
@@ -39,13 +39,13 @@ export class InterceptorLogger extends BeanBase implements IInterceptorExecute {
 
 ## Using Interceptor
 
-Unlike local interceptor, the system automatically loads global interceptors and makes them effective
+Unlike local interceptor, the system automatically loads global interceptors and makes them effective.
 
 ## Interceptor Parameters
 
-You can define parameters for interceptor, allowing for more flexible configuration of interceptor logic
+You can define parameters for interceptor, allowing for more flexible configuration of interceptor logic.
 
-For example, define the `prefix` parameter for the logger interceptor to control the output format
+For example, define the `prefix` parameter for the logger interceptor to control the output format.
 
 ### 1. Defining parameter types
 
@@ -87,7 +87,7 @@ class InterceptorLogger {
 
 ### 4. Specify parameters when using
 
-You can specify global interceptor parameters for a specific API
+You can specify global interceptor parameters for a specific API.
 
 ```diff
 class ControllerStudent {
@@ -101,7 +101,7 @@ class ControllerStudent {
 
 ### 5. App Config
 
-Interceptor parameters can be configured in App Config
+Interceptor parameters can be configured in App Config.
 
 `src/backend/config/config/config.ts`
 
@@ -122,7 +122,7 @@ config.onions = {
 
 ## Interceptor Order
 
-Since global interceptors ard loaded and enabled by default, VonaJS provides two parameters to control the order in which interceptor is loaded
+Since global interceptors ard loaded and enabled by default, VonaJS provides two parameters to control the order in which interceptor is loaded.
 
 ### 1. dependencies
 
@@ -150,7 +150,7 @@ class InterceptorLogger {}
 
 ## Interceptor Enable/Disable
 
-You can control `enable/disable` of global interceptor for certain APIs
+You can control `enable/disable` of global interceptor for certain APIs.
 
 ### 1. Enable
 
@@ -181,7 +181,7 @@ config.onions = {
 
 ### 2. Meta
 
-Allows global interceptor to take effect in a specified operating environment
+Allows global interceptor to take effect in a specified operating environment.
 
 | Name   | Type             | Description                                                                           |
 | ------ | ---------------- | ------------------------------------------------------------------------------------- |
@@ -202,7 +202,7 @@ class InterceptorLogger {}
 
 ### 3. match/ignore
 
-You can enable/disable global interceptor for some specific APIs
+You can enable/disable global interceptor for some specific APIs.
 
 | Name   | Type                               | Description               |
 | ------ | ---------------------------------- | ------------------------- |
@@ -211,7 +211,7 @@ You can enable/disable global interceptor for some specific APIs
 
 ## Inspect
 
-You can directly inspect the currently effective global interceptor list in the Controller action
+You can directly inspect the currently effective global interceptor list in the Controller action.
 
 ```diff
 class ControllerStudent {

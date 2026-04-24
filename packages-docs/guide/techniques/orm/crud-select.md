@@ -1,10 +1,10 @@
 # CRUD(Select)
 
-The following uses the `test-vona` module as an example to explain the usage of `Select` in CRUD
+The following uses the `test-vona` module as an example to explain the usage of `Select` in CRUD.
 
 ## Basic Query
 
-The `test-vona` module defines the `Post` model. You can query `Post` data as follows
+The `test-vona` module defines the `Post` model. You can query `Post` data as follows.
 
 ### 1. select
 
@@ -137,7 +137,7 @@ async select() {
 
 ## joins
 
-You can use `joins` to join multiple tables
+You can use `joins` to join multiple tables.
 
 ```typescript
 async select() {
@@ -173,7 +173,7 @@ As mentioned earlier, you can define relationships between multiple entities in 
 class ModelPost {}
 ```
 
-In a large business system, a model may not define all relationships. Alternatively, you can specify the models to be associated using the `_modelJoins` parameter, and the system will retrieve the corresponding data tables from these models
+In a large business system, a model may not define all relationships. Alternatively, you can specify the models to be associated using the `_modelJoins` parameter, and the system will retrieve the corresponding data tables from these models.
 
 For example, the `test-vona` module defines the `order` model. Then, we can use `joins` like this:
 

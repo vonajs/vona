@@ -1,6 +1,6 @@
 # Migration and Changes
 
-Vona provides a unique migration mechanism that adapts to the development and continuous iteration of large projects
+Vona provides a unique migration mechanism that adapts to the development and continuous iteration of large projects.
 
 ## Features
 
@@ -35,7 +35,7 @@ Configure the current data version of the module in the module's `package.json`
 
 ## Create meta.version
 
-Vona uses Bean `meta.version` to uniformly manage module migration codes
+Vona uses Bean `meta.version` to uniformly manage module migration codes.
 
 ### 1. Cli command
 
@@ -58,7 +58,7 @@ export class MetaVersion extends BeanBase {}
 
 ## Change-scenario
 
-Vona provides three change-scenarios. You can inherit the corresponding interface and implement the corresponding method according to business needs
+Vona provides three change-scenarios. You can inherit the corresponding interface and implement the corresponding method according to business needs.
 
 | Scenario | Interface          | Method | Description                                                                        |
 | -------- | ------------------ | ------ | ---------------------------------------------------------------------------------- |
@@ -90,7 +90,7 @@ export class MetaVersion extends BeanBase implements IMetaVersionUpdate {
 
 Vona uses `knex` at the bottom. For more details, see: [knex](https://knexjs.org/)
 
-In order to make the code higher quality and easier to maintain, we can also use a typed code style
+In order to make the code higher quality and easier to maintain, we can also use a typed code style.
 
 ```typescript
 @Meta()
@@ -110,7 +110,7 @@ export class MetaVersion extends BeanBase implements IMetaVersionUpdate {
 
 ## init: Initialize data
 
-For example, we initialize a student data
+For example, we initialize a student data.
 
 ```typescript
 @Meta()
@@ -140,11 +140,11 @@ Automatically write data in the database:
 }
 ```
 
-Where `iid: 1` is the Id of the current instance/tenant. Therefore, if there are multiple instances/tenants, the `init` method will be executed once for each instance/tenant. Therefore, the data of instances/tenants are isolated
+Where `iid: 1` is the Id of the current instance/tenant. Therefore, if there are multiple instances/tenants, the `init` method will be executed once for each instance/tenant. Therefore, the data of instances/tenants are isolated.
 
 ## test: test data
 
-For example, add a student data, which is only used in the test environment
+For example, add a student data, which is only used in the test environment.
 
 ```typescript
 @Meta()
@@ -210,7 +210,7 @@ export class MetaVersion extends BeanBase implements IMetaVersionUpdate {
 
 ### 4. Execute migration code
 
-When the system starts, it will automatically detect whether the module needs to be changed, and automatically execute the migration code
+When the system starts, it will automatically detect whether the module needs to be changed, and automatically execute the migration code.
 
 ```bash
 # Development environment
@@ -223,18 +223,18 @@ $ npm run start
 
 ## Support local development
 
-When we develop locally, we need to frequently update the database schema for the current data version. Then, we do not need to modify `fileVersion`, but execute the following command to make the migration code effective
+When we develop locally, we need to frequently update the database schema for the current data version. Then, we do not need to modify `fileVersion`, but execute the following command to make the migration code effective.
 
 ```bash
 $ npm run test
 ```
 
-When we run this command, the system will automatically delete the old database and create a new database, which will re-execute the migration code and then execute unit tests
+When we run this command, the system will automatically delete the old database and create a new database, which will re-execute the migration code and then execute unit tests.
 
 ```bash
 $ npm run db:reset
 ```
 
-This command is only used to recreate the database and re-execute the migration code; it does not execute unit tests
+This command is only used to recreate the database and re-execute the migration code; it does not execute unit tests.
 
 ![](../../assets/img/api/version-reset.png)

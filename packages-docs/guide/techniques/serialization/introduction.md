@@ -2,11 +2,11 @@
 
 VonaJS provides serialization capabilities, which can transform API response data, such as excluding password fields, masking email and mobile numbers, etc.
 
-First, we'll introduce the general serialization mechanism, followed by a set of utility functions, which make serialization capabilities more convenient to use
+First, we'll introduce the general serialization mechanism, followed by a set of utility functions, which make serialization capabilities more convenient to use.
 
 ## Create Serializer Transform
 
-For example, create a Serializer Transform: `upper` in the module demo-student to convert field values ​​to uppercase
+For example, create a Serializer Transform: `upper` in the module demo-student to convert field values ​​to uppercase.
 
 ### 1. Cli command
 
@@ -51,11 +51,11 @@ export class SerializerTransformUpper extends BeanBase {
 
 ## Using Serializer Transform
 
-For example, the result type returned by the Student API's `findOne` method is `EntityStudent`. The following code converts the `name` field of `EntityStudent` to uppercase
+For example, the result type returned by the Student API's `findOne` method is `EntityStudent`. The following code converts the `name` field of `EntityStudent` to uppercase.
 
 ### 1. Enable Serialization
 
-Serialization needs to be enabled for the API
+Serialization needs to be enabled for the API.
 
 ```diff
 class ControllerStudent {
@@ -84,9 +84,9 @@ class EntityStudent {
 
 ## Filter Parameter
 
-You can pass Filter parameter to the Serializer Transform. The system first executes the Filter function, and controls whether the current Serializer Transform needs to be executed based on the result
+You can pass Filter parameter to the Serializer Transform. The system first executes the Filter function, and controls whether the current Serializer Transform needs to be executed based on the result.
 
-For example, if the current username is `admin`, the conversion logic for `upper` will not be executed
+For example, if the current username is `admin`, the conversion logic for `upper` will not be executed.
 
 ```diff
 class EntityStudent {
@@ -102,9 +102,9 @@ class EntityStudent {
 
 ## Serializer Transform Parameters
 
-Parameters can be defined for Serializer Transform, allowing for more flexible configuration of the conversion logic
+Parameters can be defined for Serializer Transform, allowing for more flexible configuration of the conversion logic.
 
-For example, define the `first` parameter for Serializer Transform `upper` to control whether only the first letter is capitalized
+For example, define the `first` parameter for Serializer Transform `upper` to control whether only the first letter is capitalized.
 
 ### 1. Defining parameter types
 
@@ -158,7 +158,7 @@ class EntityStudent {
 
 ### 5. App Config
 
-Serializer Transform parameters can be configured in App Config
+Serializer Transform parameters can be configured in App Config.
 
 `src/backend/config/config/config.ts`
 

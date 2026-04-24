@@ -1,10 +1,10 @@
 # Worker
 
-VonaJS uses a distributed architecture, allowing multiple worker processes to provide services simultaneously. It also supports single-process execution in a Docker environment
+VonaJS uses a distributed architecture, allowing multiple worker processes to provide services simultaneously. It also supports single-process execution in a Docker environment.
 
 ## bean.worker
 
-The module `a-worker` provides a global bean `bean.worker` for managing worker processes
+The module `a-worker` provides a global bean `bean.worker` for managing worker processes.
 
 - Properties
 
@@ -36,7 +36,7 @@ this.bean.worker.reloadAll();
 
 ## SERVER_WORKERS
 
-`SERVER_WORKERS` can be modified through the .env file
+`SERVER_WORKERS` can be modified through the .env file.
 
 `env/.env`
 

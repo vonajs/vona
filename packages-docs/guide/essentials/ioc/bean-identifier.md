@@ -10,7 +10,7 @@ For example, the module demo-student provides a Service bean: ServiceStudent. Th
 
 ## Global Service Bean
 
-To further simplify the use of beans, Vona provides the concept of global service beans. If the sceneName value of a bean class is `bean`, then this bean class is a global service bean
+To further simplify the use of beans, Vona provides the concept of global service beans. If the sceneName value of a bean class is `bean`, then this bean class is a global service bean.
 
 The bean identifier of a global service bean is `beanName`
 

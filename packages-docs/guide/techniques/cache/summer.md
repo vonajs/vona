@@ -1,10 +1,10 @@
 # Summer Cache (Two-Layer Cache)
 
-`Summer Cache` is implemented based on Mem Cache and Redis Cache
+`Summer Cache` is implemented based on Mem Cache and Redis Cache.
 
 ## Create Summer Cache
 
-For example, create a Summer Cache `student` in the module `demo-student`, to cache student data
+For example, create a Summer Cache `student` in the module `demo-student`, to cache student data.
 
 ### 1. Cli Command
 
@@ -58,9 +58,9 @@ General process for reading Summer cache:
 
 ## mgetNative
 
-The `mgetNative` method can be provided to support reading multiple caches simultaneously
+The `mgetNative` method can be provided to support reading multiple caches simultaneously.
 
-If the `mgetNative` method is not provided, the system will automatically loop through and call the `getNative` method when reading multiple caches at the same time
+If the `mgetNative` method is not provided, the system will automatically loop through and call the `getNative` method when reading multiple caches at the same time.
 
 ```diff
 export class SummerCacheStudent
@@ -89,7 +89,7 @@ export class SummerCacheStudent
 
 ## Summer Cache Parameters
 
-Parameters can be configured for Summer Cache
+Parameters can be configured for Summer Cache.
 
 ```typescript
 @SummerCache({
@@ -125,7 +125,7 @@ class SummerCacheStudent {}
 
 ## App Config
 
-Summer Cache parameters can be configured in App Config
+Summer Cache parameters can be configured in App Config.
 
 `src/backend/config/config/config.ts`
 
@@ -151,7 +151,7 @@ config.onions = {
 
 ## Summer Cache Enable/Disable
 
-You can control `enable/disable` of Summer Cache
+You can control `enable/disable` of Summer Cache.
 
 ### 1. Enable
 
@@ -170,7 +170,7 @@ config.onions = {
 
 ### 2. Meta
 
-Allows Summer Cache to take effect in a specified operating environment
+Allows Summer Cache to take effect in a specified operating environment.
 
 | Name   | Type             | Description                                                                           |
 | ------ | ---------------- | ------------------------------------------------------------------------------------- |
@@ -207,7 +207,7 @@ class ControllerStudent {
 
 ## Cache method parameters
 
-Take the `get` method as an example to introduce the parameters of the cache method
+Take the `get` method as an example to introduce the parameters of the cache method.
 
 ```typescript
 await this.scope.summerCache.student.get('2', {

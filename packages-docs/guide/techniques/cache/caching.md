@@ -1,8 +1,8 @@
 # Caching Decorator
 
-Uses decorators to provide caching capabilities for any method of any class
+Uses decorators to provide caching capabilities for any method of any class.
 
-A Summer Cache `demo-student:student` was created in the document [Summer Cache (Two-Layer Cache)](./summer.md). The following demonstrates how to use Summer Cache with the Caching decorator
+A Summer Cache `demo-student:student` was created in the document [Summer Cache (Two-Layer Cache)](./summer.md). The following demonstrates how to use Summer Cache with the Caching decorator.
 
 ## Simplest usage
 
@@ -84,7 +84,7 @@ The system will automatically generate a unique `cacheKey`
 
 ## Custom cache key
 
-You can specify the `cacheKeyFn` parameter to generate a custom cache key
+You can specify the `cacheKeyFn` parameter to generate a custom cache key.
 
 ```diff
 class ServiceStudent {
@@ -102,7 +102,7 @@ class ServiceStudent {
 }
 ```
 
-If `cacheKeyFn` returns `undefined/null`, the cache will be ignored
+If `cacheKeyFn` returns `undefined/null`, the cache will be ignored.
 
 ## Caching Decorators
 
@@ -143,7 +143,7 @@ class ServiceStudent {
   - `intention: 'create'`: Indicates that @Caching.del should obtain the Id value from the return value of the create method
 
 ::: warning
-The `@Caching.xxx` decorators added here are for demonstration purposes only. In actual business scenarios, there is no need to use `@Caching.xxx` in the Service, because the Model itself has a more complete built-in caching mechanism
+The `@Caching.xxx` decorators added here are for demonstration purposes only. In actual business scenarios, there is no need to use `@Caching.xxx` in the Service, because the Model itself has a more complete built-in caching mechanism.
 
 - See: [Vona ORM: Caching](../orm/caching.md)
   :::

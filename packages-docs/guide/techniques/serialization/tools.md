@@ -1,6 +1,6 @@
 # Tools
 
-VonaJS provides a set of utility functions to make serialization capabilities more convenient
+VonaJS provides a set of utility functions to make serialization capabilities more convenient.
 
 ## Tool List
 
@@ -21,7 +21,7 @@ Since the `@Serializer` utility is very concise and intuitive, why provide the `
 
 ## @Serializer.transform/v.serializerTransform
 
-For example, to convert the `name` field value in `EntityStudent` to uppercase
+For example, to convert the `name` field value in `EntityStudent` to uppercase.
 
 we directly use the Serializer Transform `upper` created in [Serialization](./introduction.md)
 
@@ -46,7 +46,7 @@ class EntityStudent {
 
 ### 3. App Config
 
-Configuration can be modified in App Config
+Configuration can be modified in App Config.
 
 `src/backend/config/config/config.ts`
 
@@ -107,7 +107,7 @@ class EntityStudent {
 
 ### 3. App Config
 
-Configuration can be modified in App Config
+Configuration can be modified in App Config.
 
 `src/backend/config/config/config.ts`
 
@@ -173,7 +173,7 @@ class EntityStudent {
 
 ### 3. App Config
 
-Configuration can be modified in App Config
+Configuration can be modified in App Config.
 
 `src/backend/config/config/config.ts`
 
@@ -197,7 +197,7 @@ config.onions = {
 };
 ```
 
-`a-serialization:replace`: Serializer Transform provided by the `a-serialization` module
+`a-serialization:replace`: Serializer Transform provided by the `a-serialization` module.
 
 - Method 2: Construct a new schema
 
@@ -224,7 +224,7 @@ config.onions = {
 
 ## @Serializer.getter/v.serializerGetter
 
-For example, the `fullName` field in `EntityStudent` is composed of the `firstName` and `lastName` fields
+For example, the `fullName` field in `EntityStudent` is composed of the `firstName` and `lastName` fields.
 
 ### 1. getter
 
@@ -268,7 +268,7 @@ class EntityStudent {
 
 ### 4. App Config
 
-Configuration can be modified in App Config
+Configuration can be modified in App Config.
 
 `src/backend/config/config/config.ts`
 
@@ -291,7 +291,7 @@ config.onions = {
 };
 ```
 
-`a-serialization:getter`: Serializer Transform provided by the `a-serialization` module
+`a-serialization:getter`: Serializer Transform provided by the `a-serialization` module.
 
 - Method 2: Construct a new schema
 
@@ -317,7 +317,7 @@ config.onions = {
 
 ## @Serializer.custom/v.serializerCustom
 
-For example, convert the `name` field value in `EntityStudent` to uppercase
+For example, convert the `name` field value in `EntityStudent` to uppercase.
 
 ### 1. @Serializer.custom
 
@@ -347,7 +347,7 @@ class EntityStudent {
 
 ### 3. App Config
 
-Configuration can be modified in App Config
+Configuration can be modified in App Config.
 
 `src/backend/config/config/config.ts`
 
@@ -370,7 +370,7 @@ config.onions = {
 };
 ```
 
-`a-serialization:custom`: Serializer Transform provided by the `a-serialization` module
+`a-serialization:custom`: Serializer Transform provided by the `a-serialization` module.
 
 - Method 2: Construct a New Schema
 

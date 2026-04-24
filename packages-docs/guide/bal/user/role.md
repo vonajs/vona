@@ -2,7 +2,7 @@
 
 ## a-user: IRole
 
-The module `a-user` provides the interface `IRole`, which defines the basic fields of a Role
+The module `a-user` provides the interface `IRole`, which defines the basic fields of a Role.
 
 ```typescript
 export interface IRole {
@@ -13,7 +13,7 @@ export interface IRole {
 
 ## a-user: bean.role
 
-The module `a-user` provides the global Bean `bean.role`, providing a common calling convention for business logic
+The module `a-user` provides the global Bean `bean.role`, providing a common calling convention for business logic.
 
 ```typescript
 // find role
@@ -57,7 +57,7 @@ class ControllerStudent {
 
 ## Role: admin
 
-Automatically creates the `admin` role in the `meta.version` of the `home-user` module
+Automatically creates the `admin` role in the `meta.version` of the `home-user` module.
 
 - See: [Migration and Changes](../../rest-api/version.md)
 

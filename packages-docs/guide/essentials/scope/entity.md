@@ -18,7 +18,7 @@ Context Menu - [Module Path]: `Vona Create/Entity`
 
 ## Use Entity
 
-The `Entity` of the module can be obtained through the `Scope` instance
+The `Entity` of the module can be obtained through the `Scope` instance.
 
 ```diff
 class ControllerStudent {

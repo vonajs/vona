@@ -1,6 +1,6 @@
 # Dependency Lookup
 
-In addition to `Dependency Injection`, Vona also provides `Dependency Lookup`. In Vona, it is recommended to use dependency lookup, because dependency lookup can make the code more concise and intuitive
+In addition to `Dependency Injection`, Vona also provides `Dependency Lookup`. In Vona, it is recommended to use dependency lookup, because dependency lookup can make the code more concise and intuitive.
 
 ## Dependency Lookup in current module
 
@@ -14,7 +14,7 @@ class ControllerStudent {
 }
 ```
 
-Get the scope object of this current module through `this.scope` to lookup the service provided by this module
+Get the scope object of this current module through `this.scope` to lookup the service provided by this module.
 
 ## Dependency Lookup Cross-module
 
@@ -28,7 +28,7 @@ class ControllerOther {
 }
 ```
 
-Get the scope object of the module demo-student through `this.$scope.demoStudent` to lookup the service provided by the module demo-student
+Get the scope object of the module demo-student through `this.$scope.demoStudent` to lookup the service provided by the module demo-student.
 
 ## Lookup global service beans
 
@@ -42,4 +42,4 @@ class ControllerStudent {
 }
 ```
 
-Get the app container through `this.bean` to lookup the global service bean
+Get the app container through `this.bean` to lookup the global service bean.

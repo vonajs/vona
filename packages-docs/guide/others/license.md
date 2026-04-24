@@ -1,3 +1,3 @@
-MIT License
+MIT License.
 
-Copyright (c) 2016-present Vona
+Copyright (c) 2016-present Vona.

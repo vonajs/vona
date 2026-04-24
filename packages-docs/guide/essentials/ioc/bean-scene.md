@@ -1,6 +1,6 @@
 # Bean Scene
 
-Vona provides a set of decorator functions for declaring that a Bean Class is injectable. Different decorator functions represent different usage scenarios
+Vona provides a set of decorator functions for declaring that a Bean Class is injectable. Different decorator functions represent different usage scenarios.
 
 | Name                 | Description              | Scene               | Belonging Module |
 | -------------------- | ------------------------ | ------------------- | ---------------- |

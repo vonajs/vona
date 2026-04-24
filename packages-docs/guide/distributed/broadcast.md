@@ -1,10 +1,10 @@
 # Broadcast
 
-Broadcasts can be emitted to multiple worker processes in the system, allowing each worker process to execute business logic
+Broadcasts can be emitted to multiple worker processes in the system, allowing each worker process to execute business logic.
 
 ## Create Broadcast
 
-For example, create a broadcast `echo` in the module `demo-student`, so that each worker process outputs `Hello world` to the console
+For example, create a broadcast `echo` in the module `demo-student`, so that each worker process outputs `Hello world` to the console.
 
 ### 1. Cli Command
 
@@ -66,7 +66,7 @@ If business logic has already been executed in the current worker process, you c
 
 ## Broadcast Parameters
 
-Parameters can be configured for broadcasts
+Parameters can be configured for broadcasts.
 
 ```typescript
 @Broadcast({
@@ -86,7 +86,7 @@ class BroadcastEcho {}
 
 ## App Config
 
-Broadcast parameters can be configured in App Config
+Broadcast parameters can be configured in App Config.
 
 `src/backend/config/config/config.ts`
 
@@ -104,7 +104,7 @@ config.onions = {
 
 ## Inspect
 
-You can directly inspect the currently effective broadcast list
+You can directly inspect the currently effective broadcast list.
 
 ```diff
 class ControllerStudent {

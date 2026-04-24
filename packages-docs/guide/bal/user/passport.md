@@ -1,10 +1,10 @@
 # Passport
 
-When a user accesses the backend API, the system verifies the JWT token. If the verification passes, a `Passport` is created. This passport contains information such as the current user and authentication info
+When a user accesses the backend API, the system verifies the JWT token. If the verification passes, a `Passport` is created. This passport contains information such as the current user and authentication info.
 
 ## a-user: IPassport
 
-The module `a-user` provides the interface `IPassport`, which defines the basic fields of the Passport
+The module `a-user` provides the interface `IPassport`, which defines the basic fields of the Passport.
 
 ```typescript
 export interface IPassport {
@@ -16,7 +16,7 @@ export interface IPassport {
 
 ## a-user: bean.passport
 
-The module `a-user` provides the global Bean `bean.passport`, providing a common calling convention for business logic
+The module `a-user` provides the global Bean `bean.passport`, providing a common calling convention for business logic.
 
 ```typescript
 // get the current passport
@@ -86,7 +86,7 @@ class ControllerStudent {
 
 ## a-user: Passport Decorators
 
-The `a-user` module provides a set of Passport decorators for verifying permissions for the current user
+The `a-user` module provides a set of Passport decorators for verifying permissions for the current user.
 
 For many small to medium-sized projects, this set of Passport decorators is sufficient to meet their needs. For more advanced permission verification, you can develop your own `Guard`. See:
 
@@ -115,7 +115,7 @@ import { Passport } from 'vona-module-a-user';
 
 ## home-user: Passport API
 
-The `home-user` module provides a set of Passport APIs `out of the box`, and custom business logic can be extended on top of this
+The `home-user` module provides a set of Passport APIs `out of the box`, and custom business logic can be extended on top of this.
 
 `src/suite/a-home/modules/home-user/src/controller/passport.ts`
 

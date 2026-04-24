@@ -11,12 +11,12 @@ This document compares VonaJS with other mainstream frameworks (such as Next.js,
 | Admin Dashboard Supports SSR | ✅                                        | ❌                               |
 | Dual-layer Tabs Navigation   | ✅                                        | ❌                               |
 
-- **Fullstack Mechanism**: VonaJS adopts a frontend-backend separation architecture. The frontend uses the ZovaJS framework, placing the built JS bundle into the VonaJS backend for direct SSR rendering on the backend.
-  - The backend generates Swagger/OpenAPI Schema for generating API SDK on the frontend.
-  - The frontend generates types for icons, routes, and components for providing type hints on the backend.
-- **Backend Capability**: VonaJS provides more powerful and complete backend capabilities, easily handling the development of large business systems, including `multi-tenancy`, `multi-database`, `multi-datasource`, `two-layer cache`, `queues`, `broadcast`, `scheduled tasks`, `distributed locks`, `DTO dynamic inference and generation`, and more.
-- **Admin Dashboard Supports SSR**: VonaJS provides complete SSR support for `Admin Dashboard` applications, with sidebar, multilingual support, light/dark themes, and brand color themes all supporting SSR. This significantly reduces page flicker on refresh and enhances user interaction experience.
-- **Dual-layer Tabs Navigation**: VonaJS supports dual-layer tabs navigation, enabling efficient page switching while maintaining page state.
+- **Fullstack Mechanism**: VonaJS adopts a frontend-backend separation architecture. The frontend uses the ZovaJS framework, placing the built JS bundle into the VonaJS backend for direct SSR rendering on the backend
+  - The backend generates Swagger/OpenAPI Schema for generating API SDK on the frontend
+  - The frontend generates types for icons, routes, and components for providing type hints on the backend
+- **Backend Capability**: VonaJS provides more powerful and complete backend capabilities, easily handling the development of large business systems, including `multi-tenancy`, `multi-database`, `multi-datasource`, `two-layer cache`, `queues`, `broadcast`, `scheduled tasks`, `distributed locks`, `DTO dynamic inference and generation`, and more
+- **Admin Dashboard Supports SSR**: VonaJS provides complete SSR support for `Admin Dashboard` applications, with sidebar, multilingual support, light/dark themes, and brand color themes all supporting SSR. This significantly reduces page flicker on refresh and enhances user interaction experience
+- **Dual-layer Tabs Navigation**: VonaJS supports dual-layer tabs navigation, enabling efficient page switching while maintaining page state
 
 ## Comparison with NestJS
 
@@ -27,10 +27,10 @@ This document compares VonaJS with other mainstream frameworks (such as Next.js,
 | Multi-Tenant, Multi-Database, Multi-Datasource | Built-in                                            | Third-party                 |
 | AOP Programming                                | Controller Aspect, Internal Aspect, External Aspect | Controller Aspect           |
 
-- **Zod Schema**: VonaJS generates a unified Schema based on Zod4, which can be used for `parameter validation`, `Swagger/OpenAPI documentation generation`, `Form/Table dynamic rendering`, `Response data serialization and desensitization`, and other scenarios.
-- **DTO Dynamic Inference and Generation**: VonaJS provides DTO dynamic inference and generation capabilities, reducing redundant type definition work and improving development efficiency.
-- **Multi-Tenant, Multi-Database, Multi-Datasource**: VonaJS has built-in multi-tenant, multi-database, and multi-datasource capabilities, making it easy to handle large-scale business system development.
-- **AOP Programming**: VonaJS provides more complete AOP programming capabilities, including `controller aspect`, `internal aspect`, and `external aspect`. NestJS only implements `controller aspect`.
+- **Zod Schema**: VonaJS generates a unified Schema based on Zod4, which can be used for `parameter validation`, `Swagger/OpenAPI documentation generation`, `Form/Table dynamic rendering`, `Response data serialization and desensitization`, and other scenarios
+- **DTO Dynamic Inference and Generation**: VonaJS provides DTO dynamic inference and generation capabilities, reducing redundant type definition work and improving development efficiency
+- **Multi-Tenant, Multi-Database, Multi-Datasource**: VonaJS has built-in multi-tenant, multi-database, and multi-datasource capabilities, making it easy to handle large-scale business system development
+- **AOP Programming**: VonaJS provides more complete AOP programming capabilities, including `controller aspect`, `internal aspect`, and `external aspect`. NestJS only implements `controller aspect`
 
 > **What is controller aspect?**
 >
@@ -45,7 +45,7 @@ This document compares VonaJS with other mainstream frameworks (such as Next.js,
 | SSR Mechanism              | Isomorphic SSR                     | Server-side template rendering         |
 | Dual-layer Tabs Navigation | ✅                                 | ❌                                     |
 
-- VonaJS adopts a frontend and backend separated architecture. The frontend uses the ZovaJS framework, offering a more beautiful interface, cleaner code, and greater freedom to customize the interface and add new features.
+- VonaJS adopts a frontend and backend separated architecture. The frontend uses the ZovaJS framework, offering a more beautiful interface, cleaner code, and greater freedom to customize the interface and add new features
 
 ## Summary
 

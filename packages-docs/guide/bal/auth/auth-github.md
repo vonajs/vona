@@ -1,6 +1,6 @@
 # GitHub Authentication
 
-This module provides `GitHub Authentication` and supports mock user login in the development environment, making development and debugging very convenient
+This module provides `GitHub Authentication` and supports mock user login in the development environment, making development and debugging very convenient.
 
 ## How to Use
 
@@ -24,7 +24,7 @@ await this.bean.passport.signout();
 
 ### 3. Authentication Credentials
 
-In App Config Setting Authentication Credentials
+In App Config Setting Authentication Credentials.
 
 `src/backend/config/config/config.ts`
 
@@ -94,17 +94,17 @@ config.onions = {
 
 ### 5. OAuth Authentication Callback URL
 
-When using OAuth authentication, you need to provide the system's Callback URL on the OAuth website
+When using OAuth authentication, you need to provide the system's Callback URL on the OAuth website.
 
-VonaJS provides a unified Callback URL value and outputs it directly to the console during development for easy use
+VonaJS provides a unified Callback URL value and outputs it directly to the console during development for easy use.
 
 ![](../../../assets/img/bal/auth-1.png)
 
 ### 6. Disable `useMockForDev`
 
-By default, mocking user login is allowed in the development environment
+By default, mocking user login is allowed in the development environment.
 
-`useMockForDev` can be disabled in App Config
+`useMockForDev` can be disabled in App Config.
 
 `src/backend/config/config/config.ts`
 
@@ -121,7 +121,7 @@ config.onions = {
 
 ## Source Code Analysis
 
-This section analyzes the core source code of the module `auth-github` to illustrate how to develop a new Auth Provider
+This section analyzes the core source code of the module `auth-github` to illustrate how to develop a new Auth Provider.
 
 For example, creating an Auth Provider: `github` in the module `auth-github`
 

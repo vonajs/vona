@@ -42,13 +42,13 @@ class FilterTest {
 
 ## Using Filter
 
-Unlike local filter, the system automatically loads global filters and makes them effective
+Unlike local filter, the system automatically loads global filters and makes them effective.
 
 ## Filter Parameters
 
-You can define parameters for filter, allowing for more flexible configuration of filter logic
+You can define parameters for filter, allowing for more flexible configuration of filter logic.
 
-For example, define the `prefix` parameter for the test filter to customize the format of the log output
+For example, define the `prefix` parameter for the test filter to customize the format of the log output.
 
 ### 1. Defining parameter types
 
@@ -93,7 +93,7 @@ export class FilterTest extends BeanBase implements IFilterLog {
 
 ### 4. Specify parameters when using
 
-You can specify global filter parameters for a specific API
+You can specify global filter parameters for a specific API.
 
 ```diff
 class ControllerStudent {
@@ -107,7 +107,7 @@ class ControllerStudent {
 
 ### 5. App Config
 
-Filter parameters can be configured in App Config
+Filter parameters can be configured in App Config.
 
 `src/backend/config/config/config.ts`
 
@@ -128,7 +128,7 @@ config.onions = {
 
 ## Filter Order
 
-Since global filters ard loaded and enabled by default, VonaJS provides two parameters to control the order in which filter is loaded
+Since global filters ard loaded and enabled by default, VonaJS provides two parameters to control the order in which filter is loaded.
 
 ### 1. dependencies
 
@@ -156,7 +156,7 @@ class FilterTest {}
 
 ## Filter Enable/Disable
 
-You can control `enable/disable` of global filter for certain APIs
+You can control `enable/disable` of global filter for certain APIs.
 
 ### 1. Enable
 
@@ -187,7 +187,7 @@ config.onions = {
 
 ### 2. Meta
 
-Allows global filter to take effect in a specified operating environment
+Allows global filter to take effect in a specified operating environment.
 
 | Name   | Type             | Description                                                                           |
 | ------ | ---------------- | ------------------------------------------------------------------------------------- |
@@ -208,7 +208,7 @@ class FilterTest {}
 
 ### 3. match/ignore
 
-You can enable/disable global filter for some specific APIs
+You can enable/disable global filter for some specific APIs.
 
 | Name   | Type                               | Description               |
 | ------ | ---------------------------------- | ------------------------- |
@@ -217,7 +217,7 @@ You can enable/disable global filter for some specific APIs
 
 ## Inspect
 
-You can directly inspect the currently effective global filter list in the Controller action
+You can directly inspect the currently effective global filter list in the Controller action.
 
 ```diff
 class ControllerStudent {

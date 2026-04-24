@@ -25,7 +25,7 @@ $ pnpm add -g vona-cli@latest
 
 2. Install Vscode extension: [Vona - Official](https://marketplace.visualstudio.com/items?itemName=cabloy.vona-vscode)
 
-This extension provides a large number of menus for quickly creating code skeletons for various resources
+This extension provides a large number of menus for quickly creating code skeletons for various resources.
 
 ## Quick Start
 

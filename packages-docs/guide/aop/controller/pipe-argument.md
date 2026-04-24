@@ -1,10 +1,10 @@
 # Argument Pipe
 
-In actual development, we rarely use local and global pipes. Instead, we use argument pipes
+In actual development, we rarely use local and global pipes. Instead, we use argument pipes.
 
 ## Create Argument Pipe
 
-Argument pipe do not exist independently; they are created based on local pipe. The following uses the local pipe `number` as an example to demonstrate how to create an argument pipe
+Argument pipe do not exist independently; they are created based on local pipe. The following uses the local pipe `number` as an example to demonstrate how to create an argument pipe.
 
 ```diff
 + import { createArgumentPipe, Pipe } from 'vona-module-a-aspect';
@@ -25,7 +25,7 @@ class PipeNumber {
 
 ## Using Argument Pipe
 
-Use the argument pipe directly on the method parameters
+Use the argument pipe directly on the method parameters.
 
 ```diff
 class ControllerStudent {
@@ -39,7 +39,7 @@ class ControllerStudent {
 
 ## Specifying Parameters When Using
 
-You can specify pipe parameters when using pipes
+You can specify pipe parameters when using pipes.
 
 ```diff
 class ControllerStudent {

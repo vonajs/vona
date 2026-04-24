@@ -20,7 +20,7 @@ This startup performs the following logic:
 
 ### 2. a-version:databaseName
 
-Since the test database is automatically created in the local development and testing environment, the database name also changes. This startup will automatically set the database name of the default datasource
+Since the test database is automatically created in the local development and testing environment, the database name also changes. This startup will automatically set the database name of the default datasource.
 
 ## Instance Startup
 

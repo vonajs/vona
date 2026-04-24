@@ -1,6 +1,6 @@
 # Config
 
-Vona loads config files based on multi-dimensional variables, providing a more flexible configuration mechanism and supporting more complex business scenarios
+Vona loads config files based on multi-dimensional variables, providing a more flexible configuration mechanism and supporting more complex business scenarios.
 
 ## meta & config files
 
@@ -62,7 +62,7 @@ config.normal.dev.mine.ts
 
 ## Support Asynchronous Loading
 
-The config files support asynchronous loading
+The config files support asynchronous loading.
 
 ```typescript
 export default async function (app: VonaApplication) {
@@ -77,7 +77,7 @@ export default async function (app: VonaApplication) {
 
 ## Obtaining global config
 
-The global config object can be obtained directly through `this.app.config` in any bean instance
+The global config object can be obtained directly through `this.app.config` in any bean instance.
 
 ```typescript
 this.app.config.server.globalPrefix;
@@ -86,7 +86,7 @@ this.app.config.database.defaultClient;
 
 ## Obtaining instance config
 
-The instance config object can be obtained directly through `this.ctx.config` in any bean instance
+The instance config object can be obtained directly through `this.ctx.config` in any bean instance.
 
 ```typescript
 this.ctx.config.server.serve.protocol;

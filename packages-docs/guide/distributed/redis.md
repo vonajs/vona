@@ -57,9 +57,9 @@ REDIS_DEFAULT_DB = 0
 
 ## Independent Configuration
 
-All distributed components use the same Redis configuration by default
+All distributed components use the same Redis configuration by default.
 
-For large projects, independent configurations can be provided for different components
+For large projects, independent configurations can be provided for different components.
 
 `src/backend/config/config/config.ts`
 
@@ -87,7 +87,7 @@ config.redis = {
 
 ### 1. Adding Type Definition
 
-Add a new Client type definition using the interface merging mechanism, such as `order`, providing a separate Redis Client for the order business using a dedicated Redis service, thereby improving system performance
+Add a new Client type definition using the interface merging mechanism, such as `order`, providing a separate Redis Client for the order business using a dedicated Redis service, thereby improving system performance.
 
 In the VSCode editor, enter the code snippet `recordredisclient`, and the code skeleton will be automatically generated:
 

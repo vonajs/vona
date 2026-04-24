@@ -2,7 +2,7 @@
 
 ## Create Model
 
-For example, we create a Model: `student` in the module demo-student
+For example, we create a Model: `student` in the module demo-student.
 
 ### 1. Cli command
 
@@ -30,7 +30,7 @@ export class ModelStudent extends BeanModelBase<EntityStudent> {}
 
 ## Using Model
 
-Using Model in Vona supports `dependency injection` and `dependency lookup`. It is recommended to use `dependency lookup` because it can make the code more concise and intuitive
+Using Model in Vona supports `dependency injection` and `dependency lookup`. It is recommended to use `dependency lookup` because it can make the code more concise and intuitive.
 
 ### 1. Lookup in this module
 
@@ -118,11 +118,11 @@ class ServiceStudent {
 
 ## Knex Query Builder
 
-Vona Model is based on [knex](https://knexjs.org/). Therefore, it also supports the [Query Builder](https://knexjs.org/guide/query-builder.html) provided by knex
+Vona Model is based on [knex](https://knexjs.org/). Therefore, it also supports the [Query Builder](https://knexjs.org/guide/query-builder.html) provided by knex.
 
 ### 1. builder
 
-Invoke the `builder` method of the model to obtain an instance of the knex query builder
+Invoke the `builder` method of the model to obtain an instance of the knex query builder.
 
 ```typescript
 class ServiceStudent {
@@ -146,7 +146,7 @@ class ServiceStudent {
 
 ### 3. Raw Sql
 
-Raw Sql statements can be executed directly
+Raw Sql statements can be executed directly.
 
 ```typescript
 class ServiceStudent {
@@ -185,7 +185,7 @@ class ServiceStudent {
 
 ## App Config
 
-Model options can be configured in App Config
+Model options can be configured in App Config.
 
 `src/backend/config/config/config.ts`
 
@@ -224,7 +224,7 @@ class ModelOrder {}
 
 Model automatically enables soft deletion by default. When data deleting, it is not physically deleted, but the value of the field `deleted` is set to `true`
 
-Model supports multi-instance/multi-tenancy by default. When performing CRUD operations on data, the instance id is automatically obtained from the Request context and passed into the sql statement
+Model supports multi-instance/multi-tenancy by default. When performing CRUD operations on data, the instance id is automatically obtained from the Request context and passed into the sql statement.
 
 For example, execute `model.student.select()`, then the generated sql is as follows:
 
@@ -238,7 +238,7 @@ select "demoStudent"."id" from "demoStudent"
 
 ### 1. Temporarily disable soft deletion
 
-We can also temporarily specify the `soft deletion` parameter when executing the model method
+We can also temporarily specify the `soft deletion` parameter when executing the model method.
 
 ```typescript
 class ServiceStudent {
@@ -259,11 +259,11 @@ The system automatically cleans up expired soft deleted data. `softDeletionPrune
 
 ## Datasource
 
-Vona supports `multi-database` and `multi-datasource`. Model methods can be invoked for any datasource
+Vona supports `multi-database` and `multi-datasource`. Model methods can be invoked for any datasource.
 
 ### 1. Default datasource
 
-By default, Model uses the default datasource set by the system
+By default, Model uses the default datasource set by the system.
 
 `env/.env`
 
@@ -311,7 +311,7 @@ export class ModelOrder {}
 
 ### 4. Dynamic datasource
 
-We can also specify the datasource dynamically in the code
+We can also specify the datasource dynamically in the code.
 
 ```typescript
 class ServiceStudent {
@@ -324,9 +324,9 @@ class ServiceStudent {
 
 ## Cache
 
-Vona Model has cache enabled by default, making the system high performant by default
+Vona Model has cache enabled by default, making the system high performant by default.
 
-Model supports `two-layer cache`/`mem cache`/`redis cache`. `redis cache` is used by default. Because `redis cache` can maintain data consistency in distributed scenarios, while `mem cache` has a delay in synchronizing data in distributed scenarios. If business data changes infrequently, you can use `mem cache` or `two-layer cache` to achieve higher performance
+Model supports `two-layer cache`/`mem cache`/`redis cache`. `redis cache` is used by default. Because `redis cache` can maintain data consistency in distributed scenarios, while `mem cache` has a delay in synchronizing data in distributed scenarios. If business data changes infrequently, you can use `mem cache` or `two-layer cache` to achieve higher performance.
 
 This briefly introduces the basic configuration of caching. For more detailed information, see: [Vona ORM: Caching](../techniques/orm/caching.md)
 

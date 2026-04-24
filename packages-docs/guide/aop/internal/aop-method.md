@@ -1,10 +1,10 @@
 # AOP Method
 
-`AOP Method` allows us to extend the logic directly on the Class Method through decorators
+`AOP Method` allows us to extend the logic directly on the Class Method through decorators.
 
 ## Create AOP Method
 
-For example, we create a AOP Method `log` in the module demo-student to output the execution time of method
+For example, we create a AOP Method `log` in the module demo-student to output the execution time of method.
 
 ### 1. Cli command
 
@@ -69,9 +69,9 @@ class ServiceStudent {
 
 ## AOP Method Parameters
 
-You can define parameters for AOP Method, allowing for more flexible configuration of AOP Method logic
+You can define parameters for AOP Method, allowing for more flexible configuration of AOP Method logic.
 
-For example, define the `prefix` parameter for the log AOP Method to control the output format
+For example, define the `prefix` parameter for the log AOP Method to control the output format.
 
 ### 1. Defining parameter types
 
@@ -113,7 +113,7 @@ class AopMethodLog {
 
 ### 4. Specify parameters when using
 
-You can specify AOP Method parameters for any specific Class Method
+You can specify AOP Method parameters for any specific Class Method.
 
 ```diff
 class ControllerStudent {
@@ -127,7 +127,7 @@ class ControllerStudent {
 
 ### 5. App Config
 
-AOP Method parameters can be configured in App Config
+AOP Method parameters can be configured in App Config.
 
 `src/backend/config/config/config.ts`
 
@@ -148,7 +148,7 @@ config.onions = {
 
 ## AOP Method Enable/Disable
 
-You can control `enable/disable` of AOP Method
+You can control `enable/disable` of AOP Method.
 
 ### 1. Enable
 
@@ -179,7 +179,7 @@ config.onions = {
 
 ### 2. Meta
 
-Allows AOP Method to take effect in a specified operating environment
+Allows AOP Method to take effect in a specified operating environment.
 
 | Name   | Type             | Description                                                                           |
 | ------ | ---------------- | ------------------------------------------------------------------------------------- |
