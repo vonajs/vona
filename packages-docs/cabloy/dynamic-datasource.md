@@ -1,10 +1,10 @@
 # Dynamic Datasource
 
-The module `a-datasource` allows dynamic creation of datasources during system runtime, thereby managing third-party database data
+The module `a-datasource` allows dynamic creation of datasources during system runtime, thereby managing third-party database data.
 
 ## Create datasource
 
-The module stores the dynamically created datasource in the data table
+The module stores the dynamically created datasource in the data table.
 
 ```typescript
 const entityDatasource = await this.bean.datasource.create({

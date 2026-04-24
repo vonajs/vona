@@ -1,14 +1,14 @@
 # Sharding
 
-The module `a-datasharding` allows us to provide a set of `write-datasources` and a set of `read-datasources`. When a user accesses the backend API, the system automatically selects a `write-datasource` or a `read-datasource` based on the rules and accesses the corresponding database, thereby allocating workloads and improving system performance
+The module `a-datasharding` allows us to provide a set of `write-datasources` and a set of `read-datasources`. When a user accesses the backend API, the system automatically selects a `write-datasource` or a `read-datasource` based on the rules and accesses the corresponding database, thereby allocating workloads and improving system performance.
 
 ## Adding datasources
 
-First, you need to add a set of datasources
+First, you need to add a set of datasources.
 
 ### 1. Adding type definitions
 
-Adding type definitions for the new datasources
+Adding type definitions for the new datasources.
 
 `src/backend/config/config/config.ts`
 
@@ -50,7 +50,7 @@ config.database = {
 
 ## Configure the read-datasources and write-datasources
 
-Then configure the module's read-datasources and write-datasources
+Then configure the module's read-datasources and write-datasources.
 
 `src/backend/config/config/config.ts`
 
@@ -77,7 +77,7 @@ config.modules = {
 
 ## Sharding Mechanism
 
-Once the `read-datasources` and `write-datasources` are configured, the sharding mechanism automatically takes effect
+Once the `read-datasources` and `write-datasources` are configured, the sharding mechanism automatically takes effect.
 
 Now, let's explain how sharding works:
 
@@ -87,9 +87,9 @@ Now, let's explain how sharding works:
 
 ### Scenario Analysis: The Same User
 
-Data inconsistencies may occur due to database synchronization delays. For example, a user accesses the `Write-API` to write data to the `Write-Database`. Then, when the user accesses the `Read-API`, the `Read-Database` has not yet been synchronized, and the old data will be read
+Data inconsistencies may occur due to database synchronization delays. For example, a user accesses the `Write-API` to write data to the `Write-Database`. Then, when the user accesses the `Read-API`, the `Read-Database` has not yet been synchronized, and the old data will be read.
 
-To address this issue, the module automatically provides a mechanism: when a user accesses the `Write-API`, the `Write-Datasource` is automatically stored in the `two-layer cache` and an expiration time is set. During this time, the user accessing the `Read-API` will continue to use the same `Write-Datasource`, ensuring he can always read the latest data after writing
+To address this issue, the module automatically provides a mechanism: when a user accesses the `Write-API`, the `Write-Datasource` is automatically stored in the `two-layer cache` and an expiration time is set. During this time, the user accessing the `Read-API` will continue to use the same `Write-Datasource`, ensuring he can always read the latest data after writing.
 
 ### Modifying the Expiration Time
 
@@ -124,9 +124,9 @@ config.onions = {
 
 Vona ORM provides an out-of-the-box caching mechanism. See: [Caching](../guide/techniques/orm/caching.md)
 
-Due to database synchronization delays, cache inconsistencies can occur. For example, user A accesses the `Write-API`, writes data to the `Write-Database`, and automatically deletes the cache. Subsequently, user B accesses the `Read-API`. At this point, the `Read-Database` has not yet been synchronized, so the old data is read and stored in the cache
+Due to database synchronization delays, cache inconsistencies can occur. For example, user A accesses the `Write-API`, writes data to the `Write-Database`, and automatically deletes the cache. Subsequently, user B accesses the `Read-API`. At this point, the `Read-Database` has not yet been synchronized, so the old data is read and stored in the cache.
 
-To address this issue, the `a-orm` module provides a `cache-double-delete` mechanism: when user A accesses the `Write-API`, the data is written to the `Write-Database` and the cache is automatically deleted. The cache is then deleted again after a specified timeout, ensuring it always has the latest data
+To address this issue, the `a-orm` module provides a `cache-double-delete` mechanism: when user A accesses the `Write-API`, the data is written to the `Write-Database` and the cache is automatically deleted. The cache is then deleted again after a specified timeout, ensuring it always has the latest data.
 
 ### Enabling cache-double-delete
 
