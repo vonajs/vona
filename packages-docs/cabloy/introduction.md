@@ -23,7 +23,7 @@ This suite includes the following modules:
 | rest-actions  | Actions for Zova JSX. Includes: alert/confirm/copy/create/delete/edit/setValue/view                                                                        |
 | rest-resource | Universal component supporting CRUD rendering. Includes: list page, entry page, providing best practices for `Tanstack Table/Tanstack Form/Tanstack Query` |
 
-## 3. Project Templates
+## 3. Project Templates {#templates}
 
 CabloyJS provides two project templates for different UI libraries.
 

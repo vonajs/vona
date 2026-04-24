@@ -23,7 +23,7 @@ CabloyJS 不是独立的框架，而是基于`Vona/Zova套件`的形式提供一
 | rest-actions  | 用于Zova JSX的Actions。包括： alert/confirm/copy/create/delete/edit/setValue/view                         |
 | rest-resource | 支持CRUD渲染的通用组件。包括：列表页、条目页，提供`Tanstack Table/Tanstack Form/Tanstack Query`的最佳实践 |
 
-## 3. 项目模版
+## 3. 项目模版 {#templates}
 
 针对不同 UI 库，CabloyJS 分别提供了两个项目模版。
 

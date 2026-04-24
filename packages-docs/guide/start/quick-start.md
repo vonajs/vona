@@ -43,7 +43,7 @@ Vona provides two project templates:
 | cabloy-basic | Daisyui + Tailwindcss | Provides out-of-the-box `Admin-Dashboard`               |
 | cabloy-start | VuetifyJS             | Provides out-of-the-box `Website` and `Admin-Dashboard` |
 
-> See: [Cabloy: Project Templates](../../cabloy/templates.md)
+> See: [Cabloy: Project Templates](../../cabloy/introduction.md#templates)
 
 2. Modify .env file
 
