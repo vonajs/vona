@@ -65,6 +65,6 @@ CabloyJS 不是独立的框架，而是基于`Vona/Zova套件`的形式提供一
 
 ## License
 
-MIT License
+MIT License.
 
-Copyright (c) 2016-present, Vona/Zova/Cabloy
+Copyright (c) 2016-present, Vona/Zova/Cabloy.

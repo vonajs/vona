@@ -5,7 +5,12 @@
     "ja-no-mixed-period": {
       "periodMark": "。",
       "forceAppendPeriod": true,
-      "allowPeriodMarks": ["?", "!", ":", "："]
+      "allowPeriodMarks": ["?", "!", ":", "？", "！", "："]
+    },
+    "en-no-mixed-period": {
+      "periodMark": ".",
+      "forceAppendPeriod": true,
+      "allowPeriodMarks": ["?", "!", ":", "？", "！", "：", "。"]
     },
     "ja-space-between-half-and-full-width": {
       "space": "always"

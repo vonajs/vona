@@ -390,9 +390,6 @@ importers:
       '@types/retry':
         specifier: ^0.12.5
         version: 0.12.5
-      check-ends-with-period:
-        specifier: ^3.0.2
-        version: 3.0.2
       cross-env:
         specifier: ^7.0.3
         version: 7.0.3
@@ -411,6 +408,9 @@ importers:
       textlint:
         specifier: ^15.5.4
         version: 15.5.4
+      textlint-rule-en-no-mixed-period:
+        specifier: ^3.0.2
+        version: 3.0.2
       textlint-rule-ja-no-mixed-period:
         specifier: ^3.0.2
         version: 3.0.2
@@ -8565,6 +8565,9 @@ packages:
     resolution: {integrity: sha512-mk82dS8eRABNbeVJrEiN5/UMSCliINAuz8mkUwH4SwslkNP//gbEzlWNS5au0z5Dpx40SQxzqZevZkn+WYJ9Dw==}
     engines: {node: '>=8'}
 
+  textlint-rule-en-no-mixed-period@3.0.2:
+    resolution: {integrity: sha512-RGoNfzLREdNfkyoXZhhT7s/AZIVGT1qdZJ7IAN5mgAxuof2xNjVNyg/Kx2WggRmM2mRR+n5BUjeWw0Jv7vOh2Q==}
+
   textlint-rule-helper@2.5.0:
     resolution: {integrity: sha512-QIbFPtyqLy0g5BJn8mryk9iHzGYicNaFIpLFPiEnb4RXxrEGeQ2W2aARQ9yEXLIAqo+OwK4ndWBAWkbgJEPzTQ==}
 
@@ -16252,6 +16255,11 @@ snapshots:
   text-table@0.2.0: {}
 
   textextensions@3.3.0: {}
+
+  textlint-rule-en-no-mixed-period@3.0.2:
+    dependencies:
+      check-ends-with-period: 3.0.2
+      textlint-rule-helper: 2.5.0
 
   textlint-rule-helper@2.5.0:
     dependencies:
