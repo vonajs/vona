@@ -1,1 +1,0 @@
-import{n as a,t as o}from"./a-boundary-CG6tHlEo.js";o();export{a as ScopeModuleABoundary};

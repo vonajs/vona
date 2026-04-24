@@ -10,7 +10,7 @@ import { BeanAopBase, BeanBase, BeanContainer, BeanControllerBase, BeanControlle
 import * as _$zova_module_a_openapi0 from "zova-module-a-openapi";
 import { ICaptchaData, ICaptchaOptions, IJsxRenderContextBase, ITablePaged, ITableQuery, ITableResPaged } from "zova-module-a-openapi";
 import { IJwtAdapter, IJwtInfo } from "zova-module-a-interceptor";
-import { AopAction, AopActionDispose, AopActionInit, IDecoratorAopOptions } from "zova-module-a-bean";
+import { AopActionDispose, AopActionInit, AopActionRender, IDecoratorAopOptions } from "zova-module-a-bean";
 import * as _$_tanstack_vue_query0 from "@tanstack/vue-query";
 import { BeanModelBase, IDecoratorModelOptions } from "zova-module-a-model";
 import { BeanPiniaStoreBase, PiniaStore } from "zova-module-a-pinia";
@@ -5002,12 +5002,12 @@ declare module 'zova' {
 declare class AopHome extends BeanAopBase {
   protected __init__: AopActionInit<ControllerPageHome>;
   protected __dispose__: AopActionDispose<ControllerPageHome>;
-  render: AopAction<ControllerPageHome, 'render'>;
+  protected render: AopActionRender<ControllerPageHome>;
 }
 //#endregion
 //#region src/suite/a-demo/modules/demo-basic/src/bean/aop.home3.d.ts
 declare class AopHome3 extends BeanAopBase {
-  render: AopAction<ControllerPageHome, 'render'>;
+  protected render: AopActionRender<ControllerPageHome>;
 }
 //#endregion
 //#region src/suite/a-demo/modules/demo-basic/src/bean/behavior.formFieldLayout.d.ts
