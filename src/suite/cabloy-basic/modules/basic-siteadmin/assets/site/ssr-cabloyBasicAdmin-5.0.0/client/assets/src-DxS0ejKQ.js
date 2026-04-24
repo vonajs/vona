@@ -1,0 +1,1 @@
+import{a as s,c as a,i as r,l as o,n as t,o as i,r as c,s as e,t as m,u as n}from"./rest-actions-COjaFoJ9.js";m();export{n as ActionAlert,o as ActionConfirm,a as ActionCopy,e as ActionCreate,i as ActionDelete,s as ActionEdit,r as ActionSetValue,c as ActionView,t as ScopeModuleRestActions};

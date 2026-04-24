@@ -97,7 +97,7 @@ export class AppResource extends BeanSimple {
     if (!scene) scene = 'bean';
     scene = scene.replace(/\./g, '');
     // bean class name
-    const beanClassName = this._fixClassName(beanClass.name);
+    const beanClassName = beanClass.name;
     if (beanClassName.toLocaleUpperCase().startsWith(scene.toLocaleUpperCase())) {
       name = beanClassName.substring(scene.length);
     } else {
@@ -141,13 +141,6 @@ export class AppResource extends BeanSimple {
     return beanOptions?.module;
   }
 
-  _fixClassName(className: string) {
-    while (className.endsWith('2')) {
-      className = className.substring(0, className.length - 1);
-    }
-    return className;
-  }
-
   _prepareOnionOptions(options: unknown, optionsPrimitive: boolean | undefined, scene: any, name: string) {
     const app = useApp();
     if (!app?.config && scene !== 'scope') {
@@ -160,6 +153,13 @@ export class AppResource extends BeanSimple {
       return deepExtend({}, options, optionsConfig);
     }
   }
+
+  // _fixClassName(className: string) {
+  //   while (className.endsWith('2')) {
+  //     className = className.substring(0, className.length - 1);
+  //   }
+  //   return className;
+  // }
 }
 
 export const appResource = new AppResource();
