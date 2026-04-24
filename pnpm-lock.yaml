@@ -390,6 +390,9 @@ importers:
       '@types/retry':
         specifier: ^0.12.5
         version: 0.12.5
+      check-ends-with-period:
+        specifier: ^3.0.2
+        version: 3.0.2
       cross-env:
         specifier: ^7.0.3
         version: 7.0.3
@@ -414,6 +417,9 @@ importers:
       textlint-rule-ja-space-between-half-and-full-width:
         specifier: ^2.4.2
         version: 2.4.2
+      textlint-rule-period-in-list-item:
+        specifier: ^1.0.1
+        version: 1.0.1
       ts-node-maintained:
         specifier: ^10.9.6
         version: 10.9.6(@swc/core@1.15.26(@swc/helpers@0.5.21))(@types/node@22.19.17)(typescript@5.9.3)
@@ -8568,6 +8574,9 @@ packages:
   textlint-rule-ja-space-between-half-and-full-width@2.4.2:
     resolution: {integrity: sha512-GqwSy0ivm4Q5Bok9LaOwfg+H1auLRMoMi2aY/7aSIrgvX/RD5aZ2Rk2lm3TTX42mR1UrQu8GDqktUEZfvQ913w==}
 
+  textlint-rule-period-in-list-item@1.0.1:
+    resolution: {integrity: sha512-dNPa4WzePcgsz8A+CxFGQgKNZCEvjjwMCu3DFcpYB4eKuhcSISEiS/mvEO42oGAALJluYdYVZxN3yMD6XzkLBA==}
+
   textlint@15.5.4:
     resolution: {integrity: sha512-W7pJKjeNyRfyzE9gLVfFE3stscas1dcNqDvge2WTkDxroa5FklKtrHYBa8sG8z2BWAJvbqOH/d29dRPzEww0FA==}
     engines: {node: '>=20.0.0'}
@@ -16260,6 +16269,10 @@ snapshots:
       '@textlint/regexp-string-matcher': 2.0.2
       match-index: 1.0.3
       textlint-rule-helper: 2.5.0
+
+  textlint-rule-period-in-list-item@1.0.1:
+    dependencies:
+      check-ends-with-period: 3.0.2
 
   textlint@15.5.4:
     dependencies:

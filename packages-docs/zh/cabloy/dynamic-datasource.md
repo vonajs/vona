@@ -1,10 +1,10 @@
 # 动态数据源
 
-模块`a-datasource`允许在系统运行时动态创建数据源，从而管理第三方的数据库数据
+模块`a-datasource`允许在系统运行时动态创建数据源，从而管理第三方的数据库数据。
 
 ## 创建数据源
 
-模块将动态创建的数据源存储在数据表中
+模块将动态创建的数据源存储在数据表中。
 
 ```typescript
 const entityDatasource = await this.bean.datasource.create({

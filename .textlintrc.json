@@ -2,9 +2,17 @@
   "plugins": {},
   "filters": {},
   "rules": {
-    "ja-no-mixed-period": true,
+    "ja-no-mixed-period": {
+      "periodMark": "。",
+      "forceAppendPeriod": true,
+      "allowPeriodMarks": ["?", "!", ":", "："]
+    },
     "ja-space-between-half-and-full-width": {
       "space": "always"
+    },
+    "textlint-rule-period-in-list-item": {
+      "periodMark": "",
+      "forceAppendPeriod": true
     }
   }
 }
