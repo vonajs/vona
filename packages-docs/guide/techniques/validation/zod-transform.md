@@ -55,11 +55,11 @@ import { v } from 'vona-module-a-openapiutils';
 @Controller()
 class ControllerStudent {
   @Web.post()
-+ async create(@Arg.body(v.transform('demo-student:nameCapitalize')) student: DtoStudentCreate) {}
++ async create(@Arg.body(v.zodTransform('demo-student:nameCapitalize')) student: DtoStudentCreate) {}
 }
 ```
 
-- `v.transform`: This function is used to use Zod Transform. Simply pass the Zod Transform name
+- `v.zodTransform`: This function is used to use Zod Transform. Simply pass the Zod Transform name
   - The `nameCapitalize` Zod Transform belongs to the `demo-student` module, so the full name is `demo-student:nameCapitalize`
 
 ## Zod Transform Parameters
@@ -118,7 +118,7 @@ You can specify Zod Transform parameters when using.
 ```diff
 class ControllerStudent {
   @Web.post()
-+ async create(@Arg.body(v.transform('demo-student:nameCapitalize', { lowercase: true })) student: DtoStudentCreate) {}
++ async create(@Arg.body(v.zodTransform('demo-student:nameCapitalize', { lowercase: true })) student: DtoStudentCreate) {}
 }
 ```
 

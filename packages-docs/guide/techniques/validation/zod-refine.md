@@ -54,11 +54,11 @@ import { v } from 'vona-module-a-openapiutils';
 @Controller()
 class ControllerStudent {
   @Web.post()
-+ async create(@Arg.body(v.refine('demo-student:nameExists')) student: DtoStudentCreate) {}
++ async create(@Arg.body(v.zodRefine('demo-student:nameExists')) student: DtoStudentCreate) {}
 }
 ```
 
-- `v.refine`: This function is used to use Zod Refine. Simply pass the Zod Refine name
+- `v.zodRefine`: This function is used to use Zod Refine. Simply pass the Zod Refine name
   - The `nameExists` Zod Refine belongs to the `demo-student` module, so the full name is `demo-student:nameExists`
 
 ## Zod Refine Parameters
@@ -117,7 +117,7 @@ You can specify Zod Refine parameters when using.
 ```diff
 class ControllerStudent {
   @Web.post()
-+ async create(@Arg.body(v.refine('demo-student:nameExists', { errorMessage: 'Student Exists!!!' })) student: DtoStudentCreate) {}
++ async create(@Arg.body(v.zodRefine('demo-student:nameExists', { errorMessage: 'Student Exists!!!' })) student: DtoStudentCreate) {}
 }
 ```
 

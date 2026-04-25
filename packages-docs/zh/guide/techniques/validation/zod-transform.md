@@ -55,11 +55,11 @@ import { v } from 'vona-module-a-openapiutils';
 @Controller()
 class ControllerStudent {
   @Web.post()
-+ async create(@Arg.body(v.transform('demo-student:nameCapitalize')) student: DtoStudentCreate) {}
++ async create(@Arg.body(v.zodTransform('demo-student:nameCapitalize')) student: DtoStudentCreate) {}
 }
 ```
 
-- `v.transform`: 此工具函数用于使用 Zod Transform，只需传入 Zod Transform 的名称
+- `v.zodTransform`: 此工具函数用于使用 Zod Transform，只需传入 Zod Transform 的名称
   - `nameCapitalize` zod transform 属于模块`demo-student`，因此完整的名称是`demo-student:nameCapitalize`
 
 ## Zod Transform参数
@@ -118,7 +118,7 @@ class ZodTransformNameCapitalize {
 ```diff
 class ControllerStudent {
   @Web.post()
-+ async create(@Arg.body(v.transform('demo-student:nameCapitalize', { lowercase: true })) student: DtoStudentCreate) {}
++ async create(@Arg.body(v.zodTransform('demo-student:nameCapitalize', { lowercase: true })) student: DtoStudentCreate) {}
 }
 ```
 

@@ -190,10 +190,10 @@ VonaJS puts all the utility methods for extending Zod Schema into the group `v`,
 
 ### 5. Zod Tools
 
-| Name        | Description                           |
-| ----------- | ------------------------------------- |
-| v.refine    | Provides `Zod Refine` capabilities    |
-| v.transform | Provides `Zod Transform` capabilities |
+| Name           | Description                           |
+| -------------- | ------------------------------------- |
+| v.zodRefine    | Provides `Zod Refine` capabilities    |
+| v.zodTransform | Provides `Zod Transform` capabilities |
 
 ### 6. Query Filter Tools
 

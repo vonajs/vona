@@ -83,6 +83,6 @@ export const v = {
   // component
   component: schemaComponent,
   // zod
-  refine: schemaZodRefine,
-  transform: schemaZodTransform,
+  zodRefine: schemaZodRefine,
+  zodTransform: schemaZodTransform,
 };

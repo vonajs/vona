@@ -54,11 +54,11 @@ import { v } from 'vona-module-a-openapiutils';
 @Controller()
 class ControllerStudent {
   @Web.post()
-+ async create(@Arg.body(v.refine('demo-student:nameExists')) student: DtoStudentCreate) {}
++ async create(@Arg.body(v.zodRefine('demo-student:nameExists')) student: DtoStudentCreate) {}
 }
 ```
 
-- `v.refine`: 此工具函数用于使用 Zod Refine，只需传入 Zod Refine 的名称
+- `v.zodRefine`: 此工具函数用于使用 Zod Refine，只需传入 Zod Refine 的名称
   - `nameExists` zod refine 属于模块`demo-student`，因此完整的名称是`demo-student:nameExists`
 
 ## Zod Refine参数
@@ -117,7 +117,7 @@ class ZodRefineNameExists {
 ```diff
 class ControllerStudent {
   @Web.post()
-+ async create(@Arg.body(v.refine('demo-student:nameExists', { errorMessage: 'Student Exists!!!' })) student: DtoStudentCreate) {}
++ async create(@Arg.body(v.zodRefine('demo-student:nameExists', { errorMessage: 'Student Exists!!!' })) student: DtoStudentCreate) {}
 }
 ```
 
