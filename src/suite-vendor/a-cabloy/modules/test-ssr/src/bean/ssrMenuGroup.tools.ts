@@ -3,9 +3,10 @@ import type { IDecoratorSsrMenuGroupOptions } from 'vona-module-a-ssr';
 import { BeanBase } from 'vona';
 import { SsrMenuGroup } from 'vona-module-a-ssr';
 
-import { $locale } from '../.metadata/locales.ts';
+import type { ISsrSiteOptionsSecond } from './ssrSite.second.ts';
 
-export interface ISsrMenuGroupOptionsTools extends IDecoratorSsrMenuGroupOptions {}
+import { $locale } from '../.metadata/locales.ts';
+export interface ISsrMenuGroupOptionsTools extends IDecoratorSsrMenuGroupOptions<ISsrSiteOptionsSecond> {}
 
 @SsrMenuGroup<ISsrMenuGroupOptionsTools>({
   item: {

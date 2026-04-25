@@ -1,5 +1,5 @@
 import type { IDecoratorSsrSiteOptions } from 'vona-module-a-ssr';
-import type { IPagePathRecord } from 'zova-rest-test-second';
+import type { IIconRecord, IPagePathRecord } from 'zova-rest-test-second';
 
 import { BeanSsrSiteBase, SsrSite } from 'vona-module-a-ssr';
 
@@ -18,7 +18,7 @@ export interface ISsrSiteOptionsSecondPagesData {
   '/demo/basic/toolTwo/:id?': DtoTestResult;
 }
 
-export interface ISsrSiteOptionsSecond extends IDecoratorSsrSiteOptions<ISsrSiteOptionsSecondPages, ISsrSiteOptionsSecondPagesData> {}
+export interface ISsrSiteOptionsSecond extends IDecoratorSsrSiteOptions<ISsrSiteOptionsSecondPages, ISsrSiteOptionsSecondPagesData, IIconRecord> {}
 
 @SsrSite<ISsrSiteOptionsSecond>({
   publicPath: 'second',
