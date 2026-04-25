@@ -22,6 +22,6 @@ export class DtoRegister {
   @Api.field(v.min(6), v.max(20))
   passwordConfirm: string;
 
-  @Api.field(v.component('captcha'))
+  @Api.field(v.renderComponent('captcha'))
   captcha: DtoCaptchaVerify;
 }

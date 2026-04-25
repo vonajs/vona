@@ -2,6 +2,7 @@ import type {
   ISchemaObjectExtensionFieldRest,
   ISchemaObjectExtensionFieldRestScene,
   TypeRenderComponent,
+  TypeRenderComponentJsx,
   TypeSchemaScene,
 } from 'vona-module-a-openapi';
 import type z from 'zod';
@@ -36,6 +37,13 @@ export function schemaOrder<T extends z.ZodType>(order: number, level?: TypeSche
 }
 
 export function schemaRender<T extends z.ZodType>(render: TypeRenderComponent, scene?: TypeSchemaScene) {
+  return function (schema: T): T {
+    const options = { render };
+    return _generalSchemaRest(schema, options, scene);
+  };
+}
+
+export function schemaRenderJsx<T extends z.ZodType>(render: TypeRenderComponentJsx, scene?: TypeSchemaScene) {
   return function (schema: T): T {
     const options = { render };
     return _generalSchemaRest(schema, options, scene);

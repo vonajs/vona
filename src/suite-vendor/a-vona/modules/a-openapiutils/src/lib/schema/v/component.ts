@@ -24,7 +24,7 @@ const __schemaComponents = {
   textarea: schemaTextarea,
 } as const;
 
-export function schemaComponent<K extends keyof ISchemaComponentRecord>(name: K, options?: ISchemaComponentRecord[K], scene?: TypeSchemaScene) {
+export function schemaRenderComponent<K extends keyof ISchemaComponentRecord>(name: K, options?: ISchemaComponentRecord[K], scene?: TypeSchemaScene) {
   return __schemaComponents[name](options as any, scene);
 }
 
