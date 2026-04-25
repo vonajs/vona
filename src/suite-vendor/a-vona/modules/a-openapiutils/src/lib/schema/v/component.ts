@@ -1,6 +1,7 @@
 import type { CurrencyOptions } from '@zhennann/currency';
 import type {
   ICaptchaOptions,
+  IDateRangeOptions,
   IResourcePickerOptions,
   ISelectOptions,
   ITextareaOptions,
@@ -18,6 +19,7 @@ const __schemaComponents = {
   currency: schemaCurrency,
   date: schemaDate,
   captcha: schemaCaptcha,
+  dataRange: schemaDateRange,
   toggle: schemaToggle,
   select: schemaSelect,
   resourcePicker: schemaResourcePicker,
@@ -73,6 +75,13 @@ function schemaResourcePicker<T extends z.ZodType>(resourcePicker?: IResourcePic
 function schemaTextarea<T extends z.ZodType>(textarea?: ITextareaOptions, scene?: TypeSchemaScene) {
   return function (schema: T): T {
     const options = textarea !== undefined ? { render: 'textarea', textarea } : { render: 'textarea' };
+    return _generalSchemaRest(schema, options, scene);
+  };
+}
+
+export function schemaDateRange<T extends z.ZodType>(dateRange?: IDateRangeOptions, scene?: TypeSchemaScene) {
+  return function (schema: T): T {
+    const options = dateRange !== undefined ? { render: 'dateRange', dateRange } : { render: 'dateRange' };
     return _generalSchemaRest(schema, options, scene);
   };
 }

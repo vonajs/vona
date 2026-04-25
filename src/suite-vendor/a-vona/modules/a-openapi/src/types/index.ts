@@ -18,3 +18,4 @@ export * from './table.ts';
 export * from './tableProvider.ts';
 export * from './textarea.ts';
 export * from './toggle.ts';
+export * from './dateRange.ts';

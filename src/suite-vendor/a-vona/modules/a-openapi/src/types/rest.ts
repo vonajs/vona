@@ -8,12 +8,13 @@ import type { TypeResourceActionRowRecordRender } from './actions.ts';
 import type { ICaptchaOptions } from './captcha.ts';
 import type { IComponentRecord, ITableCellComponentRecord } from './component.ts';
 import type { TypeDateFormat } from './date.ts';
+import type { IDateRangeOptions } from './dateRange.ts';
 import type { IResourcePickerOptions } from './resourcePicker.ts';
 import type { ISelectOptions } from './select.ts';
 import type { ITextareaOptions } from './textarea.ts';
-import type { IToggleOptions } from './toggle.ts';
 import 'openapi3-ts/oas30';
 import 'openapi3-ts/oas31';
+import type { IToggleOptions } from './toggle.ts';
 
 export type HTMLInputElementType = 'text' | 'password' | 'number' | 'file' | 'hidden' | 'tel' | 'email';
 
@@ -47,6 +48,7 @@ export interface ISchemaObjectExtensionFieldRestProps {
   captcha?: ICaptchaOptions;
   currency?: CurrencyOptions;
   dateFormat?: TypeDateFormat;
+  dateRange?: IDateRangeOptions;
   toggle?: IToggleOptions;
   select?: ISelectOptions;
   textarea?: ITextareaOptions;
@@ -100,17 +102,19 @@ export type TypeRenderComponentPreset =
   | 'currency'
   | 'date'
   | 'dateRange'
-  | 'textarea'
+  | 'toggle'
   | 'select'
-  | 'checkbox'
-  | 'radio'
-  | 'switch'
-  | 'image'
-  | 'file'
-  | 'color'
-  | 'password'
-  | 'email'
-  | 'url';
+  | 'textarea'
+  | 'resourcePicker';
+// | 'checkbox';
+// | 'radio'
+// | 'switch';
+// | 'image'
+// | 'file'
+// | 'color'
+// | 'password'
+// | 'email'
+// | 'url';
 export type TypeRenderComponent = TypeRenderComponentPreset | TypeRenderComponentJsx;
 
 // form

@@ -1,6 +1,7 @@
 import type { CurrencyOptions } from '@zhennann/currency';
 import type {
   ICaptchaOptions,
+  IDateRangeOptions,
   IResourcePickerOptions,
   ISelectOptions,
   ITextareaOptions,
@@ -11,6 +12,7 @@ import type {
 export interface ISchemaComponentRecord {
   currency: CurrencyOptions;
   date: TypeDateFormat;
+  dataRange: IDateRangeOptions;
   captcha: ICaptchaOptions;
   toggle: IToggleOptions;
   select: ISelectOptions;
