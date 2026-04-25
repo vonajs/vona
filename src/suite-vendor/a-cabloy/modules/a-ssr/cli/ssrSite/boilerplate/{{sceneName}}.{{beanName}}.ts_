@@ -1,4 +1,6 @@
 import type { IDecoratorSsrSiteOptions } from 'vona-module-a-ssr';
+import type { IIconRecord, IPagePathRecord } from '<%=argv.ssrSiteRestNpm%>';
+
 import { BeanSsrSiteBase, SsrSite } from 'vona-module-a-ssr';
 
 declare module 'vona-module-a-ssr' {
@@ -7,11 +9,11 @@ declare module 'vona-module-a-ssr' {
   }
 }
 
-export interface ISsrSiteOptions<%=argv.beanNameCapitalize%>Pages {}
+export interface ISsrSiteOptions<%=argv.beanNameCapitalize%>Pages extends IPagePathRecord {}
 
 export interface ISsrSiteOptions<%=argv.beanNameCapitalize%>PagesData {}
 
-export interface ISsrSiteOptions<%=argv.beanNameCapitalize%> extends IDecoratorSsrSiteOptions<ISsrSiteOptions<%=argv.beanNameCapitalize%>Pages, ISsrSiteOptions<%=argv.beanNameCapitalize%>PagesData> {}
+export interface ISsrSiteOptions<%=argv.beanNameCapitalize%> extends IDecoratorSsrSiteOptions<ISsrSiteOptions<%=argv.beanNameCapitalize%>Pages, ISsrSiteOptions<%=argv.beanNameCapitalize%>PagesData, IIconRecord> {}
 
 @SsrSite<ISsrSiteOptions<%=argv.beanNameCapitalize%>>({
   publicPath: 'some',

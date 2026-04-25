@@ -22,6 +22,7 @@ declare module '@cabloy/cli' {
     ssrSiteModuleName: string;
     ssrSiteOnionName: string;
     ssrSiteGroupName: string;
+    ssrSiteRestNpm: string;
   }
 }
 
@@ -42,6 +43,9 @@ export class CliCreateBean extends BeanCliBase {
     argv.ssrSiteGroupName = fs.existsSync(path.join(argv.projectPath, 'src/suite/cabloy-start'))
       ? 'start-siteadmin:management'
       : 'basic-siteadmin:management';
+    argv.ssrSiteRestNpm = fs.existsSync(path.join(argv.projectPath, 'src/suite/cabloy-start'))
+      ? 'zova-rest-cabloy-start-admin'
+      : 'zova-rest-cabloy-basic-admin';
     // module name/info
     const moduleName = argv.module;
     argv.moduleInfo = this.helper.parseModuleInfo(moduleName);
