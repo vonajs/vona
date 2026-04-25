@@ -7,19 +7,30 @@ import type { z } from 'zod';
 import type { TypeResourceActionRowRecordRender } from './actions.ts';
 import type { ICaptchaOptions } from './captcha.ts';
 import type { IComponentRecord, ITableCellComponentRecord } from './component.ts';
-import type { TypeDateFormat } from './date.ts';
+import type { IDateOptions } from './date.ts';
 import type { IDateRangeOptions } from './dateRange.ts';
+import type { IInputOptions } from './input.ts';
 import type { IResourcePickerOptions } from './resourcePicker.ts';
-import type { ISelectOptions } from './select.ts';
-import type { ITextareaOptions } from './textarea.ts';
 import 'openapi3-ts/oas30';
 import 'openapi3-ts/oas31';
+import type { ISelectOptions } from './select.ts';
+import type { ITextareaOptions } from './textarea.ts';
 import type { IToggleOptions } from './toggle.ts';
-
-export type HTMLInputElementType = 'text' | 'password' | 'number' | 'file' | 'hidden' | 'tel' | 'email';
 
 export type TypeFormFieldOnSetDisplayValue = (value: any) => any;
 export type TypeFormFieldDisplayValueUpdateTiming = 'input' | 'change';
+
+export interface ISchemaObjectExtensionFieldRestPropsPreset {
+  input?: IInputOptions;
+  captcha?: ICaptchaOptions;
+  currency?: CurrencyOptions;
+  date?: IDateOptions;
+  dateRange?: IDateRangeOptions;
+  toggle?: IToggleOptions;
+  select?: ISelectOptions;
+  textarea?: ITextareaOptions;
+  resourcePicker?: IResourcePickerOptions;
+}
 
 export interface ISchemaObjectExtensionFieldRestProps {
   customKey?: string;
@@ -41,18 +52,9 @@ export interface ISchemaObjectExtensionFieldRestProps {
   onSetDisplayValue?: TypeFormFieldOnSetDisplayValue;
   disableNotifyChanged?: boolean;
   class?: any;
-  placeholder?: string;
   readonly?: boolean;
-  inputType?: HTMLInputElementType;
   //
-  captcha?: ICaptchaOptions;
-  currency?: CurrencyOptions;
-  dateFormat?: TypeDateFormat;
-  dateRange?: IDateRangeOptions;
-  toggle?: IToggleOptions;
-  select?: ISelectOptions;
-  textarea?: ITextareaOptions;
-  resourcePicker?: IResourcePickerOptions;
+  preset?: ISchemaObjectExtensionFieldRestPropsPreset;
 }
 
 export interface ISchemaObjectExtensionFieldRest extends ISchemaObjectExtensionFieldRestProps {

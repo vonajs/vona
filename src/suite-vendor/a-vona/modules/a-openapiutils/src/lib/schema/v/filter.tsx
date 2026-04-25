@@ -1,7 +1,7 @@
 import type { IFilterTransformOptionsDateRange, IFilterTransformRecord, ISchemaObjectExtensionFieldFilter } from 'vona-module-a-web';
 import type z from 'zod';
 
-import { schemaDateRange } from './component.ts';
+import { schemaRenderComponent } from './component.ts';
 
 export function schemaFilter(options: ISchemaObjectExtensionFieldFilter) {
   return function (schema: z.ZodType): z.ZodType {
@@ -23,7 +23,7 @@ export function schemaFilterTransform<T extends keyof IFilterTransformRecord>(fi
 
 export function schemaFilterDateRange(options?: Partial<IFilterTransformOptionsDateRange>) {
   const separator = options?.separator;
-  const fnFilterRender = schemaDateRange(separator ? { separator } : undefined, 'filter');
+  const fnFilterRender = schemaRenderComponent('dataRange', separator ? { separator } : undefined, 'filter');
   const fnFilterTransform = schemaFilterTransform('a-web:dateRange', options);
   return function (schema: z.ZodType): z.ZodType {
     return fnFilterTransform(fnFilterRender(schema));

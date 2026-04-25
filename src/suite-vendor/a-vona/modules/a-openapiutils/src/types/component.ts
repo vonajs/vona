@@ -6,12 +6,14 @@ import type {
   ISelectOptions,
   ITextareaOptions,
   IToggleOptions,
-  TypeDateFormat,
+  IDateOptions,
+  IInputOptions,
 } from 'vona-module-a-openapi';
 
 export interface ISchemaComponentRecord {
+  input: IInputOptions;
   currency: CurrencyOptions;
-  date: TypeDateFormat;
+  date: IDateOptions;
   dataRange: IDateRangeOptions;
   captcha: ICaptchaOptions;
   toggle: IToggleOptions;
