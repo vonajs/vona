@@ -9,14 +9,14 @@ import type { IDecoratorSsrSiteOptions, ISsrSiteRecord } from './ssrSite.ts';
 
 export interface ISsrMenuRecord {}
 
-export interface ISsrMenuItem<Pages extends {} = {}> extends Omit<IMenuItem<Pages>, 'name' | 'group'> {
+export interface ISsrMenuItem<Pages extends {} = {}, Icons extends {} = {}> extends Omit<IMenuItem<Pages, Icons>, 'name' | 'group'> {
   group?: keyof ISsrMenuGroupRecord | (keyof ISsrMenuGroupRecord)[];
 }
 
 // should not set default generic = IDecoratorSsrSiteOptions
 export interface IDecoratorSsrMenuOptions<SsrSiteOptions extends IDecoratorSsrSiteOptions> extends IOnionOptionsEnable {
-  item?: ISsrMenuItem<SsrSiteOptions['pages']>;
-  items?: Record<string, ISsrMenuItem<SsrSiteOptions['pages']>>;
+  item?: ISsrMenuItem<SsrSiteOptions['pages'], SsrSiteOptions['icons']>;
+  items?: Record<string, ISsrMenuItem<SsrSiteOptions['pages'], SsrSiteOptions['icons']>>;
   site?: keyof ISsrSiteRecord | (keyof ISsrSiteRecord)[];
   locale?: keyof ILocaleRecord | (keyof ILocaleRecord)[];
 }

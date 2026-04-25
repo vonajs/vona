@@ -6,6 +6,7 @@ import type { ZovaConfigEnv } from './env.ts';
 
 export type TypeSsrSitePerformAction = (data: ISsrSitePerformActionOptions) => Promise<any>;
 export type TypeSsrSitePerformActionMethod = 'get' | 'post' | 'delete' | 'put' | 'patch';
+
 export interface ISsrSitePerformActionOptions {
   method: TypeSsrSitePerformActionMethod;
   path: string;
@@ -49,7 +50,7 @@ export type TypeMergePagesAndPagesData<Pages extends {} = {}, PagesData extends 
   [K in keyof Pages]: Pages[K] & { data?: PagesData[K] };
 };
 
-export interface IDecoratorSsrSiteOptions<Pages extends {} = {}, PagesData extends {} = {}>
+export interface IDecoratorSsrSiteOptions<Pages extends {} = {}, PagesData extends {} = {}, Icons extends {} = {}>
   extends IOnionOptionsEnable, IOnionOptionsMatch<TypeOnionOptionsMatchRule<keyof IInstanceRecord>> {
   publicPath: keyof ISsrSitePublicPathRecord;
   bundlePath: string;
@@ -60,6 +61,7 @@ export interface IDecoratorSsrSiteOptions<Pages extends {} = {}, PagesData exten
     host: string;
   };
   pages: TypeMergePagesAndPagesData<Pages, PagesData>;
+  icons: Icons;
 }
 
 declare module 'vona-module-a-onion' {

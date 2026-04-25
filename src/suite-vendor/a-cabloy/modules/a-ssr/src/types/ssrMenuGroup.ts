@@ -2,16 +2,16 @@ import type { ILocaleRecord, OmitNever } from 'vona';
 import type { IMenuGroup } from 'vona-module-a-menu';
 import type { IOnionOptionsEnable, ServiceOnion } from 'vona-module-a-onion';
 
-import type { ISsrSiteRecord } from './ssrSite.ts';
+import type { IDecoratorSsrSiteOptions, ISsrSiteRecord } from './ssrSite.ts';
 
 export interface ISsrMenuGroupRecord {}
 
-export interface ISsrMenuGroup extends Omit<IMenuGroup, 'name' | 'group'> {
+export interface ISsrMenuGroup<Icons extends {} = {}> extends Omit<IMenuGroup<Icons>, 'name' | 'group'> {
   group?: keyof ISsrMenuGroupRecord | (keyof ISsrMenuGroupRecord)[];
 }
 
-export interface IDecoratorSsrMenuGroupOptions extends IOnionOptionsEnable {
-  item?: ISsrMenuGroup;
+export interface IDecoratorSsrMenuGroupOptions<SsrSiteOptions extends IDecoratorSsrSiteOptions> extends IOnionOptionsEnable {
+  item?: ISsrMenuGroup<SsrSiteOptions['icons']>;
   site?: keyof ISsrSiteRecord | (keyof ISsrSiteRecord)[];
   locale?: keyof ILocaleRecord | (keyof ILocaleRecord)[];
 }
