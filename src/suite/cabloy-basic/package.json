@@ -10,6 +10,7 @@
     "version": "node ../../../scripts/version-cabloy-basic.ts"
   },
   "dependencies": {
+    "vona-module-basic-openapi": "^5.0.0",
     "vona-module-basic-siteadmin": "workspace:^",
     "vona-suite-a-cabloy": "^5.1.10"
   },
