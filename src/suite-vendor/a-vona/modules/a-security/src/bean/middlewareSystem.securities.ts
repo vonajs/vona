@@ -129,7 +129,7 @@ export interface IMiddlewareSystemOptionsSecurities extends IDecoratorMiddleware
   hsts: {
     enable: true,
     maxAge: 365 * 24 * 3600,
-    includeSubdomains: false,
+    includeSubdomains: true,
   },
   methodnoallow: {
     enable: true,
