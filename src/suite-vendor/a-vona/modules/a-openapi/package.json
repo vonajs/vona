@@ -35,7 +35,6 @@
     "@cabloy/zod-openapi": "workspace:^",
     "@cabloy/zod-query": "workspace:^",
     "@cabloy/zod-to-openapi": "^8.1.6",
-    "@zhennann/currency": "^2.0.4",
     "openapi3-ts": "^4.5.0",
     "zod": "^4.3.6"
   },

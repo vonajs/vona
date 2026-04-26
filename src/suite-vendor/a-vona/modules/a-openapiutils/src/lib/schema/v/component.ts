@@ -1,13 +1,11 @@
-import type { TypeSchemaScene } from 'vona-module-a-openapi';
+import type { ISchemaRenderComponentPresetRecord, TypeSchemaScene } from 'vona-module-a-openapi';
 import type z from 'zod';
-
-import type { ISchemaComponentRecord } from '../../../types/component.ts';
 
 import { _generalSchemaRest } from './utils.ts';
 
-export function schemaRenderComponent<K extends keyof ISchemaComponentRecord, T extends z.ZodType>(
+export function schemaRenderComponent<K extends keyof ISchemaRenderComponentPresetRecord, T extends z.ZodType>(
   name: K,
-  options?: ISchemaComponentRecord[K],
+  options?: ISchemaRenderComponentPresetRecord[K],
   scene?: TypeSchemaScene,
 ) {
   return function (schema: T): T {
