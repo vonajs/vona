@@ -30,6 +30,6 @@ export class DtoPostQuery extends $Dto.queryPage(EntityPost, ['title', 'createdA
   )
   userName?: string;
 
-  // @Api.field(v.filterDateRange({ separator: '~' }), v.optional())
+  // @Api.field(v.filterTransform('a-web:dateRange', { separator: '~' }), v.optional())
   // createdAt?: string;
 }

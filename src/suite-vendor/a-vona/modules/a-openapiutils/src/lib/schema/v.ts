@@ -1,5 +1,5 @@
 import { schemaRenderComponent } from './v/component.ts';
-import { schemaFilter, schemaFilterDateRange, schemaFilterTransform } from './v/filter.tsx';
+import { schemaFilter, schemaFilterTransform } from './v/filter.tsx';
 import {
   schemaEmail,
   schemaIPv4,
@@ -75,7 +75,6 @@ export const v = {
   serializerCustom: schemaSerializerCustom,
   filter: schemaFilter,
   filterTransform: schemaFilterTransform,
-  filterDateRange: schemaFilterDateRange,
   // openapi
   openapi: schemaOpenapi,
   title: schemaTitle,

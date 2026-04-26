@@ -1,6 +1,6 @@
-import type { IResourceRecord } from './resource.ts';
+import type { IResourceRecord, ITableQuery } from 'vona-module-a-openapi';
+
 import type { ISelectOptions } from './select.ts';
-import type { ITableQuery } from './table.ts';
 
 export interface IResourcePickerOptions {
   resource?: keyof IResourceRecord;
