@@ -1,5 +1,5 @@
 export const _configDefault = {
-  printWidth: 150,
+  printWidth: 100,
   tabWidth: 2,
   useTabs: false,
   semi: true,

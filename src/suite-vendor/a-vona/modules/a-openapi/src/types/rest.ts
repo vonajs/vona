@@ -3,7 +3,6 @@ import type { ILocaleMagic } from 'vona';
 import type { IOpenapiOptions } from 'vona-module-a-openapiutils';
 import type { z } from 'zod';
 
-import type { TypeResourceActionRowRecordRender } from './actions.ts';
 import type { IComponentRecord, ITableCellComponentRecord } from './component.ts';
 import 'openapi3-ts/oas30';
 import 'openapi3-ts/oas31';
@@ -79,7 +78,7 @@ export interface TypeRenderComponentJsx {
 export type TypeSchemaScene = 'table' | 'form' | 'filter';
 
 export type TypeRenderComponentPreset =
-  | keyof TypeResourceActionRowRecordRender
+  | keyof ISchemaRenderComponentPresetRecord
   | 'text'
   | 'captcha'
   | 'currency'
