@@ -1,7 +1,7 @@
 import 'vona-module-a-openapi';
 import type { CurrencyOptions } from '@zhennann/currency';
 
-import type { IResourceActionRowRecord } from './action.ts';
+import type { IResourceActionRowRecord } from './actions.ts';
 import type { ICaptchaOptions } from './captcha.ts';
 import type { IDateOptions } from './date.ts';
 import type { IDateRangeOptions } from './dateRange.ts';
