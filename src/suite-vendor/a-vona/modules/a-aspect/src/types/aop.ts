@@ -22,8 +22,10 @@ export type AopAction<T extends {}, NAME extends keyof T, RESULT = undefined> = 
   _receiver: T,
 ) // @ts-ignore ignore
 => RESULT extends undefined
-  ? ReturnType<T[NAME]>
-  : ReturnType<T[NAME]> extends Promise<any>
+  ? // @ts-ignore ignore
+    ReturnType<T[NAME]>
+  : // @ts-ignore ignore
+    ReturnType<T[NAME]> extends Promise<any>
     ? Promise<RESULT>
     : RESULT;
 
