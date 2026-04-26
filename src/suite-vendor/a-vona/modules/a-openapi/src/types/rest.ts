@@ -1,36 +1,17 @@
 import type { ZodOpenAPIMetadata } from '@cabloy/zod-to-openapi';
-import type { CurrencyOptions } from '@zhennann/currency';
 import type { ILocaleMagic } from 'vona';
 import type { IOpenapiOptions } from 'vona-module-a-openapiutils';
 import type { z } from 'zod';
 
 import type { TypeResourceActionRowRecordRender } from './actions.ts';
-import type { ICaptchaOptions } from './captcha.ts';
 import type { IComponentRecord, ITableCellComponentRecord } from './component.ts';
-import type { IDateOptions } from './date.ts';
-import type { IDateRangeOptions } from './dateRange.ts';
-import type { IInputOptions } from './input.ts';
-import type { IResourcePickerOptions } from './resourcePicker.ts';
 import 'openapi3-ts/oas30';
 import 'openapi3-ts/oas31';
-import type { ISelectOptions } from './select.ts';
-import type { ITextareaOptions } from './textarea.ts';
-import type { IToggleOptions } from './toggle.ts';
 
 export type TypeFormFieldOnSetDisplayValue = (value: any) => any;
 export type TypeFormFieldDisplayValueUpdateTiming = 'input' | 'change';
 
-export interface ISchemaObjectExtensionFieldRestPropsPreset {
-  input?: IInputOptions;
-  captcha?: ICaptchaOptions;
-  currency?: CurrencyOptions;
-  date?: IDateOptions;
-  dateRange?: IDateRangeOptions;
-  toggle?: IToggleOptions;
-  select?: ISelectOptions;
-  textarea?: ITextareaOptions;
-  resourcePicker?: IResourcePickerOptions;
-}
+export interface ISchemaRenderComponentPresetRecord {}
 
 export interface ISchemaObjectExtensionFieldRestProps {
   customKey?: string;
@@ -54,7 +35,7 @@ export interface ISchemaObjectExtensionFieldRestProps {
   class?: any;
   readonly?: boolean;
   //
-  preset?: ISchemaObjectExtensionFieldRestPropsPreset;
+  preset?: ISchemaRenderComponentPresetRecord;
 }
 
 export interface ISchemaObjectExtensionFieldRest extends ISchemaObjectExtensionFieldRestProps {
