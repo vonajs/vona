@@ -100,12 +100,22 @@ export type TypeRenderComponentPreset =
 export type TypeRenderComponent = TypeRenderComponentPreset | TypeRenderComponentJsx;
 
 // form
-export type TypeFormFieldRenderComponentProvider = keyof IComponentRecord | 'input' | 'textarea' | 'select';
+export type TypeFormFieldRenderComponentProvider =
+  | keyof IComponentRecord
+  | 'input'
+  | 'textarea'
+  | 'select';
 
 // table
-export type TypeTableCellRenderComponentProvider = keyof IComponentRecord | keyof ITableCellComponentRecord | 'text';
+export type TypeTableCellRenderComponentProvider =
+  | keyof IComponentRecord
+  | keyof ITableCellComponentRecord
+  | 'text';
 
-export type TypeOpenapiMetadata<T extends z.ZodType = z.ZodType> = Omit<Partial<ZodOpenAPIMetadata<z.input<T>>>, 'title' | 'description'> & {
+export type TypeOpenapiMetadata<T extends z.ZodType = z.ZodType> = Omit<
+  Partial<ZodOpenAPIMetadata<z.input<T>>>,
+  'title' | 'description'
+> & {
   title?: string | ILocaleMagic;
   description?: string | ILocaleMagic;
 };

@@ -25,7 +25,10 @@ export type TypeRedlockLockResource = never;
 export type TypeRedlockLockIsolateResource = never;
 
 @Meta()
-export class MetaRedlock extends BeanRedlockBase<TypeRedlockLockResource, TypeRedlockLockIsolateResource> {}
+export class MetaRedlock extends BeanRedlockBase<
+  TypeRedlockLockResource,
+  TypeRedlockLockIsolateResource
+> {}
 ```
 
 - `TypeRedlockLockResource`: 定义`lock`方法使用的锁资源

@@ -23,7 +23,9 @@ export function schemaSerializerTransform<T extends keyof ISerializerTransformRe
 
 export function schemaSerializerExclude(options: Partial<ISerializerTransformOptionsExclude>);
 export function schemaSerializerExclude(exclude?: boolean);
-export function schemaSerializerExclude(param?: boolean | Partial<ISerializerTransformOptionsExclude>) {
+export function schemaSerializerExclude(
+  param?: boolean | Partial<ISerializerTransformOptionsExclude>,
+) {
   let options: Partial<ISerializerTransformOptionsExclude>;
   if (!param || typeof param === 'boolean') {
     options = { exclude: param };
@@ -39,7 +41,9 @@ export function schemaSerializerExclude(param?: boolean | Partial<ISerializerTra
   };
 }
 
-export function schemaSerializerReplace(options: ISerializerTransformRecord['a-serialization:replace']) {
+export function schemaSerializerReplace(
+  options: ISerializerTransformRecord['a-serialization:replace'],
+) {
   return function (schema: z.ZodType): z.ZodType {
     return schema.openapi({
       serializerTransforms: {
@@ -51,7 +55,9 @@ export function schemaSerializerReplace(options: ISerializerTransformRecord['a-s
 
 export function schemaSerializerGetter(options: Partial<ISerializerTransformOptionsGetter>);
 export function schemaSerializerGetter(getter: TypeSerializerTransformGetter);
-export function schemaSerializerGetter(param: TypeSerializerTransformGetter | Partial<ISerializerTransformOptionsGetter>) {
+export function schemaSerializerGetter(
+  param: TypeSerializerTransformGetter | Partial<ISerializerTransformOptionsGetter>,
+) {
   let options: Partial<ISerializerTransformOptionsGetter>;
   if (typeof param === 'function') {
     options = { getter: param };
@@ -69,7 +75,9 @@ export function schemaSerializerGetter(param: TypeSerializerTransformGetter | Pa
 
 export function schemaSerializerCustom(options: Partial<ISerializerTransformOptionsCustom>);
 export function schemaSerializerCustom(getter: TypeSerializerTransformCustom);
-export function schemaSerializerCustom(param: TypeSerializerTransformCustom | Partial<ISerializerTransformOptionsCustom>) {
+export function schemaSerializerCustom(
+  param: TypeSerializerTransformCustom | Partial<ISerializerTransformOptionsCustom>,
+) {
   let options: Partial<ISerializerTransformOptionsCustom>;
   if (typeof param === 'function') {
     options = { custom: param };

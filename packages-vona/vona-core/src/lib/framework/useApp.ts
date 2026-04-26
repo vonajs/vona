@@ -24,7 +24,10 @@ export async function closeApp() {
   }
 }
 
-export async function createGeneralApp(projectPath: string, envRuntime?: Partial<NodeJS.ProcessEnv>) {
+export async function createGeneralApp(
+  projectPath: string,
+  envRuntime?: Partial<NodeJS.ProcessEnv>,
+) {
   if (envRuntime) {
     for (const key of Object.keys(envRuntime)) {
       process.env[key] = envRuntime[key];

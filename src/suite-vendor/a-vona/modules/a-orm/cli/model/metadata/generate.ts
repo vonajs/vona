@@ -13,7 +13,8 @@ export default async function (options: IMetadataCustomGenerateOptions): Promise
   for (const globFile of globFiles) {
     const { className, beanName, fileContent, beanNameCapitalize } = globFile;
     const ast = cli.helper.gogocode(fileContent);
-    const astNodes = ast.find(`@Model<$$$0>({$$$1})export class ${className} extends $$$2 {}`).match.$$$1;
+    const astNodes = ast.find(`@Model<$$$0>({$$$1})export class ${className} extends $$$2 {}`).match
+      .$$$1;
     const entityName = __parseEntityName(__getAstNode(astNodes as any, 'entity'));
     const relations = __parseRelations(__getAstNode(astNodes as any, 'relations'));
     const magics = __parseMagics(cli, ast, globFile, entityName);
@@ -57,7 +58,8 @@ export default async function (options: IMetadataCustomGenerateOptions): Promise
     //   };
     // }`);
   }
-  if (contentRelations.length === 0 && contentRecords.length === 0 && contentModels.length === 0) return '';
+  if (contentRelations.length === 0 && contentRecords.length === 0 && contentModels.length === 0)
+    return '';
   // combine
   const content = `/** ${sceneName}: begin */
 import type { IModelGetOptions, IModelMethodOptions, IModelSelectParams, TypeModelSelectAndCount, TypeModelRelationResult, TypeModelWhere, IModelInsertOptions, TypeModelMutateRelationData, IModelDeleteOptions, IModelUpdateOptions, IModelMutateOptions, IModelSelectCountParams, IModelIncrementParams, IModelSelectAggrParams, TypeModelAggrRelationResult, IModelSelectGroupParams, TypeModelGroupRelationResult } from 'vona-module-a-orm';
@@ -102,7 +104,8 @@ function __parseRelations(node?: t.ObjectProperty) {
 function __parseRelation(nodeRelation: t.ObjectProperty) {
   const relationName = (nodeRelation.key as t.Identifier).name;
   const callExpression = nodeRelation.value as t.CallExpression;
-  const relationType = ((callExpression.callee as t.MemberExpression).property as t.Identifier).name;
+  const relationType = ((callExpression.callee as t.MemberExpression).property as t.Identifier)
+    .name;
   const args: t.Node[] = callExpression.arguments;
   // relation
   if (relationType === 'hasOne') {

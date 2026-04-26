@@ -13,7 +13,11 @@ import { DtoUser } from '../dto/user.ts';
 
 export interface IControllerOptionsOnion extends IDecoratorControllerOptions {}
 
-@Controller<IControllerOptionsOnion>({ path: 'onion', tags: ['Onion'], meta: { mode: ['dev', 'test'] } })
+@Controller<IControllerOptionsOnion>({
+  path: 'onion',
+  tags: ['Onion'],
+  meta: { mode: ['dev', 'test'] },
+})
 export class ControllerOnion extends BeanBase {
   @Web.get('/')
   @Aspect.aopMethod('a-orm:transaction', { enable: true, meta: { mode: 'dev' } })
@@ -34,7 +38,10 @@ export class ControllerOnion extends BeanBase {
     @Arg.query('id', v.default(0), z.number()) id: number,
     temp: string,
     @Arg.query('name', z.number().optional()) name: string,
-    @Arg.body(v.title($locale('User')), z.object({ id: z.number().openapi({ title: $locale('UserId') }) }))
+    @Arg.body(
+      v.title($locale('User')),
+      z.object({ id: z.number().openapi({ title: $locale('UserId') }) }),
+    )
     _user: DtoUser,
   ): string | undefined {
     return `echo: ${id}:${temp}:${name}`;
@@ -48,7 +55,10 @@ export class ControllerOnion extends BeanBase {
     @Arg.param('userId', v.title($locale('UserId')), v.example('example:1')) _userId: number,
     @Arg.param('userName', v.title($locale('UserId')), v.example('example:1')) _userName: string,
     @Arg.query(DtoUser) _user: DtoUser,
-    @Arg.body(v.title($locale('User')), z.object({ id: z.number().openapi({ title: $locale('UserId') }) }))
+    @Arg.body(
+      v.title($locale('User')),
+      z.object({ id: z.number().openapi({ title: $locale('UserId') }) }),
+    )
     user: DtoUser,
   ): DtoUser {
     // const ctx = this.app.currentContext;

@@ -3,7 +3,14 @@ import jwt from 'jsonwebtoken';
 import { BeanBase, cast, deepExtend } from 'vona';
 import { Service } from 'vona-module-a-bean';
 
-import type { IJwtClientOptions, IJwtClientRecord, IJwtPayload, IJwtSignOptions, IJwtVerifyOptions, IPayloadData } from '../types/jwt.ts';
+import type {
+  IJwtClientOptions,
+  IJwtClientRecord,
+  IJwtPayload,
+  IJwtSignOptions,
+  IJwtVerifyOptions,
+  IPayloadData,
+} from '../types/jwt.ts';
 
 @Service()
 export class ServiceJwtClient extends BeanBase {
@@ -46,7 +53,10 @@ export class ServiceJwtClient extends BeanBase {
     const [res, error] = await catchError(() => {
       return this._signInner(payloadData, options);
     });
-    this.$loggerChild('jwt').debug(() => `jwt.sign: client:${this._clientName}, token:${res}${error ? `, error: ${error.message}` : ''}`);
+    this.$loggerChild('jwt').debug(
+      () =>
+        `jwt.sign: client:${this._clientName}, token:${res}${error ? `, error: ${error.message}` : ''}`,
+    );
     if (error) throw error;
     return res;
   }
@@ -60,10 +70,14 @@ export class ServiceJwtClient extends BeanBase {
       if (options?.path) payload[this.fieldPath] = options.path;
       let signOptions = this._clientOptions.signOptions;
       if (options?.dev) {
-        signOptions = Object.assign({}, signOptions, { expiresIn: this.scope.config.clients.refresh.signOptions.expiresIn });
+        signOptions = Object.assign({}, signOptions, {
+          expiresIn: this.scope.config.clients.refresh.signOptions.expiresIn,
+        });
       }
       if (options?.temp) {
-        signOptions = Object.assign({}, signOptions, { expiresIn: this.scope.config.tempAuthToken.signOptions.expiresIn });
+        signOptions = Object.assign({}, signOptions, {
+          expiresIn: this.scope.config.tempAuthToken.signOptions.expiresIn,
+        });
       }
       this._jwtInstance.sign(payload, this._clientOptions.secret!, signOptions, (err, encoded) => {
         if (err) return reject(err);
@@ -73,30 +87,43 @@ export class ServiceJwtClient extends BeanBase {
   }
 
   async verify(token?: string, options?: IJwtVerifyOptions): Promise<IPayloadData | undefined> {
-    if (isNil(token) && this._clientName === 'access') token = this.scope.service.jwtExtract.fromAllWays();
+    if (isNil(token) && this._clientName === 'access')
+      token = this.scope.service.jwtExtract.fromAllWays();
     const [res, error] = await catchError(() => {
       return this._verifyInner(token, options);
     });
-    this.$loggerChild('jwt').debug(() => `jwt.verify: client:${this._clientName}, token:${token}${error ? `, error: ${error.message}` : ''}`);
+    this.$loggerChild('jwt').debug(
+      () =>
+        `jwt.verify: client:${this._clientName}, token:${token}${error ? `, error: ${error.message}` : ''}`,
+    );
     if (error) throw error;
     return res;
   }
 
-  private async _verifyInner(token?: string, options?: IJwtVerifyOptions): Promise<IPayloadData | undefined> {
+  private async _verifyInner(
+    token?: string,
+    options?: IJwtVerifyOptions,
+  ): Promise<IPayloadData | undefined> {
     if (!token) return undefined;
     return new Promise((resolve, reject) => {
-      this._jwtInstance.verify(token, this._clientOptions.secret!, this._clientOptions.verifyOptions, (err, decoded) => {
-        if (err) {
-          return reject(err);
-        }
-        const payload = cast<IJwtPayload>(decoded);
-        // check field client
-        if (payload[this.fieldClient] !== this._clientName) return this.app.throw(401);
-        // check field path
-        if (!this._checkVerifyPath(payload[this.fieldPath], options?.path)) return this.app.throw(401);
-        // passed
-        resolve(payload[this.fieldData]);
-      });
+      this._jwtInstance.verify(
+        token,
+        this._clientOptions.secret!,
+        this._clientOptions.verifyOptions,
+        (err, decoded) => {
+          if (err) {
+            return reject(err);
+          }
+          const payload = cast<IJwtPayload>(decoded);
+          // check field client
+          if (payload[this.fieldClient] !== this._clientName) return this.app.throw(401);
+          // check field path
+          if (!this._checkVerifyPath(payload[this.fieldPath], options?.path))
+            return this.app.throw(401);
+          // passed
+          resolve(payload[this.fieldData]);
+        },
+      );
     });
   }
 

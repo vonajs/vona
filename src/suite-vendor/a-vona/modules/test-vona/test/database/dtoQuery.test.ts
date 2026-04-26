@@ -10,26 +10,30 @@ describe('dtoQuery.test.ts', () => {
   it('action:dtoQuery', async () => {
     await app.bean.executor.mockCtx(async () => {
       // findManyEcho
-      const resEcho: IQueryParams = await app.bean.executor.performAction('get', '/test/vona/post/findManyEcho', {
-        headers: {
-          [$customKey('x-vona-tz')]: 'Asia/Tokyo',
-        },
-        query: {
-          columns: 'id,title', // ['id', 'title'],
-          where: {
-            stars: {
-              _gt_: 12,
-            },
+      const resEcho: IQueryParams = await app.bean.executor.performAction(
+        'get',
+        '/test/vona/post/findManyEcho',
+        {
+          headers: {
+            [$customKey('x-vona-tz')]: 'Asia/Tokyo',
           },
-          // orders: [['userName', 'asc']],
-          // orders: [['testVonaPost.createdAt', 'asc']],
-          pageNo: 2,
-          pageSize: 30,
-          title: 'ai',
-          userName: 'tom',
-          createdAt: '2025-12-01~2025-12-02',
+          query: {
+            columns: 'id,title', // ['id', 'title'],
+            where: {
+              stars: {
+                _gt_: 12,
+              },
+            },
+            // orders: [['userName', 'asc']],
+            // orders: [['testVonaPost.createdAt', 'asc']],
+            pageNo: 2,
+            pageSize: 30,
+            title: 'ai',
+            userName: 'tom',
+            createdAt: '2025-12-01~2025-12-02',
+          },
         },
-      });
+      );
       assert.deepEqual(resEcho.columns, ['id', 'title']);
       assert.deepEqual(resEcho.where, {
         'stars': { _gt_: 12 },

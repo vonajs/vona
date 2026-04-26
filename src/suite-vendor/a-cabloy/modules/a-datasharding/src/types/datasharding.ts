@@ -13,8 +13,14 @@ export type TypeDatashardingReads = TypeDatashardingReadsFn | (keyof IDatabaseCl
 export type TypeDatashardingWritesFn = (ctx: VonaContext) => (keyof IDatabaseClientRecord)[];
 export type TypeDatashardingWrites = TypeDatashardingWritesFn | (keyof IDatabaseClientRecord)[];
 
-export type TypeDatashardingRandomReadFn = (ctx: VonaContext, reads: (keyof IDatabaseClientRecord)[]) => keyof IDatabaseClientRecord | undefined;
-export type TypeDatashardingRandomWriteFn = (ctx: VonaContext, writes: (keyof IDatabaseClientRecord)[]) => keyof IDatabaseClientRecord | undefined;
+export type TypeDatashardingRandomReadFn = (
+  ctx: VonaContext,
+  reads: (keyof IDatabaseClientRecord)[],
+) => keyof IDatabaseClientRecord | undefined;
+export type TypeDatashardingRandomWriteFn = (
+  ctx: VonaContext,
+  writes: (keyof IDatabaseClientRecord)[],
+) => keyof IDatabaseClientRecord | undefined;
 
 export interface IConfigDatashardingClient {
   reads: TypeDatashardingReads;

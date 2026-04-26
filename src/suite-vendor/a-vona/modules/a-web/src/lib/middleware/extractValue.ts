@@ -1,5 +1,8 @@
 import type { VonaContext } from 'vona';
-import type { RouteHandlerArgumentMetaDecorator, RouteHandlerArgumentType } from 'vona-module-a-openapi';
+import type {
+  RouteHandlerArgumentMetaDecorator,
+  RouteHandlerArgumentType,
+} from 'vona-module-a-openapi';
 import type { IUploadValue } from 'vona-module-a-upload';
 
 import { SymbolUploadValue } from 'vona-module-a-upload';
@@ -8,7 +11,11 @@ export function extractValue(ctx: VonaContext, argMeta: RouteHandlerArgumentMeta
   return exchangeKeyForValue(ctx, argMeta.type, argMeta.field);
 }
 
-export function exchangeKeyForValue(ctx: VonaContext, type: RouteHandlerArgumentType, field: string | undefined) {
+export function exchangeKeyForValue(
+  ctx: VonaContext,
+  type: RouteHandlerArgumentType,
+  field: string | undefined,
+) {
   if (!type) throw new Error('argument type should not empty');
   const req = ctx.request as any;
   const res = ctx.response as any;
@@ -29,12 +36,16 @@ export function exchangeKeyForValue(ctx: VonaContext, type: RouteHandlerArgument
     fields: () => {
       const uploadValue: IUploadValue = ctx[SymbolUploadValue];
       if (!uploadValue) throw new Error('should use interceptor: a-upload:upload');
-      return field ? uploadValue.fields.filter(item => item.name === field).map(item => item.value) : uploadValue.fields;
+      return field
+        ? uploadValue.fields.filter(item => item.name === field).map(item => item.value)
+        : uploadValue.fields;
     },
     field: () => {
       const uploadValue: IUploadValue = ctx[SymbolUploadValue];
       if (!uploadValue) throw new Error('should use interceptor: a-upload:upload');
-      return field ? uploadValue.fields.find(item => item.name === field)?.value : uploadValue.fields[0]?.value;
+      return field
+        ? uploadValue.fields.find(item => item.name === field)?.value
+        : uploadValue.fields[0]?.value;
     },
     files: () => {
       const uploadValue: IUploadValue = ctx[SymbolUploadValue];

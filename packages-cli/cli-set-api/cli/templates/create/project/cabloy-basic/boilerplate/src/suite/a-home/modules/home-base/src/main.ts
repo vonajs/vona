@@ -10,7 +10,10 @@ export class Main extends BeanSimple implements IModuleMain {
       'en-us': en,
       'zh-cn': zhCN,
     };
-    this.app.util.setLocaleErrors(localeErrors, this.app.scope('a-locale').config.locale.defaultLocale);
+    this.app.util.setLocaleErrors(
+      localeErrors,
+      this.app.scope('a-locale').config.locale.defaultLocale,
+    );
   }
 
   async configLoaded(_config: any) {}

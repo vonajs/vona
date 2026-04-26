@@ -33,7 +33,10 @@ export interface ISocketEventPerformActionOptionsInner {
   h?: object;
 }
 
-export type TypeSocketPacketEvent<K extends keyof ISocketEventRecord = never> = [K | undefined, ISocketEventRecord[K] | any];
+export type TypeSocketPacketEvent<K extends keyof ISocketEventRecord = never> = [
+  K | undefined,
+  ISocketEventRecord[K] | any,
+];
 
 export interface ISendEventOptions {
   mask?: boolean | undefined;
@@ -50,6 +53,10 @@ declare module 'ws' {
       options?: ISendEventOptions,
       cb?: (err?: Error) => void,
     ): void;
-    sendEvent<K extends keyof ISocketEventRecord>(eventName: K | PropertyKey, data?: ISocketEventRecord[K] | any, cb?: (err?: Error) => void): void;
+    sendEvent<K extends keyof ISocketEventRecord>(
+      eventName: K | PropertyKey,
+      data?: ISocketEventRecord[K] | any,
+      cb?: (err?: Error) => void,
+    ): void;
   }
 }

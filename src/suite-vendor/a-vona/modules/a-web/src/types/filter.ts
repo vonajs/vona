@@ -1,6 +1,9 @@
 import type { IModelSelectParamsJoinType, ITableRecord, TypeOpsNormal } from 'vona-module-a-orm';
 
-import type { IDecoratorFilterTransformOptions, IFilterTransformRecord } from './filterTransform.ts';
+import type {
+  IDecoratorFilterTransformOptions,
+  IFilterTransformRecord,
+} from './filterTransform.ts';
 
 export interface ISchemaObjectExtensionFieldFilterJoin {
   type?: IModelSelectParamsJoinType;
@@ -15,7 +18,10 @@ export interface ISchemaObjectExtensionFieldFilterCapabilities {
   // group?: boolean;
 }
 
-export type TypeSchemaObjectExtensionFieldFilterTransform = [keyof IFilterTransformRecord, IDecoratorFilterTransformOptions | undefined];
+export type TypeSchemaObjectExtensionFieldFilterTransform = [
+  keyof IFilterTransformRecord,
+  IDecoratorFilterTransformOptions | undefined,
+];
 
 export interface ISchemaObjectExtensionFieldFilter {
   capabilities?: ISchemaObjectExtensionFieldFilterCapabilities;

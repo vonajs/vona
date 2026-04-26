@@ -6,7 +6,11 @@ import { Bean } from 'vona-module-a-bean';
 
 import type { ICaptchaData, ICaptchaDataCache } from '../types/captcha.ts';
 import type { ICaptchaProviderExecute, ICaptchaProviderRecord } from '../types/captchaProvider.ts';
-import type { ICaptchaSceneOptionsProviders, ICaptchaSceneOptionsResolverResult, ICaptchaSceneRecord } from '../types/captchaScene.ts';
+import type {
+  ICaptchaSceneOptionsProviders,
+  ICaptchaSceneOptionsResolverResult,
+  ICaptchaSceneRecord,
+} from '../types/captchaScene.ts';
 
 import { SymbolCacheSceneProviders } from '../lib/const.ts';
 
@@ -21,10 +25,19 @@ export class BeanCaptcha extends BeanBase {
     const captcha = await beanInstance.create(provider.options);
     // data
     const id = uuidv4();
-    const captchaData: ICaptchaDataCache = { scene: sceneName, provider: provider.name, token: captcha.token };
+    const captchaData: ICaptchaDataCache = {
+      scene: sceneName,
+      provider: provider.name,
+      token: captcha.token,
+    };
     // cache
-    await this.scope.cacheRedis.captcha.set(captchaData, id, { ttl: provider.options.ttl ?? this.scope.config.captchaProvider.ttl });
-    this.$loggerChild('captcha').debug(() => `captcha.create: id:${id}, sceneName:${sceneName}, provider:${provider.name}, token:${captcha.token}`);
+    await this.scope.cacheRedis.captcha.set(captchaData, id, {
+      ttl: provider.options.ttl ?? this.scope.config.captchaProvider.ttl,
+    });
+    this.$loggerChild('captcha').debug(
+      () =>
+        `captcha.create: id:${id}, sceneName:${sceneName}, provider:${provider.name}, token:${captcha.token}`,
+    );
     // result
     const result: ICaptchaData = { id, provider: provider.name, payload: captcha.payload };
     if (this.scope.config.captcha.showToken) {
@@ -48,9 +61,12 @@ export class BeanCaptcha extends BeanBase {
     // data
     captchaData = { scene: sceneName, provider: captchaData.provider, token: captcha.token };
     // cache
-    await this.scope.cacheRedis.captcha.set(captchaData, id, { ttl: providerOptions.ttl ?? this.scope.config.captchaProvider.ttl });
+    await this.scope.cacheRedis.captcha.set(captchaData, id, {
+      ttl: providerOptions.ttl ?? this.scope.config.captchaProvider.ttl,
+    });
     this.$loggerChild('captcha').debug(
-      () => `captcha.refresh: id:${id}, sceneName:${sceneName}, provider:${captchaData.provider}, token:${captcha.token}`,
+      () =>
+        `captcha.refresh: id:${id}, sceneName:${sceneName}, provider:${captchaData.provider}, token:${captcha.token}`,
     );
     // result
     const result: ICaptchaData = { id, provider: captchaData.provider, payload: captcha.payload };
@@ -64,7 +80,8 @@ export class BeanCaptcha extends BeanBase {
     const captchaData = await this.getCaptchaData(id);
     const verified = await this._verifyInner(captchaData, id, token, sceneName);
     this.$loggerChild('captcha').debug(
-      () => `captcha.verify: id:${id}, sceneName:${sceneName}, provider:${captchaData?.provider}, token:${token}, tokenWanted:${captchaData?.token}`,
+      () =>
+        `captcha.verify: id:${id}, sceneName:${sceneName}, provider:${captchaData?.provider}, token:${token}, tokenWanted:${captchaData?.token}`,
     );
     return verified;
   }
@@ -94,7 +111,9 @@ export class BeanCaptcha extends BeanBase {
     if (!verified) {
       // update token. not delete cache for refresh
       captchaData = { ...captchaData, token: undefined };
-      await this.scope.cacheRedis.captcha.set(captchaData, id, { ttl: providerOptions.ttl ?? this.scope.config.captchaProvider.ttl });
+      await this.scope.cacheRedis.captcha.set(captchaData, id, {
+        ttl: providerOptions.ttl ?? this.scope.config.captchaProvider.ttl,
+      });
       return false;
     }
     // delete cache
@@ -115,14 +134,18 @@ export class BeanCaptcha extends BeanBase {
     if (!verified) {
       // update token. not delete cache for refresh
       captchaData = { ...captchaData, token: undefined };
-      await this.scope.cacheRedis.captcha.set(captchaData, id, { ttl: providerOptions.ttl ?? this.scope.config.captchaProvider.ttl });
+      await this.scope.cacheRedis.captcha.set(captchaData, id, {
+        ttl: providerOptions.ttl ?? this.scope.config.captchaProvider.ttl,
+      });
       return false;
     }
     // tokenSecondary
     const tokenSecondary = uuidv4();
     captchaData = { ...captchaData, token: undefined, token2: tokenSecondary };
     // update cache
-    await this.scope.cacheRedis.captcha.set(captchaData, id, { ttl: providerOptions.ttlSecondary ?? this.scope.config.captchaProvider.ttlSecondary });
+    await this.scope.cacheRedis.captcha.set(captchaData, id, {
+      ttl: providerOptions.ttlSecondary ?? this.scope.config.captchaProvider.ttlSecondary,
+    });
     // ok
     return tokenSecondary;
   }
@@ -138,7 +161,9 @@ export class BeanCaptcha extends BeanBase {
     const providerOptions = this._getProviderOptions(captchaData.scene, captchaData.provider)!;
     // update cache
     captchaData = { ...captchaData, token };
-    await this.scope.cacheRedis.captcha.set(captchaData, id, { ttl: providerOptions.ttl ?? this.scope.config.captchaProvider.ttl });
+    await this.scope.cacheRedis.captcha.set(captchaData, id, {
+      ttl: providerOptions.ttl ?? this.scope.config.captchaProvider.ttl,
+    });
   }
 
   private _getProviderInstance(providerName: keyof ICaptchaProviderRecord) {
@@ -146,13 +171,18 @@ export class BeanCaptcha extends BeanBase {
     return this.bean._getBean(beanFullName) as unknown as ICaptchaProviderExecute;
   }
 
-  private _getProviderOptions(sceneName: keyof ICaptchaSceneRecord, providerName: keyof ICaptchaProviderRecord) {
+  private _getProviderOptions(
+    sceneName: keyof ICaptchaSceneRecord,
+    providerName: keyof ICaptchaProviderRecord,
+  ) {
     // providers
     const providers = this._getProviders(sceneName);
     return providers[providerName];
   }
 
-  private async _resolveProvider(sceneName: keyof ICaptchaSceneRecord): Promise<ICaptchaSceneOptionsResolverResult | undefined> {
+  private async _resolveProvider(
+    sceneName: keyof ICaptchaSceneRecord,
+  ): Promise<ICaptchaSceneOptionsResolverResult | undefined> {
     // providers
     const providers = this._getProviders(sceneName);
     if (Object.keys(providers).length === 0) return;
@@ -171,7 +201,9 @@ export class BeanCaptcha extends BeanBase {
       const onionSlice = this.bean.onion.captchaScene.getOnionSlice(sceneName);
       if (!onionSlice) throw new Error(`not found captcha scene: ${sceneName}`);
       const onionOptions = onionSlice.beanOptions.options;
-      this.app.meta[SymbolCacheSceneProviders][sceneName] = this._prepareProviders(onionOptions?.providers);
+      this.app.meta[SymbolCacheSceneProviders][sceneName] = this._prepareProviders(
+        onionOptions?.providers,
+      );
     }
     return this.app.meta[SymbolCacheSceneProviders][sceneName];
   }
@@ -191,7 +223,10 @@ export class BeanCaptcha extends BeanBase {
   }
 }
 
-async function resolverDefault(_ctx: VonaContext, providers: ICaptchaProviderRecord): Promise<keyof ICaptchaProviderRecord> {
+async function resolverDefault(
+  _ctx: VonaContext,
+  providers: ICaptchaProviderRecord,
+): Promise<keyof ICaptchaProviderRecord> {
   const keys = Object.keys(providers);
   const index = getRandomInt(keys.length, 0);
   return keys[index] as keyof ICaptchaProviderRecord;

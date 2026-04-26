@@ -206,7 +206,10 @@ class ServiceOrder {
 class ServiceUser {
   async relationBelongsToMany() {
     // insert: roles
-    const roles = await this.scope.model.role.insertBulk([{ name: 'role-family' }, { name: 'role-friend' }]);
+    const roles = await this.scope.model.role.insertBulk([
+      { name: 'role-family' },
+      { name: 'role-friend' },
+    ]);
     const roleIdFamily = roles[0].id;
     const roleIdFriend = roles[1].id;
     // insert: user

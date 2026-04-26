@@ -37,7 +37,9 @@ export class InterceptorUpload extends BeanBase implements IInterceptorExecute {
     return res;
   }
 
-  async _receive(options: IInterceptorOptionsUpload): Promise<[IUploadField[], IUploadFile[], Function[]]> {
+  async _receive(
+    options: IInterceptorOptionsUpload,
+  ): Promise<[IUploadField[], IUploadFile[], Function[]]> {
     return new Promise((resolve, reject) => {
       const fields: IUploadField[] = [];
       const files: IUploadFile[] = [];

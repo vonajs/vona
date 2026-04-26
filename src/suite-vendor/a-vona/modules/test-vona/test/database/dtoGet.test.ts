@@ -5,7 +5,13 @@ import { describe, it } from 'node:test';
 import { app } from 'vona-mock';
 import { getTargetDecoratorRules } from 'vona-module-a-openapiutils';
 import { $Dto, $relationDynamic } from 'vona-module-a-orm';
-import { ModelPost, ModelPostContent, ModelRole, ModelRoleUser, ModelUser } from 'vona-module-test-vona';
+import {
+  ModelPost,
+  ModelPostContent,
+  ModelRole,
+  ModelRoleUser,
+  ModelUser,
+} from 'vona-module-test-vona';
 
 describe('dtoGet.test.ts', () => {
   it('action:dtoGet', async () => {
@@ -59,11 +65,16 @@ describe('dtoGet.test.ts', () => {
   });
   it('action:dtoGet:categoryTree', async () => {
     await app.bean.executor.mockCtx(async () => {
-      const DtoCategoryTree = $Dto.get('test-vona:category', { columns: ['id', 'name'], include: { children: { columns: ['id'] } } });
+      const DtoCategoryTree = $Dto.get('test-vona:category', {
+        columns: ['id', 'name'],
+        include: { children: { columns: ['id'] } },
+      });
       const rules: TypeDecoratorRules = getTargetDecoratorRules(DtoCategoryTree.prototype);
       assert.equal(rules.children?.type === 'pipe', true);
       assert.equal(rules.iid, undefined);
-      const DtoCategoryChain = $Dto.get('test-vona:categoryChain', { columns: ['id', 'name', 'categoryIdParent'] });
+      const DtoCategoryChain = $Dto.get('test-vona:categoryChain', {
+        columns: ['id', 'name', 'categoryIdParent'],
+      });
       const _apiJson = await app.bean.openapi.generateJsonOfClass(DtoCategoryChain);
       // console.log(JSON.stringify(apiJson.components));
     });

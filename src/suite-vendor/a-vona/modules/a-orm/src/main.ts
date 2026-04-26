@@ -12,7 +12,13 @@ const SymbolTransactionConsistency = Symbol('SymbolTransactionConsistency');
 export class Main extends BeanSimple implements IModuleMain {
   async moduleLoading() {
     // config
-    const _configDefault = await combineConfigDefault<ConfigDatabase>(this.app, configDefault, configDev, configProd, configTest);
+    const _configDefault = await combineConfigDefault<ConfigDatabase>(
+      this.app,
+      configDefault,
+      configDev,
+      configProd,
+      configTest,
+    );
     this.app.config.database = deepExtend({}, _configDefault, this.app.config.database);
   }
 
@@ -31,7 +37,9 @@ export class Main extends BeanSimple implements IModuleMain {
       enumerable: false,
       get(this: VonaContext) {
         if (!this[SymbolTransactionConsistency]) {
-          this[SymbolTransactionConsistency] = this.app.bean._newBean(ServiceTransactionConsistency‌);
+          this[SymbolTransactionConsistency] = this.app.bean._newBean(
+            ServiceTransactionConsistency‌,
+          );
         }
         return this[SymbolTransactionConsistency];
       },

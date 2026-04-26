@@ -15,16 +15,18 @@ import type {
 } from './relations.ts';
 import type { IModelRelationOptionsMetaWrapper } from './relationsDef.ts';
 
-export type TypeModelMutateParamsInclude<MODEL extends BeanModelMeta | undefined> = TypeModelMutateParamsIncludeByModelOptions<
-  TypeUtilGetModelOptions<MODEL>
->;
+export type TypeModelMutateParamsInclude<MODEL extends BeanModelMeta | undefined> =
+  TypeModelMutateParamsIncludeByModelOptions<TypeUtilGetModelOptions<MODEL>>;
 
-export type TypeModelMutateParamsIncludeByModelOptions<ModelOptions extends IDecoratorModelOptions | undefined> =
-  ModelOptions extends IDecoratorModelOptions
-    ? {
-        [relationName in keyof ModelOptions['relations']]?: TypeModelMutateParamsRelationOptions<ModelOptions['relations'][relationName]>;
-      }
-    : never;
+export type TypeModelMutateParamsIncludeByModelOptions<
+  ModelOptions extends IDecoratorModelOptions | undefined,
+> = ModelOptions extends IDecoratorModelOptions
+  ? {
+      [relationName in keyof ModelOptions['relations']]?: TypeModelMutateParamsRelationOptions<
+        ModelOptions['relations'][relationName]
+      >;
+    }
+  : never;
 
 export type TypeModelMutateParamsRelationOptions<Relation> =
   | boolean
@@ -40,13 +42,28 @@ export type TypeModelMutateRelationResultMergeInclude<
 > = {
   [RelationName in keyof TModelOptions['relations']]: TInclude extends {} // not use ?: for OmitNever take effect
     ? TInclude[RelationName] extends {} | boolean
-      ? TypeModelMutateRelationResultMergeIncludeWrapper<TModelOptions['relations'][RelationName], TInclude[RelationName], TForInsertResult>
-      : TypeModelMutateRelationResultMergeAutoload<TModelOptions['relations'][RelationName], TForInsertResult>
-    : TypeModelMutateRelationResultMergeAutoload<TModelOptions['relations'][RelationName], TForInsertResult>;
+      ? TypeModelMutateRelationResultMergeIncludeWrapper<
+          TModelOptions['relations'][RelationName],
+          TInclude[RelationName],
+          TForInsertResult
+        >
+      : TypeModelMutateRelationResultMergeAutoload<
+          TModelOptions['relations'][RelationName],
+          TForInsertResult
+        >
+    : TypeModelMutateRelationResultMergeAutoload<
+        TModelOptions['relations'][RelationName],
+        TForInsertResult
+      >;
 };
 
-export type TypeModelMutateRelationResultMergeAutoload<Relation, TForInsertResult extends boolean | undefined = undefined> =
-  TypeUtilGetRelationOptionsAutoload<Relation> extends true ? TypeUtilMutateGetRelationEntityByType<Relation, undefined, TForInsertResult> : never;
+export type TypeModelMutateRelationResultMergeAutoload<
+  Relation,
+  TForInsertResult extends boolean | undefined = undefined,
+> =
+  TypeUtilGetRelationOptionsAutoload<Relation> extends true
+    ? TypeUtilMutateGetRelationEntityByType<Relation, undefined, TForInsertResult>
+    : never;
 
 export type TypeModelMutateRelationResultMergeIncludeWrapper<
   Relation,
@@ -83,13 +100,22 @@ export type TypeUtilMutateGetEntityByType<
   : TYPE extends 'belongsToMany'
     ? Array<{ id: TableIdentity; deleted?: boolean }> | undefined
     : TYPE extends 'hasMany'
-      ? Array<TypeModelMutateRelationData<TRecord, TModel, IncludeWrapper, TForInsertResult>> | undefined
+      ?
+          | Array<TypeModelMutateRelationData<TRecord, TModel, IncludeWrapper, TForInsertResult>>
+          | undefined
       : TypeModelMutateRelationData<TRecord, TModel, IncludeWrapper, TForInsertResult> | undefined;
 
 export type TypeModelMutateRelationResultMergeWith<
   TWith extends {} | undefined | unknown,
   TForInsertResult extends boolean | undefined = undefined,
-> = TWith extends {} ? { [RelationName in keyof TWith]: TypeModelMutateRelationResultMergeWithRelation<TWith[RelationName], TForInsertResult> } : {};
+> = TWith extends {}
+  ? {
+      [RelationName in keyof TWith]: TypeModelMutateRelationResultMergeWithRelation<
+        TWith[RelationName],
+        TForInsertResult
+      >;
+    }
+  : {};
 
 export type TypeModelMutateRelationResultMergeWithRelation<
   WithRelation,
@@ -99,7 +125,11 @@ export type TypeModelMutateRelationResultMergeWithRelation<
   : WithRelation extends true
     ? never
     : WithRelation extends {}
-      ? TypeUtilMutateGetRelationEntityByType<WithRelation, TypeUtilGetRelationOptions<WithRelation>, TForInsertResult>
+      ? TypeUtilMutateGetRelationEntityByType<
+          WithRelation,
+          TypeUtilGetRelationOptions<WithRelation>,
+          TForInsertResult
+        >
       : never;
 
 export type TypeModelMutateRelationData<
@@ -111,8 +141,19 @@ export type TypeModelMutateRelationData<
   (TModel extends BeanModelMeta
     ? Partial<
         OmitNever<
-          TypeModelMutateRelationResultMergeInclude<TypeUtilGetModelOptions<TModel>, TypeUtilGetParamsInlcude<TOptionsRelation>, TForInsertResult>
+          TypeModelMutateRelationResultMergeInclude<
+            TypeUtilGetModelOptions<TModel>,
+            TypeUtilGetParamsInlcude<TOptionsRelation>,
+            TForInsertResult
+          >
         >
       > &
-        Partial<OmitNever<TypeModelMutateRelationResultMergeWith<TypeUtilGetParamsWith<TOptionsRelation>, TForInsertResult>>>
+        Partial<
+          OmitNever<
+            TypeModelMutateRelationResultMergeWith<
+              TypeUtilGetParamsWith<TOptionsRelation>,
+              TForInsertResult
+            >
+          >
+        >
     : {});

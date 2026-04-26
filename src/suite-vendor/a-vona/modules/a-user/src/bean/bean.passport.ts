@@ -1,4 +1,10 @@
-import type { IJwtClientRecord, IJwtSignOptions, IJwtToken, IJwtVerifyOptions, IPayloadData } from 'vona-module-a-jwt';
+import type {
+  IJwtClientRecord,
+  IJwtSignOptions,
+  IJwtToken,
+  IJwtVerifyOptions,
+  IPayloadData,
+} from 'vona-module-a-jwt';
 
 import { catchError, isNil } from '@cabloy/utils';
 import { BeanBase, beanFullNameFromOnionName } from 'vona';
@@ -20,7 +26,10 @@ export class BeanPassport extends BeanBase {
 
   private get authTokenAdapter(): IAuthTokenAdapter {
     if (!this._authTokenAdapter) {
-      const beanFullName = beanFullNameFromOnionName(this.scope.config.adapter.authToken, 'service');
+      const beanFullName = beanFullNameFromOnionName(
+        this.scope.config.adapter.authToken,
+        'service',
+      );
       this._authTokenAdapter = this.bean._getBean(beanFullName) as IAuthTokenAdapter;
     }
     return this._authTokenAdapter;
@@ -76,11 +85,15 @@ export class BeanPassport extends BeanBase {
     // event
     await this.scope.event.signin.emit(passport);
     // serialize: payloadData for client certificate
-    const authTokenOptions = await this._combineAuthTokenOptions(passport.auth!.authProviderId, options?.authToken, {
-      stateless: this.scope.config.authToken.stateless,
-      strategy: this.scope.config.authToken.strategy.signin,
-      ttl: this.scope.config.authToken.ttl,
-    });
+    const authTokenOptions = await this._combineAuthTokenOptions(
+      passport.auth!.authProviderId,
+      options?.authToken,
+      {
+        stateless: this.scope.config.authToken.stateless,
+        strategy: this.scope.config.authToken.strategy.signin,
+        ttl: this.scope.config.authToken.ttl,
+      },
+    );
     const payloadData = await this._passportSerialize(passport, authTokenOptions);
     // jwt token
     return await this.bean.jwt.create(payloadData, { dev: passport.auth?.id.toString() === '-1' });
@@ -114,7 +127,10 @@ export class BeanPassport extends BeanBase {
     return await this.signin(passport, options);
   }
 
-  public async signinMock(name?: keyof IUserNameRecord, options?: ISigninOptions): Promise<IJwtToken> {
+  public async signinMock(
+    name?: keyof IUserNameRecord,
+    options?: ISigninOptions,
+  ): Promise<IJwtToken> {
     return await this.signinSystem('mock', (-10000 - ++this._mockCounter) as any, name, options);
   }
 
@@ -129,7 +145,11 @@ export class BeanPassport extends BeanBase {
     await this.authTokenAdapter.removeAll(user);
   }
 
-  public async checkAuthToken(accessToken?: string, clientName?: keyof IJwtClientRecord, options?: IJwtVerifyOptions) {
+  public async checkAuthToken(
+    accessToken?: string,
+    clientName?: keyof IJwtClientRecord,
+    options?: IJwtVerifyOptions,
+  ) {
     clientName = clientName ?? 'access';
     const [payloadData, err] = await catchError(() => {
       return this.bean.jwt.get(clientName).verify(accessToken, options);
@@ -144,9 +164,13 @@ export class BeanPassport extends BeanBase {
     const passport = await this.passportAdapter.deserialize(payloadData);
     if (!passport) return this.app.throw(401);
     // verified
-    const authTokenOptions = await this._combineAuthTokenOptions(passport.auth!.authProviderId, undefined, {
-      stateless: this.scope.config.authToken.stateless,
-    });
+    const authTokenOptions = await this._combineAuthTokenOptions(
+      passport.auth!.authProviderId,
+      undefined,
+      {
+        stateless: this.scope.config.authToken.stateless,
+      },
+    );
     if (!authTokenOptions.stateless) {
       const verified = await this.authTokenAdapter.verify(payloadData);
       if (!verified) return this.app.throw(401);
@@ -162,11 +186,15 @@ export class BeanPassport extends BeanBase {
     if (!checkRes) return this.app.throw(401);
     let { payloadData, passport } = checkRes;
     // refreshAuthToken
-    const authTokenOptions = await this._combineAuthTokenOptions(passport.auth!.authProviderId, undefined, {
-      stateless: this.scope.config.authToken.stateless,
-      strategy: this.scope.config.authToken.strategy.refreshAuthToken,
-      ttl: this.scope.config.authToken.ttl,
-    });
+    const authTokenOptions = await this._combineAuthTokenOptions(
+      passport.auth!.authProviderId,
+      undefined,
+      {
+        stateless: this.scope.config.authToken.stateless,
+        strategy: this.scope.config.authToken.strategy.refreshAuthToken,
+        ttl: this.scope.config.authToken.ttl,
+      },
+    );
     payloadData = await this._handlePayloadData(payloadData, authTokenOptions);
     // jwt token
     return await this.bean.jwt.create(payloadData);
@@ -246,7 +274,10 @@ export class BeanPassport extends BeanBase {
     return await this._handlePayloadData(payloadData, authTokenOptions);
   }
 
-  private async _handlePayloadData(payloadData: IPayloadData, authTokenOptions?: IAuthTokenOptions) {
+  private async _handlePayloadData(
+    payloadData: IPayloadData,
+    authTokenOptions?: IAuthTokenOptions,
+  ) {
     // auth token
     const stateless = authTokenOptions?.stateless;
     const strategy = authTokenOptions?.strategy ?? 'refresh';

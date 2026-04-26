@@ -10,12 +10,19 @@ import { CacheBase } from '../common/cacheBase.ts';
 
 @Bean()
 @Virtual()
-export class BeanCacheRedisBase<KEY = any, DATA = any> extends CacheBase<IDecoratorCacheRedisOptions, KEY> {
+export class BeanCacheRedisBase<KEY = any, DATA = any> extends CacheBase<
+  IDecoratorCacheRedisOptions,
+  KEY
+> {
   private _redisCache: Redis;
 
   protected __init__(cacheName?: string, cacheOptions?: IDecoratorCacheRedisOptions) {
     super.__init__(cacheName, cacheOptions);
-    this._cacheOptions = Object.assign({}, this.$scope.cache.config.redis.options, this._cacheOptions);
+    this._cacheOptions = Object.assign(
+      {},
+      this.$scope.cache.config.redis.options,
+      this._cacheOptions,
+    );
   }
 
   private get redisCache() {
@@ -45,7 +52,10 @@ export class BeanCacheRedisBase<KEY = any, DATA = any> extends CacheBase<IDecora
     return _value ? JSON.parse(_value) : undefined;
   }
 
-  public async mget(keys: KEY[], options?: ICacheRedisGetOptions): Promise<Array<DATA | undefined>> {
+  public async mget(
+    keys: KEY[],
+    options?: ICacheRedisGetOptions,
+  ): Promise<Array<DATA | undefined>> {
     if (!keys || keys.length === 0) return [];
     const cache = this.__cacheInstance;
     if (!cache) return [];
@@ -88,7 +98,8 @@ export class BeanCacheRedisBase<KEY = any, DATA = any> extends CacheBase<IDecora
     } else {
       await cache.set(redisKey, JSON.stringify(value));
     }
-    const disableTransactionCompensate = options?.disableTransactionCompensate ?? this._cacheOptions.disableTransactionCompensate;
+    const disableTransactionCompensate =
+      options?.disableTransactionCompensate ?? this._cacheOptions.disableTransactionCompensate;
     if (!disableTransactionCompensate) {
       const db = options?.db ?? this.bean.database.current;
       db?.compensate(async () => {
@@ -113,7 +124,8 @@ export class BeanCacheRedisBase<KEY = any, DATA = any> extends CacheBase<IDecora
       }
     }
     await multi.exec();
-    const disableTransactionCompensate = options?.disableTransactionCompensate ?? this._cacheOptions.disableTransactionCompensate;
+    const disableTransactionCompensate =
+      options?.disableTransactionCompensate ?? this._cacheOptions.disableTransactionCompensate;
     if (!disableTransactionCompensate) {
       const db = options?.db ?? this.bean.database.current;
       db?.compensate(async () => {
@@ -124,20 +136,29 @@ export class BeanCacheRedisBase<KEY = any, DATA = any> extends CacheBase<IDecora
     }
   }
 
-  public async getset(value?: DATA, key?: KEY, options?: ICacheRedisSetOptions): Promise<DATA | undefined> {
+  public async getset(
+    value?: DATA,
+    key?: KEY,
+    options?: ICacheRedisSetOptions,
+  ): Promise<DATA | undefined> {
     const cache = this.__cacheInstance;
     if (!cache) return;
     const redisKey = this.__getRedisKey(key);
     const ttl = options?.ttl ?? this._cacheOptions.ttl;
     let valuePrev: any;
     if (ttl) {
-      const res = await cache.multi().get(redisKey).set(redisKey, JSON.stringify(value), 'PX', ttl).exec();
+      const res = await cache
+        .multi()
+        .get(redisKey)
+        .set(redisKey, JSON.stringify(value), 'PX', ttl)
+        .exec();
       valuePrev = res && res[0][1];
     } else {
       const res = await cache.multi().get(redisKey).set(redisKey, JSON.stringify(value)).exec();
       valuePrev = res && res[0][1];
     }
-    const disableTransactionCompensate = options?.disableTransactionCompensate ?? this._cacheOptions.disableTransactionCompensate;
+    const disableTransactionCompensate =
+      options?.disableTransactionCompensate ?? this._cacheOptions.disableTransactionCompensate;
     if (!disableTransactionCompensate) {
       const db = options?.db ?? this.bean.database.current;
       db?.compensate(async () => {
@@ -188,7 +209,8 @@ export class BeanCacheRedisBase<KEY = any, DATA = any> extends CacheBase<IDecora
     // pexpire
     await cache.pexpire(redisKey, ttl);
     // compensate
-    const disableTransactionCompensate = options?.disableTransactionCompensate ?? this._cacheOptions.disableTransactionCompensate;
+    const disableTransactionCompensate =
+      options?.disableTransactionCompensate ?? this._cacheOptions.disableTransactionCompensate;
     if (!disableTransactionCompensate) {
       const db = options?.db ?? this.bean.database.current;
       db?.compensate(async () => {

@@ -1,4 +1,8 @@
-import type { IDecoratorSerializerTransformOptions, ISerializerTransform, TypeSerializerTransformCustom } from 'vona-module-a-serialization';
+import type {
+  IDecoratorSerializerTransformOptions,
+  ISerializerTransform,
+  TypeSerializerTransformCustom,
+} from 'vona-module-a-serialization';
 
 import { BeanBase } from 'vona';
 import { SerializerTransform } from 'vona-module-a-serialization';
@@ -16,7 +20,12 @@ export interface ISerializerTransformOptionsCustom extends IDecoratorSerializerT
 @SerializerTransform<ISerializerTransformOptionsCustom>()
 export class SerializerTransformCustom
   extends BeanBase
-  implements ISerializerTransform<TypeSerializerTransformCustomValue, TypeSerializerTransformCustomData, TypeSerializerTransformCustomResult>
+  implements
+    ISerializerTransform<
+      TypeSerializerTransformCustomValue,
+      TypeSerializerTransformCustomData,
+      TypeSerializerTransformCustomResult
+    >
 {
   async transform(
     value: TypeSerializerTransformCustomValue,

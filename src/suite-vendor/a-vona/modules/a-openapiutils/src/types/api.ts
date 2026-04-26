@@ -1,5 +1,11 @@
-import type { OpenAPIObject as OpenAPIObject30, SchemaObject as SchemaObject30 } from 'openapi3-ts/oas30';
-import type { OpenAPIObject as OpenAPIObject31, SchemaObject as SchemaObject31 } from 'openapi3-ts/oas31';
+import type {
+  OpenAPIObject as OpenAPIObject30,
+  SchemaObject as SchemaObject30,
+} from 'openapi3-ts/oas30';
+import type {
+  OpenAPIObject as OpenAPIObject31,
+  SchemaObject as SchemaObject31,
+} from 'openapi3-ts/oas31';
 import type { ILocaleMagic, VonaApplication } from 'vona';
 import type z from 'zod';
 

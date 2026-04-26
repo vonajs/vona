@@ -1,6 +1,9 @@
 import type { PartialDeep } from '@cabloy/type-fest';
 
-export type PowerPartial<T> = PartialDeep<T, { recurseIntoArrays: true; allowUndefinedInNonTupleArrays: false }>;
+export type PowerPartial<T> = PartialDeep<
+  T,
+  { recurseIntoArrays: true; allowUndefinedInNonTupleArrays: false }
+>;
 // export type PowerPartial<T> = {
 //   [U in keyof T]?:
 //   T[U] extends (...args: any) => any

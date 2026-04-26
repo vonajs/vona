@@ -11,11 +11,10 @@ import { __delegateProperties } from '../lib/utils.ts';
 
 @Bean()
 export class BeanExecutor extends BeanBase {
-  async performAction<METHOD extends keyof IApiPathRecordMethodMap, PATH extends keyof IApiPathRecordMethodMap[METHOD]>(
-    method: METHOD,
-    path: PATH,
-    options?: IPerformActionOptions,
-  ): Promise<any> {
+  async performAction<
+    METHOD extends keyof IApiPathRecordMethodMap,
+    PATH extends keyof IApiPathRecordMethodMap[METHOD],
+  >(method: METHOD, path: PATH, options?: IPerformActionOptions): Promise<any> {
     // url
     const url = this.app.util.combineApiPath(path as any, '', true, true);
     return await this.scope.service.executor.performActionInner(method, url, options);
@@ -27,10 +26,14 @@ export class BeanExecutor extends BeanBase {
     });
   }
 
-  async newCtxIsolate<RESULT>(fn: FunctionAsync<RESULT>, options?: INewCtxOptions): Promise<RESULT> {
+  async newCtxIsolate<RESULT>(
+    fn: FunctionAsync<RESULT>,
+    options?: INewCtxOptions,
+  ): Promise<RESULT> {
     options = Object.assign({}, options);
     // instanceName !== undefined means isolate
-    options.instanceName = options.instanceName === undefined ? this.ctx?.instanceName : options.instanceName;
+    options.instanceName =
+      options.instanceName === undefined ? this.ctx?.instanceName : options.instanceName;
     if (options.instanceName === this.ctx?.instanceName) {
       options.locale = options.locale === undefined ? this.ctx?.locale : options.locale;
       options.tz = options.tz === undefined ? this.ctx?.tz : options.tz;
@@ -41,7 +44,8 @@ export class BeanExecutor extends BeanBase {
   async mockCtx<RESULT>(fn: FunctionAsync<RESULT>, options?: INewCtxOptions): Promise<RESULT> {
     options = Object.assign({}, options);
     options.dbInfo = isNil(options.dbInfo) ? { level: 1 } : options.dbInfo;
-    options.instanceName = options.instanceName === undefined ? (this.ctx?.instanceName ?? '') : options.instanceName;
+    options.instanceName =
+      options.instanceName === undefined ? (this.ctx?.instanceName ?? '') : options.instanceName;
     options.instance = !isNil(options.instanceName);
     return this.newCtx(fn, options);
   }
@@ -55,12 +59,18 @@ export class BeanExecutor extends BeanBase {
     }, options);
   }
 
-  private async _newCtxInnerStep1<RESULT>(fn: FunctionAsync<RESULT>, options?: INewCtxOptions): Promise<RESULT> {
+  private async _newCtxInnerStep1<RESULT>(
+    fn: FunctionAsync<RESULT>,
+    options?: INewCtxOptions,
+  ): Promise<RESULT> {
     options = Object.assign({}, options);
     // innerAccess
     const innerAccess = options.innerAccess !== false;
     // isolate
-    const isolate = !this.ctx || options.instanceName !== undefined || (!innerAccess && this.ctx?.instanceName === null);
+    const isolate =
+      !this.ctx ||
+      options.instanceName !== undefined ||
+      (!innerAccess && this.ctx?.instanceName === null);
     const ctxCaller = !isolate && this.ctx ? this.ctx : undefined;
     // locale/tz/instanceName
     if (!isolate && this.ctx) {
@@ -107,12 +117,17 @@ export class BeanExecutor extends BeanBase {
     });
   }
 
-  private async _newCtxInnerStep2<RESULT>(fn: FunctionAsync<RESULT>, options?: INewCtxOptions): Promise<RESULT> {
+  private async _newCtxInnerStep2<RESULT>(
+    fn: FunctionAsync<RESULT>,
+    options?: INewCtxOptions,
+  ): Promise<RESULT> {
     // instance
     const instanceName = this.ctx.instanceName; // use default instanceName when undefined
     if (instanceName !== undefined && instanceName !== null) {
       if (!this.app.meta.appReady) {
-        throw new Error(`should not init ctx.instance: ${instanceName}, when app.meta.appReady not true`);
+        throw new Error(
+          `should not init ctx.instance: ${instanceName}, when app.meta.appReady not true`,
+        );
       }
       this.ctx.instance = (await this.bean.instance.get(instanceName))!;
       // start instance

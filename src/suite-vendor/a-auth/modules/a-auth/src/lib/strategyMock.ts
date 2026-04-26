@@ -1,7 +1,10 @@
 import { useApp, uuidv4 } from 'vona';
 import { $apiPath } from 'vona-module-a-openapiutils';
 
-import type { IAuthProviderOauth2ClientOptions, TypeStrategyOptions } from '../types/authProvider.ts';
+import type {
+  IAuthProviderOauth2ClientOptions,
+  TypeStrategyOptions,
+} from '../types/authProvider.ts';
 
 import { StrategyBase } from './strategyBase.ts';
 
@@ -19,7 +22,11 @@ export class StrategyMock extends StrategyBase {
     const self = this as any;
     self.name = 'mock';
 
-    self._oauth2.getOAuthAccessToken = function (code: string, params: unknown, callback: Function) {
+    self._oauth2.getOAuthAccessToken = function (
+      code: string,
+      params: unknown,
+      callback: Function,
+    ) {
       const accessToken = code;
       const refreshToken = uuidv4();
       callback(null, accessToken, refreshToken, params);

@@ -9,7 +9,10 @@ export class UnsupportedBodyTypeError extends Error {
   constructor(wrongType: string) {
     super();
     this.name = 'UnsupportedBodyTypeError';
-    this.message = `Invalid enabled type '${wrongType}'.` + ' make sure to pass an array contains ' + `supported types ([${supportedBodyTypes}]).`;
+    this.message =
+      `Invalid enabled type '${wrongType}'.` +
+      ' make sure to pass an array contains ' +
+      `supported types ([${supportedBodyTypes}]).`;
   }
 }
 

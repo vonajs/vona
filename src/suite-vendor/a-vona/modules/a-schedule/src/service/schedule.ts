@@ -43,7 +43,10 @@ export class ServiceSchedule extends BeanBase {
       const queue = this.$scope.queue.service.queue.getQueue(queueName, this.ctx.instanceName);
       return await queue.removeJobScheduler(scheduleKey);
     } else {
-      const queue = this.$scope.queue.service.queue.getQueue(job.data.queueName, job.data.options!.instanceName);
+      const queue = this.$scope.queue.service.queue.getQueue(
+        job.data.queueName,
+        job.data.options!.instanceName,
+      );
       return await queue.removeJobScheduler(job.name);
     }
   }
@@ -57,15 +60,25 @@ export class ServiceSchedule extends BeanBase {
       return false;
     }
     // check disable
-    if (this.bean.onion.schedule.getOnionsEnabledCached().findIndex(item => item.name === scheduleName) === -1) {
+    if (
+      this.bean.onion.schedule
+        .getOnionsEnabledCached()
+        .findIndex(item => item.name === scheduleName) === -1
+    ) {
       await this.deleteSchedule(job);
       return false;
     }
     // check if changed
     const scheduleConfig = this.app.bean.onion.schedule.getOnionOptions(scheduleName);
-    const scheduleHashActive = this.$scope.queue.service.queue.getRepeatKey(job.name, job.data!.options!.jobOptions!.repeat!);
+    const scheduleHashActive = this.$scope.queue.service.queue.getRepeatKey(
+      job.name,
+      job.data!.options!.jobOptions!.repeat!,
+    );
     const scheduleKeyConfig = this.getScheduleKey(this.ctx.instanceName, scheduleName);
-    const scheduleHashConfig = this.$scope.queue.service.queue.getRepeatKey(scheduleKeyConfig, scheduleConfig!.repeat);
+    const scheduleHashConfig = this.$scope.queue.service.queue.getRepeatKey(
+      scheduleKeyConfig,
+      scheduleConfig!.repeat,
+    );
     if (scheduleHashActive !== scheduleHashConfig) {
       return false;
     }
@@ -73,7 +86,10 @@ export class ServiceSchedule extends BeanBase {
     return true;
   }
 
-  public getScheduleKey(instanceName: string | undefined | null, scheduleName: keyof IScheduleRecord) {
+  public getScheduleKey(
+    instanceName: string | undefined | null,
+    scheduleName: keyof IScheduleRecord,
+  ) {
     return `${instanceName}.${beanFullNameFromOnionName(cast<string>(scheduleName), 'schedule')}`; // not use :
   }
 
@@ -85,7 +101,10 @@ export class ServiceSchedule extends BeanBase {
     }
   }
 
-  public async addSchedule(scheduleName: keyof IScheduleRecord, instanceName?: keyof IInstanceRecord | undefined | null) {
+  public async addSchedule(
+    scheduleName: keyof IScheduleRecord,
+    instanceName?: keyof IInstanceRecord | undefined | null,
+  ) {
     if (instanceName === undefined) instanceName = this.ctx.instanceName;
     const scheduleItem = this.bean.onion.schedule.getOnionSlice(scheduleName);
     if (!scheduleItem) return;
@@ -106,7 +125,11 @@ export class ServiceSchedule extends BeanBase {
         },
       },
     );
-    const templateOptions = deepExtend({}, this.scope.config.schedule.templateOptions, scheduleOptions.templateOptions);
+    const templateOptions = deepExtend(
+      {},
+      this.scope.config.schedule.templateOptions,
+      scheduleOptions.templateOptions,
+    );
     await this.scope.redlock.lock(
       `schedule.${scheduleName}`,
       async () => {

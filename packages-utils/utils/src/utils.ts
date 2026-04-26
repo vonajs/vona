@@ -6,12 +6,16 @@ export interface IParamsAndQuery {
 }
 
 export function deprecated(oldUsage, newUsage) {
-  const message = '`'.concat(oldUsage, '` is deprecated and will be removed in a later version. Use `').concat(newUsage, '` instead');
+  const message = '`'
+    .concat(oldUsage, '` is deprecated and will be removed in a later version. Use `')
+    .concat(newUsage, '` instead');
 
   console.warn(message);
 }
 
-export async function catchError<T>(fnMethod: (...args: any[]) => Promise<T>): Promise<[T, undefined] | [undefined, Error]> {
+export async function catchError<T>(
+  fnMethod: (...args: any[]) => Promise<T>,
+): Promise<[T, undefined] | [undefined, Error]> {
   let error: Error | undefined;
   let data: T | undefined;
   try {
@@ -22,7 +26,9 @@ export async function catchError<T>(fnMethod: (...args: any[]) => Promise<T>): P
   return error ? [undefined, error!] : [data!, undefined];
 }
 
-export function catchErrorSync<T>(fnMethod: (...args: any[]) => T): [T, undefined] | [undefined, Error] {
+export function catchErrorSync<T>(
+  fnMethod: (...args: any[]) => T,
+): [T, undefined] | [undefined, Error] {
   let error: Error | undefined;
   let data: T | undefined;
   try {
@@ -98,7 +104,12 @@ function _hasProperty(_obj: object | undefined, name: string, sep: string | unde
   return true;
 }
 
-function _getProperty<T>(_obj: object | undefined, name: string, sep: string | undefined, forceObject: boolean): T | undefined {
+function _getProperty<T>(
+  _obj: object | undefined,
+  name: string,
+  sep: string | undefined,
+  forceObject: boolean,
+): T | undefined {
   if (!_obj) return undefined;
   let obj = _obj as object;
   const names = name.split(sep || '.');
@@ -207,7 +218,11 @@ export function stringLazy(fn: () => string) {
   };
 }
 
-export async function forEach<T>(arr: T[], order: boolean, fn: (item: T, index: number) => Promise<void>) {
+export async function forEach<T>(
+  arr: T[],
+  order: boolean,
+  fn: (item: T, index: number) => Promise<void>,
+) {
   if (!arr) return;
   if (order) {
     for (let index = 0; index < arr.length; index++) {

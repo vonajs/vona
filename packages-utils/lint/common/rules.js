@@ -73,7 +73,10 @@ export const rules = {
   // 'no-setter-return': 'off', // no effect for typescript check
   '@typescript-eslint/method-signature-style': 'off',
   '@typescript-eslint/no-redeclare': 'off',
-  '@typescript-eslint/consistent-type-imports': ['error', { fixStyle: 'separate-type-imports', prefer: 'type-imports' }],
+  '@typescript-eslint/consistent-type-imports': [
+    'error',
+    { fixStyle: 'separate-type-imports', prefer: 'type-imports' },
+  ],
   '@typescript-eslint/explicit-function-return-type': 'off',
   '@typescript-eslint/no-namespace': 'off',
   '@typescript-eslint/no-explicit-any': 'off',
@@ -130,7 +133,11 @@ export const rules = {
   '@stylistic/arrow-parens': ['error', 'as-needed'],
   '@stylistic/brace-style': ['error', '1tbs', { allowSingleLine: true }],
   '@stylistic/quotes': ['error', 'single', { avoidEscape: true }],
-  '@stylistic/operator-linebreak': ['error', 'after', { overrides: { '?': 'before', ':': 'before' } }],
+  '@stylistic/operator-linebreak': [
+    'error',
+    'after',
+    { overrides: { '?': 'before', ':': 'before' } },
+  ],
   '@stylistic/keyword-spacing': [
     'error',
     {

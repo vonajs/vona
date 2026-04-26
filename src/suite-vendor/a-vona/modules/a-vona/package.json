@@ -1,6 +1,7 @@
 {
   "name": "vona-module-a-vona",
   "version": "5.1.4",
+  "gitHead": "a79189b882c17af5911573896a781bbb0046d37d",
   "description": "",
   "keywords": [
     "Vona Module"
@@ -100,6 +101,5 @@
       "a-worker": "5.0.0",
       "a-zod": "5.0.0"
     }
-  },
-  "gitHead": "a79189b882c17af5911573896a781bbb0046d37d"
+  }
 }

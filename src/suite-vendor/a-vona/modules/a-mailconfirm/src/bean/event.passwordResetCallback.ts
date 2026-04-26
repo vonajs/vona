@@ -7,4 +7,7 @@ export type TypeEventPasswordResetCallbackData = TCacheRedisPasswordResetData | 
 export type TypeEventPasswordResetCallbackResult = string;
 
 @Event()
-export class EventPasswordResetCallback extends BeanEventBase<TypeEventPasswordResetCallbackData, TypeEventPasswordResetCallbackResult> {}
+export class EventPasswordResetCallback extends BeanEventBase<
+  TypeEventPasswordResetCallbackData,
+  TypeEventPasswordResetCallbackResult
+> {}

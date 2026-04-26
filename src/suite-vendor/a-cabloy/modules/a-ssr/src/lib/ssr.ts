@@ -16,7 +16,11 @@ function Redirect<
 ): MethodDecorator {
   return Aspect.interceptor(
     'a-ssr:ssrRedirect',
-    Object.assign({}, options, { site: site as any, pagePath: pagePath as any, pageOptions: pageOptions as any }),
+    Object.assign({}, options, {
+      site: site as any,
+      pagePath: pagePath as any,
+      pageOptions: pageOptions as any,
+    }),
   );
 }
 
@@ -32,7 +36,11 @@ function Render<
 ): MethodDecorator {
   return Aspect.interceptor(
     'a-ssr:ssrRender',
-    Object.assign({}, options, { site: site as any, pagePath: pagePath as any, pageOptions: pageOptions as any }),
+    Object.assign({}, options, {
+      site: site as any,
+      pagePath: pagePath as any,
+      pageOptions: pageOptions as any,
+    }),
   );
 }
 

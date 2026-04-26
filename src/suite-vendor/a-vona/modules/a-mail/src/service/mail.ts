@@ -24,7 +24,8 @@ export class ServiceMail extends BeanBase {
       clientTest = true;
     }
     // check again
-    if (!this._checkClientValid(client)) throw new Error(`not valid config for mail client: ${clientName}`);
+    if (!this._checkClientValid(client))
+      throw new Error(`not valid config for mail client: ${clientName}`);
     // send
     const [res, error] = await catchError(async () => {
       const transporter = nodemailer.createTransport(client.transport, client.defaults);
@@ -37,7 +38,8 @@ export class ServiceMail extends BeanBase {
       // log
       if (clientTest) {
         const url = nodemailer.getTestMessageUrl(res);
-        const message = chalk.cyan('Test Mail To: ') + chalk.yellow(mail.to) + chalk.hex('#FF8800')(`\n${url}`);
+        const message =
+          chalk.cyan('Test Mail To: ') + chalk.yellow(mail.to) + chalk.hex('#FF8800')(`\n${url}`);
         this.$logger.silly(message);
       }
       // delete

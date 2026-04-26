@@ -31,7 +31,10 @@ export class BeanModelMeta<TRecord extends {} = {}> extends BeanBase {
   private [SymbolModelDb]?: ServiceDb;
   private [SymbolModelTable]?: TypeModelOptionsTable;
 
-  protected __init__(clientName?: keyof IDatabaseClientRecord | ServiceDb, table?: TypeModelOptionsTable) {
+  protected __init__(
+    clientName?: keyof IDatabaseClientRecord | ServiceDb,
+    table?: TypeModelOptionsTable,
+  ) {
     // clientName
     if (!isNil(clientName)) {
       if (typeof clientName === 'string') {
@@ -115,7 +118,12 @@ export class BeanModelMeta<TRecord extends {} = {}> extends BeanBase {
     return this.options.disableUpdateTime ?? this.scopeOrm.config.model.disableUpdateTime;
   }
 
-  protected _prepareDisableInstanceByOptions(table: keyof ITableRecord, data: any, options?: IModelMethodOptionsGeneral, useRaw?: boolean) {
+  protected _prepareDisableInstanceByOptions(
+    table: keyof ITableRecord,
+    data: any,
+    options?: IModelMethodOptionsGeneral,
+    useRaw?: boolean,
+  ) {
     const columnNameInstance = useRaw ? 'iid' : `${getTableOrTableAlias(table)}.iid`;
     if (this._checkDisableInstanceByOptions(options)) {
       delete data.iid;
@@ -130,7 +138,12 @@ export class BeanModelMeta<TRecord extends {} = {}> extends BeanBase {
     return data;
   }
 
-  protected _prepareDisableDeletedByOptions(table: keyof ITableRecord, data: any, options?: IModelMethodOptionsGeneral, useRaw?: boolean) {
+  protected _prepareDisableDeletedByOptions(
+    table: keyof ITableRecord,
+    data: any,
+    options?: IModelMethodOptionsGeneral,
+    useRaw?: boolean,
+  ) {
     const columnNameDeleted = useRaw ? 'deleted' : `${getTableOrTableAlias(table)}.deleted`;
     const deleted = this._prepareDisableDeletedByOptionsSimple(options);
     if (!isNil(deleted)) {
@@ -140,7 +153,9 @@ export class BeanModelMeta<TRecord extends {} = {}> extends BeanBase {
     return data;
   }
 
-  protected _prepareDisableDeletedByOptionsSimple(options?: IModelMethodOptionsGeneral): boolean | undefined {
+  protected _prepareDisableDeletedByOptionsSimple(
+    options?: IModelMethodOptionsGeneral,
+  ): boolean | undefined {
     if (!isNil(options?.deleted)) {
       if (!this.disableDeleted) {
         return options?.deleted;
@@ -177,7 +192,10 @@ export class BeanModelMeta<TRecord extends {} = {}> extends BeanBase {
     return options?.disableUpdateTime ?? this.disableUpdateTime;
   }
 
-  public newInstance(client?: keyof IDatabaseClientRecord | ServiceDb, table?: TypeModelOptionsTable): this {
+  public newInstance(
+    client?: keyof IDatabaseClientRecord | ServiceDb,
+    table?: TypeModelOptionsTable,
+  ): this {
     return this.app.bean._newBean(this.$beanFullName as any, client ?? this.db, table);
   }
 

@@ -24,13 +24,21 @@ export class ServiceSsr extends BeanBase {
           const siteOptions2 = site2.beanOptions.options as IDecoratorSsrSiteOptions;
           const publicPath1 = `/${siteOptions1.publicPath}`;
           const publicPath2 = `/${siteOptions2.publicPath}`;
-          return publicPath1 === publicPath2 ? 0 : publicPath1.startsWith(publicPath2) ? -1 : publicPath2.startsWith(publicPath1) ? 1 : 0;
+          return publicPath1 === publicPath2
+            ? 0
+            : publicPath1.startsWith(publicPath2)
+              ? -1
+              : publicPath2.startsWith(publicPath1)
+                ? 1
+                : 0;
         });
     }
     return this.app.meta[SymbolCacheSites][cacheKey];
   }
 
-  public prepareMenuLink(link?: keyof IDecoratorSsrSiteOptions['pages']): keyof IDecoratorSsrSiteOptions['pages'] | undefined {
+  public prepareMenuLink(
+    link?: keyof IDecoratorSsrSiteOptions['pages'],
+  ): keyof IDecoratorSsrSiteOptions['pages'] | undefined {
     if (!link) return link;
     return (this.scope.config.menuItemLinkPreset[link] as any) || link;
   }

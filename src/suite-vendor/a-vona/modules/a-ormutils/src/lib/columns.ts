@@ -1,17 +1,27 @@
 import type { Constructable } from 'vona';
 import type { TypeOpenapiMetadata } from 'vona-module-a-openapi';
-import type { IDecoratorEntityOptions, ITableRecord, TypeEntityMeta, TypeEntityStudentMetaSimpleColumns } from 'vona-module-a-orm';
+import type {
+  IDecoratorEntityOptions,
+  ITableRecord,
+  TypeEntityMeta,
+  TypeEntityStudentMetaSimpleColumns,
+} from 'vona-module-a-orm';
 
 import { isClass } from '@cabloy/utils';
 import { ZodMetadata } from '@cabloy/zod-openapi';
 import { appResource, cast, useApp } from 'vona';
-import { getTargetDecoratorRuleColumnsMap, getTargetDecoratorRules } from 'vona-module-a-openapiutils';
+import {
+  getTargetDecoratorRuleColumnsMap,
+  getTargetDecoratorRules,
+} from 'vona-module-a-openapiutils';
 
 export function $column<T>(key: keyof T): keyof T {
   return key;
 }
 
-export function $columns<T>(key?: keyof T | Array<keyof T> | undefined): keyof T | Array<keyof T> | undefined {
+export function $columns<T>(
+  key?: keyof T | Array<keyof T> | undefined,
+): keyof T | Array<keyof T> | undefined {
   return key;
 }
 
@@ -42,7 +52,10 @@ export function $columnsAll<T, TableName extends boolean, Meta extends boolean>(
 
 export function $tableColumns<K extends keyof ITableRecord>(
   tableName: K,
-  key?: TypeEntityStudentMetaSimpleColumns<ITableRecord[K]> | TypeEntityStudentMetaSimpleColumns<ITableRecord[K]>[] | undefined,
+  key?:
+    | TypeEntityStudentMetaSimpleColumns<ITableRecord[K]>
+    | TypeEntityStudentMetaSimpleColumns<ITableRecord[K]>[]
+    | undefined,
 ) {
   return { [tableName]: key };
 }
@@ -51,13 +64,17 @@ export function $tableName<K extends keyof ITableRecord>(tableName: K): keyof IT
   return tableName;
 }
 
-export function $tableNameFromEntity<T>(classEntity: (() => Constructable<T>) | Constructable<T>): keyof ITableRecord {
+export function $tableNameFromEntity<T>(
+  classEntity: (() => Constructable<T>) | Constructable<T>,
+): keyof ITableRecord {
   const beanOptionsEntity = appResource.getBean(_prepareClassEntity(classEntity));
   const entityOptions = beanOptionsEntity?.options as IDecoratorEntityOptions;
   return entityOptions.table!;
 }
 
-export function $tableComments<T>(classEntity: (() => Constructable<T>) | Constructable<T>): Record<string, string> {
+export function $tableComments<T>(
+  classEntity: (() => Constructable<T>) | Constructable<T>,
+): Record<string, string> {
   const app = useApp();
   const classEntity2 = _prepareClassEntity(classEntity);
   // rules
@@ -80,7 +97,9 @@ export function $tableComments<T>(classEntity: (() => Constructable<T>) | Constr
   return comments;
 }
 
-export function $tableDefaults<T>(classEntity: (() => Constructable<T>) | Constructable<T>): Record<string, any> {
+export function $tableDefaults<T>(
+  classEntity: (() => Constructable<T>) | Constructable<T>,
+): Record<string, any> {
   const classEntity2 = _prepareClassEntity(classEntity);
   // rules
   const rules = getTargetDecoratorRules(classEntity2.prototype);
@@ -93,6 +112,8 @@ export function $tableDefaults<T>(classEntity: (() => Constructable<T>) | Constr
   return defaults;
 }
 
-function _prepareClassEntity<T>(classEntity: (() => Constructable<T>) | Constructable<T>): Constructable<T> {
+function _prepareClassEntity<T>(
+  classEntity: (() => Constructable<T>) | Constructable<T>,
+): Constructable<T> {
   return isClass(classEntity) ? (classEntity as Constructable<T>) : cast(classEntity)();
 }

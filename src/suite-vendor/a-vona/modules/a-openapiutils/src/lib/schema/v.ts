@@ -17,7 +17,14 @@ import {
   schemaUuid,
 } from './v/helpers.ts';
 import { schemaDescription, schemaExample, schemaOpenapi, schemaTitle } from './v/openapi.ts';
-import { schemaCustomKey, schemaOrder, schemaRender, schemaRenderJsx, schemaRest, schemaVisible } from './v/rest.ts';
+import {
+  schemaCustomKey,
+  schemaOrder,
+  schemaRender,
+  schemaRenderJsx,
+  schemaRest,
+  schemaVisible,
+} from './v/rest.ts';
 import {
   schemaSerializerCustom,
   schemaSerializerExclude,

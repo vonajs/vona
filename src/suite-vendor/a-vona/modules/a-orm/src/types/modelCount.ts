@@ -2,7 +2,10 @@ import type { BeanModelMeta } from '../bean/bean.model/bean.model_meta.ts';
 import type { IModelSelectParamsJoin } from './model.ts';
 import type { TypeModelColumn, TypeModelWhere } from './modelWhere.ts';
 import type { TypeModelsClassLikeGeneral } from './relations.ts';
-import type { TypeEntityTableColumnNamesOfGeneral, TypeEntityTableColumnsOfGeneral } from './relationsColumns.ts';
+import type {
+  TypeEntityTableColumnNamesOfGeneral,
+  TypeEntityTableColumnsOfGeneral,
+} from './relationsColumns.ts';
 import type { TypeEntityTableNamesOfGeneral } from './relationsTables.ts';
 
 export interface IBuildModelSelectCountParams<

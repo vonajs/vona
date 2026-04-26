@@ -15,7 +15,11 @@ export class QueueSchedule
   extends BeanQueueBase<TypeQueueScheduleJobData, TypeQueueScheduleJobResult>
   implements IQueueExecute<TypeQueueScheduleJobData, TypeQueueScheduleJobResult>
 {
-  async execute(data: TypeQueueScheduleJobData, _options?: IQueuePushOptions, job?: TypeScheduleJob): Promise<TypeQueueScheduleJobResult> {
+  async execute(
+    data: TypeQueueScheduleJobData,
+    _options?: IQueuePushOptions,
+    job?: TypeScheduleJob,
+  ): Promise<TypeQueueScheduleJobResult> {
     await this.scope.service.schedule.execute(data.scheduleName, job);
   }
 }

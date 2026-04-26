@@ -15,12 +15,17 @@ describe('modelWhere.test.ts', () => {
       let sql = builder.toQuery();
       assert.equal(sql, 'select * from "testVonaPost" where "id" = "id"');
       builder = scopeTest.model.post.builder();
-      scopeTest.model.post.buildWhere(builder, { id: scopeTest.model.post.ref('testVonaPost.id') as any });
+      scopeTest.model.post.buildWhere(builder, {
+        id: scopeTest.model.post.ref('testVonaPost.id') as any,
+      });
       sql = builder.toQuery();
       assert.equal(sql, 'select * from "testVonaPost" where "id" = "testVonaPost"."id"');
       // raw
       builder = scopeTest.model.post.builder();
-      scopeTest.model.post.buildWhere(builder, scopeTest.model.post.raw('?? = ?', ['id', 1]) as any);
+      scopeTest.model.post.buildWhere(
+        builder,
+        scopeTest.model.post.raw('?? = ?', ['id', 1]) as any,
+      );
       sql = builder.toQuery();
       assert.equal(sql, 'select * from "testVonaPost" where "id" = 1');
       // op: normal
@@ -63,7 +68,10 @@ describe('modelWhere.test.ts', () => {
         },
       });
       sql = builder.toQuery();
-      assert.equal(sql, 'select * from "testVonaPost" where (((("iid" = 1) and ("id" = 2))) or ("title" = \'test\'))');
+      assert.equal(
+        sql,
+        'select * from "testVonaPost" where (((("iid" = 1) and ("id" = 2))) or ("title" = \'test\'))',
+      );
       // op: not
       builder = scopeTest.model.post.builder();
       scopeTest.model.post.buildWhere(builder, {
@@ -81,7 +89,10 @@ describe('modelWhere.test.ts', () => {
         } as any,
       });
       sql = builder.toQuery();
-      assert.equal(sql, 'select * from "testVonaPost" where exists (select "id" from "testVonaUser" where "testVonaUser"."id" = "userId")');
+      assert.equal(
+        sql,
+        'select * from "testVonaPost" where exists (select "id" from "testVonaUser" where "testVonaUser"."id" = "userId")',
+      );
       // op: notExists
       builder = scopeTest.model.post.builder();
       scopeTest.model.post.buildWhere(builder, {
@@ -92,7 +103,10 @@ describe('modelWhere.test.ts', () => {
         } as any,
       });
       sql = builder.toQuery();
-      assert.equal(sql, 'select * from "testVonaPost" where not exists (select "id" from "testVonaUser" where "testVonaUser"."id" = "userId")');
+      assert.equal(
+        sql,
+        'select * from "testVonaPost" where not exists (select "id" from "testVonaUser" where "testVonaUser"."id" = "userId")',
+      );
       // op: array direct/in/notIn
       builder = scopeTest.model.post.builder();
       scopeTest.model.post.buildWhere(builder, {
@@ -101,7 +115,10 @@ describe('modelWhere.test.ts', () => {
         _or_: { id: { _in_: [2, 3] }, iid: { _notIn_: [3, 4] } },
       });
       sql = builder.toQuery();
-      assert.equal(sql, 'select * from "testVonaPost" where "id" in (1, 2) and 1 = 0 and ((("id" in (2, 3))) or (("iid" not in (3, 4))))');
+      assert.equal(
+        sql,
+        'select * from "testVonaPost" where "id" in (1, 2) and 1 = 0 and ((("id" in (2, 3))) or (("iid" not in (3, 4))))',
+      );
       // op: null/notNull
       builder = scopeTest.model.post.builder();
       scopeTest.model.post.buildWhere(builder, {
@@ -109,7 +126,10 @@ describe('modelWhere.test.ts', () => {
         iid: { _isNot_: undefined },
       });
       sql = builder.toQuery();
-      assert.equal(sql, 'select * from "testVonaPost" where ("id" is null) and ("iid" is not null)');
+      assert.equal(
+        sql,
+        'select * from "testVonaPost" where ("id" is null) and ("iid" is not null)',
+      );
       // op: between/notBetween
       builder = scopeTest.model.post.builder();
       scopeTest.model.post.buildWhere(builder, {
@@ -117,7 +137,10 @@ describe('modelWhere.test.ts', () => {
         iid: { _notBetween_: [2, 4] },
       });
       sql = builder.toQuery();
-      assert.equal(sql, 'select * from "testVonaPost" where ("id" between 1 and 3) and ("iid" not between 2 and 4)');
+      assert.equal(
+        sql,
+        'select * from "testVonaPost" where ("id" between 1 and 3) and ("iid" not between 2 and 4)',
+      );
       // op: ref
       builder = scopeTest.model.post.builder();
       scopeTest.model.post.buildWhere(builder, {
@@ -131,14 +154,20 @@ describe('modelWhere.test.ts', () => {
         id: { _gt_: 1, _gte_: 2, _lt_: 3, _lte_: 4 },
       });
       sql = builder.toQuery();
-      assert.equal(sql, 'select * from "testVonaPost" where ("id" > 1 and "id" >= 2 and "id" < 3 and "id" <= 4)');
+      assert.equal(
+        sql,
+        'select * from "testVonaPost" where ("id" > 1 and "id" >= 2 and "id" < 3 and "id" <= 4)',
+      );
       // op: startsWith/endsWith/includes
       builder = scopeTest.model.post.builder();
       scopeTest.model.post.buildWhere(builder, {
         title: { _startsWith_: 'a', _endsWith_: 'b', _includes_: 'c' },
       });
       sql = builder.toQuery();
-      assert.equal(sql, 'select * from "testVonaPost" where ("title" like \'a%\' and "title" like \'%b\' and "title" like \'%c%\')');
+      assert.equal(
+        sql,
+        'select * from "testVonaPost" where ("title" like \'a%\' and "title" like \'%b\' and "title" like \'%c%\')',
+      );
     });
   });
 });

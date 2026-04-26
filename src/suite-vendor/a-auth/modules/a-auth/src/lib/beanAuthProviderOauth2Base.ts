@@ -15,8 +15,14 @@ import type { StrategyBase } from './strategyBase.ts';
 
 import { getStrategyOauth2Profile } from './utils.ts';
 
-export class BeanAuthProviderOauth2Base extends BeanBase implements IAuthProviderStrategy, IAuthProviderVerify {
-  async strategy(_clientOptions: IAuthProviderOauth2ClientOptions, _options: IDecoratorAuthProviderOptions): Promise<Constructable<StrategyBase>> {
+export class BeanAuthProviderOauth2Base
+  extends BeanBase
+  implements IAuthProviderStrategy, IAuthProviderVerify
+{
+  async strategy(
+    _clientOptions: IAuthProviderOauth2ClientOptions,
+    _options: IDecoratorAuthProviderOptions,
+  ): Promise<Constructable<StrategyBase>> {
     throw new Error('Not Implemented');
   }
 

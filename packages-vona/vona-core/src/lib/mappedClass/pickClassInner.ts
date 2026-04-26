@@ -2,9 +2,10 @@ import type { Constructable } from '../decorator/type/constructable.ts';
 
 import { copyMetadataOfClasses, copyPropertiesOfClasses } from './utils.ts';
 
-export type TypePickClass<T, KEYS extends Array<keyof T> | undefined = undefined> = KEYS extends any[]
-  ? Constructable<Pick<T, KEYS[number]>>
-  : Constructable<T>;
+export type TypePickClass<
+  T,
+  KEYS extends Array<keyof T> | undefined = undefined,
+> = KEYS extends any[] ? Constructable<Pick<T, KEYS[number]>> : Constructable<T>;
 
 export function PickClassInner<T, KEYS extends Array<keyof T> | undefined = undefined>(
   classTarget: Constructable,

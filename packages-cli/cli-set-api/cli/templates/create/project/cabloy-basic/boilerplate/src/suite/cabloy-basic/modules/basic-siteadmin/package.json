@@ -1,6 +1,7 @@
 {
   "name": "vona-module-basic-siteadmin",
   "version": "5.1.23",
+  "gitHead": "a79189b882c17af5911573896a781bbb0046d37d",
   "description": "",
   "keywords": [
     "Vona Module"
@@ -50,6 +51,5 @@
       "a-vona": "5.0.0",
       "a-ssr": "5.0.0"
     }
-  },
-  "gitHead": "a79189b882c17af5911573896a781bbb0046d37d"
+  }
 }

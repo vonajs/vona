@@ -7,7 +7,10 @@ export interface TypeBroadcastExitAllJobData {
 }
 
 @Broadcast({ instance: false })
-export class BroadcastExitAll extends BeanBroadcastBase<TypeBroadcastExitAllJobData> implements IBroadcastExecute<TypeBroadcastExitAllJobData> {
+export class BroadcastExitAll
+  extends BeanBroadcastBase<TypeBroadcastExitAllJobData>
+  implements IBroadcastExecute<TypeBroadcastExitAllJobData>
+{
   async execute(data: TypeBroadcastExitAllJobData, _isEmitter?: boolean) {
     this.bean.worker.exit(data.code);
   }

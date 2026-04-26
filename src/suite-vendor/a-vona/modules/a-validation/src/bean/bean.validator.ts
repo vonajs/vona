@@ -60,7 +60,9 @@ export class BeanValidator extends BeanBase {
     if (options?.disableErrorMessages) {
       this.app.throw(errorHttpStatusCode);
     }
-    const issues = options?.exceptionFactory ? options.exceptionFactory(result.error) : result.error.issues;
+    const issues = options?.exceptionFactory
+      ? options.exceptionFactory(result.error)
+      : result.error.issues;
     if (issues && typeof issues === 'object') {
       const app = this.app;
       issues.toString = function () {

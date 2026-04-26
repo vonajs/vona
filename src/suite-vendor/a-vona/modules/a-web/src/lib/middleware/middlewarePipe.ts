@@ -2,12 +2,18 @@ import type { Next, VonaApplication, VonaContext } from 'vona';
 import type { IPipeRecord, IPipeTransform } from 'vona-module-a-aspect';
 import type { ServiceOnion } from 'vona-module-a-onion';
 import type { IOnionExecuteCustom } from 'vona-module-a-onion';
-import type { RouteHandlerArgumentMeta, RouteHandlerArgumentMetaDecorator } from 'vona-module-a-openapi';
+import type {
+  RouteHandlerArgumentMeta,
+  RouteHandlerArgumentMetaDecorator,
+} from 'vona-module-a-openapi';
 
 import { isNil } from '@cabloy/utils';
 import { appMetadata } from 'vona';
 import { SymbolCacheComposePipes } from 'vona-module-a-aspect';
-import { SymbolRouteHandlersArgumentsMeta, SymbolRouteHandlersArgumentsValue } from 'vona-module-a-openapiutils';
+import {
+  SymbolRouteHandlersArgumentsMeta,
+  SymbolRouteHandlersArgumentsValue,
+} from 'vona-module-a-openapiutils';
 
 import type { ContextRoute } from '../../types/router.ts';
 
@@ -23,8 +29,15 @@ export async function middlewarePipe(ctx: VonaContext, next: Next) {
   return next();
 }
 
-async function _transformArguments(app: VonaApplication, route: ContextRoute): Promise<any[] | undefined> {
-  const paramtypes = appMetadata.getMetadata<any[]>('design:paramtypes', route.controller.prototype, route.action);
+async function _transformArguments(
+  app: VonaApplication,
+  route: ContextRoute,
+): Promise<any[] | undefined> {
+  const paramtypes = appMetadata.getMetadata<any[]>(
+    'design:paramtypes',
+    route.controller.prototype,
+    route.action,
+  );
   if (!paramtypes) return;
 
   // meta
@@ -65,10 +78,15 @@ async function _transformArgument(
   value: any,
 ) {
   // pipes
-  const pipes = composePipes(app, route, argMeta, (beanInstance: IPipeTransform, value, options, _next) => {
-    if (!isNil(options.argIndex) && argMeta.index !== options.argIndex) return value;
-    return beanInstance.transform(value, metadata, options);
-  });
+  const pipes = composePipes(
+    app,
+    route,
+    argMeta,
+    (beanInstance: IPipeTransform, value, options, _next) => {
+      if (!isNil(options.argIndex) && argMeta.index !== options.argIndex) return value;
+      return beanInstance.transform(value, metadata, options);
+    },
+  );
   if (pipes.length === 0) return value;
   // apply
   for (const pipe of pipes) {
@@ -88,7 +106,12 @@ async function _extractArgumentValue(ctx: VonaContext, argMeta: RouteHandlerArgu
   return extractValue(ctx, argMeta);
 }
 
-function composePipes(app: VonaApplication, route: ContextRoute, argMeta: RouteHandlerArgumentMetaDecorator, executeCustom: IOnionExecuteCustom) {
+function composePipes(
+  app: VonaApplication,
+  route: ContextRoute,
+  argMeta: RouteHandlerArgumentMetaDecorator,
+  executeCustom: IOnionExecuteCustom,
+) {
   if (!app.meta[SymbolCacheComposePipes]) app.meta[SymbolCacheComposePipes] = {};
   const cacheComposePipes: Record<string, Function[]> = app.meta[SymbolCacheComposePipes];
   const onionPipe = app.bean.onion.pipe;
@@ -118,7 +141,10 @@ function composePipes(app: VonaApplication, route: ContextRoute, argMeta: RouteH
   return cacheComposePipes[key];
 }
 
-function _collectArgumentMiddlewares(onionPipe: ServiceOnion<IPipeRecord>, argMeta: RouteHandlerArgumentMetaDecorator) {
+function _collectArgumentMiddlewares(
+  onionPipe: ServiceOnion<IPipeRecord>,
+  argMeta: RouteHandlerArgumentMetaDecorator,
+) {
   if (!argMeta.pipes) return;
   return argMeta.pipes.map(pipe => {
     const { pipeName, options } = pipe();

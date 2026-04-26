@@ -10,4 +10,7 @@ export interface TypeEventRemoveInstancesData {
 export type TypeEventRemoveInstancesResult = void;
 
 @Event()
-export class EventRemoveInstances extends BeanEventBase<TypeEventRemoveInstancesData, TypeEventRemoveInstancesResult> {}
+export class EventRemoveInstances extends BeanEventBase<
+  TypeEventRemoveInstancesData,
+  TypeEventRemoveInstancesResult
+> {}

@@ -13,4 +13,7 @@ export interface TypeEventRetrieveMenusSiteData {
 export type TypeEventRetrieveMenusSiteResult = TypeEventRetrieveMenusResult;
 
 @Event()
-export class EventRetrieveMenusSite extends BeanEventBase<TypeEventRetrieveMenusSiteData, TypeEventRetrieveMenusSiteResult> {}
+export class EventRetrieveMenusSite extends BeanEventBase<
+  TypeEventRetrieveMenusSiteData,
+  TypeEventRetrieveMenusSiteResult
+> {}

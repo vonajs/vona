@@ -7,7 +7,11 @@ import { mergeFieldOpenapiMetadata } from 'vona-module-a-openapiutils';
 import type { ISerializerTransformOptionsCustom } from '../bean/serializerTransform.custom.ts';
 import type { ISerializerTransformOptionsExclude } from '../bean/serializerTransform.exclude.ts';
 import type { ISerializerTransformOptionsGetter } from '../bean/serializerTransform.getter.ts';
-import type { ISerializerTransformRecord, TypeSerializerTransformCustom, TypeSerializerTransformGetter } from '../types/serializerTransform.ts';
+import type {
+  ISerializerTransformRecord,
+  TypeSerializerTransformCustom,
+  TypeSerializerTransformGetter,
+} from '../types/serializerTransform.ts';
 
 function Enable(enable: boolean = true): ClassDecorator & MethodDecorator {
   return Aspect.interceptor('a-serialization:serializer', { enable });
@@ -46,7 +50,9 @@ function Exclude(param?: boolean | Partial<ISerializerTransformOptionsExclude>):
   };
 }
 
-function Replace(options: ISerializerTransformRecord['a-serialization:replace']): PropertyDecorator {
+function Replace(
+  options: ISerializerTransformRecord['a-serialization:replace'],
+): PropertyDecorator {
   return function (target: object, prop: MetadataKey) {
     const metadata: TypeOpenapiMetadata = {
       serializerTransforms: {
@@ -59,7 +65,9 @@ function Replace(options: ISerializerTransformRecord['a-serialization:replace'])
 
 function Getter(options: Partial<ISerializerTransformOptionsGetter>): PropertyDecorator;
 function Getter(getter: TypeSerializerTransformGetter): PropertyDecorator;
-function Getter(param: TypeSerializerTransformGetter | Partial<ISerializerTransformOptionsGetter>): PropertyDecorator {
+function Getter(
+  param: TypeSerializerTransformGetter | Partial<ISerializerTransformOptionsGetter>,
+): PropertyDecorator {
   let options: Partial<ISerializerTransformOptionsGetter>;
   if (typeof param === 'function') {
     options = { getter: param };
@@ -78,7 +86,9 @@ function Getter(param: TypeSerializerTransformGetter | Partial<ISerializerTransf
 
 function Custom(options: Partial<ISerializerTransformOptionsCustom>): PropertyDecorator;
 function Custom(custom: TypeSerializerTransformCustom): PropertyDecorator;
-function Custom(param: TypeSerializerTransformCustom | Partial<ISerializerTransformOptionsCustom>): PropertyDecorator {
+function Custom(
+  param: TypeSerializerTransformCustom | Partial<ISerializerTransformOptionsCustom>,
+): PropertyDecorator {
   let options: Partial<ISerializerTransformOptionsCustom>;
   if (typeof param === 'function') {
     options = { custom: param };

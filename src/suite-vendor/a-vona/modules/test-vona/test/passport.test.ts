@@ -10,7 +10,9 @@ describe('passport.test.ts', () => {
       assert.equal(app.bean.passport.isAuthenticated, true);
       assert.equal(app.bean.passport.current, app.ctx.passport);
       assert.equal(app.bean.passport.currentUser, app.ctx.user);
-      await app.bean.executor.performAction('get', '/test/vona/passport/echo/:name', { params: { name: 'admin' } });
+      await app.bean.executor.performAction('get', '/test/vona/passport/echo/:name', {
+        params: { name: 'admin' },
+      });
       await app.bean.passport.signout();
       assert.equal(app.bean.passport.isAuthenticated, false);
     });
@@ -26,18 +28,26 @@ describe('passport.test.ts', () => {
       });
       assert.equal(!!jwt?.accessToken, true);
       // isAuthenticated
-      let isAuthenticated = await app.bean.executor.performAction('get', '/test/vona/passport/isAuthenticated');
+      let isAuthenticated = await app.bean.executor.performAction(
+        'get',
+        '/test/vona/passport/isAuthenticated',
+      );
       assert.equal(isAuthenticated, true);
       // isAuthenticated: isolate
       const [isAuthenticated2, _err] = await catchError(async () => {
         return await app.bean.executor.newCtxIsolate(async () => {
-          return await app.bean.executor.performAction('get', '/test/vona/passport/isAuthenticated');
+          return await app.bean.executor.performAction(
+            'get',
+            '/test/vona/passport/isAuthenticated',
+          );
         });
       });
       assert.equal(isAuthenticated2, undefined);
       // isAuthenticated: isolate + header
       isAuthenticated = await app.bean.executor.newCtxIsolate(async () => {
-        return await app.bean.executor.performAction('get', '/test/vona/passport/isAuthenticated', { authToken: jwt.accessToken });
+        return await app.bean.executor.performAction('get', '/test/vona/passport/isAuthenticated', {
+          authToken: jwt.accessToken,
+        });
       });
       assert.equal(isAuthenticated, true);
       // refresh

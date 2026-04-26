@@ -46,7 +46,10 @@ export class ServiceEventListener extends BeanBase {
   }
 }
 
-function _wrapOnion<T extends keyof IEventListenerRecord>(app: VonaApplication, item: IOnionSlice<IEventListenerRecord, T>) {
+function _wrapOnion<T extends keyof IEventListenerRecord>(
+  app: VonaApplication,
+  item: IOnionSlice<IEventListenerRecord, T>,
+) {
   const fn = (data: unknown, next: Next) => {
     // execute
     const beanFullName = item.beanOptions.beanFullName;

@@ -142,7 +142,10 @@ declare module 'vona' {
 config.logger = {
   clients: {
     order(this: VonaApplication, clientInfo) {
-      const transports = [this.bean.logger.makeTransportFile(clientInfo, 'order'), this.bean.logger.makeTransportConsole(clientInfo)];
+      const transports = [
+        this.bean.logger.makeTransportFile(clientInfo, 'order'),
+        this.bean.logger.makeTransportConsole(clientInfo),
+      ];
       return { transports };
     },
   },

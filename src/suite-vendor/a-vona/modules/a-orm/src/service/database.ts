@@ -4,7 +4,11 @@ import { Service } from 'vona-module-a-bean';
 
 import type { BeanDatabaseDialectBase } from '../bean/bean.databaseDialectBase.ts';
 import type { ConfigDatabaseClient } from '../types/config.ts';
-import type { IDatabaseClientDialectRecord, IDatabaseClientRecord, IDbInfo } from '../types/database.ts';
+import type {
+  IDatabaseClientDialectRecord,
+  IDatabaseClientRecord,
+  IDbInfo,
+} from '../types/database.ts';
 
 import { ServiceDatabaseClient } from './databaseClient_.ts';
 
@@ -14,7 +18,11 @@ export class ServiceDatabase extends BeanBase {
     return this.app.config.database;
   }
 
-  getClientConfig(clientName: keyof IDatabaseClientRecord, clientConfig?: ConfigDatabaseClient, original?: boolean): ConfigDatabaseClient {
+  getClientConfig(
+    clientName: keyof IDatabaseClientRecord,
+    clientConfig?: ConfigDatabaseClient,
+    original?: boolean,
+  ): ConfigDatabaseClient {
     // clientConfig
     if (!clientConfig) {
       clientConfig = this.configDatabase.clients[clientName];
@@ -51,7 +59,10 @@ export class ServiceDatabase extends BeanBase {
     return { level, clientName };
   }
 
-  prepareClientNameSelector(dbInfo: IDbInfo, dialect: BeanDatabaseDialectBase | keyof IDatabaseClientDialectRecord) {
+  prepareClientNameSelector(
+    dbInfo: IDbInfo,
+    dialect: BeanDatabaseDialectBase | keyof IDatabaseClientDialectRecord,
+  ) {
     const dialect2 = typeof dialect === 'string' ? this.bean.database.getDialect(dialect) : dialect;
     if (!dialect2.capabilities.level) return dbInfo.clientName;
     // combine
@@ -80,7 +91,8 @@ export class ServiceDatabase extends BeanBase {
     // check instance
     const instanceName = this.ctx.instanceName;
     if (!isNil(instanceName)) {
-      const configInstanceBase = this.$scope.instance.service.instance.getConfigInstanceBase(instanceName);
+      const configInstanceBase =
+        this.$scope.instance.service.instance.getConfigInstanceBase(instanceName);
       if (configInstanceBase?.isolate) {
         return configInstanceBase.isolateClient!;
       }
@@ -89,9 +101,12 @@ export class ServiceDatabase extends BeanBase {
   }
 
   prepareClientNameReal(clientName?: keyof IDatabaseClientRecord): keyof IDatabaseClientRecord {
-    return this.scope.event.clientNameReal.emitSync(this.prepareClientName(clientName), clientName => {
-      return clientName;
-    });
+    return this.scope.event.clientNameReal.emitSync(
+      this.prepareClientName(clientName),
+      clientName => {
+        return clientName;
+      },
+    );
   }
 
   columnsClear(clientName?: keyof IDatabaseClientRecord, tableName?: string) {
@@ -100,16 +115,25 @@ export class ServiceDatabase extends BeanBase {
   }
 
   private columnsClearWorker(clientName?: keyof IDatabaseClientRecord, tableName?: string) {
-    this.scope.event.columnsClear.emitSync({ clientName: this.prepareClientNameReal(clientName), tableName });
+    this.scope.event.columnsClear.emitSync({
+      clientName: this.prepareClientNameReal(clientName),
+      tableName,
+    });
   }
 
-  async reloadClients(clientName?: keyof IDatabaseClientRecord, clientConfig?: ConfigDatabaseClient) {
+  async reloadClients(
+    clientName?: keyof IDatabaseClientRecord,
+    clientConfig?: ConfigDatabaseClient,
+  ) {
     clientName = this.prepareClientName(clientName);
     await this.bean.mutate.reloadInstances(ServiceDatabaseClient, { clientName, clientConfig });
     this.columnsClear(clientName);
   }
 
-  async reloadClientsWorker(clientName?: keyof IDatabaseClientRecord, clientConfig?: ConfigDatabaseClient) {
+  async reloadClientsWorker(
+    clientName?: keyof IDatabaseClientRecord,
+    clientConfig?: ConfigDatabaseClient,
+  ) {
     clientName = this.prepareClientName(clientName);
     await this.bean.mutate.reloadInstancesWorker({
       beanFullName: appResource.getBeanFullName(ServiceDatabaseClient) as any,

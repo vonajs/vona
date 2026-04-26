@@ -17,8 +17,12 @@ export class CliBinTsc extends BeanCliBase {
   }
 
   async _tsc(projectPath: string, force: boolean) {
-    const suiteNames = Object.keys(this.modulesMeta.suites).filter(suiteName => !this.modulesMeta.suites[suiteName].info.node_modules);
-    const modulesArray = this.modulesMeta.modulesArray.filter(item => !item.suite && !item.info.node_modules);
+    const suiteNames = Object.keys(this.modulesMeta.suites).filter(
+      suiteName => !this.modulesMeta.suites[suiteName].info.node_modules,
+    );
+    const modulesArray = this.modulesMeta.modulesArray.filter(
+      item => !item.suite && !item.info.node_modules,
+    );
     // count
     const count = 1 + suiteNames.length + modulesArray.length;
     // begin

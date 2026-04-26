@@ -6,7 +6,10 @@ import { getKeyHash } from '../lib/utils.ts';
 
 const SymbolCacheEnabled = Symbol('SymbolCacheEnabled');
 
-export class CacheBase<CACHEOPTIONS extends IOnionOptionsEnable = IOnionOptionsEnable, KEY = any> extends BeanBase {
+export class CacheBase<
+  CACHEOPTIONS extends IOnionOptionsEnable = IOnionOptionsEnable,
+  KEY = any,
+> extends BeanBase {
   protected _cacheName: string;
   protected _cacheOptions: CACHEOPTIONS;
 

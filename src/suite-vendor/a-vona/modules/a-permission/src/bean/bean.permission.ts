@@ -1,6 +1,15 @@
 import type { ICachingActionKeyInfo } from 'vona-module-a-caching';
-import type { IOpenapiPermissionModeActionActions, IOpenapiPermissions, IResourceRecord } from 'vona-module-a-openapi';
-import type { ContextRoute, ContextRouteBase, ContextRouteMetadata, IRecordResourceNameToRoutePathItem } from 'vona-module-a-web';
+import type {
+  IOpenapiPermissionModeActionActions,
+  IOpenapiPermissions,
+  IResourceRecord,
+} from 'vona-module-a-openapi';
+import type {
+  ContextRoute,
+  ContextRouteBase,
+  ContextRouteMetadata,
+  IRecordResourceNameToRoutePathItem,
+} from 'vona-module-a-web';
 
 import { catchError } from '@cabloy/utils';
 import { appMetadata, appResource, BeanBase, beanFullNameFromOnionName } from 'vona';
@@ -12,7 +21,9 @@ import { composeGuards, recordResourceNameToRoutePath } from 'vona-module-a-web'
 @Bean()
 export class BeanPermission extends BeanBase {
   public async clearAllCaches() {
-    const cacheOpenapiSchema = this.bean.summer.cache(beanFullNameFromOnionName('a-permission:permission', 'summerCache'));
+    const cacheOpenapiSchema = this.bean.summer.cache(
+      beanFullNameFromOnionName('a-permission:permission', 'summerCache'),
+    );
     await cacheOpenapiSchema.clear();
   }
 
@@ -30,7 +41,8 @@ export class BeanPermission extends BeanBase {
   }
 
   async getPermissionsDefault(resource: keyof IResourceRecord): Promise<IOpenapiPermissions> {
-    const routePathInfo: IRecordResourceNameToRoutePathItem = recordResourceNameToRoutePath[resource];
+    const routePathInfo: IRecordResourceNameToRoutePathItem =
+      recordResourceNameToRoutePath[resource];
     if (!routePathInfo) throw new Error(`not found routePath of resource: ${resource}`);
     // controller options
     const controller = routePathInfo.controller;
@@ -41,13 +53,19 @@ export class BeanPermission extends BeanBase {
     // descs
     const descs = Object.getOwnPropertyDescriptors(controller.prototype);
     const actionsIgnore = this.scope.config.permission.actionsIgnore;
-    const actionKeys = Object.keys(descs).filter(actionKey => !['constructor'].includes(actionKey) && !actionsIgnore.includes(actionKey));
+    const actionKeys = Object.keys(descs).filter(
+      actionKey => !['constructor'].includes(actionKey) && !actionsIgnore.includes(actionKey),
+    );
     // actions
     const permissionsActions: IOpenapiPermissionModeActionActions = {};
     for (const actionKey of actionKeys) {
       const desc = descs[actionKey];
       if (!desc.value || typeof desc.value !== 'function') continue;
-      const routeReal: ContextRouteMetadata = appMetadata.getMetadata(SymbolUseOnionOptionsRouteReal, controller.prototype, actionKey)!;
+      const routeReal: ContextRouteMetadata = appMetadata.getMetadata(
+        SymbolUseOnionOptionsRouteReal,
+        controller.prototype,
+        actionKey,
+      )!;
       const route: Partial<ContextRoute> = {
         controller,
         controllerBeanFullName,

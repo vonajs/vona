@@ -8,4 +8,7 @@ export type TCacheRedisStartupDebounceData = boolean;
   disableTransactionCompensate: true,
   client: 'worker',
 })
-export class CacheRedisStartupDebounce extends BeanCacheRedisBase<TCacheRedisStartupDebounceKey, TCacheRedisStartupDebounceData> {}
+export class CacheRedisStartupDebounce extends BeanCacheRedisBase<
+  TCacheRedisStartupDebounceKey,
+  TCacheRedisStartupDebounceData
+> {}

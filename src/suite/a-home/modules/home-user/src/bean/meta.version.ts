@@ -1,4 +1,9 @@
-import type { IMetaVersionInit, IMetaVersionInitOptions, IMetaVersionUpdate, IMetaVersionUpdateOptions } from 'vona-module-a-version';
+import type {
+  IMetaVersionInit,
+  IMetaVersionInitOptions,
+  IMetaVersionUpdate,
+  IMetaVersionUpdateOptions,
+} from 'vona-module-a-version';
 
 import { BeanBase } from 'vona';
 import { Meta } from 'vona-module-a-meta';
@@ -23,7 +28,10 @@ export class MetaVersion extends BeanBase implements IMetaVersionUpdate, IMetaVe
         table.string(entityUser.avatar, 255).comment(entityUser.$comment.avatar);
         table.string(entityUser.email, 255).comment(entityUser.$comment.email);
         table.string(entityUser.mobile, 255).comment(entityUser.$comment.mobile);
-        table.boolean(entityUser.activated).defaultTo(entityUser.$default.activated).comment(entityUser.$comment.activated);
+        table
+          .boolean(entityUser.activated)
+          .defaultTo(entityUser.$default.activated)
+          .comment(entityUser.$comment.activated);
         table.string(entityUser.locale, 255).comment(entityUser.$comment.locale);
         table.string(entityUser.tz, 255).comment(entityUser.$comment.tz);
       });

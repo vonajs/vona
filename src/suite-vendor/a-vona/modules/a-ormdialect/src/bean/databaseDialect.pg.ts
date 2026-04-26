@@ -22,8 +22,13 @@ export class DatabaseDialectPg extends BeanDatabaseDialectBase {
 
   protected _configBase?: Partial<ConfigDatabaseClient> = undefined;
 
-  async fetchDatabases(schemaBuilder: Knex.SchemaBuilder, databasePrefix: string): Promise<IFetchDatabasesResultItem[]> {
-    const res: any = await schemaBuilder.raw(`select datname from pg_database where datname like '${databasePrefix}%'`);
+  async fetchDatabases(
+    schemaBuilder: Knex.SchemaBuilder,
+    databasePrefix: string,
+  ): Promise<IFetchDatabasesResultItem[]> {
+    const res: any = await schemaBuilder.raw(
+      `select datname from pg_database where datname like '${databasePrefix}%'`,
+    );
     let dbs = res.rows;
     dbs = dbs.map(db => {
       return { name: db.datname };
@@ -40,8 +45,13 @@ export class DatabaseDialectPg extends BeanDatabaseDialectBase {
     await schemaBuilder.raw(`DROP DATABASE "${databaseName}"`);
   }
 
-  async fetchIndexes(schemaBuilder: Knex.SchemaBuilder, tableName: string): Promise<IFetchIndexesResultItem[]> {
-    const res: any = await schemaBuilder.raw(`select indexname,indexdef from pg_indexes where tablename='${tableName}'`);
+  async fetchIndexes(
+    schemaBuilder: Knex.SchemaBuilder,
+    tableName: string,
+  ): Promise<IFetchIndexesResultItem[]> {
+    const res: any = await schemaBuilder.raw(
+      `select indexname,indexdef from pg_indexes where tablename='${tableName}'`,
+    );
     let items = res.rows;
     items = items.map(item => {
       return {
@@ -51,7 +61,10 @@ export class DatabaseDialectPg extends BeanDatabaseDialectBase {
     return items;
   }
 
-  async insert(builder: Knex.QueryBuilder, datas: any[]): Promise<[TableIdentity[], Knex.QueryBuilder]> {
+  async insert(
+    builder: Knex.QueryBuilder,
+    datas: any[],
+  ): Promise<[TableIdentity[], Knex.QueryBuilder]> {
     return await this.insertAsPg(builder, datas);
   }
 
@@ -76,7 +89,10 @@ export class DatabaseDialectPg extends BeanDatabaseDialectBase {
           dep.deptype = 'n'
           and dep.classid = 'pg_rewrite'::regclass
     `;
-    let items = await builder.distinct('dep_name').fromRaw(`(${sqlViews}) as depend_view`).where({ ref_name: viewName });
+    let items = await builder
+      .distinct('dep_name')
+      .fromRaw(`(${sqlViews}) as depend_view`)
+      .where({ ref_name: viewName });
     items = items.map(item => item.dep_name);
     items = items.filter((item: string) => item.toLowerCase() !== viewName.toLowerCase());
     return items;

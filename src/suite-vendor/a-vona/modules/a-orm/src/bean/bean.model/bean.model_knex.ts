@@ -9,7 +9,9 @@ export class BeanModelKnex<TRecord extends {}> extends BeanModelUtils<TRecord> {
     return this.connection.schema;
   }
 
-  builder<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(table?: Knex.TableDescriptor): Knex.QueryBuilder<TRecord2, TResult2[]> {
+  builder<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(
+    table?: Knex.TableDescriptor,
+  ): Knex.QueryBuilder<TRecord2, TResult2[]> {
     // table
     table = table || this.getTable(undefined);
     if (table) {
@@ -18,12 +20,17 @@ export class BeanModelKnex<TRecord extends {}> extends BeanModelUtils<TRecord> {
     return this.connection.queryBuilder<TRecord2, TResult2[]>();
   }
 
-  builderSelect<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(options?: IModelMethodOptionsGeneral): Knex.QueryBuilder<TRecord2, TResult2[]>;
+  builderSelect<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(
+    options?: IModelMethodOptionsGeneral,
+  ): Knex.QueryBuilder<TRecord2, TResult2[]>;
   builderSelect<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(
     table: keyof ITableRecord,
     options?: IModelMethodOptionsGeneral,
   ): Knex.QueryBuilder<TRecord2, TResult2[]>;
-  builderSelect<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(table?, options?): Knex.QueryBuilder<TRecord2, TResult2[]> {
+  builderSelect<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(
+    table?,
+    options?,
+  ): Knex.QueryBuilder<TRecord2, TResult2[]> {
     if (typeof table !== 'string') {
       options = table;
       table = undefined;
@@ -41,7 +48,10 @@ export class BeanModelKnex<TRecord extends {}> extends BeanModelUtils<TRecord> {
 
   async query(value: Knex.Value): Promise<TRecord[]>;
   async query(sql: string, binding: Knex.RawBinding): Promise<TRecord[]>;
-  async query(sql: string, bindings: readonly Knex.RawBinding[] | Knex.ValueDict): Promise<TRecord[]>;
+  async query(
+    sql: string,
+    bindings: readonly Knex.RawBinding[] | Knex.ValueDict,
+  ): Promise<TRecord[]>;
   async query(sql, bindings?): Promise<TRecord[]> {
     const raw = this.connection.raw(sql, bindings);
     const result = await raw;
@@ -51,7 +61,10 @@ export class BeanModelKnex<TRecord extends {}> extends BeanModelUtils<TRecord> {
 
   async queryOne(value: Knex.Value): Promise<TRecord | undefined>;
   async queryOne(sql: string, binding: Knex.RawBinding): Promise<TRecord | undefined>;
-  async queryOne(sql: string, bindings: readonly Knex.RawBinding[] | Knex.ValueDict): Promise<TRecord | undefined>;
+  async queryOne(
+    sql: string,
+    bindings: readonly Knex.RawBinding[] | Knex.ValueDict,
+  ): Promise<TRecord | undefined>;
   async queryOne(sql, bindings?): Promise<TRecord | undefined> {
     const res = await this.query(sql, bindings);
     if (!res[0]) return undefined;

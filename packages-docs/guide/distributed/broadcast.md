@@ -26,7 +26,10 @@ export interface TypeBroadcastEchoJobData {
 }
 
 @Broadcast()
-export class BroadcastEcho extends BeanBroadcastBase<TypeBroadcastEchoJobData> implements IBroadcastExecute<TypeBroadcastEchoJobData> {
+export class BroadcastEcho
+  extends BeanBroadcastBase<TypeBroadcastEchoJobData>
+  implements IBroadcastExecute<TypeBroadcastEchoJobData>
+{
   async execute(data: TypeBroadcastEchoJobData, isEmitter?: boolean) {
     if (!isEmitter) {
       console.log(`pid: ${process.pid} message: ${data.message}`);

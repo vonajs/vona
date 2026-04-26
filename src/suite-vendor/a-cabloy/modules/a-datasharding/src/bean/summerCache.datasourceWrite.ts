@@ -14,4 +14,7 @@ export type TSummerCacheDatasourceWriteData = keyof IDatabaseClientRecord;
     ttl: 3 * 1000, // 3s
   },
 })
-export class SummerCacheDatasourceWrite extends BeanSummerCacheBase<TSummerCacheDatasourceWriteKey, TSummerCacheDatasourceWriteData> {}
+export class SummerCacheDatasourceWrite extends BeanSummerCacheBase<
+  TSummerCacheDatasourceWriteKey,
+  TSummerCacheDatasourceWriteData
+> {}

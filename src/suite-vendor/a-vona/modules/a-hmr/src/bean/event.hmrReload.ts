@@ -13,4 +13,7 @@ export interface TypeEventHmrReloadData {
 export type TypeEventHmrReloadResult = void;
 
 @Event()
-export class EventHmrReload extends BeanEventBase<TypeEventHmrReloadData, TypeEventHmrReloadResult> {}
+export class EventHmrReload extends BeanEventBase<
+  TypeEventHmrReloadData,
+  TypeEventHmrReloadResult
+> {}

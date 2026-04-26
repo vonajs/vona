@@ -7,4 +7,7 @@ export type TypeEventEmailConfirmCallbackData = TCacheRedisEmailConfirmData | un
 export type TypeEventEmailConfirmCallbackResult = string;
 
 @Event()
-export class EventEmailConfirmCallback extends BeanEventBase<TypeEventEmailConfirmCallbackData, TypeEventEmailConfirmCallbackResult> {}
+export class EventEmailConfirmCallback extends BeanEventBase<
+  TypeEventEmailConfirmCallbackData,
+  TypeEventEmailConfirmCallbackResult
+> {}

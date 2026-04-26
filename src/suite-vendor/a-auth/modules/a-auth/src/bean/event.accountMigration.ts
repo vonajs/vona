@@ -10,4 +10,7 @@ export interface TypeEventAccountMigrationData {
 export type TypeEventAccountMigrationResult = void;
 
 @Event()
-export class EventAccountMigration extends BeanEventBase<TypeEventAccountMigrationData, TypeEventAccountMigrationResult> {}
+export class EventAccountMigration extends BeanEventBase<
+  TypeEventAccountMigrationData,
+  TypeEventAccountMigrationResult
+> {}

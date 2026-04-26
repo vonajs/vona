@@ -35,22 +35,44 @@ export function schemaIPv6(params?: string | ILocaleMagic | z.core.$ZodIPv6Param
   };
 }
 
-export function schemaMin(min: number, params?: string | ILocaleMagic | z.core.$ZodCheckMinLengthParams | z.core.$ZodCheckGreaterThanParams) {
+export function schemaMin(
+  min: number,
+  params?:
+    | string
+    | ILocaleMagic
+    | z.core.$ZodCheckMinLengthParams
+    | z.core.$ZodCheckGreaterThanParams,
+) {
   return function (schema: z.ZodString | z.ZodNumber): z.ZodString | z.ZodNumber {
     if (schema.type === 'string') {
-      return schema.min(min, normalizeErrorParams(params) as string | z.core.$ZodCheckMinLengthParams);
+      return schema.min(
+        min,
+        normalizeErrorParams(params) as string | z.core.$ZodCheckMinLengthParams,
+      );
     } else {
-      return schema.min(min, normalizeErrorParams(params) as string | z.core.$ZodCheckGreaterThanParams);
+      return schema.min(
+        min,
+        normalizeErrorParams(params) as string | z.core.$ZodCheckGreaterThanParams,
+      );
     }
   };
 }
 
-export function schemaMax(max: number, params?: string | ILocaleMagic | z.core.$ZodCheckMaxLengthParams | z.core.$ZodCheckLessThanParams) {
+export function schemaMax(
+  max: number,
+  params?: string | ILocaleMagic | z.core.$ZodCheckMaxLengthParams | z.core.$ZodCheckLessThanParams,
+) {
   return function (schema: z.ZodString | z.ZodNumber): z.ZodString | z.ZodNumber {
     if (schema.type === 'string') {
-      return schema.max(max, normalizeErrorParams(params) as string | z.core.$ZodCheckMaxLengthParams);
+      return schema.max(
+        max,
+        normalizeErrorParams(params) as string | z.core.$ZodCheckMaxLengthParams,
+      );
     } else {
-      return schema.max(max, normalizeErrorParams(params) as string | z.core.$ZodCheckLessThanParams);
+      return schema.max(
+        max,
+        normalizeErrorParams(params) as string | z.core.$ZodCheckLessThanParams,
+      );
     }
   };
 }
@@ -85,7 +107,10 @@ export function schemaUppercase(params?: string | ILocaleMagic | z.core.$ZodChec
   };
 }
 
-export function schemaRegex(regex: RegExp, params?: string | ILocaleMagic | z.core.$ZodCheckRegexParams) {
+export function schemaRegex(
+  regex: RegExp,
+  params?: string | ILocaleMagic | z.core.$ZodCheckRegexParams,
+) {
   return function (schema: z.ZodString): z.ZodString {
     return schema.regex(regex, normalizeErrorParams(params));
   };

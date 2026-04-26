@@ -6,7 +6,15 @@ import is from 'is-type-of';
 
 import { BeanCli } from './bean.cli.ts';
 
-const __envFields = ['TERM', 'TERM_PROGRAM', 'TERM_PROGRAM_VERSION', 'SHELL', 'COLOR', 'LANG', 'npm_config_registry'];
+const __envFields = [
+  'TERM',
+  'TERM_PROGRAM',
+  'TERM_PROGRAM_VERSION',
+  'SHELL',
+  'COLOR',
+  'LANG',
+  'npm_config_registry',
+];
 const __comment_seperator = '====================================================================';
 
 export class CliCommand extends BaseCommand {
@@ -168,7 +176,13 @@ export class CliCommand extends BaseCommand {
     };
     // message/skip/initial/format/validate
     for (const propName of ['message', 'skip', 'initial', 'format', 'validate']) {
-      const propFunction = this._prepareQuestionPropertyExpression({ group, question, key, context, propName });
+      const propFunction = this._prepareQuestionPropertyExpression({
+        group,
+        question,
+        key,
+        context,
+        propName,
+      });
       if (propFunction) {
         varWant[propName] = propFunction;
       }

@@ -1,6 +1,11 @@
 import type http from 'node:http';
 import type { IInstanceRecord, OmitNever } from 'vona';
-import type { IOnionOptionsEnable, IOnionOptionsMatch, ServiceOnion, TypeOnionOptionsMatchRule } from 'vona-module-a-onion';
+import type {
+  IOnionOptionsEnable,
+  IOnionOptionsMatch,
+  ServiceOnion,
+  TypeOnionOptionsMatchRule,
+} from 'vona-module-a-onion';
 
 import type { ZovaConfigEnv } from './env.ts';
 
@@ -50,8 +55,14 @@ export type TypeMergePagesAndPagesData<Pages extends {} = {}, PagesData extends 
   [K in keyof Pages]: Pages[K] & { data?: PagesData[K] };
 };
 
-export interface IDecoratorSsrSiteOptions<Pages extends {} = {}, PagesData extends {} = {}, Icons extends {} = {}>
-  extends IOnionOptionsEnable, IOnionOptionsMatch<TypeOnionOptionsMatchRule<keyof IInstanceRecord>> {
+export interface IDecoratorSsrSiteOptions<
+  Pages extends {} = {},
+  PagesData extends {} = {},
+  Icons extends {} = {},
+>
+  extends
+    IOnionOptionsEnable,
+    IOnionOptionsMatch<TypeOnionOptionsMatchRule<keyof IInstanceRecord>> {
   publicPath: keyof ISsrSitePublicPathRecord;
   bundlePath: string;
   envServer?: ZovaConfigEnv;

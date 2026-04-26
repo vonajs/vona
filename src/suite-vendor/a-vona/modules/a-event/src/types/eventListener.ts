@@ -13,7 +13,10 @@ export type NextEvent<DATA = unknown, RESULT = unknown> = (data?: DATA) => Promi
 export type NextEventStrict<DATA = unknown, RESULT = unknown> = (data: DATA) => Promise<RESULT>;
 export type NextEventSync<DATA = unknown, RESULT = unknown> = (data?: DATA) => RESULT;
 export type NextEventSyncStrict<DATA = unknown, RESULT = unknown> = (data: DATA) => RESULT;
-export type EventOn<DATA = unknown, RESULT = unknown> = (data: DATA, next: (data?: DATA) => Promise<RESULT> | RESULT) => Promise<RESULT> | RESULT;
+export type EventOn<DATA = unknown, RESULT = unknown> = (
+  data: DATA,
+  next: (data?: DATA) => Promise<RESULT> | RESULT,
+) => Promise<RESULT> | RESULT;
 
 export interface IEventExecute<DATA = unknown, RESULT = unknown> {
   execute: (data: DATA, next: NextGeneral) => Promise<RESULT> | RESULT;

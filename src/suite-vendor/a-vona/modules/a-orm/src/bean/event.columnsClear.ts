@@ -10,4 +10,7 @@ export interface TypeEventColumnsClearData {
 export type TypeEventColumnsClearResult = void;
 
 @Event()
-export class EventColumnsClear extends BeanEventBase<TypeEventColumnsClearData, TypeEventColumnsClearResult> {}
+export class EventColumnsClear extends BeanEventBase<
+  TypeEventColumnsClearData,
+  TypeEventColumnsClearResult
+> {}

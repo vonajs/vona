@@ -6,11 +6,18 @@ import { AopMethod } from 'vona-module-a-aspect';
 
 import type { ITransactionOptions } from '../types/transaction.ts';
 
-export interface IAopMethodOptionsTransaction extends IDecoratorAopMethodOptions, ITransactionOptions {}
+export interface IAopMethodOptionsTransaction
+  extends IDecoratorAopMethodOptions, ITransactionOptions {}
 
 @AopMethod<IAopMethodOptionsTransaction>()
 export class AopMethodTransaction extends BeanAopMethodBase implements IAopMethodExecute {
-  execute(options: IAopMethodOptionsTransaction, _args: [], next: Next | NextSync, _receiver: any, _prop: string): Promise<any> | any {
+  execute(
+    options: IAopMethodOptionsTransaction,
+    _args: [],
+    next: Next | NextSync,
+    _receiver: any,
+    _prop: string,
+  ): Promise<any> | any {
     return this.bean.database.current.transaction.begin(() => {
       return next();
     }, options);

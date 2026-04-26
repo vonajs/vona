@@ -1,7 +1,12 @@
 import type { TableIdentity } from 'table-identity';
 
 import { Client, OrdersController } from '@cabloy/paypal-server-sdk';
-import { CheckoutPaymentIntent, Environment, LogLevel, OrderStatus } from '@cabloy/paypal-server-sdk';
+import {
+  CheckoutPaymentIntent,
+  Environment,
+  LogLevel,
+  OrderStatus,
+} from '@cabloy/paypal-server-sdk';
 import { combineQueries } from '@cabloy/utils';
 import { BeanBase } from 'vona';
 import { Bean } from 'vona-module-a-bean';
@@ -32,7 +37,11 @@ export class BeanPaypal extends BeanBase {
     });
   }
 
-  async createOrder(userId: TableIdentity, payload: IPaypalOrderRecordPayload, options: IPaypalOrderRecordOptions) {
+  async createOrder(
+    userId: TableIdentity,
+    payload: IPaypalOrderRecordPayload,
+    options: IPaypalOrderRecordOptions,
+  ) {
     // create record
     const record = await this.scope.model.paypalRecord.insert({
       userId,

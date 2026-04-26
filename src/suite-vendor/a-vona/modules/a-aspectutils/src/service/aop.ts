@@ -1,7 +1,18 @@
 import type { Constructable, IBeanRecord } from 'vona';
-import type { IDecoratorAopOptions, IUseAopMethodPropMetadata, IUseAopMethodPropMetadataInner } from 'vona-module-a-aspect';
+import type {
+  IDecoratorAopOptions,
+  IUseAopMethodPropMetadata,
+  IUseAopMethodPropMetadataInner,
+} from 'vona-module-a-aspect';
 
-import { appMetadata, appResource, BeanBase, beanFullNameFromOnionName, deepExtend, ProxyDisable } from 'vona';
+import {
+  appMetadata,
+  appResource,
+  BeanBase,
+  beanFullNameFromOnionName,
+  deepExtend,
+  ProxyDisable,
+} from 'vona';
 import { SymbolDecoratorUseAopMethod } from 'vona-module-a-aspect';
 import { Service } from 'vona-module-a-bean';
 
@@ -38,19 +49,37 @@ export class ServiceAop extends BeanBase {
     // beanOptions
     const beanOptions = appResource.getBean(beanFullName as any);
     if (!beanOptions) return false;
-    const uses = appMetadata.getMetadata(SymbolDecoratorUseAopMethod, beanOptions.beanClass.prototype);
+    const uses = appMetadata.getMetadata(
+      SymbolDecoratorUseAopMethod,
+      beanOptions.beanClass.prototype,
+    );
     return !!uses;
   }
 
-  findAopMethodsMatched<T>(A: Constructable<T>, prop: string): IUseAopMethodPropMetadataInner[] | undefined;
-  findAopMethodsMatched<K extends keyof IBeanRecord>(beanFullName: K, prop: string): IUseAopMethodPropMetadataInner[] | undefined;
-  findAopMethodsMatched(beanFullName: string, prop: string): IUseAopMethodPropMetadataInner[] | undefined;
-  findAopMethodsMatched<T>(beanFullName: Constructable<T> | string, prop: string): IUseAopMethodPropMetadataInner[] | undefined {
+  findAopMethodsMatched<T>(
+    A: Constructable<T>,
+    prop: string,
+  ): IUseAopMethodPropMetadataInner[] | undefined;
+  findAopMethodsMatched<K extends keyof IBeanRecord>(
+    beanFullName: K,
+    prop: string,
+  ): IUseAopMethodPropMetadataInner[] | undefined;
+  findAopMethodsMatched(
+    beanFullName: string,
+    prop: string,
+  ): IUseAopMethodPropMetadataInner[] | undefined;
+  findAopMethodsMatched<T>(
+    beanFullName: Constructable<T> | string,
+    prop: string,
+  ): IUseAopMethodPropMetadataInner[] | undefined {
     // beanOptions
     const beanOptions = appResource.getBean(beanFullName as any);
     if (!beanOptions) return;
     const aopMethodsMatched: IUseAopMethodPropMetadataInner[] = [];
-    const uses = appMetadata.getMetadata(SymbolDecoratorUseAopMethod, beanOptions.beanClass.prototype);
+    const uses = appMetadata.getMetadata(
+      SymbolDecoratorUseAopMethod,
+      beanOptions.beanClass.prototype,
+    );
     const aopMethods: IUseAopMethodPropMetadata[] | undefined = uses?.[prop];
     if (aopMethods) {
       for (const aopMethod of aopMethods) {

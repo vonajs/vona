@@ -20,7 +20,9 @@ class ServiceMenu {
 
   private _getMenusDefault(): IMenus {
     return {
-      menus: [{ name: 'home', title: this.$scope.homeIndex.locale.Home(), icon: '::home', link: '/' }],
+      menus: [
+        { name: 'home', title: this.$scope.homeIndex.locale.Home(), icon: '::home', link: '/' },
+      ],
     };
   }
 }

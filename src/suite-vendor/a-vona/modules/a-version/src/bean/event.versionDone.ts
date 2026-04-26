@@ -7,4 +7,7 @@ export type TypeEventVersionDoneData = IMetaVersionOptions;
 export type TypeEventVersionDoneResult = void;
 
 @Event()
-export class EventVersionDone extends BeanEventBase<TypeEventVersionDoneData, TypeEventVersionDoneResult> {}
+export class EventVersionDone extends BeanEventBase<
+  TypeEventVersionDoneData,
+  TypeEventVersionDoneResult
+> {}

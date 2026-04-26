@@ -25,7 +25,10 @@ import { BeanModelMeta } from './bean.model_meta.ts';
 
 export class BeanModelUtils<TRecord extends {}> extends BeanModelMeta<TRecord> {
   async prepareData(item?: Partial<TRecord>): Promise<[TRecord, TRecord]>;
-  async prepareData(table: keyof ITableRecord, item?: Partial<TRecord>): Promise<[TRecord, TRecord]>;
+  async prepareData(
+    table: keyof ITableRecord,
+    item?: Partial<TRecord>,
+  ): Promise<[TRecord, TRecord]>;
   async prepareData(table?, item?): Promise<[TRecord, TRecord]> {
     if (typeof table !== 'string') {
       item = table;
@@ -73,8 +76,14 @@ export class BeanModelUtils<TRecord extends {}> extends BeanModelMeta<TRecord> {
   }
 
   raw(value: Knex.Value): Knex.Raw<any>;
-  raw<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(sql: string, binding: Knex.RawBinding): Knex.Raw<TResult2>;
-  raw<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(sql: string, bindings: readonly Knex.RawBinding[] | Knex.ValueDict): Knex.Raw<TResult2>;
+  raw<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(
+    sql: string,
+    binding: Knex.RawBinding,
+  ): Knex.Raw<TResult2>;
+  raw<TRecord2 extends {} = TRecord, TResult2 = TRecord2>(
+    sql: string,
+    bindings: readonly Knex.RawBinding[] | Knex.ValueDict,
+  ): Knex.Raw<TResult2>;
   raw(sql, bindings?) {
     return this.connection.raw(sql, bindings);
   }
@@ -114,7 +123,10 @@ export class BeanModelUtils<TRecord extends {}> extends BeanModelMeta<TRecord> {
     }
   }
 
-  buildDistinct(builder: Knex.QueryBuilder, distinct?: boolean | keyof TRecord | (keyof TRecord)[]) {
+  buildDistinct(
+    builder: Knex.QueryBuilder,
+    distinct?: boolean | keyof TRecord | (keyof TRecord)[],
+  ) {
     if (distinct === undefined || distinct === false) return;
     if (distinct === true) {
       builder.distinct();
@@ -125,7 +137,11 @@ export class BeanModelUtils<TRecord extends {}> extends BeanModelMeta<TRecord> {
     }
   }
 
-  buildCount(builder: Knex.QueryBuilder, column?: TypeModelColumn<TRecord>, distinct?: boolean | keyof TRecord | (keyof TRecord)[]) {
+  buildCount(
+    builder: Knex.QueryBuilder,
+    column?: TypeModelColumn<TRecord>,
+    distinct?: boolean | keyof TRecord | (keyof TRecord)[],
+  ) {
     if (column !== undefined) {
       builder.count(column);
     } else if (distinct !== undefined && distinct !== false) {
@@ -158,7 +174,11 @@ export class BeanModelUtils<TRecord extends {}> extends BeanModelMeta<TRecord> {
     }
   }
 
-  buildColumns(builder: Knex.QueryBuilder, columns?: TypeModelColumns<TRecord>, groups?: (keyof TRecord)[] | undefined) {
+  buildColumns(
+    builder: Knex.QueryBuilder,
+    columns?: TypeModelColumns<TRecord>,
+    groups?: (keyof TRecord)[] | undefined,
+  ) {
     if (columns) {
       builder.select(columns as any);
     } else if (groups) {
@@ -191,16 +211,27 @@ export class BeanModelUtils<TRecord extends {}> extends BeanModelMeta<TRecord> {
     this.buildOffset(builder, page.index);
   }
 
-  prepareHaving(builder: Knex.QueryBuilder, having?: TypeModelWhere<TRecord, TypeModelSelectGroupParamsColumns<TRecord>>) {
+  prepareHaving(
+    builder: Knex.QueryBuilder,
+    having?: TypeModelWhere<TRecord, TypeModelSelectGroupParamsColumns<TRecord>>,
+  ) {
     if (!having) return;
     this.buildHaving(builder, having);
   }
 
-  buildHaving(builder: Knex.QueryBuilder, having: TypeModelWhere<TRecord, TypeModelSelectGroupParamsColumns<TRecord>>) {
+  buildHaving(
+    builder: Knex.QueryBuilder,
+    having: TypeModelWhere<TRecord, TypeModelSelectGroupParamsColumns<TRecord>>,
+  ) {
     return buildWhere(this.db, builder, having, true);
   }
 
-  prepareWhere(builder: Knex.QueryBuilder, table?: keyof ITableRecord, where?: TypeModelWhere<TRecord>, options?: IModelMethodOptionsGeneral) {
+  prepareWhere(
+    builder: Knex.QueryBuilder,
+    table?: keyof ITableRecord,
+    where?: TypeModelWhere<TRecord>,
+    options?: IModelMethodOptionsGeneral,
+  ) {
     // table
     table = table || this.getTable(where);
     if (!table) throw new Error('should specify the table name');
@@ -225,7 +256,11 @@ export class BeanModelUtils<TRecord extends {}> extends BeanModelMeta<TRecord> {
     return String(value);
   }
 
-  extractFirstValue(result: Array<object> | object, defaultValue?: any, columnName?: string): any | undefined {
+  extractFirstValue(
+    result: Array<object> | object,
+    defaultValue?: any,
+    columnName?: string,
+  ): any | undefined {
     const value = this._extractFirstValue(result, columnName);
     if (value === undefined || value === null) return defaultValue;
     return value;
@@ -240,7 +275,11 @@ export class BeanModelUtils<TRecord extends {}> extends BeanModelMeta<TRecord> {
     return res[keys[0]];
   }
 
-  protected _prepareWhereByOptions(table: keyof ITableRecord, where, options?: IModelMethodOptionsGeneral) {
+  protected _prepareWhereByOptions(
+    table: keyof ITableRecord,
+    where,
+    options?: IModelMethodOptionsGeneral,
+  ) {
     // disableInstance: should not check if specified
     where = this._prepareDisableInstanceByOptions(table, where, options);
     // disableDeleted: should not check if specified
@@ -249,7 +288,11 @@ export class BeanModelUtils<TRecord extends {}> extends BeanModelMeta<TRecord> {
     return where;
   }
 
-  protected _prepareInsertDataByOptions(table: keyof ITableRecord, data, options?: IModelMethodOptionsGeneral) {
+  protected _prepareInsertDataByOptions(
+    table: keyof ITableRecord,
+    data,
+    options?: IModelMethodOptionsGeneral,
+  ) {
     let result = Object.assign({}, data);
     // disableInstance: should not check if specified
     result = this._prepareDisableInstanceByOptions(table, result, options, true);

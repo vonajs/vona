@@ -7,7 +7,10 @@ import { BeanSummerCacheBase } from './bean.summerCacheBase.ts';
 
 @Bean()
 export class BeanSummer extends BeanBase {
-  cache<KEY, DATA>(cacheName: string, cacheOptions?: IDecoratorSummerCacheOptions): BeanSummerCacheBase<KEY, DATA> {
+  cache<KEY, DATA>(
+    cacheName: string,
+    cacheOptions?: IDecoratorSummerCacheOptions,
+  ): BeanSummerCacheBase<KEY, DATA> {
     if (cacheName.includes('.summerCache.')) {
       return this.app.bean._getBeanSelector(cacheName as any, undefined, cacheOptions);
     }

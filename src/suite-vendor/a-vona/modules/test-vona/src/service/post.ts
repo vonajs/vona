@@ -154,7 +154,10 @@ export class ServicePost extends BeanBase {
   }
 
   async createBulk() {
-    const posts = await this.scope.model.post.insertBulk([{ title: 'Post001' }, { title: 'Post002' }]);
+    const posts = await this.scope.model.post.insertBulk([
+      { title: 'Post001' },
+      { title: 'Post002' },
+    ]);
     // console.log(posts[0].id, posts[1].id);
     return posts;
   }

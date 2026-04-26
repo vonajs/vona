@@ -45,19 +45,27 @@ describe('captcha.test.ts', () => {
   it('action:captcha api:error', async () => {
     await app.bean.executor.mockCtx(async () => {
       // create
-      const captcha: ICaptchaData = await app.bean.executor.performAction('post', '/captcha/create', {
-        body: {
-          scene: sceneName,
+      const captcha: ICaptchaData = await app.bean.executor.performAction(
+        'post',
+        '/captcha/create',
+        {
+          body: {
+            scene: sceneName,
+          },
         },
-      });
+      );
       assert.equal(captcha.provider, providerName);
       // refresh
-      const captcha2: ICaptchaData = await app.bean.executor.performAction('post', '/captcha/refresh', {
-        body: {
-          id: captcha.id,
-          scene: sceneName,
+      const captcha2: ICaptchaData = await app.bean.executor.performAction(
+        'post',
+        '/captcha/refresh',
+        {
+          body: {
+            id: captcha.id,
+            scene: sceneName,
+          },
         },
-      });
+      );
       assert.equal(captcha2.provider, providerName);
       assert.equal(captcha2.id, captcha.id);
       // get token
@@ -87,30 +95,42 @@ describe('captcha.test.ts', () => {
   it('action:captcha api:ok', async () => {
     await app.bean.executor.mockCtx(async () => {
       // create
-      const captcha: ICaptchaData = await app.bean.executor.performAction('post', '/captcha/create', {
-        body: {
-          scene: sceneName,
+      const captcha: ICaptchaData = await app.bean.executor.performAction(
+        'post',
+        '/captcha/create',
+        {
+          body: {
+            scene: sceneName,
+          },
         },
-      });
+      );
       assert.equal(captcha.provider, providerName);
       // refresh
-      const captcha2: ICaptchaData = await app.bean.executor.performAction('post', '/captcha/refresh', {
-        body: {
-          id: captcha.id,
-          scene: sceneName,
+      const captcha2: ICaptchaData = await app.bean.executor.performAction(
+        'post',
+        '/captcha/refresh',
+        {
+          body: {
+            id: captcha.id,
+            scene: sceneName,
+          },
         },
-      });
+      );
       assert.equal(captcha2.provider, providerName);
       assert.equal(captcha2.id, captcha.id);
       // get token
       const captchaData = await app.bean.captcha.getCaptchaData(captcha2.id);
       // verifyImmediate: ok
-      const tokenSecondary = await app.bean.executor.performAction('post', '/captcha/verifyImmediate', {
-        body: {
-          id: captcha2.id,
-          token: captchaData?.token,
+      const tokenSecondary = await app.bean.executor.performAction(
+        'post',
+        '/captcha/verifyImmediate',
+        {
+          body: {
+            id: captcha2.id,
+            token: captchaData?.token,
+          },
         },
-      });
+      );
       assert.equal(!!tokenSecondary, true);
       // verify: ok
       await app.bean.executor.performAction('post', '/test/captcha/signin', {

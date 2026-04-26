@@ -42,4 +42,7 @@ export type RouteHandlerArgumentType =
   | 'string'
   | 'user';
 
-export type TypeExtractValue = (ctx: VonaContext, argMeta: RouteHandlerArgumentMetaDecorator) => Promise<any>;
+export type TypeExtractValue = (
+  ctx: VonaContext,
+  argMeta: RouteHandlerArgumentMetaDecorator,
+) => Promise<any>;

@@ -1,9 +1,17 @@
-import type { IZodRefineExecute, IZodRefineRecord, IZodTransformExecute, IZodTransformRecord } from 'vona-module-a-zod';
+import type {
+  IZodRefineExecute,
+  IZodRefineRecord,
+  IZodTransformExecute,
+  IZodTransformRecord,
+} from 'vona-module-a-zod';
 import type z from 'zod';
 
 import { beanFullNameFromOnionName, useApp } from 'vona';
 
-export function schemaZodRefine<T extends keyof IZodRefineRecord>(zodRefineName: T, options?: Partial<IZodRefineRecord[T]>) {
+export function schemaZodRefine<T extends keyof IZodRefineRecord>(
+  zodRefineName: T,
+  options?: Partial<IZodRefineRecord[T]>,
+) {
   return function (schema: z.ZodType): z.ZodType {
     return schema.superRefine(async (value, refinementCtx) => {
       const app = useApp();
@@ -19,11 +27,17 @@ export function schemaZodRefine<T extends keyof IZodRefineRecord>(zodRefineName:
   };
 }
 
-export function schemaZodTransform<T extends keyof IZodTransformRecord>(zodTransformName: T, options?: Partial<IZodTransformRecord[T]>) {
+export function schemaZodTransform<T extends keyof IZodTransformRecord>(
+  zodTransformName: T,
+  options?: Partial<IZodTransformRecord[T]>,
+) {
   return function (schema: z.ZodType): z.ZodType {
     return schema.transform(async value => {
       const app = useApp();
-      const options2 = app.bean.onion.zodTransform.getOnionOptionsDynamic(zodTransformName, options);
+      const options2 = app.bean.onion.zodTransform.getOnionOptionsDynamic(
+        zodTransformName,
+        options,
+      );
       // execute
       const beanFullName = beanFullNameFromOnionName(zodTransformName, 'zodTransform');
       const beanInstance = app.bean._getBean(beanFullName) as IZodTransformExecute;

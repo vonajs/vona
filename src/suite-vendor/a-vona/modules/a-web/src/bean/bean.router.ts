@@ -44,7 +44,10 @@ export class BeanRouter extends BeanBase {
     const controllerBeanFullName = beanOptions.beanFullName;
     const controllerOptions = beanOptions.options as IDecoratorControllerOptions;
     const controllerPath = controllerOptions.path;
-    const controllerMiddlewaresOptions = appMetadata.getMetadata<object>(SymbolUseOnionOptions, controller);
+    const controllerMiddlewaresOptions = appMetadata.getMetadata<object>(
+      SymbolUseOnionOptions,
+      controller,
+    );
     // descs
     const descs = Object.getOwnPropertyDescriptors(controller.prototype);
     for (const actionKey in descs) {
@@ -75,13 +78,23 @@ export class BeanRouter extends BeanBase {
     app.router.on(method, _path, fn);
   }
 
-  unRegister(method: Router.HTTPMethod, moduleName: ModuleInfo.IModuleInfo | string, path: string | undefined, simplify: boolean) {
+  unRegister(
+    method: Router.HTTPMethod,
+    moduleName: ModuleInfo.IModuleInfo | string,
+    path: string | undefined,
+    simplify: boolean,
+  ) {
     const app = this.app;
     const _path = app.util.combineApiPath(path, moduleName, true, simplify);
     app.router.off(method, _path);
   }
 
-  findByPath(method: Router.HTTPMethod, moduleName: ModuleInfo.IModuleInfo | string, path: string | undefined, simplify: boolean): any {
+  findByPath(
+    method: Router.HTTPMethod,
+    moduleName: ModuleInfo.IModuleInfo | string,
+    path: string | undefined,
+    simplify: boolean,
+  ): any {
     const app = this.app;
     const _path = app.util.combineApiPath(path, moduleName, true, simplify);
     return app.router.findRoute(method, _path);
@@ -100,22 +113,47 @@ export class BeanRouter extends BeanBase {
     const app = this.app;
 
     // actionPath/actionMethod
-    if (!appMetadata.hasMetadata(SymbolRequestMappingHandler, controller.prototype, actionKey)) return;
-    const handlerMetadata = appMetadata.getMetadata<RequestMappingMetadata>(SymbolRequestMappingHandler, controller.prototype, actionKey)!;
+    if (!appMetadata.hasMetadata(SymbolRequestMappingHandler, controller.prototype, actionKey))
+      return;
+    const handlerMetadata = appMetadata.getMetadata<RequestMappingMetadata>(
+      SymbolRequestMappingHandler,
+      controller.prototype,
+      actionKey,
+    )!;
     const actionPath: RegExp | string = handlerMetadata.path || '';
     const actionMethod: TypeRequestMethod = handlerMetadata.method || 'get';
     // routePath
-    const routePath = app.util.combineApiPathControllerAndAction(moduleName, controllerPath, actionPath, true, true);
-    const routePathRaw = app.util.combineApiPathControllerAndActionRaw(moduleName, controllerPath, actionPath, true);
+    const routePath = app.util.combineApiPathControllerAndAction(
+      moduleName,
+      controllerPath,
+      actionPath,
+      true,
+      true,
+    );
+    const routePathRaw = app.util.combineApiPathControllerAndActionRaw(
+      moduleName,
+      controllerPath,
+      actionPath,
+      true,
+    );
 
     // middlewares options
-    const actionMiddlewaresOptions = appMetadata.getMetadata(SymbolUseOnionOptions, controller.prototype, actionKey);
+    const actionMiddlewaresOptions = appMetadata.getMetadata(
+      SymbolUseOnionOptions,
+      controller.prototype,
+      actionKey,
+    );
 
     // route
     const route = {
       meta: deepExtend({}, controllerMiddlewaresOptions, actionMiddlewaresOptions),
     };
-    appMetadata.defineMetadata(SymbolUseOnionOptionsRouteReal, route, controller.prototype, actionKey);
+    appMetadata.defineMetadata(
+      SymbolUseOnionOptionsRouteReal,
+      route,
+      controller.prototype,
+      actionKey,
+    );
 
     // route
     const _route: ContextRoute = {

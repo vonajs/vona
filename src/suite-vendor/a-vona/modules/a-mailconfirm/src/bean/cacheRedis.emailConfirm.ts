@@ -11,4 +11,7 @@ export interface TCacheRedisEmailConfirmData {
 @CacheRedis({
   ttl: 30 * 60 * 1000, // 30 minutes
 })
-export class CacheRedisEmailConfirm extends BeanCacheRedisBase<TCacheRedisEmailConfirmKey, TCacheRedisEmailConfirmData> {}
+export class CacheRedisEmailConfirm extends BeanCacheRedisBase<
+  TCacheRedisEmailConfirmKey,
+  TCacheRedisEmailConfirmData
+> {}

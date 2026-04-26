@@ -46,7 +46,9 @@ export class ServiceDatasharding extends BeanBase {
     return clientName ?? this.$scope.orm.service.database.getDefaultClientName();
   }
 
-  private _getRandomClientName(clientNames: (keyof IDatabaseClientRecord)[]): keyof IDatabaseClientRecord | undefined {
+  private _getRandomClientName(
+    clientNames: (keyof IDatabaseClientRecord)[],
+  ): keyof IDatabaseClientRecord | undefined {
     return clientNames[getRandomInt(clientNames.length)];
   }
 }

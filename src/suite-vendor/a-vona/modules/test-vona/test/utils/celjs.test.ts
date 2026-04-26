@@ -7,10 +7,16 @@ describe('celjs.test.ts', () => {
   it('action:celjs', async () => {
     await app.bean.executor.mockCtx(async () => {
       //
-      assert.equal(evaluateExpressions(cel('app.config.server.workers'), { app: { ...app } }) > 0, true);
+      assert.equal(
+        evaluateExpressions(cel('app.config.server.workers'), { app: { ...app } }) > 0,
+        true,
+      );
       // map
       assert.deepEqual(evaluateExpressions(cel('{"a": 1, "b": true}')), { a: 1, b: true });
-      assert.deepEqual(evaluateExpressions(cel('{"id": 1, "name": "tom"}')), { id: 1, name: 'tom' });
+      assert.deepEqual(evaluateExpressions(cel('{"id": 1, "name": "tom"}')), {
+        id: 1,
+        name: 'tom',
+      });
       // array
       assert.deepEqual(evaluateExpressions(cel('concat(1,[2,3],4)')), [1, 2, 3, 4]);
       assert.deepEqual(evaluateExpressions(cel('join(concat(1,[2,3],4),"_")')), '1_2_3_4');

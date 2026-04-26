@@ -32,7 +32,11 @@ export class ControllerMock extends BeanBase {
 
   @Web.post('authorize')
   @Passport.public()
-  async authorizePost(@Arg.query('redirect_uri') redirect_uri: string, @Arg.query('state') state: string, @Arg.body('username') username: string) {
+  async authorizePost(
+    @Arg.query('redirect_uri') redirect_uri: string,
+    @Arg.query('state') state: string,
+    @Arg.body('username') username: string,
+  ) {
     const url = combineQueries(redirect_uri, { code: username, state });
     this.ctx.redirect(url);
   }

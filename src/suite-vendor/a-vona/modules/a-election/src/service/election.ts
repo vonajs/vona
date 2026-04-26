@@ -1,7 +1,12 @@
 import { BeanBase, cast } from 'vona';
 import { Service } from 'vona-module-a-bean';
 
-import type { IElectionElectInfo, IElectionElectOptions, TypeFunctionObtain, TypeFunctionRelease } from '../types/election.ts';
+import type {
+  IElectionElectInfo,
+  IElectionElectOptions,
+  TypeFunctionObtain,
+  TypeFunctionRelease,
+} from '../types/election.ts';
 
 @Service()
 export class ServiceElection extends BeanBase {
@@ -17,8 +22,19 @@ export class ServiceElection extends BeanBase {
     }
   }
 
-  public obtain(resource: string, fnObtain: TypeFunctionObtain, fnRelease: TypeFunctionRelease, options?: IElectionElectOptions) {
-    const electionElectInfo: IElectionElectInfo = { intervalId: undefined, isLeader: false, fnObtain, fnRelease, options };
+  public obtain(
+    resource: string,
+    fnObtain: TypeFunctionObtain,
+    fnRelease: TypeFunctionRelease,
+    options?: IElectionElectOptions,
+  ) {
+    const electionElectInfo: IElectionElectInfo = {
+      intervalId: undefined,
+      isLeader: false,
+      fnObtain,
+      fnRelease,
+      options,
+    };
     this._electionElectInfos[resource] = electionElectInfo;
     //
     const tickets = options?.tickets ?? 1;
@@ -42,7 +58,12 @@ export class ServiceElection extends BeanBase {
     if (this.app.meta.appClose) return;
     const workerAlivePrefix = this.$scope.worker.cacheRedis.workerAlive.getRedisKey('');
     const lockResource = `election.${resource}`;
-    const res = await cast(this.clientRedis).electionObtain(lockResource, workerAlivePrefix, this.bean.worker.id, tickets);
+    const res = await cast(this.clientRedis).electionObtain(
+      lockResource,
+      workerAlivePrefix,
+      this.bean.worker.id,
+      tickets,
+    );
     if (!res) return; // exists
     const [leader, workersDead] = res;
     electionElectInfo.isLeader = leader === 1;

@@ -21,7 +21,11 @@ export type AopAction<T extends {}, NAME extends keyof T, RESULT = undefined> = 
   next: AopActionNext<Parameters<T[NAME]>, ReturnType<T[NAME]>>,
   _receiver: T,
 ) // @ts-ignore ignore
-=> RESULT extends undefined ? ReturnType<T[NAME]> : ReturnType<T[NAME]> extends Promise<any> ? Promise<RESULT> : RESULT;
+=> RESULT extends undefined
+  ? ReturnType<T[NAME]>
+  : ReturnType<T[NAME]> extends Promise<any>
+    ? Promise<RESULT>
+    : RESULT;
 
 export type AopActionGetter<T extends {}, NAME extends keyof T, RESULT = undefined> =
   // @ts-ignore ignore
@@ -40,16 +44,33 @@ export type AopActionSetter<T extends {}, NAME extends keyof T, DATA = undefined
   ) // @ts-ignore ignore
   => boolean;
 
-export type AopActionGet<T extends {}> = (prop: keyof T, next: AopActionNext<any, any>, _receiver: T) => any;
+export type AopActionGet<T extends {}> = (
+  prop: keyof T,
+  next: AopActionNext<any, any>,
+  _receiver: T,
+) => any;
 
-export type AopActionSet<T extends {}> = (prop: keyof T, value: any, next: AopActionNext<any, boolean>, _receiver: T) => boolean;
+export type AopActionSet<T extends {}> = (
+  prop: keyof T,
+  value: any,
+  next: AopActionNext<any, boolean>,
+  _receiver: T,
+) => boolean;
 
-export type AopActionMethod<T extends {}> = (method: keyof T, args: any[], next: AopActionNext<any[], any>, _receiver: T) => any;
+export type AopActionMethod<T extends {}> = (
+  method: keyof T,
+  args: any[],
+  next: AopActionNext<any[], any>,
+  _receiver: T,
+) => any;
 
 export interface IAopRecord {}
 
 export interface IDecoratorAopOptions
-  extends TypeOnionOptionsEnableSimple, IOnionOptionsMatch<TypeOnionOptionsMatchRule<keyof IBeanRecord>>, IOnionOptionsDeps<keyof IAopRecord> {}
+  extends
+    TypeOnionOptionsEnableSimple,
+    IOnionOptionsMatch<TypeOnionOptionsMatchRule<keyof IBeanRecord>>,
+    IOnionOptionsDeps<keyof IAopRecord> {}
 
 declare module 'vona-module-a-onion' {
   export interface BeanOnion {

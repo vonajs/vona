@@ -1,10 +1,25 @@
 import type { BeanModelMeta } from '../bean/bean.model/bean.model_meta.ts';
-import type { IModelRelationIncludeWrapper, IModelSelectParamsJoin, IModelSelectParamsOrder } from './model.ts';
+import type {
+  IModelRelationIncludeWrapper,
+  IModelSelectParamsJoin,
+  IModelSelectParamsOrder,
+} from './model.ts';
 import type { TypeModelSelectAggrParamsAggrs } from './modelAggr.ts';
-import type { TypeModelColumn, TypeModelColumnsPatch, TypeModelColumnsStrict, TypeModelWhere } from './modelWhere.ts';
+import type {
+  TypeModelColumn,
+  TypeModelColumnsPatch,
+  TypeModelColumnsStrict,
+  TypeModelWhere,
+} from './modelWhere.ts';
 import type { TypeModelsClassLikeGeneral } from './relations.ts';
-import type { TypeEntityTableColumnNamesOfGeneral, TypeEntityTableColumnsOfGeneral } from './relationsColumns.ts';
-import type { TypeModelSelectGroupParamsColumnNames, TypeModelSelectGroupParamsColumns } from './relationsGroup.ts';
+import type {
+  TypeEntityTableColumnNamesOfGeneral,
+  TypeEntityTableColumnsOfGeneral,
+} from './relationsColumns.ts';
+import type {
+  TypeModelSelectGroupParamsColumnNames,
+  TypeModelSelectGroupParamsColumns,
+} from './relationsGroup.ts';
 import type { TypeEntityTableNamesOfGeneral } from './relationsTables.ts';
 
 export interface IBuildModelSelectGeneralParams<
@@ -16,7 +31,13 @@ export interface IBuildModelSelectGeneralParams<
 >
   extends
     IModelRelationIncludeWrapper<Model>,
-    IBuildModelSelectGeneralParamsBasic<TRecord, TypeModelColumn<TRecord>, TableNames, ColumnNames, Columns> {}
+    IBuildModelSelectGeneralParamsBasic<
+      TRecord,
+      TypeModelColumn<TRecord>,
+      TableNames,
+      ColumnNames,
+      Columns
+    > {}
 
 export interface IBuildModelSelectGeneralParamsBasic<
   TRecord,

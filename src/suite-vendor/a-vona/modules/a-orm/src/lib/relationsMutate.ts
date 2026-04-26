@@ -1,7 +1,15 @@
 import type { BeanModelMeta } from '../bean/bean.model/bean.model_meta.ts';
 import type { IModelClassRecord } from '../types/onion/model.ts';
-import type { TypeModelClassLike, TypeModelOfModelLike, TypeSymbolKeyEntity } from '../types/relations.ts';
-import type { IModelRelationBelongsToManyDynamic, IModelRelationHasManyDynamic, IModelRelationHasOneDynamic } from '../types/relationsDefDynamic.ts';
+import type {
+  TypeModelClassLike,
+  TypeModelOfModelLike,
+  TypeSymbolKeyEntity,
+} from '../types/relations.ts';
+import type {
+  IModelRelationBelongsToManyDynamic,
+  IModelRelationHasManyDynamic,
+  IModelRelationHasOneDynamic,
+} from '../types/relationsDefDynamic.ts';
 import type {
   IModelRelationOptionsBelongsToManyMutate,
   IModelRelationOptionsManyMutate,
@@ -12,7 +20,11 @@ function hasOne<
   MODEL extends BeanModelMeta | keyof IModelClassRecord,
   KEY extends keyof TypeModelOfModelLike<MODEL>[TypeSymbolKeyEntity],
   OPTIONS extends IModelRelationOptionsOneMutate<TypeModelOfModelLike<MODEL>>,
->(classModel: TypeModelClassLike<MODEL>, key: KEY, options?: OPTIONS): IModelRelationHasOneDynamic<MODEL, KEY, OPTIONS> {
+>(
+  classModel: TypeModelClassLike<MODEL>,
+  key: KEY,
+  options?: OPTIONS,
+): IModelRelationHasOneDynamic<MODEL, KEY, OPTIONS> {
   return { type: 'hasOne', model: classModel, key, options };
 }
 
@@ -34,7 +46,11 @@ function hasMany<
   KEY extends keyof TypeModelOfModelLike<MODEL>[TypeSymbolKeyEntity],
   // not use `| undefined = undefined` or `= {}`
   OPTIONS extends IModelRelationOptionsManyMutate<TypeModelOfModelLike<MODEL>>,
->(classModel: TypeModelClassLike<MODEL>, key: KEY, options?: OPTIONS): IModelRelationHasManyDynamic<MODEL, KEY, OPTIONS> {
+>(
+  classModel: TypeModelClassLike<MODEL>,
+  key: KEY,
+  options?: OPTIONS,
+): IModelRelationHasManyDynamic<MODEL, KEY, OPTIONS> {
   return { type: 'hasMany', model: classModel, key, options };
 }
 
@@ -49,7 +65,14 @@ function belongsToMany<
   keyTo: keyof TypeModelOfModelLike<MODELMiddle>[TypeSymbolKeyEntity],
   options?: OPTIONS,
 ): IModelRelationBelongsToManyDynamic<MODELMiddle, MODEL, OPTIONS> {
-  return { type: 'belongsToMany', modelMiddle: classModelMiddle, model: classModel, keyFrom, keyTo, options };
+  return {
+    type: 'belongsToMany',
+    modelMiddle: classModelMiddle,
+    model: classModel,
+    keyFrom,
+    keyTo,
+    options,
+  };
 }
 
 export const $relationMutate = {

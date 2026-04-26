@@ -22,7 +22,10 @@ await testRun(projectPath, coverage, patterns);
 
 async function testRun(projectPath: string, coverage: boolean, patterns: string[]) {
   // patterns ignore
-  const patternsIgnore = !coverage && process.env.TEST_PATTERNS_IGNORE ? process.env.TEST_PATTERNS_IGNORE.split(',') : undefined;
+  const patternsIgnore =
+    !coverage && process.env.TEST_PATTERNS_IGNORE
+      ? process.env.TEST_PATTERNS_IGNORE.split(',')
+      : undefined;
   // files
   const files = await globby(patterns, {
     cwd: projectPath,
@@ -37,9 +40,15 @@ async function testRun(projectPath: string, coverage: boolean, patterns: string[
   let coverageIncludeGlobs: string[] = [];
   if (coverage) {
     if (fse.existsSync(path.join(projectPath, 'packages-vona/vona-core'))) {
-      coverageIncludeGlobs = coverageIncludeGlobs.concat(['packages-vona/vona-core/**/*.ts', 'src/suite-vendor/a-vona/**/*.ts']);
+      coverageIncludeGlobs = coverageIncludeGlobs.concat([
+        'packages-vona/vona-core/**/*.ts',
+        'src/suite-vendor/a-vona/**/*.ts',
+      ]);
     } else {
-      coverageIncludeGlobs = coverageIncludeGlobs.concat(['src/module/**/*.ts', 'src/suite/**/*.ts']);
+      coverageIncludeGlobs = coverageIncludeGlobs.concat([
+        'src/module/**/*.ts',
+        'src/suite/**/*.ts',
+      ]);
     }
   }
   const coverageExcludeGlobs = [
@@ -128,8 +137,18 @@ function outputCoverageReport(totals: CoverageTotals) {
     colWidths: [15, 15, 15, 25],
   });
   table.push(['Lines', totals.totalLineCount, totals.coveredLineCount, totals.coveredLinePercent]);
-  table.push(['Branches', totals.totalBranchCount, totals.coveredBranchCount, totals.coveredBranchPercent]);
-  table.push(['Functions', totals.totalFunctionCount, totals.coveredFunctionCount, totals.coveredFunctionPercent]);
+  table.push([
+    'Branches',
+    totals.totalBranchCount,
+    totals.coveredBranchCount,
+    totals.coveredBranchPercent,
+  ]);
+  table.push([
+    'Functions',
+    totals.totalFunctionCount,
+    totals.coveredFunctionCount,
+    totals.coveredFunctionPercent,
+  ]);
   // eslint-disable-next-line
   console.log(table.toString());
 }

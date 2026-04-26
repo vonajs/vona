@@ -16,4 +16,7 @@ export interface TypeEventPaypalCaptureOrderData {
 export type TypeEventPaypalCaptureOrderResult = void;
 
 @Event()
-export class EventPaypalCaptureOrder extends BeanEventBase<TypeEventPaypalCaptureOrderData, TypeEventPaypalCaptureOrderResult> {}
+export class EventPaypalCaptureOrder extends BeanEventBase<
+  TypeEventPaypalCaptureOrderData,
+  TypeEventPaypalCaptureOrderResult
+> {}

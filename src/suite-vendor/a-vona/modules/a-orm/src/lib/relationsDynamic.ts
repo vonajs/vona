@@ -1,6 +1,11 @@
 import type { BeanModelMeta } from '../bean/bean.model/bean.model_meta.ts';
 import type { IModelClassRecord } from '../types/onion/model.ts';
-import type { TypeModelClassLike, TypeModelOfModelLike, TypeModelsClassLikeGeneral, TypeSymbolKeyEntity } from '../types/relations.ts';
+import type {
+  TypeModelClassLike,
+  TypeModelOfModelLike,
+  TypeModelsClassLikeGeneral,
+  TypeSymbolKeyEntity,
+} from '../types/relations.ts';
 import type {
   IModelRelationBelongsToDynamic,
   IModelRelationBelongsToManyDynamic,
@@ -13,15 +18,21 @@ import type {
 function hasOne<
   MODEL extends BeanModelMeta | keyof IModelClassRecord,
   KEY extends keyof TypeModelOfModelLike<MODEL>[TypeSymbolKeyEntity],
-  OPTIONS extends IModelRelationOptionsOneDynamic<TypeModelOfModelLike<MODEL>> | undefined = undefined,
->(classModel: TypeModelClassLike<MODEL>, key: KEY, options?: OPTIONS): IModelRelationHasOneDynamic<MODEL, KEY, OPTIONS> {
+  OPTIONS extends IModelRelationOptionsOneDynamic<TypeModelOfModelLike<MODEL>> | undefined =
+    undefined,
+>(
+  classModel: TypeModelClassLike<MODEL>,
+  key: KEY,
+  options?: OPTIONS,
+): IModelRelationHasOneDynamic<MODEL, KEY, OPTIONS> {
   return { type: 'hasOne', model: classModel, key, options };
 }
 
 function belongsTo<
   MODELSelf extends BeanModelMeta | keyof IModelClassRecord,
   MODEL extends BeanModelMeta | keyof IModelClassRecord,
-  OPTIONS extends IModelRelationOptionsOneDynamic<TypeModelOfModelLike<MODEL>> | undefined = undefined,
+  OPTIONS extends IModelRelationOptionsOneDynamic<TypeModelOfModelLike<MODEL>> | undefined =
+    undefined,
 >(
   _classModelSelf: TypeModelClassLike<MODELSelf>,
   classModel: TypeModelClassLike<MODEL>,
@@ -35,7 +46,9 @@ function hasMany<
   MODEL extends BeanModelMeta | keyof IModelClassRecord,
   KEY extends keyof TypeModelOfModelLike<MODEL>[TypeSymbolKeyEntity],
   // not use `| undefined = undefined` or `= {}`
-  OPTIONS extends IModelRelationOptionsManyDynamic<TypeModelOfModelLike<MODEL>, ModelJoins, Group> | undefined = undefined,
+  OPTIONS extends
+    | IModelRelationOptionsManyDynamic<TypeModelOfModelLike<MODEL>, ModelJoins, Group>
+    | undefined = undefined,
   ModelJoins extends TypeModelsClassLikeGeneral | undefined = undefined,
   Group extends boolean | undefined = undefined,
 >(
@@ -52,7 +65,9 @@ function belongsToMany<
   MODELMiddle extends BeanModelMeta | keyof IModelClassRecord,
   MODEL extends BeanModelMeta | keyof IModelClassRecord,
   // not use `| undefined = undefined` or `= {}`
-  OPTIONS extends IModelRelationOptionsManyDynamic<TypeModelOfModelLike<MODEL>, ModelJoins, Group> | undefined = undefined,
+  OPTIONS extends
+    | IModelRelationOptionsManyDynamic<TypeModelOfModelLike<MODEL>, ModelJoins, Group>
+    | undefined = undefined,
   ModelJoins extends TypeModelsClassLikeGeneral | undefined = undefined,
   Group extends boolean | undefined = undefined,
 >(
@@ -64,7 +79,14 @@ function belongsToMany<
   _modelJoins?: ModelJoins,
   _group?: Group,
 ): IModelRelationBelongsToManyDynamic<MODELMiddle, MODEL, OPTIONS, ModelJoins, Group> {
-  return { type: 'belongsToMany', modelMiddle: classModelMiddle, model: classModel, keyFrom, keyTo, options };
+  return {
+    type: 'belongsToMany',
+    modelMiddle: classModelMiddle,
+    model: classModel,
+    keyFrom,
+    keyTo,
+    options,
+  };
 }
 
 export const $relationDynamic = {

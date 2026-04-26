@@ -13,7 +13,9 @@ export default async function (options: IMetadataCustomGenerateOptions): Promise
     const opionsName = `IEntityOptions${toUpperCaseFirstChar(beanName)}`;
     const tableName = __parseTableName(fileContent);
     contentColumns.push(`export type ${className}TableName = '${tableName}';`);
-    contentEntityMetas.push(`export type ${className}Meta=TypeEntityMeta<${className},${className}TableName>;`);
+    contentEntityMetas.push(
+      `export type ${className}Meta=TypeEntityMeta<${className},${className}TableName>;`,
+    );
     const contentRecordItem = `'${tableName}': ${className}Meta;`;
     if (!contentRecords.includes(contentRecordItem)) {
       contentRecords.push(contentRecordItem);
@@ -23,7 +25,13 @@ export default async function (options: IMetadataCustomGenerateOptions): Promise
       fields?: TypeEntityOptionsFields<${className}, ${opionsName}[TypeSymbolKeyFieldsMore]>;
     }`);
   }
-  if (contentColumns.length === 0 && contentEntityMetas.length === 0 && contentRecords.length === 0 && contentFields.length === 0) return '';
+  if (
+    contentColumns.length === 0 &&
+    contentEntityMetas.length === 0 &&
+    contentRecords.length === 0 &&
+    contentFields.length === 0
+  )
+    return '';
   // combine
   const content = `/** ${sceneName}: begin */
 ${contentColumns.join('\n')}
@@ -42,7 +50,9 @@ declare module 'vona-module-${moduleName}' {
 }
 
 function __parseTableName(fileContent: string): string | false {
-  let matched = fileContent.match(/@Entity<.*?>\(\{[\s\S]*?table: ('[^']*')[\s\S]*?\}[\s\S]*?\)\s*export class/);
+  let matched = fileContent.match(
+    /@Entity<.*?>\(\{[\s\S]*?table: ('[^']*')[\s\S]*?\}[\s\S]*?\)\s*export class/,
+  );
   if (!matched) {
     matched = fileContent.match(/@Entity<.*?>\(\s*('[^']*')/);
   }

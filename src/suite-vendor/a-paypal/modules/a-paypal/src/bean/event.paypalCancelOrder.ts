@@ -9,4 +9,7 @@ export interface TypeEventPaypalCancelOrderData {
 export type TypeEventPaypalCancelOrderResult = void;
 
 @Event()
-export class EventPaypalCancelOrder extends BeanEventBase<TypeEventPaypalCancelOrderData, TypeEventPaypalCancelOrderResult> {}
+export class EventPaypalCancelOrder extends BeanEventBase<
+  TypeEventPaypalCancelOrderData,
+  TypeEventPaypalCancelOrderResult
+> {}

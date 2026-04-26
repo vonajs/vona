@@ -8,8 +8,14 @@ type TypeEventData = TypeEventRegisterData;
 type TypeEventResult = TypeEventRegisterResult;
 
 @EventListener({ match: 'a-user:register' })
-export class EventListenerRegister extends BeanBase implements IEventExecute<TypeEventData, TypeEventResult> {
-  async execute(data: TypeEventData, next: NextEvent<TypeEventData, TypeEventResult>): Promise<TypeEventResult> {
+export class EventListenerRegister
+  extends BeanBase
+  implements IEventExecute<TypeEventData, TypeEventResult>
+{
+  async execute(
+    data: TypeEventData,
+    next: NextEvent<TypeEventData, TypeEventResult>,
+  ): Promise<TypeEventResult> {
     // next: registered
     const user = (await next()) as IUser;
     // mail: activate

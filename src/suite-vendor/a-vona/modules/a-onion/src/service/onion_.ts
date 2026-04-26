@@ -8,7 +8,16 @@ import type { ContextRouteBase } from 'vona-module-a-web';
 import { swapDeps } from '@cabloy/deps';
 import { getOnionScenesMeta } from '@cabloy/module-info';
 import { isRegExp } from 'node:util/types';
-import { appMetadata, appResource, BeanBase, cast, compose, deepExtend, ProxyDisable, SymbolDecoratorGlobal } from 'vona';
+import {
+  appMetadata,
+  appResource,
+  BeanBase,
+  cast,
+  compose,
+  deepExtend,
+  ProxyDisable,
+  SymbolDecoratorGlobal,
+} from 'vona';
 import { Service } from 'vona-module-a-bean';
 
 import type {
@@ -74,8 +83,14 @@ export class ServiceOnion<ONIONRECORD> extends BeanBase {
 
   getOnionsEnabled(selector?: string | boolean, matchThis?: any, ...matchArgs: any[]) {
     const onions = this.onionsGlobal.filter(onionSlice => {
-      const onionOptions = onionSlice.beanOptions.options as IOnionOptionsEnable & IOnionOptionsMatch<TypeOnionOptionsMatchRule<string>>;
-      return this.bean.onion.checkOnionOptionsEnabled(onionOptions, selector, matchThis, ...matchArgs);
+      const onionOptions = onionSlice.beanOptions.options as IOnionOptionsEnable &
+        IOnionOptionsMatch<TypeOnionOptionsMatchRule<string>>;
+      return this.bean.onion.checkOnionOptionsEnabled(
+        onionOptions,
+        selector,
+        matchThis,
+        ...matchArgs,
+      );
     }) as unknown as IOnionSlice<ONIONRECORD, keyof ONIONRECORD>[];
     this.$loggerChild('onion').verbose(() => {
       const selector2 = typeof selector === 'string' ? selector : '';
@@ -88,14 +103,26 @@ export class ServiceOnion<ONIONRECORD> extends BeanBase {
   getOnionsEnabledCached(_selector?: string | boolean, matchThis?: any, ...matchArgs: any[]) {
     const selector = typeof _selector === 'string' ? _selector : '';
     if (!this[SymbolOnionsEnabled][selector]) {
-      this[SymbolOnionsEnabled][selector] = this.getOnionsEnabled(_selector, matchThis, ...matchArgs);
+      this[SymbolOnionsEnabled][selector] = this.getOnionsEnabled(
+        _selector,
+        matchThis,
+        ...matchArgs,
+      );
     }
     return this[SymbolOnionsEnabled][selector];
   }
 
-  getOnionsEnabledOfMeta(useCache: boolean, beanName: keyof IMetaNameRecord, selector?: string | boolean, matchThis?: any, ...matchArgs: any[]) {
+  getOnionsEnabledOfMeta(
+    useCache: boolean,
+    beanName: keyof IMetaNameRecord,
+    selector?: string | boolean,
+    matchThis?: any,
+    ...matchArgs: any[]
+  ) {
     const method = useCache ? 'getOnionsEnabledCached' : 'getOnionsEnabled';
-    return this[method](selector, matchThis, ...matchArgs).filter(item => item.beanOptions.name === beanName);
+    return this[method](selector, matchThis, ...matchArgs).filter(
+      item => item.beanOptions.name === beanName,
+    );
   }
 
   getOnionSliceEnabled<T extends keyof ONIONRECORD>(
@@ -113,17 +140,32 @@ export class ServiceOnion<ONIONRECORD> extends BeanBase {
     return this.onionsNormal[onionName];
   }
 
-  getOnionsEnabledWrapped(wrapFn: Function, selector?: string | boolean, matchThis?: any, ...matchArgs: any[]) {
+  getOnionsEnabledWrapped(
+    wrapFn: Function,
+    selector?: string | boolean,
+    matchThis?: any,
+    ...matchArgs: any[]
+  ) {
     const onions = this.getOnionsEnabled(selector, matchThis, ...matchArgs);
     return onions.map(item => {
       return wrapFn(item);
     });
   }
 
-  getOnionsEnabledWrappedCached(wrapFn: Function, _selector?: string | boolean, matchThis?: any, ...matchArgs: any[]) {
+  getOnionsEnabledWrappedCached(
+    wrapFn: Function,
+    _selector?: string | boolean,
+    matchThis?: any,
+    ...matchArgs: any[]
+  ) {
     const selector = typeof _selector === 'string' ? _selector : '';
     if (!this[SymbolOnionsEnabledWrapped][selector]) {
-      this[SymbolOnionsEnabledWrapped][selector] = this.getOnionsEnabledWrapped(wrapFn, _selector, matchThis, ...matchArgs);
+      this[SymbolOnionsEnabledWrapped][selector] = this.getOnionsEnabledWrapped(
+        wrapFn,
+        _selector,
+        matchThis,
+        ...matchArgs,
+      );
     }
     return this[SymbolOnionsEnabledWrapped][selector];
   }
@@ -173,14 +215,17 @@ export class ServiceOnion<ONIONRECORD> extends BeanBase {
   public _collectOnionsHandler(route: ContextRouteBase | undefined) {
     if (!route?.controller) return [];
     // onionsLocal: controller
-    const controllerOnionsLocal = appMetadata.getMetadata<Record<string, string[]>>(SymbolUseOnionLocal, route.controller)?.[
-      this.sceneName
-    ] as string[];
+    const controllerOnionsLocal = appMetadata.getMetadata<Record<string, string[]>>(
+      SymbolUseOnionLocal,
+      route.controller,
+    )?.[this.sceneName] as string[];
     // onionsLocal: action
     const onionsLocal: IOnionSlice<ONIONRECORD, keyof ONIONRECORD>[] = [];
-    const actionOnionsLocal = appMetadata.getMetadata<Record<string, string[]>>(SymbolUseOnionLocal, route.controller.prototype, route.action)?.[
-      this.sceneName
-    ] as string[];
+    const actionOnionsLocal = appMetadata.getMetadata<Record<string, string[]>>(
+      SymbolUseOnionLocal,
+      route.controller.prototype,
+      route.action,
+    )?.[this.sceneName] as string[];
     const onionsLocalAll: string[] = [];
     if (actionOnionsLocal) {
       actionOnionsLocal.forEach(item => {
@@ -204,19 +249,27 @@ export class ServiceOnion<ONIONRECORD> extends BeanBase {
     return this.getOnionSlice(onionName).beanOptions.options as ONIONRECORD[T] | undefined;
   }
 
-  getOnionOptionsDynamic<T extends keyof ONIONRECORD>(onionName: T, optionsCustom?: Partial<ONIONRECORD[T]>): ONIONRECORD[T] {
+  getOnionOptionsDynamic<T extends keyof ONIONRECORD>(
+    onionName: T,
+    optionsCustom?: Partial<ONIONRECORD[T]>,
+  ): ONIONRECORD[T] {
     const item = this.getOnionSlice(onionName);
     return this.combineOnionOptions(item, optionsCustom);
   }
 
-  combineOnionOptions<T extends keyof ONIONRECORD>(item: IOnionSlice<ONIONRECORD, T>, optionsCustom?: Partial<ONIONRECORD[T]>): ONIONRECORD[T] {
+  combineOnionOptions<T extends keyof ONIONRECORD>(
+    item: IOnionSlice<ONIONRECORD, T>,
+    optionsCustom?: Partial<ONIONRECORD[T]>,
+  ): ONIONRECORD[T] {
     const ctx = this.ctx as VonaContext | undefined;
     // optionsPrimitive
     const optionsPrimitive = item.beanOptions.optionsPrimitive;
     // options: meta/config
     const optionsMetaAndConfig = item.beanOptions.options;
     // options: instance config
-    const optionsInstanceConfig = ctx?.instance ? ctx?.config.onions[item.beanOptions.scene]?.[item.name] : undefined;
+    const optionsInstanceConfig = ctx?.instance
+      ? ctx?.config.onions[item.beanOptions.scene]?.[item.name]
+      : undefined;
     // options: route
     //    not use route options for argument pipe
     let optionsRoute;
@@ -225,7 +278,9 @@ export class ServiceOnion<ONIONRECORD> extends BeanBase {
       optionsRoute = route?.meta?.[item.beanOptions.beanFullName];
     }
     // options: argument pipe
-    const optionsArgumentPipe = this.sceneMeta.optionsArgumentPipe ? cast(item).argumentPipe?.options : undefined;
+    const optionsArgumentPipe = this.sceneMeta.optionsArgumentPipe
+      ? cast(item).argumentPipe?.options
+      : undefined;
     // options: dynamic
     let optionsDynamic;
     if (this.sceneMeta.optionsDynamic) {
@@ -234,9 +289,23 @@ export class ServiceOnion<ONIONRECORD> extends BeanBase {
     // final options
     let options;
     if (optionsPrimitive) {
-      options = optionsCustom ?? optionsDynamic ?? optionsArgumentPipe ?? optionsRoute ?? optionsInstanceConfig ?? optionsMetaAndConfig;
+      options =
+        optionsCustom ??
+        optionsDynamic ??
+        optionsArgumentPipe ??
+        optionsRoute ??
+        optionsInstanceConfig ??
+        optionsMetaAndConfig;
     } else {
-      options = deepExtend({}, optionsMetaAndConfig, optionsInstanceConfig, optionsRoute, optionsArgumentPipe, optionsDynamic, optionsCustom);
+      options = deepExtend(
+        {},
+        optionsMetaAndConfig,
+        optionsInstanceConfig,
+        optionsRoute,
+        optionsArgumentPipe,
+        optionsDynamic,
+        optionsCustom,
+      );
     }
     // ok
     return options;
@@ -246,11 +315,13 @@ export class ServiceOnion<ONIONRECORD> extends BeanBase {
     swapDeps(onions as ISwapDepsItem[], {
       name: 'name',
       dependencies: item => {
-        const onionOptions = cast<IOnionSlice<ONIONRECORD, keyof ONIONRECORD>>(item).beanOptions.options as IOnionOptionsDeps<string>;
+        const onionOptions = cast<IOnionSlice<ONIONRECORD, keyof ONIONRECORD>>(item).beanOptions
+          .options as IOnionOptionsDeps<string>;
         return onionOptions.dependencies as any;
       },
       dependents: item => {
-        const onionOptions = cast<IOnionSlice<ONIONRECORD, keyof ONIONRECORD>>(item).beanOptions.options as IOnionOptionsDeps<string>;
+        const onionOptions = cast<IOnionSlice<ONIONRECORD, keyof ONIONRECORD>>(item).beanOptions
+          .options as IOnionOptionsDeps<string>;
         return onionOptions.dependents as any;
       },
     });
@@ -265,7 +336,10 @@ export class ServiceOnion<ONIONRECORD> extends BeanBase {
       // normal
       this.onionsNormal[item.name] = item;
       // global
-      if (!this.sceneMeta.hasLocal || appMetadata.getMetadata<boolean>(SymbolDecoratorGlobal, item.beanOptions.beanClass)) {
+      if (
+        !this.sceneMeta.hasLocal ||
+        appMetadata.getMetadata<boolean>(SymbolDecoratorGlobal, item.beanOptions.beanClass)
+      ) {
         this.onionsGlobal.push(item);
       }
     }
@@ -279,7 +353,10 @@ export class ServiceOnion<ONIONRECORD> extends BeanBase {
     return onionsAll;
   }
 
-  private _loadOnionsAll_fromMetadata(onionsAll: IOnionSlice<ONIONRECORD, keyof ONIONRECORD>[], module: IModule) {
+  private _loadOnionsAll_fromMetadata(
+    onionsAll: IOnionSlice<ONIONRECORD, keyof ONIONRECORD>[],
+    module: IModule,
+  ) {
     const onions = appResource.scenes[this.sceneName]?.[module.info.relativeName];
     if (!onions) return;
     for (const key in onions) {
@@ -294,7 +371,10 @@ export class ServiceOnion<ONIONRECORD> extends BeanBase {
   }
 
   /** internal */
-  public _wrapOnion<T extends keyof ONIONRECORD>(item: IOnionSlice<ONIONRECORD, T>, executeCustom?: IOnionExecuteCustom) {
+  public _wrapOnion<T extends keyof ONIONRECORD>(
+    item: IOnionSlice<ONIONRECORD, T>,
+    executeCustom?: IOnionExecuteCustom,
+  ) {
     const sceneName = this.sceneName;
     const fn = (data: any, next: Next) => {
       // optionsPrimitive
@@ -302,7 +382,10 @@ export class ServiceOnion<ONIONRECORD> extends BeanBase {
       // options
       const options = this.combineOnionOptions(item);
       // enable match ignore
-      if (!optionsPrimitive && !this.bean.onion.checkOnionOptionsEnabled(options as any, this._getRoutePathForMatch())) {
+      if (
+        !optionsPrimitive &&
+        !this.bean.onion.checkOnionOptionsEnabled(options as any, this._getRoutePathForMatch())
+      ) {
         return next(data);
       }
       // execute
@@ -341,7 +424,12 @@ export class ServiceOnion<ONIONRECORD> extends BeanBase {
     this.$logger.silly(JSON.stringify(onionNames, null, 2));
   }
 
-  public inspectMeta(metaName: keyof IMetaNameRecord, selector?: string | boolean, matchThis?: any, ...matchArgs: any[]) {
+  public inspectMeta(
+    metaName: keyof IMetaNameRecord,
+    selector?: string | boolean,
+    matchThis?: any,
+    ...matchArgs: any[]
+  ) {
     const onionSlices = this.getOnionsEnabled(selector, matchThis, ...matchArgs);
     const onionSlices2: IOnionSlice[] = [];
     for (const item of onionSlices) {
@@ -349,7 +437,9 @@ export class ServiceOnion<ONIONRECORD> extends BeanBase {
         onionSlices2.push(item);
       }
     }
-    const onionNames = onionSlices.map(item => item.name).filter(item => item.toString().endsWith(`:${metaName}`));
+    const onionNames = onionSlices
+      .map(item => item.name)
+      .filter(item => item.toString().endsWith(`:${metaName}`));
     this.$logger.silly(JSON.stringify(onionSlices2, null, 2));
     this.$logger.silly(JSON.stringify(onionNames, null, 2));
   }

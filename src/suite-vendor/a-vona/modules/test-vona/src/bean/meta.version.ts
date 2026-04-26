@@ -1,4 +1,9 @@
-import type { IMetaVersionTest, IMetaVersionTestOptions, IMetaVersionUpdate, IMetaVersionUpdateOptions } from 'vona-module-a-version';
+import type {
+  IMetaVersionTest,
+  IMetaVersionTestOptions,
+  IMetaVersionUpdate,
+  IMetaVersionUpdateOptions,
+} from 'vona-module-a-version';
 
 import { BeanBase } from 'vona';
 import { Meta } from 'vona-module-a-meta';
@@ -63,7 +68,10 @@ export class MetaVersion extends BeanBase implements IMetaVersionUpdate, IMetaVe
       await this.bean.model.createTable(entityOrder.$table, table => {
         table.comment(entityOrder.$comment.$table);
         table.basicFields();
-        table.string(entityOrder.orderNo, 50).defaultTo(entityOrder.$default.orderNo).comment(entityOrder.$comment.orderNo);
+        table
+          .string(entityOrder.orderNo, 50)
+          .defaultTo(entityOrder.$default.orderNo)
+          .comment(entityOrder.$comment.orderNo);
         table.string(entityOrder.remark, 255).comment(entityOrder.$comment.remark);
         table.tableIdentity(entityOrder.userId);
       });

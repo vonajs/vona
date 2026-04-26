@@ -194,7 +194,9 @@ class DtoStudentOther extends $Class.mixin(EntityStudent, DtoStudentCreate, DtoS
 You can combine multiple Mapped tool functions.
 
 ```typescript
-class DtoStudentUpdate extends $Class.partial($Class.pick(EntityStudent, ['name', 'description'])) {}
+class DtoStudentUpdate extends $Class.partial(
+  $Class.pick(EntityStudent, ['name', 'description']),
+) {}
 ```
 
 ## DTO infer & generation

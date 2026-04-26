@@ -80,14 +80,20 @@ export class BeanScopeBase extends BeanBaseSimple {
     // model
     if (prop === 'model') {
       if (!this[BeanModuleModel]) {
-        this[BeanModuleModel] = this.bean._newBean('a-orm.service.modelResolver' as any, moduleBelong);
+        this[BeanModuleModel] = this.bean._newBean(
+          'a-orm.service.modelResolver' as any,
+          moduleBelong,
+        );
       }
       return this[BeanModuleModel];
     }
     // entity
     if (prop === 'entity') {
       if (!this[BeanModuleEntity]) {
-        this[BeanModuleEntity] = this.bean._newBean('a-orm.service.entityResolver' as any, moduleBelong);
+        this[BeanModuleEntity] = this.bean._newBean(
+          'a-orm.service.entityResolver' as any,
+          moduleBelong,
+        );
       }
       return this[BeanModuleEntity];
     }

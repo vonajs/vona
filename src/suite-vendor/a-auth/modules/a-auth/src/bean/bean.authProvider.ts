@@ -32,7 +32,11 @@ export class BeanAuthProvider extends BeanBase {
     return await this.scope.model.authProvider.insert(dataNew);
   }
 
-  public async getClientOptions<T extends IAuthProviderClientOptions>(data: TypeAuthProviderPick, clientOptionsCustom?: T, clientOptionsDefault?: T) {
+  public async getClientOptions<T extends IAuthProviderClientOptions>(
+    data: TypeAuthProviderPick,
+    clientOptionsCustom?: T,
+    clientOptionsDefault?: T,
+  ) {
     // authProvider
     const entityAuthProvider = await this.bean.authProvider.get(data);
     if (!entityAuthProvider) return { entityAuthProvider: undefined };
@@ -41,7 +45,10 @@ export class BeanAuthProvider extends BeanBase {
     // clientName
     const clientName = entityAuthProvider.clientName ?? 'default';
     // onionSlice
-    const onionSlice = this.bean.onion.authProvider.getOnionSliceEnabled(true, authProviderName as any);
+    const onionSlice = this.bean.onion.authProvider.getOnionSliceEnabled(
+      true,
+      authProviderName as any,
+    );
     if (!onionSlice) throw new Error(`Auth provider not found: ${authProviderName}`);
     const beanFullName = onionSlice.beanOptions.beanFullName;
     const onionOptions = onionSlice.beanOptions.options ?? {};

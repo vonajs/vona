@@ -5,4 +5,7 @@ export type TypeRedlockLockResource = `schedule.${string}`;
 export type TypeRedlockLockIsolateResource = never;
 
 @Meta()
-export class MetaRedlock extends BeanRedlockBase<TypeRedlockLockResource, TypeRedlockLockIsolateResource> {}
+export class MetaRedlock extends BeanRedlockBase<
+  TypeRedlockLockResource,
+  TypeRedlockLockIsolateResource
+> {}

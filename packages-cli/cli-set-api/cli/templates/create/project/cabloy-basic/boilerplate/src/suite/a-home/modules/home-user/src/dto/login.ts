@@ -14,6 +14,10 @@ export class DtoLogin {
   @Api.field(v.required(), v.min(6))
   password: string;
 
-  @Api.field(v.required(), v.rest({ iconPrefix: ':editor:code-block' }), v.renderComponent('captcha'))
+  @Api.field(
+    v.required(),
+    v.rest({ iconPrefix: ':editor:code-block' }),
+    v.renderComponent('captcha'),
+  )
   captcha: DtoCaptchaVerify;
 }

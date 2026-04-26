@@ -7,4 +7,7 @@ export interface TypeEventHelloEchoData {
 export type TypeEventHelloEchoResult = string;
 
 @Event()
-export class EventHelloEcho extends BeanEventBase<TypeEventHelloEchoData, TypeEventHelloEchoResult> {}
+export class EventHelloEcho extends BeanEventBase<
+  TypeEventHelloEchoData,
+  TypeEventHelloEchoResult
+> {}

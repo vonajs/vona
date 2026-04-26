@@ -12,15 +12,22 @@ type TypeEventData = TypeEventResolvePathData;
 type TypeEventResult = TypeEventResolvePathResult;
 
 @EventListener({ match: 'a-static:resolvePath' })
-export class EventListenerResolvePath extends BeanBase implements IEventExecute<TypeEventData, TypeEventResult> {
-  async execute(data: TypeEventData, next: NextEvent<TypeEventData, TypeEventResult>): Promise<TypeEventResult> {
+export class EventListenerResolvePath
+  extends BeanBase
+  implements IEventExecute<TypeEventData, TypeEventResult>
+{
+  async execute(
+    data: TypeEventData,
+    next: NextEvent<TypeEventData, TypeEventResult>,
+  ): Promise<TypeEventResult> {
     // check sites
     const sites = this.scope.service.ssr.getSitesEnabled();
     for (const site of sites) {
       // publicPath
       const siteOptions = site.beanOptions.options as IDecoratorSsrSiteOptions;
       let publicPath = siteOptions.publicPath as string;
-      if (isNil(publicPath)) throw new Error(`Should specify publicPath of ssr site: ${site.beanOptions.beanFullName}`);
+      if (isNil(publicPath))
+        throw new Error(`Should specify publicPath of ssr site: ${site.beanOptions.beanFullName}`);
       if (publicPath) {
         publicPath = `${publicPath}/`;
       }
@@ -38,7 +45,9 @@ export class EventListenerResolvePath extends BeanBase implements IEventExecute<
         }
       }
       // resolvePath
-      const beanInstance = this.bean._getBean<BeanSsrSiteBase>(site.beanOptions.beanFullName as any);
+      const beanInstance = this.bean._getBean<BeanSsrSiteBase>(
+        site.beanOptions.beanFullName as any,
+      );
       const res = await beanInstance.resolvePath({ ...data, filename });
       if (res) return res;
     }

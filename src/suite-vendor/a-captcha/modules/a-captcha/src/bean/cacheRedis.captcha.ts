@@ -6,4 +6,7 @@ export type TCacheRedisCaptchaKey = string;
 export type TCacheRedisCaptchaData = ICaptchaDataCache;
 
 @CacheRedis({ disableTransactionCompensate: true })
-export class CacheRedisCaptcha extends BeanCacheRedisBase<TCacheRedisCaptchaKey, TCacheRedisCaptchaData> {}
+export class CacheRedisCaptcha extends BeanCacheRedisBase<
+  TCacheRedisCaptchaKey,
+  TCacheRedisCaptchaData
+> {}

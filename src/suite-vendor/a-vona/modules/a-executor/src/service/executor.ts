@@ -12,7 +12,11 @@ import { SymbolRouterMiddleware } from '../types/executor.ts';
 @Service()
 export class ServiceExecutor extends BeanBase {
   @Aspect.aopMethod('a-logger:log', { level: 'debug' })
-  async performActionInner<METHOD extends keyof IApiPathRecordMethodMap>(method: METHOD, url: string, options?: IPerformActionOptions): Promise<any> {
+  async performActionInner<METHOD extends keyof IApiPathRecordMethodMap>(
+    method: METHOD,
+    url: string,
+    options?: IPerformActionOptions,
+  ): Promise<any> {
     // app
     const app = this.app;
     // new ctx
@@ -23,7 +27,10 @@ export class ServiceExecutor extends BeanBase {
         ctx.res.statusCode = 404;
         ctx.req.method = method.toUpperCase();
         // url
-        ctx.req.url = combineParamsAndQuery(url, { params: options?.params, query: options?.query });
+        ctx.req.url = combineParamsAndQuery(url, {
+          params: options?.params,
+          query: options?.query,
+        });
         // headers
         ctx.req.headers = Object.assign({}, ctx.req.headers, options?.headers);
         // json
@@ -75,7 +82,8 @@ export class ServiceExecutor extends BeanBase {
     const clientName = options?.dbInfo?.clientName ?? current?.clientName;
     const locale = options?.locale === undefined ? this.ctx?.locale : options.locale;
     const tz = options?.tz === undefined ? this.ctx?.tz : options.tz;
-    const instanceName = options?.instanceName === undefined ? this.ctx?.instanceName : options.instanceName;
+    const instanceName =
+      options?.instanceName === undefined ? this.ctx?.instanceName : options.instanceName;
     options = Object.assign({}, options, {
       dbInfo: { level, clientName },
       locale,

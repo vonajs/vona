@@ -1,6 +1,7 @@
 {
   "name": "vona-module-a-instance",
   "version": "5.1.4",
+  "gitHead": "a79189b882c17af5911573896a781bbb0046d37d",
   "description": "",
   "author": "zhennann",
   "files": [
@@ -45,6 +46,5 @@
   "vonaModule": {
     "fileVersion": 1,
     "dependencies": {}
-  },
-  "gitHead": "a79189b882c17af5911573896a781bbb0046d37d"
+  }
 }

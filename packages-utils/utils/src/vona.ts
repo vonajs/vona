@@ -39,7 +39,8 @@ export function combineApiPath(
   simplify?: boolean,
   globalPrefixConfig?: string,
 ): string {
-  const globalPrefix = typeof prefix === 'string' ? prefix : prefix === false ? '' : globalPrefixConfig;
+  const globalPrefix =
+    typeof prefix === 'string' ? prefix : prefix === false ? '' : globalPrefixConfig;
   simplify = simplify ?? true;
   if (!path) path = '';
   // ignore globalPrefix
@@ -88,7 +89,13 @@ export function combineApiPathControllerAndActionRaw(
   actionPath: RegExp | string | undefined,
   simplify?: boolean,
 ): string {
-  let apiPath = combineApiPathControllerAndAction(moduleName, controllerPath, actionPath, '/_api_', simplify);
+  let apiPath = combineApiPathControllerAndAction(
+    moduleName,
+    controllerPath,
+    actionPath,
+    '/_api_',
+    simplify,
+  );
   if (typeof apiPath !== 'string') return apiPath;
   if (apiPath.startsWith('/_api_')) {
     apiPath = apiPath.substring('/_api_'.length);

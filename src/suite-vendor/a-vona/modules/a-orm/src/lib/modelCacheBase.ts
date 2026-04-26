@@ -32,13 +32,18 @@ export class ModelCacheBase extends BeanBase {
     const cacheModelCacheInstances = getCacheModelCacheInstances(this.app);
     if (!cacheModelCacheInstances[beanFullName]) cacheModelCacheInstances[beanFullName] = {};
     if (!cacheModelCacheInstances[beanFullName][cacheName]) {
-      cacheModelCacheInstances[beanFullName][cacheName] = this.app.bean.summer.cache<any, any>(cacheName, this.options);
+      cacheModelCacheInstances[beanFullName][cacheName] = this.app.bean.summer.cache<any, any>(
+        cacheName,
+        this.options,
+      );
     }
     return cacheModelCacheInstances[beanFullName][cacheName];
   }
 
   public getName(table: keyof ITableRecord) {
-    const clientNameReal = this.$scope.orm.service.database.prepareClientNameReal(this._model.db.clientName);
+    const clientNameReal = this.$scope.orm.service.database.prepareClientNameReal(
+      this._model.db.clientName,
+    );
     return `${this._model.$beanFullName}:${clientNameReal}:${table}:${this._cacheType}`;
   }
 
@@ -67,7 +72,8 @@ export class ModelCacheBase extends BeanBase {
   private _getCacheOptionsInner() {
     if (this._model.options.cache?.[this._cacheType] === false) return false;
     // options
-    let _cacheOptions = (this._model.options.cache?.[this._cacheType] ?? {}) as IDecoratorSummerCacheOptions;
+    let _cacheOptions = (this._model.options.cache?.[this._cacheType] ??
+      {}) as IDecoratorSummerCacheOptions;
     // preset
     let configPreset;
     let preset = _cacheOptions.preset;

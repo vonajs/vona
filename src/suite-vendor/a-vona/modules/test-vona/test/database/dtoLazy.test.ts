@@ -38,7 +38,10 @@ describe('dtoLazy.test.ts', () => {
       registry.register(beanOptions.beanFullName, schema);
       const generator = new OpenApiGeneratorV31(registry.definitions);
       const apiObj = generator.generateDocument(app.scope('a-openapi').config.generateDocument.V31);
-      assert.equal(cast(apiObj).components.schemas['test-vona.dto.userLazy'].properties.user.$ref, '#/components/schemas/test-vona.dto.userLazy');
+      assert.equal(
+        cast(apiObj).components.schemas['test-vona.dto.userLazy'].properties.user.$ref,
+        '#/components/schemas/test-vona.dto.userLazy',
+      );
       assert.equal(
         cast(apiObj).components.schemas['test-vona.dto.roleLazy'].properties.users.items.$ref,
         '#/components/schemas/test-vona.dto.userLazy',

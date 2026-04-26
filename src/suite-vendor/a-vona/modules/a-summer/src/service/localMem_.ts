@@ -8,7 +8,10 @@ import type { TSummerCacheActionOptions } from '../types/summerCache.ts';
 import { CacheBase } from '../common/cacheBase.ts';
 
 @Service()
-export class ServiceLocalMem<KEY = any, DATA = any> extends CacheBase<KEY, DATA> implements ICacheLayeredBase<KEY, DATA> {
+export class ServiceLocalMem<KEY = any, DATA = any>
+  extends CacheBase<KEY, DATA>
+  implements ICacheLayeredBase<KEY, DATA>
+{
   private _cacheMemInstance: BeanCacheMemBase<KEY, DATA> | undefined;
 
   protected async __dispose__() {
@@ -27,7 +30,9 @@ export class ServiceLocalMem<KEY = any, DATA = any> extends CacheBase<KEY, DATA>
 
   async get(key?: KEY, options?: TSummerCacheActionOptions<KEY, DATA>) {
     const force = options?.force;
-    let value = force ? undefined : this.cacheMem.get(key, { ttl: options?.ttl, updateAgeOnGet: options?.updateAgeOnGet });
+    let value = force
+      ? undefined
+      : this.cacheMem.get(key, { ttl: options?.ttl, updateAgeOnGet: options?.updateAgeOnGet });
     if (force || this.__checkValueEmpty(value, options)) {
       const layered = this.__getLayered(options);
       value = await layered.get(key, options);
@@ -45,7 +50,9 @@ export class ServiceLocalMem<KEY = any, DATA = any> extends CacheBase<KEY, DATA>
   async mget(keys: KEY[], options?: TSummerCacheActionOptions<KEY, DATA>) {
     const force = options?.force;
     // mget
-    const values = force ? keys.map(() => undefined) : this.cacheMem.mget(keys, { ttl: options?.ttl, updateAgeOnGet: options?.updateAgeOnGet });
+    const values = force
+      ? keys.map(() => undefined)
+      : this.cacheMem.mget(keys, { ttl: options?.ttl, updateAgeOnGet: options?.updateAgeOnGet });
     const keysMissing: any[] = [];
     const indexesMissing: any[] = [];
     for (let i = 0; i < values.length; i++) {
@@ -76,7 +83,11 @@ export class ServiceLocalMem<KEY = any, DATA = any> extends CacheBase<KEY, DATA>
     return values.map(item => (item === null ? undefined : item));
   }
 
-  async set(value?: DATA, key?: KEY, options?: TSummerCacheActionOptions<KEY, DATA>): Promise<void> {
+  async set(
+    value?: DATA,
+    key?: KEY,
+    options?: TSummerCacheActionOptions<KEY, DATA>,
+  ): Promise<void> {
     const value2 = value === undefined ? null : value;
     // set
     this.cacheMem.set(value2!, key, {
@@ -90,7 +101,11 @@ export class ServiceLocalMem<KEY = any, DATA = any> extends CacheBase<KEY, DATA>
     await layered.set(value, key, options);
   }
 
-  async mset(values: DATA[], keys: KEY[], options?: TSummerCacheActionOptions<KEY, DATA>): Promise<void> {
+  async mset(
+    values: DATA[],
+    keys: KEY[],
+    options?: TSummerCacheActionOptions<KEY, DATA>,
+  ): Promise<void> {
     const values2 = values.map(item => (item === undefined ? null : item));
     // mset
     this.cacheMem.mset(values2 as any, keys, {

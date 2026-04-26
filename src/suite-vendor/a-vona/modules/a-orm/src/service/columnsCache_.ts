@@ -17,12 +17,14 @@ export class ServiceColumnsCache extends BeanBase {
   /** real client name */
   protected __init__(clientName: keyof IDatabaseClientRecord) {
     this.clientName = clientName;
-    this._onColumnsClearCancel = this.scope.event.columnsClear.on(({ clientName, tableName }, next) => {
-      if (clientName === this.clientName) {
-        this.columnsClear(tableName);
-      }
-      next();
-    });
+    this._onColumnsClearCancel = this.scope.event.columnsClear.on(
+      ({ clientName, tableName }, next) => {
+        if (clientName === this.clientName) {
+          this.columnsClear(tableName);
+        }
+        next();
+      },
+    );
   }
 
   protected async __dispose__() {

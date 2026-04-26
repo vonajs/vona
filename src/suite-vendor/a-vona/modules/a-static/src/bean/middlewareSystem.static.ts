@@ -1,5 +1,8 @@
 import type { Next, VonaContext } from 'vona';
-import type { IDecoratorMiddlewareSystemOptions, IMiddlewareSystemExecute } from 'vona-module-a-aspect';
+import type {
+  IDecoratorMiddlewareSystemOptions,
+  IMiddlewareSystemExecute,
+} from 'vona-module-a-aspect';
 
 import staticCache from '@cabloy/koa-static-cache';
 import { isObject, isString } from '@cabloy/utils';
@@ -91,7 +94,10 @@ export class MiddlewareSystemStatic extends BeanBase implements IMiddlewareSyste
     const middlewares = [rangeMiddleware];
 
     for (const dirObj of dirs) {
-      assert(isObject(dirObj) || isString(dirObj), '`config.static.dir` must be `string | Array<string|object>`.');
+      assert(
+        isObject(dirObj) || isString(dirObj),
+        '`config.static.dir` must be `string | Array<string|object>`.',
+      );
 
       let newOptions: any;
 
@@ -99,7 +105,10 @@ export class MiddlewareSystemStatic extends BeanBase implements IMiddlewareSyste
         // copy origin options to new options ensure the safety of objects
         newOptions = Object.assign({}, options, { dir: dirObj });
       } else {
-        assert(isString(dirObj.dir), '`config.static.dir` should contains `[].dir` property when object style.');
+        assert(
+          isString(dirObj.dir),
+          '`config.static.dir` should contains `[].dir` property when object style.',
+        );
         newOptions = Object.assign({}, options, dirObj);
       }
 
@@ -135,9 +144,12 @@ async function getFullPath(
     };
   }
   const scopeSelf = ctx.app.scope(__ThisModule__);
-  return scopeSelf.event.resolvePath.emit({ dir, filename, options }, ({ dir, filename, options }) => {
-    return _getFullPathInner(ctx, dir, filename, options);
-  });
+  return scopeSelf.event.resolvePath.emit(
+    { dir, filename, options },
+    ({ dir, filename, options }) => {
+      return _getFullPathInner(ctx, dir, filename, options);
+    },
+  );
 }
 
 async function _getFullPathInner(
@@ -174,6 +186,10 @@ async function _getFullPathInner(
     // cannot throw error
     // throw new Error(`invalid filename: ${filename}`);
   }
-  const fullPath = ctx.app.util.getAssetPathPhysical(moduleRelativeName, 'static', parts.join(path.sep));
+  const fullPath = ctx.app.util.getAssetPathPhysical(
+    moduleRelativeName,
+    'static',
+    parts.join(path.sep),
+  );
   return fullPath;
 }

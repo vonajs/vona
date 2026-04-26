@@ -1,7 +1,15 @@
 import type { Constructable } from 'vona';
 import type { IOpenapiOptions } from 'vona-module-a-openapiutils';
 
-import { appMetadata, appResource, cast, createBeanDecorator, deepExtend, onionNameFromBeanFullName, useApp } from 'vona';
+import {
+  appMetadata,
+  appResource,
+  cast,
+  createBeanDecorator,
+  deepExtend,
+  onionNameFromBeanFullName,
+  useApp,
+} from 'vona';
 import { mergeFieldsOpenapiMetadata, SymbolControllerResource } from 'vona-module-a-openapiutils';
 import { SymbolOpenApiOptions } from 'vona-module-a-openapiutils';
 
@@ -12,8 +20,14 @@ import type { IRecordResourceNameToRoutePathItem } from '../const.ts';
 import { recordResourceNameToRoutePath } from '../const.ts';
 
 export function Controller<T extends IDecoratorControllerOptions>(options?: T): ClassDecorator;
-export function Controller<T extends IDecoratorControllerOptions>(path?: string, options?: Omit<T, 'path'>): ClassDecorator;
-export function Controller<T extends IDecoratorControllerOptions>(path?: T | string, options?: T | string): ClassDecorator {
+export function Controller<T extends IDecoratorControllerOptions>(
+  path?: string,
+  options?: Omit<T, 'path'>,
+): ClassDecorator;
+export function Controller<T extends IDecoratorControllerOptions>(
+  path?: T | string,
+  options?: T | string,
+): ClassDecorator {
   if (typeof path === 'string') {
     options = Object.assign({}, options, { path });
   } else {
@@ -23,7 +37,11 @@ export function Controller<T extends IDecoratorControllerOptions>(path?: T | str
     // beanOptions
     const beanOptions = appResource.getBean(target)!;
     // IOpenapiOptions
-    const optionsMeta = appMetadata.getOwnMetadataMap(false, SymbolOpenApiOptions, target) as IOpenapiOptions;
+    const optionsMeta = appMetadata.getOwnMetadataMap(
+      false,
+      SymbolOpenApiOptions,
+      target,
+    ) as IOpenapiOptions;
     for (const key in cast(beanOptions.options)) {
       if (key === 'path') continue;
       optionsMeta[key] = cast(beanOptions.options)[key];
@@ -35,9 +53,24 @@ export function Controller<T extends IDecoratorControllerOptions>(path?: T | str
     const controllerResource = appMetadata.getOwnMetadata(SymbolControllerResource, target);
     if (controllerResource) {
       const app = useApp();
-      const apiPath = app.util.combineApiPathControllerAndAction(beanOptions.module, cast(beanOptions.options).path, undefined, true, true);
-      const routePathRaw = app.util.combineApiPathControllerAndActionRaw(beanOptions.module, cast(beanOptions.options).path, undefined, true);
-      recordResourceNameToRoutePath[onionName] = { apiPath, routePathRaw, controller: target } as IRecordResourceNameToRoutePathItem;
+      const apiPath = app.util.combineApiPathControllerAndAction(
+        beanOptions.module,
+        cast(beanOptions.options).path,
+        undefined,
+        true,
+        true,
+      );
+      const routePathRaw = app.util.combineApiPathControllerAndActionRaw(
+        beanOptions.module,
+        cast(beanOptions.options).path,
+        undefined,
+        true,
+      );
+      recordResourceNameToRoutePath[onionName] = {
+        apiPath,
+        routePathRaw,
+        controller: target,
+      } as IRecordResourceNameToRoutePathItem;
     } else {
       // for hmr
       delete recordResourceNameToRoutePath[onionName];
@@ -59,7 +92,12 @@ export function mergeActionsOpenapiMetadata(target: Constructable) {
   for (const key in actions) {
     const action: IOpenapiOptions = actions[key];
     if (!action) continue;
-    const options = appMetadata.getOwnMetadataMap(false, SymbolOpenApiOptions, target.prototype, key) as IOpenapiOptions;
+    const options = appMetadata.getOwnMetadataMap(
+      false,
+      SymbolOpenApiOptions,
+      target.prototype,
+      key,
+    ) as IOpenapiOptions;
     deepExtend(options, action);
   }
 }

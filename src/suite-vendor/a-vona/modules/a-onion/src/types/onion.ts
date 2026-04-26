@@ -9,9 +9,17 @@ export type TypeOnionsNormal<ONIONRECORD> = {
   [KEY in keyof ONIONRECORD]: IOnionSlice<ONIONRECORD, KEY>;
 };
 
-export type IOnionExecuteCustom = (beanInstance: any, data: any, options: any, next: Function) => any;
+export type IOnionExecuteCustom = (
+  beanInstance: any,
+  data: any,
+  options: any,
+  next: Function,
+) => any;
 
-export type TypeUseOnionOmitOptionsGlobal<T> = Omit<T, 'dependencies' | 'dependents' | 'ignore' | 'match'>;
+export type TypeUseOnionOmitOptionsGlobal<T> = Omit<
+  T,
+  'dependencies' | 'dependents' | 'ignore' | 'match'
+>;
 export type TypeUseOnionOmitOptionsEnable<T> = Omit<T, 'enable' | 'meta'>;
 
 export interface IOnionOptionsEnable<OmitMetaFields extends string = never> {
@@ -23,7 +31,9 @@ export type TypeOnionOptionsEnableSimple = IOnionOptionsEnable<'instanceName' | 
 
 export type TypeOnionOptionsMatchFunction = (this: any, ...args: any[]) => boolean;
 export type TypeOnionOptionsMatchRule<T> = T | RegExp | TypeOnionOptionsMatchFunction;
-export type TypeOnionOptionsMatchRules<T> = TypeOnionOptionsMatchRule<T>[] | TypeOnionOptionsMatchRule<T>;
+export type TypeOnionOptionsMatchRules<T> =
+  | TypeOnionOptionsMatchRule<T>[]
+  | TypeOnionOptionsMatchRule<T>;
 
 export interface IOnionOptionsMatch<T> {
   match?: T[] | T;
@@ -40,11 +50,16 @@ export interface IOnionOptionsMeta extends VonaOnionOptionsMeta {
   host?: keyof IHostRecord | Array<keyof IHostRecord>;
 }
 
-export interface IOnionOptionsBase<T extends string> extends IOnionOptionsEnable, IOnionOptionsMatch<TypeOnionOptionsMatchRule<T>> {}
+export interface IOnionOptionsBase<T extends string>
+  extends IOnionOptionsEnable, IOnionOptionsMatch<TypeOnionOptionsMatchRule<T>> {}
 export interface TypeOnionOptionsBaseSimple<T extends string>
   extends TypeOnionOptionsEnableSimple, IOnionOptionsMatch<TypeOnionOptionsMatchRule<T>> {}
 
-export interface IOnionSlice<ONIONRECORD = unknown, ONIONNAME extends keyof ONIONRECORD = any, T = unknown> {
+export interface IOnionSlice<
+  ONIONRECORD = unknown,
+  ONIONNAME extends keyof ONIONRECORD = any,
+  T = unknown,
+> {
   name: ONIONNAME;
   beanOptions: IDecoratorBeanOptionsBase<T, ONIONRECORD[ONIONNAME]>;
 }

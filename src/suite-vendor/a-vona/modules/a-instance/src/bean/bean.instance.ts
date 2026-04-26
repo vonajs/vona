@@ -53,7 +53,10 @@ export class BeanInstance extends BeanBase {
     );
   }
 
-  private async _registerLock(instanceName: keyof IInstanceRecord, configInstanceBase: ConfigInstanceBase) {
+  private async _registerLock(
+    instanceName: keyof IInstanceRecord,
+    configInstanceBase: ConfigInstanceBase,
+  ) {
     // get again
     let instance = await this.modelInstance.get({ name: instanceName }, { cache: { force: true } });
     if (instance) return instance;
@@ -70,7 +73,8 @@ export class BeanInstance extends BeanBase {
     }
     // isolate
     if (configInstanceBase.isolate) {
-      if (!configInstanceBase.id) throw new Error(`should specify id for isolate instance: ${instanceName}`);
+      if (!configInstanceBase.id)
+        throw new Error(`should specify id for isolate instance: ${instanceName}`);
       instance.isolate = configInstanceBase.isolate;
     }
     return await this.modelInstance.insert(instance);

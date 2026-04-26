@@ -51,7 +51,12 @@ const __MagicFields: Record<string, IMagicField> = {
   },
 };
 
-export function __parseMagics(cli: BeanCliBase, ast: GoGoCode.GoGoAST, globFile: IGlobBeanFile, entityName: string) {
+export function __parseMagics(
+  cli: BeanCliBase,
+  ast: GoGoCode.GoGoAST,
+  globFile: IGlobBeanFile,
+  entityName: string,
+) {
   const { className, file } = globFile;
   const astImportEntity = ast.find(`import { ${entityName} } from '$$$0'`);
   const fileEntity = path.join(path.dirname(file), (astImportEntity as any).value.source.value);

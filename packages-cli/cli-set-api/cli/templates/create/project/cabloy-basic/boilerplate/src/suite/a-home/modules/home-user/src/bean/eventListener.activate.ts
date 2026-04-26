@@ -8,8 +8,14 @@ type TypeEventData = TypeEventActivateData;
 type TypeEventResult = TypeEventActivateResult;
 
 @EventListener({ match: 'a-user:activate' })
-export class EventListenerActivate extends BeanBase implements IEventExecute<TypeEventData, TypeEventResult> {
-  async execute(data: TypeEventData, next: NextEvent<TypeEventData, TypeEventResult>): Promise<TypeEventResult> {
+export class EventListenerActivate
+  extends BeanBase
+  implements IEventExecute<TypeEventData, TypeEventResult>
+{
+  async execute(
+    data: TypeEventData,
+    next: NextEvent<TypeEventData, TypeEventResult>,
+  ): Promise<TypeEventResult> {
     const user = data as IUser;
     if (user.name === 'admin' && !this.scope.config.disableRoleAdmin) {
       // role: admin

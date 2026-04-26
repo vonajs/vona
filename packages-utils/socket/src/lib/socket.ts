@@ -18,7 +18,8 @@ const __cabloyEventPrefix = '_:';
 const __closeReasonNormal = 'Manual close';
 
 export class WebSocketClient {
-  private [SymbolPerformActionRecord]: Record<string, ISocketEventPerformActionItem | undefined> = {};
+  private [SymbolPerformActionRecord]: Record<string, ISocketEventPerformActionItem | undefined> =
+    {};
   private _ws?: WebSocket;
   private _timeoutRetry: any;
   private _reconnectDelay: number;
@@ -27,7 +28,11 @@ export class WebSocketClient {
   private _reconnectAttempts: number = 0;
 
   public onReady?: () => void;
-  public onEvent?: <K extends keyof ISocketEventRecord>(eventName: K, data: ISocketEventRecord[K], event: MessageEvent) => void;
+  public onEvent?: <K extends keyof ISocketEventRecord>(
+    eventName: K,
+    data: ISocketEventRecord[K],
+    event: MessageEvent,
+  ) => void;
   public onFallback?: (event: MessageEvent) => void;
 
   public onOpen?: (event: Event, reconnectAttempts: number) => void;
@@ -68,7 +73,9 @@ export class WebSocketClient {
       ws.removeEventListener('open', onOpen);
       ws.removeEventListener('error', onError);
       ws.removeEventListener('close', onClose);
-      const reconnect = event.reason !== __closeReasonNormal && this._reconnectAttempts < this._reconnectAttemptsMax;
+      const reconnect =
+        event.reason !== __closeReasonNormal &&
+        this._reconnectAttempts < this._reconnectAttemptsMax;
       this.onClose?.(event, reconnect);
       if (reconnect) {
         this._startTimeoutRetry(url, protocols);
@@ -145,7 +152,11 @@ export class WebSocketClient {
     return packet;
   }
 
-  public performAction(method: TypeSocketEventPerformActionMethod, path: string, options?: ISocketEventPerformActionOptions): Promise<any> {
+  public performAction(
+    method: TypeSocketEventPerformActionMethod,
+    path: string,
+    options?: ISocketEventPerformActionOptions,
+  ): Promise<any> {
     const id = (this[SymbolPerformActionId] ?? 0) + 1;
     this[SymbolPerformActionId] = id;
     return new Promise((resolve, reject) => {
@@ -158,7 +169,10 @@ export class WebSocketClient {
         b: options?.body,
         h: options?.headers,
       };
-      this.sendEvent('sysPerformAction' satisfies keyof ISocketEventRecordSystem as never, data as never);
+      this.sendEvent(
+        'sysPerformAction' satisfies keyof ISocketEventRecordSystem as never,
+        data as never,
+      );
     });
   }
 

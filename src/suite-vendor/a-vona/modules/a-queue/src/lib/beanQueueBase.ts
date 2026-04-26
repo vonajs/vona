@@ -12,10 +12,15 @@ export class BeanQueueBase<DATA = unknown, RESULT = unknown> extends BeanBase {
   }
 
   push(data: DATA, options?: IQueuePushOptions) {
-    return this.$scope.queue.service.queue.push(this.$scope.queue.service.queue.prepareJobInfo(this.$onionName as any, data, options));
+    return this.$scope.queue.service.queue.push(
+      this.$scope.queue.service.queue.prepareJobInfo(this.$onionName as any, data, options),
+    );
   }
 
   getQueue(instanceName?: keyof IInstanceRecord) {
-    return this.$scope.queue.service.queue.getQueue(this.$onionName as keyof IQueueRecord, instanceName);
+    return this.$scope.queue.service.queue.getQueue(
+      this.$onionName as keyof IQueueRecord,
+      instanceName,
+    );
   }
 }

@@ -27,7 +27,11 @@ const __SWAGGER_HTML__ = `<!doctype html>
 `;
 export interface IControllerOptionsRapidoc extends IDecoratorControllerOptions {}
 
-@Controller<IControllerOptionsRapidoc>({ path: '//rapidoc', exclude: true, meta: { mode: ['dev', 'test'] } })
+@Controller<IControllerOptionsRapidoc>({
+  path: '//rapidoc',
+  exclude: true,
+  meta: { mode: ['dev', 'test'] },
+})
 export class ControllerRapidoc extends BeanBase {
   @Web.get()
   @Passport.public()

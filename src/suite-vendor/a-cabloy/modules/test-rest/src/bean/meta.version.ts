@@ -1,4 +1,9 @@
-import type { IMetaVersionTest, IMetaVersionTestOptions, IMetaVersionUpdate, IMetaVersionUpdateOptions } from 'vona-module-a-version';
+import type {
+  IMetaVersionTest,
+  IMetaVersionTestOptions,
+  IMetaVersionUpdate,
+  IMetaVersionUpdateOptions,
+} from 'vona-module-a-version';
 
 import { getRandomInt } from '@cabloy/utils';
 import { faker } from '@faker-js/faker';

@@ -37,7 +37,10 @@ export interface ISocketEventPerformActionOptionsInner {
   h?: object;
 }
 
-export type TypeSocketPacketEvent<K extends keyof ISocketEventRecord = never> = [K | undefined, ISocketEventRecord[K] | any];
+export type TypeSocketPacketEvent<K extends keyof ISocketEventRecord = never> = [
+  K | undefined,
+  ISocketEventRecord[K] | any,
+];
 
 export interface ISendEventOptions {
   mask?: boolean | undefined;

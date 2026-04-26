@@ -5,7 +5,10 @@ import type { FunctionAny, FunctionAsync } from 'vona';
 import { BeanBase } from 'vona';
 import { Service } from 'vona-module-a-bean';
 
-import type { ITransactionConsistencyCommitOptions, ITransactionOptions } from '../types/transaction.ts';
+import type {
+  ITransactionConsistencyCommitOptions,
+  ITransactionOptions,
+} from '../types/transaction.ts';
 import type { ServiceDb } from './db_.ts';
 import type { ServiceTransactionFiber } from './transactionFiber_.ts';
 
@@ -103,13 +106,18 @@ export class ServiceTransaction extends BeanBase {
     throw new Error('transaction error: unknown propagation');
   }
 
-  private async _isolationLevelRequired<RESULT>(fn: FunctionAsync<RESULT>, options?: ITransactionOptions): Promise<RESULT> {
+  private async _isolationLevelRequired<RESULT>(
+    fn: FunctionAsync<RESULT>,
+    options?: ITransactionOptions,
+  ): Promise<RESULT> {
     let res: RESULT;
     // begin
     let fiber: ServiceTransactionFiber | undefined;
     if (!this.inTransaction) {
       const connection = this._db.client.connection;
-      const transactionConnection = await connection.transaction(_translateTransactionOptions(options));
+      const transactionConnection = await connection.transaction(
+        _translateTransactionOptions(options),
+      );
       fiber = this.transactionState.add(this._db, transactionConnection);
     }
     // fn
@@ -138,7 +146,9 @@ export class ServiceTransaction extends BeanBase {
   }
 }
 
-function _translateTransactionOptions(options?: ITransactionOptions): Knex.TransactionConfig | undefined {
+function _translateTransactionOptions(
+  options?: ITransactionOptions,
+): Knex.TransactionConfig | undefined {
   if (!options) return undefined;
   return {
     isolationLevel: TransactionIsolationLevelsMap[options.isolationLevel ?? 'DEFAULT'] as any,

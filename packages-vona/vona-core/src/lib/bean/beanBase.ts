@@ -13,7 +13,10 @@ const SymbolLoggerChildren = Symbol('SymbolLoggerChildren');
 export class BeanBase extends BeanBaseSimple {
   private [SymbolText]: IModuleLocaleText;
   private [SymbolLogger]: Record<keyof ILoggerClientRecord, winston.Logger> = {} as any;
-  private [SymbolLoggerChildren]: Record<keyof ILoggerClientRecord, Record<string, winston.Logger>> = {} as any;
+  private [SymbolLoggerChildren]: Record<
+    keyof ILoggerClientRecord,
+    Record<string, winston.Logger>
+  > = {} as any;
 
   protected get $text(): IModuleLocaleText {
     if (!this[SymbolText]) {
@@ -28,18 +31,26 @@ export class BeanBase extends BeanBaseSimple {
 
   protected $loggerClient(clientName: keyof ILoggerClientRecord = 'default') {
     if (!this[SymbolLogger][clientName]) {
-      this[SymbolLogger][clientName] = this.app.meta.logger.get(clientName).child({ beanFullName: this.$beanFullName });
+      this[SymbolLogger][clientName] = this.app.meta.logger
+        .get(clientName)
+        .child({ beanFullName: this.$beanFullName });
     }
     return this[SymbolLogger][clientName];
   }
 
-  protected $loggerChild(childName: keyof ILoggerChildRecord, clientName: keyof ILoggerClientRecord = 'default') {
-    if (!this[SymbolLoggerChildren][clientName]) this[SymbolLoggerChildren][clientName] = {} as never;
+  protected $loggerChild(
+    childName: keyof ILoggerChildRecord,
+    clientName: keyof ILoggerClientRecord = 'default',
+  ) {
+    if (!this[SymbolLoggerChildren][clientName])
+      this[SymbolLoggerChildren][clientName] = {} as never;
     if (!this[SymbolLoggerChildren][clientName][childName]) {
-      this[SymbolLoggerChildren][clientName][childName] = this.app.meta.logger.get(clientName).child({
-        beanFullName: this.$beanFullName,
-        name: childName,
-      });
+      this[SymbolLoggerChildren][clientName][childName] = this.app.meta.logger
+        .get(clientName)
+        .child({
+          beanFullName: this.$beanFullName,
+          name: childName,
+        });
     }
     return this[SymbolLoggerChildren][clientName][childName];
   }

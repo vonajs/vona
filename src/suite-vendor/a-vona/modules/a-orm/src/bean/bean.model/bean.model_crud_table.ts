@@ -37,23 +37,43 @@ export class BeanModelCrudTable<TRecord extends {}> extends BeanModelCrudInner<T
     return await this._get(table, where, options);
   }
 
-  async count(table: keyof ITableRecord, params?: IModelCountParams<TRecord>, options?: IModelMethodOptionsGeneral): Promise<string | undefined> {
+  async count(
+    table: keyof ITableRecord,
+    params?: IModelCountParams<TRecord>,
+    options?: IModelMethodOptionsGeneral,
+  ): Promise<string | undefined> {
     return await this._count(table, params, options);
   }
 
-  async insert(table: keyof ITableRecord, data?: Partial<TRecord>, options?: IModelMethodOptionsGeneral): Promise<TRecord> {
+  async insert(
+    table: keyof ITableRecord,
+    data?: Partial<TRecord>,
+    options?: IModelMethodOptionsGeneral,
+  ): Promise<TRecord> {
     return (await this._insertBulk(table, data, options)) as Promise<TRecord>;
   }
 
-  async insertBulk(table: keyof ITableRecord, data: Partial<TRecord>[], options?: IModelMethodOptionsGeneral): Promise<TRecord[]> {
+  async insertBulk(
+    table: keyof ITableRecord,
+    data: Partial<TRecord>[],
+    options?: IModelMethodOptionsGeneral,
+  ): Promise<TRecord[]> {
     return (await this._insertBulk(table, data, options)) as Promise<TRecord[]>;
   }
 
-  async update(table: keyof ITableRecord, data: Partial<TRecord>, options?: IModelUpdateOptionsGeneral<TRecord>): Promise<Partial<TRecord>> {
+  async update(
+    table: keyof ITableRecord,
+    data: Partial<TRecord>,
+    options?: IModelUpdateOptionsGeneral<TRecord>,
+  ): Promise<Partial<TRecord>> {
     return await this._update(table, data, options);
   }
 
-  async delete(table: keyof ITableRecord, where?: TypeModelWhere<TRecord>, options?: IModelMethodOptionsGeneral): Promise<void> {
+  async delete(
+    table: keyof ITableRecord,
+    where?: TypeModelWhere<TRecord>,
+    options?: IModelMethodOptionsGeneral,
+  ): Promise<void> {
     return await this._delete(table, where, options);
   }
 }

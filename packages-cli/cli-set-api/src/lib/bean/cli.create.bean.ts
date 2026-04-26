@@ -39,7 +39,9 @@ export class CliCreateBean extends BeanCliBase {
     argv.ssrSiteModuleName = fs.existsSync(path.join(argv.projectPath, 'src/suite/cabloy-start'))
       ? 'vona-module-start-siteadmin'
       : 'vona-module-basic-siteadmin';
-    argv.ssrSiteOnionName = fs.existsSync(path.join(argv.projectPath, 'src/suite/cabloy-start')) ? 'start-siteadmin:admin' : 'basic-siteadmin:admin';
+    argv.ssrSiteOnionName = fs.existsSync(path.join(argv.projectPath, 'src/suite/cabloy-start'))
+      ? 'start-siteadmin:admin'
+      : 'basic-siteadmin:admin';
     argv.ssrSiteGroupName = fs.existsSync(path.join(argv.projectPath, 'src/suite/cabloy-start'))
       ? 'start-siteadmin:management'
       : 'basic-siteadmin:management';
@@ -67,10 +69,19 @@ export class CliCreateBean extends BeanCliBase {
     const beanName = argv.beanName;
     argv.beanNameCapitalize = this.helper.firstCharToUpperCase(beanName);
     // moduleResourceName
-    argv.moduleResourceName = this.helper.combineModuleNameAndResource(argv.moduleInfo.relativeName, argv.beanName);
+    argv.moduleResourceName = this.helper.combineModuleNameAndResource(
+      argv.moduleInfo.relativeName,
+      argv.beanName,
+    );
     // directory
-    const beanDir = path.join(targetDir, onionSceneMeta.sceneIsolate ? `src/${sceneName}` : 'src/bean');
-    const beanFile = path.join(beanDir, onionSceneMeta.sceneIsolate ? `${beanName}.ts` : `${sceneName}.${beanName}.ts`);
+    const beanDir = path.join(
+      targetDir,
+      onionSceneMeta.sceneIsolate ? `src/${sceneName}` : 'src/bean',
+    );
+    const beanFile = path.join(
+      beanDir,
+      onionSceneMeta.sceneIsolate ? `${beanName}.ts` : `${sceneName}.${beanName}.ts`,
+    );
     if (fs.existsSync(beanFile)) {
       throw new Error(`${sceneName} bean exists: ${beanName}`);
     }
@@ -79,7 +90,8 @@ export class CliCreateBean extends BeanCliBase {
     const snippets = this._getBoilerplatesOrSnippets('snippets');
     const boilerplates = this._getBoilerplatesOrSnippets('boilerplate', argv.boilerplate);
     const snippetsName = snippets[`${sceneName}:${argv.beanName}`] || snippets[sceneName];
-    const boilerplateName = boilerplates[`${sceneName}:${argv.beanName}`] || boilerplates[sceneName];
+    const boilerplateName =
+      boilerplates[`${sceneName}:${argv.beanName}`] || boilerplates[sceneName];
     // render
     await this.template.renderBoilerplateAndSnippets({
       targetDir: beanDir,
@@ -102,7 +114,11 @@ export class CliCreateBean extends BeanCliBase {
       const onionSceneMeta = onionScenesMeta[sceneName];
       const scenePath = onionSceneMeta[type2];
       if (scenePath) {
-        result[sceneName] = this._combineBoilerplatesOrSnippetsPath(type, onionSceneMeta.module!.root, scenePath);
+        result[sceneName] = this._combineBoilerplatesOrSnippetsPath(
+          type,
+          onionSceneMeta.module!.root,
+          scenePath,
+        );
       }
     }
     // metas
@@ -111,13 +127,21 @@ export class CliCreateBean extends BeanCliBase {
       const onionMetaMeta = onionMetasMeta[sceneName];
       const scenePath = onionMetaMeta[type2];
       if (scenePath) {
-        result[`meta:${sceneName}`] = this._combineBoilerplatesOrSnippetsPath(type, onionMetaMeta.module!.root, scenePath);
+        result[`meta:${sceneName}`] = this._combineBoilerplatesOrSnippetsPath(
+          type,
+          onionMetaMeta.module!.root,
+          scenePath,
+        );
       }
     }
     return result;
   }
 
-  private _combineBoilerplatesOrSnippetsPath(type: 'boilerplate' | 'snippets', moduleRoot: string, scenePath: string) {
+  private _combineBoilerplatesOrSnippetsPath(
+    type: 'boilerplate' | 'snippets',
+    moduleRoot: string,
+    scenePath: string,
+  ) {
     // boilerplate
     if (type === 'boilerplate') {
       return path.join(moduleRoot, 'cli', scenePath);

@@ -8,17 +8,27 @@ import type { TypeCachingActionOptions } from '../types/caching.ts';
 
 import { combineCachingKey, isCachingKeyValid } from '../lib/utils.ts';
 
-export interface IAopMethodOptionsCachingGet extends IDecoratorAopMethodOptions, TypeCachingActionOptions {}
+export interface IAopMethodOptionsCachingGet
+  extends IDecoratorAopMethodOptions, TypeCachingActionOptions {}
 
 @AopMethod<IAopMethodOptionsCachingGet>()
 export class AopMethodCachingGet extends BeanAopMethodBase implements IAopMethodExecute {
-  async execute(options: IAopMethodOptionsCachingGet, args: [], next: Next, receiver: any, prop: string): Promise<any> {
-    if (!options.cacheName) throw new Error(`Should specify cacheName for caching: ${receiver.$beanFullName}#${prop}`);
+  async execute(
+    options: IAopMethodOptionsCachingGet,
+    args: [],
+    next: Next,
+    receiver: any,
+    prop: string,
+  ): Promise<any> {
+    if (!options.cacheName)
+      throw new Error(`Should specify cacheName for caching: ${receiver.$beanFullName}#${prop}`);
     // key
     const key = combineCachingKey({ args, receiver, prop, intention: 'get' }, options);
     if (!isCachingKeyValid(key)) return next();
     // cache
-    const cache = this.bean.summer.cache(beanFullNameFromOnionName(options.cacheName, 'summerCache'));
+    const cache = this.bean.summer.cache(
+      beanFullNameFromOnionName(options.cacheName, 'summerCache'),
+    );
     return await cache.get(
       key,
       Object.assign({}, options, {

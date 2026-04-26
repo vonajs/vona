@@ -11,20 +11,28 @@ import type { IModelClassRecord } from '../../types/onion/model.ts';
 import type { TypeModelOfModelLike, TypeSymbolKeyEntity } from '../../types/relations.ts';
 
 export function DtoAggregate<
-  Aggrs extends TypeModelSelectAggrParamsAggrs<TypeModelOfModelLike<ModelLike>[TypeSymbolKeyEntity]>,
+  Aggrs extends TypeModelSelectAggrParamsAggrs<
+    TypeModelOfModelLike<ModelLike>[TypeSymbolKeyEntity]
+  >,
   ModelLike extends BeanModelMeta | keyof IModelClassRecord,
 >(
-  modelLike: ModelLike extends BeanModelMeta ? (() => Constructable<ModelLike>) | Constructable<ModelLike> : ModelLike,
+  modelLike: ModelLike extends BeanModelMeta
+    ? (() => Constructable<ModelLike>) | Constructable<ModelLike>
+    : ModelLike,
   aggrs: Aggrs,
 ): Constructable<TypeDtoAggrResult<Aggrs>> {
   return _DtoAggregate_raw(modelLike, aggrs);
 }
 
 function _DtoAggregate_raw<
-  Aggrs extends TypeModelSelectAggrParamsAggrs<TypeModelOfModelLike<ModelLike>[TypeSymbolKeyEntity]>,
+  Aggrs extends TypeModelSelectAggrParamsAggrs<
+    TypeModelOfModelLike<ModelLike>[TypeSymbolKeyEntity]
+  >,
   ModelLike extends BeanModelMeta | keyof IModelClassRecord,
 >(
-  modelLike: ModelLike extends BeanModelMeta ? (() => Constructable<ModelLike>) | Constructable<ModelLike> : ModelLike,
+  modelLike: ModelLike extends BeanModelMeta
+    ? (() => Constructable<ModelLike>) | Constructable<ModelLike>
+    : ModelLike,
   aggrs: Aggrs,
 ): Constructable<TypeDtoAggrResult<Aggrs>> {
   abstract class TargetClass {}
@@ -32,11 +40,15 @@ function _DtoAggregate_raw<
 }
 
 export function _DtoAggregate_inner<
-  Aggrs extends TypeModelSelectAggrParamsAggrs<TypeModelOfModelLike<ModelLike>[TypeSymbolKeyEntity]>,
+  Aggrs extends TypeModelSelectAggrParamsAggrs<
+    TypeModelOfModelLike<ModelLike>[TypeSymbolKeyEntity]
+  >,
   ModelLike extends BeanModelMeta | keyof IModelClassRecord,
 >(
   classTarget: Constructable,
-  _modelLike: ModelLike extends BeanModelMeta ? (() => Constructable<ModelLike>) | Constructable<ModelLike> : ModelLike,
+  _modelLike: ModelLike extends BeanModelMeta
+    ? (() => Constructable<ModelLike>) | Constructable<ModelLike>
+    : ModelLike,
   aggrs: Aggrs,
 ): Constructable<TypeDtoAggrResult<Aggrs>> {
   for (const key in aggrs) {

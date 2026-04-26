@@ -12,7 +12,10 @@ describe('modelAggregate.test.ts', () => {
       // scope
       const scopeTest = app.scope('test-vona');
       // insert: roles
-      const roles = await scopeTest.model.role.insertBulk([{ name: `${prefix}:family` }, { name: `${prefix}:friend` }]);
+      const roles = await scopeTest.model.role.insertBulk([
+        { name: `${prefix}:family` },
+        { name: `${prefix}:friend` },
+      ]);
       assert.equal(roles.length, 2);
       assert.equal(roles[0].id !== undefined, true);
       // create: users

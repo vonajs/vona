@@ -17,7 +17,9 @@ export class BeanWorker extends BeanBase {
   async setAlive(id?: string) {
     const aliveTimeout = this.scope.config.alive.timeout;
     const aliveTimeoutMore = this.scope.config.alive.timeoutMore;
-    await this.scope.cacheRedis.workerAlive.set(true, id ?? this.id, { ttl: aliveTimeout + aliveTimeoutMore });
+    await this.scope.cacheRedis.workerAlive.set(true, id ?? this.id, {
+      ttl: aliveTimeout + aliveTimeoutMore,
+    });
   }
 
   async delAlive(id?: string) {

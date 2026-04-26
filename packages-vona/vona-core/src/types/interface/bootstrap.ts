@@ -1,4 +1,8 @@
-import type { TypeBootstrapOptionsConfig, TypeBootstrapOptionsLocales, TypeBootstrapOptionsModulesMeta } from '../application/app.ts';
+import type {
+  TypeBootstrapOptionsConfig,
+  TypeBootstrapOptionsLocales,
+  TypeBootstrapOptionsModulesMeta,
+} from '../application/app.ts';
 import type { AppMonkeyConstructable } from './monkey.ts';
 
 export interface BootstrapOptions {

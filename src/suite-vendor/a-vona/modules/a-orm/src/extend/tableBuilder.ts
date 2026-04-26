@@ -14,7 +14,11 @@ export interface IBasicFieldsOptions {
 
 export function ExtendTableBuilder(app: VonaApplication) {
   const scope = app.scope(__ThisModule__);
-  function _basicFields(this: knex.Knex.TableBuilder, options?: IBasicFieldsOptions, identityType?: TableIdentityType) {
+  function _basicFields(
+    this: knex.Knex.TableBuilder,
+    options?: IBasicFieldsOptions,
+    identityType?: TableIdentityType,
+  ) {
     options = options || ({} as IBasicFieldsOptions);
     if (options.id !== false) {
       const _identityType = identityType ?? scope.config.table.identityType;
@@ -32,24 +36,33 @@ export function ExtendTableBuilder(app: VonaApplication) {
     return this;
   }
 
-  knex.TableBuilder.extend('basicFields', function (this: knex.Knex.TableBuilder, options?: IBasicFieldsOptions) {
-    _basicFields.call(this, options, undefined);
-    return this;
-  });
-  knex.TableBuilder.extend('basicFieldsSimple', function (this: knex.Knex.TableBuilder, options?: IBasicFieldsOptions) {
-    _basicFields.call(this, options, 'number');
-    return this;
-  });
-  knex.TableBuilder.extend('tableIdentity', function (this: knex.Knex.TableBuilder, columnName: string) {
-    const _identityType = scope.config.table.identityType;
-    if (_identityType === 'bigint') {
-      return this.bigInteger(columnName); // default value is null
-    } else if (_identityType === 'number') {
-      return this.integer(columnName); // default value is null
-    } else {
-      throw new Error(`Should create column ${columnName} by yourself`);
-    }
-  });
+  knex.TableBuilder.extend(
+    'basicFields',
+    function (this: knex.Knex.TableBuilder, options?: IBasicFieldsOptions) {
+      _basicFields.call(this, options, undefined);
+      return this;
+    },
+  );
+  knex.TableBuilder.extend(
+    'basicFieldsSimple',
+    function (this: knex.Knex.TableBuilder, options?: IBasicFieldsOptions) {
+      _basicFields.call(this, options, 'number');
+      return this;
+    },
+  );
+  knex.TableBuilder.extend(
+    'tableIdentity',
+    function (this: knex.Knex.TableBuilder, columnName: string) {
+      const _identityType = scope.config.table.identityType;
+      if (_identityType === 'bigint') {
+        return this.bigInteger(columnName); // default value is null
+      } else if (_identityType === 'number') {
+        return this.integer(columnName); // default value is null
+      } else {
+        throw new Error(`Should create column ${columnName} by yourself`);
+      }
+    },
+  );
   knex.TableBuilder.extend('userId', function (this: knex.Knex.TableBuilder, columnName?: string) {
     return this.tableIdentity(columnName ?? 'userId');
   });

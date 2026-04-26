@@ -252,7 +252,9 @@ Defining an `n:n` relation requires an intermediate Model. For example, if the M
 @Model({
   entity: EntityUser,
   relations: {
-    roles: $relation.belongsToMany('test-vona:roleUser', 'test-vona:role', 'userId', 'roleId', { columns: ['id', 'name'] }),
+    roles: $relation.belongsToMany('test-vona:roleUser', 'test-vona:role', 'userId', 'roleId', {
+      columns: ['id', 'name'],
+    }),
   },
 })
 class ModelUser {}
@@ -276,7 +278,10 @@ The `belongsToMany` relation defined in the Model can be used for all `CRUD` ope
 class ServiceUser {
   async relationBelongsToMany() {
     // insert: roles
-    const roles = await this.scope.model.role.insertBulk([{ name: 'role-family' }, { name: 'role-friend' }]);
+    const roles = await this.scope.model.role.insertBulk([
+      { name: 'role-family' },
+      { name: 'role-friend' },
+    ]);
     const roleIdFamily = roles[0].id;
     const roleIdFriend = roles[1].id;
     // insert: user

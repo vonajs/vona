@@ -11,4 +11,7 @@ export interface TypeEventResolvePathData {
 export type TypeEventResolvePathResult = string | true | undefined;
 
 @Event()
-export class EventResolvePath extends BeanEventBase<TypeEventResolvePathData, TypeEventResolvePathResult> {}
+export class EventResolvePath extends BeanEventBase<
+  TypeEventResolvePathData,
+  TypeEventResolvePathResult
+> {}

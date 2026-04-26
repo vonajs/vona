@@ -57,7 +57,9 @@ export class ControllerPassport extends BeanBase {
   async loginOauth<T extends keyof IAuthProviderRecord>(
     @Arg.param('module') module: string,
     @Arg.param('providerName') providerName: string,
-    @Arg.param('clientName', z.string().optional()) clientName?: IAuthenticateOptions<IAuthProviderRecord[T]>['clientName'],
+    @Arg.param('clientName', z.string().optional()) clientName?: IAuthenticateOptions<
+      IAuthProviderRecord[T]
+    >['clientName'],
     @Arg.query('redirect', v.optional()) redirect?: string,
   ) {
     // only support oauth, so not return jwt to client
@@ -72,7 +74,9 @@ export class ControllerPassport extends BeanBase {
   async associate<T extends keyof IAuthProviderRecord>(
     @Arg.param('module') module: string,
     @Arg.param('providerName') providerName: string,
-    @Arg.param('clientName', z.string().optional()) clientName?: IAuthenticateOptions<IAuthProviderRecord[T]>['clientName'],
+    @Arg.param('clientName', z.string().optional()) clientName?: IAuthenticateOptions<
+      IAuthProviderRecord[T]
+    >['clientName'],
     @Arg.query('redirect', v.optional()) redirect?: string,
   ): Promise<DtoPassportJwt> {
     const jwt = await this.bean.auth.authenticate(`${module}:${providerName}` as T, {
@@ -87,7 +91,9 @@ export class ControllerPassport extends BeanBase {
   async migrate<T extends keyof IAuthProviderRecord>(
     @Arg.param('module') module: string,
     @Arg.param('providerName') providerName: string,
-    @Arg.param('clientName', z.string().optional()) clientName?: IAuthenticateOptions<IAuthProviderRecord[T]>['clientName'],
+    @Arg.param('clientName', z.string().optional()) clientName?: IAuthenticateOptions<
+      IAuthProviderRecord[T]
+    >['clientName'],
     @Arg.query('redirect', v.optional()) redirect?: string,
   ): Promise<DtoPassportJwt> {
     const jwt = await this.bean.auth.authenticate(`${module}:${providerName}` as T, {

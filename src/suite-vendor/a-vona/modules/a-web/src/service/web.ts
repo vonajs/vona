@@ -22,9 +22,19 @@ export class ServiceWeb extends BeanBase {
     const controllerOptions = beanOptions.options as any;
     const controllerPath = controllerOptions.path;
     // actionPath
-    const handlerMetadata = appMetadata.getMetadata<RequestMappingMetadata>(SymbolRequestMappingHandler, controller.prototype, actionKey)!;
+    const handlerMetadata = appMetadata.getMetadata<RequestMappingMetadata>(
+      SymbolRequestMappingHandler,
+      controller.prototype,
+      actionKey,
+    )!;
     const actionPath: string = handlerMetadata.path || '';
     // combine
-    return this.app.util.combineApiPathControllerAndAction(beanOptions.module, controllerPath, actionPath, prefix, simplify);
+    return this.app.util.combineApiPathControllerAndAction(
+      beanOptions.module,
+      controllerPath,
+      actionPath,
+      prefix,
+      simplify,
+    );
   }
 }

@@ -4,7 +4,11 @@ import { cast } from 'vona';
 import { getKeyHash } from 'vona-module-a-cache';
 
 import type { IAopMethodOptionsCachingSet } from '../bean/aopMethod.cachingSet.ts';
-import type { ICachingActionKeyInfo, ICachingActionValueInfo, TypeCachingActionOptions } from '../types/caching.ts';
+import type {
+  ICachingActionKeyInfo,
+  ICachingActionValueInfo,
+  TypeCachingActionOptions,
+} from '../types/caching.ts';
 
 export function combineCachingKey(info: ICachingActionKeyInfo, options: TypeCachingActionOptions) {
   const { result, args, prop, receiver, intention } = info;
@@ -12,7 +16,9 @@ export function combineCachingKey(info: ICachingActionKeyInfo, options: TypeCach
   if (options.cacheKeyFn) {
     if (typeof options.cacheKeyFn === 'string') {
       if (!receiver[options.cacheKeyFn]) {
-        throw new Error(`cacheKeyFn not found: ${cast(receiver).$beanFullName}#${options.cacheKeyFn}`);
+        throw new Error(
+          `cacheKeyFn not found: ${cast(receiver).$beanFullName}#${options.cacheKeyFn}`,
+        );
       }
       return _hashKey(receiver[options.cacheKeyFn](info, options));
     }
@@ -43,13 +49,18 @@ export function combineCachingKey(info: ICachingActionKeyInfo, options: TypeCach
   return _hashKey(argFirst);
 }
 
-export function combineCachingValue(info: ICachingActionValueInfo, options: IAopMethodOptionsCachingSet) {
+export function combineCachingValue(
+  info: ICachingActionValueInfo,
+  options: IAopMethodOptionsCachingSet,
+) {
   const { result, args, prop, receiver, intention } = info;
   // cacheValueFn
   if (!isNil(options.cacheValueFn)) {
     if (typeof options.cacheValueFn === 'string') {
       if (!receiver[options.cacheValueFn]) {
-        throw new Error(`cacheValueFn not found: ${cast(receiver).$beanFullName}#${options.cacheValueFn}`);
+        throw new Error(
+          `cacheValueFn not found: ${cast(receiver).$beanFullName}#${options.cacheValueFn}`,
+        );
       }
       return receiver[options.cacheValueFn](info, options);
     }

@@ -1,5 +1,10 @@
 import type { Next, OmitNever } from 'vona';
-import type { IOnionOptionsDeps, ServiceOnion, TypeOnionOptionsBaseSimple, TypeOnionOptionsEnableSimple } from 'vona-module-a-onion';
+import type {
+  IOnionOptionsDeps,
+  ServiceOnion,
+  TypeOnionOptionsBaseSimple,
+  TypeOnionOptionsEnableSimple,
+} from 'vona-module-a-onion';
 import type { IApiPathRecord } from 'vona-module-a-web';
 
 export interface IFilterRecordGlobal {}
@@ -21,7 +26,9 @@ export interface IFilterHtml {
 export interface IDecoratorFilterOptions extends TypeOnionOptionsEnableSimple {}
 
 export interface IDecoratorFilterOptionsGlobal
-  extends TypeOnionOptionsBaseSimple<keyof IApiPathRecord>, IOnionOptionsDeps<keyof IFilterRecordGlobal> {}
+  extends
+    TypeOnionOptionsBaseSimple<keyof IApiPathRecord>,
+    IOnionOptionsDeps<keyof IFilterRecordGlobal> {}
 
 export interface IFilterComposeData {
   err: Error;

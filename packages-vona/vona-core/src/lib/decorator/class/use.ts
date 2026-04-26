@@ -3,13 +3,21 @@ import { isNilOrEmptyString } from '@cabloy/utils';
 
 import type { IBeanRecord } from '../../bean/type.ts';
 import type { MetadataKey } from '../../core/metadata.ts';
-import type { Constructable, IDecoratorUseOptions, IDecoratorUseOptionsBase, IInjectSelectorInfo, IUsePrepareArgResult } from '../index.ts';
+import type {
+  Constructable,
+  IDecoratorUseOptions,
+  IDecoratorUseOptionsBase,
+  IInjectSelectorInfo,
+  IUsePrepareArgResult,
+} from '../index.ts';
 
 import { appMetadata } from '../../core/metadata.ts';
 import { appResource } from '../../core/resource.ts';
 
 export function Use(options?: IDecoratorUseOptions): PropertyDecorator & MethodDecorator;
-export function Use<T extends keyof IBeanRecord>(beanFullName?: T): PropertyDecorator & MethodDecorator;
+export function Use<T extends keyof IBeanRecord>(
+  beanFullName?: T,
+): PropertyDecorator & MethodDecorator;
 export function Use(options?: IDecoratorUseOptions | string): PropertyDecorator & MethodDecorator {
   return function (target: object, prop: MetadataKey, descriptor?: PropertyDescriptor) {
     if (!options) options = {};
@@ -23,7 +31,9 @@ export function Use(options?: IDecoratorUseOptions | string): PropertyDecorator 
     if (!beanFullName) {
       beanFullName = appResource.getBeanFullName(beanClass);
       if (!beanFullName) {
-        throw new Error(`@Use not found valid beanFullName for: ${target.constructor.name}.${String(prop)}`);
+        throw new Error(
+          `@Use not found valid beanFullName for: ${target.constructor.name}.${String(prop)}`,
+        );
       }
     }
     // record
@@ -50,19 +60,29 @@ export function usePrepareArgs(args: Array<(() => any) | any>, withSelector?: bo
   };
 }
 
-export function __prepareInjectSelectorInfo(beanInstance, useOptions: IDecoratorUseOptionsBase): IInjectSelectorInfo {
+export function __prepareInjectSelectorInfo(
+  beanInstance,
+  useOptions: IDecoratorUseOptionsBase,
+): IInjectSelectorInfo {
   let selectorInfo = __prepareInjectSelectorInfo_descriptor(beanInstance, useOptions);
   if (!selectorInfo) {
     selectorInfo = __prepareInjectSelectorInfo_init(beanInstance, useOptions);
   }
   if (!selectorInfo && !isNilOrEmptyString(useOptions.selector)) {
-    const selector = evaluateExpressions(useOptions.selector, { self: beanInstance, app: beanInstance.app, ctx: beanInstance.ctx });
+    const selector = evaluateExpressions(useOptions.selector, {
+      self: beanInstance,
+      app: beanInstance.app,
+      ctx: beanInstance.ctx,
+    });
     return { withSelector: true, args: [selector] };
   }
   return selectorInfo ?? { withSelector: false, args: [] };
 }
 
-function __prepareInjectSelectorInfo_descriptor(beanInstance, useOptions: IDecoratorUseOptionsBase): IInjectSelectorInfo | undefined {
+function __prepareInjectSelectorInfo_descriptor(
+  beanInstance,
+  useOptions: IDecoratorUseOptionsBase,
+): IInjectSelectorInfo | undefined {
   const fnGet = useOptions.descriptor?.get;
   if (!fnGet) return;
   const res: IUsePrepareArgResult = fnGet.call(beanInstance);
@@ -72,7 +92,10 @@ function __prepareInjectSelectorInfo_descriptor(beanInstance, useOptions: IDecor
   return { withSelector, args };
 }
 
-function __prepareInjectSelectorInfo_init(beanInstance, useOptions: IDecoratorUseOptionsBase): IInjectSelectorInfo | undefined {
+function __prepareInjectSelectorInfo_init(
+  beanInstance,
+  useOptions: IDecoratorUseOptionsBase,
+): IInjectSelectorInfo | undefined {
   const init = useOptions.init;
   if (!init) return;
   const withSelector = init.withSelector ?? false;

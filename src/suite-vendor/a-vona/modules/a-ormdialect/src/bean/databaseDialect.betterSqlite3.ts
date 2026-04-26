@@ -33,7 +33,10 @@ export class DatabaseDialectBetterSqlite3 extends BeanDatabaseDialectBase {
     },
   };
 
-  async fetchDatabases(_schemaBuilder: Knex.SchemaBuilder, databasePrefix: string): Promise<IFetchDatabasesResultItem[]> {
+  async fetchDatabases(
+    _schemaBuilder: Knex.SchemaBuilder,
+    databasePrefix: string,
+  ): Promise<IFetchDatabasesResultItem[]> {
     const dbDir = this._getDbDir();
     const files = await globby(`${databasePrefix}*.db`, {
       cwd: dbDir,
@@ -57,7 +60,10 @@ export class DatabaseDialectBetterSqlite3 extends BeanDatabaseDialectBase {
     }
   }
 
-  async fetchIndexes(schemaBuilder: Knex.SchemaBuilder, tableName: string): Promise<IFetchIndexesResultItem[]> {
+  async fetchIndexes(
+    schemaBuilder: Knex.SchemaBuilder,
+    tableName: string,
+  ): Promise<IFetchIndexesResultItem[]> {
     let items: any = await schemaBuilder.raw(`PRAGMA index_list(${tableName})`);
     items = items.map(item => {
       return {
@@ -67,11 +73,18 @@ export class DatabaseDialectBetterSqlite3 extends BeanDatabaseDialectBase {
     return items;
   }
 
-  async insert(builder: Knex.QueryBuilder, datas: any[]): Promise<[TableIdentity[], Knex.QueryBuilder]> {
+  async insert(
+    builder: Knex.QueryBuilder,
+    datas: any[],
+  ): Promise<[TableIdentity[], Knex.QueryBuilder]> {
     return await this.insertAsMysql(builder, datas);
   }
 
-  async select(builder: Knex.QueryBuilder, datas: any[], fn: TypeDatabaseDialectTableColumnsFn): Promise<any[]> {
+  async select(
+    builder: Knex.QueryBuilder,
+    datas: any[],
+    fn: TypeDatabaseDialectTableColumnsFn,
+  ): Promise<any[]> {
     return await this.selectAsSqlite3(builder, datas, fn);
   }
 

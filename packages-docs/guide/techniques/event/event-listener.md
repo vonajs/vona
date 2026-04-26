@@ -27,8 +27,14 @@ type TypeEventData = unknown; // TypeEventEchoData;
 type TypeEventResult = unknown; // TypeEventEchoResult;
 
 @EventListener({ match: 'some-module:echo' })
-export class EventListenerEcho extends BeanBase implements IEventExecute<TypeEventData, TypeEventResult> {
-  async execute(_data: TypeEventData, next: NextEvent<TypeEventData, TypeEventResult>): Promise<TypeEventResult> {
+export class EventListenerEcho
+  extends BeanBase
+  implements IEventExecute<TypeEventData, TypeEventResult>
+{
+  async execute(
+    _data: TypeEventData,
+    next: NextEvent<TypeEventData, TypeEventResult>,
+  ): Promise<TypeEventResult> {
     // next
     return next();
   }

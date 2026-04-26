@@ -71,7 +71,10 @@ export class ServiceDevProxy extends BeanBase {
     }
   }
 
-  public async web(req: http.IncomingMessage, res: http.ServerResponse<http.IncomingMessage>): Promise<true | undefined> {
+  public async web(
+    req: http.IncomingMessage,
+    res: http.ServerResponse<http.IncomingMessage>,
+  ): Promise<true | undefined> {
     // need not check _devProxyNotRunning
     // if (this._devProxyNotRunning) return undefined;
     if (await this._routerLookup(req)) return undefined;

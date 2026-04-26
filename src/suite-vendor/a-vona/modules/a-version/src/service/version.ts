@@ -8,7 +8,13 @@ import { Service } from 'vona-module-a-bean';
 
 import type { EntityVersion } from '../entity/version.ts';
 import type { EntityVersionInit } from '../entity/versionInit.ts';
-import type { IMetaVersionInit, IMetaVersionOptions, IMetaVersionOptionsInner, IMetaVersionTest, IMetaVersionUpdate } from '../types/version.ts';
+import type {
+  IMetaVersionInit,
+  IMetaVersionOptions,
+  IMetaVersionOptionsInner,
+  IMetaVersionTest,
+  IMetaVersionUpdate,
+} from '../types/version.ts';
 
 @Service()
 export class ServiceVersion extends BeanBase {
@@ -34,16 +40,23 @@ export class ServiceVersion extends BeanBase {
     }
   }
 
-  async __instanceInit(instanceName: keyof IInstanceRecord | undefined | null, instanceBase?: ConfigInstanceBase) {
+  async __instanceInit(
+    instanceName: keyof IInstanceRecord | undefined | null,
+    instanceBase?: ConfigInstanceBase,
+  ) {
     if (instanceName === undefined || instanceName === null) {
       throw new Error('instance name is not valid');
     }
     try {
       const optionsInit = Object.assign({}, instanceBase, { scene: 'init' as const, instanceName });
       await this.__check(optionsInit);
-      this.$logger.silly(chalk.cyan(`The instance is initialized successfully: ${instanceName || 'default'}`));
+      this.$logger.silly(
+        chalk.cyan(`The instance is initialized successfully: ${instanceName || 'default'}`),
+      );
     } catch (err) {
-      this.$logger.silly(chalk.cyan(`The instance is initialized failed: ${instanceName || 'default'}`));
+      this.$logger.silly(
+        chalk.cyan(`The instance is initialized failed: ${instanceName || 'default'}`),
+      );
       throw err;
     }
   }
@@ -71,7 +84,11 @@ export class ServiceVersion extends BeanBase {
 
     // check all modules
     for (const module of this.app.meta.modulesArray) {
-      this.$loggerChild('version').debug('check module: %s, scene:%s', module.info.relativeName, options.scene);
+      this.$loggerChild('version').debug(
+        'check module: %s, scene:%s',
+        module.info.relativeName,
+        options.scene,
+      );
       await this.__checkModule(module.info.relativeName, options);
     }
 
@@ -169,7 +186,12 @@ export class ServiceVersion extends BeanBase {
       }
       // loop
       for (const version of versions) {
-        this.$loggerChild('version').debug('update module: %s, version: %d, scene:%s', module.info.relativeName, version, options.scene);
+        this.$loggerChild('version').debug(
+          'update module: %s, version: %d, scene:%s',
+          module.info.relativeName,
+          version,
+          options.scene,
+        );
         await this.__updateModule2(options, module, version);
       }
     }
@@ -209,7 +231,8 @@ export class ServiceVersion extends BeanBase {
   async __updateModuleTransaction(module, version) {
     // bean
     const beanVersion = this.__getBeanVersion<IMetaVersionUpdate>(module.info.relativeName, true);
-    if (!beanVersion.update) throw new Error(`meta.version.update not exists for ${module.info.relativeName}`);
+    if (!beanVersion.update)
+      throw new Error(`meta.version.update not exists for ${module.info.relativeName}`);
     // clear columns cache
     this.bean.database.current.columns.columnsClear();
     // execute
@@ -259,7 +282,8 @@ export class ServiceVersion extends BeanBase {
   private __getBeanVersion<T>(moduleName: string, throwErrorIfEmpty: boolean): T {
     // bean
     const beanVersion = this.bean._getBean(`${moduleName}.meta.version` as any);
-    if (!beanVersion && throwErrorIfEmpty) throw new Error(`meta.version not exists for ${moduleName}`);
+    if (!beanVersion && throwErrorIfEmpty)
+      throw new Error(`meta.version not exists for ${moduleName}`);
     return beanVersion;
   }
 }

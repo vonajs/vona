@@ -33,7 +33,10 @@ export class ControllerUpload extends BeanBase {
   @Passport.public()
   @Core.fileUpload()
   @Api.contentType('application/json')
-  file(@Arg.field('name', v.default('zhennann')) name: string, @Arg.file('welcome') file: IUploadFile) {
+  file(
+    @Arg.field('name', v.default('zhennann')) name: string,
+    @Arg.file('welcome') file: IUploadFile,
+  ) {
     assert.equal(name, 'zhennann');
     assert.equal(file.name, 'welcome');
     return this.ctx[SymbolUploadValue];

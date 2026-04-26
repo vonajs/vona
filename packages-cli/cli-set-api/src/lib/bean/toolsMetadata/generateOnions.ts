@@ -6,7 +6,12 @@ import { beanFullNameFromOnionName } from 'vona-core';
 
 import { extractBeanInfo, getScopeModuleName, globBeanFiles } from './utils.ts';
 
-export async function generateOnions(sceneName: string, sceneMeta: OnionSceneMeta, moduleName: string, modulePath: string) {
+export async function generateOnions(
+  sceneName: string,
+  sceneMeta: OnionSceneMeta,
+  moduleName: string,
+  modulePath: string,
+) {
   const scopeModuleName = getScopeModuleName(moduleName);
   const sceneNameCapitalize = toUpperCaseFirstChar(sceneName);
   const globFiles = await globBeanFiles(sceneName, sceneMeta, moduleName, modulePath);
@@ -19,7 +24,15 @@ export async function generateOnions(sceneName: string, sceneMeta: OnionSceneMet
   const contentRecordsLocal: string[] = [];
   let needImportOptionsGlobalInterface;
   for (const globFile of globFiles) {
-    const { fileContent, fileNameJSRelative, sceneName, className, beanNameFull, isIgnore, isVirtual } = globFile;
+    const {
+      fileContent,
+      fileNameJSRelative,
+      sceneName,
+      className,
+      beanNameFull,
+      isIgnore,
+      isVirtual,
+    } = globFile;
     const isBeanGlobal = fileNameJSRelative.includes('../bean/bean.');
     contentExports.push(`export * from '${fileNameJSRelative}';`);
     if (isIgnore) continue; // get scope() also can be ignored
@@ -49,7 +62,9 @@ export async function generateOnions(sceneName: string, sceneMeta: OnionSceneMet
         } else {
           if (sceneMeta.optionsGlobalInterfaceName) {
             onionOptions = sceneMeta.optionsGlobalInterfaceName;
-            contentRecordsGlobal.push(`'${beanNameFull}': ${sceneMeta.optionsGlobalInterfaceName};`);
+            contentRecordsGlobal.push(
+              `'${beanNameFull}': ${sceneMeta.optionsGlobalInterfaceName};`,
+            );
             needImportOptionsGlobalInterface = true;
           } else {
             contentRecordsGlobal.push(`'${beanNameFull}': never;`);

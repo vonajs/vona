@@ -32,7 +32,9 @@ export class ControllerOrder extends BeanBase {
 
   @Web.get('findAll')
   @Api.body(v.array(DtoOrderResult))
-  async findAll(@Arg.filter(DtoOrderQuery) params: IQueryParams<ModelOrder>): Promise<DtoOrderResult[]> {
+  async findAll(
+    @Arg.filter(DtoOrderQuery) params: IQueryParams<ModelOrder>,
+  ): Promise<DtoOrderResult[]> {
     return this.scope.model.order.select({
       ...params,
       include: {

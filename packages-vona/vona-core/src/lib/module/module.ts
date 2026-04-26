@@ -7,7 +7,9 @@ export class ModuleTools extends BeanSimple {
     const app = this.app;
     const modulesMeta = await app.options.modulesMeta();
     const modules = modulesMeta.modulesMeta.modules;
-    const modulesArray = modulesMeta.modulesMeta.moduleNames.map(relativeName => modules[relativeName]);
+    const modulesArray = modulesMeta.modulesMeta.moduleNames.map(
+      relativeName => modules[relativeName],
+    );
     app.meta.modules = modules;
     app.meta.modulesArray = modulesArray;
     app.meta.modulesMonkey = [];
@@ -31,7 +33,13 @@ export class ModuleTools extends BeanSimple {
   async monkey(order: boolean, monkeyName) {
     const app = this.app;
     for (const module of app.meta.modulesArray) {
-      await app.util.monkeyModule(app.meta.appMonkey, app.meta.modulesMonkey, order, monkeyName, module);
+      await app.util.monkeyModule(
+        app.meta.appMonkey,
+        app.meta.modulesMonkey,
+        order,
+        monkeyName,
+        module,
+      );
     }
   }
 }

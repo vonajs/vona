@@ -1,4 +1,8 @@
-import type { DtoSerializerArray, DtoSerializerLazy, DtoSerializerSimple } from 'vona-module-test-vona';
+import type {
+  DtoSerializerArray,
+  DtoSerializerLazy,
+  DtoSerializerSimple,
+} from 'vona-module-test-vona';
 
 import assert from 'node:assert';
 import { describe, it } from 'node:test';
@@ -20,9 +24,13 @@ describe('serializer.test.ts', () => {
   } as DtoSerializerSimple;
   it('action:serializerSimple', async () => {
     await app.bean.executor.mockCtx(async () => {
-      const res: DtoSerializerSimple = await app.bean.executor.performAction('post', '/test/vona/serializer/echoSimple', {
-        body: dataSimple,
-      });
+      const res: DtoSerializerSimple = await app.bean.executor.performAction(
+        'post',
+        '/test/vona/serializer/echoSimple',
+        {
+          body: dataSimple,
+        },
+      );
       assert.equal(res.password, undefined);
       assert.equal(res.password2, undefined);
       assert.equal(res.email, 'k****n@cabloy.com');
@@ -40,9 +48,13 @@ describe('serializer.test.ts', () => {
   });
   it('action:serializerArray', async () => {
     await app.bean.executor.mockCtx(async () => {
-      const res: DtoSerializerArray[] = await app.bean.executor.performAction('post', '/test/vona/serializer/echoArray', {
-        body: [{ simples: [dataSimple], simplesLazy: [dataSimple] }],
-      });
+      const res: DtoSerializerArray[] = await app.bean.executor.performAction(
+        'post',
+        '/test/vona/serializer/echoArray',
+        {
+          body: [{ simples: [dataSimple], simplesLazy: [dataSimple] }],
+        },
+      );
       assert.equal(res[0].simples[0].password, '111111');
       assert.equal(res[0].simples[0].password2, undefined);
       assert.equal(res[0].simplesLazy[0].password, '111111');
@@ -51,12 +63,16 @@ describe('serializer.test.ts', () => {
   });
   it('action:serializerLazy', async () => {
     await app.bean.executor.mockCtx(async () => {
-      const res: DtoSerializerLazy = await app.bean.executor.performAction('post', '/test/vona/serializer/echoLazy', {
-        body: {
-          simple: dataSimple,
-          simpleLazy: dataSimple,
+      const res: DtoSerializerLazy = await app.bean.executor.performAction(
+        'post',
+        '/test/vona/serializer/echoLazy',
+        {
+          body: {
+            simple: dataSimple,
+            simpleLazy: dataSimple,
+          },
         },
-      });
+      );
       assert.equal(res.simple.password, '111111');
       assert.equal(res.simple.password2, undefined);
       assert.equal(res.simpleLazy.password, '111111');

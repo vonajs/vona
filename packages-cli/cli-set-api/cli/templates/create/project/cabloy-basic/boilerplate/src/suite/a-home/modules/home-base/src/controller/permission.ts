@@ -13,7 +13,9 @@ export interface IControllerOptionsPermission extends IDecoratorControllerOption
 export class ControllerPermission extends BeanBase {
   @Web.get(':resource')
   @Api.body(v.object(DtoPermissions))
-  async retrievePermissions(@Arg.param('resource', z.string()) resource: keyof IResourceRecord): Promise<IOpenapiPermissions> {
+  async retrievePermissions(
+    @Arg.param('resource', z.string()) resource: keyof IResourceRecord,
+  ): Promise<IOpenapiPermissions> {
     return await this.scope.service.permission.retrievePermissions(resource);
   }
 }

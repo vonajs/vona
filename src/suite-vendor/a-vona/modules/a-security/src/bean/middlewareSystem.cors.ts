@@ -1,5 +1,8 @@
 import type { Next, VonaContext } from 'vona';
-import type { IDecoratorMiddlewareSystemOptions, IMiddlewareSystemExecute } from 'vona-module-a-aspect';
+import type {
+  IDecoratorMiddlewareSystemOptions,
+  IMiddlewareSystemExecute,
+} from 'vona-module-a-aspect';
 
 import koaCors from '@koa/cors';
 import { BeanBase } from 'vona';

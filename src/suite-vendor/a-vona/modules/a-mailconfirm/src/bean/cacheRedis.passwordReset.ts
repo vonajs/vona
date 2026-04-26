@@ -10,4 +10,7 @@ export interface TCacheRedisPasswordResetData {
 @CacheRedis({
   ttl: 30 * 60 * 1000, // 30 minutes
 })
-export class CacheRedisPasswordReset extends BeanCacheRedisBase<TCacheRedisPasswordResetKey, TCacheRedisPasswordResetData> {}
+export class CacheRedisPasswordReset extends BeanCacheRedisBase<
+  TCacheRedisPasswordResetKey,
+  TCacheRedisPasswordResetData
+> {}

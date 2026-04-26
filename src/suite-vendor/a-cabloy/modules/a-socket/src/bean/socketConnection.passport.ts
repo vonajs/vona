@@ -1,5 +1,8 @@
 import type { Next } from 'vona';
-import type { IDecoratorSocketConnectionOptions, ISocketConnectionExecute } from 'vona-module-a-socket';
+import type {
+  IDecoratorSocketConnectionOptions,
+  ISocketConnectionExecute,
+} from 'vona-module-a-socket';
 import type { WebSocket } from 'ws';
 
 import { BeanBase } from 'vona';
@@ -9,14 +12,22 @@ export interface ISocketConnectionOptionsPassport extends IDecoratorSocketConnec
 
 @SocketConnection<ISocketConnectionOptionsPassport>({ dependencies: 'a-socket:event' })
 export class SocketConnectionPassport extends BeanBase implements ISocketConnectionExecute {
-  async enter(ws: WebSocket, _options: ISocketConnectionOptionsPassport, next: Next): Promise<void> {
+  async enter(
+    ws: WebSocket,
+    _options: ISocketConnectionOptionsPassport,
+    next: Next,
+  ): Promise<void> {
     // checkOauthCode
     await this._checkOauthCode(ws);
     // next
     return next();
   }
 
-  async exit(_ws: WebSocket, _options: ISocketConnectionOptionsPassport, next: Next): Promise<void> {
+  async exit(
+    _ws: WebSocket,
+    _options: ISocketConnectionOptionsPassport,
+    next: Next,
+  ): Promise<void> {
     // next
     return next();
   }

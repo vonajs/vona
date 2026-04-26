@@ -18,10 +18,17 @@ export function getScopeModuleName(moduleName: string) {
   return `ScopeModule${stringToCapitalize(moduleName, '-')}`;
 }
 
-export async function globBeanFiles(sceneName: string, sceneMeta: OnionSceneMeta, moduleName: string, modulePath: string): Promise<IGlobBeanFile[]> {
+export async function globBeanFiles(
+  sceneName: string,
+  sceneMeta: OnionSceneMeta,
+  moduleName: string,
+  modulePath: string,
+): Promise<IGlobBeanFile[]> {
   const result: IGlobBeanFile[] = [];
   const sceneNameCapitalize = toUpperCaseFirstChar(sceneName);
-  const pattern = sceneMeta.sceneIsolate ? `src/${sceneName}/*.ts(x)?` : `src/bean/${sceneName}.*.ts(x)?`;
+  const pattern = sceneMeta.sceneIsolate
+    ? `src/${sceneName}/*.ts(x)?`
+    : `src/bean/${sceneName}.*.ts(x)?`;
   const files = await globby(pattern, { cwd: modulePath });
   if (files.length === 0) return result;
   files.sort();
@@ -34,8 +41,12 @@ export async function globBeanFiles(sceneName: string, sceneMeta: OnionSceneMeta
     if (!sceneMeta.sceneIsolate && parts.length < 2) continue;
     const isIgnore = checkIgnoreOfParts(parts);
     const fileNameJS = fileName; // fileName.replace('.ts', '.js');
-    const fileNameJSRelative = sceneMeta.sceneIsolate ? `../${sceneName}/${fileNameJS}` : `../bean/${fileNameJS}`;
-    const className = (sceneMeta.sceneIsolate ? sceneNameCapitalize : '') + parts.map(item => toUpperCaseFirstChar(item)).join('');
+    const fileNameJSRelative = sceneMeta.sceneIsolate
+      ? `../${sceneName}/${fileNameJS}`
+      : `../bean/${fileNameJS}`;
+    const className =
+      (sceneMeta.sceneIsolate ? sceneNameCapitalize : '') +
+      parts.map(item => toUpperCaseFirstChar(item)).join('');
     const beanName = parts[parts.length - 1];
     const beanNameFull = `${moduleName}:${beanName}`;
     const beanNameCapitalize = toUpperCaseFirstChar(beanName);
@@ -72,7 +83,9 @@ export function extractBeanInfo(sceneName: string, fileContent: string, sceneMet
   if (matches) {
     optionsCustomInterface = matches[1];
     // optionsCustomInterfaceFrom
-    reg = new RegExp(`import type {[\\s\\S]*?${optionsCustomInterface}[, ][\\s\\S]*?} from '([^']*)'`);
+    reg = new RegExp(
+      `import type {[\\s\\S]*?${optionsCustomInterface}[, ][\\s\\S]*?} from '([^']*)'`,
+    );
     matches = fileContent.match(reg);
     if (matches) {
       optionsCustomInterfaceFrom = matches[1];

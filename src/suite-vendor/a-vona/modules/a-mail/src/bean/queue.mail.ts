@@ -21,7 +21,10 @@ export class QueueMail
   extends BeanQueueBase<TypeQueueMailJobData, TypeQueueMailJobResult>
   implements IQueueExecute<TypeQueueMailJobData, TypeQueueMailJobResult>
 {
-  async execute(data: TypeQueueMailJobData, _options?: IQueuePushOptions): Promise<TypeQueueMailJobResult> {
+  async execute(
+    data: TypeQueueMailJobData,
+    _options?: IQueuePushOptions,
+  ): Promise<TypeQueueMailJobResult> {
     await this.scope.service.mail.sendById(data.mailId);
   }
 }

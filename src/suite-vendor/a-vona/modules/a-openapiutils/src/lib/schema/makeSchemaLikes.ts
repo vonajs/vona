@@ -15,7 +15,10 @@ export function $makeSchema<T>(...schemaLikes: SchemaLike<T>[]): z.ZodType<T> {
   return makeSchemaLikes(schemaLikes, undefined);
 }
 
-export function makeSchemaLikes<T>(schemaLikes: SchemaLike<T> | SchemaLike<T>[], typeInit: any): z.ZodType<T> {
+export function makeSchemaLikes<T>(
+  schemaLikes: SchemaLike<T> | SchemaLike<T>[],
+  typeInit: any,
+): z.ZodType<T> {
   if (!Array.isArray(schemaLikes)) schemaLikes = [schemaLikes];
   // default schema
   let argSchema: z.ZodType<T> = $schema(typeInit);
@@ -27,12 +30,20 @@ export function makeSchemaLikes<T>(schemaLikes: SchemaLike<T> | SchemaLike<T>[],
   return argSchema;
 }
 
-export function makeSchemaLike<T>(schemaLike: SchemaLike<T> | undefined, schemaPrevious: z.ZodType<T>): z.ZodType<T> {
+export function makeSchemaLike<T>(
+  schemaLike: SchemaLike<T> | undefined,
+  schemaPrevious: z.ZodType<T>,
+): z.ZodType<T> {
   if (!schemaLike) return schemaPrevious;
   if (Object.prototype.hasOwnProperty.call(schemaLike, 'parseAsync')) {
     // schema
     return schemaLike as z.ZodType<T>;
-  } else if (isClass(schemaLike) || ['String', 'Number', 'Boolean', 'Date', 'BigInt', 'Array'].includes(cast<Function>(schemaLike).name)) {
+  } else if (
+    isClass(schemaLike) ||
+    ['String', 'Number', 'Boolean', 'Date', 'BigInt', 'Array'].includes(
+      cast<Function>(schemaLike).name,
+    )
+  ) {
     // class
     return $schema(cast<Constructable>(schemaLike)) as z.ZodType<T>;
   } else {
@@ -48,7 +59,10 @@ export function $schema(classType: BooleanConstructor): z.ZodBoolean;
 export function $schema(classType: DateConstructor): z.ZodDate;
 export function $schema(classType: BigIntConstructor): z.ZodBigInt;
 export function $schema(classType: ArrayConstructor): z.ZodArray<z.ZodAny>;
-export function $schema<T>(classType: Constructable<T>, options?: ISchemaObjectOptions): z.ZodType<T>;
+export function $schema<T>(
+  classType: Constructable<T>,
+  options?: ISchemaObjectOptions,
+): z.ZodType<T>;
 export function $schema(classType: any, options?: ISchemaObjectOptions): any {
   if (!classType) return z.any();
   if (classType.parseAsync) return classType;
@@ -59,7 +73,9 @@ export function $schema(classType: any, options?: ISchemaObjectOptions): any {
   if (classType.name === 'BigInt') return z.bigint();
   if (classType.name === 'Array') return z.array(z.any());
   // check if object
-  const rules = classType.prototype ? appMetadata.getMetadata(SymbolDecoratorRule, classType.prototype) : undefined;
+  const rules = classType.prototype
+    ? appMetadata.getMetadata(SymbolDecoratorRule, classType.prototype)
+    : undefined;
   if (!rules) {
     // not object
     return z.any();

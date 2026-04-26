@@ -8,7 +8,10 @@ import type { TSummerCacheActionOptions } from '../types/summerCache.ts';
 import { CacheBase } from '../common/cacheBase.ts';
 
 @Service()
-export class ServiceLocalRedis<KEY = any, DATA = any> extends CacheBase<KEY, DATA> implements ICacheLayeredBase<KEY, DATA> {
+export class ServiceLocalRedis<KEY = any, DATA = any>
+  extends CacheBase<KEY, DATA>
+  implements ICacheLayeredBase<KEY, DATA>
+{
   private _cacheRedisInstance: BeanCacheRedisBase<KEY, DATA> | undefined;
 
   protected async __dispose__() {
@@ -20,14 +23,22 @@ export class ServiceLocalRedis<KEY = any, DATA = any> extends CacheBase<KEY, DAT
 
   get cacheRedis(): BeanCacheRedisBase<KEY, DATA> {
     if (!this._cacheRedisInstance) {
-      this._cacheRedisInstance = this.app.bean.cache.redis(this._cacheName, this._cacheOptions.redis);
+      this._cacheRedisInstance = this.app.bean.cache.redis(
+        this._cacheName,
+        this._cacheOptions.redis,
+      );
     }
     return this._cacheRedisInstance;
   }
 
   async get(key?: KEY, options?: TSummerCacheActionOptions<KEY, DATA>) {
     const force = options?.force;
-    let value = force ? undefined : await this.cacheRedis.get(key, { ttl: options?.ttl, updateAgeOnGet: options?.updateAgeOnGet });
+    let value = force
+      ? undefined
+      : await this.cacheRedis.get(key, {
+          ttl: options?.ttl,
+          updateAgeOnGet: options?.updateAgeOnGet,
+        });
     if (force || this.__checkValueEmpty(value, options)) {
       const layered = this.__getLayered(options);
       value = await layered.get(key, options);
@@ -46,7 +57,10 @@ export class ServiceLocalRedis<KEY = any, DATA = any> extends CacheBase<KEY, DAT
     // mget
     const values = force
       ? keys.map(() => undefined)
-      : await this.cacheRedis.mget(keys, { ttl: options?.ttl, updateAgeOnGet: options?.updateAgeOnGet });
+      : await this.cacheRedis.mget(keys, {
+          ttl: options?.ttl,
+          updateAgeOnGet: options?.updateAgeOnGet,
+        });
     const keysMissing: any[] = [];
     const indexesMissing: any[] = [];
     for (let i = 0; i < values.length; i++) {
@@ -76,7 +90,11 @@ export class ServiceLocalRedis<KEY = any, DATA = any> extends CacheBase<KEY, DAT
     return values.map(item => (item === null ? undefined : item));
   }
 
-  async set(value?: DATA, key?: KEY, options?: TSummerCacheActionOptions<KEY, DATA>): Promise<void> {
+  async set(
+    value?: DATA,
+    key?: KEY,
+    options?: TSummerCacheActionOptions<KEY, DATA>,
+  ): Promise<void> {
     const value2 = value === undefined ? null : value;
     await this.cacheRedis.set(value2!, key, {
       ttl: options?.ttl,
@@ -85,7 +103,11 @@ export class ServiceLocalRedis<KEY = any, DATA = any> extends CacheBase<KEY, DAT
     });
   }
 
-  async mset(values: DATA[], keys: KEY[], options?: TSummerCacheActionOptions<KEY, DATA>): Promise<void> {
+  async mset(
+    values: DATA[],
+    keys: KEY[],
+    options?: TSummerCacheActionOptions<KEY, DATA>,
+  ): Promise<void> {
     const values2 = values.map(item => (item === undefined ? null : item));
     await this.cacheRedis.mset(values2 as any, keys, {
       ttl: options?.ttl,

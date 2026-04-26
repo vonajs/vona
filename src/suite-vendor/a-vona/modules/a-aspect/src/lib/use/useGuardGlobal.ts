@@ -12,7 +12,11 @@ import { UseOnionGlobalBase } from './useOnionGlobalBase.ts';
 export function UseGuardGlobal<T extends keyof IGuardRecordGlobal>(
   guardName: T,
   options?: Partial<TypeUseOnionOmitOptionsGlobal<IGuardRecordGlobal[T]>>,
-  fn?: (target: object, prop?: MetadataKey, descriptor?: PropertyDescriptor) => PropertyDescriptor | undefined,
+  fn?: (
+    target: object,
+    prop?: MetadataKey,
+    descriptor?: PropertyDescriptor,
+  ) => PropertyDescriptor | undefined,
 ): ClassDecorator & MethodDecorator {
   return UseOnionGlobalBase('guard', guardName, options, (target, prop, descriptor) => {
     if (guardName === 'a-user:passport' && !isNil(cast(options)?.public)) {

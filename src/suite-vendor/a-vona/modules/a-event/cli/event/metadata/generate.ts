@@ -12,7 +12,8 @@ export default async function (options: IMetadataCustomGenerateOptions): Promise
     contentRecords.push(`'${beanNameFull}': EventOn<${typeData}, ${typeResult}>;`);
   }
   if (contentImports.length === 0) return '';
-  const contentImportEventOn = contentImports.length > 0 ? "import type { EventOn } from 'vona-module-a-event';" : '';
+  const contentImportEventOn =
+    contentImports.length > 0 ? "import type { EventOn } from 'vona-module-a-event';" : '';
   // combine
   const content = `/** ${sceneName}: begin */
 ${contentImports.join('\n')}

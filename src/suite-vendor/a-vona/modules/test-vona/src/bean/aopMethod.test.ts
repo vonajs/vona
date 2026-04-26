@@ -1,5 +1,10 @@
 import type { Next, NextSync } from 'vona';
-import type { IAopMethodExecute, IAopMethodGet, IAopMethodSet, IDecoratorAopMethodOptions } from 'vona-module-a-aspect';
+import type {
+  IAopMethodExecute,
+  IAopMethodGet,
+  IAopMethodSet,
+  IDecoratorAopMethodOptions,
+} from 'vona-module-a-aspect';
 
 import { BeanAopMethodBase } from 'vona';
 import { AopMethod } from 'vona-module-a-aspect';
@@ -9,17 +14,32 @@ export interface IAopMethodOptionsTest extends IDecoratorAopMethodOptions {
 }
 
 @AopMethod<IAopMethodOptionsTest>({ wrapper: '' })
-export class AopMethodTest extends BeanAopMethodBase implements IAopMethodGet, IAopMethodSet, IAopMethodExecute {
+export class AopMethodTest
+  extends BeanAopMethodBase
+  implements IAopMethodGet, IAopMethodSet, IAopMethodExecute
+{
   get(options: IAopMethodOptionsTest, next: NextSync, _receiver: any, _prop: string): string {
     const res = next();
     return this._wrapper(options.wrapper, res);
   }
 
-  set(options: IAopMethodOptionsTest, value: string, next: NextSync, _receiver: any, _prop: string): boolean {
+  set(
+    options: IAopMethodOptionsTest,
+    value: string,
+    next: NextSync,
+    _receiver: any,
+    _prop: string,
+  ): boolean {
     return next(this._unwrapper(options.wrapper, value));
   }
 
-  execute(options: IAopMethodOptionsTest, _args: [], next: Next | NextSync, _receiver: any, _prop: string): Promise<string> | string {
+  execute(
+    options: IAopMethodOptionsTest,
+    _args: [],
+    next: Next | NextSync,
+    _receiver: any,
+    _prop: string,
+  ): Promise<string> | string {
     const res = next();
     if (res?.then) {
       return res.then(res => {

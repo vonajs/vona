@@ -27,7 +27,11 @@ export interface IPipeOptionsNumber extends IDecoratorPipeOptions {}
 
 @Pipe<IPipeOptionsNumber>()
 class PipeNumber {
-  async transform(value: TypePipeNumberData, _metadata: RouteHandlerArgumentMeta, _options: IPipeOptionsNumber): Promise<TypePipeNumberResult> {
+  async transform(
+    value: TypePipeNumberData,
+    _metadata: RouteHandlerArgumentMeta,
+    _options: IPipeOptionsNumber,
+  ): Promise<TypePipeNumberResult> {
     const valueNew = Number(value);
     if (Number.isNaN(valueNew)) this.app.throw(400);
     return valueNew;

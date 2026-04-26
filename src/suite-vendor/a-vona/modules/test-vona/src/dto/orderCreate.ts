@@ -8,4 +8,6 @@ import { ModelOrder } from '../model/order.ts';
 export interface IDtoOptionsOrderCreate extends IDecoratorDtoOptions {}
 
 @Dto<IDtoOptionsOrderCreate>()
-export class DtoOrderCreate extends $Dto.create(() => ModelOrder, { columns: ['orderNo', 'remark'] }) {}
+export class DtoOrderCreate extends $Dto.create(() => ModelOrder, {
+  columns: ['orderNo', 'remark'],
+}) {}

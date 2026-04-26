@@ -9,7 +9,13 @@ export interface IApiPathRecordMethodMap {
   put: IApiPathPutRecord;
   patch: IApiPathPatchRecord;
 }
-export interface IApiPathRecord extends IApiPathGetRecord, IApiPathPostRecord, IApiPathDeleteRecord, IApiPathPutRecord, IApiPathPatchRecord {}
+export interface IApiPathRecord
+  extends
+    IApiPathGetRecord,
+    IApiPathPostRecord,
+    IApiPathDeleteRecord,
+    IApiPathPutRecord,
+    IApiPathPatchRecord {}
 
 export interface IApiPathGetRecord {}
 export interface IApiPathPostRecord {}

@@ -47,9 +47,14 @@ export class ServiceSocket extends BeanBase {
       return;
     }
     const url = URL.parse(req.url ?? '', `https://${req.headers.host}`); // req.headers.host 'http://localhost'
-    const instanceName = (url?.searchParams.get(this.scope.config.queryKey.instanceName) || undefined) as keyof IInstanceRecord | undefined;
-    const locale = (url?.searchParams.get(this.scope.config.queryKey.locale) || undefined) as keyof ILocaleRecord | undefined;
-    const tz = (url?.searchParams.get(this.scope.config.queryKey.tz) || undefined) as string | undefined;
+    const instanceName = (url?.searchParams.get(this.scope.config.queryKey.instanceName) ||
+      undefined) as keyof IInstanceRecord | undefined;
+    const locale = (url?.searchParams.get(this.scope.config.queryKey.locale) || undefined) as
+      | keyof ILocaleRecord
+      | undefined;
+    const tz = (url?.searchParams.get(this.scope.config.queryKey.tz) || undefined) as
+      | string
+      | undefined;
     // enter
     return await this.app.bean.executor.newCtx(
       async () => {
@@ -143,7 +148,9 @@ export class ServiceSocket extends BeanBase {
     return cacheSocketPackets[namespace];
   }
 
-  private _wrapOnionConnection<T extends keyof ISocketConnectionRecord>(item: IOnionSlice<ISocketConnectionRecord, T>) {
+  private _wrapOnionConnection<T extends keyof ISocketConnectionRecord>(
+    item: IOnionSlice<ISocketConnectionRecord, T>,
+  ) {
     const fn = (data: ISocketConnectionComposeData, next: Next) => {
       const options = item.beanOptions.options!;
       // execute
@@ -158,7 +165,9 @@ export class ServiceSocket extends BeanBase {
     return fn;
   }
 
-  private _wrapOnionPacket<T extends keyof ISocketPacketRecord>(item: IOnionSlice<ISocketPacketRecord, T>) {
+  private _wrapOnionPacket<T extends keyof ISocketPacketRecord>(
+    item: IOnionSlice<ISocketPacketRecord, T>,
+  ) {
     const fn = (data: ISocketPacketComposeData, next: Next) => {
       const options = item.beanOptions.options!;
       // execute

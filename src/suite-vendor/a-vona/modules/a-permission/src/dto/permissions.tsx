@@ -1,4 +1,7 @@
-import type { IOpenapiPermissionModeActionActions, IOpenapiPermissions } from 'vona-module-a-openapi';
+import type {
+  IOpenapiPermissionModeActionActions,
+  IOpenapiPermissions,
+} from 'vona-module-a-openapi';
 import type { IRoleIdRecord, IRoleNameRecord } from 'vona-module-a-user';
 import type { IDecoratorDtoOptions } from 'vona-module-a-web';
 

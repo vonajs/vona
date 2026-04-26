@@ -1,9 +1,20 @@
 import type { BeanModelMeta } from '../bean/bean.model/bean.model_meta.ts';
 import type { IModelClassRecord } from '../types/onion/model.ts';
-import type { TypeModelClassLike, TypeModelOfModelLike, TypeModelsClassLikeGeneral, TypeSymbolKeyEntity } from '../types/relations.ts';
-import type { IModelRelationOptionsManyStatic, IModelRelationOptionsOneStatic } from './relationsStatic.ts';
+import type {
+  TypeModelClassLike,
+  TypeModelOfModelLike,
+  TypeModelsClassLikeGeneral,
+  TypeSymbolKeyEntity,
+} from '../types/relations.ts';
+import type {
+  IModelRelationOptionsManyStatic,
+  IModelRelationOptionsOneStatic,
+} from './relationsStatic.ts';
 
-function hasOne<MODEL extends BeanModelMeta | keyof IModelClassRecord, OPTIONS extends IModelRelationOptionsOneStatic<TypeModelOfModelLike<MODEL>>>(
+function hasOne<
+  MODEL extends BeanModelMeta | keyof IModelClassRecord,
+  OPTIONS extends IModelRelationOptionsOneStatic<TypeModelOfModelLike<MODEL>>,
+>(
   classModel: TypeModelClassLike<MODEL>,
   key: keyof TypeModelOfModelLike<MODEL>[TypeSymbolKeyEntity],
   options?: OPTIONS,
@@ -58,7 +69,14 @@ function belongsToMany<
   _group?: Group,
 ): any {
   // : IModelRelationBelongsToMany<MODELMiddle, MODEL, AUTOLOAD, COLUMNS, ModelJoins> {
-  return { type: 'belongsToMany', modelMiddle: classModelMiddle, model: classModel, keyFrom, keyTo, options };
+  return {
+    type: 'belongsToMany',
+    modelMiddle: classModelMiddle,
+    model: classModel,
+    keyFrom,
+    keyTo,
+    options,
+  };
 }
 
 export const $relation = {

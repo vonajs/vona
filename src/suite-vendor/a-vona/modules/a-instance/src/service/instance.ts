@@ -96,12 +96,21 @@ export class ServiceInstance extends BeanBase {
     const configInstanceBase = this.getConfigInstanceBase(instanceName);
     const instanceConfigDb = instance.config ? JSON.parse(instance.config) : undefined;
     // cache configs
-    this.__cacheIntancesConfig[instanceName] = deepExtend({}, this.app.config, configInstanceBase?.config, instanceConfigDb, {
-      instance: undefined,
-    });
+    this.__cacheIntancesConfig[instanceName] = deepExtend(
+      {},
+      this.app.config,
+      configInstanceBase?.config,
+      instanceConfigDb,
+      {
+        instance: undefined,
+      },
+    );
   }
 
-  async instanceStartupIsolate(instanceName: keyof IInstanceRecord, options?: IInstanceStartupOptions) {
+  async instanceStartupIsolate(
+    instanceName: keyof IInstanceRecord,
+    options?: IInstanceStartupOptions,
+  ) {
     await this.bean.executor.newCtx(
       async () => {
         await this.instanceStartup(instanceName, options);
@@ -121,26 +130,28 @@ export class ServiceInstance extends BeanBase {
     await this._cacheInstanceConfig(instanceName, options?.force);
     // queue within the same worker
     if (!this.__queueInstanceStartup[instanceName]) {
-      this.__queueInstanceStartup[instanceName] = async.queue((info: IInstanceStartupQueueInfo, cb: Function) => {
-        // check again
-        const force = info.options?.force;
-        if (this.ctx.app.meta.appReadyInstances[info.instanceName] && !force) {
-          info.resolve();
-          cb();
-          return;
-        }
-        // startup
-        this.$scope.startup.service.startup
-          .runStartupInstance(info.instanceName, info.options)
-          .then(() => {
+      this.__queueInstanceStartup[instanceName] = async.queue(
+        (info: IInstanceStartupQueueInfo, cb: Function) => {
+          // check again
+          const force = info.options?.force;
+          if (this.ctx.app.meta.appReadyInstances[info.instanceName] && !force) {
             info.resolve();
             cb();
-          })
-          .catch(err => {
-            info.reject(err);
-            cb();
-          });
-      });
+            return;
+          }
+          // startup
+          this.$scope.startup.service.startup
+            .runStartupInstance(info.instanceName, info.options)
+            .then(() => {
+              info.resolve();
+              cb();
+            })
+            .catch(err => {
+              info.reject(err);
+              cb();
+            });
+        },
+      );
     }
     // promise
     return new Promise((resolve, reject) => {

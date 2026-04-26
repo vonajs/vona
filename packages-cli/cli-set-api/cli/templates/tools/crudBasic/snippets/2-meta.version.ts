@@ -25,15 +25,28 @@ export default metadataCustomSnippet({
   format: true,
   init: async ({ cli, argv, targetFile }) => {
     await catchError(() => {
-      return cli.helper.invokeCli([':create:bean', 'meta', 'version', `--module=${argv.module}`, '--nometadata', '--noformat'], {
-        cwd: argv.projectPath,
-      });
+      return cli.helper.invokeCli(
+        [
+          ':create:bean',
+          'meta',
+          'version',
+          `--module=${argv.module}`,
+          '--nometadata',
+          '--noformat',
+        ],
+        {
+          cwd: argv.projectPath,
+        },
+      );
     });
     return fs.readFileSync(targetFile).toString('utf8');
   },
   async transform({ cli, ast }) {
     // update
-    ast.replace('async update(_options: IMetaVersionUpdateOptions) {$$$1}', 'async update(options: IMetaVersionUpdateOptions) {$$$1}');
+    ast.replace(
+      'async update(_options: IMetaVersionUpdateOptions) {$$$1}',
+      'async update(options: IMetaVersionUpdateOptions) {$$$1}',
+    );
     const code = await cli.template.renderContent({ content: __snippet_update });
     ast.replace('async update($$$0) {$$$1}', `async update($$$0) {\n  $$$1\n  ${code}}`);
     // ok

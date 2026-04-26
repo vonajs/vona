@@ -13,7 +13,13 @@ export default async function (_app: VonaApplication) {
     instances: {
       '': { password: '', title: '', config: {} },
       'shareTest': { password: '', title: '' },
-      'isolateTest': { password: '', title: '', id: 1000, isolate: true, isolateClient: 'isolateTest' },
+      'isolateTest': {
+        password: '',
+        title: '',
+        id: 1000,
+        isolate: true,
+        isolateClient: 'isolateTest',
+      },
     },
   };
 

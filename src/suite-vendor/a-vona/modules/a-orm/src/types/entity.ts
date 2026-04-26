@@ -12,4 +12,6 @@ export const SymbolKeyFieldsMore = Symbol('$fieldsMore');
 export type TypeSymbolKeyFieldsMore = typeof SymbolKeyFieldsMore;
 
 export type TypeEntityStudentMetaSimple<T> = Omit<T, '$table' | '$comment' | '$default'>;
-export type TypeEntityStudentMetaSimpleColumns<T> = PickString<keyof TypeEntityStudentMetaSimple<T>>;
+export type TypeEntityStudentMetaSimpleColumns<T> = PickString<
+  keyof TypeEntityStudentMetaSimple<T>
+>;

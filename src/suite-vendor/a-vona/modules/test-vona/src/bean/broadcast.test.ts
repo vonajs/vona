@@ -8,7 +8,10 @@ export interface TypeBroadcastTestJobData {
 }
 
 @Broadcast()
-export class BroadcastTest extends BeanBroadcastBase<TypeBroadcastTestJobData> implements IBroadcastExecute<TypeBroadcastTestJobData> {
+export class BroadcastTest
+  extends BeanBroadcastBase<TypeBroadcastTestJobData>
+  implements IBroadcastExecute<TypeBroadcastTestJobData>
+{
   async execute(data: TypeBroadcastTestJobData, isEmitter?: boolean) {
     if (!isEmitter) {
       // do something

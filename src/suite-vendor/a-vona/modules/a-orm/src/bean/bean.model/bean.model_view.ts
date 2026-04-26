@@ -7,7 +7,10 @@ import { cast } from 'vona';
 import { BeanModelKnex } from './bean.model_knex.ts';
 
 export class BeanModelView<TRecord extends {}> extends BeanModelKnex<TRecord> {
-  async createView(viewName: string, callback?: (viewBuilder: Knex.ViewBuilder) => any): Promise<void> {
+  async createView(
+    viewName: string,
+    callback?: (viewBuilder: Knex.ViewBuilder) => any,
+  ): Promise<void> {
     if (callback) {
       // create view
       let _view: Knex.ViewBuilder | null = null;
@@ -42,7 +45,10 @@ export class BeanModelView<TRecord extends {}> extends BeanModelKnex<TRecord> {
     }
   }
 
-  async alterView(viewName: string, callback?: (viewBuilder: Knex.ViewBuilder) => any): Promise<void> {
+  async alterView(
+    viewName: string,
+    callback?: (viewBuilder: Knex.ViewBuilder) => any,
+  ): Promise<void> {
     await this._viewDependentsAll_handle(viewName, async () => {
       // drop view
       await this.dropView(viewName, true);
@@ -51,7 +57,10 @@ export class BeanModelView<TRecord extends {}> extends BeanModelKnex<TRecord> {
     });
   }
 
-  async createTable(tableName: string, callback: (tableBuilder: Knex.CreateTableBuilder) => any): Promise<void> {
+  async createTable(
+    tableName: string,
+    callback: (tableBuilder: Knex.CreateTableBuilder) => any,
+  ): Promise<void> {
     await this.schema.createTable(tableName, callback);
   }
 
@@ -59,7 +68,11 @@ export class BeanModelView<TRecord extends {}> extends BeanModelKnex<TRecord> {
     await this.schema.dropTable(tableName);
   }
 
-  async alterTable(tableName: string, callback: (tableBuilder: Knex.CreateTableBuilder) => any, alterViewAuto?: boolean): Promise<void> {
+  async alterTable(
+    tableName: string,
+    callback: (tableBuilder: Knex.CreateTableBuilder) => any,
+    alterViewAuto?: boolean,
+  ): Promise<void> {
     if (!alterViewAuto) {
       // alter table
       return await this.schema.alterTable(tableName, table => {
@@ -99,7 +112,9 @@ export class BeanModelView<TRecord extends {}> extends BeanModelKnex<TRecord> {
       // dependencies
       const view = views.find(view => view.name === dependent);
       if (view) {
-        const dep = cast(view.dependencies).find(dep => dep.toLowerCase() === viewName.toLowerCase());
+        const dep = cast(view.dependencies).find(
+          dep => dep.toLowerCase() === viewName.toLowerCase(),
+        );
         if (!dep) {
           cast(view.dependencies).push(viewName);
         }

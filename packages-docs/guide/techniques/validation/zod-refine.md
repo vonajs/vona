@@ -29,7 +29,11 @@ export interface IZodRefineOptionsNameExists extends IDecoratorZodRefineOptions 
 
 @ZodRefine<IZodRefineOptionsNameExists>()
 class ZodRefineNameExists {
-  async execute(value: TypeZodRefineNameExistsData, refinementCtx: TypeRefinementCtx, _options: IZodRefineOptionsNameExists) {
+  async execute(
+    value: TypeZodRefineNameExistsData,
+    refinementCtx: TypeRefinementCtx,
+    _options: IZodRefineOptionsNameExists,
+  ) {
     const student = await this.scope.model.student.getByName(value.name);
     if (student) {
       refinementCtx.addIssue({

@@ -65,7 +65,10 @@ function _composeMiddlewareSystems(app: VonaApplication) {
   return app.meta[SymbolCacheComposeMiddlewareSystems];
 }
 
-function _wrapOnion<T extends keyof IMiddlewareSystemRecord>(app: VonaApplication, item: IOnionSlice<IMiddlewareSystemRecord, T>) {
+function _wrapOnion<T extends keyof IMiddlewareSystemRecord>(
+  app: VonaApplication,
+  item: IOnionSlice<IMiddlewareSystemRecord, T>,
+) {
   const fn = (_ctx: VonaContext, next: Next) => {
     const options = item.beanOptions.options!;
     if (!app.bean.onion.checkOnionOptionsEnabled(options, app.ctx.path)) {

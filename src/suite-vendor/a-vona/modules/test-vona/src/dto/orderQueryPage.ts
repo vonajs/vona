@@ -15,7 +15,10 @@ export interface IDtoOptionsOrderQueryPage extends IDecoratorDtoOptions {}
     pageSize: z.number().min(1).max(300).default(30),
   },
 })
-export class DtoOrderQueryPage extends $Class.omit($Dto.queryPage(EntityOrder, ['orderNo', 'remark']), ['pageSize']) {
+export class DtoOrderQueryPage extends $Class.omit(
+  $Dto.queryPage(EntityOrder, ['orderNo', 'remark']),
+  ['pageSize'],
+) {
   @Api.field(z.number().min(1).max(300).default(30))
   pageSize: number;
 }

@@ -6,7 +6,12 @@ import dotenvExpand from 'dotenv-expand';
 import { globbySync } from 'globby';
 import path from 'node:path';
 
-export function loadEnvs(meta: object, dir: string, prefix: string = '.env', postfixes?: string | string[]): DotenvParseOutput | undefined {
+export function loadEnvs(
+  meta: object,
+  dir: string,
+  prefix: string = '.env',
+  postfixes?: string | string[],
+): DotenvParseOutput | undefined {
   // envfiles
   const envFiles = getEnvFiles(meta, dir, prefix, postfixes);
   if (!envFiles) return undefined;
@@ -29,7 +34,12 @@ export function metaToScope(meta: object) {
   return scope;
 }
 
-export function getEnvFiles(meta: object, dir: string, prefix: string, postfixes?: string | string[]): string[] | undefined {
+export function getEnvFiles(
+  meta: object,
+  dir: string,
+  prefix: string,
+  postfixes?: string | string[],
+): string[] | undefined {
   if (typeof postfixes === 'string') postfixes = [postfixes];
   // files
   let files: string[] = globbySync(`${prefix}*`, { cwd: dir });
@@ -51,7 +61,9 @@ export function getEnvFiles(meta: object, dir: string, prefix: string, postfixes
   let keys = cascadeExtendKeys(scope, source, prefix, '.');
   if (!keys) return undefined;
   // mine
-  keys = keys.filter(item => !item.includes('.mine')).concat(keys.filter(item => item.includes('.mine')));
+  keys = keys
+    .filter(item => !item.includes('.mine'))
+    .concat(keys.filter(item => item.includes('.mine')));
   // files
   files = keys.map(key => {
     let file = path.join(dir, key);

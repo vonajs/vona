@@ -25,7 +25,13 @@ export interface IAopMethodOptionsLog extends IDecoratorAopMethodOptions {}
 
 @AopMethod<IAopMethodOptionsLog>()
 class AopMethodLog {
-  async execute(_options: IAopMethodOptionsLog, _args: [], next: Next | NextSync, _receiver: any, _prop: string): Promise<any> {
+  async execute(
+    _options: IAopMethodOptionsLog,
+    _args: [],
+    next: Next | NextSync,
+    _receiver: any,
+    _prop: string,
+  ): Promise<any> {
     const timeBegin = Date.now();
     const res = await next();
     const timeEnd = Date.now();

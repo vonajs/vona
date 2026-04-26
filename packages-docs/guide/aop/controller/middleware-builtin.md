@@ -65,7 +65,9 @@ import { Core } from 'vona-module-a-core';
 `@Core.gate` still calls `@Aspect.middlewareGlobal` internally, the code is as follows:
 
 ```typescript
-function Gate(options?: Partial<TypeUseOnionOmitOptionsGlobal<IMiddlewareOptionsGate>>): ClassDecorator & MethodDecorator {
+function Gate(
+  options?: Partial<TypeUseOnionOmitOptionsGlobal<IMiddlewareOptionsGate>>,
+): ClassDecorator & MethodDecorator {
   return Aspect.middlewareGlobal('a-core:gate', options);
 }
 ```

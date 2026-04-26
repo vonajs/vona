@@ -1,6 +1,7 @@
 {
   "name": "vona-module-a-redis",
   "version": "5.1.5",
+  "gitHead": "a79189b882c17af5911573896a781bbb0046d37d",
   "description": "",
   "keywords": [
     "Vona Module"
@@ -50,6 +51,5 @@
     "globalDependencies": {
       "ioredis": true
     }
-  },
-  "gitHead": "a79189b882c17af5911573896a781bbb0046d37d"
+  }
 }

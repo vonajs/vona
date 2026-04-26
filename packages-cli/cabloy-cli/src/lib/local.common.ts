@@ -36,14 +36,20 @@ export class LocalCommon {
     // all modules: type file
     const promises: Promise<void>[] = [];
     for (const module of this.cli.modulesMeta.modulesArray) {
-      if (module.info.node_modules && !fse.existsSync(path.join(module.root, 'src/.metadata'))) continue;
+      if (module.info.node_modules && !fse.existsSync(path.join(module.root, 'src/.metadata'))) {
+        continue;
+      }
       const moduleTypeFile = path.join(module.root, 'src/.metadata/modules.d.ts');
       promises.push(this._generateTypeModulesFileInner(typeFile, typeFileStat, moduleTypeFile));
     }
     await Promise.all(promises);
   }
 
-  async _generateTypeModulesFileInner(typeFile: string, typeFileStat: Stats, moduleTypeFile: string) {
+  async _generateTypeModulesFileInner(
+    typeFile: string,
+    typeFileStat: Stats,
+    moduleTypeFile: string,
+  ) {
     const win = process.platform.startsWith('win');
     let needCreate = true;
     const exists = await fse.exists(moduleTypeFile);
@@ -60,7 +66,7 @@ export class LocalCommon {
             needCreate = false;
           }
         }
-      } catch (_err) {}
+      } catch {}
     }
     if (needCreate) {
       await fse.remove(moduleTypeFile);
@@ -90,7 +96,14 @@ export class LocalCommon {
       await this._generatePackageJson_saveBack(pkg!, pkgOriginal, pkgOriginalFile, deps, depsDev);
     }
     // generate pkg from pkgOriginal
-    return await this._generatePackageJson_pkgFromPkgOriginal(projectPath, pkgOriginal, pkg, pkgFile, deps, depsDev);
+    return await this._generatePackageJson_pkgFromPkgOriginal(
+      projectPath,
+      pkgOriginal,
+      pkg,
+      pkgFile,
+      deps,
+      depsDev,
+    );
   }
 
   async _generatePackageJson_prepareDeps(_projectPath: string) {
@@ -167,7 +180,13 @@ export class LocalCommon {
     }
   }
 
-  async _generatePackageJson_saveBack(pkg: IModulePackage, pkgOriginal: IModulePackage, pkgOriginalFile: string, deps: TypeDeps, depsDev: TypeDeps) {
+  async _generatePackageJson_saveBack(
+    pkg: IModulePackage,
+    pkgOriginal: IModulePackage,
+    pkgOriginalFile: string,
+    deps: TypeDeps,
+    depsDev: TypeDeps,
+  ) {
     let changed = false;
     for (const key of ['version', 'gitHead']) {
       if (pkgOriginal[key] !== pkg[key]) {
@@ -201,15 +220,23 @@ export class LocalCommon {
   }
 }
 
-function _collectModuleDevs(module: IModule, deps: {}, nameDependencies: string, nameGlobalDependencies: string) {
+function _collectModuleDevs(
+  module: IModule,
+  deps: {},
+  nameDependencies: string,
+  nameGlobalDependencies: string,
+) {
   const moduleDeps = module.package[nameDependencies];
-  const globalDependencies = module.package.vonaModule?.[nameGlobalDependencies] || module.package.zovaModule?.[nameGlobalDependencies];
+  const globalDependencies =
+    module.package.vonaModule?.[nameGlobalDependencies] ||
+    module.package.zovaModule?.[nameGlobalDependencies];
   if (globalDependencies) {
     for (const key in globalDependencies) {
       let version = globalDependencies[key];
       if (version !== false) {
         if (version === true) {
-          if (!moduleDeps) throw new Error(`${nameDependencies} not found: ${module.info.relativeName}`);
+          if (!moduleDeps)
+            throw new Error(`${nameDependencies} not found: ${module.info.relativeName}`);
           version = moduleDeps[key];
         }
         deps[key] = version;

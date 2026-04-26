@@ -8,7 +8,10 @@ export interface TypeBroadcastReleaseJobData {
 }
 
 @Broadcast()
-export class BroadcastRelease extends BeanBroadcastBase<TypeBroadcastReleaseJobData> implements IBroadcastExecute<TypeBroadcastReleaseJobData> {
+export class BroadcastRelease
+  extends BeanBroadcastBase<TypeBroadcastReleaseJobData>
+  implements IBroadcastExecute<TypeBroadcastReleaseJobData>
+{
   async execute(data: TypeBroadcastReleaseJobData, _isEmitter?: boolean) {
     if (this.bean.worker.id === data.workerId) {
       await this.scope.service.election.release(data.resource);

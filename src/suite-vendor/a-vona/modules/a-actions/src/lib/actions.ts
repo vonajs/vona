@@ -1,4 +1,9 @@
-import type { IActionExprOptions, IActionLogOptions, IActionVarOptions, IActionViewOptions } from '../types/actions.ts';
+import type {
+  IActionExprOptions,
+  IActionLogOptions,
+  IActionVarOptions,
+  IActionViewOptions,
+} from '../types/actions.ts';
 
 export function ActionExpr(_options: IActionExprOptions) {
   return 'actionExpr';

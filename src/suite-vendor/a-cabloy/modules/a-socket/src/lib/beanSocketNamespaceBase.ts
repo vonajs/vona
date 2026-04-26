@@ -4,7 +4,12 @@ import type { ISendEventOptions } from '../types/socketEvent.ts';
 import type { IDecoratorSocketNamespaceOptions } from '../types/socketNamespace.ts';
 
 export class BeanSocketNamespaceBase<EVENTS extends {}> extends BeanBase {
-  send<K extends keyof EVENTS>(id: string, eventName: K, data?: EVENTS[K], options?: ISendEventOptions) {
+  send<K extends keyof EVENTS>(
+    id: string,
+    eventName: K,
+    data?: EVENTS[K],
+    options?: ISendEventOptions,
+  ) {
     this.$scope.socket.service.socketEvent.send(id, eventName, data, options);
   }
 

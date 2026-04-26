@@ -11,21 +11,33 @@ import { $schema } from 'vona-module-a-openapiutils';
 @Bean()
 export class BeanOpenapi extends BeanBase {
   public async clearAllCaches() {
-    const cacheOpenapiSchema = this.bean.summer.cache(beanFullNameFromOnionName('a-openapi:json', 'summerCache'));
+    const cacheOpenapiSchema = this.bean.summer.cache(
+      beanFullNameFromOnionName('a-openapi:json', 'summerCache'),
+    );
     await cacheOpenapiSchema.clear();
-    const cacheSwagger = this.bean.summer.cache(beanFullNameFromOnionName('a-swagger:swagger', 'summerCache'));
+    const cacheSwagger = this.bean.summer.cache(
+      beanFullNameFromOnionName('a-swagger:swagger', 'summerCache'),
+    );
     await cacheSwagger.clear();
-    const cacheRapidoc = this.bean.summer.cache(beanFullNameFromOnionName('a-swagger:rapidoc', 'summerCache'));
+    const cacheRapidoc = this.bean.summer.cache(
+      beanFullNameFromOnionName('a-swagger:rapidoc', 'summerCache'),
+    );
     await cacheRapidoc.clear();
   }
 
   // need not cache
-  async generateJsonOfClass<K extends keyof IOpenapiObject>(schemaClass: Constructable, version: K = 'V31' as any): Promise<IOpenapiObject[K]> {
+  async generateJsonOfClass<K extends keyof IOpenapiObject>(
+    schemaClass: Constructable,
+    version: K = 'V31' as any,
+  ): Promise<IOpenapiObject[K]> {
     return await this.generateJsonOfClasses([schemaClass], version);
   }
 
   // need not cache
-  async generateJsonOfClasses<K extends keyof IOpenapiObject>(schemaClasses: Constructable[], version: K = 'V31' as any): Promise<IOpenapiObject[K]> {
+  async generateJsonOfClasses<K extends keyof IOpenapiObject>(
+    schemaClasses: Constructable[],
+    version: K = 'V31' as any,
+  ): Promise<IOpenapiObject[K]> {
     const registry = new OpenAPIRegistry();
     // schema: independent
     let counter = 0;
@@ -37,7 +49,10 @@ export class BeanOpenapi extends BeanBase {
       }
       registry.register(beanFullName, schema);
     }
-    const generator = version === 'V30' ? new OpenApiGeneratorV3(registry.definitions) : new OpenApiGeneratorV31(registry.definitions);
+    const generator =
+      version === 'V30'
+        ? new OpenApiGeneratorV3(registry.definitions)
+        : new OpenApiGeneratorV31(registry.definitions);
     const apiObj = generator.generateDocument(this.scope.config.generateDocument[version]);
     this.scope.service.openapi.translate(apiObj, 'rest');
     return apiObj as IOpenapiObject[K];
@@ -58,15 +73,23 @@ export class BeanOpenapi extends BeanBase {
   }
 
   @Caching.get({ cacheName: 'a-openapi:json', cacheKeyFn: 'generateJsonCacheKey' })
-  async generateJson<K extends keyof IOpenapiObject>(version: K = 'V31' as any): Promise<IOpenapiObject[K]> {
+  async generateJson<K extends keyof IOpenapiObject>(
+    version: K = 'V31' as any,
+  ): Promise<IOpenapiObject[K]> {
     const registry = this.scope.service.openapi.collectRegistry();
-    const generator = version === 'V30' ? new OpenApiGeneratorV3(registry.definitions) : new OpenApiGeneratorV31(registry.definitions);
+    const generator =
+      version === 'V30'
+        ? new OpenApiGeneratorV3(registry.definitions)
+        : new OpenApiGeneratorV31(registry.definitions);
     const apiObj = generator.generateDocument(this.scope.config.generateDocument[version]);
     this.scope.service.openapi.translate(apiObj, 'api');
     return apiObj as IOpenapiObject[K];
   }
 
-  @Caching.get({ cacheName: 'a-openapi:json', cacheKeyFn: 'generateJsonOfControllerActionCacheKey' })
+  @Caching.get({
+    cacheName: 'a-openapi:json',
+    cacheKeyFn: 'generateJsonOfControllerActionCacheKey',
+  })
   async generateJsonOfControllerAction<K extends keyof IOpenapiObject>(
     controller: Constructable,
     actionKey: string,
@@ -75,8 +98,16 @@ export class BeanOpenapi extends BeanBase {
     const registry = new OpenAPIRegistry();
     const beanOptions = appResource.getBean(controller);
     if (!beanOptions) throw new Error('invalid controller');
-    this.scope.service.openapi.collectController(registry, beanOptions.module, controller, actionKey);
-    const generator = version === 'V30' ? new OpenApiGeneratorV3(registry.definitions) : new OpenApiGeneratorV31(registry.definitions);
+    this.scope.service.openapi.collectController(
+      registry,
+      beanOptions.module,
+      controller,
+      actionKey,
+    );
+    const generator =
+      version === 'V30'
+        ? new OpenApiGeneratorV3(registry.definitions)
+        : new OpenApiGeneratorV31(registry.definitions);
     const apiObj = generator.generateDocument(this.scope.config.generateDocument[version]);
     this.scope.service.openapi.translate(apiObj, 'rest');
     return apiObj as IOpenapiObject[K];

@@ -29,7 +29,10 @@ export class ControllerCaptcha extends BeanBase {
   @Web.post('verifyImmediate')
   @Api.body(z.string())
   @Passport.public()
-  async verifyImmediate(@Arg.body('id') id: string, @Arg.body('token') token: unknown): Promise<string> {
+  async verifyImmediate(
+    @Arg.body('id') id: string,
+    @Arg.body('token') token: unknown,
+  ): Promise<string> {
     const verified = await this.bean.captcha.verifyImmediate(id, token);
     if (!verified) this.app.throw(403);
     return verified;

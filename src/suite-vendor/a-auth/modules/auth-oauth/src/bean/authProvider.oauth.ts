@@ -1,4 +1,9 @@
-import type { IAuthProviderClientRecord, IAuthProviderOauth2ClientOptions, IDecoratorAuthProviderOptions, StrategyBase } from 'vona-module-a-auth';
+import type {
+  IAuthProviderClientRecord,
+  IAuthProviderOauth2ClientOptions,
+  IDecoratorAuthProviderOptions,
+  StrategyBase,
+} from 'vona-module-a-auth';
 
 import StrategyGithub from 'passport-github';
 import { type Constructable } from 'vona';
@@ -17,7 +22,10 @@ export interface IAuthProviderOauthClientOptions extends IAuthProviderOauth2Clie
   Strategy?: Constructable<StrategyBase>;
 }
 
-export interface IAuthProviderOptionsOauth extends IDecoratorAuthProviderOptions<IAuthProviderOauthClientRecord, IAuthProviderOauthClientOptions> {}
+export interface IAuthProviderOptionsOauth extends IDecoratorAuthProviderOptions<
+  IAuthProviderOauthClientRecord,
+  IAuthProviderOauthClientOptions
+> {}
 
 @AuthProvider<IAuthProviderOptionsOauth>({
   base: {
@@ -32,7 +40,10 @@ export interface IAuthProviderOptionsOauth extends IDecoratorAuthProviderOptions
   },
 })
 export class AuthProviderOauth extends BeanAuthProviderOauth2Base {
-  async strategy(clientOptions: IAuthProviderOauthClientOptions, _options: IAuthProviderOptionsOauth): Promise<Constructable<StrategyBase>> {
+  async strategy(
+    clientOptions: IAuthProviderOauthClientOptions,
+    _options: IAuthProviderOptionsOauth,
+  ): Promise<Constructable<StrategyBase>> {
     if (!clientOptions.Strategy) throw new Error('Should specify Strategy for oauth provider');
     return clientOptions.Strategy;
   }

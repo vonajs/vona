@@ -7,9 +7,21 @@ export const TransactionIsolationLevelsMap = {
   SNAPSHOT: 'snapshot',
 };
 
-export type TypeTransactionIsolationLevels = 'DEFAULT' | 'READ_UNCOMMITTED' | 'READ_COMMITTED' | 'REPEATABLE_READ' | 'SERIALIZABLE' | 'SNAPSHOT';
+export type TypeTransactionIsolationLevels =
+  | 'DEFAULT'
+  | 'READ_UNCOMMITTED'
+  | 'READ_COMMITTED'
+  | 'REPEATABLE_READ'
+  | 'SERIALIZABLE'
+  | 'SNAPSHOT';
 
-export type TypeTransactionPropagation = 'REQUIRED' | 'SUPPORTS' | 'MANDATORY' | 'REQUIRES_NEW' | 'NOT_SUPPORTED' | 'NEVER';
+export type TypeTransactionPropagation =
+  | 'REQUIRED'
+  | 'SUPPORTS'
+  | 'MANDATORY'
+  | 'REQUIRES_NEW'
+  | 'NOT_SUPPORTED'
+  | 'NEVER';
 
 // export type TransactionPropagation=''
 export interface ITransactionOptions {

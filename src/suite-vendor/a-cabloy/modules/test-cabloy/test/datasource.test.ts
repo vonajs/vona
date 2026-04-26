@@ -13,7 +13,9 @@ describe('datasource.test.ts', () => {
       const entityTest = await scopeTest.model.test.insert({ title: 'datasource:compensate:fail' });
       assert.equal(entityTest.title, 'datasource:compensate:fail');
       // scope
-      const clientConfig = app.scope('a-orm').service.database.getClientConfig(app.ctx.db.clientName);
+      const clientConfig = app
+        .scope('a-orm')
+        .service.database.getClientConfig(app.ctx.db.clientName);
       const clientConfig2 = app.ctx.db.client.clientConfig;
       const clientConfig3 = app.bean.database.current.client.clientConfig;
       assert.equal(clientConfig.client, clientConfig2.client);

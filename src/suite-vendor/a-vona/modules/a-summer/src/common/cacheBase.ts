@@ -3,7 +3,10 @@ import { BeanBase } from 'vona';
 import type { ServiceLocalFetch } from '../service/localFetch_.ts';
 import type { ServiceLocalMem } from '../service/localMem_.ts';
 import type { ServiceLocalRedis } from '../service/localRedis_.ts';
-import type { IDecoratorSummerCacheOptions, TSummerCacheActionOptions } from '../types/summerCache.ts';
+import type {
+  IDecoratorSummerCacheOptions,
+  TSummerCacheActionOptions,
+} from '../types/summerCache.ts';
 
 import { __ThisModule__ } from '../.metadata/this.ts';
 
@@ -46,28 +49,41 @@ export class CacheBase<KEY = any, DATA = any> extends BeanBase {
 
   protected get localMem(): ServiceLocalMem<KEY, DATA> {
     if (!this._localMem) {
-      this._localMem = this.app.bean._getBeanSelector(`${__ThisModule__}.service.localMem` as any, this._cacheName, this._cacheOptions);
+      this._localMem = this.app.bean._getBeanSelector(
+        `${__ThisModule__}.service.localMem` as any,
+        this._cacheName,
+        this._cacheOptions,
+      );
     }
     return this._localMem!;
   }
 
   protected get localRedis(): ServiceLocalRedis<KEY, DATA> {
     if (!this._localRedis) {
-      this._localRedis = this.app.bean._getBeanSelector(`${__ThisModule__}.service.localRedis` as any, this._cacheName, this._cacheOptions);
+      this._localRedis = this.app.bean._getBeanSelector(
+        `${__ThisModule__}.service.localRedis` as any,
+        this._cacheName,
+        this._cacheOptions,
+      );
     }
     return this._localRedis!;
   }
 
   protected get localFetch(): ServiceLocalFetch<KEY, DATA> {
     if (!this._localFetch) {
-      this._localFetch = this.app.bean._getBeanSelector(`${__ThisModule__}.service.localFetch` as any, this._cacheName, this._cacheOptions);
+      this._localFetch = this.app.bean._getBeanSelector(
+        `${__ThisModule__}.service.localFetch` as any,
+        this._cacheName,
+        this._cacheOptions,
+      );
     }
     return this._localFetch!;
   }
 
   protected __getOptionsEnabled(options?: TSummerCacheActionOptions<KEY, DATA>) {
     // enable/meta
-    const enable = options?.enable ?? this._cacheOptions.enable ?? this.scopeSummer.config.summer.enable;
+    const enable =
+      options?.enable ?? this._cacheOptions.enable ?? this.scopeSummer.config.summer.enable;
     const meta = this._cacheOptions.meta ?? this.scopeSummer.config.summer.meta;
     if (!this.bean.onion.checkOnionOptionsEnabled({ enable, meta })) return false;
     // default
@@ -78,11 +94,15 @@ export class CacheBase<KEY = any, DATA = any> extends BeanBase {
     return options?.mode ?? this._cacheOptions.mode ?? 'all';
   }
 
-  protected __checkValueEmpty(value: DATA | null | undefined, options?: TSummerCacheActionOptions<KEY, DATA>) {
+  protected __checkValueEmpty(
+    value: DATA | null | undefined,
+    options?: TSummerCacheActionOptions<KEY, DATA>,
+  ) {
     // undefined
     if (value === undefined) return true;
     // []
-    const emptyArrayAsNull = options?.emptyArrayAsNull ?? this._cacheOptions.emptyArrayAsNull ?? false;
+    const emptyArrayAsNull =
+      options?.emptyArrayAsNull ?? this._cacheOptions.emptyArrayAsNull ?? false;
     if (emptyArrayAsNull && Array.isArray(value) && value.length === 0) {
       value = null;
     }

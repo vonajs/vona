@@ -161,7 +161,9 @@ async select() {
 ```typescript
 @Model({
   relations: {
-    postContent: $relation.hasOne('test-vona:postContent', 'postId', { columns: ['id', 'content'] }),
+    postContent: $relation.hasOne('test-vona:postContent', 'postId', {
+      columns: ['id', 'content'],
+    }),
     user: $relation.belongsTo(
       () => ModelPost,
       () => ModelUser,
@@ -440,7 +442,10 @@ class ServicePost {
     return await this.scope.model.post.select({
       where: {
         _exists_: function (builder: Knex.QueryBuilder) {
-          builder.select('*').from('testVonaPostContent').where('postId', this.scope.model.post.ref('testVonaPost.id'));
+          builder
+            .select('*')
+            .from('testVonaPostContent')
+            .where('postId', this.scope.model.post.ref('testVonaPost.id'));
         } as any,
       },
     });

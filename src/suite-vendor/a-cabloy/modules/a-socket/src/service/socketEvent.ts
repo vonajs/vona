@@ -15,12 +15,22 @@ export class ServiceSocketEvent extends BeanBase {
     this.bean.socket.clients[id]?.sendEvent(eventName, data, options);
   }
 
-  broadcast(namespace: keyof ISocketNamespaceRecord, eventName: PropertyKey, data?: unknown, options?: ISendEventOptions) {
+  broadcast(
+    namespace: keyof ISocketNamespaceRecord,
+    eventName: PropertyKey,
+    data?: unknown,
+    options?: ISendEventOptions,
+  ) {
     this.broadcastWorker(namespace, eventName, data, options);
     this.scope.broadcast.broadcast.emit({ namespace, eventName, data, options });
   }
 
-  broadcastWorker(namespace: keyof ISocketNamespaceRecord, eventName: PropertyKey, data?: unknown, options?: ISendEventOptions) {
+  broadcastWorker(
+    namespace: keyof ISocketNamespaceRecord,
+    eventName: PropertyKey,
+    data?: unknown,
+    options?: ISendEventOptions,
+  ) {
     const ids = this.bean.socket.clientsNamespace[namespace];
     if (!ids) return;
     for (const id of ids) {

@@ -43,19 +43,28 @@ export class ControllerProduct extends BeanBase {
 
   @Web.get()
   @Api.body(DtoProductQueryRes)
-  @Ssr.redirect('basic-siteadmin:admin', '/rest/resource/:resource', { params: { resource: 'test-rest:product' } })
-  async select(@Arg.filter(DtoProductQuery) params: IQueryParams<ModelProduct>): Promise<DtoProductQueryRes> {
+  @Ssr.redirect('basic-siteadmin:admin', '/rest/resource/:resource', {
+    params: { resource: 'test-rest:product' },
+  })
+  async select(
+    @Arg.filter(DtoProductQuery) params: IQueryParams<ModelProduct>,
+  ): Promise<DtoProductQueryRes> {
     return await this.scope.service.product.select(params);
   }
 
   @Web.get(':id')
   @Api.body(v.optional(), v.object(EntityProduct))
-  async view(@Arg.param('id', v.tableIdentity()) id: TableIdentity): Promise<EntityProduct | undefined> {
+  async view(
+    @Arg.param('id', v.tableIdentity()) id: TableIdentity,
+  ): Promise<EntityProduct | undefined> {
     return await this.scope.service.product.view(id);
   }
 
   @Web.patch(':id')
-  async update(@Arg.param('id', v.tableIdentity()) id: TableIdentity, @Arg.body() product: DtoProductUpdate) {
+  async update(
+    @Arg.param('id', v.tableIdentity()) id: TableIdentity,
+    @Arg.body() product: DtoProductUpdate,
+  ) {
     return await this.scope.service.product.update(id, product);
   }
 

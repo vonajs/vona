@@ -1,8 +1,23 @@
-import type { OpenAPIObject as OpenAPIObject30, SchemaObject as SchemaObject30, SecurityRequirementObject } from 'openapi3-ts/oas30';
-import type { OpenAPIObject as OpenAPIObject31, SchemaObject as SchemaObject31 } from 'openapi3-ts/oas31';
+import type {
+  OpenAPIObject as OpenAPIObject30,
+  SchemaObject as SchemaObject30,
+  SecurityRequirementObject,
+} from 'openapi3-ts/oas30';
+import type {
+  OpenAPIObject as OpenAPIObject31,
+  SchemaObject as SchemaObject31,
+} from 'openapi3-ts/oas31';
 import type { Constructable, IDecoratorBeanOptionsBase } from 'vona';
-import type { IOpenapiHeader, IOpenapiOptions, TypeGenerateJsonScene } from 'vona-module-a-openapiutils';
-import type { IDecoratorControllerOptions, RequestMappingMetadata, TypeRequestMethod } from 'vona-module-a-web';
+import type {
+  IOpenapiHeader,
+  IOpenapiOptions,
+  TypeGenerateJsonScene,
+} from 'vona-module-a-openapiutils';
+import type {
+  IDecoratorControllerOptions,
+  RequestMappingMetadata,
+  TypeRequestMethod,
+} from 'vona-module-a-web';
 
 import * as ModuleInfo from '@cabloy/module-info';
 import { isEmptyObject, isNil } from '@cabloy/utils';
@@ -12,7 +27,12 @@ import { getInnerTypeName } from '@cabloy/zod-query';
 import { OpenAPIRegistry } from '@cabloy/zod-to-openapi';
 import { appMetadata, appResource, BeanBase, cast } from 'vona';
 import { Service } from 'vona-module-a-bean';
-import { $schema, bodySchemaWrapperDefault, SymbolOpenApiOptions, SymbolRouteHandlersArgumentsMeta } from 'vona-module-a-openapiutils';
+import {
+  $schema,
+  bodySchemaWrapperDefault,
+  SymbolOpenApiOptions,
+  SymbolRouteHandlersArgumentsMeta,
+} from 'vona-module-a-openapiutils';
 import { SymbolRequestMappingHandler } from 'vona-module-a-web';
 import { z } from 'zod';
 
@@ -22,7 +42,10 @@ const __ArgumentTypes = ['param', 'query', 'body', 'headers', 'fields', 'field',
 
 @Service()
 export class ServiceOpenapi extends BeanBase {
-  public translate(apiObj: OpenAPIObject30 | OpenAPIObject31, generateJsonScene: TypeGenerateJsonScene) {
+  public translate(
+    apiObj: OpenAPIObject30 | OpenAPIObject31,
+    generateJsonScene: TypeGenerateJsonScene,
+  ) {
     // paths
     if (apiObj.paths) {
       for (const key in apiObj.paths) {
@@ -89,7 +112,10 @@ export class ServiceOpenapi extends BeanBase {
     // items
     const items = cast<SchemaObject30 | SchemaObject31>(schema).items;
     if (items && typeof items === 'object') {
-      cast<SchemaObject30 | SchemaObject31>(schema).items = this._translateSchema(items, generateJsonScene);
+      cast<SchemaObject30 | SchemaObject31>(schema).items = this._translateSchema(
+        items,
+        generateJsonScene,
+      );
     }
     // ok
     return schema;
@@ -140,12 +166,21 @@ export class ServiceOpenapi extends BeanBase {
     }
     // controller
     for (const controller of this.bean.onion.controller.getOnionsEnabledCached()) {
-      this.collectController(registry, controller.beanOptions.module, controller.beanOptions.beanClass);
+      this.collectController(
+        registry,
+        controller.beanOptions.module,
+        controller.beanOptions.beanClass,
+      );
     }
     return registry;
   }
 
-  public collectController(registry: OpenAPIRegistry, moduleName: string, controller: Constructable, actionKey?: string) {
+  public collectController(
+    registry: OpenAPIRegistry,
+    moduleName: string,
+    controller: Constructable,
+    actionKey?: string,
+  ) {
     // info
     const info = ModuleInfo.parseInfo(moduleName)!;
     // controller options
@@ -154,7 +189,10 @@ export class ServiceOpenapi extends BeanBase {
     const controllerBeanFullName = beanOptions.beanFullName;
     const controllerOptions = beanOptions.options as IDecoratorControllerOptions;
     const controllerPath = controllerOptions.path;
-    const controllerOpenApiOptions = appMetadata.getMetadata<IOpenapiOptions>(SymbolOpenApiOptions, controller);
+    const controllerOpenApiOptions = appMetadata.getMetadata<IOpenapiOptions>(
+      SymbolOpenApiOptions,
+      controller,
+    );
     if (controllerOpenApiOptions?.exclude) return;
     // descs
     const descs = Object.getOwnPropertyDescriptors(controller.prototype);
@@ -192,30 +230,50 @@ export class ServiceOpenapi extends BeanBase {
     const app = this.app;
 
     // action options: should not extend controllerOpenApiOptions
-    const actionOpenApiOptions = appMetadata.getMetadata<IOpenapiOptions>(SymbolOpenApiOptions, controller.prototype, actionKey);
+    const actionOpenApiOptions = appMetadata.getMetadata<IOpenapiOptions>(
+      SymbolOpenApiOptions,
+      controller.prototype,
+      actionKey,
+    );
     if (actionOpenApiOptions?.exclude) return;
 
     // actionPath/actionMethod
-    if (!appMetadata.hasMetadata(SymbolRequestMappingHandler, controller.prototype, actionKey)) return;
-    const handlerMetadata = appMetadata.getMetadata<RequestMappingMetadata>(SymbolRequestMappingHandler, controller.prototype, actionKey)!;
+    if (!appMetadata.hasMetadata(SymbolRequestMappingHandler, controller.prototype, actionKey))
+      return;
+    const handlerMetadata = appMetadata.getMetadata<RequestMappingMetadata>(
+      SymbolRequestMappingHandler,
+      controller.prototype,
+      actionKey,
+    )!;
     const actionPath: string = handlerMetadata.path || '';
     const actionMethod: TypeRequestMethod = handlerMetadata.method || 'get';
 
     // routePath
-    const routePath = app.util.combineApiPathControllerAndAction(info.relativeName, controllerPath, actionPath, true, true);
+    const routePath = app.util.combineApiPathControllerAndAction(
+      info.relativeName,
+      controllerPath,
+      actionPath,
+      true,
+      true,
+    );
     // :id -> {id}
     const routePath2 = routePath.replace(/:([^/]+)/g, '{$1}');
 
     // tags
     let tags: string[] | undefined = actionOpenApiOptions?.tags ?? controllerOpenApiOptions?.tags;
     if (!tags || tags.length === 0) {
-      tags = [toUpperCaseFirstChar(this.app.util.combineResourceName(beanOptions.name, info.relativeName, true, true))];
+      tags = [
+        toUpperCaseFirstChar(
+          this.app.util.combineResourceName(beanOptions.name, info.relativeName, true, true),
+        ),
+      ];
     }
     // operationId
     let operationId = actionOpenApiOptions?.operationId ?? actionKey;
     operationId = `${tags[0]}_${operationId}`;
     // security
-    const _public: boolean | undefined = actionOpenApiOptions?.public ?? controllerOpenApiOptions?.public;
+    const _public: boolean | undefined =
+      actionOpenApiOptions?.public ?? controllerOpenApiOptions?.public;
     let security: SecurityRequirementObject[] | undefined;
     if (!_public) {
       security = [
@@ -233,7 +291,13 @@ export class ServiceOpenapi extends BeanBase {
       security,
       description: actionOpenApiOptions?.description as string,
       summary: actionOpenApiOptions?.summary as string,
-      request: this._collectRequest(info, controller, actionKey, actionOpenApiOptions, controllerOpenApiOptions),
+      request: this._collectRequest(
+        info,
+        controller,
+        actionKey,
+        actionOpenApiOptions,
+        controllerOpenApiOptions,
+      ),
       responses: this._collectResponses(controller, actionKey, actionOpenApiOptions),
     });
   }
@@ -246,7 +310,12 @@ export class ServiceOpenapi extends BeanBase {
     controllerOpenApiOptions: IOpenapiOptions | undefined,
   ) {
     // meta
-    const argsMeta = this._prepareArgsMeta(controller, actionKey, actionOpenApiOptions, controllerOpenApiOptions);
+    const argsMeta = this._prepareArgsMeta(
+      controller,
+      actionKey,
+      actionOpenApiOptions,
+      controllerOpenApiOptions,
+    );
     if (!argsMeta) return;
     // args
     const argsMapWithField: any = {};
@@ -302,7 +371,9 @@ export class ServiceOpenapi extends BeanBase {
         if (!schema) continue;
         // check schema
         if (getInnerTypeName(schema) === 'any') {
-          throw new Error(`Invalid Openapi argument type: ${info.relativeName}:${controller.name}.${actionKey}#${argumentType}`);
+          throw new Error(
+            `Invalid Openapi argument type: ${info.relativeName}:${controller.name}.${actionKey}#${argumentType}`,
+          );
         }
         // record
         if (argumentType === 'body') {
@@ -326,11 +397,20 @@ export class ServiceOpenapi extends BeanBase {
     return request;
   }
 
-  private _collectResponses(controller: Constructable, actionKey: string, actionOpenApiOptions: IOpenapiOptions | undefined) {
+  private _collectResponses(
+    controller: Constructable,
+    actionKey: string,
+    actionOpenApiOptions: IOpenapiOptions | undefined,
+  ) {
     // contentType
     const contentType = actionOpenApiOptions?.contentType || 'application/json';
     // body schema
-    const bodySchema = this._parseBodySchema(controller, actionKey, actionOpenApiOptions, contentType);
+    const bodySchema = this._parseBodySchema(
+      controller,
+      actionKey,
+      actionOpenApiOptions,
+      contentType,
+    );
     // response
     const response = {
       description: '',
@@ -345,7 +425,12 @@ export class ServiceOpenapi extends BeanBase {
     return responses;
   }
 
-  private _parseBodySchema(controller: Constructable, actionKey: string, actionOpenApiOptions: IOpenapiOptions | undefined, contentType: string) {
+  private _parseBodySchema(
+    controller: Constructable,
+    actionKey: string,
+    actionOpenApiOptions: IOpenapiOptions | undefined,
+    contentType: string,
+  ) {
     // bodySchema
     let bodySchema: z.ZodType;
     if (actionOpenApiOptions?.bodySchema) {
@@ -368,7 +453,11 @@ export class ServiceOpenapi extends BeanBase {
     controllerOpenApiOptions: IOpenapiOptions | undefined,
   ) {
     // meta
-    let argsMeta = appMetadata.getMetadata<RouteHandlerArgumentMetaDecorator[]>(SymbolRouteHandlersArgumentsMeta, controller.prototype, actionKey);
+    let argsMeta = appMetadata.getMetadata<RouteHandlerArgumentMetaDecorator[]>(
+      SymbolRouteHandlersArgumentsMeta,
+      controller.prototype,
+      actionKey,
+    );
     // headers
     const objHeaders = Object.assign(
       {} as any,
@@ -383,7 +472,8 @@ export class ServiceOpenapi extends BeanBase {
       argHeaders = { type: 'headers', field: undefined, schema: z.object(objHeaders) } as any;
       argsMeta.push(argHeaders!);
     } else {
-      if (!(argHeaders.schema as any).extend) throw new Error(`headers schema is not valid: ${actionKey}`);
+      if (!(argHeaders.schema as any).extend)
+        throw new Error(`headers schema is not valid: ${actionKey}`);
       argHeaders.schema = (argHeaders.schema as any).extend(objHeaders);
     }
     return argsMeta;

@@ -19,7 +19,9 @@ const defaultMetadata: RequestMappingMetadata = {
   options: undefined,
 };
 
-export function RequestMapping(metadata: RequestMappingMetadata = defaultMetadata): MethodDecorator {
+export function RequestMapping(
+  metadata: RequestMappingMetadata = defaultMetadata,
+): MethodDecorator {
   const path = metadata.path || '';
   const method = metadata.method || 'get';
   const options = metadata.options;
@@ -27,7 +29,12 @@ export function RequestMapping(metadata: RequestMappingMetadata = defaultMetadat
   return (target: object, prop: string | symbol, descriptor: TypedPropertyDescriptor<any>) => {
     appMetadata.defineMetadata(SymbolRequestMappingHandler, { path, method }, target, prop);
     if (options) {
-      const optionsMeta = appMetadata.getOwnMetadataMap(false, SymbolOpenApiOptions, target, prop) as IOpenapiOptions;
+      const optionsMeta = appMetadata.getOwnMetadataMap(
+        false,
+        SymbolOpenApiOptions,
+        target,
+        prop,
+      ) as IOpenapiOptions;
       Object.assign(optionsMeta, options);
     }
     return descriptor;

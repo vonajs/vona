@@ -1,5 +1,9 @@
 import type { OmitNever } from 'vona';
-import type { IDecoratorCacheMemOptionsBase, IDecoratorCacheRedisOptionsBase, TypeBroadcastOnSet } from 'vona-module-a-cache';
+import type {
+  IDecoratorCacheMemOptionsBase,
+  IDecoratorCacheRedisOptionsBase,
+  TypeBroadcastOnSet,
+} from 'vona-module-a-cache';
 import type { ServiceOnion, TypeOnionOptionsEnableSimple } from 'vona-module-a-onion';
 import type { ServiceDb } from 'vona-module-a-orm';
 
@@ -11,7 +15,10 @@ export interface ISummerCacheGet<KEY, DATA> {
 }
 
 export interface ISummerCacheMGet<KEY, DATA> {
-  mgetNative(keys: KEY[], options?: TSummerCacheActionOptions<KEY, DATA>): Promise<Array<DATA | undefined>>;
+  mgetNative(
+    keys: KEY[],
+    options?: TSummerCacheActionOptions<KEY, DATA>,
+  ): Promise<Array<DATA | undefined>>;
 }
 
 export type TSummerCachePreset = 'all' | 'mem' | 'redis';
@@ -38,7 +45,10 @@ export interface TSummerCacheActionOptions<KEY, DATA> {
   broadcastOnSet?: TypeBroadcastOnSet;
   disableTransactionCompensate?: boolean;
   get?: (key?: KEY, options?: TSummerCacheActionOptions<KEY, DATA>) => Promise<DATA | undefined>;
-  mget?: (keys: KEY[], options?: TSummerCacheActionOptions<KEY, DATA>) => Promise<Array<DATA | undefined>>;
+  mget?: (
+    keys: KEY[],
+    options?: TSummerCacheActionOptions<KEY, DATA>,
+  ) => Promise<Array<DATA | undefined>>;
 }
 
 declare module 'vona-module-a-onion' {

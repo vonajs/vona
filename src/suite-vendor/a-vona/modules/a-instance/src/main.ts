@@ -10,7 +10,10 @@ export class Main extends BeanSimple implements IModuleMain {
     this.app.context.__getInstanceName = function (this: VonaContext) {
       return __getInstanceName(this);
     };
-    this.app.context.__setInstanceName = function (this: VonaContext, instanceName: keyof IInstanceRecord) {
+    this.app.context.__setInstanceName = function (
+      this: VonaContext,
+      instanceName: keyof IInstanceRecord,
+    ) {
       return __setInstanceName(this, instanceName);
     };
   }
@@ -18,7 +21,10 @@ export class Main extends BeanSimple implements IModuleMain {
   async configLoaded(_config: any) {}
 }
 
-function __setInstanceName(ctx: VonaContext, instanceName: keyof IInstanceRecord | undefined | null) {
+function __setInstanceName(
+  ctx: VonaContext,
+  instanceName: keyof IInstanceRecord | undefined | null,
+) {
   ctx[SymbolInstanceName] = instanceName;
 }
 

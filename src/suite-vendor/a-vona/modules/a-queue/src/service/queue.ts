@@ -209,7 +209,11 @@ export class ServiceQueue extends BeanBase {
     return this._ensureQueue(info).queue;
   }
 
-  _callCallback<DATA>(jobId: string | number, failedReason: string | undefined, data: DATA | undefined) {
+  _callCallback<DATA>(
+    jobId: string | number,
+    failedReason: string | undefined,
+    data: DATA | undefined,
+  ) {
     const _callback = this._queueCallbacks[jobId];
     if (_callback) {
       delete this._queueCallbacks[jobId];
@@ -301,7 +305,11 @@ export class ServiceQueue extends BeanBase {
     return `${jobName}:${endDate}:${tz}:${suffix}`;
   }
 
-  prepareJobInfo<DATA>(queueName: keyof IQueueRecord, data: DATA, options?: IQueuePushOptions): IQueueJobContext<DATA> {
+  prepareJobInfo<DATA>(
+    queueName: keyof IQueueRecord,
+    data: DATA,
+    options?: IQueuePushOptions,
+  ): IQueueJobContext<DATA> {
     options = this.$scope.executor.service.executor.prepareGeneralInfo(options);
     // info
     return { queueName, data, options };

@@ -12,7 +12,8 @@ export interface IDecoratorCacheRedisOptionsBase {
   disableTransactionCompensate?: boolean;
 }
 
-export interface IDecoratorCacheRedisOptions extends IDecoratorCacheRedisOptionsBase, TypeOnionOptionsEnableSimple {}
+export interface IDecoratorCacheRedisOptions
+  extends IDecoratorCacheRedisOptionsBase, TypeOnionOptionsEnableSimple {}
 
 declare module 'vona-module-a-onion' {
   export interface BeanOnion {

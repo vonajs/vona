@@ -3,7 +3,10 @@ import type { TypeOpenapiMetadata } from 'vona-module-a-openapi';
 import type { z } from 'zod';
 
 export function schemaOpenapi<T extends z.ZodType>(metadata: TypeOpenapiMetadata<T>): T;
-export function schemaOpenapi<T extends z.ZodType>(refId: string, metadata?: TypeOpenapiMetadata<T>): T;
+export function schemaOpenapi<T extends z.ZodType>(
+  refId: string,
+  metadata?: TypeOpenapiMetadata<T>,
+): T;
 export function schemaOpenapi<T extends z.ZodType>(refId: any, metadata?: any) {
   return function (schema: T): T {
     return schema.openapi(refId, metadata);

@@ -11,13 +11,29 @@ import type { ITableRecord } from './table.ts';
 export interface IModelRecord {}
 export interface IModelClassRecord {}
 
-export type TypeDynamicTableName = (ctx: VonaContext, where: any | undefined, defaultTable: keyof ITableRecord, modelInstance: any) => string;
+export type TypeDynamicTableName = (
+  ctx: VonaContext,
+  where: any | undefined,
+  defaultTable: keyof ITableRecord,
+  modelInstance: any,
+) => string;
 
-export type TypeDynamicClientName = (ctx: VonaContext, modelInstance: any) => keyof IDatabaseClientRecord;
+export type TypeDynamicClientName = (
+  ctx: VonaContext,
+  modelInstance: any,
+) => keyof IDatabaseClientRecord;
 
-export type TypeModelsClearedByFn = (ctx: VonaContext, modelTarget: any, modelSource: any) => Promise<void>;
+export type TypeModelsClearedByFn = (
+  ctx: VonaContext,
+  modelTarget: any,
+  modelSource: any,
+) => Promise<void>;
 
-export type TypeSoftDeletionPruneHandler = (ctx: VonaContext, modelInstance: any, options: ISoftDeletionPruneHandlerOptions) => Promise<void>;
+export type TypeSoftDeletionPruneHandler = (
+  ctx: VonaContext,
+  modelInstance: any,
+  options: ISoftDeletionPruneHandlerOptions,
+) => Promise<void>;
 
 export interface ISoftDeletionPruneHandlerOptions {
   expired: number;

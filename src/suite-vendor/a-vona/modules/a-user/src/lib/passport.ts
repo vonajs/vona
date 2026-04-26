@@ -20,7 +20,9 @@ function RoleName(options?: Partial<IGuardOptionsRoleName>): ClassDecorator & Me
   return Aspect.guard('a-user:roleName', options);
 }
 
-function Admin(options?: Partial<Omit<IGuardOptionsRoleName, 'name'>>): ClassDecorator & MethodDecorator {
+function Admin(
+  options?: Partial<Omit<IGuardOptionsRoleName, 'name'>>,
+): ClassDecorator & MethodDecorator {
   return Aspect.guard('a-user:roleName', Object.assign({}, options, { name: 'admin' as const }));
 }
 

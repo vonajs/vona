@@ -13,7 +13,11 @@ export interface ISsrSiteOptionsAdminPages extends IPagePathRecord {}
 
 export interface ISsrSiteOptionsAdminPagesData {}
 
-export interface ISsrSiteOptionsAdmin extends IDecoratorSsrSiteOptions<ISsrSiteOptionsAdminPages, ISsrSiteOptionsAdminPagesData, IIconRecord> {}
+export interface ISsrSiteOptionsAdmin extends IDecoratorSsrSiteOptions<
+  ISsrSiteOptionsAdminPages,
+  ISsrSiteOptionsAdminPagesData,
+  IIconRecord
+> {}
 
 @SsrSite<ISsrSiteOptionsAdmin>({
   publicPath: '',

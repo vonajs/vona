@@ -39,8 +39,16 @@ export class CliToolsCrudBasic extends BeanCliBase {
     const resourceName = argv.resourceName;
     argv.resourceNameCapitalize = this.helper.firstCharToUpperCase(resourceName);
     // moduleResourceName
-    argv.moduleResourceName = this.helper.combineModuleNameAndResource(argv.moduleInfo.relativeName, argv.resourceName);
-    argv.moduleActionPathRaw = combineApiPathControllerAndActionRaw(moduleName, resourceName, '', true);
+    argv.moduleResourceName = this.helper.combineModuleNameAndResource(
+      argv.moduleInfo.relativeName,
+      argv.resourceName,
+    );
+    argv.moduleActionPathRaw = combineApiPathControllerAndActionRaw(
+      moduleName,
+      resourceName,
+      '',
+      true,
+    );
     // controller
     const controllerFile = path.join(targetDir, 'src/controller', `${resourceName}.ts`);
     if (fs.existsSync(controllerFile)) {

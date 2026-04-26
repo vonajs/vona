@@ -18,8 +18,14 @@ export interface ICachingActionValueInfo {
   intention: TypeCachingActionIntention;
 }
 
-export type TypeCacheKeyFn = (info: ICachingActionKeyInfo, options: TypeCachingActionOptions) => any;
-export type TypeCacheValueFn = (info: ICachingActionValueInfo, options: TypeCachingActionOptions) => any;
+export type TypeCacheKeyFn = (
+  info: ICachingActionKeyInfo,
+  options: TypeCachingActionOptions,
+) => any;
+export type TypeCacheValueFn = (
+  info: ICachingActionValueInfo,
+  options: TypeCachingActionOptions,
+) => any;
 
 export type TypeCachingActionOptions = Pick<
   TSummerCacheActionOptions<unknown, unknown>,
@@ -30,4 +36,7 @@ export type TypeCachingActionOptions = Pick<
   cacheKeyFn?: TypeCacheKeyFn | string;
 };
 
-export type TypeCachingActionClearOptions = Omit<TypeCachingActionOptions, 'cacheKey' | 'cacheKeyFn'>;
+export type TypeCachingActionClearOptions = Omit<
+  TypeCachingActionOptions,
+  'cacheKey' | 'cacheKeyFn'
+>;

@@ -16,7 +16,10 @@ export interface TypeBroadcastMemSetJobData {
 }
 
 @Broadcast()
-export class BroadcastMemSet extends BeanBroadcastBase<TypeBroadcastMemSetJobData> implements IBroadcastExecute<TypeBroadcastMemSetJobData> {
+export class BroadcastMemSet
+  extends BeanBroadcastBase<TypeBroadcastMemSetJobData>
+  implements IBroadcastExecute<TypeBroadcastMemSetJobData>
+{
   async execute(data: TypeBroadcastMemSetJobData, isEmitter?: boolean) {
     const { cacheName, cacheOptions, value, keyHash, key, options } = data;
     if (!isEmitter) {

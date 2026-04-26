@@ -31,7 +31,9 @@ describe('mappedTypes.test.ts', () => {
       assert.deepEqual(dataNew, data, JSON.stringify(err, null, 2));
       // OmitClass
       const [, err2] = await catchError(async () => {
-        return await serviceValidator.validate($Class.omit(DtoUser, ['married']), data, { strict: true });
+        return await serviceValidator.validate($Class.omit(DtoUser, ['married']), data, {
+          strict: true,
+        });
       });
       assert.equal(cast(err2?.message)[0]?.keys[0], 'married');
       // OmitClass and inherit
@@ -41,7 +43,9 @@ describe('mappedTypes.test.ts', () => {
       assert.deepEqual(dataNew3, data);
       // PickClass
       const [, err4] = await catchError(async () => {
-        return await serviceValidator.validate($Class.pick(DtoUser, ['id', 'name']), data, { strict: true });
+        return await serviceValidator.validate($Class.pick(DtoUser, ['id', 'name']), data, {
+          strict: true,
+        });
       });
       assert.equal(cast(err4?.message)[0]?.keys[0], 'married');
       // PartialClass
@@ -50,12 +54,18 @@ describe('mappedTypes.test.ts', () => {
       });
       assert.deepEqual(dataNew5, {});
       const [dataNew6] = await catchError(async () => {
-        return await serviceValidator.validate($Class.partial(DtoUser, ['id', 'name']), { married: true }, { strict: true });
+        return await serviceValidator.validate(
+          $Class.partial(DtoUser, ['id', 'name']),
+          { married: true },
+          { strict: true },
+        );
       });
       assert.deepEqual(dataNew6, { married: true });
       // MixinClass
       const [_, err7] = await catchError(async () => {
-        return await serviceValidator.validate($Class.mixin(DtoUser, DtoProfile), data, { strict: true });
+        return await serviceValidator.validate($Class.mixin(DtoUser, DtoProfile), data, {
+          strict: true,
+        });
       });
       assert.equal(cast(err7?.message)[0]?.path[0], 'email');
     });

@@ -1,4 +1,8 @@
-import type { IOpenapiPermissions, TypeComponentRecordSelectorKeysStrict, TypeRenderComponentJsx } from 'vona-module-a-openapi';
+import type {
+  IOpenapiPermissions,
+  TypeComponentRecordSelectorKeysStrict,
+  TypeRenderComponentJsx,
+} from 'vona-module-a-openapi';
 
 import type { IFormProvider } from './formProvider.ts';
 import type { ITableProvider } from './tableProvider.ts';

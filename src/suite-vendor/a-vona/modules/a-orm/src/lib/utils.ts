@@ -3,7 +3,10 @@ import { deepExtend } from 'vona';
 import type { IModelRelationIncludeWrapper } from '../types/model.ts';
 import type { IRelationItem } from '../types/relationsDef.ts';
 
-export function handleRelationsCollection(relationsStatic?: Record<string, any>, includeWrapper?: IModelRelationIncludeWrapper): IRelationItem[] {
+export function handleRelationsCollection(
+  relationsStatic?: Record<string, any>,
+  includeWrapper?: IModelRelationIncludeWrapper,
+): IRelationItem[] {
   // collect
   const relations: IRelationItem[] = [];
   // include
@@ -38,7 +41,13 @@ export function handleRelationsCollection(relationsStatic?: Record<string, any>,
     for (const key in includeWrapper.with) {
       const relationReal: any = includeWrapper.with[key];
       if (!relationReal) continue;
-      relations.push([key, relationReal, relationReal.options?.include, relationReal.options?.with, false]);
+      relations.push([
+        key,
+        relationReal,
+        relationReal.options?.include,
+        relationReal.options?.with,
+        false,
+      ]);
     }
   }
   return relations;

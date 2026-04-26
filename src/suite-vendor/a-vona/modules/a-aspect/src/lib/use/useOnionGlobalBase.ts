@@ -7,7 +7,11 @@ export function UseOnionGlobalBase(
   sceneName: string,
   onionName: string,
   options?: any,
-  fn?: (target: object, prop?: MetadataKey, descriptor?: PropertyDescriptor) => PropertyDescriptor | undefined,
+  fn?: (
+    target: object,
+    prop?: MetadataKey,
+    descriptor?: PropertyDescriptor,
+  ) => PropertyDescriptor | undefined,
 ): ClassDecorator & MethodDecorator {
   return function (target: object, prop?: MetadataKey, descriptor?: PropertyDescriptor) {
     const onionsOptions = appMetadata.getOwnMetadataMap(false, SymbolUseOnionOptions, target, prop);

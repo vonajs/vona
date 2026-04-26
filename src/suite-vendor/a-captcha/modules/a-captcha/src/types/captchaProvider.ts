@@ -5,7 +5,11 @@ export interface ICaptchaProviderRecord {}
 
 export interface ICaptchaProviderExecute<TOKEN = unknown, PAYLOAD = unknown> {
   create(options: IDecoratorCaptchaProviderOptions): Promise<ICaptchaProviderData<TOKEN, PAYLOAD>>;
-  verify(token: TOKEN, tokenInput: TOKEN, options: IDecoratorCaptchaProviderOptions): Promise<boolean>;
+  verify(
+    token: TOKEN,
+    tokenInput: TOKEN,
+    options: IDecoratorCaptchaProviderOptions,
+  ): Promise<boolean>;
 }
 
 export interface ICaptchaProviderData<TOKEN = unknown, PAYLOAD = unknown> {

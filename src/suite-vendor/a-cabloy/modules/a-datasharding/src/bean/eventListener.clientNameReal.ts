@@ -8,10 +8,19 @@ type TypeEventData = TypeEventClientNameRealData;
 type TypeEventResult = TypeEventClientNameRealResult;
 
 @EventListener({ match: 'a-orm:clientNameReal' })
-export class EventListenerClientNameReal extends BeanBase implements IEventExecute<TypeEventData, TypeEventResult> {
-  execute(data: TypeEventData, next: NextEventSync<TypeEventData, TypeEventResult>): TypeEventResult {
+export class EventListenerClientNameReal
+  extends BeanBase
+  implements IEventExecute<TypeEventData, TypeEventResult>
+{
+  execute(
+    data: TypeEventData,
+    next: NextEventSync<TypeEventData, TypeEventResult>,
+  ): TypeEventResult {
     // reads/writes
-    if (this.scope.service.datasharding.getClientReads().includes(data) || this.scope.service.datasharding.getClientWrites().includes(data)) {
+    if (
+      this.scope.service.datasharding.getClientReads().includes(data) ||
+      this.scope.service.datasharding.getClientWrites().includes(data)
+    ) {
       return this.$scope.orm.service.database.getDefaultClientName();
     }
     // next

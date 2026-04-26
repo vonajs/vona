@@ -24,5 +24,7 @@ export interface IAuthenticateOptions<
 > {
   state?: IAuthenticateState;
   clientName?: K;
-  clientOptions?: NonNullable<T['clients']>[K] extends undefined ? PowerPartial<T['base']> : PowerPartial<NonNullable<T['clients']>[K]>;
+  clientOptions?: NonNullable<T['clients']>[K] extends undefined
+    ? PowerPartial<T['base']>
+    : PowerPartial<NonNullable<T['clients']>[K]>;
 }

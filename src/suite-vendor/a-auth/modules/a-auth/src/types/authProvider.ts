@@ -6,7 +6,9 @@ import type { EntityAuthProvider } from '../entity/authProvider.ts';
 import type { StrategyBase } from '../lib/strategyBase.ts';
 import type { IAuthenticateStrategyState } from './auth.ts';
 
-export type TypeAuthProviderPick = Partial<Pick<EntityAuthProvider, 'id' | 'providerName' | 'clientName'>>;
+export type TypeAuthProviderPick = Partial<
+  Pick<EntityAuthProvider, 'id' | 'providerName' | 'clientName'>
+>;
 
 export interface IAuthProviderRecord {}
 
@@ -31,13 +33,18 @@ export interface IAuthProviderOauth2ClientOptions extends IAuthProviderClientOpt
   customHeaders?: object;
 }
 
-export type TypeStrategyOptions<T extends IAuthProviderClientOptions = IAuthProviderClientOptions> = T & {
-  callbackURL?: string;
-  state?: string;
-};
+export type TypeStrategyOptions<T extends IAuthProviderClientOptions = IAuthProviderClientOptions> =
+  T & {
+    callbackURL?: string;
+    state?: string;
+  };
 
 export type TypeStrategyVerifyArgs = any[];
-export type TypeStrategyOauth2VerifyArgs<T = IAuthUserProfile> = [accessToken: string, refreshToken: string, profile: T];
+export type TypeStrategyOauth2VerifyArgs<T = IAuthUserProfile> = [
+  accessToken: string,
+  refreshToken: string,
+  profile: T,
+];
 
 export interface IDecoratorAuthProviderOptions<
   R extends IAuthProviderClientRecord = IAuthProviderClientRecord,
@@ -49,7 +56,10 @@ export interface IDecoratorAuthProviderOptions<
 }
 
 export interface IAuthProviderStrategy {
-  strategy(clientOptions: IAuthProviderClientOptions, options: IDecoratorAuthProviderOptions): Promise<Constructable<StrategyBase>>;
+  strategy(
+    clientOptions: IAuthProviderClientOptions,
+    options: IDecoratorAuthProviderOptions,
+  ): Promise<Constructable<StrategyBase>>;
 }
 
 export interface IAuthProviderVerify {

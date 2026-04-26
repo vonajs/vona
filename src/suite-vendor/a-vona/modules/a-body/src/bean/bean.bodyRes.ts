@@ -1,4 +1,8 @@
-import type { IOpenapiOptions, IResponseHeaders, TypeResponseContentType } from 'vona-module-a-openapiutils';
+import type {
+  IOpenapiOptions,
+  IResponseHeaders,
+  TypeResponseContentType,
+} from 'vona-module-a-openapiutils';
 import type z from 'zod';
 
 import { appMetadata, BeanBase } from 'vona';
@@ -31,7 +35,11 @@ export class BeanBodyRes extends BeanBase {
     const controller = this.ctx.getController();
     if (controller) {
       const handlerName = this.ctx.getHandlerName();
-      const options = appMetadata.getMetadata<IOpenapiOptions>(SymbolOpenApiOptions, controller.prototype, handlerName);
+      const options = appMetadata.getMetadata<IOpenapiOptions>(
+        SymbolOpenApiOptions,
+        controller.prototype,
+        handlerName,
+      );
       return options?.setHeaders;
     }
   }
@@ -46,7 +54,11 @@ export class BeanBodyRes extends BeanBase {
     const controller = this.ctx.getController();
     if (controller) {
       const handlerName = this.ctx.getHandlerName();
-      const options = appMetadata.getMetadata<IOpenapiOptions>(SymbolOpenApiOptions, controller.prototype, handlerName);
+      const options = appMetadata.getMetadata<IOpenapiOptions>(
+        SymbolOpenApiOptions,
+        controller.prototype,
+        handlerName,
+      );
       httpCode = options?.httpCode;
     }
     return httpCode ?? defaultCode;
@@ -57,7 +69,11 @@ export class BeanBodyRes extends BeanBase {
     const controller = this.ctx.getController();
     if (controller) {
       const handlerName = this.ctx.getHandlerName();
-      const options = appMetadata.getMetadata<IOpenapiOptions>(SymbolOpenApiOptions, controller.prototype, handlerName);
+      const options = appMetadata.getMetadata<IOpenapiOptions>(
+        SymbolOpenApiOptions,
+        controller.prototype,
+        handlerName,
+      );
       const contentType = options?.contentType;
       if (contentType) return contentType;
     }
@@ -70,7 +86,11 @@ export class BeanBodyRes extends BeanBase {
     const controller = this.ctx.getController();
     if (!controller) return;
     const handlerName = this.ctx.getHandlerName();
-    const options = appMetadata.getMetadata<IOpenapiOptions>(SymbolOpenApiOptions, controller.prototype, handlerName);
+    const options = appMetadata.getMetadata<IOpenapiOptions>(
+      SymbolOpenApiOptions,
+      controller.prototype,
+      handlerName,
+    );
     if (options?.bodySchema) return options.bodySchema;
     const metaType = appMetadata.getDesignReturntype(controller.prototype, handlerName);
     if (!metaType) return;

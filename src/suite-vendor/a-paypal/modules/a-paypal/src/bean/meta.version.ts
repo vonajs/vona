@@ -13,7 +13,9 @@ export class MetaVersion extends BeanBase implements IMetaVersionUpdate {
         table.basicFields();
         table.userId();
         table.int0(entityPaypalRecord.status).comment(entityPaypalRecord.$comment.status);
-        table.string(entityPaypalRecord.prepayId, 255).comment(entityPaypalRecord.$comment.prepayId);
+        table
+          .string(entityPaypalRecord.prepayId, 255)
+          .comment(entityPaypalRecord.$comment.prepayId);
         table.json(entityPaypalRecord.payload).comment(entityPaypalRecord.$comment.payload);
         table.json(entityPaypalRecord.options).comment(entityPaypalRecord.$comment.options);
       });

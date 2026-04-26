@@ -41,10 +41,17 @@ export class ServicePaypal extends BeanBase {
         this.scope.error.TransactionException.throw();
       }
       // update
-      const sellerReceivableBreakdown = res.result.purchaseUnits![0].payments!.captures![0].sellerReceivableBreakdown!;
-      grossAmount = Number.parseInt((Number.parseFloat(sellerReceivableBreakdown.grossAmount.value) * 100) as any);
-      payFee = Number.parseInt((Number.parseFloat(sellerReceivableBreakdown.paypalFee!.value) * 100) as any);
-      netAmount = Number.parseInt((Number.parseFloat(sellerReceivableBreakdown.netAmount!.value) * 100) as any);
+      const sellerReceivableBreakdown =
+        res.result.purchaseUnits![0].payments!.captures![0].sellerReceivableBreakdown!;
+      grossAmount = Number.parseInt(
+        (Number.parseFloat(sellerReceivableBreakdown.grossAmount.value) * 100) as any,
+      );
+      payFee = Number.parseInt(
+        (Number.parseFloat(sellerReceivableBreakdown.paypalFee!.value) * 100) as any,
+      );
+      netAmount = Number.parseInt(
+        (Number.parseFloat(sellerReceivableBreakdown.netAmount!.value) * 100) as any,
+      );
       orderResult = res.result;
     }
     // update status

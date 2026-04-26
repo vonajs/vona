@@ -14,7 +14,8 @@ export interface IDecoratorCacheMemOptionsBase {
   disableInstance?: boolean;
   disableTransactionCompensate?: boolean;
 }
-export interface IDecoratorCacheMemOptions extends IDecoratorCacheMemOptionsBase, TypeOnionOptionsEnableSimple {}
+export interface IDecoratorCacheMemOptions
+  extends IDecoratorCacheMemOptionsBase, TypeOnionOptionsEnableSimple {}
 
 declare module 'vona-module-a-onion' {
   export interface BeanOnion {

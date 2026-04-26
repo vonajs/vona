@@ -10,10 +10,17 @@ import { getCacheMemories } from '../lib/const.ts';
 
 @Bean()
 @Virtual()
-export class BeanCacheMemBase<KEY = any, DATA = any> extends CacheBase<IDecoratorCacheMemOptions, KEY> {
+export class BeanCacheMemBase<KEY = any, DATA = any> extends CacheBase<
+  IDecoratorCacheMemOptions,
+  KEY
+> {
   protected __init__(cacheName?: string, cacheOptions?: IDecoratorCacheMemOptions) {
     super.__init__(cacheName, cacheOptions);
-    this._cacheOptions = Object.assign({}, this.$scope.cache.config.mem.options, this._cacheOptions);
+    this._cacheOptions = Object.assign(
+      {},
+      this.$scope.cache.config.mem.options,
+      this._cacheOptions,
+    );
   }
 
   protected async __dispose__() {
@@ -96,7 +103,8 @@ export class BeanCacheMemBase<KEY = any, DATA = any> extends CacheBase<IDecorato
         });
       }
     }
-    const disableTransactionCompensate = options?.disableTransactionCompensate ?? this._cacheOptions.disableTransactionCompensate;
+    const disableTransactionCompensate =
+      options?.disableTransactionCompensate ?? this._cacheOptions.disableTransactionCompensate;
     if (!disableTransactionCompensate) {
       const db = options?.db ?? this.bean.database.current;
       db?.compensate(() => {
@@ -137,7 +145,8 @@ export class BeanCacheMemBase<KEY = any, DATA = any> extends CacheBase<IDecorato
         });
       }
     }
-    const disableTransactionCompensate = options?.disableTransactionCompensate ?? this._cacheOptions.disableTransactionCompensate;
+    const disableTransactionCompensate =
+      options?.disableTransactionCompensate ?? this._cacheOptions.disableTransactionCompensate;
     if (!disableTransactionCompensate) {
       const db = options?.db ?? this.bean.database.current;
       db?.compensate(() => {
@@ -198,7 +207,10 @@ export class BeanCacheMemBase<KEY = any, DATA = any> extends CacheBase<IDecorato
     // clear on this worker
     cache.clear();
     // clear on other workers by broadcast
-    this.$scope.cache.broadcast.memClear.emit({ cacheName: this._cacheName, cacheOptions: this._cacheOptions });
+    this.$scope.cache.broadcast.memClear.emit({
+      cacheName: this._cacheName,
+      cacheOptions: this._cacheOptions,
+    });
   }
 
   protected __setRaw(value: DATA, keyHash: string, _key: KEY, options: ICacheMemSetOptions) {
@@ -207,7 +219,12 @@ export class BeanCacheMemBase<KEY = any, DATA = any> extends CacheBase<IDecorato
     cache.set(keyHash, JSON.stringify(value), options);
   }
 
-  protected __msetRaw(values: DATA[], keysHash: string[], _keys: KEY[], options: ICacheMemSetOptions) {
+  protected __msetRaw(
+    values: DATA[],
+    keysHash: string[],
+    _keys: KEY[],
+    options: ICacheMemSetOptions,
+  ) {
     const cache = this.__cacheInstance;
     if (!cache) return undefined;
     for (let i = 0; i < keysHash.length; i++) {

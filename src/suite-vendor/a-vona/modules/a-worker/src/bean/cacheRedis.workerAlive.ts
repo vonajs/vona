@@ -8,4 +8,7 @@ export type TCacheRedisWorkerAliveData = boolean;
   disableTransactionCompensate: true,
   client: 'worker',
 })
-export class CacheRedisWorkerAlive extends BeanCacheRedisBase<TCacheRedisWorkerAliveKey, TCacheRedisWorkerAliveData> {}
+export class CacheRedisWorkerAlive extends BeanCacheRedisBase<
+  TCacheRedisWorkerAliveKey,
+  TCacheRedisWorkerAliveData
+> {}

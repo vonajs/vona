@@ -16,28 +16,44 @@ import { _DtoAggregate_inner } from './dtoAggregate.ts';
 export function DtoGroup<
   ModelLike extends BeanModelMeta | keyof IModelClassRecord,
   Groups extends TypeModelColumnsStrict<TypeModelOfModelLike<ModelLike>[TypeSymbolKeyEntity]>,
-  Aggrs extends TypeModelSelectAggrParamsAggrs<TypeModelOfModelLike<ModelLike>[TypeSymbolKeyEntity]> | undefined = undefined,
-  Columns extends TypeModelColumnsStrict<TypeModelOfModelLike<ModelLike>[TypeSymbolKeyEntity]> | undefined = undefined,
+  Aggrs extends
+    | TypeModelSelectAggrParamsAggrs<TypeModelOfModelLike<ModelLike>[TypeSymbolKeyEntity]>
+    | undefined = undefined,
+  Columns extends
+    | TypeModelColumnsStrict<TypeModelOfModelLike<ModelLike>[TypeSymbolKeyEntity]>
+    | undefined = undefined,
 >(
-  modelLike: ModelLike extends BeanModelMeta ? (() => Constructable<ModelLike>) | Constructable<ModelLike> : ModelLike,
+  modelLike: ModelLike extends BeanModelMeta
+    ? (() => Constructable<ModelLike>) | Constructable<ModelLike>
+    : ModelLike,
   groups: Groups,
   aggrs?: Aggrs,
   columns?: Columns,
-): Constructable<TypeDtoGroupResult<TypeModelOfModelLike<ModelLike>[TypeSymbolKeyEntity], Aggrs, Groups, Columns>> {
+): Constructable<
+  TypeDtoGroupResult<TypeModelOfModelLike<ModelLike>[TypeSymbolKeyEntity], Aggrs, Groups, Columns>
+> {
   return _DtoGroup_raw(modelLike, groups, aggrs, columns);
 }
 
 function _DtoGroup_raw<
   ModelLike extends BeanModelMeta | keyof IModelClassRecord,
   Groups extends TypeModelColumnsStrict<TypeModelOfModelLike<ModelLike>[TypeSymbolKeyEntity]>,
-  Aggrs extends TypeModelSelectAggrParamsAggrs<TypeModelOfModelLike<ModelLike>[TypeSymbolKeyEntity]> | undefined = undefined,
-  Columns extends TypeModelColumnsStrict<TypeModelOfModelLike<ModelLike>[TypeSymbolKeyEntity]> | undefined = undefined,
+  Aggrs extends
+    | TypeModelSelectAggrParamsAggrs<TypeModelOfModelLike<ModelLike>[TypeSymbolKeyEntity]>
+    | undefined = undefined,
+  Columns extends
+    | TypeModelColumnsStrict<TypeModelOfModelLike<ModelLike>[TypeSymbolKeyEntity]>
+    | undefined = undefined,
 >(
-  modelLike: ModelLike extends BeanModelMeta ? (() => Constructable<ModelLike>) | Constructable<ModelLike> : ModelLike,
+  modelLike: ModelLike extends BeanModelMeta
+    ? (() => Constructable<ModelLike>) | Constructable<ModelLike>
+    : ModelLike,
   groups: Groups,
   aggrs?: Aggrs,
   columns?: Columns,
-): Constructable<TypeDtoGroupResult<TypeModelOfModelLike<ModelLike>[TypeSymbolKeyEntity], Aggrs, Groups, Columns>> {
+): Constructable<
+  TypeDtoGroupResult<TypeModelOfModelLike<ModelLike>[TypeSymbolKeyEntity], Aggrs, Groups, Columns>
+> {
   abstract class TargetClass {}
   // model
   const modelClass = prepareClassModel(modelLike);

@@ -34,9 +34,12 @@ export class BeanStatusBase<IStatusRecord> extends BeanBase {
       });
     } else {
       if (lock) {
-        await this.$scope.status.redlock.lockIsolate(`statusSet.${this[SymbolModuleBelong]}.${name}`, async () => {
-          return await this._setInner(name, value, false);
-        });
+        await this.$scope.status.redlock.lockIsolate(
+          `statusSet.${this[SymbolModuleBelong]}.${name}`,
+          async () => {
+            return await this._setInner(name, value, false);
+          },
+        );
       } else {
         await this._modelStatus.insert({
           module: this[SymbolModuleBelong],

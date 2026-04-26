@@ -22,7 +22,13 @@ export async function hash(password: string, options?: IHashOptions) {
   // salt
   const salt = await promisify(randomBytes)(options.saltlen!);
   // pbkdf2
-  const key = await promisify(pbkdf2)(password, salt, options.iterations, options.keylen, options.digest);
+  const key = await promisify(pbkdf2)(
+    password,
+    salt,
+    options.iterations,
+    options.keylen,
+    options.digest,
+  );
   // hash
   return `pbkdf2$${salt.toString('hex')}$${options.iterations}$${options.keylen}$${options.digest}$${key.toString('hex')}`;
 }
@@ -30,6 +36,12 @@ export async function hash(password: string, options?: IHashOptions) {
 export async function verify(password: string, hash: string) {
   const [method, salt, iterations, keylen, digest, key] = hash.split('$');
   if (!method || !salt || !iterations || !keylen || !digest || !key) return false;
-  const key2 = await promisify(pbkdf2)(password, Buffer.from(salt, 'hex'), Number.parseInt(iterations), Number.parseInt(keylen), digest);
+  const key2 = await promisify(pbkdf2)(
+    password,
+    Buffer.from(salt, 'hex'),
+    Number.parseInt(iterations),
+    Number.parseInt(keylen),
+    digest,
+  );
   return key2.toString('hex') === key;
 }

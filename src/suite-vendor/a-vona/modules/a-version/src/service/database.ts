@@ -16,7 +16,10 @@ export class ServiceDatabase extends BeanBase {
     return this.app.config.database;
   }
 
-  public getDatabasePrefix(instanceName?: keyof IInstanceRecord, configInstanceBase?: ConfigInstanceBase) {
+  public getDatabasePrefix(
+    instanceName?: keyof IInstanceRecord,
+    configInstanceBase?: ConfigInstanceBase,
+  ) {
     const prefix = configInstanceBase?.isolate ? `isolate${__separator}${instanceName}` : 'share';
     return `vona${__separator}test${__separator}${this.app.name}${__separator}${prefix}${__separator}`;
   }
@@ -42,12 +45,20 @@ export class ServiceDatabase extends BeanBase {
     }, clientName);
   }
 
-  private async __fetchDatabases(client: ServiceDatabaseClient, instanceName?: keyof IInstanceRecord, configInstanceBase?: ConfigInstanceBase) {
+  private async __fetchDatabases(
+    client: ServiceDatabaseClient,
+    instanceName?: keyof IInstanceRecord,
+    configInstanceBase?: ConfigInstanceBase,
+  ) {
     const databasePrefix = this.getDatabasePrefix(instanceName, configInstanceBase);
     return await client.connection.schema.fetchDatabases(databasePrefix);
   }
 
-  private async __createDatabase(client: ServiceDatabaseClient, instanceName?: keyof IInstanceRecord, configInstanceBase?: ConfigInstanceBase) {
+  private async __createDatabase(
+    client: ServiceDatabaseClient,
+    instanceName?: keyof IInstanceRecord,
+    configInstanceBase?: ConfigInstanceBase,
+  ) {
     const databasePrefix = this.getDatabasePrefix(instanceName, configInstanceBase);
     const databaseName = `${databasePrefix}${DateTime.now().toFormat(__timeFormat)}`;
     return await client.connection.schema.createDatabase(databaseName);
@@ -62,19 +73,32 @@ export class ServiceDatabase extends BeanBase {
       const configInstanceBase = this.app.config.instance.instances[instanceName];
       if (configInstanceBase === false) continue;
       if (!configInstanceBase.isolate) continue;
-      if (!configInstanceBase.isolateClient) throw new Error(`should specify isolateClient for isolate instance: ${instanceName}`);
-      await this.prepareDatabase(configInstanceBase.isolateClient, versionStart, instanceName, configInstanceBase);
+      if (!configInstanceBase.isolateClient)
+        throw new Error(`should specify isolateClient for isolate instance: ${instanceName}`);
+      await this.prepareDatabase(
+        configInstanceBase.isolateClient,
+        versionStart,
+        instanceName,
+        configInstanceBase,
+      );
     }
   }
 
-  private async __prepareDatabase(versionStart: boolean, instanceName?: keyof IInstanceRecord, configInstanceBase?: ConfigInstanceBase) {
+  private async __prepareDatabase(
+    versionStart: boolean,
+    instanceName?: keyof IInstanceRecord,
+    configInstanceBase?: ConfigInstanceBase,
+  ) {
     await this.__prepareDatabaseInner(instanceName, configInstanceBase);
     if (versionStart) {
       await this.scope.service.version.__start();
     }
   }
 
-  private async __prepareDatabaseInner(instanceName?: keyof IInstanceRecord, configInstanceBase?: ConfigInstanceBase) {
+  private async __prepareDatabaseInner(
+    instanceName?: keyof IInstanceRecord,
+    configInstanceBase?: ConfigInstanceBase,
+  ) {
     if (this.app.meta.isProd) {
       // donothing
       return;

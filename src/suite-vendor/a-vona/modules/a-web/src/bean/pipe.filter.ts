@@ -1,5 +1,13 @@
-import type { IDecoratorPipeOptions, IDecoratorPipeOptionsArgument, IPipeTransform } from 'vona-module-a-aspect';
-import type { ISchemaObjectExtensionField, ITableQuery, RouteHandlerArgumentMeta } from 'vona-module-a-openapi';
+import type {
+  IDecoratorPipeOptions,
+  IDecoratorPipeOptionsArgument,
+  IPipeTransform,
+} from 'vona-module-a-aspect';
+import type {
+  ISchemaObjectExtensionField,
+  ITableQuery,
+  RouteHandlerArgumentMeta,
+} from 'vona-module-a-openapi';
 import type { ValidatorOptions } from 'vona-module-a-validation';
 
 import { isNil, isNilOrEmptyString } from '@cabloy/utils';
@@ -7,13 +15,18 @@ import { ZodMetadata } from '@cabloy/zod-openapi';
 import { BeanBase, beanFullNameFromOnionName, cast } from 'vona';
 import { createArgumentPipe, Pipe } from 'vona-module-a-aspect';
 
-import type { IFilterTransformRecord, IFilterTransformWhere, TypeQueryParamsPatch } from '../types/filterTransform.ts';
+import type {
+  IFilterTransformRecord,
+  IFilterTransformWhere,
+  TypeQueryParamsPatch,
+} from '../types/filterTransform.ts';
 
 export type TypePipeFilterData = ITableQuery;
 
 export type TypePipeFilterResult = TypeQueryParamsPatch;
 
-export interface IPipeOptionsFilter extends IDecoratorPipeOptions, IDecoratorPipeOptionsArgument, ValidatorOptions {}
+export interface IPipeOptionsFilter
+  extends IDecoratorPipeOptions, IDecoratorPipeOptionsArgument, ValidatorOptions {}
 
 const __FieldsSystem = ['columns', 'where', 'orders', 'pageNo', 'pageSize'];
 
@@ -24,11 +37,26 @@ const __FieldsSystem = ['columns', 'where', 'orders', 'pageNo', 'pageSize'];
   loose: false,
   strict: false,
 })
-export class PipeFilter extends BeanBase implements IPipeTransform<TypePipeFilterData, TypePipeFilterResult> {
-  async transform(value: TypePipeFilterData, metadata: RouteHandlerArgumentMeta, options: IPipeOptionsFilter): Promise<TypePipeFilterResult> {
-    if (!options.schema) throw new Error(`should specify the schema of pipeFilter: ${metadata.controller.name}.${metadata.method}#${metadata.index}`);
+export class PipeFilter
+  extends BeanBase
+  implements IPipeTransform<TypePipeFilterData, TypePipeFilterResult>
+{
+  async transform(
+    value: TypePipeFilterData,
+    metadata: RouteHandlerArgumentMeta,
+    options: IPipeOptionsFilter,
+  ): Promise<TypePipeFilterResult> {
+    if (!options.schema)
+      throw new Error(
+        `should specify the schema of pipeFilter: ${metadata.controller.name}.${metadata.method}#${metadata.index}`,
+      );
     // validateSchema
-    value = (await this.bean.validator.validateSchema(options.schema, value, options, metadata.field)) as TypePipeFilterData;
+    value = (await this.bean.validator.validateSchema(
+      options.schema,
+      value,
+      options,
+      metadata.field,
+    )) as TypePipeFilterData;
     // transform
     const params = await this._transform(value, options);
     // ok
@@ -77,7 +105,9 @@ export class PipeFilter extends BeanBase implements IPipeTransform<TypePipeFilte
   private _transformOrders(params: TypeQueryParamsPatch, options: IPipeOptionsFilter) {
     if (!params.orders) return;
     // openapi
-    const openapi: ISchemaObjectExtensionField | undefined = ZodMetadata.getOpenapiMetadata(options.schema!);
+    const openapi: ISchemaObjectExtensionField | undefined = ZodMetadata.getOpenapiMetadata(
+      options.schema!,
+    );
     const table = openapi?.filter?.table;
     // loop
     for (const order of params.orders) {
@@ -87,7 +117,8 @@ export class PipeFilter extends BeanBase implements IPipeTransform<TypePipeFilte
       let fieldCurrent = field;
       const fieldSchema = ZodMetadata.getFieldSchema(options.schema, field);
       if (fieldSchema) {
-        const openapi: ISchemaObjectExtensionField | undefined = ZodMetadata.getOpenapiMetadata(fieldSchema);
+        const openapi: ISchemaObjectExtensionField | undefined =
+          ZodMetadata.getOpenapiMetadata(fieldSchema);
         if (openapi?.filter?.table) {
           tableCurrent = openapi?.filter?.table;
         }
@@ -99,14 +130,21 @@ export class PipeFilter extends BeanBase implements IPipeTransform<TypePipeFilte
     }
   }
 
-  private async _transformField(key: string, fieldValue: any, params: TypeQueryParamsPatch, value: any, options: IPipeOptionsFilter) {
+  private async _transformField(
+    key: string,
+    fieldValue: any,
+    params: TypeQueryParamsPatch,
+    value: any,
+    options: IPipeOptionsFilter,
+  ) {
     if (isNilOrEmptyString(fieldValue)) return;
     if (__FieldsSystem.includes(key)) return;
     const fieldSchema = ZodMetadata.getFieldSchema(options.schema, key);
     if (!fieldSchema) return;
     const fieldSchemaInner = ZodMetadata.unwrapChained(fieldSchema);
     // openapi
-    const openapi: ISchemaObjectExtensionField | undefined = ZodMetadata.getOpenapiMetadata(fieldSchema);
+    const openapi: ISchemaObjectExtensionField | undefined =
+      ZodMetadata.getOpenapiMetadata(fieldSchema);
     // name
     const originalName = openapi?.filter?.originalName ?? key;
     let fullName: string;
@@ -124,8 +162,14 @@ export class PipeFilter extends BeanBase implements IPipeTransform<TypePipeFilte
     // check where
     if (Object.prototype.hasOwnProperty.call(params.where, fullName)) return;
     // filter transform
-    const [transformName, transformOptions] = openapi?.filter?.transform ?? ['a-web:base', undefined];
-    const transformOptions2 = this.bean.onion.filterTransform.getOnionOptionsDynamic(transformName as keyof IFilterTransformRecord, transformOptions);
+    const [transformName, transformOptions] = openapi?.filter?.transform ?? [
+      'a-web:base',
+      undefined,
+    ];
+    const transformOptions2 = this.bean.onion.filterTransform.getOnionOptionsDynamic(
+      transformName as keyof IFilterTransformRecord,
+      transformOptions,
+    );
     // execute
     const beanFullName = beanFullNameFromOnionName(transformName, 'filterTransform');
     const beanInstance = this.bean._getBean(beanFullName) as unknown as IFilterTransformWhere;
@@ -161,7 +205,11 @@ export class PipeFilter extends BeanBase implements IPipeTransform<TypePipeFilte
     }
   }
 
-  private async _transformFields(params: TypeQueryParamsPatch, value: any, options: IPipeOptionsFilter) {
+  private async _transformFields(
+    params: TypeQueryParamsPatch,
+    value: any,
+    options: IPipeOptionsFilter,
+  ) {
     // loop
     for (const key in value) {
       await this._transformField(key, value[key], params, value, options);

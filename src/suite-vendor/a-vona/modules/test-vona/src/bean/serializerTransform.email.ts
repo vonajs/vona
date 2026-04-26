@@ -1,4 +1,7 @@
-import type { IDecoratorSerializerTransformOptions, ISerializerTransform } from 'vona-module-a-serialization';
+import type {
+  IDecoratorSerializerTransformOptions,
+  ISerializerTransform,
+} from 'vona-module-a-serialization';
 
 import { BeanBase } from 'vona';
 import { SerializerTransform } from 'vona-module-a-serialization';
@@ -14,7 +17,12 @@ export interface ISerializerTransformOptionsEmail extends IDecoratorSerializerTr
 @SerializerTransform<ISerializerTransformOptionsEmail>()
 export class SerializerTransformEmail
   extends BeanBase
-  implements ISerializerTransform<TypeSerializerTransformEmailValue, TypeSerializerTransformEmailData, TypeSerializerTransformEmailResult>
+  implements
+    ISerializerTransform<
+      TypeSerializerTransformEmailValue,
+      TypeSerializerTransformEmailData,
+      TypeSerializerTransformEmailResult
+    >
 {
   async transform(
     value: TypeSerializerTransformEmailValue,

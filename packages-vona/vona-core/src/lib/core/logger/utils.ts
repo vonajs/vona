@@ -3,7 +3,11 @@ import chalk from 'chalk';
 import { LEVEL, MESSAGE } from 'triple-beam';
 import * as Winston from 'winston';
 
-import type { ILoggerFormatFilterOpts, ILoggerFormatOpts, ILoggerOptionsClientInfo } from '../../../types/interface/logger.ts';
+import type {
+  ILoggerFormatFilterOpts,
+  ILoggerFormatOpts,
+  ILoggerOptionsClientInfo,
+} from '../../../types/interface/logger.ts';
 
 import { cast } from '../../../types/utils/cast.ts';
 import { useApp } from '../../framework/useApp.ts';
@@ -11,7 +15,11 @@ import { useApp } from '../../framework/useApp.ts';
 const SymbolLoggerMessage = Symbol('SymbolLoggerMessage');
 
 export const formatLoggerAxiosError = Winston.format((einfo, { stack, cause }: any) => {
-  if ((einfo instanceof Error && einfo.constructor.name.includes('AxiosError')) || einfo.name === 'AxiosError' || einfo.isAxiosError) {
+  if (
+    (einfo instanceof Error && einfo.constructor.name.includes('AxiosError')) ||
+    einfo.name === 'AxiosError' ||
+    einfo.isAxiosError
+  ) {
     const info = Object.assign({}, einfo, {
       level: einfo.level,
       [LEVEL]: einfo[LEVEL] || einfo.level,
@@ -59,25 +67,32 @@ export const formatLoggerFilter = Winston.format(((info: any, opts: ILoggerForma
   const level = typeof opts.level === 'function' ? opts.level() : opts.level;
   if (!level) return false;
   if (opts.strict) {
-    if (Winston.config.npm.levels[info.level] === Winston.config.npm.levels[level]) return __formatLoggerFilterCheckInfo(info);
+    if (Winston.config.npm.levels[info.level] === Winston.config.npm.levels[level])
+      return __formatLoggerFilterCheckInfo(info);
     return false;
   }
-  if (Winston.config.npm.levels[info.level] <= Winston.config.npm.levels[level] || (opts.silly && info.level === 'silly'))
+  if (
+    Winston.config.npm.levels[info.level] <= Winston.config.npm.levels[level] ||
+    (opts.silly && info.level === 'silly')
+  )
     return __formatLoggerFilterCheckInfo(info);
   return false;
 }) as any);
 
 export const formatLoggerConsole = (clientInfo: ILoggerOptionsClientInfo) => {
-  return Winston.format.printf(({ timestamp, level, stack, message, name, beanFullName, durationMs, ...meta }) => {
-    const textClientName = clientInfo.clientName === 'default' ? '' : ` ${chalk.cyan(`[${clientInfo.clientName}]`)}`;
-    const textName = name ? ` ${chalk.cyan(`[${name}]`)}` : '';
-    const textBeanFullName = beanFullName ? ` ${chalk.gray(`[${beanFullName}]`)}` : '';
-    const textMeta = !isEmptyObject(meta) ? ` ${JSON.stringify(meta)}` : '';
-    const textMessage = ` ${message}`;
-    const textDurationMs = durationMs !== undefined ? ` ${chalk.cyan(`+${durationMs}ms`)}` : '';
-    const textStack = stack ? `\n${stack}` : '';
-    return `${timestamp} ${level}${textClientName}${textName}${textBeanFullName}${textMeta}${textMessage}${textDurationMs}${textStack}`;
-  });
+  return Winston.format.printf(
+    ({ timestamp, level, stack, message, name, beanFullName, durationMs, ...meta }) => {
+      const textClientName =
+        clientInfo.clientName === 'default' ? '' : ` ${chalk.cyan(`[${clientInfo.clientName}]`)}`;
+      const textName = name ? ` ${chalk.cyan(`[${name}]`)}` : '';
+      const textBeanFullName = beanFullName ? ` ${chalk.gray(`[${beanFullName}]`)}` : '';
+      const textMeta = !isEmptyObject(meta) ? ` ${JSON.stringify(meta)}` : '';
+      const textMessage = ` ${message}`;
+      const textDurationMs = durationMs !== undefined ? ` ${chalk.cyan(`+${durationMs}ms`)}` : '';
+      const textStack = stack ? `\n${stack}` : '';
+      return `${timestamp} ${level}${textClientName}${textName}${textBeanFullName}${textMeta}${textMessage}${textDurationMs}${textStack}`;
+    },
+  );
 };
 
 function __formatLoggerFilterCheckInfo(info) {

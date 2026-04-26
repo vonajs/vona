@@ -13,14 +13,20 @@ export class ServiceRedis extends BeanBase {
     const app = this.app;
     // clear keys
     // await this._clearRedisKeys(app.bean.redis.get('limiter'), `b_${app.name}:*`);
-    await this._clearRedisKeys(app.bean.redis.get('queue'), `${getRedisClientKeyPrefix('bull', app)}*`);
+    await this._clearRedisKeys(
+      app.bean.redis.get('queue'),
+      `${getRedisClientKeyPrefix('bull', app)}*`,
+    );
     // broadcast channel has subscribed
     // await _clearRedisKeys(app.redis.get('broadcast'), `${getRedisClientKeyPrefix('broadcast', app)}*`);
     for (const _clientName in app.config.redis.clients) {
       const clientName = _clientName as keyof IRedisClientRecord;
       if (['limiter', 'queue', 'broadcast'].includes(clientName)) continue;
       if (clientName.startsWith('redlock')) {
-        await this._clearRedisKeys(app.bean.redis.get(clientName), `${getRedisClientKeyPrefix('redlock', app)}*`);
+        await this._clearRedisKeys(
+          app.bean.redis.get(clientName),
+          `${getRedisClientKeyPrefix('redlock', app)}*`,
+        );
       } else {
         const client = app.config.redis.clients[clientName];
         const keyPrefix = prepareRedisClientKeyPrefix(client.keyPrefix, clientName, this.app);

@@ -13,7 +13,12 @@ export interface IModelOptionsUserStatsGroup extends IDecoratorModelOptions<Enti
     posts: $relation.hasMany(
       () => ModelPost,
       'userId',
-      { autoload: true, groups: ['title'], aggrs: { count: ['*', 'title'], sum: 'stars' }, orders: [['title', 'desc']] },
+      {
+        autoload: true,
+        groups: ['title'],
+        aggrs: { count: ['*', 'title'], sum: 'stars' },
+        orders: [['title', 'desc']],
+      },
       undefined,
       true,
     ),

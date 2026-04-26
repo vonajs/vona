@@ -1,5 +1,10 @@
 import type { ILoggerChildRecord, ILoggerClientRecord, LoggerLevel, Next, NextSync } from 'vona';
-import type { IAopMethodExecute, IAopMethodGet, IAopMethodSet, IDecoratorAopMethodOptions } from 'vona-module-a-aspect';
+import type {
+  IAopMethodExecute,
+  IAopMethodGet,
+  IAopMethodSet,
+  IDecoratorAopMethodOptions,
+} from 'vona-module-a-aspect';
 import type winston from 'winston';
 
 import { evaluateExpressions } from '@cabloy/utils';
@@ -18,7 +23,10 @@ export interface IAopMethodOptionsLog extends IDecoratorAopMethodOptions {
 @AopMethod<IAopMethodOptionsLog>({
   level: 'info',
 })
-export class AopMethodLog extends BeanAopMethodBase implements IAopMethodGet, IAopMethodSet, IAopMethodExecute {
+export class AopMethodLog
+  extends BeanAopMethodBase
+  implements IAopMethodGet, IAopMethodSet, IAopMethodExecute
+{
   get(options: IAopMethodOptionsLog, next: NextSync, receiver: any, prop: string): any {
     const context = this._getContext(options, receiver);
     const message = `${receiver[SymbolBeanFullName]}#${prop}(get)`;
@@ -36,7 +44,13 @@ export class AopMethodLog extends BeanAopMethodBase implements IAopMethodGet, IA
     }
   }
 
-  set(options: IAopMethodOptionsLog, value: any, next: NextSync, receiver: any, prop: string): boolean {
+  set(
+    options: IAopMethodOptionsLog,
+    value: any,
+    next: NextSync,
+    receiver: any,
+    prop: string,
+  ): boolean {
     const context = this._getContext(options, receiver);
     const message = `${receiver[SymbolBeanFullName]}#${prop}(set)`;
     const logger = this.app.meta.logger.child(options.childName, options.clientName);
@@ -53,12 +67,23 @@ export class AopMethodLog extends BeanAopMethodBase implements IAopMethodGet, IA
     }
   }
 
-  execute(options: IAopMethodOptionsLog, _args: [], next: Next | NextSync, receiver: any, prop: string): Promise<any> | any {
+  execute(
+    options: IAopMethodOptionsLog,
+    _args: [],
+    next: Next | NextSync,
+    receiver: any,
+    prop: string,
+  ): Promise<any> | any {
     const context = this._getContext(options, receiver);
     const message = `${receiver[SymbolBeanFullName]}#${prop}`;
     const logger = this.app.meta.logger.child(options.childName, options.clientName);
     // begin
-    options.args !== false && logger.log(options.level, () => `${message} args: ${JSON.stringify(_args)}`, context ? { context } : undefined);
+    options.args !== false &&
+      logger.log(
+        options.level,
+        () => `${message} args: ${JSON.stringify(_args)}`,
+        context ? { context } : undefined,
+      );
     const profiler = logger.startTimer();
     // next
     try {
@@ -88,7 +113,13 @@ export class AopMethodLog extends BeanAopMethodBase implements IAopMethodGet, IA
     });
   }
 
-  _logValue(profiler: winston.Profiler, context: any, value: any, options: IAopMethodOptionsLog, message: string) {
+  _logValue(
+    profiler: winston.Profiler,
+    context: any,
+    value: any,
+    options: IAopMethodOptionsLog,
+    message: string,
+  ) {
     const info: any = {
       level: options.level,
       message: () => {
@@ -100,7 +131,13 @@ export class AopMethodLog extends BeanAopMethodBase implements IAopMethodGet, IA
     profiler.done(info);
   }
 
-  _logResult(profiler: winston.Profiler, context: any, res: any, options: IAopMethodOptionsLog, message: string) {
+  _logResult(
+    profiler: winston.Profiler,
+    context: any,
+    res: any,
+    options: IAopMethodOptionsLog,
+    message: string,
+  ) {
     const info: any = {
       level: options.level,
       message: () => {
@@ -112,7 +149,13 @@ export class AopMethodLog extends BeanAopMethodBase implements IAopMethodGet, IA
     profiler.done(info);
   }
 
-  _logError(profiler: winston.Profiler, context: any, err: Error, _options: IAopMethodOptionsLog, message: string) {
+  _logError(
+    profiler: winston.Profiler,
+    context: any,
+    err: Error,
+    _options: IAopMethodOptionsLog,
+    message: string,
+  ) {
     const info: any = {
       level: 'error',
       message: () => {

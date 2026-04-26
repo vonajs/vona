@@ -10,4 +10,7 @@ export interface TypeEventReloadInstancesData {
 export type TypeEventReloadInstancesResult = void;
 
 @Event()
-export class EventReloadInstances extends BeanEventBase<TypeEventReloadInstancesData, TypeEventReloadInstancesResult> {}
+export class EventReloadInstances extends BeanEventBase<
+  TypeEventReloadInstancesData,
+  TypeEventReloadInstancesResult
+> {}

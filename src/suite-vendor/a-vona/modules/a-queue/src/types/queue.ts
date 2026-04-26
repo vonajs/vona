@@ -11,9 +11,16 @@ export interface IQueuePushOptions extends IGeneralInfoOptions {
   jobOptions?: Bull.JobsOptions;
 }
 
-export type TypeQueueJob<DATA = unknown, RESULT = unknown> = Bull.Job<IQueueJobContext<DATA>, RESULT>;
+export type TypeQueueJob<DATA = unknown, RESULT = unknown> = Bull.Job<
+  IQueueJobContext<DATA>,
+  RESULT
+>;
 export interface IQueueExecute<DATA = unknown, RESULT = unknown> {
-  execute: (data: DATA, options?: IQueuePushOptions, job?: TypeQueueJob<DATA, RESULT>) => Promise<RESULT>;
+  execute: (
+    data: DATA,
+    options?: IQueuePushOptions,
+    job?: TypeQueueJob<DATA, RESULT>,
+  ) => Promise<RESULT>;
 }
 
 export interface IQueueJobContext<DATA> {

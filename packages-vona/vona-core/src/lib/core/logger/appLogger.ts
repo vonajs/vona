@@ -89,7 +89,10 @@ export class AppLogger extends BeanSimple {
     return logger;
   }
 
-  private _prepareConfigClient(clientName: keyof ILoggerClientRecord, configClient: TypeLoggerOptions) {
+  private _prepareConfigClient(
+    clientName: keyof ILoggerClientRecord,
+    configClient: TypeLoggerOptions,
+  ) {
     if (typeof configClient !== 'function') return configClient;
     return configClient.call(
       this.app,
@@ -105,7 +108,9 @@ export class AppLogger extends BeanSimple {
   public createTransportFile(
     fileName: string,
     clientInfo: ILoggerOptionsClientInfo,
-    options: Winston.transports.FileTransportOptions | DailyRotateFile.DailyRotateFileTransportOptions,
+    options:
+      | Winston.transports.FileTransportOptions
+      | DailyRotateFile.DailyRotateFileTransportOptions,
   ) {
     const dirname = this.app.config.logger.baseDir;
     if (!fse.existsSync(dirname)) {

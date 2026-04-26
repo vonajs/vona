@@ -45,7 +45,10 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
   public cacheEntity: ServiceCacheEntity;
   protected relations: ServiceRelations;
 
-  protected __init__(clientName?: keyof IDatabaseClientRecord | ServiceDb, table?: keyof ITableRecord) {
+  protected __init__(
+    clientName?: keyof IDatabaseClientRecord | ServiceDb,
+    table?: keyof ITableRecord,
+  ) {
     super.__init__(clientName, table);
     this.cacheQuery = this.bean._newBean(ServiceCacheQuery, this);
     this.cacheEntity = this.bean._newBean(ServiceCacheEntity, this);
@@ -57,18 +60,29 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
     await disposeInstance(this.cacheEntity);
   }
 
-  async insert<T extends IModelInsertOptions<TRecord>>(data?: Partial<TRecord>, options?: T): Promise<TRecord> {
+  async insert<T extends IModelInsertOptions<TRecord>>(
+    data?: Partial<TRecord>,
+    options?: T,
+  ): Promise<TRecord> {
     if (!data) data = {};
     const items = await this.insertBulk([data], options);
     return items[0];
   }
 
-  async insertBulk<T extends IModelInsertOptions<TRecord>>(items: Partial<TRecord>[], options?: T): Promise<TRecord[]> {
+  async insertBulk<T extends IModelInsertOptions<TRecord>>(
+    items: Partial<TRecord>[],
+    options?: T,
+  ): Promise<TRecord[]> {
     const itemsResult = await this.__insertBulk_raw(undefined, items, options);
     const itemsNew = items.map((item, index) => {
       return Object.assign({}, item, { id: cast(itemsResult[index]).id });
     });
-    return await this.relations.handleRelationsMutate(itemsResult, itemsNew as any, options as any, options);
+    return await this.relations.handleRelationsMutate(
+      itemsResult,
+      itemsNew as any,
+      options as any,
+      options,
+    );
   }
 
   async __insertBulk_raw(
@@ -88,13 +102,19 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
     return res;
   }
 
-  async mutate<T extends IModelMutateOptions<TRecord>>(data?: Partial<TRecord>, options?: T): Promise<Partial<TRecord>> {
+  async mutate<T extends IModelMutateOptions<TRecord>>(
+    data?: Partial<TRecord>,
+    options?: T,
+  ): Promise<Partial<TRecord>> {
     if (!data) data = {};
     const items = await this.mutateBulk([data], options);
     return items[0];
   }
 
-  async mutateBulk<T extends IModelMutateOptions<TRecord>>(items: Partial<TRecord>[], options?: T): Promise<Partial<TRecord>[]> {
+  async mutateBulk<T extends IModelMutateOptions<TRecord>>(
+    items: Partial<TRecord>[],
+    options?: T,
+  ): Promise<Partial<TRecord>[]> {
     return await this.__mutateBulk_raw(undefined, items, options);
   }
 
@@ -140,7 +160,12 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
       .concat(itemsUpdate as any);
     let itemsMutateResult = itemsInsertNew.concat(itemsUpdate as any);
     const indexesMutate = indexesInsert.concat(indexesUpdate);
-    itemsMutateResult = await this.relations.handleRelationsMutate(itemsMutateResult, itemsMutate as any, options as any, options);
+    itemsMutateResult = await this.relations.handleRelationsMutate(
+      itemsMutateResult,
+      itemsMutate as any,
+      options as any,
+      options,
+    );
     let result: TRecord[] = [];
     for (let index = 0; index < indexesMutate.length; index++) {
       result[indexesMutate[index]] = itemsMutateResult[index] as any;
@@ -153,7 +178,10 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
     return result;
   }
 
-  async mget<T extends IModelGetOptions<TRecord>>(ids: TableIdentity[], options?: T): Promise<Partial<TRecord>[]> {
+  async mget<T extends IModelGetOptions<TRecord>>(
+    ids: TableIdentity[],
+    options?: T,
+  ): Promise<Partial<TRecord>[]> {
     if (ids.length === 0) return [];
     const relations = this.relations.handleRelationsCollection(options as any);
     const [options2, refKeys] = this.relations.prepareColumnsByRelations(relations, options);
@@ -170,7 +198,11 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
     return items;
   }
 
-  private async __mget_raw(table: keyof ITableRecord | undefined, ids: TableIdentity[], options?: IModelGetOptions<TRecord>): Promise<TRecord[]> {
+  private async __mget_raw(
+    table: keyof ITableRecord | undefined,
+    ids: TableIdentity[],
+    options?: IModelGetOptions<TRecord>,
+  ): Promise<TRecord[]> {
     // table
     table = table || this.getTable(undefined);
     if (!table) return this.scopeOrm.error.ShouldSpecifyTable.throw();
@@ -195,7 +227,10 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
     return this.__filterMGetColumns(items, options?.columns);
   }
 
-  async count<T extends IModelSelectCountParams<TRecord>, ModelJoins extends TypeModelsClassLikeGeneral | undefined>(
+  async count<
+    T extends IModelSelectCountParams<TRecord>,
+    ModelJoins extends TypeModelsClassLikeGeneral | undefined,
+  >(
     params?: T,
     options?: IModelMethodOptions,
     _modelJoins?: ModelJoins,
@@ -206,19 +241,17 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
     return this.extractFirstValue(item);
   }
 
-  async increment<T extends IModelIncrementParams<TRecord>, ModelJoins extends TypeModelsClassLikeGeneral | undefined>(
-    params: T,
-    options?: IModelMethodOptions,
-    _modelJoins?: ModelJoins,
-  ): Promise<number> {
+  async increment<
+    T extends IModelIncrementParams<TRecord>,
+    ModelJoins extends TypeModelsClassLikeGeneral | undefined,
+  >(params: T, options?: IModelMethodOptions, _modelJoins?: ModelJoins): Promise<number> {
     return await this.__increment_raw(undefined, params, options);
   }
 
-  async decrement<T extends IModelIncrementParams<TRecord>, ModelJoins extends TypeModelsClassLikeGeneral | undefined>(
-    params: T,
-    options?: IModelMethodOptions,
-    _modelJoins?: ModelJoins,
-  ): Promise<number> {
+  async decrement<
+    T extends IModelIncrementParams<TRecord>,
+    ModelJoins extends TypeModelsClassLikeGeneral | undefined,
+  >(params: T, options?: IModelMethodOptions, _modelJoins?: ModelJoins): Promise<number> {
     const columns = {} as TypeModelIncrementParamsColumns<TRecord>;
     for (const key in params.columns) {
       columns[key] = -params.columns[key]!;
@@ -259,7 +292,10 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
     return res;
   }
 
-  async aggregate<T extends IModelSelectAggrParams<TRecord>, ModelJoins extends TypeModelsClassLikeGeneral | undefined>(
+  async aggregate<
+    T extends IModelSelectAggrParams<TRecord>,
+    ModelJoins extends TypeModelsClassLikeGeneral | undefined,
+  >(
     params?: T,
     options?: IModelMethodOptions,
     _modelJoins?: ModelJoins,
@@ -280,7 +316,10 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
     return items;
   }
 
-  async group<T extends IModelSelectGroupParams<TRecord>, ModelJoins extends TypeModelsClassLikeGeneral | undefined>(
+  async group<
+    T extends IModelSelectGroupParams<TRecord>,
+    ModelJoins extends TypeModelsClassLikeGeneral | undefined,
+  >(
     params?: T,
     options?: IModelMethodOptions,
     _modelJoins?: ModelJoins,
@@ -300,16 +339,20 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
     return items;
   }
 
-  async selectAndCount<T extends IModelSelectParams<TRecord>, ModelJoins extends TypeModelsClassLikeGeneral | undefined>(
-    params?: T,
-    options?: IModelMethodOptions,
-    modelJoins?: ModelJoins,
-  ): Promise<any> {
+  async selectAndCount<
+    T extends IModelSelectParams<TRecord>,
+    ModelJoins extends TypeModelsClassLikeGeneral | undefined,
+  >(params?: T, options?: IModelMethodOptions, modelJoins?: ModelJoins): Promise<any> {
     // pageNo/pageSize
     const pageSize = params?.limit ?? this.scopeOrm.config.rest.query.pageSize.default;
     const pageNo = Math.floor((params?.offset ?? 0) / pageSize) + 1;
     // count
-    const paramsCount = Object.assign({}, params, { columns: undefined, orders: undefined, limit: undefined, offset: undefined });
+    const paramsCount = Object.assign({}, params, {
+      columns: undefined,
+      orders: undefined,
+      limit: undefined,
+      offset: undefined,
+    });
     let count = await this.count(paramsCount, options, modelJoins);
     if (!count) count = '0';
     // list
@@ -325,11 +368,10 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
     return { list, total: count, pageCount, pageSize, pageNo };
   }
 
-  async select<T extends IModelSelectParams<TRecord>, ModelJoins extends TypeModelsClassLikeGeneral | undefined>(
-    params?: T,
-    options?: IModelMethodOptions,
-    _modelJoins?: ModelJoins,
-  ): Promise<any[]> {
+  async select<
+    T extends IModelSelectParams<TRecord>,
+    ModelJoins extends TypeModelsClassLikeGeneral | undefined,
+  >(params?: T, options?: IModelMethodOptions, _modelJoins?: ModelJoins): Promise<any[]> {
     const relations = this.relations.handleRelationsCollection(params as any);
     const [params2, refKeys] = this.relations.prepareColumnsByRelations(relations, params);
     let items = await this.__select_raw(undefined, params2, options);
@@ -375,11 +417,17 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
     }
     // 2: mget
     const ids = items.map(item => cast(item).id);
-    const options3 = params?.columns ? Object.assign({}, options, { columns: params?.columns }) : options;
+    const options3 = params?.columns
+      ? Object.assign({}, options, { columns: params?.columns })
+      : options;
     return await this.__mget_raw(table, ids, options3);
   }
 
-  private async __select_cache(table: keyof ITableRecord, params?: IModelSelectParams<TRecord>, options?: IModelMethodOptions): Promise<TRecord[]> {
+  private async __select_cache(
+    table: keyof ITableRecord,
+    params?: IModelSelectParams<TRecord>,
+    options?: IModelMethodOptions,
+  ): Promise<TRecord[]> {
     // check if cache
     if (this._checkDisableCacheQueryByOptions(options)) {
       return await super._select(table, params, options);
@@ -400,7 +448,10 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
     return items;
   }
 
-  async get<T extends IModelGetOptions<TRecord>>(where: TypeModelWhere<TRecord>, options?: T): Promise<Partial<TRecord> | undefined> {
+  async get<T extends IModelGetOptions<TRecord>>(
+    where: TypeModelWhere<TRecord>,
+    options?: T,
+  ): Promise<Partial<TRecord> | undefined> {
     const relations = this.relations.handleRelationsCollection(options);
     const [options2, refKeys] = this.relations.prepareColumnsByRelations(relations, options);
     let item: TRecord | undefined = await this.__get_raw(undefined, where, options2);
@@ -444,19 +495,33 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
       return items[0];
     }
     // key
-    return this.__filterGetColumns(await this.__get_key(id, table, where, options), options?.columns);
+    return this.__filterGetColumns(
+      await this.__get_key(id, table, where, options),
+      options?.columns,
+    );
   }
 
-  async update<T extends IModelUpdateOptions<TRecord>>(data: Partial<TRecord>, options?: T): Promise<Partial<TRecord>> {
+  async update<T extends IModelUpdateOptions<TRecord>>(
+    data: Partial<TRecord>,
+    options?: T,
+  ): Promise<Partial<TRecord>> {
     const ids = await this.__update_raw(undefined, data, options);
     if (!ids || ids.length !== 1) return data;
     // only support =1
     const dataNew = [Object.assign({}, data, { id: ids[0] })];
-    const items = await this.relations.handleRelationsMutate(dataNew, dataNew, options as any, options);
+    const items = await this.relations.handleRelationsMutate(
+      dataNew,
+      dataNew,
+      options as any,
+      options,
+    );
     return items[0];
   }
 
-  async updateBulk<T extends IModelUpdateOptions<TRecord>>(items: Partial<TRecord>[], options?: T): Promise<Partial<TRecord>[]> {
+  async updateBulk<T extends IModelUpdateOptions<TRecord>>(
+    items: Partial<TRecord>[],
+    options?: T,
+  ): Promise<Partial<TRecord>[]> {
     await this.__updateBulk_raw(undefined, items, options);
     return await this.relations.handleRelationsMutate(items, items, options as any, options);
   }
@@ -525,14 +590,20 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
     return Array.isArray(id) ? id : [id];
   }
 
-  async delete<T extends IModelDeleteOptions<TRecord>>(where?: TypeModelWhere<TRecord>, options?: T): Promise<void> {
+  async delete<T extends IModelDeleteOptions<TRecord>>(
+    where?: TypeModelWhere<TRecord>,
+    options?: T,
+  ): Promise<void> {
     const ids = await this.__delete_raw(undefined, where, options);
     if (!isNil(ids)) {
       await this.relations.handleRelationsDelete(ids as [], options as any, options);
     }
   }
 
-  async deleteBulk<T extends IModelDeleteOptions<TRecord>>(ids: TableIdentity[], options?: T): Promise<void> {
+  async deleteBulk<T extends IModelDeleteOptions<TRecord>>(
+    ids: TableIdentity[],
+    options?: T,
+  ): Promise<void> {
     return await this.__deleteBulk_raw_with_relations(undefined, ids, options);
   }
 
@@ -639,7 +710,10 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
     });
   }
 
-  public async cacheEntityDelInner(id: TableIdentity | TableIdentity[], table?: keyof ITableRecord) {
+  public async cacheEntityDelInner(
+    id: TableIdentity | TableIdentity[],
+    table?: keyof ITableRecord,
+  ) {
     await this.cacheEntity.del(id, table);
     await this.cacheQueryClearInner(table);
   }
@@ -729,7 +803,11 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
     return !(options?.cache?.enable ?? this.cacheEntity.enabled);
   }
 
-  private __checkIfOnlyKey(keys: (string | TypeModelColumn<TRecord>)[], table: keyof ITableRecord, noCheckLength?: boolean): string | false {
+  private __checkIfOnlyKey(
+    keys: (string | TypeModelColumn<TRecord>)[],
+    table: keyof ITableRecord,
+    noCheckLength?: boolean,
+  ): string | false {
     const columnId = `${table}.id`;
     if (!noCheckLength) {
       const keysAux = this.cacheEntity.keysAux;
@@ -748,11 +826,17 @@ export class BeanModelCache<TRecord extends {} = {}> extends BeanModelCrud<TReco
     }
   }
 
-  private __checkCacheKeyValid(where: {} | undefined, table: keyof ITableRecord, noCheckLength?: boolean) {
+  private __checkCacheKeyValid(
+    where: {} | undefined,
+    table: keyof ITableRecord,
+    noCheckLength?: boolean,
+  ) {
     if (!where) return undefined;
     const columnId = this.__checkIfOnlyKey(Object.keys(where), table, noCheckLength);
     if (!columnId) return undefined;
-    return ['number', 'string', 'bigint', 'array'].includes(typeof where[columnId]) ? where[columnId] : undefined;
+    return ['number', 'string', 'bigint', 'array'].includes(typeof where[columnId])
+      ? where[columnId]
+      : undefined;
   }
 
   protected __get__(prop: string) {

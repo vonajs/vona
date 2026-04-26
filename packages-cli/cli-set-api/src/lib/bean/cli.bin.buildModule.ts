@@ -1,4 +1,11 @@
-import type { LogLevel, LogOrStringHandler, OutputOptions, RollupBuild, RollupLog, RollupOptions } from 'rollup';
+import type {
+  LogLevel,
+  LogOrStringHandler,
+  OutputOptions,
+  RollupBuild,
+  RollupLog,
+  RollupOptions,
+} from 'rollup';
 
 import { BeanCliBase } from '@cabloy/cli';
 import aliasImport from '@rollup/plugin-alias';
@@ -47,17 +54,38 @@ export class CliBinBuildModule extends BeanCliBase {
   async _rollup(projectPath: string) {
     const { argv } = this.context;
     const aliasEntries: aliasImport.Alias[] = [];
-    for (const name of ['better-sqlite3', 'mysql', 'oracledb', 'pg-native', 'pg-query-stream', 'sqlite3', 'tedious', 'cloudflare:sockets']) {
+    for (const name of [
+      'better-sqlite3',
+      'mysql',
+      'oracledb',
+      'pg-native',
+      'pg-query-stream',
+      'sqlite3',
+      'tedious',
+      'cloudflare:sockets',
+    ]) {
       aliasEntries.push({ find: name, replacement: 'vona-shared' });
     }
 
     const sourceMap = argv.sourcemap;
 
     const babelPluginVonaBeanModule = getAbsolutePathOfModule('babel-plugin-vona-bean-module', '');
-    const babelPluginTransformTypescriptMetadata = getAbsolutePathOfModule('babel-plugin-transform-typescript-metadata', '');
-    const babelPluginProposalDecorators = getAbsolutePathOfModule('@babel/plugin-proposal-decorators', '');
-    const babelPluginTransformClassProperties = getAbsolutePathOfModule('@babel/plugin-transform-class-properties', '');
-    const babelPluginTransformTypescript = getAbsolutePathOfModule('@babel/plugin-transform-typescript', '');
+    const babelPluginTransformTypescriptMetadata = getAbsolutePathOfModule(
+      'babel-plugin-transform-typescript-metadata',
+      '',
+    );
+    const babelPluginProposalDecorators = getAbsolutePathOfModule(
+      '@babel/plugin-proposal-decorators',
+      '',
+    );
+    const babelPluginTransformClassProperties = getAbsolutePathOfModule(
+      '@babel/plugin-transform-class-properties',
+      '',
+    );
+    const babelPluginTransformTypescript = getAbsolutePathOfModule(
+      '@babel/plugin-transform-typescript',
+      '',
+    );
 
     const plugins = [
       alias({
@@ -109,7 +137,9 @@ export class CliBinBuildModule extends BeanCliBase {
         if (
           log.code === 'THIS_IS_UNDEFINED' &&
           (log.message.includes('ramda/es/partialObject.js') ||
-            log.message.includes("The 'this' keyword is equivalent to 'undefined' at the top level of an ES module"))
+            log.message.includes(
+              "The 'this' keyword is equivalent to 'undefined' at the top level of an ES module",
+            ))
         ) {
           return;
         }

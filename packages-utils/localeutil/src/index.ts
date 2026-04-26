@@ -24,7 +24,14 @@ export function getLocaleText(
       const _key = keyCache[1];
       const argIndex = flags[1] ?? 0;
       if (args[argIndex] === flags[0]) {
-        return _getLocaleText_inner(supportCustomMessage, locales1, locales2, locale, _key, ...args);
+        return _getLocaleText_inner(
+          supportCustomMessage,
+          locales1,
+          locales2,
+          locale,
+          _key,
+          ...args,
+        );
       }
     }
   }
@@ -32,7 +39,12 @@ export function getLocaleText(
   return _getLocaleText_inner(supportCustomMessage, locales1, locales2, locale, key, ...args);
 }
 
-function _parseKeyCaches(locales1: Record<string, object> | undefined, locales2: Record<string, object> | undefined, locale: string, key: string) {
+function _parseKeyCaches(
+  locales1: Record<string, object> | undefined,
+  locales2: Record<string, object> | undefined,
+  locale: string,
+  key: string,
+) {
   if (!__keysCachesLocales[locale]) __keysCachesLocales[locale] = {};
   const keysCaches = __keysCachesLocales[locale];
   if (keysCaches[key] !== undefined) return keysCaches[key];
@@ -47,7 +59,13 @@ function _parseKeyCaches(locales1: Record<string, object> | undefined, locales2:
   return keysCaches[key];
 }
 
-function _collectKeyCaches(keyCaches: KeyCache[], checkExists: boolean, locales: Record<string, object> | undefined, locale: string, key: string) {
+function _collectKeyCaches(
+  keyCaches: KeyCache[],
+  checkExists: boolean,
+  locales: Record<string, object> | undefined,
+  locale: string,
+  key: string,
+) {
   if (!locales || !locales[locale]) return;
   for (const _key in locales[locale]) {
     if (_key === key || !_key.startsWith(key)) continue;

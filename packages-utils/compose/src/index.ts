@@ -1,4 +1,7 @@
-export type TypeComposeAdapter = (context: any, chain: any) => { receiver?: any; fn?: Function } | undefined;
+export type TypeComposeAdapter = (
+  context: any,
+  chain: any,
+) => { receiver?: any; fn?: Function } | undefined;
 
 function __adapterDefault(_context, chain) {
   return {

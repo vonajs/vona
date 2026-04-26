@@ -8,7 +8,11 @@ import type { ContextState } from './contextState.ts';
 export * from './contextState.ts';
 
 // @ts-ignore ignore the throw type check of 'throw'/'meta'
-export interface VonaContext extends Omit<KoaApplication.ParameterizedContext<ContextState, {}>, 'redirect'>, ContextBase, ContextOthers {
+export interface VonaContext
+  extends
+    Omit<KoaApplication.ParameterizedContext<ContextState, {}>, 'redirect'>,
+    ContextBase,
+    ContextOthers {
   app: VonaApplication;
   state: ContextState;
 }

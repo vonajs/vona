@@ -193,7 +193,9 @@ class DtoStudentOther extends $Class.mixin(EntityStudent, DtoStudentCreate, DtoS
 可以将多个 Mapped 工具函数组合使用。
 
 ```typescript
-class DtoStudentUpdate extends $Class.partial($Class.pick(EntityStudent, ['name', 'description'])) {}
+class DtoStudentUpdate extends $Class.partial(
+  $Class.pick(EntityStudent, ['name', 'description']),
+) {}
 ```
 
 ## DTO推断与生成

@@ -2,7 +2,12 @@ import { checkMeta, isNil, matchSelector } from '@cabloy/utils';
 import { BeanBase, ProxyDisable } from 'vona';
 import { Bean } from 'vona-module-a-bean';
 
-import type { IOnionOptionsEnable, IOnionOptionsMatch, IOnionOptionsMeta, TypeOnionOptionsMatchRules } from '../types/onion.ts';
+import type {
+  IOnionOptionsEnable,
+  IOnionOptionsMatch,
+  IOnionOptionsMeta,
+  TypeOnionOptionsMatchRules,
+} from '../types/onion.ts';
 
 import { ServiceOnion } from '../service/onion_.ts';
 
@@ -30,8 +35,10 @@ export class BeanOnion extends BeanBase {
     if (isNil(options.match) && isNil(options.ignore)) return true;
     matchThis = matchThis ?? this.app;
     return (
-      (!isNil(options.match) && __onionMatchSelector(options.match, selector, matchThis, ...matchArgs)) ||
-      (!isNil(options.ignore) && !__onionMatchSelector(options.ignore, selector, matchThis, ...matchArgs))
+      (!isNil(options.match) &&
+        __onionMatchSelector(options.match, selector, matchThis, ...matchArgs)) ||
+      (!isNil(options.ignore) &&
+        !__onionMatchSelector(options.ignore, selector, matchThis, ...matchArgs))
     );
   }
 
@@ -47,6 +54,11 @@ export class BeanOnion extends BeanBase {
   }
 }
 
-function __onionMatchSelector(match: TypeOnionOptionsMatchRules<string>, selector: string | boolean, matchThis: any, ...matchArgs: any[]) {
+function __onionMatchSelector(
+  match: TypeOnionOptionsMatchRules<string>,
+  selector: string | boolean,
+  matchThis: any,
+  ...matchArgs: any[]
+) {
   return matchSelector(match, selector, matchThis, ...matchArgs);
 }

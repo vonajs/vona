@@ -1,7 +1,11 @@
 import { DateTime } from 'luxon';
 import { BeanBase } from 'vona';
 
-import type { IDecoratorFilterTransformOptions, IFilterTransformWhere, IPipeOptionsFilterTransformInfo } from '../types/filterTransform.ts';
+import type {
+  IDecoratorFilterTransformOptions,
+  IFilterTransformWhere,
+  IPipeOptionsFilterTransformInfo,
+} from '../types/filterTransform.ts';
 
 import { FilterTransform } from '../lib/decorator/filterTransform.ts';
 
@@ -13,7 +17,10 @@ export interface IFilterTransformOptionsDateRange extends IDecoratorFilterTransf
   separator: '~',
 })
 export class FilterTransformDateRange extends BeanBase implements IFilterTransformWhere {
-  async where(info: IPipeOptionsFilterTransformInfo, options: IFilterTransformOptionsDateRange): Promise<any | undefined> {
+  async where(
+    info: IPipeOptionsFilterTransformInfo,
+    options: IFilterTransformOptionsDateRange,
+  ): Promise<any | undefined> {
     const { value } = info;
     const [dateStartStr, dateEndStr] = value.split(options.separator);
     if (!dateStartStr && !dateEndStr) return;

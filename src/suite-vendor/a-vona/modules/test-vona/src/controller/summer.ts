@@ -30,7 +30,9 @@ export class ControllerSummer extends BeanBase {
     assert.equal(!!cache, true);
     let cacheOtherModule = this.$scope.testVona.summerCache.test;
     assert.equal(cache, cacheOtherModule);
-    cacheOtherModule = this.bean.summer.cache(`${__ThisModule__}.summerCache.${name}`) as SummerCacheTest;
+    cacheOtherModule = this.bean.summer.cache(
+      `${__ThisModule__}.summerCache.${name}`,
+    ) as SummerCacheTest;
     assert.equal(cache, cacheOtherModule);
 
     let value: TSummerCacheTestData | undefined;

@@ -24,7 +24,13 @@ config.instance = {
   instances: {
     '': { password: '', title: '', config: {} },
     'shareTest': { password: '', title: '' },
-    'isolateTest': { password: '', title: '', id: 1000, isolate: true, isolateClient: 'isolateTest' },
+    'isolateTest': {
+      password: '',
+      title: '',
+      id: 1000,
+      isolate: true,
+      isolateClient: 'isolateTest',
+    },
   },
 };
 ```
@@ -226,6 +232,11 @@ await this.scope.model.student.builderSelect().where({
 如果使用`原生Sql`操作数据库，就需要自行添加`实例Id`
 
 ```typescript
-await this.scope.model.student.query('select * from demoStudent where iid=?', [this.ctx.instance.id]);
-await this.scope.model.student.queryOne('select * from demoStudent where iid=? and id=?', [this.ctx.instance.id, 1]);
+await this.scope.model.student.query('select * from demoStudent where iid=?', [
+  this.ctx.instance.id,
+]);
+await this.scope.model.student.queryOne('select * from demoStudent where iid=? and id=?', [
+  this.ctx.instance.id,
+  1,
+]);
 ```

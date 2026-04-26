@@ -1,5 +1,8 @@
 import type { Next } from 'vona';
-import type { IDecoratorMiddlewareSystemOptions, IMiddlewareSystemExecute } from 'vona-module-a-aspect';
+import type {
+  IDecoratorMiddlewareSystemOptions,
+  IMiddlewareSystemExecute,
+} from 'vona-module-a-aspect';
 
 import StdSerializers from 'pino-std-serializers';
 import { BeanBase } from 'vona';

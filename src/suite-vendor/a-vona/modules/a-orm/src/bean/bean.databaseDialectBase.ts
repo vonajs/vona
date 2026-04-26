@@ -29,7 +29,10 @@ export class BeanDatabaseDialectBase extends BeanBase {
     return this._configBase;
   }
 
-  async fetchDatabases(_schemaBuilder: Knex.SchemaBuilder, _databasePrefix: string): Promise<IFetchDatabasesResultItem[]> {
+  async fetchDatabases(
+    _schemaBuilder: Knex.SchemaBuilder,
+    _databasePrefix: string,
+  ): Promise<IFetchDatabasesResultItem[]> {
     throw new Error('Not Implemented');
   }
 
@@ -41,15 +44,25 @@ export class BeanDatabaseDialectBase extends BeanBase {
     throw new Error('Not Implemented');
   }
 
-  async fetchIndexes(_schemaBuilder: Knex.SchemaBuilder, _tableName: string): Promise<IFetchIndexesResultItem[]> {
+  async fetchIndexes(
+    _schemaBuilder: Knex.SchemaBuilder,
+    _tableName: string,
+  ): Promise<IFetchIndexesResultItem[]> {
     throw new Error('Not Implemented');
   }
 
-  async insert(_builder: Knex.QueryBuilder, _datas: any[]): Promise<[TableIdentity[], Knex.QueryBuilder]> {
+  async insert(
+    _builder: Knex.QueryBuilder,
+    _datas: any[],
+  ): Promise<[TableIdentity[], Knex.QueryBuilder]> {
     throw new Error('Not Implemented');
   }
 
-  async select(_builder: Knex.QueryBuilder, datas: any[], _fn: TypeDatabaseDialectTableColumnsFn): Promise<any[]> {
+  async select(
+    _builder: Knex.QueryBuilder,
+    datas: any[],
+    _fn: TypeDatabaseDialectTableColumnsFn,
+  ): Promise<any[]> {
     return datas;
   }
 
@@ -70,7 +83,11 @@ export class BeanDatabaseDialectBase extends BeanBase {
     return result;
   }
 
-  protected async selectAsSqlite3(_builder: Knex.QueryBuilder, datas: any[], fn: TypeDatabaseDialectTableColumnsFn): Promise<any[]> {
+  protected async selectAsSqlite3(
+    _builder: Knex.QueryBuilder,
+    datas: any[],
+    fn: TypeDatabaseDialectTableColumnsFn,
+  ): Promise<any[]> {
     const columns = await fn();
     // data
     for (const data of datas) {
@@ -89,7 +106,10 @@ export class BeanDatabaseDialectBase extends BeanBase {
     return datas;
   }
 
-  protected async insertAsMysql(builder: Knex.QueryBuilder, datas: any[]): Promise<[TableIdentity[], Knex.QueryBuilder]> {
+  protected async insertAsMysql(
+    builder: Knex.QueryBuilder,
+    datas: any[],
+  ): Promise<[TableIdentity[], Knex.QueryBuilder]> {
     if (datas.length === 0) return [[], builder];
     if (isNil(datas[0].id)) {
       let builderFirst: Knex.QueryBuilder | undefined = undefined;
@@ -109,7 +129,10 @@ export class BeanDatabaseDialectBase extends BeanBase {
     }
   }
 
-  protected async insertAsPg(builder: Knex.QueryBuilder, datas: any[]): Promise<[TableIdentity[], Knex.QueryBuilder]> {
+  protected async insertAsPg(
+    builder: Knex.QueryBuilder,
+    datas: any[],
+  ): Promise<[TableIdentity[], Knex.QueryBuilder]> {
     if (datas.length === 0) return [[], builder];
     if (isNil(datas[0].id)) {
       builder.insert(datas).returning('id');
@@ -128,9 +151,19 @@ export class BeanDatabaseDialectBase extends BeanBase {
     // type
     if (['bit', 'bool', 'boolean'].includes(type)) return safeBoolean(value);
     if (['int'].includes(type)) return this._safeNumber(value);
-    if (this._columnTypePrefixes(type, ['timestamp']) && value === 'CURRENT_TIMESTAMP') return undefined; // new Date();
+    if (this._columnTypePrefixes(type, ['timestamp']) && value === 'CURRENT_TIMESTAMP')
+      return undefined; // new Date();
     if (this._columnTypePrefixes(type, ['float', 'double'])) return this._safeNumber(value);
-    if (this._columnTypePrefixes(type, ['tinyint', 'smallint', 'mediumint', 'bigint', 'numeric', 'integer'])) {
+    if (
+      this._columnTypePrefixes(type, [
+        'tinyint',
+        'smallint',
+        'mediumint',
+        'bigint',
+        'numeric',
+        'integer',
+      ])
+    ) {
       return this._safeNumber(value);
     }
     // pg: NULL::character varying

@@ -13,7 +13,10 @@ export interface ISsrSiteOptionsWebPages extends IPagePathRecord {}
 
 export interface ISsrSiteOptionsWebPagesData {}
 
-export interface ISsrSiteOptionsWeb extends IDecoratorSsrSiteOptions<ISsrSiteOptionsWebPages, ISsrSiteOptionsWebPagesData> {}
+export interface ISsrSiteOptionsWeb extends IDecoratorSsrSiteOptions<
+  ISsrSiteOptionsWebPages,
+  ISsrSiteOptionsWebPagesData
+> {}
 
 @SsrSite<ISsrSiteOptionsWeb>({
   publicPath: '',

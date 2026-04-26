@@ -13,7 +13,10 @@ export interface TypeBroadcastBroadcastJobData {
 }
 
 @Broadcast()
-export class BroadcastBroadcast extends BeanBroadcastBase<TypeBroadcastBroadcastJobData> implements IBroadcastExecute<TypeBroadcastBroadcastJobData> {
+export class BroadcastBroadcast
+  extends BeanBroadcastBase<TypeBroadcastBroadcastJobData>
+  implements IBroadcastExecute<TypeBroadcastBroadcastJobData>
+{
   async execute(data: TypeBroadcastBroadcastJobData, isEmitter?: boolean) {
     const { namespace, eventName, data: eventData, options } = data;
     if (!isEmitter) {

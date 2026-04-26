@@ -4,7 +4,11 @@ import type { ServiceOnion } from 'vona-module-a-onion';
 export interface ISerializerTransformRecord {}
 
 export interface ISerializerTransform<VALUE = unknown, DATA = unknown, RESULT = VALUE> {
-  transform(value: VALUE, data: DATA, options: IDecoratorSerializerTransformOptions): Promise<RESULT>;
+  transform(
+    value: VALUE,
+    data: DATA,
+    options: IDecoratorSerializerTransformOptions,
+  ): Promise<RESULT>;
 }
 
 export type TypeSerializerTransformGetter = (this: VonaContext, data: any, value: any) => any;

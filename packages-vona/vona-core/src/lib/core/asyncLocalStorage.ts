@@ -12,7 +12,11 @@ export class VonaAsyncLocalStorage extends AsyncLocalStorage<VonaContext> {
   }
 
   async run<R>(store: VonaContext, callback: () => R): Promise<R>;
-  async run<R, TArgs extends any[]>(store: VonaContext, callback: (...args: TArgs) => R, ...args: TArgs): Promise<R> {
+  async run<R, TArgs extends any[]>(
+    store: VonaContext,
+    callback: (...args: TArgs) => R,
+    ...args: TArgs
+  ): Promise<R> {
     if (store === this.app.currentContext) {
       return await callback(...args);
     }

@@ -26,7 +26,9 @@ export function getTargetColumnName(column: string) {
   return column;
 }
 
-export function prepareColumns<TRecord>(columns?: TypeModelColumns<TRecord>): Array<TypeModelColumn<TRecord>> | undefined {
+export function prepareColumns<TRecord>(
+  columns?: TypeModelColumns<TRecord>,
+): Array<TypeModelColumn<TRecord>> | undefined {
   if (!columns) return undefined;
   columns = Array.isArray(columns) ? columns : [columns];
   if (columns.includes('*')) return undefined;
@@ -34,7 +36,9 @@ export function prepareColumns<TRecord>(columns?: TypeModelColumns<TRecord>): Ar
 }
 
 export function prepareClassModel<ModelLike extends BeanModelMeta | keyof IModelClassRecord>(
-  classType: ModelLike extends BeanModelMeta ? (() => Constructable<ModelLike>) | Constructable<ModelLike> : ModelLike,
+  classType: ModelLike extends BeanModelMeta
+    ? (() => Constructable<ModelLike>) | Constructable<ModelLike>
+    : ModelLike,
 ): Constructable<ModelLike> {
   if (typeof classType === 'string') {
     const beanOptions = appResource.getBean(beanFullNameFromOnionName(classType, 'model'));

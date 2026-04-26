@@ -18,7 +18,11 @@ export interface ISsrSiteOptionsSecondPagesData {
   '/demo/basic/toolTwo/:id?': DtoTestResult;
 }
 
-export interface ISsrSiteOptionsSecond extends IDecoratorSsrSiteOptions<ISsrSiteOptionsSecondPages, ISsrSiteOptionsSecondPagesData, IIconRecord> {}
+export interface ISsrSiteOptionsSecond extends IDecoratorSsrSiteOptions<
+  ISsrSiteOptionsSecondPages,
+  ISsrSiteOptionsSecondPagesData,
+  IIconRecord
+> {}
 
 @SsrSite<ISsrSiteOptionsSecond>({
   publicPath: 'second',

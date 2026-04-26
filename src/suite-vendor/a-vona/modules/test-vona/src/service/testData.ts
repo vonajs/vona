@@ -30,9 +30,18 @@ export class ServiceTestData extends BeanBase {
       { userId: userTom.id, roleId: roleFriend.id },
       { userId: userJimmy.id, roleId: roleFamily.id },
     ]);
-    const postApple = await scopeTest.model.post.insert({ title: `${prefix}:postApple`, userId: userTom.id });
-    const postPear = await scopeTest.model.post.insert({ title: `${prefix}:postPear`, userId: userTom.id });
-    const postContentApple = await scopeTest.model.postContent.insert({ content: `${prefix}:postContentApple`, postId: postApple.id });
+    const postApple = await scopeTest.model.post.insert({
+      title: `${prefix}:postApple`,
+      userId: userTom.id,
+    });
+    const postPear = await scopeTest.model.post.insert({
+      title: `${prefix}:postPear`,
+      userId: userTom.id,
+    });
+    const postContentApple = await scopeTest.model.postContent.insert({
+      content: `${prefix}:postContentApple`,
+      postId: postApple.id,
+    });
     // ok
     return {
       userTom,
@@ -46,7 +55,8 @@ export class ServiceTestData extends BeanBase {
   }
 
   async drop(data: ITestData) {
-    const { userTom, userJimmy, roleFamily, roleFriend, postApple, postPear, postContentApple } = data;
+    const { userTom, userJimmy, roleFamily, roleFriend, postApple, postPear, postContentApple } =
+      data;
     const scopeTest = this.scope;
     await scopeTest.model.postContent.delete({ id: postContentApple.id });
     await scopeTest.model.post.delete({ id: postApple.id });

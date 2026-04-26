@@ -8,7 +8,10 @@ import type { IDatashardingSwitchOptions } from '../types/datasharding.ts';
 
 @Bean()
 export class BeanDatasharding extends BeanBase {
-  async switchDatasource<RESULT>(fn: FunctionAsync<RESULT>, options?: IDatashardingSwitchOptions): Promise<RESULT> {
+  async switchDatasource<RESULT>(
+    fn: FunctionAsync<RESULT>,
+    options?: IDatashardingSwitchOptions,
+  ): Promise<RESULT> {
     // config
     const configClient = this.scope.config.client;
     if (configClient.reads.length === 0 && configClient.writes.length === 0) return await fn();
@@ -19,7 +22,9 @@ export class BeanDatasharding extends BeanBase {
     return await this.bean.database.switchDb(fn, clientName);
   }
 
-  private async _checkDatasourceType(options?: IDatashardingSwitchOptions): Promise<keyof IDatabaseClientRecord | undefined> {
+  private async _checkDatasourceType(
+    options?: IDatashardingSwitchOptions,
+  ): Promise<keyof IDatabaseClientRecord | undefined> {
     let datasourceType = options?.datasourceType ?? 'auto';
     if (datasourceType === 'auto') {
       // 1. innerAccess/inTransaction
@@ -54,15 +59,26 @@ export class BeanDatasharding extends BeanBase {
     return clientName;
   }
 
-  private async _getSummerCacheDatasourceWrite(updateAgeOnGet: boolean, options?: IDatashardingSwitchOptions) {
+  private async _getSummerCacheDatasourceWrite(
+    updateAgeOnGet: boolean,
+    options?: IDatashardingSwitchOptions,
+  ) {
     if (!options?.cacheDatasourceWrite) return;
     if (!this.bean.passport.isAuthenticated) return;
-    return await this.scope.summerCache.datasourceWrite.get(this.bean.passport.currentUser?.id, { updateAgeOnGet });
+    return await this.scope.summerCache.datasourceWrite.get(this.bean.passport.currentUser?.id, {
+      updateAgeOnGet,
+    });
   }
 
-  private async _setSummerCacheDatasourceWrite(clientName: keyof IDatabaseClientRecord, options?: IDatashardingSwitchOptions) {
+  private async _setSummerCacheDatasourceWrite(
+    clientName: keyof IDatabaseClientRecord,
+    options?: IDatashardingSwitchOptions,
+  ) {
     if (!options?.cacheDatasourceWrite) return;
     if (!this.bean.passport.isAuthenticated) return;
-    return await this.scope.summerCache.datasourceWrite.set(clientName, this.bean.passport.currentUser?.id);
+    return await this.scope.summerCache.datasourceWrite.set(
+      clientName,
+      this.bean.passport.currentUser?.id,
+    );
   }
 }

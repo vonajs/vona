@@ -1,4 +1,8 @@
-import type { IFilterTransformOptionsDateRange, IFilterTransformRecord, ISchemaObjectExtensionFieldFilter } from 'vona-module-a-web';
+import type {
+  IFilterTransformOptionsDateRange,
+  IFilterTransformRecord,
+  ISchemaObjectExtensionFieldFilter,
+} from 'vona-module-a-web';
 import type z from 'zod';
 
 import { schemaRenderComponent } from './component.ts';
@@ -11,7 +15,10 @@ export function schemaFilter(options: ISchemaObjectExtensionFieldFilter) {
   };
 }
 
-export function schemaFilterTransform<T extends keyof IFilterTransformRecord>(filterTransformName: T, options?: Partial<IFilterTransformRecord[T]>) {
+export function schemaFilterTransform<T extends keyof IFilterTransformRecord>(
+  filterTransformName: T,
+  options?: Partial<IFilterTransformRecord[T]>,
+) {
   return function (schema: z.ZodType): z.ZodType {
     return schema.openapi({
       filter: {
@@ -23,7 +30,11 @@ export function schemaFilterTransform<T extends keyof IFilterTransformRecord>(fi
 
 export function schemaFilterDateRange(options?: Partial<IFilterTransformOptionsDateRange>) {
   const separator = options?.separator;
-  const fnFilterRender = schemaRenderComponent('dataRange', separator ? { separator } : undefined, 'filter');
+  const fnFilterRender = schemaRenderComponent(
+    'dataRange',
+    separator ? { separator } : undefined,
+    'filter',
+  );
   const fnFilterTransform = schemaFilterTransform('a-web:dateRange', options);
   return function (schema: z.ZodType): z.ZodType {
     return fnFilterTransform(fnFilterRender(schema));

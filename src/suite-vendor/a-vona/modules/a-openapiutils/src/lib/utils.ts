@@ -12,7 +12,10 @@ import type { TypeSchemaOrderLevel } from '../types/order.ts';
 import { OrderLevelBaseMap } from './const/database.ts';
 import { SymbolDecoratorRule } from './const/decorator.ts';
 
-export function getTargetDecoratorRules(target: object, disableRegisterMetadata?: boolean): TypeDecoratorRules {
+export function getTargetDecoratorRules(
+  target: object,
+  disableRegisterMetadata?: boolean,
+): TypeDecoratorRules {
   if (!disableRegisterMetadata) {
     registerMappedClassMetadataKey(target, SymbolDecoratorRule, {
       partialClass: (meta: z.ZodType) => {
@@ -50,7 +53,11 @@ export function mergeFieldsOpenapiMetadata(target: Constructable) {
 }
 
 // fieldRule maybe undefined
-export function mergeFieldOpenapiMetadata(target: object, prop: string, fieldRule?: TypeOpenapiMetadata | z.ZodType): TypeDecoratorRules {
+export function mergeFieldOpenapiMetadata(
+  target: object,
+  prop: string,
+  fieldRule?: TypeOpenapiMetadata | z.ZodType,
+): TypeDecoratorRules {
   // rules
   const rules = getTargetDecoratorRules(target);
   // rule
@@ -81,7 +88,9 @@ export function mergeFieldOpenapiMetadata(target: object, prop: string, fieldRul
   return rules;
 }
 
-export function prepareClassType<T>(classType: (() => Constructable<T>) | Constructable<T>): Constructable<T> {
+export function prepareClassType<T>(
+  classType: (() => Constructable<T>) | Constructable<T>,
+): Constructable<T> {
   return isClass(classType) ? (classType as Constructable<T>) : cast(classType)();
 }
 

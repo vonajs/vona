@@ -2,7 +2,11 @@ import type { IModule } from '@cabloy/module-info';
 
 import chalk from 'chalk';
 
-import type { TypeModuleResourceLocaleModules, TypeModuleResourceLocales, VonaConfigEnv } from '../../types/index.ts';
+import type {
+  TypeModuleResourceLocaleModules,
+  TypeModuleResourceLocales,
+  VonaConfigEnv,
+} from '../../types/index.ts';
 import type { IAppMonkey } from '../../types/interface/monkey.ts';
 import type { ErrorClass, IBeanScopeConfig, IModuleLocaleText } from '../bean/index.ts';
 import type { AppMetadata } from './metadata.ts';
@@ -137,13 +141,23 @@ export class AppMeta extends BeanSimple {
     // appClose
     this.appClose = true;
     // hook: appClose
-    await this.app.util.monkeyModule(this.app.meta.appMonkey, this.app.meta.modulesMonkey, false, 'appClose');
+    await this.app.util.monkeyModule(
+      this.app.meta.appMonkey,
+      this.app.meta.modulesMonkey,
+      false,
+      'appClose',
+    );
     // ctx counter
     await this.app.meta.ctxCounter.awaitUntilZero();
     // appClosed
     this.appClosed = true;
     // hook: appClosed
-    await this.app.util.monkeyModule(this.app.meta.appMonkey, this.app.meta.modulesMonkey, false, 'appClosed');
+    await this.app.util.monkeyModule(
+      this.app.meta.appMonkey,
+      this.app.meta.modulesMonkey,
+      false,
+      'appClosed',
+    );
     // container dispose
     await this.app.bean.dispose();
     // logger dispose

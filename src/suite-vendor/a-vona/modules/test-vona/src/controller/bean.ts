@@ -22,7 +22,10 @@ export class ControllerBean extends BeanBase {
     let res;
 
     // app.bean
-    assert.equal(this.bean._getBean('test-vona.service.testApp'), this.bean['test-vona.service.testApp']);
+    assert.equal(
+      this.bean._getBean('test-vona.service.testApp'),
+      this.bean['test-vona.service.testApp'],
+    );
 
     res = this.bean['test-vona.service.testApp'].actionSync({ a, b });
     assert.equal(res, `${a + b}:regexpaop`);
@@ -55,7 +58,10 @@ export class ControllerBean extends BeanBase {
     assert.equal(res, `test-vona:simpleaop:regexpaop:${a + b}:simpleaop:regexpaop`);
 
     // ctx.bean: class
-    assert.equal(this.bean['test-vona.service.testClass'], this.app.bean['test-vona.service.testClass']);
+    assert.equal(
+      this.bean['test-vona.service.testClass'],
+      this.app.bean['test-vona.service.testClass'],
+    );
 
     res = this.bean['test-vona.service.testClass'].actionSync({ a, b });
     assert.equal(res, `${a + b}:regexpaop`);

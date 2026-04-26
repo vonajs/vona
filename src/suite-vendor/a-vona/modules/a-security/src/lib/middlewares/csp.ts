@@ -7,7 +7,10 @@ import type { IMiddlewareSystemOptionsSecurities } from '../../bean/middlewareSy
 import { checkIfIgnore } from '../utils.ts';
 
 const HEADER = ['x-content-security-policy', 'content-security-policy'];
-const REPORT_ONLY_HEADER = ['x-content-security-policy-report-only', 'content-security-policy-report-only'];
+const REPORT_ONLY_HEADER = [
+  'x-content-security-policy-report-only',
+  'content-security-policy-report-only',
+];
 
 // Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1)
 const MSIE_REGEXP = / MSIE /i;

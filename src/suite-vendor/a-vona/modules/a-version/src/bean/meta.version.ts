@@ -1,4 +1,9 @@
-import type { IMetaVersionInit, IMetaVersionInitOptions, IMetaVersionUpdate, IMetaVersionUpdateOptions } from 'vona-module-a-version';
+import type {
+  IMetaVersionInit,
+  IMetaVersionInitOptions,
+  IMetaVersionUpdate,
+  IMetaVersionUpdateOptions,
+} from 'vona-module-a-version';
 
 import fse from 'fs-extra';
 import { BeanBase } from 'vona';

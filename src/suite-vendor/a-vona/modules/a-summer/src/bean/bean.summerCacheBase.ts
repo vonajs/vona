@@ -1,7 +1,10 @@
 import { deepExtend, Virtual } from 'vona';
 import { Bean } from 'vona-module-a-bean';
 
-import type { IDecoratorSummerCacheOptions, TSummerCacheActionOptions } from '../types/summerCache.ts';
+import type {
+  IDecoratorSummerCacheOptions,
+  TSummerCacheActionOptions,
+} from '../types/summerCache.ts';
 
 import { CacheBase } from '../common/cacheBase.ts';
 
@@ -18,7 +21,8 @@ export class BeanSummerCacheBase<KEY = any, DATA = any> extends CacheBase<KEY, D
     } else {
       // summer cache
       _cacheName = this.$beanFullName;
-      _cacheOptions = cacheOptions ?? (this.$beanOptions.options as IDecoratorSummerCacheOptions) ?? {};
+      _cacheOptions =
+        cacheOptions ?? (this.$beanOptions.options as IDecoratorSummerCacheOptions) ?? {};
     }
     // preset
     let preset = _cacheOptions.preset;
@@ -37,7 +41,10 @@ export class BeanSummerCacheBase<KEY = any, DATA = any> extends CacheBase<KEY, D
     return await layered.get(key, options);
   }
 
-  async mget(keys: KEY[], options?: TSummerCacheActionOptions<KEY, DATA>): Promise<Array<DATA | undefined>> {
+  async mget(
+    keys: KEY[],
+    options?: TSummerCacheActionOptions<KEY, DATA>,
+  ): Promise<Array<DATA | undefined>> {
     if (!keys || keys.length === 0) {
       return [];
     }
@@ -55,7 +62,11 @@ export class BeanSummerCacheBase<KEY = any, DATA = any> extends CacheBase<KEY, D
     return await layered.set(value, key, options);
   }
 
-  async mset(values: DATA[], keys: KEY[], options?: TSummerCacheActionOptions<KEY, DATA>): Promise<void> {
+  async mset(
+    values: DATA[],
+    keys: KEY[],
+    options?: TSummerCacheActionOptions<KEY, DATA>,
+  ): Promise<void> {
     if (!keys || keys.length === 0) {
       return;
     }

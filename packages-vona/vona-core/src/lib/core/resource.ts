@@ -2,7 +2,11 @@ import { isClass } from '@cabloy/utils';
 import { toLowerCaseFirstChar } from '@cabloy/word-utils';
 
 import type { IBeanRecord } from '../bean/type.ts';
-import type { Constructable, IDecoratorBeanOptionsBase, IDecoratorUseOptionsBase } from '../decorator/index.ts';
+import type {
+  Constructable,
+  IDecoratorBeanOptionsBase,
+  IDecoratorUseOptionsBase,
+} from '../decorator/index.ts';
 import type { MetadataKey } from './metadata.ts';
 
 import { cast } from '../../types/utils/cast.ts';
@@ -50,7 +54,12 @@ export class AppResource extends BeanSimple {
     // moduleBelong
     const moduleBelong = this._parseModuleBelong(module, beanClass, virtual);
     // options
-    const options2 = this._prepareOnionOptions(options, optionsPrimitive, scene, `${module}:${name}`);
+    const options2 = this._prepareOnionOptions(
+      options,
+      optionsPrimitive,
+      scene,
+      `${module}:${name}`,
+    );
     // beanOptions2
     const beanOptions2 = {
       ...beanOptions,
@@ -82,7 +91,9 @@ export class AppResource extends BeanSimple {
   }
 
   getBean<T>(A: Constructable<T>): IDecoratorBeanOptionsBase<T> | undefined;
-  getBean<K extends keyof IBeanRecord>(beanFullName: K): IDecoratorBeanOptionsBase<IBeanRecord[K]> | undefined;
+  getBean<K extends keyof IBeanRecord>(
+    beanFullName: K,
+  ): IDecoratorBeanOptionsBase<IBeanRecord[K]> | undefined;
   getBean<T>(beanFullName: string): IDecoratorBeanOptionsBase<T> | undefined;
   getBean<T>(beanFullName): IDecoratorBeanOptionsBase<T> | undefined {
     const fullName = this.getBeanFullName(beanFullName);
@@ -129,7 +140,8 @@ export class AppResource extends BeanSimple {
   _getModuleBelong(beanFullName: string): string;
   _getModuleBelong<T>(beanFullName: Constructable<T> | string): string {
     const beanOptions = this.getBean(beanFullName as any);
-    if (!beanOptions || !beanOptions.moduleBelong) throw new Error(`not found module belong: ${beanFullName}`);
+    if (!beanOptions || !beanOptions.moduleBelong)
+      throw new Error(`not found module belong: ${beanFullName}`);
     return beanOptions.moduleBelong;
   }
 
@@ -141,7 +153,12 @@ export class AppResource extends BeanSimple {
     return beanOptions?.module;
   }
 
-  _prepareOnionOptions(options: unknown, optionsPrimitive: boolean | undefined, scene: any, name: string) {
+  _prepareOnionOptions(
+    options: unknown,
+    optionsPrimitive: boolean | undefined,
+    scene: any,
+    name: string,
+  ) {
     const app = useApp();
     if (!app?.config && scene !== 'scope') {
       throw new Error('Should not import vona module in config');

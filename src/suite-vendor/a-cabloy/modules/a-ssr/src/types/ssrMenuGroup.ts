@@ -6,11 +6,16 @@ import type { IDecoratorSsrSiteOptions, ISsrSiteRecord } from './ssrSite.ts';
 
 export interface ISsrMenuGroupRecord {}
 
-export interface ISsrMenuGroup<Icons extends {} = {}> extends Omit<IMenuGroup<Icons>, 'name' | 'group'> {
+export interface ISsrMenuGroup<Icons extends {} = {}> extends Omit<
+  IMenuGroup<Icons>,
+  'name' | 'group'
+> {
   group?: keyof ISsrMenuGroupRecord | (keyof ISsrMenuGroupRecord)[];
 }
 
-export interface IDecoratorSsrMenuGroupOptions<SsrSiteOptions extends IDecoratorSsrSiteOptions> extends IOnionOptionsEnable {
+export interface IDecoratorSsrMenuGroupOptions<
+  SsrSiteOptions extends IDecoratorSsrSiteOptions,
+> extends IOnionOptionsEnable {
   item?: ISsrMenuGroup<SsrSiteOptions['icons']>;
   site?: keyof ISsrSiteRecord | (keyof ISsrSiteRecord)[];
   locale?: keyof ILocaleRecord | (keyof ILocaleRecord)[];

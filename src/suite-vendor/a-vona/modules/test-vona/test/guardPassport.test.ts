@@ -7,9 +7,13 @@ describe('guardPassport.test.ts', () => {
   it('action:guardPassport:userName', async () => {
     await app.bean.executor.mockCtx(async () => {
       await app.bean.passport.signinMock();
-      const res = await app.bean.executor.performAction('get', '/test/vona/guardPassport/testUserName', {
-        innerAccess: false,
-      });
+      const res = await app.bean.executor.performAction(
+        'get',
+        '/test/vona/guardPassport/testUserName',
+        {
+          innerAccess: false,
+        },
+      );
       assert.equal(res, undefined);
       const [_, err] = await catchError(() => {
         return app.bean.executor.performAction('get', '/test/vona/guardPassport/testUserNameFail', {
@@ -24,9 +28,13 @@ describe('guardPassport.test.ts', () => {
   it('action:guardPassport:roleName', async () => {
     await app.bean.executor.mockCtx(async () => {
       await app.bean.passport.signinMock();
-      const res = await app.bean.executor.performAction('get', '/test/vona/guardPassport/testRoleName', {
-        innerAccess: false,
-      });
+      const res = await app.bean.executor.performAction(
+        'get',
+        '/test/vona/guardPassport/testRoleName',
+        {
+          innerAccess: false,
+        },
+      );
       assert.equal(res, undefined);
       const [_, err] = await catchError(() => {
         return app.bean.executor.performAction('get', '/test/vona/guardPassport/testRoleNameFail', {

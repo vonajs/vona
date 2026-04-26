@@ -14,8 +14,17 @@ export class BeanScopeUtil extends BeanSimple {
     return this.app.util.combineApiPath(path, this[BeanModuleScope], prefix, simplify);
   }
 
-  combineResourceName(resourceName: string | undefined, simplify?: boolean, simplifyProviderId?: boolean): string {
-    return this.app.util.combineResourceName(resourceName, this[BeanModuleScope], simplify, simplifyProviderId);
+  combineResourceName(
+    resourceName: string | undefined,
+    simplify?: boolean,
+    simplifyProviderId?: boolean,
+  ): string {
+    return this.app.util.combineResourceName(
+      resourceName,
+      this[BeanModuleScope],
+      simplify,
+      simplifyProviderId,
+    );
   }
 
   combineStaticPath(path: string | undefined) {

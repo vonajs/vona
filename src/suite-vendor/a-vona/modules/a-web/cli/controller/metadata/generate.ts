@@ -15,7 +15,9 @@ export default async function (options: IMetadataCustomGenerateOptions): Promise
     if (fileContent.includes('@Resource()')) {
       contentResources.push(`'${moduleName}:${beanName}': never;`);
     }
-    contentImports.push(`// @ts-ignore ignore\nimport type { ${className} } from '${fileNameJSRelative}';`);
+    contentImports.push(
+      `// @ts-ignore ignore\nimport type { ${className} } from '${fileNameJSRelative}';`,
+    );
     contentActions.push(`
     export interface ${opionsName} {
       actions?: TypeControllerOptionsActions<${className}>;
@@ -80,7 +82,9 @@ ${contentResources2}
 }
 
 function __parseControllerPath(fileContent: string): string | false {
-  let matched = fileContent.match(/@Controller<.*?>\(\{[\s\S]*?path: ('[^']*')[\s\S]*?\}[\s\S]*?\)\s*export class/);
+  let matched = fileContent.match(
+    /@Controller<.*?>\(\{[\s\S]*?path: ('[^']*')[\s\S]*?\}[\s\S]*?\)\s*export class/,
+  );
   if (!matched) {
     matched = fileContent.match(/@Controller<.*?>\(([^)]*)\)/);
   }
@@ -92,7 +96,9 @@ function __parseControllerPath(fileContent: string): string | false {
 
 function __parseActionPaths(fileContent: string): [string, string][] {
   const actionPaths: [string, string][] = [];
-  const matches = fileContent.match(/(@Web\.get|@Web\.post|@Web\.delete|@Web\.put|@Web\.patch)\([\s\S]*?\)/g);
+  const matches = fileContent.match(
+    /(@Web\.get|@Web\.post|@Web\.delete|@Web\.put|@Web\.patch)\([\s\S]*?\)/g,
+  );
   if (!matches) return [];
   for (const match of matches) {
     const matches2 = match.match(/@([^(]*)\(([\s\S]*?)\)/);
@@ -109,6 +115,10 @@ function __parseActionPaths(fileContent: string): [string, string][] {
   return actionPaths;
 }
 
-function __combineApiPath(moduleName: string, controllerPath: string | undefined, actionPath: RegExp | string | undefined) {
+function __combineApiPath(
+  moduleName: string,
+  controllerPath: string | undefined,
+  actionPath: RegExp | string | undefined,
+) {
   return combineApiPathControllerAndActionRaw(moduleName, controllerPath, actionPath, true);
 }

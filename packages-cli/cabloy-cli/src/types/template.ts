@@ -22,7 +22,9 @@ export interface IMetadataCustomGenerateOptions {
   globFiles: IGlobBeanFile[];
 }
 
-export type TypeMetadataCustomGenerate = (options: IMetadataCustomGenerateOptions) => Promise<string>;
+export type TypeMetadataCustomGenerate = (
+  options: IMetadataCustomGenerateOptions,
+) => Promise<string>;
 
 export interface IEjsData extends ICommandContext {
   cli: BeanCliBase;
@@ -40,8 +42,16 @@ export interface IInitData extends ICommandContext {
 }
 
 export type TypeParseLanguage = 'plain' | 'json' | 'gogo' | '';
-export type TypeParseResult<LANGUAGE extends TypeParseLanguage> = LANGUAGE extends 'plain' ? string : LANGUAGE extends 'json' ? any : GoGoAST;
-export type TypeParseOptions<LANGUAGE extends TypeParseLanguage> = LANGUAGE extends 'plain' ? never : LANGUAGE extends 'json' ? never : ParserOptions;
+export type TypeParseResult<LANGUAGE extends TypeParseLanguage> = LANGUAGE extends 'plain'
+  ? string
+  : LANGUAGE extends 'json'
+    ? any
+    : GoGoAST;
+export type TypeParseOptions<LANGUAGE extends TypeParseLanguage> = LANGUAGE extends 'plain'
+  ? never
+  : LANGUAGE extends 'json'
+    ? never
+    : ParserOptions;
 
 export interface ISnippet<LANGUAGE extends TypeParseLanguage = ''> {
   language?: LANGUAGE;
@@ -51,6 +61,8 @@ export interface ISnippet<LANGUAGE extends TypeParseLanguage = ''> {
   parseOptions?: TypeParseOptions<LANGUAGE>;
   transform: (astData: IAstData<LANGUAGE>) => Promise<TypeParseResult<LANGUAGE>>;
 }
-export function metadataCustomSnippet<LANGUAGE extends TypeParseLanguage>(snippet: ISnippet<LANGUAGE>) {
+export function metadataCustomSnippet<LANGUAGE extends TypeParseLanguage>(
+  snippet: ISnippet<LANGUAGE>,
+) {
   return snippet;
 }

@@ -20,7 +20,10 @@ export class ServiceAuthSimple extends BeanBase {
     return await this.scope.model.authSimple.get({ id: auth.profileId });
   }
 
-  async verifyPassword(userId: TableIdentity, password: string): Promise<TableIdentity | undefined> {
+  async verifyPassword(
+    userId: TableIdentity,
+    password: string,
+  ): Promise<TableIdentity | undefined> {
     // check
     if (!password) return;
     // authSimple

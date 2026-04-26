@@ -12,7 +12,10 @@ export interface ArgumentPipeInfo<T extends keyof IPipeRecord> {
   options?: Partial<IPipeRecord[T]>;
 }
 
-export function createArgumentPipeInfo<T extends keyof IPipeRecord>(pipeName: T, options?: Partial<IPipeRecord[T]>): ArgumentPipeInfo<T> {
+export function createArgumentPipeInfo<T extends keyof IPipeRecord>(
+  pipeName: T,
+  options?: Partial<IPipeRecord[T]>,
+): ArgumentPipeInfo<T> {
   return {
     pipeName,
     options,
@@ -35,7 +38,12 @@ export function setArgumentPipe<T extends keyof IPipeRecord>(
   index: number,
 ) {
   // not inherit
-  const argsMeta = appMetadata.getOwnMetadataArray<RouteHandlerArgumentMetaDecorator>(false, SymbolRouteHandlersArgumentsMeta, target, prop);
+  const argsMeta = appMetadata.getOwnMetadataArray<RouteHandlerArgumentMetaDecorator>(
+    false,
+    SymbolRouteHandlersArgumentsMeta,
+    target,
+    prop,
+  );
 
   const argMeta = argsMeta[index];
   const pipe = () => {

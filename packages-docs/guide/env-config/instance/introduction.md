@@ -24,7 +24,13 @@ config.instance = {
   instances: {
     '': { password: '', title: '', config: {} },
     'shareTest': { password: '', title: '' },
-    'isolateTest': { password: '', title: '', id: 1000, isolate: true, isolateClient: 'isolateTest' },
+    'isolateTest': {
+      password: '',
+      title: '',
+      id: 1000,
+      isolate: true,
+      isolateClient: 'isolateTest',
+    },
   },
 };
 ```
@@ -226,6 +232,11 @@ await this.scope.model.student.builderSelect().where({
 If you use `Raw SQL` to query data, you will need to add `Instance Id` yourself.
 
 ```typescript
-await this.scope.model.student.query('select * from demoStudent where iid=?', [this.ctx.instance.id]);
-await this.scope.model.student.queryOne('select * from demoStudent where iid=? and id=?', [this.ctx.instance.id, 1]);
+await this.scope.model.student.query('select * from demoStudent where iid=?', [
+  this.ctx.instance.id,
+]);
+await this.scope.model.student.queryOne('select * from demoStudent where iid=? and id=?', [
+  this.ctx.instance.id,
+  1,
+]);
 ```

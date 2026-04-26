@@ -33,7 +33,10 @@ export class ServiceRedisClient extends BeanBase {
       // sentinels
       return new Redis(configClient as RedisOptions);
     } else if (cast<ConfigRedisCluster>(configClient).nodes) {
-      return new Redis.Cluster(cast<ConfigRedisCluster>(configClient).nodes, cast<ConfigRedisCluster>(configClient)) as unknown as Redis;
+      return new Redis.Cluster(
+        cast<ConfigRedisCluster>(configClient).nodes,
+        cast<ConfigRedisCluster>(configClient),
+      ) as unknown as Redis;
     } else {
       const keyPrefix = prepareRedisClientKeyPrefix(configClient.keyPrefix, clientName, this.app);
       const configNode = deepExtend({}, configRedis.base, configClient, { keyPrefix });

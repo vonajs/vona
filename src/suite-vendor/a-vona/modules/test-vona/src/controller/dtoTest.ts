@@ -38,7 +38,10 @@ export class ControllerDtoTest extends BeanBase {
   }
 
   @Web.patch('updateUser/:id')
-  updateUser(@Arg.param('id') id: TableIdentity, @Arg.body(v.object(DtoUserUpdate)) user: DtoUserUpdate) {
+  updateUser(
+    @Arg.param('id') id: TableIdentity,
+    @Arg.body(v.object(DtoUserUpdate)) user: DtoUserUpdate,
+  ) {
     return this.scope.model.user.update(user, { where: { id } });
   }
 

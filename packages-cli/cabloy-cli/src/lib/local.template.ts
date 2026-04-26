@@ -52,7 +52,9 @@ export class LocalTemplate {
     if (path.isAbsolute(_path)) return _path;
     const sets = this.moduleConfig.sets;
     const require = createRequire(import.meta.url);
-    const modulePath = require.resolve(`${sets[process.env.CabloyCliBrandName as any][setName]}/package.json`);
+    const modulePath = require.resolve(
+      `${sets[process.env.CabloyCliBrandName as any][setName]}/package.json`,
+    );
     let templatePath = path.join(path.dirname(modulePath), 'dist-cli/templates', _path);
     if (!fse.existsSync(templatePath)) {
       templatePath = path.join(path.dirname(modulePath), 'cli/templates', _path);
@@ -231,7 +233,9 @@ export class LocalTemplate {
       onlyFiles: true,
     });
     // snippets sort
-    files = files.filter(item => item[0] !== '-').sort((a, b) => this._parseSnippetFilePrefix(a) - this._parseSnippetFilePrefix(b));
+    files = files
+      .filter(item => item[0] !== '-')
+      .sort((a, b) => this._parseSnippetFilePrefix(a) - this._parseSnippetFilePrefix(b));
     // for
     for (const file of files) {
       const snippetTemplatePath = path.join(snippetsDir, file);
@@ -255,7 +259,10 @@ export class LocalTemplate {
     }
   }
 
-  async _loadSnippetInstance(snippetTemplatePath: string, fn: (snippet: ISnippet) => Promise<void>) {
+  async _loadSnippetInstance(
+    snippetTemplatePath: string,
+    fn: (snippet: ISnippet) => Promise<void>,
+  ) {
     return await this.helper.importDynamic(snippetTemplatePath, instance => {
       return fn(instance.default);
     });

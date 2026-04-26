@@ -7,7 +7,12 @@ import path from 'node:path';
 import { BeanBase, cast } from 'vona';
 import { Service } from 'vona-module-a-bean';
 
-import type { IDecoratorStartupOptions, IInstanceStartupOptions, IStartupExecute, IStartupRecord } from '../types/startup.ts';
+import type {
+  IDecoratorStartupOptions,
+  IInstanceStartupOptions,
+  IStartupExecute,
+  IStartupRecord,
+} from '../types/startup.ts';
 
 @Service()
 export class ServiceStartup extends BeanBase {
@@ -64,13 +69,19 @@ export class ServiceStartup extends BeanBase {
   }
 
   private async _appReadyInstanceStartup(instanceName: keyof IInstanceRecord, wait: boolean) {
-    const res = this.$scope.instance.service.instance.instanceStartupIsolate(instanceName, { force: false });
+    const res = this.$scope.instance.service.instance.instanceStartupIsolate(instanceName, {
+      force: false,
+    });
     if (wait) {
       await res;
     }
   }
 
-  async runStartup(startupName: string, instanceName?: keyof IInstanceRecord | null, options?: IInstanceStartupOptions) {
+  async runStartup(
+    startupName: string,
+    instanceName?: keyof IInstanceRecord | null,
+    options?: IInstanceStartupOptions,
+  ) {
     const startup = this.bean.onion.startup.onionsNormal[startupName];
     const startupOptions = startup.beanOptions.options as IDecoratorStartupOptions;
     // normal
@@ -97,9 +108,15 @@ export class ServiceStartup extends BeanBase {
     // ignore debounce for test
     if (!options?.force && !this.app.meta.isTest) {
       const startupOptions = startup.beanOptions.options as IDecoratorStartupOptions;
-      const cacheKey = `startupDebounce:${startup.name}${!isNil(instanceName) ? `:${this.ctx.instance.id}` : ''}` as const;
-      const debounce = typeof startupOptions.debounce === 'number' ? startupOptions.debounce : this.scope.config.startup.debounce;
-      const flag = await this.scope.cacheRedis.startupDebounce.getset(true, cacheKey, { ttl: debounce });
+      const cacheKey =
+        `startupDebounce:${startup.name}${!isNil(instanceName) ? `:${this.ctx.instance.id}` : ''}` as const;
+      const debounce =
+        typeof startupOptions.debounce === 'number'
+          ? startupOptions.debounce
+          : this.scope.config.startup.debounce;
+      const flag = await this.scope.cacheRedis.startupDebounce.getset(true, cacheKey, {
+        ttl: debounce,
+      });
       if (flag) return;
     }
     // perform
@@ -111,12 +128,16 @@ export class ServiceStartup extends BeanBase {
     instanceName?: keyof IInstanceRecord | null,
     options?: IInstanceStartupOptions,
   ) {
-    this.$logger.silly(`startup${startup.beanOptions?.options?.instance ? ' instance' : ''}: ${startup.name}, pid: ${process.pid}`);
+    this.$logger.silly(
+      `startup${startup.beanOptions?.options?.instance ? ' instance' : ''}: ${startup.name}, pid: ${process.pid}`,
+    );
     const startupOptions = startup.beanOptions.options as IDecoratorStartupOptions;
     // execute
     return await this.bean.executor.newCtx(
       async () => {
-        const bean = cast<IStartupExecute>(this.bean._getBean(startup.beanOptions.beanFullName as any));
+        const bean = cast<IStartupExecute>(
+          this.bean._getBean(startup.beanOptions.beanFullName as any),
+        );
         await bean.execute(options);
       },
       {

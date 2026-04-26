@@ -1,6 +1,9 @@
 import type { BeanModelMeta } from '../bean/bean.model/bean.model_meta.ts';
 import type { TypeModelsClassLikeGeneral } from '../types/relations.ts';
-import type { IModelRelationOptionsManyDynamic, IModelRelationOptionsOneDynamic } from '../types/relationsDefDynamic.ts';
+import type {
+  IModelRelationOptionsManyDynamic,
+  IModelRelationOptionsOneDynamic,
+} from '../types/relationsDefDynamic.ts';
 
 export interface IModelRelationOptionsManyStatic<
   MODEL extends BeanModelMeta,

@@ -4,12 +4,23 @@ import { isNil } from '@cabloy/utils';
 import { cast } from 'vona';
 
 import type { ServiceDb } from '../service/db_.ts';
-import type { TypeModelColumnValue, TypeModelWhere, TypeModelWhereFieldAll, TypeOpsJoint, TypeOpsNormal } from '../types/modelWhere.ts';
+import type {
+  TypeModelColumnValue,
+  TypeModelWhere,
+  TypeModelWhereFieldAll,
+  TypeOpsJoint,
+  TypeOpsNormal,
+} from '../types/modelWhere.ts';
 
 import { Op, OpAggrs, OpJointValues, OpNormalValues } from '../types/modelWhere.ts';
 import { isRaw, isRef } from './utils.ts';
 
-export function buildWhere<TRecord>(db: ServiceDb, builder: Knex.QueryBuilder, wheres: TypeModelWhere<TRecord>, having: boolean = false) {
+export function buildWhere<TRecord>(
+  db: ServiceDb,
+  builder: Knex.QueryBuilder,
+  wheres: TypeModelWhere<TRecord>,
+  having: boolean = false,
+) {
   _buildWhereInner(having, db, builder, wheres);
 }
 
@@ -111,7 +122,9 @@ function _buildWhereColumn<TRecord>(
   db: ServiceDb,
   builder: Knex.QueryBuilder,
   column: keyof TRecord,
-  value: TypeModelColumnValue<TRecord, TRecord[keyof TRecord]> | TypeModelWhereFieldAll<TRecord, TRecord[keyof TRecord]>,
+  value:
+    | TypeModelColumnValue<TRecord, TRecord[keyof TRecord]>
+    | TypeModelWhereFieldAll<TRecord, TRecord[keyof TRecord]>,
   op?: TypeOpsNormal,
 ) {
   // skip
@@ -206,11 +219,23 @@ function _buildWhereColumnOpNormal<TRecord>(
 }
 
 function _getOpLikeReal(having: boolean, db: ServiceDb) {
-  return db.dialect.capabilities.like ? (having ? 'havingLike' : 'whereLike') : having ? 'havingILike' : 'whereILike';
+  return db.dialect.capabilities.like
+    ? having
+      ? 'havingLike'
+      : 'whereLike'
+    : having
+      ? 'havingILike'
+      : 'whereILike';
 }
 
 function _getOpILikeReal(having: boolean, db: ServiceDb) {
-  return db.dialect.capabilities.ilike ? (having ? 'havingILike' : 'whereILike') : having ? 'havingLike' : 'whereLike';
+  return db.dialect.capabilities.ilike
+    ? having
+      ? 'havingILike'
+      : 'whereILike'
+    : having
+      ? 'havingLike'
+      : 'whereLike';
 }
 
 function _checkHavingColumn<TRecord>(db: ServiceDb, column: keyof TRecord | string) {

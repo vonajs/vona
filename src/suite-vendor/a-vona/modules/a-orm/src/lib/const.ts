@@ -25,7 +25,9 @@ export function getCacheModelCacheInstances(app: VonaApplication) {
   return app.meta[SymbolCacheModelCacheInstances];
 }
 
-export function getCacheModelsClear(app: VonaApplication): Record<keyof IModelRecord, TypeModelClassLikeGeneral[]> {
+export function getCacheModelsClear(
+  app: VonaApplication,
+): Record<keyof IModelRecord, TypeModelClassLikeGeneral[]> {
   if (!app.meta[SymbolCacheModelsClear]) {
     app.meta[SymbolCacheModelsClear] = _collectModelsClear(app);
   }

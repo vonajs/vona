@@ -7,4 +7,7 @@ export type TypeEventClientNameRealData = keyof IDatabaseClientRecord;
 export type TypeEventClientNameRealResult = keyof IDatabaseClientRecord;
 
 @Event()
-export class EventClientNameReal extends BeanEventBase<TypeEventClientNameRealData, TypeEventClientNameRealResult> {}
+export class EventClientNameReal extends BeanEventBase<
+  TypeEventClientNameRealData,
+  TypeEventClientNameRealResult
+> {}

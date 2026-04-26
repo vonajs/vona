@@ -10,23 +10,25 @@ import type {
   TypeUtilGetRelationEntityMeta,
 } from './relations.ts';
 
-export type TypeEntityTableNames<EntityMeta extends { $table: string } | undefined> = EntityMeta extends { $table: infer TableName }
-  ? TableName
-  : never;
+export type TypeEntityTableNames<EntityMeta extends { $table: string } | undefined> =
+  EntityMeta extends { $table: infer TableName } ? TableName : never;
 
-export type TypeEntityTableNamesOfModelOptions<TModelOptions extends IDecoratorModelOptions> = TModelOptions['relations'] extends {}
-  ? TypeRecordValues<{
-      [RelationName in keyof TModelOptions['relations']]: TypeEntityTableNames<
-        TypeUtilGetRelationEntityMeta<TModelOptions['relations'][RelationName]>
-      >;
-    }>
-  : never;
+export type TypeEntityTableNamesOfModelOptions<TModelOptions extends IDecoratorModelOptions> =
+  TModelOptions['relations'] extends {}
+    ? TypeRecordValues<{
+        [RelationName in keyof TModelOptions['relations']]: TypeEntityTableNames<
+          TypeUtilGetRelationEntityMeta<TModelOptions['relations'][RelationName]>
+        >;
+      }>
+    : never;
 
-export type TypeEntityTableNamesOfModelJoins<TModelJoins extends TypeModelsClassLikeGeneral> = TypeEntityTableNames<
-  TypeModelOfModelLike<TypeConfirmArray<TModelJoins>[number]>[TypeSymbolKeyEntityMeta]
->;
+export type TypeEntityTableNamesOfModelJoins<TModelJoins extends TypeModelsClassLikeGeneral> =
+  TypeEntityTableNames<
+    TypeModelOfModelLike<TypeConfirmArray<TModelJoins>[number]>[TypeSymbolKeyEntityMeta]
+  >;
 
-export type TypeEntityTableNamesOfModelClass<TModel extends BeanModelMeta> = TypeEntityTableNamesOfModelOptions<TypeUtilGetModelOptions<TModel>>;
+export type TypeEntityTableNamesOfModelClass<TModel extends BeanModelMeta> =
+  TypeEntityTableNamesOfModelOptions<TypeUtilGetModelOptions<TModel>>;
 
 export type TypeEntityTableNamesOfGeneral<
   TModelJoins extends TypeModelsClassLikeGeneral | undefined,

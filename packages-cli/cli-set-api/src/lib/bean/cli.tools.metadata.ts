@@ -6,7 +6,13 @@ import path from 'node:path';
 
 import { loadJSONFile, saveJSONFile } from '../utils.ts';
 import { generateBeanGenerals } from './toolsMetadata/generateBeanGenerals.ts';
-import { generateConfig, generateConstant, generateError, generateLocale1, generateLocale2 } from './toolsMetadata/generateConfig.ts';
+import {
+  generateConfig,
+  generateConstant,
+  generateError,
+  generateLocale1,
+  generateLocale2,
+} from './toolsMetadata/generateConfig.ts';
 import { generateMetadataCustom } from './toolsMetadata/generateMetadataCustom.ts';
 import { generateMain, generateMonkey } from './toolsMetadata/generateMonkey.ts';
 import { generateOnions } from './toolsMetadata/generateOnions.ts';
@@ -31,7 +37,9 @@ export class CliToolsMetadata extends BeanCliBase {
     let moduleNames = argv._;
     const force = argv.force ?? moduleNames.length > 0;
     if (moduleNames.length === 0) {
-      moduleNames = this.modulesMeta.modulesArray.filter(item => !item.info.node_modules).map(item => item.info.relativeName);
+      moduleNames = this.modulesMeta.modulesArray
+        .filter(item => !item.info.node_modules)
+        .map(item => item.info.relativeName);
     }
     const total = moduleNames.length;
     for (let index = 0; index < total; index++) {
@@ -72,7 +80,12 @@ export class CliToolsMetadata extends BeanCliBase {
       content += await generateOnions(sceneName, sceneMeta, moduleName, modulePath);
       // scope resources
       if (sceneMeta.scopeResource) {
-        const contentScopeResource = await generateScopeResources(sceneName, sceneMeta, moduleName, modulePath);
+        const contentScopeResource = await generateScopeResources(
+          sceneName,
+          sceneMeta,
+          moduleName,
+          modulePath,
+        );
         if (contentScopeResource) {
           content += contentScopeResource;
           scopeResources[sceneName] = `IModule${toUpperCaseFirstChar(sceneName)}`;
@@ -88,7 +101,14 @@ export class CliToolsMetadata extends BeanCliBase {
         for (const metaName in onionMetasMeta) {
           const metaMeta = onionMetasMeta[metaName];
           if (metaMeta.scopeResource) {
-            const contentScopeResourceMeta = await generateScopeResourcesMeta(metaName, metaMeta, sceneName, sceneMeta, moduleName, modulePath);
+            const contentScopeResourceMeta = await generateScopeResourcesMeta(
+              metaName,
+              metaMeta,
+              sceneName,
+              sceneMeta,
+              moduleName,
+              modulePath,
+            );
             if (contentScopeResourceMeta) {
               content += contentScopeResourceMeta;
               scopeResources[metaName] = `Meta${toUpperCaseFirstChar(metaName)}`;
@@ -125,7 +145,12 @@ export class CliToolsMetadata extends BeanCliBase {
       locales: contentLocales2,
       constants: contentConstants,
     };
-    content += await generateScope(moduleName, relativeNameCapitalize, scopeResources, generateScopeOptions);
+    content += await generateScope(
+      moduleName,
+      relativeNameCapitalize,
+      scopeResources,
+      generateScopeOptions,
+    );
     // patch
     content = this._generatePatch(content);
     // empty
@@ -150,7 +175,12 @@ export class CliToolsMetadata extends BeanCliBase {
   _generatePatch(content: string) {
     if (!content) return content;
     content = this._generatePatch_resources(content, 'table-identity', ['TableIdentity'], true);
-    content = this._generatePatch_resources(content, 'vona-module-a-openapi', ['TypeEntityOptionsFields', 'TypeControllerOptionsActions'], true);
+    content = this._generatePatch_resources(
+      content,
+      'vona-module-a-openapi',
+      ['TypeEntityOptionsFields', 'TypeControllerOptionsActions'],
+      true,
+    );
     content = this._generatePatch_resources(
       content,
       'vona-module-a-orm',
@@ -169,7 +199,12 @@ export class CliToolsMetadata extends BeanCliBase {
     return content;
   }
 
-  _generatePatch_resources(content: string, packageName: string, resources: string[], type: boolean) {
+  _generatePatch_resources(
+    content: string,
+    packageName: string,
+    resources: string[],
+    type: boolean,
+  ) {
     const items = resources.filter(item => {
       const regexp = new RegExp(`${item}[\\[\\]<,;?:\\s]`);
       return !!regexp.exec(content);

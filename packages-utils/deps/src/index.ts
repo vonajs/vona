@@ -25,7 +25,8 @@ function _handleDependents(items: ISwapDepsItem[], options?: ISwapDepsOptions) {
   const depsDynamic: Record<string, string[]> = {};
   for (const item of items) {
     const itemName = _getProperty(item, keyName);
-    let dependents = typeof keyDependents === 'function' ? keyDependents(item) : _getProperty(item, keyDependents);
+    let dependents =
+      typeof keyDependents === 'function' ? keyDependents(item) : _getProperty(item, keyDependents);
     if (!dependents) continue;
     if (!Array.isArray(dependents)) {
       dependents = dependents.split(',') as any[];
@@ -40,13 +41,20 @@ function _handleDependents(items: ISwapDepsItem[], options?: ISwapDepsOptions) {
   return depsDynamic;
 }
 
-function _swapDeps(depsDynamic: Record<string, string[]>, items: ISwapDepsItem[], options?: ISwapDepsOptions) {
+function _swapDeps(
+  depsDynamic: Record<string, string[]>,
+  items: ISwapDepsItem[],
+  options?: ISwapDepsOptions,
+) {
   const keyDependencies = options?.dependencies || 'dependencies';
   const keyName = options?.name || 'name';
   let result = false;
   for (const item of items) {
     const name = _getProperty(item, keyName);
-    let deps = (typeof keyDependencies === 'function' ? keyDependencies(item) : _getProperty(item, keyDependencies)) || [];
+    let deps =
+      (typeof keyDependencies === 'function'
+        ? keyDependencies(item)
+        : _getProperty(item, keyDependencies)) || [];
     if (typeof deps === 'string') deps = deps.split(',');
     if (depsDynamic[name]) {
       for (const depDynamic of depsDynamic[name]) {

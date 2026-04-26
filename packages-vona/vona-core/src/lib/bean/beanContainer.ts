@@ -4,7 +4,12 @@ import type { VonaContext } from '../../types/index.ts';
 import type { VonaApplication } from '../core/application.ts';
 import type { MetadataKey } from '../core/metadata.ts';
 import type { Constructable, ContainerType, IDecoratorUseOptionsBase } from '../decorator/index.ts';
-import type { IBeanRecord, IBeanRecordGlobal, IBeanScopeRecord, TypeBeanScopeRecordKeys } from './type.ts';
+import type {
+  IBeanRecord,
+  IBeanRecordGlobal,
+  IBeanScopeRecord,
+  TypeBeanScopeRecordKeys,
+} from './type.ts';
 
 import { cast } from '../../types/index.ts';
 import { appMetadata } from '../core/metadata.ts';
@@ -63,7 +68,10 @@ export class BeanContainer {
   public async _removeBean(beanInstance: BeanSimple): Promise<void>;
   public async _removeBean(beanInstanceKey: string): Promise<void>;
   public async _removeBean(beanInstanceKeyLike: BeanSimple | string): Promise<void> {
-    const beanInstanceKey = typeof beanInstanceKeyLike === 'string' ? beanInstanceKeyLike : beanInstanceKeyLike[SymbolBeanInstanceKey];
+    const beanInstanceKey =
+      typeof beanInstanceKeyLike === 'string'
+        ? beanInstanceKeyLike
+        : beanInstanceKeyLike[SymbolBeanInstanceKey];
     if (!beanInstanceKey) return;
     const beanInstance = this[SymbolBeanContainerInstances][beanInstanceKey] as any;
     if (beanInstance) {
@@ -95,13 +103,21 @@ export class BeanContainer {
   }
 
   _getBeanSelector<T>(A: Constructable<T>, selector?: string, ...args): T;
-  _getBeanSelector<K extends keyof IBeanRecord>(beanFullName: K, selector?: string, ...args): IBeanRecord[K];
+  _getBeanSelector<K extends keyof IBeanRecord>(
+    beanFullName: K,
+    selector?: string,
+    ...args
+  ): IBeanRecord[K];
   // _getBeanSelector<T>(beanFullName: string, selector?: string, ...args): T;
   _getBeanSelector<T>(beanFullName: Constructable<T> | string, selector?: string, ...args): T {
     return this._getBeanSelectorInner(beanFullName, true, selector, ...args);
   }
 
-  _getBeanSelectorInner<T>(beanFullName: Constructable<T> | string, withSelector?: boolean, ...args): T {
+  _getBeanSelectorInner<T>(
+    beanFullName: Constructable<T> | string,
+    withSelector?: boolean,
+    ...args
+  ): T {
     // bean options
     const beanOptions = appResource.getBean(beanFullName as any);
     if (!beanOptions) {
@@ -124,20 +140,36 @@ export class BeanContainer {
   }
 
   _newBeanSelector<T>(A: Constructable<T>, selector?: string, ...args): T;
-  _newBeanSelector<K extends keyof IBeanRecord>(beanFullName: K, selector?: string, ...args): IBeanRecord[K];
+  _newBeanSelector<K extends keyof IBeanRecord>(
+    beanFullName: K,
+    selector?: string,
+    ...args
+  ): IBeanRecord[K];
   // _newBeanSelector<T>(beanFullName: string, selector?: string, ...args): T;
   _newBeanSelector<T>(beanFullName: Constructable<T> | string, selector?: string, ...args): T {
     return this._newBean(beanFullName as any, selector, ...args);
   }
 
   /** @internal */
-  public _newBeanInner<T>(record: boolean, beanFullName: Constructable<T> | string, withSelector?: boolean, ...args): T {
+  public _newBeanInner<T>(
+    record: boolean,
+    beanFullName: Constructable<T> | string,
+    withSelector?: boolean,
+    ...args
+  ): T {
     // bean options
     const beanOptions = appResource.getBean(beanFullName as any);
     if (!beanOptions) {
       // class
       if (typeof beanFullName === 'function' && isClass(beanFullName)) {
-        return this._createBeanInstance<T>(record, undefined, beanFullName, args, false, withSelector);
+        return this._createBeanInstance<T>(
+          record,
+          undefined,
+          beanFullName,
+          args,
+          false,
+          withSelector,
+        );
       }
       // throw new Error(`bean not found: ${beanFullName}`);
       return null!;
@@ -171,7 +203,8 @@ export class BeanContainer {
         const key = __getSelectorKey(fullName, withSelector, args[0]);
         __setPropertyValue(beanInstance, SymbolBeanInstanceKey, key);
         this[SymbolBeanContainerInstances][key] = beanInstance;
-        this.containerType === 'app' && this.app.meta.hmr.addBeanInstance(fullName, key, args, withSelector);
+        this.containerType === 'app' &&
+          this.app.meta.hmr.addBeanInstance(fullName, key, args, withSelector);
       }
     }
     // init
@@ -221,7 +254,12 @@ export class BeanContainer {
     if (!uses) return;
     for (const key in uses) {
       const useOptions = uses[key];
-      this._injectBeanInstancePropLazy(beanInstance, useOptions.prop, useOptions.beanFullName, useOptions);
+      this._injectBeanInstancePropLazy(
+        beanInstance,
+        useOptions.prop,
+        useOptions.beanFullName,
+        useOptions,
+      );
     }
   }
 
@@ -231,17 +269,27 @@ export class BeanContainer {
       enumerable: true,
       configurable: true,
       get() {
-        if (!beanInstance[SymbolBeanInstancePropsLazy]) beanInstance[SymbolBeanInstancePropsLazy] = {};
+        if (!beanInstance[SymbolBeanInstancePropsLazy])
+          beanInstance[SymbolBeanInstancePropsLazy] = {};
         if (!beanInstance[SymbolBeanInstancePropsLazy][prop]) {
-          beanInstance[SymbolBeanInstancePropsLazy][prop] = self._injectBeanInstanceProp(beanInstance, targetBeanFullName, useOptions);
-          self.containerType === 'app' && self.app.meta.hmr.addBeanInstanceProp(beanInstance, prop, targetBeanFullName);
+          beanInstance[SymbolBeanInstancePropsLazy][prop] = self._injectBeanInstanceProp(
+            beanInstance,
+            targetBeanFullName,
+            useOptions,
+          );
+          self.containerType === 'app' &&
+            self.app.meta.hmr.addBeanInstanceProp(beanInstance, prop, targetBeanFullName);
         }
         return beanInstance[SymbolBeanInstancePropsLazy][prop];
       },
     });
   }
 
-  private _injectBeanInstanceProp(beanInstance, targetBeanFullName: string, useOptions: IDecoratorUseOptionsBase) {
+  private _injectBeanInstanceProp(
+    beanInstance,
+    targetBeanFullName: string,
+    useOptions: IDecoratorUseOptionsBase,
+  ) {
     // injectionScope
     const injectionScope = useOptions.injectionScope ?? 'app';
     // options: selectorInfo
@@ -250,11 +298,24 @@ export class BeanContainer {
     let targetInstance;
     // selector maybe empty string
     if (injectionScope === 'app') {
-      targetInstance = this.app.bean._getBeanSelectorInner(targetBeanFullName, selectorInfo.withSelector, ...selectorInfo.args);
+      targetInstance = this.app.bean._getBeanSelectorInner(
+        targetBeanFullName,
+        selectorInfo.withSelector,
+        ...selectorInfo.args,
+      );
     } else if (injectionScope === 'ctx') {
-      targetInstance = this._getBeanSelectorInner(targetBeanFullName, selectorInfo.withSelector, ...selectorInfo.args);
+      targetInstance = this._getBeanSelectorInner(
+        targetBeanFullName,
+        selectorInfo.withSelector,
+        ...selectorInfo.args,
+      );
     } else if (injectionScope === 'new') {
-      targetInstance = this._newBeanInner(false, targetBeanFullName, selectorInfo.withSelector, ...selectorInfo.args);
+      targetInstance = this._newBeanInner(
+        false,
+        targetBeanFullName,
+        selectorInfo.withSelector,
+        ...selectorInfo.args,
+      );
     }
     return targetInstance;
   }
@@ -304,7 +365,14 @@ export class BeanContainer {
           if (__isLifeCycleMethod(prop)) return Reflect.get(target, prop, receiver);
           const methodName = `__get_${prop}__`;
           const methodNameMagic = '__get__';
-          const _aopChainsProp = self._getAopChainsProp(beanFullName, beanInstance, methodName, methodNameMagic, 'get', prop);
+          const _aopChainsProp = self._getAopChainsProp(
+            beanFullName,
+            beanInstance,
+            methodName,
+            methodNameMagic,
+            'get',
+            prop,
+          );
           if (!_aopChainsProp) return Reflect.get(target, prop, receiver);
           // aop
           return _aopChainsProp([receiver, undefined], ([receiver, _]) => {
@@ -335,7 +403,14 @@ export class BeanContainer {
         }
         const methodName = `__set_${prop}__`;
         const methodNameMagic = '__set__';
-        const _aopChainsProp = self._getAopChainsProp(beanFullName, beanInstance, methodName, methodNameMagic, 'set', prop);
+        const _aopChainsProp = self._getAopChainsProp(
+          beanFullName,
+          beanInstance,
+          methodName,
+          methodNameMagic,
+          'set',
+          prop,
+        );
         if (!_aopChainsProp) {
           Reflect.set(target, prop, value, receiver);
           return true;
@@ -365,7 +440,14 @@ export class BeanContainer {
     }
     // aop chains
     const methodNameMagic = '__method__';
-    const _aopChainsProp = this._getAopChainsProp(beanFullName, beanInstance, prop, methodNameMagic, 'method', prop);
+    const _aopChainsProp = this._getAopChainsProp(
+      beanFullName,
+      beanInstance,
+      prop,
+      methodNameMagic,
+      'method',
+      prop,
+    );
     if (!_aopChainsProp) return Reflect.get(target, prop, receiver);
     // proxy
     const methodProxyKey = `__aopproxy_method_${prop}__`;
@@ -388,7 +470,9 @@ export class BeanContainer {
     const beanOptions = appResource.getBean(beanFullNameOrBeanClass);
     const cacheKey = beanOptions?.beanFullName || beanFullNameOrBeanClass;
     // ProxyDisable
-    const proxyDisable = beanOptions?.beanClass ? appMetadata.getMetadata<boolean>(SymbolDecoratorProxyDisable, beanOptions?.beanClass) : false;
+    const proxyDisable = beanOptions?.beanClass
+      ? appMetadata.getMetadata<boolean>(SymbolDecoratorProxyDisable, beanOptions?.beanClass)
+      : false;
     // host
     const host = this._aopCacheHost();
     if (!host[SymbolCacheAopChains]) host[SymbolCacheAopChains] = {};
@@ -424,7 +508,14 @@ export class BeanContainer {
     return this.app;
   }
 
-  private _getAopChainsProp(beanFullName, beanInstance, methodName, methodNameMagic, methodType: 'get' | 'set' | 'method', prop: string) {
+  private _getAopChainsProp(
+    beanFullName,
+    beanInstance,
+    methodName,
+    methodNameMagic,
+    methodType: 'get' | 'set' | 'method',
+    prop: string,
+  ) {
     const self = this;
     const chainsKey = `__aopChains_${methodName}__`;
     const beanOptions = appResource.getBean(beanFullName);
@@ -432,7 +523,8 @@ export class BeanContainer {
     const host = this._aopCacheHost();
     if (!host[SymbolCacheAopChainsKey]) host[SymbolCacheAopChainsKey] = {};
     if (!host[SymbolCacheAopChainsKey][cacheKey]) host[SymbolCacheAopChainsKey][cacheKey] = {};
-    if (host[SymbolCacheAopChainsKey][cacheKey][chainsKey] !== undefined) return host[SymbolCacheAopChainsKey][cacheKey][chainsKey];
+    if (host[SymbolCacheAopChainsKey][cacheKey][chainsKey] !== undefined)
+      return host[SymbolCacheAopChainsKey][cacheKey][chainsKey];
     const _aopChains = this._prepareAopChains(beanFullName, beanInstance);
     const chains: [MetadataKey, string][] = [];
     for (const aopKey of _aopChains) {
@@ -476,12 +568,22 @@ export class BeanContainer {
             } else if (methodType === 'set') {
               fn = function ([receiver, value], next) {
                 const aop: BeanAopBase = self.app.bean._getBean(aopKey as string as any);
-                return aop[methodNameMagic](prop, value, _patchAopNext([receiver, value], next), receiver);
+                return aop[methodNameMagic](
+                  prop,
+                  value,
+                  _patchAopNext([receiver, value], next),
+                  receiver,
+                );
               };
             } else if (methodType === 'method') {
               fn = function ([receiver, args], next) {
                 const aop: BeanAopBase = self.app.bean._getBean(aopKey as string as any);
-                return aop[methodNameMagic](prop, args, _patchAopNext([receiver, args], next), receiver);
+                return aop[methodNameMagic](
+                  prop,
+                  args,
+                  _patchAopNext([receiver, args], next),
+                  receiver,
+                );
               };
             }
             chains.push([aopKey, fn]);
@@ -508,20 +610,40 @@ export class BeanContainer {
       if (methodType === 'get') {
         fn = function ([receiver, _], next) {
           const beanInstance = self.app.bean._getBean<any>(aopMethod.beanFullName);
-          if (!beanInstance.get) throw new Error(`get property accessor not exists: ${aopMethod.onionName}`);
-          return beanInstance.get(aopMethod.options, _patchAopNext([receiver, _], next), receiver, prop);
+          if (!beanInstance.get)
+            throw new Error(`get property accessor not exists: ${aopMethod.onionName}`);
+          return beanInstance.get(
+            aopMethod.options,
+            _patchAopNext([receiver, _], next),
+            receiver,
+            prop,
+          );
         };
       } else if (methodType === 'set') {
         fn = function ([receiver, value], next) {
           const beanInstance = self.app.bean._getBean<any>(aopMethod.beanFullName);
-          if (!beanInstance.set) throw new Error(`set property accessor not exists: ${aopMethod.onionName}`);
-          return beanInstance.set(aopMethod.options, value, _patchAopNext([receiver, value], next), receiver, prop);
+          if (!beanInstance.set)
+            throw new Error(`set property accessor not exists: ${aopMethod.onionName}`);
+          return beanInstance.set(
+            aopMethod.options,
+            value,
+            _patchAopNext([receiver, value], next),
+            receiver,
+            prop,
+          );
         };
       } else if (methodType === 'method') {
         fn = function ([receiver, args], next) {
           const beanInstance = self.app.bean._getBean<any>(aopMethod.beanFullName);
-          if (!beanInstance.execute) throw new Error(`execute method not exists: ${aopMethod.onionName}`);
-          return beanInstance.execute(aopMethod.options, args, _patchAopNext([receiver, args], next), receiver, prop);
+          if (!beanInstance.execute)
+            throw new Error(`execute method not exists: ${aopMethod.onionName}`);
+          return beanInstance.execute(
+            aopMethod.options,
+            args,
+            _patchAopNext([receiver, args], next),
+            receiver,
+            prop,
+          );
         };
       }
       chains.push([aopKey, fn]);

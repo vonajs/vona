@@ -11,7 +11,12 @@ import { Field } from './field.ts';
 
 function httpCode(httpCode: number): MethodDecorator {
   return function (target: object, prop?: MetadataKey, descriptor?: PropertyDescriptor) {
-    const options = appMetadata.getOwnMetadataMap(false, SymbolOpenApiOptions, target, prop) as IOpenapiOptions;
+    const options = appMetadata.getOwnMetadataMap(
+      false,
+      SymbolOpenApiOptions,
+      target,
+      prop,
+    ) as IOpenapiOptions;
     options.httpCode = httpCode;
     return descriptor;
   } as any;
@@ -19,7 +24,12 @@ function httpCode(httpCode: number): MethodDecorator {
 
 function contentType(contentType: TypeResponseContentType): MethodDecorator {
   return function (target: object, prop?: MetadataKey, descriptor?: PropertyDescriptor) {
-    const options = appMetadata.getOwnMetadataMap(false, SymbolOpenApiOptions, target, prop) as IOpenapiOptions;
+    const options = appMetadata.getOwnMetadataMap(
+      false,
+      SymbolOpenApiOptions,
+      target,
+      prop,
+    ) as IOpenapiOptions;
     options.contentType = contentType;
     return descriptor;
   } as any;
@@ -31,19 +41,32 @@ function body(...schemaLikes: SchemaLike[]): MethodDecorator {
     const metaType = appMetadata.getDesignReturntype(target, prop);
     const schema = makeSchemaLikes(schemaLikes, metaType);
     // options
-    const options = appMetadata.getOwnMetadataMap(false, SymbolOpenApiOptions, target, prop) as IOpenapiOptions;
+    const options = appMetadata.getOwnMetadataMap(
+      false,
+      SymbolOpenApiOptions,
+      target,
+      prop,
+    ) as IOpenapiOptions;
     options.bodySchema = schema;
     return descriptor;
   } as any;
 }
 
-function bodyCustom(bodySchemaWrapper: SchemaLikeCreate | false, ...schemaLikes: SchemaLike[]): MethodDecorator {
+function bodyCustom(
+  bodySchemaWrapper: SchemaLikeCreate | false,
+  ...schemaLikes: SchemaLike[]
+): MethodDecorator {
   return function (target: object, prop?: MetadataKey, descriptor?: PropertyDescriptor) {
     // schema
     const metaType = appMetadata.getDesignReturntype(target, prop);
     const schema = makeSchemaLikes(schemaLikes, metaType);
     // options
-    const options = appMetadata.getOwnMetadataMap(false, SymbolOpenApiOptions, target, prop) as IOpenapiOptions;
+    const options = appMetadata.getOwnMetadataMap(
+      false,
+      SymbolOpenApiOptions,
+      target,
+      prop,
+    ) as IOpenapiOptions;
     options.bodySchema = schema;
     options.bodySchemaWrapper = bodySchemaWrapper;
     return descriptor;
@@ -52,7 +75,12 @@ function bodyCustom(bodySchemaWrapper: SchemaLikeCreate | false, ...schemaLikes:
 
 function exclude(): ClassDecorator & MethodDecorator {
   return function (target: object, prop?: MetadataKey, descriptor?: PropertyDescriptor) {
-    const options = appMetadata.getOwnMetadataMap(false, SymbolOpenApiOptions, target, prop) as IOpenapiOptions;
+    const options = appMetadata.getOwnMetadataMap(
+      false,
+      SymbolOpenApiOptions,
+      target,
+      prop,
+    ) as IOpenapiOptions;
     options.exclude = true;
     return descriptor;
   } as any;
@@ -60,7 +88,12 @@ function exclude(): ClassDecorator & MethodDecorator {
 
 function tags(tags: string[]): ClassDecorator & MethodDecorator {
   return function (target: object, prop?: MetadataKey, descriptor?: PropertyDescriptor) {
-    const options = appMetadata.getOwnMetadataMap(false, SymbolOpenApiOptions, target, prop) as IOpenapiOptions;
+    const options = appMetadata.getOwnMetadataMap(
+      false,
+      SymbolOpenApiOptions,
+      target,
+      prop,
+    ) as IOpenapiOptions;
     options.tags = tags;
     return descriptor;
   } as any;
@@ -68,7 +101,12 @@ function tags(tags: string[]): ClassDecorator & MethodDecorator {
 
 function header(header: IOpenapiHeader): ClassDecorator & MethodDecorator {
   return function (target: object, prop?: MetadataKey, descriptor?: PropertyDescriptor) {
-    const options = appMetadata.getOwnMetadataMap(false, SymbolOpenApiOptions, target, prop) as IOpenapiOptions;
+    const options = appMetadata.getOwnMetadataMap(
+      false,
+      SymbolOpenApiOptions,
+      target,
+      prop,
+    ) as IOpenapiOptions;
     if (!options.headers) options.headers = [];
     options.headers.push(header);
     return descriptor;
@@ -77,7 +115,12 @@ function header(header: IOpenapiHeader): ClassDecorator & MethodDecorator {
 
 function headers(headers: IOpenapiHeader[]): ClassDecorator & MethodDecorator {
   return function (target: object, prop?: MetadataKey, descriptor?: PropertyDescriptor) {
-    const options = appMetadata.getOwnMetadataMap(false, SymbolOpenApiOptions, target, prop) as IOpenapiOptions;
+    const options = appMetadata.getOwnMetadataMap(
+      false,
+      SymbolOpenApiOptions,
+      target,
+      prop,
+    ) as IOpenapiOptions;
     if (!options.headers) options.headers = [];
     options.headers.push(...headers);
     return descriptor;
@@ -88,7 +131,12 @@ function setHeader(field: { [key: string]: string | string[] }): ClassDecorator 
 function setHeader(field: string, val: string | string[]): ClassDecorator & MethodDecorator;
 function setHeader(field: any, val?: any): ClassDecorator & MethodDecorator {
   return function (target: object, prop?: MetadataKey, descriptor?: PropertyDescriptor) {
-    const options = appMetadata.getOwnMetadataMap(false, SymbolOpenApiOptions, target, prop) as IOpenapiOptions;
+    const options = appMetadata.getOwnMetadataMap(
+      false,
+      SymbolOpenApiOptions,
+      target,
+      prop,
+    ) as IOpenapiOptions;
     if (!options.setHeaders) options.setHeaders = {};
     if (typeof field === 'string') {
       options.setHeaders[field] = val;
@@ -99,9 +147,30 @@ function setHeader(field: any, val?: any): ClassDecorator & MethodDecorator {
   } as any;
 }
 
-export const Api = { field: Field, httpCode, contentType, body, bodyCustom, exclude, tags, header, headers, setHeader };
+export const Api = {
+  field: Field,
+  httpCode,
+  contentType,
+  body,
+  bodyCustom,
+  exclude,
+  tags,
+  header,
+  headers,
+  setHeader,
+};
 
-export function setPublic(target: object, prop?: MetadataKey, _descriptor?: PropertyDescriptor, value?: boolean) {
-  const options = appMetadata.getOwnMetadataMap(false, SymbolOpenApiOptions, target, prop) as IOpenapiOptions;
+export function setPublic(
+  target: object,
+  prop?: MetadataKey,
+  _descriptor?: PropertyDescriptor,
+  value?: boolean,
+) {
+  const options = appMetadata.getOwnMetadataMap(
+    false,
+    SymbolOpenApiOptions,
+    target,
+    prop,
+  ) as IOpenapiOptions;
   options.public = value;
 }

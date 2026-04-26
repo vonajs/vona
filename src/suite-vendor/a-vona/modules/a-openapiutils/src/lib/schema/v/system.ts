@@ -35,7 +35,10 @@ export function schemaObject<T>(classType: Constructable<T>, options?: ISchemaOb
   };
 }
 
-export function schemaArray(schemaLike?: SchemaLike, params?: z.core.$ZodArrayParams & { separator?: string }) {
+export function schemaArray(
+  schemaLike?: SchemaLike,
+  params?: z.core.$ZodArrayParams & { separator?: string },
+) {
   return function (schema: z.ZodType): z.ZodType {
     return z.preprocess(
       val => {

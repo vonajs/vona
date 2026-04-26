@@ -8,7 +8,10 @@ import { Startup } from 'vona-module-a-startup';
 export class StartupListen extends BeanBase implements IStartupExecute {
   async execute() {
     if (!this.app.config.server.listen.disable) {
-      this.app.server = this._listen(this.app.config.server.listen.port, this.app.config.server.listen.hostname);
+      this.app.server = this._listen(
+        this.app.config.server.listen.port,
+        this.app.config.server.listen.hostname,
+      );
     }
   }
 

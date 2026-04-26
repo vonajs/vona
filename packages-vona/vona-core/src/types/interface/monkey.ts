@@ -16,7 +16,8 @@ export interface IMonkeyModule {
   configLoaded: (module: IModule, config: any) => Promise<void>;
 }
 
-export interface IMonkeySystem extends IMonkeyAppStart, IMonkeyAppReady, IMonkeyAppStarted, IMonkeyAppClose, IMonkeyAppClosed {}
+export interface IMonkeySystem
+  extends IMonkeyAppStart, IMonkeyAppReady, IMonkeyAppStarted, IMonkeyAppClose, IMonkeyAppClosed {}
 
 export interface IMonkeyAppStart {
   appStart: () => Promise<void>;

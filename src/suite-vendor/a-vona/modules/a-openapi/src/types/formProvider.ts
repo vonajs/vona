@@ -1,4 +1,7 @@
-import type { TypeBehaviorRecordSelectorKeys, TypeBehaviorRecordSelectorKeysStrict } from './behavior.ts';
+import type {
+  TypeBehaviorRecordSelectorKeys,
+  TypeBehaviorRecordSelectorKeysStrict,
+} from './behavior.ts';
 import type { TypeComponentRecordSelectorKeysStrict } from './component.ts';
 import type { TypeFormFieldRenderComponentProvider } from './rest.ts';
 

@@ -19,7 +19,12 @@ import path from 'node:path';
 import { pathToFileURL } from 'node:url';
 import * as uuid from 'uuid';
 
-import type { IInstanceRecord, TypeMonkeyName, VonaConfigEnv, VonaContext } from '../../types/index.ts';
+import type {
+  IInstanceRecord,
+  TypeMonkeyName,
+  VonaConfigEnv,
+  VonaContext,
+} from '../../types/index.ts';
 import type { IBeanRecord, IBeanScopeRecord, TypeBeanScopeRecordKeys } from '../bean/type.ts';
 import type { IBeanSceneRecord } from '../decorator/interface/beanOptions.ts';
 import type { ZodLocaleErrors } from './zod-enhance.ts';
@@ -88,10 +93,22 @@ export class AppUtil extends BeanSimple {
     prefix?: string | boolean,
     simplify?: boolean,
   ): string {
-    return combineApiPathControllerAndAction(moduleName, controllerPath, actionPath, prefix, simplify, this.app.config.server.globalPrefix);
+    return combineApiPathControllerAndAction(
+      moduleName,
+      controllerPath,
+      actionPath,
+      prefix,
+      simplify,
+      this.app.config.server.globalPrefix,
+    );
   }
 
-  combineApiPath(path: string | undefined, moduleName?: ModuleInfo.IModuleInfo | string, prefix?: string | boolean, simplify?: boolean) {
+  combineApiPath(
+    path: string | undefined,
+    moduleName?: ModuleInfo.IModuleInfo | string,
+    prefix?: string | boolean,
+    simplify?: boolean,
+  ) {
     return combineApiPath(path, moduleName, prefix, simplify, this.app.config.server.globalPrefix);
   }
 
@@ -125,7 +142,10 @@ export class AppUtil extends BeanSimple {
   async getPublicPathPhysical(subdir?: string, ensure?: boolean) {
     const rootPath = this.app.config.server.publicDir;
     // use instance.id, not instanceName
-    const dir = combineFilePathSafe(path.join(rootPath, cast(this.ctx).instance.id.toString()), subdir || '');
+    const dir = combineFilePathSafe(
+      path.join(rootPath, cast(this.ctx).instance.id.toString()),
+      subdir || '',
+    );
     if (!dir) throw new Error('not valid path');
     if (ensure) {
       await fse.ensureDir(dir);
@@ -141,10 +161,17 @@ export class AppUtil extends BeanSimple {
     return this[SymbolProdRootPath];
   }
 
-  getAssetPathPhysical(moduleName: ModuleInfo.IModuleInfo | string, scene: keyof IModuleAssetSceneRecord, assetPath?: string) {
+  getAssetPathPhysical(
+    moduleName: ModuleInfo.IModuleInfo | string,
+    scene: keyof IModuleAssetSceneRecord,
+    assetPath?: string,
+  ) {
     if (typeof moduleName !== 'string') moduleName = moduleName.relativeName;
     if (this.app.meta.isProd) {
-      return combineFilePathSafe(path.join(this.prodRootPath, 'assets', scene, moduleName), assetPath || '');
+      return combineFilePathSafe(
+        path.join(this.prodRootPath, 'assets', scene, moduleName),
+        assetPath || '',
+      );
     } else {
       const module = this.app.meta.modules[moduleName];
       if (!module) throw new Error('module not found');
@@ -324,7 +351,12 @@ export function uuidv4() {
   return uuid.v4();
 }
 
-export function createHash(str: string, encoding?: BinaryToTextEncoding, algorithm?: string, options?: HashOptions) {
+export function createHash(
+  str: string,
+  encoding?: BinaryToTextEncoding,
+  algorithm?: string,
+  options?: HashOptions,
+) {
   const hash = crypto.createHash(algorithm ?? 'sha256', options);
   hash.update(str);
   return hash.digest(encoding ?? 'hex');
@@ -354,7 +386,10 @@ export function prepareEnv(env: Partial<NodeJS.ProcessEnv>): VonaConfigEnv {
   return env2 as unknown as VonaConfigEnv;
 }
 
-export function beanFullNameFromOnionName(onionName: string, sceneName: keyof IBeanSceneRecord): keyof IBeanRecord {
+export function beanFullNameFromOnionName(
+  onionName: string,
+  sceneName: keyof IBeanSceneRecord,
+): keyof IBeanRecord {
   return onionName.replace(':', `.${sceneName}.`) as unknown as keyof IBeanRecord;
 }
 

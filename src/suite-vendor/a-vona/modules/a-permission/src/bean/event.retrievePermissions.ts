@@ -9,4 +9,7 @@ export interface TypeEventRetrievePermissionsData {
 export type TypeEventRetrievePermissionsResult = IOpenapiPermissions;
 
 @Event()
-export class EventRetrievePermissions extends BeanEventBase<TypeEventRetrievePermissionsData, TypeEventRetrievePermissionsResult> {}
+export class EventRetrievePermissions extends BeanEventBase<
+  TypeEventRetrievePermissionsData,
+  TypeEventRetrievePermissionsResult
+> {}

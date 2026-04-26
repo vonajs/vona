@@ -1,4 +1,7 @@
-import type { IDecoratorSerializerTransformOptions, ISerializerTransform } from 'vona-module-a-serialization';
+import type {
+  IDecoratorSerializerTransformOptions,
+  ISerializerTransform,
+} from 'vona-module-a-serialization';
 
 import { BeanBase } from 'vona';
 import { SerializerTransform } from 'vona-module-a-serialization';
@@ -16,7 +19,12 @@ export interface ISerializerTransformOptionsExclude extends IDecoratorSerializer
 @SerializerTransform<ISerializerTransformOptionsExclude>()
 export class SerializerTransformExclude
   extends BeanBase
-  implements ISerializerTransform<TypeSerializerTransformExcludeValue, TypeSerializerTransformExcludeData, TypeSerializerTransformExcludeResult>
+  implements
+    ISerializerTransform<
+      TypeSerializerTransformExcludeValue,
+      TypeSerializerTransformExcludeData,
+      TypeSerializerTransformExcludeResult
+    >
 {
   async transform(
     value: TypeSerializerTransformExcludeValue,

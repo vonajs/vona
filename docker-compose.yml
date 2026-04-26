@@ -16,7 +16,16 @@ services:
       - ./docker-compose/output/dist/docker:/opt/node/app/dist/docker
       - ./docker-compose/output/app/vona:/root/vona
       - ./docker-compose/logs/app:/root/logs
-    command: [./scripts/wait-for-it.sh, 'pg:5432', 'mysql:3306', 'redis:6379', -s, --, ./scripts/app-init.sh]
+    command:
+      [
+        ./scripts/wait-for-it.sh,
+        'pg:5432',
+        'mysql:3306',
+        'redis:6379',
+        -s,
+        --,
+        ./scripts/app-init.sh,
+      ]
 
   nginx:
     image: nginx:latest

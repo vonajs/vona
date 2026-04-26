@@ -29,7 +29,9 @@ export class BeanBodyReq extends BeanBase {
     const mimeTypes = getMimeTypes(options.extendTypes);
 
     const shouldParseBodyAs = (type: BodyType) => {
-      return Boolean(isEnabledBodyAs[type] && isTypes(ctx.request.get('content-type'), mimeTypes[type]));
+      return Boolean(
+        isEnabledBodyAs[type] && isTypes(ctx.request.get('content-type'), mimeTypes[type]),
+      );
     };
 
     const bodyType =

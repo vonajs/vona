@@ -19,9 +19,17 @@ export interface ILoggerFormatFilterOpts {
   silly?: boolean;
 }
 
-export type TypeLoggerOptions = Winston.LoggerOptions | ((clientInfo: ILoggerOptionsClientInfo, winston: typeof Winston) => Winston.LoggerOptions);
-export type TypeLoggerRotateOptions = DailyRotateFile.DailyRotateFileTransportOptions & { enable: boolean };
-export type TypeLoggerRotateOptionsFn = (fileName: string, winston: typeof Winston, clientInfo: ILoggerOptionsClientInfo) => TypeLoggerRotateOptions;
+export type TypeLoggerOptions =
+  | Winston.LoggerOptions
+  | ((clientInfo: ILoggerOptionsClientInfo, winston: typeof Winston) => Winston.LoggerOptions);
+export type TypeLoggerRotateOptions = DailyRotateFile.DailyRotateFileTransportOptions & {
+  enable: boolean;
+};
+export type TypeLoggerRotateOptionsFn = (
+  fileName: string,
+  winston: typeof Winston,
+  clientInfo: ILoggerOptionsClientInfo,
+) => TypeLoggerRotateOptions;
 
 export interface ILoggerClientRecord {
   default: never;

@@ -7,12 +7,17 @@ import { setArgumentPipe } from 'vona-module-a-aspect';
 import { makeSchemaLikes } from 'vona-module-a-openapiutils';
 import { z } from 'zod';
 
-export function createPipesArgumentDecorator(paramType: RouteHandlerArgumentType, extractValue?: TypeExtractValue) {
+export function createPipesArgumentDecorator(
+  paramType: RouteHandlerArgumentType,
+  extractValue?: TypeExtractValue,
+) {
   return function (field?: string | SchemaLike, ...schemaLikes: SchemaLike[]): ParameterDecorator {
     return function (target: object, prop: MetadataKey | undefined, index: number) {
       const hasParamField = typeof field === 'string';
       const paramField = hasParamField ? field : undefined;
-      const paramSchemaLikes = hasParamField ? schemaLikes : [field!, ...schemaLikes].filter(item => !!item);
+      const paramSchemaLikes = hasParamField
+        ? schemaLikes
+        : [field!, ...schemaLikes].filter(item => !!item);
 
       const paramtypes = appMetadata.getMetadata<any[]>('design:paramtypes', target, prop)!;
       let metaType;

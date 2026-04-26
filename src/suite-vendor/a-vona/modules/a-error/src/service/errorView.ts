@@ -111,7 +111,9 @@ export class ServiceErrorView extends BeanBase {
 
   serializeFrame(frame) {
     const filename = frame.getFileName();
-    const relativeFileName = filename.includes(process.cwd()) ? filename.replace(process.cwd(), '').replace(startingSlashRegex, '') : filename;
+    const relativeFileName = filename.includes(process.cwd())
+      ? filename.replace(process.cwd(), '').replace(startingSlashRegex, '')
+      : filename;
     const extname = path.extname(filename).replace('.', '');
 
     return {
@@ -135,7 +137,9 @@ export class ServiceErrorView extends BeanBase {
       message,
       name: error.name,
       status: error.status,
-      frames: Array.isArray(stack) ? stack.filter(frame => frame.getFileName()).map(frameFomatter) : [],
+      frames: Array.isArray(stack)
+        ? stack.filter(frame => frame.getFileName()).map(frameFomatter)
+        : [],
     };
   }
 

@@ -5,7 +5,12 @@ import type { IMenuGroup, IMenuItem } from 'vona-module-a-menu';
 import type { IOnionSlice } from 'vona-module-a-onion';
 import type { TypeEventResolvePathData, TypeEventResolvePathResult } from 'vona-module-a-static';
 
-import { catchError, combineParamsAndQuery, combineQueries, defaultPathSerializer } from '@cabloy/utils';
+import {
+  catchError,
+  combineParamsAndQuery,
+  combineQueries,
+  defaultPathSerializer,
+} from '@cabloy/utils';
 import path from 'node:path';
 import { BeanBase, cast, deepExtend, SymbolModuleName } from 'vona';
 import { checkErrorJwtExpiredAndThrow } from 'vona-module-a-jwt';
@@ -25,7 +30,9 @@ import { ServiceDevProxy } from '../service/devProxy.ts';
 import { ServiceSsrHandler } from '../service/ssrHandler.ts';
 import { SymbolCacheMenus } from './const.ts';
 
-export class BeanSsrSiteBase<SsrSiteOptions extends IDecoratorSsrSiteOptions = IDecoratorSsrSiteOptions> extends BeanBase {
+export class BeanSsrSiteBase<
+  SsrSiteOptions extends IDecoratorSsrSiteOptions = IDecoratorSsrSiteOptions,
+> extends BeanBase {
   private _siteOptions: SsrSiteOptions;
   private _devProxy: ServiceDevProxy;
   private _ssrHandler: ServiceSsrHandler;
@@ -54,10 +61,10 @@ export class BeanSsrSiteBase<SsrSiteOptions extends IDecoratorSsrSiteOptions = I
     return await this.render(undefined, undefined, { req, res });
   }
 
-  async redirect<PAGEPATH extends keyof SsrSiteOptions['pages'], PAGEOPTIONS extends Omit<SsrSiteOptions['pages'][PAGEPATH], 'data'>>(
-    pagePath?: PAGEPATH,
-    pageOptions?: PAGEOPTIONS,
-  ): Promise<undefined | never> {
+  async redirect<
+    PAGEPATH extends keyof SsrSiteOptions['pages'],
+    PAGEOPTIONS extends Omit<SsrSiteOptions['pages'][PAGEPATH], 'data'>,
+  >(pagePath?: PAGEPATH, pageOptions?: PAGEOPTIONS): Promise<undefined | never> {
     // pagePath
     pagePath = this.$scope.ssr.service.ssr.prepareMenuLink(pagePath as any) as any;
     // pagePathFull
@@ -73,7 +80,10 @@ export class BeanSsrSiteBase<SsrSiteOptions extends IDecoratorSsrSiteOptions = I
     }
   }
 
-  async render<PAGEPATH extends keyof SsrSiteOptions['pages'], PAGEOPTIONS extends SsrSiteOptions['pages'][PAGEPATH]>(
+  async render<
+    PAGEPATH extends keyof SsrSiteOptions['pages'],
+    PAGEOPTIONS extends SsrSiteOptions['pages'][PAGEPATH],
+  >(
     pagePath?: PAGEPATH,
     pageOptions?: PAGEOPTIONS,
     renderOptions?: ISsrHandlerRenderOptions,
@@ -89,12 +99,18 @@ export class BeanSsrSiteBase<SsrSiteOptions extends IDecoratorSsrSiteOptions = I
     // pagePath
     if (pagePath) {
       pagePath = this.$scope.ssr.service.ssr.prepareMenuLink(pagePath as any) as any;
-      pagePath = defaultPathSerializer(pagePath as string, (pageOptions as IParamsAndQuery)?.params) as any;
+      pagePath = defaultPathSerializer(
+        pagePath as string,
+        (pageOptions as IParamsAndQuery)?.params,
+      ) as any;
     }
     // url
     let pagePathFull = pagePath;
     if (pagePathFull) {
-      pagePathFull = combineQueries(pagePathFull as any, (pageOptions as IParamsAndQuery)?.query) as any;
+      pagePathFull = combineQueries(
+        pagePathFull as any,
+        (pageOptions as IParamsAndQuery)?.query,
+      ) as any;
     }
     // optionsInner
     const req = renderOptions?.req ?? this.ctx.req;
@@ -130,7 +146,8 @@ export class BeanSsrSiteBase<SsrSiteOptions extends IDecoratorSsrSiteOptions = I
     if (!this._siteOptions) {
       const onionOptions = this.$onionOptions as IDecoratorSsrSiteOptions;
       const SSR_WITH_VONA = 'true';
-      const META_MODE: ZovaMetaMode = process.env.META_MODE === 'dev' ? 'development' : 'production';
+      const META_MODE: ZovaMetaMode =
+        process.env.META_MODE === 'dev' ? 'development' : 'production';
       const baseUrl = `${this.app.util.protocol}://${this.app.util.host}`;
       this._siteOptions = deepExtend(
         {
@@ -165,13 +182,21 @@ export class BeanSsrSiteBase<SsrSiteOptions extends IDecoratorSsrSiteOptions = I
 
   private get ssrHandler() {
     if (!this._ssrHandler) {
-      this._ssrHandler = this.bean._newBean(ServiceSsrHandler, this.siteOptions, this._getAssetPathPhysical(''));
+      this._ssrHandler = this.bean._newBean(
+        ServiceSsrHandler,
+        this.siteOptions,
+        this._getAssetPathPhysical(''),
+      );
     }
     return this._ssrHandler;
   }
 
   private _getAssetPathPhysical(filePath: string) {
-    return this.app.util.getAssetPathPhysical(this[SymbolModuleName] as any, 'site', path.join(this.siteOptions.bundlePath, filePath));
+    return this.app.util.getAssetPathPhysical(
+      this[SymbolModuleName] as any,
+      'site',
+      path.join(this.siteOptions.bundlePath, filePath),
+    );
   }
 
   private async _createPerformAction() {
@@ -190,7 +215,10 @@ export class BeanSsrSiteBase<SsrSiteOptions extends IDecoratorSsrSiteOptions = I
         await this.$scope.instance.service.instance.initInstance();
         // auth token
         if (!this.bean.passport.current) {
-          const accessToken = this.$scope.jwt.service.jwtExtract.fromAuthHeaderWithScheme(headers.Authorization ?? headers.authorization) ?? '';
+          const accessToken =
+            this.$scope.jwt.service.jwtExtract.fromAuthHeaderWithScheme(
+              headers.Authorization ?? headers.authorization,
+            ) ?? '';
           const [_, err] = await catchError(() => {
             return this.bean.passport.checkAuthToken(accessToken);
           });
@@ -204,12 +232,16 @@ export class BeanSsrSiteBase<SsrSiteOptions extends IDecoratorSsrSiteOptions = I
         ctxInited = true;
       }
       // performAction
-      const res = await this.$scope.executor.service.executor.performActionInner(data.method, data.path as never, {
-        innerAccess: false,
-        query: data.query,
-        body: data.body,
-        headers,
-      });
+      const res = await this.$scope.executor.service.executor.performActionInner(
+        data.method,
+        data.path as never,
+        {
+          innerAccess: false,
+          query: data.query,
+          body: data.body,
+          headers,
+        },
+      );
       // let toJSON take affect
       return res && typeof res === 'object' ? JSON.parse(JSON.stringify(res)) : res;
     };
@@ -217,7 +249,8 @@ export class BeanSsrSiteBase<SsrSiteOptions extends IDecoratorSsrSiteOptions = I
 
   private async _getMenusCache(locale: keyof ILocaleRecord): Promise<TypeEventRetrieveMenusResult> {
     if (!this.app.meta[SymbolCacheMenus]) this.app.meta[SymbolCacheMenus] = {};
-    const cacheMenus: Record<keyof ILocaleRecord, TypeEventRetrieveMenusResult> = this.app.meta[SymbolCacheMenus];
+    const cacheMenus: Record<keyof ILocaleRecord, TypeEventRetrieveMenusResult> =
+      this.app.meta[SymbolCacheMenus];
     const beanFullName = this.$beanFullName;
     const instanceName = this.ctx.instanceName;
     const host = this.ctx.host;
@@ -230,16 +263,19 @@ export class BeanSsrSiteBase<SsrSiteOptions extends IDecoratorSsrSiteOptions = I
   }
 
   private async _prepareMenus(locale: keyof ILocaleRecord): Promise<TypeEventRetrieveMenusResult> {
-    return await this.$scope.ssr.event.retrieveMenusSite.emit({ ssrSite: this, locale }, async () => {
-      // menus
-      const ssrMenus = this.bean.onion.ssrMenu.getOnionsEnabled();
-      const menus = this._prepareMenusOrGroups(locale, ssrMenus);
-      // groups
-      const ssrMenuGroups = this.bean.onion.ssrMenuGroup.getOnionsEnabled();
-      const groups = this._prepareMenusOrGroups(locale, ssrMenuGroups);
-      // ok
-      return { menus, groups };
-    });
+    return await this.$scope.ssr.event.retrieveMenusSite.emit(
+      { ssrSite: this, locale },
+      async () => {
+        // menus
+        const ssrMenus = this.bean.onion.ssrMenu.getOnionsEnabled();
+        const menus = this._prepareMenusOrGroups(locale, ssrMenus);
+        // groups
+        const ssrMenuGroups = this.bean.onion.ssrMenuGroup.getOnionsEnabled();
+        const groups = this._prepareMenusOrGroups(locale, ssrMenuGroups);
+        // ok
+        return { menus, groups };
+      },
+    );
   }
 
   private _prepareMenusOrGroups<T extends keyof ISsrMenuRecord>(
@@ -258,16 +294,22 @@ export class BeanSsrSiteBase<SsrSiteOptions extends IDecoratorSsrSiteOptions = I
     // menus
     const menus: IMenuItem<keyof SsrSiteOptions['pages']>[] = [];
     for (const ssrMenu of ssrMenus) {
-      const siteMenuOptions = ssrMenu.beanOptions.options as IDecoratorSsrMenuOptions<IDecoratorSsrSiteOptions>;
+      const siteMenuOptions = ssrMenu.beanOptions
+        .options as IDecoratorSsrMenuOptions<IDecoratorSsrSiteOptions>;
       if (!_checkValidSiteOrLocale(siteOnionName, siteMenuOptions.site)) continue;
       if (!_checkValidSiteOrLocale(locale, siteMenuOptions.locale)) continue;
-      const menusFrom = siteMenuOptions.items || (siteMenuOptions.item && { '': siteMenuOptions.item });
+      const menusFrom =
+        siteMenuOptions.items || (siteMenuOptions.item && { '': siteMenuOptions.item });
       if (!menusFrom) continue;
       for (const key in menusFrom) {
         const menuFrom = menusFrom[key];
         const name = !key ? ssrMenu.name : `${ssrMenu.name}#${key}`;
-        const title = menuFrom.title ? this.app.meta.text.locale(locale, menuFrom.title) : menuFrom.title;
-        const description = menuFrom.description ? this.app.meta.text.locale(locale, menuFrom.description) : menuFrom.description;
+        const title = menuFrom.title
+          ? this.app.meta.text.locale(locale, menuFrom.title)
+          : menuFrom.title;
+        const description = menuFrom.description
+          ? this.app.meta.text.locale(locale, menuFrom.description)
+          : menuFrom.description;
         const link = this.$scope.ssr.service.ssr.prepareMenuLink(menuFrom.link);
         menus.push({ ...menuFrom, name, title, description, link });
       }

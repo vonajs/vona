@@ -30,7 +30,10 @@ export interface TCacheRedisStudentData {
 @CacheRedis({
   ttl: 2 * 3600 * 1000,
 })
-export class CacheRedisStudent extends BeanCacheRedisBase<TCacheRedisStudentKey, TCacheRedisStudentData> {}
+export class CacheRedisStudent extends BeanCacheRedisBase<
+  TCacheRedisStudentKey,
+  TCacheRedisStudentData
+> {}
 ```
 
 - `TCacheRedisStudentKey`: 定义缓存 Key 的类型

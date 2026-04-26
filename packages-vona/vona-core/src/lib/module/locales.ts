@@ -58,6 +58,10 @@ export default async function (app: VonaApplication, modules: Record<string, IMo
     app.meta.locales[locale] = Object.assign({}, moduleLocales, app.meta.locales[locale]);
     // localeModules
     if (!app.meta.localeModules[moduleName]) app.meta.localeModules[moduleName] = {};
-    app.meta.localeModules[moduleName][locale] = Object.assign({}, moduleLocales, app.meta.localeModules[moduleName][locale]);
+    app.meta.localeModules[moduleName][locale] = Object.assign(
+      {},
+      moduleLocales,
+      app.meta.localeModules[moduleName][locale],
+    );
   }
 }

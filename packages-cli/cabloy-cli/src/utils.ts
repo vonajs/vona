@@ -8,7 +8,13 @@ import urllib from 'urllib';
 
 import { getRegistry } from './registry.ts';
 
-const boxenOptions = { padding: 1, margin: 1, align: 'center', borderColor: 'yellow', borderStyle: 'round' };
+const boxenOptions = {
+  padding: 1,
+  margin: 1,
+  align: 'center',
+  borderColor: 'yellow',
+  borderStyle: 'round',
+};
 
 export async function checkForUpdates(packageName: string) {
   try {
@@ -23,9 +29,9 @@ export async function checkForUpdates(packageName: string) {
     const lt = semver.lt(versionOld, versionNew);
     if (!lt) return;
     // log
-    let message = `[${chalk.keyword('cyan')(packageName)}] new version available: ${chalk.keyword('yellow')(
-      versionOld,
-    )} → ${chalk.keyword('orange')(versionNew)}`;
+    let message = `[${chalk.keyword('cyan')(packageName)}] new version available: ${chalk.keyword(
+      'yellow',
+    )(versionOld)} → ${chalk.keyword('orange')(versionNew)}`;
     message += `\nRun ${chalk.keyword('orange')(`> pnpm add -g ${packageName} <`)} to update!`;
     // eslint-disable-next-line
     console.log('\n' + boxen(message, boxenOptions as any));
@@ -48,6 +54,8 @@ export async function getPackageInfo(packageName: string) {
   return result.data;
 }
 
-export function patchFlavor(flavor?: VonaMetaFlavor | VonaMetaFlavor[]): VonaMetaFlavor | undefined {
+export function patchFlavor(
+  flavor?: VonaMetaFlavor | VonaMetaFlavor[],
+): VonaMetaFlavor | undefined {
   return Array.isArray(flavor) ? flavor[flavor.length - 1] : flavor;
 }

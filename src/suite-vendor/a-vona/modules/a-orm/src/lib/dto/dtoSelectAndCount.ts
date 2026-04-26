@@ -12,7 +12,9 @@ export function DtoSelectAndCount<
   ModelLike extends BeanModelMeta | keyof IModelClassRecord,
   T extends IDtoGetParams<ModelLike> | undefined = undefined,
 >(
-  modelLike: ModelLike extends BeanModelMeta ? (() => Constructable<ModelLike>) | Constructable<ModelLike> : ModelLike,
+  modelLike: ModelLike extends BeanModelMeta
+    ? (() => Constructable<ModelLike>) | Constructable<ModelLike>
+    : ModelLike,
   params?: T,
 ): Constructable<TypeDtoSelectAndCountResult<ModelLike, T>> {
   const DtoGetResult = DtoGet(modelLike, params);

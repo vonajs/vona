@@ -24,7 +24,11 @@ export class BeanUser extends BeanBase {
     });
   }
 
-  async register(user: Partial<IUser>, confirmed?: boolean, randomUsername?: boolean): Promise<IUser> {
+  async register(
+    user: Partial<IUser>,
+    confirmed?: boolean,
+    randomUsername?: boolean,
+  ): Promise<IUser> {
     // config.user.autoActivate > confirmed
     const autoActivate = this.scope.config.user.autoActivate ? true : confirmed;
     const data = { user, confirmed, autoActivate };

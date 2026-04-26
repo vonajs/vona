@@ -65,7 +65,9 @@ import { Core } from 'vona-module-a-core';
 `@Core.gate`内部仍然调用的是`@Aspect.middlewareGlobal`，代码如下：
 
 ```typescript
-function Gate(options?: Partial<TypeUseOnionOmitOptionsGlobal<IMiddlewareOptionsGate>>): ClassDecorator & MethodDecorator {
+function Gate(
+  options?: Partial<TypeUseOnionOmitOptionsGlobal<IMiddlewareOptionsGate>>,
+): ClassDecorator & MethodDecorator {
   return Aspect.middlewareGlobal('a-core:gate', options);
 }
 ```

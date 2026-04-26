@@ -1,7 +1,12 @@
 import type { IBeanSceneRecord, IDecoratorBeanOptionsBase } from 'vona';
 import type { ServiceOnion } from 'vona-module-a-onion';
 
-export type TypeHmrWatchScene = keyof IBeanSceneRecord | '_error' | '_locale' | '_config' | '_constant';
+export type TypeHmrWatchScene =
+  | keyof IBeanSceneRecord
+  | '_error'
+  | '_locale'
+  | '_config'
+  | '_constant';
 
 export interface IHmrRecord {}
 

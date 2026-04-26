@@ -1213,7 +1213,12 @@ export const _configDefault = {
         'no-redeclare': 'off',
         'no-use-before-define': 'off',
       },
-      jsPlugins: ['eslint-plugin-antfu', '@e18e/eslint-plugin', '@stylistic/eslint-plugin', 'eslint-plugin-unused-imports'],
+      jsPlugins: [
+        'eslint-plugin-antfu',
+        '@e18e/eslint-plugin',
+        '@stylistic/eslint-plugin',
+        'eslint-plugin-unused-imports',
+      ],
       plugins: ['typescript'],
     },
     {

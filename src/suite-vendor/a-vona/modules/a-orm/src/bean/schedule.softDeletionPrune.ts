@@ -13,7 +13,9 @@ export class ScheduleSoftDeletionPrune extends BeanBase implements IScheduleExec
     const onionSlices = this.bean.onion.model.getOnionsEnabledCached();
     for (const onionSlice of onionSlices) {
       if (onionSlice.beanOptions.options?.disableDeleted) continue;
-      let softDeletionPrune = onionSlice.beanOptions.options?.softDeletionPrune ?? this.scope.config.softDeletionPrune.enable;
+      let softDeletionPrune =
+        onionSlice.beanOptions.options?.softDeletionPrune ??
+        this.scope.config.softDeletionPrune.enable;
       if (!softDeletionPrune) continue;
       if (softDeletionPrune === true) softDeletionPrune = {};
       await this._modulePrune(onionSlice, softDeletionPrune);

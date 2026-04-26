@@ -29,7 +29,10 @@ export class DatabaseDialectMysql extends BeanDatabaseDialectBase {
     },
   };
 
-  async fetchDatabases(schemaBuilder: Knex.SchemaBuilder, databasePrefix: string): Promise<IFetchDatabasesResultItem[]> {
+  async fetchDatabases(
+    schemaBuilder: Knex.SchemaBuilder,
+    databasePrefix: string,
+  ): Promise<IFetchDatabasesResultItem[]> {
     const res = await schemaBuilder.raw(`show databases like '${databasePrefix}%'`);
     let dbs = res[0];
     dbs = dbs.map(db => {
@@ -40,7 +43,9 @@ export class DatabaseDialectMysql extends BeanDatabaseDialectBase {
   }
 
   async createDatabase(schemaBuilder: Knex.SchemaBuilder, databaseName: string): Promise<string> {
-    await schemaBuilder.raw(`CREATE DATABASE \`${databaseName}\` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci`);
+    await schemaBuilder.raw(
+      `CREATE DATABASE \`${databaseName}\` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci`,
+    );
     return databaseName;
   }
 
@@ -48,7 +53,10 @@ export class DatabaseDialectMysql extends BeanDatabaseDialectBase {
     await schemaBuilder.raw(`drop database \`${databaseName}\``);
   }
 
-  async fetchIndexes(schemaBuilder: Knex.SchemaBuilder, tableName: string): Promise<IFetchIndexesResultItem[]> {
+  async fetchIndexes(
+    schemaBuilder: Knex.SchemaBuilder,
+    tableName: string,
+  ): Promise<IFetchIndexesResultItem[]> {
     const res: any = await schemaBuilder.raw(`show index from ${tableName}`);
     let items = res[0];
     items = items.map(item => {
@@ -59,7 +67,10 @@ export class DatabaseDialectMysql extends BeanDatabaseDialectBase {
     return items;
   }
 
-  async insert(builder: Knex.QueryBuilder, datas: any[]): Promise<[TableIdentity[], Knex.QueryBuilder]> {
+  async insert(
+    builder: Knex.QueryBuilder,
+    datas: any[],
+  ): Promise<[TableIdentity[], Knex.QueryBuilder]> {
     return await this.insertAsMysql(builder, datas);
   }
 
@@ -79,7 +90,10 @@ export class DatabaseDialectMysql extends BeanDatabaseDialectBase {
           AND V.VIEW_DEFINITION LIKE CONCAT('%\`',T.TABLE_NAME,'\`%')
       WHERE T.TABLE_SCHEMA = DATABASE()
     `;
-    const items = await builder.distinct('dep_name').fromRaw(`(${sqlViews}) as viewDependents`).where({ ref_name: viewName });
+    const items = await builder
+      .distinct('dep_name')
+      .fromRaw(`(${sqlViews}) as viewDependents`)
+      .where({ ref_name: viewName });
     return items.map(item => item.dep_name);
   }
 }

@@ -38,7 +38,10 @@ export interface IFilterTransformOptionsDateRange extends IDecoratorFilterTransf
 
 @FilterTransform<IFilterTransformOptionsDateRange>()
 export class FilterTransformDateRange extends BeanBase implements IFilterTransformWhere {
-  async where(info: IPipeOptionsFilterTransformInfo, _options: IFilterTransformOptionsDateRange): Promise<any | undefined> {
+  async where(
+    info: IPipeOptionsFilterTransformInfo,
+    _options: IFilterTransformOptionsDateRange,
+  ): Promise<any | undefined> {
     const { value } = info;
     const [dateStartStr, dateEndStr] = value.split('~');
     const dateStart = DateTime.fromISO(dateStartStr, { zone: this.ctx.tz });
@@ -84,7 +87,11 @@ config.onions = {
   dto: {
     'demo-student:studentQuery': {
       fields: {
-        createdAt: $makeSchema(v.filterTransform('demo-student:dateRange'), v.optional(), z.string()),
+        createdAt: $makeSchema(
+          v.filterTransform('demo-student:dateRange'),
+          v.optional(),
+          z.string(),
+        ),
       },
     },
   },

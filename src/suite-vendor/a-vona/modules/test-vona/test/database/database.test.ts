@@ -77,7 +77,9 @@ describe('database.test.ts', () => {
     await app.bean.executor.mockCtx(async () => {
       // scope
       const scopeTest = app.scope('test-vona');
-      const entityTest = await scopeTest.model.test.insert({ title: 'transaction:compensate:fail' });
+      const entityTest = await scopeTest.model.test.insert({
+        title: 'transaction:compensate:fail',
+      });
       assert.equal(entityTest.title, 'transaction:compensate:fail');
       await catchError(async () => {
         const db = app.bean.database.getDb({ clientName: 'default' });

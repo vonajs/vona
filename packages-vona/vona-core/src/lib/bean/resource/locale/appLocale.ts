@@ -30,7 +30,11 @@ export class AppLocale extends BeanSimple {
     const getText = function (text: string | object, ...args: any[]): string {
       return self.getText(false, moduleScope, undefined, text, ...args);
     };
-    getText.locale = function <T extends keyof ILocaleRecord>(locale: T | undefined, text: string | object, ...args: any[]): string {
+    getText.locale = function <T extends keyof ILocaleRecord>(
+      locale: T | undefined,
+      text: string | object,
+      ...args: any[]
+    ): string {
       return self.getText(false, moduleScope, locale, text, ...args);
     };
     return getText;
@@ -42,7 +46,10 @@ export class AppLocale extends BeanSimple {
     const getText = function (...args: any[]): string {
       return self.getText(false, moduleScope, undefined, text, ...args);
     };
-    getText.locale = function <T extends keyof ILocaleRecord>(locale: T | undefined, ...args: any[]): string {
+    getText.locale = function <T extends keyof ILocaleRecord>(
+      locale: T | undefined,
+      ...args: any[]
+    ): string {
       return self.getText(false, moduleScope, locale, text, ...args);
     };
     return getText;

@@ -19,13 +19,19 @@ export function getSqlite3DatabaseNameDefault(app: VonaApplication) {
 export function getSqlite3NativeBinding(_app: VonaApplication, nativeBinding: string | undefined) {
   nativeBinding = prepareNativeBinding(nativeBinding);
   if (!nativeBinding) return nativeBinding;
-  const nativeBindingPath = path.isAbsolute(nativeBinding) ? nativeBinding : path.join(import.meta.dirname, nativeBinding);
+  const nativeBindingPath = path.isAbsolute(nativeBinding)
+    ? nativeBinding
+    : path.join(import.meta.dirname, nativeBinding);
   const require = createRequire(import.meta.url);
   const addon = require(nativeBindingPath);
   return addon as any;
 }
 
-export async function copySqlite3NativeBinding(projectPath: string, outDir: string, env: NodeJS.ProcessEnv) {
+export async function copySqlite3NativeBinding(
+  projectPath: string,
+  outDir: string,
+  env: NodeJS.ProcessEnv,
+) {
   // dest
   const nativeBinding = prepareNativeBinding(env.DATABASE_CLIENT_SQLITE3_NATIVEBINDING);
   if (!nativeBinding || path.isAbsolute(nativeBinding)) return;

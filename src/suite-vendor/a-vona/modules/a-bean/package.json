@@ -1,6 +1,7 @@
 {
   "name": "vona-module-a-bean",
   "version": "5.1.4",
+  "gitHead": "a79189b882c17af5911573896a781bbb0046d37d",
   "description": "",
   "keywords": [
     "Vona Module"
@@ -61,6 +62,5 @@
         "boilerplate": "service/boilerplate"
       }
     }
-  },
-  "gitHead": "a79189b882c17af5911573896a781bbb0046d37d"
+  }
 }

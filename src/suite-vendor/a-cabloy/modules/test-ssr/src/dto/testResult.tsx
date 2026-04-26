@@ -8,7 +8,12 @@ import { ActionExpr, ActionLog } from 'vona-module-a-actions';
 import { $makeSchema, Api, v } from 'vona-module-a-openapiutils';
 import { Dto } from 'vona-module-a-web';
 import z from 'zod';
-import { $iconName, BBARestActionsCopy, BBARestActionsSetValue, BBZIcon } from 'zova-rest-test-second';
+import {
+  $iconName,
+  BBARestActionsCopy,
+  BBARestActionsSetValue,
+  BBZIcon,
+} from 'zova-rest-test-second';
 
 import { $locale } from '../.metadata/locales.ts';
 import { DtoTestDetail } from './testDetail.ts';
@@ -135,7 +140,11 @@ export interface IDtoOptionsTestResult extends IDecoratorDtoOptions<
                   onInput={
                     <action>
                       <BBARestActionsSetValue name="name"></BBARestActionsSetValue>
-                      <BBARestActionsSetValue name="_customCopied" value={false} disableNotifyChanged></BBARestActionsSetValue>
+                      <BBARestActionsSetValue
+                        name="_customCopied"
+                        value={false}
+                        disableNotifyChanged
+                      ></BBARestActionsSetValue>
                     </action>
                   }
                 ></input>
@@ -146,7 +155,10 @@ export interface IDtoOptionsTestResult extends IDecoratorDtoOptions<
                   nativeOnClick={
                     <action>
                       <BBARestActionsCopy text={cel('getValue("name")')}></BBARestActionsCopy>
-                      <BBARestActionsSetValue name="_customCopied" value={true}></BBARestActionsSetValue>
+                      <BBARestActionsSetValue
+                        name="_customCopied"
+                        value={true}
+                      ></BBARestActionsSetValue>
                     </action>
                   }
                 ></BBZIcon>

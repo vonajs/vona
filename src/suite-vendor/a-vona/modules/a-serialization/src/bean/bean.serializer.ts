@@ -6,7 +6,10 @@ import { ZodMetadata } from '@cabloy/zod-openapi';
 import { BeanBase, beanFullNameFromOnionName } from 'vona';
 import { Bean } from 'vona-module-a-bean';
 
-import type { ISerializerTransform, ISerializerTransformRecord } from '../types/serializerTransform.ts';
+import type {
+  ISerializerTransform,
+  ISerializerTransformRecord,
+} from '../types/serializerTransform.ts';
 
 @Bean()
 export class BeanSerializer extends BeanBase {
@@ -39,7 +42,8 @@ export class BeanSerializer extends BeanBase {
     const dataPatch = {};
     for (const key in schema.shape) {
       const keySchema = ZodMetadata.resolveLazySchema(schema.shape[key]);
-      const metadata: ISchemaObjectExtensionField | undefined = ZodMetadata.getOpenapiMetadata(keySchema);
+      const metadata: ISchemaObjectExtensionField | undefined =
+        ZodMetadata.getOpenapiMetadata(keySchema);
       if (!metadata) continue;
       // valuePatch
       let valuePatch = data[key];

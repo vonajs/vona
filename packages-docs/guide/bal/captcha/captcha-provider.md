@@ -23,7 +23,10 @@ Context Menu - [Module Path]: `Vona Bean/Captcha Provider`
 ```typescript
 export type TypeCaptchaProviderImageTextToken = string;
 export type TypeCaptchaProviderImageTextPayload = string;
-export type TypeCaptchaProviderImageTextData = ICaptchaProviderData<TypeCaptchaProviderImageTextToken, TypeCaptchaProviderImageTextPayload>;
+export type TypeCaptchaProviderImageTextData = ICaptchaProviderData<
+  TypeCaptchaProviderImageTextToken,
+  TypeCaptchaProviderImageTextPayload
+>;
 
 export type TypeCaptchaProviderImageTextType = 'char' | 'math';
 const CaptchaProviderImageTextTypes = ['char', 'math'] as const;
@@ -46,7 +49,8 @@ class CaptchaProviderImageText {
     if (!type) {
       type = CaptchaProviderImageTextTypes[getRandomInt(2, 0)];
     }
-    const captcha = type === 'char' ? svgCaptcha.create(options.opts) : svgCaptcha.createMathExpr(options.opts);
+    const captcha =
+      type === 'char' ? svgCaptcha.create(options.opts) : svgCaptcha.createMathExpr(options.opts);
     return { token: captcha.text, payload: svg64(captcha.data) };
   }
 

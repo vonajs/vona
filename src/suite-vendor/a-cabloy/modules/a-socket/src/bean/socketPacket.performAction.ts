@@ -17,21 +17,36 @@ export interface ISocketPacketOptionsPerformAction extends IDecoratorSocketPacke
 
 @SocketPacket<ISocketPacketOptionsPerformAction>({ dependencies: 'a-socket:event' })
 export class SocketPacketPerformAction extends BeanBase implements ISocketPacketExecute {
-  async execute(packet: TypeSocketPacketEvent, ws: WebSocket, _options: ISocketPacketOptionsPerformAction, next: Next): Promise<void> {
+  async execute(
+    packet: TypeSocketPacketEvent,
+    ws: WebSocket,
+    _options: ISocketPacketOptionsPerformAction,
+    next: Next,
+  ): Promise<void> {
     const eventName: keyof ISocketEventRecord | undefined = packet[0];
     const data: ISocketEventPerformActionOptionsInner = packet[1];
     if (eventName !== ('sysPerformAction' satisfies keyof ISocketEventRecordSystem)) return next();
     try {
       // performAction
-      const res = await this.$scope.executor.service.executor.performActionInner(data.m, data.p as never, {
-        innerAccess: false,
-        query: data.q,
-        body: data.b,
-        headers: data.h,
-      });
-      ws.sendEvent('sysPerformActionBack' satisfies keyof ISocketEventRecordSystem as never, { i: data.i, c: 0, d: res } as never);
+      const res = await this.$scope.executor.service.executor.performActionInner(
+        data.m,
+        data.p as never,
+        {
+          innerAccess: false,
+          query: data.q,
+          body: data.b,
+          headers: data.h,
+        },
+      );
+      ws.sendEvent(
+        'sysPerformActionBack' satisfies keyof ISocketEventRecordSystem as never,
+        { i: data.i, c: 0, d: res } as never,
+      );
     } catch (err: any) {
-      ws.sendEvent('sysPerformActionBack' satisfies keyof ISocketEventRecordSystem as never, { i: data.i, c: err.code, m: err.message } as never);
+      ws.sendEvent(
+        'sysPerformActionBack' satisfies keyof ISocketEventRecordSystem as never,
+        { i: data.i, c: err.code, m: err.message } as never,
+      );
     }
   }
 }

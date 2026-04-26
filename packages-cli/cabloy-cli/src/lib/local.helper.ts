@@ -140,7 +140,11 @@ export class LocalHelper {
   }
 
   parseModuleInfo(moduleName) {
-    const moduleInfo = ModuleInfo.parseInfoPro(moduleName, process.env.CabloyCliBrandName as any, 'module');
+    const moduleInfo = ModuleInfo.parseInfoPro(
+      moduleName,
+      process.env.CabloyCliBrandName as any,
+      'module',
+    );
     if (!moduleInfo) throw new Error(`module name is not valid: ${moduleName}`);
     return moduleInfo;
   }
@@ -151,7 +155,11 @@ export class LocalHelper {
   }
 
   parseSuiteInfo(suiteName) {
-    const suiteInfo = ModuleInfo.parseInfoPro(suiteName, process.env.CabloyCliBrandName as any, 'suite');
+    const suiteInfo = ModuleInfo.parseInfoPro(
+      suiteName,
+      process.env.CabloyCliBrandName as any,
+      'suite',
+    );
     if (!suiteInfo) throw new Error(`suite name is not valid: ${suiteName}`);
     return suiteInfo;
   }
@@ -186,19 +194,51 @@ export class LocalHelper {
     return await this.processHelper.formatFile({ fileName, logPrefix });
   }
 
-  async spawnBin({ cmd, args, options }: { cmd: string; args?: string[]; options?: IProcessHelperSpawnOptions }): Promise<string> {
+  async spawnBin({
+    cmd,
+    args,
+    options,
+  }: {
+    cmd: string;
+    args?: string[];
+    options?: IProcessHelperSpawnOptions;
+  }): Promise<string> {
     return await this.processHelper.spawnBin({ cmd, args, options });
   }
 
-  async spawnCmd({ cmd, args, options }: { cmd: string; args?: string[]; options?: IProcessHelperSpawnOptions }): Promise<string> {
+  async spawnCmd({
+    cmd,
+    args,
+    options,
+  }: {
+    cmd: string;
+    args?: string[];
+    options?: IProcessHelperSpawnOptions;
+  }): Promise<string> {
     return await this.processHelper.spawnCmd({ cmd, args, options });
   }
 
-  async spawnExe({ cmd, args, options }: { cmd: string; args?: string[]; options?: IProcessHelperSpawnOptions }): Promise<string> {
+  async spawnExe({
+    cmd,
+    args,
+    options,
+  }: {
+    cmd: string;
+    args?: string[];
+    options?: IProcessHelperSpawnOptions;
+  }): Promise<string> {
     return await this.processHelper.spawnExe({ cmd, args, options });
   }
 
-  async spawn({ cmd, args = [], options = {} }: { cmd: string; args?: string[]; options?: IProcessHelperSpawnOptions }): Promise<string> {
+  async spawn({
+    cmd,
+    args = [],
+    options = {},
+  }: {
+    cmd: string;
+    args?: string[];
+    options?: IProcessHelperSpawnOptions;
+  }): Promise<string> {
     return await this.processHelper.spawn({ cmd, args, options });
   }
 
@@ -280,8 +320,14 @@ export class LocalHelper {
   }
 
   async importDynamic(fileName: string): Promise<any>;
-  async importDynamic<RESULT>(fileName: string, fn: (instance: any) => Promise<RESULT>): Promise<RESULT>;
-  async importDynamic<RESULT>(fileName: string, fn?: (instance: any) => Promise<RESULT>): Promise<RESULT | any> {
+  async importDynamic<RESULT>(
+    fileName: string,
+    fn: (instance: any) => Promise<RESULT>,
+  ): Promise<RESULT>;
+  async importDynamic<RESULT>(
+    fileName: string,
+    fn?: (instance: any) => Promise<RESULT>,
+  ): Promise<RESULT | any> {
     // load
     const instance = await import(this.pathToHref(fileName));
     if (!fn) return instance;
@@ -312,7 +358,10 @@ export class LocalHelper {
     return stat.mtime.valueOf();
   }
 
-  async tempFile<RESULT>(fn: (fileTemp: string) => Promise<RESULT>, options?: ITempFileOptions): Promise<RESULT> {
+  async tempFile<RESULT>(
+    fn: (fileTemp: string) => Promise<RESULT>,
+    options?: ITempFileOptions,
+  ): Promise<RESULT> {
     // temp
     const fileTempObj = tmp.fileSync(options);
     const fileTemp = fileTempObj.name;
@@ -332,7 +381,8 @@ export class LocalHelper {
 function _formatFileDisable(fileName: string) {
   const baseName = path.basename(fileName);
   if (/.env\..*$/.test(baseName)) return true;
-  if (['.env', 'docker-compose-dockerfile-app', 'docker-compose.yml'].includes(baseName)) return true;
+  if (['.env', 'docker-compose-dockerfile-app', 'docker-compose.yml'].includes(baseName))
+    return true;
   return false;
 }
 

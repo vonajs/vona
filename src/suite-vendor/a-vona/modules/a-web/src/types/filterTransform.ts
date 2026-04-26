@@ -24,7 +24,10 @@ export interface IPipeOptionsFilterTransformInfo {
 export interface IFilterTransformRecord {}
 
 export interface IFilterTransformWhere {
-  where(info: IPipeOptionsFilterTransformInfo, options: IDecoratorFilterTransformOptions): Promise<boolean>;
+  where(
+    info: IPipeOptionsFilterTransformInfo,
+    options: IDecoratorFilterTransformOptions,
+  ): Promise<boolean>;
 }
 
 export interface IDecoratorFilterTransformOptions {}

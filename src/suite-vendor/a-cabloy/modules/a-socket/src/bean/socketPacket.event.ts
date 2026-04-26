@@ -13,7 +13,12 @@ export interface ISocketPacketOptionsEvent extends IDecoratorSocketPacketOptions
 
 @SocketPacket<ISocketPacketOptionsEvent>()
 export class SocketPacketEvent extends BeanBase implements ISocketPacketExecute {
-  async execute(data: any, _ws: WebSocket, _options: ISocketPacketOptionsEvent, next: Next): Promise<void> {
+  async execute(
+    data: any,
+    _ws: WebSocket,
+    _options: ISocketPacketOptionsEvent,
+    next: Next,
+  ): Promise<void> {
     let packet: TypeSocketPacketEvent;
     const eventPrefix = this.scope.config.eventPrefix;
     if (typeof data === 'string' && data.startsWith(eventPrefix)) {

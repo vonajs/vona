@@ -111,7 +111,10 @@ function __checkModulesDisables(context: IModuleGlobContext) {
   }
 }
 
-async function __loadPackage(context: IModuleGlobContext, modules: Record<string, ISuiteModuleBase>) {
+async function __loadPackage(
+  context: IModuleGlobContext,
+  modules: Record<string, ISuiteModuleBase>,
+) {
   const promises: Promise<IModulePackage>[] = [];
   const modulesArray: string[] = [];
   for (const moduleName in modules) {
@@ -153,13 +156,18 @@ function __orderModules(context: IModuleGlobContext, modules: Record<string, IMo
   }
 }
 
-function __pushModule(context: IModuleGlobContext, modules: Record<string, IModule>, moduleRelativeName) {
+function __pushModule(
+  context: IModuleGlobContext,
+  modules: Record<string, IModule>,
+  moduleRelativeName,
+) {
   // module
   const module = modules[moduleRelativeName];
   // check if disable
   if (context.disabledModules[moduleRelativeName]) return false;
   // check meta
-  const capabilities = module.package.zovaModule?.capabilities ?? module.package.vonaModule?.capabilities;
+  const capabilities =
+    module.package.zovaModule?.capabilities ?? module.package.vonaModule?.capabilities;
   if (context.meta && capabilities && !checkMeta(capabilities.meta, context.meta)) return false;
 
   // ordering
@@ -184,7 +192,12 @@ function __pushModule(context: IModuleGlobContext, modules: Record<string, IModu
   return true;
 }
 
-function __orderDependencies(context: IModuleGlobContext, modules: Record<string, IModule>, module, moduleRelativeName) {
+function __orderDependencies(
+  context: IModuleGlobContext,
+  modules: Record<string, IModule>,
+  module,
+  moduleRelativeName,
+) {
   if (context.options.disableCheckDependencies) return true;
   const moduleNode = getPackageModuleNode(context.options.projectMode);
   if (!module.package[moduleNode] || !module.package[moduleNode].dependencies) return true;
@@ -196,9 +209,9 @@ function __orderDependencies(context: IModuleGlobContext, modules: Record<string
     const subModule = modules[key];
     if (context.options.check !== false) {
       if (!subModule) {
-        const message = `${chalk.keyword('orange')(`module ${moduleRelativeName} disabled`)}, because ${chalk.keyword('cyan')(
-          `module ${key} not exists`,
-        )}`;
+        const message = `${chalk.keyword('orange')(`module ${moduleRelativeName} disabled`)}, because ${chalk.keyword(
+          'cyan',
+        )(`module ${key} not exists`)}`;
         console.log(`\n${boxen(message, boxenOptions)}\n`);
         enabled = false; // process.exit(0);
         continue;
@@ -321,7 +334,9 @@ function __logSuites(context: IModuleGlobContext, log) {
   for (const key in context.suitesVendor) {
     console.log(chalk.cyan(`> ${key}`));
   }
-  console.log(chalk.keyword('orange')(`\n=== Total Suites: ${Object.keys(context.suites).length} ===`));
+  console.log(
+    chalk.keyword('orange')(`\n=== Total Suites: ${Object.keys(context.suites).length} ===`),
+  );
   console.log('\n');
 }
 
@@ -426,13 +441,18 @@ function __checkSuites(context: IModuleGlobContext, suites: Record<string, ISuit
   }
 }
 
-function _checkSuiteValid(context: IModuleGlobContext, suites: Record<string, ISuite>, suiteRelativeName: string): boolean {
+function _checkSuiteValid(
+  context: IModuleGlobContext,
+  suites: Record<string, ISuite>,
+  suiteRelativeName: string,
+): boolean {
   // suite
   const suite = suites[suiteRelativeName];
   // check if disable
   if (context.disabledSuites[suiteRelativeName]) return false;
   // check meta
-  const capabilities = suite.package.zovaModule?.capabilities ?? suite.package.vonaModule?.capabilities;
+  const capabilities =
+    suite.package.zovaModule?.capabilities ?? suite.package.vonaModule?.capabilities;
   if (context.meta && capabilities && !checkMeta(capabilities.meta, context.meta)) return false;
   // ok
   return true;

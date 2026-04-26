@@ -1,5 +1,9 @@
 import type { Next, OmitNever } from 'vona';
-import type { IOnionOptionsDeps, ServiceOnion, TypeOnionOptionsBaseSimple } from 'vona-module-a-onion';
+import type {
+  IOnionOptionsDeps,
+  ServiceOnion,
+  TypeOnionOptionsBaseSimple,
+} from 'vona-module-a-onion';
 
 export interface IMiddlewareSystemRecord {}
 

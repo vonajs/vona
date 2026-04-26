@@ -14,7 +14,9 @@ describe('runtime.test.ts', () => {
       const runtimeUser = runtime['a-user'];
       // isAuthenticated: isolate + header
       const isAuthenticated = await app.bean.executor.newCtxIsolate(async () => {
-        return await app.bean.executor.performAction('get', '/test/vona/passport/isAuthenticated', { authToken: runtimeUser?.accessToken });
+        return await app.bean.executor.performAction('get', '/test/vona/passport/isAuthenticated', {
+          authToken: runtimeUser?.accessToken,
+        });
       });
       assert.equal(isAuthenticated, true);
     });

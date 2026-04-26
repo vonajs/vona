@@ -17,9 +17,13 @@ export function createFunction(expression: string, scopeKeys?: string[]): Functi
   let fn: Function;
   try {
     const js = `return (${expression})`;
-    fn = scopeKeys && scopeKeys.length > 0 ? new Function(scopeKeys.join(','), js) : new Function(js);
+    fn =
+      scopeKeys && scopeKeys.length > 0 ? new Function(scopeKeys.join(','), js) : new Function(js);
   } catch (_err) {
-    fn = scopeKeys && scopeKeys.length > 0 ? new Function(scopeKeys.join(','), expression) : new Function(expression);
+    fn =
+      scopeKeys && scopeKeys.length > 0
+        ? new Function(scopeKeys.join(','), expression)
+        : new Function(expression);
   }
   return fn;
 }

@@ -14,4 +14,7 @@ export interface TypeEventRetrieveMenusData {
 export type TypeEventRetrieveMenusResult = IMenus | undefined;
 
 @Event()
-export class EventRetrieveMenus extends BeanEventBase<TypeEventRetrieveMenusData, TypeEventRetrieveMenusResult> {}
+export class EventRetrieveMenus extends BeanEventBase<
+  TypeEventRetrieveMenusData,
+  TypeEventRetrieveMenusResult
+> {}

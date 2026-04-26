@@ -97,26 +97,58 @@ export class ProcessHelper {
     });
   }
 
-  async spawnBin({ cmd, args, options }: { cmd: string; args?: string[]; options?: IProcessHelperSpawnOptions }): Promise<string> {
+  async spawnBin({
+    cmd,
+    args,
+    options,
+  }: {
+    cmd: string;
+    args?: string[];
+    options?: IProcessHelperSpawnOptions;
+  }): Promise<string> {
     cmd = path.join(this.cwd, 'node_modules/.bin', cmd);
     return await this.spawnCmd({ cmd, args, options });
   }
 
-  async spawnCmd({ cmd, args, options }: { cmd: string; args?: string[]; options?: IProcessHelperSpawnOptions }): Promise<string> {
+  async spawnCmd({
+    cmd,
+    args,
+    options,
+  }: {
+    cmd: string;
+    args?: string[];
+    options?: IProcessHelperSpawnOptions;
+  }): Promise<string> {
     if (process.platform.startsWith('win')) {
       cmd = `${cmd}.cmd`;
     }
     return await this.spawn({ cmd, args, options });
   }
 
-  async spawnExe({ cmd, args, options }: { cmd: string; args?: string[]; options?: IProcessHelperSpawnOptions }): Promise<string> {
+  async spawnExe({
+    cmd,
+    args,
+    options,
+  }: {
+    cmd: string;
+    args?: string[];
+    options?: IProcessHelperSpawnOptions;
+  }): Promise<string> {
     if (process.platform.startsWith('win')) {
       cmd = `${cmd}.exe`;
     }
     return await this.spawn({ cmd, args, options });
   }
 
-  async spawn({ cmd, args = [], options = {} }: { cmd: string; args?: string[]; options?: IProcessHelperSpawnOptions }): Promise<string> {
+  async spawn({
+    cmd,
+    args = [],
+    options = {},
+  }: {
+    cmd: string;
+    args?: string[];
+    options?: IProcessHelperSpawnOptions;
+  }): Promise<string> {
     options.cwd = options.cwd || this.cwd;
     options.stdio = options.stdio || 'inherit';
     options.shell = options.shell ?? true;
@@ -168,7 +200,10 @@ export class ProcessHelper {
       args: ['status'],
       options,
     });
-    if (stdout.includes('nothing to commit, working tree clean') && !stdout.includes('is ahead of')) {
+    if (
+      stdout.includes('nothing to commit, working tree clean') &&
+      !stdout.includes('is ahead of')
+    ) {
       // do nothing
       return;
     }

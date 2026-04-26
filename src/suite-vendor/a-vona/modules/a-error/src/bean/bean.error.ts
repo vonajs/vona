@@ -33,7 +33,9 @@ export class BeanError extends BeanBase {
   }
 
   private _getViewTemplate() {
-    const fileTemplate = this.scope.config.error.templatePath || this.scope.asset.get('templates', 'onerror_page.mustache');
+    const fileTemplate =
+      this.scope.config.error.templatePath ||
+      this.scope.asset.get('templates', 'onerror_page.mustache');
     if (!__cacheViewTemplates[fileTemplate]) {
       __cacheViewTemplates[fileTemplate] = fs.readFileSync(fileTemplate, 'utf8');
     }

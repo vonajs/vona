@@ -1,7 +1,14 @@
 import type { ICliBuildCustomOptions } from '@cabloy/cli';
 import type { glob } from '@cabloy/module-glob';
 import type { VonaConfigMeta, VonaMetaFlavor, VonaMetaMode } from '@cabloy/module-info';
-import type { LogLevel, LogOrStringHandler, OutputOptions, RollupBuild, RollupLog, RollupOptions } from 'rollup';
+import type {
+  LogLevel,
+  LogOrStringHandler,
+  OutputOptions,
+  RollupBuild,
+  RollupLog,
+  RollupOptions,
+} from 'rollup';
 
 import { BeanCliBase } from '@cabloy/cli';
 import aliasImport from '@rollup/plugin-alias';
@@ -20,7 +27,12 @@ import { rollup } from 'rollup';
 
 import type { VonaBinConfigOptions } from './toolsBin/types.ts';
 
-import { generateConfigDefine, getAbsolutePathOfModule, getOutDir, getOutReleasesDir } from '../utils.ts';
+import {
+  generateConfigDefine,
+  getAbsolutePathOfModule,
+  getOutDir,
+  getOutReleasesDir,
+} from '../utils.ts';
 import { generateVonaMeta } from './toolsBin/generateVonaMeta.ts';
 
 const commonjs = commonjsImport as any as typeof commonjsImport.default;
@@ -123,7 +135,11 @@ export class CliBinBuild extends BeanCliBase {
     });
   }
 
-  async _assets(_projectPath: string, modulesMeta: Awaited<ReturnType<typeof glob>>, outDir: string) {
+  async _assets(
+    _projectPath: string,
+    modulesMeta: Awaited<ReturnType<typeof glob>>,
+    outDir: string,
+  ) {
     const assetsPath = path.join(outDir, 'assets');
     for (const relativeName in modulesMeta.modules) {
       const module = modulesMeta.modules[relativeName];
@@ -151,10 +167,22 @@ export class CliBinBuild extends BeanCliBase {
     const replaceValues = generateConfigDefine(env, ['NODE_ENV', 'META_MODE', 'META_FLAVOR']);
 
     const babelPluginVonaBeanModule = getAbsolutePathOfModule('babel-plugin-vona-bean-module', '');
-    const babelPluginTransformTypescriptMetadata = getAbsolutePathOfModule('babel-plugin-transform-typescript-metadata', '');
-    const babelPluginProposalDecorators = getAbsolutePathOfModule('@babel/plugin-proposal-decorators', '');
-    const babelPluginTransformClassProperties = getAbsolutePathOfModule('@babel/plugin-transform-class-properties', '');
-    const babelPluginTransformTypescript = getAbsolutePathOfModule('@babel/plugin-transform-typescript', '');
+    const babelPluginTransformTypescriptMetadata = getAbsolutePathOfModule(
+      'babel-plugin-transform-typescript-metadata',
+      '',
+    );
+    const babelPluginProposalDecorators = getAbsolutePathOfModule(
+      '@babel/plugin-proposal-decorators',
+      '',
+    );
+    const babelPluginTransformClassProperties = getAbsolutePathOfModule(
+      '@babel/plugin-transform-class-properties',
+      '',
+    );
+    const babelPluginTransformTypescript = getAbsolutePathOfModule(
+      '@babel/plugin-transform-typescript',
+      '',
+    );
 
     const plugins = [
       alias({
@@ -206,11 +234,17 @@ export class CliBinBuild extends BeanCliBase {
       input: path.join(projectPath, '.vona/bootstrap.ts'),
       plugins,
       onLog: (level: LogLevel, log: RollupLog, defaultHandler: LogOrStringHandler) => {
-        if (log.code === 'CIRCULAR_DEPENDENCY' && process.env.BUILD_LOG_CIRCULAR_DEPENDENCY === 'false') return;
+        if (
+          log.code === 'CIRCULAR_DEPENDENCY' &&
+          process.env.BUILD_LOG_CIRCULAR_DEPENDENCY === 'false'
+        )
+          return;
         if (
           log.code === 'THIS_IS_UNDEFINED' &&
           (log.message.includes('ramda/es/partialObject.js') ||
-            log.message.includes("The 'this' keyword is equivalent to 'undefined' at the top level of an ES module"))
+            log.message.includes(
+              "The 'this' keyword is equivalent to 'undefined' at the top level of an ES module",
+            ))
         ) {
           return;
         }

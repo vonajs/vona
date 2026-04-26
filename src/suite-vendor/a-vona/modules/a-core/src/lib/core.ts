@@ -9,11 +9,15 @@ import { Aspect } from 'vona-module-a-aspect';
 
 import type { IMiddlewareOptionsGate } from '../bean/middleware.gate.ts';
 
-function Gate(options?: Partial<TypeUseOnionOmitOptionsGlobal<IMiddlewareOptionsGate>>): ClassDecorator & MethodDecorator {
+function Gate(
+  options?: Partial<TypeUseOnionOmitOptionsGlobal<IMiddlewareOptionsGate>>,
+): ClassDecorator & MethodDecorator {
   return Aspect.middlewareGlobal('a-core:gate', options);
 }
 
-function Error(options?: Partial<TypeUseOnionOmitOptionsGlobal<IFilterOptionsError>>): ClassDecorator & MethodDecorator {
+function Error(
+  options?: Partial<TypeUseOnionOmitOptionsGlobal<IFilterOptionsError>>,
+): ClassDecorator & MethodDecorator {
   return Aspect.filterGlobal('a-error:error', options);
 }
 

@@ -3,8 +3,14 @@ import type { IModelSelectParamsJoin, IModelSelectParamsOrder } from './model.ts
 import type { TypeModelSelectAggrParamsAggrs } from './modelAggr.ts';
 import type { TypeModelColumnsStrict, TypeModelWhere } from './modelWhere.ts';
 import type { TypeModelsClassLikeGeneral } from './relations.ts';
-import type { TypeEntityTableColumnNamesOfGeneral, TypeEntityTableColumnsOfGeneral } from './relationsColumns.ts';
-import type { TypeModelSelectGroupParamsColumnNames, TypeModelSelectGroupParamsColumns } from './relationsGroup.ts';
+import type {
+  TypeEntityTableColumnNamesOfGeneral,
+  TypeEntityTableColumnsOfGeneral,
+} from './relationsColumns.ts';
+import type {
+  TypeModelSelectGroupParamsColumnNames,
+  TypeModelSelectGroupParamsColumns,
+} from './relationsGroup.ts';
 import type { TypeEntityTableNamesOfGeneral } from './relationsTables.ts';
 
 export interface IBuildModelSelectGroupParams<

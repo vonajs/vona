@@ -29,7 +29,9 @@ export class CliToolsCrud extends BeanCliBase {
     argv.ssrSiteModuleName = fs.existsSync(path.join(argv.projectPath, 'src/suite/cabloy-start'))
       ? 'vona-module-start-siteadmin'
       : 'vona-module-basic-siteadmin';
-    argv.ssrSiteOnionName = fs.existsSync(path.join(argv.projectPath, 'src/suite/cabloy-start')) ? 'start-siteadmin:admin' : 'basic-siteadmin:admin';
+    argv.ssrSiteOnionName = fs.existsSync(path.join(argv.projectPath, 'src/suite/cabloy-start'))
+      ? 'start-siteadmin:admin'
+      : 'basic-siteadmin:admin';
     argv.ssrSiteGroupName = fs.existsSync(path.join(argv.projectPath, 'src/suite/cabloy-start'))
       ? 'start-siteadmin:management'
       : 'basic-siteadmin:management';
@@ -52,7 +54,10 @@ export class CliToolsCrud extends BeanCliBase {
       throw new Error(`resource exists: ${resourceName}`);
     }
     // tools:crud
-    await this.helper.invokeCli([':tools:crudBasic', resourceName, `--module=${argv.module}`, '--nometadata'], { cwd: argv.projectPath });
+    await this.helper.invokeCli(
+      [':tools:crudBasic', resourceName, `--module=${argv.module}`, '--nometadata'],
+      { cwd: argv.projectPath },
+    );
     // render
     await this.template.renderBoilerplateAndSnippets({
       targetDir,

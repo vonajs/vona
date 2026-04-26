@@ -5,4 +5,7 @@ export type TypeRedlockLockResource = never;
 export type TypeRedlockLockIsolateResource = `startup.${string}`;
 
 @Meta()
-export class MetaRedlock extends BeanRedlockBase<TypeRedlockLockResource, TypeRedlockLockIsolateResource> {}
+export class MetaRedlock extends BeanRedlockBase<
+  TypeRedlockLockResource,
+  TypeRedlockLockIsolateResource
+> {}

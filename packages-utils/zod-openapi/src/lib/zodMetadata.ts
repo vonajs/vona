@@ -9,7 +9,9 @@ export class ZodMetadata {
     return (Metadata as any).unwrapUntil(schema, typeName);
   }
 
-  static unwrapChained<T extends z.ZodType | undefined>(schema?: T): T extends undefined ? undefined : z.ZodType {
+  static unwrapChained<T extends z.ZodType | undefined>(
+    schema?: T,
+  ): T extends undefined ? undefined : z.ZodType {
     if (!schema) return undefined as any;
     return Metadata.unwrapChained(schema) as any;
   }
@@ -50,7 +52,10 @@ export class ZodMetadata {
     return zodSchema;
   }
 
-  static _getFieldSchemaInner(zodSchema: z.ZodType | undefined, key: string): z.ZodType | undefined {
+  static _getFieldSchemaInner(
+    zodSchema: z.ZodType | undefined,
+    key: string,
+  ): z.ZodType | undefined {
     if (!zodSchema) return;
     zodSchema = this.unwrapChained(zodSchema);
     let schema;
@@ -68,9 +73,18 @@ export class ZodMetadata {
     return Metadata.getOpenApiMetadata(zodSchema);
   }
 
-  static isZodType<TypeName extends keyof ZodTypes>(schema: object, typeNames: TypeName[]): schema is ZodTypes[TypeName];
-  static isZodType<TypeName extends keyof ZodTypes>(schema: object, typeName: TypeName): schema is ZodTypes[TypeName];
-  static isZodType<TypeName extends keyof ZodTypes>(schema: object, typeNames: TypeName | TypeName[]): boolean {
+  static isZodType<TypeName extends keyof ZodTypes>(
+    schema: object,
+    typeNames: TypeName[],
+  ): schema is ZodTypes[TypeName];
+  static isZodType<TypeName extends keyof ZodTypes>(
+    schema: object,
+    typeName: TypeName,
+  ): schema is ZodTypes[TypeName];
+  static isZodType<TypeName extends keyof ZodTypes>(
+    schema: object,
+    typeNames: TypeName | TypeName[],
+  ): boolean {
     return isZodType(schema, typeNames as any);
   }
 }

@@ -28,7 +28,11 @@ export function schemaCustomKey<T extends z.ZodType>(customKey: string, scene?: 
   };
 }
 
-export function schemaOrder<T extends z.ZodType>(order: number, level?: TypeSchemaOrderLevel, scene?: TypeSchemaScene) {
+export function schemaOrder<T extends z.ZodType>(
+  order: number,
+  level?: TypeSchemaOrderLevel,
+  scene?: TypeSchemaScene,
+) {
   const orderReal = $order(order, level);
   return function (schema: T): T {
     const options = { order: orderReal };
@@ -36,14 +40,20 @@ export function schemaOrder<T extends z.ZodType>(order: number, level?: TypeSche
   };
 }
 
-export function schemaRender<T extends z.ZodType>(render: TypeRenderComponent, scene?: TypeSchemaScene) {
+export function schemaRender<T extends z.ZodType>(
+  render: TypeRenderComponent,
+  scene?: TypeSchemaScene,
+) {
   return function (schema: T): T {
     const options = { render };
     return _generalSchemaRest(schema, options, scene);
   };
 }
 
-export function schemaRenderJsx<T extends z.ZodType>(render: TypeRenderComponentJsx, scene?: TypeSchemaScene) {
+export function schemaRenderJsx<T extends z.ZodType>(
+  render: TypeRenderComponentJsx,
+  scene?: TypeSchemaScene,
+) {
   return function (schema: T): T {
     const options = { render };
     return _generalSchemaRest(schema, options, scene);

@@ -16,10 +16,17 @@ export class ServiceJwtExtract extends BeanBase {
 
   fromAuthHeaderWithScheme(headerValue?: string) {
     if (!headerValue) {
-      headerValue = this.ctx.request.headers[this.scope.config.field.extract.headerAuth] as string | undefined;
+      headerValue = this.ctx.request.headers[this.scope.config.field.extract.headerAuth] as
+        | string
+        | undefined;
     }
     const auth = parseAuthHeader(headerValue);
-    if (!auth || auth.scheme.toLocaleLowerCase() !== this.scope.config.field.extract.headerAuthScheme.toLocaleLowerCase()) return;
+    if (
+      !auth ||
+      auth.scheme.toLocaleLowerCase() !==
+        this.scope.config.field.extract.headerAuthScheme.toLocaleLowerCase()
+    )
+      return;
     return auth.value;
   }
 

@@ -33,15 +33,26 @@ describe('upload.test.ts', () => {
       });
       const data = await res.json();
       assert.equal(data.data.fields.find(item => item.name === 'name')?.value, 'zhennann');
-      assert.equal(data.data.files.find(item => item.name === 'welcome')?.info.filename, 'file-test.txt');
+      assert.equal(
+        data.data.files.find(item => item.name === 'welcome')?.info.filename,
+        'file-test.txt',
+      );
     });
   });
   it('action:upload:files', async () => {
     await app.bean.executor.mockCtx(async () => {
       const formData = new FormData();
       formData.append('name', 'zhennann');
-      formData.append('welcome1', new (Blob as any)(['hello world!'], { type: 'text/plain' }), 'file-test1.txt');
-      formData.append('welcome2', new (Blob as any)(['hello world!'], { type: 'text/plain' }), 'file-test2.txt');
+      formData.append(
+        'welcome1',
+        new (Blob as any)(['hello world!'], { type: 'text/plain' }),
+        'file-test1.txt',
+      );
+      formData.append(
+        'welcome2',
+        new (Blob as any)(['hello world!'], { type: 'text/plain' }),
+        'file-test2.txt',
+      );
       formData.append('images', new (Blob as any)(['hello world!'], { type: 'text/plain' }));
       formData.append('images', new (Blob as any)(['hello world!'], { type: 'text/plain' }));
       const url = app.util.getAbsoluteUrlByApiPath($apiPath('/test/vona/upload/files'));
@@ -51,8 +62,14 @@ describe('upload.test.ts', () => {
       });
       const data = await res.json();
       assert.equal(data.data.fields.find(item => item.name === 'name')?.value, 'zhennann');
-      assert.equal(data.data.files.find(item => item.name === 'welcome1')?.info.filename, 'file-test1.txt');
-      assert.equal(data.data.files.find(item => item.name === 'welcome2')?.info.filename, 'file-test2.txt');
+      assert.equal(
+        data.data.files.find(item => item.name === 'welcome1')?.info.filename,
+        'file-test1.txt',
+      );
+      assert.equal(
+        data.data.files.find(item => item.name === 'welcome2')?.info.filename,
+        'file-test2.txt',
+      );
     });
   });
 });

@@ -11,7 +11,10 @@ describe('modelRelationsMutate.test.ts', () => {
       // scope
       const scopeTest = app.scope('test-vona');
       // insert: roles
-      const roles = await scopeTest.model.role.insertBulk([{ name: `${prefix}:family` }, { name: `${prefix}:friend` }]);
+      const roles = await scopeTest.model.role.insertBulk([
+        { name: `${prefix}:family` },
+        { name: `${prefix}:friend` },
+      ]);
       assert.equal(roles.length, 2);
       assert.equal(roles[0].id !== undefined, true);
       // insert: users
@@ -43,7 +46,10 @@ describe('modelRelationsMutate.test.ts', () => {
       );
       assert.equal(users.length, 1);
       // check
-      const post = await scopeTest.model.post.get({ id: users[0].posts?.[0].id }, { include: { postContent: true } });
+      const post = await scopeTest.model.post.get(
+        { id: users[0].posts?.[0].id },
+        { include: { postContent: true } },
+      );
       assert.equal(post?.postContent?.content, `${prefix}:postContentApple`);
       // update: users
       const _usersUpdate = await scopeTest.model.user.update(
@@ -98,7 +104,10 @@ describe('modelRelationsMutate.test.ts', () => {
       );
       assert.equal(usersUpdateCheck?.posts.length, 2);
       assert.equal(usersUpdateCheck?.posts[0].title, `${prefix}:postApple-update`);
-      assert.equal(usersUpdateCheck?.posts[0].postContent?.content, `${prefix}:postContentApple-update`);
+      assert.equal(
+        usersUpdateCheck?.posts[0].postContent?.content,
+        `${prefix}:postContentApple-update`,
+      );
       assert.equal(usersUpdateCheck?.posts[1].postContent?.content, `${prefix}:postContentPear`);
       assert.equal(usersUpdateCheck?.roles.length, 1);
       assert.equal(usersUpdateCheck?.roles[0].id, roles[1].id);
@@ -147,7 +156,10 @@ describe('modelRelationsMutate.test.ts', () => {
       );
       assert.equal(usersMutateCheck?.posts.length, 2);
       assert.equal(usersMutateCheck?.posts[0].title, `${prefix}:postApple-mutate`);
-      assert.equal(usersMutateCheck?.posts[0].postContent?.content, `${prefix}:postContentApple-mutate`);
+      assert.equal(
+        usersMutateCheck?.posts[0].postContent?.content,
+        `${prefix}:postContentApple-mutate`,
+      );
       assert.equal(usersMutateCheck?.posts[1].postContent?.content, `${prefix}:postContentPear`);
       assert.equal(usersMutateCheck?.roles.length, 0);
       // delete: users
@@ -160,7 +172,9 @@ describe('modelRelationsMutate.test.ts', () => {
           },
         },
       );
-      const roleUsers = await scopeTest.model.roleUser.select({ where: { userId: users.map(item => item.id) } });
+      const roleUsers = await scopeTest.model.roleUser.select({
+        where: { userId: users.map(item => item.id) },
+      });
       assert.equal(roleUsers.length, 0);
       // delete: roles
       await scopeTest.model.role.deleteBulk(roles.map(item => item.id));
@@ -184,7 +198,10 @@ describe('modelRelationsMutate.test.ts', () => {
       // scope
       const scopeTest = app.scope('test-vona');
       // insert: roles
-      const roles = await scopeTest.model.role.insertBulk([{ name: `${prefix}:family` }, { name: `${prefix}:friend` }]);
+      const roles = await scopeTest.model.role.insertBulk([
+        { name: `${prefix}:family` },
+        { name: `${prefix}:friend` },
+      ]);
       assert.equal(roles.length, 2);
       assert.equal(roles[0].id !== undefined, true);
       // insert: users
@@ -216,7 +233,10 @@ describe('modelRelationsMutate.test.ts', () => {
       );
       assert.equal(users.length, 1);
       // check
-      const post = await scopeTest.model.post.get({ id: users[0].posts![0].id }, { include: { postContent: true } });
+      const post = await scopeTest.model.post.get(
+        { id: users[0].posts![0].id },
+        { include: { postContent: true } },
+      );
       assert.equal(post?.postContent?.content, `${prefix}:postContentApple`);
       // update: users
       const _usersUpdate = await scopeTest.model.user.update(
@@ -271,7 +291,10 @@ describe('modelRelationsMutate.test.ts', () => {
       );
       assert.equal(usersUpdateCheck?.posts.length, 2);
       assert.equal(usersUpdateCheck?.posts[0].title, `${prefix}:postApple-update`);
-      assert.equal(usersUpdateCheck?.posts[0].postContent?.content, `${prefix}:postContentApple-update`);
+      assert.equal(
+        usersUpdateCheck?.posts[0].postContent?.content,
+        `${prefix}:postContentApple-update`,
+      );
       assert.equal(usersUpdateCheck?.posts[1].postContent?.content, `${prefix}:postContentPear`);
       assert.equal(usersUpdateCheck?.roles.length, 1);
       assert.equal(usersUpdateCheck?.roles[0].id, roles[1].id);
@@ -320,7 +343,10 @@ describe('modelRelationsMutate.test.ts', () => {
       );
       assert.equal(usersMutateCheck?.posts.length, 2);
       assert.equal(usersMutateCheck?.posts[0].title, `${prefix}:postApple-mutate`);
-      assert.equal(usersMutateCheck?.posts[0].postContent?.content, `${prefix}:postContentApple-mutate`);
+      assert.equal(
+        usersMutateCheck?.posts[0].postContent?.content,
+        `${prefix}:postContentApple-mutate`,
+      );
       assert.equal(usersMutateCheck?.posts[1].postContent?.content, `${prefix}:postContentPear`);
       assert.equal(usersMutateCheck?.roles.length, 0);
       // delete: users
@@ -333,7 +359,9 @@ describe('modelRelationsMutate.test.ts', () => {
           },
         },
       );
-      const roleUsers = await scopeTest.model.roleUser.select({ where: { userId: users.map(item => item.id) } });
+      const roleUsers = await scopeTest.model.roleUser.select({
+        where: { userId: users.map(item => item.id) },
+      });
       assert.equal(roleUsers.length, 0);
       // delete: roles
       await scopeTest.model.role.deleteBulk(roles.map(item => item.id));
@@ -392,7 +420,10 @@ describe('modelRelationsMutate.test.ts', () => {
         include: { children: false },
       });
       assert.equal(items.length, 5);
-      await scopeTest.model.category.delete({ id: categoryTree.id }, { include: { children: { meta: { client: '_auto_' } } } });
+      await scopeTest.model.category.delete(
+        { id: categoryTree.id },
+        { include: { children: { meta: { client: '_auto_' } } } },
+      );
       const items2 = await scopeTest.model.category.select({
         where: {
           name: { _startsWith_: `${prefix}:` },

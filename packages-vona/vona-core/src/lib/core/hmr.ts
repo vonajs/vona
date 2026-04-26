@@ -18,7 +18,12 @@ export class AppHmr extends BeanSimple {
   public recordBeanInstances: Record<string, IRecordBeanInstance[] | undefined> = {};
   public recordBeanInstanceProps: Record<string, IRecordBeanInstanceProp[] | undefined> = {};
 
-  addBeanInstance(beanFullName: string, beanInstanceKey: string, args: any[], withSelector?: boolean) {
+  addBeanInstance(
+    beanFullName: string,
+    beanInstanceKey: string,
+    args: any[],
+    withSelector?: boolean,
+  ) {
     if (!this.recordBeanInstances[beanFullName]) {
       this.recordBeanInstances[beanFullName] = [];
     }

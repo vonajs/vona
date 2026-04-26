@@ -54,7 +54,11 @@ export class ServiceHmr extends BeanBase {
     const locale = path.basename(file, '.ts');
     // localeModules
     if (!this.app.meta.localeModules[moduleName]) this.app.meta.localeModules[moduleName] = {};
-    this.app.meta.localeModules[moduleName][locale] = Object.assign({}, moduleLocales, this.app.meta.hmrCacheLocaleModules[moduleName]?.[locale]);
+    this.app.meta.localeModules[moduleName][locale] = Object.assign(
+      {},
+      moduleLocales,
+      this.app.meta.hmrCacheLocaleModules[moduleName]?.[locale],
+    );
     // openapi
     await this.bean.openapi.clearAllCaches();
   }
@@ -62,9 +66,20 @@ export class ServiceHmr extends BeanBase {
   private async _reloadConfig(moduleName: string, config: TypeModuleResourceConfig) {
     const app = this.app;
     const configModule = await config(app);
-    await app.util.monkeyModule(app.meta.appMonkey, app.meta.modulesMonkey, true, 'configLoaded', app.meta.modules[moduleName], configModule);
+    await app.util.monkeyModule(
+      app.meta.appMonkey,
+      app.meta.modulesMonkey,
+      true,
+      'configLoaded',
+      app.meta.modules[moduleName],
+      configModule,
+    );
     // app config
-    app.config.modules[moduleName] = deepExtend({}, configModule, app.meta.hmrCacheConfigModules[moduleName]);
+    app.config.modules[moduleName] = deepExtend(
+      {},
+      configModule,
+      app.meta.hmrCacheConfigModules[moduleName],
+    );
     // instance config
     await this.$scope.instance.service.instance.resetAllCaches();
   }
@@ -128,7 +143,11 @@ export class ServiceHmr extends BeanBase {
         const state = beanInstanceOld[SymbolHmrStateSave]?.();
         await beanContainer._removeBean(beanInstanceKey);
         // new
-        const beanInstanceNew: any = beanContainer._getBeanSelectorInner(beanFullName, withSelector, ...args);
+        const beanInstanceNew: any = beanContainer._getBeanSelectorInner(
+          beanFullName,
+          withSelector,
+          ...args,
+        );
         beanInstanceNew[SymbolHmrStateLoad]?.(state);
       }
     }

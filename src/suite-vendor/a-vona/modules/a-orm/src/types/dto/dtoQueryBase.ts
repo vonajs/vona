@@ -13,6 +13,10 @@ export class DtoQueryBase {
   @Api.field(v.optional(), z.looseObject({}))
   where?: object;
 
-  @Api.field(v.default(ordersDefault), v.optional(), z.union([z.string(), z.array(z.array(z.string()))]))
+  @Api.field(
+    v.default(ordersDefault),
+    v.optional(),
+    z.union([z.string(), z.array(z.array(z.string()))]),
+  )
   orders?: string | string[][];
 }

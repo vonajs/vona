@@ -24,7 +24,9 @@ export class StartupRuntime extends BeanBase implements IStartupExecute {
     const runtime = {};
     const onions = this.bean.onion.meta.getOnionsEnabledOfMeta(true, 'runtime');
     for (const onion of onions) {
-      const beanInstance = this.bean._getBean<IMetaRuntimeExecute>(onion.beanOptions.beanFullName as any);
+      const beanInstance = this.bean._getBean<IMetaRuntimeExecute>(
+        onion.beanOptions.beanFullName as any,
+      );
       const res = await beanInstance.execute();
       if (!res) continue;
       const moduleName = onion.beanOptions.module;

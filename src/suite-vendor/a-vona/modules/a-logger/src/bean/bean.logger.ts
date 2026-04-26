@@ -1,8 +1,20 @@
-import type { ILoggerChildRecord, ILoggerClientRecord, ILoggerOptionsClientInfo, LoggerLevel } from 'vona';
+import type {
+  ILoggerChildRecord,
+  ILoggerClientRecord,
+  ILoggerOptionsClientInfo,
+  LoggerLevel,
+} from 'vona';
 import type { ILoggerFormatOpts } from 'vona';
 import type * as Transport from 'winston-transport';
 
-import { BeanBase, formatLoggerConsole, formatLoggerCtx, formatLoggerDummy, formatLoggerErrors, formatLoggerFilter } from 'vona';
+import {
+  BeanBase,
+  formatLoggerConsole,
+  formatLoggerCtx,
+  formatLoggerDummy,
+  formatLoggerErrors,
+  formatLoggerFilter,
+} from 'vona';
 import { Bean } from 'vona-module-a-bean';
 import * as Winston from 'winston';
 
@@ -34,12 +46,20 @@ export class BeanLogger extends BeanBase {
     return this.app.meta.logger.get(clientName);
   }
 
-  public getChild(childName: keyof ILoggerChildRecord, clientName?: keyof ILoggerClientRecord): Winston.Logger {
+  public getChild(
+    childName: keyof ILoggerChildRecord,
+    clientName?: keyof ILoggerClientRecord,
+  ): Winston.Logger {
     return this.app.meta.logger.get(clientName).child({ name: childName });
   }
 
   public makeFormatBase(opts: ILoggerFormatOpts) {
-    return Winston.format.combine(formatLoggerErrors(opts), formatLoggerCtx(), Winston.format.splat(), Winston.format.timestamp());
+    return Winston.format.combine(
+      formatLoggerErrors(opts),
+      formatLoggerCtx(),
+      Winston.format.splat(),
+      Winston.format.timestamp(),
+    );
   }
 
   public makeTransportFile(
@@ -51,7 +71,11 @@ export class BeanLogger extends BeanBase {
     return this.app.meta.logger.createTransportFile(fileName, clientInfo, {
       level: levelStrict ?? 'silly',
       format: Winston.format.combine(
-        formatLoggerFilter({ child: childStrict ?? clientInfo.child, level: levelStrict ?? clientInfo.level, strict: !!levelStrict }),
+        formatLoggerFilter({
+          child: childStrict ?? clientInfo.child,
+          level: levelStrict ?? clientInfo.level,
+          strict: !!levelStrict,
+        }),
         Winston.format.json(),
       ),
     });

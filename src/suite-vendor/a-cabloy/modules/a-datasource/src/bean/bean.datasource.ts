@@ -10,7 +10,8 @@ export class BeanDatasource extends BeanBase {
     if (datasource.id) where.id = datasource.id;
     if (datasource.name) where.name = datasource.name;
     const entityDatasource = await this.scope.model.datasource.get(where);
-    if (!entityDatasource) throw new Error(`datasource not found: ${datasource.name || datasource.id}`);
+    if (!entityDatasource)
+      throw new Error(`datasource not found: ${datasource.name || datasource.id}`);
     // client
     const clientName = this._getDynamicClientName(entityDatasource.id) as any;
     return this.bean.database.getDb(clientName, entityDatasource.config);

@@ -33,7 +33,10 @@ export class QueueAdd
   extends BeanQueueBase<TypeQueueAddJobData, TypeQueueAddJobResult>
   implements IQueueExecute<TypeQueueAddJobData, TypeQueueAddJobResult>
 {
-  async execute(data: TypeQueueAddJobData, _options?: IQueuePushOptions): Promise<TypeQueueAddJobResult> {
+  async execute(
+    data: TypeQueueAddJobData,
+    _options?: IQueuePushOptions,
+  ): Promise<TypeQueueAddJobResult> {
     return data.a + data.b;
   }
 }

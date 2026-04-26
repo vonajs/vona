@@ -19,7 +19,11 @@ import type {
 import { BeanModelView } from './bean.model_view.ts';
 
 export class BeanModelCrudInner<TRecord extends {}> extends BeanModelView<TRecord> {
-  protected async _mget(table?: keyof ITableRecord, ids?: TableIdentity[], options?: IModelGetOptionsGeneral<TRecord>): Promise<TRecord[]> {
+  protected async _mget(
+    table?: keyof ITableRecord,
+    ids?: TableIdentity[],
+    options?: IModelGetOptionsGeneral<TRecord>,
+  ): Promise<TRecord[]> {
     const items = await this._mget_original(table, ids, options);
     return items.filter(item => !isNil(item));
   }
@@ -45,7 +49,9 @@ export class BeanModelCrudInner<TRecord extends {}> extends BeanModelView<TRecor
       params.columns = options?.columns as any;
     }
     // select
-    const options2 = options?.columns ? Object.assign({}, options, { columns: undefined }) : options;
+    const options2 = options?.columns
+      ? Object.assign({}, options, { columns: undefined })
+      : options;
     const items = await this._select(table, params, options2);
     // sort
     const result: (TRecord | undefined)[] = [];
@@ -201,7 +207,10 @@ export class BeanModelCrudInner<TRecord extends {}> extends BeanModelView<TRecor
       const dataTemp2 = this._prepareInsertDataByOptions(table, dataTemp, options);
       // then
       const [dataNew, dataNewOriginal] = await this.prepareData(table, dataTemp2);
-      if (isNil(cast(dataNewOriginal).id) && Object.prototype.hasOwnProperty.call(dataNewOriginal, 'id')) {
+      if (
+        isNil(cast(dataNewOriginal).id) &&
+        Object.prototype.hasOwnProperty.call(dataNewOriginal, 'id')
+      ) {
         delete cast(dataNewOriginal).id;
       }
       datas.push(dataNew);
@@ -275,7 +284,11 @@ export class BeanModelCrudInner<TRecord extends {}> extends BeanModelView<TRecor
     return data;
   }
 
-  protected async _delete(table?: keyof ITableRecord, where?: TypeModelWhere<TRecord>, options?: IModelMethodOptionsGeneral): Promise<void> {
+  protected async _delete(
+    table?: keyof ITableRecord,
+    where?: TypeModelWhere<TRecord>,
+    options?: IModelMethodOptionsGeneral,
+  ): Promise<void> {
     // table
     table = table || this.getTable(where);
     if (!table) return this.scopeOrm.error.ShouldSpecifyTable.throw();

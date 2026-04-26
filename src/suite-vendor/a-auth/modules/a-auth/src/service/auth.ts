@@ -31,13 +31,25 @@ export class ServiceAuth extends BeanBase {
     state?: IAuthenticateStrategyState,
     strategyVerifyArgs?: TypeStrategyVerifyArgs,
   ) {
-    const profileUser = await beanAuthProvider.verify(strategyVerifyArgs ?? [], clientOptions, onionOptions, state);
+    const profileUser = await beanAuthProvider.verify(
+      strategyVerifyArgs ?? [],
+      clientOptions,
+      onionOptions,
+      state,
+    );
     // confirmed
     if (isNil(profileUser.confirmed)) profileUser.confirmed = clientOptions.confirmed;
     // issuePassport
-    const passport = await this.issuePassport(profileUser, entityAuthProvider, clientOptions, state);
+    const passport = await this.issuePassport(
+      profileUser,
+      entityAuthProvider,
+      clientOptions,
+      state,
+    );
     // signin
-    const jwtToken = await this.bean.passport.signin(passport, { authToken: clientOptions.authTokenOptions });
+    const jwtToken = await this.bean.passport.signin(passport, {
+      authToken: clientOptions.authTokenOptions,
+    });
     return jwtToken;
   }
 
@@ -51,7 +63,12 @@ export class ServiceAuth extends BeanBase {
     return await this.scope.event.issuePassport.emit(
       { profileUser, entityAuthProvider, clientOptions, state },
       async ({ profileUser, entityAuthProvider, clientOptions, state }) => {
-        return await this._issuePassportInner(profileUser, entityAuthProvider, clientOptions, state);
+        return await this._issuePassportInner(
+          profileUser,
+          entityAuthProvider,
+          clientOptions,
+          state,
+        );
       },
     );
   }
@@ -153,9 +170,12 @@ export class ServiceAuth extends BeanBase {
   }
 
   async accountMigration(userIdFrom: TableIdentity, userIdTo: TableIdentity) {
-    return await this.scope.event.accountMigration.emit({ userIdFrom, userIdTo }, async ({ userIdFrom, userIdTo }) => {
-      return await this._accountMigrationInner(userIdFrom, userIdTo);
-    });
+    return await this.scope.event.accountMigration.emit(
+      { userIdFrom, userIdTo },
+      async ({ userIdFrom, userIdTo }) => {
+        return await this._accountMigrationInner(userIdFrom, userIdTo);
+      },
+    );
   }
 
   private async _accountMigrationInner(userIdFrom: TableIdentity, userIdTo: TableIdentity) {
@@ -188,19 +208,26 @@ export class ServiceAuth extends BeanBase {
 
   public async authCallback(strategyState: IAuthenticateStrategyState): Promise<IJwtToken> {
     // clientOptions
-    const { entityAuthProvider, disabled, beanFullName, onionOptions, clientOptions } = await this.bean.authProvider.getClientOptions(
-      {
-        id: strategyState.authProviderId,
-      },
-      strategyState.clientOptions,
-    );
+    const { entityAuthProvider, disabled, beanFullName, onionOptions, clientOptions } =
+      await this.bean.authProvider.getClientOptions(
+        {
+          id: strategyState.authProviderId,
+        },
+        strategyState.clientOptions,
+      );
     if (!entityAuthProvider || disabled) return this.app.throw(403);
     // execute
-    const beanAuthProvider = this.app.bean._getBean<IAuthProviderVerify & IAuthProviderStrategy>(beanFullName as any);
+    const beanAuthProvider = this.app.bean._getBean<IAuthProviderVerify & IAuthProviderStrategy>(
+      beanFullName as any,
+    );
     // strategy
     if (!beanAuthProvider.strategy) return this.app.throw(401);
     const strategyOptions: TypeStrategyOptions = clientOptions;
-    const Strategy = await this.getStrategyConstructable(beanAuthProvider, clientOptions, onionOptions);
+    const Strategy = await this.getStrategyConstructable(
+      beanAuthProvider,
+      clientOptions,
+      onionOptions,
+    );
     // strategy.authenticate
     return new Promise((resolve, reject) => {
       const strategy = new Strategy(strategyOptions, async (...args: TypeStrategyVerifyArgs) => {
@@ -220,7 +247,9 @@ export class ServiceAuth extends BeanBase {
           const code = await this.bean.passport.createOauthCodeFromOauthAuthToken(jwt.accessToken);
           // redirect
           if (!strategyState.redirect) return reject(new Error('redirect not specified'));
-          const redirectUrl = combineQueries(strategyState.redirect, { [this.scope.config.oauthCodeField]: code });
+          const redirectUrl = combineQueries(strategyState.redirect, {
+            [this.scope.config.oauthCodeField]: code,
+          });
           return this.ctx.redirect(redirectUrl);
         } catch (err) {
           reject(err);

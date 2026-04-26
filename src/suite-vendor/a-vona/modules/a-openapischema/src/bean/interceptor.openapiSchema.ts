@@ -14,7 +14,11 @@ export class InterceptorOpenapiSchema extends BeanBase implements IInterceptorEx
     if (headerOpenapiSchema?.toString() !== 'true') return next();
     // openapi-schema
     const route = this.ctx.route;
-    const doc = await this.bean.openapi.generateJsonOfControllerAction(route.controller, route.action, 'V31');
+    const doc = await this.bean.openapi.generateJsonOfControllerAction(
+      route.controller,
+      route.action,
+      'V31',
+    );
     this.app.success({ doc });
   }
 }

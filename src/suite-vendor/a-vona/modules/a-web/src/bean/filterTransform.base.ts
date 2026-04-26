@@ -1,6 +1,10 @@
 import { BeanBase } from 'vona';
 
-import type { IDecoratorFilterTransformOptions, IFilterTransformWhere, IPipeOptionsFilterTransformInfo } from '../types/filterTransform.ts';
+import type {
+  IDecoratorFilterTransformOptions,
+  IFilterTransformWhere,
+  IPipeOptionsFilterTransformInfo,
+} from '../types/filterTransform.ts';
 
 import { FilterTransform } from '../lib/decorator/filterTransform.ts';
 
@@ -10,7 +14,10 @@ export interface IFilterTransformOptionsBase extends IDecoratorFilterTransformOp
 
 @FilterTransform<IFilterTransformOptionsBase>()
 export class FilterTransformBase extends BeanBase implements IFilterTransformWhere {
-  async where(info: IPipeOptionsFilterTransformInfo, _options: IFilterTransformOptionsBase): Promise<any | undefined> {
+  async where(
+    info: IPipeOptionsFilterTransformInfo,
+    _options: IFilterTransformOptionsBase,
+  ): Promise<any | undefined> {
     const { value, type, openapi } = info;
     let op = openapi?.filter?.op;
     if (!op) {

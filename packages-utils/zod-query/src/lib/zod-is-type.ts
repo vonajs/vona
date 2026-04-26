@@ -60,9 +60,18 @@ const ZodTypeKeys: Record<keyof ZodTypes, string> = {
   ZodDate: 'date',
 };
 
-export function isZodType<TypeName extends keyof ZodTypes>(schema: object, typeNames: TypeName[]): schema is ZodTypes[TypeName];
-export function isZodType<TypeName extends keyof ZodTypes>(schema: object, typeName: TypeName): schema is ZodTypes[TypeName];
-export function isZodType<TypeName extends keyof ZodTypes>(schema: object, typeNames: TypeName | TypeName[]): schema is ZodTypes[TypeName] {
+export function isZodType<TypeName extends keyof ZodTypes>(
+  schema: object,
+  typeNames: TypeName[],
+): schema is ZodTypes[TypeName];
+export function isZodType<TypeName extends keyof ZodTypes>(
+  schema: object,
+  typeName: TypeName,
+): schema is ZodTypes[TypeName];
+export function isZodType<TypeName extends keyof ZodTypes>(
+  schema: object,
+  typeNames: TypeName | TypeName[],
+): schema is ZodTypes[TypeName] {
   const typeNamesArray = Array.isArray(typeNames) ? typeNames : [typeNames];
 
   return typeNamesArray.some(typeName => {

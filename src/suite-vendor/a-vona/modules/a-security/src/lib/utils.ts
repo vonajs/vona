@@ -44,7 +44,9 @@ export function isSafePath(path: string, ctx: VonaContext) {
     } catch (_e) {
       if (ctx.app.meta.isDev || ctx.app.meta.isTest) {
         // not under production environment, output log
-        ctx.app.meta.logger.get().warn('[@eggjs/security: dta global block] : decode file path %j failed.', path);
+        ctx.app.meta.logger
+          .get()
+          .warn('[@eggjs/security: dta global block] : decode file path %j failed.', path);
       }
     }
   }
@@ -52,7 +54,10 @@ export function isSafePath(path: string, ctx: VonaContext) {
   return !(normalizePath.startsWith('../') || normalizePath.startsWith('..\\'));
 }
 
-export function checkIfIgnore(opts: { enable: boolean; matching?: PathMatchingFun }, ctx: VonaContext) {
+export function checkIfIgnore(
+  opts: { enable: boolean; matching?: PathMatchingFun },
+  ctx: VonaContext,
+) {
   // check opts.enable first
   if (!opts.enable) return true;
   return !opts.matching?.(ctx);
@@ -170,11 +175,15 @@ export function preprocessConfig(config: IMiddlewareSystemOptionsSecurities) {
   config.domainWhiteList = config.domainWhiteList.map((domain: string) => domain.toLowerCase());
 
   config.protocolWhiteList = config.protocolWhiteList || [];
-  config.protocolWhiteList = config.protocolWhiteList.map((protocol: string) => protocol.toLowerCase());
+  config.protocolWhiteList = config.protocolWhiteList.map((protocol: string) =>
+    protocol.toLowerCase(),
+  );
 
   // Make sure refererWhiteList is case insensitive
   if (config.csrf && config.csrf.refererWhiteList) {
-    config.csrf.refererWhiteList = config.csrf.refererWhiteList.map((ref: string) => ref.toLowerCase());
+    config.csrf.refererWhiteList = config.csrf.refererWhiteList.map((ref: string) =>
+      ref.toLowerCase(),
+    );
   }
 
   // Directly converted to Set collection by a private property (not documented),

@@ -33,7 +33,9 @@ function __parseFrom(address: string | Address | undefined): string | undefined 
   return address;
 }
 
-function __parseTo(address: string | Address | Array<string | Address> | undefined): string | undefined {
+function __parseTo(
+  address: string | Address | Array<string | Address> | undefined,
+): string | undefined {
   if (!address) return address;
   if (!Array.isArray(address)) return __parseFrom(address);
   return address.map(item => __parseFrom(item)).join(',');
