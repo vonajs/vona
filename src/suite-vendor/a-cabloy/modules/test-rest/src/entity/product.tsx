@@ -25,7 +25,7 @@ export class EntityProduct extends EntityBase {
   @Api.field(
     v.title($locale('Name')),
     v.order(1),
-    // v.renderComponent('actionDelete', undefined, 'table'),
+    // v.renderComponent(),
     // v.render(
     //   <ZZDemoBasicActionView>
     //     <div className="mock">{cel('displayValue')}</div>
