@@ -1,11 +1,16 @@
 /** table */
 
+import type { TableIdentity } from 'table-identity';
+import type { IResourceRecord } from 'vona-module-a-openapi';
+
 export interface IResourceActionTableRecord {
   create: IResourceActionTableOptionsCreate;
   operationsTable: IResourceActionTableOptionsOperationsTable;
 }
 
-export interface IResourceActionTableOptionsBase {}
+export interface IResourceActionTableOptionsBase {
+  resource?: keyof IResourceRecord;
+}
 
 export interface IResourceActionTableOptionsCreate extends IResourceActionTableOptionsBase {}
 export interface IResourceActionTableOptionsOperationsTable extends IResourceActionTableOptionsBase {}
@@ -19,7 +24,10 @@ export interface IResourceActionRowRecord {
   actionOperationsRow: IResourceActionRowOptionsOperationsRow;
 }
 
-export interface IResourceActionRowOptionsBase {}
+export interface IResourceActionRowOptionsBase {
+  resource?: keyof IResourceRecord;
+  id?: TableIdentity;
+}
 
 export interface IResourceActionRowOptionsView extends IResourceActionRowOptionsBase {}
 
