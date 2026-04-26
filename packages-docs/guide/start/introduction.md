@@ -71,7 +71,7 @@ The Website and Admin-Dashboard of Cabloy Store are built by one codebase.
 | Knex       | >=3.1.0  |
 | Zod        | >=4.1.13 |
 | Redis      | >=7.2.6  |
-| Sqlite3    | 内置     |
+| Sqlite3    | builtin  |
 | MySQL      | >=8      |
 | Postgresql | >=16     |
 
