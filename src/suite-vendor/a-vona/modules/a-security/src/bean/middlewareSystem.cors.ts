@@ -26,7 +26,7 @@ export interface IMiddlewareSystemOptionsCors extends IDecoratorMiddlewareSystem
   exposeHeaders: '',
   allowHeaders: '',
   maxAge: '',
-  credentials: true,
+  credentials: false,
   keepHeadersOnError: false,
   secureContext: false,
   privateNetworkAccess: false,
