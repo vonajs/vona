@@ -11,3 +11,4 @@ export * from './resourceMeta.ts';
 export * from './rest.ts';
 export * from './table.ts';
 export * from './tableProvider.ts';
+export * from './actions.ts';

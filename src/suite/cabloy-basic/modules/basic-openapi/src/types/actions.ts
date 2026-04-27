@@ -1,33 +1,39 @@
-/** table */
+import 'vona-module-a-openapi';
+import type {
+  IResourceActionRowOptionsBase,
+  IResourceActionTableOptionsBase,
+} from 'vona-module-a-openapi';
 
-import type { TableIdentity } from 'table-identity';
-import type { IResourceRecord } from 'vona-module-a-openapi';
+declare module 'vona-module-a-openapi' {
+  /** table */
+  export interface IResourceActionTableRecord {
+    create?: never;
+    operationsTable?: never;
+  }
 
-export interface IResourceActionTableRecord {
-  create: IResourceActionTableOptionsCreate;
-  operationsTable: IResourceActionTableOptionsOperationsTable;
+  /** row */
+  export interface IResourceActionRowRecord {
+    view?: never;
+    update?: never;
+    delete?: never;
+    operationsRow?: never;
+  }
 }
 
-export interface IResourceActionTableOptionsBase {
-  resource?: keyof IResourceRecord;
+export interface IResourceActionComponentTableRecord {
+  actionCreate?: IResourceActionTableOptionsCreate;
+  actionOperationsTable?: IResourceActionTableOptionsOperationsTable;
+}
+
+export interface IResourceActionComponentRowRecord {
+  actionView?: IResourceActionRowOptionsView;
+  actionUpdate?: IResourceActionRowOptionsUpdate;
+  actionDelete?: IResourceActionRowOptionsDelete;
+  actionOperationsRow?: IResourceActionRowOptionsOperationsRow;
 }
 
 export interface IResourceActionTableOptionsCreate extends IResourceActionTableOptionsBase {}
 export interface IResourceActionTableOptionsOperationsTable extends IResourceActionTableOptionsBase {}
-
-/** row */
-
-export interface IResourceActionRowRecord {
-  actionView: IResourceActionRowOptionsView;
-  actionUpdate: IResourceActionRowOptionsUpdate;
-  actionDelete: IResourceActionRowOptionsDelete;
-  actionOperationsRow: IResourceActionRowOptionsOperationsRow;
-}
-
-export interface IResourceActionRowOptionsBase {
-  resource?: keyof IResourceRecord;
-  id?: TableIdentity;
-}
 
 export interface IResourceActionRowOptionsView extends IResourceActionRowOptionsBase {}
 
