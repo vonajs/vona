@@ -100,11 +100,10 @@ export type TypeRenderComponentPreset =
 export type TypeRenderComponent = TypeRenderComponentPreset | TypeRenderComponentJsx;
 
 // form
-export type TypeFormFieldRenderComponentProvider =
-  | keyof IComponentRecord
-  | 'input'
-  | 'textarea'
-  | 'select';
+export type TypeFormFieldRenderComponentProvider = keyof IComponentRecord;
+// | 'input'
+// | 'textarea'
+// | 'select';
 
 // table
 export type TypeTableCellRenderComponentProvider =
