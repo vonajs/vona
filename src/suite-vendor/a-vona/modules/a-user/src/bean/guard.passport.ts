@@ -28,15 +28,17 @@ export class GuardPassport extends BeanBase implements IGuardExecute {
         checkErrorJwtExpiredAndThrow(err, this.ctx.headers);
       }
     }
-    // check current
-    if (!this.bean.passport.current) {
-      await this.bean.passport.signinWithAnonymous();
-    }
+    // check public
     if (!options.public && !this.bean.passport.isAuthenticated) {
       // return false;
       // 401 for this guard, 403 for the next guards
       return this.app.throw(401);
     }
+    // anonymous
+    if (!this.bean.passport.current) {
+      await this.bean.passport.signinWithAnonymous();
+    }
+    // check activated
     if (this.bean.passport.isAuthenticated) {
       if (options.activated === true && !this.bean.passport.isActivated) {
         return this.app.throw(403);
