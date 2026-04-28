@@ -1,4 +1,3 @@
-import { schemaRenderComponent } from './v/component.ts';
 import { schemaFilter, schemaFilterTransform } from './v/filter.tsx';
 import {
   schemaEmail,
@@ -24,6 +23,8 @@ import {
   schemaRest,
   schemaRenderCustomKey,
   schemaRenderVisible,
+  schemaRenderComponent,
+  schemaRenderReadonly,
 } from './v/rest.ts';
 import {
   schemaSerializerCustom,
@@ -88,6 +89,7 @@ export const v = {
   order: schemaRenderOrder,
   render: schemaRender,
   visible: schemaRenderVisible,
+  renderReadonly: schemaRenderReadonly,
   renderJsx: schemaRenderJsx,
   renderComponent: schemaRenderComponent,
   // zod
