@@ -18,12 +18,12 @@ import {
 } from './v/helpers.ts';
 import { schemaDescription, schemaExample, schemaOpenapi, schemaTitle } from './v/openapi.ts';
 import {
-  schemaCustomKey,
-  schemaOrder,
+  schemaRenderOrder,
   schemaRender,
   schemaRenderJsx,
   schemaRest,
-  schemaVisible,
+  schemaRenderCustomKey,
+  schemaRenderVisible,
 } from './v/rest.ts';
 import {
   schemaSerializerCustom,
@@ -68,11 +68,13 @@ export const v = {
   uppercase: schemaUppercase,
   regex: schemaRegex,
   tableIdentity: schemaTableIdentity,
+  // serializer
   serializerExclude: schemaSerializerExclude,
   serializerTransform: schemaSerializerTransform,
   serializerReplace: schemaSerializerReplace,
   serializerGetter: schemaSerializerGetter,
   serializerCustom: schemaSerializerCustom,
+  // filter
   filter: schemaFilter,
   filterTransform: schemaFilterTransform,
   // openapi
@@ -80,13 +82,12 @@ export const v = {
   title: schemaTitle,
   description: schemaDescription,
   example: schemaExample,
-  // rest
+  // rest/render
   rest: schemaRest,
-  customKey: schemaCustomKey,
-  order: schemaOrder,
+  customKey: schemaRenderCustomKey,
+  order: schemaRenderOrder,
   render: schemaRender,
-  visible: schemaVisible,
-  // render
+  visible: schemaRenderVisible,
   renderJsx: schemaRenderJsx,
   renderComponent: schemaRenderComponent,
   // zod

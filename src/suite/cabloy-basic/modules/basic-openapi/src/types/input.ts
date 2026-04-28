@@ -8,6 +8,12 @@ export type HTMLInputElementType =
   | 'email';
 
 export interface IInputOptions {
-  placeholder?: string;
+  class?: any;
+  value?: any;
   type?: HTMLInputElementType;
+  readonly?: boolean;
+  placeholder?: string;
+  onChange?: (e: Event) => void;
+  onInput?: (e: Event) => void;
+  onBlur?: (e: Event) => void;
 }

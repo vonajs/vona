@@ -59,6 +59,7 @@ export interface IDtoOptionsTestResult extends IDecoratorDtoOptions<
                 <div>{text`cel://name+": ${$locale('TestApples_', 2)}"`}</div>
                 <BBZIcon
                   name={$iconName('::home')}
+                  width={24}
                   nativeOnClick={
                     <action>
                       <ActionLog message="sss"></ActionLog>
