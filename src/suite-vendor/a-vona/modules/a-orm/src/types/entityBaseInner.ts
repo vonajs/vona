@@ -22,9 +22,9 @@ export class EntityBaseInner extends EntityBaseEmpty {
   )
   updatedAt: Date;
 
-  @Api.field(v.title($locale('Deleted')), v.visible(false), v.default(false))
+  @Api.field(v.title($locale('Deleted')), v.renderVisible(false), v.default(false))
   deleted: boolean;
 
-  @Api.field(v.title($locale('InstanceId')), v.visible(false), v.default(0))
+  @Api.field(v.title($locale('InstanceId')), v.renderVisible(false), v.default(0))
   iid: number;
 }

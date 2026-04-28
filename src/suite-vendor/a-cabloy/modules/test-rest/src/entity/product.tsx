@@ -26,14 +26,14 @@ export class EntityProduct extends EntityBase {
     v.title($locale('Name')),
     v.renderOrder(1),
     // v.renderComponent(),
-    // v.render(
+    // v.renderJsx(
     //   <ZZDemoBasicActionView>
     //     <div className="mock">{cel('displayValue')}</div>
     //     <div>{cel('get(permissions,"actions.create")')}</div>
     //   </ZZDemoBasicActionView>,
     //   'table',
     // ),
-    // v.render(
+    // v.renderJsx(
     //   <a
     //     className="hover:text-blue-500"
     //     href="#"
@@ -63,7 +63,7 @@ export class EntityProduct extends EntityBase {
     //   </a>,
     //   'table',
     // ),
-    v.render('actionView', 'table'),
+    v.renderComponent('actionView', undefined, 'table'),
     v.min(3, $locale('ZodErrorStringMin')),
     v.required(),
   )
@@ -75,9 +75,9 @@ export class EntityProduct extends EntityBase {
   @Api.field(
     v.title($locale('Price')),
     v.renderOrder(3),
-    // v.render(<TTCurrency currency={{ exp: 4, fixed: 4 }}></TTCurrency>, 'table'),
+    // v.renderJsx(<TTCurrency currency={{ exp: 4, fixed: 4 }}></TTCurrency>, 'table'),
     // v.renderComponent('currency', { exp: 3, fixed: 3 }),
-    // v.render(
+    // v.renderJsx(
     //   <ZZDemoBasicTableCellTest showLog={true}>
     //     <div>{cel('displayValue')}</div>
     //     <div v-slot="header" v-slot-scope="item">{cel('name + ":header:" + item.name')}</div>

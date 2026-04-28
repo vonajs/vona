@@ -101,7 +101,7 @@ function _DtoGet_relation_handle<TRecord extends {}>(
         mutateTypeTopLevel,
         relation,
       );
-      schema = v.lazy(v.visible(false), schemaLazy);
+      schema = v.lazy(v.renderVisible(false), schemaLazy);
       // optional = true;
     } else {
       // hasMany
@@ -126,7 +126,7 @@ function _DtoGet_relation_handle<TRecord extends {}>(
     let schema;
     let optional = false;
     if (type === 'hasOne' || type === 'belongsTo') {
-      schema = v.lazy(v.visible(false), schemaLazy);
+      schema = v.lazy(v.renderVisible(false), schemaLazy);
       optional = true;
     } else {
       if (optionsReal.groups) {
