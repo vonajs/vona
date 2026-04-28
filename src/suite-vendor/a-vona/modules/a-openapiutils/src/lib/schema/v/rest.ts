@@ -1,5 +1,5 @@
 import type {
-  ISchemaObjectExtensionFieldRestScene,
+  ISchemaRenderComponentLayoutOptions,
   ISchemaRenderComponentPresetRecord,
   TypeRenderComponentJsx,
   TypeSchemaScene,
@@ -10,6 +10,16 @@ import type { TypeSchemaOrderLevel } from '../../../types/order.ts';
 
 import { $order } from '../../utils.ts';
 import { _generalSchemaRest } from './utils.ts';
+
+export function schemaRenderLayout<T extends z.ZodType>(
+  layoutOptions: ISchemaRenderComponentLayoutOptions,
+  scene?: TypeSchemaScene,
+) {
+  return function (schema: T): T {
+    const options = { layout: layoutOptions };
+    return _generalSchemaRest(schema, options, scene);
+  };
+}
 
 export function schemaRenderComponent<
   K extends keyof ISchemaRenderComponentPresetRecord,
@@ -23,11 +33,11 @@ export function schemaRenderComponent<
 }
 
 export function schemaRenderJsx<T extends z.ZodType>(
-  render: TypeRenderComponentJsx,
+  renderJsx: TypeRenderComponentJsx,
   scene?: TypeSchemaScene,
 ) {
   return function (schema: T): T {
-    const options = { render };
+    const options = { render: renderJsx };
     return _generalSchemaRest(schema, options, scene);
   };
 }

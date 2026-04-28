@@ -23,6 +23,7 @@ import {
   schemaRenderVisible,
   schemaRenderComponent,
   schemaRenderReadonly,
+  schemaRenderLayout,
 } from './v/rest.ts';
 import {
   schemaSerializerCustom,
@@ -82,8 +83,9 @@ export const v = {
   description: schemaDescription,
   example: schemaExample,
   // rest/render
-  renderJsx: schemaRenderJsx,
+  renderLayout: schemaRenderLayout,
   renderComponent: schemaRenderComponent,
+  renderJsx: schemaRenderJsx,
   renderVisible: schemaRenderVisible,
   renderReadonly: schemaRenderReadonly,
   renderOrder: schemaRenderOrder,
