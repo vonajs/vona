@@ -6,7 +6,7 @@ import { EntityBaseEmpty } from './entityBaseEmpty.ts';
 export class EntityBaseInner extends EntityBaseEmpty {
   @Api.field(
     v.title($locale('CreatedAt')),
-    v.order(-2, 'max'),
+    v.renderOrder(-2, 'max'),
     v.renderComponent('date'),
     v.renderComponent('dateRange', undefined, 'filter'),
     v.filterTransform('a-web:dateRange'),
@@ -15,7 +15,7 @@ export class EntityBaseInner extends EntityBaseEmpty {
 
   @Api.field(
     v.title($locale('UpdatedAt')),
-    v.order(-1, 'max'),
+    v.renderOrder(-1, 'max'),
     v.renderComponent('date'),
     v.renderComponent('dateRange', undefined, 'filter'),
     v.filterTransform('a-web:dateRange'),

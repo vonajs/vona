@@ -4,6 +4,6 @@ import { $locale } from '../.metadata/locales.ts';
 import { EntityBaseInner } from './entityBaseInner.ts';
 
 export class EntityBaseSimple extends EntityBaseInner {
-  @Api.field(v.order(1, 'core'), v.title($locale('TableIdentity')))
+  @Api.field(v.renderOrder(1, 'core'), v.title($locale('TableIdentity')))
   id: number;
 }

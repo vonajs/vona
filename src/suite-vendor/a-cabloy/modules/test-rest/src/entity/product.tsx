@@ -24,7 +24,7 @@ export interface IEntityOptionsProduct extends IDecoratorEntityOptions<'_custom'
 export class EntityProduct extends EntityBase {
   @Api.field(
     v.title($locale('Name')),
-    v.order(1),
+    v.renderOrder(1),
     // v.renderComponent(),
     // v.render(
     //   <ZZDemoBasicActionView>
@@ -69,12 +69,12 @@ export class EntityProduct extends EntityBase {
   )
   name: string;
 
-  @Api.field(v.title($locale('Description')), v.order(2), v.optional())
+  @Api.field(v.title($locale('Description')), v.renderOrder(2), v.optional())
   description?: string;
 
   @Api.field(
     v.title($locale('Price')),
-    v.order(3),
+    v.renderOrder(3),
     // v.render(<TTCurrency currency={{ exp: 4, fixed: 4 }}></TTCurrency>, 'table'),
     // v.renderComponent('currency', { exp: 3, fixed: 3 }),
     // v.render(
@@ -90,9 +90,14 @@ export class EntityProduct extends EntityBase {
   )
   price: number;
 
-  @Api.field(v.title($locale('Quantity')), v.order(4), v.default(0))
+  @Api.field(v.title($locale('Quantity')), v.renderOrder(4), v.default(0))
   quantity: number;
 
-  @Api.field(v.title($locale('Amount')), v.order(5), v.renderComponent('currency'), v.required())
+  @Api.field(
+    v.title($locale('Amount')),
+    v.renderOrder(5),
+    v.renderComponent('currency'),
+    v.required(),
+  )
   amount: number;
 }

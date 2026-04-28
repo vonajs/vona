@@ -18,9 +18,7 @@ import {
 import { schemaDescription, schemaExample, schemaOpenapi, schemaTitle } from './v/openapi.ts';
 import {
   schemaRenderOrder,
-  schemaRender,
   schemaRenderJsx,
-  schemaRest,
   schemaRenderCustomKey,
   schemaRenderVisible,
   schemaRenderComponent,
@@ -84,14 +82,12 @@ export const v = {
   description: schemaDescription,
   example: schemaExample,
   // rest/render
-  rest: schemaRest,
-  customKey: schemaRenderCustomKey,
-  order: schemaRenderOrder,
-  render: schemaRender,
-  visible: schemaRenderVisible,
-  renderReadonly: schemaRenderReadonly,
   renderJsx: schemaRenderJsx,
   renderComponent: schemaRenderComponent,
+  renderVisible: schemaRenderVisible,
+  renderReadonly: schemaRenderReadonly,
+  renderOrder: schemaRenderOrder,
+  renderCustomKey: schemaRenderCustomKey,
   // zod
   zodRefine: schemaZodRefine,
   zodTransform: schemaZodTransform,

@@ -1,8 +1,6 @@
 import type {
-  ISchemaObjectExtensionFieldRest,
   ISchemaObjectExtensionFieldRestScene,
   ISchemaRenderComponentPresetRecord,
-  TypeRenderComponent,
   TypeRenderComponentJsx,
   TypeSchemaScene,
 } from 'vona-module-a-openapi';
@@ -76,21 +74,21 @@ export function schemaRenderOrder<T extends z.ZodType>(
   };
 }
 
-export function schemaRest<T extends z.ZodType>(
-  rest?: ISchemaObjectExtensionFieldRestScene | ISchemaObjectExtensionFieldRest,
-  scene?: TypeSchemaScene,
-) {
-  return function (schema: T): T {
-    return _generalSchemaRest(schema, rest, scene);
-  };
-}
+// export function schemaRest<T extends z.ZodType>(
+//   rest?: ISchemaObjectExtensionFieldRestScene | ISchemaObjectExtensionFieldRest,
+//   scene?: TypeSchemaScene,
+// ) {
+//   return function (schema: T): T {
+//     return _generalSchemaRest(schema, rest, scene);
+//   };
+// }
 
-export function schemaRender<T extends z.ZodType>(
-  render: TypeRenderComponent,
-  scene?: TypeSchemaScene,
-) {
-  return function (schema: T): T {
-    const options = { render };
-    return _generalSchemaRest(schema, options, scene);
-  };
-}
+// export function schemaRender<T extends z.ZodType>(
+//   render: TypeRenderComponent,
+//   scene?: TypeSchemaScene,
+// ) {
+//   return function (schema: T): T {
+//     const options = { render };
+//     return _generalSchemaRest(schema, options, scene);
+//   };
+// }

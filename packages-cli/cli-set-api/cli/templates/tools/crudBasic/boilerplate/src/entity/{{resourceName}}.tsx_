@@ -9,7 +9,7 @@ export interface IEntityOptions<%=argv.resourceNameCapitalize%> extends IDecorat
 export class Entity<%=argv.resourceNameCapitalize%> extends EntityBase {
   @Api.field(
     v.title($locale('Name')),
-    v.order(1),
+    v.renderOrder(1),
     v.render('actionView', 'table'),
     v.required(),
     v.min(2),
@@ -18,7 +18,7 @@ export class Entity<%=argv.resourceNameCapitalize%> extends EntityBase {
 
   @Api.field(
     v.title($locale('Description')),
-    v.order(2),
+    v.renderOrder(2),
     v.optional(),
   )
   description?: string;
