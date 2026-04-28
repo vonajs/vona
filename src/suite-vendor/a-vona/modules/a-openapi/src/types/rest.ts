@@ -42,6 +42,7 @@ export interface ISchemaObjectExtensionFieldRest extends ISchemaObjectExtensionF
   'table'?: ISchemaObjectExtensionFieldRestScene;
   'form'?: ISchemaObjectExtensionFieldRestScene;
   'form-view'?: ISchemaObjectExtensionFieldRestScene;
+  'form-create'?: ISchemaObjectExtensionFieldRestScene;
   'filter'?: ISchemaObjectExtensionFieldRestScene;
 }
 
@@ -76,7 +77,8 @@ export interface TypeRenderComponentJsx {
   props?: TypeRenderComponentJsxProps;
 }
 
-export type TypeSchemaScene = 'table' | 'form' | 'form-view' | 'filter';
+export type TypeSchemaScene = 'table' | TypeFormSchemaScene;
+export type TypeFormSchemaScene = 'form' | 'form-view' | 'form-create' | 'filter';
 
 export type TypeRenderComponentPreset =
   | keyof ISchemaRenderComponentPresetRecord
