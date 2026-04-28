@@ -38,10 +38,11 @@ export interface ISchemaObjectExtensionFieldRestProps {
 }
 
 export interface ISchemaObjectExtensionFieldRest extends ISchemaObjectExtensionFieldRestProps {
-  render?: TypeRenderComponentPreset;
-  table?: ISchemaObjectExtensionFieldRestScene;
-  form?: ISchemaObjectExtensionFieldRestScene;
-  filter?: ISchemaObjectExtensionFieldRestScene;
+  'render'?: TypeRenderComponentPreset;
+  'table'?: ISchemaObjectExtensionFieldRestScene;
+  'form'?: ISchemaObjectExtensionFieldRestScene;
+  'form-view'?: ISchemaObjectExtensionFieldRestScene;
+  'filter'?: ISchemaObjectExtensionFieldRestScene;
 }
 
 export interface ISchemaObjectExtensionFieldRestScene extends ISchemaObjectExtensionFieldRestProps {
@@ -75,7 +76,7 @@ export interface TypeRenderComponentJsx {
   props?: TypeRenderComponentJsxProps;
 }
 
-export type TypeSchemaScene = 'table' | 'form' | 'filter';
+export type TypeSchemaScene = 'table' | 'form' | 'form-view' | 'filter';
 
 export type TypeRenderComponentPreset =
   | keyof ISchemaRenderComponentPresetRecord

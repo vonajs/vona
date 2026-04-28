@@ -5,6 +5,7 @@ import type { IIconRecord } from 'zova-rest-cabloy-basic-admin';
 
 declare module 'vona-module-a-openapi' {
   export interface ISchemaRenderComponentLayoutOptions {
+    disable?: boolean;
     class?: any;
     label?: string | false;
     inline?: boolean;
