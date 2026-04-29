@@ -1,7 +1,9 @@
 import 'vona-module-a-openapi';
 import type {
   IResourceActionRowOptionsBase,
+  IResourceActionRowRecord,
   IResourceActionTableOptionsBase,
+  TypeRenderComponentJsx,
 } from 'vona-module-a-openapi';
 
 declare module 'vona-module-a-openapi' {
@@ -41,4 +43,16 @@ export interface IResourceActionRowOptionsUpdate extends IResourceActionRowOptio
 
 export interface IResourceActionRowOptionsDelete extends IResourceActionRowOptionsBase {}
 
-export interface IResourceActionRowOptionsOperationsRow extends IResourceActionRowOptionsBase {}
+export interface IResourceActionRowOptionsOperationsRow extends IResourceActionRowOptionsBase {
+  actions?: TypeResourceActionRowOptionsOperationsRowActions;
+}
+
+export type TypeResourceActionRowOptionsOperationsRowActions = {
+  [key in keyof Omit<IResourceActionRowRecord, 'operationsRow'>]?:
+    | IResourceActionRowOptionsOperationsRowAction
+    | false;
+};
+export interface IResourceActionRowOptionsOperationsRowAction {
+  component?: keyof Omit<IResourceActionComponentRowRecord, 'actionOperationsRow'>;
+  jsx?: TypeRenderComponentJsx;
+}
