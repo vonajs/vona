@@ -62,12 +62,12 @@ export function schemaRenderReadonly<T extends z.ZodType>(
   };
 }
 
-export function schemaRenderCustomKey<T extends z.ZodType>(
-  customKey: string,
+export function schemaRenderFieldSource<T extends z.ZodType>(
+  fieldSource: string,
   scene?: TypeSchemaScene,
 ) {
   return function (schema: T): T {
-    const options = { customKey };
+    const options = { fieldSource };
     return _generalSchemaRest(schema, options, scene);
   };
 }

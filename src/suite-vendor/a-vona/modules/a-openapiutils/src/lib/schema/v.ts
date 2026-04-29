@@ -19,7 +19,7 @@ import { schemaDescription, schemaExample, schemaOpenapi, schemaTitle } from './
 import {
   schemaRenderOrder,
   schemaRenderJsx,
-  schemaRenderCustomKey,
+  schemaRenderFieldSource,
   schemaRenderVisible,
   schemaRenderComponent,
   schemaRenderReadonly,
@@ -89,7 +89,7 @@ export const v = {
   renderVisible: schemaRenderVisible,
   renderReadonly: schemaRenderReadonly,
   renderOrder: schemaRenderOrder,
-  renderCustomKey: schemaRenderCustomKey,
+  renderFieldSource: schemaRenderFieldSource,
   // zod
   zodRefine: schemaZodRefine,
   zodTransform: schemaZodTransform,

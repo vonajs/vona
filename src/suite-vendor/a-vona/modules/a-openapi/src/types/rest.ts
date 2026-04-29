@@ -13,7 +13,7 @@ export type TypeFormFieldDisplayValueUpdateTiming = 'input' | 'change';
 export interface ISchemaRenderComponentPresetRecord {}
 
 export interface ISchemaObjectExtensionFieldRestProps {
-  customKey?: string;
+  fieldSource?: string;
   visible?: boolean;
   order?: number;
   //
