@@ -4,7 +4,7 @@ import type { IDatabaseClientRecord } from 'vona-module-a-orm';
 
 import { replaceTemplate } from '@cabloy/utils';
 import {
-  $customKey,
+  $protocolKey,
   getLoggerPathPhysicalRoot,
   getPublicPathPhysicalRoot,
   getSqlite3DatabaseNameDefault,
@@ -43,8 +43,8 @@ export default async function (app: VonaApplication) {
   // instance
   config.instance = {
     getInstanceName: undefined,
-    queryField: $customKey('x-vona-instance-name'),
-    headerField: $customKey('x-vona-instance-name'),
+    queryField: $protocolKey('x-vona-instance-name'),
+    headerField: $protocolKey('x-vona-instance-name'),
     instances: {},
   };
 

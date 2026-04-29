@@ -1,4 +1,4 @@
-import type { ICustomKeyRecord, IInstanceRecord, VonaConfigOptional, VonaContext } from 'vona';
+import type { IInstanceRecord, IProtocolKeyRecord, VonaConfigOptional, VonaContext } from 'vona';
 import type { IDatabaseClientRecord } from 'vona-module-a-orm';
 
 import type { EntityInstance } from '../entity/instance.ts';
@@ -17,8 +17,8 @@ export type TypeGetInstanceNameFn = (ctx: VonaContext) => keyof IInstanceRecord 
 
 export interface ConfigInstance {
   getInstanceName?: TypeGetInstanceNameFn;
-  queryField?: keyof ICustomKeyRecord;
-  headerField?: keyof ICustomKeyRecord;
+  queryField?: keyof IProtocolKeyRecord;
+  headerField?: keyof IProtocolKeyRecord;
   instances: Record<keyof IInstanceRecord, ConfigInstanceBase | false>;
 }
 

@@ -4,7 +4,7 @@ import { WebSocketClient } from '@cabloy/socket';
 import { catchError } from '@cabloy/utils';
 import assert from 'node:assert';
 import { describe, it } from 'node:test';
-import { $customKey } from 'vona';
+import { $protocolKey } from 'vona';
 import { app } from 'vona-mock';
 
 describe('socket.test.ts', () => {
@@ -21,7 +21,7 @@ async function test(app: VonaApplication) {
   const scopeSocket = app.scope('a-socket');
   const path = `${scopeSocket.config.globalPrefix}/xxx`;
   const code = await app.bean.passport.createTempAuthToken({ path });
-  const url = `ws://${app.config.server.listen.hostname}:${app.config.server.listen.port}${path}?${$customKey('x-vona-passport-code')}=${code}`;
+  const url = `ws://${app.config.server.listen.hostname}:${app.config.server.listen.port}${path}?${$protocolKey('x-vona-passport-code')}=${code}`;
   return new Promise(resolve => {
     const ws = new WebSocketClient();
     ws.onReady = async () => {

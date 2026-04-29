@@ -1,11 +1,11 @@
-import type { ICustomKeyRecord, ILocaleRecord, VonaApplication } from 'vona';
+import type { ILocaleRecord, IProtocolKeyRecord, VonaApplication } from 'vona';
 
-import { $customKey } from 'vona';
+import { $protocolKey } from 'vona';
 
 export interface I18nConfigLocale {
   defaultLocale: keyof ILocaleRecord;
-  queryField?: keyof ICustomKeyRecord;
-  headerField?: keyof ICustomKeyRecord;
+  queryField?: keyof IProtocolKeyRecord;
+  headerField?: keyof IProtocolKeyRecord;
   cookieField?: string;
   localeAlias: any;
   writeCookie: boolean;
@@ -15,8 +15,8 @@ export interface I18nConfigLocale {
 
 export interface I18nConfigTz {
   defaultTz?: string;
-  queryField?: keyof ICustomKeyRecord;
-  headerField?: keyof ICustomKeyRecord;
+  queryField?: keyof IProtocolKeyRecord;
+  headerField?: keyof IProtocolKeyRecord;
   cookieField?: string;
   writeCookie: boolean;
   cookieMaxAge: number;
@@ -32,8 +32,8 @@ export function config(_app: VonaApplication) {
   return {
     locale: {
       defaultLocale: 'en-us',
-      queryField: $customKey('x-vona-locale'),
-      headerField: $customKey('x-vona-locale'),
+      queryField: $protocolKey('x-vona-locale'),
+      headerField: $protocolKey('x-vona-locale'),
       cookieField: 'locale',
       localeAlias: {},
       writeCookie: false,
@@ -41,8 +41,8 @@ export function config(_app: VonaApplication) {
     },
     tz: {
       defaultTz: undefined,
-      queryField: $customKey('x-vona-tz'),
-      headerField: $customKey('x-vona-tz'),
+      queryField: $protocolKey('x-vona-tz'),
+      headerField: $protocolKey('x-vona-tz'),
       cookieField: 'tz',
       writeCookie: false,
       cookieMaxAge: 1 * 365 * 24 * 60 * 60 * 1000,

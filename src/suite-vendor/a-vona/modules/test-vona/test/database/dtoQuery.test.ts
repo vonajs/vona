@@ -3,7 +3,7 @@ import type { IQueryParams } from 'vona-module-a-orm';
 import { isNil } from '@cabloy/utils';
 import assert from 'node:assert';
 import { describe, it } from 'node:test';
-import { $customKey } from 'vona';
+import { $protocolKey } from 'vona';
 import { app } from 'vona-mock';
 
 describe('dtoQuery.test.ts', () => {
@@ -15,7 +15,7 @@ describe('dtoQuery.test.ts', () => {
         '/test/vona/post/findManyEcho',
         {
           headers: {
-            [$customKey('x-vona-tz')]: 'Asia/Tokyo',
+            [$protocolKey('x-vona-tz')]: 'Asia/Tokyo',
           },
           query: {
             columns: 'id,title', // ['id', 'title'],
