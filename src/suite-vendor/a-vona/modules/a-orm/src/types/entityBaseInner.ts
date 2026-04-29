@@ -19,7 +19,7 @@ export class EntityBaseInner extends EntityBaseEmpty {
       'table',
     ),
   )
-  _operationsRow: unknown;
+  _operationsRow?: unknown;
 
   @Api.field(
     v.title($locale('CreatedAt')),
