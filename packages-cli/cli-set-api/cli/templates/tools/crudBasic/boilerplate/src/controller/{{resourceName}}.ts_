@@ -1,13 +1,16 @@
 import type { TableIdentity } from 'table-identity';
 import type { IQueryParams } from 'vona-module-a-orm';
 import type { IDecoratorControllerOptions } from 'vona-module-a-web';
-import type { Model<%=argv.resourceNameCapitalize%> } from '../model/<%=argv.resourceName%>.ts';
+
 import { BeanBase } from 'vona';
 import { Api, Resource, v } from 'vona-module-a-openapiutils';
 import { Arg, Controller, Web } from 'vona-module-a-web';
+
+import type { Model<%=argv.resourceNameCapitalize%> } from '../model/<%=argv.resourceName%>.ts';
+
 import { Dto<%=argv.resourceNameCapitalize%>Create } from '../dto/<%=argv.resourceName%>Create.tsx';
-import { Dto<%=argv.resourceNameCapitalize%>Query } from '../dto/<%=argv.resourceName%>Query.tsx';
-import { Dto<%=argv.resourceNameCapitalize%>QueryRes } from '../dto/<%=argv.resourceName%>QueryRes.tsx';
+import { Dto<%=argv.resourceNameCapitalize%>SelectReq } from '../dto/<%=argv.resourceName%>SelectReq.tsx';
+import { Dto<%=argv.resourceNameCapitalize%>SelectRes } from '../dto/<%=argv.resourceName%>SelectRes.tsx';
 import { Dto<%=argv.resourceNameCapitalize%>Update } from '../dto/<%=argv.resourceName%>Update.tsx';
 import { Dto<%=argv.resourceNameCapitalize%>View } from '../dto/<%=argv.resourceName%>View.tsx';
 
@@ -23,8 +26,8 @@ export class Controller<%=argv.resourceNameCapitalize%> extends BeanBase {
   }
 
   @Web.get()
-  @Api.body(Dto<%=argv.resourceNameCapitalize%>QueryRes)
-  async select(@Arg.filter(Dto<%=argv.resourceNameCapitalize%>Query) params: IQueryParams<Model<%=argv.resourceNameCapitalize%>>): Promise<Dto<%=argv.resourceNameCapitalize%>QueryRes> {
+  @Api.body(Dto<%=argv.resourceNameCapitalize%>SelectRes)
+  async select(@Arg.filter(Dto<%=argv.resourceNameCapitalize%>SelectReq) params: IQueryParams<Model<%=argv.resourceNameCapitalize%>>): Promise<Dto<%=argv.resourceNameCapitalize%>SelectRes> {
     return await this.scope.service.<%=argv.resourceName%>.select(params);
   }
 

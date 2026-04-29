@@ -1,0 +1,11 @@
+import type { IDecoratorDtoOptions } from 'vona-module-a-web';
+
+import { $Dto } from 'vona-module-a-orm';
+import { Dto } from 'vona-module-a-web';
+
+import { Model<%=argv.resourceNameCapitalize%> } from '../model/<%=argv.resourceName%>.ts';
+
+export interface IDtoOptions<%=argv.resourceNameCapitalize%>SelectResItem extends IDecoratorDtoOptions {}
+
+@Dto<IDtoOptions<%=argv.resourceNameCapitalize%>SelectResItem>()
+export class Dto<%=argv.resourceNameCapitalize%>SelectResItem extends $Dto.get(() => Model<%=argv.resourceNameCapitalize%>) {}
