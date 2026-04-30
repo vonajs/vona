@@ -1,4 +1,5 @@
 import type {
+  ISchemaObjectExtensionFieldRestScene,
   ISchemaRenderComponentLayoutOptions,
   ISchemaRenderComponentPresetRecord,
   TypeRenderComponentJsx,
@@ -26,10 +27,16 @@ export function schemaRenderComponent<
   T extends z.ZodType,
 >(name: K, options?: ISchemaRenderComponentPresetRecord[K], scene?: TypeSchemaScene) {
   return function (schema: T): T {
-    const options2 =
-      options !== undefined ? { render: name, preset: { [name]: options } } : { render: name };
+    const options2 = schemaRenderComponentOptions(name, options);
     return _generalSchemaRest(schema, options2, scene);
   };
+}
+
+export function schemaRenderComponentOptions<K extends keyof ISchemaRenderComponentPresetRecord>(
+  name: K,
+  options?: ISchemaRenderComponentPresetRecord[K],
+): ISchemaObjectExtensionFieldRestScene {
+  return options !== undefined ? { render: name, preset: { [name]: options } } : { render: name };
 }
 
 export function schemaRenderJsx<T extends z.ZodType>(
@@ -37,9 +44,13 @@ export function schemaRenderJsx<T extends z.ZodType>(
   scene?: TypeSchemaScene,
 ) {
   return function (schema: T): T {
-    const options = { render: renderJsx };
+    const options = schemaRenderJsxOptions(renderJsx);
     return _generalSchemaRest(schema, options, scene);
   };
+}
+
+export function schemaRenderJsxOptions(renderJsx: TypeRenderComponentJsx) {
+  return { render: renderJsx };
 }
 
 export function schemaRenderVisible<T extends z.ZodType>(

@@ -13,28 +13,14 @@ export type TypeFormFieldDisplayValueUpdateTiming = 'input' | 'change';
 export interface ISchemaRenderComponentPresetRecord {}
 
 export interface ISchemaObjectExtensionFieldRestProps {
+  //
+  preset?: ISchemaRenderComponentPresetRecord;
+  //
   fieldSource?: string;
   visible?: boolean;
   order?: number;
-  //
-  classContainer?: any;
-  label?: string | false;
-  inline?: boolean;
-  bordered?: boolean;
-  floating?: boolean;
-  iconPrefix?: string;
-  iconSuffix?: string;
-  header?: TypeRenderComponentJsx | string;
-  footer?: TypeRenderComponentJsx | string;
-  //
-  displayValue?: any;
-  displayValueUpdateTiming?: TypeFormFieldDisplayValueUpdateTiming;
-  onSetDisplayValue?: TypeFormFieldOnSetDisplayValue;
   disableNotifyChanged?: boolean;
-  class?: any;
   readonly?: boolean;
-  //
-  preset?: ISchemaRenderComponentPresetRecord;
 }
 
 export interface ISchemaObjectExtensionFieldRest extends ISchemaObjectExtensionFieldRestProps {

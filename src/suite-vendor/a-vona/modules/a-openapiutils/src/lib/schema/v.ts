@@ -24,6 +24,8 @@ import {
   schemaRenderComponent,
   schemaRenderReadonly,
   schemaRenderLayout,
+  schemaRenderComponentOptions,
+  schemaRenderJsxOptions,
 } from './v/rest.ts';
 import {
   schemaSerializerCustom,
@@ -90,6 +92,8 @@ export const v = {
   renderReadonly: schemaRenderReadonly,
   renderOrder: schemaRenderOrder,
   renderFieldSource: schemaRenderFieldSource,
+  renderComponentOptions: schemaRenderComponentOptions,
+  renderJsxOptions: schemaRenderJsxOptions,
   // zod
   zodRefine: schemaZodRefine,
   zodTransform: schemaZodTransform,

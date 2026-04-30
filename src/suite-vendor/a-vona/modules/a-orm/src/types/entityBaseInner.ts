@@ -7,13 +7,13 @@ export class EntityBaseInner extends EntityBaseEmpty {
   @Api.field(
     v.title($locale('Operations')),
     v.renderOrder(-1, 'max'),
+    v.renderVisible(false, 'form'),
     v.renderComponent(
       'actionOperationsRow',
       {
-        resource: 'demo-student:book',
         actions: {
-          update: { component: 'actionUpdate' },
-          delete: { component: 'actionDelete' },
+          update: v.renderComponentOptions('actionUpdate'),
+          delete: v.renderComponentOptions('actionDelete'),
         },
       },
       'table',

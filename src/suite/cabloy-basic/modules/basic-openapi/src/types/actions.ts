@@ -3,7 +3,7 @@ import type {
   IResourceActionRowOptionsBase,
   IResourceActionRowRecord,
   IResourceActionTableOptionsBase,
-  TypeRenderComponentJsx,
+  ISchemaObjectExtensionFieldRestScene,
 } from 'vona-module-a-openapi';
 
 declare module 'vona-module-a-openapi' {
@@ -49,10 +49,6 @@ export interface IResourceActionRowOptionsOperationsRow extends IResourceActionR
 
 export type TypeResourceActionRowOptionsOperationsRowActions = {
   [key in keyof Omit<IResourceActionRowRecord, 'operationsRow'>]?:
-    | IResourceActionRowOptionsOperationsRowAction
+    | ISchemaObjectExtensionFieldRestScene
     | false;
 };
-export interface IResourceActionRowOptionsOperationsRowAction {
-  component?: keyof Omit<IResourceActionComponentRowRecord, 'actionOperationsRow'>;
-  jsx?: TypeRenderComponentJsx;
-}
