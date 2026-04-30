@@ -12,7 +12,7 @@
     "./package.json": "./package.json"
   },
   "dependencies": {
-    "@cabloy/utils": "^2.1.11",
+    "@cabloy/utils": "^2.1.12",
     "@tanstack/query-core": "^5.99.0",
     "@tanstack/vue-query": "^5.99.2",
     "openapi3-ts": "^4.5.0",

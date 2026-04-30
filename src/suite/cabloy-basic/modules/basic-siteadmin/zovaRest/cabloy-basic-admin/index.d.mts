@@ -8,7 +8,7 @@ import { VNode } from "vue";
 import { BeanApiBase, IApiActionOptions, IApiSchemaOptions } from "zova-module-a-api";
 import { BeanAopBase, BeanBase, BeanContainer, BeanControllerBase, BeanControllerPageBase, BeanRenderBase, BeanScopeBase, BeanScopeUtil, BeanSimple, BeanStyleBase, DefineModelOptions, IComponentOptions, IModuleMain, IMonkeyAppClose, IMonkeyAppInitialize, IMonkeyBeanInit, ISlot, TypeControllerInnerProps, TypeEventOff, TypeLocaleBase, TypeModuleConfig, TypeModuleLocales, TypePropUpdateFromModel, TypePropValueFromModel, ZovaSys } from "zova";
 import * as _$zova_module_a_openapi0 from "zova-module-a-openapi";
-import { IJsxRenderContextBase, IResourceActionRowOptionsBase, ISchemaRenderComponentLayoutOptions, ITablePaged, ITableQuery, ITableResPaged } from "zova-module-a-openapi";
+import { IJsxRenderContextBase, IResourceActionRowOptionsBase, IResourceActionRowRecord, ISchemaObjectExtensionFieldRestTable, ISchemaRenderComponentLayoutOptions, ITablePaged, ITableQuery, ITableResPaged, TypeFormSchemaScene } from "zova-module-a-openapi";
 import { IJwtAdapter, IJwtInfo } from "zova-module-a-interceptor";
 import { AopActionDispose, AopActionInit, AopActionRender, IDecoratorAopOptions } from "zova-module-a-bean";
 import * as _$_tanstack_vue_query0 from "@tanstack/vue-query";
@@ -16,9 +16,9 @@ import { BeanModelBase, IDecoratorModelOptions } from "zova-module-a-model";
 import { BeanPiniaStoreBase, PiniaStore } from "zova-module-a-pinia";
 import * as _$vue_jsx_runtime0 from "vue/jsx-runtime";
 import * as _$zova_module_a_table0 from "zova-module-a-table";
-import { BeanControllerTableBase, ControllerTable, ControllerTableProps, IDecoratorTableCellOptions, IDecoratorTableCellPresetOptions, IJsxRenderContextTableCell, ITableCellRender, NextTableCellRender, TypeTableGetColumnsNext } from "zova-module-a-table";
+import { BeanControllerTableBase, ControllerTable, ControllerTableProps, IDecoratorTableCellOptions, IDecoratorTableCellPresetOptions, IJsxRenderContextTableCell, IJsxRenderContextTableColumn, ITableCellRender, NextTableCellRender } from "zova-module-a-table";
 import * as _$zova_module_a_form0 from "zova-module-a-form";
-import { BeanControllerPageFormBase, ControllerForm, ControllerFormField, ControllerFormFieldBlankProps, ControllerFormFieldProps, ControllerFormFieldWrapperProps, ControllerFormProps, IFormFieldComponentOptions, IFormFieldPresetOptions, IFormFieldRenderContext, IFormMeta, IFormProvider, TypeFormOnSubmitData } from "zova-module-a-form";
+import { BeanControllerPageFormBase, ControllerForm, ControllerFormField, ControllerFormFieldBlankProps, ControllerFormFieldPresetProps, ControllerFormFieldProps, ControllerFormProps, IFormFieldComponentOptions, IFormFieldPresetOptions, IFormFieldRenderContext, IFormMeta, IFormProvider, TypeFormOnSubmitData } from "zova-module-a-form";
 import * as _$openapi3_ts_oas310 from "openapi3-ts/oas31";
 import { SchemaObject } from "openapi3-ts/oas31";
 import { BeanBehaviorBase, ControllerBehaviorProps, IDecoratorBehaviorOptions, NextBehavior } from "zova-module-a-behavior";
@@ -5786,9 +5786,9 @@ declare function BBZFormField<TParentData extends {} = {}>(_props: TypeControlle
 type TypeControllerFormFieldBlankPublicProps<TParentData extends {} = {}, TSubmitMeta = never> = TypeRenderComponentJsxPropsPublic & ControllerFormFieldBlankProps<TParentData, TSubmitMeta>;
 declare function BBFFormBlank<TParentData extends {} = {}, TSubmitMeta = never>(_props: TypeControllerFormFieldBlankPublicProps<TParentData, TSubmitMeta>): string;
 //#endregion
-//#region src/suite-vendor/a-zova/modules/a-form/rest/component/formFieldWrapper.d.ts
-type TypeControllerFormFieldWrapperPublicProps<TParentData extends {} = {}> = TypeRenderComponentJsxPropsPublic & ControllerFormFieldWrapperProps<TParentData>;
-declare function BBFFormWrapper<TParentData extends {} = {}>(_props: TypeControllerFormFieldWrapperPublicProps<TParentData>): string;
+//#region src/suite-vendor/a-zova/modules/a-form/rest/component/formFieldPreset.d.ts
+type TypeControllerFormFieldPresetPublicProps<TParentData extends {} = {}> = TypeRenderComponentJsxPropsPublic & ControllerFormFieldPresetProps<TParentData>;
+declare function BBFFormPreset<TParentData extends {} = {}>(_props: TypeControllerFormFieldPresetPublicProps<TParentData>): string;
 //#endregion
 //#region src/suite-vendor/a-zova/modules/a-icon/rest/component/icon.d.ts
 type TypeControllerIconPublicProps = TypeRenderComponentJsxPropsPublic & ControllerIconProps;
@@ -7053,7 +7053,10 @@ interface IResourceActionComponentRowRecord {
 interface IResourceActionRowOptionsView extends IResourceActionRowOptionsBase {}
 interface IResourceActionRowOptionsUpdate extends IResourceActionRowOptionsBase {}
 interface IResourceActionRowOptionsDelete extends IResourceActionRowOptionsBase {}
-interface IResourceActionRowOptionsOperationsRow extends IResourceActionRowOptionsBase {}
+interface IResourceActionRowOptionsOperationsRow extends IResourceActionRowOptionsBase {
+  actions?: TypeResourceActionRowOptionsOperationsRowActions;
+}
+type TypeResourceActionRowOptionsOperationsRowActions = { [key in keyof Omit<IResourceActionRowRecord, 'operationsRow'>]?: ISchemaObjectExtensionFieldRestTable | false };
 //#endregion
 //#region src/suite/cabloy-basic/modules/basic-openapi/src/types/preset.d.ts
 declare module 'zova-module-a-openapi' {
@@ -7073,6 +7076,7 @@ declare module 'zova-module-a-openapi' {
 //#region src/suite/cabloy-basic/modules/basic-openapi/src/types/fieldLayout.d.ts
 declare module 'zova-module-a-openapi' {
   interface ISchemaRenderComponentLayoutOptions {
+    disable?: boolean;
     class?: any;
     label?: string | false;
     inline?: boolean;
@@ -7361,13 +7365,14 @@ declare module 'zova-module-a-table' {
 interface ControllerRestPageProps<TData extends {} = {}> {
   showFilter?: boolean;
 }
-declare class ControllerRestPage<TData extends {} = {}> extends BeanControllerTableBase {
+declare class ControllerRestPage<TData extends {} = {}> extends BeanControllerBase {
   static $propsDefault: {
     showFilter: boolean;
   };
   queryFilterData: {};
   queryPaged: ITablePaged;
   query: ITableQuery;
+  tableRef: BeanControllerTableBase;
   $$pageWrapper: ControllerPageResource;
   $$modelResource: ModelResource<TData>;
   protected __init__(): Promise<void>;
@@ -7382,7 +7387,6 @@ declare class ControllerRestPage<TData extends {} = {}> extends BeanControllerTa
   get paged(): ITableResPaged | undefined;
   get schema(): _$openapi3_ts_oas310.SchemaObject | undefined;
   get permissions(): _$zova_module_a_openapi0.TypeOpenapiPermissions | undefined;
-  getColumns(next: TypeTableGetColumnsNext<TData>, $$table: ControllerTable<TData>): Promise<_$zova_module_a_table0.TypeColumn<TData>[]>;
   gotoPage(pageNo: number): void;
   onFilter(data: any): void;
 }
@@ -7419,6 +7423,7 @@ declare class ControllerRestPageEntry<TData extends {} = {}> extends BeanControl
   get resource(): string;
   get entryId(): string | undefined;
   get formMeta(): _$zova_module_a_form0.IFormMeta;
+  get schemaScene(): TypeFormSchemaScene;
   get queryData(): {
     dataUpdatedAt: number;
     errorUpdatedAt: number;
@@ -7707,7 +7712,6 @@ declare const locales$1: {
     Submit: string;
     Search: string;
     Reset: string;
-    TableActions: string;
     PagedTotalItems: string;
     PagedTotalPages: string;
     EntryNotExist: string;
@@ -7719,7 +7723,6 @@ declare const locales$1: {
     Submit: string;
     Search: string;
     Reset: string;
-    TableActions: string;
     PagedTotalItems: string;
     PagedTotalPages: string;
     EntryNotExist: string;
@@ -7874,10 +7877,25 @@ declare class RenderTable<TData extends {} = {}> extends BeanRenderBase {
   _renderTable($$table: ControllerTable<TData>): _$vue_jsx_runtime0.JSX.Element;
 }
 //#endregion
+//#region src/suite/cabloy-basic/modules/basic-table/src/bean/tableCell.actionDelete.d.ts
+interface ITableCellOptionsActionDelete extends IDecoratorTableCellPresetOptions {}
+declare class TableCellActionDelete extends BeanBase implements ITableCellRender {
+  checkVisible(_options: ITableCellOptionsActionDelete, _renderContext: IJsxRenderContextTableColumn): Promise<boolean>;
+  render(options: ITableCellOptionsActionDelete, renderContext: IJsxRenderContextTableCell, _next: NextTableCellRender): _$vue_jsx_runtime0.JSX.Element;
+}
+//#endregion
 //#region src/suite/cabloy-basic/modules/basic-table/src/bean/tableCell.actionOperationsRow.d.ts
 interface ITableCellOptionsActionOperationsRow extends IDecoratorTableCellPresetOptions {}
 declare class TableCellActionOperationsRow extends BeanBase implements ITableCellRender {
-  render(_options: ITableCellOptionsActionOperationsRow, renderContext: IJsxRenderContextTableCell, _next: NextTableCellRender): _$vue_jsx_runtime0.JSX.Element;
+  checkVisible(options: ITableCellOptionsActionOperationsRow, renderContext: IJsxRenderContextTableColumn): Promise<boolean>;
+  render(options: ITableCellOptionsActionOperationsRow, renderContext: IJsxRenderContextTableCell, _next: NextTableCellRender): _$vue_jsx_runtime0.JSX.Element | undefined;
+}
+//#endregion
+//#region src/suite/cabloy-basic/modules/basic-table/src/bean/tableCell.actionUpdate.d.ts
+interface ITableCellOptionsActionUpdate extends IDecoratorTableCellPresetOptions {}
+declare class TableCellActionUpdate extends BeanBase implements ITableCellRender {
+  checkVisible(_options: ITableCellOptionsActionUpdate, _renderContext: IJsxRenderContextTableColumn): Promise<boolean>;
+  render(options: ITableCellOptionsActionUpdate, renderContext: IJsxRenderContextTableCell, _next: NextTableCellRender): _$vue_jsx_runtime0.JSX.Element;
 }
 //#endregion
 //#region src/suite/cabloy-basic/modules/basic-table/src/bean/tableCell.actionView.d.ts
@@ -7941,16 +7959,30 @@ declare module 'zova' {
 /** tableCell: begin */
 declare module 'zova-module-a-table' {
   interface ITableCellRecord {
+    'basic-table:actionDelete': ITableCellOptionsActionDelete;
     'basic-table:actionOperationsRow': ITableCellOptionsActionOperationsRow;
+    'basic-table:actionUpdate': ITableCellOptionsActionUpdate;
     'basic-table:actionView': ITableCellOptionsActionView;
   }
 }
 declare module 'zova-module-basic-table' {
+  interface TableCellActionDelete {}
+  interface TableCellActionDelete {
+    get $beanFullName(): 'basic-table.tableCell.actionDelete';
+    get $onionName(): 'basic-table:actionDelete';
+    get $onionOptions(): ITableCellOptionsActionDelete;
+  }
   interface TableCellActionOperationsRow {}
   interface TableCellActionOperationsRow {
     get $beanFullName(): 'basic-table.tableCell.actionOperationsRow';
     get $onionName(): 'basic-table:actionOperationsRow';
     get $onionOptions(): ITableCellOptionsActionOperationsRow;
+  }
+  interface TableCellActionUpdate {}
+  interface TableCellActionUpdate {
+    get $beanFullName(): 'basic-table.tableCell.actionUpdate';
+    get $onionName(): 'basic-table:actionUpdate';
+    get $onionOptions(): ITableCellOptionsActionUpdate;
   }
   interface TableCellActionView {}
   interface TableCellActionView {
@@ -7963,7 +7995,9 @@ declare module 'zova-module-basic-table' {
 /** tableCell: begin */
 declare module 'zova' {
   interface IBeanRecordGeneral {
+    'basic-table.tableCell.actionDelete': TableCellActionDelete;
     'basic-table.tableCell.actionOperationsRow': TableCellActionOperationsRow;
+    'basic-table.tableCell.actionUpdate': TableCellActionUpdate;
     'basic-table.tableCell.actionView': TableCellActionView;
   }
 }
@@ -7987,8 +8021,14 @@ declare module 'zova' {
 type TypeControllerTablePublicProps<TData extends {} = {}> = TypeRenderComponentJsxPropsPublic & ControllerTableProps$1<TData>;
 declare function BBZBasicTable<TData extends {} = {}>(_props: TypeControllerTablePublicProps<TData>): string;
 //#endregion
+//#region src/suite/cabloy-basic/modules/basic-table/rest/tableCell/actionDelete.d.ts
+declare function BBTBasicTableActionDelete(_props: ITableCellOptionsActionDelete): string;
+//#endregion
 //#region src/suite/cabloy-basic/modules/basic-table/rest/tableCell/actionOperationsRow.d.ts
 declare function BBTBasicTableActionOperationsRow(_props: ITableCellOptionsActionOperationsRow): string;
+//#endregion
+//#region src/suite/cabloy-basic/modules/basic-table/rest/tableCell/actionUpdate.d.ts
+declare function BBTBasicTableActionUpdate(_props: ITableCellOptionsActionUpdate): string;
 //#endregion
 //#region src/suite/cabloy-basic/modules/basic-table/rest/tableCell/actionView.d.ts
 declare function BBTBasicTableActionView(_props: ITableCellOptionsActionView): string;
@@ -8028,7 +8068,7 @@ declare function BBZRouterstackRouterViewStack(_props: TypeControllerRouterViewS
 type TypeControllerRouterViewTabsPublicProps = TypeRenderComponentJsxPropsPublic & ControllerRouterViewTabsProps;
 declare function BBZRoutertabsRouterViewTabs(_props: TypeControllerRouterViewTabsPublicProps): string;
 declare namespace index_d_exports {
-  export { $iconName, AopHome, AopHome3, ApiTodo, ApiTodoEntity, ApiTodoIntertBody, ApiTodoUpdateBody, BBAActionsLog, BBARestActionsAlert, BBARestActionsConfirm, BBARestActionsCopy, BBARestActionsCreate, BBARestActionsDelete, BBARestActionsEdit, BBARestActionsSetValue, BBARestActionsView, BBFBasicCaptcha, BBFBasicDateRange, BBFBasicInput, BBFCurrency, BBFDate, BBFDemoBasicTest, BBFFormBlank, BBFFormWrapper, BBPBasicRestpage, BBPBasicRestpageEntry, BBTBasicTableActionOperationsRow, BBTBasicTableActionView, BBTCurrency, BBTDate, BBTDemoBasicTest, BBZApp, BBZBasicDateRange, BBZBasicRestpageWrapperFilter, BBZBasicTable, BBZBasicTableActionOperationsTable, BBZBehavior, BBZDemoBasicActionView, BBZDemoBasicCard, BBZDemoBasicTableCellTest, BBZForm, BBZFormField, BBZHomeBaseItemLink, BBZHomeBasePage, BBZHomeLayoutemptyLayoutEmpty, BBZHomeLayouttabsLayoutTabs, BBZIcon, BBZRouterViewEmpty, BBZRouterstackRouterViewStack, BBZRoutertabsRouterViewTabs, BBZTable, BehaviorFormFieldLayout, BehaviorFormFieldLayoutLogin, ControllerActionView, ControllerActionViewProps, ControllerCard, ControllerCardProps, ControllerFormFieldTest, ControllerFormFieldTestProps, ControllerItemLink, ControllerItemLinkProps, ControllerPage, ControllerPageAuthCallback, ControllerPageAuthCallbackSchemaQuery, ControllerPageComponent, ControllerPageErrorExpired, ControllerPageErrorExpiredSchemaQuery, ControllerPageErrorNotFound, ControllerPageHome, ControllerPageItem, ControllerPageItemSchemaParams, ControllerPageItemSchemaQuery, ControllerPageLocale, ControllerPageLogin$1 as ControllerPageLogin, ControllerPagePinia, ControllerPageProps, ControllerPageRouteParams, ControllerPageRouteParamsSchemaParams, ControllerPageRouteParamsSchemaQuery, ControllerPageRouteQuery, ControllerPageRouteQueryB, ControllerPageRouteQueryBSchemaParams, ControllerPageRouteQueryBSchemaQuery, ControllerPageRouteQuerySchemaParams, ControllerPageRouteQuerySchemaQuery, ControllerPageState, ControllerPageStyle, ControllerPageTodo, ControllerPageToolOne$1 as ControllerPageToolOne, ControllerPageToolOneSchemaParams, ControllerPageToolOneSchemaQuery, ControllerPageToolTwo, ControllerPageToolTwoSchemaParams, ControllerPageToolTwoSchemaQuery, ControllerTableCellTest, ControllerTableCellTestProps, IBehaviorOptionsFormFieldLayout, IBehaviorOptionsFormFieldLayoutLogin, IBehaviorPropsInputFormFieldLayout, IBehaviorPropsInputFormFieldLayoutLogin, IBehaviorPropsOutputFormFieldLayout, IBehaviorPropsOutputFormFieldLayoutLogin, IIconRecord, IModelOptionsTest, IModelOptionsTodo, IModuleApi, IPagePathRecord, IServiceSsrLayoutOptions, ITableCellOptionsTest, Main, ModelTest, ModelTodo, Monkey, MonkeySys, NSControllerPageAuthCallback, NSControllerPageErrorExpired, NSControllerPageItem, NSControllerPageRouteParams, NSControllerPageRouteQuery, NSControllerPageRouteQueryB, NSControllerPageToolOne, NSControllerPageToolTwo, RenderPageLogin, RenderPageToolOne, ScopeModuleDemoBasic, ScopeModuleDemoTodo, ScopeModuleHomeBase, ScopeModuleHomeIcon, ScopeModuleHomeIndex, ScopeModuleHomeLogin, ServiceRouterGuards, ServiceSsr, ServiceSsrLayout, StoreCounter, TableCellTest, TypeControllerActionViewPublicProps, TypeControllerCardPublicProps, TypeControllerFormFieldTestPublicProps, TypeControllerItemLinkPublicProps, TypeControllerPagePublicProps, TypeControllerTableCellTestPublicProps, ZActionView, ZCard, ZFormFieldTest, ZItemLink, ZPage, ZPageAuthCallback, ZPageComponent, ZPageErrorExpired, ZPageErrorNotFound, ZPageHome, ZPageItem, ZPageLocale, ZPageLogin, ZPagePinia, ZPageRouteParams, ZPageRouteQuery, ZPageRouteQueryB, ZPageState, ZPageStyle, ZPageTodo, ZPageToolOne, ZPageToolTwo, ZTableCellTest, config, definePropertyScopeBase, icons };
+  export { $iconName, AopHome, AopHome3, ApiTodo, ApiTodoEntity, ApiTodoIntertBody, ApiTodoUpdateBody, BBAActionsLog, BBARestActionsAlert, BBARestActionsConfirm, BBARestActionsCopy, BBARestActionsCreate, BBARestActionsDelete, BBARestActionsEdit, BBARestActionsSetValue, BBARestActionsView, BBFBasicCaptcha, BBFBasicDateRange, BBFBasicInput, BBFCurrency, BBFDate, BBFDemoBasicTest, BBFFormBlank, BBFFormPreset, BBPBasicRestpage, BBPBasicRestpageEntry, BBTBasicTableActionDelete, BBTBasicTableActionOperationsRow, BBTBasicTableActionUpdate, BBTBasicTableActionView, BBTCurrency, BBTDate, BBTDemoBasicTest, BBZApp, BBZBasicDateRange, BBZBasicRestpageWrapperFilter, BBZBasicTable, BBZBasicTableActionOperationsTable, BBZBehavior, BBZDemoBasicActionView, BBZDemoBasicCard, BBZDemoBasicTableCellTest, BBZForm, BBZFormField, BBZHomeBaseItemLink, BBZHomeBasePage, BBZHomeLayoutemptyLayoutEmpty, BBZHomeLayouttabsLayoutTabs, BBZIcon, BBZRouterViewEmpty, BBZRouterstackRouterViewStack, BBZRoutertabsRouterViewTabs, BBZTable, BehaviorFormFieldLayout, BehaviorFormFieldLayoutLogin, ControllerActionView, ControllerActionViewProps, ControllerCard, ControllerCardProps, ControllerFormFieldTest, ControllerFormFieldTestProps, ControllerItemLink, ControllerItemLinkProps, ControllerPage, ControllerPageAuthCallback, ControllerPageAuthCallbackSchemaQuery, ControllerPageComponent, ControllerPageErrorExpired, ControllerPageErrorExpiredSchemaQuery, ControllerPageErrorNotFound, ControllerPageHome, ControllerPageItem, ControllerPageItemSchemaParams, ControllerPageItemSchemaQuery, ControllerPageLocale, ControllerPageLogin$1 as ControllerPageLogin, ControllerPagePinia, ControllerPageProps, ControllerPageRouteParams, ControllerPageRouteParamsSchemaParams, ControllerPageRouteParamsSchemaQuery, ControllerPageRouteQuery, ControllerPageRouteQueryB, ControllerPageRouteQueryBSchemaParams, ControllerPageRouteQueryBSchemaQuery, ControllerPageRouteQuerySchemaParams, ControllerPageRouteQuerySchemaQuery, ControllerPageState, ControllerPageStyle, ControllerPageTodo, ControllerPageToolOne$1 as ControllerPageToolOne, ControllerPageToolOneSchemaParams, ControllerPageToolOneSchemaQuery, ControllerPageToolTwo, ControllerPageToolTwoSchemaParams, ControllerPageToolTwoSchemaQuery, ControllerTableCellTest, ControllerTableCellTestProps, IBehaviorOptionsFormFieldLayout, IBehaviorOptionsFormFieldLayoutLogin, IBehaviorPropsInputFormFieldLayout, IBehaviorPropsInputFormFieldLayoutLogin, IBehaviorPropsOutputFormFieldLayout, IBehaviorPropsOutputFormFieldLayoutLogin, IIconRecord, IModelOptionsTest, IModelOptionsTodo, IModuleApi, IPagePathRecord, IServiceSsrLayoutOptions, ITableCellOptionsTest, Main, ModelTest, ModelTodo, Monkey, MonkeySys, NSControllerPageAuthCallback, NSControllerPageErrorExpired, NSControllerPageItem, NSControllerPageRouteParams, NSControllerPageRouteQuery, NSControllerPageRouteQueryB, NSControllerPageToolOne, NSControllerPageToolTwo, RenderPageLogin, RenderPageToolOne, ScopeModuleDemoBasic, ScopeModuleDemoTodo, ScopeModuleHomeBase, ScopeModuleHomeIcon, ScopeModuleHomeIndex, ScopeModuleHomeLogin, ServiceRouterGuards, ServiceSsr, ServiceSsrLayout, StoreCounter, TableCellTest, TypeControllerActionViewPublicProps, TypeControllerCardPublicProps, TypeControllerFormFieldTestPublicProps, TypeControllerItemLinkPublicProps, TypeControllerPagePublicProps, TypeControllerTableCellTestPublicProps, ZActionView, ZCard, ZFormFieldTest, ZItemLink, ZPage, ZPageAuthCallback, ZPageComponent, ZPageErrorExpired, ZPageErrorNotFound, ZPageHome, ZPageItem, ZPageLocale, ZPageLogin, ZPagePinia, ZPageRouteParams, ZPageRouteQuery, ZPageRouteQueryB, ZPageState, ZPageStyle, ZPageTodo, ZPageToolOne, ZPageToolTwo, ZTableCellTest, config, definePropertyScopeBase, icons };
 }
 declare function $iconName<K extends keyof IIconRecord$1>(name: K): any;
 declare module 'zova-module-a-router' {
@@ -8040,4 +8080,4 @@ declare module 'zova-module-a-router' {
   }
 }
 //#endregion
-export { $iconName, AopHome, AopHome3, ApiTodo, ApiTodoEntity, ApiTodoIntertBody, ApiTodoUpdateBody, BBAActionsLog, BBARestActionsAlert, BBARestActionsConfirm, BBARestActionsCopy, BBARestActionsCreate, BBARestActionsDelete, BBARestActionsEdit, BBARestActionsSetValue, BBARestActionsView, BBFBasicCaptcha, BBFBasicDateRange, BBFBasicInput, BBFCurrency, BBFDate, BBFDemoBasicTest, BBFFormBlank, BBFFormWrapper, BBPBasicRestpage, BBPBasicRestpageEntry, BBTBasicTableActionOperationsRow, BBTBasicTableActionView, BBTCurrency, BBTDate, BBTDemoBasicTest, BBZApp, BBZBasicDateRange, BBZBasicRestpageWrapperFilter, BBZBasicTable, BBZBasicTableActionOperationsTable, BBZBehavior, BBZDemoBasicActionView, BBZDemoBasicCard, BBZDemoBasicTableCellTest, BBZForm, BBZFormField, BBZHomeBaseItemLink, BBZHomeBasePage, BBZHomeLayoutemptyLayoutEmpty, BBZHomeLayouttabsLayoutTabs, BBZIcon, BBZRouterViewEmpty, BBZRouterstackRouterViewStack, BBZRoutertabsRouterViewTabs, BBZTable, BehaviorFormFieldLayout, BehaviorFormFieldLayoutLogin, ControllerActionView, ControllerActionViewProps, ControllerCard, ControllerCardProps, ControllerFormFieldTest, ControllerFormFieldTestProps, ControllerItemLink, ControllerItemLinkProps, ControllerPage, ControllerPageAuthCallback, ControllerPageAuthCallbackSchemaQuery, ControllerPageComponent, ControllerPageErrorExpired, ControllerPageErrorExpiredSchemaQuery, ControllerPageErrorNotFound, ControllerPageHome, ControllerPageItem, ControllerPageItemSchemaParams, ControllerPageItemSchemaQuery, ControllerPageLocale, ControllerPageLogin$1 as ControllerPageLogin, ControllerPagePinia, ControllerPageProps, ControllerPageRouteParams, ControllerPageRouteParamsSchemaParams, ControllerPageRouteParamsSchemaQuery, ControllerPageRouteQuery, ControllerPageRouteQueryB, ControllerPageRouteQueryBSchemaParams, ControllerPageRouteQueryBSchemaQuery, ControllerPageRouteQuerySchemaParams, ControllerPageRouteQuerySchemaQuery, ControllerPageState, ControllerPageStyle, ControllerPageTodo, ControllerPageToolOne$1 as ControllerPageToolOne, ControllerPageToolOneSchemaParams, ControllerPageToolOneSchemaQuery, ControllerPageToolTwo, ControllerPageToolTwoSchemaParams, ControllerPageToolTwoSchemaQuery, ControllerTableCellTest, ControllerTableCellTestProps, IBehaviorOptionsFormFieldLayout, IBehaviorOptionsFormFieldLayoutLogin, IBehaviorPropsInputFormFieldLayout, IBehaviorPropsInputFormFieldLayoutLogin, IBehaviorPropsOutputFormFieldLayout, IBehaviorPropsOutputFormFieldLayoutLogin, type IIconRecord, IModelOptionsTest, IModelOptionsTodo, IModuleApi, type IPagePathRecord, IServiceSsrLayoutOptions, ITableCellOptionsTest, Main, ModelTest, ModelTodo, Monkey, MonkeySys, NSControllerPageAuthCallback, NSControllerPageErrorExpired, NSControllerPageItem, NSControllerPageRouteParams, NSControllerPageRouteQuery, NSControllerPageRouteQueryB, NSControllerPageToolOne, NSControllerPageToolTwo, RenderPageLogin, RenderPageToolOne, ScopeModuleDemoBasic, ScopeModuleDemoTodo, ScopeModuleHomeBase, ScopeModuleHomeIcon, ScopeModuleHomeIndex, ScopeModuleHomeLogin, ServiceRouterGuards, ServiceSsr, ServiceSsrLayout, StoreCounter, TableCellTest, TypeControllerActionViewPublicProps, TypeControllerCardPublicProps, TypeControllerFormFieldTestPublicProps, TypeControllerItemLinkPublicProps, TypeControllerPagePublicProps, TypeControllerTableCellTestPublicProps, ZActionView, ZCard, ZFormFieldTest, ZItemLink, ZPage, ZPageAuthCallback, ZPageComponent, ZPageErrorExpired, ZPageErrorNotFound, ZPageHome, ZPageItem, ZPageLocale, ZPageLogin, ZPagePinia, ZPageRouteParams, ZPageRouteQuery, ZPageRouteQueryB, ZPageState, ZPageStyle, ZPageTodo, ZPageToolOne, ZPageToolTwo, ZTableCellTest, config, definePropertyScopeBase, icons };
+export { $iconName, AopHome, AopHome3, ApiTodo, ApiTodoEntity, ApiTodoIntertBody, ApiTodoUpdateBody, BBAActionsLog, BBARestActionsAlert, BBARestActionsConfirm, BBARestActionsCopy, BBARestActionsCreate, BBARestActionsDelete, BBARestActionsEdit, BBARestActionsSetValue, BBARestActionsView, BBFBasicCaptcha, BBFBasicDateRange, BBFBasicInput, BBFCurrency, BBFDate, BBFDemoBasicTest, BBFFormBlank, BBFFormPreset, BBPBasicRestpage, BBPBasicRestpageEntry, BBTBasicTableActionDelete, BBTBasicTableActionOperationsRow, BBTBasicTableActionUpdate, BBTBasicTableActionView, BBTCurrency, BBTDate, BBTDemoBasicTest, BBZApp, BBZBasicDateRange, BBZBasicRestpageWrapperFilter, BBZBasicTable, BBZBasicTableActionOperationsTable, BBZBehavior, BBZDemoBasicActionView, BBZDemoBasicCard, BBZDemoBasicTableCellTest, BBZForm, BBZFormField, BBZHomeBaseItemLink, BBZHomeBasePage, BBZHomeLayoutemptyLayoutEmpty, BBZHomeLayouttabsLayoutTabs, BBZIcon, BBZRouterViewEmpty, BBZRouterstackRouterViewStack, BBZRoutertabsRouterViewTabs, BBZTable, BehaviorFormFieldLayout, BehaviorFormFieldLayoutLogin, ControllerActionView, ControllerActionViewProps, ControllerCard, ControllerCardProps, ControllerFormFieldTest, ControllerFormFieldTestProps, ControllerItemLink, ControllerItemLinkProps, ControllerPage, ControllerPageAuthCallback, ControllerPageAuthCallbackSchemaQuery, ControllerPageComponent, ControllerPageErrorExpired, ControllerPageErrorExpiredSchemaQuery, ControllerPageErrorNotFound, ControllerPageHome, ControllerPageItem, ControllerPageItemSchemaParams, ControllerPageItemSchemaQuery, ControllerPageLocale, ControllerPageLogin$1 as ControllerPageLogin, ControllerPagePinia, ControllerPageProps, ControllerPageRouteParams, ControllerPageRouteParamsSchemaParams, ControllerPageRouteParamsSchemaQuery, ControllerPageRouteQuery, ControllerPageRouteQueryB, ControllerPageRouteQueryBSchemaParams, ControllerPageRouteQueryBSchemaQuery, ControllerPageRouteQuerySchemaParams, ControllerPageRouteQuerySchemaQuery, ControllerPageState, ControllerPageStyle, ControllerPageTodo, ControllerPageToolOne$1 as ControllerPageToolOne, ControllerPageToolOneSchemaParams, ControllerPageToolOneSchemaQuery, ControllerPageToolTwo, ControllerPageToolTwoSchemaParams, ControllerPageToolTwoSchemaQuery, ControllerTableCellTest, ControllerTableCellTestProps, IBehaviorOptionsFormFieldLayout, IBehaviorOptionsFormFieldLayoutLogin, IBehaviorPropsInputFormFieldLayout, IBehaviorPropsInputFormFieldLayoutLogin, IBehaviorPropsOutputFormFieldLayout, IBehaviorPropsOutputFormFieldLayoutLogin, type IIconRecord, IModelOptionsTest, IModelOptionsTodo, IModuleApi, type IPagePathRecord, IServiceSsrLayoutOptions, ITableCellOptionsTest, Main, ModelTest, ModelTodo, Monkey, MonkeySys, NSControllerPageAuthCallback, NSControllerPageErrorExpired, NSControllerPageItem, NSControllerPageRouteParams, NSControllerPageRouteQuery, NSControllerPageRouteQueryB, NSControllerPageToolOne, NSControllerPageToolTwo, RenderPageLogin, RenderPageToolOne, ScopeModuleDemoBasic, ScopeModuleDemoTodo, ScopeModuleHomeBase, ScopeModuleHomeIcon, ScopeModuleHomeIndex, ScopeModuleHomeLogin, ServiceRouterGuards, ServiceSsr, ServiceSsrLayout, StoreCounter, TableCellTest, TypeControllerActionViewPublicProps, TypeControllerCardPublicProps, TypeControllerFormFieldTestPublicProps, TypeControllerItemLinkPublicProps, TypeControllerPagePublicProps, TypeControllerTableCellTestPublicProps, ZActionView, ZCard, ZFormFieldTest, ZItemLink, ZPage, ZPageAuthCallback, ZPageComponent, ZPageErrorExpired, ZPageErrorNotFound, ZPageHome, ZPageItem, ZPageLocale, ZPageLogin, ZPagePinia, ZPageRouteParams, ZPageRouteQuery, ZPageRouteQueryB, ZPageState, ZPageStyle, ZPageTodo, ZPageToolOne, ZPageToolTwo, ZTableCellTest, config, definePropertyScopeBase, icons };

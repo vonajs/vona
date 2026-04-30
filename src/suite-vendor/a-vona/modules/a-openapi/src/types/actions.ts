@@ -13,4 +13,5 @@ export interface IResourceActionTableOptionsBase {
 export interface IResourceActionRowOptionsBase {
   resource?: keyof IResourceRecord;
   id?: TableIdentity;
+  class?: any;
 }
