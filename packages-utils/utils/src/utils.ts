@@ -256,3 +256,7 @@ export function pickObject<T extends object, K extends keyof T>(obj: T, keys: K[
   }
   return result;
 }
+
+export function typedKeys<T extends object>(obj: T) {
+  return Object.keys(obj) as Array<keyof T>;
+}
