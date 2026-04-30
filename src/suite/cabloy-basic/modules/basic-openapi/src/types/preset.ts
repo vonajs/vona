@@ -11,7 +11,7 @@ import type { ITextareaOptions } from './textarea.ts';
 import type { IToggleOptions } from './toggle.ts';
 
 declare module 'vona-module-a-openapi' {
-  export interface ISchemaRenderComponentPresetRecord extends IResourceActionComponentRowRecord... {
+  export interface IResourceComponentFormFieldRecord {
     input?: IInputOptions;
     captcha?: ICaptchaOptions;
     currency?: CurrencyOptions;

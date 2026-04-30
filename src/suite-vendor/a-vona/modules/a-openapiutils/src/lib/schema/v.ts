@@ -24,8 +24,10 @@ import {
   schemaRenderComponent,
   schemaRenderReadonly,
   schemaRenderLayout,
-  schemaRenderComponentOptions,
-  schemaRenderJsxOptions,
+  schemaRenderComponentRow,
+  schemaRenderComponentBulk,
+  schemaRenderJsxRow,
+  schemaRenderJsxBulk,
 } from './v/rest.ts';
 import {
   schemaSerializerCustom,
@@ -92,8 +94,10 @@ export const v = {
   renderReadonly: schemaRenderReadonly,
   renderOrder: schemaRenderOrder,
   renderFieldSource: schemaRenderFieldSource,
-  renderComponentOptions: schemaRenderComponentOptions,
-  renderJsxOptions: schemaRenderJsxOptions,
+  renderComponentRow: schemaRenderComponentRow,
+  renderComponentBulk: schemaRenderComponentBulk,
+  renderJsxRow: schemaRenderJsxRow,
+  renderJsxBulk: schemaRenderJsxBulk,
   // zod
   zodRefine: schemaZodRefine,
   zodTransform: schemaZodTransform,

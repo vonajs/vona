@@ -1,12 +1,17 @@
 import type {
+  IResourceActionBulkOptionsOperationsBulkAction,
+  IResourceActionBulkRecord,
+  IResourceActionRowOptionsOperationsRowAction,
+  IResourceActionRowRecord,
   ISchemaObjectExtensionFieldRestScene,
   ISchemaRenderComponentLayoutOptions,
   ISchemaRenderComponentPresetRecord,
   TypeRenderComponentJsx,
   TypeSchemaScene,
 } from 'vona-module-a-openapi';
-import type { IResourceActionRowOptionsOperationsRowAction } from 'vona-module-basic-openapi';
 import type z from 'zod';
+
+import { toUpperCaseFirstChar } from '@cabloy/word-utils';
 
 import type { TypeSchemaOrderLevel } from '../../../types/order.ts';
 
@@ -33,21 +38,6 @@ export function schemaRenderComponent<
   };
 }
 
-export function schemaRenderComponentOptions<K extends keyof ISchemaRenderComponentPresetRecord>(
-  name: K,
-  options?: ISchemaRenderComponentPresetRecord[K],
-): ISchemaObjectExtensionFieldRestScene {
-  return options !== undefined ? { render: name, preset: { [name]: options } } : { render: name };
-}
-
-export function schemaRenderComponentNested<K extends keyof ISchemaRenderComponentPresetRecord>(
-  name: K,
-  options?: ISchemaRenderComponentPresetRecord[K],
-): IResourceActionRowOptionsOperationsRowAction {
-  const options2 = schemaRenderComponentOptions(name, options);
-  return { name, options: options2 };
-}
-
 export function schemaRenderJsx<T extends z.ZodType>(
   renderJsx: TypeRenderComponentJsx,
   scene?: TypeSchemaScene,
@@ -58,8 +48,33 @@ export function schemaRenderJsx<T extends z.ZodType>(
   };
 }
 
-export function schemaRenderJsxOptions(renderJsx: TypeRenderComponentJsx) {
-  return { render: renderJsx };
+export function schemaRenderComponentRow<
+  K extends keyof Omit<IResourceActionRowRecord, 'operationsRow'>,
+>(name: K, options?: IResourceActionRowRecord[K]): IResourceActionRowOptionsOperationsRowAction {
+  const options2 = schemaRenderComponentOptions('action' + toUpperCaseFirstChar(name), options);
+  return { name, options: options2 };
+}
+
+export function schemaRenderComponentBulk<
+  K extends keyof Omit<IResourceActionBulkRecord, 'operationsBulk'>,
+>(name: K, options?: IResourceActionBulkRecord[K]): IResourceActionBulkOptionsOperationsBulkAction {
+  const options2 = schemaRenderComponentOptions('action' + toUpperCaseFirstChar(name), options);
+  return { name, options: options2 };
+}
+
+export function schemaRenderJsxRow<K extends keyof Omit<IResourceActionRowRecord, 'operationsRow'>>(
+  name: K,
+  renderJsx: TypeRenderComponentJsx,
+) {
+  const options = schemaRenderJsxOptions(renderJsx);
+  return { name, options };
+}
+
+export function schemaRenderJsxBulk<
+  K extends keyof Omit<IResourceActionBulkRecord, 'operationsBulk'>,
+>(name: K, renderJsx: TypeRenderComponentJsx) {
+  const options = schemaRenderJsxOptions(renderJsx);
+  return { name, options };
 }
 
 export function schemaRenderVisible<T extends z.ZodType>(
@@ -102,6 +117,19 @@ export function schemaRenderOrder<T extends z.ZodType>(
     const options = { order: orderReal };
     return _generalSchemaRest(schema, options, scene);
   };
+}
+
+function schemaRenderComponentOptions(
+  name: string,
+  options?: {},
+): ISchemaObjectExtensionFieldRestScene {
+  return options !== undefined
+    ? { render: name as never, preset: { [name]: options } }
+    : { render: name as never };
+}
+
+function schemaRenderJsxOptions(renderJsx: TypeRenderComponentJsx) {
+  return { render: renderJsx };
 }
 
 // export function schemaRest<T extends z.ZodType>(

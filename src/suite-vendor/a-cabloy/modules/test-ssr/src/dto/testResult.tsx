@@ -4,7 +4,7 @@ import type { IDecoratorDtoOptions } from 'vona-module-a-web';
 import { cel } from '@cabloy/utils';
 import React from 'react';
 import { text } from 'vona';
-import { ActionExpr, ActionLog } from 'vona-module-a-actions';
+import { ActionLog } from 'vona-module-a-actions';
 import { $makeSchema, Api, v } from 'vona-module-a-openapiutils';
 import { Dto } from 'vona-module-a-web';
 import z from 'zod';
@@ -38,9 +38,9 @@ export interface IDtoOptionsTestResult extends IDecoratorDtoOptions<
             //   </FFDemoBasicTest>
             // ),
           },
-          label: 'Custom1',
         },
       }),
+      v.renderLayout({ label: 'Custom1' }),
       v.default('custom'),
       v.optional(),
       v.min(6),
@@ -69,10 +69,12 @@ export interface IDtoOptionsTestResult extends IDecoratorDtoOptions<
               </div>
             ),
           },
-          label: 'Custom2',
-          header: <div>{cel('name + ":containerHeader:" + value')}</div>,
-          footer: <div>{cel('name + ":containerFooter:" + value')}</div>,
         },
+      }),
+      v.renderLayout({
+        label: 'Custom2',
+        header: <div>{cel('name + ":containerHeader:" + value')}</div>,
+        footer: <div>{cel('name + ":containerFooter:" + value')}</div>,
       }),
       v.default('custom'),
       v.optional(),
@@ -83,9 +85,9 @@ export interface IDtoOptionsTestResult extends IDecoratorDtoOptions<
       v.openapi({
         rest: {
           render: cel('getValue("name")!="kevin"?"text":"password"'),
-          label: 'Custom3',
         },
       }),
+      v.renderLayout({ label: 'Custom3' }),
       v.default('custom'),
       v.optional(),
       v.min(6),
@@ -95,16 +97,9 @@ export interface IDtoOptionsTestResult extends IDecoratorDtoOptions<
       v.openapi({
         rest: {
           // render: 'text',
-          label: 'Custom4',
-          displayValue: cel('"!"+value'),
-          onSetDisplayValue: (
-            <action>
-              <ActionLog message={cel('getEvent()')}></ActionLog>
-              <ActionExpr expression={cel('getEvent().substring(1)')}></ActionExpr>
-            </action>
-          ),
         },
       }),
+      v.renderLayout({ label: 'Custom4' }),
       v.default('custom'),
       v.optional(),
       v.min(6),
@@ -121,55 +116,46 @@ export interface IDtoOptionsTestResult extends IDecoratorDtoOptions<
               </div>
             ),
           },
-          label: 'Custom5',
         },
       }),
+      v.renderLayout({ label: 'Custom5' }),
       v.default('custom'),
       v.optional(),
       v.min(6),
       z.string(),
     ),
     _customCopy: $makeSchema(
-      v.openapi({
-        rest: {
-          form: {
-            render: (
-              <div style={{ display: 'inline-flex', alignItems: 'center' }}>
-                <input
-                  className="input"
-                  value={cel('getValue("name")')}
-                  onInput={
-                    <action>
-                      <BBARestActionsSetValue name="name"></BBARestActionsSetValue>
-                      <BBARestActionsSetValue
-                        name="_customCopied"
-                        value={false}
-                        disableNotifyChanged
-                      ></BBARestActionsSetValue>
-                    </action>
-                  }
-                ></input>
-                <BBZIcon
-                  v-if={cel('getValue("_customCopied")==false')}
-                  style={{ cursor: 'pointer' }}
-                  name={$iconName(':outline:copy-outline')}
-                  nativeOnClick={
-                    <action>
-                      <BBARestActionsCopy text={cel('getValue("name")')}></BBARestActionsCopy>
-                      <BBARestActionsSetValue
-                        name="_customCopied"
-                        value={true}
-                      ></BBARestActionsSetValue>
-                    </action>
-                  }
-                ></BBZIcon>
-                <span v-if={cel('getValue("_customCopied")==true')}>Copied!</span>
-              </div>
-            ),
-          },
-          label: 'Custom Copy',
-        },
-      }),
+      v.renderJsx(
+        <div style={{ display: 'inline-flex', alignItems: 'center' }}>
+          <input
+            className="input"
+            value={cel('getValue("name")')}
+            onInput={
+              <action>
+                <BBARestActionsSetValue name="name"></BBARestActionsSetValue>
+                <BBARestActionsSetValue
+                  name="_customCopied"
+                  value={false}
+                  disableNotifyChanged
+                ></BBARestActionsSetValue>
+              </action>
+            }
+          ></input>
+          <BBZIcon
+            v-if={cel('getValue("_customCopied")==false')}
+            style={{ cursor: 'pointer' }}
+            name={$iconName(':outline:copy-outline')}
+            nativeOnClick={
+              <action>
+                <BBARestActionsCopy text={cel('getValue("name")')}></BBARestActionsCopy>
+                <BBARestActionsSetValue name="_customCopied" value={true}></BBARestActionsSetValue>
+              </action>
+            }
+          ></BBZIcon>
+          <span v-if={cel('getValue("_customCopied")==true')}>Copied!</span>
+        </div>,
+      ),
+      v.renderLayout({ label: 'Custom Copy' }),
       v.optional(),
       v.min(6),
       z.string(),
@@ -192,15 +178,9 @@ export class DtoTestResult {
   @Api.field(
     v.openapi({
       title: $locale('Name'),
-      rest: {
-        form: {
-          render: <input className="text-center"></input>,
-        },
-        label: cel('name+"!!"'),
-        class: 'text-center-2',
-        classContainer: 'test-layout',
-      },
     }),
+    v.renderJsx(<input className="text-center-2 text-center"></input>),
+    v.renderLayout({ label: cel('name+"!!"'), class: 'test-layout' }),
     v.default('tom'),
     v.min(3),
   )

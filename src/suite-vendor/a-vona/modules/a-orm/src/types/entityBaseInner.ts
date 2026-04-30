@@ -5,25 +5,8 @@ import { EntityBaseEmpty } from './entityBaseEmpty.ts';
 
 export class EntityBaseInner extends EntityBaseEmpty {
   @Api.field(
-    v.title($locale('Operations')),
-    v.renderOrder(-1, 'max'),
-    v.renderVisible(false, 'form'),
-    v.renderComponent(
-      'actionOperationsRow',
-      {
-        actions: {
-          update: v.renderComponentOptions('actionUpdate'),
-          delete: v.renderComponentOptions('actionDelete'),
-        },
-      },
-      'table',
-    ),
-  )
-  _operationsRow?: unknown;
-
-  @Api.field(
     v.title($locale('CreatedAt')),
-    v.renderOrder(-3, 'max'),
+    v.renderOrder(-2, 'max'),
     v.renderComponent('date'),
     v.renderComponent('dateRange', undefined, 'filter'),
     v.filterTransform('a-web:dateRange'),
@@ -32,7 +15,7 @@ export class EntityBaseInner extends EntityBaseEmpty {
 
   @Api.field(
     v.title($locale('UpdatedAt')),
-    v.renderOrder(-2, 'max'),
+    v.renderOrder(-1, 'max'),
     v.renderComponent('date'),
     v.renderComponent('dateRange', undefined, 'filter'),
     v.filterTransform('a-web:dateRange'),

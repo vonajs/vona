@@ -3,14 +3,23 @@ import type { ILocaleMagic } from 'vona';
 import type { IOpenapiOptions } from 'vona-module-a-openapiutils';
 import type { z } from 'zod';
 
-import type { IComponentRecord, ITableCellComponentRecord } from './component.ts';
+import type {
+  IResourceComponentActionBulkRecord,
+  IResourceComponentActionRowRecord,
+  IResourceComponentFormFieldRecord,
+} from './actions.ts';
 import 'openapi3-ts/oas30';
 import 'openapi3-ts/oas31';
+import type { IComponentRecord, ITableCellComponentRecord } from './component.ts';
 
 export type TypeFormFieldOnSetDisplayValue = (value: any) => any;
 export type TypeFormFieldDisplayValueUpdateTiming = 'input' | 'change';
 
-export interface ISchemaRenderComponentPresetRecord extends ...  {}
+export interface ISchemaRenderComponentPresetRecord
+  extends
+    IResourceComponentFormFieldRecord,
+    IResourceComponentActionBulkRecord,
+    IResourceComponentActionRowRecord {}
 
 export interface ISchemaObjectExtensionFieldRestProps {
   //
