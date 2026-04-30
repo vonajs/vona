@@ -97,6 +97,16 @@ export function schemaRenderReadonly<T extends z.ZodType>(
   };
 }
 
+export function schemaRenderDisableNotifyChanged<T extends z.ZodType>(
+  disableNotifyChanged?: boolean,
+  scene?: TypeSchemaScene,
+) {
+  return function (schema: T): T {
+    const options = { disableNotifyChanged };
+    return _generalSchemaRest(schema, options, scene);
+  };
+}
+
 export function schemaRenderFieldSource<T extends z.ZodType>(
   fieldSource: string,
   scene?: TypeSchemaScene,

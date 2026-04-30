@@ -9,6 +9,9 @@ export interface IResourceActionBulkRecord {}
 
 export interface IResourceActionRowRecord {}
 
+export interface IResourceActionTableRecord
+  extends IResourceActionBulkRecord, IResourceActionRowRecord {}
+
 export type IResourceComponentActionBulkRecord = {
   [key in keyof IResourceActionBulkRecord as `action${Capitalize<key>}`]: IResourceActionBulkRecord[key];
 };
@@ -16,6 +19,9 @@ export type IResourceComponentActionBulkRecord = {
 export type IResourceComponentActionRowRecord = {
   [key in keyof IResourceActionRowRecord as `action${Capitalize<key>}`]: IResourceActionRowRecord[key];
 };
+
+export interface IResourceComponentActionTableRecord
+  extends IResourceComponentActionBulkRecord, IResourceComponentActionRowRecord {}
 
 export interface IResourceActionBulkOptionsBase {
   resource?: keyof IResourceRecord;

@@ -28,6 +28,7 @@ import {
   schemaRenderComponentBulk,
   schemaRenderJsxRow,
   schemaRenderJsxBulk,
+  schemaRenderDisableNotifyChanged,
 } from './v/rest.ts';
 import {
   schemaSerializerCustom,
@@ -93,6 +94,7 @@ export const v = {
   renderVisible: schemaRenderVisible,
   renderReadonly: schemaRenderReadonly,
   renderOrder: schemaRenderOrder,
+  renderDisableNotifyChanged: schemaRenderDisableNotifyChanged,
   renderFieldSource: schemaRenderFieldSource,
   renderComponentRow: schemaRenderComponentRow,
   renderComponentBulk: schemaRenderComponentBulk,
