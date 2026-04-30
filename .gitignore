@@ -9,6 +9,8 @@ miniprogram_npm
 /docs-api
 /run
 
+.claude/settings.local.json
+
 .idea
 .DS_Store
 .nx
