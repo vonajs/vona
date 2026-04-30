@@ -5,6 +5,7 @@ import type {
   TypeRenderComponentJsx,
   TypeSchemaScene,
 } from 'vona-module-a-openapi';
+import type { IResourceActionRowOptionsOperationsRowAction } from 'vona-module-basic-openapi';
 import type z from 'zod';
 
 import type { TypeSchemaOrderLevel } from '../../../types/order.ts';
@@ -37,6 +38,14 @@ export function schemaRenderComponentOptions<K extends keyof ISchemaRenderCompon
   options?: ISchemaRenderComponentPresetRecord[K],
 ): ISchemaObjectExtensionFieldRestScene {
   return options !== undefined ? { render: name, preset: { [name]: options } } : { render: name };
+}
+
+export function schemaRenderComponentNested<K extends keyof ISchemaRenderComponentPresetRecord>(
+  name: K,
+  options?: ISchemaRenderComponentPresetRecord[K],
+): IResourceActionRowOptionsOperationsRowAction {
+  const options2 = schemaRenderComponentOptions(name, options);
+  return { name, options: options2 };
 }
 
 export function schemaRenderJsx<T extends z.ZodType>(

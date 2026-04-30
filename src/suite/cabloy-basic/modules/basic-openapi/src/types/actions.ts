@@ -2,40 +2,29 @@ import 'vona-module-a-openapi';
 import type {
   IResourceActionRowOptionsBase,
   IResourceActionRowRecord,
-  IResourceActionTableOptionsBase,
+  IResourceActionBulkOptionsBase,
+  IResourceActionBulkRecord,
   ISchemaObjectExtensionFieldRestScene,
 } from 'vona-module-a-openapi';
 
 declare module 'vona-module-a-openapi' {
   /** table */
-  export interface IResourceActionTableRecord {
-    create?: never;
-    operationsTable?: never;
+  export interface IResourceActionBulkRecord {
+    create?: IResourceActionBulkOptionsCreate;
+    operationsBulk?: IResourceActionBulkOptionsOperationsBulk;
   }
 
   /** row */
   export interface IResourceActionRowRecord {
-    view?: never;
-    update?: never;
-    delete?: never;
-    operationsRow?: never;
+    view?: IResourceActionRowOptionsView;
+    update?: IResourceActionRowOptionsUpdate;
+    delete?: IResourceActionRowOptionsDelete;
+    operationsRow?: IResourceActionRowOptionsOperationsRow;
   }
 }
 
-export interface IResourceActionComponentTableRecord {
-  actionCreate?: IResourceActionTableOptionsCreate;
-  actionOperationsTable?: IResourceActionTableOptionsOperationsTable;
-}
-
-export interface IResourceActionComponentRowRecord {
-  actionView?: IResourceActionRowOptionsView;
-  actionUpdate?: IResourceActionRowOptionsUpdate;
-  actionDelete?: IResourceActionRowOptionsDelete;
-  actionOperationsRow?: IResourceActionRowOptionsOperationsRow;
-}
-
-export interface IResourceActionTableOptionsCreate extends IResourceActionTableOptionsBase {}
-export interface IResourceActionTableOptionsOperationsTable extends IResourceActionTableOptionsBase {}
+export interface IResourceActionBulkOptionsCreate extends IResourceActionBulkOptionsBase {}
+export interface IResourceActionBulkOptionsOperationsBulk extends IResourceActionBulkOptionsBase {}
 
 export interface IResourceActionRowOptionsView extends IResourceActionRowOptionsBase {}
 
@@ -44,11 +33,19 @@ export interface IResourceActionRowOptionsUpdate extends IResourceActionRowOptio
 export interface IResourceActionRowOptionsDelete extends IResourceActionRowOptionsBase {}
 
 export interface IResourceActionRowOptionsOperationsRow extends IResourceActionRowOptionsBase {
-  actions?: TypeResourceActionRowOptionsOperationsRowActions;
+  actions?: IResourceActionRowOptionsOperationsRowAction[];
 }
 
-export type TypeResourceActionRowOptionsOperationsRowActions = {
-  [key in keyof Omit<IResourceActionRowRecord, 'operationsRow'>]?:
-    | ISchemaObjectExtensionFieldRestScene
-    | false;
-};
+export interface IResourceActionBulkOptionsOperationsBulk extends IResourceActionBulkOptionsBase {
+  actions?: IResourceActionBulkOptionsOperationsBulkAction[];
+}
+
+export interface IResourceActionRowOptionsOperationsRowAction {
+  name: keyof Omit<IResourceActionRowRecord, 'operationsRow'>;
+  options: ISchemaObjectExtensionFieldRestScene;
+}
+
+export interface IResourceActionBulkOptionsOperationsBulkAction {
+  name: keyof Omit<IResourceActionBulkRecord, 'operationsBulk'>;
+  options: ISchemaObjectExtensionFieldRestScene;
+}

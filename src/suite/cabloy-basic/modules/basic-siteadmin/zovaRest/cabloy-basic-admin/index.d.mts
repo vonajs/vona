@@ -4081,7 +4081,7 @@ declare const isVue2: boolean;
 declare const isVue3: boolean;
 declare const Vue2: any;
 declare const install: (vue?: any) => void;
-/** 
+/**
  * @deprecated To avoid bringing in all the tree-shakable modules, this API has been deprecated. Use `Vue2` or named exports instead.
  * Refer to https://github.com/vueuse/vue-demi/issues/41
  */
@@ -7032,7 +7032,7 @@ interface IToggleOptions {
 //#region src/suite/cabloy-basic/modules/basic-openapi/src/types/actions.d.ts
 declare module 'zova-module-a-openapi' {
   /** table */
-  interface IResourceActionTableRecord {
+  interface IResourceActionBulkRecord {
     create?: never;
     operationsTable?: never;
   }

@@ -10,7 +10,7 @@ import 'openapi3-ts/oas31';
 export type TypeFormFieldOnSetDisplayValue = (value: any) => any;
 export type TypeFormFieldDisplayValueUpdateTiming = 'input' | 'change';
 
-export interface ISchemaRenderComponentPresetRecord {}
+export interface ISchemaRenderComponentPresetRecord extends ...  {}
 
 export interface ISchemaObjectExtensionFieldRestProps {
   //

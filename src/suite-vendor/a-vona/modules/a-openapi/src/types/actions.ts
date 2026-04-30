@@ -2,11 +2,19 @@ import { TableIdentity } from 'table-identity';
 
 import type { IResourceRecord } from './resource.ts';
 
-export interface IResourceActionTableRecord {}
+export interface IResourceActionBulkRecord {}
 
 export interface IResourceActionRowRecord {}
 
-export interface IResourceActionTableOptionsBase {
+export type IResourceActionComponentBulkRecord = {
+  [key in keyof IResourceActionBulkRecord as `action${Capitalize<key>}`]: IResourceActionBulkRecord[key];
+};
+
+export type IResourceActionComponentRowRecord = {
+  [key in keyof IResourceActionRowRecord as `action${Capitalize<key>}`]: IResourceActionRowRecord[key];
+};
+
+export interface IResourceActionBulkOptionsBase {
   resource?: keyof IResourceRecord;
 }
 
