@@ -12,9 +12,6 @@ import 'openapi3-ts/oas30';
 import 'openapi3-ts/oas31';
 import type { IComponentRecord, ITableCellComponentRecord } from './component.ts';
 
-export type TypeFormFieldOnSetDisplayValue = (value: any) => any;
-export type TypeFormFieldDisplayValueUpdateTiming = 'input' | 'change';
-
 export interface ISchemaRenderComponentPresetRecord
   extends
     IResourceComponentFormFieldRecord,

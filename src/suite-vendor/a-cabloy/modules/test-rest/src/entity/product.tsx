@@ -28,7 +28,7 @@ export class EntityProduct extends EntityBase {
     // v.renderComponent(),
     // v.renderJsx(
     //   <ZZDemoBasicActionView>
-    //     <div className="mock">{cel('displayValue')}</div>
+    //     <div className="mock">{cel('value')}</div>
     //     <div>{cel('get(permissions,"actions.create")')}</div>
     //   </ZZDemoBasicActionView>,
     //   'table',
@@ -42,13 +42,13 @@ export class EntityProduct extends EntityBase {
     //         <ActionView></ActionView>
     //         <ActionVar name="var1" value={cel('getValue("id")')}></ActionVar>
     //         <ActionLog message={cel('var1+":var1 hello world"')}></ActionLog>
-    //         <ActionExpr expression={cel('displayValue+"!"')}></ActionExpr>
+    //         <ActionExpr expression={cel('value+"!"')}></ActionExpr>
     //         <ActionLog message={cel('res[3]')}></ActionLog>
     //         <ActionLog message={cel('getEventProp("x")+":"+getEventProp("y")')}></ActionLog>
     //         <action res="resAction">
     //           <ActionVar name="var2" value={cel('getValue("id")')}></ActionVar>
     //           <ActionLog message={cel('var2+":var2 hello world"')}></ActionLog>
-    //           <ActionExpr expression={cel('displayValue+"!"')}></ActionExpr>
+    //           <ActionExpr expression={cel('value+"!"')}></ActionExpr>
     //           <ActionLog message={cel('res[6]')}></ActionLog>
     //           <ActionLog message={cel('res[6][2]')}></ActionLog>
     //           <ActionExpr expression={cel('res[6][2]')}></ActionExpr>
@@ -59,7 +59,7 @@ export class EntityProduct extends EntityBase {
     //       </action>
     //     )}
     //   >
-    //     {cel('displayValue')}
+    //     {cel('value')}
     //   </a>,
     //   'table',
     // ),
@@ -79,7 +79,7 @@ export class EntityProduct extends EntityBase {
     // v.renderComponent('currency', { exp: 3, fixed: 3 }),
     // v.renderJsx(
     //   <ZZDemoBasicTableCellTest showLog={true}>
-    //     <div>{cel('displayValue')}</div>
+    //     <div>{cel('value')}</div>
     //     <div v-slot="header" v-slot-scope="item">{cel('name + ":header:" + item.name')}</div>
     //     <div v-slot="footer" v-slot-scope="scope">{cel('name + ":footer:" + scope.name')}</div>
     //   </ZZDemoBasicTableCellTest>,
