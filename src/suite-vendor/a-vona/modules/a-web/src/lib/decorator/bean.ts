@@ -114,6 +114,6 @@ export function mergeDtoActionsOpenapiMetadata(target: Constructable) {
   if (!actions) return;
   // openapi
   onionOptions.openapi = deepExtend({}, onionOptions.openapi, {
-    rest: { preset: { actionOperationsBulk: { actions } } },
+    rest: { dtoActions: actions },
   });
 }

@@ -13,11 +13,11 @@ export interface IResourceActionTableRecord
   extends IResourceActionBulkRecord, IResourceActionRowRecord {}
 
 export type IResourceComponentActionBulkRecord = {
-  [key in keyof IResourceActionBulkRecord as `action${Capitalize<key>}`]: IResourceActionBulkRecord[key];
+  [key in keyof IResourceActionBulkRecord as `Action${Capitalize<key>}`]: IResourceActionBulkRecord[key];
 };
 
 export type IResourceComponentActionRowRecord = {
-  [key in keyof IResourceActionRowRecord as `action${Capitalize<key>}`]: IResourceActionRowRecord[key];
+  [key in keyof IResourceActionRowRecord as `Action${Capitalize<key>}`]: IResourceActionRowRecord[key];
 };
 
 export interface IResourceComponentActionTableRecord
@@ -51,7 +51,7 @@ export interface IResourceActionRowOptionsOperationsRow extends IResourceActionR
 }
 
 export interface IResourceActionBulkOptionsOperationsBulkAction {
-  name: keyof Omit<IResourceActionBulkRecord, 'operationsBulk'>;
+  name: keyof IResourceActionBulkRecord; // not omit operationsBulk
   options: ISchemaObjectExtensionFieldRestScene;
 }
 

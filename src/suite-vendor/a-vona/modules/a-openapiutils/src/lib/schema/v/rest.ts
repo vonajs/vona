@@ -48,31 +48,32 @@ export function schemaRenderJsx<T extends z.ZodType>(
   };
 }
 
-export function schemaRenderComponentRow<
+export function schemaRenderActionRow<
   K extends keyof Omit<IResourceActionRowRecord, 'operationsRow'>,
 >(name: K, options?: IResourceActionRowRecord[K]): IResourceActionRowOptionsOperationsRowAction {
-  const options2 = schemaRenderComponentOptions('action' + toUpperCaseFirstChar(name), options);
+  const options2 = schemaRenderComponentOptions('Action' + toUpperCaseFirstChar(name), options);
   return { name, options: options2 };
 }
 
-export function schemaRenderComponentBulk<
-  K extends keyof Omit<IResourceActionBulkRecord, 'operationsBulk'>,
->(name: K, options?: IResourceActionBulkRecord[K]): IResourceActionBulkOptionsOperationsBulkAction {
-  const options2 = schemaRenderComponentOptions('action' + toUpperCaseFirstChar(name), options);
-  return { name, options: options2 };
-}
-
-export function schemaRenderJsxRow<K extends keyof Omit<IResourceActionRowRecord, 'operationsRow'>>(
+export function schemaRenderActionBulk<K extends keyof IResourceActionBulkRecord>(
   name: K,
-  renderJsx: TypeRenderComponentJsx,
-) {
+  options?: IResourceActionBulkRecord[K],
+): IResourceActionBulkOptionsOperationsBulkAction {
+  const options2 = schemaRenderComponentOptions('Action' + toUpperCaseFirstChar(name), options);
+  return { name, options: options2 };
+}
+
+export function schemaRenderActionJsxRow<
+  K extends keyof Omit<IResourceActionRowRecord, 'operationsRow'>,
+>(name: K, renderJsx: TypeRenderComponentJsx) {
   const options = schemaRenderJsxOptions(renderJsx);
   return { name, options };
 }
 
-export function schemaRenderJsxBulk<
-  K extends keyof Omit<IResourceActionBulkRecord, 'operationsBulk'>,
->(name: K, renderJsx: TypeRenderComponentJsx) {
+export function schemaRenderActionJsxBulk<K extends IResourceActionBulkRecord>(
+  name: K,
+  renderJsx: TypeRenderComponentJsx,
+) {
   const options = schemaRenderJsxOptions(renderJsx);
   return { name, options };
 }
