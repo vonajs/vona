@@ -4,7 +4,7 @@ import fs from 'node:fs';
 
 import { locale_transform } from '../utils.ts';
 
-const __resources = { Name: 'Name', Description: 'Description' };
+const __resources = { Name: 'Name', Description: 'Description', Operations: 'Operations' };
 
 declare module '@cabloy/cli' {
   interface ICommandArgv {

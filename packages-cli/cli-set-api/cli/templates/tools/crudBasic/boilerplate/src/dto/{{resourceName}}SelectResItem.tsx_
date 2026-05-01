@@ -1,11 +1,32 @@
 import type { IDecoratorDtoOptions } from 'vona-module-a-web';
 
+import { Api, v } from 'vona-module-a-openapiutils';
 import { $Dto } from 'vona-module-a-orm';
 import { Dto } from 'vona-module-a-web';
 
+import { $locale } from '../.metadata/locales.ts';
 import { Model<%=argv.resourceNameCapitalize%> } from '../model/<%=argv.resourceName%>.ts';
 
 export interface IDtoOptions<%=argv.resourceNameCapitalize%>SelectResItem extends IDecoratorDtoOptions {}
 
-@Dto<IDtoOptions<%=argv.resourceNameCapitalize%>SelectResItem>()
-export class Dto<%=argv.resourceNameCapitalize%>SelectResItem extends $Dto.get(() => Model<%=argv.resourceNameCapitalize%>) {}
+@Dto<IDtoOptions<%=argv.resourceNameCapitalize%>SelectResItem>({
+  actions: [
+    v.renderActionBulk('operationsBulk', {
+      actions: [v.renderActionBulk('create')],
+    }),
+  ],
+})
+export class Dto<%=argv.resourceNameCapitalize%>SelectResItem extends $Dto.get(() => Model<%=argv.resourceNameCapitalize%>) {
+  @Api.field(
+    v.title($locale('Operations')),
+    v.renderOrder(1, 'max'),
+    v.renderComponent(
+      'ActionOperationsRow',
+      {
+        actions: [v.renderActionRow('update'), v.renderActionRow('delete')],
+      },
+      'table',
+    ),
+  )
+  _operationsRow?: unknown;
+}
