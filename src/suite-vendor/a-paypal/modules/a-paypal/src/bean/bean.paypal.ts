@@ -22,7 +22,7 @@ export class BeanPaypal extends BeanBase {
         oAuthClientSecret: this.scope.config.client.clientSecret,
       },
       timeout: 0,
-      environment: this.app.meta.isLocal ? Environment.Sandbox : Environment.Production,
+      environment: this.app.meta.isProd ? Environment.Production : Environment.Sandbox,
       logging: this.scope.config.client.logging
         ? {
             logLevel: LogLevel.Info,
