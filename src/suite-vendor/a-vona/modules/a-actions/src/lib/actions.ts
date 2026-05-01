@@ -6,17 +6,17 @@ import type {
 } from '../types/actions.ts';
 
 export function ActionExpr(_options: IActionExprOptions) {
-  return 'actionExpr';
+  return 'ActionExpr';
 }
 
 export function ActionVar(_options: IActionVarOptions) {
-  return 'actionVar';
+  return 'ActionVar';
 }
 
 export function ActionLog(_options: IActionLogOptions) {
-  return 'actionLog';
+  return 'ActionLog';
 }
 
 export function ActionView(_options: IActionViewOptions) {
-  return 'actionView';
+  return 'ActionView';
 }

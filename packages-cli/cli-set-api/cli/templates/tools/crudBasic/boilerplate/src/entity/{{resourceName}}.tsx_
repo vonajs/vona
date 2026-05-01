@@ -10,7 +10,7 @@ export class Entity<%=argv.resourceNameCapitalize%> extends EntityBase {
   @Api.field(
     v.title($locale('Name')),
     v.renderOrder(1),
-    v.renderComponent('actionView', undefined, 'table'),
+    v.renderComponent('ActionView', undefined, 'table'),
     v.required(),
     v.min(2),
   )

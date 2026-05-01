@@ -63,7 +63,7 @@ export class EntityProduct extends EntityBase {
     //   </a>,
     //   'table',
     // ),
-    v.renderComponent('actionView', undefined, 'table'),
+    v.renderComponent('ActionView', undefined, 'table'),
     v.min(3, $locale('ZodErrorStringMin')),
     v.required(),
   )
