@@ -4,7 +4,6 @@ import type { IOpenapiOptions } from 'vona-module-a-openapiutils';
 import type { z } from 'zod';
 
 import type {
-  IResourceComponentActionBulkRecord,
   IResourceComponentActionRowRecord,
   IResourceComponentFormFieldRecord,
 } from './actions.ts';
@@ -13,10 +12,7 @@ import 'openapi3-ts/oas31';
 import type { IComponentRecord, ITableCellComponentRecord } from './component.ts';
 
 export interface ISchemaRenderComponentPresetRecord
-  extends
-    IResourceComponentFormFieldRecord,
-    IResourceComponentActionBulkRecord,
-    IResourceComponentActionRowRecord {}
+  extends IResourceComponentFormFieldRecord, IResourceComponentActionRowRecord {}
 
 export interface ISchemaObjectExtensionFieldRestProps {
   //

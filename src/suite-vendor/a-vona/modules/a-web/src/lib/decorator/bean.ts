@@ -10,7 +10,10 @@ import {
   onionNameFromBeanFullName,
   useApp,
 } from 'vona';
-import { mergeFieldsOpenapiMetadata, SymbolControllerResource } from 'vona-module-a-openapiutils';
+import {
+  mergeDtoFieldsOpenapiMetadata,
+  SymbolControllerResource,
+} from 'vona-module-a-openapiutils';
 import { SymbolOpenApiOptions } from 'vona-module-a-openapiutils';
 
 import type { IDecoratorControllerOptions } from '../../types/controller.ts';
@@ -47,7 +50,7 @@ export function Controller<T extends IDecoratorControllerOptions>(
       optionsMeta[key] = cast(beanOptions.options)[key];
     }
     // IOpenapiOptions
-    mergeActionsOpenapiMetadata(target);
+    mergeControllerActionsOpenapiMetadata(target);
     // map: resourceName->api path
     const onionName = onionNameFromBeanFullName(beanOptions.beanFullName);
     const controllerResource = appMetadata.getOwnMetadata(SymbolControllerResource, target);
@@ -80,11 +83,12 @@ export function Controller<T extends IDecoratorControllerOptions>(
 
 export function Dto<T extends IDecoratorDtoOptions<any>>(options?: T): ClassDecorator {
   return createBeanDecorator('dto', options, false, target => {
-    mergeFieldsOpenapiMetadata(target);
+    mergeDtoFieldsOpenapiMetadata(target);
+    mergeDtoActionsOpenapiMetadata(target);
   });
 }
 
-export function mergeActionsOpenapiMetadata(target: Constructable) {
+export function mergeControllerActionsOpenapiMetadata(target: Constructable) {
   // beanOptions
   const beanOptions = appResource.getBean(target);
   const actions = cast(beanOptions?.options)?.actions;
@@ -100,4 +104,16 @@ export function mergeActionsOpenapiMetadata(target: Constructable) {
     ) as IOpenapiOptions;
     deepExtend(options, action);
   }
+}
+
+export function mergeDtoActionsOpenapiMetadata(target: Constructable) {
+  // beanOptions
+  const beanOptions = appResource.getBean(target);
+  const onionOptions = beanOptions?.options as IDecoratorDtoOptions | undefined;
+  const actions = onionOptions?.actions;
+  if (!actions) return;
+  // openapi
+  onionOptions.openapi = deepExtend({}, onionOptions.openapi, {
+    rest: { preset: { actionOperationsBulk: { actions } } },
+  });
 }

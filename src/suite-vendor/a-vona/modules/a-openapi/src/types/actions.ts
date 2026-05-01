@@ -24,13 +24,14 @@ export interface IResourceComponentActionTableRecord
   extends IResourceComponentActionBulkRecord, IResourceComponentActionRowRecord {}
 
 export interface IResourceActionBulkOptionsBase {
+  class?: any;
   resource?: keyof IResourceRecord;
 }
 
 export interface IResourceActionRowOptionsBase {
+  class?: any;
   resource?: keyof IResourceRecord;
   id?: TableIdentity;
-  class?: any;
 }
 
 export interface IResourceActionBulkOptionsCreate extends IResourceActionBulkOptionsBase {}

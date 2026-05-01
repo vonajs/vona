@@ -40,7 +40,7 @@ export function getTargetDecoratorRuleColumnsMap(target: object): Record<string,
   return map;
 }
 
-export function mergeFieldsOpenapiMetadata(target: Constructable) {
+export function mergeDtoFieldsOpenapiMetadata(target: Constructable) {
   // beanOptions
   const beanOptions = appResource.getBean(target);
   const fields = cast(beanOptions?.options)?.fields;
