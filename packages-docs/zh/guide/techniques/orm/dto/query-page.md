@@ -44,10 +44,10 @@ export class DtoOrderQueryPage extends DtoQueryPageBase {}
 
 class ControllerOrder extends BeanBase {
   @Web.get('findMany')
-  @Api.body(DtoOrderResultPage)
+  @Api.body(DtoOrderSelectRes)
   async findMany(
 +   @Arg.filter(DtoOrderQueryPage) params: IQueryParams<ModelOrder>,
-  ): Promise<DtoOrderResultPage> {
+  ): Promise<DtoOrderSelectRes> {
     return this.scope.model.order.selectAndCount(params);
   }
 }

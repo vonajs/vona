@@ -11,8 +11,8 @@ import type { ModelOrder } from '../model/order.ts';
 import { DtoOrderCreate } from '../dto/orderCreate.ts';
 import { DtoOrderQuery } from '../dto/orderQuery.ts';
 import { DtoOrderQueryPage } from '../dto/orderQueryPage.ts';
-import { DtoOrderResult } from '../dto/orderResult.ts';
-import { DtoOrderResultPage } from '../dto/orderResultPage.ts';
+import { DtoOrderSelectRes } from '../dto/orderSelectRes.ts';
+import { DtoOrderSelectResItem } from '../dto/orderSelectResItem.ts';
 import { DtoOrderUpdate } from '../dto/orderUpdate.ts';
 
 export interface IControllerOptionsOrder extends IDecoratorControllerOptions {}
@@ -31,10 +31,10 @@ export class ControllerOrder extends BeanBase {
   }
 
   @Web.get('findAll')
-  @Api.body(v.array(DtoOrderResult))
+  @Api.body(v.array(DtoOrderSelectResItem))
   async findAll(
     @Arg.filter(DtoOrderQuery) params: IQueryParams<ModelOrder>,
-  ): Promise<DtoOrderResult[]> {
+  ): Promise<DtoOrderSelectResItem[]> {
     return this.scope.model.order.select({
       ...params,
       include: {
@@ -44,7 +44,7 @@ export class ControllerOrder extends BeanBase {
   }
 
   @Web.get('findMany')
-  @Api.body(DtoOrderResultPage)
+  @Api.body(DtoOrderSelectRes)
   async findMany(@Arg.filter(DtoOrderQueryPage) params: IQueryParams<ModelOrder>) {
     return this.scope.model.order.selectAndCount({
       ...params,

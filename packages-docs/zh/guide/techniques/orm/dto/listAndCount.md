@@ -12,18 +12,18 @@
 
 ```typescript
 @Dto()
-export class DtoOrderResultPage {}
+export class DtoOrderSelectRes {}
 ```
 
 ### 2. 继承$Dto.selectAndCount
 
 ```diff
 @Dto()
-export class DtoOrderResultPage
+export class DtoOrderSelectRes
 + extends $Dto.selectAndCount(() => ModelOrder) {}
 ```
 
-## DtoOrderResultPage成员字段
+## DtoOrderSelectRes成员字段
 
 | 名称  | 说明             |
 | ----- | ---------------- |
@@ -37,17 +37,17 @@ export class DtoOrderResultPage
 ```diff
 class ControllerOrder extends BeanBase {
   @Web.get('findMany')
-+ @Api.body(DtoOrderResultPage)
++ @Api.body(DtoOrderSelectRes)
   async findMany(
     @Arg.filter(DtoOrderQueryPage) params: IQueryParams<ModelOrder>,
-+ ): Promise<DtoOrderResultPage> {
++ ): Promise<DtoOrderSelectRes> {
     return this.scope.model.order.selectAndCount(params);
   }
 }
 ```
 
-- `@Api.body`：传入 DtoOrderResultPage，用于标注 API 返回值
+- `@Api.body`：传入 DtoOrderSelectRes，用于标注 API 返回值
 
-基于`DtoOrderResultPage`生成的 Swagger/Openapi 效果如下：
+基于`DtoOrderSelectRes`生成的 Swagger/Openapi 效果如下：
 
 ![](../../../../assets/img/orm/dto/dto-7.png)

@@ -12,7 +12,6 @@ Vona ORM provides the following DTO Tools:
 | ------------------------------- | ------------------------------------------------------- |
 | $Dto.get                        | Annotate the return result                              |
 | $Dto.listAndCount               | Annotate the return result with paging                  |
-| $Dto.selectAndCount             | Annotate the return result with paging                  |
 | $Dto.query/DtoQueryBase         | Annotate the query parameters                           |
 | $Dto.queryPage/DtoQueryPageBase | Annotate the query parameters with paging               |
 | $Dto.create                     | Annotate the Create parameters                          |

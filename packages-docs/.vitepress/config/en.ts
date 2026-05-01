@@ -369,7 +369,6 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
             { text: 'Introduction', link: 'introduction' },
             { text: '$Dto.get', link: 'get' },
             { text: '$Dto.listAndCount', link: 'listAndCount' },
-            { text: '$Dto.selectAndCount', link: 'selectAndCount' },
             {
               text: '$Dto.query/DtoQueryBase',
               collapsed: false,

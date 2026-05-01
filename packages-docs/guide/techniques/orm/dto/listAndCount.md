@@ -12,18 +12,18 @@ In VSCode, use the `Vona Create/Dto` context menu to create a DTO code skeleton:
 
 ```typescript
 @Dto()
-export class DtoOrderResultPage {}
+export class DtoOrderSelectRes {}
 ```
 
 ### 2. Inherit $Dto.selectAndCount
 
 ```diff
 @Dto()
-export class DtoOrderResultPage
+export class DtoOrderSelectRes
 + extends $Dto.selectAndCount(() => ModelOrder) {}
 ```
 
-## DtoOrderResultPage Fields
+## DtoOrderSelectRes Fields
 
 | Name  | Description                       |
 | ----- | --------------------------------- |
@@ -37,16 +37,16 @@ Taking the `findMany` method of the `Order` controller as an example, we can ann
 ```diff
 class ControllerOrder extends BeanBase {
   @Web.get('findMany')
-+ @Api.body(DtoOrderResultPage)
++ @Api.body(DtoOrderSelectRes)
   async findMany(
     @Arg.filter(DtoOrderQueryPage) params: IQueryParams<ModelOrder>,
-+ ): Promise<DtoOrderResultPage> {
++ ): Promise<DtoOrderSelectRes> {
     return this.scope.model.order.selectAndCount(params);
   }
 }
 ```
 
-- `@Api.body`: passed in `DtoOrderResultPage`, used to annotate the API return value
+- `@Api.body`: passed in `DtoOrderSelectRes`, used to annotate the API return value
 
 The automatically generated Swagger/Openapi is as follows:
 
