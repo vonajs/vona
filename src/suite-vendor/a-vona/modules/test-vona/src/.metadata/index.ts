@@ -1550,8 +1550,9 @@ export * from '../dto/orderUpdate.ts';
 export * from '../dto/postAggregate.ts';
 export * from '../dto/postCreate.ts';
 export * from '../dto/postGroup.ts';
-export * from '../dto/postQuery.ts';
-export * from '../dto/postQueryRes.ts';
+export * from '../dto/postSelectReq.ts';
+export * from '../dto/postSelectRes.ts';
+export * from '../dto/postSelectResItem.tsx';
 export * from '../dto/profile.ts';
 export * from '../dto/roleLazy.ts';
 export * from '../dto/serializerArray.ts';
@@ -1571,8 +1572,9 @@ import type { IDtoOptionsOrderUpdate } from '../dto/orderUpdate.ts';
 import type { IDtoOptionsPostAggregate } from '../dto/postAggregate.ts';
 import type { IDtoOptionsPostCreate } from '../dto/postCreate.ts';
 import type { IDtoOptionsPostGroup } from '../dto/postGroup.ts';
-import type { IDtoOptionsPostQuery } from '../dto/postQuery.ts';
-import type { IDtoOptionsPostQueryRes } from '../dto/postQueryRes.ts';
+import type { IDtoOptionsPostSelectReq } from '../dto/postSelectReq.ts';
+import type { IDtoOptionsPostSelectRes } from '../dto/postSelectRes.ts';
+import type { IDtoOptionsPostSelectResItem } from '../dto/postSelectResItem.tsx';
 import type { IDtoOptionsProfile } from '../dto/profile.ts';
 import type { IDtoOptionsRoleLazy } from '../dto/roleLazy.ts';
 import type { IDtoOptionsSerializerArray } from '../dto/serializerArray.ts';
@@ -1596,8 +1598,9 @@ declare module 'vona-module-a-web' {
 'test-vona:postAggregate': IDtoOptionsPostAggregate;
 'test-vona:postCreate': IDtoOptionsPostCreate;
 'test-vona:postGroup': IDtoOptionsPostGroup;
-'test-vona:postQuery': IDtoOptionsPostQuery;
-'test-vona:postQueryRes': IDtoOptionsPostQueryRes;
+'test-vona:postSelectReq': IDtoOptionsPostSelectReq;
+'test-vona:postSelectRes': IDtoOptionsPostSelectRes;
+'test-vona:postSelectResItem': IDtoOptionsPostSelectResItem;
 'test-vona:profile': IDtoOptionsProfile;
 'test-vona:roleLazy': IDtoOptionsRoleLazy;
 'test-vona:serializerArray': IDtoOptionsSerializerArray;
@@ -1626,8 +1629,9 @@ import type { DtoOrderUpdate } from '../dto/orderUpdate.ts';
 import type { DtoPostAggregate } from '../dto/postAggregate.ts';
 import type { DtoPostCreate } from '../dto/postCreate.ts';
 import type { DtoPostGroup } from '../dto/postGroup.ts';
-import type { DtoPostQuery } from '../dto/postQuery.ts';
-import type { DtoPostQueryRes } from '../dto/postQueryRes.ts';
+import type { DtoPostSelectReq } from '../dto/postSelectReq.ts';
+import type { DtoPostSelectRes } from '../dto/postSelectRes.ts';
+import type { DtoPostSelectResItem } from '../dto/postSelectResItem.tsx';
 import type { DtoProfile } from '../dto/profile.ts';
 import type { DtoRoleLazy } from '../dto/roleLazy.ts';
 import type { DtoSerializerArray } from '../dto/serializerArray.ts';
@@ -1679,12 +1683,16 @@ declare module 'vona-module-test-vona' {
       fields?: TypeEntityOptionsFields<DtoPostGroup, IDtoOptionsPostGroup[TypeSymbolKeyFieldsMore]>;
     }
 
-    export interface IDtoOptionsPostQuery {
-      fields?: TypeEntityOptionsFields<DtoPostQuery, IDtoOptionsPostQuery[TypeSymbolKeyFieldsMore]>;
+    export interface IDtoOptionsPostSelectReq {
+      fields?: TypeEntityOptionsFields<DtoPostSelectReq, IDtoOptionsPostSelectReq[TypeSymbolKeyFieldsMore]>;
     }
 
-    export interface IDtoOptionsPostQueryRes {
-      fields?: TypeEntityOptionsFields<DtoPostQueryRes, IDtoOptionsPostQueryRes[TypeSymbolKeyFieldsMore]>;
+    export interface IDtoOptionsPostSelectRes {
+      fields?: TypeEntityOptionsFields<DtoPostSelectRes, IDtoOptionsPostSelectRes[TypeSymbolKeyFieldsMore]>;
+    }
+
+    export interface IDtoOptionsPostSelectResItem {
+      fields?: TypeEntityOptionsFields<DtoPostSelectResItem, IDtoOptionsPostSelectResItem[TypeSymbolKeyFieldsMore]>;
     }
 
     export interface IDtoOptionsProfile {

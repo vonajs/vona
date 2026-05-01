@@ -190,20 +190,23 @@ declare module 'vona-module-test-rest' {
 /** meta: end */
 /** dto: begin */
 export * from '../dto/productCreate.ts';
-export * from '../dto/productQuery.ts';
-export * from '../dto/productQueryRes.ts';
+export * from '../dto/productSelectReq.ts';
+export * from '../dto/productSelectRes.ts';
+export * from '../dto/productSelectResItem.tsx';
 export * from '../dto/productUpdate.ts';
 import type { IDtoOptionsProductCreate } from '../dto/productCreate.ts';
-import type { IDtoOptionsProductQuery } from '../dto/productQuery.ts';
-import type { IDtoOptionsProductQueryRes } from '../dto/productQueryRes.ts';
+import type { IDtoOptionsProductSelectReq } from '../dto/productSelectReq.ts';
+import type { IDtoOptionsProductSelectRes } from '../dto/productSelectRes.ts';
+import type { IDtoOptionsProductSelectResItem } from '../dto/productSelectResItem.tsx';
 import type { IDtoOptionsProductUpdate } from '../dto/productUpdate.ts';
 import 'vona-module-a-web';
 declare module 'vona-module-a-web' {
   
     export interface IDtoRecord {
       'test-rest:productCreate': IDtoOptionsProductCreate;
-'test-rest:productQuery': IDtoOptionsProductQuery;
-'test-rest:productQueryRes': IDtoOptionsProductQueryRes;
+'test-rest:productSelectReq': IDtoOptionsProductSelectReq;
+'test-rest:productSelectRes': IDtoOptionsProductSelectRes;
+'test-rest:productSelectResItem': IDtoOptionsProductSelectResItem;
 'test-rest:productUpdate': IDtoOptionsProductUpdate;
     }
 
@@ -215,8 +218,9 @@ declare module 'vona-module-test-rest' {
 /** dto: end */
 /** dto: begin */
 import type { DtoProductCreate } from '../dto/productCreate.ts';
-import type { DtoProductQuery } from '../dto/productQuery.ts';
-import type { DtoProductQueryRes } from '../dto/productQueryRes.ts';
+import type { DtoProductSelectReq } from '../dto/productSelectReq.ts';
+import type { DtoProductSelectRes } from '../dto/productSelectRes.ts';
+import type { DtoProductSelectResItem } from '../dto/productSelectResItem.tsx';
 import type { DtoProductUpdate } from '../dto/productUpdate.ts';
 declare module 'vona-module-test-rest' {
   
@@ -224,12 +228,16 @@ declare module 'vona-module-test-rest' {
       fields?: TypeEntityOptionsFields<DtoProductCreate, IDtoOptionsProductCreate[TypeSymbolKeyFieldsMore]>;
     }
 
-    export interface IDtoOptionsProductQuery {
-      fields?: TypeEntityOptionsFields<DtoProductQuery, IDtoOptionsProductQuery[TypeSymbolKeyFieldsMore]>;
+    export interface IDtoOptionsProductSelectReq {
+      fields?: TypeEntityOptionsFields<DtoProductSelectReq, IDtoOptionsProductSelectReq[TypeSymbolKeyFieldsMore]>;
     }
 
-    export interface IDtoOptionsProductQueryRes {
-      fields?: TypeEntityOptionsFields<DtoProductQueryRes, IDtoOptionsProductQueryRes[TypeSymbolKeyFieldsMore]>;
+    export interface IDtoOptionsProductSelectRes {
+      fields?: TypeEntityOptionsFields<DtoProductSelectRes, IDtoOptionsProductSelectRes[TypeSymbolKeyFieldsMore]>;
+    }
+
+    export interface IDtoOptionsProductSelectResItem {
+      fields?: TypeEntityOptionsFields<DtoProductSelectResItem, IDtoOptionsProductSelectResItem[TypeSymbolKeyFieldsMore]>;
     }
 
     export interface IDtoOptionsProductUpdate {

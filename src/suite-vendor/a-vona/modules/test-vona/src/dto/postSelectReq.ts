@@ -7,15 +7,15 @@ import z from 'zod';
 
 import { EntityPost } from '../entity/post.ts';
 
-export interface IDtoOptionsPostQuery extends IDecoratorDtoOptions {}
+export interface IDtoOptionsPostSelectReq extends IDecoratorDtoOptions {}
 
-@Dto<IDtoOptionsPostQuery>({
+@Dto<IDtoOptionsPostSelectReq>({
   openapi: { filter: { table: 'testVonaPost' } },
   fields: {
     createdAt: z.string().optional(),
   },
 })
-export class DtoPostQuery extends $Dto.queryPage(EntityPost, ['title', 'createdAt']) {
+export class DtoPostSelectReq extends $Dto.queryPage(EntityPost, ['title', 'createdAt']) {
   // @Api.field(v.optional())
   // title?: string;
 

@@ -11,6 +11,7 @@ Vona ORM 提供了以下 DTO 工具：
 | 名称                            | 说明                   |
 | ------------------------------- | ---------------------- |
 | $Dto.get                        | 标注返回结果           |
+| $Dto.listAndCount               | 标注带分页的返回结果   |
 | $Dto.selectAndCount             | 标注带分页的返回结果   |
 | $Dto.query/DtoQueryBase         | 标注Query参数          |
 | $Dto.queryPage/DtoQueryPageBase | 标注带分页的Query参数  |

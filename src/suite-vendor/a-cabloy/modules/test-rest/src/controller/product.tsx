@@ -13,8 +13,8 @@ import type { ModelProduct } from '../model/product.ts';
 
 // import { PPDevuiRestpage, PPDevuiRestpageEntry } from 'zova-rest-cabloy-basic-admin';
 import { DtoProductCreate } from '../dto/productCreate.ts';
-import { DtoProductQuery } from '../dto/productQuery.ts';
-import { DtoProductQueryRes } from '../dto/productQueryRes.ts';
+import { DtoProductSelectReq } from '../dto/productSelectReq.ts';
+import { DtoProductSelectRes } from '../dto/productSelectRes.ts';
 import { DtoProductUpdate } from '../dto/productUpdate.ts';
 import { EntityProduct } from '../entity/product.tsx';
 
@@ -42,13 +42,13 @@ export class ControllerProduct extends BeanBase {
   }
 
   @Web.get()
-  @Api.body(DtoProductQueryRes)
+  @Api.body(DtoProductSelectRes)
   @Ssr.redirect('basic-siteadmin:admin', '/rest/resource/:resource', {
     params: { resource: 'test-rest:product' },
   })
   async select(
-    @Arg.filter(DtoProductQuery) params: IQueryParams<ModelProduct>,
-  ): Promise<DtoProductQueryRes> {
+    @Arg.filter(DtoProductSelectReq) params: IQueryParams<ModelProduct>,
+  ): Promise<DtoProductSelectRes> {
     return await this.scope.service.product.select(params);
   }
 

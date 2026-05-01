@@ -1,5 +1,6 @@
 export default {
   Name: '名称',
+  Operations: '操作',
   User: '用户',
   UserId: '用户ID',
   Test: '测试',

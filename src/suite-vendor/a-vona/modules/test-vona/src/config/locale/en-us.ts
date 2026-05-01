@@ -1,5 +1,6 @@
 export default {
   Name: 'Name',
+  Operations: 'Operations',
   User: 'User',
   UserId: 'User ID',
   Test: 'Test',

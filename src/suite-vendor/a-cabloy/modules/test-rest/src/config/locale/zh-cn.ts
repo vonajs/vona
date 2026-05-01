@@ -4,6 +4,7 @@ export default {
   ProductInfo: '产品信息',
   Name: '名称',
   Description: '描述',
+  Operations: '操作',
   Product: '产品',
   Admin: '管理',
   Price: '价格',

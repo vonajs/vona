@@ -7,15 +7,15 @@ import z from 'zod';
 
 import { EntityProduct } from '../entity/product.tsx';
 
-export interface IDtoOptionsProductQuery extends IDecoratorDtoOptions {}
+export interface IDtoOptionsProductSelectReq extends IDecoratorDtoOptions {}
 
-@Dto<IDtoOptionsProductQuery>({
+@Dto<IDtoOptionsProductSelectReq>({
   openapi: { filter: { table: 'testRestProduct' } },
   fields: {
     createdAt: z.string().optional(),
   },
 })
-export class DtoProductQuery extends $Dto.queryPage(EntityProduct, ['name', 'createdAt']) {
+export class DtoProductSelectReq extends $Dto.queryPage(EntityProduct, ['name', 'createdAt']) {
   // remove .min(3)
   @Api.field(v.optional())
   name?: string;

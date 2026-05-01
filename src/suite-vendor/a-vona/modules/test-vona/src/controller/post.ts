@@ -10,8 +10,8 @@ import type { ModelPost } from '../model/post.ts';
 
 import { DtoPostAggregate } from '../dto/postAggregate.ts';
 import { DtoPostGroup } from '../dto/postGroup.ts';
-import { DtoPostQuery } from '../dto/postQuery.ts';
-import { DtoPostQueryRes } from '../dto/postQueryRes.ts';
+import { DtoPostSelectReq } from '../dto/postSelectReq.ts';
+import { DtoPostSelectRes } from '../dto/postSelectRes.ts';
 
 export interface IControllerOptionsPost extends IDecoratorControllerOptions {}
 
@@ -44,16 +44,16 @@ export class ControllerPost extends BeanBase {
   }
 
   @Web.get('findManyEcho')
-  @Api.body(DtoPostQueryRes)
+  @Api.body(DtoPostSelectRes)
   @Passport.public()
-  findManyEcho(@Arg.filter(DtoPostQuery) params: IQueryParams<ModelPost>) {
+  findManyEcho(@Arg.filter(DtoPostSelectReq) params: IQueryParams<ModelPost>) {
     return params;
   }
 
   @Web.get('findMany')
-  @Api.body(DtoPostQueryRes)
+  @Api.body(DtoPostSelectRes)
   @Passport.public()
-  async findMany(@Arg.filter(DtoPostQuery) params: IQueryParams<ModelPost>) {
+  async findMany(@Arg.filter(DtoPostSelectReq) params: IQueryParams<ModelPost>) {
     return await this.scope.service.post.findMany(params);
   }
 }

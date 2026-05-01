@@ -4,6 +4,7 @@ export default {
   ProductInfo: 'Product Info',
   Name: 'Name',
   Description: 'Description',
+  Operations: 'Operations',
   Product: 'Product',
   Admin: 'Admin',
   Price: 'Price',
