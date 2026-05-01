@@ -1,8 +1,8 @@
 import type { TypeTableCellRenderComponentProvider } from './rest.ts';
 
 export interface ITableProviderComponents {
-  actionView?: TypeTableCellRenderComponentProvider;
-  currency?: TypeTableCellRenderComponentProvider;
+  ActionView?: TypeTableCellRenderComponentProvider;
+  Currency?: TypeTableCellRenderComponentProvider;
 }
 
 export interface ITableProvider {
