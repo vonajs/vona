@@ -17,7 +17,7 @@ export class DtoLogin {
   @Api.field(
     v.required(),
     v.renderLayout({ iconPrefix: ':editor:code-block' }),
-    v.renderComponent('captcha'),
+    v.renderComponent('Captcha'),
   )
   captcha: DtoCaptchaVerify;
 }

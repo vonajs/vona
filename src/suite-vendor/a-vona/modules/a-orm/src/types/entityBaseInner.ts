@@ -7,8 +7,8 @@ export class EntityBaseInner extends EntityBaseEmpty {
   @Api.field(
     v.title($locale('CreatedAt')),
     v.renderOrder(-2, 'max'),
-    v.renderComponent('date'),
-    v.renderComponent('dateRange', undefined, 'filter'),
+    v.renderComponent('Date'),
+    v.renderComponent('DateRange', undefined, 'filter'),
     v.filterTransform('a-web:dateRange'),
   )
   createdAt: Date;
@@ -16,8 +16,8 @@ export class EntityBaseInner extends EntityBaseEmpty {
   @Api.field(
     v.title($locale('UpdatedAt')),
     v.renderOrder(-1, 'max'),
-    v.renderComponent('date'),
-    v.renderComponent('dateRange', undefined, 'filter'),
+    v.renderComponent('Date'),
+    v.renderComponent('DateRange', undefined, 'filter'),
     v.filterTransform('a-web:dateRange'),
   )
   updatedAt: Date;
