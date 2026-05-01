@@ -5,7 +5,7 @@ import { Dto } from 'vona-module-a-web';
 
 import { ModelOrder } from '../model/order.ts';
 
-export interface IDtoOptionsOrderResult extends IDecoratorDtoOptions {}
+export interface IDtoOptionsOrderSelectResItem extends IDecoratorDtoOptions {}
 
-@Dto<IDtoOptionsOrderResult>()
-export class DtoOrderResult extends $Dto.get(() => ModelOrder) {}
+@Dto<IDtoOptionsOrderSelectResItem>()
+export class DtoOrderSelectResItem extends $Dto.get(() => ModelOrder) {}

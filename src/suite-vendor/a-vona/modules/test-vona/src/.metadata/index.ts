@@ -1544,8 +1544,8 @@ export * from '../dto/categoryTree.ts';
 export * from '../dto/orderCreate.ts';
 export * from '../dto/orderQuery.ts';
 export * from '../dto/orderQueryPage.ts';
-export * from '../dto/orderResult.ts';
-export * from '../dto/orderResultPage.ts';
+export * from '../dto/orderSelectRes.ts';
+export * from '../dto/orderSelectResItem.ts';
 export * from '../dto/orderUpdate.ts';
 export * from '../dto/postAggregate.ts';
 export * from '../dto/postCreate.ts';
@@ -1566,8 +1566,8 @@ import type { IDtoOptionsCategoryTree } from '../dto/categoryTree.ts';
 import type { IDtoOptionsOrderCreate } from '../dto/orderCreate.ts';
 import type { IDtoOptionsOrderQuery } from '../dto/orderQuery.ts';
 import type { IDtoOptionsOrderQueryPage } from '../dto/orderQueryPage.ts';
-import type { IDtoOptionsOrderResult } from '../dto/orderResult.ts';
-import type { IDtoOptionsOrderResultPage } from '../dto/orderResultPage.ts';
+import type { IDtoOptionsOrderSelectRes } from '../dto/orderSelectRes.ts';
+import type { IDtoOptionsOrderSelectResItem } from '../dto/orderSelectResItem.ts';
 import type { IDtoOptionsOrderUpdate } from '../dto/orderUpdate.ts';
 import type { IDtoOptionsPostAggregate } from '../dto/postAggregate.ts';
 import type { IDtoOptionsPostCreate } from '../dto/postCreate.ts';
@@ -1592,8 +1592,8 @@ declare module 'vona-module-a-web' {
 'test-vona:orderCreate': IDtoOptionsOrderCreate;
 'test-vona:orderQuery': IDtoOptionsOrderQuery;
 'test-vona:orderQueryPage': IDtoOptionsOrderQueryPage;
-'test-vona:orderResult': IDtoOptionsOrderResult;
-'test-vona:orderResultPage': IDtoOptionsOrderResultPage;
+'test-vona:orderSelectRes': IDtoOptionsOrderSelectRes;
+'test-vona:orderSelectResItem': IDtoOptionsOrderSelectResItem;
 'test-vona:orderUpdate': IDtoOptionsOrderUpdate;
 'test-vona:postAggregate': IDtoOptionsPostAggregate;
 'test-vona:postCreate': IDtoOptionsPostCreate;
@@ -1623,8 +1623,8 @@ import type { DtoCategoryTree } from '../dto/categoryTree.ts';
 import type { DtoOrderCreate } from '../dto/orderCreate.ts';
 import type { DtoOrderQuery } from '../dto/orderQuery.ts';
 import type { DtoOrderQueryPage } from '../dto/orderQueryPage.ts';
-import type { DtoOrderResult } from '../dto/orderResult.ts';
-import type { DtoOrderResultPage } from '../dto/orderResultPage.ts';
+import type { DtoOrderSelectRes } from '../dto/orderSelectRes.ts';
+import type { DtoOrderSelectResItem } from '../dto/orderSelectResItem.ts';
 import type { DtoOrderUpdate } from '../dto/orderUpdate.ts';
 import type { DtoPostAggregate } from '../dto/postAggregate.ts';
 import type { DtoPostCreate } from '../dto/postCreate.ts';
@@ -1659,12 +1659,12 @@ declare module 'vona-module-test-vona' {
       fields?: TypeEntityOptionsFields<DtoOrderQueryPage, IDtoOptionsOrderQueryPage[TypeSymbolKeyFieldsMore]>;
     }
 
-    export interface IDtoOptionsOrderResult {
-      fields?: TypeEntityOptionsFields<DtoOrderResult, IDtoOptionsOrderResult[TypeSymbolKeyFieldsMore]>;
+    export interface IDtoOptionsOrderSelectRes {
+      fields?: TypeEntityOptionsFields<DtoOrderSelectRes, IDtoOptionsOrderSelectRes[TypeSymbolKeyFieldsMore]>;
     }
 
-    export interface IDtoOptionsOrderResultPage {
-      fields?: TypeEntityOptionsFields<DtoOrderResultPage, IDtoOptionsOrderResultPage[TypeSymbolKeyFieldsMore]>;
+    export interface IDtoOptionsOrderSelectResItem {
+      fields?: TypeEntityOptionsFields<DtoOrderSelectResItem, IDtoOptionsOrderSelectResItem[TypeSymbolKeyFieldsMore]>;
     }
 
     export interface IDtoOptionsOrderUpdate {
