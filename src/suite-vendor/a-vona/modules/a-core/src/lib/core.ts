@@ -37,6 +37,10 @@ function FileUpload(options?: Partial<IInterceptorOptionsUpload>): MethodDecorat
   return Aspect.interceptor('a-upload:upload', options);
 }
 
+function Serializer(enable: boolean = true): ClassDecorator & MethodDecorator {
+  return Aspect.interceptor('a-serialization:serializer', { enable });
+}
+
 export const Core = {
   gate: Gate,
   error: Error,
@@ -44,4 +48,5 @@ export const Core = {
   transaction: Transaction,
   captchaVerify: CaptchaVerify,
   fileUpload: FileUpload,
+  serializer: Serializer,
 };

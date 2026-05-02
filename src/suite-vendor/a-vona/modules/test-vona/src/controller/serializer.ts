@@ -1,8 +1,8 @@
 import type { IDecoratorControllerOptions } from 'vona-module-a-web';
 
 import { BeanBase } from 'vona';
+import { Core } from 'vona-module-a-core';
 import { Api, v } from 'vona-module-a-openapiutils';
-import { Serializer } from 'vona-module-a-serialization';
 import { Passport } from 'vona-module-a-user';
 import { Arg, Controller, Web } from 'vona-module-a-web';
 
@@ -17,7 +17,7 @@ export class ControllerSerializer extends BeanBase {
   @Web.post('echoSimple')
   @Api.body(DtoSerializerSimple)
   @Passport.public()
-  @Serializer.enable()
+  @Core.serializer()
   echoSimple(@Arg.body() data: DtoSerializerSimple) {
     return data;
   }
@@ -25,7 +25,7 @@ export class ControllerSerializer extends BeanBase {
   @Web.post('echoArray')
   @Api.body(v.array(DtoSerializerArray))
   @Passport.public()
-  @Serializer.enable()
+  @Core.serializer()
   echoArray(@Arg.body(v.array(DtoSerializerArray)) data: DtoSerializerArray[]) {
     return data;
   }
@@ -33,7 +33,7 @@ export class ControllerSerializer extends BeanBase {
   @Web.post('echoLazy')
   @Api.body(DtoSerializerLazy)
   @Passport.public()
-  @Serializer.enable()
+  @Core.serializer()
   echoLazy(@Arg.body(DtoSerializerLazy) data: DtoSerializerLazy) {
     return data;
   }

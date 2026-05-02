@@ -61,7 +61,7 @@ export class SerializerTransformUpper extends BeanBase {
 class ControllerStudent {
   @Web.get(':id')
   @Api.body(v.optional(), v.object(EntityStudent))
-+ @Serializer.enable()
++ @Core.serializer()
   async findOne(id) {
     return await this.scope.service.student.findOne(id);
   }

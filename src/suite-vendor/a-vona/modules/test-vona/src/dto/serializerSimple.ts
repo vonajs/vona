@@ -1,7 +1,6 @@
 import type { IDecoratorDtoOptions } from 'vona-module-a-web';
 
 import { Api, v } from 'vona-module-a-openapiutils';
-import { Serializer } from 'vona-module-a-serialization';
 import { Dto } from 'vona-module-a-web';
 
 import { SensitiveEmail } from '../lib/serializer.ts';
@@ -10,33 +9,36 @@ export interface IDtoOptionsSerializerSimple extends IDecoratorDtoOptions {}
 
 @Dto<IDtoOptionsSerializerSimple>()
 export class DtoSerializerSimple {
-  @Serializer.exclude()
-  @Api.field(v.min(6))
+  @Api.field(v.serializerExclude(), v.min(6))
   password: string;
 
   @Api.field(v.serializerExclude(), v.min(6))
   password2: string;
 
-  @Serializer.transform('test-vona:email')
+  @Api.field(v.serializerTransform('test-vona:email'))
   email: string;
 
-  @Serializer.transform('a-serialization:replace', {
-    // eslint-disable-next-line
-    patternFrom: /(\w?)(\w+)(\w)(@\w+\.[a-z]+)/,
-    patternTo: '$1****$3$4',
-  })
-  @Api.field(v.email())
+  @Api.field(
+    v.serializerTransform('a-serialization:replace', {
+      // eslint-disable-next-line
+      patternFrom: /(\w?)(\w+)(\w)(@\w+\.[a-z]+)/,
+      patternTo: '$1****$3$4',
+    }),
+    v.email(),
+  )
   email2: string;
 
-  @Serializer.replace({
-    // eslint-disable-next-line
-    patternFrom: /(\w?)(\w+)(\w)(@\w+\.[a-z]+)/,
-    patternTo: '$1****$3$4',
-  })
-  @Api.field(v.email())
+  @Api.field(
+    v.serializerReplace({
+      // eslint-disable-next-line
+      patternFrom: /(\w?)(\w+)(\w)(@\w+\.[a-z]+)/,
+      patternTo: '$1****$3$4',
+    }),
+    v.email(),
+  )
   email3: string;
 
-  @SensitiveEmail()
+  @Api.field(SensitiveEmail())
   email4: string;
 
   @Api.field(
@@ -79,10 +81,12 @@ export class DtoSerializerSimple {
   @Api.field()
   lastName: string;
 
-  @Serializer.getter((data: DtoSerializerSimple) => {
-    return `${data.firstName} ${data.lastName}`;
-  })
-  @Api.field(v.optional())
+  @Api.field(
+    v.serializerGetter((data: DtoSerializerSimple) => {
+      return `${data.firstName} ${data.lastName}`;
+    }),
+    v.optional(),
+  )
   fullName: string;
 
   @Api.field(
