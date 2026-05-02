@@ -60,10 +60,10 @@ export function getEnvFiles(
   // extend
   let keys = cascadeExtendKeys(scope, source, prefix, '.');
   if (!keys) return undefined;
-  // mine
+  // local
   keys = keys
-    .filter(item => !item.includes('.mine'))
-    .concat(keys.filter(item => item.includes('.mine')));
+    .filter(item => !item.includes('.local'))
+    .concat(keys.filter(item => item.includes('.local')));
   // files
   files = keys.map(key => {
     let file = path.join(dir, key);

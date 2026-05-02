@@ -9,8 +9,8 @@ Vona 从`src/backend/config/config`目录中加载 config 文件，支持基于`
 ```txt
 config.ts                # 所有情况下都会加载
 config.[meta].ts         # 只在指定条件下加载
-config.mine.ts           # 所有情况下都会加载，但会被 git 忽略
-config.[meta].mine.ts    # 只在指定条件下加载，但会被 git 忽略
+config.local.ts           # 所有情况下都会加载，但会被 git 忽略
+config.[meta].local.ts    # 只在指定条件下加载，但会被 git 忽略
 ```
 
 - `[meta]`可以是以下两个变量值的`任意组合`
@@ -55,9 +55,9 @@ $ npm run build:docker
 config.ts
 config.normal.ts
 config.normal.dev.ts
-config.mine.ts
-config.normal.mine.ts
-config.normal.dev.mine.ts
+config.local.ts
+config.normal.local.ts
+config.normal.dev.local.ts
 ```
 
 ## 支持异步加载

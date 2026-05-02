@@ -9,8 +9,8 @@ Vona uses [dotenv](https://github.com/motdotla/dotenv) to load environment varia
 ```txt
 .env                # loaded in all cases
 .env.[meta]         # only loaded in specified condition
-.env.mine           # loaded in all cases, ignored by git
-.env.[meta].mine    # only loaded in specified condition, ignored by git
+.env.local           # loaded in all cases, ignored by git
+.env.[meta].local    # only loaded in specified condition, ignored by git
 ```
 
 - `[meta]` can be `any combination` of the following two variables
@@ -55,9 +55,9 @@ The system will automatically load the environment variables in the following fi
 .env
 .env.normal
 .env.normal.dev
-.env.mine
-.env.normal.mine
-.env.normal.dev.mine
+.env.local
+.env.normal.local
+.env.normal.dev.local
 ```
 
 ## Tree-shaking

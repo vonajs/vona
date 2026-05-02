@@ -9,8 +9,8 @@ Vona loads config files from the `src/backend/config/config` directory and suppo
 ```txt
 config.ts                # loaded in all cases
 config.[meta].ts         # only loaded in specified condition
-config.mine.ts           # loaded in all cases, ignored by git
-config.[meta].mine.ts    # only loaded in specified condition, ignored by git
+config.local.ts           # loaded in all cases, ignored by git
+config.[meta].local.ts    # only loaded in specified condition, ignored by git
 ```
 
 - `[meta]` can be `any combination` of the following two variables
@@ -55,9 +55,9 @@ The system will automatically load the configuration in the following files and 
 config.ts
 config.normal.ts
 config.normal.dev.ts
-config.mine.ts
-config.normal.mine.ts
-config.normal.dev.mine.ts
+config.local.ts
+config.normal.local.ts
+config.normal.dev.local.ts
 ```
 
 ## Support Asynchronous Loading

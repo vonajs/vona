@@ -185,7 +185,7 @@ By default, newly registered users need to perform an activation operation.
 
 You can enable the `autoActivate` configuration in App Config.
 
-`src/backend/config/config/config.mine.ts`
+`src/backend/config/config/config.local.ts`
 
 ```typescript
 // modules

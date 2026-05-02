@@ -182,7 +182,7 @@ class EventListenerActivate {
 
 可以在 App Config 中启用`自动激活`配置。
 
-`src/backend/config/config/config.mine.ts`
+`src/backend/config/config/config.local.ts`
 
 ```typescript
 // modules

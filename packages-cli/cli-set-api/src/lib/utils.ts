@@ -6,7 +6,7 @@ import { createRequire } from 'node:module';
 import { pathToFileURL } from 'node:url';
 
 export function getEnvMeta(configMeta: VonaConfigMeta) {
-  return { flavor: configMeta.flavor, mode: configMeta.mode, mine: 'mine' };
+  return { flavor: configMeta.flavor, mode: configMeta.mode, local: 'local' };
 }
 
 export function getNodeEnv(mode: VonaMetaMode) {
