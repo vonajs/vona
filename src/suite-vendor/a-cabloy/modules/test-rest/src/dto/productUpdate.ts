@@ -1,5 +1,6 @@
 import type { IDecoratorDtoOptions } from 'vona-module-a-web';
 
+import { v } from 'vona-module-a-openapiutils';
 import { $Dto } from 'vona-module-a-orm';
 import { Dto } from 'vona-module-a-web';
 
@@ -11,5 +12,15 @@ export interface IDtoOptionsProductUpdate extends IDecoratorDtoOptions {}
 @Dto<IDtoOptionsProductUpdate>({
   openapi: { title: $locale('UpdateProduct') },
   fields: {},
+  actions: [
+    v.renderActionRow('operationsRow', {
+      actions: [
+        v.renderActionRow('submit', {
+          permission: { action: 'update', formScene: ['create', 'edit'] },
+        }),
+        v.renderActionRow('back', { permission: { public: true } }),
+      ],
+    }),
+  ],
 })
 export class DtoProductUpdate extends $Dto.update(() => ModelProduct) {}
