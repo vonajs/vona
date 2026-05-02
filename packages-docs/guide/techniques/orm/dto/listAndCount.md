@@ -2,9 +2,11 @@
 
 `$Dto.listAndCount` is used to annotate the return result with paging.
 
-## How to use
+## Parameters
 
-The usage of `$Dto.listAndCount` can be referred to `$Dto.get`. The difference is that `$Dto.listAndCount` returns the `list of items of the current page` and the `total number of all items`
+| Name     | Description                          |
+| -------- | ------------------------------------ |
+| classRef | DTO class generated using `$Dto.get` |
 
 ### 1. Create DTO
 
@@ -15,12 +17,14 @@ In VSCode, use the `Vona Create/Dto` context menu to create a DTO code skeleton:
 export class DtoOrderSelectRes {}
 ```
 
-### 2. Inherit $Dto.selectAndCount
+### 2. Inherit $Dto.listAndCount
 
 ```diff
++ import { DtoOrderSelectResItem } from './orderSelectResItem.ts';
+
 @Dto()
 export class DtoOrderSelectRes
-+ extends $Dto.selectAndCount(() => ModelOrder) {}
++ extends $Dto.listAndCount(DtoOrderSelectResItem) {}
 ```
 
 ## DtoOrderSelectRes Fields

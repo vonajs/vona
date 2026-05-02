@@ -2,9 +2,11 @@
 
 `$Dto.listAndCount`用于标注带分页的返回结果。
 
-## 如何使用
+## 参数
 
-`$Dto.listAndCount`的使用方式可以参考`$Dto.get`。不同的是，`$Dto.selectAndCount`返回`当前页的条目列表`和`数据总条数`
+| 名称     | 描述                          |
+| -------- | ----------------------------- |
+| classRef | 使用`$Dto.get`生成的DTO class |
 
 ### 1. 创建DTO
 
@@ -15,12 +17,14 @@
 export class DtoOrderSelectRes {}
 ```
 
-### 2. 继承$Dto.selectAndCount
+### 2. 继承$Dto.listAndCount
 
 ```diff
++ import { DtoOrderSelectResItem } from './orderSelectResItem.ts';
+
 @Dto()
 export class DtoOrderSelectRes
-+ extends $Dto.selectAndCount(() => ModelOrder) {}
++ extends $Dto.listAndCount(DtoOrderSelectResItem) {}
 ```
 
 ## DtoOrderSelectRes成员字段
