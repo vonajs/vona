@@ -39,11 +39,11 @@ export function schemaRenderComponent<
 }
 
 export function schemaRenderComponentJsx<T extends z.ZodType>(
-  renderJsx: TypeRenderComponentJsx,
+  renderComponentJsx: TypeRenderComponentJsx,
   scene?: TypeSchemaScene,
 ) {
   return function (schema: T): T {
-    const options = schemaRenderJsxOptions(renderJsx);
+    const options = schemaRenderJsxOptions(renderComponentJsx);
     return _generalSchemaRest(schema, options, scene);
   };
 }
@@ -66,17 +66,17 @@ export function schemaRenderActionBulk<K extends keyof IResourceActionBulkRecord
 
 export function schemaRenderActionJsxRow<K extends keyof IResourceActionRowRecord>(
   name: K,
-  renderJsx: TypeRenderComponentJsx,
+  renderComponentJsx: TypeRenderComponentJsx,
 ) {
-  const options = schemaRenderJsxOptions(renderJsx);
+  const options = schemaRenderJsxOptions(renderComponentJsx);
   return { name, options };
 }
 
 export function schemaRenderActionJsxBulk<K extends IResourceActionBulkRecord>(
   name: K,
-  renderJsx: TypeRenderComponentJsx,
+  renderComponentJsx: TypeRenderComponentJsx,
 ) {
-  const options = schemaRenderJsxOptions(renderJsx);
+  const options = schemaRenderJsxOptions(renderComponentJsx);
   return { name, options };
 }
 
@@ -141,8 +141,8 @@ function schemaRenderComponentOptions(
     : { render: name as never };
 }
 
-function schemaRenderJsxOptions(renderJsx: TypeRenderComponentJsx) {
-  return { render: renderJsx };
+function schemaRenderJsxOptions(renderComponentJsx: TypeRenderComponentJsx) {
+  return { render: renderComponentJsx };
 }
 
 // export function schemaRest<T extends z.ZodType>(

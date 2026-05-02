@@ -26,14 +26,14 @@ export class EntityProduct extends EntityBase {
     v.title($locale('Name')),
     v.renderOrder(1),
     // v.renderComponent(),
-    // v.renderJsx(
+    // v.renderComponentJsx(
     //   <ZZDemoBasicActionView>
     //     <div className="mock">{cel('value')}</div>
     //     <div>{cel('get(permissions,"actions.create")')}</div>
     //   </ZZDemoBasicActionView>,
     //   'table',
     // ),
-    // v.renderJsx(
+    // v.renderComponentJsx(
     //   <a
     //     className="hover:text-blue-500"
     //     href="#"
@@ -75,9 +75,9 @@ export class EntityProduct extends EntityBase {
   @Api.field(
     v.title($locale('Price')),
     v.renderOrder(3),
-    // v.renderJsx(<TTCurrency currency={{ exp: 4, fixed: 4 }}></TTCurrency>, 'table'),
+    // v.renderComponentJsx(<TTCurrency currency={{ exp: 4, fixed: 4 }}></TTCurrency>, 'table'),
     // v.renderComponent('currency', { exp: 3, fixed: 3 }),
-    // v.renderJsx(
+    // v.renderComponentJsx(
     //   <ZZDemoBasicTableCellTest showLog={true}>
     //     <div>{cel('value')}</div>
     //     <div v-slot="header" v-slot-scope="item">{cel('name + ":header:" + item.name')}</div>
