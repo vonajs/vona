@@ -36,7 +36,9 @@ class ControllerStudent {
 
 ```diff
 class EntityStudent {
-+ @Api.field(v.serializerTransform('demo-student:upper'))
+  @Api.field(
++   v.serializerTransform('demo-student:upper'),
+  )
   name: string;
 }
 ```
@@ -83,7 +85,9 @@ config.onions = {
 
 ```diff
 class EntityStudent {
-+ @Api.field(v.serializerExclude())
+  @Api.field(
++   v.serializerExclude(),
+  )
   name: string;
 }
 ```
@@ -134,9 +138,9 @@ config.onions = {
 class EntityStudent {
   @Api.field(
 +   v.serializerReplace({
-      patternFrom: /(\w)(\w+)(\w)/,
-      patternTo: '$1***$3'
-    })
++     patternFrom: /(\w)(\w+)(\w)/,
++     patternTo: '$1***$3'
++   }),
   )
   name: string;
 }
