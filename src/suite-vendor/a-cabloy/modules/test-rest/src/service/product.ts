@@ -5,7 +5,7 @@ import { BeanBase } from 'vona';
 import { Service } from 'vona-module-a-bean';
 
 import type { DtoProductCreate } from '../dto/productCreate.ts';
-import type { DtoProductQueryRes } from '../dto/productQueryRes.ts';
+import type { DtoProductSelectRes } from '../dto/productSelectRes.ts';
 import type { DtoProductUpdate } from '../dto/productUpdate.ts';
 import type { EntityProduct } from '../entity/product.tsx';
 import type { ModelProduct } from '../model/product.ts';
@@ -16,7 +16,7 @@ export class ServiceProduct extends BeanBase {
     return await this.scope.model.product.insert(product);
   }
 
-  async select(params?: IQueryParams<ModelProduct>): Promise<DtoProductQueryRes> {
+  async select(params?: IQueryParams<ModelProduct>): Promise<DtoProductSelectRes> {
     return await this.scope.model.product.selectAndCount({
       ...params,
     });
