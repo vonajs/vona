@@ -1,9 +1,18 @@
 import type { IDecoratorDtoOptions } from 'vona-module-a-web';
+
+import { v } from 'vona-module-a-openapiutils';
 import { $Dto } from 'vona-module-a-orm';
 import { Dto } from 'vona-module-a-web';
+
 import { Model<%=argv.resourceNameCapitalize%> } from '../model/<%=argv.resourceName%>.ts';
 
 export interface IDtoOptions<%=argv.resourceNameCapitalize%>View extends IDecoratorDtoOptions {}
 
-@Dto<IDtoOptions<%=argv.resourceNameCapitalize%>View>()
+@Dto<IDtoOptions<%=argv.resourceNameCapitalize%>View>({
+  actions: [
+    v.renderActionRow('operationsRow', {
+      actions: [v.renderActionRow('back', { permission: { public: true } })],
+    }),
+  ],
+})
 export class Dto<%=argv.resourceNameCapitalize%>View extends $Dto.get(() => Model<%=argv.resourceNameCapitalize%>) {}

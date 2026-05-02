@@ -1,9 +1,23 @@
 import type { IDecoratorDtoOptions } from 'vona-module-a-web';
+
+import { v } from 'vona-module-a-openapiutils';
 import { $Dto } from 'vona-module-a-orm';
 import { Dto } from 'vona-module-a-web';
+
 import { Model<%=argv.resourceNameCapitalize%> } from '../model/<%=argv.resourceName%>.ts';
 
 export interface IDtoOptions<%=argv.resourceNameCapitalize%>Create extends IDecoratorDtoOptions {}
 
-@Dto<IDtoOptions<%=argv.resourceNameCapitalize%>Create>()
+@Dto<IDtoOptions<%=argv.resourceNameCapitalize%>Create>({
+  actions: [
+    v.renderActionRow('operationsRow', {
+      actions: [
+        v.renderActionRow('submit', {
+          permission: { action: 'update', formScene: ['create', 'edit'] },
+        }),
+        v.renderActionRow('back', { permission: { public: true } }),
+      ],
+    }),
+  ],
+})
 export class Dto<%=argv.resourceNameCapitalize%>Create extends $Dto.create(() => Model<%=argv.resourceNameCapitalize%>) {}
