@@ -68,19 +68,18 @@ class ControllerStudent {
 }
 ```
 
-- `@Serializer.enable`: 开启序列化
+- `@Core.serializer`: 开启序列化
 
 ### 2. 字段装饰器
 
 ```diff
 class EntityStudent {
-+ @Serializer.transform('demo-student:upper')
-  @Api.field(v.title($locale('Name')))
++ @Api.field(v.serializerTransform('demo-student:upper'))
   name: string;
 }
 ```
 
-- `@Serializer.transform`: 传入 Serializer Transform 名称`demo-student:upper`
+- `v.serializerTransform`: 传入 Serializer Transform 名称`demo-student:upper`
 
 ## Filter参数
 
@@ -90,12 +89,13 @@ class EntityStudent {
 
 ```diff
 class EntityStudent {
-  @Serializer.transform('demo-student:upper', {
-+   filter(this: VonaContext) {
-+     return this.user.name !== 'admin';
-+   },
-  })
-  @Api.field(v.title($locale('Name')))
+  @Api.field(
+    v.serializerTransform('demo-student:upper', {
++     filter(this: VonaContext) {
++       return this.user.name !== 'admin';
++     },
+    }),
+  )
   name: string;
 }
 ```
@@ -146,12 +146,15 @@ class SerializerTransformUpper {
 
 ### 4. 使用时指定参数
 
-可以指定`@Serializer.transform`的参数。
+可以指定`v.serializerTransform`的参数。
 
 ```diff
 class EntityStudent {
-+ @Serializer.transform('demo-student:upper', { first: true })
-  @Api.field(v.title($locale('Name')))
+  @Api.field(
+    v.serializerTransform('demo-student:upper', {
++     first: true,
+    }),
+  )
   name: string;
 }
 ```
