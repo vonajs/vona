@@ -28,10 +28,10 @@ miniprogram_npm
 .app
 .zova-rest
 
-# mine .env files
-env/.env*.mine
-/src/backend/config/config/config*.mine.ts
-/src/backend/config/config/config*.mine.tsx
+# local .env files
+env/.env*.local
+/src/backend/config/config/config*.local.ts
+/src/backend/config/config/config*.local.tsx
 /src/backend/typing/modules.d.ts
 **/.metadata/modules.d.ts
 src/backend/typing/mine.d.ts
