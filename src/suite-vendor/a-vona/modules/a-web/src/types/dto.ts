@@ -2,6 +2,7 @@ import type { OmitNever } from 'vona';
 import type { ServiceOnion } from 'vona-module-a-onion';
 import type {
   IResourceActionBulkOptionsOperationsBulkAction,
+  IResourceActionRowOptionsOperationsRowAction,
   TypeOpenapiMetadata,
 } from 'vona-module-a-openapi';
 import type { SchemaLike } from 'vona-module-a-openapiutils';
@@ -14,7 +15,9 @@ export interface IDecoratorDtoOptions<FieldsMore = never> {
   independent?: boolean;
   openapi?: TypeOpenapiMetadata;
   pipes?: SchemaLike | SchemaLike[];
-  actions?: IResourceActionBulkOptionsOperationsBulkAction[];
+  actions?:
+    | IResourceActionBulkOptionsOperationsBulkAction[]
+    | IResourceActionRowOptionsOperationsRowAction[];
 }
 
 declare module 'vona-module-a-onion' {

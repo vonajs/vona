@@ -42,6 +42,9 @@ export interface IResourceActionRowOptionsUpdate extends IResourceActionRowOptio
 
 export interface IResourceActionRowOptionsDelete extends IResourceActionRowOptionsBase {}
 
+export interface IResourceActionRowOptionsSubmit extends IResourceActionRowOptionsBase {}
+export interface IResourceActionRowOptionsBack extends IResourceActionRowOptionsBase {}
+
 export interface IResourceActionBulkOptionsOperationsBulk extends IResourceActionBulkOptionsBase {
   actions?: IResourceActionBulkOptionsOperationsBulkAction[];
 }
@@ -56,6 +59,6 @@ export interface IResourceActionBulkOptionsOperationsBulkAction {
 }
 
 export interface IResourceActionRowOptionsOperationsRowAction {
-  name: keyof Omit<IResourceActionRowRecord, 'operationsRow'>;
+  name: keyof IResourceActionRowRecord; // not omit operationsBulk
   options: ISchemaObjectExtensionFieldRestScene;
 }

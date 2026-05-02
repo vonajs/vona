@@ -2,8 +2,10 @@ import 'vona-module-a-openapi';
 import type {
   IResourceActionBulkOptionsCreate,
   IResourceActionBulkOptionsOperationsBulk,
+  IResourceActionRowOptionsBack,
   IResourceActionRowOptionsDelete,
   IResourceActionRowOptionsOperationsRow,
+  IResourceActionRowOptionsSubmit,
   IResourceActionRowOptionsUpdate,
   IResourceActionRowOptionsView,
 } from 'vona-module-a-openapi';
@@ -21,5 +23,7 @@ declare module 'vona-module-a-openapi' {
     update?: IResourceActionRowOptionsUpdate;
     delete?: IResourceActionRowOptionsDelete;
     operationsRow?: IResourceActionRowOptionsOperationsRow;
+    submit?: IResourceActionRowOptionsSubmit;
+    back?: IResourceActionRowOptionsBack;
   }
 }
