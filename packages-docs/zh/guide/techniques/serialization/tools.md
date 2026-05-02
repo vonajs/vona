@@ -170,8 +170,6 @@ config.onions = {
 };
 ```
 
-`a-serialization:replace`: `a-serialization`模块提供的 Serializer Transform。
-
 - 方法 2: 构造一个新的 schema
 
 ```typescript

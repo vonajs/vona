@@ -4,47 +4,44 @@ VonaJS provides a set of utility functions to make serialization capabilities mo
 
 ## Tool List
 
-| @Serializer           | v                     | Description                                                             |
-| --------------------- | --------------------- | ----------------------------------------------------------------------- |
-| @Serializer.transform | v.serializerTransform | For using Serializer Transform, see: [Serialization](./introduction.md) |
-| @Serializer.exclude   | v.serializerExclude   | Exclude fields                                                          |
-| @Serializer.replace   | v.serializerReplace   | Mask the field values                                                   |
-| @Serializer.getter    | v.serializerGetter    | Generate new field values ​​using getter mechanisms                     |
-| @Serializer.custom    | v.serializerCustom    | Transform field values ​​using custom function                          |
+| Name                  | Description                                                             |
+| --------------------- | ----------------------------------------------------------------------- |
+| @core.serializer      | Enable Serialization                                                    |
+| v.serializerTransform | For using Serializer Transform, see: [Serialization](./introduction.md) |
+| v.serializerExclude   | Exclude fields                                                          |
+| v.serializerReplace   | Mask the field values                                                   |
+| v.serializerGetter    | Generate new field values ​​using getter mechanisms                     |
+| v.serializerCustom    | Transform field values ​​using custom function                          |
 
-::: tip
-Since the `@Serializer` utility is very concise and intuitive, why provide the `v` utility?
+## @core.serializer
 
-1. The `v` tool allows modification of configurations via App Config
-2. The underlying logic of the `v` tool and the `@Serializer` tool is consistent
-   :::
+For example, enable serialization for the `findOne` API.
 
-## @Serializer.transform/v.serializerTransform
+```diff
+class ControllerStudent {
+  @Web.get(':id')
+  @Api.body(v.optional(), v.object(EntityStudent))
++ @Core.serializer()
+  async findOne(id) {
+    return await this.scope.service.student.findOne(id);
+  }
+}
+```
+
+## v.serializerTransform
 
 For example, to convert the `name` field value in `EntityStudent` to uppercase.
 
 we directly use the Serializer Transform `upper` created in [Serialization](./introduction.md)
 
-### 1. @Serializer.transform
-
 ```diff
 class EntityStudent {
-+ @Serializer.transform('demo-student:upper')
-  @Api.field(v.title($locale('Name')))
+  @Api.field(
++   v.serializerTransform('demo-student:upper'),
+  )
   name: string;
 }
 ```
-
-### 2. v.serializerTransform
-
-```diff
-class EntityStudent {
-+ @Api.field(v.serializerTransform('demo-student:upper'), v.title($locale('Name')))
-  name: string;
-}
-```
-
-### 3. App Config
 
 Configuration can be modified in App Config.
 
@@ -82,25 +79,15 @@ config.onions = {
 };
 ```
 
-## @Serializer.exclude/v.serializerExclude
+## v.serializerExclude
 
 For example, exclude the `name` field in `EntityStudent`
 
-### 1. @Serializer.exclude
-
 ```diff
 class EntityStudent {
-+ @Serializer.exclude()
-  @Api.field(v.title($locale('Name')))
-  name: string;
-}
-```
-
-### 2. v.serializerExclude
-
-```diff
-class EntityStudent {
-+ @Api.field(v.serializerExclude(), v.title($locale('Name')))
+  @Api.field(
++   v.serializerExclude(),
+  )
   name: string;
 }
 ```
@@ -143,35 +130,23 @@ config.onions = {
 };
 ```
 
-## @Serializer.replace/v.serializerReplace
+## v.serializerReplace
 
 For example, to mask the value of the `name` field in `EntityStudent`
 
 For example, the original value of `name` is `tom`, this result after mask is `t***m`
 
-### 1. @Serializer.replace
-
-```diff
-class EntityStudent {
-+ @Serializer.replace({ patternFrom: /(\w)(\w+)(\w)/, patternTo: '$1***$3' })
-  @Api.field(v.title($locale('Name')))
-  name: string;
-}
-```
-
-### 2. v.serializerReplace
-
 ```diff
 class EntityStudent {
   @Api.field(
-+   v.serializerReplace({ patternFrom: /(\w)(\w+)(\w)/, patternTo: '$1***$3' }),
-    v.title($locale('Name')),
++   v.serializerReplace({
++     patternFrom: /(\w)(\w+)(\w)/,
++     patternTo: '$1***$3'
++   }),
   )
   name: string;
 }
 ```
-
-### 3. App Config
 
 Configuration can be modified in App Config.
 
@@ -196,8 +171,6 @@ config.onions = {
   },
 };
 ```
-
-`a-serialization:replace`: Serializer Transform provided by the `a-serialization` module.
 
 - Method 2: Construct a new schema
 
@@ -222,51 +195,20 @@ config.onions = {
 };
 ```
 
-## @Serializer.getter/v.serializerGetter
+## v.serializerGetter
 
 For example, the `fullName` field in `EntityStudent` is composed of the `firstName` and `lastName` fields.
 
-### 1. getter
-
 ```diff
 class EntityStudent {
-  @Api.field()
-  firstName: string;
-
-  @Api.field()
-  lastName: string;
-
-  @Api.field()
-+ get fullName(): string | undefined {
-+   return `${this.firstName} ${this.lastName}`;
-+ }
-}
-```
-
-### 2. @Serializer.getter
-
-```diff
-class EntityStudent {
-+ @Serializer.getter((data: EntityStudent) => {
-+   return `${data.firstName} ${data.lastName}`;
-+ })
-  @Api.field()
+  @Api.field(
++   v.serializerGetter((data: EntityStudent) => {
++     return `${data.firstName} ${data.lastName}`;
++   }),
+  )
   fullName: string;
 }
 ```
-
-### 3. v.serializerGetter
-
-```diff
-class EntityStudent {
-+ @Api.field(v.serializerGetter((data: EntityStudent) => {
-+   return `${data.firstName} ${data.lastName}`;
-+ }))
-  fullName: string;
-}
-```
-
-### 4. App Config
 
 Configuration can be modified in App Config.
 
@@ -291,8 +233,6 @@ config.onions = {
 };
 ```
 
-`a-serialization:getter`: Serializer Transform provided by the `a-serialization` module.
-
 - Method 2: Construct a new schema
 
 ```typescript
@@ -315,23 +255,9 @@ config.onions = {
 };
 ```
 
-## @Serializer.custom/v.serializerCustom
+## v.serializerCustom
 
 For example, convert the `name` field value in `EntityStudent` to uppercase.
-
-### 1. @Serializer.custom
-
-```diff
-class EntityStudent {
-+ @Serializer.custom((value: string) => {
-+   return value.toUpperCase();
-+ })
-  @Api.field(v.title($locale('Name')))
-  name: string;
-}
-```
-
-### 2. v.serializerCustom
 
 ```diff
 class EntityStudent {
@@ -339,13 +265,10 @@ class EntityStudent {
 +   v.serializerCustom((value: string) => {
 +     return value.toUpperCase();
 +   }),
-    v.title($locale('Name')),
   )
   name: string;
 }
 ```
-
-### 3. App Config
 
 Configuration can be modified in App Config.
 
@@ -369,8 +292,6 @@ config.onions = {
   },
 };
 ```
-
-`a-serialization:custom`: Serializer Transform provided by the `a-serialization` module.
 
 - Method 2: Construct a New Schema
 

@@ -58,29 +58,30 @@ For example, the result type returned by the Student API's `findOne` method is `
 Serialization needs to be enabled for the API.
 
 ```diff
++ import { Core } from 'vona-module-a-core';
+
 class ControllerStudent {
   @Web.get(':id')
   @Api.body(v.optional(), v.object(EntityStudent))
-+ @Serializer.enable()
++ @Core.serializer()
   async findOne(id) {
     return await this.scope.service.student.findOne(id);
   }
 }
 ```
 
-- `@Serializer.enable`: Enables serialization
+- `@Core.serializer`: Enables serialization
 
 ### 2. Field Decorator
 
 ```diff
 class EntityStudent {
-+ @Serializer.transform('demo-student:upper')
-  @Api.field(v.title($locale('Name')))
++ @Api.field(v.serializerTransform('demo-student:upper'))
   name: string;
 }
 ```
 
-- `@Serializer.transform`: Pass in the Serializer Transform name `demo-student:upper`
+- `v.serializerTransform`: Pass in the Serializer Transform name `demo-student:upper`
 
 ## Filter Parameter
 
@@ -90,12 +91,13 @@ For example, if the current username is `admin`, the conversion logic for `upper
 
 ```diff
 class EntityStudent {
-  @Serializer.transform('demo-student:upper', {
-+   filter(this: VonaContext) {
-+     return this.user.name !== 'admin';
-+   },
-  })
-  @Api.field(v.title($locale('Name')))
+  @Api.field(
+    v.serializerTransform('demo-student:upper', {
++     filter(this: VonaContext) {
++       return this.user.name !== 'admin';
++     },
+    }),
+  )
   name: string;
 }
 ```
@@ -146,12 +148,15 @@ class SerializerTransformUpper {
 
 ### 4. Specify parameters when using
 
-Parameters can be specified for `@Serializer.transform`
+Parameters can be specified for `v.serializerTransform`
 
 ```diff
 class EntityStudent {
-+ @Serializer.transform('demo-student:upper', { first: true })
-  @Api.field(v.title($locale('Name')))
+  @Api.field(
+    v.serializerTransform('demo-student:upper', {
++     first: true,
+    }),
+  )
   name: string;
 }
 ```

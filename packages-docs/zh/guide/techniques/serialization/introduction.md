@@ -58,6 +58,8 @@ export class SerializerTransformUpper extends BeanBase {
 需要为 API 开启序列化。
 
 ```diff
++ import { Core } from 'vona-module-a-core';
+
 class ControllerStudent {
   @Web.get(':id')
   @Api.body(v.optional(), v.object(EntityStudent))
