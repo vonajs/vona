@@ -18,7 +18,6 @@ import {
 import { schemaDescription, schemaExample, schemaOpenapi, schemaTitle } from './v/openapi.ts';
 import {
   schemaRenderOrder,
-  schemaRenderJsx,
   schemaRenderFieldSource,
   schemaRenderVisible,
   schemaRenderComponent,
@@ -29,6 +28,7 @@ import {
   schemaRenderActionBulk,
   schemaRenderActionJsxRow,
   schemaRenderActionJsxBulk,
+  schemaRenderComponentJsx,
 } from './v/rest.ts';
 import {
   schemaSerializerCustom,
@@ -90,7 +90,7 @@ export const v = {
   // rest/render
   renderLayout: schemaRenderLayout,
   renderComponent: schemaRenderComponent,
-  renderJsx: schemaRenderJsx,
+  renderComponentJsx: schemaRenderComponentJsx,
   renderVisible: schemaRenderVisible,
   renderReadonly: schemaRenderReadonly,
   renderOrder: schemaRenderOrder,

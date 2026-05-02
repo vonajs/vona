@@ -38,7 +38,7 @@ export function schemaRenderComponent<
   };
 }
 
-export function schemaRenderJsx<T extends z.ZodType>(
+export function schemaRenderComponentJsx<T extends z.ZodType>(
   renderJsx: TypeRenderComponentJsx,
   scene?: TypeSchemaScene,
 ) {

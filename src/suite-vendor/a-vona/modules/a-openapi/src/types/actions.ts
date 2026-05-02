@@ -23,15 +23,28 @@ export type IResourceComponentActionRowRecord = {
 export interface IResourceComponentActionTableRecord
   extends IResourceComponentActionBulkRecord, IResourceComponentActionRowRecord {}
 
+export interface IPermissionHint {
+  action?: string;
+  public?: boolean;
+}
+
 export interface IResourceActionBulkOptionsBase {
   class?: any;
   resource?: keyof IResourceRecord;
+  permission?: {
+    action?: keyof IResourceActionBulkRecord;
+    public?: boolean;
+  };
 }
 
 export interface IResourceActionRowOptionsBase {
   class?: any;
   resource?: keyof IResourceRecord;
   id?: TableIdentity;
+  permission?: {
+    action?: keyof IResourceActionRowRecord;
+    public?: boolean;
+  };
 }
 
 export interface IResourceActionBulkOptionsCreate extends IResourceActionBulkOptionsBase {}
