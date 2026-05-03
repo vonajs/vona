@@ -86,11 +86,14 @@ export function schemaRenderBlock<K extends keyof IResourceComponentBlockRecord>
   name: K,
   options?: IResourceComponentBlockRecord[K],
 ): IResourceComponentBlockOptionsBlock {
-  return schemaRenderComponentOptions(name, options);
+  return {
+    name,
+    options: { preset: { [name]: options } },
+  };
 }
 
 export function schemaRenderBlockJsx(renderComponentJsx: TypeRenderComponentJsx) {
-  return schemaRenderJsxOptions(renderComponentJsx);
+  return { render: renderComponentJsx };
 }
 
 export function schemaRenderVisible<T extends z.ZodType>(

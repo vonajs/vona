@@ -1,14 +1,14 @@
 import type { TableIdentity } from 'table-identity';
+import type { types } from 'typestyle';
 
-import type { IResourceRecord } from './resource.ts';
+import type { TypeFormScene } from './formMeta.ts';
 import type { TypeRenderComponent } from './rest.ts';
 
 export interface IResourceComponentBlockRecord {}
 
 export interface IResourceBlockOptionsBase {
   class?: any;
-  resource?: keyof IResourceRecord;
-  id?: TableIdentity;
+  style?: types.NestedCSSProperties;
   blocks?: IResourceComponentBlockOptionsBlock[];
 }
 
@@ -16,16 +16,18 @@ export interface IResourceBlockPresetOptionsBase {
   preset?: IResourceComponentBlockRecord;
 }
 
-export interface IResourceBlockOptionsPageEntry extends IResourceBlockOptionsBase {}
+export interface IResourceBlockOptionsPageEntry extends IResourceBlockOptionsBase {
+  resource?: string;
+  id?: TableIdentity;
+  formScene?: TypeFormScene;
+}
 
-export interface IResourceComponentBlockOptionsBlock extends IResourceComponentBlockOptions {}
-
-// export interface IResourceComponentBlockOptionsBlock {
-//   name: keyof IResourceComponentBlockRecord;
-//   options: IResourceComponentBlockOptions;
-// }
+export interface IResourceComponentBlockOptionsBlock {
+  name?: keyof IResourceComponentBlockRecord;
+  render?: TypeRenderComponent;
+  options?: IResourceComponentBlockOptions;
+}
 
 export interface IResourceComponentBlockOptions {
-  render?: TypeRenderComponent;
   preset?: IResourceComponentBlockRecord;
 }

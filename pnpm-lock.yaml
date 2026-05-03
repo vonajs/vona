@@ -95,6 +95,9 @@ importers:
       table-identity:
         specifier: workspace:^
         version: link:packages-utils/table-identity
+      typestyle:
+        specifier: ^2.4.0
+        version: 2.4.0
       uuid:
         specifier: ^11.1.0
         version: 11.1.0
@@ -1993,6 +1996,9 @@ importers:
       openapi3-ts:
         specifier: ^4.5.0
         version: 4.5.0
+      typestyle:
+        specifier: ^2.4.0
+        version: 2.4.0
       zod:
         specifier: npm:@cabloy/zod@4.3.6
         version: '@cabloy/zod@4.3.6'
