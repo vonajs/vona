@@ -3,6 +3,8 @@ import type {
   IResourceActionBulkRecord,
   IResourceActionRowOptionsOperationsRowAction,
   IResourceActionRowRecord,
+  IResourceComponentBlockOptionsBlock,
+  IResourceComponentBlockRecord,
   ISchemaObjectExtensionFieldRestScene,
   ISchemaRenderComponentLayoutOptions,
   ISchemaRenderComponentPresetRecord,
@@ -78,6 +80,17 @@ export function schemaRenderActionJsxBulk<K extends IResourceActionBulkRecord>(
 ) {
   const options = schemaRenderJsxOptions(renderComponentJsx);
   return { name, options };
+}
+
+export function schemaRenderBlock<K extends keyof IResourceComponentBlockRecord>(
+  name: K,
+  options?: IResourceComponentBlockRecord[K],
+): IResourceComponentBlockOptionsBlock {
+  return schemaRenderComponentOptions(name, options);
+}
+
+export function schemaRenderBlockJsx(renderComponentJsx: TypeRenderComponentJsx) {
+  return schemaRenderJsxOptions(renderComponentJsx);
 }
 
 export function schemaRenderVisible<T extends z.ZodType>(

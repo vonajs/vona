@@ -85,6 +85,7 @@ export function Dto<T extends IDecoratorDtoOptions<any>>(options?: T): ClassDeco
   return createBeanDecorator('dto', options, false, target => {
     mergeDtoFieldsOpenapiMetadata(target);
     mergeDtoActionsOpenapiMetadata(target);
+    mergeDtoBlocksOpenapiMetadata(target);
   });
 }
 
@@ -115,5 +116,17 @@ export function mergeDtoActionsOpenapiMetadata(target: Constructable) {
   // openapi
   onionOptions.openapi = deepExtend({}, onionOptions.openapi, {
     rest: { dtoActions: actions },
+  });
+}
+
+export function mergeDtoBlocksOpenapiMetadata(target: Constructable) {
+  // beanOptions
+  const beanOptions = appResource.getBean(target);
+  const onionOptions = beanOptions?.options as IDecoratorDtoOptions | undefined;
+  const blocks = onionOptions?.blocks;
+  if (!blocks) return;
+  // openapi
+  onionOptions.openapi = deepExtend({}, onionOptions.openapi, {
+    rest: { blocks },
   });
 }

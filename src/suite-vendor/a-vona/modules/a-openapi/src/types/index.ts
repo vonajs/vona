@@ -14,3 +14,4 @@ export * from './tableProvider.ts';
 export * from './actions.ts';
 export * from './fieldLayout.ts';
 export * from './formMeta.ts';
+export * from './blocks.ts';

@@ -3,6 +3,7 @@ import type { ServiceOnion } from 'vona-module-a-onion';
 import type {
   IResourceActionBulkOptionsOperationsBulkAction,
   IResourceActionRowOptionsOperationsRowAction,
+  IResourceComponentBlockOptionsBlock,
   TypeOpenapiMetadata,
 } from 'vona-module-a-openapi';
 import type { SchemaLike } from 'vona-module-a-openapiutils';
@@ -18,6 +19,7 @@ export interface IDecoratorDtoOptions<FieldsMore = never> {
   actions?:
     | IResourceActionBulkOptionsOperationsBulkAction[]
     | IResourceActionRowOptionsOperationsRowAction[];
+  blocks?: IResourceComponentBlockOptionsBlock[];
 }
 
 declare module 'vona-module-a-onion' {

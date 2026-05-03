@@ -29,6 +29,8 @@ import {
   schemaRenderActionJsxRow,
   schemaRenderActionJsxBulk,
   schemaRenderComponentJsx,
+  schemaRenderBlock,
+  schemaRenderBlockJsx,
 } from './v/rest.ts';
 import {
   schemaSerializerCustom,
@@ -100,6 +102,8 @@ export const v = {
   renderActionBulk: schemaRenderActionBulk,
   renderActionJsxRow: schemaRenderActionJsxRow,
   renderActionJsxBulk: schemaRenderActionJsxBulk,
+  renderBlock: schemaRenderBlock,
+  renderBlockJsx: schemaRenderBlockJsx,
   // zod
   zodRefine: schemaZodRefine,
   zodTransform: schemaZodTransform,
