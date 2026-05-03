@@ -7,6 +7,7 @@ import { Service } from 'vona-module-a-bean';
 import type { DtoProductCreate } from '../dto/productCreate.tsx';
 import type { DtoProductSelectRes } from '../dto/productSelectRes.tsx';
 import type { DtoProductUpdate } from '../dto/productUpdate.tsx';
+import type { DtoProductView } from '../dto/productView.tsx';
 import type { EntityProduct } from '../entity/product.tsx';
 import type { ModelProduct } from '../model/product.ts';
 
@@ -22,7 +23,7 @@ export class ServiceProduct extends BeanBase {
     });
   }
 
-  async view(id: TableIdentity): Promise<EntityProduct | undefined> {
+  async view(id: TableIdentity): Promise<DtoProductView | undefined> {
     return await this.scope.model.product.getById(id);
   }
 

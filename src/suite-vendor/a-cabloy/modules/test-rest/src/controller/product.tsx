@@ -16,7 +16,7 @@ import { DtoProductCreate } from '../dto/productCreate.tsx';
 import { DtoProductSelectReq } from '../dto/productSelectReq.tsx';
 import { DtoProductSelectRes } from '../dto/productSelectRes.tsx';
 import { DtoProductUpdate } from '../dto/productUpdate.tsx';
-import { EntityProduct } from '../entity/product.tsx';
+import { DtoProductView } from '../dto/productView.tsx';
 
 export interface IControllerOptionsProduct extends IDecoratorControllerOptions {}
 
@@ -53,10 +53,10 @@ export class ControllerProduct extends BeanBase {
   }
 
   @Web.get(':id')
-  @Api.body(v.optional(), v.object(EntityProduct))
+  @Api.body(v.optional(), v.object(DtoProductView))
   async view(
     @Arg.param('id', v.tableIdentity()) id: TableIdentity,
-  ): Promise<EntityProduct | undefined> {
+  ): Promise<DtoProductView | undefined> {
     return await this.scope.service.product.view(id);
   }
 
