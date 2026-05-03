@@ -2,7 +2,7 @@ import type { TableIdentity } from 'table-identity';
 import type { types } from 'typestyle';
 
 import type { TypeFormScene } from './formMeta.ts';
-import type { TypeRenderComponent } from './rest.ts';
+import type { TypeRenderComponentJsx } from './rest.ts';
 
 export interface IResourceComponentBlockRecord {}
 
@@ -23,8 +23,7 @@ export interface IResourceBlockOptionsPageEntry extends IResourceBlockOptionsBas
 }
 
 export interface IResourceComponentBlockOptionsBlock {
-  name?: keyof IResourceComponentBlockRecord;
-  render?: TypeRenderComponent;
+  render?: keyof IResourceComponentBlockRecord | TypeRenderComponentJsx;
   options?: IResourceComponentBlockOptions;
 }
 
