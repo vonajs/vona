@@ -2,7 +2,7 @@ import { TableIdentity } from 'table-identity';
 
 import type { TypeFormScene } from './formMeta.ts';
 import type { IResourceRecord } from './resource.ts';
-import type { ISchemaObjectExtensionFieldRestScene } from './rest.ts';
+import type { TypeRenderComponentJsx } from './rest.ts';
 
 export interface IResourceComponentFormFieldRecord {}
 
@@ -62,19 +62,29 @@ export interface IResourceActionRowOptionsSubmit extends IResourceActionRowOptio
 export interface IResourceActionRowOptionsBack extends IResourceActionRowOptionsBase {}
 
 export interface IResourceActionBulkOptionsOperationsBulk extends IResourceActionBulkOptionsBase {
-  actions?: IResourceActionBulkOptionsOperationsBulkAction[];
+  actions?: IResourceComponentActionBulkOptionsAction[];
 }
 
 export interface IResourceActionRowOptionsOperationsRow extends IResourceActionRowOptionsBase {
-  actions?: IResourceActionRowOptionsOperationsRowAction[];
+  actions?: IResourceComponentActionRowOptionsAction[];
 }
 
-export interface IResourceActionBulkOptionsOperationsBulkAction {
+export interface IResourceComponentActionBulkOptionsAction {
   name: keyof IResourceActionBulkRecord; // not omit operationsBulk
-  options: ISchemaObjectExtensionFieldRestScene;
+  render?: keyof IResourceComponentActionBulkRecord | TypeRenderComponentJsx;
+  options?: IResourceComponentActionBulkOptions;
 }
 
-export interface IResourceActionRowOptionsOperationsRowAction {
+export interface IResourceComponentActionBulkOptions {
+  preset?: IResourceComponentActionBulkRecord;
+}
+
+export interface IResourceComponentActionRowOptionsAction {
   name: keyof IResourceActionRowRecord; // not omit operationsBulk
-  options: ISchemaObjectExtensionFieldRestScene;
+  render?: keyof IResourceComponentActionRowRecord | TypeRenderComponentJsx;
+  options?: IResourceComponentActionRowOptions;
+}
+
+export interface IResourceComponentActionRowOptions {
+  preset?: IResourceComponentActionRowRecord;
 }

@@ -54,8 +54,22 @@ export function schemaRenderActionRow<K extends keyof IResourceActionRowRecord>(
   name: K,
   options?: IResourceActionRowRecord[K],
 ): IResourceActionRowOptionsOperationsRowAction {
-  const options2 = schemaRenderComponentOptions('Action' + toUpperCaseFirstChar(name), options);
-  return { name, options: options2 };
+  const render = 'Action' + toUpperCaseFirstChar(name);
+  return {
+    name,
+    render: render,
+    options: { preset: { [render]: options } },
+  };
+}
+
+export function schemaRenderActionJsxRow<K extends keyof IResourceActionRowRecord>(
+  name: K,
+  renderComponentJsx: TypeRenderComponentJsx,
+) {
+  return {
+    name,
+    render: renderComponentJsx,
+  };
 }
 
 export function schemaRenderActionBulk<K extends keyof IResourceActionBulkRecord>(
@@ -64,14 +78,6 @@ export function schemaRenderActionBulk<K extends keyof IResourceActionBulkRecord
 ): IResourceActionBulkOptionsOperationsBulkAction {
   const options2 = schemaRenderComponentOptions('Action' + toUpperCaseFirstChar(name), options);
   return { name, options: options2 };
-}
-
-export function schemaRenderActionJsxRow<K extends keyof IResourceActionRowRecord>(
-  name: K,
-  renderComponentJsx: TypeRenderComponentJsx,
-) {
-  const options = schemaRenderJsxOptions(renderComponentJsx);
-  return { name, options };
 }
 
 export function schemaRenderActionJsxBulk<K extends IResourceActionBulkRecord>(
