@@ -1,8 +1,8 @@
 import type {
-  IResourceActionBulkOptionsOperationsBulkAction,
   IResourceActionBulkRecord,
-  IResourceActionRowOptionsOperationsRowAction,
   IResourceActionRowRecord,
+  IResourceComponentActionBulkOptionsAction,
+  IResourceComponentActionRowOptionsAction,
   IResourceComponentBlockOptionsBlock,
   IResourceComponentBlockRecord,
   ISchemaObjectExtensionFieldRestScene,
@@ -53,11 +53,11 @@ export function schemaRenderComponentJsx<T extends z.ZodType>(
 export function schemaRenderActionRow<K extends keyof IResourceActionRowRecord>(
   name: K,
   options?: IResourceActionRowRecord[K],
-): IResourceActionRowOptionsOperationsRowAction {
+): IResourceComponentActionRowOptionsAction {
   const render = 'Action' + toUpperCaseFirstChar(name);
   return {
     name,
-    render: render,
+    render: render as any,
     options: { preset: { [render]: options } },
   };
 }
@@ -75,17 +75,23 @@ export function schemaRenderActionJsxRow<K extends keyof IResourceActionRowRecor
 export function schemaRenderActionBulk<K extends keyof IResourceActionBulkRecord>(
   name: K,
   options?: IResourceActionBulkRecord[K],
-): IResourceActionBulkOptionsOperationsBulkAction {
-  const options2 = schemaRenderComponentOptions('Action' + toUpperCaseFirstChar(name), options);
-  return { name, options: options2 };
+): IResourceComponentActionBulkOptionsAction {
+  const render = 'Action' + toUpperCaseFirstChar(name);
+  return {
+    name,
+    render: render as any,
+    options: { preset: { [render]: options } },
+  };
 }
 
 export function schemaRenderActionJsxBulk<K extends IResourceActionBulkRecord>(
   name: K,
   renderComponentJsx: TypeRenderComponentJsx,
 ) {
-  const options = schemaRenderJsxOptions(renderComponentJsx);
-  return { name, options };
+  return {
+    name,
+    render: renderComponentJsx,
+  };
 }
 
 export function schemaRenderBlock<K extends keyof IResourceComponentBlockRecord>(
