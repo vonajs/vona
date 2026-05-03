@@ -12,10 +12,10 @@ import { Arg, Controller, Web } from 'vona-module-a-web';
 import type { ModelProduct } from '../model/product.ts';
 
 // import { PPDevuiRestpage, PPDevuiRestpageEntry } from 'zova-rest-cabloy-basic-admin';
-import { DtoProductCreate } from '../dto/productCreate.ts';
-import { DtoProductSelectReq } from '../dto/productSelectReq.ts';
-import { DtoProductSelectRes } from '../dto/productSelectRes.ts';
-import { DtoProductUpdate } from '../dto/productUpdate.ts';
+import { DtoProductCreate } from '../dto/productCreate.tsx';
+import { DtoProductSelectReq } from '../dto/productSelectReq.tsx';
+import { DtoProductSelectRes } from '../dto/productSelectRes.tsx';
+import { DtoProductUpdate } from '../dto/productUpdate.tsx';
 import { EntityProduct } from '../entity/product.tsx';
 
 export interface IControllerOptionsProduct extends IDecoratorControllerOptions {}

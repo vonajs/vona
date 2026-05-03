@@ -4,9 +4,9 @@ import type { IQueryParams } from 'vona-module-a-orm';
 import { BeanBase } from 'vona';
 import { Service } from 'vona-module-a-bean';
 
-import type { DtoProductCreate } from '../dto/productCreate.ts';
-import type { DtoProductSelectRes } from '../dto/productSelectRes.ts';
-import type { DtoProductUpdate } from '../dto/productUpdate.ts';
+import type { DtoProductCreate } from '../dto/productCreate.tsx';
+import type { DtoProductSelectRes } from '../dto/productSelectRes.tsx';
+import type { DtoProductUpdate } from '../dto/productUpdate.tsx';
 import type { EntityProduct } from '../entity/product.tsx';
 import type { ModelProduct } from '../model/product.ts';
 
