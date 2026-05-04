@@ -11,13 +11,6 @@ export interface IResourceBlockOptionsBase {
   style?: types.NestedCSSProperties;
 }
 
-export interface IResourceBlockOptionsPageEntry extends IResourceBlockOptionsBase {
-  blocks?: IResourceComponentBlockOptionsBlock[];
-  resource?: string;
-  id?: TableIdentity;
-  formScene?: TypeFormScene;
-}
-
 export interface IResourceComponentBlockOptionsBlock {
   render?: keyof IResourceComponentBlockRecord | TypeRenderComponentJsx;
   options?: IResourceBlockOptionsBase;
