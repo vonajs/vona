@@ -57,21 +57,14 @@ export function schemaRenderActionRow<K extends keyof IResourceActionRowRecord>(
   options?: IResourceActionRowRecord[K],
 ): IResourceComponentActionRowOptionsAction {
   const render = 'Action' + toUpperCaseFirstChar(name);
-  return {
-    name,
-    render: render as any,
-    options: { preset: { [render]: options } },
-  };
+  return { name, render: render as any, options };
 }
 
 export function schemaRenderActionJsxRow<K extends keyof IResourceActionRowRecord>(
   name: K,
   renderComponentJsx: TypeRenderComponentJsx,
 ) {
-  return {
-    name,
-    render: renderComponentJsx,
-  };
+  return { name, render: renderComponentJsx };
 }
 
 export function schemaRenderActionBulk<K extends keyof IResourceActionBulkRecord>(
@@ -79,31 +72,21 @@ export function schemaRenderActionBulk<K extends keyof IResourceActionBulkRecord
   options?: IResourceActionBulkRecord[K],
 ): IResourceComponentActionBulkOptionsAction {
   const render = 'Action' + toUpperCaseFirstChar(name);
-  return {
-    name,
-    render: render as any,
-    options: { preset: { [render]: options } },
-  };
+  return { name, render: render as any, options };
 }
 
 export function schemaRenderActionJsxBulk<K extends IResourceActionBulkRecord>(
   name: K,
   renderComponentJsx: TypeRenderComponentJsx,
 ) {
-  return {
-    name,
-    render: renderComponentJsx,
-  };
+  return { name, render: renderComponentJsx };
 }
 
 export function schemaRenderBlock<K extends keyof IResourceComponentBlockRecord>(
   name: K,
   options?: IResourceComponentBlockRecord[K],
 ): IResourceComponentBlockOptionsBlock {
-  return {
-    render: name,
-    options: options,
-  };
+  return { render: name, options };
 }
 
 export function schemaRenderBlockJsx(renderComponentJsx: TypeRenderComponentJsx) {

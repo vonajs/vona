@@ -72,19 +72,11 @@ export interface IResourceActionRowOptionsOperationsRow extends IResourceActionR
 export interface IResourceComponentActionBulkOptionsAction {
   name: keyof IResourceActionBulkRecord; // not omit operationsBulk
   render?: keyof IResourceComponentActionBulkRecord | TypeRenderComponentJsx;
-  options?: IResourceComponentActionBulkOptions;
-}
-
-export interface IResourceComponentActionBulkOptions {
-  preset?: IResourceComponentActionBulkRecord;
+  options?: IResourceActionBulkOptionsBase;
 }
 
 export interface IResourceComponentActionRowOptionsAction {
   name: keyof IResourceActionRowRecord; // not omit operationsBulk
   render?: keyof IResourceComponentActionRowRecord | TypeRenderComponentJsx;
-  options?: IResourceComponentActionRowOptions;
-}
-
-export interface IResourceComponentActionRowOptions {
-  preset?: IResourceComponentActionRowRecord;
+  options?: IResourceActionRowOptionsBase;
 }

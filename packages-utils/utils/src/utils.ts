@@ -257,6 +257,14 @@ export function pickObject<T extends object, K extends keyof T>(obj: T, keys: K[
   return result;
 }
 
+export function omitObject<T extends object, K extends keyof T>(obj: T, keys: K[]): Omit<T, K> {
+  const result = { ...obj };
+  for (const key of keys) {
+    delete result[key];
+  }
+  return result;
+}
+
 export function typedKeys<T extends object>(obj: T) {
   return Object.keys(obj) as Array<keyof T>;
 }

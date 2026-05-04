@@ -9,10 +9,10 @@ export interface IResourceComponentBlockRecord {}
 export interface IResourceBlockOptionsBase {
   class?: any;
   style?: types.NestedCSSProperties;
-  blocks?: IResourceComponentBlockOptionsBlock[];
 }
 
 export interface IResourceBlockOptionsPageEntry extends IResourceBlockOptionsBase {
+  blocks?: IResourceComponentBlockOptionsBlock[];
   resource?: string;
   id?: TableIdentity;
   formScene?: TypeFormScene;
