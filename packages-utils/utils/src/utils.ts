@@ -258,12 +258,12 @@ export function pickObject<T extends object, K extends keyof T>(obj: T, keys: K[
 }
 
 export function omitObject<T extends object | undefined, K extends keyof NonNullable<T>>(obj: T, keys: K[]): T extends undefined ? undefined : Omit<NonNullable<T>, K> {
-  if (!obj) return undefined;
-  const result = { ...obj };
+  if (!obj) return undefined as T extends undefined ? undefined : Omit<NonNullable<T>, K>;
+  const result = { ...obj } as NonNullable<T>;
   for (const key of keys) {
-    delete result[key];
+    delete (result as Record<string, unknown>)[key as string];
   }
-  return result;
+  return result as unknown as T extends undefined ? undefined : Omit<NonNullable<T>, K>;
 }
 
 export function typedKeys<T extends object>(obj: T) {
