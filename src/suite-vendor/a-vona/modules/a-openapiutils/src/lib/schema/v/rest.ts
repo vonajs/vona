@@ -102,7 +102,7 @@ export function schemaRenderBlock<K extends keyof IResourceComponentBlockRecord>
 ): IResourceComponentBlockOptionsBlock {
   return {
     render: name,
-    options: { preset: { [name]: options } },
+    options: options,
   };
 }
 

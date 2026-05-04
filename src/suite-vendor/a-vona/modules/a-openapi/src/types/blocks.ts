@@ -12,10 +12,6 @@ export interface IResourceBlockOptionsBase {
   blocks?: IResourceComponentBlockOptionsBlock[];
 }
 
-export interface IResourceBlockPresetOptionsBase {
-  preset?: IResourceComponentBlockRecord;
-}
-
 export interface IResourceBlockOptionsPageEntry extends IResourceBlockOptionsBase {
   resource?: string;
   id?: TableIdentity;
@@ -24,9 +20,5 @@ export interface IResourceBlockOptionsPageEntry extends IResourceBlockOptionsBas
 
 export interface IResourceComponentBlockOptionsBlock {
   render?: keyof IResourceComponentBlockRecord | TypeRenderComponentJsx;
-  options?: IResourceComponentBlockOptions;
-}
-
-export interface IResourceComponentBlockOptions {
-  preset?: IResourceComponentBlockRecord;
+  options?: IResourceBlockOptionsBase;
 }
