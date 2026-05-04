@@ -26,11 +26,11 @@ import {
   schemaRenderDisableNotifyChanged,
   schemaRenderActionRow,
   schemaRenderActionBulk,
-  schemaRenderActionJsxRow,
-  schemaRenderActionJsxBulk,
   schemaRenderComponentJsx,
   schemaRenderBlock,
   schemaRenderBlockJsx,
+  schemaRenderActionRowJsx,
+  schemaRenderActionBulkJsx,
 } from './v/rest.ts';
 import {
   schemaSerializerCustom,
@@ -99,9 +99,9 @@ export const v = {
   renderDisableNotifyChanged: schemaRenderDisableNotifyChanged,
   renderFieldSource: schemaRenderFieldSource,
   renderActionRow: schemaRenderActionRow,
+  renderActionRowJsx: schemaRenderActionRowJsx,
   renderActionBulk: schemaRenderActionBulk,
-  renderActionJsxRow: schemaRenderActionJsxRow,
-  renderActionJsxBulk: schemaRenderActionJsxBulk,
+  renderActionBulkJsx: schemaRenderActionBulkJsx,
   renderBlock: schemaRenderBlock,
   renderBlockJsx: schemaRenderBlockJsx,
   // zod

@@ -57,10 +57,10 @@ export function schemaRenderActionRow<K extends keyof IResourceActionRowRecord>(
   options?: IResourceActionRowRecord[K],
 ): IResourceComponentActionRowOptionsAction {
   const render = 'Action' + toUpperCaseFirstChar(name);
-  return { name, render: render as any, options };
+  return { $$typeof: 'zova-jsx:actionRow', name, render: render as any, options };
 }
 
-export function schemaRenderActionJsxRow<K extends keyof IResourceActionRowRecord>(
+export function schemaRenderActionRowJsx<K extends keyof IResourceActionRowRecord>(
   name: K,
   renderComponentJsx: TypeRenderComponentJsx,
 ) {
@@ -72,10 +72,10 @@ export function schemaRenderActionBulk<K extends keyof IResourceActionBulkRecord
   options?: IResourceActionBulkRecord[K],
 ): IResourceComponentActionBulkOptionsAction {
   const render = 'Action' + toUpperCaseFirstChar(name);
-  return { name, render: render as any, options };
+  return { $$typeof: 'zova-jsx:actionBulk', name, render: render as any, options };
 }
 
-export function schemaRenderActionJsxBulk<K extends IResourceActionBulkRecord>(
+export function schemaRenderActionBulkJsx<K extends IResourceActionBulkRecord>(
   name: K,
   renderComponentJsx: TypeRenderComponentJsx,
 ) {
@@ -86,7 +86,7 @@ export function schemaRenderBlock<K extends keyof IResourceComponentBlockRecord>
   name: K,
   options?: IResourceComponentBlockRecord[K],
 ): IResourceComponentBlockOptionsBlock {
-  return { render: name, options };
+  return { $$typeof: 'zova-jsx:block', render: name, options };
 }
 
 export function schemaRenderBlockJsx(renderComponentJsx: TypeRenderComponentJsx) {

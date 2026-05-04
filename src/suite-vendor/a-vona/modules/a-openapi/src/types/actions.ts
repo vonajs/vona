@@ -3,6 +3,7 @@ import { TableIdentity } from 'table-identity';
 import type { TypeFormScene } from './formMeta.ts';
 import type { IResourceRecord } from './resource.ts';
 import type { TypeRenderComponentJsx } from './rest.ts';
+import type { ZovaJsxComponentType } from './zovaJsx.ts';
 
 export interface IResourceComponentFormFieldRecord {}
 
@@ -70,12 +71,14 @@ export interface IResourceActionRowOptionsOperationsRow extends IResourceActionR
 }
 
 export interface IResourceComponentActionBulkOptionsAction {
+  $$typeof?: ZovaJsxComponentType;
   name: keyof IResourceActionBulkRecord; // not omit operationsBulk
   render?: keyof IResourceComponentActionBulkRecord | TypeRenderComponentJsx;
   options?: IResourceActionBulkOptionsBase;
 }
 
 export interface IResourceComponentActionRowOptionsAction {
+  $$typeof?: ZovaJsxComponentType;
   name: keyof IResourceActionRowRecord; // not omit operationsBulk
   render?: keyof IResourceComponentActionRowRecord | TypeRenderComponentJsx;
   options?: IResourceActionRowOptionsBase;

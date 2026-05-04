@@ -3,6 +3,7 @@ import type { types } from 'typestyle';
 
 import type { TypeFormScene } from './formMeta.ts';
 import type { TypeRenderComponentJsx } from './rest.ts';
+import type { ZovaJsxComponentType } from './zovaJsx.ts';
 
 export interface IResourceComponentBlockRecord {}
 
@@ -12,6 +13,7 @@ export interface IResourceBlockOptionsBase {
 }
 
 export interface IResourceComponentBlockOptionsBlock {
+  $$typeof?: ZovaJsxComponentType;
   render?: keyof IResourceComponentBlockRecord | TypeRenderComponentJsx;
   options?: IResourceBlockOptionsBase;
 }
