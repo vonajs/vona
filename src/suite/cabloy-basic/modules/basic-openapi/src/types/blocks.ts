@@ -19,9 +19,12 @@ export interface IResourceBlockOptionsToolbarRow extends IResourceBlockOptionsBa
   actions?: IResourceComponentActionRowOptionsAction[];
 }
 
+export interface IResourceBlockOptionsForm extends IResourceBlockOptionsBase {}
+
 declare module 'vona-module-a-openapi' {
   export interface IResourceComponentBlockRecord {
     BlockPageEntry?: IResourceBlockOptionsPageEntry;
     BlockToolbarRow?: IResourceBlockOptionsToolbarRow;
+    BlockForm?: IResourceBlockOptionsForm;
   }
 }

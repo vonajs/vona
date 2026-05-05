@@ -1,8 +1,4 @@
-import type {
-  IOpenapiPermissions,
-  TypeComponentRecordSelectorKeysStrict,
-  TypeRenderComponentJsx,
-} from 'vona-module-a-openapi';
+import type { IOpenapiPermissions } from 'vona-module-a-openapi';
 
 import type { IFormProvider } from './formProvider.ts';
 import type { ITableProvider } from './tableProvider.ts';
@@ -34,9 +30,4 @@ export interface IOpenapiOptionsResourceMetaProvider {
   components?: IOpenapiOptionsResourceMetaProviderComponents;
 }
 
-export interface IOpenapiOptionsResourceMetaProviderComponents {
-  restPage?: TypeComponentRecordSelectorKeysStrict<'restPage'> | TypeRenderComponentJsx;
-  restPageEntry?: TypeComponentRecordSelectorKeysStrict<'restPageEntry'> | TypeRenderComponentJsx;
-  table?: TypeComponentRecordSelectorKeysStrict<'table'>;
-  form?: TypeComponentRecordSelectorKeysStrict<'form'>;
-}
+export interface IOpenapiOptionsResourceMetaProviderComponents {}
