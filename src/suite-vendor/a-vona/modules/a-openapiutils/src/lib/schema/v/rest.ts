@@ -40,7 +40,7 @@ export function schemaRenderField<
       options !== undefined
         ? { render: name as never, preset: { [name]: options } }
         : { render: name as never };
-    return _generalSchemaRest(schema, options2, scene);
+    return _generalSchemaRest(schema, options2, scene ?? 'form'); // diff from table
   };
 }
 
@@ -50,7 +50,7 @@ export function schemaRenderFieldJsx<T extends z.ZodType>(
 ) {
   return function (schema: T): T {
     const options = { render: renderComponentJsx };
-    return _generalSchemaRest(schema, options, scene);
+    return _generalSchemaRest(schema, options, scene ?? 'form'); //diff from table
   };
 }
 
