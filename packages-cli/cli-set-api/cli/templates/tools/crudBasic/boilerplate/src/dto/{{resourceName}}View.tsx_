@@ -9,9 +9,14 @@ import { Model<%=argv.resourceNameCapitalize%> } from '../model/<%=argv.resource
 export interface IDtoOptions<%=argv.resourceNameCapitalize%>View extends IDecoratorDtoOptions {}
 
 @Dto<IDtoOptions<%=argv.resourceNameCapitalize%>View>({
-  actions: [
-    v.renderActionRow('operationsRow', {
-      actions: [v.renderActionRow('back', { permission: { public: true } })],
+  blocks: [
+    v.renderBlock('BlockPageEntry', {
+      blocks: [
+        v.renderBlock('BlockForm'),
+        v.renderBlock('BlockToolbarRow', {
+          actions: [v.renderActionRow('back', { permission: { public: true } })],
+        }),
+      ],
     }),
   ],
 })

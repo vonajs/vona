@@ -25,8 +25,8 @@ export class EntityProduct extends EntityBase {
   @Api.field(
     v.title($locale('Name')),
     v.renderOrder(1),
-    // v.renderComponent(),
-    // v.renderComponentJsx(
+    // v.renderField(),
+    // v.renderFieldJsx(
     //   <ZZDemoBasicActionView>
     //     <div className="mock">{cel('value')}</div>
     //     <div>{cel('get(permissions,"actions.create")')}</div>
@@ -63,7 +63,7 @@ export class EntityProduct extends EntityBase {
     //   </a>,
     //   'table',
     // ),
-    v.renderComponent('ActionView', undefined, 'table'),
+    v.renderCell('ActionView'),
     v.min(3, $locale('ZodErrorStringMin')),
     v.required(),
   )

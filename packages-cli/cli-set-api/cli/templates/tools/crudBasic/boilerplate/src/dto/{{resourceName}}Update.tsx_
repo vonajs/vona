@@ -9,13 +9,18 @@ import { Model<%=argv.resourceNameCapitalize%> } from '../model/<%=argv.resource
 export interface IDtoOptions<%=argv.resourceNameCapitalize%>Update extends IDecoratorDtoOptions {}
 
 @Dto<IDtoOptions<%=argv.resourceNameCapitalize%>Update>({
-  actions: [
-    v.renderActionRow('operationsRow', {
-      actions: [
-        v.renderActionRow('submit', {
-          permission: { action: 'update', formScene: ['create', 'edit'] },
+  blocks: [
+    v.renderBlock('BlockPageEntry', {
+      blocks: [
+        v.renderBlock('BlockForm'),
+        v.renderBlock('BlockToolbarRow', {
+          actions: [
+            v.renderActionRow('submit', {
+              permission: { action: 'update', formScene: ['create', 'edit'] },
+            }),
+            v.renderActionRow('back', { permission: { public: true } }),
+          ],
         }),
-        v.renderActionRow('back', { permission: { public: true } }),
       ],
     }),
   ],
