@@ -60,7 +60,9 @@ export function schemaRenderCell<
 >(name: K, options?: IResourceComponentTableCellActionRowRecord[K]) {
   return function (schema: T): T {
     const options2 =
-      options !== undefined ? { render: name as never, options } : { render: name as never };
+      options !== undefined
+        ? { render: name as never, columnProps: options }
+        : { render: name as never };
     return _generalSchemaRest(schema, options2, 'table');
   };
 }
