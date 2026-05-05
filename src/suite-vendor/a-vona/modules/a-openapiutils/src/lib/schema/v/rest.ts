@@ -5,6 +5,7 @@ import type {
   IResourceComponentActionRowOptionsAction,
   IResourceComponentBlockOptionsBlock,
   IResourceComponentBlockRecord,
+  IResourceComponentTableCellRecord,
   ISchemaRenderComponentLayoutOptions,
   ISchemaRenderComponentPresetRecord,
   TypeRenderComponentJsx,
@@ -49,6 +50,26 @@ export function schemaRenderComponentJsx<T extends z.ZodType>(
   return function (schema: T): T {
     const options = { render: renderComponentJsx };
     return _generalSchemaRest(schema, options, scene);
+  };
+}
+
+export function schemaRenderCell<
+  K extends keyof IResourceComponentTableCellRecord,
+  T extends z.ZodType,
+>(name: K, options?: IResourceComponentTableCellRecord[K]) {
+  return function (schema: T): T {
+    const options2 =
+      options !== undefined ? { render: name as never, options } : { render: name as never };
+    return _generalSchemaRest(schema, options2, 'table');
+  };
+}
+
+export function schemaRenderCellJsx<T extends z.ZodType>(
+  renderComponentJsx: TypeRenderComponentJsx,
+) {
+  return function (schema: T): T {
+    const options = { render: renderComponentJsx };
+    return _generalSchemaRest(schema, options, 'table');
   };
 }
 

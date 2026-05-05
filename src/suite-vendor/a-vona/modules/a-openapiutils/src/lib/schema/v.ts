@@ -31,6 +31,8 @@ import {
   schemaRenderBlockJsx,
   schemaRenderActionRowJsx,
   schemaRenderActionBulkJsx,
+  schemaRenderCell,
+  schemaRenderCellJsx,
 } from './v/rest.ts';
 import {
   schemaSerializerCustom,
@@ -93,6 +95,8 @@ export const v = {
   renderLayout: schemaRenderLayout,
   renderComponent: schemaRenderComponent,
   renderComponentJsx: schemaRenderComponentJsx,
+  renderCell: schemaRenderCell,
+  renderCellJsx: schemaRenderCellJsx,
   renderVisible: schemaRenderVisible,
   renderReadonly: schemaRenderReadonly,
   renderOrder: schemaRenderOrder,
