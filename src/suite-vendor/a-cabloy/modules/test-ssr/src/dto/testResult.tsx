@@ -125,7 +125,7 @@ export interface IDtoOptionsTestResult extends IDecoratorDtoOptions<
       z.string(),
     ),
     _customCopy: $makeSchema(
-      v.renderComponentJsx(
+      v.renderFieldJsx(
         <div style={{ display: 'inline-flex', alignItems: 'center' }}>
           <input
             className="input"
@@ -179,7 +179,7 @@ export class DtoTestResult {
     v.openapi({
       title: $locale('Name'),
     }),
-    v.renderComponentJsx(<input className="text-center-2 text-center"></input>),
+    v.renderFieldJsx(<input className="text-center-2 text-center"></input>),
     v.renderLayout({ label: cel('name+"!!"'), class: 'test-layout' }),
     v.default('tom'),
     v.min(3),

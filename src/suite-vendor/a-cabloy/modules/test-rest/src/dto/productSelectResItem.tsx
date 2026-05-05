@@ -9,24 +9,14 @@ import { ModelProduct } from '../model/product.ts';
 
 export interface IDtoOptionsProductSelectResItem extends IDecoratorDtoOptions {}
 
-@Dto<IDtoOptionsProductSelectResItem>({
-  actions: [
-    v.renderActionBulk('operationsBulk', {
-      actions: [v.renderActionBulk('create')],
-    }),
-  ],
-})
+@Dto<IDtoOptionsProductSelectResItem>({})
 export class DtoProductSelectResItem extends $Dto.get(() => ModelProduct) {
   @Api.field(
     v.title($locale('Operations')),
     v.renderOrder(1, 'max'),
-    v.renderComponent(
-      'ActionOperationsRow',
-      {
-        actions: [v.renderActionRow('update'), v.renderActionRow('delete')],
-      },
-      'table',
-    ),
+    v.renderCell('ActionOperationsRow', {
+      actions: [v.renderActionRow('update'), v.renderActionRow('delete')],
+    }),
   )
   _operationsRow?: unknown;
 }

@@ -9,26 +9,16 @@ import { ModelPost } from '../model/post.ts';
 
 export interface IDtoOptionsPostSelectResItem extends IDecoratorDtoOptions {}
 
-@Dto<IDtoOptionsPostSelectResItem>({
-  actions: [
-    v.renderActionBulk('operationsBulk', {
-      actions: [v.renderActionBulk('create')],
-    }),
-  ],
-})
+@Dto<IDtoOptionsPostSelectResItem>({})
 export class DtoPostSelectResItem extends $Dto.get(() => ModelPost, {
   include: { postContent: true },
 }) {
   @Api.field(
     v.title($locale('Operations')),
     v.renderOrder(1, 'max'),
-    v.renderComponent(
-      'ActionOperationsRow',
-      {
-        actions: [v.renderActionRow('update'), v.renderActionRow('delete')],
-      },
-      'table',
-    ),
+    v.renderCell('ActionOperationsRow', {
+      actions: [v.renderActionRow('update'), v.renderActionRow('delete')],
+    }),
   )
   _operationsRow?: unknown;
 }

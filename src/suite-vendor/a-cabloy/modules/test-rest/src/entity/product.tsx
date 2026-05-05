@@ -84,7 +84,8 @@ export class EntityProduct extends EntityBase {
     //     <div v-slot="footer" v-slot-scope="scope">{cel('name + ":footer:" + scope.name')}</div>
     //   </ZZDemoBasicTableCellTest>,
     // ),
-    v.renderComponent('Currency'),
+    v.renderField('Currency'),
+    v.renderCell('Currency'),
     v.min(0, $locale('ZodErrorNumberMin')),
     v.required(),
   )
@@ -96,7 +97,8 @@ export class EntityProduct extends EntityBase {
   @Api.field(
     v.title($locale('Amount')),
     v.renderOrder(5),
-    v.renderComponent('Currency'),
+    v.renderField('Currency'),
+    v.renderCell('Currency'),
     v.required(),
   )
   amount: number;
