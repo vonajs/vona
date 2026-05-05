@@ -1,25 +1,79 @@
 import 'vona-module-a-openapi';
 import type { CurrencyOptions } from '@zhennann/currency';
+import type { IResourceFormFieldOptionsBase, ITableQuery } from 'vona-module-a-openapi';
 
-import type { ICaptchaOptions } from './captcha.ts';
-import type { IDateOptions } from './date.ts';
-import type { IDateRangeOptions } from './dateRange.ts';
-import type { IInputOptions } from './input.ts';
-import type { IResourcePickerOptions } from './resourcePicker.ts';
-import type { ISelectOptions } from './select.ts';
-import type { ITextareaOptions } from './textarea.ts';
-import type { IToggleOptions } from './toggle.ts';
+import type { ICaptchaSceneRecord, ISelectOptions, TypeDateFormatPreset } from './utils.ts';
+
+export type HTMLInputElementType =
+  | 'text'
+  | 'password'
+  | 'number'
+  | 'file'
+  | 'hidden'
+  | 'tel'
+  | 'email';
+
+export interface IResourceFormFieldOptionsInput extends IResourceFormFieldOptionsBase {
+  value?: any;
+  type?: HTMLInputElementType;
+  placeholder?: string;
+  onChange?: (e: Event) => void;
+  onInput?: (e: Event) => void;
+  onBlur?: (e: Event) => void;
+}
+
+export interface IResourceFormFieldOptionsCaptcha extends IResourceFormFieldOptionsBase {
+  scene?: keyof ICaptchaSceneRecord;
+}
+
+export interface IResourceFormFieldOptionsCurrency
+  extends IResourceFormFieldOptionsBase, CurrencyOptions {}
+
+export interface IResourceFormFieldOptionsDate extends IResourceFormFieldOptionsBase {
+  preset?: TypeDateFormatPreset;
+  format?: string;
+}
+
+export interface IResourceFormFieldOptionsDateRange extends IResourceFormFieldOptionsBase {
+  separator?: string;
+}
+
+export interface IResourceFormFieldOptionsToggle extends IResourceFormFieldOptionsBase {
+  color?: 'primary' | 'secondary' | 'success' | 'info' | 'warning' | 'error';
+}
+
+export interface IResourceFormFieldOptionsSelect
+  extends IResourceFormFieldOptionsBase, ISelectOptions {}
+
+export interface IResourceFormFieldOptionsTextarea extends IResourceFormFieldOptionsBase {
+  autoGrow?: boolean;
+  maxRows?: number;
+  maxHeight?: number;
+  noResize?: boolean;
+  rows?: number;
+  color?: string;
+  bgColor?: string;
+  counter?: string | number | true;
+}
+
+export interface IResourceFormFieldOptionsResourcePicker extends IResourceFormFieldOptionsBase {
+  resource?: string;
+  actionPath?: string;
+  query?: ITableQuery;
+  selectOptions?: ISelectOptions;
+  relation?: string;
+}
 
 declare module 'vona-module-a-openapi' {
   export interface IResourceComponentFormFieldRecord {
-    Input?: IInputOptions;
-    Captcha?: ICaptchaOptions;
-    Currency?: CurrencyOptions;
-    Date?: IDateOptions;
-    DateRange?: IDateRangeOptions;
-    Toggle?: IToggleOptions;
-    Select?: ISelectOptions;
-    Textarea?: ITextareaOptions;
-    ResourcePicker?: IResourcePickerOptions;
+    Input?: IResourceFormFieldOptionsInput;
+    Captcha?: IResourceFormFieldOptionsCaptcha;
+    Currency?: IResourceFormFieldOptionsCurrency;
+    Date?: IResourceFormFieldOptionsDate;
+    DateRange?: IResourceFormFieldOptionsDateRange;
+    Toggle?: IResourceFormFieldOptionsToggle;
+    Select?: IResourceFormFieldOptionsSelect;
+    Textarea?: IResourceFormFieldOptionsTextarea;
+    ResourcePicker?: IResourceFormFieldOptionsResourcePicker;
   }
 }

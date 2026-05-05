@@ -5,9 +5,10 @@ import type {
   IResourceComponentActionRowOptionsAction,
   IResourceComponentBlockOptionsBlock,
   IResourceComponentBlockRecord,
-  IResourceComponentTableCellRecord,
+  IResourceComponentFormFieldRecord,
+  IResourceComponentTableCellActionRowRecord,
   ISchemaRenderComponentLayoutOptions,
-  ISchemaRenderComponentPresetRecord,
+  TypeFormSchemaScene,
   TypeRenderComponentJsx,
   TypeSchemaScene,
 } from 'vona-module-a-openapi';
@@ -30,10 +31,10 @@ export function schemaRenderLayout<T extends z.ZodType>(
   };
 }
 
-export function schemaRenderComponent<
-  K extends keyof ISchemaRenderComponentPresetRecord,
+export function schemaRenderField<
+  K extends keyof IResourceComponentFormFieldRecord,
   T extends z.ZodType,
->(name: K, options?: ISchemaRenderComponentPresetRecord[K], scene?: TypeSchemaScene) {
+>(name: K, options?: IResourceComponentFormFieldRecord[K], scene?: TypeFormSchemaScene) {
   return function (schema: T): T {
     const options2 =
       options !== undefined
@@ -43,9 +44,9 @@ export function schemaRenderComponent<
   };
 }
 
-export function schemaRenderComponentJsx<T extends z.ZodType>(
+export function schemaRenderFieldJsx<T extends z.ZodType>(
   renderComponentJsx: TypeRenderComponentJsx,
-  scene?: TypeSchemaScene,
+  scene?: TypeFormSchemaScene,
 ) {
   return function (schema: T): T {
     const options = { render: renderComponentJsx };
@@ -54,9 +55,9 @@ export function schemaRenderComponentJsx<T extends z.ZodType>(
 }
 
 export function schemaRenderCell<
-  K extends keyof IResourceComponentTableCellRecord,
+  K extends keyof IResourceComponentTableCellActionRowRecord,
   T extends z.ZodType,
->(name: K, options?: IResourceComponentTableCellRecord[K]) {
+>(name: K, options?: IResourceComponentTableCellActionRowRecord[K]) {
   return function (schema: T): T {
     const options2 =
       options !== undefined ? { render: name as never, options } : { render: name as never };

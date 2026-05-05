@@ -1,11 +1,11 @@
+import type { types } from 'typestyle';
+
 import { TableIdentity } from 'table-identity';
 
 import type { TypeFormScene } from './formMeta.ts';
 import type { IResourceRecord } from './resource.ts';
 import type { TypeRenderComponentJsx } from './rest.ts';
 import type { ZovaJsxComponentType } from './zovaJsx.ts';
-
-export interface IResourceComponentFormFieldRecord {}
 
 export interface IResourceActionBulkRecord {}
 
@@ -14,13 +14,9 @@ export interface IResourceActionRowRecord {}
 export interface IResourceActionTableRecord
   extends IResourceActionBulkRecord, IResourceActionRowRecord {}
 
-export type IResourceComponentActionBulkRecord = {
-  [key in keyof IResourceActionBulkRecord as `Action${Capitalize<key>}`]: IResourceActionBulkRecord[key];
-};
+export interface IResourceComponentActionBulkRecord {}
 
-export type IResourceComponentActionRowRecord = {
-  [key in keyof IResourceActionRowRecord as `Action${Capitalize<key>}`]: IResourceActionRowRecord[key];
-};
+export interface IResourceComponentActionRowRecord {}
 
 export interface IResourceComponentActionTableRecord
   extends IResourceComponentActionBulkRecord, IResourceComponentActionRowRecord {}
@@ -33,6 +29,7 @@ export interface IPermissionHint {
 
 export interface IResourceActionBulkOptionsBase {
   class?: any;
+  style?: types.NestedCSSProperties;
   resource?: keyof IResourceRecord;
   permission?: {
     action?: keyof IResourceActionBulkRecord;
@@ -42,6 +39,7 @@ export interface IResourceActionBulkOptionsBase {
 
 export interface IResourceActionRowOptionsBase {
   class?: any;
+  style?: types.NestedCSSProperties;
   resource?: keyof IResourceRecord;
   id?: TableIdentity;
   permission?: {

@@ -1,8 +1,6 @@
 import type { OmitNever } from 'vona';
 import type { ServiceOnion } from 'vona-module-a-onion';
 import type {
-  IResourceActionBulkOptionsOperationsBulkAction,
-  IResourceActionRowOptionsOperationsRowAction,
   IResourceComponentBlockOptionsBlock,
   TypeOpenapiMetadata,
 } from 'vona-module-a-openapi';
@@ -16,9 +14,6 @@ export interface IDecoratorDtoOptions<FieldsMore = never> {
   independent?: boolean;
   openapi?: TypeOpenapiMetadata;
   pipes?: SchemaLike | SchemaLike[];
-  actions?:
-    | IResourceActionBulkOptionsOperationsBulkAction[]
-    | IResourceActionRowOptionsOperationsRowAction[];
   blocks?: IResourceComponentBlockOptionsBlock[];
 }
 

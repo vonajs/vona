@@ -1,7 +1,5 @@
-import type { TableIdentity } from 'table-identity';
 import type { types } from 'typestyle';
 
-import type { TypeFormScene } from './formMeta.ts';
 import type { TypeRenderComponentJsx } from './rest.ts';
 import type { ZovaJsxComponentType } from './zovaJsx.ts';
 
