@@ -3,7 +3,6 @@ import type { types } from 'typestyle';
 import { TableIdentity } from 'table-identity';
 
 import type { TypeFormScene } from './formMeta.ts';
-import type { IResourceRecord } from './resource.ts';
 import type { TypeRenderComponentJsx } from './rest.ts';
 import type { ZovaJsxComponentType } from './zovaJsx.ts';
 
@@ -38,7 +37,7 @@ export interface IPermissionHint {
 export interface IResourceActionBulkOptionsBase {
   class?: any;
   style?: types.NestedCSSProperties;
-  resource?: keyof IResourceRecord;
+  resource?: string;
   permission?: {
     action?: keyof IResourceActionBulkRecord;
     public?: boolean;
@@ -48,7 +47,7 @@ export interface IResourceActionBulkOptionsBase {
 export interface IResourceActionRowOptionsBase {
   class?: any;
   style?: types.NestedCSSProperties;
-  resource?: keyof IResourceRecord;
+  resource?: string;
   id?: TableIdentity;
   permission?: {
     action?: keyof IResourceActionRowRecord;

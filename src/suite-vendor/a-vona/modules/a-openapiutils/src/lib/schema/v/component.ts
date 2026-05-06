@@ -2,6 +2,7 @@ import type {
   IResourceActionBulkRecord,
   IResourceActionRowRecord,
   IResourceComponentActionBulkOptionsAction,
+  IResourceComponentActionRowOptionsAction,
   IResourceComponentBlockOptionsBlock,
   IResourceComponentBlockRecord,
   IResourceComponentFormFieldRecord,
