@@ -56,25 +56,6 @@ export interface IResourceActionRowOptionsBase {
   };
 }
 
-export interface IResourceActionBulkOptionsCreate extends IResourceActionBulkOptionsBase {}
-
-export interface IResourceActionRowOptionsView extends IResourceActionRowOptionsBase {}
-
-export interface IResourceActionRowOptionsUpdate extends IResourceActionRowOptionsBase {}
-
-export interface IResourceActionRowOptionsDelete extends IResourceActionRowOptionsBase {}
-
-export interface IResourceActionRowOptionsSubmit extends IResourceActionRowOptionsBase {}
-export interface IResourceActionRowOptionsBack extends IResourceActionRowOptionsBase {}
-
-export interface IResourceActionBulkOptionsOperationsBulk extends IResourceActionBulkOptionsBase {
-  actions?: IResourceComponentActionBulkOptionsAction[];
-}
-
-export interface IResourceActionRowOptionsOperationsRow extends IResourceActionRowOptionsBase {
-  actions?: IResourceComponentActionRowOptionsAction[];
-}
-
 export interface IResourceComponentActionBulkOptionsAction {
   $$typeof?: ZovaJsxComponentType;
   name: keyof IResourceActionBulkRecord; // not omit operationsBulk
