@@ -20,18 +20,7 @@ import { DtoProductView } from '../dto/productView.tsx';
 
 export interface IControllerOptionsProduct extends IDecoratorControllerOptions {}
 
-@Controller<IControllerOptionsProduct>('product', {
-  resourceMeta: {
-    provider: {
-      components: {
-        // restPage: <PPDevuiRestpage showFilter={true}></PPDevuiRestpage>,
-        // restPageEntry: <PPDevuiRestpageEntry toolbarPosition="bottom"></PPDevuiRestpageEntry>,
-      },
-    },
-    // permissions: true,
-    // permissions: false,
-  },
-})
+@Controller<IControllerOptionsProduct>('product')
 @Resource()
 export class ControllerProduct extends BeanBase {
   @Web.post()

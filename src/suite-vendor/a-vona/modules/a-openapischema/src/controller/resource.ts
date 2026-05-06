@@ -1,11 +1,9 @@
-import type { IOpenapiOptions } from 'vona-module-a-openapiutils';
 import type {
   IDecoratorControllerOptions,
   IRecordResourceNameToRoutePathItem,
 } from 'vona-module-a-web';
 
-import { appMetadata, BeanBase, deepExtend } from 'vona';
-import { SymbolOpenApiOptions } from 'vona-module-a-openapiutils';
+import { BeanBase } from 'vona';
 import { Passport } from 'vona-module-a-user';
 import { Arg, Controller, recordResourceNameToRoutePath, Web } from 'vona-module-a-web';
 
@@ -23,16 +21,6 @@ export class ControllerResource extends BeanBase {
       recordResourceNameToRoutePath[resource];
     if (!routePathInfo) throw new Error(`not found routePath of resource: ${resource}`);
     const apiPath = routePathInfo.apiPath;
-    // resourceMeta
-    const openApiOptions = appMetadata.getMetadata<IOpenapiOptions>(
-      SymbolOpenApiOptions,
-      routePathInfo.controller,
-    );
-    const resourceMeta = deepExtend(
-      {},
-      this.scope.config.resourceMeta,
-      openApiOptions?.resourceMeta,
-    );
-    return { apiPath, resourceMeta };
+    return { apiPath };
   }
 }
