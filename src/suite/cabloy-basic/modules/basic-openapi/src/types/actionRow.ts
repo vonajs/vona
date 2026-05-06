@@ -17,15 +17,6 @@ export interface IResourceActionRowOptionsOperationsRow extends IResourceActionR
 }
 
 declare module 'vona-module-a-openapi' {
-  export interface IResourceActionRowRecord {
-    view?: IResourceActionRowOptionsView;
-    update?: IResourceActionRowOptionsUpdate;
-    delete?: IResourceActionRowOptionsDelete;
-    operationsRow?: IResourceActionRowOptionsOperationsRow;
-    submit?: IResourceActionRowOptionsSubmit;
-    back?: IResourceActionRowOptionsBack;
-  }
-
   export interface IResourceComponentActionRowRecord {
     ActionView?: IResourceActionRowOptionsView;
     ActionUpdate?: IResourceActionRowOptionsUpdate;

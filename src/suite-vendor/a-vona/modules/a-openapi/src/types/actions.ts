@@ -7,9 +7,17 @@ import type { IResourceRecord } from './resource.ts';
 import type { TypeRenderComponentJsx } from './rest.ts';
 import type { ZovaJsxComponentType } from './zovaJsx.ts';
 
-export interface IResourceActionBulkRecord {}
+export type IResourceActionBulkRecord = {
+  [KEY in keyof IResourceComponentActionBulkRecord as KEY extends `Action${infer Rest}`
+    ? Uncapitalize<Rest>
+    : KEY]: IResourceComponentActionBulkRecord[KEY];
+};
 
-export interface IResourceActionRowRecord {}
+export type IResourceActionRowRecord = {
+  [KEY in keyof IResourceComponentActionRowRecord as KEY extends `Action${infer Rest}`
+    ? Uncapitalize<Rest>
+    : KEY]: IResourceComponentActionRowRecord[KEY];
+};
 
 export interface IResourceActionTableRecord
   extends IResourceActionBulkRecord, IResourceActionRowRecord {}
