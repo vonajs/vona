@@ -10,8 +10,8 @@ import { Dto } from 'vona-module-a-web';
 import z from 'zod';
 import {
   $iconName,
-  BBARestActionsCopy,
-  BBARestActionsSetValue,
+  BBABasicActionsCopy,
+  BBABasicActionsSetValue,
   BBZIcon,
 } from 'zova-rest-test-second';
 
@@ -132,12 +132,12 @@ export interface IDtoOptionsTestResult extends IDecoratorDtoOptions<
             value={cel('getValue("name")')}
             onInput={
               <action>
-                <BBARestActionsSetValue name="name"></BBARestActionsSetValue>
-                <BBARestActionsSetValue
+                <BBABasicActionsSetValue name="name"></BBABasicActionsSetValue>
+                <BBABasicActionsSetValue
                   name="_customCopied"
                   value={false}
                   disableNotifyChanged
-                ></BBARestActionsSetValue>
+                ></BBABasicActionsSetValue>
               </action>
             }
           ></input>
@@ -147,8 +147,11 @@ export interface IDtoOptionsTestResult extends IDecoratorDtoOptions<
             name={$iconName(':outline:copy-outline')}
             nativeOnClick={
               <action>
-                <BBARestActionsCopy text={cel('getValue("name")')}></BBARestActionsCopy>
-                <BBARestActionsSetValue name="_customCopied" value={true}></BBARestActionsSetValue>
+                <BBABasicActionsCopy text={cel('getValue("name")')}></BBABasicActionsCopy>
+                <BBABasicActionsSetValue
+                  name="_customCopied"
+                  value={true}
+                ></BBABasicActionsSetValue>
               </action>
             }
           ></BBZIcon>

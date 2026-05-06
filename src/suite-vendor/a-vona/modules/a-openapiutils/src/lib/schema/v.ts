@@ -1,4 +1,16 @@
-import { schemaFilter, schemaFilterTransform } from './v/filter.tsx';
+import {
+  schemaRenderActionBulk,
+  schemaRenderActionBulkJsx,
+  schemaRenderActionRow,
+  schemaRenderActionRowJsx,
+  schemaRenderBlock,
+  schemaRenderBlockJsx,
+  schemaRenderCell,
+  schemaRenderCellJsx,
+  schemaRenderField,
+  schemaRenderFieldJsx,
+} from './v/component.ts';
+import { schemaFilter, schemaFilterTransform } from './v/filter.ts';
 import {
   schemaEmail,
   schemaIPv4,
@@ -23,16 +35,6 @@ import {
   schemaRenderReadonly,
   schemaRenderLayout,
   schemaRenderDisableNotifyChanged,
-  schemaRenderActionRow,
-  schemaRenderActionBulk,
-  schemaRenderBlock,
-  schemaRenderBlockJsx,
-  schemaRenderActionRowJsx,
-  schemaRenderActionBulkJsx,
-  schemaRenderCell,
-  schemaRenderCellJsx,
-  schemaRenderField,
-  schemaRenderFieldJsx,
 } from './v/rest.ts';
 import {
   schemaSerializerCustom,
@@ -91,17 +93,18 @@ export const v = {
   title: schemaTitle,
   description: schemaDescription,
   example: schemaExample,
-  // rest/render
+  // render
   renderLayout: schemaRenderLayout,
-  renderField: schemaRenderField,
-  renderFieldJsx: schemaRenderFieldJsx,
-  renderCell: schemaRenderCell,
-  renderCellJsx: schemaRenderCellJsx,
   renderVisible: schemaRenderVisible,
   renderReadonly: schemaRenderReadonly,
   renderOrder: schemaRenderOrder,
   renderDisableNotifyChanged: schemaRenderDisableNotifyChanged,
   renderFieldSource: schemaRenderFieldSource,
+  // component
+  renderField: schemaRenderField,
+  renderFieldJsx: schemaRenderFieldJsx,
+  renderCell: schemaRenderCell,
+  renderCellJsx: schemaRenderCellJsx,
   renderActionRow: schemaRenderActionRow,
   renderActionRowJsx: schemaRenderActionRowJsx,
   renderActionBulk: schemaRenderActionBulk,
