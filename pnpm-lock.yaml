@@ -391,7 +391,7 @@ importers:
         specifier: ^22.19.17
         version: 22.19.17
       '@types/react':
-        specifier: npm:@cabloy/types-react@^19.2.15
+        specifier: npm:@cabloy/types-react@^19.2.16
         version: '@cabloy/types-react@19.2.15'
       '@types/retry':
         specifier: ^0.12.5
@@ -1022,7 +1022,7 @@ importers:
         specifier: ^8.1.6
         version: 8.1.6
       '@types/react':
-        specifier: npm:@cabloy/types-react@^19.2.15
+        specifier: npm:@cabloy/types-react@^19.2.16
         version: '@cabloy/types-react@19.2.15'
       chalk:
         specifier: ^5.6.2
@@ -1744,7 +1744,7 @@ importers:
         specifier: ^22.19.17
         version: 22.19.17
       '@types/react':
-        specifier: npm:@cabloy/types-react@^19.2.15
+        specifier: npm:@cabloy/types-react@^19.2.16
         version: '@cabloy/types-react@19.2.15'
       '@types/retry':
         specifier: ^0.12.5

@@ -4,7 +4,7 @@ import type { IDecoratorDtoOptions } from 'vona-module-a-web';
 import { cel } from '@cabloy/utils';
 import React from 'react';
 import { text } from 'vona';
-import { Actions, Event } from 'vona-module-a-actions';
+import { Event } from 'vona-module-a-actions';
 import { $makeSchema, Api, v } from 'vona-module-a-openapiutils';
 import { Dto } from 'vona-module-a-web';
 import z from 'zod';
@@ -60,7 +60,7 @@ export interface IDtoOptionsTestResult extends IDecoratorDtoOptions<
                 <BBZIcon
                   name={$iconName('::home')}
                   width={24}
-                  nativeOnClick={<action>{/* <ActionLog message="sss"></ActionLog> */}</action>}
+                  nativeOnClick={<Event>{/* <ActionLog message="sss"></ActionLog> */}</Event>}
                 ></BBZIcon>
               </div>
             ),
@@ -127,18 +127,14 @@ export interface IDtoOptionsTestResult extends IDecoratorDtoOptions<
             className="input"
             value={cel('getValue("name")')}
             onInput={
-              <action>
-                <Event>
-                  <div></div>
-                  <Actions></Actions>
-                </Event>
+              <Event>
                 <BBABasicActionsSetValue name="name"></BBABasicActionsSetValue>
                 <BBABasicActionsSetValue
                   name="_customCopied"
                   value={false}
                   disableNotifyChanged
                 ></BBABasicActionsSetValue>
-              </action>
+              </Event>
             }
           ></input>
           <BBZIcon
@@ -146,13 +142,13 @@ export interface IDtoOptionsTestResult extends IDecoratorDtoOptions<
             style={{ cursor: 'pointer' }}
             name={$iconName(':outline:copy-outline')}
             nativeOnClick={
-              <action>
+              <Event>
                 <BBABasicActionsCopy text={cel('getValue("name")')}></BBABasicActionsCopy>
                 <BBABasicActionsSetValue
                   name="_customCopied"
                   value={true}
                 ></BBABasicActionsSetValue>
-              </action>
+              </Event>
             }
           ></BBZIcon>
           <span v-if={cel('getValue("_customCopied")==true')}>Copied!</span>
