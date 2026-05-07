@@ -8,12 +8,7 @@ import { Event } from 'vona-module-a-actions';
 import { $makeSchema, Api, v } from 'vona-module-a-openapiutils';
 import { Dto } from 'vona-module-a-web';
 import z from 'zod';
-import {
-  $iconName,
-  BBABasicActionsCopy,
-  BBABasicActionsSetValue,
-  BBZIcon,
-} from 'zova-rest-test-second';
+import { Action, Component } from 'zova-rest-cabloy-basic-admin';
 
 import { $locale } from '../.metadata/locales.ts';
 import { DtoTestDetail } from './testDetail.ts';
@@ -57,11 +52,18 @@ export interface IDtoOptionsTestResult extends IDecoratorDtoOptions<
                 <div>{$locale('TestApples_', 0)}</div>
                 <div>{text`I have ${$locale('TestApples_', 1)}`}</div>
                 <div>{text`cel://name+": ${$locale('TestApples_', 2)}"`}</div>
-                <BBZIcon
-                  name={$iconName('::home')}
-                  width={24}
-                  nativeOnClick={<Event>{/* <ActionLog message="sss"></ActionLog> */}</Event>}
-                ></BBZIcon>
+                <Component
+                  name="a-icon:icon"
+                  options={{
+                    name: '::home',
+                    width: 24,
+                  }}
+                  nativeOnClick={
+                    <Event>
+                      <Action name="basic-actionssync:log" options={{ message: 'sss' }}></Action>
+                    </Event>
+                  }
+                ></Component>
               </div>
             ),
           },
@@ -128,29 +130,34 @@ export interface IDtoOptionsTestResult extends IDecoratorDtoOptions<
             value={cel('getValue("name")')}
             onInput={
               <Event>
-                <BBABasicActionsSetValue name="name"></BBABasicActionsSetValue>
-                <BBABasicActionsSetValue
-                  name="_customCopied"
-                  value={false}
-                  disableNotifyChanged
-                ></BBABasicActionsSetValue>
+                <Action name="basic-actions:setValue" options={{ name: 'name' }}></Action>
+                <Action
+                  name="basic-actions:setValue"
+                  options={{ name: '_customCopied', value: false, disableNotifyChanged: true }}
+                ></Action>
               </Event>
             }
           ></input>
-          <BBZIcon
+          <Component
             v-if={cel('getValue("_customCopied")==false')}
+            name="a-icon:icon"
             style={{ cursor: 'pointer' }}
-            name={$iconName(':outline:copy-outline')}
+            options={{
+              name: ':outline:copy-outline',
+            }}
             nativeOnClick={
               <Event>
-                <BBABasicActionsCopy text={cel('getValue("name")')}></BBABasicActionsCopy>
-                <BBABasicActionsSetValue
-                  name="_customCopied"
-                  value={true}
-                ></BBABasicActionsSetValue>
+                <Action
+                  name="basic-actions:copy"
+                  options={{ text: cel('getValue("name")') }}
+                ></Action>
+                <Action
+                  name="basic-actions:setValue"
+                  options={{ name: '_customCopied', value: true }}
+                ></Action>
               </Event>
             }
-          ></BBZIcon>
+          ></Component>
           <span v-if={cel('getValue("_customCopied")==true')}>Copied!</span>
         </div>,
       ),
