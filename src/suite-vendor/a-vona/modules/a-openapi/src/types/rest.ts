@@ -3,18 +3,14 @@ import type { ILocaleMagic } from 'vona';
 import type { IOpenapiOptions } from 'vona-module-a-openapiutils';
 import type { z } from 'zod';
 
-import type { IResourceComponentActionRowRecord } from './actions.ts';
 import 'openapi3-ts/oas30';
 import 'openapi3-ts/oas31';
 import type { IComponentRecord, ITableCellComponentRecord } from './component.ts';
 import type { IResourceComponentFormFieldRecord } from './formField.ts';
 
-export interface ISchemaRenderComponentPresetRecord
-  extends IResourceComponentFormFieldRecord, IResourceComponentActionRowRecord {}
+export interface ISchemaRenderComponentPresetRecord extends IResourceComponentFormFieldRecord {}
 
 export interface ISchemaObjectExtensionFieldRestProps {
-  //
-  preset?: ISchemaRenderComponentPresetRecord;
   //
   fieldSource?: string;
   visible?: boolean;
