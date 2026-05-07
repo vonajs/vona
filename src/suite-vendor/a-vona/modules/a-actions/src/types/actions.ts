@@ -1,26 +1,15 @@
-import type { IResourceRecord } from 'vona-module-a-openapi';
+export interface IActionOptionsBase {}
 
-export interface IActionOptionsBase {
+export interface IActionOptionsRes extends IActionOptionsBase {
   res?: string;
 }
 
-export interface IActionOptionsNone {}
-
-export interface IActionExprOptions extends IActionOptionsNone {
-  expression: string;
+export interface IActionOptionsEvent extends IActionOptionsRes {
+  stop?: boolean;
+  prevent?: boolean;
+  children?: React.ReactNode;
 }
 
-export interface IActionVarOptions extends IActionOptionsNone {
-  name: string;
-  value: any;
-}
-
-export interface IActionLogOptions extends IActionOptionsNone {
-  name?: string;
-  message: any;
-}
-
-export interface IActionViewOptions extends IActionOptionsNone {
-  resource?: keyof IResourceRecord;
-  id?: string;
+export interface IActionOptionsActions extends IActionOptionsRes {
+  children?: React.ReactNode;
 }

@@ -4,7 +4,7 @@ import type { IDecoratorDtoOptions } from 'vona-module-a-web';
 import { cel } from '@cabloy/utils';
 import React from 'react';
 import { text } from 'vona';
-import { ActionLog } from 'vona-module-a-actions';
+import { Actions, Event } from 'vona-module-a-actions';
 import { $makeSchema, Api, v } from 'vona-module-a-openapiutils';
 import { Dto } from 'vona-module-a-web';
 import z from 'zod';
@@ -60,11 +60,7 @@ export interface IDtoOptionsTestResult extends IDecoratorDtoOptions<
                 <BBZIcon
                   name={$iconName('::home')}
                   width={24}
-                  nativeOnClick={
-                    <action>
-                      <ActionLog message="sss"></ActionLog>
-                    </action>
-                  }
+                  nativeOnClick={<action>{/* <ActionLog message="sss"></ActionLog> */}</action>}
                 ></BBZIcon>
               </div>
             ),
@@ -132,6 +128,10 @@ export interface IDtoOptionsTestResult extends IDecoratorDtoOptions<
             value={cel('getValue("name")')}
             onInput={
               <action>
+                <Event>
+                  <div></div>
+                  <Actions></Actions>
+                </Event>
                 <BBABasicActionsSetValue name="name"></BBABasicActionsSetValue>
                 <BBABasicActionsSetValue
                   name="_customCopied"

@@ -1,22 +1,9 @@
-import type {
-  IActionExprOptions,
-  IActionLogOptions,
-  IActionVarOptions,
-  IActionViewOptions,
-} from '../types/actions.ts';
+import type { IActionOptionsActions, IActionOptionsEvent } from '../types/actions.ts';
 
-export function ActionExpr(_options: IActionExprOptions) {
-  return 'ActionExpr';
+export function Event(_options: IActionOptionsEvent) {
+  return 'ActionEvent';
 }
 
-export function ActionVar(_options: IActionVarOptions) {
-  return 'ActionVar';
-}
-
-export function ActionLog(_options: IActionLogOptions) {
-  return 'ActionLog';
-}
-
-export function ActionView(_options: IActionViewOptions) {
-  return 'ActionView';
+export function Actions(_options: IActionOptionsActions) {
+  return 'ActionActions';
 }
