@@ -22,9 +22,7 @@ export function schemaRenderField<
 >(name: K, options?: IResourceComponentFormFieldRecord[K], scene?: TypeFormSchemaScene) {
   return function (schema: T): T {
     const options2 =
-      options !== undefined
-        ? { render: name as never, preset: { [name]: options } }
-        : { render: name as never };
+      options !== undefined ? { render: name as never, options } : { render: name as never };
     return _generalSchemaRest(schema, options2, scene ?? 'form'); // diff from table
   };
 }
