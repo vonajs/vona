@@ -1,0 +1,1 @@
+import{a,c as s,i as c,n as o,o as r,r as t,s as i,t as p}from"./basic-captcha-njGBTG1A.js";p();export{i as $useLocale,r as ControllerFormFieldCaptcha,o as ScopeModuleBasicCaptcha,a as ZFormFieldCaptcha,t as components,c as locale,s as locales};

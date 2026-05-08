@@ -1,0 +1,1 @@
+import{a,i as s,n as r,o,r as t,t as b}from"./a-routertabs-CFDxEw7c.js";b();export{a as ControllerRouterViewTabs,o as ModelTabs,r as ScopeModuleARoutertabs,s as ZRouterViewTabs,t as components};

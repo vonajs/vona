@@ -1,0 +1,1 @@
+import{n as a,t as o}from"./a-boundary-CltlJZnU.js";o();export{a as ScopeModuleABoundary};

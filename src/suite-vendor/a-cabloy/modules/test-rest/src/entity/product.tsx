@@ -14,7 +14,7 @@ export interface IEntityOptionsProduct extends IDecoratorEntityOptions<'_custom'
 @Entity<IEntityOptionsProduct>('testRestProduct', {
   openapi: { title: $locale('ProductInfo') },
   fields: {
-    _custom: $makeSchema(v.title('Custom'), z.string()),
+    _custom: $makeSchema(v.title('Custom'), v.optional(), z.string()),
   },
 })
 export class EntityProduct extends EntityBase {

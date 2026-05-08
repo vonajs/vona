@@ -1,6 +1,6 @@
 import type {
   DtoProductCreate,
-  DtoProductQueryRes,
+  DtoProductSelectRes,
   DtoProductUpdate,
   EntityProduct,
 } from 'vona-module-test-rest';
@@ -32,7 +32,7 @@ describe('product.test.ts', () => {
       });
       assert.equal(!!productId, true);
       // findMany
-      const queryRes: DtoProductQueryRes = await app.bean.executor.performAction(
+      const queryRes: DtoProductSelectRes = await app.bean.executor.performAction(
         'get',
         '/test/rest/product',
       );

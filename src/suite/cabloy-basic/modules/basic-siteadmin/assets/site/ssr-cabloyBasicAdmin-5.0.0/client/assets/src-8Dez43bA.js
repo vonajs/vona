@@ -1,0 +1,1 @@
+import{n as a,t as o}from"./basic-openapi-Be9fY2cm.js";o();export{a as ScopeModuleBasicOpenapi};

@@ -1,0 +1,1 @@
+import{a as s,c as a,d as o,f as r,i as f,l as i,n as m,o as t,r as c,s as p,t as b,u as d}from"./basic-form-BqWR5Ai_.js";b();export{o as $useLocale,t as BehaviorFormField,s as BehaviorFormFieldLayout,d as ControllerActionBack,i as ControllerActionSubmit,m as ScopeModuleBasicForm,a as ZActionBack,p as ZActionSubmit,c as components,f as locale,r as locales};

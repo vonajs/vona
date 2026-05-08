@@ -1,0 +1,1 @@
+import{n as a,t as o}from"./basic-openapi-SD-JPr-T.js";o();export{a as ScopeModuleBasicOpenapi};
