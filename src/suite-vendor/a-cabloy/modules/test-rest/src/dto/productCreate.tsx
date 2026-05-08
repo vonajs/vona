@@ -1,5 +1,6 @@
 import type { IDecoratorDtoOptions } from 'vona-module-a-web';
 
+import { v } from 'vona-module-a-openapiutils';
 import { $Dto } from 'vona-module-a-orm';
 import { Dto } from 'vona-module-a-web';
 
@@ -18,5 +19,20 @@ export interface IDtoOptionsProductCreate extends IDecoratorDtoOptions<'_test'> 
       },
     },
   },
+  blocks: [
+    v.renderBlock('BlockPageEntry', {
+      blocks: [
+        v.renderBlock('BlockForm'),
+        v.renderBlock('BlockToolbarRow', {
+          actions: [
+            v.renderActionRow('submit', {
+              permission: { action: 'update', formScene: ['create', 'edit'] },
+            }),
+            v.renderActionRow('back', { permission: { public: true } }),
+          ],
+        }),
+      ],
+    }),
+  ],
 })
 export class DtoProductCreate extends $Dto.create(() => ModelProduct) {}

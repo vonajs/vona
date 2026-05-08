@@ -2,8 +2,9 @@ import type { IDecoratorEntityOptions } from 'vona-module-a-orm';
 
 // import { cel } from '@cabloy/utils';
 // import React from 'react';
-import { Api, v } from 'vona-module-a-openapiutils';
+import { $makeSchema, Api, v } from 'vona-module-a-openapiutils';
 import { Entity, EntityBase } from 'vona-module-a-orm';
+import z from 'zod';
 
 // import { ZZDemoBasicActionView } from 'zova-rest-cabloy-basic-admin';
 import { $locale } from '../.metadata/locales.ts';
@@ -13,12 +14,7 @@ export interface IEntityOptionsProduct extends IDecoratorEntityOptions<'_custom'
 @Entity<IEntityOptionsProduct>('testRestProduct', {
   openapi: { title: $locale('ProductInfo') },
   fields: {
-    _custom: {
-      title: 'Custom',
-      rest: {
-        render: 'text',
-      },
-    },
+    _custom: $makeSchema(v.title('Custom'), z.string()),
   },
 })
 export class EntityProduct extends EntityBase {

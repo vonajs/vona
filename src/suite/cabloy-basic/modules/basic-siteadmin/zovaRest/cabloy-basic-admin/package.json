@@ -16,6 +16,7 @@
     "@tanstack/vue-query": "^5.99.2",
     "openapi3-ts": "^4.5.0",
     "table-identity": "^1.1.4",
+    "typestyle": "^2.4.0",
     "vue": "^3.5.32",
     "zod": "^4.3.6",
     "zova": "^5.1.47",

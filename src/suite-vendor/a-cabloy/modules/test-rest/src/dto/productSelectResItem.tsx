@@ -9,7 +9,20 @@ import { ModelProduct } from '../model/product.ts';
 
 export interface IDtoOptionsProductSelectResItem extends IDecoratorDtoOptions {}
 
-@Dto<IDtoOptionsProductSelectResItem>({})
+@Dto<IDtoOptionsProductSelectResItem>({
+  blocks: [
+    v.renderBlock('BlockPage', {
+      blocks: [
+        v.renderBlock('BlockFilter'),
+        v.renderBlock('BlockToolbarBulk', {
+          actions: [v.renderActionBulk('create')],
+        }),
+        v.renderBlock('BlockTable'),
+        v.renderBlock('BlockPager'),
+      ],
+    }),
+  ],
+})
 export class DtoProductSelectResItem extends $Dto.get(() => ModelProduct) {
   @Api.field(
     v.title($locale('Operations')),
