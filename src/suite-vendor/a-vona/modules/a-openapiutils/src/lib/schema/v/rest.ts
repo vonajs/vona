@@ -1,14 +1,17 @@
-import type { ISchemaRenderComponentLayoutOptions, TypeSchemaScene } from 'vona-module-a-openapi';
+import type {
+  ISchemaRenderComponentLayoutOptions,
+  TypeFormSchemaScene,
+  TypeSchemaOrderLevel,
+  TypeSchemaScene,
+} from 'vona-module-a-openapi';
 import type z from 'zod';
-
-import type { TypeSchemaOrderLevel } from '../../../types/order.ts';
 
 import { $order } from '../../utils.ts';
 import { _generalSchemaRest } from './utils.ts';
 
 export function schemaRenderLayout<T extends z.ZodType>(
   layoutOptions: ISchemaRenderComponentLayoutOptions,
-  scene?: TypeSchemaScene,
+  scene?: TypeFormSchemaScene,
 ) {
   return function (schema: T): T {
     const options = { layout: layoutOptions };

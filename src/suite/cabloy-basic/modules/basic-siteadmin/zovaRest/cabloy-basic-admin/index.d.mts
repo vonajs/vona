@@ -1,47 +1,81 @@
-import { IIconRecord, IIconRecord as IIconRecord$1 } from "zova-module-a-icon";
-import { BeanRouter, BeanRouterGuardsBase, IPagePathRecord, IRouteViewRouteItem, ModelPageData, TypePagePathSchema } from "zova-module-a-router";
-import { IActionBulkOptionsBase, IActionExecute, IActionOptionsBase, IActionRecord, IActionRecord as IActionRecord$1, IActionRowOptionsBase, NextActionExecute, TypeActionOptions } from "zova-module-a-action";
-import { AopActionDispose, AopActionInit, AopActionRender, IDecoratorAopOptions, IVonaComponentRecord, IVonaComponentRecord as IVonaComponentRecord$1, TypeComponentOptions } from "zova-module-a-bean";
-import * as _$zova_module_a_openapi0 from "zova-module-a-openapi";
-import { IFormMeta, IFormProvider, IJsxRenderContextBase, IJsxRenderContextPage, IJsxRenderContextPageEntry, IPageEntryScope, IPageScope, IResourceActionBulkOptionsBase, IResourceActionRowOptionsBase, IResourceBlockOptionsBase, IResourceComponentActionBulkOptionsAction, IResourceComponentActionBulkRecord, IResourceComponentActionRowOptionsAction, IResourceComponentActionRowRecord, IResourceComponentBlockOptionsBlock, IResourceComponentBlockRecord, IResourceComponentFormFieldRecord, IResourceComponentTableCellRecord, IResourceFormFieldOptionsBase, IResourceTableCellOptionsBase, ISchemaRenderComponentLayoutOptions, ISchemaRenderComponentLayoutOptions as ISchemaRenderComponentLayoutOptions$1, ITablePaged, ITableProvider, ITableQuery, ITableResPaged, TypeFormScene, TypeFormSchemaScene } from "zova-module-a-openapi";
 import * as _$vue from "vue";
 import { VNode } from "vue";
+import { BeanBase, BeanContainer, BeanControllerBase, BeanControllerPageBase, BeanRenderBase, BeanScopeBase, BeanScopeUtil, BeanSimple, BeanStyleBase, DefineModelOptions, IComponentOptions, IModuleMain, ReturnTypeComposable, TypeControllerInnerProps, TypeEventOff, TypeLocaleBase, TypeModuleConfig, TypeModuleLocales, TypePropUpdateFromModel, TypePropValueFromModel, ZovaSys } from "zova";
 import * as _$vue_jsx_runtime0 from "vue/jsx-runtime";
-import { BeanAopBase, BeanBase, BeanContainer, BeanControllerBase, BeanControllerPageBase, BeanRenderBase, BeanScopeBase, BeanScopeUtil, BeanSimple, BeanStyleBase, DefineModelOptions, IComponentOptions, IModuleMain, IMonkeyAppClose, IMonkeyAppInitialize, IMonkeyBeanInit, ISlot, TypeControllerInnerProps, TypeEventOff, TypeLocaleBase, TypeModuleConfig, TypeModuleLocales, TypePropUpdateFromModel, TypePropValueFromModel, ZovaSys } from "zova";
-import { BeanControllerFormBase, BeanControllerPageFormBase, ControllerForm, ControllerFormField, IFormFieldComponentOptions, IFormFieldPresetOptionsBase, IFormFieldRenderContext, TypeFormOnSubmitData } from "zova-module-a-form";
-import { z } from "zod";
-import { BeanApiBase, IApiActionOptions, IApiSchemaOptions } from "zova-module-a-api";
-import { IJwtAdapter, IJwtInfo } from "zova-module-a-interceptor";
-import * as _$_tanstack_vue_query0 from "@tanstack/vue-query";
+import { BeanControllerFormBase, ControllerForm, ControllerFormField, IFormFieldPresetOptionsBase, IFormFieldRenderContext, TypeFormOnSubmitData } from "zova-module-a-form";
+import * as _$zova_module_a_openapi0 from "zova-module-a-openapi";
+import { IFormMeta, IFormProvider, IJsxRenderContextBase, IJsxRenderContextPage, IJsxRenderContextPageEntry, IPageEntryScope, IPageScope, IPermissionHint, IResourceActionBulkOptionsBase, IResourceActionBulkRecord, IResourceActionRowOptionsBase, IResourceActionRowRecord, IResourceActionTableRecord, IResourceBlockOptionsBase, IResourceComponentActionBulkOptionsAction, IResourceComponentActionRowOptionsAction, IResourceComponentBlockOptionsBlock, IResourceComponentBlockRecord, IResourceComponentFormFieldRecord, IResourceComponentTableCellActionRowRecord, IResourceFormFieldOptionsBase, IResourceProviders, IResourceTableCellOptionsBase, ISchemaRenderComponentLayoutOptions, ITablePaged, ITableProvider, ITableQuery, ITableResPaged, TypeFormScene, TypeFormSchemaScene, TypeOpenapiPermissions, TypeSchemaOrderLevel, TypeSchemaScene } from "zova-module-a-openapi";
+import { BeanRouter, BeanRouterGuardsBase, IRouteViewRouteItem, TypePagePathSchema } from "zova-module-a-router";
 import { BeanModelBase, IDecoratorModelOptions } from "zova-module-a-model";
-import { BeanPiniaStoreBase, PiniaStore } from "zova-module-a-pinia";
-import { BeanControllerTableBase, ControllerTable as ControllerTable$1, ControllerTableProps as ControllerTableProps$1, IDecoratorTableCellOptions, IJsxRenderContextTableCell, IJsxRenderContextTableColumn, ITableCellRender, NextTableCellRender } from "zova-module-a-table";
+import { BeanApiBase, IApiActionOptions, IApiSchemaOptions } from "zova-module-a-api";
+import { IVonaComponentRecord, TypeComponentOptions } from "zova-module-a-bean";
+import { BeanBehaviorBase, IDecoratorBehaviorOptions, NextBehavior } from "zova-module-a-behavior";
+import { IIconRecord } from "zova-module-a-icon";
+import { IJwtAdapter, IJwtInfo } from "zova-module-a-interceptor";
+import { ScopeModuleASsr } from "zova-module-a-ssr";
+import { BeanThemeBase, IDecoratorCssOptions, IDecoratorThemeOptions, IThemeApplyParams, IThemeApplyResult, IThemeBase, IThemeHandler, IThemeHandlerApplyParams } from "zova-module-a-style";
+import { BeanControllerTableBase, ControllerTable as ControllerTable$1, ControllerTableProps as ControllerTableProps$1, IJsxRenderContextTableCell, IJsxRenderContextTableColumn, ITableCellRender, NextTableCellRender } from "zova-module-a-table";
+import { ToolV } from "zova-module-a-zod";
+import z$1, { z } from "zod";
+import * as _$_tanstack_vue_query0 from "@tanstack/vue-query";
+import { ModelTabs, RouteTab } from "zova-module-a-routertabs";
 import * as _$openapi3_ts_oas310 from "openapi3-ts/oas31";
 import { SchemaObject } from "openapi3-ts/oas31";
-import { BeanBehaviorBase, IDecoratorBehaviorOptions, NextBehavior } from "zova-module-a-behavior";
-import * as _$_tanstack_query_core0 from "@tanstack/query-core";
-import { ScopeModuleASsr } from "zova-module-a-ssr";
-import { ModelTabs, RouteTab } from "zova-module-a-routertabs";
+import { IActionBulkOptionsBase, IActionExecute, IActionOptionsBase, IActionRecord, IActionRowOptionsBase, NextActionExecute, TypeActionOptions } from "zova-module-a-action";
 import { TableIdentity } from "table-identity";
-import { ToolV } from "zova-module-a-zod";
 import { types } from "typestyle";
 import { TypeRenderComponentJsx, ZovaJsx } from "zova-jsx";
 import { ModelResource } from "zova-module-rest-resource";
-export * from "zova-module-a-icon";
-export * from "zova-module-a-router";
+import * as _$_tanstack_query_core0 from "@tanstack/query-core";
 export * from "zova-module-a-form";
-export * from "zova-module-a-table";
-export * from "zova-module-a-behavior";
+export * from "zova-module-a-openapi";
+export * from "zova-module-a-router";
+export * from "zova-module-a-fetch";
+export * from "zova-module-a-model";
+export * from "zova-module-a-api";
 export * from "zova-module-a-app";
+export * from "zova-module-a-bean";
+export * from "zova-module-a-behavior";
+export * from "zova-module-a-boundary";
+export * from "zova-module-a-icon";
+export * from "zova-module-a-interceptor";
+export * from "zova-module-a-logger";
+export * from "zova-module-a-meta";
+export * from "zova-module-a-ssr";
+export * from "zova-module-a-ssrhmr";
+export * from "zova-module-a-style";
+export * from "zova-module-a-table";
+export * from "zova-module-a-zod";
+export * from "zova-module-a-zova";
 export * from "zova-module-a-routertabs";
+export * from "zova-module-a-action";
 export * from "zova-module-rest-resource";
+export * from "zova-module-a-behaviors";
 export * from "zova-module-a-routerstack";
+export * from "zova-module-a-ssrserver";
 
 //#region \0rolldown/runtime.js
 //#endregion
+//#region src/module/demo-student/src/component/card/controller.d.ts
+interface ControllerCardProps {}
+interface ControllerCardModels {
+  'vModel:title'?: number;
+  'vModel'?: number;
+}
+declare class ControllerCard extends BeanControllerBase {
+  static $propsDefault: {
+    title: number;
+    modelValue: number;
+  };
+  modelValue: number;
+  modelTitle: number;
+  protected __init__(): Promise<void>;
+  protected render(): null;
+}
+//#endregion
 //#region src/module/demo-student/src/component/formFieldTest/controller.d.ts
-interface ControllerFormFieldTestProps$1 extends IFormFieldPresetOptionsBase<IResourceFormFieldOptionsBase> {}
-declare class ControllerFormFieldTest$1 extends BeanControllerBase {
+interface ControllerFormFieldTestProps extends IFormFieldPresetOptionsBase<IResourceFormFieldOptionsBase> {}
+declare class ControllerFormFieldTest extends BeanControllerBase {
   static $propsDefault: {};
   static $componentOptions: IComponentOptions;
   protected __init__(): Promise<void>;
@@ -64,8 +98,30 @@ declare class ControllerTest extends BeanControllerBase {
   protected render(): null;
 }
 //#endregion
+//#region src/module/demo-student/src/component/test2/controller.d.ts
+interface ControllerTest2Props {}
+interface ControllerTest2Models {
+  'vModel:title'?: number;
+  'vModel'?: number;
+}
+declare class ControllerTest2 extends BeanControllerBase {
+  static $propsDefault: {
+    title: number;
+    modelValue: number;
+  };
+  modelValue: number;
+  modelTitle: number;
+  protected __init__(): Promise<void>;
+  protected render(): null;
+}
+//#endregion
 //#region src/module/demo-student/src/page/test/controller.d.ts
+declare function useMouse(): {
+  x: _$vue.Ref<number, number>;
+  y: _$vue.Ref<number, number>;
+};
 declare class ControllerPageTest extends BeanControllerPageBase {
+  mouse: ReturnTypeComposable<typeof useMouse>;
   protected __init__(): Promise<void>;
   protected render(): _$vue_jsx_runtime0.JSX.Element;
 }
@@ -73,26 +129,58 @@ declare class ControllerPageTest extends BeanControllerPageBase {
 //#region src/module/demo-student/src/.metadata/page/test.d.ts
 declare const ZPageTest: _$vue.DefineSetupFnComponent<Record<string, any>, {}, {}, Record<string, any> & {}, _$vue.PublicProps>;
 //#endregion
-//#region src/module/demo-student/src/.metadata/component/formFieldTest.d.ts
-type TypeControllerFormFieldTestPublicProps$1 = {
-  controllerRef?: (ref: ControllerFormFieldTest$1) => void;
-} & ControllerFormFieldTestProps$1;
-type ControllerInnerProps$27 = TypeControllerInnerProps<ControllerFormFieldTestProps$1, keyof typeof ControllerFormFieldTest$1.$propsDefault>;
+//#region src/module/demo-student/src/.metadata/component/card.d.ts
+type TypeControllerCardPublicProps = {
+  controllerRef?: (ref: ControllerCard) => void;
+} & ControllerCardProps & ControllerCardModels & { [KEY in keyof ControllerCardModels as TypePropValueFromModel<KEY>]: ControllerCardModels[KEY] } & { [KEY in keyof ControllerCardModels as TypePropUpdateFromModel<KEY>]: (value: ControllerCardModels[KEY]) => void };
+type TypeModelArguments$3 = { [KEY in keyof ControllerCardModels as TypePropValueFromModel<KEY>]: ControllerCardModels[KEY] };
+type ControllerInnerProps$25 = TypeControllerInnerProps<ControllerCardProps & { [KEY in keyof ControllerCardModels as TypePropValueFromModel<KEY>]: ControllerCardModels[KEY] }, keyof typeof ControllerCard.$propsDefault>;
 declare module 'zova-module-demo-student' {
-  interface ControllerFormFieldTest {
-    $props: ControllerInnerProps$27;
+  interface ControllerCard {
+    $props: ControllerInnerProps$25;
+    $useModel<K extends keyof TypeModelArguments$3>(name: K, options?: DefineModelOptions<TypeModelArguments$3[K]>): ControllerInnerProps$25[K];
+    $useModel(options?: DefineModelOptions<TypeModelArguments$3['modelValue']>): ControllerInnerProps$25['modelValue'];
   }
 }
-declare const ZFormFieldTest$1: _$vue.DefineSetupFnComponent<TypeControllerFormFieldTestPublicProps$1, _$vue.EmitsOptions, _$vue.SlotsType<Record<string, any>>, {
-  controllerRef?: (ref: ControllerFormFieldTest$1) => void;
-} & ControllerFormFieldTestProps$1 & ({
+declare const ZCard: _$vue.DefineSetupFnComponent<TypeControllerCardPublicProps, _$vue.EmitsOptions, _$vue.SlotsType<Record<string, any>>, {
+  controllerRef?: (ref: ControllerCard) => void;
+} & ControllerCardProps & ControllerCardModels & {
+  modelValue?: number | undefined;
+  title?: number | undefined;
+} & {
+  "onUpdate:modelValue"?: ((value: number | undefined) => void) | undefined;
+  "onUpdate:title"?: ((value: number | undefined) => void) | undefined;
+} & ({
   [x: `on${Capitalize<string>}`]: ((...args: any[]) => any) | undefined;
 } | {
   [x: `on${Capitalize<string>}`]: ((...args: never) => any) | undefined;
 }), _$vue.PublicProps>;
 declare module 'zova-module-a-bean' {
   interface IVonaComponentRecord {
-    'demo-student:formFieldTest': ControllerFormFieldTestProps$1;
+    'demo-student:card': ControllerCardProps & ControllerCardModels & { [KEY in keyof ControllerCardModels as TypePropValueFromModel<KEY>]: ControllerCardModels[KEY] } & { [KEY in keyof ControllerCardModels as TypePropUpdateFromModel<KEY>]: (value: ControllerCardModels[KEY]) => void };
+  }
+}
+//#endregion
+//#region src/module/demo-student/src/.metadata/component/formFieldTest.d.ts
+type TypeControllerFormFieldTestPublicProps = {
+  controllerRef?: (ref: ControllerFormFieldTest) => void;
+} & ControllerFormFieldTestProps;
+type ControllerInnerProps$24 = TypeControllerInnerProps<ControllerFormFieldTestProps, keyof typeof ControllerFormFieldTest.$propsDefault>;
+declare module 'zova-module-demo-student' {
+  interface ControllerFormFieldTest {
+    $props: ControllerInnerProps$24;
+  }
+}
+declare const ZFormFieldTest: _$vue.DefineSetupFnComponent<TypeControllerFormFieldTestPublicProps, _$vue.EmitsOptions, _$vue.SlotsType<Record<string, any>>, {
+  controllerRef?: (ref: ControllerFormFieldTest) => void;
+} & ControllerFormFieldTestProps & ({
+  [x: `on${Capitalize<string>}`]: ((...args: any[]) => any) | undefined;
+} | {
+  [x: `on${Capitalize<string>}`]: ((...args: never) => any) | undefined;
+}), _$vue.PublicProps>;
+declare module 'zova-module-a-bean' {
+  interface IVonaComponentRecord {
+    'demo-student:formFieldTest': ControllerFormFieldTestProps;
   }
 }
 //#endregion
@@ -100,12 +188,12 @@ declare module 'zova-module-a-bean' {
 type TypeControllerTestPublicProps<_T = unknown> = {
   controllerRef?: (ref: ControllerTest<_T>) => void;
 } & ControllerTestProps<_T> & ControllerTestModels<_T> & { [KEY in keyof ControllerTestModels<_T> as TypePropValueFromModel<KEY>]: ControllerTestModels<_T>[KEY] } & { [KEY in keyof ControllerTestModels<_T> as TypePropUpdateFromModel<KEY>]: (value: ControllerTestModels<_T>[KEY]) => void };
-type TypeModelArguments$1<_T = unknown> = { [KEY in keyof ControllerTestModels<_T> as TypePropValueFromModel<KEY>]: ControllerTestModels<_T>[KEY] };
-type ControllerInnerProps$26<_T = unknown> = TypeControllerInnerProps<ControllerTestProps<_T> & { [KEY in keyof ControllerTestModels<_T> as TypePropValueFromModel<KEY>]: ControllerTestModels<_T>[KEY] }, keyof typeof ControllerTest.$propsDefault>;
+type TypeModelArguments$2<_T = unknown> = { [KEY in keyof ControllerTestModels<_T> as TypePropValueFromModel<KEY>]: ControllerTestModels<_T>[KEY] };
+type ControllerInnerProps$23<_T = unknown> = TypeControllerInnerProps<ControllerTestProps<_T> & { [KEY in keyof ControllerTestModels<_T> as TypePropValueFromModel<KEY>]: ControllerTestModels<_T>[KEY] }, keyof typeof ControllerTest.$propsDefault>;
 declare module 'zova-module-demo-student' {
   interface ControllerTest<_T = unknown> {
-    $props: ControllerInnerProps$26<_T>;
-    $useModel<K extends keyof TypeModelArguments$1<_T>>(name: K, options?: DefineModelOptions<TypeModelArguments$1<_T>[K]>): ControllerInnerProps$26<_T>[K];
+    $props: ControllerInnerProps$23<_T>;
+    $useModel<K extends keyof TypeModelArguments$2<_T>>(name: K, options?: DefineModelOptions<TypeModelArguments$2<_T>[K]>): ControllerInnerProps$23<_T>[K];
   }
 }
 declare const ZTest: new <_T = unknown>(props: ({
@@ -152,19 +240,55 @@ declare module 'zova-module-a-bean' {
   }
 }
 //#endregion
+//#region src/module/demo-student/src/.metadata/component/test2.d.ts
+type TypeControllerTest2PublicProps = {
+  controllerRef?: (ref: ControllerTest2) => void;
+} & ControllerTest2Props & ControllerTest2Models & { [KEY in keyof ControllerTest2Models as TypePropValueFromModel<KEY>]: ControllerTest2Models[KEY] } & { [KEY in keyof ControllerTest2Models as TypePropUpdateFromModel<KEY>]: (value: ControllerTest2Models[KEY]) => void };
+type TypeModelArguments$1 = { [KEY in keyof ControllerTest2Models as TypePropValueFromModel<KEY>]: ControllerTest2Models[KEY] };
+type ControllerInnerProps$22 = TypeControllerInnerProps<ControllerTest2Props & { [KEY in keyof ControllerTest2Models as TypePropValueFromModel<KEY>]: ControllerTest2Models[KEY] }, keyof typeof ControllerTest2.$propsDefault>;
+declare module 'zova-module-demo-student' {
+  interface ControllerTest2 {
+    $props: ControllerInnerProps$22;
+    $useModel<K extends keyof TypeModelArguments$1>(name: K, options?: DefineModelOptions<TypeModelArguments$1[K]>): ControllerInnerProps$22[K];
+    $useModel(options?: DefineModelOptions<TypeModelArguments$1['modelValue']>): ControllerInnerProps$22['modelValue'];
+  }
+}
+declare const ZTest2: _$vue.DefineSetupFnComponent<TypeControllerTest2PublicProps, _$vue.EmitsOptions, _$vue.SlotsType<Record<string, any>>, {
+  controllerRef?: (ref: ControllerTest2) => void;
+} & ControllerTest2Props & ControllerTest2Models & {
+  modelValue?: number | undefined;
+  title?: number | undefined;
+} & {
+  "onUpdate:modelValue"?: ((value: number | undefined) => void) | undefined;
+  "onUpdate:title"?: ((value: number | undefined) => void) | undefined;
+} & ({
+  [x: `on${Capitalize<string>}`]: ((...args: any[]) => any) | undefined;
+} | {
+  [x: `on${Capitalize<string>}`]: ((...args: never) => any) | undefined;
+}), _$vue.PublicProps>;
+declare module 'zova-module-a-bean' {
+  interface IVonaComponentRecord {
+    'demo-student:test2': ControllerTest2Props & ControllerTest2Models & { [KEY in keyof ControllerTest2Models as TypePropValueFromModel<KEY>]: ControllerTest2Models[KEY] } & { [KEY in keyof ControllerTest2Models as TypePropUpdateFromModel<KEY>]: (value: ControllerTest2Models[KEY]) => void };
+  }
+}
+//#endregion
 //#region src/module/demo-student/src/.metadata/index.d.ts
 declare module 'zova' {}
 declare module 'zova-module-demo-student' {
+  interface ControllerCard {}
   interface ControllerFormFieldTest {}
   interface ControllerTest {}
+  interface ControllerTest2 {}
   interface ControllerPageTest {}
 }
 /** controller: end */
 /** controller: begin */
 declare module 'zova' {
   interface IBeanRecordLocal {
-    'demo-student.controller.formFieldTest': ControllerFormFieldTest$1;
+    'demo-student.controller.card': ControllerCard;
+    'demo-student.controller.formFieldTest': ControllerFormFieldTest;
     'demo-student.controller.test': ControllerTest;
+    'demo-student.controller.test2': ControllerTest2;
     'demo-student.controller.pageTest': ControllerPageTest;
   }
 }
@@ -181,12 +305,16 @@ declare module 'zova-module-demo-student' {}
 /** components: begin */
 declare module 'zova' {
   interface IComponentRecord {
-    'demo-student:formFieldTest': ControllerFormFieldTest$1;
+    'demo-student:card': ControllerCard;
+    'demo-student:formFieldTest': ControllerFormFieldTest;
     'demo-student:test': ControllerTest;
+    'demo-student:test2': ControllerTest2;
   }
   interface IZovaComponentRecord {
-    'demo-student:formFieldTest': typeof ZFormFieldTest$1;
+    'demo-student:card': typeof ZCard;
+    'demo-student:formFieldTest': typeof ZFormFieldTest;
     'demo-student:test': typeof ZTest;
+    'demo-student:test2': typeof ZTest2;
   }
 }
 /** components: end */
@@ -201,6 +329,52 @@ declare module 'zova' {
   }
 }
 /** scope: end */
+//#endregion
+//#region src/suite/a-devui/modules/devui-adapter/src/bean/meta.themeHandler.d.ts
+declare class MetaThemeHandler extends BeanBase implements IThemeHandler {
+  $$scopeSsr: ScopeModuleASsr;
+  apply({
+    name: _name,
+    dark,
+    token
+  }: IThemeHandlerApplyParams): Promise<void>;
+}
+//#endregion
+//#region src/suite/a-devui/modules/devui-adapter/src/.metadata/index.d.ts
+declare module 'zova-module-a-meta' {
+  interface IMetaRecord {
+    'devui-adapter:themeHandler': never;
+  }
+}
+declare module 'zova-module-devui-adapter' {
+  interface MetaThemeHandler {}
+  interface MetaThemeHandler {
+    get $beanFullName(): 'devui-adapter.meta.themeHandler';
+    get $onionName(): 'devui-adapter:themeHandler';
+  }
+}
+/** meta: end */
+/** meta: begin */
+declare module 'zova' {
+  interface IBeanRecordLocal {
+    'devui-adapter.meta.themeHandler': MetaThemeHandler;
+  }
+}
+/** meta: end */
+/** monkeySys: begin */
+declare class ScopeModuleDevuiAdapter extends BeanScopeBase {}
+interface ScopeModuleDevuiAdapter {
+  util: BeanScopeUtil;
+}
+declare module 'zova' {
+  interface IBeanScopeRecord {
+    'devui-adapter': ScopeModuleDevuiAdapter;
+  }
+}
+/** scope: end */
+//#endregion
+//#region src/suite/a-home/modules/home-api/src/api/openapi/baseURL.d.ts
+declare const OpenApiBaseURL: (sys: ZovaSys) => string;
 //#endregion
 //#region src/suite/a-home/modules/home-api/src/api/openapi/types.d.ts
 interface paths {
@@ -1213,6 +1387,7 @@ interface paths {
     trace?: never;
   };
 }
+type webhooks = Record<string, never>;
 interface components {
   schemas: {
     'test-vona.dto.postCreate': {
@@ -1875,6 +2050,7 @@ interface components {
   headers: never;
   pathItems: never;
 }
+type $defs = Record<string, never>;
 interface operations {
   AuthMock_authorize: {
     parameters: {
@@ -3831,24 +4007,144 @@ interface operations {
 }
 //#endregion
 //#region src/suite/a-home/modules/home-api/src/api/openapi/schemas.d.ts
+type ApiSchemaTestVonaDtoPostCreate = components['schemas']['test-vona.dto.postCreate'];
+type ApiSchemaTestVonaDtoPostCreatePartial = Partial<ApiSchemaTestVonaDtoPostCreate>;
+type ApiSchemaTestVonaDtoUserCreate = components['schemas']['test-vona.dto.userCreate'];
+type ApiSchemaTestVonaDtoUserCreatePartial = Partial<ApiSchemaTestVonaDtoUserCreate>;
+type ApiSchemaTestVonaEntityProduct = components['schemas']['test-vona.entity.product'];
+type ApiSchemaTestVonaEntityProductPartial = Partial<ApiSchemaTestVonaEntityProduct>;
+type ApiSchemaACaptchaDtoCaptchaData = components['schemas']['a-captcha.dto.captchaData'];
+type ApiSchemaACaptchaDtoCaptchaDataPartial = Partial<ApiSchemaACaptchaDtoCaptchaData>;
+type ApiSchemaAMenuDtoMenus = components['schemas']['a-menu.dto.menus'];
+type ApiSchemaAMenuDtoMenusPartial = Partial<ApiSchemaAMenuDtoMenus>;
 type ApiSchemaAMenuDtoMenuItem = components['schemas']['a-menu.dto.menuItem'];
+type ApiSchemaAMenuDtoMenuItemPartial = Partial<ApiSchemaAMenuDtoMenuItem>;
+type ApiSchemaAMenuDtoMenuItemMeta = components['schemas']['a-menu.dto.menuItemMeta'];
+type ApiSchemaAMenuDtoMenuItemMetaPartial = Partial<ApiSchemaAMenuDtoMenuItemMeta>;
 type ApiSchemaAMenuDtoMenuGroup = components['schemas']['a-menu.dto.menuGroup'];
+type ApiSchemaAMenuDtoMenuGroupPartial = Partial<ApiSchemaAMenuDtoMenuGroup>;
+type ApiSchemaAPermissionDtoPermissions = components['schemas']['a-permission.dto.permissions'];
+type ApiSchemaAPermissionDtoPermissionsPartial = Partial<ApiSchemaAPermissionDtoPermissions>;
+type ApiSchemaHomeUserDtoPassport = components['schemas']['home-user.dto.passport'];
+type ApiSchemaHomeUserDtoPassportPartial = Partial<ApiSchemaHomeUserDtoPassport>;
+type ApiSchemaHomeUserEntityUser = components['schemas']['home-user.entity.user'];
+type ApiSchemaHomeUserEntityUserPartial = Partial<ApiSchemaHomeUserEntityUser>;
+type ApiSchemaAAuthDtoAuth = components['schemas']['a-auth.dto.auth'];
+type ApiSchemaAAuthDtoAuthPartial = Partial<ApiSchemaAAuthDtoAuth>;
+type ApiSchemaHomeUserEntityRole = components['schemas']['home-user.entity.role'];
+type ApiSchemaHomeUserEntityRolePartial = Partial<ApiSchemaHomeUserEntityRole>;
+type ApiSchemaHomeUserDtoPassportJwt = components['schemas']['home-user.dto.passportJwt'];
+type ApiSchemaHomeUserDtoPassportJwtPartial = Partial<ApiSchemaHomeUserDtoPassportJwt>;
+type ApiSchemaAJwtDtoJwtToken = components['schemas']['a-jwt.dto.jwtToken'];
+type ApiSchemaAJwtDtoJwtTokenPartial = Partial<ApiSchemaAJwtDtoJwtToken>;
+type ApiSchemaHomeUserDtoRegister = components['schemas']['home-user.dto.register'];
+type ApiSchemaHomeUserDtoRegisterPartial = Partial<ApiSchemaHomeUserDtoRegister>;
+type ApiSchemaACaptchaDtoCaptchaVerify_c3cd80b1eeafe39bfe4433491bb081d68e84797e = components['schemas']['a-captcha.dto.captchaVerify_c3cd80b1eeafe39bfe4433491bb081d68e84797e'];
+type ApiSchemaACaptchaDtoCaptchaVerify_c3cd80b1eeafe39bfe4433491bb081d68e84797ePartial = Partial<ApiSchemaACaptchaDtoCaptchaVerify_c3cd80b1eeafe39bfe4433491bb081d68e84797e>;
+type ApiSchemaHomeUserDtoLogin = components['schemas']['home-user.dto.login'];
+type ApiSchemaHomeUserDtoLoginPartial = Partial<ApiSchemaHomeUserDtoLogin>;
+type ApiSchemaACaptchaDtoCaptchaVerify_c3cd80b1eeafe39bfe4433491bb081d68e84797e_3218e7d152830e08f6e764b9e0c3796df929ee2b = components['schemas']['a-captcha.dto.captchaVerify_c3cd80b1eeafe39bfe4433491bb081d68e84797e_3218e7d152830e08f6e764b9e0c3796df929ee2b'];
+type ApiSchemaACaptchaDtoCaptchaVerify_c3cd80b1eeafe39bfe4433491bb081d68e84797e_3218e7d152830e08f6e764b9e0c3796df929ee2bPartial = Partial<ApiSchemaACaptchaDtoCaptchaVerify_c3cd80b1eeafe39bfe4433491bb081d68e84797e_3218e7d152830e08f6e764b9e0c3796df929ee2b>;
+type ApiSchemaTestRestDtoProductCreate = components['schemas']['test-rest.dto.productCreate'];
+type ApiSchemaTestRestDtoProductCreatePartial = Partial<ApiSchemaTestRestDtoProductCreate>;
+type ApiSchemaTestRestDtoProductQueryRes = components['schemas']['test-rest.dto.productQueryRes'];
+type ApiSchemaTestRestDtoProductQueryResPartial = Partial<ApiSchemaTestRestDtoProductQueryRes>;
+type ApiSchemaTestRestEntityProduct = components['schemas']['test-rest.entity.product'];
+type ApiSchemaTestRestEntityProductPartial = Partial<ApiSchemaTestRestEntityProduct>;
+type ApiSchemaTestRestDtoProductUpdate = components['schemas']['test-rest.dto.productUpdate'];
+type ApiSchemaTestRestDtoProductUpdatePartial = Partial<ApiSchemaTestRestDtoProductUpdate>;
 type ApiSchemaTestSsrDtoTestResult = components['schemas']['test-ssr.dto.testResult'];
+type ApiSchemaTestSsrDtoTestResultPartial = Partial<ApiSchemaTestSsrDtoTestResult>;
+type ApiSchemaTestSsrDtoTestDetail = components['schemas']['test-ssr.dto.testDetail'];
+type ApiSchemaTestSsrDtoTestDetailPartial = Partial<ApiSchemaTestSsrDtoTestDetail>;
 type ApiSchemaTestSsrDtoTestBody = components['schemas']['test-ssr.dto.testBody'];
 type ApiSchemaTestSsrDtoTestBodyPartial = Partial<ApiSchemaTestSsrDtoTestBody>;
+type ApiSchemaTestCaptchaDtoSignin = components['schemas']['test-captcha.dto.signin'];
+type ApiSchemaTestCaptchaDtoSigninPartial = Partial<ApiSchemaTestCaptchaDtoSignin>;
+type ApiSchemaAPaypalEntityPaypalRecord = components['schemas']['a-paypal.entity.paypalRecord'];
+type ApiSchemaAPaypalEntityPaypalRecordPartial = Partial<ApiSchemaAPaypalEntityPaypalRecord>;
+type ApiSchemaAPaypalDtoPaypalOrderRecordPayload = components['schemas']['a-paypal.dto.paypalOrderRecordPayload'];
+type ApiSchemaAPaypalDtoPaypalOrderRecordPayloadPartial = Partial<ApiSchemaAPaypalDtoPaypalOrderRecordPayload>;
+type ApiSchemaAPaypalDtoPaypalOrderRecordOptions = components['schemas']['a-paypal.dto.paypalOrderRecordOptions'];
+type ApiSchemaAPaypalDtoPaypalOrderRecordOptionsPartial = Partial<ApiSchemaAPaypalDtoPaypalOrderRecordOptions>;
+type ApiSchemaAPlayDtoPlay = components['schemas']['a-play.dto.play'];
+type ApiSchemaAPlayDtoPlayPartial = Partial<ApiSchemaAPlayDtoPlay>;
+type ApiSchemaTestVonaDtoUserLazy = components['schemas']['test-vona.dto.userLazy'];
+type ApiSchemaTestVonaDtoUserLazyPartial = Partial<ApiSchemaTestVonaDtoUserLazy>;
+type ApiSchemaTestVonaDtoRoleLazy = components['schemas']['test-vona.dto.roleLazy'];
+type ApiSchemaTestVonaDtoRoleLazyPartial = Partial<ApiSchemaTestVonaDtoRoleLazy>;
+type ApiSchemaTestVonaEntityUser_2c7d642ee581efa300341e343180fbb0ecdc785d_1816ff740d81c738ec055c7038bbd93beb9405a7 = components['schemas']['test-vona.entity.user_2c7d642ee581efa300341e343180fbb0ecdc785d_1816ff740d81c738ec055c7038bbd93beb9405a7'];
+type ApiSchemaTestVonaEntityUser_2c7d642ee581efa300341e343180fbb0ecdc785d_1816ff740d81c738ec055c7038bbd93beb9405a7Partial = Partial<ApiSchemaTestVonaEntityUser_2c7d642ee581efa300341e343180fbb0ecdc785d_1816ff740d81c738ec055c7038bbd93beb9405a7>;
+type ApiSchemaTestVonaEntityPost_a6ba2076b5b70a3c098374cc82d418bd1ab226c3 = components['schemas']['test-vona.entity.post_a6ba2076b5b70a3c098374cc82d418bd1ab226c3'];
+type ApiSchemaTestVonaEntityPost_a6ba2076b5b70a3c098374cc82d418bd1ab226c3Partial = Partial<ApiSchemaTestVonaEntityPost_a6ba2076b5b70a3c098374cc82d418bd1ab226c3>;
+type ApiSchemaTestVonaEntityPost_729883d7de16ce4401b26f75bebe618c8948ff64 = components['schemas']['test-vona.entity.post_729883d7de16ce4401b26f75bebe618c8948ff64'];
+type ApiSchemaTestVonaEntityPost_729883d7de16ce4401b26f75bebe618c8948ff64Partial = Partial<ApiSchemaTestVonaEntityPost_729883d7de16ce4401b26f75bebe618c8948ff64>;
+type ApiSchemaTestVonaDtoUserUpdate = components['schemas']['test-vona.dto.userUpdate'];
+type ApiSchemaTestVonaDtoUserUpdatePartial = Partial<ApiSchemaTestVonaDtoUserUpdate>;
+type ApiSchemaTestVonaEntityCategory_2c7d642ee581efa300341e343180fbb0ecdc785d = components['schemas']['test-vona.entity.category_2c7d642ee581efa300341e343180fbb0ecdc785d'];
+type ApiSchemaTestVonaEntityCategory_2c7d642ee581efa300341e343180fbb0ecdc785dPartial = Partial<ApiSchemaTestVonaEntityCategory_2c7d642ee581efa300341e343180fbb0ecdc785d>;
+type ApiSchemaTestVonaDtoCategoryTree = components['schemas']['test-vona.dto.categoryTree'];
+type ApiSchemaTestVonaDtoCategoryTreePartial = Partial<ApiSchemaTestVonaDtoCategoryTree>;
+type ApiSchemaTestVonaDtoUser = components['schemas']['test-vona.dto.user'];
+type ApiSchemaTestVonaDtoUserPartial = Partial<ApiSchemaTestVonaDtoUser>;
+type ApiSchemaTestVonaDtoOrderCreate = components['schemas']['test-vona.dto.orderCreate'];
+type ApiSchemaTestVonaDtoOrderCreatePartial = Partial<ApiSchemaTestVonaDtoOrderCreate>;
+type ApiSchemaTestVonaEntityProduct_29731960f3f38d3572bc2f8a01a7498bfe927055 = components['schemas']['test-vona.entity.product_29731960f3f38d3572bc2f8a01a7498bfe927055'];
+type ApiSchemaTestVonaEntityProduct_29731960f3f38d3572bc2f8a01a7498bfe927055Partial = Partial<ApiSchemaTestVonaEntityProduct_29731960f3f38d3572bc2f8a01a7498bfe927055>;
+type ApiSchemaTestVonaDtoOrderUpdate = components['schemas']['test-vona.dto.orderUpdate'];
+type ApiSchemaTestVonaDtoOrderUpdatePartial = Partial<ApiSchemaTestVonaDtoOrderUpdate>;
+type ApiSchemaTestVonaEntityProduct_9cf2c6bcd41713270c34bcfce21b7b4942e3fbc6 = components['schemas']['test-vona.entity.product_9cf2c6bcd41713270c34bcfce21b7b4942e3fbc6'];
+type ApiSchemaTestVonaEntityProduct_9cf2c6bcd41713270c34bcfce21b7b4942e3fbc6Partial = Partial<ApiSchemaTestVonaEntityProduct_9cf2c6bcd41713270c34bcfce21b7b4942e3fbc6>;
+type ApiSchemaTestVonaDtoOrderResult = components['schemas']['test-vona.dto.orderResult'];
+type ApiSchemaTestVonaDtoOrderResultPartial = Partial<ApiSchemaTestVonaDtoOrderResult>;
+type ApiSchemaTestVonaEntityProduct_bce173590aaef19772f1ae3a82196493c2633e2e = components['schemas']['test-vona.entity.product_bce173590aaef19772f1ae3a82196493c2633e2e'];
+type ApiSchemaTestVonaEntityProduct_bce173590aaef19772f1ae3a82196493c2633e2ePartial = Partial<ApiSchemaTestVonaEntityProduct_bce173590aaef19772f1ae3a82196493c2633e2e>;
+type ApiSchemaTestVonaDtoOrderResultPage = components['schemas']['test-vona.dto.orderResultPage'];
+type ApiSchemaTestVonaDtoOrderResultPagePartial = Partial<ApiSchemaTestVonaDtoOrderResultPage>;
+type ApiSchemaTestVonaDtoPostGroup = components['schemas']['test-vona.dto.postGroup'];
+type ApiSchemaTestVonaDtoPostGroupPartial = Partial<ApiSchemaTestVonaDtoPostGroup>;
+type ApiSchemaTestVonaDtoPostAggregate = components['schemas']['test-vona.dto.postAggregate'];
+type ApiSchemaTestVonaDtoPostAggregatePartial = Partial<ApiSchemaTestVonaDtoPostAggregate>;
+type ApiSchemaTestVonaDtoPostQueryRes = components['schemas']['test-vona.dto.postQueryRes'];
+type ApiSchemaTestVonaDtoPostQueryResPartial = Partial<ApiSchemaTestVonaDtoPostQueryRes>;
+type ApiSchemaTestVonaDtoSerializerSimple = components['schemas']['test-vona.dto.serializerSimple'];
+type ApiSchemaTestVonaDtoSerializerSimplePartial = Partial<ApiSchemaTestVonaDtoSerializerSimple>;
+type ApiSchemaTestVonaDtoSerializerArray = components['schemas']['test-vona.dto.serializerArray'];
+type ApiSchemaTestVonaDtoSerializerArrayPartial = Partial<ApiSchemaTestVonaDtoSerializerArray>;
+type ApiSchemaTestVonaDtoSerializerLazy = components['schemas']['test-vona.dto.serializerLazy'];
+type ApiSchemaTestVonaDtoSerializerLazyPartial = Partial<ApiSchemaTestVonaDtoSerializerLazy>;
+type ApiSchemaTestVonaDtoSerializerSimple_1c4b95bcfe8fe28a56dbcc7028097cf11836b4fc = components['schemas']['test-vona.dto.serializerSimple_1c4b95bcfe8fe28a56dbcc7028097cf11836b4fc'];
+type ApiSchemaTestVonaDtoSerializerSimple_1c4b95bcfe8fe28a56dbcc7028097cf11836b4fcPartial = Partial<ApiSchemaTestVonaDtoSerializerSimple_1c4b95bcfe8fe28a56dbcc7028097cf11836b4fc>;
+type ApiSchemaTestVonaDtoSerializerSimple_542f7be0da9b85a67248a6a1a3629e72de5fdb33_cff0ae112a392da58caf5aa905749f3c4444c4ab = components['schemas']['test-vona.dto.serializerSimple_542f7be0da9b85a67248a6a1a3629e72de5fdb33_cff0ae112a392da58caf5aa905749f3c4444c4ab'];
+type ApiSchemaTestVonaDtoSerializerSimple_542f7be0da9b85a67248a6a1a3629e72de5fdb33_cff0ae112a392da58caf5aa905749f3c4444c4abPartial = Partial<ApiSchemaTestVonaDtoSerializerSimple_542f7be0da9b85a67248a6a1a3629e72de5fdb33_cff0ae112a392da58caf5aa905749f3c4444c4ab>;
 //#endregion
 //#region src/suite/a-home/modules/home-api/src/api/captcha.d.ts
+/** Captcha_create */
+declare const ApiApiCaptchacreatePath = "/api/captcha/create";
+type ApiApiCaptchacreatePath = '/api/captcha/create';
+type ApiApiCaptchacreateMethod = 'post';
 type ApiApiCaptchacreateRequestBody = {
   scene: string;
 };
+type ApiApiCaptchacreateResponseBody = paths[ApiApiCaptchacreatePath][ApiApiCaptchacreateMethod]['responses']['200']['content']['application/json']['data'];
+/** Captcha_refresh */
+declare const ApiApiCaptcharefreshPath = "/api/captcha/refresh";
+type ApiApiCaptcharefreshPath = '/api/captcha/refresh';
+type ApiApiCaptcharefreshMethod = 'post';
 type ApiApiCaptcharefreshRequestBody = {
   id: string;
   scene: string;
 };
+type ApiApiCaptcharefreshResponseBody = paths[ApiApiCaptcharefreshPath][ApiApiCaptcharefreshMethod]['responses']['200']['content']['application/json']['data'];
+/** Captcha_verifyImmediate */
+declare const ApiApiCaptchaverifyImmediatePath = "/api/captcha/verifyImmediate";
+type ApiApiCaptchaverifyImmediatePath = '/api/captcha/verifyImmediate';
+type ApiApiCaptchaverifyImmediateMethod = 'post';
 type ApiApiCaptchaverifyImmediateRequestBody = {
   id: string;
   token?: unknown;
 };
+type ApiApiCaptchaverifyImmediateResponseBody = paths[ApiApiCaptchaverifyImmediatePath][ApiApiCaptchaverifyImmediateMethod]['responses']['200']['content']['application/json']['data'];
 declare class ApiCaptcha extends BeanApiBase {
   create(body: ApiApiCaptchacreateRequestBody, options?: IApiActionOptions): Promise<{
     id: string;
@@ -3866,6 +4162,11 @@ declare class ApiCaptcha extends BeanApiBase {
 }
 //#endregion
 //#region src/suite/a-home/modules/home-api/src/api/home.d.ts
+/** Home_index */
+declare const ApiApiHomeindexPath = "/";
+type ApiApiHomeindexPath = '/';
+type ApiApiHomeindexMethod = 'get';
+type ApiApiHomeindexResponseBody = paths[ApiApiHomeindexPath][ApiApiHomeindexMethod]['responses']['200']['content']['application/json']['data'];
 declare class ApiHome extends BeanApiBase {
   /** @description Home */
   index(options?: IApiActionOptions): Promise<unknown>;
@@ -3877,6 +4178,7 @@ declare const ApiApiHomeBaseMenuretrieveMenusPath = "/api/home/base/menu/{public
 type ApiApiHomeBaseMenuretrieveMenusPath = '/api/home/base/menu/{publicPath?}';
 type ApiApiHomeBaseMenuretrieveMenusMethod = 'get';
 type ApiApiHomeBaseMenuretrieveMenusRequestParams = paths[ApiApiHomeBaseMenuretrieveMenusPath][ApiApiHomeBaseMenuretrieveMenusMethod]['parameters']['path'];
+type ApiApiHomeBaseMenuretrieveMenusResponseBody = paths[ApiApiHomeBaseMenuretrieveMenusPath][ApiApiHomeBaseMenuretrieveMenusMethod]['responses']['200']['content']['application/json']['data'];
 declare class ApiHomeBaseMenu extends BeanApiBase {
   retrieveMenus(options: {
     params: ApiApiHomeBaseMenuretrieveMenusRequestParams;
@@ -3892,6 +4194,7 @@ declare const ApiApiHomeBasePermissionretrievePermissionsPath = "/api/home/base/
 type ApiApiHomeBasePermissionretrievePermissionsPath = '/api/home/base/permission/{resource}';
 type ApiApiHomeBasePermissionretrievePermissionsMethod = 'get';
 type ApiApiHomeBasePermissionretrievePermissionsRequestParams = paths[ApiApiHomeBasePermissionretrievePermissionsPath][ApiApiHomeBasePermissionretrievePermissionsMethod]['parameters']['path'];
+type ApiApiHomeBasePermissionretrievePermissionsResponseBody = paths[ApiApiHomeBasePermissionretrievePermissionsPath][ApiApiHomeBasePermissionretrievePermissionsMethod]['responses']['200']['content']['application/json']['data'];
 declare class ApiHomeBasePermission extends BeanApiBase {
   retrievePermissions(options: {
     params: ApiApiHomeBasePermissionretrievePermissionsRequestParams;
@@ -3903,37 +4206,71 @@ declare class ApiHomeBasePermission extends BeanApiBase {
 }
 //#endregion
 //#region src/suite/a-home/modules/home-api/src/api/homeUserPassport.d.ts
+/** HomeUserPassport_current */
+declare const ApiApiHomeUserPassportcurrentPath = "/api/home/user/passport/current";
+type ApiApiHomeUserPassportcurrentPath = '/api/home/user/passport/current';
+type ApiApiHomeUserPassportcurrentMethod = 'get';
+type ApiApiHomeUserPassportcurrentResponseBody = paths[ApiApiHomeUserPassportcurrentPath][ApiApiHomeUserPassportcurrentMethod]['responses']['200']['content']['application/json']['data'];
+/** HomeUserPassport_logout */
+declare const ApiApiHomeUserPassportlogoutPath = "/api/home/user/passport/logout";
+type ApiApiHomeUserPassportlogoutPath = '/api/home/user/passport/logout';
+type ApiApiHomeUserPassportlogoutMethod = 'post';
+type ApiApiHomeUserPassportlogoutResponseBody = paths[ApiApiHomeUserPassportlogoutPath][ApiApiHomeUserPassportlogoutMethod]['responses']['200']['content']['application/json']['data'];
+/** HomeUserPassport_register */
+declare const ApiApiHomeUserPassportregisterPath = "/api/home/user/passport/register";
+type ApiApiHomeUserPassportregisterPath = '/api/home/user/passport/register';
+type ApiApiHomeUserPassportregisterMethod = 'post';
 type ApiApiHomeUserPassportregisterRequestBody = components['schemas']['home-user.dto.register'];
+type ApiApiHomeUserPassportregisterResponseBody = paths[ApiApiHomeUserPassportregisterPath][ApiApiHomeUserPassportregisterMethod]['responses']['200']['content']['application/json']['data'];
+/** HomeUserPassport_login */
+declare const ApiApiHomeUserPassportloginPath = "/api/home/user/passport/login";
+type ApiApiHomeUserPassportloginPath = '/api/home/user/passport/login';
+type ApiApiHomeUserPassportloginMethod = 'post';
 type ApiApiHomeUserPassportloginRequestBody = components['schemas']['home-user.dto.login'];
+type ApiApiHomeUserPassportloginResponseBody = paths[ApiApiHomeUserPassportloginPath][ApiApiHomeUserPassportloginMethod]['responses']['200']['content']['application/json']['data'];
 /** HomeUserPassport_loginOauth */
 declare const ApiApiHomeUserPassportloginOauthPath = "/api/home/user/passport/login/{module}/{providerName}/{clientName?}";
 type ApiApiHomeUserPassportloginOauthPath = '/api/home/user/passport/login/{module}/{providerName}/{clientName?}';
 type ApiApiHomeUserPassportloginOauthMethod = 'get';
 type ApiApiHomeUserPassportloginOauthRequestParams = paths[ApiApiHomeUserPassportloginOauthPath][ApiApiHomeUserPassportloginOauthMethod]['parameters']['path'];
 type ApiApiHomeUserPassportloginOauthRequestQuery = paths[ApiApiHomeUserPassportloginOauthPath][ApiApiHomeUserPassportloginOauthMethod]['parameters']['query'];
+type ApiApiHomeUserPassportloginOauthResponseBody = paths[ApiApiHomeUserPassportloginOauthPath][ApiApiHomeUserPassportloginOauthMethod]['responses']['200']['content']['application/json']['data'];
 /** HomeUserPassport_associate */
 declare const ApiApiHomeUserPassportassociatePath = "/api/home/user/passport/associate/{module}/{providerName}/{clientName?}";
 type ApiApiHomeUserPassportassociatePath = '/api/home/user/passport/associate/{module}/{providerName}/{clientName?}';
 type ApiApiHomeUserPassportassociateMethod = 'get';
 type ApiApiHomeUserPassportassociateRequestParams = paths[ApiApiHomeUserPassportassociatePath][ApiApiHomeUserPassportassociateMethod]['parameters']['path'];
 type ApiApiHomeUserPassportassociateRequestQuery = paths[ApiApiHomeUserPassportassociatePath][ApiApiHomeUserPassportassociateMethod]['parameters']['query'];
+type ApiApiHomeUserPassportassociateResponseBody = paths[ApiApiHomeUserPassportassociatePath][ApiApiHomeUserPassportassociateMethod]['responses']['200']['content']['application/json']['data'];
 /** HomeUserPassport_migrate */
 declare const ApiApiHomeUserPassportmigratePath = "/api/home/user/passport/migrate/{module}/{providerName}/{clientName?}";
 type ApiApiHomeUserPassportmigratePath = '/api/home/user/passport/migrate/{module}/{providerName}/{clientName?}';
 type ApiApiHomeUserPassportmigrateMethod = 'get';
 type ApiApiHomeUserPassportmigrateRequestParams = paths[ApiApiHomeUserPassportmigratePath][ApiApiHomeUserPassportmigrateMethod]['parameters']['path'];
 type ApiApiHomeUserPassportmigrateRequestQuery = paths[ApiApiHomeUserPassportmigratePath][ApiApiHomeUserPassportmigrateMethod]['parameters']['query'];
+type ApiApiHomeUserPassportmigrateResponseBody = paths[ApiApiHomeUserPassportmigratePath][ApiApiHomeUserPassportmigrateMethod]['responses']['200']['content']['application/json']['data'];
+/** HomeUserPassport_refreshAuthToken */
+declare const ApiApiHomeUserPassportrefreshAuthTokenPath = "/api/home/user/passport/refreshAuthToken";
+type ApiApiHomeUserPassportrefreshAuthTokenPath = '/api/home/user/passport/refreshAuthToken';
+type ApiApiHomeUserPassportrefreshAuthTokenMethod = 'post';
 type ApiApiHomeUserPassportrefreshAuthTokenRequestBody = {
   refreshToken: string;
 };
+type ApiApiHomeUserPassportrefreshAuthTokenResponseBody = paths[ApiApiHomeUserPassportrefreshAuthTokenPath][ApiApiHomeUserPassportrefreshAuthTokenMethod]['responses']['200']['content']['application/json']['data'];
+/** HomeUserPassport_createPassportJwtFromOauthCode */
+declare const ApiApiHomeUserPassportcreatePassportJwtFromOauthCodePath = "/api/home/user/passport/createPassportJwtFromOauthCode";
+type ApiApiHomeUserPassportcreatePassportJwtFromOauthCodePath = '/api/home/user/passport/createPassportJwtFromOauthCode';
+type ApiApiHomeUserPassportcreatePassportJwtFromOauthCodeMethod = 'post';
 type ApiApiHomeUserPassportcreatePassportJwtFromOauthCodeRequestBody = {
   code: string;
 };
+type ApiApiHomeUserPassportcreatePassportJwtFromOauthCodeResponseBody = paths[ApiApiHomeUserPassportcreatePassportJwtFromOauthCodePath][ApiApiHomeUserPassportcreatePassportJwtFromOauthCodeMethod]['responses']['200']['content']['application/json']['data'];
 /** HomeUserPassport_createTempAuthToken */
 declare const ApiApiHomeUserPassportcreateTempAuthTokenPath = "/api/home/user/passport/createTempAuthToken";
 type ApiApiHomeUserPassportcreateTempAuthTokenPath = '/api/home/user/passport/createTempAuthToken';
 type ApiApiHomeUserPassportcreateTempAuthTokenMethod = 'post';
 type ApiApiHomeUserPassportcreateTempAuthTokenRequestQuery = paths[ApiApiHomeUserPassportcreateTempAuthTokenPath][ApiApiHomeUserPassportcreateTempAuthTokenMethod]['parameters']['query'];
+type ApiApiHomeUserPassportcreateTempAuthTokenResponseBody = paths[ApiApiHomeUserPassportcreateTempAuthTokenPath][ApiApiHomeUserPassportcreateTempAuthTokenMethod]['responses']['200']['content']['application/json']['data'];
 declare class ApiHomeUserPassport extends BeanApiBase {
   current(options?: IApiActionOptions): Promise<{
     user: components['schemas']['home-user.entity.user'];
@@ -3988,6 +4325,7 @@ type ApiApiTestSsrToolOnetestGetPath = '/api/test/ssr/toolOne/test/{id?}';
 type ApiApiTestSsrToolOnetestGetMethod = 'get';
 type ApiApiTestSsrToolOnetestGetRequestParams = paths[ApiApiTestSsrToolOnetestGetPath][ApiApiTestSsrToolOnetestGetMethod]['parameters']['path'];
 type ApiApiTestSsrToolOnetestGetRequestQuery = paths[ApiApiTestSsrToolOnetestGetPath][ApiApiTestSsrToolOnetestGetMethod]['parameters']['query'];
+type ApiApiTestSsrToolOnetestGetResponseBody = paths[ApiApiTestSsrToolOnetestGetPath][ApiApiTestSsrToolOnetestGetMethod]['responses']['200']['content']['application/json']['data'];
 /** TestSsrToolOne_test */
 declare const ApiApiTestSsrToolOnetestPath = "/api/test/ssr/toolOne/test/{id?}";
 type ApiApiTestSsrToolOnetestPath = '/api/test/ssr/toolOne/test/{id?}';
@@ -3995,6 +4333,7 @@ type ApiApiTestSsrToolOnetestMethod = 'post';
 type ApiApiTestSsrToolOnetestRequestParams = paths[ApiApiTestSsrToolOnetestPath][ApiApiTestSsrToolOnetestMethod]['parameters']['path'];
 type ApiApiTestSsrToolOnetestRequestQuery = paths[ApiApiTestSsrToolOnetestPath][ApiApiTestSsrToolOnetestMethod]['parameters']['query'];
 type ApiApiTestSsrToolOnetestRequestBody = components['schemas']['test-ssr.dto.testBody'];
+type ApiApiTestSsrToolOnetestResponseBody = paths[ApiApiTestSsrToolOnetestPath][ApiApiTestSsrToolOnetestMethod]['responses']['200']['content']['application/json']['data'];
 declare class ApiTestSsrToolOne extends BeanApiBase {
   testGet(options: {
     params: ApiApiTestSsrToolOnetestGetRequestParams;
@@ -4103,7 +4442,7 @@ declare module 'zova-module-home-api' {
 }
 /** api: end */
 /** api: begin */
-interface IModuleApi$1 {
+interface IModuleApi {
   'captcha': ApiCaptcha;
   'home': ApiHome;
   'homeBaseMenu': ApiHomeBaseMenu;
@@ -4202,7 +4541,7 @@ declare module 'zova' {
 declare class ScopeModuleHomeApi extends BeanScopeBase {}
 interface ScopeModuleHomeApi {
   util: BeanScopeUtil;
-  api: IModuleApi$1;
+  api: IModuleApi;
   apiSchema: IModuleApiSchema;
 }
 declare module 'zova' {
@@ -4215,1710 +4554,10 @@ declare module 'zova' {
 //#region src/suite/a-home/modules/home-api/src/types/api.d.ts
 declare module 'zova' {
   interface BeanBase {
-    $api: IModuleApi$1;
+    $api: IModuleApi;
     $apiSchema: IModuleApiSchema;
   }
 }
-//#endregion
-//#region src/suite/a-demo/modules/demo-basic/src/model/test.d.ts
-interface IModelOptionsTest extends IDecoratorModelOptions {}
-declare class ModelTest extends BeanModelBase {
-  test(): _$vue.UnwrapNestedRefs<_$_tanstack_vue_query0.UseQueryReturnType<{
-    id: number | string;
-    name?: string;
-    married: boolean;
-    details: components['schemas']['test-ssr.dto.testDetail'][];
-    _custom1?: string | undefined;
-    _custom2?: string | undefined;
-    _custom3?: string | undefined;
-    _custom4?: string | undefined;
-    _custom5?: string | undefined;
-    _customCopy?: string | undefined;
-    _customCopied?: boolean | undefined;
-  }, Error>>;
-}
-declare namespace index_d_exports$10 {
-  export { V$1 as Vue, Vue2, del, install, isVue2, isVue3, set };
-}
-import * as import_vue from "vue";
-declare const isVue2: boolean;
-declare const isVue3: boolean;
-declare const Vue2: any;
-declare const install: (vue?: any) => void;
-/** 
- * @deprecated To avoid bringing in all the tree-shakable modules, this API has been deprecated. Use `Vue2` or named exports instead.
- * Refer to https://github.com/vueuse/vue-demi/issues/41
- */
-declare const V$1: typeof _$vue;
-declare function set<T>(target: any, key: any, val: T): T;
-declare function del(target: any, key: any): void;
-//#endregion
-//#region node_modules/.pnpm/pinia@2.3.1_typescript@5.9.3_vue@3.5.32_typescript@5.9.3_/node_modules/pinia/dist/pinia.d.ts
-/**
- * Type of an object of Actions. For internal usage only.
- * For internal use **only**
- */
-declare type _ActionsTree = Record<string, _Method>;
-declare type _Awaited<T> = T extends null | undefined ? T : T extends object & {
-  then(onfulfilled: infer F): any;
-} ? F extends ((value: infer V, ...args: any) => any) ? _Awaited<V> : never : T;
-/**
- * Recursive `Partial<T>`. Used by {@link Store['$patch']}.
- *
- * For internal use **only**
- */
-declare type _DeepPartial<T> = { [K in keyof T]?: _DeepPartial<T[K]> };
-/**
- * Options parameter of `defineStore()` for option stores. Can be extended to
- * augment stores with the plugin API. @see {@link DefineStoreOptionsBase}.
- */
-declare interface DefineStoreOptions<Id extends string, S extends StateTree, G, A> extends DefineStoreOptionsBase<S, Store<Id, S, G, A>> {
-  /**
-   * Unique string key to identify the store across the application.
-   */
-  id: Id;
-  /**
-   * Function to create a fresh state. **Must be an arrow function** to ensure
-   * correct typings!
-   */
-  state?: () => S;
-  /**
-   * Optional object of getters.
-   */
-  getters?: G & ThisType<index_d_exports$10.UnwrapRef<S> & _StoreWithGetters<G> & PiniaCustomProperties> & _GettersTree<S>;
-  /**
-   * Optional object of actions.
-   */
-  actions?: A & ThisType<A & index_d_exports$10.UnwrapRef<S> & _StoreWithState<Id, S, G, A> & _StoreWithGetters<G> & PiniaCustomProperties>;
-  /**
-   * Allows hydrating the store during SSR when complex state (like client side only refs) are used in the store
-   * definition and copying the value from `pinia.state` isn't enough.
-   *
-   * @example
-   * If in your `state`, you use any `customRef`s, any `computed`s, or any `ref`s that have a different value on
-   * Server and Client, you need to manually hydrate them. e.g., a custom ref that is stored in the local
-   * storage:
-   *
-   * ```ts
-   * const useStore = defineStore('main', {
-   *   state: () => ({
-   *     n: useLocalStorage('key', 0)
-   *   }),
-   *   hydrate(storeState, initialState) {
-   *     // @ts-expect-error: https://github.com/microsoft/TypeScript/issues/43826
-   *     storeState.n = useLocalStorage('key', 0)
-   *   }
-   * })
-   * ```
-   *
-   * @param storeState - the current state in the store
-   * @param initialState - initialState
-   */
-  hydrate?(storeState: index_d_exports$10.UnwrapRef<S>, initialState: index_d_exports$10.UnwrapRef<S>): void;
-}
-/**
- * Options passed to `defineStore()` that are common between option and setup
- * stores. Extend this interface if you want to add custom options to both kinds
- * of stores.
- */
-declare interface DefineStoreOptionsBase<S extends StateTree, Store> {}
-/**
- * Available `options` when creating a pinia plugin.
- */
-declare interface DefineStoreOptionsInPlugin<Id extends string, S extends StateTree, G, A> extends Omit<DefineStoreOptions<Id, S, G, A>, 'id' | 'actions'> {
-  /**
-   * Extracted object of actions. Added by useStore() when the store is built
-   * using the setup API, otherwise uses the one passed to `defineStore()`.
-   * Defaults to an empty object if no actions are defined.
-   */
-  actions: A;
-}
-/**
- * Type of an object of Getters that infers the argument. For internal usage only.
- * For internal use **only**
- */
-declare type _GettersTree<S extends StateTree> = Record<string, ((state: index_d_exports$10.UnwrapRef<S> & index_d_exports$10.UnwrapRef<PiniaCustomStateProperties<S>>) => any) | (() => any)>;
-/**
- * Generic type for a function that can infer arguments and return type
- *
- * For internal use **only**
- */
-declare type _Method = (...args: any[]) => any;
-/**
- * Possible types for SubscriptionCallback
- */
-declare enum MutationType {
-  /**
-   * Direct mutation of the state:
-   *
-   * - `store.name = 'new name'`
-   * - `store.$state.name = 'new name'`
-   * - `store.list.push('new item')`
-   */
-  direct = "direct",
-  /**
-   * Mutated the state with `$patch` and an object
-   *
-   * - `store.$patch({ name: 'newName' })`
-   */
-  patchObject = "patch object",
-  /**
-   * Mutated the state with `$patch` and a function
-   *
-   * - `store.$patch(state => state.name = 'newName')`
-   */
-  patchFunction = "patch function"
-}
-/**
- * Every application must own its own pinia to be able to create stores
- */
-declare interface Pinia {
-  install: (app: index_d_exports$10.App) => void;
-  /**
-   * root state
-   */
-  state: index_d_exports$10.Ref<Record<string, StateTree>>;
-  /**
-   * Adds a store plugin to extend every store
-   *
-   * @param plugin - store plugin to add
-   */
-  use(plugin: PiniaPlugin): Pinia;
-  /* Excluded from this release type: _p */
-  /* Excluded from this release type: _a */
-  /* Excluded from this release type: _e */
-  /* Excluded from this release type: _s */
-  /* Excluded from this release type: _testing */
-}
-/**
- * Interface to be extended by the user when they add properties through plugins.
- */
-declare interface PiniaCustomProperties<Id extends string = string, S extends StateTree = StateTree, G = _GettersTree<S>, A = _ActionsTree> {}
-/**
- * Properties that are added to every `store.$state` by `pinia.use()`.
- */
-declare interface PiniaCustomStateProperties<S extends StateTree = StateTree> {}
-/**
- * Plugin to extend every store.
- */
-declare interface PiniaPlugin {
-  /**
-   * Plugin to extend every store. Returns an object to extend the store or
-   * nothing.
-   *
-   * @param context - Context
-   */
-  (context: PiniaPluginContext): Partial<PiniaCustomProperties & PiniaCustomStateProperties> | void;
-}
-/**
- * Context argument passed to Pinia plugins.
- */
-declare interface PiniaPluginContext<Id extends string = string, S extends StateTree = StateTree, G = _GettersTree<S>, A = _ActionsTree> {
-  /**
-   * pinia instance.
-   */
-  pinia: Pinia;
-  /**
-   * Current app created with `Vue.createApp()`.
-   */
-  app: index_d_exports$10.App;
-  /**
-   * Current store being extended.
-   */
-  store: Store<Id, S, G, A>;
-  /**
-   * Initial options defining the store when calling `defineStore()`.
-   */
-  options: DefineStoreOptionsInPlugin<Id, S, G, A>;
-}
-/**
- * Generic state of a Store
- */
-declare type StateTree = Record<PropertyKey, any>;
-/**
- * Store type to build a store.
- */
-declare type Store<Id extends string = string, S extends StateTree = {}, G = {}, A = {}> = _StoreWithState<Id, S, G, A> & index_d_exports$10.UnwrapRef<S> & _StoreWithGetters<G> & (_ActionsTree extends A ? {} : A) & PiniaCustomProperties<Id, S, G, A> & PiniaCustomStateProperties<S>;
-/**
- * Return type of `defineStore()`. Function that allows instantiating a store.
- */
-declare interface StoreDefinition<Id extends string = string, S extends StateTree = StateTree, G = _GettersTree<S>, A = _ActionsTree> {
-  /**
-   * Returns a store, creates it if necessary.
-   *
-   * @param pinia - Pinia instance to retrieve the store
-   * @param hot - dev only hot module replacement
-   */
-  (pinia?: Pinia | null | undefined, hot?: StoreGeneric): Store<Id, S, G, A>;
-  /**
-   * Id of the store. Used by map helpers.
-   */
-  $id: Id;
-  /* Excluded from this release type: _pinia */
-}
-/**
- * Generic and type-unsafe version of Store. Doesn't fail on access with
- * strings, making it much easier to write generic functions that do not care
- * about the kind of store that is passed.
- */
-declare type StoreGeneric = Store<string, StateTree, _GettersTree<StateTree>, _ActionsTree>;
-/**
- * Argument of `store.$onAction()`
- */
-declare type StoreOnActionListener<Id extends string, S extends StateTree, G, A> = (context: StoreOnActionListenerContext<Id, S, G, {} extends A ? _ActionsTree : A>) => void;
-/**
- * Context object passed to callbacks of `store.$onAction(context => {})`
- * TODO: should have only the Id, the Store and Actions to generate the proper object
- */
-declare type StoreOnActionListenerContext<Id extends string, S extends StateTree, G, A> = _ActionsTree extends A ? _StoreOnActionListenerContext<StoreGeneric, string, _ActionsTree> : { [Name in keyof A]: Name extends string ? _StoreOnActionListenerContext<Store<Id, S, G, A>, Name, A> : never }[keyof A];
-/**
- * Actual type for {@link StoreOnActionListenerContext}. Exists for refactoring
- * purposes. For internal use only.
- * For internal use **only**
- */
-declare interface _StoreOnActionListenerContext<Store, ActionName extends string, A> {
-  /**
-   * Name of the action
-   */
-  name: ActionName;
-  /**
-   * Store that is invoking the action
-   */
-  store: Store;
-  /**
-   * Parameters passed to the action
-   */
-  args: A extends Record<ActionName, _Method> ? Parameters<A[ActionName]> : unknown[];
-  /**
-   * Sets up a hook once the action is finished. It receives the return value
-   * of the action, if it's a Promise, it will be unwrapped.
-   */
-  after: (callback: A extends Record<ActionName, _Method> ? (resolvedReturn: _Awaited<ReturnType<A[ActionName]>>) => void : () => void) => void;
-  /**
-   * Sets up a hook if the action fails. Return `false` to catch the error and
-   * stop it from propagating.
-   */
-  onError: (callback: (error: unknown) => void) => void;
-}
-/**
- * Properties of a store.
- */
-declare interface StoreProperties<Id extends string> {
-  /**
-   * Unique identifier of the store
-   */
-  $id: Id;
-  /* Excluded from this release type: _p */
-  /* Excluded from this release type: _getters */
-  /* Excluded from this release type: _isOptionsAPI */
-  /**
-   * Used by devtools plugin to retrieve properties added with plugins. Removed
-   * in production. Can be used by the user to add property keys of the store
-   * that should be displayed in devtools.
-   */
-  _customProperties: Set<string>;
-  /* Excluded from this release type: _hotUpdate */
-  /* Excluded from this release type: _hotUpdating */
-  /* Excluded from this release type: _hmrPayload */
-}
-/**
- * Store augmented with getters. For internal usage only.
- * For internal use **only**
- */
-declare type _StoreWithGetters<G> = _StoreWithGetters_Readonly<G> & _StoreWithGetters_Writable<G>;
-/**
- * Store augmented with readonly getters. For internal usage **only**.
- */
-declare type _StoreWithGetters_Readonly<G> = { readonly [K in keyof G as G[K] extends ((...args: any[]) => any) ? K : index_d_exports$10.ComputedRef extends G[K] ? K : never]: G[K] extends ((...args: any[]) => infer R) ? R : index_d_exports$10.UnwrapRef<G[K]> };
-/**
- * Store augmented with writable getters. For internal usage **only**.
- */
-declare type _StoreWithGetters_Writable<G> = { [K in keyof G as G[K] extends index_d_exports$10.WritableComputedRef<any> ? K : never]: G[K] extends Readonly<index_d_exports$10.WritableComputedRef<infer R>> ? R : never };
-/**
- * Base store with state and functions. Should not be used directly.
- */
-declare interface _StoreWithState<Id extends string, S extends StateTree, G, A> extends StoreProperties<Id> {
-  /**
-   * State of the Store. Setting it will internally call `$patch()` to update the state.
-   */
-  $state: index_d_exports$10.UnwrapRef<S> & PiniaCustomStateProperties<S>;
-  /**
-   * Applies a state patch to current state. Allows passing nested values
-   *
-   * @param partialState - patch to apply to the state
-   */
-  $patch(partialState: _DeepPartial<index_d_exports$10.UnwrapRef<S>>): void;
-  /**
-   * Group multiple changes into one function. Useful when mutating objects like
-   * Sets or arrays and applying an object patch isn't practical, e.g. appending
-   * to an array. The function passed to `$patch()` **must be synchronous**.
-   *
-   * @param stateMutator - function that mutates `state`, cannot be asynchronous
-   */
-  $patch<F extends (state: index_d_exports$10.UnwrapRef<S>) => any>(stateMutator: ReturnType<F> extends Promise<any> ? never : F): void;
-  /**
-   * Resets the store to its initial state by building a new state object.
-   */
-  $reset(): void;
-  /**
-   * Setups a callback to be called whenever the state changes. It also returns a function to remove the callback. Note
-   * that when calling `store.$subscribe()` inside of a component, it will be automatically cleaned up when the
-   * component gets unmounted unless `detached` is set to true.
-   *
-   * @param callback - callback passed to the watcher
-   * @param options - `watch` options + `detached` to detach the subscription from the context (usually a component)
-   * this is called from. Note that the `flush` option does not affect calls to `store.$patch()`.
-   * @returns function that removes the watcher
-   */
-  $subscribe(callback: SubscriptionCallback<S>, options?: {
-    detached?: boolean;
-  } & index_d_exports$10.WatchOptions): () => void;
-  /**
-   * Setups a callback to be called every time an action is about to get
-   * invoked. The callback receives an object with all the relevant information
-   * of the invoked action:
-   * - `store`: the store it is invoked on
-   * - `name`: The name of the action
-   * - `args`: The parameters passed to the action
-   *
-   * On top of these, it receives two functions that allow setting up a callback
-   * once the action finishes or when it fails.
-   *
-   * It also returns a function to remove the callback. Note than when calling
-   * `store.$onAction()` inside of a component, it will be automatically cleaned
-   * up when the component gets unmounted unless `detached` is set to true.
-   *
-   * @example
-   *
-   *```js
-   *store.$onAction(({ after, onError }) => {
-   *  // Here you could share variables between all of the hooks as well as
-   *  // setting up watchers and clean them up
-   *  after((resolvedValue) => {
-   *    // can be used to cleanup side effects
-   * .  // `resolvedValue` is the value returned by the action, if it's a
-   * .  // Promise, it will be the resolved value instead of the Promise
-   *  })
-   *  onError((error) => {
-   *    // can be used to pass up errors
-   *  })
-   *})
-   *```
-   *
-   * @param callback - callback called before every action
-   * @param detached - detach the subscription from the context this is called from
-   * @returns function that removes the watcher
-   */
-  $onAction(callback: StoreOnActionListener<Id, S, G, A>, detached?: boolean): () => void;
-  /**
-   * Stops the associated effect scope of the store and remove it from the store
-   * registry. Plugins can override this method to cleanup any added effects.
-   * e.g. devtools plugin stops displaying disposed stores from devtools.
-   * Note this doesn't delete the state of the store, you have to do it manually with
-   * `delete pinia.state.value[store.$id]` if you want to. If you don't and the
-   * store is used again, it will reuse the previous state.
-   */
-  $dispose(): void;
-  /* Excluded from this release type: _r */
-}
-/**
- * Callback of a subscription
- */
-declare type SubscriptionCallback<S> = (
-/**
- * Object with information relative to the store mutation that triggered the
- * subscription.
- */
-
-mutation: SubscriptionCallbackMutation<S>,
-/**
- * State of the store when the subscription is triggered. Same as
- * `store.$state`.
- */
-
-state: index_d_exports$10.UnwrapRef<S>) => void;
-/**
- * Context object passed to a subscription callback.
- */
-declare type SubscriptionCallbackMutation<S> = SubscriptionCallbackMutationDirect | SubscriptionCallbackMutationPatchObject<S> | SubscriptionCallbackMutationPatchFunction;
-/**
- * Base type for the context passed to a subscription callback. Internal type.
- */
-declare interface _SubscriptionCallbackMutationBase {
-  /**
-   * Type of the mutation.
-   */
-  type: MutationType;
-  /**
-   * `id` of the store doing the mutation.
-   */
-  storeId: string;
-  /**
-   * 🔴 DEV ONLY, DO NOT use for production code. Different mutation calls. Comes from
-   * https://vuejs.org/guide/extras/reactivity-in-depth.html#reactivity-debugging and allows to track mutations in
-   * devtools and plugins **during development only**.
-   */
-  events?: index_d_exports$10.DebuggerEvent[] | index_d_exports$10.DebuggerEvent;
-}
-/**
- * Context passed to a subscription callback when directly mutating the state of
- * a store with `store.someState = newValue` or `store.$state.someState =
- * newValue`.
- */
-declare interface SubscriptionCallbackMutationDirect extends _SubscriptionCallbackMutationBase {
-  type: MutationType.direct;
-  events: index_d_exports$10.DebuggerEvent;
-}
-/**
- * Context passed to a subscription callback when `store.$patch()` is called
- * with a function.
- */
-declare interface SubscriptionCallbackMutationPatchFunction extends _SubscriptionCallbackMutationBase {
-  type: MutationType.patchFunction;
-  events: index_d_exports$10.DebuggerEvent[];
-}
-/**
- * Context passed to a subscription callback when `store.$patch()` is called
- * with an object.
- */
-declare interface SubscriptionCallbackMutationPatchObject<S> extends _SubscriptionCallbackMutationBase {
-  type: MutationType.patchObject;
-  events: index_d_exports$10.DebuggerEvent[];
-  /**
-   * Object passed to `store.$patch()`.
-   */
-  payload: _DeepPartial<index_d_exports$10.UnwrapRef<S>>;
-}
-// Extensions of Vue types to be appended manually
-// https://github.com/microsoft/rushstack/issues/2090
-// https://github.com/microsoft/rushstack/issues/1709
-// @ts-ignore: works on Vue 2, fails in Vue 3
-declare module 'vue/types/vue' {
-  interface Vue {
-    /**
-     * Currently installed pinia instance.
-     */
-    $pinia: Pinia;
-    /**
-     * Cache of stores instantiated by the current instance. Used by map
-     * helpers. Used internally by Pinia.
-     *
-     * @internal
-     */
-    _pStores?: Record<string, Store>;
-  }
-} // @ts-ignore: works on Vue 2, fails in Vue 3
-declare module 'vue/types/options' {
-  interface ComponentOptions<V> {
-    /**
-     * Pinia instance to install in your application. Should be passed to the
-     * root Vue.
-     */
-    pinia?: Pinia;
-  }
-}
-/**
- * NOTE: Used to be `@vue/runtime-core` but it break types from time to time. Then, in Vue docs, we started recommending
- * to use `vue` instead of `@vue/runtime-core` but that broke others' types so we reverted it. Now, local types do not
- * work if we use `@vue/runtime-core` so we are using `vue` again.
- */
-// @ts-ignore: works on Vue 3, fails in Vue 2
-declare module 'vue' {
-  // This seems to be needed to not break auto import types based on the order
-  // https://github.com/vuejs/pinia/pull/2730
-  interface GlobalComponents {}
-  interface ComponentCustomProperties {
-    /**
-     * Access to the application's Pinia
-     */
-    $pinia: Pinia;
-    /**
-     * Cache of stores instantiated by the current instance. Used by devtools to
-     * list currently used stores. Used internally by Pinia.
-     *
-     * @internal
-     */
-    _pStores?: Record<string, StoreGeneric>;
-  }
-} // normally this is only needed in .d.ts files
-//#endregion
-//#region src/suite/a-demo/modules/demo-basic/src/bean/counterStore.d.ts
-declare const useCounterStore: StoreDefinition<"counter", Pick<{
-  count: _$vue.Ref<number, number>;
-  name: _$vue.Ref<string, string>;
-  doubleCount: _$vue.ComputedRef<number>;
-  increment: () => void;
-}, "count" | "name">, Pick<{
-  count: _$vue.Ref<number, number>;
-  name: _$vue.Ref<string, string>;
-  doubleCount: _$vue.ComputedRef<number>;
-  increment: () => void;
-}, "doubleCount">, Pick<{
-  count: _$vue.Ref<number, number>;
-  name: _$vue.Ref<string, string>;
-  doubleCount: _$vue.ComputedRef<number>;
-  increment: () => void;
-}, "increment">>;
-//#endregion
-//#region src/suite/a-demo/modules/demo-basic/src/bean/store.counter.d.ts
-interface StoreCounter extends PiniaStore<typeof useCounterStore> {}
-declare class StoreCounter extends BeanPiniaStoreBase {
-  protected __init__(): Promise<void>;
-}
-//#endregion
-//#region src/suite/a-demo/modules/demo-basic/src/component/actionView/controller.d.ts
-interface ControllerActionViewProps {
-  onClick?: () => void;
-}
-declare class ControllerActionView extends BeanControllerBase {
-  static $propsDefault: {};
-  $$renderContext: IJsxRenderContextTableCell;
-  protected __init__(): Promise<void>;
-  protected render(): _$vue_jsx_runtime0.JSX.Element;
-}
-//#endregion
-//#region src/suite/a-demo/modules/demo-basic/src/component/card/controller.d.ts
-interface ControllerCardProps {
-  header?: string;
-  content?: string;
-  footer?: string;
-  onReset?: (time: Date) => void;
-  slotHeader?: ISlot;
-  slotFooter?: ISlot;
-}
-declare class ControllerCard extends BeanControllerBase {
-  static $propsDefault: {
-    header: string;
-  };
-  protected render(): _$vue_jsx_runtime0.JSX.Element;
-}
-//#endregion
-//#region src/suite/a-demo/modules/demo-basic/src/component/formFieldTest/controller.d.ts
-interface ControllerFormFieldTestProps extends IFormFieldComponentOptions {
-  showLog?: boolean;
-  slotHeader?: (scope: {
-    name: string;
-  }) => VNode;
-  slotFooter?: (scope: {
-    name: string;
-  }) => VNode;
-}
-declare class ControllerFormFieldTest extends BeanControllerBase {
-  static $propsDefault: {};
-  static $componentOptions: IComponentOptions;
-  protected __init__(): Promise<void>;
-  protected render(): _$vue_jsx_runtime0.JSX.Element;
-}
-//#endregion
-//#region src/suite/a-demo/modules/demo-basic/src/component/tableCellTest/controller.d.ts
-interface ControllerTableCellTestProps {
-  showLog?: boolean;
-  slotHeader?: (scope: {
-    name: string;
-  }) => VNode;
-  slotFooter?: (scope: {
-    name: string;
-  }) => VNode;
-}
-declare class ControllerTableCellTest extends BeanControllerBase {
-  static $propsDefault: {};
-  $$renderContext: IJsxRenderContextTableCell;
-  protected __init__(): Promise<void>;
-  protected render(): _$vue_jsx_runtime0.JSX.Element;
-}
-//#endregion
-//#region src/suite/a-demo/modules/demo-basic/src/page/component/controller.d.ts
-declare class ControllerPageComponent extends BeanControllerPageBase {
-  resetTime: Date;
-  cardRef?: ControllerCard;
-  protected render(): _$vue_jsx_runtime0.JSX.Element;
-}
-//#endregion
-//#region src/suite/a-demo/modules/demo-basic/src/page/locale/controller.d.ts
-declare class ControllerPageLocale extends BeanControllerPageBase {
-  protected __init__(): Promise<void>;
-  protected render(): _$vue_jsx_runtime0.JSX.Element;
-}
-//#endregion
-//#region src/suite/a-demo/modules/demo-basic/src/page/pinia/controller.d.ts
-declare class ControllerPagePinia extends BeanControllerPageBase {
-  $$counter: StoreCounter;
-  protected __init__(): Promise<void>;
-  protected render(): _$vue_jsx_runtime0.JSX.Element;
-}
-//#endregion
-//#region src/suite/a-demo/modules/demo-basic/src/page/routeParams/controller.d.ts
-declare const ControllerPageRouteParamsSchemaParams: z.ZodObject<{
-  id: z.ZodDefault<z.ZodOptional<z.ZodNumber>>;
-}, z.core.$strip>;
-declare const ControllerPageRouteParamsSchemaQuery: z.ZodObject<{}, z.core.$strip>;
-declare class ControllerPageRouteParams extends BeanControllerPageBase {
-  protected __init__(): Promise<void>;
-  protected render(): _$vue_jsx_runtime0.JSX.Element;
-}
-//#endregion
-//#region src/suite/a-demo/modules/demo-basic/src/page/routeQuery/controller.d.ts
-declare const ControllerPageRouteQuerySchemaParams: z.ZodObject<{}, z.core.$strip>;
-declare const ControllerPageRouteQuerySchemaQuery: z.ZodObject<{
-  name: z.ZodOptional<z.ZodString>;
-  age: z.ZodOptional<z.ZodNumber>;
-}, z.core.$strip>;
-declare class ControllerPageRouteQuery extends BeanControllerPageBase {
-  protected __init__(): Promise<void>;
-  protected render(): _$vue_jsx_runtime0.JSX.Element;
-}
-//#endregion
-//#region src/suite/a-demo/modules/demo-basic/src/page/routeQueryB/controller.d.ts
-declare const ControllerPageRouteQueryBSchemaParams: z.ZodObject<{}, z.core.$strip>;
-declare const ControllerPageRouteQueryBSchemaQuery: z.ZodObject<{
-  tabName: z.ZodDefault<z.ZodOptional<z.ZodString>>;
-  private: z.ZodOptional<z.ZodBoolean>;
-  user: z.ZodOptional<z.ZodObject<{
-    name: z.ZodString;
-    age: z.ZodNumber;
-  }, z.core.$strip>>;
-  todos: z.ZodOptional<z.ZodArray<z.ZodObject<{
-    title: z.ZodString;
-    done: z.ZodBoolean;
-  }, z.core.$strip>>>;
-}, z.core.$strip>;
-declare class ControllerPageRouteQueryB extends BeanControllerPageBase {
-  togglePrivate(): void;
-  toggleUser(): void;
-  toggleTodos(): void;
-  toggleTab(event: any, tabName: string): void;
-  protected render(): _$vue_jsx_runtime0.JSX.Element;
-}
-//#endregion
-//#region src/suite/a-demo/modules/demo-basic/src/page/state/controller.d.ts
-declare class ControllerPageState extends BeanControllerPageBase {
-  count: number;
-  count2: string;
-  protected __init__(): Promise<void>;
-  increment(): void;
-  decrement(): void;
-  protected render(): _$vue_jsx_runtime0.JSX.Element;
-}
-//#endregion
-//#region src/suite/a-demo/modules/demo-basic/src/page/style/controller.d.ts
-declare class ControllerPageStyle extends BeanControllerPageBase {
-  active: boolean;
-  cTextColor: string;
-  cBlock: string;
-  renderHello: any;
-  renderHello2: any;
-  protected __init__(): Promise<void>;
-  protected render(): _$vue_jsx_runtime0.JSX.Element;
-}
-//#endregion
-//#region src/suite/a-demo/modules/demo-basic/src/page/toolOne/controller.d.ts
-declare const ControllerPageToolOneSchemaParams: z.ZodObject<{
-  id: z.ZodOptional<z.ZodNumber>;
-}, z.core.$strip>;
-declare const ControllerPageToolOneSchemaQuery: z.ZodObject<{
-  name: z.ZodOptional<z.ZodString>;
-}, z.core.$strip>;
-declare class ControllerPageToolOne$1 extends BeanControllerPageFormBase {
-  schemaUpdate?: SchemaObject;
-  $$modelTest: ModelTest;
-  controllerForm: ControllerForm;
-  fieldName: string;
-  formData: ApiSchemaTestSsrDtoTestBodyPartial;
-  formMeta: IFormMeta;
-  protected __init__(): Promise<void>;
-  submitData(data: TypeFormOnSubmitData<ApiSchemaTestSsrDtoTestBodyPartial>): Promise<void>;
-}
-//#endregion
-//#region src/suite/a-demo/modules/demo-basic/src/page/toolTwo/controller.d.ts
-declare const ControllerPageToolTwoSchemaParams: z.ZodObject<{
-  id: z.ZodOptional<z.ZodNumber>;
-}, z.core.$strip>;
-declare const ControllerPageToolTwoSchemaQuery: z.ZodObject<{
-  name: z.ZodOptional<z.ZodString>;
-}, z.core.$strip>;
-declare class ControllerPageToolTwo extends BeanControllerPageBase {
-  $$modelPageData: ModelPageData<ApiSchemaTestSsrDtoTestResult | undefined>;
-  protected __init__(): Promise<void>;
-  protected render(): _$vue_jsx_runtime0.JSX.Element;
-}
-//#endregion
-//#region src/suite/a-demo/modules/demo-basic/src/.metadata/page/component.d.ts
-declare const ZPageComponent: _$vue.DefineSetupFnComponent<Record<string, any>, {}, {}, Record<string, any> & {}, _$vue.PublicProps>;
-//#endregion
-//#region src/suite/a-demo/modules/demo-basic/src/.metadata/page/locale.d.ts
-declare const ZPageLocale: _$vue.DefineSetupFnComponent<Record<string, any>, {}, {}, Record<string, any> & {}, _$vue.PublicProps>;
-//#endregion
-//#region src/suite/a-demo/modules/demo-basic/src/.metadata/page/pinia.d.ts
-declare const ZPagePinia: _$vue.DefineSetupFnComponent<Record<string, any>, {}, {}, Record<string, any> & {}, _$vue.PublicProps>;
-//#endregion
-//#region src/suite/a-demo/modules/demo-basic/src/.metadata/page/routeParams.d.ts
-declare namespace NSControllerPageRouteParams {
-  const paramsSchema: z.ZodObject<{
-    id: z.ZodDefault<z.ZodOptional<z.ZodNumber>>;
-  }, z.core.$strip>;
-  type ParamsInput = z.input<typeof ControllerPageRouteParamsSchemaParams>;
-  type ParamsOutput = z.output<typeof ControllerPageRouteParamsSchemaParams>;
-  const querySchema: z.ZodObject<{}, z.core.$strip>;
-  type QueryInput = z.input<typeof ControllerPageRouteParamsSchemaQuery>;
-  type QueryOutput = z.output<typeof ControllerPageRouteParamsSchemaQuery>;
-}
-declare const ZPageRouteParams: _$vue.DefineSetupFnComponent<Record<string, any>, {}, {}, Record<string, any> & {}, _$vue.PublicProps>;
-//#endregion
-//#region src/suite/a-demo/modules/demo-basic/src/.metadata/page/routeQuery.d.ts
-declare namespace NSControllerPageRouteQuery {
-  const paramsSchema: z.ZodObject<{}, z.core.$strip>;
-  type ParamsInput = z.input<typeof ControllerPageRouteQuerySchemaParams>;
-  type ParamsOutput = z.output<typeof ControllerPageRouteQuerySchemaParams>;
-  const querySchema: z.ZodObject<{
-    name: z.ZodOptional<z.ZodString>;
-    age: z.ZodOptional<z.ZodNumber>;
-  }, z.core.$strip>;
-  type QueryInput = z.input<typeof ControllerPageRouteQuerySchemaQuery>;
-  type QueryOutput = z.output<typeof ControllerPageRouteQuerySchemaQuery>;
-}
-declare const ZPageRouteQuery: _$vue.DefineSetupFnComponent<Record<string, any>, {}, {}, Record<string, any> & {}, _$vue.PublicProps>;
-//#endregion
-//#region src/suite/a-demo/modules/demo-basic/src/.metadata/page/routeQueryB.d.ts
-declare namespace NSControllerPageRouteQueryB {
-  const paramsSchema: z.ZodObject<{}, z.core.$strip>;
-  type ParamsInput = z.input<typeof ControllerPageRouteQueryBSchemaParams>;
-  type ParamsOutput = z.output<typeof ControllerPageRouteQueryBSchemaParams>;
-  const querySchema: z.ZodObject<{
-    tabName: z.ZodDefault<z.ZodOptional<z.ZodString>>;
-    private: z.ZodOptional<z.ZodBoolean>;
-    user: z.ZodOptional<z.ZodObject<{
-      name: z.ZodString;
-      age: z.ZodNumber;
-    }, z.core.$strip>>;
-    todos: z.ZodOptional<z.ZodArray<z.ZodObject<{
-      title: z.ZodString;
-      done: z.ZodBoolean;
-    }, z.core.$strip>>>;
-  }, z.core.$strip>;
-  type QueryInput = z.input<typeof ControllerPageRouteQueryBSchemaQuery>;
-  type QueryOutput = z.output<typeof ControllerPageRouteQueryBSchemaQuery>;
-}
-declare const ZPageRouteQueryB: _$vue.DefineSetupFnComponent<Record<string, any>, {}, {}, Record<string, any> & {}, _$vue.PublicProps>;
-//#endregion
-//#region src/suite/a-demo/modules/demo-basic/src/.metadata/page/state.d.ts
-declare const ZPageState: _$vue.DefineSetupFnComponent<Record<string, any>, {}, {}, Record<string, any> & {}, _$vue.PublicProps>;
-//#endregion
-//#region src/suite/a-demo/modules/demo-basic/src/.metadata/page/style.d.ts
-declare const ZPageStyle: _$vue.DefineSetupFnComponent<Record<string, any>, {}, {}, Record<string, any> & {}, _$vue.PublicProps>;
-//#endregion
-//#region src/suite/a-demo/modules/demo-basic/src/.metadata/page/toolOne.d.ts
-declare namespace NSControllerPageToolOne {
-  const paramsSchema: z.ZodObject<{
-    id: z.ZodOptional<z.ZodNumber>;
-  }, z.core.$strip>;
-  type ParamsInput = z.input<typeof ControllerPageToolOneSchemaParams>;
-  type ParamsOutput = z.output<typeof ControllerPageToolOneSchemaParams>;
-  const querySchema: z.ZodObject<{
-    name: z.ZodOptional<z.ZodString>;
-  }, z.core.$strip>;
-  type QueryInput = z.input<typeof ControllerPageToolOneSchemaQuery>;
-  type QueryOutput = z.output<typeof ControllerPageToolOneSchemaQuery>;
-}
-declare module 'zova-module-demo-basic' {
-  interface RenderPageToolOne extends ControllerPageToolOne {}
-}
-declare const ZPageToolOne: _$vue.DefineSetupFnComponent<Record<string, any>, {}, {}, Record<string, any> & {}, _$vue.PublicProps>;
-//#endregion
-//#region src/suite/a-demo/modules/demo-basic/src/.metadata/page/toolTwo.d.ts
-declare namespace NSControllerPageToolTwo {
-  const paramsSchema: z.ZodObject<{
-    id: z.ZodOptional<z.ZodNumber>;
-  }, z.core.$strip>;
-  type ParamsInput = z.input<typeof ControllerPageToolTwoSchemaParams>;
-  type ParamsOutput = z.output<typeof ControllerPageToolTwoSchemaParams>;
-  const querySchema: z.ZodObject<{
-    name: z.ZodOptional<z.ZodString>;
-  }, z.core.$strip>;
-  type QueryInput = z.input<typeof ControllerPageToolTwoSchemaQuery>;
-  type QueryOutput = z.output<typeof ControllerPageToolTwoSchemaQuery>;
-}
-declare const ZPageToolTwo: _$vue.DefineSetupFnComponent<Record<string, any>, {}, {}, Record<string, any> & {}, _$vue.PublicProps>;
-//#endregion
-//#region src/suite/a-demo/modules/demo-basic/src/.metadata/component/actionView.d.ts
-type TypeControllerActionViewPublicProps = {
-  controllerRef?: (ref: ControllerActionView) => void;
-} & ControllerActionViewProps;
-type ControllerInnerProps$25 = TypeControllerInnerProps<ControllerActionViewProps, keyof typeof ControllerActionView.$propsDefault>;
-declare module 'zova-module-demo-basic' {
-  interface ControllerActionView {
-    $props: ControllerInnerProps$25;
-  }
-}
-declare const ZActionView: _$vue.DefineSetupFnComponent<TypeControllerActionViewPublicProps, _$vue.EmitsOptions, _$vue.SlotsType<Record<string, any>>, {
-  controllerRef?: (ref: ControllerActionView) => void;
-} & ControllerActionViewProps & ({
-  [x: `on${Capitalize<string>}`]: ((...args: any[]) => any) | undefined;
-} | {
-  [x: `on${Capitalize<string>}`]: ((...args: never) => any) | undefined;
-}), _$vue.PublicProps>;
-declare module 'zova-module-a-bean' {
-  interface IVonaComponentRecord {
-    'demo-basic:actionView': ControllerActionViewProps;
-  }
-}
-//#endregion
-//#region src/suite/a-demo/modules/demo-basic/src/.metadata/component/card.d.ts
-type TypeControllerCardPublicProps = {
-  controllerRef?: (ref: ControllerCard) => void;
-} & ControllerCardProps;
-type ControllerInnerProps$24 = TypeControllerInnerProps<ControllerCardProps, keyof typeof ControllerCard.$propsDefault>;
-declare module 'zova-module-demo-basic' {
-  interface ControllerCard {
-    $props: ControllerInnerProps$24;
-  }
-}
-declare const ZCard: _$vue.DefineSetupFnComponent<TypeControllerCardPublicProps, _$vue.EmitsOptions, _$vue.SlotsType<Record<string, any>>, {
-  controllerRef?: (ref: ControllerCard) => void;
-} & ControllerCardProps & ({
-  [x: `on${Capitalize<string>}`]: ((...args: any[]) => any) | undefined;
-} | {
-  [x: `on${Capitalize<string>}`]: ((...args: never) => any) | undefined;
-}), _$vue.PublicProps>;
-declare module 'zova-module-a-bean' {
-  interface IVonaComponentRecord {
-    'demo-basic:card': ControllerCardProps;
-  }
-}
-//#endregion
-//#region src/suite/a-demo/modules/demo-basic/src/.metadata/component/formFieldTest.d.ts
-type TypeControllerFormFieldTestPublicProps = {
-  controllerRef?: (ref: ControllerFormFieldTest) => void;
-} & ControllerFormFieldTestProps;
-type ControllerInnerProps$23 = TypeControllerInnerProps<ControllerFormFieldTestProps, keyof typeof ControllerFormFieldTest.$propsDefault>;
-declare module 'zova-module-demo-basic' {
-  interface ControllerFormFieldTest {
-    $props: ControllerInnerProps$23;
-  }
-}
-declare const ZFormFieldTest: _$vue.DefineSetupFnComponent<TypeControllerFormFieldTestPublicProps, _$vue.EmitsOptions, _$vue.SlotsType<Record<string, any>>, {
-  controllerRef?: (ref: ControllerFormFieldTest) => void;
-} & ControllerFormFieldTestProps & ({
-  [x: `on${Capitalize<string>}`]: ((...args: any[]) => any) | undefined;
-} | {
-  [x: `on${Capitalize<string>}`]: ((...args: never) => any) | undefined;
-}), _$vue.PublicProps>;
-declare module 'zova-module-a-bean' {
-  interface IVonaComponentRecord {
-    'demo-basic:formFieldTest': ControllerFormFieldTestProps;
-  }
-}
-//#endregion
-//#region src/suite/a-demo/modules/demo-basic/src/.metadata/component/tableCellTest.d.ts
-type TypeControllerTableCellTestPublicProps = {
-  controllerRef?: (ref: ControllerTableCellTest) => void;
-} & ControllerTableCellTestProps;
-type ControllerInnerProps$22 = TypeControllerInnerProps<ControllerTableCellTestProps, keyof typeof ControllerTableCellTest.$propsDefault>;
-declare module 'zova-module-demo-basic' {
-  interface ControllerTableCellTest {
-    $props: ControllerInnerProps$22;
-  }
-}
-declare const ZTableCellTest: _$vue.DefineSetupFnComponent<TypeControllerTableCellTestPublicProps, _$vue.EmitsOptions, _$vue.SlotsType<Record<string, any>>, {
-  controllerRef?: (ref: ControllerTableCellTest) => void;
-} & ControllerTableCellTestProps & ({
-  [x: `on${Capitalize<string>}`]: ((...args: any[]) => any) | undefined;
-} | {
-  [x: `on${Capitalize<string>}`]: ((...args: never) => any) | undefined;
-}), _$vue.PublicProps>;
-declare module 'zova-module-a-bean' {
-  interface IVonaComponentRecord {
-    'demo-basic:tableCellTest': ControllerTableCellTestProps;
-  }
-}
-//#endregion
-//#region src/suite/a-demo/modules/demo-basic/src/page/toolOne/render.d.ts
-declare class RenderPageToolOne extends BeanRenderBase {
-  private _renderAuto;
-  private _renderManual;
-  render(): _$vue_jsx_runtime0.JSX.Element;
-}
-//#endregion
-//#region src/suite/a-home/modules/home-index/src/page/home/controller.d.ts
-declare class ControllerPageHome extends BeanControllerPageBase {
-  message: string;
-  protected __init__(): Promise<void>;
-  protected render(): _$vue_jsx_runtime0.JSX.Element;
-}
-//#endregion
-//#region src/suite/a-home/modules/home-index/src/.metadata/page/home.d.ts
-declare const ZPageHome: _$vue.DefineSetupFnComponent<Record<string, any>, {}, {}, Record<string, any> & {}, _$vue.PublicProps>;
-//#endregion
-//#region src/suite/a-home/modules/home-index/src/.metadata/index.d.ts
-declare module 'zova' {}
-declare module 'zova-module-home-index' {
-  interface ControllerPageHome {}
-}
-/** controller: end */
-/** controller: begin */
-declare module 'zova' {
-  interface IBeanRecordLocal {
-    'home-index.controller.pageHome': ControllerPageHome;
-  }
-}
-/** controller: end */
-/** pages: begin */
-declare module 'zova-module-a-router' {
-  interface IPagePathRecord {
-    '/home/index': TypePagePathSchema<undefined, undefined>;
-  }
-  interface IPageNameRecord {}
-}
-declare module 'zova-module-home-index' {}
-/** pages: end */
-/** scope: begin */
-declare class ScopeModuleHomeIndex extends BeanScopeBase {}
-interface ScopeModuleHomeIndex {
-  util: BeanScopeUtil;
-}
-declare module 'zova' {
-  interface IBeanScopeRecord {
-    'home-index': ScopeModuleHomeIndex;
-  }
-}
-/** scope: end */
-//#endregion
-//#region src/suite/a-demo/modules/demo-basic/src/bean/aop.home.d.ts
-declare class AopHome extends BeanAopBase {
-  protected __init__: AopActionInit<ControllerPageHome>;
-  protected __dispose__: AopActionDispose<ControllerPageHome>;
-  protected render: AopActionRender<ControllerPageHome>;
-}
-//#endregion
-//#region src/suite/a-demo/modules/demo-basic/src/bean/aop.home3.d.ts
-declare class AopHome3 extends BeanAopBase {
-  protected render: AopActionRender<ControllerPageHome>;
-}
-//#endregion
-//#region src/suite/a-demo/modules/demo-basic/src/bean/behavior.formFieldLayout.d.ts
-interface IBehaviorPropsInputFormFieldLayout$1 {}
-interface IBehaviorPropsOutputFormFieldLayout$1 {}
-interface IBehaviorOptionsFormFieldLayout$1 extends IDecoratorBehaviorOptions {}
-declare class BehaviorFormFieldLayout$1 extends BeanBehaviorBase<IBehaviorOptionsFormFieldLayout$1, IBehaviorPropsInputFormFieldLayout$1, IBehaviorPropsOutputFormFieldLayout$1> {
-  $$formField: ControllerFormField;
-  protected render(renderContext: IFormFieldRenderContext, next: NextBehavior<IBehaviorPropsOutputFormFieldLayout$1>): VNode;
-}
-//#endregion
-//#region src/suite/a-demo/modules/demo-basic/src/bean/tableCell.test.d.ts
-interface ITableCellOptionsTest extends IDecoratorTableCellOptions {
-  iconPrefix?: string;
-}
-declare class TableCellTest extends BeanBase implements ITableCellRender {
-  render(options: ITableCellOptionsTest, _renderContext: IJsxRenderContextTableCell, next: NextTableCellRender): any;
-}
-//#endregion
-//#region src/suite/a-demo/modules/demo-basic/src/.metadata/locales.d.ts
-declare const locales$8: {
-  'en-us': {
-    HelloWorld: string;
-    ChangeLanguage: string;
-    YourName: string;
-    Submit: string;
-  };
-  'zh-cn': {
-    HelloWorld: string;
-    ChangeLanguage: string;
-    YourName: string;
-    Submit: string;
-  };
-};
-//#endregion
-//#region src/suite/a-demo/modules/demo-basic/src/.metadata/index.d.ts
-declare module 'zova-module-a-model' {
-  interface IModelRecord {
-    'demo-basic:test': IModelOptionsTest;
-  }
-}
-declare module 'zova-module-demo-basic' {
-  interface ModelTest {}
-  interface ModelTest {
-    get $beanFullName(): 'demo-basic.model.test';
-    get $onionName(): 'demo-basic:test';
-    get $onionOptions(): IModelOptionsTest;
-  }
-}
-/** model: end */
-/** model: begin */
-declare module 'zova' {
-  interface IBeanRecordGeneral {
-    'demo-basic.model.test': ModelTest;
-  }
-}
-/** model: end */
-/** store: begin */
-declare module 'zova' {}
-declare module 'zova-module-demo-basic' {
-  interface StoreCounter {}
-  interface StoreCounter {
-    get $beanFullName(): 'demo-basic.store.counter';
-    get $onionName(): 'demo-basic:counter';
-  }
-}
-/** store: end */
-/** store: begin */
-declare module 'zova' {
-  interface IBeanRecordGeneral {
-    'demo-basic.store.counter': StoreCounter;
-  }
-}
-/** store: end */
-/** controller: begin */
-declare module 'zova' {}
-declare module 'zova-module-demo-basic' {
-  interface ControllerActionView {}
-  interface ControllerCard {}
-  interface ControllerFormFieldTest {}
-  interface ControllerTableCellTest {}
-  interface ControllerPageComponent {}
-  interface ControllerPageLocale {}
-  interface ControllerPagePinia {}
-  interface ControllerPageRouteParams {}
-  interface ControllerPageRouteQuery {}
-  interface ControllerPageRouteQueryB {}
-  interface ControllerPageState {}
-  interface ControllerPageStyle {}
-  interface ControllerPageToolOne {}
-  interface ControllerPageToolTwo {}
-}
-/** controller: end */
-/** controller: begin */
-declare module 'zova' {
-  interface IBeanRecordLocal {
-    'demo-basic.controller.actionView': ControllerActionView;
-    'demo-basic.controller.card': ControllerCard;
-    'demo-basic.controller.formFieldTest': ControllerFormFieldTest;
-    'demo-basic.controller.tableCellTest': ControllerTableCellTest;
-    'demo-basic.controller.pageComponent': ControllerPageComponent;
-    'demo-basic.controller.pageLocale': ControllerPageLocale;
-    'demo-basic.controller.pagePinia': ControllerPagePinia;
-    'demo-basic.controller.pageRouteParams': ControllerPageRouteParams;
-    'demo-basic.controller.pageRouteQuery': ControllerPageRouteQuery;
-    'demo-basic.controller.pageRouteQueryB': ControllerPageRouteQueryB;
-    'demo-basic.controller.pageState': ControllerPageState;
-    'demo-basic.controller.pageStyle': ControllerPageStyle;
-    'demo-basic.controller.pageToolOne': ControllerPageToolOne$1;
-    'demo-basic.controller.pageToolTwo': ControllerPageToolTwo;
-  }
-}
-/** controller: end */
-/** pages: begin */
-declare module 'zova-module-a-router' {
-  interface IPagePathRecord {
-    '/demo/basic/component': TypePagePathSchema<undefined, undefined>;
-    '/demo/basic/locale': TypePagePathSchema<undefined, undefined>;
-    '/demo/basic/pinia': TypePagePathSchema<undefined, undefined>;
-    '/demo/basic/routeParams/:id?': TypePagePathSchema<NSControllerPageRouteParams.ParamsInput, NSControllerPageRouteParams.QueryInput>;
-    '/demo/basic/routeQuery': TypePagePathSchema<NSControllerPageRouteQuery.ParamsInput, NSControllerPageRouteQuery.QueryInput>;
-    '/demo/basic/routeQueryB': TypePagePathSchema<NSControllerPageRouteQueryB.ParamsInput, NSControllerPageRouteQueryB.QueryInput>;
-    '/demo/basic/state': TypePagePathSchema<undefined, undefined>;
-    '/demo/basic/style': TypePagePathSchema<undefined, undefined>;
-    '/demo/basic/toolOne/:id?': TypePagePathSchema<NSControllerPageToolOne.ParamsInput, NSControllerPageToolOne.QueryInput>;
-    '/demo/basic/toolTwo/:id?': TypePagePathSchema<NSControllerPageToolTwo.ParamsInput, NSControllerPageToolTwo.QueryInput>;
-  }
-  interface IPageNameRecord {
-    'demo-basic:routeParams': undefined;
-    'demo-basic:toolOne': undefined;
-    'demo-basic:toolTwo': undefined;
-  }
-}
-declare module 'zova-module-demo-basic' {
-  interface ControllerPageRouteParams {
-    $params: NSControllerPageRouteParams.ParamsOutput;
-    $query: NSControllerPageRouteParams.QueryOutput;
-  }
-  interface ControllerPageRouteQuery {
-    $params: NSControllerPageRouteQuery.ParamsOutput;
-    $query: NSControllerPageRouteQuery.QueryOutput;
-  }
-  interface ControllerPageRouteQueryB {
-    $params: NSControllerPageRouteQueryB.ParamsOutput;
-    $query: NSControllerPageRouteQueryB.QueryOutput;
-  }
-  interface ControllerPageToolOne {
-    $params: NSControllerPageToolOne.ParamsOutput;
-    $query: NSControllerPageToolOne.QueryOutput;
-  }
-  interface ControllerPageToolTwo {
-    $params: NSControllerPageToolTwo.ParamsOutput;
-    $query: NSControllerPageToolTwo.QueryOutput;
-  }
-}
-/** pages: end */
-/** components: begin */
-declare module 'zova' {
-  interface IComponentRecord {
-    'demo-basic:actionView': ControllerActionView;
-    'demo-basic:card': ControllerCard;
-    'demo-basic:formFieldTest': ControllerFormFieldTest;
-    'demo-basic:tableCellTest': ControllerTableCellTest;
-  }
-  interface IZovaComponentRecord {
-    'demo-basic:actionView': typeof ZActionView;
-    'demo-basic:card': typeof ZCard;
-    'demo-basic:formFieldTest': typeof ZFormFieldTest;
-    'demo-basic:tableCellTest': typeof ZTableCellTest;
-  }
-}
-/** components: end */
-/** render: begin */
-declare module 'zova' {}
-declare module 'zova-module-demo-basic' {
-  interface RenderPageToolOne {}
-}
-/** render: end */
-/** render: begin */
-declare module 'zova' {
-  interface IBeanRecordLocal {
-    'demo-basic.render.pageToolOne': RenderPageToolOne;
-  }
-}
-/** render: end */
-/** aop: begin */
-declare module 'zova-module-a-bean' {
-  interface IAopRecord {
-    'demo-basic:home': IDecoratorAopOptions;
-    'demo-basic:home3': IDecoratorAopOptions;
-  }
-}
-declare module 'zova-module-demo-basic' {
-  interface AopHome {}
-  interface AopHome {
-    get $beanFullName(): 'demo-basic.aop.home';
-    get $onionName(): 'demo-basic:home';
-    get $onionOptions(): IDecoratorAopOptions;
-  }
-  interface AopHome3 {}
-  interface AopHome3 {
-    get $beanFullName(): 'demo-basic.aop.home3';
-    get $onionName(): 'demo-basic:home3';
-    get $onionOptions(): IDecoratorAopOptions;
-  }
-}
-/** aop: end */
-/** aop: begin */
-declare module 'zova' {
-  interface IBeanRecordLocal {
-    'demo-basic.aop.home': AopHome;
-    'demo-basic.aop.home3': AopHome3;
-  }
-}
-/** aop: end */
-/** behavior: begin */
-declare module 'zova-module-a-behavior' {
-  interface IBehaviorRecord {
-    'demo-basic:formFieldLayout': IBehaviorOptionsFormFieldLayout$1;
-  }
-}
-declare module 'zova-module-demo-basic' {
-  interface BehaviorFormFieldLayout {}
-  interface BehaviorFormFieldLayout {
-    get $beanFullName(): 'demo-basic.behavior.formFieldLayout';
-    get $onionName(): 'demo-basic:formFieldLayout';
-    get $onionOptions(): IBehaviorOptionsFormFieldLayout$1;
-  }
-}
-/** behavior: end */
-/** behavior: begin */
-declare module 'zova' {
-  interface IBeanRecordLocal {
-    'demo-basic.behavior.formFieldLayout': BehaviorFormFieldLayout$1;
-  }
-}
-/** behavior: end */
-/** behaviors: begin */
-declare module 'vue' {
-  interface InputHTMLAttributes {
-    'bs-demo-basic-formFieldLayout'?: IBehaviorOptionsFormFieldLayout$1 | '' | boolean;
-  }
-}
-declare module 'vue/jsx-runtime' {
-  namespace JSX {
-    interface IntrinsicAttributes {
-      'bs-demo-basic-formFieldLayout'?: IBehaviorOptionsFormFieldLayout$1 | '' | boolean;
-    }
-  }
-}
-/** behaviors: end */
-/** tableCell: begin */
-declare module 'zova-module-a-table' {
-  interface ITableCellRecord {
-    'demo-basic:test': ITableCellOptionsTest;
-  }
-}
-declare module 'zova-module-demo-basic' {
-  interface TableCellTest {}
-  interface TableCellTest {
-    get $beanFullName(): 'demo-basic.tableCell.test';
-    get $onionName(): 'demo-basic:test';
-    get $onionOptions(): ITableCellOptionsTest;
-  }
-}
-/** tableCell: end */
-/** tableCell: begin */
-declare module 'zova' {
-  interface IBeanRecordGeneral {
-    'demo-basic.tableCell.test': TableCellTest;
-  }
-}
-/** tableCell: end */
-/** locale: begin */
-declare class ScopeModuleDemoBasic extends BeanScopeBase {}
-interface ScopeModuleDemoBasic {
-  util: BeanScopeUtil;
-  locale: TypeModuleLocales<(typeof locales$8)[TypeLocaleBase]>;
-}
-declare module 'zova' {
-  interface IBeanScopeRecord {
-    'demo-basic': ScopeModuleDemoBasic;
-  }
-  interface IBeanScopeLocale {
-    'demo-basic': (typeof locales$8)[TypeLocaleBase];
-  }
-}
-//#endregion
-//#region src/suite/a-demo/modules/demo-basic/rest/tableCell/test.d.ts
-declare function BBTDemoBasicTest(_props: ITableCellOptionsTest): string;
-//#endregion
-//#region src/suite/a-demo/modules/demo-todo/src/model/todo.d.ts
-interface IModelOptionsTodo extends IDecoratorModelOptions {}
-declare class ModelTodo extends BeanModelBase {
-  findAll(): _$vue.UnwrapNestedRefs<_$_tanstack_vue_query0.UseQueryReturnType<ApiTodoEntity[], Error>>;
-  findOne(id?: string): {
-    dataUpdatedAt: number;
-    errorUpdatedAt: number;
-    failureCount: number;
-    failureReason: Error | null;
-    errorUpdateCount: number;
-    isFetched: boolean;
-    isFetchedAfterMount: boolean;
-    isFetching: boolean;
-    isInitialLoading: boolean;
-    isPaused: boolean;
-    isRefetching: boolean;
-    isStale: boolean;
-    isEnabled: boolean;
-    refetch: (options?: _$_tanstack_query_core0.RefetchOptions) => Promise<_$_tanstack_query_core0.QueryObserverResult<ApiTodoEntity, Error>>;
-    fetchStatus: _$_tanstack_query_core0.FetchStatus;
-    promise: Promise<ApiTodoEntity>;
-    data: undefined;
-    error: Error;
-    isError: true;
-    isPending: false;
-    isLoading: false;
-    isLoadingError: true;
-    isRefetchError: false;
-    isSuccess: false;
-    isPlaceholderData: false;
-    status: 'error';
-    suspense: () => Promise<_$_tanstack_query_core0.QueryObserverResult<ApiTodoEntity, Error>>;
-  } | {
-    dataUpdatedAt: number;
-    errorUpdatedAt: number;
-    failureCount: number;
-    failureReason: Error | null;
-    errorUpdateCount: number;
-    isFetched: boolean;
-    isFetchedAfterMount: boolean;
-    isFetching: boolean;
-    isLoading: boolean;
-    isInitialLoading: boolean;
-    isPaused: boolean;
-    isRefetching: boolean;
-    isStale: boolean;
-    isEnabled: boolean;
-    refetch: (options?: _$_tanstack_query_core0.RefetchOptions) => Promise<_$_tanstack_query_core0.QueryObserverResult<ApiTodoEntity, Error>>;
-    fetchStatus: _$_tanstack_query_core0.FetchStatus;
-    promise: Promise<ApiTodoEntity>;
-    data: undefined;
-    error: null;
-    isError: false;
-    isPending: true;
-    isLoadingError: false;
-    isRefetchError: false;
-    isSuccess: false;
-    isPlaceholderData: false;
-    status: 'pending';
-    suspense: () => Promise<_$_tanstack_query_core0.QueryObserverResult<ApiTodoEntity, Error>>;
-  } | {
-    dataUpdatedAt: number;
-    errorUpdatedAt: number;
-    failureCount: number;
-    failureReason: Error | null;
-    errorUpdateCount: number;
-    isFetched: boolean;
-    isFetchedAfterMount: boolean;
-    isFetching: boolean;
-    isInitialLoading: boolean;
-    isPaused: boolean;
-    isRefetching: boolean;
-    isStale: boolean;
-    isEnabled: boolean;
-    refetch: (options?: _$_tanstack_query_core0.RefetchOptions) => Promise<_$_tanstack_query_core0.QueryObserverResult<ApiTodoEntity, Error>>;
-    fetchStatus: _$_tanstack_query_core0.FetchStatus;
-    promise: Promise<ApiTodoEntity>;
-    data: ApiTodoEntity;
-    isError: false;
-    error: null;
-    isPending: false;
-    isLoading: false;
-    isLoadingError: false;
-    isRefetchError: false;
-    isSuccess: true;
-    isPlaceholderData: true;
-    status: 'success';
-    suspense: () => Promise<_$_tanstack_query_core0.QueryObserverResult<ApiTodoEntity, Error>>;
-  } | {
-    dataUpdatedAt: number;
-    errorUpdatedAt: number;
-    failureCount: number;
-    failureReason: Error | null;
-    errorUpdateCount: number;
-    isFetched: boolean;
-    isFetchedAfterMount: boolean;
-    isFetching: boolean;
-    isInitialLoading: boolean;
-    isPaused: boolean;
-    isRefetching: boolean;
-    isStale: boolean;
-    isEnabled: boolean;
-    refetch: (options?: _$_tanstack_query_core0.RefetchOptions) => Promise<_$_tanstack_query_core0.QueryObserverResult<ApiTodoEntity, Error>>;
-    fetchStatus: _$_tanstack_query_core0.FetchStatus;
-    promise: Promise<ApiTodoEntity>;
-    data: ApiTodoEntity;
-    error: Error;
-    isError: true;
-    isPending: false;
-    isLoading: false;
-    isLoadingError: false;
-    isRefetchError: true;
-    isSuccess: false;
-    isPlaceholderData: false;
-    status: 'error';
-    suspense: () => Promise<_$_tanstack_query_core0.QueryObserverResult<ApiTodoEntity, Error>>;
-  } | {
-    dataUpdatedAt: number;
-    errorUpdatedAt: number;
-    failureCount: number;
-    failureReason: Error | null;
-    errorUpdateCount: number;
-    isFetched: boolean;
-    isFetchedAfterMount: boolean;
-    isFetching: boolean;
-    isInitialLoading: boolean;
-    isPaused: boolean;
-    isRefetching: boolean;
-    isStale: boolean;
-    isEnabled: boolean;
-    refetch: (options?: _$_tanstack_query_core0.RefetchOptions) => Promise<_$_tanstack_query_core0.QueryObserverResult<ApiTodoEntity, Error>>;
-    fetchStatus: _$_tanstack_query_core0.FetchStatus;
-    promise: Promise<ApiTodoEntity>;
-    data: ApiTodoEntity;
-    error: null;
-    isError: false;
-    isPending: false;
-    isLoading: false;
-    isLoadingError: false;
-    isRefetchError: false;
-    isSuccess: true;
-    isPlaceholderData: false;
-    status: 'success';
-    suspense: () => Promise<_$_tanstack_query_core0.QueryObserverResult<ApiTodoEntity, Error>>;
-  } | undefined;
-  create(): _$vue.UnwrapNestedRefs<_$_tanstack_vue_query0.UseMutationReturnType<void, Error, ApiTodoEntity, unknown>>;
-  update(id: string): _$vue.UnwrapNestedRefs<_$_tanstack_vue_query0.UseMutationReturnType<void, Error, ApiTodoEntity, unknown>>;
-  delete(id: string): _$vue.UnwrapNestedRefs<_$_tanstack_vue_query0.UseMutationReturnType<void, Error, void, unknown>>;
-}
-//#endregion
-//#region src/suite/a-demo/modules/demo-todo/src/api/todo.d.ts
-interface ApiTodoEntity {
-  id: string;
-  title: string;
-  done: boolean;
-}
-type ApiTodoIntertBody = ApiTodoEntity;
-type ApiTodoUpdateBody = ApiTodoEntity;
-declare class ApiTodo extends BeanApiBase {
-  findAll(): Promise<ApiTodoEntity[]>;
-  findOne(id: string): Promise<ApiTodoEntity>;
-  create(body: ApiTodoIntertBody): Promise<void>;
-  update(id: string, body: ApiTodoUpdateBody): Promise<void>;
-  delete(id: string): Promise<void>;
-}
-//#endregion
-//#region src/suite/a-demo/modules/demo-todo/src/page/item/controller.d.ts
-declare const ControllerPageItemSchemaParams: z.ZodObject<{
-  id: z.ZodString;
-}, z.core.$strip>;
-declare const ControllerPageItemSchemaQuery: z.ZodObject<{}, z.core.$strip>;
-declare class ControllerPageItem extends BeanControllerPageBase {
-  $$modelTodo: ModelTodo;
-  currentTodoId?: string;
-  protected __init__(): Promise<void>;
-  protected render(): _$vue_jsx_runtime0.JSX.Element;
-}
-//#endregion
-//#region src/suite/a-demo/modules/demo-todo/src/page/todo/controller.d.ts
-declare class ControllerPageTodo extends BeanControllerPageBase {
-  $$modelTodo: ModelTodo;
-  newTitle: string;
-  currentTodoId?: string;
-  protected __init__(): Promise<void>;
-  get queryTodos(): _$vue.UnwrapNestedRefs<_$_tanstack_vue_query0.UseQueryReturnType<ApiTodoEntity[], Error>>;
-  get queryTodoCurrent(): {
-    dataUpdatedAt: number;
-    errorUpdatedAt: number;
-    failureCount: number;
-    failureReason: Error | null;
-    errorUpdateCount: number;
-    isFetched: boolean;
-    isFetchedAfterMount: boolean;
-    isFetching: boolean;
-    isInitialLoading: boolean;
-    isPaused: boolean;
-    isRefetching: boolean;
-    isStale: boolean;
-    isEnabled: boolean;
-    refetch: (options?: _$_tanstack_query_core0.RefetchOptions) => Promise<_$_tanstack_query_core0.QueryObserverResult<ApiTodoEntity, Error>>;
-    fetchStatus: _$_tanstack_query_core0.FetchStatus;
-    promise: Promise<ApiTodoEntity>;
-    data: undefined;
-    error: Error;
-    isError: true;
-    isPending: false;
-    isLoading: false;
-    isLoadingError: true;
-    isRefetchError: false;
-    isSuccess: false;
-    isPlaceholderData: false;
-    status: 'error';
-    suspense: () => Promise<_$_tanstack_query_core0.QueryObserverResult<ApiTodoEntity, Error>>;
-  } | {
-    dataUpdatedAt: number;
-    errorUpdatedAt: number;
-    failureCount: number;
-    failureReason: Error | null;
-    errorUpdateCount: number;
-    isFetched: boolean;
-    isFetchedAfterMount: boolean;
-    isFetching: boolean;
-    isLoading: boolean;
-    isInitialLoading: boolean;
-    isPaused: boolean;
-    isRefetching: boolean;
-    isStale: boolean;
-    isEnabled: boolean;
-    refetch: (options?: _$_tanstack_query_core0.RefetchOptions) => Promise<_$_tanstack_query_core0.QueryObserverResult<ApiTodoEntity, Error>>;
-    fetchStatus: _$_tanstack_query_core0.FetchStatus;
-    promise: Promise<ApiTodoEntity>;
-    data: undefined;
-    error: null;
-    isError: false;
-    isPending: true;
-    isLoadingError: false;
-    isRefetchError: false;
-    isSuccess: false;
-    isPlaceholderData: false;
-    status: 'pending';
-    suspense: () => Promise<_$_tanstack_query_core0.QueryObserverResult<ApiTodoEntity, Error>>;
-  } | {
-    dataUpdatedAt: number;
-    errorUpdatedAt: number;
-    failureCount: number;
-    failureReason: Error | null;
-    errorUpdateCount: number;
-    isFetched: boolean;
-    isFetchedAfterMount: boolean;
-    isFetching: boolean;
-    isInitialLoading: boolean;
-    isPaused: boolean;
-    isRefetching: boolean;
-    isStale: boolean;
-    isEnabled: boolean;
-    refetch: (options?: _$_tanstack_query_core0.RefetchOptions) => Promise<_$_tanstack_query_core0.QueryObserverResult<ApiTodoEntity, Error>>;
-    fetchStatus: _$_tanstack_query_core0.FetchStatus;
-    promise: Promise<ApiTodoEntity>;
-    data: ApiTodoEntity;
-    isError: false;
-    error: null;
-    isPending: false;
-    isLoading: false;
-    isLoadingError: false;
-    isRefetchError: false;
-    isSuccess: true;
-    isPlaceholderData: true;
-    status: 'success';
-    suspense: () => Promise<_$_tanstack_query_core0.QueryObserverResult<ApiTodoEntity, Error>>;
-  } | {
-    dataUpdatedAt: number;
-    errorUpdatedAt: number;
-    failureCount: number;
-    failureReason: Error | null;
-    errorUpdateCount: number;
-    isFetched: boolean;
-    isFetchedAfterMount: boolean;
-    isFetching: boolean;
-    isInitialLoading: boolean;
-    isPaused: boolean;
-    isRefetching: boolean;
-    isStale: boolean;
-    isEnabled: boolean;
-    refetch: (options?: _$_tanstack_query_core0.RefetchOptions) => Promise<_$_tanstack_query_core0.QueryObserverResult<ApiTodoEntity, Error>>;
-    fetchStatus: _$_tanstack_query_core0.FetchStatus;
-    promise: Promise<ApiTodoEntity>;
-    data: ApiTodoEntity;
-    error: Error;
-    isError: true;
-    isPending: false;
-    isLoading: false;
-    isLoadingError: false;
-    isRefetchError: true;
-    isSuccess: false;
-    isPlaceholderData: false;
-    status: 'error';
-    suspense: () => Promise<_$_tanstack_query_core0.QueryObserverResult<ApiTodoEntity, Error>>;
-  } | {
-    dataUpdatedAt: number;
-    errorUpdatedAt: number;
-    failureCount: number;
-    failureReason: Error | null;
-    errorUpdateCount: number;
-    isFetched: boolean;
-    isFetchedAfterMount: boolean;
-    isFetching: boolean;
-    isInitialLoading: boolean;
-    isPaused: boolean;
-    isRefetching: boolean;
-    isStale: boolean;
-    isEnabled: boolean;
-    refetch: (options?: _$_tanstack_query_core0.RefetchOptions) => Promise<_$_tanstack_query_core0.QueryObserverResult<ApiTodoEntity, Error>>;
-    fetchStatus: _$_tanstack_query_core0.FetchStatus;
-    promise: Promise<ApiTodoEntity>;
-    data: ApiTodoEntity;
-    error: null;
-    isError: false;
-    isPending: false;
-    isLoading: false;
-    isLoadingError: false;
-    isRefetchError: false;
-    isSuccess: true;
-    isPlaceholderData: false;
-    status: 'success';
-    suspense: () => Promise<_$_tanstack_query_core0.QueryObserverResult<ApiTodoEntity, Error>>;
-  } | undefined;
-  addTodo(): Promise<void>;
-  completeTodo(item: ApiTodoEntity): Promise<void>;
-  deleteTodo(item: ApiTodoEntity): Promise<void>;
-  protected render(): _$vue_jsx_runtime0.JSX.Element;
-}
-//#endregion
-//#region src/suite/a-demo/modules/demo-todo/src/.metadata/page/item.d.ts
-declare namespace NSControllerPageItem {
-  const paramsSchema: z.ZodObject<{
-    id: z.ZodString;
-  }, z.core.$strip>;
-  type ParamsInput = z.input<typeof ControllerPageItemSchemaParams>;
-  type ParamsOutput = z.output<typeof ControllerPageItemSchemaParams>;
-  const querySchema: z.ZodObject<{}, z.core.$strip>;
-  type QueryInput = z.input<typeof ControllerPageItemSchemaQuery>;
-  type QueryOutput = z.output<typeof ControllerPageItemSchemaQuery>;
-}
-declare const ZPageItem: _$vue.DefineSetupFnComponent<Record<string, any>, {}, {}, Record<string, any> & {}, _$vue.PublicProps>;
-//#endregion
-//#region src/suite/a-demo/modules/demo-todo/src/.metadata/page/todo.d.ts
-declare const ZPageTodo: _$vue.DefineSetupFnComponent<Record<string, any>, {}, {}, Record<string, any> & {}, _$vue.PublicProps>;
-//#endregion
-//#region src/suite/a-demo/modules/demo-todo/src/.metadata/index.d.ts
-declare module 'zova-module-a-model' {
-  interface IModelRecord {
-    'demo-todo:todo': IModelOptionsTodo;
-  }
-}
-declare module 'zova-module-demo-todo' {
-  interface ModelTodo {}
-  interface ModelTodo {
-    get $beanFullName(): 'demo-todo.model.todo';
-    get $onionName(): 'demo-todo:todo';
-    get $onionOptions(): IModelOptionsTodo;
-  }
-}
-/** model: end */
-/** model: begin */
-declare module 'zova' {
-  interface IBeanRecordGeneral {
-    'demo-todo.model.todo': ModelTodo;
-  }
-}
-/** model: end */
-/** api: begin */
-declare module 'zova' {}
-declare module 'zova-module-demo-todo' {
-  interface ApiTodo {}
-  interface ApiTodo {
-    get $beanFullName(): 'demo-todo.api.todo';
-    get $onionName(): 'demo-todo:todo';
-  }
-}
-/** api: end */
-/** api: begin */
-interface IModuleApi {
-  'todo': ApiTodo;
-}
-declare module 'zova' {
-  interface IBeanRecordGeneral {
-    'demo-todo.api.todo': ApiTodo;
-  }
-}
-/** api: end */
-/** openapi: begin */
-/** openapi: end */
-/** controller: begin */
-declare module 'zova' {}
-declare module 'zova-module-demo-todo' {
-  interface ControllerPageItem {}
-  interface ControllerPageTodo {}
-}
-/** controller: end */
-/** controller: begin */
-declare module 'zova' {
-  interface IBeanRecordLocal {
-    'demo-todo.controller.pageItem': ControllerPageItem;
-    'demo-todo.controller.pageTodo': ControllerPageTodo;
-  }
-}
-/** controller: end */
-/** pages: begin */
-declare module 'zova-module-a-router' {
-  interface IPagePathRecord {
-    '/demo/todo/item/:id': TypePagePathSchema<NSControllerPageItem.ParamsInput, NSControllerPageItem.QueryInput>;
-    '/demo/todo/todo': TypePagePathSchema<undefined, undefined>;
-  }
-  interface IPageNameRecord {
-    'demo-todo:item': undefined;
-  }
-}
-declare module 'zova-module-demo-todo' {
-  interface ControllerPageItem {
-    $params: NSControllerPageItem.ParamsOutput;
-    $query: NSControllerPageItem.QueryOutput;
-  }
-}
-/** pages: end */
-/** scope: begin */
-declare class ScopeModuleDemoTodo extends BeanScopeBase {}
-interface ScopeModuleDemoTodo {
-  util: BeanScopeUtil;
-  api: IModuleApi;
-}
-declare module 'zova' {
-  interface IBeanScopeRecord {
-    'demo-todo': ScopeModuleDemoTodo;
-  }
-}
-/** scope: end */
 //#endregion
 //#region src/suite/a-home/modules/home-base/src/service/routerGuards.d.ts
 declare class ServiceRouterGuards extends BeanRouterGuardsBase {
@@ -5947,7 +4586,7 @@ declare class ServiceSsrLayout extends BeanBase {
 interface ControllerItemLinkProps {
   title: string;
   description?: string;
-  icon?: keyof IIconRecord$1;
+  icon?: keyof IIconRecord;
   href?: string;
   to?: string | object;
 }
@@ -6070,7 +4709,7 @@ declare module 'zova-module-a-bean' {
 }
 //#endregion
 //#region src/suite/a-home/modules/home-base/src/config/config.d.ts
-declare const config$1: (_sys: ZovaSys) => {
+declare const config$3: (_sys: ZovaSys) => {
   layout: {
     sidebar: {
       width: number;
@@ -6090,20 +4729,6 @@ declare const locales$7: {
     Home: string;
   };
 };
-//#endregion
-//#region src/suite/a-home/modules/home-base/src/monkey.d.ts
-declare class Monkey extends BeanSimple implements IMonkeyAppInitialize, IMonkeyAppClose, IMonkeyBeanInit {
-  serviceRouterGuards: ServiceRouterGuards;
-  serviceSsr: ServiceSsr;
-  appInitialize(): Promise<void>;
-  appClose(): void;
-  beanInit(bean: BeanContainer, beanInstance: BeanBase): Promise<void>;
-}
-//#endregion
-//#region src/suite/a-home/modules/home-base/src/monkeySys.d.ts
-declare class MonkeySys extends BeanSimple implements IMonkeyBeanInit {
-  beanInit(bean: BeanContainer, beanInstance: BeanBase): Promise<void>;
-}
 //#endregion
 //#region src/suite/a-home/modules/home-base/src/main.d.ts
 declare class Main extends BeanSimple implements IModuleMain {
@@ -6201,7 +4826,7 @@ declare module 'zova' {
 declare class ScopeModuleHomeBase extends BeanScopeBase {}
 interface ScopeModuleHomeBase {
   util: BeanScopeUtil;
-  config: TypeModuleConfig<typeof config$1>;
+  config: TypeModuleConfig<typeof config$3>;
   locale: TypeModuleLocales<(typeof locales$7)[TypeLocaleBase]>;
 }
 declare module 'zova' {
@@ -6209,7 +4834,7 @@ declare module 'zova' {
     'home-base': ScopeModuleHomeBase;
   }
   interface IBeanScopeConfig {
-    'home-base': ReturnType<typeof config$1>;
+    'home-base': ReturnType<typeof config$3>;
   }
   interface IBeanScopeLocale {
     'home-base': (typeof locales$7)[TypeLocaleBase];
@@ -6498,6 +5123,50 @@ declare module 'zova' {
 }
 /** scope: end */
 //#endregion
+//#region src/suite/a-home/modules/home-index/src/page/home/controller.d.ts
+declare class ControllerPageHome extends BeanControllerPageBase {
+  message: string;
+  protected __init__(): Promise<void>;
+  protected render(): _$vue_jsx_runtime0.JSX.Element;
+}
+//#endregion
+//#region src/suite/a-home/modules/home-index/src/.metadata/page/home.d.ts
+declare const ZPageHome: _$vue.DefineSetupFnComponent<Record<string, any>, {}, {}, Record<string, any> & {}, _$vue.PublicProps>;
+//#endregion
+//#region src/suite/a-home/modules/home-index/src/.metadata/index.d.ts
+declare module 'zova' {}
+declare module 'zova-module-home-index' {
+  interface ControllerPageHome {}
+}
+/** controller: end */
+/** controller: begin */
+declare module 'zova' {
+  interface IBeanRecordLocal {
+    'home-index.controller.pageHome': ControllerPageHome;
+  }
+}
+/** controller: end */
+/** pages: begin */
+declare module 'zova-module-a-router' {
+  interface IPagePathRecord {
+    '/home/index': TypePagePathSchema<undefined, undefined>;
+  }
+  interface IPageNameRecord {}
+}
+declare module 'zova-module-home-index' {}
+/** pages: end */
+/** scope: begin */
+declare class ScopeModuleHomeIndex extends BeanScopeBase {}
+interface ScopeModuleHomeIndex {
+  util: BeanScopeUtil;
+}
+declare module 'zova' {
+  interface IBeanScopeRecord {
+    'home-index': ScopeModuleHomeIndex;
+  }
+}
+/** scope: end */
+//#endregion
 //#region src/suite/a-home/modules/home-layoutempty/src/component/layoutEmpty/controller.d.ts
 interface ControllerLayoutEmptyProps {}
 declare class ControllerLayoutEmpty extends BeanControllerBase {
@@ -6692,7 +5361,7 @@ declare class RenderTabs extends BeanRenderBase {
   renderTabs(): _$vue_jsx_runtime0.JSX.Element | undefined;
   renderTabItems(): _$vue_jsx_runtime0.JSX.Element | undefined;
   getTabIcon(tab: RouteTab): string;
-  getTabItemIcon(tabItem: IRouteViewRouteItem): keyof IIconRecord$1 | '';
+  getTabItemIcon(tabItem: IRouteViewRouteItem): keyof IIconRecord | '';
   _renderRouterViewTabs(): _$vue_jsx_runtime0.JSX.Element;
 }
 //#endregion
@@ -6733,7 +5402,7 @@ declare class StyleLayoutTabs$1 extends BeanStyleBase {
 }
 //#endregion
 //#region src/suite/a-home/modules/home-layouttabs/src/config/config.d.ts
-declare const config: (_sys: ZovaSys) => {
+declare const config$2: (_sys: ZovaSys) => {
   tabs: {
     scene: string;
     max: number;
@@ -6890,7 +5559,7 @@ declare module 'zova' {
 declare class ScopeModuleHomeLayouttabs extends BeanScopeBase {}
 interface ScopeModuleHomeLayouttabs {
   util: BeanScopeUtil;
-  config: TypeModuleConfig<typeof config>;
+  config: TypeModuleConfig<typeof config$2>;
   locale: TypeModuleLocales<(typeof locales$6)[TypeLocaleBase]>;
 }
 declare module 'zova' {
@@ -6898,7 +5567,7 @@ declare module 'zova' {
     'home-layouttabs': ScopeModuleHomeLayouttabs;
   }
   interface IBeanScopeConfig {
-    'home-layouttabs': ReturnType<typeof config>;
+    'home-layouttabs': ReturnType<typeof config$2>;
   }
   interface IBeanScopeLocale {
     'home-layouttabs': (typeof locales$6)[TypeLocaleBase];
@@ -7038,6 +5707,236 @@ declare module 'zova' {
     'home-login': (typeof locales$5)[TypeLocaleBase];
   }
 }
+//#endregion
+//#region src/suite/a-home/modules/home-passport/src/model/passport.d.ts
+interface IModelOptionsPassport extends IDecoratorModelOptions {}
+declare class ModelPassport extends BeanModelBase {
+  passport?: ApiApiHomeUserPassportloginResponseBody['passport'];
+  jwt?: ApiApiHomeUserPassportloginResponseBody['jwt'];
+  accessToken?: string;
+  expireTime?: number;
+  schemaLogin?: SchemaObject;
+  protected __init__(): Promise<void>;
+  get apiSchemasLogin(): _$zova_module_a_openapi0.IOpenapiSchemas;
+  login(): _$vue.UnwrapNestedRefs<_$_tanstack_vue_query0.UseMutationReturnType<{
+    passport: components['schemas']['home-user.dto.passport'];
+    jwt: components['schemas']['a-jwt.dto.jwtToken'];
+  }, Error, {
+    username: string;
+    password: string;
+    captcha: components['schemas']['a-captcha.dto.captchaVerify_c3cd80b1eeafe39bfe4433491bb081d68e84797e_3218e7d152830e08f6e764b9e0c3796df929ee2b'];
+  }, unknown>>;
+  loginByOauthCode(): _$vue.UnwrapNestedRefs<_$_tanstack_vue_query0.UseMutationReturnType<{
+    passport: components['schemas']['home-user.dto.passport'];
+    jwt: components['schemas']['a-jwt.dto.jwtToken'];
+  }, Error, ApiApiHomeUserPassportcreatePassportJwtFromOauthCodeRequestBody, unknown>>;
+  getOauthLoginUrl(module: string, providerName: string, clientName?: string): string;
+  afterLogin(data?: ApiApiHomeUserPassportloginResponseBody): void;
+  logout(): _$vue.UnwrapNestedRefs<_$_tanstack_vue_query0.UseMutationReturnType<void, Error, void, unknown>>;
+  get isAuthenticated(): boolean;
+  get user(): {
+    createdAt: Date;
+    updatedAt: Date;
+    deleted?: boolean;
+    iid?: number;
+    id: number | string;
+    name: string;
+    avatar?: string | undefined;
+    email?: string | undefined;
+    mobile?: string | undefined;
+    activated?: boolean;
+    locale?: string | undefined;
+    tz?: string | undefined;
+  } | undefined;
+  get roles(): {
+    createdAt: Date;
+    updatedAt: Date;
+    deleted?: boolean;
+    iid?: number;
+    id: number | string;
+    name: string;
+  }[] | undefined;
+  getJwtInfo(): Promise<IJwtInfo | undefined>;
+  refreshAuthToken(refreshToken: string): Promise<IJwtInfo>;
+  ensurePassport(): Promise<{
+    user: components['schemas']['home-user.entity.user'];
+    auth: components['schemas']['a-auth.dto.auth'];
+    roles: components['schemas']['home-user.entity.role'][];
+  } | undefined>;
+  private _setLocaleTz;
+  private _setPassportJwt;
+  private _setPassport;
+  private _setJwt;
+  checkPermission(permissions: TypeOpenapiPermissions | undefined, actionName: keyof IResourceActionTableRecord, permissionHint?: IPermissionHint): boolean;
+}
+//#endregion
+//#region src/suite/a-home/modules/home-passport/src/config/config.d.ts
+declare const config$1: (_sys: ZovaSys) => {
+  accessToken: {
+    expireTimeDelay: number;
+  };
+};
+//#endregion
+//#region src/suite/a-home/modules/home-passport/src/.metadata/index.d.ts
+declare module 'zova-module-a-model' {
+  interface IModelRecord {
+    'home-passport:passport': IModelOptionsPassport;
+  }
+}
+declare module 'zova-module-home-passport' {
+  interface ModelPassport {}
+  interface ModelPassport {
+    get $beanFullName(): 'home-passport.model.passport';
+    get $onionName(): 'home-passport:passport';
+    get $onionOptions(): IModelOptionsPassport;
+  }
+}
+/** model: end */
+/** model: begin */
+declare module 'zova' {
+  interface IBeanRecordGeneral {
+    'home-passport.model.passport': ModelPassport;
+  }
+}
+/** model: end */
+/** config: begin */
+declare class ScopeModuleHomePassport extends BeanScopeBase {}
+interface ScopeModuleHomePassport {
+  util: BeanScopeUtil;
+  config: TypeModuleConfig<typeof config$1>;
+}
+declare module 'zova' {
+  interface IBeanScopeRecord {
+    'home-passport': ScopeModuleHomePassport;
+  }
+  interface IBeanScopeConfig {
+    'home-passport': ReturnType<typeof config$1>;
+  }
+}
+/** scope: end */
+//#endregion
+//#region src/suite/a-home/modules/home-passport/src/types/passport.d.ts
+declare module 'zova' {
+  interface BeanBase {
+    $passport: ModelPassport;
+  }
+}
+//#endregion
+//#region src/suite/a-home/modules/home-theme/src/bean/css.default.d.ts
+interface ICssOptionsDefault extends IDecoratorCssOptions {}
+declare class CssDefault extends BeanBase {
+  textCenter: string;
+  buttonPrimary: string;
+  protected __init__(): Promise<void>;
+}
+//#endregion
+//#region src/suite/a-home/modules/home-theme/src/types/style.d.ts
+declare module 'zova' {
+  interface BeanBase {
+    $css: CssDefault;
+  }
+}
+//#endregion
+//#region src/suite/a-home/modules/home-theme/src/types/themeToken.d.ts
+interface ThemeTokenCustom {
+  color: {
+    primary: string;
+  };
+  var: {
+    borderColor: string;
+  };
+  component: {
+    page: {
+      background: string;
+      color: string;
+    };
+  };
+}
+declare module 'zova-module-a-style' {
+  interface ThemeToken extends ThemeTokenCustom {}
+}
+//#endregion
+//#region src/suite/a-home/modules/home-theme/src/bean/theme.default.d.ts
+interface IThemeOptionsDefault extends IDecoratorThemeOptions {}
+declare class ThemeDefault extends BeanThemeBase implements IThemeBase {
+  apply({
+    name,
+    dark
+  }: IThemeApplyParams): Promise<IThemeApplyResult>;
+}
+//#endregion
+//#region src/suite/a-home/modules/home-theme/src/bean/theme.orange.d.ts
+interface IThemeOptionsOrange extends IDecoratorThemeOptions {}
+declare class ThemeOrange extends BeanThemeBase implements IThemeBase {
+  apply({
+    name,
+    dark
+  }: IThemeApplyParams): Promise<IThemeApplyResult>;
+}
+//#endregion
+//#region src/suite/a-home/modules/home-theme/src/.metadata/index.d.ts
+declare module 'zova-module-a-style' {
+  interface ICssRecord {
+    'home-theme:default': ICssOptionsDefault;
+  }
+}
+declare module 'zova-module-home-theme' {
+  interface CssDefault {}
+  interface CssDefault {
+    get $beanFullName(): 'home-theme.css.default';
+    get $onionName(): 'home-theme:default';
+    get $onionOptions(): ICssOptionsDefault;
+  }
+}
+/** css: end */
+/** css: begin */
+declare module 'zova' {
+  interface IBeanRecordLocal {
+    'home-theme.css.default': CssDefault;
+  }
+}
+/** css: end */
+/** theme: begin */
+declare module 'zova-module-a-style' {
+  interface IThemeRecord {
+    'home-theme:default': IThemeOptionsDefault;
+    'home-theme:orange': IThemeOptionsOrange;
+  }
+}
+declare module 'zova-module-home-theme' {
+  interface ThemeDefault {}
+  interface ThemeDefault {
+    get $beanFullName(): 'home-theme.theme.default';
+    get $onionName(): 'home-theme:default';
+    get $onionOptions(): IThemeOptionsDefault;
+  }
+  interface ThemeOrange {}
+  interface ThemeOrange {
+    get $beanFullName(): 'home-theme.theme.orange';
+    get $onionName(): 'home-theme:orange';
+    get $onionOptions(): IThemeOptionsOrange;
+  }
+}
+/** theme: end */
+/** theme: begin */
+declare module 'zova' {
+  interface IBeanRecordLocal {
+    'home-theme.theme.default': ThemeDefault;
+    'home-theme.theme.orange': ThemeOrange;
+  }
+}
+/** theme: end */
+/** scope: begin */
+declare class ScopeModuleHomeTheme extends BeanScopeBase {}
+interface ScopeModuleHomeTheme {
+  util: BeanScopeUtil;
+}
+declare module 'zova' {
+  interface IBeanScopeRecord {
+    'home-theme': ScopeModuleHomeTheme;
+  }
+}
+/** scope: end */
 //#endregion
 //#region src/suite/cabloy-basic/modules/basic-actions/src/bean/action.alert.d.ts
 type TypeActionAlertResult = unknown;
@@ -7278,6 +6177,27 @@ declare module 'zova' {
 }
 /** scope: end */
 //#endregion
+//#region src/suite/cabloy-basic/modules/basic-adapter/src/config/config.d.ts
+declare const config: (_sys: ZovaSys) => {
+  resourceProviders: IResourceProviders;
+};
+//#endregion
+//#region src/suite/cabloy-basic/modules/basic-adapter/src/.metadata/index.d.ts
+declare class ScopeModuleBasicAdapter extends BeanScopeBase {}
+interface ScopeModuleBasicAdapter {
+  util: BeanScopeUtil;
+  config: TypeModuleConfig<typeof config>;
+}
+declare module 'zova' {
+  interface IBeanScopeRecord {
+    'basic-adapter': ScopeModuleBasicAdapter;
+  }
+  interface IBeanScopeConfig {
+    'basic-adapter': ReturnType<typeof config>;
+  }
+}
+/** scope: end */
+//#endregion
 //#region src/suite/cabloy-basic/modules/basic-captcha/src/.metadata/locales.d.ts
 declare const locales$4: {
   'en-us': {
@@ -7311,6 +6231,9 @@ interface CurrencyOptions {
 type TypeDateFormatPreset = 'DATE_SHORT' | 'DATE_MED' | 'DATE_MED_WITH_WEEKDAY' | 'DATE_FULL' | 'DATE_HUGE' | 'TIME_SIMPLE' | 'TIME_WITH_SECONDS' | 'TIME_WITH_SHORT_OFFSET' | 'TIME_WITH_LONG_OFFSET' | 'TIME_24_SIMPLE' | 'TIME_24_WITH_SECONDS' | 'TIME_24_WITH_SHORT_OFFSET' | 'TIME_24_WITH_LONG_OFFSET' | 'DATETIME_SHORT' | 'DATETIME_MED' | 'DATETIME_MED_WITH_WEEKDAY' | 'DATETIME_FULL' | 'DATETIME_HUGE' | 'DATETIME_SHORT_WITH_SECONDS' | 'DATETIME_MED_WITH_SECONDS' | 'DATETIME_FULL_WITH_SECONDS' | 'DATETIME_HUGE_WITH_SECONDS';
 interface ICaptchaSceneRecord {
   'captcha-simple:simple': never;
+}
+interface ICaptchaOptions {
+  scene?: keyof ICaptchaSceneRecord;
 }
 interface ICaptchaProviderRecord {}
 interface ISelectChipsOptions {
@@ -7423,8 +6346,8 @@ declare module 'zova-module-a-openapi' {
     inline?: boolean;
     bordered?: boolean;
     floating?: boolean;
-    iconPrefix?: keyof IIconRecord$1;
-    iconSuffix?: keyof IIconRecord$1;
+    iconPrefix?: keyof IIconRecord;
+    iconSuffix?: keyof IIconRecord;
     header?: TypeRenderComponentJsx | string;
     footer?: TypeRenderComponentJsx | string;
   }
@@ -7669,9 +6592,6 @@ declare module 'zova' {
 declare function currencyFormat(value: any, options?: CurrencyOptions): any;
 declare function currencyUpdate(value: any, options?: CurrencyOptions): number | null | undefined;
 //#endregion
-//#region src/suite/cabloy-basic/modules/basic-currency/rest/tableCell/currency.d.ts
-declare function BBTBasicCurrency(_props: ITableCellOptionsCurrency): string;
-//#endregion
 //#region src/suite/cabloy-basic/modules/basic-date/src/bean/tableCell.date.d.ts
 interface ITableCellOptionsDate extends IResourceTableCellOptionsDate {}
 declare class TableCellDate extends BeanBase implements ITableCellRender {
@@ -7863,9 +6783,6 @@ declare module 'zova' {
   }
 }
 /** scope: end */
-//#endregion
-//#region src/suite/cabloy-basic/modules/basic-date/rest/tableCell/date.d.ts
-declare function BBTBasicDate(_props: ITableCellOptionsDate): string;
 //#endregion
 //#region src/suite/cabloy-basic/modules/basic-form/src/.metadata/locales.d.ts
 declare const locales$3: {
@@ -8146,7 +7063,7 @@ interface ControllerBlockPageProps extends IResourceBlockOptionsPage {}
 declare class ControllerBlockPage<TData extends {} = {}> extends BeanControllerBase {
   static $propsDefault: {};
   static $componentOptions: IComponentOptions;
-  tableInstance: BeanControllerTableBase;
+  tableRef: BeanControllerTableBase;
   tableProvider: ITableProvider;
   jsxZova: ZovaJsx;
   jsxCelScope: IPageScope;
@@ -8187,7 +7104,7 @@ declare class ControllerBlockFilter extends BeanControllerBase {
   static $propsDefault: {};
   static $componentOptions: IComponentOptions;
   formMeta: IFormMeta;
-  formFieldLayout: ISchemaRenderComponentLayoutOptions$1;
+  formFieldLayout: ISchemaRenderComponentLayoutOptions;
   $$renderContext: IJsxRenderContextPage;
   protected __init__(): Promise<void>;
   get schemaFilter(): _$openapi3_ts_oas310.SchemaObject | undefined;
@@ -8213,7 +7130,7 @@ interface ControllerBlockTableProps extends IResourceBlockOptionsTable {}
 declare class ControllerBlockTable extends BeanControllerBase {
   static $propsDefault: {};
   static $componentOptions: IComponentOptions;
-  tableInstance: BeanControllerTableBase;
+  tableRef: BeanControllerTableBase;
   $$renderContext: IJsxRenderContextPage;
   protected __init__(): Promise<void>;
   get permissions(): _$zova_module_a_openapi0.TypeOpenapiPermissions | undefined;
@@ -8417,7 +7334,7 @@ declare class ControllerBlockPageEntry<TData extends {} = {}> extends BeanContro
   static $propsDefault: {};
   static $componentOptions: IComponentOptions;
   entryIdCreated?: TableIdentity;
-  formInstance: BeanControllerFormBase;
+  formRef: BeanControllerFormBase;
   formMeta: IFormMeta;
   formProvider: IFormProvider;
   formSchema?: SchemaObject;
@@ -8596,7 +7513,7 @@ interface ControllerBlockFormProps extends IResourceBlockOptionsForm {}
 declare class ControllerBlockForm extends BeanControllerBase {
   static $propsDefault: {};
   static $componentOptions: IComponentOptions;
-  formInstance: BeanControllerFormBase;
+  formRef: BeanControllerFormBase;
   $$renderContext: IJsxRenderContextPageEntry;
   protected __init__(): Promise<void>;
   protected render(): _$vue_jsx_runtime0.JSX.Element;
@@ -8961,21 +7878,7 @@ declare module 'zova' {
   }
 }
 //#endregion
-//#region src/suite/cabloy-basic/modules/basic-table/rest/tableCell/actionDelete.d.ts
-declare function BBTBasicTableActionDelete(_props: ITableCellOptionsActionDelete): string;
-//#endregion
-//#region src/suite/cabloy-basic/modules/basic-table/rest/tableCell/actionOperationsRow.d.ts
-declare function BBTBasicTableActionOperationsRow(_props: ITableCellOptionsActionOperationsRow): string;
-//#endregion
-//#region src/suite/cabloy-basic/modules/basic-table/rest/tableCell/actionUpdate.d.ts
-declare function BBTBasicTableActionUpdate(_props: ITableCellOptionsActionUpdate): string;
-//#endregion
-//#region src/suite/cabloy-basic/modules/basic-table/rest/tableCell/actionView.d.ts
-declare function BBTBasicTableActionView(_props: ITableCellOptionsActionView): string;
-declare namespace index_d_exports {
-  export { $iconName, Action, ActionAlert, ActionConfirm, ActionCopy, ActionCreate, ActionDelete, ActionEdit, ActionExpr, ActionLog, ActionSetValue, ActionView, AopHome, AopHome3, ApiTodo, ApiTodoEntity, ApiTodoIntertBody, ApiTodoUpdateBody, BBTBasicCurrency, BBTBasicDate, BBTBasicTableActionDelete, BBTBasicTableActionOperationsRow, BBTBasicTableActionUpdate, BBTBasicTableActionView, BBTDemoBasicTest, BehaviorFormField, BehaviorFormFieldLayoutLogin, Component, ControllerActionBack, ControllerActionBackProps, ControllerActionCreate, ControllerActionCreateProps, ControllerActionSubmit, ControllerActionSubmitProps, ControllerActionView, ControllerActionViewProps, ControllerBlockFilter, ControllerBlockFilterProps, ControllerBlockForm, ControllerBlockFormProps, ControllerBlockPage, ControllerBlockPageEntry, ControllerBlockPageEntryProps, ControllerBlockPageProps, ControllerBlockPager, ControllerBlockPagerProps, ControllerBlockTable, ControllerBlockTableProps, ControllerBlockToolbarBulk, ControllerBlockToolbarBulkProps, ControllerBlockToolbarRow, ControllerBlockToolbarRowProps, ControllerCard, ControllerCardProps, ControllerDateRange, ControllerDateRangeModels, ControllerDateRangeProps, ControllerFormFieldCaptcha, ControllerFormFieldCaptchaProps, ControllerFormFieldCurrency, ControllerFormFieldCurrencyProps, ControllerFormFieldDate, ControllerFormFieldDateProps, ControllerFormFieldDateRange, ControllerFormFieldDateRangeProps, ControllerFormFieldInput, ControllerFormFieldInputProps, ControllerItemLink, ControllerItemLinkProps, ControllerLayoutEmpty, ControllerLayoutEmptyProps, ControllerLayoutTabs, ControllerLayoutTabsProps, ControllerPage, ControllerPageAuthCallback, ControllerPageAuthCallbackSchemaQuery, ControllerPageComponent, ControllerPageErrorExpired, ControllerPageErrorExpiredSchemaQuery, ControllerPageErrorNotFound, ControllerPageHome, ControllerPageItem, ControllerPageItemSchemaParams, ControllerPageItemSchemaQuery, ControllerPageLocale, ControllerPageLogin$1 as ControllerPageLogin, ControllerPagePinia, ControllerPageProps, ControllerPageRouteParams, ControllerPageRouteParamsSchemaParams, ControllerPageRouteParamsSchemaQuery, ControllerPageRouteQuery, ControllerPageRouteQueryB, ControllerPageRouteQueryBSchemaParams, ControllerPageRouteQueryBSchemaQuery, ControllerPageRouteQuerySchemaParams, ControllerPageRouteQuerySchemaQuery, ControllerPageState, ControllerPageStyle, ControllerPageTest, ControllerPageTodo, ControllerPageToolOne$1 as ControllerPageToolOne, ControllerPageToolOneSchemaParams, ControllerPageToolOneSchemaQuery, ControllerPageToolTwo, ControllerPageToolTwoSchemaParams, ControllerPageToolTwoSchemaQuery, ControllerTable, ControllerTableCellTest, ControllerTableCellTestProps, ControllerTableProps, ControllerTest, ControllerTestModels, ControllerTestProps, IActionOptionsAlert, IActionOptionsConfirm, IActionOptionsCopy, IActionOptionsCreate, IActionOptionsDelete, IActionOptionsEdit, IActionOptionsExpr, IActionOptionsLog, IActionOptionsSetValue, IActionOptionsView, IActionRecord, IBehaviorOptionsFormField, IBehaviorOptionsFormFieldLayoutLogin, IBehaviorPropsInputFormField, IBehaviorPropsInputFormFieldLayoutLogin, IBehaviorPropsOutputFormField, IBehaviorPropsOutputFormFieldLayoutLogin, ICaptchaData, IIconRecord, IModelOptionsLayout, IModelOptionsMenu, IModelOptionsTest, IModelOptionsTodo, IModuleApi, IPagePathRecord, IResourceComponentActionBulkRecord, IResourceComponentActionRowRecord, IResourceComponentBlockRecord, IResourceComponentFormFieldRecord, IResourceComponentTableCellRecord, ISchemaRenderComponentLayoutOptions, IServiceSsrLayoutOptions, ITableCellOptionsActionDelete, ITableCellOptionsActionOperationsRow, ITableCellOptionsActionUpdate, ITableCellOptionsActionView, ITableCellOptionsCurrency, ITableCellOptionsDate, ITableCellOptionsTest, IVonaComponentRecord, Main, ModelLayout, ModelMenu, ModelTest, ModelTodo, Monkey, MonkeySys, NSControllerPageAuthCallback, NSControllerPageErrorExpired, NSControllerPageItem, NSControllerPageRouteParams, NSControllerPageRouteQuery, NSControllerPageRouteQueryB, NSControllerPageToolOne, NSControllerPageToolTwo, RenderContent, RenderHeader, RenderLayoutTabs, RenderLocale, RenderMenu, RenderPageLogin, RenderPageToolOne, RenderSidebar, RenderTable, RenderTabs, RenderTheme, RenderUser, ScopeModuleBasicActions, ScopeModuleBasicActionssync, ScopeModuleBasicCaptcha, ScopeModuleBasicCurrency, ScopeModuleBasicDate, ScopeModuleBasicForm, ScopeModuleBasicInput, ScopeModuleBasicPage, ScopeModuleBasicPageentry, ScopeModuleBasicTable, ScopeModuleDemoBasic, ScopeModuleDemoStudent, ScopeModuleDemoTodo, ScopeModuleHomeBase, ScopeModuleHomeIcon, ScopeModuleHomeIndex, ScopeModuleHomeLayoutempty, ScopeModuleHomeLayouttabs, ScopeModuleHomeLogin, ServiceRouterGuards, ServiceSsr, ServiceSsrLayout, StoreCounter, StyleLayoutTabs$1 as StyleLayoutTabs, TableCellActionDelete, TableCellActionOperationsRow, TableCellActionUpdate, TableCellActionView, TableCellCurrency, TableCellDate, TableCellTest, TypeActionAlertResult, TypeActionConfirmResult, TypeActionCopyResult, TypeActionCreateResult, TypeActionDeleteResult, TypeActionEditResult, TypeActionExprResult, TypeActionLogResult, TypeActionSetValueResult, TypeActionViewResult, TypeControllerActionBackPublicProps, TypeControllerActionCreatePublicProps, TypeControllerActionSubmitPublicProps, TypeControllerActionViewPublicProps, TypeControllerBlockFilterPublicProps, TypeControllerBlockFormPublicProps, TypeControllerBlockPageEntryPublicProps, TypeControllerBlockPagePublicProps, TypeControllerBlockPagerPublicProps, TypeControllerBlockTablePublicProps, TypeControllerBlockToolbarBulkPublicProps, TypeControllerBlockToolbarRowPublicProps, TypeControllerCardPublicProps, TypeControllerDateRangePublicProps, TypeControllerFormFieldCaptchaPublicProps, TypeControllerFormFieldCurrencyPublicProps, TypeControllerFormFieldDatePublicProps, TypeControllerFormFieldDateRangePublicProps, TypeControllerFormFieldInputPublicProps, TypeControllerItemLinkPublicProps, TypeControllerLayoutEmptyPublicProps, TypeControllerLayoutTabsPublicProps, TypeControllerPagePublicProps, TypeControllerTableCellTestPublicProps, TypeControllerTablePublicProps, TypeControllerTestPublicProps, TypeMenuGroup, TypeMenuItem, TypeMenuTree, ZActionBack, ZActionCreate, ZActionSubmit, ZActionView, ZBlockFilter, ZBlockForm, ZBlockPage, ZBlockPageEntry, ZBlockPager, ZBlockTable, ZBlockToolbarBulk, ZBlockToolbarRow, ZCard, ZDateRange, ZFormFieldCaptcha, ZFormFieldCurrency, ZFormFieldDate, ZFormFieldDateRange, ZFormFieldInput, ZItemLink, ZLayoutEmpty, ZLayoutTabs, ZPage, ZPageAuthCallback, ZPageComponent, ZPageErrorExpired, ZPageErrorNotFound, ZPageHome, ZPageItem, ZPageLocale, ZPageLogin, ZPagePinia, ZPageRouteParams, ZPageRouteQuery, ZPageRouteQueryB, ZPageState, ZPageStyle, ZPageTest, ZPageTodo, ZPageToolOne, ZPageToolTwo, ZTable, ZTableCellTest, ZTest, currencyFormat, currencyUpdate, dateFormatUtil, definePropertyScopeBase, icons };
-}
-declare function $iconName<K extends keyof IIconRecord$1>(name: K): any;
+//#region .zova-rest/utils.d.ts
 declare module 'zova-module-a-router' {
   interface IPagePathRecord {
     '/': TypePagePathSchema<undefined, undefined>;
@@ -8984,7 +7887,59 @@ declare module 'zova-module-a-router' {
     'presetResource': TypePagePathSchema<undefined, undefined>;
   }
 }
-declare function Action<K extends keyof IActionRecord$1>(options: TypeActionOptions<K>): string;
-declare function Component<K extends keyof IVonaComponentRecord$1>(options: TypeComponentOptions<K>): K;
+declare function $iconName<K extends keyof IIconRecord>(name: K): any;
+declare function Action<K extends keyof IActionRecord>(options: TypeActionOptions<K>): string;
+declare function Component<K extends keyof IVonaComponentRecord>(options: TypeComponentOptions<K>): K;
 //#endregion
-export { $iconName, Action, ActionAlert, ActionConfirm, ActionCopy, ActionCreate, ActionDelete, ActionEdit, ActionExpr, ActionLog, ActionSetValue, ActionView, AopHome, AopHome3, ApiTodo, ApiTodoEntity, ApiTodoIntertBody, ApiTodoUpdateBody, BBTBasicCurrency, BBTBasicDate, BBTBasicTableActionDelete, BBTBasicTableActionOperationsRow, BBTBasicTableActionUpdate, BBTBasicTableActionView, BBTDemoBasicTest, BehaviorFormField, BehaviorFormFieldLayoutLogin, Component, ControllerActionBack, ControllerActionBackProps, ControllerActionCreate, ControllerActionCreateProps, ControllerActionSubmit, ControllerActionSubmitProps, ControllerActionView, ControllerActionViewProps, ControllerBlockFilter, ControllerBlockFilterProps, ControllerBlockForm, ControllerBlockFormProps, ControllerBlockPage, ControllerBlockPageEntry, ControllerBlockPageEntryProps, ControllerBlockPageProps, ControllerBlockPager, ControllerBlockPagerProps, ControllerBlockTable, ControllerBlockTableProps, ControllerBlockToolbarBulk, ControllerBlockToolbarBulkProps, ControllerBlockToolbarRow, ControllerBlockToolbarRowProps, ControllerCard, ControllerCardProps, ControllerDateRange, ControllerDateRangeModels, ControllerDateRangeProps, ControllerFormFieldCaptcha, ControllerFormFieldCaptchaProps, ControllerFormFieldCurrency, ControllerFormFieldCurrencyProps, ControllerFormFieldDate, ControllerFormFieldDateProps, ControllerFormFieldDateRange, ControllerFormFieldDateRangeProps, ControllerFormFieldInput, ControllerFormFieldInputProps, ControllerItemLink, ControllerItemLinkProps, ControllerLayoutEmpty, ControllerLayoutEmptyProps, ControllerLayoutTabs, ControllerLayoutTabsProps, ControllerPage, ControllerPageAuthCallback, ControllerPageAuthCallbackSchemaQuery, ControllerPageComponent, ControllerPageErrorExpired, ControllerPageErrorExpiredSchemaQuery, ControllerPageErrorNotFound, ControllerPageHome, ControllerPageItem, ControllerPageItemSchemaParams, ControllerPageItemSchemaQuery, ControllerPageLocale, ControllerPageLogin$1 as ControllerPageLogin, ControllerPagePinia, ControllerPageProps, ControllerPageRouteParams, ControllerPageRouteParamsSchemaParams, ControllerPageRouteParamsSchemaQuery, ControllerPageRouteQuery, ControllerPageRouteQueryB, ControllerPageRouteQueryBSchemaParams, ControllerPageRouteQueryBSchemaQuery, ControllerPageRouteQuerySchemaParams, ControllerPageRouteQuerySchemaQuery, ControllerPageState, ControllerPageStyle, ControllerPageTest, ControllerPageTodo, ControllerPageToolOne$1 as ControllerPageToolOne, ControllerPageToolOneSchemaParams, ControllerPageToolOneSchemaQuery, ControllerPageToolTwo, ControllerPageToolTwoSchemaParams, ControllerPageToolTwoSchemaQuery, ControllerTable, ControllerTableCellTest, ControllerTableCellTestProps, ControllerTableProps, ControllerTest, ControllerTestModels, ControllerTestProps, IActionOptionsAlert, IActionOptionsConfirm, IActionOptionsCopy, IActionOptionsCreate, IActionOptionsDelete, IActionOptionsEdit, IActionOptionsExpr, IActionOptionsLog, IActionOptionsSetValue, IActionOptionsView, type IActionRecord, IBehaviorOptionsFormField, IBehaviorOptionsFormFieldLayoutLogin, IBehaviorPropsInputFormField, IBehaviorPropsInputFormFieldLayoutLogin, IBehaviorPropsOutputFormField, IBehaviorPropsOutputFormFieldLayoutLogin, ICaptchaData, type IIconRecord, IModelOptionsLayout, IModelOptionsMenu, IModelOptionsTest, IModelOptionsTodo, IModuleApi, type IPagePathRecord, type IResourceComponentActionBulkRecord, type IResourceComponentActionRowRecord, type IResourceComponentBlockRecord, type IResourceComponentFormFieldRecord, type IResourceComponentTableCellRecord, type ISchemaRenderComponentLayoutOptions, IServiceSsrLayoutOptions, ITableCellOptionsActionDelete, ITableCellOptionsActionOperationsRow, ITableCellOptionsActionUpdate, ITableCellOptionsActionView, ITableCellOptionsCurrency, ITableCellOptionsDate, ITableCellOptionsTest, type IVonaComponentRecord, Main, ModelLayout, ModelMenu, ModelTest, ModelTodo, Monkey, MonkeySys, NSControllerPageAuthCallback, NSControllerPageErrorExpired, NSControllerPageItem, NSControllerPageRouteParams, NSControllerPageRouteQuery, NSControllerPageRouteQueryB, NSControllerPageToolOne, NSControllerPageToolTwo, RenderContent, RenderHeader, RenderLayoutTabs, RenderLocale, RenderMenu, RenderPageLogin, RenderPageToolOne, RenderSidebar, RenderTable, RenderTabs, RenderTheme, RenderUser, ScopeModuleBasicActions, ScopeModuleBasicActionssync, ScopeModuleBasicCaptcha, ScopeModuleBasicCurrency, ScopeModuleBasicDate, ScopeModuleBasicForm, ScopeModuleBasicInput, ScopeModuleBasicPage, ScopeModuleBasicPageentry, ScopeModuleBasicTable, ScopeModuleDemoBasic, ScopeModuleDemoStudent, ScopeModuleDemoTodo, ScopeModuleHomeBase, ScopeModuleHomeIcon, ScopeModuleHomeIndex, ScopeModuleHomeLayoutempty, ScopeModuleHomeLayouttabs, ScopeModuleHomeLogin, ServiceRouterGuards, ServiceSsr, ServiceSsrLayout, StoreCounter, StyleLayoutTabs$1 as StyleLayoutTabs, TableCellActionDelete, TableCellActionOperationsRow, TableCellActionUpdate, TableCellActionView, TableCellCurrency, TableCellDate, TableCellTest, TypeActionAlertResult, TypeActionConfirmResult, TypeActionCopyResult, TypeActionCreateResult, TypeActionDeleteResult, TypeActionEditResult, TypeActionExprResult, TypeActionLogResult, TypeActionSetValueResult, TypeActionViewResult, TypeControllerActionBackPublicProps, TypeControllerActionCreatePublicProps, TypeControllerActionSubmitPublicProps, TypeControllerActionViewPublicProps, TypeControllerBlockFilterPublicProps, TypeControllerBlockFormPublicProps, TypeControllerBlockPageEntryPublicProps, TypeControllerBlockPagePublicProps, TypeControllerBlockPagerPublicProps, TypeControllerBlockTablePublicProps, TypeControllerBlockToolbarBulkPublicProps, TypeControllerBlockToolbarRowPublicProps, TypeControllerCardPublicProps, TypeControllerDateRangePublicProps, TypeControllerFormFieldCaptchaPublicProps, TypeControllerFormFieldCurrencyPublicProps, TypeControllerFormFieldDatePublicProps, TypeControllerFormFieldDateRangePublicProps, TypeControllerFormFieldInputPublicProps, TypeControllerItemLinkPublicProps, TypeControllerLayoutEmptyPublicProps, TypeControllerLayoutTabsPublicProps, TypeControllerPagePublicProps, TypeControllerTableCellTestPublicProps, TypeControllerTablePublicProps, TypeControllerTestPublicProps, TypeMenuGroup, TypeMenuItem, TypeMenuTree, ZActionBack, ZActionCreate, ZActionSubmit, ZActionView, ZBlockFilter, ZBlockForm, ZBlockPage, ZBlockPageEntry, ZBlockPager, ZBlockTable, ZBlockToolbarBulk, ZBlockToolbarRow, ZCard, ZDateRange, ZFormFieldCaptcha, ZFormFieldCurrency, ZFormFieldDate, ZFormFieldDateRange, ZFormFieldInput, ZItemLink, ZLayoutEmpty, ZLayoutTabs, ZPage, ZPageAuthCallback, ZPageComponent, ZPageErrorExpired, ZPageErrorNotFound, ZPageHome, ZPageItem, ZPageLocale, ZPageLogin, ZPagePinia, ZPageRouteParams, ZPageRouteQuery, ZPageRouteQueryB, ZPageState, ZPageStyle, ZPageTest, ZPageTodo, ZPageToolOne, ZPageToolTwo, ZTable, ZTableCellTest, ZTest, currencyFormat, currencyUpdate, dateFormatUtil, definePropertyScopeBase, icons };
+//#region .zova-rest/component.d.ts
+declare function schemaRenderField<K extends keyof IResourceComponentFormFieldRecord, T extends z$1.ZodType>(name: K, options?: IResourceComponentFormFieldRecord[K], scene?: TypeFormSchemaScene): (schema: T) => T;
+declare function schemaRenderFieldJsx<T extends z$1.ZodType>(renderComponentJsx: TypeRenderComponentJsx, scene?: TypeFormSchemaScene): (schema: T) => T;
+declare function schemaRenderCell<K extends keyof IResourceComponentTableCellActionRowRecord, T extends z$1.ZodType>(name: K, options?: IResourceComponentTableCellActionRowRecord[K]): (schema: T) => T;
+declare function schemaRenderCellJsx<T extends z$1.ZodType>(renderComponentJsx: TypeRenderComponentJsx): (schema: T) => T;
+declare function schemaRenderActionRow<K extends keyof IResourceActionRowRecord>(name: K, options?: IResourceActionRowRecord[K]): IResourceComponentActionRowOptionsAction;
+declare function schemaRenderActionRowJsx<K extends keyof IResourceActionRowRecord>(name: K, renderComponentJsx: TypeRenderComponentJsx): {
+  name: K;
+  render: TypeRenderComponentJsx;
+};
+declare function schemaRenderActionBulk<K extends keyof IResourceActionBulkRecord>(name: K, options?: IResourceActionBulkRecord[K]): IResourceComponentActionBulkOptionsAction;
+declare function schemaRenderActionBulkJsx<K extends IResourceActionBulkRecord>(name: K, renderComponentJsx: TypeRenderComponentJsx): {
+  name: K;
+  render: TypeRenderComponentJsx;
+};
+declare function schemaRenderBlock<K extends keyof IResourceComponentBlockRecord>(name: K, options?: IResourceComponentBlockRecord[K]): IResourceComponentBlockOptionsBlock;
+declare function schemaRenderBlockJsx(renderComponentJsx: TypeRenderComponentJsx): {
+  render: TypeRenderComponentJsx;
+};
+//#endregion
+//#region .zova-rest/rest.d.ts
+declare function schemaRenderLayout<T extends z$1.ZodType>(layoutOptions: ISchemaRenderComponentLayoutOptions, scene?: TypeFormSchemaScene): (schema: T) => T;
+declare function schemaRenderVisible<T extends z$1.ZodType>(visible?: boolean, scene?: TypeSchemaScene): (schema: T) => T;
+declare function schemaRenderReadonly<T extends z$1.ZodType>(readonly?: boolean, scene?: TypeSchemaScene): (schema: T) => T;
+declare function schemaRenderDisableNotifyChanged<T extends z$1.ZodType>(disableNotifyChanged?: boolean, scene?: TypeSchemaScene): (schema: T) => T;
+declare function schemaRenderFieldSource<T extends z$1.ZodType>(fieldSource: string, scene?: TypeSchemaScene): (schema: T) => T;
+declare function schemaRenderOrder<T extends z$1.ZodType>(order: number, level?: TypeSchemaOrderLevel, scene?: TypeSchemaScene): (schema: T) => T;
+//#endregion
+//#region .zova-rest/render.d.ts
+declare const render: {
+  layout: typeof schemaRenderLayout;
+  visible: typeof schemaRenderVisible;
+  readonly: typeof schemaRenderReadonly;
+  order: typeof schemaRenderOrder;
+  disableNotifyChanged: typeof schemaRenderDisableNotifyChanged;
+  fieldSource: typeof schemaRenderFieldSource;
+  field: typeof schemaRenderField;
+  fieldJsx: typeof schemaRenderFieldJsx;
+  cell: typeof schemaRenderCell;
+  cellJsx: typeof schemaRenderCellJsx;
+  actionRow: typeof schemaRenderActionRow;
+  actionRowJsx: typeof schemaRenderActionRowJsx;
+  actionBulk: typeof schemaRenderActionBulk;
+  actionBulkJsx: typeof schemaRenderActionBulkJsx;
+  block: typeof schemaRenderBlock;
+  blockJsx: typeof schemaRenderBlockJsx;
+};
+declare namespace index_d_exports {
+  export { $defs, $iconName, Action, ActionAlert, ActionConfirm, ActionCopy, ActionCreate, ActionDelete, ActionEdit, ActionExpr, ActionLog, ActionSetValue, ActionView, ApiApiCaptchacreateMethod, ApiApiCaptchacreatePath, ApiApiCaptchacreateRequestBody, ApiApiCaptchacreateResponseBody, ApiApiCaptcharefreshMethod, ApiApiCaptcharefreshPath, ApiApiCaptcharefreshRequestBody, ApiApiCaptcharefreshResponseBody, ApiApiCaptchaverifyImmediateMethod, ApiApiCaptchaverifyImmediatePath, ApiApiCaptchaverifyImmediateRequestBody, ApiApiCaptchaverifyImmediateResponseBody, ApiApiHomeBaseMenuretrieveMenusMethod, ApiApiHomeBaseMenuretrieveMenusPath, ApiApiHomeBaseMenuretrieveMenusRequestParams, ApiApiHomeBaseMenuretrieveMenusResponseBody, ApiApiHomeBasePermissionretrievePermissionsMethod, ApiApiHomeBasePermissionretrievePermissionsPath, ApiApiHomeBasePermissionretrievePermissionsRequestParams, ApiApiHomeBasePermissionretrievePermissionsResponseBody, ApiApiHomeUserPassportassociateMethod, ApiApiHomeUserPassportassociatePath, ApiApiHomeUserPassportassociateRequestParams, ApiApiHomeUserPassportassociateRequestQuery, ApiApiHomeUserPassportassociateResponseBody, ApiApiHomeUserPassportcreatePassportJwtFromOauthCodeMethod, ApiApiHomeUserPassportcreatePassportJwtFromOauthCodePath, ApiApiHomeUserPassportcreatePassportJwtFromOauthCodeRequestBody, ApiApiHomeUserPassportcreatePassportJwtFromOauthCodeResponseBody, ApiApiHomeUserPassportcreateTempAuthTokenMethod, ApiApiHomeUserPassportcreateTempAuthTokenPath, ApiApiHomeUserPassportcreateTempAuthTokenRequestQuery, ApiApiHomeUserPassportcreateTempAuthTokenResponseBody, ApiApiHomeUserPassportcurrentMethod, ApiApiHomeUserPassportcurrentPath, ApiApiHomeUserPassportcurrentResponseBody, ApiApiHomeUserPassportloginMethod, ApiApiHomeUserPassportloginOauthMethod, ApiApiHomeUserPassportloginOauthPath, ApiApiHomeUserPassportloginOauthRequestParams, ApiApiHomeUserPassportloginOauthRequestQuery, ApiApiHomeUserPassportloginOauthResponseBody, ApiApiHomeUserPassportloginPath, ApiApiHomeUserPassportloginRequestBody, ApiApiHomeUserPassportloginResponseBody, ApiApiHomeUserPassportlogoutMethod, ApiApiHomeUserPassportlogoutPath, ApiApiHomeUserPassportlogoutResponseBody, ApiApiHomeUserPassportmigrateMethod, ApiApiHomeUserPassportmigratePath, ApiApiHomeUserPassportmigrateRequestParams, ApiApiHomeUserPassportmigrateRequestQuery, ApiApiHomeUserPassportmigrateResponseBody, ApiApiHomeUserPassportrefreshAuthTokenMethod, ApiApiHomeUserPassportrefreshAuthTokenPath, ApiApiHomeUserPassportrefreshAuthTokenRequestBody, ApiApiHomeUserPassportrefreshAuthTokenResponseBody, ApiApiHomeUserPassportregisterMethod, ApiApiHomeUserPassportregisterPath, ApiApiHomeUserPassportregisterRequestBody, ApiApiHomeUserPassportregisterResponseBody, ApiApiHomeindexMethod, ApiApiHomeindexPath, ApiApiHomeindexResponseBody, ApiApiTestSsrToolOnetestGetMethod, ApiApiTestSsrToolOnetestGetPath, ApiApiTestSsrToolOnetestGetRequestParams, ApiApiTestSsrToolOnetestGetRequestQuery, ApiApiTestSsrToolOnetestGetResponseBody, ApiApiTestSsrToolOnetestMethod, ApiApiTestSsrToolOnetestPath, ApiApiTestSsrToolOnetestRequestBody, ApiApiTestSsrToolOnetestRequestParams, ApiApiTestSsrToolOnetestRequestQuery, ApiApiTestSsrToolOnetestResponseBody, ApiCaptcha, ApiHome, ApiHomeBaseMenu, ApiHomeBasePermission, ApiHomeUserPassport, ApiSchemaAAuthDtoAuth, ApiSchemaAAuthDtoAuthPartial, ApiSchemaACaptchaDtoCaptchaData, ApiSchemaACaptchaDtoCaptchaDataPartial, ApiSchemaACaptchaDtoCaptchaVerify_c3cd80b1eeafe39bfe4433491bb081d68e84797e, ApiSchemaACaptchaDtoCaptchaVerify_c3cd80b1eeafe39bfe4433491bb081d68e84797ePartial, ApiSchemaACaptchaDtoCaptchaVerify_c3cd80b1eeafe39bfe4433491bb081d68e84797e_3218e7d152830e08f6e764b9e0c3796df929ee2b, ApiSchemaACaptchaDtoCaptchaVerify_c3cd80b1eeafe39bfe4433491bb081d68e84797e_3218e7d152830e08f6e764b9e0c3796df929ee2bPartial, ApiSchemaAJwtDtoJwtToken, ApiSchemaAJwtDtoJwtTokenPartial, ApiSchemaAMenuDtoMenuGroup, ApiSchemaAMenuDtoMenuGroupPartial, ApiSchemaAMenuDtoMenuItem, ApiSchemaAMenuDtoMenuItemMeta, ApiSchemaAMenuDtoMenuItemMetaPartial, ApiSchemaAMenuDtoMenuItemPartial, ApiSchemaAMenuDtoMenus, ApiSchemaAMenuDtoMenusPartial, ApiSchemaAPaypalDtoPaypalOrderRecordOptions, ApiSchemaAPaypalDtoPaypalOrderRecordOptionsPartial, ApiSchemaAPaypalDtoPaypalOrderRecordPayload, ApiSchemaAPaypalDtoPaypalOrderRecordPayloadPartial, ApiSchemaAPaypalEntityPaypalRecord, ApiSchemaAPaypalEntityPaypalRecordPartial, ApiSchemaAPermissionDtoPermissions, ApiSchemaAPermissionDtoPermissionsPartial, ApiSchemaAPlayDtoPlay, ApiSchemaAPlayDtoPlayPartial, ApiSchemaCaptcha, ApiSchemaHome, ApiSchemaHomeBaseMenu, ApiSchemaHomeBasePermission, ApiSchemaHomeUserDtoLogin, ApiSchemaHomeUserDtoLoginPartial, ApiSchemaHomeUserDtoPassport, ApiSchemaHomeUserDtoPassportJwt, ApiSchemaHomeUserDtoPassportJwtPartial, ApiSchemaHomeUserDtoPassportPartial, ApiSchemaHomeUserDtoRegister, ApiSchemaHomeUserDtoRegisterPartial, ApiSchemaHomeUserEntityRole, ApiSchemaHomeUserEntityRolePartial, ApiSchemaHomeUserEntityUser, ApiSchemaHomeUserEntityUserPartial, ApiSchemaHomeUserPassport, ApiSchemaTestCaptchaDtoSignin, ApiSchemaTestCaptchaDtoSigninPartial, ApiSchemaTestRestDtoProductCreate, ApiSchemaTestRestDtoProductCreatePartial, ApiSchemaTestRestDtoProductQueryRes, ApiSchemaTestRestDtoProductQueryResPartial, ApiSchemaTestRestDtoProductUpdate, ApiSchemaTestRestDtoProductUpdatePartial, ApiSchemaTestRestEntityProduct, ApiSchemaTestRestEntityProductPartial, ApiSchemaTestSsrDtoTestBody, ApiSchemaTestSsrDtoTestBodyPartial, ApiSchemaTestSsrDtoTestDetail, ApiSchemaTestSsrDtoTestDetailPartial, ApiSchemaTestSsrDtoTestResult, ApiSchemaTestSsrDtoTestResultPartial, ApiSchemaTestSsrToolOne, ApiSchemaTestVonaDtoCategoryTree, ApiSchemaTestVonaDtoCategoryTreePartial, ApiSchemaTestVonaDtoOrderCreate, ApiSchemaTestVonaDtoOrderCreatePartial, ApiSchemaTestVonaDtoOrderResult, ApiSchemaTestVonaDtoOrderResultPage, ApiSchemaTestVonaDtoOrderResultPagePartial, ApiSchemaTestVonaDtoOrderResultPartial, ApiSchemaTestVonaDtoOrderUpdate, ApiSchemaTestVonaDtoOrderUpdatePartial, ApiSchemaTestVonaDtoPostAggregate, ApiSchemaTestVonaDtoPostAggregatePartial, ApiSchemaTestVonaDtoPostCreate, ApiSchemaTestVonaDtoPostCreatePartial, ApiSchemaTestVonaDtoPostGroup, ApiSchemaTestVonaDtoPostGroupPartial, ApiSchemaTestVonaDtoPostQueryRes, ApiSchemaTestVonaDtoPostQueryResPartial, ApiSchemaTestVonaDtoRoleLazy, ApiSchemaTestVonaDtoRoleLazyPartial, ApiSchemaTestVonaDtoSerializerArray, ApiSchemaTestVonaDtoSerializerArrayPartial, ApiSchemaTestVonaDtoSerializerLazy, ApiSchemaTestVonaDtoSerializerLazyPartial, ApiSchemaTestVonaDtoSerializerSimple, ApiSchemaTestVonaDtoSerializerSimplePartial, ApiSchemaTestVonaDtoSerializerSimple_1c4b95bcfe8fe28a56dbcc7028097cf11836b4fc, ApiSchemaTestVonaDtoSerializerSimple_1c4b95bcfe8fe28a56dbcc7028097cf11836b4fcPartial, ApiSchemaTestVonaDtoSerializerSimple_542f7be0da9b85a67248a6a1a3629e72de5fdb33_cff0ae112a392da58caf5aa905749f3c4444c4ab, ApiSchemaTestVonaDtoSerializerSimple_542f7be0da9b85a67248a6a1a3629e72de5fdb33_cff0ae112a392da58caf5aa905749f3c4444c4abPartial, ApiSchemaTestVonaDtoUser, ApiSchemaTestVonaDtoUserCreate, ApiSchemaTestVonaDtoUserCreatePartial, ApiSchemaTestVonaDtoUserLazy, ApiSchemaTestVonaDtoUserLazyPartial, ApiSchemaTestVonaDtoUserPartial, ApiSchemaTestVonaDtoUserUpdate, ApiSchemaTestVonaDtoUserUpdatePartial, ApiSchemaTestVonaEntityCategory_2c7d642ee581efa300341e343180fbb0ecdc785d, ApiSchemaTestVonaEntityCategory_2c7d642ee581efa300341e343180fbb0ecdc785dPartial, ApiSchemaTestVonaEntityPost_729883d7de16ce4401b26f75bebe618c8948ff64, ApiSchemaTestVonaEntityPost_729883d7de16ce4401b26f75bebe618c8948ff64Partial, ApiSchemaTestVonaEntityPost_a6ba2076b5b70a3c098374cc82d418bd1ab226c3, ApiSchemaTestVonaEntityPost_a6ba2076b5b70a3c098374cc82d418bd1ab226c3Partial, ApiSchemaTestVonaEntityProduct, ApiSchemaTestVonaEntityProductPartial, ApiSchemaTestVonaEntityProduct_29731960f3f38d3572bc2f8a01a7498bfe927055, ApiSchemaTestVonaEntityProduct_29731960f3f38d3572bc2f8a01a7498bfe927055Partial, ApiSchemaTestVonaEntityProduct_9cf2c6bcd41713270c34bcfce21b7b4942e3fbc6, ApiSchemaTestVonaEntityProduct_9cf2c6bcd41713270c34bcfce21b7b4942e3fbc6Partial, ApiSchemaTestVonaEntityProduct_bce173590aaef19772f1ae3a82196493c2633e2e, ApiSchemaTestVonaEntityProduct_bce173590aaef19772f1ae3a82196493c2633e2ePartial, ApiSchemaTestVonaEntityUser_2c7d642ee581efa300341e343180fbb0ecdc785d_1816ff740d81c738ec055c7038bbd93beb9405a7, ApiSchemaTestVonaEntityUser_2c7d642ee581efa300341e343180fbb0ecdc785d_1816ff740d81c738ec055c7038bbd93beb9405a7Partial, ApiTestSsrToolOne, BehaviorFormField, BehaviorFormFieldLayout, BehaviorFormFieldLayoutLogin, Component, ControllerActionBack, ControllerActionBackProps, ControllerActionCreate, ControllerActionCreateProps, ControllerActionSubmit, ControllerActionSubmitProps, ControllerBlockFilter, ControllerBlockFilterProps, ControllerBlockForm, ControllerBlockFormProps, ControllerBlockPage, ControllerBlockPageEntry, ControllerBlockPageEntryProps, ControllerBlockPageProps, ControllerBlockPager, ControllerBlockPagerProps, ControllerBlockTable, ControllerBlockTableProps, ControllerBlockToolbarBulk, ControllerBlockToolbarBulkProps, ControllerBlockToolbarRow, ControllerBlockToolbarRowProps, ControllerCard, ControllerCardModels, ControllerCardProps, ControllerDateRange, ControllerDateRangeModels, ControllerDateRangeProps, ControllerFormFieldCaptcha, ControllerFormFieldCaptchaProps, ControllerFormFieldCurrency, ControllerFormFieldCurrencyProps, ControllerFormFieldDate, ControllerFormFieldDateProps, ControllerFormFieldDateRange, ControllerFormFieldDateRangeProps, ControllerFormFieldInput, ControllerFormFieldInputProps, ControllerFormFieldTest, ControllerFormFieldTestProps, ControllerItemLink, ControllerItemLinkProps, ControllerLayoutEmpty, ControllerLayoutEmptyProps, ControllerLayoutTabs, ControllerLayoutTabsProps, ControllerPage, ControllerPageAuthCallback, ControllerPageAuthCallbackSchemaQuery, ControllerPageErrorExpired, ControllerPageErrorExpiredSchemaQuery, ControllerPageErrorNotFound, ControllerPageHome, ControllerPageLogin$1 as ControllerPageLogin, ControllerPageProps, ControllerPageTest, ControllerTable, ControllerTableProps, ControllerTest, ControllerTest2, ControllerTest2Models, ControllerTest2Props, ControllerTestModels, ControllerTestProps, CssDefault, HTMLInputElementType, IActionOptionsAlert, IActionOptionsConfirm, IActionOptionsCopy, IActionOptionsCreate, IActionOptionsDelete, IActionOptionsEdit, IActionOptionsExpr, IActionOptionsLog, IActionOptionsSetValue, IActionOptionsView, IBehaviorOptionsFormField, IBehaviorOptionsFormFieldLayout, IBehaviorOptionsFormFieldLayoutLogin, IBehaviorPropsInputFormField, IBehaviorPropsInputFormFieldLayout, IBehaviorPropsInputFormFieldLayoutLogin, IBehaviorPropsOutputFormField, IBehaviorPropsOutputFormFieldLayout, IBehaviorPropsOutputFormFieldLayoutLogin, ICaptchaData, ICaptchaOptions, ICaptchaProviderRecord, ICaptchaSceneRecord, ICssOptionsDefault, IModelOptionsLayout, IModelOptionsMenu, IModelOptionsPassport, IModuleApi, IModuleApiSchema, IResourceActionBulkOptionsCreate, IResourceActionRowOptionsBack, IResourceActionRowOptionsDelete, IResourceActionRowOptionsOperationsRow, IResourceActionRowOptionsSubmit, IResourceActionRowOptionsUpdate, IResourceActionRowOptionsView, IResourceBlockOptionsFilter, IResourceBlockOptionsForm, IResourceBlockOptionsPage, IResourceBlockOptionsPageEntry, IResourceBlockOptionsPager, IResourceBlockOptionsTable, IResourceBlockOptionsToolbarBulk, IResourceBlockOptionsToolbarRow, IResourceFormFieldOptionsCaptcha, IResourceFormFieldOptionsCurrency, IResourceFormFieldOptionsDate, IResourceFormFieldOptionsDateRange, IResourceFormFieldOptionsInput, IResourceFormFieldOptionsResourcePicker, IResourceFormFieldOptionsSelect, IResourceFormFieldOptionsTextarea, IResourceFormFieldOptionsToggle, IResourceTableCellOptionsCurrency, IResourceTableCellOptionsDate, ISelectChipsOptions, ISelectOptions, IServiceSsrLayoutOptions, ITableCellOptionsActionDelete, ITableCellOptionsActionOperationsRow, ITableCellOptionsActionUpdate, ITableCellOptionsActionView, ITableCellOptionsCurrency, ITableCellOptionsDate, IThemeOptionsDefault, IThemeOptionsOrange, Main, MetaThemeHandler, ModelLayout, ModelMenu, ModelPassport, NSControllerPageAuthCallback, NSControllerPageErrorExpired, OpenApiBaseURL, RenderContent, RenderHeader, RenderLayoutTabs, RenderLocale, RenderMenu, RenderPageLogin, RenderSidebar, RenderTable, RenderTabs, RenderTheme, RenderUser, ScopeModuleBasicActions, ScopeModuleBasicActionssync, ScopeModuleBasicAdapter, ScopeModuleBasicCaptcha, ScopeModuleBasicCurrency, ScopeModuleBasicDate, ScopeModuleBasicForm, ScopeModuleBasicInput, ScopeModuleBasicOpenapi, ScopeModuleBasicPage, ScopeModuleBasicPageentry, ScopeModuleBasicTable, ScopeModuleDemoStudent, ScopeModuleDevuiAdapter, ScopeModuleHomeApi, ScopeModuleHomeBase, ScopeModuleHomeIcon, ScopeModuleHomeIndex, ScopeModuleHomeLayoutempty, ScopeModuleHomeLayouttabs, ScopeModuleHomeLogin, ScopeModuleHomePassport, ScopeModuleHomeTheme, ServiceJwtAdapter, ServiceRouterGuards, ServiceSsr, ServiceSsrLayout, StyleLayoutTabs$1 as StyleLayoutTabs, TableCellActionDelete, TableCellActionOperationsRow, TableCellActionUpdate, TableCellActionView, TableCellCurrency, TableCellDate, ThemeDefault, ThemeOrange, ThemeTokenCustom, TypeActionAlertResult, TypeActionConfirmResult, TypeActionCopyResult, TypeActionCreateResult, TypeActionDeleteResult, TypeActionEditResult, TypeActionExprResult, TypeActionLogResult, TypeActionSetValueResult, TypeActionViewResult, TypeControllerActionBackPublicProps, TypeControllerActionCreatePublicProps, TypeControllerActionSubmitPublicProps, TypeControllerBlockFilterPublicProps, TypeControllerBlockFormPublicProps, TypeControllerBlockPageEntryPublicProps, TypeControllerBlockPagePublicProps, TypeControllerBlockPagerPublicProps, TypeControllerBlockTablePublicProps, TypeControllerBlockToolbarBulkPublicProps, TypeControllerBlockToolbarRowPublicProps, TypeControllerCardPublicProps, TypeControllerDateRangePublicProps, TypeControllerFormFieldCaptchaPublicProps, TypeControllerFormFieldCurrencyPublicProps, TypeControllerFormFieldDatePublicProps, TypeControllerFormFieldDateRangePublicProps, TypeControllerFormFieldInputPublicProps, TypeControllerFormFieldTestPublicProps, TypeControllerItemLinkPublicProps, TypeControllerLayoutEmptyPublicProps, TypeControllerLayoutTabsPublicProps, TypeControllerPagePublicProps, TypeControllerTablePublicProps, TypeControllerTest2PublicProps, TypeControllerTestPublicProps, TypeDateFormatPreset, TypeMenuGroup, TypeMenuItem, TypeMenuTree, ZActionBack, ZActionCreate, ZActionSubmit, ZBlockFilter, ZBlockForm, ZBlockPage, ZBlockPageEntry, ZBlockPager, ZBlockTable, ZBlockToolbarBulk, ZBlockToolbarRow, ZCard, ZDateRange, ZFormFieldCaptcha, ZFormFieldCurrency, ZFormFieldDate, ZFormFieldDateRange, ZFormFieldInput, ZFormFieldTest, ZItemLink, ZLayoutEmpty, ZLayoutTabs, ZPage, ZPageAuthCallback, ZPageErrorExpired, ZPageErrorNotFound, ZPageHome, ZPageLogin, ZPageTest, ZTable, ZTest, ZTest2, currencyFormat, currencyUpdate, dateFormatUtil, definePropertyScopeBase, icons, operations, paths, render, webhooks };
+}
+//#endregion
+export { $defs, $iconName, Action, ActionAlert, ActionConfirm, ActionCopy, ActionCreate, ActionDelete, ActionEdit, ActionExpr, ActionLog, ActionSetValue, ActionView, ApiApiCaptchacreateMethod, ApiApiCaptchacreatePath, ApiApiCaptchacreateRequestBody, ApiApiCaptchacreateResponseBody, ApiApiCaptcharefreshMethod, ApiApiCaptcharefreshPath, ApiApiCaptcharefreshRequestBody, ApiApiCaptcharefreshResponseBody, ApiApiCaptchaverifyImmediateMethod, ApiApiCaptchaverifyImmediatePath, ApiApiCaptchaverifyImmediateRequestBody, ApiApiCaptchaverifyImmediateResponseBody, ApiApiHomeBaseMenuretrieveMenusMethod, ApiApiHomeBaseMenuretrieveMenusPath, ApiApiHomeBaseMenuretrieveMenusRequestParams, ApiApiHomeBaseMenuretrieveMenusResponseBody, ApiApiHomeBasePermissionretrievePermissionsMethod, ApiApiHomeBasePermissionretrievePermissionsPath, ApiApiHomeBasePermissionretrievePermissionsRequestParams, ApiApiHomeBasePermissionretrievePermissionsResponseBody, ApiApiHomeUserPassportassociateMethod, ApiApiHomeUserPassportassociatePath, ApiApiHomeUserPassportassociateRequestParams, ApiApiHomeUserPassportassociateRequestQuery, ApiApiHomeUserPassportassociateResponseBody, ApiApiHomeUserPassportcreatePassportJwtFromOauthCodeMethod, ApiApiHomeUserPassportcreatePassportJwtFromOauthCodePath, ApiApiHomeUserPassportcreatePassportJwtFromOauthCodeRequestBody, ApiApiHomeUserPassportcreatePassportJwtFromOauthCodeResponseBody, ApiApiHomeUserPassportcreateTempAuthTokenMethod, ApiApiHomeUserPassportcreateTempAuthTokenPath, ApiApiHomeUserPassportcreateTempAuthTokenRequestQuery, ApiApiHomeUserPassportcreateTempAuthTokenResponseBody, ApiApiHomeUserPassportcurrentMethod, ApiApiHomeUserPassportcurrentPath, ApiApiHomeUserPassportcurrentResponseBody, ApiApiHomeUserPassportloginMethod, ApiApiHomeUserPassportloginOauthMethod, ApiApiHomeUserPassportloginOauthPath, ApiApiHomeUserPassportloginOauthRequestParams, ApiApiHomeUserPassportloginOauthRequestQuery, ApiApiHomeUserPassportloginOauthResponseBody, ApiApiHomeUserPassportloginPath, ApiApiHomeUserPassportloginRequestBody, ApiApiHomeUserPassportloginResponseBody, ApiApiHomeUserPassportlogoutMethod, ApiApiHomeUserPassportlogoutPath, ApiApiHomeUserPassportlogoutResponseBody, ApiApiHomeUserPassportmigrateMethod, ApiApiHomeUserPassportmigratePath, ApiApiHomeUserPassportmigrateRequestParams, ApiApiHomeUserPassportmigrateRequestQuery, ApiApiHomeUserPassportmigrateResponseBody, ApiApiHomeUserPassportrefreshAuthTokenMethod, ApiApiHomeUserPassportrefreshAuthTokenPath, ApiApiHomeUserPassportrefreshAuthTokenRequestBody, ApiApiHomeUserPassportrefreshAuthTokenResponseBody, ApiApiHomeUserPassportregisterMethod, ApiApiHomeUserPassportregisterPath, ApiApiHomeUserPassportregisterRequestBody, ApiApiHomeUserPassportregisterResponseBody, ApiApiHomeindexMethod, ApiApiHomeindexPath, ApiApiHomeindexResponseBody, ApiApiTestSsrToolOnetestGetMethod, ApiApiTestSsrToolOnetestGetPath, ApiApiTestSsrToolOnetestGetRequestParams, ApiApiTestSsrToolOnetestGetRequestQuery, ApiApiTestSsrToolOnetestGetResponseBody, ApiApiTestSsrToolOnetestMethod, ApiApiTestSsrToolOnetestPath, ApiApiTestSsrToolOnetestRequestBody, ApiApiTestSsrToolOnetestRequestParams, ApiApiTestSsrToolOnetestRequestQuery, ApiApiTestSsrToolOnetestResponseBody, ApiCaptcha, ApiHome, ApiHomeBaseMenu, ApiHomeBasePermission, ApiHomeUserPassport, ApiSchemaAAuthDtoAuth, ApiSchemaAAuthDtoAuthPartial, ApiSchemaACaptchaDtoCaptchaData, ApiSchemaACaptchaDtoCaptchaDataPartial, ApiSchemaACaptchaDtoCaptchaVerify_c3cd80b1eeafe39bfe4433491bb081d68e84797e, ApiSchemaACaptchaDtoCaptchaVerify_c3cd80b1eeafe39bfe4433491bb081d68e84797ePartial, ApiSchemaACaptchaDtoCaptchaVerify_c3cd80b1eeafe39bfe4433491bb081d68e84797e_3218e7d152830e08f6e764b9e0c3796df929ee2b, ApiSchemaACaptchaDtoCaptchaVerify_c3cd80b1eeafe39bfe4433491bb081d68e84797e_3218e7d152830e08f6e764b9e0c3796df929ee2bPartial, ApiSchemaAJwtDtoJwtToken, ApiSchemaAJwtDtoJwtTokenPartial, ApiSchemaAMenuDtoMenuGroup, ApiSchemaAMenuDtoMenuGroupPartial, ApiSchemaAMenuDtoMenuItem, ApiSchemaAMenuDtoMenuItemMeta, ApiSchemaAMenuDtoMenuItemMetaPartial, ApiSchemaAMenuDtoMenuItemPartial, ApiSchemaAMenuDtoMenus, ApiSchemaAMenuDtoMenusPartial, ApiSchemaAPaypalDtoPaypalOrderRecordOptions, ApiSchemaAPaypalDtoPaypalOrderRecordOptionsPartial, ApiSchemaAPaypalDtoPaypalOrderRecordPayload, ApiSchemaAPaypalDtoPaypalOrderRecordPayloadPartial, ApiSchemaAPaypalEntityPaypalRecord, ApiSchemaAPaypalEntityPaypalRecordPartial, ApiSchemaAPermissionDtoPermissions, ApiSchemaAPermissionDtoPermissionsPartial, ApiSchemaAPlayDtoPlay, ApiSchemaAPlayDtoPlayPartial, ApiSchemaCaptcha, ApiSchemaHome, ApiSchemaHomeBaseMenu, ApiSchemaHomeBasePermission, ApiSchemaHomeUserDtoLogin, ApiSchemaHomeUserDtoLoginPartial, ApiSchemaHomeUserDtoPassport, ApiSchemaHomeUserDtoPassportJwt, ApiSchemaHomeUserDtoPassportJwtPartial, ApiSchemaHomeUserDtoPassportPartial, ApiSchemaHomeUserDtoRegister, ApiSchemaHomeUserDtoRegisterPartial, ApiSchemaHomeUserEntityRole, ApiSchemaHomeUserEntityRolePartial, ApiSchemaHomeUserEntityUser, ApiSchemaHomeUserEntityUserPartial, ApiSchemaHomeUserPassport, ApiSchemaTestCaptchaDtoSignin, ApiSchemaTestCaptchaDtoSigninPartial, ApiSchemaTestRestDtoProductCreate, ApiSchemaTestRestDtoProductCreatePartial, ApiSchemaTestRestDtoProductQueryRes, ApiSchemaTestRestDtoProductQueryResPartial, ApiSchemaTestRestDtoProductUpdate, ApiSchemaTestRestDtoProductUpdatePartial, ApiSchemaTestRestEntityProduct, ApiSchemaTestRestEntityProductPartial, ApiSchemaTestSsrDtoTestBody, ApiSchemaTestSsrDtoTestBodyPartial, ApiSchemaTestSsrDtoTestDetail, ApiSchemaTestSsrDtoTestDetailPartial, ApiSchemaTestSsrDtoTestResult, ApiSchemaTestSsrDtoTestResultPartial, ApiSchemaTestSsrToolOne, ApiSchemaTestVonaDtoCategoryTree, ApiSchemaTestVonaDtoCategoryTreePartial, ApiSchemaTestVonaDtoOrderCreate, ApiSchemaTestVonaDtoOrderCreatePartial, ApiSchemaTestVonaDtoOrderResult, ApiSchemaTestVonaDtoOrderResultPage, ApiSchemaTestVonaDtoOrderResultPagePartial, ApiSchemaTestVonaDtoOrderResultPartial, ApiSchemaTestVonaDtoOrderUpdate, ApiSchemaTestVonaDtoOrderUpdatePartial, ApiSchemaTestVonaDtoPostAggregate, ApiSchemaTestVonaDtoPostAggregatePartial, ApiSchemaTestVonaDtoPostCreate, ApiSchemaTestVonaDtoPostCreatePartial, ApiSchemaTestVonaDtoPostGroup, ApiSchemaTestVonaDtoPostGroupPartial, ApiSchemaTestVonaDtoPostQueryRes, ApiSchemaTestVonaDtoPostQueryResPartial, ApiSchemaTestVonaDtoRoleLazy, ApiSchemaTestVonaDtoRoleLazyPartial, ApiSchemaTestVonaDtoSerializerArray, ApiSchemaTestVonaDtoSerializerArrayPartial, ApiSchemaTestVonaDtoSerializerLazy, ApiSchemaTestVonaDtoSerializerLazyPartial, ApiSchemaTestVonaDtoSerializerSimple, ApiSchemaTestVonaDtoSerializerSimplePartial, ApiSchemaTestVonaDtoSerializerSimple_1c4b95bcfe8fe28a56dbcc7028097cf11836b4fc, ApiSchemaTestVonaDtoSerializerSimple_1c4b95bcfe8fe28a56dbcc7028097cf11836b4fcPartial, ApiSchemaTestVonaDtoSerializerSimple_542f7be0da9b85a67248a6a1a3629e72de5fdb33_cff0ae112a392da58caf5aa905749f3c4444c4ab, ApiSchemaTestVonaDtoSerializerSimple_542f7be0da9b85a67248a6a1a3629e72de5fdb33_cff0ae112a392da58caf5aa905749f3c4444c4abPartial, ApiSchemaTestVonaDtoUser, ApiSchemaTestVonaDtoUserCreate, ApiSchemaTestVonaDtoUserCreatePartial, ApiSchemaTestVonaDtoUserLazy, ApiSchemaTestVonaDtoUserLazyPartial, ApiSchemaTestVonaDtoUserPartial, ApiSchemaTestVonaDtoUserUpdate, ApiSchemaTestVonaDtoUserUpdatePartial, ApiSchemaTestVonaEntityCategory_2c7d642ee581efa300341e343180fbb0ecdc785d, ApiSchemaTestVonaEntityCategory_2c7d642ee581efa300341e343180fbb0ecdc785dPartial, ApiSchemaTestVonaEntityPost_729883d7de16ce4401b26f75bebe618c8948ff64, ApiSchemaTestVonaEntityPost_729883d7de16ce4401b26f75bebe618c8948ff64Partial, ApiSchemaTestVonaEntityPost_a6ba2076b5b70a3c098374cc82d418bd1ab226c3, ApiSchemaTestVonaEntityPost_a6ba2076b5b70a3c098374cc82d418bd1ab226c3Partial, ApiSchemaTestVonaEntityProduct, ApiSchemaTestVonaEntityProductPartial, ApiSchemaTestVonaEntityProduct_29731960f3f38d3572bc2f8a01a7498bfe927055, ApiSchemaTestVonaEntityProduct_29731960f3f38d3572bc2f8a01a7498bfe927055Partial, ApiSchemaTestVonaEntityProduct_9cf2c6bcd41713270c34bcfce21b7b4942e3fbc6, ApiSchemaTestVonaEntityProduct_9cf2c6bcd41713270c34bcfce21b7b4942e3fbc6Partial, ApiSchemaTestVonaEntityProduct_bce173590aaef19772f1ae3a82196493c2633e2e, ApiSchemaTestVonaEntityProduct_bce173590aaef19772f1ae3a82196493c2633e2ePartial, ApiSchemaTestVonaEntityUser_2c7d642ee581efa300341e343180fbb0ecdc785d_1816ff740d81c738ec055c7038bbd93beb9405a7, ApiSchemaTestVonaEntityUser_2c7d642ee581efa300341e343180fbb0ecdc785d_1816ff740d81c738ec055c7038bbd93beb9405a7Partial, ApiTestSsrToolOne, BehaviorFormField, BehaviorFormFieldLayout, BehaviorFormFieldLayoutLogin, Component, ControllerActionBack, ControllerActionBackProps, ControllerActionCreate, ControllerActionCreateProps, ControllerActionSubmit, ControllerActionSubmitProps, ControllerBlockFilter, ControllerBlockFilterProps, ControllerBlockForm, ControllerBlockFormProps, ControllerBlockPage, ControllerBlockPageEntry, ControllerBlockPageEntryProps, ControllerBlockPageProps, ControllerBlockPager, ControllerBlockPagerProps, ControllerBlockTable, ControllerBlockTableProps, ControllerBlockToolbarBulk, ControllerBlockToolbarBulkProps, ControllerBlockToolbarRow, ControllerBlockToolbarRowProps, ControllerCard, ControllerCardModels, ControllerCardProps, ControllerDateRange, ControllerDateRangeModels, ControllerDateRangeProps, ControllerFormFieldCaptcha, ControllerFormFieldCaptchaProps, ControllerFormFieldCurrency, ControllerFormFieldCurrencyProps, ControllerFormFieldDate, ControllerFormFieldDateProps, ControllerFormFieldDateRange, ControllerFormFieldDateRangeProps, ControllerFormFieldInput, ControllerFormFieldInputProps, ControllerFormFieldTest, ControllerFormFieldTestProps, ControllerItemLink, ControllerItemLinkProps, ControllerLayoutEmpty, ControllerLayoutEmptyProps, ControllerLayoutTabs, ControllerLayoutTabsProps, ControllerPage, ControllerPageAuthCallback, ControllerPageAuthCallbackSchemaQuery, ControllerPageErrorExpired, ControllerPageErrorExpiredSchemaQuery, ControllerPageErrorNotFound, ControllerPageHome, ControllerPageLogin$1 as ControllerPageLogin, ControllerPageProps, ControllerPageTest, ControllerTable, ControllerTableProps, ControllerTest, ControllerTest2, ControllerTest2Models, ControllerTest2Props, ControllerTestModels, ControllerTestProps, CssDefault, HTMLInputElementType, IActionOptionsAlert, IActionOptionsConfirm, IActionOptionsCopy, IActionOptionsCreate, IActionOptionsDelete, IActionOptionsEdit, IActionOptionsExpr, IActionOptionsLog, IActionOptionsSetValue, IActionOptionsView, IBehaviorOptionsFormField, IBehaviorOptionsFormFieldLayout, IBehaviorOptionsFormFieldLayoutLogin, IBehaviorPropsInputFormField, IBehaviorPropsInputFormFieldLayout, IBehaviorPropsInputFormFieldLayoutLogin, IBehaviorPropsOutputFormField, IBehaviorPropsOutputFormFieldLayout, IBehaviorPropsOutputFormFieldLayoutLogin, ICaptchaData, ICaptchaOptions, ICaptchaProviderRecord, ICaptchaSceneRecord, ICssOptionsDefault, IModelOptionsLayout, IModelOptionsMenu, IModelOptionsPassport, IModuleApi, IModuleApiSchema, IResourceActionBulkOptionsCreate, IResourceActionRowOptionsBack, IResourceActionRowOptionsDelete, IResourceActionRowOptionsOperationsRow, IResourceActionRowOptionsSubmit, IResourceActionRowOptionsUpdate, IResourceActionRowOptionsView, IResourceBlockOptionsFilter, IResourceBlockOptionsForm, IResourceBlockOptionsPage, IResourceBlockOptionsPageEntry, IResourceBlockOptionsPager, IResourceBlockOptionsTable, IResourceBlockOptionsToolbarBulk, IResourceBlockOptionsToolbarRow, IResourceFormFieldOptionsCaptcha, IResourceFormFieldOptionsCurrency, IResourceFormFieldOptionsDate, IResourceFormFieldOptionsDateRange, IResourceFormFieldOptionsInput, IResourceFormFieldOptionsResourcePicker, IResourceFormFieldOptionsSelect, IResourceFormFieldOptionsTextarea, IResourceFormFieldOptionsToggle, IResourceTableCellOptionsCurrency, IResourceTableCellOptionsDate, ISelectChipsOptions, ISelectOptions, IServiceSsrLayoutOptions, ITableCellOptionsActionDelete, ITableCellOptionsActionOperationsRow, ITableCellOptionsActionUpdate, ITableCellOptionsActionView, ITableCellOptionsCurrency, ITableCellOptionsDate, IThemeOptionsDefault, IThemeOptionsOrange, Main, MetaThemeHandler, ModelLayout, ModelMenu, ModelPassport, NSControllerPageAuthCallback, NSControllerPageErrorExpired, OpenApiBaseURL, RenderContent, RenderHeader, RenderLayoutTabs, RenderLocale, RenderMenu, RenderPageLogin, RenderSidebar, RenderTable, RenderTabs, RenderTheme, RenderUser, ScopeModuleBasicActions, ScopeModuleBasicActionssync, ScopeModuleBasicAdapter, ScopeModuleBasicCaptcha, ScopeModuleBasicCurrency, ScopeModuleBasicDate, ScopeModuleBasicForm, ScopeModuleBasicInput, ScopeModuleBasicOpenapi, ScopeModuleBasicPage, ScopeModuleBasicPageentry, ScopeModuleBasicTable, ScopeModuleDemoStudent, ScopeModuleDevuiAdapter, ScopeModuleHomeApi, ScopeModuleHomeBase, ScopeModuleHomeIcon, ScopeModuleHomeIndex, ScopeModuleHomeLayoutempty, ScopeModuleHomeLayouttabs, ScopeModuleHomeLogin, ScopeModuleHomePassport, ScopeModuleHomeTheme, ServiceJwtAdapter, ServiceRouterGuards, ServiceSsr, ServiceSsrLayout, StyleLayoutTabs$1 as StyleLayoutTabs, TableCellActionDelete, TableCellActionOperationsRow, TableCellActionUpdate, TableCellActionView, TableCellCurrency, TableCellDate, ThemeDefault, ThemeOrange, ThemeTokenCustom, TypeActionAlertResult, TypeActionConfirmResult, TypeActionCopyResult, TypeActionCreateResult, TypeActionDeleteResult, TypeActionEditResult, TypeActionExprResult, TypeActionLogResult, TypeActionSetValueResult, TypeActionViewResult, TypeControllerActionBackPublicProps, TypeControllerActionCreatePublicProps, TypeControllerActionSubmitPublicProps, TypeControllerBlockFilterPublicProps, TypeControllerBlockFormPublicProps, TypeControllerBlockPageEntryPublicProps, TypeControllerBlockPagePublicProps, TypeControllerBlockPagerPublicProps, TypeControllerBlockTablePublicProps, TypeControllerBlockToolbarBulkPublicProps, TypeControllerBlockToolbarRowPublicProps, TypeControllerCardPublicProps, TypeControllerDateRangePublicProps, TypeControllerFormFieldCaptchaPublicProps, TypeControllerFormFieldCurrencyPublicProps, TypeControllerFormFieldDatePublicProps, TypeControllerFormFieldDateRangePublicProps, TypeControllerFormFieldInputPublicProps, TypeControllerFormFieldTestPublicProps, TypeControllerItemLinkPublicProps, TypeControllerLayoutEmptyPublicProps, TypeControllerLayoutTabsPublicProps, TypeControllerPagePublicProps, TypeControllerTablePublicProps, TypeControllerTest2PublicProps, TypeControllerTestPublicProps, TypeDateFormatPreset, TypeMenuGroup, TypeMenuItem, TypeMenuTree, ZActionBack, ZActionCreate, ZActionSubmit, ZBlockFilter, ZBlockForm, ZBlockPage, ZBlockPageEntry, ZBlockPager, ZBlockTable, ZBlockToolbarBulk, ZBlockToolbarRow, ZCard, ZDateRange, ZFormFieldCaptcha, ZFormFieldCurrency, ZFormFieldDate, ZFormFieldDateRange, ZFormFieldInput, ZFormFieldTest, ZItemLink, ZLayoutEmpty, ZLayoutTabs, ZPage, ZPageAuthCallback, ZPageErrorExpired, ZPageErrorNotFound, ZPageHome, ZPageLogin, ZPageTest, ZTable, ZTest, ZTest2, currencyFormat, currencyUpdate, dateFormatUtil, definePropertyScopeBase, icons, operations, paths, render, webhooks };

@@ -1,1 +1,195 @@
-var e=Object.defineProperty,t=Object.getOwnPropertyDescriptor,n=Object.getOwnPropertyNames,r=Object.prototype.hasOwnProperty,i=(t,n)=>{let r={};for(var i in t)e(r,i,{get:t[i],enumerable:!0});return n||e(r,Symbol.toStringTag,{value:`Module`}),r},a=(i,a,o,s)=>{if(a&&typeof a==`object`||typeof a==`function`)for(var c=n(a),l=0,u=c.length,d;l<u;l++)d=c[l],!r.call(i,d)&&d!==o&&e(i,d,{get:(e=>a[e]).bind(null,d),enumerable:!(s=t(a,d))||s.enumerable});return i},o=(e,t,n)=>(a(e,t,`default`),n&&a(n,t,`default`)),s=i({});function c(e){return`demo-basic.tableCell.test`}var l=i({BBTDemoBasicTest:()=>c}),u=i({}),d=i({}),f=i({}),p=i({}),m=i({}),h=i({}),g=i({}),_=i({}),v=i({}),y=i({}),b=i({}),x=i({}),S=i({}),C=i({}),w=i({}),T=i({});function E(e){return`basic-currency.tableCell.currency`}var D=i({BBTBasicCurrency:()=>E});function O(e){return`basic-date.tableCell.date`}var k=i({BBTBasicDate:()=>O}),A=i({}),j=i({}),M=i({}),N=i({});function P(e){return`basic-table.tableCell.actionDelete`}function F(e){return`basic-table.tableCell.actionOperationsRow`}function I(e){return`basic-table.tableCell.actionUpdate`}function L(e){return`basic-table.tableCell.actionView`}var R=i({BBTBasicTableActionDelete:()=>P,BBTBasicTableActionOperationsRow:()=>F,BBTBasicTableActionUpdate:()=>I,BBTBasicTableActionView:()=>L}),z=i({}),B=i({}),V=i({}),H=i({$iconName:()=>U,Action:()=>W,BBTBasicCurrency:()=>E,BBTBasicDate:()=>O,BBTBasicTableActionDelete:()=>P,BBTBasicTableActionOperationsRow:()=>F,BBTBasicTableActionUpdate:()=>I,BBTBasicTableActionView:()=>L,BBTDemoBasicTest:()=>c,Component:()=>G});o(H,s),o(H,l),o(H,u),o(H,d),o(H,f),o(H,p),o(H,m),o(H,h),o(H,g),o(H,_),o(H,v),o(H,y),o(H,b),o(H,x),o(H,S),o(H,C),o(H,w),o(H,T),o(H,D),o(H,k),o(H,A),o(H,j),o(H,M),o(H,N),o(H,R),o(H,z),o(H,B),o(H,V);function U(e){return e}function W(e){if(!e.name)throw Error(`should specify the action name`);return e.name.replace(`:`,`.action.`)}function G(e){if(!e.name)throw Error(`should specify the component name`);return e.name}export{U as $iconName,W as Action,E as BBTBasicCurrency,O as BBTBasicDate,P as BBTBasicTableActionDelete,F as BBTBasicTableActionOperationsRow,I as BBTBasicTableActionUpdate,L as BBTBasicTableActionView,c as BBTDemoBasicTest,G as Component};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//#endregion
+//#region .zova-rest/utils.ts
+function $iconName(name) {
+	return name;
+}
+function Action(options) {
+	if (!options.name) throw new Error("should specify the action name");
+	return options.name.replace(":", ".action.");
+}
+function Component(options) {
+	if (!options.name) throw new Error("should specify the component name");
+	return options.name;
+}
+const OrderLevelBaseMap = {
+	core: 100,
+	business: 1e3,
+	max: 1e5
+};
+function _generalSchemaRest(schema, options, scene) {
+	return schema.openapi(scene ? { rest: { [scene]: options } } : { rest: options });
+}
+function _order(order, level) {
+	return OrderLevelBaseMap[level ?? "business"] + order;
+}
+//#endregion
+//#region .zova-rest/component.ts
+function schemaRenderField(name, options, scene) {
+	return function(schema) {
+		return _generalSchemaRest(schema, options !== void 0 ? {
+			render: name,
+			options
+		} : { render: name }, scene ?? "form");
+	};
+}
+function schemaRenderFieldJsx(renderComponentJsx, scene) {
+	return function(schema) {
+		return _generalSchemaRest(schema, { render: renderComponentJsx }, scene ?? "form");
+	};
+}
+function schemaRenderCell(name, options) {
+	return function(schema) {
+		return _generalSchemaRest(schema, options !== void 0 ? {
+			render: name,
+			columnProps: options
+		} : { render: name }, "table");
+	};
+}
+function schemaRenderCellJsx(renderComponentJsx) {
+	return function(schema) {
+		return _generalSchemaRest(schema, { render: renderComponentJsx }, "table");
+	};
+}
+function schemaRenderActionRow(name, options) {
+	return {
+		$$typeof: "zova-jsx:actionRow",
+		name,
+		render: "Action" + toUpperCaseFirstChar(name),
+		options
+	};
+}
+function schemaRenderActionRowJsx(name, renderComponentJsx) {
+	return {
+		name,
+		render: renderComponentJsx
+	};
+}
+function schemaRenderActionBulk(name, options) {
+	return {
+		$$typeof: "zova-jsx:actionBulk",
+		name,
+		render: "Action" + toUpperCaseFirstChar(name),
+		options
+	};
+}
+function schemaRenderActionBulkJsx(name, renderComponentJsx) {
+	return {
+		name,
+		render: renderComponentJsx
+	};
+}
+function schemaRenderBlock(name, options) {
+	return {
+		$$typeof: "zova-jsx:block",
+		render: name,
+		options
+	};
+}
+function schemaRenderBlockJsx(renderComponentJsx) {
+	return { render: renderComponentJsx };
+}
+//#endregion
+//#region .zova-rest/rest.ts
+function schemaRenderLayout(layoutOptions, scene) {
+	return function(schema) {
+		return _generalSchemaRest(schema, { layout: layoutOptions }, scene);
+	};
+}
+function schemaRenderVisible(visible, scene) {
+	return function(schema) {
+		return _generalSchemaRest(schema, { visible }, scene);
+	};
+}
+function schemaRenderReadonly(readonly, scene) {
+	return function(schema) {
+		return _generalSchemaRest(schema, { readonly }, scene);
+	};
+}
+function schemaRenderDisableNotifyChanged(disableNotifyChanged, scene) {
+	return function(schema) {
+		return _generalSchemaRest(schema, { disableNotifyChanged }, scene);
+	};
+}
+function schemaRenderFieldSource(fieldSource, scene) {
+	return function(schema) {
+		return _generalSchemaRest(schema, { fieldSource }, scene);
+	};
+}
+function schemaRenderOrder(order, level, scene) {
+	const orderReal = _order(order, level);
+	return function(schema) {
+		return _generalSchemaRest(schema, { order: orderReal }, scene);
+	};
+}
+//#endregion
+//#region .zova-rest/render.ts
+const render = {
+	layout: schemaRenderLayout,
+	visible: schemaRenderVisible,
+	readonly: schemaRenderReadonly,
+	order: schemaRenderOrder,
+	disableNotifyChanged: schemaRenderDisableNotifyChanged,
+	fieldSource: schemaRenderFieldSource,
+	field: schemaRenderField,
+	fieldJsx: schemaRenderFieldJsx,
+	cell: schemaRenderCell,
+	cellJsx: schemaRenderCellJsx,
+	actionRow: schemaRenderActionRow,
+	actionRowJsx: schemaRenderActionRowJsx,
+	actionBulk: schemaRenderActionBulk,
+	actionBulkJsx: schemaRenderActionBulkJsx,
+	block: schemaRenderBlock,
+	blockJsx: schemaRenderBlockJsx
+};
+//#endregion
+export { $iconName, Action, Component, render };
