@@ -3,6 +3,7 @@ import type { IDecoratorDtoOptions } from 'vona-module-a-web';
 import { DtoCaptchaVerify } from 'vona-module-a-captcha';
 import { Api, v } from 'vona-module-a-openapiutils';
 import { Dto } from 'vona-module-a-web';
+import { render } from 'zova-rest-cabloy-basic-admin';
 
 export interface IDtoOptionsLogin extends IDecoratorDtoOptions {}
 
@@ -17,7 +18,7 @@ export class DtoLogin {
   @Api.field(
     v.required(),
     v.renderLayout({ iconPrefix: ':editor:code-block' }),
-    v.renderField('Captcha'),
+    render.field('basic-captcha:formFieldCaptcha'),
   )
   captcha: DtoCaptchaVerify;
 }
