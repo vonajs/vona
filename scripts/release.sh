@@ -1,6 +1,6 @@
 #! /usr/bin/env bash
 
-lerna version patch
+lerna version $1
 git add .
 git commit -m 'chore: release'
 git push
