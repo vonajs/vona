@@ -1,7 +1,9 @@
 import type { IDecoratorDtoOptions } from 'vona-module-a-web';
 
+import { $makeSchema, v } from 'vona-module-a-openapiutils';
 import { $Dto } from 'vona-module-a-orm';
 import { Dto } from 'vona-module-a-web';
+import z from 'zod';
 import { render } from 'zova-rest-cabloy-basic-admin';
 
 import { $locale } from '../.metadata/locales.ts';
@@ -12,12 +14,7 @@ export interface IDtoOptionsProductCreate extends IDecoratorDtoOptions<'_test'> 
 @Dto<IDtoOptionsProductCreate>({
   openapi: { title: $locale('CreateProduct') },
   fields: {
-    _test: {
-      title: 'Test',
-      rest: {
-        render: 'text',
-      },
-    },
+    _test: $makeSchema(v.title('Test'), render.field('basic-input:formFieldInput'), z.string()),
   },
   blocks: [
     render.block('basic-pageentry:blockPageEntry', {

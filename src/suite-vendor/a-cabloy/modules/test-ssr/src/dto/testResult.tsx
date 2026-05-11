@@ -8,7 +8,7 @@ import { Event } from 'vona-module-a-actions';
 import { $makeSchema, Api, v } from 'vona-module-a-openapiutils';
 import { Dto } from 'vona-module-a-web';
 import z from 'zod';
-import { Action, Component } from 'zova-rest-cabloy-basic-admin';
+import { Action, Component, render } from 'zova-rest-cabloy-basic-admin';
 
 import { $locale } from '../.metadata/locales.ts';
 import { DtoTestDetail } from './testDetail.ts';
@@ -42,33 +42,27 @@ export interface IDtoOptionsTestResult extends IDecoratorDtoOptions<
       z.string(),
     ),
     _custom2: $makeSchema(
-      v.openapi({
-        rest: {
-          form: {
-            render: (
-              <div className="text-center">
-                <div>{$locale('ChildOne')}</div>
-                <div>{$locale('ChildTwo')}</div>
-                <div>{$locale('TestApples_', 0)}</div>
-                <div>{text`I have ${$locale('TestApples_', 1)}`}</div>
-                <div>{text`cel://name+": ${$locale('TestApples_', 2)}"`}</div>
-                <Component
-                  name="a-icon:icon"
-                  options={{
-                    name: '::home',
-                    width: 24,
-                  }}
-                  nativeOnClick={
-                    <Event>
-                      <Action name="basic-actionssync:log" options={{ message: 'sss' }}></Action>
-                    </Event>
-                  }
-                ></Component>
-              </div>
-            ),
-          },
-        },
-      }),
+      render.fieldJsx(
+        <div className="text-center">
+          <div>{$locale('ChildOne')}</div>
+          <div>{$locale('ChildTwo')}</div>
+          <div>{$locale('TestApples_', 0)}</div>
+          <div>{text`I have ${$locale('TestApples_', 1)}`}</div>
+          <div>{text`cel://name+": ${$locale('TestApples_', 2)}"`}</div>
+          <Component
+            name="a-icon:icon"
+            options={{
+              name: '::home',
+              width: 24,
+            }}
+            nativeOnClick={
+              <Event>
+                <Action name="basic-actionssync:log" options={{ message: 'sss' }}></Action>
+              </Event>
+            }
+          ></Component>
+        </div>,
+      ),
       v.renderLayout({
         label: 'Custom2',
         header: <div>{cel('name + ":containerHeader:" + value')}</div>,
@@ -79,43 +73,13 @@ export interface IDtoOptionsTestResult extends IDecoratorDtoOptions<
       v.min(6),
       z.string(),
     ),
-    _custom3: $makeSchema(
-      v.openapi({
-        rest: {
-          render: cel('getValue("name")!="kevin"?"text":"password"'),
-        },
-      }),
-      v.renderLayout({ label: 'Custom3' }),
-      v.default('custom'),
-      v.optional(),
-      v.min(6),
-      z.string(),
-    ),
-    _custom4: $makeSchema(
-      v.openapi({
-        rest: {
-          // render: 'text',
-        },
-      }),
-      v.renderLayout({ label: 'Custom4' }),
-      v.default('custom'),
-      v.optional(),
-      v.min(6),
-      z.string(),
-    ),
     _custom5: $makeSchema(
-      v.openapi({
-        rest: {
-          form: {
-            render: (
-              <div>
-                <var name="varTest" value={cel('getValue("name") + "!!"')}></var>
-                <div>{cel('"var: " + varTest')}</div>
-              </div>
-            ),
-          },
-        },
-      }),
+      render.fieldJsx(
+        <div>
+          <var name="varTest" value={cel('getValue("name") + "!!"')}></var>
+          <div>{cel('"var: " + varTest')}</div>
+        </div>,
+      ),
       v.renderLayout({ label: 'Custom5' }),
       v.default('custom'),
       v.optional(),
@@ -166,15 +130,7 @@ export interface IDtoOptionsTestResult extends IDecoratorDtoOptions<
       v.min(6),
       z.string(),
     ),
-    _customCopied: $makeSchema(
-      v.openapi({
-        rest: {
-          visible: false,
-        },
-      }),
-      v.optional(),
-      z.boolean(),
-    ),
+    _customCopied: $makeSchema(render.visible(false), v.optional(), z.boolean()),
   },
 })
 export class DtoTestResult {
@@ -182,9 +138,7 @@ export class DtoTestResult {
   id: TableIdentity;
 
   @Api.field(
-    v.openapi({
-      title: $locale('Name'),
-    }),
+    v.title($locale('Name')),
     v.renderFieldJsx(<input className="text-center-2 text-center"></input>),
     v.renderLayout({ label: cel('name+"!!"'), class: 'test-layout' }),
     v.default('tom'),

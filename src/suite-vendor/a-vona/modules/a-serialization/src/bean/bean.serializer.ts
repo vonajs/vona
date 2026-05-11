@@ -42,8 +42,9 @@ export class BeanSerializer extends BeanBase {
     const dataPatch = {};
     for (const key in schema.shape) {
       const keySchema = ZodMetadata.resolveLazySchema(schema.shape[key]);
-      const metadata: ISchemaObjectExtensionField | undefined =
-        ZodMetadata.getOpenapiMetadata(keySchema);
+      const metadata: ISchemaObjectExtensionField | undefined = ZodMetadata.getOpenapiMetadata(
+        keySchema,
+      ) as ISchemaObjectExtensionField | undefined;
       if (!metadata) continue;
       // valuePatch
       let valuePatch = data[key];

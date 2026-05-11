@@ -107,7 +107,7 @@ export class PipeFilter
     // openapi
     const openapi: ISchemaObjectExtensionField | undefined = ZodMetadata.getOpenapiMetadata(
       options.schema!,
-    );
+    ) as ISchemaObjectExtensionField | undefined;
     const table = openapi?.filter?.table;
     // loop
     for (const order of params.orders) {
@@ -117,8 +117,9 @@ export class PipeFilter
       let fieldCurrent = field;
       const fieldSchema = ZodMetadata.getFieldSchema(options.schema, field);
       if (fieldSchema) {
-        const openapi: ISchemaObjectExtensionField | undefined =
-          ZodMetadata.getOpenapiMetadata(fieldSchema);
+        const openapi: ISchemaObjectExtensionField | undefined = ZodMetadata.getOpenapiMetadata(
+          fieldSchema,
+        ) as ISchemaObjectExtensionField | undefined;
         if (openapi?.filter?.table) {
           tableCurrent = openapi?.filter?.table;
         }
@@ -143,8 +144,9 @@ export class PipeFilter
     if (!fieldSchema) return;
     const fieldSchemaInner = ZodMetadata.unwrapChained(fieldSchema);
     // openapi
-    const openapi: ISchemaObjectExtensionField | undefined =
-      ZodMetadata.getOpenapiMetadata(fieldSchema);
+    const openapi: ISchemaObjectExtensionField | undefined = ZodMetadata.getOpenapiMetadata(
+      fieldSchema,
+    ) as ISchemaObjectExtensionField | undefined;
     // name
     const originalName = openapi?.filter?.originalName ?? key;
     let fullName: string;
