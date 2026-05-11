@@ -1,6 +1,6 @@
 import type { IDecoratorEntityOptions } from 'vona-module-a-orm';
 
-import { Api, v } from 'vona-module-a-openapiutils';
+import { $makeMetadata, Api, v } from 'vona-module-a-openapiutils';
 import { Entity, EntityBase } from 'vona-module-a-orm';
 import { render } from 'zova-rest-cabloy-basic-admin';
 
@@ -8,7 +8,28 @@ import { $locale } from '../.metadata/locales.ts';
 
 export interface IEntityOptions<%=argv.resourceNameCapitalize%> extends IDecoratorEntityOptions {}
 
-@Entity<IEntityOptions<%=argv.resourceNameCapitalize%>>('<%=argv.moduleResourceName%>', { openapi: { title: $locale('<%=argv.resourceNameCapitalize%>') } })
+@Entity<IEntityOptions<%=argv.resourceNameCapitalize%>>('<%=argv.moduleResourceName%>', {
+  openapi: { title: $locale('<%=argv.resourceNameCapitalize%>') },
+  fields: {
+    id: $makeMetadata(render.order(1, 'core')),
+    createdAt: $makeMetadata(
+      render.order(-2, 'max'),
+      render.field('basic-date:formFieldDate'),
+      render.cell('basic-date:date'),
+      render.field('basic-date:formFieldDateRange', undefined, 'filter'),
+      v.filterTransform('a-web:dateRange'),
+    ),
+    updatedAt: $makeMetadata(
+      render.order(-1, 'max'),
+      render.field('basic-date:formFieldDate'),
+      render.cell('basic-date:date'),
+      render.field('basic-date:formFieldDateRange', undefined, 'filter'),
+      v.filterTransform('a-web:dateRange'),
+    ),
+    deleted: $makeMetadata(render.visible(false)),
+    iid: $makeMetadata(render.visible(false)),
+  },
+})
 export class Entity<%=argv.resourceNameCapitalize%> extends EntityBase {
   @Api.field(
     v.title($locale('Name')),
