@@ -1,7 +1,5 @@
 import '@cabloy/zod-query';
 
-export * from './behavior.ts';
-export * from './component.ts';
 export * from './decorator.ts';
 export * from './permissions.ts';
 export * from './resource.ts';
