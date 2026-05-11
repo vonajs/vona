@@ -1,0 +1,40 @@
+{
+  "name": "zova-rest-cabloy-basic-admin",
+  "version": "5.0.0",
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": [
+        "./index.d.mts"
+      ],
+      "import": "./index.mjs"
+    },
+    "./package.json": "./package.json"
+  },
+  "dependencies": {
+    "@tanstack/query-core": "^5.99.0",
+    "@tanstack/vue-query": "^5.99.2",
+    "openapi3-ts": "^4.5.0",
+    "table-identity": "^1.1.4",
+    "typestyle": "^2.4.0",
+    "vue": "^3.5.32",
+    "zod": "^4.3.6",
+    "zova": "^5.1.56",
+    "zova-jsx": "^1.1.34",
+    "zova-module-a-action": "^5.1.16",
+    "zova-module-a-api": "^5.1.10",
+    "zova-module-a-bean": "^5.1.17",
+    "zova-module-a-behavior": "^5.1.13",
+    "zova-module-a-form": "^5.1.19",
+    "zova-module-a-icon": "^5.1.14",
+    "zova-module-a-interceptor": "^5.1.16",
+    "zova-module-a-model": "^5.1.16",
+    "zova-module-a-openapi": "^5.1.21",
+    "zova-module-a-router": "^5.1.15",
+    "zova-module-a-routertabs": "^5.1.17",
+    "zova-module-a-ssr": "^5.1.12",
+    "zova-module-a-style": "^5.1.18",
+    "zova-module-a-table": "^5.1.18",
+    "zova-module-rest-resource": "^5.1.19"
+  }
+}

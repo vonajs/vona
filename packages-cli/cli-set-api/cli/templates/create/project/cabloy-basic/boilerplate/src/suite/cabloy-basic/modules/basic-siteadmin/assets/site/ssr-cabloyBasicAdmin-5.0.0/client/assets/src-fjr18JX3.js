@@ -1,1 +1,0 @@
-import{n as a,t as o}from"./a-boundary-CCeVn_ls.js";o();export{a as ScopeModuleABoundary};
