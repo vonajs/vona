@@ -1,0 +1,1 @@
+import{n as a,r,t as s}from"./a-behaviors-B63PG2af.js";s();export{r as BehaviorFocus,a as ScopeModuleABehaviors};

@@ -1,1 +1,0 @@
-import{a as s,c as a,d as o,f as t,i as m,l as r,m as d,n as e,o as p,p as f,r as i,s as j,t as n,u}from"./demo-student-CYrqxHSM.js";n();export{d as ControllerCard,o as ControllerPageTest,f as ControllerTest,t as ControllerTest2,e as ScopeModuleDemoStudent,a as ZCard,u as ZPageTest,j as ZTest,p as ZTest2,i as components,m as pageNameSchemas,s as pagePathSchemas,r as routes};
