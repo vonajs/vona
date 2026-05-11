@@ -46,8 +46,6 @@
 
 
 
-
-
 //#endregion
 //#region .zova-rest/utils.ts
 function $iconName(name) {
@@ -72,14 +70,17 @@ function _generalSchemaRest(schema, options, scene) {
 function _order(order, level) {
 	return OrderLevelBaseMap[level ?? "business"] + order;
 }
+function _toLowerCaseFirstChar(str) {
+	return str.charAt(0).toLowerCase() + str.substring(1);
+}
 //#endregion
 //#region .zova-rest/component.ts
-function schemaRenderField(name, options, scene) {
+function schemaRenderField(render, options, scene) {
 	return function(schema) {
 		return _generalSchemaRest(schema, options !== void 0 ? {
-			render: name,
+			render,
 			options
-		} : { render: name }, scene ?? "form");
+		} : { render }, scene ?? "form");
 	};
 }
 function schemaRenderFieldJsx(renderComponentJsx, scene) {
@@ -87,51 +88,71 @@ function schemaRenderFieldJsx(renderComponentJsx, scene) {
 		return _generalSchemaRest(schema, { render: renderComponentJsx }, scene ?? "form");
 	};
 }
-function schemaRenderCell(name, options) {
+function schemaRenderCell(render, options) {
 	return function(schema) {
 		return _generalSchemaRest(schema, options !== void 0 ? {
-			render: name,
+			render,
 			columnProps: options
-		} : { render: name }, "table");
+		} : { render }, "table");
 	};
 }
-function schemaRenderCellJsx(renderComponentJsx) {
+function schemaRenderCellJsx(renderComponentJsx, options) {
 	return function(schema) {
-		return _generalSchemaRest(schema, { render: renderComponentJsx }, "table");
+		return _generalSchemaRest(schema, options !== void 0 ? {
+			render: renderComponentJsx,
+			columnProps: options
+		} : { render: renderComponentJsx }, "table");
 	};
 }
-function schemaRenderActionRow(name, options) {
+function schemaRenderTableActionRow(render, options) {
+	const pos = render.toString().indexOf(":action");
 	return {
 		$$typeof: "zova-jsx:actionRow",
-		name,
-		render: "Action" + toUpperCaseFirstChar(name),
+		name: pos > -1 ? _toLowerCaseFirstChar(render.toString().substring(pos + 7)) : void 0,
+		render,
 		options
 	};
 }
-function schemaRenderActionRowJsx(name, renderComponentJsx) {
+function schemaRenderTableActionRowJsx(renderComponentJsx, options) {
 	return {
-		name,
-		render: renderComponentJsx
+		render: renderComponentJsx,
+		options
 	};
 }
-function schemaRenderActionBulk(name, options) {
+function schemaRenderFormActionRow(render, options) {
+	const pos = render.toString().indexOf(":action");
+	return {
+		$$typeof: "zova-jsx:actionRow",
+		name: pos > -1 ? _toLowerCaseFirstChar(render.toString().substring(pos + 7)) : void 0,
+		render,
+		options
+	};
+}
+function schemaRenderFormActionRowJsx(renderComponentJsx, options) {
+	return {
+		render: renderComponentJsx,
+		options
+	};
+}
+function schemaRenderTableActionBulk(render, options) {
+	const pos = render.toString().indexOf(":action");
 	return {
 		$$typeof: "zova-jsx:actionBulk",
-		name,
-		render: "Action" + toUpperCaseFirstChar(name),
+		name: pos > -1 ? _toLowerCaseFirstChar(render.toString().substring(pos + 7)) : void 0,
+		render,
 		options
 	};
 }
-function schemaRenderActionBulkJsx(name, renderComponentJsx) {
+function schemaRenderTableActionBulkJsx(renderComponentJsx, options) {
 	return {
-		name,
-		render: renderComponentJsx
+		render: renderComponentJsx,
+		options
 	};
 }
-function schemaRenderBlock(name, options) {
+function schemaRenderBlock(render, options) {
 	return {
 		$$typeof: "zova-jsx:block",
-		render: name,
+		render,
 		options
 	};
 }
@@ -184,10 +205,12 @@ const render = {
 	fieldJsx: schemaRenderFieldJsx,
 	cell: schemaRenderCell,
 	cellJsx: schemaRenderCellJsx,
-	actionRow: schemaRenderActionRow,
-	actionRowJsx: schemaRenderActionRowJsx,
-	actionBulk: schemaRenderActionBulk,
-	actionBulkJsx: schemaRenderActionBulkJsx,
+	tableActionRow: schemaRenderTableActionRow,
+	tableActionRowJsx: schemaRenderTableActionRowJsx,
+	formActionRow: schemaRenderFormActionRow,
+	formActionRowJsx: schemaRenderFormActionRowJsx,
+	tableActionBulk: schemaRenderTableActionBulk,
+	tableActionBulkJsx: schemaRenderTableActionBulkJsx,
 	block: schemaRenderBlock,
 	blockJsx: schemaRenderBlockJsx
 };

@@ -5,7 +5,7 @@ import * as _$vue_jsx_runtime0 from "vue/jsx-runtime";
 import { BeanRouter, BeanRouterGuardsBase, IRouteViewRouteItem, TypePagePathSchema } from "zova-module-a-router";
 import { BeanModelBase, IDecoratorModelOptions } from "zova-module-a-model";
 import * as _$zova_module_a_openapi0 from "zova-module-a-openapi";
-import { ICaptchaData, ICaptchaSceneRecord as ICaptchaSceneRecord$1, IFormMeta, IFormProvider, IJsxRenderContextBase, IJsxRenderContextPage, IJsxRenderContextPageEntry, IPageEntryScope, IPageScope, IPermissionHint, IResourceActionBulkOptionsBase, IResourceActionBulkRecord, IResourceActionRowOptionsBase, IResourceActionRowRecord, IResourceActionTableRecord, IResourceBlockOptionsBase, IResourceComponentActionBulkOptionsAction, IResourceComponentActionRowOptionsAction, IResourceComponentBlockOptionsBlock, IResourceComponentBlockRecord, IResourceComponentFormFieldRecord, IResourceComponentTableCellActionRowRecord, IResourceFormFieldOptionsBase, IResourceProviders, IResourceTableCellOptionsBase, ISchemaRenderComponentLayoutOptions, ITablePaged, ITableProvider, ITableQuery, ITableResPaged, TypeFormScene, TypeFormSchemaScene, TypeOpenapiPermissions, TypeSchemaOrderLevel, TypeSchemaScene } from "zova-module-a-openapi";
+import { ICaptchaData, ICaptchaSceneRecord, IFormMeta, IFormProvider, IJsxRenderContextBase, IJsxRenderContextPage, IJsxRenderContextPageEntry, IPageEntryScope, IPageScope, IPermissionHint, IResourceBlockOptionsBase, IResourceBlockRecord, IResourceFormActionRowNameRecord, IResourceFormActionRowOptionsBase, IResourceFormActionRowRecord, IResourceFormFieldLayoutOptions, IResourceFormFieldOptionsBase, IResourceFormFieldRecord, IResourceRenderBlockOptionsBlock, IResourceRenderFormActionRowOptionsAction, IResourceRenderTableActionBulkOptionsAction, IResourceRenderTableActionRowOptionsAction, IResourceTableActionBulkOptionsBase, IResourceTableActionBulkRecord, IResourceTableActionNameRecord, IResourceTableActionRowOptionsBase, IResourceTableActionRowRecord, IResourceTableCellOptionsBase, IResourceTableCellRecord, ISchemaRenderComponentLayoutOptions, ITablePaged, ITableQuery, ITableResPaged, TypeFormScene, TypeFormSchemaScene, TypeOpenapiPermissions, TypeSchemaOrderLevel, TypeSchemaScene } from "zova-module-a-openapi";
 import { BeanApiBase, IApiActionOptions, IApiSchemaOptions } from "zova-module-a-api";
 import { IVonaComponentRecord, TypeComponentOptions } from "zova-module-a-bean";
 import { BeanBehaviorBase, IDecoratorBehaviorOptions, NextBehavior } from "zova-module-a-behavior";
@@ -5730,7 +5730,7 @@ declare class ModelPassport extends BeanModelBase {
   private _setPassportJwt;
   private _setPassport;
   private _setJwt;
-  checkPermission(permissions: TypeOpenapiPermissions | undefined, actionName: keyof IResourceActionTableRecord, permissionHint?: IPermissionHint): boolean;
+  checkPermission(permissions: TypeOpenapiPermissions | undefined, actionName?: keyof (IResourceTableActionNameRecord & IResourceFormActionRowNameRecord), permissionHint?: IPermissionHint): boolean;
 }
 //#endregion
 //#region src/suite/a-home/modules/home-passport/src/config/config.d.ts
@@ -6142,7 +6142,7 @@ declare module 'zova' {
 //#endregion
 //#region src/suite/cabloy-basic/modules/basic-adapter/src/config/config.d.ts
 declare const config: (_sys: ZovaSys) => {
-  resourceProviders: IResourceProviders;
+  formProvider: IFormProvider;
 };
 //#endregion
 //#region src/suite/cabloy-basic/modules/basic-adapter/src/.metadata/index.d.ts
@@ -6173,7 +6173,7 @@ declare const locales$4: {
 //#endregion
 //#region src/suite/cabloy-basic/modules/basic-captcha/src/component/formFieldCaptcha/controller.d.ts
 declare module 'zova-module-a-openapi' {
-  interface IResourceComponentFormFieldRecord {
+  interface IResourceFormFieldRecord {
     'basic-captcha:formFieldCaptcha'?: IResourceFormFieldCaptchaOptions;
   }
   interface ICaptchaSceneRecord {
@@ -6181,7 +6181,7 @@ declare module 'zova-module-a-openapi' {
   }
 }
 interface IResourceFormFieldCaptchaOptions extends IResourceFormFieldOptionsBase {
-  scene?: keyof ICaptchaSceneRecord$1;
+  scene?: keyof ICaptchaSceneRecord;
 }
 interface ControllerFormFieldCaptchaProps extends IFormFieldComponentOptions {
   options?: IResourceFormFieldCaptchaOptions;
@@ -6275,7 +6275,7 @@ interface CurrencyOptions {
 //#endregion
 //#region src/suite/cabloy-basic/modules/basic-currency/src/component/formFieldCurrency/controller.d.ts
 declare module 'zova-module-a-openapi' {
-  interface IResourceComponentFormFieldRecord {
+  interface IResourceFormFieldRecord {
     'basic-currency:formFieldCurrency'?: IResourceFormFieldCurrencyOptions;
   }
 }
@@ -6317,168 +6317,13 @@ declare module 'zova-module-a-bean' {
   }
 }
 //#endregion
-//#region src/suite/cabloy-basic/modules/basic-openapi/src/.metadata/index.d.ts
-declare class ScopeModuleBasicOpenapi extends BeanScopeBase {}
-interface ScopeModuleBasicOpenapi {
-  util: BeanScopeUtil;
-}
-declare module 'zova' {
-  interface IBeanScopeRecord {
-    'basic-openapi': ScopeModuleBasicOpenapi;
-  }
-}
-/** scope: end */
-//#endregion
-//#region src/suite/cabloy-basic/modules/basic-openapi/src/types/utils.d.ts
-type TypeDateFormatPreset$1 = 'DATE_SHORT' | 'DATE_MED' | 'DATE_MED_WITH_WEEKDAY' | 'DATE_FULL' | 'DATE_HUGE' | 'TIME_SIMPLE' | 'TIME_WITH_SECONDS' | 'TIME_WITH_SHORT_OFFSET' | 'TIME_WITH_LONG_OFFSET' | 'TIME_24_SIMPLE' | 'TIME_24_WITH_SECONDS' | 'TIME_24_WITH_SHORT_OFFSET' | 'TIME_24_WITH_LONG_OFFSET' | 'DATETIME_SHORT' | 'DATETIME_MED' | 'DATETIME_MED_WITH_WEEKDAY' | 'DATETIME_FULL' | 'DATETIME_HUGE' | 'DATETIME_SHORT_WITH_SECONDS' | 'DATETIME_MED_WITH_SECONDS' | 'DATETIME_FULL_WITH_SECONDS' | 'DATETIME_HUGE_WITH_SECONDS';
-interface ICaptchaSceneRecord {
-  'captcha-simple:simple': never;
-}
-interface ICaptchaOptions {
-  scene?: keyof ICaptchaSceneRecord;
-}
-interface ICaptchaProviderRecord {}
-interface ISelectChipsOptions {
-  column?: boolean;
-  filter?: boolean;
-  selectedClass?: string;
-}
-interface ISelectOptions {
-  mode?: 'default' | 'chips';
-  chipsOptions?: ISelectChipsOptions;
-  multiple?: boolean;
-  chips?: boolean;
-  items?: any[];
-  itemTitle?: string;
-  itemValue?: string;
-  itemProps?: string;
-}
-//#endregion
-//#region src/suite/cabloy-basic/modules/basic-openapi/src/types/formField.d.ts
-interface IResourceFormFieldOptionsToggle extends IResourceFormFieldOptionsBase {
-  color?: 'primary' | 'secondary' | 'success' | 'info' | 'warning' | 'error';
-}
-interface IResourceFormFieldOptionsSelect extends IResourceFormFieldOptionsBase, ISelectOptions {}
-interface IResourceFormFieldOptionsTextarea extends IResourceFormFieldOptionsBase {
-  autoGrow?: boolean;
-  maxRows?: number;
-  maxHeight?: number;
-  noResize?: boolean;
-  rows?: number;
-  color?: string;
-  bgColor?: string;
-  counter?: string | number | true;
-}
-interface IResourceFormFieldOptionsResourcePicker extends IResourceFormFieldOptionsBase {
-  resource?: string;
-  actionPath?: string;
-  query?: ITableQuery;
-  selectOptions?: ISelectOptions;
-  relation?: string;
-}
-declare module 'zova-module-a-openapi' {
-  interface IResourceComponentFormFieldRecord {
-    Toggle?: IResourceFormFieldOptionsToggle;
-    Select?: IResourceFormFieldOptionsSelect;
-    Textarea?: IResourceFormFieldOptionsTextarea;
-    ResourcePicker?: IResourceFormFieldOptionsResourcePicker;
-  }
-}
-//#endregion
-//#region src/suite/cabloy-basic/modules/basic-openapi/src/types/actionBulk.d.ts
-interface IResourceActionBulkOptionsCreate extends IResourceActionBulkOptionsBase {}
-declare module 'zova-module-a-openapi' {
-  interface IResourceComponentActionBulkRecord {
-    ActionCreate?: IResourceActionBulkOptionsCreate;
-  }
-}
-//#endregion
-//#region src/suite/cabloy-basic/modules/basic-openapi/src/types/actionRow.d.ts
-interface IResourceActionRowOptionsView extends IResourceActionRowOptionsBase {}
-interface IResourceActionRowOptionsUpdate extends IResourceActionRowOptionsBase {}
-interface IResourceActionRowOptionsDelete extends IResourceActionRowOptionsBase {}
-interface IResourceActionRowOptionsSubmit extends IResourceActionRowOptionsBase {}
-interface IResourceActionRowOptionsBack extends IResourceActionRowOptionsBase {}
-interface IResourceActionRowOptionsOperationsRow extends IResourceActionRowOptionsBase {
-  actions?: IResourceComponentActionRowOptionsAction[];
-}
-declare module 'zova-module-a-openapi' {
-  interface IResourceComponentActionRowRecord {
-    ActionView?: IResourceActionRowOptionsView;
-    ActionUpdate?: IResourceActionRowOptionsUpdate;
-    ActionDelete?: IResourceActionRowOptionsDelete;
-    ActionOperationsRow?: IResourceActionRowOptionsOperationsRow;
-    ActionSubmit?: IResourceActionRowOptionsSubmit;
-    ActionBack?: IResourceActionRowOptionsBack;
-  }
-}
-//#endregion
-//#region src/suite/cabloy-basic/modules/basic-openapi/src/types/fieldLayout.d.ts
-declare module 'zova-module-a-openapi' {
-  interface ISchemaRenderComponentLayoutOptions {
-    disable?: boolean;
-    class?: any;
-    style?: types.NestedCSSProperties;
-    label?: string | false;
-    inline?: boolean;
-    bordered?: boolean;
-    floating?: boolean;
-    iconPrefix?: keyof IIconRecord;
-    iconSuffix?: keyof IIconRecord;
-    header?: TypeRenderComponentJsx | string;
-    footer?: TypeRenderComponentJsx | string;
-  }
-}
-//#endregion
-//#region src/suite/cabloy-basic/modules/basic-openapi/src/types/block.d.ts
-interface IResourceBlockOptionsPage extends IResourceBlockOptionsBase {
-  blocks?: IResourceComponentBlockOptionsBlock[];
-  resource?: string;
-}
-interface IResourceBlockOptionsFilter extends IResourceBlockOptionsBase {}
-interface IResourceBlockOptionsToolbarBulk extends IResourceBlockOptionsBase {
-  actions?: IResourceComponentActionBulkOptionsAction[];
-}
-interface IResourceBlockOptionsTable extends IResourceBlockOptionsBase {}
-interface IResourceBlockOptionsPager extends IResourceBlockOptionsBase {}
-interface IResourceBlockOptionsPageEntry extends IResourceBlockOptionsBase {
-  blocks?: IResourceComponentBlockOptionsBlock[];
-  resource?: string;
-  id?: TableIdentity;
-  formScene?: TypeFormScene;
-}
-interface IResourceBlockOptionsToolbarRow extends IResourceBlockOptionsBase {
-  actions?: IResourceComponentActionRowOptionsAction[];
-}
-interface IResourceBlockOptionsForm extends IResourceBlockOptionsBase {}
-declare module 'zova-module-a-openapi' {
-  interface IResourceComponentBlockRecord {
-    BlockPage?: IResourceBlockOptionsPage;
-    BlockFilter?: IResourceBlockOptionsFilter;
-    BlockToolbarBulk?: IResourceBlockOptionsToolbarBulk;
-    BlockTable?: IResourceBlockOptionsTable;
-    BlockPager?: IResourceBlockOptionsPager;
-    BlockPageEntry?: IResourceBlockOptionsPageEntry;
-    BlockToolbarRow?: IResourceBlockOptionsToolbarRow;
-    BlockForm?: IResourceBlockOptionsForm;
-  }
-}
-//#endregion
-//#region src/suite/cabloy-basic/modules/basic-openapi/src/types/tableCell.d.ts
-interface IResourceTableCellOptionsDate extends IResourceTableCellOptionsBase {
-  preset?: TypeDateFormatPreset$1;
-  format?: string;
-}
-interface IResourceTableCellOptionsCurrency extends IResourceTableCellOptionsBase, CurrencyOptions {}
-declare module 'zova-module-a-openapi' {
-  interface IResourceComponentTableCellRecord {
-    Currency?: IResourceTableCellOptionsCurrency;
-    Date?: IResourceTableCellOptionsDate;
-  }
-}
-//#endregion
 //#region src/suite/cabloy-basic/modules/basic-currency/src/bean/tableCell.currency.d.ts
-interface ITableCellOptionsCurrency extends IResourceTableCellOptionsCurrency {}
+declare module 'zova-module-a-openapi' {
+  interface IResourceTableCellRecord {
+    'basic-currency:currency'?: ITableCellOptionsCurrency;
+  }
+}
+interface ITableCellOptionsCurrency extends IResourceTableCellOptionsBase, CurrencyOptions {}
 declare class TableCellCurrency extends BeanBase implements ITableCellRender {
   render(options: ITableCellOptionsCurrency, _renderContext: IJsxRenderContextTableCell, next: NextTableCellRender): any;
 }
@@ -6548,7 +6393,15 @@ declare function currencyUpdate(value: any, options?: CurrencyOptions): number |
 type TypeDateFormatPreset = 'DATE_SHORT' | 'DATE_MED' | 'DATE_MED_WITH_WEEKDAY' | 'DATE_FULL' | 'DATE_HUGE' | 'TIME_SIMPLE' | 'TIME_WITH_SECONDS' | 'TIME_WITH_SHORT_OFFSET' | 'TIME_WITH_LONG_OFFSET' | 'TIME_24_SIMPLE' | 'TIME_24_WITH_SECONDS' | 'TIME_24_WITH_SHORT_OFFSET' | 'TIME_24_WITH_LONG_OFFSET' | 'DATETIME_SHORT' | 'DATETIME_MED' | 'DATETIME_MED_WITH_WEEKDAY' | 'DATETIME_FULL' | 'DATETIME_HUGE' | 'DATETIME_SHORT_WITH_SECONDS' | 'DATETIME_MED_WITH_SECONDS' | 'DATETIME_FULL_WITH_SECONDS' | 'DATETIME_HUGE_WITH_SECONDS';
 //#endregion
 //#region src/suite/cabloy-basic/modules/basic-date/src/bean/tableCell.date.d.ts
-interface ITableCellOptionsDate extends IResourceTableCellOptionsDate {}
+declare module 'zova-module-a-openapi' {
+  interface IResourceTableCellRecord {
+    'basic-date:date'?: ITableCellOptionsDate;
+  }
+}
+interface ITableCellOptionsDate extends IResourceTableCellOptionsBase {
+  preset?: TypeDateFormatPreset;
+  format?: string;
+}
 declare class TableCellDate extends BeanBase implements ITableCellRender {
   render(options: ITableCellOptionsDate, _renderContext: IJsxRenderContextTableCell, next: NextTableCellRender): any;
 }
@@ -6577,7 +6430,7 @@ declare class ControllerDateRange extends BeanControllerBase {
 //#endregion
 //#region src/suite/cabloy-basic/modules/basic-date/src/component/formFieldDate/controller.d.ts
 declare module 'zova-module-a-openapi' {
-  interface IResourceComponentFormFieldRecord {
+  interface IResourceFormFieldRecord {
     'basic-date:formFieldDate'?: IResourceFormFieldDateOptions;
   }
 }
@@ -6602,7 +6455,7 @@ declare class ControllerFormFieldDate extends BeanControllerBase {
 //#endregion
 //#region src/suite/cabloy-basic/modules/basic-date/src/component/formFieldDateRange/controller.d.ts
 declare module 'zova-module-a-openapi' {
-  interface IResourceComponentFormFieldRecord {
+  interface IResourceFormFieldRecord {
     'basic-date:formFieldDateRange'?: IResourceFormFieldDateRangeOptions;
   }
 }
@@ -6773,7 +6626,12 @@ declare const locales$3: {
 };
 //#endregion
 //#region src/suite/cabloy-basic/modules/basic-form/src/component/actionBack/controller.d.ts
-interface ControllerActionBackProps extends IResourceActionRowOptionsBack {}
+declare module 'zova-module-a-openapi' {
+  interface IResourceFormActionRowRecord {
+    'basic-form:actionBack'?: ControllerActionBackProps;
+  }
+}
+interface ControllerActionBackProps extends IResourceFormActionRowOptionsBase {}
 declare class ControllerActionBack extends BeanControllerBase {
   static $propsDefault: {
     class: string;
@@ -6785,7 +6643,12 @@ declare class ControllerActionBack extends BeanControllerBase {
 }
 //#endregion
 //#region src/suite/cabloy-basic/modules/basic-form/src/component/actionSubmit/controller.d.ts
-interface ControllerActionSubmitProps extends IResourceActionRowOptionsSubmit {}
+declare module 'zova-module-a-openapi' {
+  interface IResourceFormActionRowRecord {
+    'basic-form:actionSubmit'?: ControllerActionSubmitProps;
+  }
+}
+interface ControllerActionSubmitProps extends IResourceFormActionRowOptionsBase {}
 declare class ControllerActionSubmit extends BeanControllerBase {
   static $propsDefault: {
     class: string;
@@ -6853,6 +6716,22 @@ declare class BehaviorFormField extends BeanBehaviorBase<IBehaviorOptionsFormFie
 }
 //#endregion
 //#region src/suite/cabloy-basic/modules/basic-form/src/bean/behavior.formFieldLayout.d.ts
+declare module 'zova-module-a-openapi' {
+  interface IResourceFormFieldLayoutOptions extends IBehaviorResourceFormFieldLayoutOptions {}
+}
+interface IBehaviorResourceFormFieldLayoutOptions {
+  disable?: boolean;
+  class?: any;
+  style?: types.NestedCSSProperties;
+  label?: string | false;
+  inline?: boolean;
+  bordered?: boolean;
+  floating?: boolean;
+  iconPrefix?: keyof IIconRecord;
+  iconSuffix?: keyof IIconRecord;
+  header?: TypeRenderComponentJsx | string;
+  footer?: TypeRenderComponentJsx | string;
+}
 interface IBehaviorPropsInputFormFieldLayout extends IFormFieldRenderContext {}
 interface IBehaviorPropsOutputFormFieldLayout extends IBehaviorPropsInputFormFieldLayout {}
 interface IBehaviorOptionsFormFieldLayout extends IDecoratorBehaviorOptions {}
@@ -6953,7 +6832,7 @@ declare module 'zova' {
 //#endregion
 //#region src/suite/cabloy-basic/modules/basic-input/src/component/formFieldInput/controller.d.ts
 declare module 'zova-module-a-openapi' {
-  interface IResourceComponentFormFieldRecord {
+  interface IResourceFormFieldRecord {
     'basic-input:formFieldInput'?: IResourceFormFieldInputOptions;
   }
 }
@@ -7050,12 +6929,19 @@ declare const locales$2: {
 };
 //#endregion
 //#region src/suite/cabloy-basic/modules/basic-page/src/component/blockPage/controller.d.ts
-interface ControllerBlockPageProps extends IResourceBlockOptionsPage {}
+declare module 'zova-module-a-openapi' {
+  interface IResourceBlockRecord {
+    'basic-page:blockPage'?: ControllerBlockPageProps;
+  }
+}
+interface ControllerBlockPageProps extends IResourceBlockOptionsBase {
+  blocks?: IResourceRenderBlockOptionsBlock[];
+  resource?: string;
+}
 declare class ControllerBlockPage<TData extends {} = {}> extends BeanControllerBase {
   static $propsDefault: {};
   static $componentOptions: IComponentOptions;
   tableRef: BeanControllerTableBase;
-  tableProvider: ITableProvider;
   jsxZova: ZovaJsx;
   jsxCelScope: IPageScope;
   jsxRenderContext: IJsxRenderContextPage<TData>;
@@ -7090,12 +6976,17 @@ declare module 'zova-module-a-table' {
 }
 //#endregion
 //#region src/suite/cabloy-basic/modules/basic-page/src/component/blockFilter/controller.d.ts
-interface ControllerBlockFilterProps extends IResourceBlockOptionsFilter {}
+declare module 'zova-module-a-openapi' {
+  interface IResourceBlockRecord {
+    'basic-page:blockFilter'?: ControllerBlockFilterProps;
+  }
+}
+interface ControllerBlockFilterProps extends IResourceBlockOptionsBase {}
 declare class ControllerBlockFilter extends BeanControllerBase {
   static $propsDefault: {};
   static $componentOptions: IComponentOptions;
   formMeta: IFormMeta;
-  formFieldLayout: ISchemaRenderComponentLayoutOptions;
+  formFieldLayout: IResourceFormFieldLayoutOptions;
   $$renderContext: IJsxRenderContextPage;
   protected __init__(): Promise<void>;
   get schemaFilter(): _$openapi3_ts_oas310.SchemaObject | undefined;
@@ -7106,7 +6997,12 @@ declare class ControllerBlockFilter extends BeanControllerBase {
 }
 //#endregion
 //#region src/suite/cabloy-basic/modules/basic-page/src/component/blockPager/controller.d.ts
-interface ControllerBlockPagerProps extends IResourceBlockOptionsPager {}
+declare module 'zova-module-a-openapi' {
+  interface IResourceBlockRecord {
+    'basic-page:blockPager'?: ControllerBlockPagerProps;
+  }
+}
+interface ControllerBlockPagerProps extends IResourceBlockOptionsBase {}
 declare class ControllerBlockPager extends BeanControllerBase {
   static $propsDefault: {};
   static $componentOptions: IComponentOptions;
@@ -7117,7 +7013,12 @@ declare class ControllerBlockPager extends BeanControllerBase {
 }
 //#endregion
 //#region src/suite/cabloy-basic/modules/basic-page/src/component/blockTable/controller.d.ts
-interface ControllerBlockTableProps extends IResourceBlockOptionsTable {}
+declare module 'zova-module-a-openapi' {
+  interface IResourceBlockRecord {
+    'basic-page:blockTable'?: ControllerBlockTableProps;
+  }
+}
+interface ControllerBlockTableProps extends IResourceBlockOptionsBase {}
 declare class ControllerBlockTable extends BeanControllerBase {
   static $propsDefault: {};
   static $componentOptions: IComponentOptions;
@@ -7129,7 +7030,14 @@ declare class ControllerBlockTable extends BeanControllerBase {
 }
 //#endregion
 //#region src/suite/cabloy-basic/modules/basic-page/src/component/blockToolbarBulk/controller.d.ts
-interface ControllerBlockToolbarBulkProps extends IResourceBlockOptionsToolbarBulk {}
+declare module 'zova-module-a-openapi' {
+  interface IResourceBlockRecord {
+    'basic-page:blockToolbarBulk'?: ControllerBlockToolbarBulkProps;
+  }
+}
+interface ControllerBlockToolbarBulkProps extends IResourceBlockOptionsBase {
+  actions?: IResourceRenderTableActionBulkOptionsAction[];
+}
 declare class ControllerBlockToolbarBulk extends BeanControllerBase {
   static $propsDefault: {};
   static $componentOptions: IComponentOptions;
@@ -7320,7 +7228,17 @@ declare const locales$1: {
 };
 //#endregion
 //#region src/suite/cabloy-basic/modules/basic-pageentry/src/component/blockPageEntry/controller.d.ts
-interface ControllerBlockPageEntryProps extends IResourceBlockOptionsPageEntry {}
+declare module 'zova-module-a-openapi' {
+  interface IResourceBlockRecord {
+    'basic-pageentry:blockPageEntry'?: ControllerBlockPageEntryProps;
+  }
+}
+interface ControllerBlockPageEntryProps extends IResourceBlockOptionsBase {
+  blocks?: IResourceRenderBlockOptionsBlock[];
+  resource?: string;
+  id?: TableIdentity;
+  formScene?: TypeFormScene;
+}
 declare class ControllerBlockPageEntry<TData extends {} = {}> extends BeanControllerBase {
   static $propsDefault: {};
   static $componentOptions: IComponentOptions;
@@ -7500,7 +7418,12 @@ declare module 'zova-module-a-form' {
 }
 //#endregion
 //#region src/suite/cabloy-basic/modules/basic-pageentry/src/component/blockForm/controller.d.ts
-interface ControllerBlockFormProps extends IResourceBlockOptionsForm {}
+declare module 'zova-module-a-openapi' {
+  interface IResourceBlockRecord {
+    'basic-pageentry:blockForm'?: ControllerBlockFormProps;
+  }
+}
+interface ControllerBlockFormProps extends IResourceBlockOptionsBase {}
 declare class ControllerBlockForm extends BeanControllerBase {
   static $propsDefault: {};
   static $componentOptions: IComponentOptions;
@@ -7511,7 +7434,14 @@ declare class ControllerBlockForm extends BeanControllerBase {
 }
 //#endregion
 //#region src/suite/cabloy-basic/modules/basic-pageentry/src/component/blockToolbarRow/controller.d.ts
-interface ControllerBlockToolbarRowProps extends IResourceBlockOptionsToolbarRow {}
+declare module 'zova-module-a-openapi' {
+  interface IResourceBlockRecord {
+    'basic-pageentry:blockToolbarRow'?: ControllerBlockToolbarRowProps;
+  }
+}
+interface ControllerBlockToolbarRowProps extends IResourceBlockOptionsBase {
+  actions?: IResourceRenderFormActionRowOptionsAction[];
+}
 declare class ControllerBlockToolbarRow extends BeanControllerBase {
   static $propsDefault: {};
   static $componentOptions: IComponentOptions;
@@ -7639,7 +7569,12 @@ declare module 'zova' {
 }
 //#endregion
 //#region src/suite/cabloy-basic/modules/basic-table/src/component/actionCreate/controller.d.ts
-interface ControllerActionCreateProps extends IResourceActionBulkOptionsCreate {}
+declare module 'zova-module-a-openapi' {
+  interface IResourceTableActionBulkRecord {
+    'basic-table:actionCreate'?: ControllerActionCreateProps;
+  }
+}
+interface ControllerActionCreateProps extends IResourceTableActionBulkOptionsBase {}
 declare class ControllerActionCreate extends BeanControllerBase {
   static $propsDefault: {
     class: string;
@@ -7732,26 +7667,48 @@ declare class RenderTable<TData extends {} = {}> extends BeanRenderBase {
 }
 //#endregion
 //#region src/suite/cabloy-basic/modules/basic-table/src/bean/tableCell.actionDelete.d.ts
-interface ITableCellOptionsActionDelete extends IResourceActionRowOptionsDelete {}
+declare module 'zova-module-a-openapi' {
+  interface IResourceTableActionRowRecord {
+    'basic-table:actionDelete'?: ITableCellOptionsActionDelete;
+  }
+}
+interface ITableCellOptionsActionDelete extends IResourceTableActionRowOptionsBase {}
 declare class TableCellActionDelete extends BeanBase implements ITableCellRender {
   render(options: ITableCellOptionsActionDelete, renderContext: IJsxRenderContextTableCell, _next: NextTableCellRender): _$vue_jsx_runtime0.JSX.Element;
 }
 //#endregion
 //#region src/suite/cabloy-basic/modules/basic-table/src/bean/tableCell.actionOperationsRow.d.ts
-interface ITableCellOptionsActionOperationsRow extends IResourceActionRowOptionsOperationsRow {}
+declare module 'zova-module-a-openapi' {
+  interface IResourceTableActionRowRecord {
+    'basic-table:actionOperationsRow'?: ITableCellOptionsActionOperationsRow;
+  }
+}
+interface ITableCellOptionsActionOperationsRow extends IResourceTableActionRowOptionsBase {
+  actions?: IResourceRenderTableActionRowOptionsAction[];
+}
 declare class TableCellActionOperationsRow extends BeanBase implements ITableCellRender {
   checkVisible(options: ITableCellOptionsActionOperationsRow, renderContext: IJsxRenderContextTableColumn): Promise<boolean>;
   render(options: ITableCellOptionsActionOperationsRow, renderContext: IJsxRenderContextTableCell, _next: NextTableCellRender): _$vue_jsx_runtime0.JSX.Element | undefined;
 }
 //#endregion
 //#region src/suite/cabloy-basic/modules/basic-table/src/bean/tableCell.actionUpdate.d.ts
-interface ITableCellOptionsActionUpdate extends IResourceActionRowOptionsUpdate {}
+declare module 'zova-module-a-openapi' {
+  interface IResourceTableActionRowRecord {
+    'basic-table:actionUpdate'?: ITableCellOptionsActionUpdate;
+  }
+}
+interface ITableCellOptionsActionUpdate extends IResourceTableActionRowOptionsBase {}
 declare class TableCellActionUpdate extends BeanBase implements ITableCellRender {
   render(options: ITableCellOptionsActionUpdate, renderContext: IJsxRenderContextTableCell, _next: NextTableCellRender): _$vue_jsx_runtime0.JSX.Element;
 }
 //#endregion
 //#region src/suite/cabloy-basic/modules/basic-table/src/bean/tableCell.actionView.d.ts
-interface ITableCellOptionsActionView extends IResourceActionRowOptionsView {}
+declare module 'zova-module-a-openapi' {
+  interface IResourceTableActionRowRecord {
+    'basic-table:actionView'?: ITableCellOptionsActionView;
+  }
+}
+interface ITableCellOptionsActionView extends IResourceTableActionRowOptionsBase {}
 declare class TableCellActionView extends BeanBase implements ITableCellRender {
   render(options: ITableCellOptionsActionView, renderContext: IJsxRenderContextTableCell, next: NextTableCellRender): _$vue_jsx_runtime0.JSX.Element;
 }
@@ -7883,21 +7840,26 @@ declare function Action<K extends keyof IActionRecord>(options: TypeActionOption
 declare function Component<K extends keyof IVonaComponentRecord>(options: TypeComponentOptions<K>): K;
 //#endregion
 //#region .zova-rest/component.d.ts
-declare function schemaRenderField<K extends keyof IResourceComponentFormFieldRecord, T extends z$1.ZodType>(name: K, options?: IResourceComponentFormFieldRecord[K], scene?: TypeFormSchemaScene): (schema: T) => T;
+declare function schemaRenderField<K extends keyof IResourceFormFieldRecord, T extends z$1.ZodType>(render: K, options?: IResourceFormFieldRecord[K], scene?: TypeFormSchemaScene): (schema: T) => T;
 declare function schemaRenderFieldJsx<T extends z$1.ZodType>(renderComponentJsx: TypeRenderComponentJsx, scene?: TypeFormSchemaScene): (schema: T) => T;
-declare function schemaRenderCell<K extends keyof IResourceComponentTableCellActionRowRecord, T extends z$1.ZodType>(name: K, options?: IResourceComponentTableCellActionRowRecord[K]): (schema: T) => T;
-declare function schemaRenderCellJsx<T extends z$1.ZodType>(renderComponentJsx: TypeRenderComponentJsx): (schema: T) => T;
-declare function schemaRenderActionRow<K extends keyof IResourceActionRowRecord>(name: K, options?: IResourceActionRowRecord[K]): IResourceComponentActionRowOptionsAction;
-declare function schemaRenderActionRowJsx<K extends keyof IResourceActionRowRecord>(name: K, renderComponentJsx: TypeRenderComponentJsx): {
-  name: K;
+declare function schemaRenderCell<K extends keyof (IResourceTableCellRecord & IResourceTableActionRowRecord), T extends z$1.ZodType>(render: K, options?: (IResourceTableCellRecord & IResourceTableActionRowRecord)[K]): (schema: T) => T;
+declare function schemaRenderCellJsx<T extends z$1.ZodType>(renderComponentJsx: TypeRenderComponentJsx, options?: Pick<IResourceTableActionRowOptionsBase, 'permission'>): (schema: T) => T;
+declare function schemaRenderTableActionRow<K extends keyof IResourceTableActionRowRecord>(render: K, options?: IResourceTableActionRowRecord[K]): IResourceRenderTableActionRowOptionsAction;
+declare function schemaRenderTableActionRowJsx(renderComponentJsx: TypeRenderComponentJsx, options?: Pick<IResourceTableActionRowOptionsBase, 'permission'>): {
   render: TypeRenderComponentJsx;
+  options: Pick<IResourceTableActionRowOptionsBase, "permission"> | undefined;
 };
-declare function schemaRenderActionBulk<K extends keyof IResourceActionBulkRecord>(name: K, options?: IResourceActionBulkRecord[K]): IResourceComponentActionBulkOptionsAction;
-declare function schemaRenderActionBulkJsx<K extends IResourceActionBulkRecord>(name: K, renderComponentJsx: TypeRenderComponentJsx): {
-  name: K;
+declare function schemaRenderFormActionRow<K extends keyof IResourceFormActionRowRecord>(render: K, options?: IResourceFormActionRowRecord[K]): IResourceRenderFormActionRowOptionsAction;
+declare function schemaRenderFormActionRowJsx(renderComponentJsx: TypeRenderComponentJsx, options?: Pick<IResourceFormActionRowOptionsBase, 'permission'>): {
   render: TypeRenderComponentJsx;
+  options: Pick<IResourceFormActionRowOptionsBase, "permission"> | undefined;
 };
-declare function schemaRenderBlock<K extends keyof IResourceComponentBlockRecord>(name: K, options?: IResourceComponentBlockRecord[K]): IResourceComponentBlockOptionsBlock;
+declare function schemaRenderTableActionBulk<K extends keyof IResourceTableActionBulkRecord>(render: K, options?: IResourceTableActionBulkRecord[K]): IResourceRenderTableActionBulkOptionsAction;
+declare function schemaRenderTableActionBulkJsx(renderComponentJsx: TypeRenderComponentJsx, options?: Pick<IResourceTableActionBulkOptionsBase, 'permission'>): {
+  render: TypeRenderComponentJsx;
+  options: Pick<IResourceTableActionBulkOptionsBase, "permission"> | undefined;
+};
+declare function schemaRenderBlock<K extends keyof IResourceBlockRecord>(render: K, options?: IResourceBlockRecord[K]): IResourceRenderBlockOptionsBlock;
 declare function schemaRenderBlockJsx(renderComponentJsx: TypeRenderComponentJsx): {
   render: TypeRenderComponentJsx;
 };
@@ -7922,15 +7884,17 @@ declare const render: {
   fieldJsx: typeof schemaRenderFieldJsx;
   cell: typeof schemaRenderCell;
   cellJsx: typeof schemaRenderCellJsx;
-  actionRow: typeof schemaRenderActionRow;
-  actionRowJsx: typeof schemaRenderActionRowJsx;
-  actionBulk: typeof schemaRenderActionBulk;
-  actionBulkJsx: typeof schemaRenderActionBulkJsx;
+  tableActionRow: typeof schemaRenderTableActionRow;
+  tableActionRowJsx: typeof schemaRenderTableActionRowJsx;
+  formActionRow: typeof schemaRenderFormActionRow;
+  formActionRowJsx: typeof schemaRenderFormActionRowJsx;
+  tableActionBulk: typeof schemaRenderTableActionBulk;
+  tableActionBulkJsx: typeof schemaRenderTableActionBulkJsx;
   block: typeof schemaRenderBlock;
   blockJsx: typeof schemaRenderBlockJsx;
 };
 declare namespace index_d_exports {
-  export { $defs, $iconName, Action, ActionAlert, ActionConfirm, ActionCopy, ActionCreate, ActionDelete, ActionEdit, ActionExpr, ActionLog, ActionSetValue, ActionView, ApiApiCaptchacreateMethod, ApiApiCaptchacreatePath, ApiApiCaptchacreateRequestBody, ApiApiCaptchacreateResponseBody, ApiApiCaptcharefreshMethod, ApiApiCaptcharefreshPath, ApiApiCaptcharefreshRequestBody, ApiApiCaptcharefreshResponseBody, ApiApiCaptchaverifyImmediateMethod, ApiApiCaptchaverifyImmediatePath, ApiApiCaptchaverifyImmediateRequestBody, ApiApiCaptchaverifyImmediateResponseBody, ApiApiHomeBaseMenuretrieveMenusMethod, ApiApiHomeBaseMenuretrieveMenusPath, ApiApiHomeBaseMenuretrieveMenusRequestParams, ApiApiHomeBaseMenuretrieveMenusResponseBody, ApiApiHomeBasePermissionretrievePermissionsMethod, ApiApiHomeBasePermissionretrievePermissionsPath, ApiApiHomeBasePermissionretrievePermissionsRequestParams, ApiApiHomeBasePermissionretrievePermissionsResponseBody, ApiApiHomeUserPassportassociateMethod, ApiApiHomeUserPassportassociatePath, ApiApiHomeUserPassportassociateRequestParams, ApiApiHomeUserPassportassociateRequestQuery, ApiApiHomeUserPassportassociateResponseBody, ApiApiHomeUserPassportcreatePassportJwtFromOauthCodeMethod, ApiApiHomeUserPassportcreatePassportJwtFromOauthCodePath, ApiApiHomeUserPassportcreatePassportJwtFromOauthCodeRequestBody, ApiApiHomeUserPassportcreatePassportJwtFromOauthCodeResponseBody, ApiApiHomeUserPassportcreateTempAuthTokenMethod, ApiApiHomeUserPassportcreateTempAuthTokenPath, ApiApiHomeUserPassportcreateTempAuthTokenRequestQuery, ApiApiHomeUserPassportcreateTempAuthTokenResponseBody, ApiApiHomeUserPassportcurrentMethod, ApiApiHomeUserPassportcurrentPath, ApiApiHomeUserPassportcurrentResponseBody, ApiApiHomeUserPassportloginMethod, ApiApiHomeUserPassportloginOauthMethod, ApiApiHomeUserPassportloginOauthPath, ApiApiHomeUserPassportloginOauthRequestParams, ApiApiHomeUserPassportloginOauthRequestQuery, ApiApiHomeUserPassportloginOauthResponseBody, ApiApiHomeUserPassportloginPath, ApiApiHomeUserPassportloginRequestBody, ApiApiHomeUserPassportloginResponseBody, ApiApiHomeUserPassportlogoutMethod, ApiApiHomeUserPassportlogoutPath, ApiApiHomeUserPassportlogoutResponseBody, ApiApiHomeUserPassportmigrateMethod, ApiApiHomeUserPassportmigratePath, ApiApiHomeUserPassportmigrateRequestParams, ApiApiHomeUserPassportmigrateRequestQuery, ApiApiHomeUserPassportmigrateResponseBody, ApiApiHomeUserPassportrefreshAuthTokenMethod, ApiApiHomeUserPassportrefreshAuthTokenPath, ApiApiHomeUserPassportrefreshAuthTokenRequestBody, ApiApiHomeUserPassportrefreshAuthTokenResponseBody, ApiApiHomeUserPassportregisterMethod, ApiApiHomeUserPassportregisterPath, ApiApiHomeUserPassportregisterRequestBody, ApiApiHomeUserPassportregisterResponseBody, ApiApiHomeindexMethod, ApiApiHomeindexPath, ApiApiHomeindexResponseBody, ApiApiTestSsrToolOnetestGetMethod, ApiApiTestSsrToolOnetestGetPath, ApiApiTestSsrToolOnetestGetRequestParams, ApiApiTestSsrToolOnetestGetRequestQuery, ApiApiTestSsrToolOnetestGetResponseBody, ApiApiTestSsrToolOnetestMethod, ApiApiTestSsrToolOnetestPath, ApiApiTestSsrToolOnetestRequestBody, ApiApiTestSsrToolOnetestRequestParams, ApiApiTestSsrToolOnetestRequestQuery, ApiApiTestSsrToolOnetestResponseBody, ApiCaptcha, ApiHome, ApiHomeBaseMenu, ApiHomeBasePermission, ApiHomeUserPassport, ApiSchemaAAuthDtoAuth, ApiSchemaAAuthDtoAuthPartial, ApiSchemaACaptchaDtoCaptchaData, ApiSchemaACaptchaDtoCaptchaDataPartial, ApiSchemaACaptchaDtoCaptchaVerify_c3cd80b1eeafe39bfe4433491bb081d68e84797e, ApiSchemaACaptchaDtoCaptchaVerify_c3cd80b1eeafe39bfe4433491bb081d68e84797ePartial, ApiSchemaACaptchaDtoCaptchaVerify_c3cd80b1eeafe39bfe4433491bb081d68e84797e_3218e7d152830e08f6e764b9e0c3796df929ee2b, ApiSchemaACaptchaDtoCaptchaVerify_c3cd80b1eeafe39bfe4433491bb081d68e84797e_3218e7d152830e08f6e764b9e0c3796df929ee2bPartial, ApiSchemaAJwtDtoJwtToken, ApiSchemaAJwtDtoJwtTokenPartial, ApiSchemaAMenuDtoMenuGroup, ApiSchemaAMenuDtoMenuGroupPartial, ApiSchemaAMenuDtoMenuItem, ApiSchemaAMenuDtoMenuItemMeta, ApiSchemaAMenuDtoMenuItemMetaPartial, ApiSchemaAMenuDtoMenuItemPartial, ApiSchemaAMenuDtoMenus, ApiSchemaAMenuDtoMenusPartial, ApiSchemaAPaypalDtoPaypalOrderRecordOptions, ApiSchemaAPaypalDtoPaypalOrderRecordOptionsPartial, ApiSchemaAPaypalDtoPaypalOrderRecordPayload, ApiSchemaAPaypalDtoPaypalOrderRecordPayloadPartial, ApiSchemaAPaypalEntityPaypalRecord, ApiSchemaAPaypalEntityPaypalRecordPartial, ApiSchemaAPermissionDtoPermissions, ApiSchemaAPermissionDtoPermissionsPartial, ApiSchemaAPlayDtoPlay, ApiSchemaAPlayDtoPlayPartial, ApiSchemaCaptcha, ApiSchemaHome, ApiSchemaHomeBaseMenu, ApiSchemaHomeBasePermission, ApiSchemaHomeUserDtoLogin, ApiSchemaHomeUserDtoLoginPartial, ApiSchemaHomeUserDtoPassport, ApiSchemaHomeUserDtoPassportJwt, ApiSchemaHomeUserDtoPassportJwtPartial, ApiSchemaHomeUserDtoPassportPartial, ApiSchemaHomeUserDtoRegister, ApiSchemaHomeUserDtoRegisterPartial, ApiSchemaHomeUserEntityRole, ApiSchemaHomeUserEntityRolePartial, ApiSchemaHomeUserEntityUser, ApiSchemaHomeUserEntityUserPartial, ApiSchemaHomeUserPassport, ApiSchemaTestCaptchaDtoSignin, ApiSchemaTestCaptchaDtoSigninPartial, ApiSchemaTestRestDtoProductCreate, ApiSchemaTestRestDtoProductCreatePartial, ApiSchemaTestRestDtoProductQueryRes, ApiSchemaTestRestDtoProductQueryResPartial, ApiSchemaTestRestDtoProductUpdate, ApiSchemaTestRestDtoProductUpdatePartial, ApiSchemaTestRestEntityProduct, ApiSchemaTestRestEntityProductPartial, ApiSchemaTestSsrDtoTestBody, ApiSchemaTestSsrDtoTestBodyPartial, ApiSchemaTestSsrDtoTestDetail, ApiSchemaTestSsrDtoTestDetailPartial, ApiSchemaTestSsrDtoTestResult, ApiSchemaTestSsrDtoTestResultPartial, ApiSchemaTestSsrToolOne, ApiSchemaTestVonaDtoCategoryTree, ApiSchemaTestVonaDtoCategoryTreePartial, ApiSchemaTestVonaDtoOrderCreate, ApiSchemaTestVonaDtoOrderCreatePartial, ApiSchemaTestVonaDtoOrderResult, ApiSchemaTestVonaDtoOrderResultPage, ApiSchemaTestVonaDtoOrderResultPagePartial, ApiSchemaTestVonaDtoOrderResultPartial, ApiSchemaTestVonaDtoOrderUpdate, ApiSchemaTestVonaDtoOrderUpdatePartial, ApiSchemaTestVonaDtoPostAggregate, ApiSchemaTestVonaDtoPostAggregatePartial, ApiSchemaTestVonaDtoPostCreate, ApiSchemaTestVonaDtoPostCreatePartial, ApiSchemaTestVonaDtoPostGroup, ApiSchemaTestVonaDtoPostGroupPartial, ApiSchemaTestVonaDtoPostQueryRes, ApiSchemaTestVonaDtoPostQueryResPartial, ApiSchemaTestVonaDtoRoleLazy, ApiSchemaTestVonaDtoRoleLazyPartial, ApiSchemaTestVonaDtoSerializerArray, ApiSchemaTestVonaDtoSerializerArrayPartial, ApiSchemaTestVonaDtoSerializerLazy, ApiSchemaTestVonaDtoSerializerLazyPartial, ApiSchemaTestVonaDtoSerializerSimple, ApiSchemaTestVonaDtoSerializerSimplePartial, ApiSchemaTestVonaDtoSerializerSimple_1c4b95bcfe8fe28a56dbcc7028097cf11836b4fc, ApiSchemaTestVonaDtoSerializerSimple_1c4b95bcfe8fe28a56dbcc7028097cf11836b4fcPartial, ApiSchemaTestVonaDtoSerializerSimple_542f7be0da9b85a67248a6a1a3629e72de5fdb33_cff0ae112a392da58caf5aa905749f3c4444c4ab, ApiSchemaTestVonaDtoSerializerSimple_542f7be0da9b85a67248a6a1a3629e72de5fdb33_cff0ae112a392da58caf5aa905749f3c4444c4abPartial, ApiSchemaTestVonaDtoUser, ApiSchemaTestVonaDtoUserCreate, ApiSchemaTestVonaDtoUserCreatePartial, ApiSchemaTestVonaDtoUserLazy, ApiSchemaTestVonaDtoUserLazyPartial, ApiSchemaTestVonaDtoUserPartial, ApiSchemaTestVonaDtoUserUpdate, ApiSchemaTestVonaDtoUserUpdatePartial, ApiSchemaTestVonaEntityCategory_2c7d642ee581efa300341e343180fbb0ecdc785d, ApiSchemaTestVonaEntityCategory_2c7d642ee581efa300341e343180fbb0ecdc785dPartial, ApiSchemaTestVonaEntityPost_729883d7de16ce4401b26f75bebe618c8948ff64, ApiSchemaTestVonaEntityPost_729883d7de16ce4401b26f75bebe618c8948ff64Partial, ApiSchemaTestVonaEntityPost_a6ba2076b5b70a3c098374cc82d418bd1ab226c3, ApiSchemaTestVonaEntityPost_a6ba2076b5b70a3c098374cc82d418bd1ab226c3Partial, ApiSchemaTestVonaEntityProduct, ApiSchemaTestVonaEntityProductPartial, ApiSchemaTestVonaEntityProduct_29731960f3f38d3572bc2f8a01a7498bfe927055, ApiSchemaTestVonaEntityProduct_29731960f3f38d3572bc2f8a01a7498bfe927055Partial, ApiSchemaTestVonaEntityProduct_9cf2c6bcd41713270c34bcfce21b7b4942e3fbc6, ApiSchemaTestVonaEntityProduct_9cf2c6bcd41713270c34bcfce21b7b4942e3fbc6Partial, ApiSchemaTestVonaEntityProduct_bce173590aaef19772f1ae3a82196493c2633e2e, ApiSchemaTestVonaEntityProduct_bce173590aaef19772f1ae3a82196493c2633e2ePartial, ApiSchemaTestVonaEntityUser_2c7d642ee581efa300341e343180fbb0ecdc785d_1816ff740d81c738ec055c7038bbd93beb9405a7, ApiSchemaTestVonaEntityUser_2c7d642ee581efa300341e343180fbb0ecdc785d_1816ff740d81c738ec055c7038bbd93beb9405a7Partial, ApiTestSsrToolOne, BehaviorFormField, BehaviorFormFieldLayout, BehaviorFormFieldLayoutLogin, Component, ControllerActionBack, ControllerActionBackProps, ControllerActionCreate, ControllerActionCreateProps, ControllerActionSubmit, ControllerActionSubmitProps, ControllerBlockFilter, ControllerBlockFilterProps, ControllerBlockForm, ControllerBlockFormProps, ControllerBlockPage, ControllerBlockPageEntry, ControllerBlockPageEntryProps, ControllerBlockPageProps, ControllerBlockPager, ControllerBlockPagerProps, ControllerBlockTable, ControllerBlockTableProps, ControllerBlockToolbarBulk, ControllerBlockToolbarBulkProps, ControllerBlockToolbarRow, ControllerBlockToolbarRowProps, ControllerCard, ControllerCardModels, ControllerCardProps, ControllerDateRange, ControllerDateRangeModels, ControllerDateRangeProps, ControllerFormFieldCaptcha, ControllerFormFieldCaptchaProps, ControllerFormFieldCurrency, ControllerFormFieldCurrencyProps, ControllerFormFieldDate, ControllerFormFieldDateProps, ControllerFormFieldDateRange, ControllerFormFieldDateRangeProps, ControllerFormFieldInput, ControllerFormFieldInputProps, ControllerItemLink, ControllerItemLinkProps, ControllerLayoutEmpty, ControllerLayoutEmptyProps, ControllerLayoutTabs, ControllerLayoutTabsProps, ControllerPage, ControllerPageAuthCallback, ControllerPageAuthCallbackSchemaQuery, ControllerPageErrorExpired, ControllerPageErrorExpiredSchemaQuery, ControllerPageErrorNotFound, ControllerPageHome, ControllerPageLogin$1 as ControllerPageLogin, ControllerPageProps, ControllerPageTest, ControllerTable, ControllerTableProps, ControllerTest, ControllerTest2, ControllerTest2Models, ControllerTest2Props, ControllerTestModels, ControllerTestProps, CssDefault, IActionOptionsAlert, IActionOptionsConfirm, IActionOptionsCopy, IActionOptionsCreate, IActionOptionsDelete, IActionOptionsEdit, IActionOptionsExpr, IActionOptionsLog, IActionOptionsSetValue, IActionOptionsView, IBehaviorOptionsFormField, IBehaviorOptionsFormFieldLayout, IBehaviorOptionsFormFieldLayoutLogin, IBehaviorPropsInputFormField, IBehaviorPropsInputFormFieldLayout, IBehaviorPropsInputFormFieldLayoutLogin, IBehaviorPropsOutputFormField, IBehaviorPropsOutputFormFieldLayout, IBehaviorPropsOutputFormFieldLayoutLogin, ICaptchaOptions, ICaptchaProviderRecord, ICaptchaSceneRecord, ICssOptionsDefault, IModelOptionsLayout, IModelOptionsMenu, IModelOptionsPassport, IModuleApi, IModuleApiSchema, IResourceActionBulkOptionsCreate, IResourceActionRowOptionsBack, IResourceActionRowOptionsDelete, IResourceActionRowOptionsOperationsRow, IResourceActionRowOptionsSubmit, IResourceActionRowOptionsUpdate, IResourceActionRowOptionsView, IResourceBlockOptionsFilter, IResourceBlockOptionsForm, IResourceBlockOptionsPage, IResourceBlockOptionsPageEntry, IResourceBlockOptionsPager, IResourceBlockOptionsTable, IResourceBlockOptionsToolbarBulk, IResourceBlockOptionsToolbarRow, IResourceFormFieldCaptchaOptions, IResourceFormFieldCurrencyOptions, IResourceFormFieldDateOptions, IResourceFormFieldDateRangeOptions, IResourceFormFieldInputOptions, IResourceFormFieldOptionsResourcePicker, IResourceFormFieldOptionsSelect, IResourceFormFieldOptionsTextarea, IResourceFormFieldOptionsToggle, IResourceTableCellOptionsCurrency, IResourceTableCellOptionsDate, ISelectChipsOptions, ISelectOptions, IServiceSsrLayoutOptions, ITableCellOptionsActionDelete, ITableCellOptionsActionOperationsRow, ITableCellOptionsActionUpdate, ITableCellOptionsActionView, ITableCellOptionsCurrency, ITableCellOptionsDate, IThemeOptionsDefault, IThemeOptionsOrange, Main, MetaThemeHandler, ModelLayout, ModelMenu, ModelPassport, NSControllerPageAuthCallback, NSControllerPageErrorExpired, OpenApiBaseURL, RenderContent, RenderHeader, RenderLayoutTabs, RenderLocale, RenderMenu, RenderPageLogin, RenderSidebar, RenderTable, RenderTabs, RenderTheme, RenderUser, ScopeModuleBasicActions, ScopeModuleBasicActionssync, ScopeModuleBasicAdapter, ScopeModuleBasicCaptcha, ScopeModuleBasicCurrency, ScopeModuleBasicDate, ScopeModuleBasicForm, ScopeModuleBasicInput, ScopeModuleBasicOpenapi, ScopeModuleBasicPage, ScopeModuleBasicPageentry, ScopeModuleBasicTable, ScopeModuleDemoStudent, ScopeModuleDevuiAdapter, ScopeModuleHomeApi, ScopeModuleHomeBase, ScopeModuleHomeIcon, ScopeModuleHomeIndex, ScopeModuleHomeLayoutempty, ScopeModuleHomeLayouttabs, ScopeModuleHomeLogin, ScopeModuleHomePassport, ScopeModuleHomeTheme, ServiceJwtAdapter, ServiceRouterGuards, ServiceSsr, ServiceSsrLayout, StyleLayoutTabs$1 as StyleLayoutTabs, TableCellActionDelete, TableCellActionOperationsRow, TableCellActionUpdate, TableCellActionView, TableCellCurrency, TableCellDate, ThemeDefault, ThemeOrange, ThemeTokenCustom, TypeActionAlertResult, TypeActionConfirmResult, TypeActionCopyResult, TypeActionCreateResult, TypeActionDeleteResult, TypeActionEditResult, TypeActionExprResult, TypeActionLogResult, TypeActionSetValueResult, TypeActionViewResult, TypeControllerActionBackPublicProps, TypeControllerActionCreatePublicProps, TypeControllerActionSubmitPublicProps, TypeControllerBlockFilterPublicProps, TypeControllerBlockFormPublicProps, TypeControllerBlockPageEntryPublicProps, TypeControllerBlockPagePublicProps, TypeControllerBlockPagerPublicProps, TypeControllerBlockTablePublicProps, TypeControllerBlockToolbarBulkPublicProps, TypeControllerBlockToolbarRowPublicProps, TypeControllerCardPublicProps, TypeControllerDateRangePublicProps, TypeControllerFormFieldCaptchaPublicProps, TypeControllerFormFieldCurrencyPublicProps, TypeControllerFormFieldDatePublicProps, TypeControllerFormFieldDateRangePublicProps, TypeControllerFormFieldInputPublicProps, TypeControllerItemLinkPublicProps, TypeControllerLayoutEmptyPublicProps, TypeControllerLayoutTabsPublicProps, TypeControllerPagePublicProps, TypeControllerTablePublicProps, TypeControllerTest2PublicProps, TypeControllerTestPublicProps, TypeMenuGroup, TypeMenuItem, TypeMenuTree, ZActionBack, ZActionCreate, ZActionSubmit, ZBlockFilter, ZBlockForm, ZBlockPage, ZBlockPageEntry, ZBlockPager, ZBlockTable, ZBlockToolbarBulk, ZBlockToolbarRow, ZCard, ZDateRange, ZFormFieldCaptcha, ZFormFieldCurrency, ZFormFieldDate, ZFormFieldDateRange, ZFormFieldInput, ZItemLink, ZLayoutEmpty, ZLayoutTabs, ZPage, ZPageAuthCallback, ZPageErrorExpired, ZPageErrorNotFound, ZPageHome, ZPageLogin, ZPageTest, ZTable, ZTest, ZTest2, currencyFormat, currencyUpdate, dateFormatUtil, definePropertyScopeBase, icons, operations, paths, render, webhooks };
+  export { $defs, $iconName, Action, ActionAlert, ActionConfirm, ActionCopy, ActionCreate, ActionDelete, ActionEdit, ActionExpr, ActionLog, ActionSetValue, ActionView, ApiApiCaptchacreateMethod, ApiApiCaptchacreatePath, ApiApiCaptchacreateRequestBody, ApiApiCaptchacreateResponseBody, ApiApiCaptcharefreshMethod, ApiApiCaptcharefreshPath, ApiApiCaptcharefreshRequestBody, ApiApiCaptcharefreshResponseBody, ApiApiCaptchaverifyImmediateMethod, ApiApiCaptchaverifyImmediatePath, ApiApiCaptchaverifyImmediateRequestBody, ApiApiCaptchaverifyImmediateResponseBody, ApiApiHomeBaseMenuretrieveMenusMethod, ApiApiHomeBaseMenuretrieveMenusPath, ApiApiHomeBaseMenuretrieveMenusRequestParams, ApiApiHomeBaseMenuretrieveMenusResponseBody, ApiApiHomeBasePermissionretrievePermissionsMethod, ApiApiHomeBasePermissionretrievePermissionsPath, ApiApiHomeBasePermissionretrievePermissionsRequestParams, ApiApiHomeBasePermissionretrievePermissionsResponseBody, ApiApiHomeUserPassportassociateMethod, ApiApiHomeUserPassportassociatePath, ApiApiHomeUserPassportassociateRequestParams, ApiApiHomeUserPassportassociateRequestQuery, ApiApiHomeUserPassportassociateResponseBody, ApiApiHomeUserPassportcreatePassportJwtFromOauthCodeMethod, ApiApiHomeUserPassportcreatePassportJwtFromOauthCodePath, ApiApiHomeUserPassportcreatePassportJwtFromOauthCodeRequestBody, ApiApiHomeUserPassportcreatePassportJwtFromOauthCodeResponseBody, ApiApiHomeUserPassportcreateTempAuthTokenMethod, ApiApiHomeUserPassportcreateTempAuthTokenPath, ApiApiHomeUserPassportcreateTempAuthTokenRequestQuery, ApiApiHomeUserPassportcreateTempAuthTokenResponseBody, ApiApiHomeUserPassportcurrentMethod, ApiApiHomeUserPassportcurrentPath, ApiApiHomeUserPassportcurrentResponseBody, ApiApiHomeUserPassportloginMethod, ApiApiHomeUserPassportloginOauthMethod, ApiApiHomeUserPassportloginOauthPath, ApiApiHomeUserPassportloginOauthRequestParams, ApiApiHomeUserPassportloginOauthRequestQuery, ApiApiHomeUserPassportloginOauthResponseBody, ApiApiHomeUserPassportloginPath, ApiApiHomeUserPassportloginRequestBody, ApiApiHomeUserPassportloginResponseBody, ApiApiHomeUserPassportlogoutMethod, ApiApiHomeUserPassportlogoutPath, ApiApiHomeUserPassportlogoutResponseBody, ApiApiHomeUserPassportmigrateMethod, ApiApiHomeUserPassportmigratePath, ApiApiHomeUserPassportmigrateRequestParams, ApiApiHomeUserPassportmigrateRequestQuery, ApiApiHomeUserPassportmigrateResponseBody, ApiApiHomeUserPassportrefreshAuthTokenMethod, ApiApiHomeUserPassportrefreshAuthTokenPath, ApiApiHomeUserPassportrefreshAuthTokenRequestBody, ApiApiHomeUserPassportrefreshAuthTokenResponseBody, ApiApiHomeUserPassportregisterMethod, ApiApiHomeUserPassportregisterPath, ApiApiHomeUserPassportregisterRequestBody, ApiApiHomeUserPassportregisterResponseBody, ApiApiHomeindexMethod, ApiApiHomeindexPath, ApiApiHomeindexResponseBody, ApiApiTestSsrToolOnetestGetMethod, ApiApiTestSsrToolOnetestGetPath, ApiApiTestSsrToolOnetestGetRequestParams, ApiApiTestSsrToolOnetestGetRequestQuery, ApiApiTestSsrToolOnetestGetResponseBody, ApiApiTestSsrToolOnetestMethod, ApiApiTestSsrToolOnetestPath, ApiApiTestSsrToolOnetestRequestBody, ApiApiTestSsrToolOnetestRequestParams, ApiApiTestSsrToolOnetestRequestQuery, ApiApiTestSsrToolOnetestResponseBody, ApiCaptcha, ApiHome, ApiHomeBaseMenu, ApiHomeBasePermission, ApiHomeUserPassport, ApiSchemaAAuthDtoAuth, ApiSchemaAAuthDtoAuthPartial, ApiSchemaACaptchaDtoCaptchaData, ApiSchemaACaptchaDtoCaptchaDataPartial, ApiSchemaACaptchaDtoCaptchaVerify_c3cd80b1eeafe39bfe4433491bb081d68e84797e, ApiSchemaACaptchaDtoCaptchaVerify_c3cd80b1eeafe39bfe4433491bb081d68e84797ePartial, ApiSchemaACaptchaDtoCaptchaVerify_c3cd80b1eeafe39bfe4433491bb081d68e84797e_3218e7d152830e08f6e764b9e0c3796df929ee2b, ApiSchemaACaptchaDtoCaptchaVerify_c3cd80b1eeafe39bfe4433491bb081d68e84797e_3218e7d152830e08f6e764b9e0c3796df929ee2bPartial, ApiSchemaAJwtDtoJwtToken, ApiSchemaAJwtDtoJwtTokenPartial, ApiSchemaAMenuDtoMenuGroup, ApiSchemaAMenuDtoMenuGroupPartial, ApiSchemaAMenuDtoMenuItem, ApiSchemaAMenuDtoMenuItemMeta, ApiSchemaAMenuDtoMenuItemMetaPartial, ApiSchemaAMenuDtoMenuItemPartial, ApiSchemaAMenuDtoMenus, ApiSchemaAMenuDtoMenusPartial, ApiSchemaAPaypalDtoPaypalOrderRecordOptions, ApiSchemaAPaypalDtoPaypalOrderRecordOptionsPartial, ApiSchemaAPaypalDtoPaypalOrderRecordPayload, ApiSchemaAPaypalDtoPaypalOrderRecordPayloadPartial, ApiSchemaAPaypalEntityPaypalRecord, ApiSchemaAPaypalEntityPaypalRecordPartial, ApiSchemaAPermissionDtoPermissions, ApiSchemaAPermissionDtoPermissionsPartial, ApiSchemaAPlayDtoPlay, ApiSchemaAPlayDtoPlayPartial, ApiSchemaCaptcha, ApiSchemaHome, ApiSchemaHomeBaseMenu, ApiSchemaHomeBasePermission, ApiSchemaHomeUserDtoLogin, ApiSchemaHomeUserDtoLoginPartial, ApiSchemaHomeUserDtoPassport, ApiSchemaHomeUserDtoPassportJwt, ApiSchemaHomeUserDtoPassportJwtPartial, ApiSchemaHomeUserDtoPassportPartial, ApiSchemaHomeUserDtoRegister, ApiSchemaHomeUserDtoRegisterPartial, ApiSchemaHomeUserEntityRole, ApiSchemaHomeUserEntityRolePartial, ApiSchemaHomeUserEntityUser, ApiSchemaHomeUserEntityUserPartial, ApiSchemaHomeUserPassport, ApiSchemaTestCaptchaDtoSignin, ApiSchemaTestCaptchaDtoSigninPartial, ApiSchemaTestRestDtoProductCreate, ApiSchemaTestRestDtoProductCreatePartial, ApiSchemaTestRestDtoProductQueryRes, ApiSchemaTestRestDtoProductQueryResPartial, ApiSchemaTestRestDtoProductUpdate, ApiSchemaTestRestDtoProductUpdatePartial, ApiSchemaTestRestEntityProduct, ApiSchemaTestRestEntityProductPartial, ApiSchemaTestSsrDtoTestBody, ApiSchemaTestSsrDtoTestBodyPartial, ApiSchemaTestSsrDtoTestDetail, ApiSchemaTestSsrDtoTestDetailPartial, ApiSchemaTestSsrDtoTestResult, ApiSchemaTestSsrDtoTestResultPartial, ApiSchemaTestSsrToolOne, ApiSchemaTestVonaDtoCategoryTree, ApiSchemaTestVonaDtoCategoryTreePartial, ApiSchemaTestVonaDtoOrderCreate, ApiSchemaTestVonaDtoOrderCreatePartial, ApiSchemaTestVonaDtoOrderResult, ApiSchemaTestVonaDtoOrderResultPage, ApiSchemaTestVonaDtoOrderResultPagePartial, ApiSchemaTestVonaDtoOrderResultPartial, ApiSchemaTestVonaDtoOrderUpdate, ApiSchemaTestVonaDtoOrderUpdatePartial, ApiSchemaTestVonaDtoPostAggregate, ApiSchemaTestVonaDtoPostAggregatePartial, ApiSchemaTestVonaDtoPostCreate, ApiSchemaTestVonaDtoPostCreatePartial, ApiSchemaTestVonaDtoPostGroup, ApiSchemaTestVonaDtoPostGroupPartial, ApiSchemaTestVonaDtoPostQueryRes, ApiSchemaTestVonaDtoPostQueryResPartial, ApiSchemaTestVonaDtoRoleLazy, ApiSchemaTestVonaDtoRoleLazyPartial, ApiSchemaTestVonaDtoSerializerArray, ApiSchemaTestVonaDtoSerializerArrayPartial, ApiSchemaTestVonaDtoSerializerLazy, ApiSchemaTestVonaDtoSerializerLazyPartial, ApiSchemaTestVonaDtoSerializerSimple, ApiSchemaTestVonaDtoSerializerSimplePartial, ApiSchemaTestVonaDtoSerializerSimple_1c4b95bcfe8fe28a56dbcc7028097cf11836b4fc, ApiSchemaTestVonaDtoSerializerSimple_1c4b95bcfe8fe28a56dbcc7028097cf11836b4fcPartial, ApiSchemaTestVonaDtoSerializerSimple_542f7be0da9b85a67248a6a1a3629e72de5fdb33_cff0ae112a392da58caf5aa905749f3c4444c4ab, ApiSchemaTestVonaDtoSerializerSimple_542f7be0da9b85a67248a6a1a3629e72de5fdb33_cff0ae112a392da58caf5aa905749f3c4444c4abPartial, ApiSchemaTestVonaDtoUser, ApiSchemaTestVonaDtoUserCreate, ApiSchemaTestVonaDtoUserCreatePartial, ApiSchemaTestVonaDtoUserLazy, ApiSchemaTestVonaDtoUserLazyPartial, ApiSchemaTestVonaDtoUserPartial, ApiSchemaTestVonaDtoUserUpdate, ApiSchemaTestVonaDtoUserUpdatePartial, ApiSchemaTestVonaEntityCategory_2c7d642ee581efa300341e343180fbb0ecdc785d, ApiSchemaTestVonaEntityCategory_2c7d642ee581efa300341e343180fbb0ecdc785dPartial, ApiSchemaTestVonaEntityPost_729883d7de16ce4401b26f75bebe618c8948ff64, ApiSchemaTestVonaEntityPost_729883d7de16ce4401b26f75bebe618c8948ff64Partial, ApiSchemaTestVonaEntityPost_a6ba2076b5b70a3c098374cc82d418bd1ab226c3, ApiSchemaTestVonaEntityPost_a6ba2076b5b70a3c098374cc82d418bd1ab226c3Partial, ApiSchemaTestVonaEntityProduct, ApiSchemaTestVonaEntityProductPartial, ApiSchemaTestVonaEntityProduct_29731960f3f38d3572bc2f8a01a7498bfe927055, ApiSchemaTestVonaEntityProduct_29731960f3f38d3572bc2f8a01a7498bfe927055Partial, ApiSchemaTestVonaEntityProduct_9cf2c6bcd41713270c34bcfce21b7b4942e3fbc6, ApiSchemaTestVonaEntityProduct_9cf2c6bcd41713270c34bcfce21b7b4942e3fbc6Partial, ApiSchemaTestVonaEntityProduct_bce173590aaef19772f1ae3a82196493c2633e2e, ApiSchemaTestVonaEntityProduct_bce173590aaef19772f1ae3a82196493c2633e2ePartial, ApiSchemaTestVonaEntityUser_2c7d642ee581efa300341e343180fbb0ecdc785d_1816ff740d81c738ec055c7038bbd93beb9405a7, ApiSchemaTestVonaEntityUser_2c7d642ee581efa300341e343180fbb0ecdc785d_1816ff740d81c738ec055c7038bbd93beb9405a7Partial, ApiTestSsrToolOne, BehaviorFormField, BehaviorFormFieldLayout, BehaviorFormFieldLayoutLogin, Component, ControllerActionBack, ControllerActionBackProps, ControllerActionCreate, ControllerActionCreateProps, ControllerActionSubmit, ControllerActionSubmitProps, ControllerBlockFilter, ControllerBlockFilterProps, ControllerBlockForm, ControllerBlockFormProps, ControllerBlockPage, ControllerBlockPageEntry, ControllerBlockPageEntryProps, ControllerBlockPageProps, ControllerBlockPager, ControllerBlockPagerProps, ControllerBlockTable, ControllerBlockTableProps, ControllerBlockToolbarBulk, ControllerBlockToolbarBulkProps, ControllerBlockToolbarRow, ControllerBlockToolbarRowProps, ControllerCard, ControllerCardModels, ControllerCardProps, ControllerDateRange, ControllerDateRangeModels, ControllerDateRangeProps, ControllerFormFieldCaptcha, ControllerFormFieldCaptchaProps, ControllerFormFieldCurrency, ControllerFormFieldCurrencyProps, ControllerFormFieldDate, ControllerFormFieldDateProps, ControllerFormFieldDateRange, ControllerFormFieldDateRangeProps, ControllerFormFieldInput, ControllerFormFieldInputProps, ControllerItemLink, ControllerItemLinkProps, ControllerLayoutEmpty, ControllerLayoutEmptyProps, ControllerLayoutTabs, ControllerLayoutTabsProps, ControllerPage, ControllerPageAuthCallback, ControllerPageAuthCallbackSchemaQuery, ControllerPageErrorExpired, ControllerPageErrorExpiredSchemaQuery, ControllerPageErrorNotFound, ControllerPageHome, ControllerPageLogin$1 as ControllerPageLogin, ControllerPageProps, ControllerPageTest, ControllerTable, ControllerTableProps, ControllerTest, ControllerTest2, ControllerTest2Models, ControllerTest2Props, ControllerTestModels, ControllerTestProps, CssDefault, IActionOptionsAlert, IActionOptionsConfirm, IActionOptionsCopy, IActionOptionsCreate, IActionOptionsDelete, IActionOptionsEdit, IActionOptionsExpr, IActionOptionsLog, IActionOptionsSetValue, IActionOptionsView, IBehaviorOptionsFormField, IBehaviorOptionsFormFieldLayout, IBehaviorOptionsFormFieldLayoutLogin, IBehaviorPropsInputFormField, IBehaviorPropsInputFormFieldLayout, IBehaviorPropsInputFormFieldLayoutLogin, IBehaviorPropsOutputFormField, IBehaviorPropsOutputFormFieldLayout, IBehaviorPropsOutputFormFieldLayoutLogin, IBehaviorResourceFormFieldLayoutOptions, ICssOptionsDefault, IModelOptionsLayout, IModelOptionsMenu, IModelOptionsPassport, IModuleApi, IModuleApiSchema, IResourceFormFieldCaptchaOptions, IResourceFormFieldCurrencyOptions, IResourceFormFieldDateOptions, IResourceFormFieldDateRangeOptions, IResourceFormFieldInputOptions, IServiceSsrLayoutOptions, ITableCellOptionsActionDelete, ITableCellOptionsActionOperationsRow, ITableCellOptionsActionUpdate, ITableCellOptionsActionView, ITableCellOptionsCurrency, ITableCellOptionsDate, IThemeOptionsDefault, IThemeOptionsOrange, Main, MetaThemeHandler, ModelLayout, ModelMenu, ModelPassport, NSControllerPageAuthCallback, NSControllerPageErrorExpired, OpenApiBaseURL, RenderContent, RenderHeader, RenderLayoutTabs, RenderLocale, RenderMenu, RenderPageLogin, RenderSidebar, RenderTable, RenderTabs, RenderTheme, RenderUser, ScopeModuleBasicActions, ScopeModuleBasicActionssync, ScopeModuleBasicAdapter, ScopeModuleBasicCaptcha, ScopeModuleBasicCurrency, ScopeModuleBasicDate, ScopeModuleBasicForm, ScopeModuleBasicInput, ScopeModuleBasicPage, ScopeModuleBasicPageentry, ScopeModuleBasicTable, ScopeModuleDemoStudent, ScopeModuleDevuiAdapter, ScopeModuleHomeApi, ScopeModuleHomeBase, ScopeModuleHomeIcon, ScopeModuleHomeIndex, ScopeModuleHomeLayoutempty, ScopeModuleHomeLayouttabs, ScopeModuleHomeLogin, ScopeModuleHomePassport, ScopeModuleHomeTheme, ServiceJwtAdapter, ServiceRouterGuards, ServiceSsr, ServiceSsrLayout, StyleLayoutTabs$1 as StyleLayoutTabs, TableCellActionDelete, TableCellActionOperationsRow, TableCellActionUpdate, TableCellActionView, TableCellCurrency, TableCellDate, ThemeDefault, ThemeOrange, ThemeTokenCustom, TypeActionAlertResult, TypeActionConfirmResult, TypeActionCopyResult, TypeActionCreateResult, TypeActionDeleteResult, TypeActionEditResult, TypeActionExprResult, TypeActionLogResult, TypeActionSetValueResult, TypeActionViewResult, TypeControllerActionBackPublicProps, TypeControllerActionCreatePublicProps, TypeControllerActionSubmitPublicProps, TypeControllerBlockFilterPublicProps, TypeControllerBlockFormPublicProps, TypeControllerBlockPageEntryPublicProps, TypeControllerBlockPagePublicProps, TypeControllerBlockPagerPublicProps, TypeControllerBlockTablePublicProps, TypeControllerBlockToolbarBulkPublicProps, TypeControllerBlockToolbarRowPublicProps, TypeControllerCardPublicProps, TypeControllerDateRangePublicProps, TypeControllerFormFieldCaptchaPublicProps, TypeControllerFormFieldCurrencyPublicProps, TypeControllerFormFieldDatePublicProps, TypeControllerFormFieldDateRangePublicProps, TypeControllerFormFieldInputPublicProps, TypeControllerItemLinkPublicProps, TypeControllerLayoutEmptyPublicProps, TypeControllerLayoutTabsPublicProps, TypeControllerPagePublicProps, TypeControllerTablePublicProps, TypeControllerTest2PublicProps, TypeControllerTestPublicProps, TypeDateFormatPreset, TypeMenuGroup, TypeMenuItem, TypeMenuTree, ZActionBack, ZActionCreate, ZActionSubmit, ZBlockFilter, ZBlockForm, ZBlockPage, ZBlockPageEntry, ZBlockPager, ZBlockTable, ZBlockToolbarBulk, ZBlockToolbarRow, ZCard, ZDateRange, ZFormFieldCaptcha, ZFormFieldCurrency, ZFormFieldDate, ZFormFieldDateRange, ZFormFieldInput, ZItemLink, ZLayoutEmpty, ZLayoutTabs, ZPage, ZPageAuthCallback, ZPageErrorExpired, ZPageErrorNotFound, ZPageHome, ZPageLogin, ZPageTest, ZTable, ZTest, ZTest2, currencyFormat, currencyUpdate, dateFormatUtil, definePropertyScopeBase, icons, operations, paths, render, webhooks };
 }
 //#endregion
-export { $defs, $iconName, Action, ActionAlert, ActionConfirm, ActionCopy, ActionCreate, ActionDelete, ActionEdit, ActionExpr, ActionLog, ActionSetValue, ActionView, ApiApiCaptchacreateMethod, ApiApiCaptchacreatePath, ApiApiCaptchacreateRequestBody, ApiApiCaptchacreateResponseBody, ApiApiCaptcharefreshMethod, ApiApiCaptcharefreshPath, ApiApiCaptcharefreshRequestBody, ApiApiCaptcharefreshResponseBody, ApiApiCaptchaverifyImmediateMethod, ApiApiCaptchaverifyImmediatePath, ApiApiCaptchaverifyImmediateRequestBody, ApiApiCaptchaverifyImmediateResponseBody, ApiApiHomeBaseMenuretrieveMenusMethod, ApiApiHomeBaseMenuretrieveMenusPath, ApiApiHomeBaseMenuretrieveMenusRequestParams, ApiApiHomeBaseMenuretrieveMenusResponseBody, ApiApiHomeBasePermissionretrievePermissionsMethod, ApiApiHomeBasePermissionretrievePermissionsPath, ApiApiHomeBasePermissionretrievePermissionsRequestParams, ApiApiHomeBasePermissionretrievePermissionsResponseBody, ApiApiHomeUserPassportassociateMethod, ApiApiHomeUserPassportassociatePath, ApiApiHomeUserPassportassociateRequestParams, ApiApiHomeUserPassportassociateRequestQuery, ApiApiHomeUserPassportassociateResponseBody, ApiApiHomeUserPassportcreatePassportJwtFromOauthCodeMethod, ApiApiHomeUserPassportcreatePassportJwtFromOauthCodePath, ApiApiHomeUserPassportcreatePassportJwtFromOauthCodeRequestBody, ApiApiHomeUserPassportcreatePassportJwtFromOauthCodeResponseBody, ApiApiHomeUserPassportcreateTempAuthTokenMethod, ApiApiHomeUserPassportcreateTempAuthTokenPath, ApiApiHomeUserPassportcreateTempAuthTokenRequestQuery, ApiApiHomeUserPassportcreateTempAuthTokenResponseBody, ApiApiHomeUserPassportcurrentMethod, ApiApiHomeUserPassportcurrentPath, ApiApiHomeUserPassportcurrentResponseBody, ApiApiHomeUserPassportloginMethod, ApiApiHomeUserPassportloginOauthMethod, ApiApiHomeUserPassportloginOauthPath, ApiApiHomeUserPassportloginOauthRequestParams, ApiApiHomeUserPassportloginOauthRequestQuery, ApiApiHomeUserPassportloginOauthResponseBody, ApiApiHomeUserPassportloginPath, ApiApiHomeUserPassportloginRequestBody, ApiApiHomeUserPassportloginResponseBody, ApiApiHomeUserPassportlogoutMethod, ApiApiHomeUserPassportlogoutPath, ApiApiHomeUserPassportlogoutResponseBody, ApiApiHomeUserPassportmigrateMethod, ApiApiHomeUserPassportmigratePath, ApiApiHomeUserPassportmigrateRequestParams, ApiApiHomeUserPassportmigrateRequestQuery, ApiApiHomeUserPassportmigrateResponseBody, ApiApiHomeUserPassportrefreshAuthTokenMethod, ApiApiHomeUserPassportrefreshAuthTokenPath, ApiApiHomeUserPassportrefreshAuthTokenRequestBody, ApiApiHomeUserPassportrefreshAuthTokenResponseBody, ApiApiHomeUserPassportregisterMethod, ApiApiHomeUserPassportregisterPath, ApiApiHomeUserPassportregisterRequestBody, ApiApiHomeUserPassportregisterResponseBody, ApiApiHomeindexMethod, ApiApiHomeindexPath, ApiApiHomeindexResponseBody, ApiApiTestSsrToolOnetestGetMethod, ApiApiTestSsrToolOnetestGetPath, ApiApiTestSsrToolOnetestGetRequestParams, ApiApiTestSsrToolOnetestGetRequestQuery, ApiApiTestSsrToolOnetestGetResponseBody, ApiApiTestSsrToolOnetestMethod, ApiApiTestSsrToolOnetestPath, ApiApiTestSsrToolOnetestRequestBody, ApiApiTestSsrToolOnetestRequestParams, ApiApiTestSsrToolOnetestRequestQuery, ApiApiTestSsrToolOnetestResponseBody, ApiCaptcha, ApiHome, ApiHomeBaseMenu, ApiHomeBasePermission, ApiHomeUserPassport, ApiSchemaAAuthDtoAuth, ApiSchemaAAuthDtoAuthPartial, ApiSchemaACaptchaDtoCaptchaData, ApiSchemaACaptchaDtoCaptchaDataPartial, ApiSchemaACaptchaDtoCaptchaVerify_c3cd80b1eeafe39bfe4433491bb081d68e84797e, ApiSchemaACaptchaDtoCaptchaVerify_c3cd80b1eeafe39bfe4433491bb081d68e84797ePartial, ApiSchemaACaptchaDtoCaptchaVerify_c3cd80b1eeafe39bfe4433491bb081d68e84797e_3218e7d152830e08f6e764b9e0c3796df929ee2b, ApiSchemaACaptchaDtoCaptchaVerify_c3cd80b1eeafe39bfe4433491bb081d68e84797e_3218e7d152830e08f6e764b9e0c3796df929ee2bPartial, ApiSchemaAJwtDtoJwtToken, ApiSchemaAJwtDtoJwtTokenPartial, ApiSchemaAMenuDtoMenuGroup, ApiSchemaAMenuDtoMenuGroupPartial, ApiSchemaAMenuDtoMenuItem, ApiSchemaAMenuDtoMenuItemMeta, ApiSchemaAMenuDtoMenuItemMetaPartial, ApiSchemaAMenuDtoMenuItemPartial, ApiSchemaAMenuDtoMenus, ApiSchemaAMenuDtoMenusPartial, ApiSchemaAPaypalDtoPaypalOrderRecordOptions, ApiSchemaAPaypalDtoPaypalOrderRecordOptionsPartial, ApiSchemaAPaypalDtoPaypalOrderRecordPayload, ApiSchemaAPaypalDtoPaypalOrderRecordPayloadPartial, ApiSchemaAPaypalEntityPaypalRecord, ApiSchemaAPaypalEntityPaypalRecordPartial, ApiSchemaAPermissionDtoPermissions, ApiSchemaAPermissionDtoPermissionsPartial, ApiSchemaAPlayDtoPlay, ApiSchemaAPlayDtoPlayPartial, ApiSchemaCaptcha, ApiSchemaHome, ApiSchemaHomeBaseMenu, ApiSchemaHomeBasePermission, ApiSchemaHomeUserDtoLogin, ApiSchemaHomeUserDtoLoginPartial, ApiSchemaHomeUserDtoPassport, ApiSchemaHomeUserDtoPassportJwt, ApiSchemaHomeUserDtoPassportJwtPartial, ApiSchemaHomeUserDtoPassportPartial, ApiSchemaHomeUserDtoRegister, ApiSchemaHomeUserDtoRegisterPartial, ApiSchemaHomeUserEntityRole, ApiSchemaHomeUserEntityRolePartial, ApiSchemaHomeUserEntityUser, ApiSchemaHomeUserEntityUserPartial, ApiSchemaHomeUserPassport, ApiSchemaTestCaptchaDtoSignin, ApiSchemaTestCaptchaDtoSigninPartial, ApiSchemaTestRestDtoProductCreate, ApiSchemaTestRestDtoProductCreatePartial, ApiSchemaTestRestDtoProductQueryRes, ApiSchemaTestRestDtoProductQueryResPartial, ApiSchemaTestRestDtoProductUpdate, ApiSchemaTestRestDtoProductUpdatePartial, ApiSchemaTestRestEntityProduct, ApiSchemaTestRestEntityProductPartial, ApiSchemaTestSsrDtoTestBody, ApiSchemaTestSsrDtoTestBodyPartial, ApiSchemaTestSsrDtoTestDetail, ApiSchemaTestSsrDtoTestDetailPartial, ApiSchemaTestSsrDtoTestResult, ApiSchemaTestSsrDtoTestResultPartial, ApiSchemaTestSsrToolOne, ApiSchemaTestVonaDtoCategoryTree, ApiSchemaTestVonaDtoCategoryTreePartial, ApiSchemaTestVonaDtoOrderCreate, ApiSchemaTestVonaDtoOrderCreatePartial, ApiSchemaTestVonaDtoOrderResult, ApiSchemaTestVonaDtoOrderResultPage, ApiSchemaTestVonaDtoOrderResultPagePartial, ApiSchemaTestVonaDtoOrderResultPartial, ApiSchemaTestVonaDtoOrderUpdate, ApiSchemaTestVonaDtoOrderUpdatePartial, ApiSchemaTestVonaDtoPostAggregate, ApiSchemaTestVonaDtoPostAggregatePartial, ApiSchemaTestVonaDtoPostCreate, ApiSchemaTestVonaDtoPostCreatePartial, ApiSchemaTestVonaDtoPostGroup, ApiSchemaTestVonaDtoPostGroupPartial, ApiSchemaTestVonaDtoPostQueryRes, ApiSchemaTestVonaDtoPostQueryResPartial, ApiSchemaTestVonaDtoRoleLazy, ApiSchemaTestVonaDtoRoleLazyPartial, ApiSchemaTestVonaDtoSerializerArray, ApiSchemaTestVonaDtoSerializerArrayPartial, ApiSchemaTestVonaDtoSerializerLazy, ApiSchemaTestVonaDtoSerializerLazyPartial, ApiSchemaTestVonaDtoSerializerSimple, ApiSchemaTestVonaDtoSerializerSimplePartial, ApiSchemaTestVonaDtoSerializerSimple_1c4b95bcfe8fe28a56dbcc7028097cf11836b4fc, ApiSchemaTestVonaDtoSerializerSimple_1c4b95bcfe8fe28a56dbcc7028097cf11836b4fcPartial, ApiSchemaTestVonaDtoSerializerSimple_542f7be0da9b85a67248a6a1a3629e72de5fdb33_cff0ae112a392da58caf5aa905749f3c4444c4ab, ApiSchemaTestVonaDtoSerializerSimple_542f7be0da9b85a67248a6a1a3629e72de5fdb33_cff0ae112a392da58caf5aa905749f3c4444c4abPartial, ApiSchemaTestVonaDtoUser, ApiSchemaTestVonaDtoUserCreate, ApiSchemaTestVonaDtoUserCreatePartial, ApiSchemaTestVonaDtoUserLazy, ApiSchemaTestVonaDtoUserLazyPartial, ApiSchemaTestVonaDtoUserPartial, ApiSchemaTestVonaDtoUserUpdate, ApiSchemaTestVonaDtoUserUpdatePartial, ApiSchemaTestVonaEntityCategory_2c7d642ee581efa300341e343180fbb0ecdc785d, ApiSchemaTestVonaEntityCategory_2c7d642ee581efa300341e343180fbb0ecdc785dPartial, ApiSchemaTestVonaEntityPost_729883d7de16ce4401b26f75bebe618c8948ff64, ApiSchemaTestVonaEntityPost_729883d7de16ce4401b26f75bebe618c8948ff64Partial, ApiSchemaTestVonaEntityPost_a6ba2076b5b70a3c098374cc82d418bd1ab226c3, ApiSchemaTestVonaEntityPost_a6ba2076b5b70a3c098374cc82d418bd1ab226c3Partial, ApiSchemaTestVonaEntityProduct, ApiSchemaTestVonaEntityProductPartial, ApiSchemaTestVonaEntityProduct_29731960f3f38d3572bc2f8a01a7498bfe927055, ApiSchemaTestVonaEntityProduct_29731960f3f38d3572bc2f8a01a7498bfe927055Partial, ApiSchemaTestVonaEntityProduct_9cf2c6bcd41713270c34bcfce21b7b4942e3fbc6, ApiSchemaTestVonaEntityProduct_9cf2c6bcd41713270c34bcfce21b7b4942e3fbc6Partial, ApiSchemaTestVonaEntityProduct_bce173590aaef19772f1ae3a82196493c2633e2e, ApiSchemaTestVonaEntityProduct_bce173590aaef19772f1ae3a82196493c2633e2ePartial, ApiSchemaTestVonaEntityUser_2c7d642ee581efa300341e343180fbb0ecdc785d_1816ff740d81c738ec055c7038bbd93beb9405a7, ApiSchemaTestVonaEntityUser_2c7d642ee581efa300341e343180fbb0ecdc785d_1816ff740d81c738ec055c7038bbd93beb9405a7Partial, ApiTestSsrToolOne, BehaviorFormField, BehaviorFormFieldLayout, BehaviorFormFieldLayoutLogin, Component, ControllerActionBack, ControllerActionBackProps, ControllerActionCreate, ControllerActionCreateProps, ControllerActionSubmit, ControllerActionSubmitProps, ControllerBlockFilter, ControllerBlockFilterProps, ControllerBlockForm, ControllerBlockFormProps, ControllerBlockPage, ControllerBlockPageEntry, ControllerBlockPageEntryProps, ControllerBlockPageProps, ControllerBlockPager, ControllerBlockPagerProps, ControllerBlockTable, ControllerBlockTableProps, ControllerBlockToolbarBulk, ControllerBlockToolbarBulkProps, ControllerBlockToolbarRow, ControllerBlockToolbarRowProps, ControllerCard, ControllerCardModels, ControllerCardProps, ControllerDateRange, ControllerDateRangeModels, ControllerDateRangeProps, ControllerFormFieldCaptcha, ControllerFormFieldCaptchaProps, ControllerFormFieldCurrency, ControllerFormFieldCurrencyProps, ControllerFormFieldDate, ControllerFormFieldDateProps, ControllerFormFieldDateRange, ControllerFormFieldDateRangeProps, ControllerFormFieldInput, ControllerFormFieldInputProps, ControllerItemLink, ControllerItemLinkProps, ControllerLayoutEmpty, ControllerLayoutEmptyProps, ControllerLayoutTabs, ControllerLayoutTabsProps, ControllerPage, ControllerPageAuthCallback, ControllerPageAuthCallbackSchemaQuery, ControllerPageErrorExpired, ControllerPageErrorExpiredSchemaQuery, ControllerPageErrorNotFound, ControllerPageHome, ControllerPageLogin$1 as ControllerPageLogin, ControllerPageProps, ControllerPageTest, ControllerTable, ControllerTableProps, ControllerTest, ControllerTest2, ControllerTest2Models, ControllerTest2Props, ControllerTestModels, ControllerTestProps, CssDefault, IActionOptionsAlert, IActionOptionsConfirm, IActionOptionsCopy, IActionOptionsCreate, IActionOptionsDelete, IActionOptionsEdit, IActionOptionsExpr, IActionOptionsLog, IActionOptionsSetValue, IActionOptionsView, IBehaviorOptionsFormField, IBehaviorOptionsFormFieldLayout, IBehaviorOptionsFormFieldLayoutLogin, IBehaviorPropsInputFormField, IBehaviorPropsInputFormFieldLayout, IBehaviorPropsInputFormFieldLayoutLogin, IBehaviorPropsOutputFormField, IBehaviorPropsOutputFormFieldLayout, IBehaviorPropsOutputFormFieldLayoutLogin, ICaptchaOptions, ICaptchaProviderRecord, ICaptchaSceneRecord, ICssOptionsDefault, IModelOptionsLayout, IModelOptionsMenu, IModelOptionsPassport, IModuleApi, IModuleApiSchema, IResourceActionBulkOptionsCreate, IResourceActionRowOptionsBack, IResourceActionRowOptionsDelete, IResourceActionRowOptionsOperationsRow, IResourceActionRowOptionsSubmit, IResourceActionRowOptionsUpdate, IResourceActionRowOptionsView, IResourceBlockOptionsFilter, IResourceBlockOptionsForm, IResourceBlockOptionsPage, IResourceBlockOptionsPageEntry, IResourceBlockOptionsPager, IResourceBlockOptionsTable, IResourceBlockOptionsToolbarBulk, IResourceBlockOptionsToolbarRow, IResourceFormFieldCaptchaOptions, IResourceFormFieldCurrencyOptions, IResourceFormFieldDateOptions, IResourceFormFieldDateRangeOptions, IResourceFormFieldInputOptions, IResourceFormFieldOptionsResourcePicker, IResourceFormFieldOptionsSelect, IResourceFormFieldOptionsTextarea, IResourceFormFieldOptionsToggle, IResourceTableCellOptionsCurrency, IResourceTableCellOptionsDate, ISelectChipsOptions, ISelectOptions, IServiceSsrLayoutOptions, ITableCellOptionsActionDelete, ITableCellOptionsActionOperationsRow, ITableCellOptionsActionUpdate, ITableCellOptionsActionView, ITableCellOptionsCurrency, ITableCellOptionsDate, IThemeOptionsDefault, IThemeOptionsOrange, Main, MetaThemeHandler, ModelLayout, ModelMenu, ModelPassport, NSControllerPageAuthCallback, NSControllerPageErrorExpired, OpenApiBaseURL, RenderContent, RenderHeader, RenderLayoutTabs, RenderLocale, RenderMenu, RenderPageLogin, RenderSidebar, RenderTable, RenderTabs, RenderTheme, RenderUser, ScopeModuleBasicActions, ScopeModuleBasicActionssync, ScopeModuleBasicAdapter, ScopeModuleBasicCaptcha, ScopeModuleBasicCurrency, ScopeModuleBasicDate, ScopeModuleBasicForm, ScopeModuleBasicInput, ScopeModuleBasicOpenapi, ScopeModuleBasicPage, ScopeModuleBasicPageentry, ScopeModuleBasicTable, ScopeModuleDemoStudent, ScopeModuleDevuiAdapter, ScopeModuleHomeApi, ScopeModuleHomeBase, ScopeModuleHomeIcon, ScopeModuleHomeIndex, ScopeModuleHomeLayoutempty, ScopeModuleHomeLayouttabs, ScopeModuleHomeLogin, ScopeModuleHomePassport, ScopeModuleHomeTheme, ServiceJwtAdapter, ServiceRouterGuards, ServiceSsr, ServiceSsrLayout, StyleLayoutTabs$1 as StyleLayoutTabs, TableCellActionDelete, TableCellActionOperationsRow, TableCellActionUpdate, TableCellActionView, TableCellCurrency, TableCellDate, ThemeDefault, ThemeOrange, ThemeTokenCustom, TypeActionAlertResult, TypeActionConfirmResult, TypeActionCopyResult, TypeActionCreateResult, TypeActionDeleteResult, TypeActionEditResult, TypeActionExprResult, TypeActionLogResult, TypeActionSetValueResult, TypeActionViewResult, TypeControllerActionBackPublicProps, TypeControllerActionCreatePublicProps, TypeControllerActionSubmitPublicProps, TypeControllerBlockFilterPublicProps, TypeControllerBlockFormPublicProps, TypeControllerBlockPageEntryPublicProps, TypeControllerBlockPagePublicProps, TypeControllerBlockPagerPublicProps, TypeControllerBlockTablePublicProps, TypeControllerBlockToolbarBulkPublicProps, TypeControllerBlockToolbarRowPublicProps, TypeControllerCardPublicProps, TypeControllerDateRangePublicProps, TypeControllerFormFieldCaptchaPublicProps, TypeControllerFormFieldCurrencyPublicProps, TypeControllerFormFieldDatePublicProps, TypeControllerFormFieldDateRangePublicProps, TypeControllerFormFieldInputPublicProps, TypeControllerItemLinkPublicProps, TypeControllerLayoutEmptyPublicProps, TypeControllerLayoutTabsPublicProps, TypeControllerPagePublicProps, TypeControllerTablePublicProps, TypeControllerTest2PublicProps, TypeControllerTestPublicProps, TypeMenuGroup, TypeMenuItem, TypeMenuTree, ZActionBack, ZActionCreate, ZActionSubmit, ZBlockFilter, ZBlockForm, ZBlockPage, ZBlockPageEntry, ZBlockPager, ZBlockTable, ZBlockToolbarBulk, ZBlockToolbarRow, ZCard, ZDateRange, ZFormFieldCaptcha, ZFormFieldCurrency, ZFormFieldDate, ZFormFieldDateRange, ZFormFieldInput, ZItemLink, ZLayoutEmpty, ZLayoutTabs, ZPage, ZPageAuthCallback, ZPageErrorExpired, ZPageErrorNotFound, ZPageHome, ZPageLogin, ZPageTest, ZTable, ZTest, ZTest2, currencyFormat, currencyUpdate, dateFormatUtil, definePropertyScopeBase, icons, operations, paths, render, webhooks };
+export { $defs, $iconName, Action, ActionAlert, ActionConfirm, ActionCopy, ActionCreate, ActionDelete, ActionEdit, ActionExpr, ActionLog, ActionSetValue, ActionView, ApiApiCaptchacreateMethod, ApiApiCaptchacreatePath, ApiApiCaptchacreateRequestBody, ApiApiCaptchacreateResponseBody, ApiApiCaptcharefreshMethod, ApiApiCaptcharefreshPath, ApiApiCaptcharefreshRequestBody, ApiApiCaptcharefreshResponseBody, ApiApiCaptchaverifyImmediateMethod, ApiApiCaptchaverifyImmediatePath, ApiApiCaptchaverifyImmediateRequestBody, ApiApiCaptchaverifyImmediateResponseBody, ApiApiHomeBaseMenuretrieveMenusMethod, ApiApiHomeBaseMenuretrieveMenusPath, ApiApiHomeBaseMenuretrieveMenusRequestParams, ApiApiHomeBaseMenuretrieveMenusResponseBody, ApiApiHomeBasePermissionretrievePermissionsMethod, ApiApiHomeBasePermissionretrievePermissionsPath, ApiApiHomeBasePermissionretrievePermissionsRequestParams, ApiApiHomeBasePermissionretrievePermissionsResponseBody, ApiApiHomeUserPassportassociateMethod, ApiApiHomeUserPassportassociatePath, ApiApiHomeUserPassportassociateRequestParams, ApiApiHomeUserPassportassociateRequestQuery, ApiApiHomeUserPassportassociateResponseBody, ApiApiHomeUserPassportcreatePassportJwtFromOauthCodeMethod, ApiApiHomeUserPassportcreatePassportJwtFromOauthCodePath, ApiApiHomeUserPassportcreatePassportJwtFromOauthCodeRequestBody, ApiApiHomeUserPassportcreatePassportJwtFromOauthCodeResponseBody, ApiApiHomeUserPassportcreateTempAuthTokenMethod, ApiApiHomeUserPassportcreateTempAuthTokenPath, ApiApiHomeUserPassportcreateTempAuthTokenRequestQuery, ApiApiHomeUserPassportcreateTempAuthTokenResponseBody, ApiApiHomeUserPassportcurrentMethod, ApiApiHomeUserPassportcurrentPath, ApiApiHomeUserPassportcurrentResponseBody, ApiApiHomeUserPassportloginMethod, ApiApiHomeUserPassportloginOauthMethod, ApiApiHomeUserPassportloginOauthPath, ApiApiHomeUserPassportloginOauthRequestParams, ApiApiHomeUserPassportloginOauthRequestQuery, ApiApiHomeUserPassportloginOauthResponseBody, ApiApiHomeUserPassportloginPath, ApiApiHomeUserPassportloginRequestBody, ApiApiHomeUserPassportloginResponseBody, ApiApiHomeUserPassportlogoutMethod, ApiApiHomeUserPassportlogoutPath, ApiApiHomeUserPassportlogoutResponseBody, ApiApiHomeUserPassportmigrateMethod, ApiApiHomeUserPassportmigratePath, ApiApiHomeUserPassportmigrateRequestParams, ApiApiHomeUserPassportmigrateRequestQuery, ApiApiHomeUserPassportmigrateResponseBody, ApiApiHomeUserPassportrefreshAuthTokenMethod, ApiApiHomeUserPassportrefreshAuthTokenPath, ApiApiHomeUserPassportrefreshAuthTokenRequestBody, ApiApiHomeUserPassportrefreshAuthTokenResponseBody, ApiApiHomeUserPassportregisterMethod, ApiApiHomeUserPassportregisterPath, ApiApiHomeUserPassportregisterRequestBody, ApiApiHomeUserPassportregisterResponseBody, ApiApiHomeindexMethod, ApiApiHomeindexPath, ApiApiHomeindexResponseBody, ApiApiTestSsrToolOnetestGetMethod, ApiApiTestSsrToolOnetestGetPath, ApiApiTestSsrToolOnetestGetRequestParams, ApiApiTestSsrToolOnetestGetRequestQuery, ApiApiTestSsrToolOnetestGetResponseBody, ApiApiTestSsrToolOnetestMethod, ApiApiTestSsrToolOnetestPath, ApiApiTestSsrToolOnetestRequestBody, ApiApiTestSsrToolOnetestRequestParams, ApiApiTestSsrToolOnetestRequestQuery, ApiApiTestSsrToolOnetestResponseBody, ApiCaptcha, ApiHome, ApiHomeBaseMenu, ApiHomeBasePermission, ApiHomeUserPassport, ApiSchemaAAuthDtoAuth, ApiSchemaAAuthDtoAuthPartial, ApiSchemaACaptchaDtoCaptchaData, ApiSchemaACaptchaDtoCaptchaDataPartial, ApiSchemaACaptchaDtoCaptchaVerify_c3cd80b1eeafe39bfe4433491bb081d68e84797e, ApiSchemaACaptchaDtoCaptchaVerify_c3cd80b1eeafe39bfe4433491bb081d68e84797ePartial, ApiSchemaACaptchaDtoCaptchaVerify_c3cd80b1eeafe39bfe4433491bb081d68e84797e_3218e7d152830e08f6e764b9e0c3796df929ee2b, ApiSchemaACaptchaDtoCaptchaVerify_c3cd80b1eeafe39bfe4433491bb081d68e84797e_3218e7d152830e08f6e764b9e0c3796df929ee2bPartial, ApiSchemaAJwtDtoJwtToken, ApiSchemaAJwtDtoJwtTokenPartial, ApiSchemaAMenuDtoMenuGroup, ApiSchemaAMenuDtoMenuGroupPartial, ApiSchemaAMenuDtoMenuItem, ApiSchemaAMenuDtoMenuItemMeta, ApiSchemaAMenuDtoMenuItemMetaPartial, ApiSchemaAMenuDtoMenuItemPartial, ApiSchemaAMenuDtoMenus, ApiSchemaAMenuDtoMenusPartial, ApiSchemaAPaypalDtoPaypalOrderRecordOptions, ApiSchemaAPaypalDtoPaypalOrderRecordOptionsPartial, ApiSchemaAPaypalDtoPaypalOrderRecordPayload, ApiSchemaAPaypalDtoPaypalOrderRecordPayloadPartial, ApiSchemaAPaypalEntityPaypalRecord, ApiSchemaAPaypalEntityPaypalRecordPartial, ApiSchemaAPermissionDtoPermissions, ApiSchemaAPermissionDtoPermissionsPartial, ApiSchemaAPlayDtoPlay, ApiSchemaAPlayDtoPlayPartial, ApiSchemaCaptcha, ApiSchemaHome, ApiSchemaHomeBaseMenu, ApiSchemaHomeBasePermission, ApiSchemaHomeUserDtoLogin, ApiSchemaHomeUserDtoLoginPartial, ApiSchemaHomeUserDtoPassport, ApiSchemaHomeUserDtoPassportJwt, ApiSchemaHomeUserDtoPassportJwtPartial, ApiSchemaHomeUserDtoPassportPartial, ApiSchemaHomeUserDtoRegister, ApiSchemaHomeUserDtoRegisterPartial, ApiSchemaHomeUserEntityRole, ApiSchemaHomeUserEntityRolePartial, ApiSchemaHomeUserEntityUser, ApiSchemaHomeUserEntityUserPartial, ApiSchemaHomeUserPassport, ApiSchemaTestCaptchaDtoSignin, ApiSchemaTestCaptchaDtoSigninPartial, ApiSchemaTestRestDtoProductCreate, ApiSchemaTestRestDtoProductCreatePartial, ApiSchemaTestRestDtoProductQueryRes, ApiSchemaTestRestDtoProductQueryResPartial, ApiSchemaTestRestDtoProductUpdate, ApiSchemaTestRestDtoProductUpdatePartial, ApiSchemaTestRestEntityProduct, ApiSchemaTestRestEntityProductPartial, ApiSchemaTestSsrDtoTestBody, ApiSchemaTestSsrDtoTestBodyPartial, ApiSchemaTestSsrDtoTestDetail, ApiSchemaTestSsrDtoTestDetailPartial, ApiSchemaTestSsrDtoTestResult, ApiSchemaTestSsrDtoTestResultPartial, ApiSchemaTestSsrToolOne, ApiSchemaTestVonaDtoCategoryTree, ApiSchemaTestVonaDtoCategoryTreePartial, ApiSchemaTestVonaDtoOrderCreate, ApiSchemaTestVonaDtoOrderCreatePartial, ApiSchemaTestVonaDtoOrderResult, ApiSchemaTestVonaDtoOrderResultPage, ApiSchemaTestVonaDtoOrderResultPagePartial, ApiSchemaTestVonaDtoOrderResultPartial, ApiSchemaTestVonaDtoOrderUpdate, ApiSchemaTestVonaDtoOrderUpdatePartial, ApiSchemaTestVonaDtoPostAggregate, ApiSchemaTestVonaDtoPostAggregatePartial, ApiSchemaTestVonaDtoPostCreate, ApiSchemaTestVonaDtoPostCreatePartial, ApiSchemaTestVonaDtoPostGroup, ApiSchemaTestVonaDtoPostGroupPartial, ApiSchemaTestVonaDtoPostQueryRes, ApiSchemaTestVonaDtoPostQueryResPartial, ApiSchemaTestVonaDtoRoleLazy, ApiSchemaTestVonaDtoRoleLazyPartial, ApiSchemaTestVonaDtoSerializerArray, ApiSchemaTestVonaDtoSerializerArrayPartial, ApiSchemaTestVonaDtoSerializerLazy, ApiSchemaTestVonaDtoSerializerLazyPartial, ApiSchemaTestVonaDtoSerializerSimple, ApiSchemaTestVonaDtoSerializerSimplePartial, ApiSchemaTestVonaDtoSerializerSimple_1c4b95bcfe8fe28a56dbcc7028097cf11836b4fc, ApiSchemaTestVonaDtoSerializerSimple_1c4b95bcfe8fe28a56dbcc7028097cf11836b4fcPartial, ApiSchemaTestVonaDtoSerializerSimple_542f7be0da9b85a67248a6a1a3629e72de5fdb33_cff0ae112a392da58caf5aa905749f3c4444c4ab, ApiSchemaTestVonaDtoSerializerSimple_542f7be0da9b85a67248a6a1a3629e72de5fdb33_cff0ae112a392da58caf5aa905749f3c4444c4abPartial, ApiSchemaTestVonaDtoUser, ApiSchemaTestVonaDtoUserCreate, ApiSchemaTestVonaDtoUserCreatePartial, ApiSchemaTestVonaDtoUserLazy, ApiSchemaTestVonaDtoUserLazyPartial, ApiSchemaTestVonaDtoUserPartial, ApiSchemaTestVonaDtoUserUpdate, ApiSchemaTestVonaDtoUserUpdatePartial, ApiSchemaTestVonaEntityCategory_2c7d642ee581efa300341e343180fbb0ecdc785d, ApiSchemaTestVonaEntityCategory_2c7d642ee581efa300341e343180fbb0ecdc785dPartial, ApiSchemaTestVonaEntityPost_729883d7de16ce4401b26f75bebe618c8948ff64, ApiSchemaTestVonaEntityPost_729883d7de16ce4401b26f75bebe618c8948ff64Partial, ApiSchemaTestVonaEntityPost_a6ba2076b5b70a3c098374cc82d418bd1ab226c3, ApiSchemaTestVonaEntityPost_a6ba2076b5b70a3c098374cc82d418bd1ab226c3Partial, ApiSchemaTestVonaEntityProduct, ApiSchemaTestVonaEntityProductPartial, ApiSchemaTestVonaEntityProduct_29731960f3f38d3572bc2f8a01a7498bfe927055, ApiSchemaTestVonaEntityProduct_29731960f3f38d3572bc2f8a01a7498bfe927055Partial, ApiSchemaTestVonaEntityProduct_9cf2c6bcd41713270c34bcfce21b7b4942e3fbc6, ApiSchemaTestVonaEntityProduct_9cf2c6bcd41713270c34bcfce21b7b4942e3fbc6Partial, ApiSchemaTestVonaEntityProduct_bce173590aaef19772f1ae3a82196493c2633e2e, ApiSchemaTestVonaEntityProduct_bce173590aaef19772f1ae3a82196493c2633e2ePartial, ApiSchemaTestVonaEntityUser_2c7d642ee581efa300341e343180fbb0ecdc785d_1816ff740d81c738ec055c7038bbd93beb9405a7, ApiSchemaTestVonaEntityUser_2c7d642ee581efa300341e343180fbb0ecdc785d_1816ff740d81c738ec055c7038bbd93beb9405a7Partial, ApiTestSsrToolOne, BehaviorFormField, BehaviorFormFieldLayout, BehaviorFormFieldLayoutLogin, Component, ControllerActionBack, ControllerActionBackProps, ControllerActionCreate, ControllerActionCreateProps, ControllerActionSubmit, ControllerActionSubmitProps, ControllerBlockFilter, ControllerBlockFilterProps, ControllerBlockForm, ControllerBlockFormProps, ControllerBlockPage, ControllerBlockPageEntry, ControllerBlockPageEntryProps, ControllerBlockPageProps, ControllerBlockPager, ControllerBlockPagerProps, ControllerBlockTable, ControllerBlockTableProps, ControllerBlockToolbarBulk, ControllerBlockToolbarBulkProps, ControllerBlockToolbarRow, ControllerBlockToolbarRowProps, ControllerCard, ControllerCardModels, ControllerCardProps, ControllerDateRange, ControllerDateRangeModels, ControllerDateRangeProps, ControllerFormFieldCaptcha, ControllerFormFieldCaptchaProps, ControllerFormFieldCurrency, ControllerFormFieldCurrencyProps, ControllerFormFieldDate, ControllerFormFieldDateProps, ControllerFormFieldDateRange, ControllerFormFieldDateRangeProps, ControllerFormFieldInput, ControllerFormFieldInputProps, ControllerItemLink, ControllerItemLinkProps, ControllerLayoutEmpty, ControllerLayoutEmptyProps, ControllerLayoutTabs, ControllerLayoutTabsProps, ControllerPage, ControllerPageAuthCallback, ControllerPageAuthCallbackSchemaQuery, ControllerPageErrorExpired, ControllerPageErrorExpiredSchemaQuery, ControllerPageErrorNotFound, ControllerPageHome, ControllerPageLogin$1 as ControllerPageLogin, ControllerPageProps, ControllerPageTest, ControllerTable, ControllerTableProps, ControllerTest, ControllerTest2, ControllerTest2Models, ControllerTest2Props, ControllerTestModels, ControllerTestProps, CssDefault, IActionOptionsAlert, IActionOptionsConfirm, IActionOptionsCopy, IActionOptionsCreate, IActionOptionsDelete, IActionOptionsEdit, IActionOptionsExpr, IActionOptionsLog, IActionOptionsSetValue, IActionOptionsView, IBehaviorOptionsFormField, IBehaviorOptionsFormFieldLayout, IBehaviorOptionsFormFieldLayoutLogin, IBehaviorPropsInputFormField, IBehaviorPropsInputFormFieldLayout, IBehaviorPropsInputFormFieldLayoutLogin, IBehaviorPropsOutputFormField, IBehaviorPropsOutputFormFieldLayout, IBehaviorPropsOutputFormFieldLayoutLogin, IBehaviorResourceFormFieldLayoutOptions, ICssOptionsDefault, IModelOptionsLayout, IModelOptionsMenu, IModelOptionsPassport, IModuleApi, IModuleApiSchema, IResourceFormFieldCaptchaOptions, IResourceFormFieldCurrencyOptions, IResourceFormFieldDateOptions, IResourceFormFieldDateRangeOptions, IResourceFormFieldInputOptions, IServiceSsrLayoutOptions, ITableCellOptionsActionDelete, ITableCellOptionsActionOperationsRow, ITableCellOptionsActionUpdate, ITableCellOptionsActionView, ITableCellOptionsCurrency, ITableCellOptionsDate, IThemeOptionsDefault, IThemeOptionsOrange, Main, MetaThemeHandler, ModelLayout, ModelMenu, ModelPassport, NSControllerPageAuthCallback, NSControllerPageErrorExpired, OpenApiBaseURL, RenderContent, RenderHeader, RenderLayoutTabs, RenderLocale, RenderMenu, RenderPageLogin, RenderSidebar, RenderTable, RenderTabs, RenderTheme, RenderUser, ScopeModuleBasicActions, ScopeModuleBasicActionssync, ScopeModuleBasicAdapter, ScopeModuleBasicCaptcha, ScopeModuleBasicCurrency, ScopeModuleBasicDate, ScopeModuleBasicForm, ScopeModuleBasicInput, ScopeModuleBasicPage, ScopeModuleBasicPageentry, ScopeModuleBasicTable, ScopeModuleDemoStudent, ScopeModuleDevuiAdapter, ScopeModuleHomeApi, ScopeModuleHomeBase, ScopeModuleHomeIcon, ScopeModuleHomeIndex, ScopeModuleHomeLayoutempty, ScopeModuleHomeLayouttabs, ScopeModuleHomeLogin, ScopeModuleHomePassport, ScopeModuleHomeTheme, ServiceJwtAdapter, ServiceRouterGuards, ServiceSsr, ServiceSsrLayout, StyleLayoutTabs$1 as StyleLayoutTabs, TableCellActionDelete, TableCellActionOperationsRow, TableCellActionUpdate, TableCellActionView, TableCellCurrency, TableCellDate, ThemeDefault, ThemeOrange, ThemeTokenCustom, TypeActionAlertResult, TypeActionConfirmResult, TypeActionCopyResult, TypeActionCreateResult, TypeActionDeleteResult, TypeActionEditResult, TypeActionExprResult, TypeActionLogResult, TypeActionSetValueResult, TypeActionViewResult, TypeControllerActionBackPublicProps, TypeControllerActionCreatePublicProps, TypeControllerActionSubmitPublicProps, TypeControllerBlockFilterPublicProps, TypeControllerBlockFormPublicProps, TypeControllerBlockPageEntryPublicProps, TypeControllerBlockPagePublicProps, TypeControllerBlockPagerPublicProps, TypeControllerBlockTablePublicProps, TypeControllerBlockToolbarBulkPublicProps, TypeControllerBlockToolbarRowPublicProps, TypeControllerCardPublicProps, TypeControllerDateRangePublicProps, TypeControllerFormFieldCaptchaPublicProps, TypeControllerFormFieldCurrencyPublicProps, TypeControllerFormFieldDatePublicProps, TypeControllerFormFieldDateRangePublicProps, TypeControllerFormFieldInputPublicProps, TypeControllerItemLinkPublicProps, TypeControllerLayoutEmptyPublicProps, TypeControllerLayoutTabsPublicProps, TypeControllerPagePublicProps, TypeControllerTablePublicProps, TypeControllerTest2PublicProps, TypeControllerTestPublicProps, TypeDateFormatPreset, TypeMenuGroup, TypeMenuItem, TypeMenuTree, ZActionBack, ZActionCreate, ZActionSubmit, ZBlockFilter, ZBlockForm, ZBlockPage, ZBlockPageEntry, ZBlockPager, ZBlockTable, ZBlockToolbarBulk, ZBlockToolbarRow, ZCard, ZDateRange, ZFormFieldCaptcha, ZFormFieldCurrency, ZFormFieldDate, ZFormFieldDateRange, ZFormFieldInput, ZItemLink, ZLayoutEmpty, ZLayoutTabs, ZPage, ZPageAuthCallback, ZPageErrorExpired, ZPageErrorNotFound, ZPageHome, ZPageLogin, ZPageTest, ZTable, ZTest, ZTest2, currencyFormat, currencyUpdate, dateFormatUtil, definePropertyScopeBase, icons, operations, paths, render, webhooks };

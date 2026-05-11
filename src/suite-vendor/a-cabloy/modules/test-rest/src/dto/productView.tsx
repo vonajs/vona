@@ -10,11 +10,13 @@ export interface IDtoOptionsProductView extends IDecoratorDtoOptions {}
 
 @Dto<IDtoOptionsProductView>({
   blocks: [
-    v.renderBlock('BlockPageEntry', {
+    render.block('basic-pageentry:blockPageEntry', {
       blocks: [
-        v.renderBlock('BlockForm'),
-        v.renderBlock('BlockToolbarRow', {
-          actions: [v.renderActionRow('back', { permission: { public: true } })],
+        render.block('basic-pageentry:blockForm'),
+        render.block('basic-pageentry:blockToolbarRow', {
+          actions: [
+            render.formActionRow('basic-form:actionBack', { permission: { public: true } }),
+          ],
         }),
       ],
     }),

@@ -1,9 +1,6 @@
 import type { OmitNever } from 'vona';
 import type { ServiceOnion } from 'vona-module-a-onion';
-import type {
-  IResourceComponentBlockOptionsBlock,
-  TypeOpenapiMetadata,
-} from 'vona-module-a-openapi';
+import type { TypeOpenapiMetadata } from 'vona-module-a-openapi';
 import type { SchemaLike } from 'vona-module-a-openapiutils';
 import type { SymbolKeyFieldsMore } from 'vona-module-a-orm';
 
@@ -14,7 +11,7 @@ export interface IDecoratorDtoOptions<FieldsMore = never> {
   independent?: boolean;
   openapi?: TypeOpenapiMetadata;
   pipes?: SchemaLike | SchemaLike[];
-  blocks?: IResourceComponentBlockOptionsBlock[];
+  blocks?: any[];
 }
 
 declare module 'vona-module-a-onion' {

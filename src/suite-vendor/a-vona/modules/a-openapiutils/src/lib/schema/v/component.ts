@@ -3,8 +3,6 @@ import type {
   IResourceActionRowRecord,
   IResourceComponentActionBulkOptionsAction,
   IResourceComponentActionRowOptionsAction,
-  IResourceComponentBlockOptionsBlock,
-  IResourceComponentBlockRecord,
   IResourceComponentFormFieldRecord,
   IResourceComponentTableCellActionRowRecord,
   TypeFormSchemaScene,
@@ -87,15 +85,4 @@ export function schemaRenderActionBulkJsx<K extends IResourceActionBulkRecord>(
   renderComponentJsx: TypeRenderComponentJsx,
 ) {
   return { name, render: renderComponentJsx };
-}
-
-export function schemaRenderBlock<K extends keyof IResourceComponentBlockRecord>(
-  name: K,
-  options?: IResourceComponentBlockRecord[K],
-): IResourceComponentBlockOptionsBlock {
-  return { $$typeof: 'zova-jsx:block', render: name, options };
-}
-
-export function schemaRenderBlockJsx(renderComponentJsx: TypeRenderComponentJsx) {
-  return { render: renderComponentJsx };
 }

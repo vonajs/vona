@@ -3,8 +3,6 @@ import {
   schemaRenderActionBulkJsx,
   schemaRenderActionRow,
   schemaRenderActionRowJsx,
-  schemaRenderBlock,
-  schemaRenderBlockJsx,
   schemaRenderCell,
   schemaRenderCellJsx,
   schemaRenderField,
@@ -109,8 +107,6 @@ export const v = {
   renderActionRowJsx: schemaRenderActionRowJsx,
   renderActionBulk: schemaRenderActionBulk,
   renderActionBulkJsx: schemaRenderActionBulkJsx,
-  renderBlock: schemaRenderBlock,
-  renderBlockJsx: schemaRenderBlockJsx,
   // zod
   zodRefine: schemaZodRefine,
   zodTransform: schemaZodTransform,

@@ -3,6 +3,7 @@ import type { IDecoratorDtoOptions } from 'vona-module-a-web';
 import { Api, v } from 'vona-module-a-openapiutils';
 import { $Dto } from 'vona-module-a-orm';
 import { Dto } from 'vona-module-a-web';
+import { render } from 'zova-rest-cabloy-basic-admin';
 
 import { $locale } from '../.metadata/locales.ts';
 import { ModelProduct } from '../model/product.ts';
@@ -11,14 +12,14 @@ export interface IDtoOptionsProductSelectResItem extends IDecoratorDtoOptions {}
 
 @Dto<IDtoOptionsProductSelectResItem>({
   blocks: [
-    v.renderBlock('BlockPage', {
+    render.block('basic-page:blockPage', {
       blocks: [
-        v.renderBlock('BlockFilter'),
-        v.renderBlock('BlockToolbarBulk', {
-          actions: [v.renderActionBulk('create')],
+        render.block('basic-page:blockFilter'),
+        render.block('basic-page:blockToolbarBulk', {
+          actions: [render.tableActionBulk('basic-table:actionCreate')],
         }),
-        v.renderBlock('BlockTable'),
-        v.renderBlock('BlockPager'),
+        render.block('basic-page:blockTable'),
+        render.block('basic-page:blockPager'),
       ],
     }),
   ],
@@ -27,8 +28,11 @@ export class DtoProductSelectResItem extends $Dto.get(() => ModelProduct) {
   @Api.field(
     v.title($locale('Operations')),
     v.renderOrder(1, 'max'),
-    v.renderCell('ActionOperationsRow', {
-      actions: [v.renderActionRow('update'), v.renderActionRow('delete')],
+    render.cell('basic-table:actionOperationsRow', {
+      actions: [
+        render.tableActionRow('basic-table:actionUpdate'),
+        render.tableActionRow('basic-table:actionDelete'),
+      ],
     }),
   )
   _operationsRow?: unknown;
