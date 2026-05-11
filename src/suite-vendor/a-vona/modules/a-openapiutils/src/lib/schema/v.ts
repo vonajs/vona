@@ -1,13 +1,3 @@
-import {
-  schemaRenderActionBulk,
-  schemaRenderActionBulkJsx,
-  schemaRenderActionRow,
-  schemaRenderActionRowJsx,
-  schemaRenderCell,
-  schemaRenderCellJsx,
-  schemaRenderField,
-  schemaRenderFieldJsx,
-} from './v/component.ts';
 import { schemaFilter, schemaFilterTransform } from './v/filter.ts';
 import {
   schemaEmail,
@@ -26,14 +16,6 @@ import {
   schemaUuid,
 } from './v/helpers.ts';
 import { schemaDescription, schemaExample, schemaOpenapi, schemaTitle } from './v/openapi.ts';
-import {
-  schemaRenderOrder,
-  schemaRenderFieldSource,
-  schemaRenderVisible,
-  schemaRenderReadonly,
-  schemaRenderLayout,
-  schemaRenderDisableNotifyChanged,
-} from './v/rest.ts';
 import {
   schemaSerializerCustom,
   schemaSerializerExclude,
@@ -91,22 +73,6 @@ export const v = {
   title: schemaTitle,
   description: schemaDescription,
   example: schemaExample,
-  // render
-  renderLayout: schemaRenderLayout,
-  renderVisible: schemaRenderVisible,
-  renderReadonly: schemaRenderReadonly,
-  renderOrder: schemaRenderOrder,
-  renderDisableNotifyChanged: schemaRenderDisableNotifyChanged,
-  renderFieldSource: schemaRenderFieldSource,
-  // component
-  renderField: schemaRenderField,
-  renderFieldJsx: schemaRenderFieldJsx,
-  renderCell: schemaRenderCell,
-  renderCellJsx: schemaRenderCellJsx,
-  renderActionRow: schemaRenderActionRow,
-  renderActionRowJsx: schemaRenderActionRowJsx,
-  renderActionBulk: schemaRenderActionBulk,
-  renderActionBulkJsx: schemaRenderActionBulkJsx,
   // zod
   zodRefine: schemaZodRefine,
   zodTransform: schemaZodTransform,

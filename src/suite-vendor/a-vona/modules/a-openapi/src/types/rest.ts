@@ -7,10 +7,6 @@ import type { ILocaleMagic } from 'vona';
 import type { IOpenapiOptions } from 'vona-module-a-openapiutils';
 import type { core, z } from 'zod';
 
-import type { IResourceComponentFormFieldRecord } from './formField.ts';
-
-export interface ISchemaRenderComponentPresetRecord extends IResourceComponentFormFieldRecord {}
-
 export interface ISchemaObjectExtensionFieldRestProps {
   //
   fieldSource?: string;
