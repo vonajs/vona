@@ -27,7 +27,7 @@ export interface IDtoOptionsProductSelectResItem extends IDecoratorDtoOptions {}
 export class DtoProductSelectResItem extends $Dto.get(() => ModelProduct) {
   @Api.field(
     v.title($locale('Operations')),
-    v.renderOrder(1, 'max'),
+    render.order(1, 'max'),
     render.cell('basic-table:actionOperationsRow', {
       actions: [
         render.tableActionRow('basic-table:actionUpdate'),

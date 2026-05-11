@@ -25,7 +25,7 @@ export class EntityProduct extends EntityBase {
   )
   name: string;
 
-  @Api.field(v.title($locale('Description')), v.renderOrder(2), v.optional())
+  @Api.field(v.title($locale('Description')), render.order(2), v.optional())
   description?: string;
 
   @Api.field(
@@ -38,7 +38,7 @@ export class EntityProduct extends EntityBase {
   )
   price: number;
 
-  @Api.field(v.title($locale('Quantity')), v.renderOrder(4), v.default(0))
+  @Api.field(v.title($locale('Quantity')), render.order(4), v.default(0))
   quantity: number;
 
   @Api.field(

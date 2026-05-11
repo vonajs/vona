@@ -16,7 +16,7 @@ export class DtoPostSelectResItem extends $Dto.get(() => ModelPost, {
 }) {
   @Api.field(
     v.title($locale('Operations')),
-    v.renderOrder(1, 'max'),
+    render.order(1, 'max'),
     render.cell('basic-table:actionOperationsRow', {
       actions: [
         render.tableActionRow('basic-table:actionUpdate'),
