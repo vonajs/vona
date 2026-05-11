@@ -35,7 +35,7 @@ export interface IDtoOptionsTestResult extends IDecoratorDtoOptions<
           },
         },
       }),
-      v.renderLayout({ label: 'Custom1' }),
+      render.layout({ label: 'Custom1' }),
       v.default('custom'),
       v.optional(),
       v.min(6),
@@ -63,7 +63,7 @@ export interface IDtoOptionsTestResult extends IDecoratorDtoOptions<
           ></Component>
         </div>,
       ),
-      v.renderLayout({
+      render.layout({
         label: 'Custom2',
         header: <div>{cel('name + ":containerHeader:" + value')}</div>,
         footer: <div>{cel('name + ":containerFooter:" + value')}</div>,
@@ -80,7 +80,7 @@ export interface IDtoOptionsTestResult extends IDecoratorDtoOptions<
           <div>{cel('"var: " + varTest')}</div>
         </div>,
       ),
-      v.renderLayout({ label: 'Custom5' }),
+      render.layout({ label: 'Custom5' }),
       v.default('custom'),
       v.optional(),
       v.min(6),
@@ -125,7 +125,7 @@ export interface IDtoOptionsTestResult extends IDecoratorDtoOptions<
           <span v-if={cel('getValue("_customCopied")==true')}>Copied!</span>
         </div>,
       ),
-      v.renderLayout({ label: 'Custom Copy' }),
+      render.layout({ label: 'Custom Copy' }),
       v.optional(),
       v.min(6),
       z.string(),
@@ -140,7 +140,7 @@ export class DtoTestResult {
   @Api.field(
     v.title($locale('Name')),
     v.renderFieldJsx(<input className="text-center-2 text-center"></input>),
-    v.renderLayout({ label: cel('name+"!!"'), class: 'test-layout' }),
+    render.layout({ label: cel('name+"!!"'), class: 'test-layout' }),
     v.default('tom'),
     v.min(3),
   )
