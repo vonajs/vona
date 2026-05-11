@@ -14,7 +14,12 @@ export interface IDtoOptionsProductCreate extends IDecoratorDtoOptions<'_test'> 
 @Dto<IDtoOptionsProductCreate>({
   openapi: { title: $locale('CreateProduct') },
   fields: {
-    _test: $makeSchema(v.title('Test'), render.field('basic-input:formFieldInput'), z.string()),
+    _test: $makeSchema(
+      v.title('Test'),
+      render.field('basic-input:formFieldInput'),
+      v.optional(),
+      z.string(),
+    ),
   },
   blocks: [
     render.block('basic-pageentry:blockPageEntry', {
