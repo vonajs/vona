@@ -22,6 +22,7 @@ export function evaluateExpressions<T = any>(
     return expressions.map(item => _evaluateExpressionInner(item, context, celEnv, dry)) as any;
   } else if (typeof expressions === 'object') {
     if (expressions.$$typeof) return expressions;
+    if (expressions instanceof Date) return expressions as any;
     const res = {};
     for (const key in expressions) {
       res[key] = _evaluateExpressionInner(expressions[key], context, celEnv, dry);
