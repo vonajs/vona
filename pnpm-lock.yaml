@@ -305,9 +305,6 @@ importers:
       vona-module-auth-simple:
         specifier: workspace:^
         version: link:src/suite-vendor/a-auth/modules/auth-simple
-      vona-module-basic-openapi:
-        specifier: workspace:^
-        version: link:src/suite/cabloy-basic/modules/basic-openapi
       vona-module-basic-siteadmin:
         specifier: workspace:^
         version: link:src/suite/cabloy-basic/modules/basic-siteadmin
@@ -2382,28 +2379,12 @@ importers:
 
   src/suite/cabloy-basic:
     dependencies:
-      vona-module-basic-openapi:
-        specifier: ^5.0.0
-        version: link:modules/basic-openapi
       vona-module-basic-siteadmin:
         specifier: workspace:^
         version: link:modules/basic-siteadmin
       vona-suite-a-cabloy:
         specifier: ^5.1.10
         version: link:../../suite-vendor/a-cabloy
-
-  src/suite/cabloy-basic/modules/basic-openapi:
-    dependencies:
-      '@zhennann/currency':
-        specifier: ^2.0.4
-        version: 2.0.4
-    devDependencies:
-      clean-package:
-        specifier: ^2.2.0
-        version: 2.2.0
-      rimraf:
-        specifier: ^6.1.3
-        version: 6.1.3
 
   src/suite/cabloy-basic/modules/basic-siteadmin:
     devDependencies:
@@ -4595,9 +4576,6 @@ packages:
   '@zhennann/common-bin@4.0.1':
     resolution: {integrity: sha512-76gun6uGtvHyJcUotV37VWCI9K8oDeOVG+xdjuL6+K4njwtSZ9AWSK8Dfuaao4PkeJKAWpQm222Q5bQLpx1NfQ==}
     engines: {node: '>= 14.0.0'}
-
-  '@zhennann/currency@2.0.4':
-    resolution: {integrity: sha512-+RmlCeTGcM4QbR02MA3Ypb8vAo7LdcI+2m2ZRPC8KsrxFtAkO5IxACFGF7HUMuv8AJOdX+9RGHzZltSvJvcP5Q==}
 
   '@zhennann/ejs@3.0.1':
     resolution: {integrity: sha512-AkfhJ8D8X+sLyBTl5Lrp7nT0Gg4apE+9CcPk5EFolC3O0Qhom4QDUJxaczElsSyNzbSAkFNRzcNW9MTeJQOv3w==}
@@ -11651,8 +11629,6 @@ snapshots:
       yargs-parser: 13.1.2
     transitivePeerDependencies:
       - supports-color
-
-  '@zhennann/currency@2.0.4': {}
 
   '@zhennann/ejs@3.0.1': {}
 

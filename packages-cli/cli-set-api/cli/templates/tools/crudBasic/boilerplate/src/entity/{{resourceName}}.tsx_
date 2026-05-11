@@ -1,6 +1,9 @@
 import type { IDecoratorEntityOptions } from 'vona-module-a-orm';
+
 import { Api, v } from 'vona-module-a-openapiutils';
 import { Entity, EntityBase } from 'vona-module-a-orm';
+import { render } from 'zova-rest-cabloy-basic-admin';
+
 import { $locale } from '../.metadata/locales.ts';
 
 export interface IEntityOptions<%=argv.resourceNameCapitalize%> extends IDecoratorEntityOptions {}
@@ -9,17 +12,17 @@ export interface IEntityOptions<%=argv.resourceNameCapitalize%> extends IDecorat
 export class Entity<%=argv.resourceNameCapitalize%> extends EntityBase {
   @Api.field(
     v.title($locale('Name')),
-    v.renderOrder(1),
-    v.renderCell('ActionView'),
     v.required(),
     v.min(2),
+    render.order(1),
+    render.cell('basic-table:actionView'),
   )
   name: string;
 
   @Api.field(
     v.title($locale('Description')),
-    v.renderOrder(2),
     v.optional(),
+    render.order(2),
   )
   description?: string;
 }
