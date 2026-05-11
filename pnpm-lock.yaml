@@ -2383,7 +2383,7 @@ importers:
         specifier: workspace:^
         version: link:modules/basic-siteadmin
       vona-suite-a-cabloy:
-        specifier: ^5.1.11
+        specifier: ^5.1.12
         version: link:../../suite-vendor/a-cabloy
 
   src/suite/cabloy-basic/modules/basic-siteadmin:
