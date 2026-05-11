@@ -48,6 +48,12 @@
 
 //#endregion
 //#region .zova-rest/utils.ts
+function $cssBase(name) {
+	return `cssBase:${name}`;
+}
+function $cssMerge(...classes) {
+	return classes;
+}
 function $iconName(name) {
 	return name;
 }
@@ -215,4 +221,4 @@ const render = {
 	blockJsx: schemaRenderBlockJsx
 };
 //#endregion
-export { $iconName, Action, Component, render };
+export { $cssBase, $cssMerge, $iconName, Action, Component, render };
