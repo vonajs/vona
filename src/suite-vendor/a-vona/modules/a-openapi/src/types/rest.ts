@@ -7,7 +7,6 @@ import type { ILocaleMagic } from 'vona';
 import type { IOpenapiOptions } from 'vona-module-a-openapiutils';
 import type { core, z } from 'zod';
 
-import type { IComponentRecord, ITableCellComponentRecord } from './component.ts';
 import type { IResourceComponentFormFieldRecord } from './formField.ts';
 
 export interface ISchemaRenderComponentPresetRecord extends IResourceComponentFormFieldRecord {}
@@ -22,7 +21,7 @@ export interface ISchemaObjectExtensionFieldRestProps {
 }
 
 export interface ISchemaObjectExtensionFieldRest extends ISchemaObjectExtensionFieldRestProps {
-  'render'?: TypeRenderComponentPreset;
+  'render'?: TypeRenderComponent;
   'table'?: ISchemaObjectExtensionFieldRestScene;
   'form'?: ISchemaObjectExtensionFieldRestScene;
   'form-view'?: ISchemaObjectExtensionFieldRestScene;
@@ -54,21 +53,6 @@ declare module 'zod' {
   }
 }
 
-// export type TypeOpenapiMetadata<_T extends z.ZodType = z.ZodType> = Omit<
-//   Partial<ISchemaObjectExtensionField>,
-//   'title' | 'description'
-// > & {
-//   title?: string | ILocaleMagic;
-//   description?: string | ILocaleMagic;
-// };
-// // export type TypeOpenapiMetadata<T extends z.ZodType = z.ZodType> = Omit<
-// //   Partial<ZodOpenAPIMetadata<z.input<T>>>,
-// //   'title' | 'description'
-// // > & {
-// //   title?: string | ILocaleMagic;
-// //   description?: string | ILocaleMagic;
-// // };
-
 export interface TypeRenderComponentJsxProps {
   'children': TypeRenderComponentJsx | TypeRenderComponentJsx[];
   'v-if'?: string | boolean;
@@ -87,39 +71,7 @@ export interface TypeRenderComponentJsx {
 export type TypeSchemaScene = 'table' | TypeFormSchemaScene;
 export type TypeFormSchemaScene = 'form' | 'form-view' | 'form-create' | 'filter';
 
-export type TypeRenderComponentPreset =
-  | keyof ISchemaRenderComponentPresetRecord
-  | 'text'
-  | 'captcha'
-  | 'currency'
-  | 'date'
-  | 'dateRange'
-  | 'toggle'
-  | 'select'
-  | 'textarea'
-  | 'resourcePicker';
-// | 'checkbox';
-// | 'radio'
-// | 'switch';
-// | 'image'
-// | 'file'
-// | 'color'
-// | 'password'
-// | 'email'
-// | 'url';
-export type TypeRenderComponent = TypeRenderComponentPreset | TypeRenderComponentJsx;
-
-// form
-export type TypeFormFieldRenderComponentProvider = keyof IComponentRecord;
-// | 'input'
-// | 'textarea'
-// | 'select';
-
-// table
-export type TypeTableCellRenderComponentProvider =
-  | keyof IComponentRecord
-  | keyof ITableCellComponentRecord
-  | 'text';
+export type TypeRenderComponent = TypeRenderComponentJsx | string;
 
 export type TypeEntityOptionsFields<T extends {}, More extends string | undefined = never> = {
   [key in keyof T | (More extends string ? More : never)]?: ISchemaObjectExtensionField | z.ZodType;
