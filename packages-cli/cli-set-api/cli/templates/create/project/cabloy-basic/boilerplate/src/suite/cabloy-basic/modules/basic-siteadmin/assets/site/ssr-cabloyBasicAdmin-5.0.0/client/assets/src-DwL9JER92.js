@@ -1,0 +1,1 @@
+import{i as a,n as s,r,t}from"./basic-adapter-BUPotcgV.js";t();export{r as MonkeySys,s as ScopeModuleBasicAdapter,a as config};
