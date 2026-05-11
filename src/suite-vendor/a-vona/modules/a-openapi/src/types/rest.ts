@@ -1,10 +1,12 @@
-import type { ZodOpenAPIMetadata } from '@cabloy/zod-to-openapi';
-import type { ILocaleMagic } from 'vona';
-import type { IOpenapiOptions } from 'vona-module-a-openapiutils';
-import type { z } from 'zod';
+import type { OpenApiOptions } from '@cabloy/zod-to-openapi/dist/zod-extensions.js';
+import type { SchemaObject } from 'openapi3-ts/oas31';
 
 import 'openapi3-ts/oas30';
 import 'openapi3-ts/oas31';
+import type { ILocaleMagic } from 'vona';
+import type { IOpenapiOptions } from 'vona-module-a-openapiutils';
+import type { core, z } from 'zod';
+
 import type { IComponentRecord, ITableCellComponentRecord } from './component.ts';
 import type { IResourceComponentFormFieldRecord } from './formField.ts';
 
@@ -32,17 +34,40 @@ export interface ISchemaObjectExtensionFieldRestScene extends ISchemaObjectExten
   render?: TypeRenderComponent;
 }
 
-export interface ISchemaObjectExtensionField {
+export interface ISchemaObjectExtensionField extends Omit<SchemaObject, 'title' | 'description'> {
   rest?: ISchemaObjectExtensionFieldRest;
+  title?: string | ILocaleMagic;
+  description?: string | ILocaleMagic;
 }
 
-declare module 'openapi3-ts/oas30' {
-  export interface SchemaObject extends ISchemaObjectExtensionField {}
+declare module 'zod' {
+  interface ZodType<
+    out Output = unknown,
+    out Input = unknown,
+    out Internals extends core.$ZodTypeInternals<Output, Input> = core.$ZodTypeInternals<
+      Output,
+      Input
+    >,
+  > extends core.$ZodType<Output, Input, Internals> {
+    openapi(metadata: ISchemaObjectExtensionField, options?: OpenApiOptions): this;
+    openapi(refId: string, metadata?: ISchemaObjectExtensionField, options?: OpenApiOptions): this;
+  }
 }
 
-declare module 'openapi3-ts/oas31' {
-  export interface SchemaObject extends ISchemaObjectExtensionField {}
-}
+// export type TypeOpenapiMetadata<_T extends z.ZodType = z.ZodType> = Omit<
+//   Partial<ISchemaObjectExtensionField>,
+//   'title' | 'description'
+// > & {
+//   title?: string | ILocaleMagic;
+//   description?: string | ILocaleMagic;
+// };
+// // export type TypeOpenapiMetadata<T extends z.ZodType = z.ZodType> = Omit<
+// //   Partial<ZodOpenAPIMetadata<z.input<T>>>,
+// //   'title' | 'description'
+// // > & {
+// //   title?: string | ILocaleMagic;
+// //   description?: string | ILocaleMagic;
+// // };
 
 export interface TypeRenderComponentJsxProps {
   'children': TypeRenderComponentJsx | TypeRenderComponentJsx[];
@@ -96,16 +121,8 @@ export type TypeTableCellRenderComponentProvider =
   | keyof ITableCellComponentRecord
   | 'text';
 
-export type TypeOpenapiMetadata<T extends z.ZodType = z.ZodType> = Omit<
-  Partial<ZodOpenAPIMetadata<z.input<T>>>,
-  'title' | 'description'
-> & {
-  title?: string | ILocaleMagic;
-  description?: string | ILocaleMagic;
-};
-
 export type TypeEntityOptionsFields<T extends {}, More extends string | undefined = never> = {
-  [key in keyof T | (More extends string ? More : never)]?: TypeOpenapiMetadata | z.ZodType;
+  [key in keyof T | (More extends string ? More : never)]?: ISchemaObjectExtensionField | z.ZodType;
 };
 
 export type TypeControllerOptionsActions<T extends {}> = {

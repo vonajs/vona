@@ -6954,8 +6954,8 @@ declare class ControllerBlockPage<TData extends {} = {}> extends BeanControllerB
   get queryData(): _$vue.UnwrapNestedRefs<_$_tanstack_vue_query0.UseQueryReturnType<_$zova_module_a_openapi0.ITableRes<TData>, Error>>;
   get data(): TData[] | undefined;
   get paged(): ITableResPaged | undefined;
-  get schemaFilter(): _$openapi3_ts_oas310.SchemaObject | undefined;
-  get schemaRow(): _$openapi3_ts_oas310.SchemaObject | undefined;
+  get schemaFilter(): _$zova_module_a_openapi0.ISchemaObjectExtensionField | undefined;
+  get schemaRow(): _$zova_module_a_openapi0.ISchemaObjectExtensionField | undefined;
   get permissions(): _$zova_module_a_openapi0.TypeOpenapiPermissions | undefined;
   gotoPage(pageNo: number): void;
   onFilter(data: any): void;
@@ -6989,7 +6989,7 @@ declare class ControllerBlockFilter extends BeanControllerBase {
   formFieldLayout: IResourceFormFieldLayoutOptions;
   $$renderContext: IJsxRenderContextPage;
   protected __init__(): Promise<void>;
-  get schemaFilter(): _$openapi3_ts_oas310.SchemaObject | undefined;
+  get schemaFilter(): _$zova_module_a_openapi0.ISchemaObjectExtensionField | undefined;
   submitData(data: TypeFormOnSubmitData): void;
   resetData(data: any): void;
   _onFilter(dataOld: any): void;

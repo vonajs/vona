@@ -1,4 +1,4 @@
-import type { ZodOpenAPIMetadata } from '@cabloy/zod-to-openapi';
+import type { ISchemaObjectExtensionField } from 'vona-module-a-openapi';
 
 import { ZodMetadata } from '@cabloy/zod-openapi';
 
@@ -8,7 +8,7 @@ import { $makeSchema } from './makeSchemaLikes.ts';
 
 export function $makeMetadata<T>(
   ...schemaLikes: SchemaLike<T>[]
-): ZodOpenAPIMetadata<T> | undefined {
+): ISchemaObjectExtensionField | undefined {
   const schema = $makeSchema(...schemaLikes);
-  return ZodMetadata.getOpenapiMetadata(schema);
+  return ZodMetadata.getOpenapiMetadata(schema) as ISchemaObjectExtensionField;
 }

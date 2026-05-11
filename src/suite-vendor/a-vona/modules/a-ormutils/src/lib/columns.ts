@@ -1,5 +1,5 @@
 import type { Constructable } from 'vona';
-import type { TypeOpenapiMetadata } from 'vona-module-a-openapi';
+import type { ISchemaObjectExtensionField } from 'vona-module-a-openapi';
 import type {
   IDecoratorEntityOptions,
   ITableRecord,
@@ -89,7 +89,7 @@ export function $tableComments<T>(
   // table comment
   const beanOptions = appResource.getBean(classEntity2);
   if (beanOptions) {
-    const openapi: TypeOpenapiMetadata = cast(beanOptions.options)?.openapi;
+    const openapi: ISchemaObjectExtensionField = cast(beanOptions.options)?.openapi;
     const comment = openapi?.description || openapi?.title;
     cast(comments).$table = comment ? app.meta.text(comment) : '';
   }

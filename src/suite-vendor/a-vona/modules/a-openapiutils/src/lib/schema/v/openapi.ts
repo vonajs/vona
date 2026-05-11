@@ -1,11 +1,11 @@
 import type { ILocaleMagic } from 'vona';
-import type { TypeOpenapiMetadata } from 'vona-module-a-openapi';
+import type { ISchemaObjectExtensionField } from 'vona-module-a-openapi';
 import type { z } from 'zod';
 
-export function schemaOpenapi<T extends z.ZodType>(metadata: TypeOpenapiMetadata<T>): T;
+export function schemaOpenapi<T extends z.ZodType>(metadata: ISchemaObjectExtensionField): T;
 export function schemaOpenapi<T extends z.ZodType>(
   refId: string,
-  metadata?: TypeOpenapiMetadata<T>,
+  metadata?: ISchemaObjectExtensionField,
 ): T;
 export function schemaOpenapi<T extends z.ZodType>(refId: any, metadata?: any) {
   return function (schema: T): T {

@@ -1,5 +1,5 @@
 import type { Constructable, ILocaleMagic } from 'vona';
-import type { TypeOpenapiMetadata, TypeSchemaOrderLevel } from 'vona-module-a-openapi';
+import type { ISchemaObjectExtensionField, TypeSchemaOrderLevel } from 'vona-module-a-openapi';
 
 import { isClass, isEmptyObject } from '@cabloy/utils';
 import { ZodMetadata } from '@cabloy/zod-openapi';
@@ -45,7 +45,7 @@ export function mergeDtoFieldsOpenapiMetadata(target: Constructable) {
   const fields = cast(beanOptions?.options)?.fields;
   if (!fields) return;
   for (const key in fields) {
-    const field: TypeOpenapiMetadata | z.ZodType = fields[key];
+    const field: ISchemaObjectExtensionField | z.ZodType = fields[key];
     if (!field) continue;
     mergeFieldOpenapiMetadata(target.prototype, key, field);
   }
@@ -55,7 +55,7 @@ export function mergeDtoFieldsOpenapiMetadata(target: Constructable) {
 export function mergeFieldOpenapiMetadata(
   target: object,
   prop: string,
-  fieldRule?: TypeOpenapiMetadata | z.ZodType,
+  fieldRule?: ISchemaObjectExtensionField | z.ZodType,
 ): TypeDecoratorRules {
   // rules
   const rules = getTargetDecoratorRules(target);

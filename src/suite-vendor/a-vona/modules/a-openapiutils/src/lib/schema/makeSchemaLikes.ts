@@ -1,5 +1,5 @@
 import type { Constructable } from 'vona';
-import type { ISchemaObjectOptions, TypeOpenapiMetadata } from 'vona-module-a-openapi';
+import type { ISchemaObjectExtensionField, ISchemaObjectOptions } from 'vona-module-a-openapi';
 
 import { isClass } from '@cabloy/utils';
 import { appMetadata, appResource, cast } from 'vona';
@@ -95,7 +95,7 @@ export function $schema(classType: any, options?: ISchemaObjectOptions): any {
       if (pipes) {
         schema = makeSchemaLikes(pipes, schema) as any;
       }
-      const openapi: TypeOpenapiMetadata = cast(beanOptions.options)?.openapi;
+      const openapi: ISchemaObjectExtensionField = cast(beanOptions.options)?.openapi;
       schema = schema.openapi(beanOptions.beanFullName, openapi);
     }
   }

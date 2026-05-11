@@ -1,6 +1,6 @@
 import type { OmitNever } from 'vona';
 import type { ServiceOnion } from 'vona-module-a-onion';
-import type { TypeOpenapiMetadata } from 'vona-module-a-openapi';
+import type { ISchemaObjectExtensionField } from 'vona-module-a-openapi';
 import type { SchemaLike } from 'vona-module-a-openapiutils';
 
 import type { SymbolKeyFieldsMore } from '../entity.ts';
@@ -12,7 +12,7 @@ export interface IDecoratorEntityOptions<FieldsMore = never> {
   [SymbolKeyFieldsMore]?: FieldsMore;
   table?: keyof ITableRecord;
   independent?: boolean;
-  openapi?: TypeOpenapiMetadata;
+  openapi?: ISchemaObjectExtensionField;
   pipes?: SchemaLike | SchemaLike[];
 }
 
