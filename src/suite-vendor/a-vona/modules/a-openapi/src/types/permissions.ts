@@ -1,9 +1,14 @@
 import type { IRoleIdRecord, IRoleNameRecord } from 'vona-module-a-user';
 
-import type { IResourceActionTableRecord } from './actions.ts';
+export interface IResourceTableActionRecord {
+  create: never;
+  view: never;
+  update: never;
+  delete: never;
+}
 
 export type IOpenapiPermissionModeActionActions = {
-  [K in keyof IResourceActionTableRecord]?: IResourceActionTableRecord[K];
+  [K in keyof IResourceTableActionRecord]?: boolean; // IResourceTableActionRecord[K];
 };
 
 export interface IOpenapiPermissions {
