@@ -16,7 +16,7 @@ export interface IDtoOptionsPostSelectReq extends IDecoratorDtoOptions {}
     createdAt: $makeSchema(
       ZovaRender.order(-2, 'max'),
       ZovaRender.field('basic-date:formFieldDate'),
-      render.cell('basic-date:date'),
+      ZovaRender.cell('basic-date:date'),
       ZovaRender.field('basic-date:formFieldDateRange', undefined, 'filter'),
       v.filterTransform('a-web:dateRange'),
       z.string().optional(),

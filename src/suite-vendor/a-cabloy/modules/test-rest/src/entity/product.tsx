@@ -21,7 +21,7 @@ export class EntityProduct extends EntityBase {
     v.min(3, $locale('ZodErrorStringMin')),
     v.required(),
     ZovaRender.order(1),
-    render.cell('basic-table:actionView'),
+    ZovaRender.cell('basic-table:actionView'),
   )
   name: string;
 
@@ -34,7 +34,7 @@ export class EntityProduct extends EntityBase {
     v.required(),
     ZovaRender.order(3),
     ZovaRender.field('basic-currency:formFieldCurrency'),
-    render.cell('basic-currency:currency'),
+    ZovaRender.cell('basic-currency:currency'),
   )
   price: number;
 
@@ -46,7 +46,7 @@ export class EntityProduct extends EntityBase {
     v.required(),
     ZovaRender.order(5),
     ZovaRender.field('basic-currency:formFieldCurrency'),
-    render.cell('basic-currency:currency'),
+    ZovaRender.cell('basic-currency:currency'),
   )
   amount: number;
 }

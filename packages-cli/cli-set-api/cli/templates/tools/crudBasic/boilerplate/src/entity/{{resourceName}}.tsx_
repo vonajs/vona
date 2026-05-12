@@ -15,14 +15,14 @@ export interface IEntityOptions<%=argv.resourceNameCapitalize%> extends IDecorat
     createdAt: $makeMetadata(
       ZovaRender.order(-2, 'max'),
       ZovaRender.field('basic-date:formFieldDate'),
-      render.cell('basic-date:date'),
+      ZovaRender.cell('basic-date:date'),
       ZovaRender.field('basic-date:formFieldDateRange', undefined, 'filter'),
       v.filterTransform('a-web:dateRange'),
     ),
     updatedAt: $makeMetadata(
       ZovaRender.order(-1, 'max'),
       ZovaRender.field('basic-date:formFieldDate'),
-      render.cell('basic-date:date'),
+      ZovaRender.cell('basic-date:date'),
       ZovaRender.field('basic-date:formFieldDateRange', undefined, 'filter'),
       v.filterTransform('a-web:dateRange'),
     ),
@@ -36,7 +36,7 @@ export class Entity<%=argv.resourceNameCapitalize%> extends EntityBase {
     v.required(),
     v.min(2),
     ZovaRender.order(1),
-    render.cell('basic-table:actionView'),
+    ZovaRender.cell('basic-table:actionView'),
   )
   name: string;
 

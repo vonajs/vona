@@ -28,7 +28,7 @@ export class DtoProductSelectResItem extends $Dto.get(() => ModelProduct) {
   @Api.field(
     v.title($locale('Operations')),
     ZovaRender.order(1, 'max'),
-    render.cell('basic-table:actionOperationsRow', {
+    ZovaRender.cell('basic-table:actionOperationsRow', {
       actions: [
         ZovaRender.tableActionRow('basic-table:actionUpdate'),
         ZovaRender.tableActionRow('basic-table:actionDelete'),
