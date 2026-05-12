@@ -7,7 +7,7 @@ import type {
 import { getRandomInt } from '@cabloy/utils';
 import svgCaptcha, { ConfigObject } from '@zhennann/svg-captcha';
 import fse from 'fs-extra';
-import opentype from 'opentype.js';
+import * as opentype from 'opentype.js';
 import svg64 from 'svg64';
 import { BeanBase, cast } from 'vona';
 import { CaptchaProvider } from 'vona-module-a-captcha';
