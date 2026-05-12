@@ -27,7 +27,7 @@ export interface IDtoOptions<%=argv.resourceNameCapitalize%>SelectResItem extend
 export class Dto<%=argv.resourceNameCapitalize%>SelectResItem extends $Dto.get(() => Model<%=argv.resourceNameCapitalize%>) {
   @Api.field(
     v.title($locale('Operations')),
-    render.order(1, 'max'),
+    ZovaRender.order(1, 'max'),
     render.cell('basic-table:actionOperationsRow', {
       actions: [ZovaRender.tableActionRow('basic-table:actionUpdate'), ZovaRender.tableActionRow('basic-table:actionDelete')],
     }),

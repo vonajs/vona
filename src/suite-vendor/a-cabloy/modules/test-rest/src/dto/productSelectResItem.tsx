@@ -27,7 +27,7 @@ export interface IDtoOptionsProductSelectResItem extends IDecoratorDtoOptions {}
 export class DtoProductSelectResItem extends $Dto.get(() => ModelProduct) {
   @Api.field(
     v.title($locale('Operations')),
-    render.order(1, 'max'),
+    ZovaRender.order(1, 'max'),
     render.cell('basic-table:actionOperationsRow', {
       actions: [
         ZovaRender.tableActionRow('basic-table:actionUpdate'),

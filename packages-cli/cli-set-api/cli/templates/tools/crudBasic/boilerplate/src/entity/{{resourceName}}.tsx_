@@ -11,16 +11,16 @@ export interface IEntityOptions<%=argv.resourceNameCapitalize%> extends IDecorat
 @Entity<IEntityOptions<%=argv.resourceNameCapitalize%>>('<%=argv.moduleResourceName%>', {
   openapi: { title: $locale('<%=argv.resourceNameCapitalize%>') },
   fields: {
-    id: $makeMetadata(render.order(1, 'core')),
+    id: $makeMetadata(ZovaRender.order(1, 'core')),
     createdAt: $makeMetadata(
-      render.order(-2, 'max'),
+      ZovaRender.order(-2, 'max'),
       ZovaRender.field('basic-date:formFieldDate'),
       render.cell('basic-date:date'),
       ZovaRender.field('basic-date:formFieldDateRange', undefined, 'filter'),
       v.filterTransform('a-web:dateRange'),
     ),
     updatedAt: $makeMetadata(
-      render.order(-1, 'max'),
+      ZovaRender.order(-1, 'max'),
       ZovaRender.field('basic-date:formFieldDate'),
       render.cell('basic-date:date'),
       ZovaRender.field('basic-date:formFieldDateRange', undefined, 'filter'),
@@ -35,7 +35,7 @@ export class Entity<%=argv.resourceNameCapitalize%> extends EntityBase {
     v.title($locale('Name')),
     v.required(),
     v.min(2),
-    render.order(1),
+    ZovaRender.order(1),
     render.cell('basic-table:actionView'),
   )
   name: string;
@@ -43,7 +43,7 @@ export class Entity<%=argv.resourceNameCapitalize%> extends EntityBase {
   @Api.field(
     v.title($locale('Description')),
     v.optional(),
-    render.order(2),
+    ZovaRender.order(2),
   )
   description?: string;
 }

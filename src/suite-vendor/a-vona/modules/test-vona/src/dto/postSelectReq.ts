@@ -14,7 +14,7 @@ export interface IDtoOptionsPostSelectReq extends IDecoratorDtoOptions {}
   openapi: { filter: { table: 'testVonaPost' } },
   fields: {
     createdAt: $makeSchema(
-      render.order(-2, 'max'),
+      ZovaRender.order(-2, 'max'),
       ZovaRender.field('basic-date:formFieldDate'),
       render.cell('basic-date:date'),
       ZovaRender.field('basic-date:formFieldDateRange', undefined, 'filter'),

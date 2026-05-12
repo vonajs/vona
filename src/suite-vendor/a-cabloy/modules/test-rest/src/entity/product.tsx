@@ -20,31 +20,31 @@ export class EntityProduct extends EntityBase {
     v.title($locale('Name')),
     v.min(3, $locale('ZodErrorStringMin')),
     v.required(),
-    render.order(1),
+    ZovaRender.order(1),
     render.cell('basic-table:actionView'),
   )
   name: string;
 
-  @Api.field(v.title($locale('Description')), render.order(2), v.optional())
+  @Api.field(v.title($locale('Description')), ZovaRender.order(2), v.optional())
   description?: string;
 
   @Api.field(
     v.title($locale('Price')),
     v.min(0, $locale('ZodErrorNumberMin')),
     v.required(),
-    render.order(3),
+    ZovaRender.order(3),
     ZovaRender.field('basic-currency:formFieldCurrency'),
     render.cell('basic-currency:currency'),
   )
   price: number;
 
-  @Api.field(v.title($locale('Quantity')), render.order(4), v.default(0))
+  @Api.field(v.title($locale('Quantity')), ZovaRender.order(4), v.default(0))
   quantity: number;
 
   @Api.field(
     v.title($locale('Amount')),
     v.required(),
-    render.order(5),
+    ZovaRender.order(5),
     ZovaRender.field('basic-currency:formFieldCurrency'),
     render.cell('basic-currency:currency'),
   )
