@@ -8,8 +8,8 @@ export function jsxEnhance() {
   } as any;
 }
 
-function _checkIfJsxAction(type: string) {
-  return ['ActionEvent', 'ActionActions'].includes(type) || type.includes('.action.');
+function _checkIfJsxEvent(type: string) {
+  return ['ZovaEvent', 'ZovaCommands'].includes(type) || type.includes('.command.');
 }
 
 function _translateJsxRender(component: any) {
@@ -17,7 +17,7 @@ function _translateJsxRender(component: any) {
   const componentNew: any = {};
   const type =
     typeof component.type === 'function' ? component.type(component.props) : component.type;
-  componentNew.$$typeof = _checkIfJsxAction(type) ? 'zova-jsx:event' : 'zova-jsx:component';
+  componentNew.$$typeof = _checkIfJsxEvent(type) ? 'zova-jsx:event' : 'zova-jsx:component';
   componentNew.type = type;
   componentNew.key = component.key;
   if (
