@@ -7,7 +7,6 @@
   "files": [],
   "type": "module",
   "dependencies": {
-    "vona-module-a-actions": "workspace:^",
     "vona-module-a-aspect": "workspace:^",
     "vona-module-a-aspectutils": "workspace:^",
     "vona-module-a-bean": "workspace:^",

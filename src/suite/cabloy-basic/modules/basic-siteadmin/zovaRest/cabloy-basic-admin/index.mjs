@@ -57,13 +57,19 @@ function $cssMerge(...classes) {
 function $iconName(name) {
 	return name;
 }
-function Action(options) {
-	if (!options.name) throw new Error("should specify the action name");
-	return options.name.replace(":", ".action.");
-}
-function Component(options) {
+function ZovaComponent(options) {
 	if (!options.name) throw new Error("should specify the component name");
 	return options.name;
+}
+function ZovaCommand(options) {
+	if (!options.name) throw new Error("should specify the command name");
+	return options.name.replace(":", ".command.");
+}
+function ZovaEvent(_options) {
+	return "ActionEvent";
+}
+function ZovaCommands(_options) {
+	return "ActionActions";
 }
 const OrderLevelBaseMap = {
 	core: 100,
@@ -221,4 +227,4 @@ const render = {
 	blockJsx: schemaRenderBlockJsx
 };
 //#endregion
-export { $cssBase, $cssMerge, $iconName, Action, Component, render };
+export { $cssBase, $cssMerge, $iconName, ZovaCommand, ZovaCommands, ZovaComponent, ZovaEvent, render };

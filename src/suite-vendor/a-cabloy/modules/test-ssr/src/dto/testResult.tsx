@@ -4,7 +4,6 @@ import type { IDecoratorDtoOptions } from 'vona-module-a-web';
 import { cel } from '@cabloy/utils';
 import React from 'react';
 import { text } from 'vona';
-import { Event } from 'vona-module-a-actions';
 import { $makeSchema, Api, v } from 'vona-module-a-openapiutils';
 import { Dto } from 'vona-module-a-web';
 import z from 'zod';
