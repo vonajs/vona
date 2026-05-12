@@ -48,13 +48,13 @@
 
 //#endregion
 //#region .zova-rest/utils.ts
-function $cssBase(name) {
+function ZovaCssBase(name) {
 	return `cssBase:${name}`;
 }
-function $cssMerge(...classes) {
+function ZovaCssMerge(...classes) {
 	return classes;
 }
-function $iconName(name) {
+function ZovaIconName(name) {
 	return name;
 }
 function ZovaComponent(options) {
@@ -206,7 +206,7 @@ function schemaRenderOrder(order, level, scene) {
 }
 //#endregion
 //#region .zova-rest/render.ts
-const render = {
+const ZovaRender = {
 	layout: schemaRenderLayout,
 	visible: schemaRenderVisible,
 	readonly: schemaRenderReadonly,
@@ -227,4 +227,4 @@ const render = {
 	blockJsx: schemaRenderBlockJsx
 };
 //#endregion
-export { $cssBase, $cssMerge, $iconName, ZovaCommand, ZovaCommands, ZovaComponent, ZovaEvent, render };
+export { ZovaCommand, ZovaCommands, ZovaComponent, ZovaCssBase, ZovaCssMerge, ZovaEvent, ZovaIconName, ZovaRender };
