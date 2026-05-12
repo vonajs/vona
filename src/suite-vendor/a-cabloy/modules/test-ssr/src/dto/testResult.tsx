@@ -135,7 +135,7 @@ export interface IDtoOptionsTestResult extends IDecoratorDtoOptions<
       v.min(6),
       z.string(),
     ),
-    _customCopied: $makeSchema(render.visible(false), v.optional(), z.boolean()),
+    _customCopied: $makeSchema(ZovaRender.visible(false), v.optional(), z.boolean()),
   },
 })
 export class DtoTestResult {

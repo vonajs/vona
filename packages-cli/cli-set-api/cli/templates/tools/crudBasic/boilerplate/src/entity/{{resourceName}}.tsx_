@@ -26,8 +26,8 @@ export interface IEntityOptions<%=argv.resourceNameCapitalize%> extends IDecorat
       ZovaRender.field('basic-date:formFieldDateRange', undefined, 'filter'),
       v.filterTransform('a-web:dateRange'),
     ),
-    deleted: $makeMetadata(render.visible(false)),
-    iid: $makeMetadata(render.visible(false)),
+    deleted: $makeMetadata(ZovaRender.visible(false)),
+    iid: $makeMetadata(ZovaRender.visible(false)),
   },
 })
 export class Entity<%=argv.resourceNameCapitalize%> extends EntityBase {
