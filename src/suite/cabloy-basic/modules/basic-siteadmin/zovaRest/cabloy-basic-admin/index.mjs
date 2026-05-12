@@ -66,10 +66,10 @@ function ZovaCommand(options) {
 	return options.name.replace(":", ".command.");
 }
 function ZovaEvent(_options) {
-	return "ActionEvent";
+	return "ZovaEvent";
 }
 function ZovaCommands(_options) {
-	return "ActionActions";
+	return "ZovaCommands";
 }
 const OrderLevelBaseMap = {
 	core: 100,
