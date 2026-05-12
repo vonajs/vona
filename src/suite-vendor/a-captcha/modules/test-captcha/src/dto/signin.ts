@@ -15,6 +15,6 @@ export class DtoSignin {
   @Api.field(v.min(3))
   password: string;
 
-  @Api.field(render.field('basic-captcha:formFieldCaptcha'))
+  @Api.field(ZovaRender.field('basic-captcha:formFieldCaptcha'))
   captcha: DtoCaptchaVerify;
 }

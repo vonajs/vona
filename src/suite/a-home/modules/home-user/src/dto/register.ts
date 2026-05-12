@@ -23,6 +23,6 @@ export class DtoRegister {
   @Api.field(v.min(6), v.max(20))
   passwordConfirm: string;
 
-  @Api.field(render.field('basic-captcha:formFieldCaptcha'))
+  @Api.field(ZovaRender.field('basic-captcha:formFieldCaptcha'))
   captcha: DtoCaptchaVerify;
 }

@@ -33,7 +33,7 @@ export class EntityProduct extends EntityBase {
     v.min(0, $locale('ZodErrorNumberMin')),
     v.required(),
     render.order(3),
-    render.field('basic-currency:formFieldCurrency'),
+    ZovaRender.field('basic-currency:formFieldCurrency'),
     render.cell('basic-currency:currency'),
   )
   price: number;
@@ -45,7 +45,7 @@ export class EntityProduct extends EntityBase {
     v.title($locale('Amount')),
     v.required(),
     render.order(5),
-    render.field('basic-currency:formFieldCurrency'),
+    ZovaRender.field('basic-currency:formFieldCurrency'),
     render.cell('basic-currency:currency'),
   )
   amount: number;

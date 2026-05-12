@@ -16,7 +16,7 @@ export interface IDtoOptionsProductCreate extends IDecoratorDtoOptions<'_test'> 
   fields: {
     _test: $makeSchema(
       v.title('Test'),
-      render.field('basic-input:formFieldInput'),
+      ZovaRender.field('basic-input:formFieldInput'),
       v.optional(),
       z.string(),
     ),
