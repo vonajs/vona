@@ -4,7 +4,7 @@ import { $makeSchema, Api, v } from 'vona-module-a-openapiutils';
 import { $Dto } from 'vona-module-a-orm';
 import { Dto } from 'vona-module-a-web';
 import z from 'zod';
-import { render } from 'zova-rest-cabloy-basic-admin';
+import { ZovaRender } from 'zova-rest-cabloy-basic-admin';
 
 import { EntityPost } from '../entity/post.ts';
 

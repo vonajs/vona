@@ -3,7 +3,7 @@ import type { IDecoratorDtoOptions } from 'vona-module-a-web';
 
 import { Api, v } from 'vona-module-a-openapiutils';
 import { Dto } from 'vona-module-a-web';
-import { render } from 'zova-rest-cabloy-basic-admin';
+import { ZovaRender } from 'zova-rest-cabloy-basic-admin';
 
 export interface IDtoOptionsSignin extends IDecoratorDtoOptions {}
 
