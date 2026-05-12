@@ -5,7 +5,7 @@ import * as _$vue_jsx_runtime0 from "vue/jsx-runtime";
 import { BeanRouter, BeanRouterGuardsBase, IRouteViewRouteItem, ModelPageData, TypePagePathSchema } from "zova-module-a-router";
 import * as _$zova_module_a_openapi0 from "zova-module-a-openapi";
 import { ICaptchaData, ICaptchaSceneRecord, IFormMeta, IFormProvider, IJsxRenderContextBase, IJsxRenderContextPage, IJsxRenderContextPageEntry, IPageEntryScope, IPageScope, IPermissionHint, IResourceBlockOptionsBase, IResourceBlockRecord, IResourceFormActionRowNameRecord, IResourceFormActionRowOptionsBase, IResourceFormActionRowRecord, IResourceFormFieldLayoutOptions, IResourceFormFieldOptionsBase, IResourceFormFieldRecord, IResourceRenderBlockOptionsBlock, IResourceRenderFormActionRowOptionsAction, IResourceRenderTableActionBulkOptionsAction, IResourceRenderTableActionRowOptionsAction, IResourceTableActionBulkOptionsBase, IResourceTableActionBulkRecord, IResourceTableActionNameRecord, IResourceTableActionRowOptionsBase, IResourceTableActionRowRecord, IResourceTableCellOptionsBase, IResourceTableCellRecord, ISchemaRenderComponentLayoutOptions, ITablePaged, ITableQuery, ITableResPaged, TypeFormScene, TypeFormSchemaScene, TypeOpenapiPermissions, TypeSchemaOrderLevel, TypeSchemaScene } from "zova-module-a-openapi";
-import { IActionBulkOptionsBase, IActionExecute, IActionOptionsBase, IActionRecord, IActionRowOptionsBase, NextActionExecute, TypeActionOptions } from "zova-module-a-action";
+import { ICommandBulkOptionsBase, ICommandExecute, ICommandOptionsBase, ICommandRecord, ICommandRowOptionsBase, IJsxCommandOptionsCommands, IJsxCommandOptionsEvent, NextCommandExecute, TypeCommandOptions } from "zova-module-a-command";
 import z$1, { z } from "zod";
 import { BeanApiBase, IApiActionOptions, IApiSchemaOptions } from "zova-module-a-api";
 import { IJwtAdapter, IJwtInfo } from "zova-module-a-interceptor";
@@ -28,7 +28,7 @@ import { TypeRenderComponentJsx, ZovaJsx } from "zova-jsx";
 import { ModelResource } from "zova-module-rest-resource";
 export * from "zova-module-a-router";
 export * from "zova-module-a-openapi";
-export * from "zova-module-a-action";
+export * from "zova-module-a-command";
 export * from "zova-module-a-api";
 export * from "zova-module-a-interceptor";
 export * from "zova-module-a-bean";
@@ -239,11 +239,11 @@ declare module 'zova-module-a-bean' {
   }
 }
 //#endregion
-//#region src/module/demo-student/src/bean/action.test.d.ts
-type TypeActionTestResult = unknown;
-interface IActionOptionsTest extends IActionOptionsBase<TypeActionTestResult> {}
-declare class ActionTest extends BeanBase implements IActionExecute {
-  execute(_options: IActionOptionsTest, _renderContext: IJsxRenderContextBase, next: NextActionExecute): any;
+//#region src/module/demo-student/src/bean/command.test.d.ts
+type TypeCommandTestResult = unknown;
+interface ICommandOptionsTest extends ICommandOptionsBase<TypeCommandTestResult> {}
+declare class CommandTest extends BeanBase implements ICommandExecute {
+  execute(_options: ICommandOptionsTest, _renderContext: IJsxRenderContextBase, next: NextCommandExecute): any;
 }
 //#endregion
 //#region src/module/demo-student/src/.metadata/index.d.ts
@@ -288,28 +288,28 @@ declare module 'zova' {
   }
 }
 /** components: end */
-/** action: begin */
-declare module 'zova-module-a-action' {
-  interface IActionRecord {
-    'demo-student:test': IActionOptionsTest;
+/** command: begin */
+declare module 'zova-module-a-command' {
+  interface ICommandRecord {
+    'demo-student:test': ICommandOptionsTest;
   }
 }
 declare module 'zova-module-demo-student' {
-  interface ActionTest {}
-  interface ActionTest {
-    get $beanFullName(): 'demo-student.action.test';
+  interface CommandTest {}
+  interface CommandTest {
+    get $beanFullName(): 'demo-student.command.test';
     get $onionName(): 'demo-student:test';
-    get $onionOptions(): IActionOptionsTest;
+    get $onionOptions(): ICommandOptionsTest;
   }
 }
-/** action: end */
-/** action: begin */
+/** command: end */
+/** command: begin */
 declare module 'zova' {
   interface IBeanRecordGeneral {
-    'demo-student.action.test': ActionTest;
+    'demo-student.command.test': CommandTest;
   }
 }
-/** action: end */
+/** command: end */
 /** scope: begin */
 declare class ScopeModuleDemoStudent extends BeanScopeBase {}
 interface ScopeModuleDemoStudent {
@@ -7030,245 +7030,6 @@ declare module 'zova' {
 }
 /** scope: end */
 //#endregion
-//#region src/suite/cabloy-basic/modules/basic-actions/src/bean/action.alert.d.ts
-type TypeActionAlertResult = unknown;
-interface IActionOptionsAlert extends IActionOptionsBase<TypeActionAlertResult> {
-  message: string;
-  wait?: boolean;
-}
-declare class ActionAlert extends BeanBase implements IActionExecute {
-  execute(options: IActionOptionsAlert, _renderContext: IJsxRenderContextBase, next: NextActionExecute): any;
-}
-//#endregion
-//#region src/suite/cabloy-basic/modules/basic-actions/src/bean/action.confirm.d.ts
-type TypeActionConfirmResult = boolean;
-interface IActionOptionsConfirm extends IActionOptionsBase<TypeActionConfirmResult> {
-  message: string;
-}
-declare class ActionConfirm extends BeanBase implements IActionExecute {
-  execute(options: IActionOptionsConfirm, _renderContext: IJsxRenderContextBase, next: NextActionExecute): any;
-}
-//#endregion
-//#region src/suite/cabloy-basic/modules/basic-actions/src/bean/action.copy.d.ts
-type TypeActionCopyResult = unknown;
-interface IActionOptionsCopy extends IActionOptionsBase<TypeActionCopyResult> {
-  text: any;
-}
-declare class ActionCopy extends BeanBase implements IActionExecute {
-  execute(options: IActionOptionsCopy, _renderContext: IJsxRenderContextBase, next: NextActionExecute): any;
-}
-//#endregion
-//#region src/suite/cabloy-basic/modules/basic-actions/src/lib/beanActionBulkBase.d.ts
-declare class BeanActionBulkBase extends BeanBase {
-  getResource(options: IActionBulkOptionsBase, renderContext: IJsxRenderContextBase): {
-    resource: string;
-  };
-}
-//#endregion
-//#region src/suite/cabloy-basic/modules/basic-actions/src/bean/action.create.d.ts
-type TypeActionCreateResult = unknown;
-interface IActionOptionsCreate extends IActionBulkOptionsBase<TypeActionCreateResult> {
-  replace?: boolean;
-}
-declare class ActionCreate extends BeanActionBulkBase implements IActionExecute {
-  execute(options: IActionOptionsCreate, renderContext: IJsxRenderContextBase, next: NextActionExecute): any;
-}
-//#endregion
-//#region src/suite/cabloy-basic/modules/basic-actions/src/lib/beanActionRowBase.d.ts
-declare class BeanActionRowBase extends BeanBase {
-  getResourceAndId(options: IActionRowOptionsBase, renderContext: IJsxRenderContextBase): {
-    resource: string;
-    id: TableIdentity;
-  };
-}
-//#endregion
-//#region src/suite/cabloy-basic/modules/basic-actions/src/bean/action.delete.d.ts
-type TypeActionDeleteResult = number;
-interface IActionOptionsDelete extends IActionRowOptionsBase<TypeActionDeleteResult> {}
-declare class ActionDelete extends BeanActionRowBase implements IActionExecute {
-  execute(options: IActionOptionsDelete, renderContext: IJsxRenderContextBase, next: NextActionExecute): Promise<any>;
-}
-//#endregion
-//#region src/suite/cabloy-basic/modules/basic-actions/src/bean/action.edit.d.ts
-type TypeActionEditResult = unknown;
-interface IActionOptionsEdit extends IActionRowOptionsBase<TypeActionEditResult> {
-  replace?: boolean;
-}
-declare class ActionEdit extends BeanActionRowBase implements IActionExecute {
-  execute(options: IActionOptionsEdit, renderContext: IJsxRenderContextBase, next: NextActionExecute): any;
-}
-//#endregion
-//#region src/suite/cabloy-basic/modules/basic-actions/src/bean/action.setValue.d.ts
-type TypeActionSetValueResult = unknown;
-interface IActionOptionsSetValue extends IActionOptionsBase<TypeActionSetValueResult> {
-  name?: string;
-  value?: any;
-  disableNotifyChanged?: boolean;
-}
-declare class ActionSetValue extends BeanBase implements IActionExecute {
-  execute(options: IActionOptionsSetValue, renderContext: IJsxRenderContextBase, next: NextActionExecute): any;
-}
-//#endregion
-//#region src/suite/cabloy-basic/modules/basic-actions/src/bean/action.view.d.ts
-type TypeActionViewResult = unknown;
-interface IActionOptionsView extends IActionRowOptionsBase<TypeActionViewResult> {
-  replace?: boolean;
-}
-declare class ActionView extends BeanActionRowBase implements IActionExecute {
-  execute(options: IActionOptionsView, renderContext: IJsxRenderContextBase, next: NextActionExecute): any;
-}
-//#endregion
-//#region src/suite/cabloy-basic/modules/basic-actions/src/.metadata/index.d.ts
-declare module 'zova-module-a-action' {
-  interface IActionRecord {
-    'basic-actions:alert': IActionOptionsAlert;
-    'basic-actions:confirm': IActionOptionsConfirm;
-    'basic-actions:copy': IActionOptionsCopy;
-    'basic-actions:create': IActionOptionsCreate;
-    'basic-actions:delete': IActionOptionsDelete;
-    'basic-actions:edit': IActionOptionsEdit;
-    'basic-actions:setValue': IActionOptionsSetValue;
-    'basic-actions:view': IActionOptionsView;
-  }
-}
-declare module 'zova-module-basic-actions' {
-  interface ActionAlert {}
-  interface ActionAlert {
-    get $beanFullName(): 'basic-actions.action.alert';
-    get $onionName(): 'basic-actions:alert';
-    get $onionOptions(): IActionOptionsAlert;
-  }
-  interface ActionConfirm {}
-  interface ActionConfirm {
-    get $beanFullName(): 'basic-actions.action.confirm';
-    get $onionName(): 'basic-actions:confirm';
-    get $onionOptions(): IActionOptionsConfirm;
-  }
-  interface ActionCopy {}
-  interface ActionCopy {
-    get $beanFullName(): 'basic-actions.action.copy';
-    get $onionName(): 'basic-actions:copy';
-    get $onionOptions(): IActionOptionsCopy;
-  }
-  interface ActionCreate {}
-  interface ActionCreate {
-    get $beanFullName(): 'basic-actions.action.create';
-    get $onionName(): 'basic-actions:create';
-    get $onionOptions(): IActionOptionsCreate;
-  }
-  interface ActionDelete {}
-  interface ActionDelete {
-    get $beanFullName(): 'basic-actions.action.delete';
-    get $onionName(): 'basic-actions:delete';
-    get $onionOptions(): IActionOptionsDelete;
-  }
-  interface ActionEdit {}
-  interface ActionEdit {
-    get $beanFullName(): 'basic-actions.action.edit';
-    get $onionName(): 'basic-actions:edit';
-    get $onionOptions(): IActionOptionsEdit;
-  }
-  interface ActionSetValue {}
-  interface ActionSetValue {
-    get $beanFullName(): 'basic-actions.action.setValue';
-    get $onionName(): 'basic-actions:setValue';
-    get $onionOptions(): IActionOptionsSetValue;
-  }
-  interface ActionView {}
-  interface ActionView {
-    get $beanFullName(): 'basic-actions.action.view';
-    get $onionName(): 'basic-actions:view';
-    get $onionOptions(): IActionOptionsView;
-  }
-}
-/** action: end */
-/** action: begin */
-declare module 'zova' {
-  interface IBeanRecordGeneral {
-    'basic-actions.action.alert': ActionAlert;
-    'basic-actions.action.confirm': ActionConfirm;
-    'basic-actions.action.copy': ActionCopy;
-    'basic-actions.action.create': ActionCreate;
-    'basic-actions.action.delete': ActionDelete;
-    'basic-actions.action.edit': ActionEdit;
-    'basic-actions.action.setValue': ActionSetValue;
-    'basic-actions.action.view': ActionView;
-  }
-}
-/** action: end */
-/** scope: begin */
-declare class ScopeModuleBasicActions extends BeanScopeBase {}
-interface ScopeModuleBasicActions {
-  util: BeanScopeUtil;
-}
-declare module 'zova' {
-  interface IBeanScopeRecord {
-    'basic-actions': ScopeModuleBasicActions;
-  }
-}
-/** scope: end */
-//#endregion
-//#region src/suite/cabloy-basic/modules/basic-actionssync/src/bean/action.expr.d.ts
-type TypeActionExprResult = unknown;
-interface IActionOptionsExpr extends IActionOptionsBase<TypeActionExprResult> {
-  expression: string;
-}
-declare class ActionExpr extends BeanBase implements IActionExecute {
-  execute(options: IActionOptionsExpr, _renderContext: IJsxRenderContextBase, next: NextActionExecute): any;
-}
-//#endregion
-//#region src/suite/cabloy-basic/modules/basic-actionssync/src/bean/action.log.d.ts
-type TypeActionLogResult = unknown;
-interface IActionOptionsLog extends IActionOptionsBase<TypeActionLogResult> {
-  name?: string;
-  message: any;
-}
-declare class ActionLog extends BeanBase implements IActionExecute {
-  execute(options: IActionOptionsLog, _renderContext: IJsxRenderContextBase, next: NextActionExecute): any;
-}
-//#endregion
-//#region src/suite/cabloy-basic/modules/basic-actionssync/src/.metadata/index.d.ts
-declare module 'zova-module-a-action' {
-  interface IActionRecord {
-    'basic-actionssync:expr': IActionOptionsExpr;
-    'basic-actionssync:log': IActionOptionsLog;
-  }
-}
-declare module 'zova-module-basic-actionssync' {
-  interface ActionExpr {}
-  interface ActionExpr {
-    get $beanFullName(): 'basic-actionssync.action.expr';
-    get $onionName(): 'basic-actionssync:expr';
-    get $onionOptions(): IActionOptionsExpr;
-  }
-  interface ActionLog {}
-  interface ActionLog {
-    get $beanFullName(): 'basic-actionssync.action.log';
-    get $onionName(): 'basic-actionssync:log';
-    get $onionOptions(): IActionOptionsLog;
-  }
-}
-/** action: end */
-/** action: begin */
-declare module 'zova' {
-  interface IBeanRecordGeneral {
-    'basic-actionssync.action.expr': ActionExpr;
-    'basic-actionssync.action.log': ActionLog;
-  }
-}
-/** action: end */
-/** scope: begin */
-declare class ScopeModuleBasicActionssync extends BeanScopeBase {}
-interface ScopeModuleBasicActionssync {
-  util: BeanScopeUtil;
-}
-declare module 'zova' {
-  interface IBeanScopeRecord {
-    'basic-actionssync': ScopeModuleBasicActionssync;
-  }
-}
-/** scope: end */
-//#endregion
 //#region src/suite/cabloy-basic/modules/basic-adapter/src/config/config.d.ts
 declare const config: (_sys: ZovaSys) => {
   formProvider: IFormProvider;
@@ -7394,6 +7155,245 @@ declare module 'zova' {
     'basic-captcha': (typeof locales$4)[TypeLocaleBase];
   }
 }
+//#endregion
+//#region src/suite/cabloy-basic/modules/basic-commands/src/bean/command.alert.d.ts
+type TypeCommandAlertResult = unknown;
+interface ICommandOptionsAlert extends ICommandOptionsBase<TypeCommandAlertResult> {
+  message: string;
+  wait?: boolean;
+}
+declare class CommandAlert extends BeanBase implements ICommandExecute {
+  execute(options: ICommandOptionsAlert, _renderContext: IJsxRenderContextBase, next: NextCommandExecute): any;
+}
+//#endregion
+//#region src/suite/cabloy-basic/modules/basic-commands/src/bean/command.confirm.d.ts
+type TypeCommandConfirmResult = boolean;
+interface ICommandOptionsConfirm extends ICommandOptionsBase<TypeCommandConfirmResult> {
+  message: string;
+}
+declare class CommandConfirm extends BeanBase implements ICommandExecute {
+  execute(options: ICommandOptionsConfirm, _renderContext: IJsxRenderContextBase, next: NextCommandExecute): any;
+}
+//#endregion
+//#region src/suite/cabloy-basic/modules/basic-commands/src/bean/command.copy.d.ts
+type TypeCommandCopyResult = unknown;
+interface ICommandOptionsCopy extends ICommandOptionsBase<TypeCommandCopyResult> {
+  text: any;
+}
+declare class CommandCopy extends BeanBase implements ICommandExecute {
+  execute(options: ICommandOptionsCopy, _renderContext: IJsxRenderContextBase, next: NextCommandExecute): any;
+}
+//#endregion
+//#region src/suite/cabloy-basic/modules/basic-commands/src/lib/beanCommandBulkBase.d.ts
+declare class BeanCommandBulkBase extends BeanBase {
+  getResource(options: ICommandBulkOptionsBase, renderContext: IJsxRenderContextBase): {
+    resource: string;
+  };
+}
+//#endregion
+//#region src/suite/cabloy-basic/modules/basic-commands/src/bean/command.create.d.ts
+type TypeCommandCreateResult = unknown;
+interface ICommandOptionsCreate extends ICommandBulkOptionsBase<TypeCommandCreateResult> {
+  replace?: boolean;
+}
+declare class CommandCreate extends BeanCommandBulkBase implements ICommandExecute {
+  execute(options: ICommandOptionsCreate, renderContext: IJsxRenderContextBase, next: NextCommandExecute): any;
+}
+//#endregion
+//#region src/suite/cabloy-basic/modules/basic-commands/src/lib/beanCommandRowBase.d.ts
+declare class BeanCommandRowBase extends BeanBase {
+  getResourceAndId(options: ICommandRowOptionsBase, renderContext: IJsxRenderContextBase): {
+    resource: string;
+    id: TableIdentity;
+  };
+}
+//#endregion
+//#region src/suite/cabloy-basic/modules/basic-commands/src/bean/command.delete.d.ts
+type TypeCommandDeleteResult = number;
+interface ICommandOptionsDelete extends ICommandRowOptionsBase<TypeCommandDeleteResult> {}
+declare class CommandDelete extends BeanCommandRowBase implements ICommandExecute {
+  execute(options: ICommandOptionsDelete, renderContext: IJsxRenderContextBase, next: NextCommandExecute): Promise<any>;
+}
+//#endregion
+//#region src/suite/cabloy-basic/modules/basic-commands/src/bean/command.edit.d.ts
+type TypeCommandEditResult = unknown;
+interface ICommandOptionsEdit extends ICommandRowOptionsBase<TypeCommandEditResult> {
+  replace?: boolean;
+}
+declare class CommandEdit extends BeanCommandRowBase implements ICommandExecute {
+  execute(options: ICommandOptionsEdit, renderContext: IJsxRenderContextBase, next: NextCommandExecute): any;
+}
+//#endregion
+//#region src/suite/cabloy-basic/modules/basic-commands/src/bean/command.setValue.d.ts
+type TypeCommandSetValueResult = unknown;
+interface ICommandOptionsSetValue extends ICommandOptionsBase<TypeCommandSetValueResult> {
+  name?: string;
+  value?: any;
+  disableNotifyChanged?: boolean;
+}
+declare class CommandSetValue extends BeanBase implements ICommandExecute {
+  execute(options: ICommandOptionsSetValue, renderContext: IJsxRenderContextBase, next: NextCommandExecute): any;
+}
+//#endregion
+//#region src/suite/cabloy-basic/modules/basic-commands/src/bean/command.view.d.ts
+type TypeCommandViewResult = unknown;
+interface ICommandOptionsView extends ICommandRowOptionsBase<TypeCommandViewResult> {
+  replace?: boolean;
+}
+declare class CommandView extends BeanCommandRowBase implements ICommandExecute {
+  execute(options: ICommandOptionsView, renderContext: IJsxRenderContextBase, next: NextCommandExecute): any;
+}
+//#endregion
+//#region src/suite/cabloy-basic/modules/basic-commands/src/.metadata/index.d.ts
+declare module 'zova-module-a-command' {
+  interface ICommandRecord {
+    'basic-commands:alert': ICommandOptionsAlert;
+    'basic-commands:confirm': ICommandOptionsConfirm;
+    'basic-commands:copy': ICommandOptionsCopy;
+    'basic-commands:create': ICommandOptionsCreate;
+    'basic-commands:delete': ICommandOptionsDelete;
+    'basic-commands:edit': ICommandOptionsEdit;
+    'basic-commands:setValue': ICommandOptionsSetValue;
+    'basic-commands:view': ICommandOptionsView;
+  }
+}
+declare module 'zova-module-basic-commands' {
+  interface CommandAlert {}
+  interface CommandAlert {
+    get $beanFullName(): 'basic-commands.command.alert';
+    get $onionName(): 'basic-commands:alert';
+    get $onionOptions(): ICommandOptionsAlert;
+  }
+  interface CommandConfirm {}
+  interface CommandConfirm {
+    get $beanFullName(): 'basic-commands.command.confirm';
+    get $onionName(): 'basic-commands:confirm';
+    get $onionOptions(): ICommandOptionsConfirm;
+  }
+  interface CommandCopy {}
+  interface CommandCopy {
+    get $beanFullName(): 'basic-commands.command.copy';
+    get $onionName(): 'basic-commands:copy';
+    get $onionOptions(): ICommandOptionsCopy;
+  }
+  interface CommandCreate {}
+  interface CommandCreate {
+    get $beanFullName(): 'basic-commands.command.create';
+    get $onionName(): 'basic-commands:create';
+    get $onionOptions(): ICommandOptionsCreate;
+  }
+  interface CommandDelete {}
+  interface CommandDelete {
+    get $beanFullName(): 'basic-commands.command.delete';
+    get $onionName(): 'basic-commands:delete';
+    get $onionOptions(): ICommandOptionsDelete;
+  }
+  interface CommandEdit {}
+  interface CommandEdit {
+    get $beanFullName(): 'basic-commands.command.edit';
+    get $onionName(): 'basic-commands:edit';
+    get $onionOptions(): ICommandOptionsEdit;
+  }
+  interface CommandSetValue {}
+  interface CommandSetValue {
+    get $beanFullName(): 'basic-commands.command.setValue';
+    get $onionName(): 'basic-commands:setValue';
+    get $onionOptions(): ICommandOptionsSetValue;
+  }
+  interface CommandView {}
+  interface CommandView {
+    get $beanFullName(): 'basic-commands.command.view';
+    get $onionName(): 'basic-commands:view';
+    get $onionOptions(): ICommandOptionsView;
+  }
+}
+/** command: end */
+/** command: begin */
+declare module 'zova' {
+  interface IBeanRecordGeneral {
+    'basic-commands.command.alert': CommandAlert;
+    'basic-commands.command.confirm': CommandConfirm;
+    'basic-commands.command.copy': CommandCopy;
+    'basic-commands.command.create': CommandCreate;
+    'basic-commands.command.delete': CommandDelete;
+    'basic-commands.command.edit': CommandEdit;
+    'basic-commands.command.setValue': CommandSetValue;
+    'basic-commands.command.view': CommandView;
+  }
+}
+/** command: end */
+/** scope: begin */
+declare class ScopeModuleBasicCommands extends BeanScopeBase {}
+interface ScopeModuleBasicCommands {
+  util: BeanScopeUtil;
+}
+declare module 'zova' {
+  interface IBeanScopeRecord {
+    'basic-commands': ScopeModuleBasicCommands;
+  }
+}
+/** scope: end */
+//#endregion
+//#region src/suite/cabloy-basic/modules/basic-commandssync/src/bean/command.expr.d.ts
+type TypeCommandExprResult = unknown;
+interface ICommandOptionsExpr extends ICommandOptionsBase<TypeCommandExprResult> {
+  expression: string;
+}
+declare class CommandExpr extends BeanBase implements ICommandExecute {
+  execute(options: ICommandOptionsExpr, _renderContext: IJsxRenderContextBase, next: NextCommandExecute): any;
+}
+//#endregion
+//#region src/suite/cabloy-basic/modules/basic-commandssync/src/bean/command.log.d.ts
+type TypeCommandLogResult = unknown;
+interface ICommandOptionsLog extends ICommandOptionsBase<TypeCommandLogResult> {
+  name?: string;
+  message: any;
+}
+declare class CommandLog extends BeanBase implements ICommandExecute {
+  execute(options: ICommandOptionsLog, _renderContext: IJsxRenderContextBase, next: NextCommandExecute): any;
+}
+//#endregion
+//#region src/suite/cabloy-basic/modules/basic-commandssync/src/.metadata/index.d.ts
+declare module 'zova-module-a-command' {
+  interface ICommandRecord {
+    'basic-commandssync:expr': ICommandOptionsExpr;
+    'basic-commandssync:log': ICommandOptionsLog;
+  }
+}
+declare module 'zova-module-basic-commandssync' {
+  interface CommandExpr {}
+  interface CommandExpr {
+    get $beanFullName(): 'basic-commandssync.command.expr';
+    get $onionName(): 'basic-commandssync:expr';
+    get $onionOptions(): ICommandOptionsExpr;
+  }
+  interface CommandLog {}
+  interface CommandLog {
+    get $beanFullName(): 'basic-commandssync.command.log';
+    get $onionName(): 'basic-commandssync:log';
+    get $onionOptions(): ICommandOptionsLog;
+  }
+}
+/** command: end */
+/** command: begin */
+declare module 'zova' {
+  interface IBeanRecordGeneral {
+    'basic-commandssync.command.expr': CommandExpr;
+    'basic-commandssync.command.log': CommandLog;
+  }
+}
+/** command: end */
+/** scope: begin */
+declare class ScopeModuleBasicCommandssync extends BeanScopeBase {}
+interface ScopeModuleBasicCommandssync {
+  util: BeanScopeUtil;
+}
+declare module 'zova' {
+  interface IBeanScopeRecord {
+    'basic-commandssync': ScopeModuleBasicCommandssync;
+  }
+}
+/** scope: end */
 //#endregion
 //#region node_modules/.pnpm/@zhennann+currency@2.0.4/node_modules/@zhennann/currency/dist/index.d.ts
 interface CurrencyOptions {
@@ -8964,13 +8964,15 @@ declare module 'zova-module-a-router' {
     'presetResource': TypePagePathSchema<undefined, undefined>;
   }
 }
-declare function $cssBase<K extends PrefixKeys<CssBase, 'c'>>(name: K): string;
-declare function $cssMerge(...classes: (string | false | undefined | null | {
+declare function ZovaCssBase<K extends PrefixKeys<CssBase, 'c'>>(name: K): string;
+declare function ZovaCssMerge(...classes: (string | false | undefined | null | {
   [className: string]: any;
 })[]): any;
-declare function $iconName<K extends keyof IIconRecord>(name: K): any;
-declare function Action<K extends keyof IActionRecord>(options: TypeActionOptions<K>): string;
-declare function Component<K extends keyof IVonaComponentRecord>(options: TypeComponentOptions<K>): K;
+declare function ZovaIconName<K extends keyof IIconRecord>(name: K): any;
+declare function ZovaComponent<K extends keyof IVonaComponentRecord>(options: TypeComponentOptions<K>): K;
+declare function ZovaCommand<K extends keyof ICommandRecord>(options: TypeCommandOptions<K>): string;
+declare function ZovaEvent(_options: IJsxCommandOptionsEvent): string;
+declare function ZovaCommands(_options: IJsxCommandOptionsCommands): string;
 //#endregion
 //#region .zova-rest/component.d.ts
 declare function schemaRenderField<K extends keyof IResourceFormFieldRecord, T extends z$1.ZodType>(render: K, options?: IResourceFormFieldRecord[K], scene?: TypeFormSchemaScene): (schema: T) => T;
@@ -9006,7 +9008,7 @@ declare function schemaRenderFieldSource<T extends z$1.ZodType>(fieldSource: str
 declare function schemaRenderOrder<T extends z$1.ZodType>(order: number, level?: TypeSchemaOrderLevel, scene?: TypeSchemaScene): (schema: T) => T;
 //#endregion
 //#region .zova-rest/render.d.ts
-declare const render: {
+declare const ZovaRender: {
   layout: typeof schemaRenderLayout;
   visible: typeof schemaRenderVisible;
   readonly: typeof schemaRenderReadonly;
@@ -9027,7 +9029,7 @@ declare const render: {
   blockJsx: typeof schemaRenderBlockJsx;
 };
 declare namespace index_d_exports {
-  export { $cssBase, $cssMerge, $defs, $iconName, Action, ActionAlert, ActionConfirm, ActionCopy, ActionCreate, ActionDelete, ActionEdit, ActionExpr, ActionLog, ActionSetValue, ActionTest, ActionView, AopHome, AopHome3, ApiApiCaptchacreateMethod, ApiApiCaptchacreatePath, ApiApiCaptchacreateRequestBody, ApiApiCaptchacreateResponseBody, ApiApiCaptcharefreshMethod, ApiApiCaptcharefreshPath, ApiApiCaptcharefreshRequestBody, ApiApiCaptcharefreshResponseBody, ApiApiCaptchaverifyImmediateMethod, ApiApiCaptchaverifyImmediatePath, ApiApiCaptchaverifyImmediateRequestBody, ApiApiCaptchaverifyImmediateResponseBody, ApiApiHomeBaseMenuretrieveMenusMethod, ApiApiHomeBaseMenuretrieveMenusPath, ApiApiHomeBaseMenuretrieveMenusRequestParams, ApiApiHomeBaseMenuretrieveMenusResponseBody, ApiApiHomeBasePermissionretrievePermissionsMethod, ApiApiHomeBasePermissionretrievePermissionsPath, ApiApiHomeBasePermissionretrievePermissionsRequestParams, ApiApiHomeBasePermissionretrievePermissionsResponseBody, ApiApiHomeUserPassportassociateMethod, ApiApiHomeUserPassportassociatePath, ApiApiHomeUserPassportassociateRequestParams, ApiApiHomeUserPassportassociateRequestQuery, ApiApiHomeUserPassportassociateResponseBody, ApiApiHomeUserPassportcreatePassportJwtFromOauthCodeMethod, ApiApiHomeUserPassportcreatePassportJwtFromOauthCodePath, ApiApiHomeUserPassportcreatePassportJwtFromOauthCodeRequestBody, ApiApiHomeUserPassportcreatePassportJwtFromOauthCodeResponseBody, ApiApiHomeUserPassportcreateTempAuthTokenMethod, ApiApiHomeUserPassportcreateTempAuthTokenPath, ApiApiHomeUserPassportcreateTempAuthTokenRequestQuery, ApiApiHomeUserPassportcreateTempAuthTokenResponseBody, ApiApiHomeUserPassportcurrentMethod, ApiApiHomeUserPassportcurrentPath, ApiApiHomeUserPassportcurrentResponseBody, ApiApiHomeUserPassportloginMethod, ApiApiHomeUserPassportloginOauthMethod, ApiApiHomeUserPassportloginOauthPath, ApiApiHomeUserPassportloginOauthRequestParams, ApiApiHomeUserPassportloginOauthRequestQuery, ApiApiHomeUserPassportloginOauthResponseBody, ApiApiHomeUserPassportloginPath, ApiApiHomeUserPassportloginRequestBody, ApiApiHomeUserPassportloginResponseBody, ApiApiHomeUserPassportlogoutMethod, ApiApiHomeUserPassportlogoutPath, ApiApiHomeUserPassportlogoutResponseBody, ApiApiHomeUserPassportmigrateMethod, ApiApiHomeUserPassportmigratePath, ApiApiHomeUserPassportmigrateRequestParams, ApiApiHomeUserPassportmigrateRequestQuery, ApiApiHomeUserPassportmigrateResponseBody, ApiApiHomeUserPassportrefreshAuthTokenMethod, ApiApiHomeUserPassportrefreshAuthTokenPath, ApiApiHomeUserPassportrefreshAuthTokenRequestBody, ApiApiHomeUserPassportrefreshAuthTokenResponseBody, ApiApiHomeUserPassportregisterMethod, ApiApiHomeUserPassportregisterPath, ApiApiHomeUserPassportregisterRequestBody, ApiApiHomeUserPassportregisterResponseBody, ApiApiHomeindexMethod, ApiApiHomeindexPath, ApiApiHomeindexResponseBody, ApiApiTestSsrToolOnetestGetMethod, ApiApiTestSsrToolOnetestGetPath, ApiApiTestSsrToolOnetestGetRequestParams, ApiApiTestSsrToolOnetestGetRequestQuery, ApiApiTestSsrToolOnetestGetResponseBody, ApiApiTestSsrToolOnetestMethod, ApiApiTestSsrToolOnetestPath, ApiApiTestSsrToolOnetestRequestBody, ApiApiTestSsrToolOnetestRequestParams, ApiApiTestSsrToolOnetestRequestQuery, ApiApiTestSsrToolOnetestResponseBody, ApiCaptcha, ApiHome, ApiHomeBaseMenu, ApiHomeBasePermission, ApiHomeUserPassport, ApiSchemaAAuthDtoAuth, ApiSchemaAAuthDtoAuthPartial, ApiSchemaACaptchaDtoCaptchaData, ApiSchemaACaptchaDtoCaptchaDataPartial, ApiSchemaACaptchaDtoCaptchaVerify_c3cd80b1eeafe39bfe4433491bb081d68e84797e, ApiSchemaACaptchaDtoCaptchaVerify_c3cd80b1eeafe39bfe4433491bb081d68e84797ePartial, ApiSchemaACaptchaDtoCaptchaVerify_c3cd80b1eeafe39bfe4433491bb081d68e84797e_3218e7d152830e08f6e764b9e0c3796df929ee2b, ApiSchemaACaptchaDtoCaptchaVerify_c3cd80b1eeafe39bfe4433491bb081d68e84797e_3218e7d152830e08f6e764b9e0c3796df929ee2bPartial, ApiSchemaAJwtDtoJwtToken, ApiSchemaAJwtDtoJwtTokenPartial, ApiSchemaAMenuDtoMenuGroup, ApiSchemaAMenuDtoMenuGroupPartial, ApiSchemaAMenuDtoMenuItem, ApiSchemaAMenuDtoMenuItemMeta, ApiSchemaAMenuDtoMenuItemMetaPartial, ApiSchemaAMenuDtoMenuItemPartial, ApiSchemaAMenuDtoMenus, ApiSchemaAMenuDtoMenusPartial, ApiSchemaAPaypalDtoPaypalOrderRecordOptions, ApiSchemaAPaypalDtoPaypalOrderRecordOptionsPartial, ApiSchemaAPaypalDtoPaypalOrderRecordPayload, ApiSchemaAPaypalDtoPaypalOrderRecordPayloadPartial, ApiSchemaAPaypalEntityPaypalRecord, ApiSchemaAPaypalEntityPaypalRecordPartial, ApiSchemaAPermissionDtoPermissions, ApiSchemaAPermissionDtoPermissionsPartial, ApiSchemaAPlayDtoPlay, ApiSchemaAPlayDtoPlayPartial, ApiSchemaCaptcha, ApiSchemaHome, ApiSchemaHomeBaseMenu, ApiSchemaHomeBasePermission, ApiSchemaHomeUserDtoLogin, ApiSchemaHomeUserDtoLoginPartial, ApiSchemaHomeUserDtoPassport, ApiSchemaHomeUserDtoPassportJwt, ApiSchemaHomeUserDtoPassportJwtPartial, ApiSchemaHomeUserDtoPassportPartial, ApiSchemaHomeUserDtoRegister, ApiSchemaHomeUserDtoRegisterPartial, ApiSchemaHomeUserEntityRole, ApiSchemaHomeUserEntityRolePartial, ApiSchemaHomeUserEntityUser, ApiSchemaHomeUserEntityUserPartial, ApiSchemaHomeUserPassport, ApiSchemaTestCaptchaDtoSignin, ApiSchemaTestCaptchaDtoSigninPartial, ApiSchemaTestRestDtoProductCreate, ApiSchemaTestRestDtoProductCreatePartial, ApiSchemaTestRestDtoProductQueryRes, ApiSchemaTestRestDtoProductQueryResPartial, ApiSchemaTestRestDtoProductUpdate, ApiSchemaTestRestDtoProductUpdatePartial, ApiSchemaTestRestEntityProduct, ApiSchemaTestRestEntityProductPartial, ApiSchemaTestSsrDtoTestBody, ApiSchemaTestSsrDtoTestBodyPartial, ApiSchemaTestSsrDtoTestDetail, ApiSchemaTestSsrDtoTestDetailPartial, ApiSchemaTestSsrDtoTestResult, ApiSchemaTestSsrDtoTestResultPartial, ApiSchemaTestSsrToolOne, ApiSchemaTestVonaDtoCategoryTree, ApiSchemaTestVonaDtoCategoryTreePartial, ApiSchemaTestVonaDtoOrderCreate, ApiSchemaTestVonaDtoOrderCreatePartial, ApiSchemaTestVonaDtoOrderResult, ApiSchemaTestVonaDtoOrderResultPage, ApiSchemaTestVonaDtoOrderResultPagePartial, ApiSchemaTestVonaDtoOrderResultPartial, ApiSchemaTestVonaDtoOrderUpdate, ApiSchemaTestVonaDtoOrderUpdatePartial, ApiSchemaTestVonaDtoPostAggregate, ApiSchemaTestVonaDtoPostAggregatePartial, ApiSchemaTestVonaDtoPostCreate, ApiSchemaTestVonaDtoPostCreatePartial, ApiSchemaTestVonaDtoPostGroup, ApiSchemaTestVonaDtoPostGroupPartial, ApiSchemaTestVonaDtoPostQueryRes, ApiSchemaTestVonaDtoPostQueryResPartial, ApiSchemaTestVonaDtoRoleLazy, ApiSchemaTestVonaDtoRoleLazyPartial, ApiSchemaTestVonaDtoSerializerArray, ApiSchemaTestVonaDtoSerializerArrayPartial, ApiSchemaTestVonaDtoSerializerLazy, ApiSchemaTestVonaDtoSerializerLazyPartial, ApiSchemaTestVonaDtoSerializerSimple, ApiSchemaTestVonaDtoSerializerSimplePartial, ApiSchemaTestVonaDtoSerializerSimple_1c4b95bcfe8fe28a56dbcc7028097cf11836b4fc, ApiSchemaTestVonaDtoSerializerSimple_1c4b95bcfe8fe28a56dbcc7028097cf11836b4fcPartial, ApiSchemaTestVonaDtoSerializerSimple_542f7be0da9b85a67248a6a1a3629e72de5fdb33_cff0ae112a392da58caf5aa905749f3c4444c4ab, ApiSchemaTestVonaDtoSerializerSimple_542f7be0da9b85a67248a6a1a3629e72de5fdb33_cff0ae112a392da58caf5aa905749f3c4444c4abPartial, ApiSchemaTestVonaDtoUser, ApiSchemaTestVonaDtoUserCreate, ApiSchemaTestVonaDtoUserCreatePartial, ApiSchemaTestVonaDtoUserLazy, ApiSchemaTestVonaDtoUserLazyPartial, ApiSchemaTestVonaDtoUserPartial, ApiSchemaTestVonaDtoUserUpdate, ApiSchemaTestVonaDtoUserUpdatePartial, ApiSchemaTestVonaEntityCategory_2c7d642ee581efa300341e343180fbb0ecdc785d, ApiSchemaTestVonaEntityCategory_2c7d642ee581efa300341e343180fbb0ecdc785dPartial, ApiSchemaTestVonaEntityPost_729883d7de16ce4401b26f75bebe618c8948ff64, ApiSchemaTestVonaEntityPost_729883d7de16ce4401b26f75bebe618c8948ff64Partial, ApiSchemaTestVonaEntityPost_a6ba2076b5b70a3c098374cc82d418bd1ab226c3, ApiSchemaTestVonaEntityPost_a6ba2076b5b70a3c098374cc82d418bd1ab226c3Partial, ApiSchemaTestVonaEntityProduct, ApiSchemaTestVonaEntityProductPartial, ApiSchemaTestVonaEntityProduct_29731960f3f38d3572bc2f8a01a7498bfe927055, ApiSchemaTestVonaEntityProduct_29731960f3f38d3572bc2f8a01a7498bfe927055Partial, ApiSchemaTestVonaEntityProduct_9cf2c6bcd41713270c34bcfce21b7b4942e3fbc6, ApiSchemaTestVonaEntityProduct_9cf2c6bcd41713270c34bcfce21b7b4942e3fbc6Partial, ApiSchemaTestVonaEntityProduct_bce173590aaef19772f1ae3a82196493c2633e2e, ApiSchemaTestVonaEntityProduct_bce173590aaef19772f1ae3a82196493c2633e2ePartial, ApiSchemaTestVonaEntityUser_2c7d642ee581efa300341e343180fbb0ecdc785d_1816ff740d81c738ec055c7038bbd93beb9405a7, ApiSchemaTestVonaEntityUser_2c7d642ee581efa300341e343180fbb0ecdc785d_1816ff740d81c738ec055c7038bbd93beb9405a7Partial, ApiTestSsrToolOne, ApiTodo, ApiTodoEntity, ApiTodoIntertBody, ApiTodoUpdateBody, BehaviorFormField, BehaviorFormFieldLayoutLogin, Component, ControllerActionBack, ControllerActionBackProps, ControllerActionCreate, ControllerActionCreateProps, ControllerActionSubmit, ControllerActionSubmitProps, ControllerActionView, ControllerActionViewProps, ControllerBlockFilter, ControllerBlockFilterProps, ControllerBlockForm, ControllerBlockFormProps, ControllerBlockPage, ControllerBlockPageEntry, ControllerBlockPageEntryProps, ControllerBlockPageProps, ControllerBlockPager, ControllerBlockPagerProps, ControllerBlockTable, ControllerBlockTableProps, ControllerBlockToolbarBulk, ControllerBlockToolbarBulkProps, ControllerBlockToolbarRow, ControllerBlockToolbarRowProps, ControllerCardModels, ControllerDateRange, ControllerDateRangeModels, ControllerDateRangeProps, ControllerFormFieldCaptcha, ControllerFormFieldCaptchaProps, ControllerFormFieldCurrency, ControllerFormFieldCurrencyProps, ControllerFormFieldDate, ControllerFormFieldDateProps, ControllerFormFieldDateRange, ControllerFormFieldDateRangeProps, ControllerFormFieldInput, ControllerFormFieldInputProps, ControllerFormFieldTest, ControllerFormFieldTestProps, ControllerItemLink, ControllerItemLinkProps, ControllerLayoutEmpty, ControllerLayoutEmptyProps, ControllerLayoutTabs, ControllerLayoutTabsProps, ControllerPage, ControllerPageAuthCallback, ControllerPageAuthCallbackSchemaQuery, ControllerPageComponent, ControllerPageErrorExpired, ControllerPageErrorExpiredSchemaQuery, ControllerPageErrorNotFound, ControllerPageHome, ControllerPageItem, ControllerPageItemSchemaParams, ControllerPageItemSchemaQuery, ControllerPageLocale, ControllerPageLogin$1 as ControllerPageLogin, ControllerPageProps, ControllerPageRouteParams, ControllerPageRouteParamsSchemaParams, ControllerPageRouteParamsSchemaQuery, ControllerPageRouteQuery, ControllerPageRouteQueryB, ControllerPageRouteQueryBSchemaParams, ControllerPageRouteQueryBSchemaQuery, ControllerPageRouteQuerySchemaParams, ControllerPageRouteQuerySchemaQuery, ControllerPageState, ControllerPageStyle, ControllerPageTest, ControllerPageTodo, ControllerPageToolOne$1 as ControllerPageToolOne, ControllerPageToolOneSchemaParams, ControllerPageToolOneSchemaQuery, ControllerPageToolTwo, ControllerPageToolTwoSchemaParams, ControllerPageToolTwoSchemaQuery, ControllerTable, ControllerTableCellTest, ControllerTableCellTestProps, ControllerTableProps, ControllerTest, ControllerTest2, ControllerTest2Models, ControllerTest2Props, ControllerTestModels, ControllerTestProps, CssBase, IActionOptionsAlert, IActionOptionsConfirm, IActionOptionsCopy, IActionOptionsCreate, IActionOptionsDelete, IActionOptionsEdit, IActionOptionsExpr, IActionOptionsLog, IActionOptionsSetValue, IActionOptionsTest, IActionOptionsView, IBehaviorOptionsFormField, IBehaviorOptionsFormFieldLayoutLogin, IBehaviorPropsInputFormField, IBehaviorPropsInputFormFieldLayoutLogin, IBehaviorPropsOutputFormField, IBehaviorPropsOutputFormFieldLayoutLogin, IBehaviorResourceFormFieldLayoutOptions, ICssOptionsBase, IModelOptionsLayout, IModelOptionsMenu, IModelOptionsPassport, IModelOptionsTest, IModelOptionsTodo, IModuleApiSchema, IResourceFormFieldCaptchaOptions, IResourceFormFieldCurrencyOptions, IResourceFormFieldDateOptions, IResourceFormFieldDateRangeOptions, IResourceFormFieldInputOptions, IServiceSsrLayoutOptions, ITableCellOptionsActionDelete, ITableCellOptionsActionOperationsRow, ITableCellOptionsActionUpdate, ITableCellOptionsActionView, ITableCellOptionsCurrency, ITableCellOptionsDate, ITableCellOptionsTest, IThemeOptionsDefault, IThemeOptionsOrange, Main, MetaThemeHandler, ModelLayout, ModelMenu, ModelPassport, ModelTest, ModelTodo, NSControllerPageAuthCallback, NSControllerPageErrorExpired, NSControllerPageItem, NSControllerPageRouteParams, NSControllerPageRouteQuery, NSControllerPageRouteQueryB, NSControllerPageToolOne, NSControllerPageToolTwo, OpenApiBaseURL, RenderContent, RenderHeader, RenderLayoutTabs, RenderLocale, RenderMenu, RenderPageLogin, RenderPageToolOne, RenderSidebar, RenderTable, RenderTabs, RenderTheme, RenderUser, ScopeModuleBasicActions, ScopeModuleBasicActionssync, ScopeModuleBasicAdapter, ScopeModuleBasicCaptcha, ScopeModuleBasicCurrency, ScopeModuleBasicDate, ScopeModuleBasicForm, ScopeModuleBasicInput, ScopeModuleBasicPage, ScopeModuleBasicPageentry, ScopeModuleBasicTable, ScopeModuleDemoBasic, ScopeModuleDemoStudent, ScopeModuleDemoTodo, ScopeModuleDevuiAdapter, ScopeModuleHomeApi, ScopeModuleHomeBase, ScopeModuleHomeIcon, ScopeModuleHomeIndex, ScopeModuleHomeLayoutempty, ScopeModuleHomeLayouttabs, ScopeModuleHomeLogin, ScopeModuleHomePassport, ScopeModuleHomeTheme, ServiceJwtAdapter, ServiceRouterGuards, ServiceSsr, ServiceSsrLayout, StyleLayoutTabs$1 as StyleLayoutTabs, TableCellActionDelete, TableCellActionOperationsRow, TableCellActionUpdate, TableCellActionView, TableCellCurrency, TableCellDate, TableCellTest, ThemeDefault, ThemeOrange, ThemeTokenCustom, TypeActionAlertResult, TypeActionConfirmResult, TypeActionCopyResult, TypeActionCreateResult, TypeActionDeleteResult, TypeActionEditResult, TypeActionExprResult, TypeActionLogResult, TypeActionSetValueResult, TypeActionTestResult, TypeActionViewResult, TypeControllerActionBackPublicProps, TypeControllerActionCreatePublicProps, TypeControllerActionSubmitPublicProps, TypeControllerActionViewPublicProps, TypeControllerBlockFilterPublicProps, TypeControllerBlockFormPublicProps, TypeControllerBlockPageEntryPublicProps, TypeControllerBlockPagePublicProps, TypeControllerBlockPagerPublicProps, TypeControllerBlockTablePublicProps, TypeControllerBlockToolbarBulkPublicProps, TypeControllerBlockToolbarRowPublicProps, TypeControllerDateRangePublicProps, TypeControllerFormFieldCaptchaPublicProps, TypeControllerFormFieldCurrencyPublicProps, TypeControllerFormFieldDatePublicProps, TypeControllerFormFieldDateRangePublicProps, TypeControllerFormFieldInputPublicProps, TypeControllerFormFieldTestPublicProps, TypeControllerItemLinkPublicProps, TypeControllerLayoutEmptyPublicProps, TypeControllerLayoutTabsPublicProps, TypeControllerPagePublicProps, TypeControllerTableCellTestPublicProps, TypeControllerTablePublicProps, TypeControllerTest2PublicProps, TypeControllerTestPublicProps, TypeDateFormatPreset, TypeMenuGroup, TypeMenuItem, TypeMenuTree, ZActionBack, ZActionCreate, ZActionSubmit, ZActionView, ZBlockFilter, ZBlockForm, ZBlockPage, ZBlockPageEntry, ZBlockPager, ZBlockTable, ZBlockToolbarBulk, ZBlockToolbarRow, ZDateRange, ZFormFieldCaptcha, ZFormFieldCurrency, ZFormFieldDate, ZFormFieldDateRange, ZFormFieldInput, ZFormFieldTest, ZItemLink, ZLayoutEmpty, ZLayoutTabs, ZPage, ZPageAuthCallback, ZPageComponent, ZPageErrorExpired, ZPageErrorNotFound, ZPageHome, ZPageItem, ZPageLocale, ZPageLogin, ZPageRouteParams, ZPageRouteQuery, ZPageRouteQueryB, ZPageState, ZPageStyle, ZPageTest, ZPageTodo, ZPageToolOne, ZPageToolTwo, ZTable, ZTableCellTest, ZTest, ZTest2, currencyFormat, currencyUpdate, dateFormatUtil, definePropertyScopeBase, icons, operations, paths, render, webhooks };
+  export { $defs, AopHome, AopHome3, ApiApiCaptchacreateMethod, ApiApiCaptchacreatePath, ApiApiCaptchacreateRequestBody, ApiApiCaptchacreateResponseBody, ApiApiCaptcharefreshMethod, ApiApiCaptcharefreshPath, ApiApiCaptcharefreshRequestBody, ApiApiCaptcharefreshResponseBody, ApiApiCaptchaverifyImmediateMethod, ApiApiCaptchaverifyImmediatePath, ApiApiCaptchaverifyImmediateRequestBody, ApiApiCaptchaverifyImmediateResponseBody, ApiApiHomeBaseMenuretrieveMenusMethod, ApiApiHomeBaseMenuretrieveMenusPath, ApiApiHomeBaseMenuretrieveMenusRequestParams, ApiApiHomeBaseMenuretrieveMenusResponseBody, ApiApiHomeBasePermissionretrievePermissionsMethod, ApiApiHomeBasePermissionretrievePermissionsPath, ApiApiHomeBasePermissionretrievePermissionsRequestParams, ApiApiHomeBasePermissionretrievePermissionsResponseBody, ApiApiHomeUserPassportassociateMethod, ApiApiHomeUserPassportassociatePath, ApiApiHomeUserPassportassociateRequestParams, ApiApiHomeUserPassportassociateRequestQuery, ApiApiHomeUserPassportassociateResponseBody, ApiApiHomeUserPassportcreatePassportJwtFromOauthCodeMethod, ApiApiHomeUserPassportcreatePassportJwtFromOauthCodePath, ApiApiHomeUserPassportcreatePassportJwtFromOauthCodeRequestBody, ApiApiHomeUserPassportcreatePassportJwtFromOauthCodeResponseBody, ApiApiHomeUserPassportcreateTempAuthTokenMethod, ApiApiHomeUserPassportcreateTempAuthTokenPath, ApiApiHomeUserPassportcreateTempAuthTokenRequestQuery, ApiApiHomeUserPassportcreateTempAuthTokenResponseBody, ApiApiHomeUserPassportcurrentMethod, ApiApiHomeUserPassportcurrentPath, ApiApiHomeUserPassportcurrentResponseBody, ApiApiHomeUserPassportloginMethod, ApiApiHomeUserPassportloginOauthMethod, ApiApiHomeUserPassportloginOauthPath, ApiApiHomeUserPassportloginOauthRequestParams, ApiApiHomeUserPassportloginOauthRequestQuery, ApiApiHomeUserPassportloginOauthResponseBody, ApiApiHomeUserPassportloginPath, ApiApiHomeUserPassportloginRequestBody, ApiApiHomeUserPassportloginResponseBody, ApiApiHomeUserPassportlogoutMethod, ApiApiHomeUserPassportlogoutPath, ApiApiHomeUserPassportlogoutResponseBody, ApiApiHomeUserPassportmigrateMethod, ApiApiHomeUserPassportmigratePath, ApiApiHomeUserPassportmigrateRequestParams, ApiApiHomeUserPassportmigrateRequestQuery, ApiApiHomeUserPassportmigrateResponseBody, ApiApiHomeUserPassportrefreshAuthTokenMethod, ApiApiHomeUserPassportrefreshAuthTokenPath, ApiApiHomeUserPassportrefreshAuthTokenRequestBody, ApiApiHomeUserPassportrefreshAuthTokenResponseBody, ApiApiHomeUserPassportregisterMethod, ApiApiHomeUserPassportregisterPath, ApiApiHomeUserPassportregisterRequestBody, ApiApiHomeUserPassportregisterResponseBody, ApiApiHomeindexMethod, ApiApiHomeindexPath, ApiApiHomeindexResponseBody, ApiApiTestSsrToolOnetestGetMethod, ApiApiTestSsrToolOnetestGetPath, ApiApiTestSsrToolOnetestGetRequestParams, ApiApiTestSsrToolOnetestGetRequestQuery, ApiApiTestSsrToolOnetestGetResponseBody, ApiApiTestSsrToolOnetestMethod, ApiApiTestSsrToolOnetestPath, ApiApiTestSsrToolOnetestRequestBody, ApiApiTestSsrToolOnetestRequestParams, ApiApiTestSsrToolOnetestRequestQuery, ApiApiTestSsrToolOnetestResponseBody, ApiCaptcha, ApiHome, ApiHomeBaseMenu, ApiHomeBasePermission, ApiHomeUserPassport, ApiSchemaAAuthDtoAuth, ApiSchemaAAuthDtoAuthPartial, ApiSchemaACaptchaDtoCaptchaData, ApiSchemaACaptchaDtoCaptchaDataPartial, ApiSchemaACaptchaDtoCaptchaVerify_c3cd80b1eeafe39bfe4433491bb081d68e84797e, ApiSchemaACaptchaDtoCaptchaVerify_c3cd80b1eeafe39bfe4433491bb081d68e84797ePartial, ApiSchemaACaptchaDtoCaptchaVerify_c3cd80b1eeafe39bfe4433491bb081d68e84797e_3218e7d152830e08f6e764b9e0c3796df929ee2b, ApiSchemaACaptchaDtoCaptchaVerify_c3cd80b1eeafe39bfe4433491bb081d68e84797e_3218e7d152830e08f6e764b9e0c3796df929ee2bPartial, ApiSchemaAJwtDtoJwtToken, ApiSchemaAJwtDtoJwtTokenPartial, ApiSchemaAMenuDtoMenuGroup, ApiSchemaAMenuDtoMenuGroupPartial, ApiSchemaAMenuDtoMenuItem, ApiSchemaAMenuDtoMenuItemMeta, ApiSchemaAMenuDtoMenuItemMetaPartial, ApiSchemaAMenuDtoMenuItemPartial, ApiSchemaAMenuDtoMenus, ApiSchemaAMenuDtoMenusPartial, ApiSchemaAPaypalDtoPaypalOrderRecordOptions, ApiSchemaAPaypalDtoPaypalOrderRecordOptionsPartial, ApiSchemaAPaypalDtoPaypalOrderRecordPayload, ApiSchemaAPaypalDtoPaypalOrderRecordPayloadPartial, ApiSchemaAPaypalEntityPaypalRecord, ApiSchemaAPaypalEntityPaypalRecordPartial, ApiSchemaAPermissionDtoPermissions, ApiSchemaAPermissionDtoPermissionsPartial, ApiSchemaAPlayDtoPlay, ApiSchemaAPlayDtoPlayPartial, ApiSchemaCaptcha, ApiSchemaHome, ApiSchemaHomeBaseMenu, ApiSchemaHomeBasePermission, ApiSchemaHomeUserDtoLogin, ApiSchemaHomeUserDtoLoginPartial, ApiSchemaHomeUserDtoPassport, ApiSchemaHomeUserDtoPassportJwt, ApiSchemaHomeUserDtoPassportJwtPartial, ApiSchemaHomeUserDtoPassportPartial, ApiSchemaHomeUserDtoRegister, ApiSchemaHomeUserDtoRegisterPartial, ApiSchemaHomeUserEntityRole, ApiSchemaHomeUserEntityRolePartial, ApiSchemaHomeUserEntityUser, ApiSchemaHomeUserEntityUserPartial, ApiSchemaHomeUserPassport, ApiSchemaTestCaptchaDtoSignin, ApiSchemaTestCaptchaDtoSigninPartial, ApiSchemaTestRestDtoProductCreate, ApiSchemaTestRestDtoProductCreatePartial, ApiSchemaTestRestDtoProductQueryRes, ApiSchemaTestRestDtoProductQueryResPartial, ApiSchemaTestRestDtoProductUpdate, ApiSchemaTestRestDtoProductUpdatePartial, ApiSchemaTestRestEntityProduct, ApiSchemaTestRestEntityProductPartial, ApiSchemaTestSsrDtoTestBody, ApiSchemaTestSsrDtoTestBodyPartial, ApiSchemaTestSsrDtoTestDetail, ApiSchemaTestSsrDtoTestDetailPartial, ApiSchemaTestSsrDtoTestResult, ApiSchemaTestSsrDtoTestResultPartial, ApiSchemaTestSsrToolOne, ApiSchemaTestVonaDtoCategoryTree, ApiSchemaTestVonaDtoCategoryTreePartial, ApiSchemaTestVonaDtoOrderCreate, ApiSchemaTestVonaDtoOrderCreatePartial, ApiSchemaTestVonaDtoOrderResult, ApiSchemaTestVonaDtoOrderResultPage, ApiSchemaTestVonaDtoOrderResultPagePartial, ApiSchemaTestVonaDtoOrderResultPartial, ApiSchemaTestVonaDtoOrderUpdate, ApiSchemaTestVonaDtoOrderUpdatePartial, ApiSchemaTestVonaDtoPostAggregate, ApiSchemaTestVonaDtoPostAggregatePartial, ApiSchemaTestVonaDtoPostCreate, ApiSchemaTestVonaDtoPostCreatePartial, ApiSchemaTestVonaDtoPostGroup, ApiSchemaTestVonaDtoPostGroupPartial, ApiSchemaTestVonaDtoPostQueryRes, ApiSchemaTestVonaDtoPostQueryResPartial, ApiSchemaTestVonaDtoRoleLazy, ApiSchemaTestVonaDtoRoleLazyPartial, ApiSchemaTestVonaDtoSerializerArray, ApiSchemaTestVonaDtoSerializerArrayPartial, ApiSchemaTestVonaDtoSerializerLazy, ApiSchemaTestVonaDtoSerializerLazyPartial, ApiSchemaTestVonaDtoSerializerSimple, ApiSchemaTestVonaDtoSerializerSimplePartial, ApiSchemaTestVonaDtoSerializerSimple_1c4b95bcfe8fe28a56dbcc7028097cf11836b4fc, ApiSchemaTestVonaDtoSerializerSimple_1c4b95bcfe8fe28a56dbcc7028097cf11836b4fcPartial, ApiSchemaTestVonaDtoSerializerSimple_542f7be0da9b85a67248a6a1a3629e72de5fdb33_cff0ae112a392da58caf5aa905749f3c4444c4ab, ApiSchemaTestVonaDtoSerializerSimple_542f7be0da9b85a67248a6a1a3629e72de5fdb33_cff0ae112a392da58caf5aa905749f3c4444c4abPartial, ApiSchemaTestVonaDtoUser, ApiSchemaTestVonaDtoUserCreate, ApiSchemaTestVonaDtoUserCreatePartial, ApiSchemaTestVonaDtoUserLazy, ApiSchemaTestVonaDtoUserLazyPartial, ApiSchemaTestVonaDtoUserPartial, ApiSchemaTestVonaDtoUserUpdate, ApiSchemaTestVonaDtoUserUpdatePartial, ApiSchemaTestVonaEntityCategory_2c7d642ee581efa300341e343180fbb0ecdc785d, ApiSchemaTestVonaEntityCategory_2c7d642ee581efa300341e343180fbb0ecdc785dPartial, ApiSchemaTestVonaEntityPost_729883d7de16ce4401b26f75bebe618c8948ff64, ApiSchemaTestVonaEntityPost_729883d7de16ce4401b26f75bebe618c8948ff64Partial, ApiSchemaTestVonaEntityPost_a6ba2076b5b70a3c098374cc82d418bd1ab226c3, ApiSchemaTestVonaEntityPost_a6ba2076b5b70a3c098374cc82d418bd1ab226c3Partial, ApiSchemaTestVonaEntityProduct, ApiSchemaTestVonaEntityProductPartial, ApiSchemaTestVonaEntityProduct_29731960f3f38d3572bc2f8a01a7498bfe927055, ApiSchemaTestVonaEntityProduct_29731960f3f38d3572bc2f8a01a7498bfe927055Partial, ApiSchemaTestVonaEntityProduct_9cf2c6bcd41713270c34bcfce21b7b4942e3fbc6, ApiSchemaTestVonaEntityProduct_9cf2c6bcd41713270c34bcfce21b7b4942e3fbc6Partial, ApiSchemaTestVonaEntityProduct_bce173590aaef19772f1ae3a82196493c2633e2e, ApiSchemaTestVonaEntityProduct_bce173590aaef19772f1ae3a82196493c2633e2ePartial, ApiSchemaTestVonaEntityUser_2c7d642ee581efa300341e343180fbb0ecdc785d_1816ff740d81c738ec055c7038bbd93beb9405a7, ApiSchemaTestVonaEntityUser_2c7d642ee581efa300341e343180fbb0ecdc785d_1816ff740d81c738ec055c7038bbd93beb9405a7Partial, ApiTestSsrToolOne, ApiTodo, ApiTodoEntity, ApiTodoIntertBody, ApiTodoUpdateBody, BehaviorFormField, BehaviorFormFieldLayoutLogin, CommandAlert, CommandConfirm, CommandCopy, CommandCreate, CommandDelete, CommandEdit, CommandExpr, CommandLog, CommandSetValue, CommandTest, CommandView, ControllerActionBack, ControllerActionBackProps, ControllerActionCreate, ControllerActionCreateProps, ControllerActionSubmit, ControllerActionSubmitProps, ControllerActionView, ControllerActionViewProps, ControllerBlockFilter, ControllerBlockFilterProps, ControllerBlockForm, ControllerBlockFormProps, ControllerBlockPage, ControllerBlockPageEntry, ControllerBlockPageEntryProps, ControllerBlockPageProps, ControllerBlockPager, ControllerBlockPagerProps, ControllerBlockTable, ControllerBlockTableProps, ControllerBlockToolbarBulk, ControllerBlockToolbarBulkProps, ControllerBlockToolbarRow, ControllerBlockToolbarRowProps, ControllerCardModels, ControllerDateRange, ControllerDateRangeModels, ControllerDateRangeProps, ControllerFormFieldCaptcha, ControllerFormFieldCaptchaProps, ControllerFormFieldCurrency, ControllerFormFieldCurrencyProps, ControllerFormFieldDate, ControllerFormFieldDateProps, ControllerFormFieldDateRange, ControllerFormFieldDateRangeProps, ControllerFormFieldInput, ControllerFormFieldInputProps, ControllerFormFieldTest, ControllerFormFieldTestProps, ControllerItemLink, ControllerItemLinkProps, ControllerLayoutEmpty, ControllerLayoutEmptyProps, ControllerLayoutTabs, ControllerLayoutTabsProps, ControllerPage, ControllerPageAuthCallback, ControllerPageAuthCallbackSchemaQuery, ControllerPageComponent, ControllerPageErrorExpired, ControllerPageErrorExpiredSchemaQuery, ControllerPageErrorNotFound, ControllerPageHome, ControllerPageItem, ControllerPageItemSchemaParams, ControllerPageItemSchemaQuery, ControllerPageLocale, ControllerPageLogin$1 as ControllerPageLogin, ControllerPageProps, ControllerPageRouteParams, ControllerPageRouteParamsSchemaParams, ControllerPageRouteParamsSchemaQuery, ControllerPageRouteQuery, ControllerPageRouteQueryB, ControllerPageRouteQueryBSchemaParams, ControllerPageRouteQueryBSchemaQuery, ControllerPageRouteQuerySchemaParams, ControllerPageRouteQuerySchemaQuery, ControllerPageState, ControllerPageStyle, ControllerPageTest, ControllerPageTodo, ControllerPageToolOne$1 as ControllerPageToolOne, ControllerPageToolOneSchemaParams, ControllerPageToolOneSchemaQuery, ControllerPageToolTwo, ControllerPageToolTwoSchemaParams, ControllerPageToolTwoSchemaQuery, ControllerTable, ControllerTableCellTest, ControllerTableCellTestProps, ControllerTableProps, ControllerTest, ControllerTest2, ControllerTest2Models, ControllerTest2Props, ControllerTestModels, ControllerTestProps, CssBase, IBehaviorOptionsFormField, IBehaviorOptionsFormFieldLayoutLogin, IBehaviorPropsInputFormField, IBehaviorPropsInputFormFieldLayoutLogin, IBehaviorPropsOutputFormField, IBehaviorPropsOutputFormFieldLayoutLogin, IBehaviorResourceFormFieldLayoutOptions, ICommandOptionsAlert, ICommandOptionsConfirm, ICommandOptionsCopy, ICommandOptionsCreate, ICommandOptionsDelete, ICommandOptionsEdit, ICommandOptionsExpr, ICommandOptionsLog, ICommandOptionsSetValue, ICommandOptionsTest, ICommandOptionsView, ICssOptionsBase, IModelOptionsLayout, IModelOptionsMenu, IModelOptionsPassport, IModelOptionsTest, IModelOptionsTodo, IModuleApiSchema, IResourceFormFieldCaptchaOptions, IResourceFormFieldCurrencyOptions, IResourceFormFieldDateOptions, IResourceFormFieldDateRangeOptions, IResourceFormFieldInputOptions, IServiceSsrLayoutOptions, ITableCellOptionsActionDelete, ITableCellOptionsActionOperationsRow, ITableCellOptionsActionUpdate, ITableCellOptionsActionView, ITableCellOptionsCurrency, ITableCellOptionsDate, ITableCellOptionsTest, IThemeOptionsDefault, IThemeOptionsOrange, Main, MetaThemeHandler, ModelLayout, ModelMenu, ModelPassport, ModelTest, ModelTodo, NSControllerPageAuthCallback, NSControllerPageErrorExpired, NSControllerPageItem, NSControllerPageRouteParams, NSControllerPageRouteQuery, NSControllerPageRouteQueryB, NSControllerPageToolOne, NSControllerPageToolTwo, OpenApiBaseURL, RenderContent, RenderHeader, RenderLayoutTabs, RenderLocale, RenderMenu, RenderPageLogin, RenderPageToolOne, RenderSidebar, RenderTable, RenderTabs, RenderTheme, RenderUser, ScopeModuleBasicAdapter, ScopeModuleBasicCaptcha, ScopeModuleBasicCommands, ScopeModuleBasicCommandssync, ScopeModuleBasicCurrency, ScopeModuleBasicDate, ScopeModuleBasicForm, ScopeModuleBasicInput, ScopeModuleBasicPage, ScopeModuleBasicPageentry, ScopeModuleBasicTable, ScopeModuleDemoBasic, ScopeModuleDemoStudent, ScopeModuleDemoTodo, ScopeModuleDevuiAdapter, ScopeModuleHomeApi, ScopeModuleHomeBase, ScopeModuleHomeIcon, ScopeModuleHomeIndex, ScopeModuleHomeLayoutempty, ScopeModuleHomeLayouttabs, ScopeModuleHomeLogin, ScopeModuleHomePassport, ScopeModuleHomeTheme, ServiceJwtAdapter, ServiceRouterGuards, ServiceSsr, ServiceSsrLayout, StyleLayoutTabs$1 as StyleLayoutTabs, TableCellActionDelete, TableCellActionOperationsRow, TableCellActionUpdate, TableCellActionView, TableCellCurrency, TableCellDate, TableCellTest, ThemeDefault, ThemeOrange, ThemeTokenCustom, TypeCommandAlertResult, TypeCommandConfirmResult, TypeCommandCopyResult, TypeCommandCreateResult, TypeCommandDeleteResult, TypeCommandEditResult, TypeCommandExprResult, TypeCommandLogResult, TypeCommandSetValueResult, TypeCommandTestResult, TypeCommandViewResult, TypeControllerActionBackPublicProps, TypeControllerActionCreatePublicProps, TypeControllerActionSubmitPublicProps, TypeControllerActionViewPublicProps, TypeControllerBlockFilterPublicProps, TypeControllerBlockFormPublicProps, TypeControllerBlockPageEntryPublicProps, TypeControllerBlockPagePublicProps, TypeControllerBlockPagerPublicProps, TypeControllerBlockTablePublicProps, TypeControllerBlockToolbarBulkPublicProps, TypeControllerBlockToolbarRowPublicProps, TypeControllerDateRangePublicProps, TypeControllerFormFieldCaptchaPublicProps, TypeControllerFormFieldCurrencyPublicProps, TypeControllerFormFieldDatePublicProps, TypeControllerFormFieldDateRangePublicProps, TypeControllerFormFieldInputPublicProps, TypeControllerFormFieldTestPublicProps, TypeControllerItemLinkPublicProps, TypeControllerLayoutEmptyPublicProps, TypeControllerLayoutTabsPublicProps, TypeControllerPagePublicProps, TypeControllerTableCellTestPublicProps, TypeControllerTablePublicProps, TypeControllerTest2PublicProps, TypeControllerTestPublicProps, TypeDateFormatPreset, TypeMenuGroup, TypeMenuItem, TypeMenuTree, ZActionBack, ZActionCreate, ZActionSubmit, ZActionView, ZBlockFilter, ZBlockForm, ZBlockPage, ZBlockPageEntry, ZBlockPager, ZBlockTable, ZBlockToolbarBulk, ZBlockToolbarRow, ZDateRange, ZFormFieldCaptcha, ZFormFieldCurrency, ZFormFieldDate, ZFormFieldDateRange, ZFormFieldInput, ZFormFieldTest, ZItemLink, ZLayoutEmpty, ZLayoutTabs, ZPage, ZPageAuthCallback, ZPageComponent, ZPageErrorExpired, ZPageErrorNotFound, ZPageHome, ZPageItem, ZPageLocale, ZPageLogin, ZPageRouteParams, ZPageRouteQuery, ZPageRouteQueryB, ZPageState, ZPageStyle, ZPageTest, ZPageTodo, ZPageToolOne, ZPageToolTwo, ZTable, ZTableCellTest, ZTest, ZTest2, ZovaCommand, ZovaCommands, ZovaComponent, ZovaCssBase, ZovaCssMerge, ZovaEvent, ZovaIconName, ZovaRender, currencyFormat, currencyUpdate, dateFormatUtil, definePropertyScopeBase, icons, operations, paths, webhooks };
 }
 //#endregion
-export { $cssBase, $cssMerge, $defs, $iconName, Action, ActionAlert, ActionConfirm, ActionCopy, ActionCreate, ActionDelete, ActionEdit, ActionExpr, ActionLog, ActionSetValue, ActionTest, ActionView, AopHome, AopHome3, ApiApiCaptchacreateMethod, ApiApiCaptchacreatePath, ApiApiCaptchacreateRequestBody, ApiApiCaptchacreateResponseBody, ApiApiCaptcharefreshMethod, ApiApiCaptcharefreshPath, ApiApiCaptcharefreshRequestBody, ApiApiCaptcharefreshResponseBody, ApiApiCaptchaverifyImmediateMethod, ApiApiCaptchaverifyImmediatePath, ApiApiCaptchaverifyImmediateRequestBody, ApiApiCaptchaverifyImmediateResponseBody, ApiApiHomeBaseMenuretrieveMenusMethod, ApiApiHomeBaseMenuretrieveMenusPath, ApiApiHomeBaseMenuretrieveMenusRequestParams, ApiApiHomeBaseMenuretrieveMenusResponseBody, ApiApiHomeBasePermissionretrievePermissionsMethod, ApiApiHomeBasePermissionretrievePermissionsPath, ApiApiHomeBasePermissionretrievePermissionsRequestParams, ApiApiHomeBasePermissionretrievePermissionsResponseBody, ApiApiHomeUserPassportassociateMethod, ApiApiHomeUserPassportassociatePath, ApiApiHomeUserPassportassociateRequestParams, ApiApiHomeUserPassportassociateRequestQuery, ApiApiHomeUserPassportassociateResponseBody, ApiApiHomeUserPassportcreatePassportJwtFromOauthCodeMethod, ApiApiHomeUserPassportcreatePassportJwtFromOauthCodePath, ApiApiHomeUserPassportcreatePassportJwtFromOauthCodeRequestBody, ApiApiHomeUserPassportcreatePassportJwtFromOauthCodeResponseBody, ApiApiHomeUserPassportcreateTempAuthTokenMethod, ApiApiHomeUserPassportcreateTempAuthTokenPath, ApiApiHomeUserPassportcreateTempAuthTokenRequestQuery, ApiApiHomeUserPassportcreateTempAuthTokenResponseBody, ApiApiHomeUserPassportcurrentMethod, ApiApiHomeUserPassportcurrentPath, ApiApiHomeUserPassportcurrentResponseBody, ApiApiHomeUserPassportloginMethod, ApiApiHomeUserPassportloginOauthMethod, ApiApiHomeUserPassportloginOauthPath, ApiApiHomeUserPassportloginOauthRequestParams, ApiApiHomeUserPassportloginOauthRequestQuery, ApiApiHomeUserPassportloginOauthResponseBody, ApiApiHomeUserPassportloginPath, ApiApiHomeUserPassportloginRequestBody, ApiApiHomeUserPassportloginResponseBody, ApiApiHomeUserPassportlogoutMethod, ApiApiHomeUserPassportlogoutPath, ApiApiHomeUserPassportlogoutResponseBody, ApiApiHomeUserPassportmigrateMethod, ApiApiHomeUserPassportmigratePath, ApiApiHomeUserPassportmigrateRequestParams, ApiApiHomeUserPassportmigrateRequestQuery, ApiApiHomeUserPassportmigrateResponseBody, ApiApiHomeUserPassportrefreshAuthTokenMethod, ApiApiHomeUserPassportrefreshAuthTokenPath, ApiApiHomeUserPassportrefreshAuthTokenRequestBody, ApiApiHomeUserPassportrefreshAuthTokenResponseBody, ApiApiHomeUserPassportregisterMethod, ApiApiHomeUserPassportregisterPath, ApiApiHomeUserPassportregisterRequestBody, ApiApiHomeUserPassportregisterResponseBody, ApiApiHomeindexMethod, ApiApiHomeindexPath, ApiApiHomeindexResponseBody, ApiApiTestSsrToolOnetestGetMethod, ApiApiTestSsrToolOnetestGetPath, ApiApiTestSsrToolOnetestGetRequestParams, ApiApiTestSsrToolOnetestGetRequestQuery, ApiApiTestSsrToolOnetestGetResponseBody, ApiApiTestSsrToolOnetestMethod, ApiApiTestSsrToolOnetestPath, ApiApiTestSsrToolOnetestRequestBody, ApiApiTestSsrToolOnetestRequestParams, ApiApiTestSsrToolOnetestRequestQuery, ApiApiTestSsrToolOnetestResponseBody, ApiCaptcha, ApiHome, ApiHomeBaseMenu, ApiHomeBasePermission, ApiHomeUserPassport, ApiSchemaAAuthDtoAuth, ApiSchemaAAuthDtoAuthPartial, ApiSchemaACaptchaDtoCaptchaData, ApiSchemaACaptchaDtoCaptchaDataPartial, ApiSchemaACaptchaDtoCaptchaVerify_c3cd80b1eeafe39bfe4433491bb081d68e84797e, ApiSchemaACaptchaDtoCaptchaVerify_c3cd80b1eeafe39bfe4433491bb081d68e84797ePartial, ApiSchemaACaptchaDtoCaptchaVerify_c3cd80b1eeafe39bfe4433491bb081d68e84797e_3218e7d152830e08f6e764b9e0c3796df929ee2b, ApiSchemaACaptchaDtoCaptchaVerify_c3cd80b1eeafe39bfe4433491bb081d68e84797e_3218e7d152830e08f6e764b9e0c3796df929ee2bPartial, ApiSchemaAJwtDtoJwtToken, ApiSchemaAJwtDtoJwtTokenPartial, ApiSchemaAMenuDtoMenuGroup, ApiSchemaAMenuDtoMenuGroupPartial, ApiSchemaAMenuDtoMenuItem, ApiSchemaAMenuDtoMenuItemMeta, ApiSchemaAMenuDtoMenuItemMetaPartial, ApiSchemaAMenuDtoMenuItemPartial, ApiSchemaAMenuDtoMenus, ApiSchemaAMenuDtoMenusPartial, ApiSchemaAPaypalDtoPaypalOrderRecordOptions, ApiSchemaAPaypalDtoPaypalOrderRecordOptionsPartial, ApiSchemaAPaypalDtoPaypalOrderRecordPayload, ApiSchemaAPaypalDtoPaypalOrderRecordPayloadPartial, ApiSchemaAPaypalEntityPaypalRecord, ApiSchemaAPaypalEntityPaypalRecordPartial, ApiSchemaAPermissionDtoPermissions, ApiSchemaAPermissionDtoPermissionsPartial, ApiSchemaAPlayDtoPlay, ApiSchemaAPlayDtoPlayPartial, ApiSchemaCaptcha, ApiSchemaHome, ApiSchemaHomeBaseMenu, ApiSchemaHomeBasePermission, ApiSchemaHomeUserDtoLogin, ApiSchemaHomeUserDtoLoginPartial, ApiSchemaHomeUserDtoPassport, ApiSchemaHomeUserDtoPassportJwt, ApiSchemaHomeUserDtoPassportJwtPartial, ApiSchemaHomeUserDtoPassportPartial, ApiSchemaHomeUserDtoRegister, ApiSchemaHomeUserDtoRegisterPartial, ApiSchemaHomeUserEntityRole, ApiSchemaHomeUserEntityRolePartial, ApiSchemaHomeUserEntityUser, ApiSchemaHomeUserEntityUserPartial, ApiSchemaHomeUserPassport, ApiSchemaTestCaptchaDtoSignin, ApiSchemaTestCaptchaDtoSigninPartial, ApiSchemaTestRestDtoProductCreate, ApiSchemaTestRestDtoProductCreatePartial, ApiSchemaTestRestDtoProductQueryRes, ApiSchemaTestRestDtoProductQueryResPartial, ApiSchemaTestRestDtoProductUpdate, ApiSchemaTestRestDtoProductUpdatePartial, ApiSchemaTestRestEntityProduct, ApiSchemaTestRestEntityProductPartial, ApiSchemaTestSsrDtoTestBody, ApiSchemaTestSsrDtoTestBodyPartial, ApiSchemaTestSsrDtoTestDetail, ApiSchemaTestSsrDtoTestDetailPartial, ApiSchemaTestSsrDtoTestResult, ApiSchemaTestSsrDtoTestResultPartial, ApiSchemaTestSsrToolOne, ApiSchemaTestVonaDtoCategoryTree, ApiSchemaTestVonaDtoCategoryTreePartial, ApiSchemaTestVonaDtoOrderCreate, ApiSchemaTestVonaDtoOrderCreatePartial, ApiSchemaTestVonaDtoOrderResult, ApiSchemaTestVonaDtoOrderResultPage, ApiSchemaTestVonaDtoOrderResultPagePartial, ApiSchemaTestVonaDtoOrderResultPartial, ApiSchemaTestVonaDtoOrderUpdate, ApiSchemaTestVonaDtoOrderUpdatePartial, ApiSchemaTestVonaDtoPostAggregate, ApiSchemaTestVonaDtoPostAggregatePartial, ApiSchemaTestVonaDtoPostCreate, ApiSchemaTestVonaDtoPostCreatePartial, ApiSchemaTestVonaDtoPostGroup, ApiSchemaTestVonaDtoPostGroupPartial, ApiSchemaTestVonaDtoPostQueryRes, ApiSchemaTestVonaDtoPostQueryResPartial, ApiSchemaTestVonaDtoRoleLazy, ApiSchemaTestVonaDtoRoleLazyPartial, ApiSchemaTestVonaDtoSerializerArray, ApiSchemaTestVonaDtoSerializerArrayPartial, ApiSchemaTestVonaDtoSerializerLazy, ApiSchemaTestVonaDtoSerializerLazyPartial, ApiSchemaTestVonaDtoSerializerSimple, ApiSchemaTestVonaDtoSerializerSimplePartial, ApiSchemaTestVonaDtoSerializerSimple_1c4b95bcfe8fe28a56dbcc7028097cf11836b4fc, ApiSchemaTestVonaDtoSerializerSimple_1c4b95bcfe8fe28a56dbcc7028097cf11836b4fcPartial, ApiSchemaTestVonaDtoSerializerSimple_542f7be0da9b85a67248a6a1a3629e72de5fdb33_cff0ae112a392da58caf5aa905749f3c4444c4ab, ApiSchemaTestVonaDtoSerializerSimple_542f7be0da9b85a67248a6a1a3629e72de5fdb33_cff0ae112a392da58caf5aa905749f3c4444c4abPartial, ApiSchemaTestVonaDtoUser, ApiSchemaTestVonaDtoUserCreate, ApiSchemaTestVonaDtoUserCreatePartial, ApiSchemaTestVonaDtoUserLazy, ApiSchemaTestVonaDtoUserLazyPartial, ApiSchemaTestVonaDtoUserPartial, ApiSchemaTestVonaDtoUserUpdate, ApiSchemaTestVonaDtoUserUpdatePartial, ApiSchemaTestVonaEntityCategory_2c7d642ee581efa300341e343180fbb0ecdc785d, ApiSchemaTestVonaEntityCategory_2c7d642ee581efa300341e343180fbb0ecdc785dPartial, ApiSchemaTestVonaEntityPost_729883d7de16ce4401b26f75bebe618c8948ff64, ApiSchemaTestVonaEntityPost_729883d7de16ce4401b26f75bebe618c8948ff64Partial, ApiSchemaTestVonaEntityPost_a6ba2076b5b70a3c098374cc82d418bd1ab226c3, ApiSchemaTestVonaEntityPost_a6ba2076b5b70a3c098374cc82d418bd1ab226c3Partial, ApiSchemaTestVonaEntityProduct, ApiSchemaTestVonaEntityProductPartial, ApiSchemaTestVonaEntityProduct_29731960f3f38d3572bc2f8a01a7498bfe927055, ApiSchemaTestVonaEntityProduct_29731960f3f38d3572bc2f8a01a7498bfe927055Partial, ApiSchemaTestVonaEntityProduct_9cf2c6bcd41713270c34bcfce21b7b4942e3fbc6, ApiSchemaTestVonaEntityProduct_9cf2c6bcd41713270c34bcfce21b7b4942e3fbc6Partial, ApiSchemaTestVonaEntityProduct_bce173590aaef19772f1ae3a82196493c2633e2e, ApiSchemaTestVonaEntityProduct_bce173590aaef19772f1ae3a82196493c2633e2ePartial, ApiSchemaTestVonaEntityUser_2c7d642ee581efa300341e343180fbb0ecdc785d_1816ff740d81c738ec055c7038bbd93beb9405a7, ApiSchemaTestVonaEntityUser_2c7d642ee581efa300341e343180fbb0ecdc785d_1816ff740d81c738ec055c7038bbd93beb9405a7Partial, ApiTestSsrToolOne, ApiTodo, ApiTodoEntity, ApiTodoIntertBody, ApiTodoUpdateBody, BehaviorFormField, BehaviorFormFieldLayoutLogin, Component, ControllerActionBack, ControllerActionBackProps, ControllerActionCreate, ControllerActionCreateProps, ControllerActionSubmit, ControllerActionSubmitProps, ControllerActionView, ControllerActionViewProps, ControllerBlockFilter, ControllerBlockFilterProps, ControllerBlockForm, ControllerBlockFormProps, ControllerBlockPage, ControllerBlockPageEntry, ControllerBlockPageEntryProps, ControllerBlockPageProps, ControllerBlockPager, ControllerBlockPagerProps, ControllerBlockTable, ControllerBlockTableProps, ControllerBlockToolbarBulk, ControllerBlockToolbarBulkProps, ControllerBlockToolbarRow, ControllerBlockToolbarRowProps, ControllerCardModels, ControllerDateRange, ControllerDateRangeModels, ControllerDateRangeProps, ControllerFormFieldCaptcha, ControllerFormFieldCaptchaProps, ControllerFormFieldCurrency, ControllerFormFieldCurrencyProps, ControllerFormFieldDate, ControllerFormFieldDateProps, ControllerFormFieldDateRange, ControllerFormFieldDateRangeProps, ControllerFormFieldInput, ControllerFormFieldInputProps, ControllerFormFieldTest, ControllerFormFieldTestProps, ControllerItemLink, ControllerItemLinkProps, ControllerLayoutEmpty, ControllerLayoutEmptyProps, ControllerLayoutTabs, ControllerLayoutTabsProps, ControllerPage, ControllerPageAuthCallback, ControllerPageAuthCallbackSchemaQuery, ControllerPageComponent, ControllerPageErrorExpired, ControllerPageErrorExpiredSchemaQuery, ControllerPageErrorNotFound, ControllerPageHome, ControllerPageItem, ControllerPageItemSchemaParams, ControllerPageItemSchemaQuery, ControllerPageLocale, ControllerPageLogin$1 as ControllerPageLogin, ControllerPageProps, ControllerPageRouteParams, ControllerPageRouteParamsSchemaParams, ControllerPageRouteParamsSchemaQuery, ControllerPageRouteQuery, ControllerPageRouteQueryB, ControllerPageRouteQueryBSchemaParams, ControllerPageRouteQueryBSchemaQuery, ControllerPageRouteQuerySchemaParams, ControllerPageRouteQuerySchemaQuery, ControllerPageState, ControllerPageStyle, ControllerPageTest, ControllerPageTodo, ControllerPageToolOne$1 as ControllerPageToolOne, ControllerPageToolOneSchemaParams, ControllerPageToolOneSchemaQuery, ControllerPageToolTwo, ControllerPageToolTwoSchemaParams, ControllerPageToolTwoSchemaQuery, ControllerTable, ControllerTableCellTest, ControllerTableCellTestProps, ControllerTableProps, ControllerTest, ControllerTest2, ControllerTest2Models, ControllerTest2Props, ControllerTestModels, ControllerTestProps, CssBase, IActionOptionsAlert, IActionOptionsConfirm, IActionOptionsCopy, IActionOptionsCreate, IActionOptionsDelete, IActionOptionsEdit, IActionOptionsExpr, IActionOptionsLog, IActionOptionsSetValue, IActionOptionsTest, IActionOptionsView, IBehaviorOptionsFormField, IBehaviorOptionsFormFieldLayoutLogin, IBehaviorPropsInputFormField, IBehaviorPropsInputFormFieldLayoutLogin, IBehaviorPropsOutputFormField, IBehaviorPropsOutputFormFieldLayoutLogin, IBehaviorResourceFormFieldLayoutOptions, ICssOptionsBase, IModelOptionsLayout, IModelOptionsMenu, IModelOptionsPassport, IModelOptionsTest, IModelOptionsTodo, IModuleApiSchema, IResourceFormFieldCaptchaOptions, IResourceFormFieldCurrencyOptions, IResourceFormFieldDateOptions, IResourceFormFieldDateRangeOptions, IResourceFormFieldInputOptions, IServiceSsrLayoutOptions, ITableCellOptionsActionDelete, ITableCellOptionsActionOperationsRow, ITableCellOptionsActionUpdate, ITableCellOptionsActionView, ITableCellOptionsCurrency, ITableCellOptionsDate, ITableCellOptionsTest, IThemeOptionsDefault, IThemeOptionsOrange, Main, MetaThemeHandler, ModelLayout, ModelMenu, ModelPassport, ModelTest, ModelTodo, NSControllerPageAuthCallback, NSControllerPageErrorExpired, NSControllerPageItem, NSControllerPageRouteParams, NSControllerPageRouteQuery, NSControllerPageRouteQueryB, NSControllerPageToolOne, NSControllerPageToolTwo, OpenApiBaseURL, RenderContent, RenderHeader, RenderLayoutTabs, RenderLocale, RenderMenu, RenderPageLogin, RenderPageToolOne, RenderSidebar, RenderTable, RenderTabs, RenderTheme, RenderUser, ScopeModuleBasicActions, ScopeModuleBasicActionssync, ScopeModuleBasicAdapter, ScopeModuleBasicCaptcha, ScopeModuleBasicCurrency, ScopeModuleBasicDate, ScopeModuleBasicForm, ScopeModuleBasicInput, ScopeModuleBasicPage, ScopeModuleBasicPageentry, ScopeModuleBasicTable, ScopeModuleDemoBasic, ScopeModuleDemoStudent, ScopeModuleDemoTodo, ScopeModuleDevuiAdapter, ScopeModuleHomeApi, ScopeModuleHomeBase, ScopeModuleHomeIcon, ScopeModuleHomeIndex, ScopeModuleHomeLayoutempty, ScopeModuleHomeLayouttabs, ScopeModuleHomeLogin, ScopeModuleHomePassport, ScopeModuleHomeTheme, ServiceJwtAdapter, ServiceRouterGuards, ServiceSsr, ServiceSsrLayout, StyleLayoutTabs$1 as StyleLayoutTabs, TableCellActionDelete, TableCellActionOperationsRow, TableCellActionUpdate, TableCellActionView, TableCellCurrency, TableCellDate, TableCellTest, ThemeDefault, ThemeOrange, ThemeTokenCustom, TypeActionAlertResult, TypeActionConfirmResult, TypeActionCopyResult, TypeActionCreateResult, TypeActionDeleteResult, TypeActionEditResult, TypeActionExprResult, TypeActionLogResult, TypeActionSetValueResult, TypeActionTestResult, TypeActionViewResult, TypeControllerActionBackPublicProps, TypeControllerActionCreatePublicProps, TypeControllerActionSubmitPublicProps, TypeControllerActionViewPublicProps, TypeControllerBlockFilterPublicProps, TypeControllerBlockFormPublicProps, TypeControllerBlockPageEntryPublicProps, TypeControllerBlockPagePublicProps, TypeControllerBlockPagerPublicProps, TypeControllerBlockTablePublicProps, TypeControllerBlockToolbarBulkPublicProps, TypeControllerBlockToolbarRowPublicProps, TypeControllerDateRangePublicProps, TypeControllerFormFieldCaptchaPublicProps, TypeControllerFormFieldCurrencyPublicProps, TypeControllerFormFieldDatePublicProps, TypeControllerFormFieldDateRangePublicProps, TypeControllerFormFieldInputPublicProps, TypeControllerFormFieldTestPublicProps, TypeControllerItemLinkPublicProps, TypeControllerLayoutEmptyPublicProps, TypeControllerLayoutTabsPublicProps, TypeControllerPagePublicProps, TypeControllerTableCellTestPublicProps, TypeControllerTablePublicProps, TypeControllerTest2PublicProps, TypeControllerTestPublicProps, TypeDateFormatPreset, TypeMenuGroup, TypeMenuItem, TypeMenuTree, ZActionBack, ZActionCreate, ZActionSubmit, ZActionView, ZBlockFilter, ZBlockForm, ZBlockPage, ZBlockPageEntry, ZBlockPager, ZBlockTable, ZBlockToolbarBulk, ZBlockToolbarRow, ZDateRange, ZFormFieldCaptcha, ZFormFieldCurrency, ZFormFieldDate, ZFormFieldDateRange, ZFormFieldInput, ZFormFieldTest, ZItemLink, ZLayoutEmpty, ZLayoutTabs, ZPage, ZPageAuthCallback, ZPageComponent, ZPageErrorExpired, ZPageErrorNotFound, ZPageHome, ZPageItem, ZPageLocale, ZPageLogin, ZPageRouteParams, ZPageRouteQuery, ZPageRouteQueryB, ZPageState, ZPageStyle, ZPageTest, ZPageTodo, ZPageToolOne, ZPageToolTwo, ZTable, ZTableCellTest, ZTest, ZTest2, currencyFormat, currencyUpdate, dateFormatUtil, definePropertyScopeBase, icons, operations, paths, render, webhooks };
+export { $defs, AopHome, AopHome3, ApiApiCaptchacreateMethod, ApiApiCaptchacreatePath, ApiApiCaptchacreateRequestBody, ApiApiCaptchacreateResponseBody, ApiApiCaptcharefreshMethod, ApiApiCaptcharefreshPath, ApiApiCaptcharefreshRequestBody, ApiApiCaptcharefreshResponseBody, ApiApiCaptchaverifyImmediateMethod, ApiApiCaptchaverifyImmediatePath, ApiApiCaptchaverifyImmediateRequestBody, ApiApiCaptchaverifyImmediateResponseBody, ApiApiHomeBaseMenuretrieveMenusMethod, ApiApiHomeBaseMenuretrieveMenusPath, ApiApiHomeBaseMenuretrieveMenusRequestParams, ApiApiHomeBaseMenuretrieveMenusResponseBody, ApiApiHomeBasePermissionretrievePermissionsMethod, ApiApiHomeBasePermissionretrievePermissionsPath, ApiApiHomeBasePermissionretrievePermissionsRequestParams, ApiApiHomeBasePermissionretrievePermissionsResponseBody, ApiApiHomeUserPassportassociateMethod, ApiApiHomeUserPassportassociatePath, ApiApiHomeUserPassportassociateRequestParams, ApiApiHomeUserPassportassociateRequestQuery, ApiApiHomeUserPassportassociateResponseBody, ApiApiHomeUserPassportcreatePassportJwtFromOauthCodeMethod, ApiApiHomeUserPassportcreatePassportJwtFromOauthCodePath, ApiApiHomeUserPassportcreatePassportJwtFromOauthCodeRequestBody, ApiApiHomeUserPassportcreatePassportJwtFromOauthCodeResponseBody, ApiApiHomeUserPassportcreateTempAuthTokenMethod, ApiApiHomeUserPassportcreateTempAuthTokenPath, ApiApiHomeUserPassportcreateTempAuthTokenRequestQuery, ApiApiHomeUserPassportcreateTempAuthTokenResponseBody, ApiApiHomeUserPassportcurrentMethod, ApiApiHomeUserPassportcurrentPath, ApiApiHomeUserPassportcurrentResponseBody, ApiApiHomeUserPassportloginMethod, ApiApiHomeUserPassportloginOauthMethod, ApiApiHomeUserPassportloginOauthPath, ApiApiHomeUserPassportloginOauthRequestParams, ApiApiHomeUserPassportloginOauthRequestQuery, ApiApiHomeUserPassportloginOauthResponseBody, ApiApiHomeUserPassportloginPath, ApiApiHomeUserPassportloginRequestBody, ApiApiHomeUserPassportloginResponseBody, ApiApiHomeUserPassportlogoutMethod, ApiApiHomeUserPassportlogoutPath, ApiApiHomeUserPassportlogoutResponseBody, ApiApiHomeUserPassportmigrateMethod, ApiApiHomeUserPassportmigratePath, ApiApiHomeUserPassportmigrateRequestParams, ApiApiHomeUserPassportmigrateRequestQuery, ApiApiHomeUserPassportmigrateResponseBody, ApiApiHomeUserPassportrefreshAuthTokenMethod, ApiApiHomeUserPassportrefreshAuthTokenPath, ApiApiHomeUserPassportrefreshAuthTokenRequestBody, ApiApiHomeUserPassportrefreshAuthTokenResponseBody, ApiApiHomeUserPassportregisterMethod, ApiApiHomeUserPassportregisterPath, ApiApiHomeUserPassportregisterRequestBody, ApiApiHomeUserPassportregisterResponseBody, ApiApiHomeindexMethod, ApiApiHomeindexPath, ApiApiHomeindexResponseBody, ApiApiTestSsrToolOnetestGetMethod, ApiApiTestSsrToolOnetestGetPath, ApiApiTestSsrToolOnetestGetRequestParams, ApiApiTestSsrToolOnetestGetRequestQuery, ApiApiTestSsrToolOnetestGetResponseBody, ApiApiTestSsrToolOnetestMethod, ApiApiTestSsrToolOnetestPath, ApiApiTestSsrToolOnetestRequestBody, ApiApiTestSsrToolOnetestRequestParams, ApiApiTestSsrToolOnetestRequestQuery, ApiApiTestSsrToolOnetestResponseBody, ApiCaptcha, ApiHome, ApiHomeBaseMenu, ApiHomeBasePermission, ApiHomeUserPassport, ApiSchemaAAuthDtoAuth, ApiSchemaAAuthDtoAuthPartial, ApiSchemaACaptchaDtoCaptchaData, ApiSchemaACaptchaDtoCaptchaDataPartial, ApiSchemaACaptchaDtoCaptchaVerify_c3cd80b1eeafe39bfe4433491bb081d68e84797e, ApiSchemaACaptchaDtoCaptchaVerify_c3cd80b1eeafe39bfe4433491bb081d68e84797ePartial, ApiSchemaACaptchaDtoCaptchaVerify_c3cd80b1eeafe39bfe4433491bb081d68e84797e_3218e7d152830e08f6e764b9e0c3796df929ee2b, ApiSchemaACaptchaDtoCaptchaVerify_c3cd80b1eeafe39bfe4433491bb081d68e84797e_3218e7d152830e08f6e764b9e0c3796df929ee2bPartial, ApiSchemaAJwtDtoJwtToken, ApiSchemaAJwtDtoJwtTokenPartial, ApiSchemaAMenuDtoMenuGroup, ApiSchemaAMenuDtoMenuGroupPartial, ApiSchemaAMenuDtoMenuItem, ApiSchemaAMenuDtoMenuItemMeta, ApiSchemaAMenuDtoMenuItemMetaPartial, ApiSchemaAMenuDtoMenuItemPartial, ApiSchemaAMenuDtoMenus, ApiSchemaAMenuDtoMenusPartial, ApiSchemaAPaypalDtoPaypalOrderRecordOptions, ApiSchemaAPaypalDtoPaypalOrderRecordOptionsPartial, ApiSchemaAPaypalDtoPaypalOrderRecordPayload, ApiSchemaAPaypalDtoPaypalOrderRecordPayloadPartial, ApiSchemaAPaypalEntityPaypalRecord, ApiSchemaAPaypalEntityPaypalRecordPartial, ApiSchemaAPermissionDtoPermissions, ApiSchemaAPermissionDtoPermissionsPartial, ApiSchemaAPlayDtoPlay, ApiSchemaAPlayDtoPlayPartial, ApiSchemaCaptcha, ApiSchemaHome, ApiSchemaHomeBaseMenu, ApiSchemaHomeBasePermission, ApiSchemaHomeUserDtoLogin, ApiSchemaHomeUserDtoLoginPartial, ApiSchemaHomeUserDtoPassport, ApiSchemaHomeUserDtoPassportJwt, ApiSchemaHomeUserDtoPassportJwtPartial, ApiSchemaHomeUserDtoPassportPartial, ApiSchemaHomeUserDtoRegister, ApiSchemaHomeUserDtoRegisterPartial, ApiSchemaHomeUserEntityRole, ApiSchemaHomeUserEntityRolePartial, ApiSchemaHomeUserEntityUser, ApiSchemaHomeUserEntityUserPartial, ApiSchemaHomeUserPassport, ApiSchemaTestCaptchaDtoSignin, ApiSchemaTestCaptchaDtoSigninPartial, ApiSchemaTestRestDtoProductCreate, ApiSchemaTestRestDtoProductCreatePartial, ApiSchemaTestRestDtoProductQueryRes, ApiSchemaTestRestDtoProductQueryResPartial, ApiSchemaTestRestDtoProductUpdate, ApiSchemaTestRestDtoProductUpdatePartial, ApiSchemaTestRestEntityProduct, ApiSchemaTestRestEntityProductPartial, ApiSchemaTestSsrDtoTestBody, ApiSchemaTestSsrDtoTestBodyPartial, ApiSchemaTestSsrDtoTestDetail, ApiSchemaTestSsrDtoTestDetailPartial, ApiSchemaTestSsrDtoTestResult, ApiSchemaTestSsrDtoTestResultPartial, ApiSchemaTestSsrToolOne, ApiSchemaTestVonaDtoCategoryTree, ApiSchemaTestVonaDtoCategoryTreePartial, ApiSchemaTestVonaDtoOrderCreate, ApiSchemaTestVonaDtoOrderCreatePartial, ApiSchemaTestVonaDtoOrderResult, ApiSchemaTestVonaDtoOrderResultPage, ApiSchemaTestVonaDtoOrderResultPagePartial, ApiSchemaTestVonaDtoOrderResultPartial, ApiSchemaTestVonaDtoOrderUpdate, ApiSchemaTestVonaDtoOrderUpdatePartial, ApiSchemaTestVonaDtoPostAggregate, ApiSchemaTestVonaDtoPostAggregatePartial, ApiSchemaTestVonaDtoPostCreate, ApiSchemaTestVonaDtoPostCreatePartial, ApiSchemaTestVonaDtoPostGroup, ApiSchemaTestVonaDtoPostGroupPartial, ApiSchemaTestVonaDtoPostQueryRes, ApiSchemaTestVonaDtoPostQueryResPartial, ApiSchemaTestVonaDtoRoleLazy, ApiSchemaTestVonaDtoRoleLazyPartial, ApiSchemaTestVonaDtoSerializerArray, ApiSchemaTestVonaDtoSerializerArrayPartial, ApiSchemaTestVonaDtoSerializerLazy, ApiSchemaTestVonaDtoSerializerLazyPartial, ApiSchemaTestVonaDtoSerializerSimple, ApiSchemaTestVonaDtoSerializerSimplePartial, ApiSchemaTestVonaDtoSerializerSimple_1c4b95bcfe8fe28a56dbcc7028097cf11836b4fc, ApiSchemaTestVonaDtoSerializerSimple_1c4b95bcfe8fe28a56dbcc7028097cf11836b4fcPartial, ApiSchemaTestVonaDtoSerializerSimple_542f7be0da9b85a67248a6a1a3629e72de5fdb33_cff0ae112a392da58caf5aa905749f3c4444c4ab, ApiSchemaTestVonaDtoSerializerSimple_542f7be0da9b85a67248a6a1a3629e72de5fdb33_cff0ae112a392da58caf5aa905749f3c4444c4abPartial, ApiSchemaTestVonaDtoUser, ApiSchemaTestVonaDtoUserCreate, ApiSchemaTestVonaDtoUserCreatePartial, ApiSchemaTestVonaDtoUserLazy, ApiSchemaTestVonaDtoUserLazyPartial, ApiSchemaTestVonaDtoUserPartial, ApiSchemaTestVonaDtoUserUpdate, ApiSchemaTestVonaDtoUserUpdatePartial, ApiSchemaTestVonaEntityCategory_2c7d642ee581efa300341e343180fbb0ecdc785d, ApiSchemaTestVonaEntityCategory_2c7d642ee581efa300341e343180fbb0ecdc785dPartial, ApiSchemaTestVonaEntityPost_729883d7de16ce4401b26f75bebe618c8948ff64, ApiSchemaTestVonaEntityPost_729883d7de16ce4401b26f75bebe618c8948ff64Partial, ApiSchemaTestVonaEntityPost_a6ba2076b5b70a3c098374cc82d418bd1ab226c3, ApiSchemaTestVonaEntityPost_a6ba2076b5b70a3c098374cc82d418bd1ab226c3Partial, ApiSchemaTestVonaEntityProduct, ApiSchemaTestVonaEntityProductPartial, ApiSchemaTestVonaEntityProduct_29731960f3f38d3572bc2f8a01a7498bfe927055, ApiSchemaTestVonaEntityProduct_29731960f3f38d3572bc2f8a01a7498bfe927055Partial, ApiSchemaTestVonaEntityProduct_9cf2c6bcd41713270c34bcfce21b7b4942e3fbc6, ApiSchemaTestVonaEntityProduct_9cf2c6bcd41713270c34bcfce21b7b4942e3fbc6Partial, ApiSchemaTestVonaEntityProduct_bce173590aaef19772f1ae3a82196493c2633e2e, ApiSchemaTestVonaEntityProduct_bce173590aaef19772f1ae3a82196493c2633e2ePartial, ApiSchemaTestVonaEntityUser_2c7d642ee581efa300341e343180fbb0ecdc785d_1816ff740d81c738ec055c7038bbd93beb9405a7, ApiSchemaTestVonaEntityUser_2c7d642ee581efa300341e343180fbb0ecdc785d_1816ff740d81c738ec055c7038bbd93beb9405a7Partial, ApiTestSsrToolOne, ApiTodo, ApiTodoEntity, ApiTodoIntertBody, ApiTodoUpdateBody, BehaviorFormField, BehaviorFormFieldLayoutLogin, CommandAlert, CommandConfirm, CommandCopy, CommandCreate, CommandDelete, CommandEdit, CommandExpr, CommandLog, CommandSetValue, CommandTest, CommandView, ControllerActionBack, ControllerActionBackProps, ControllerActionCreate, ControllerActionCreateProps, ControllerActionSubmit, ControllerActionSubmitProps, ControllerActionView, ControllerActionViewProps, ControllerBlockFilter, ControllerBlockFilterProps, ControllerBlockForm, ControllerBlockFormProps, ControllerBlockPage, ControllerBlockPageEntry, ControllerBlockPageEntryProps, ControllerBlockPageProps, ControllerBlockPager, ControllerBlockPagerProps, ControllerBlockTable, ControllerBlockTableProps, ControllerBlockToolbarBulk, ControllerBlockToolbarBulkProps, ControllerBlockToolbarRow, ControllerBlockToolbarRowProps, ControllerCardModels, ControllerDateRange, ControllerDateRangeModels, ControllerDateRangeProps, ControllerFormFieldCaptcha, ControllerFormFieldCaptchaProps, ControllerFormFieldCurrency, ControllerFormFieldCurrencyProps, ControllerFormFieldDate, ControllerFormFieldDateProps, ControllerFormFieldDateRange, ControllerFormFieldDateRangeProps, ControllerFormFieldInput, ControllerFormFieldInputProps, ControllerFormFieldTest, ControllerFormFieldTestProps, ControllerItemLink, ControllerItemLinkProps, ControllerLayoutEmpty, ControllerLayoutEmptyProps, ControllerLayoutTabs, ControllerLayoutTabsProps, ControllerPage, ControllerPageAuthCallback, ControllerPageAuthCallbackSchemaQuery, ControllerPageComponent, ControllerPageErrorExpired, ControllerPageErrorExpiredSchemaQuery, ControllerPageErrorNotFound, ControllerPageHome, ControllerPageItem, ControllerPageItemSchemaParams, ControllerPageItemSchemaQuery, ControllerPageLocale, ControllerPageLogin$1 as ControllerPageLogin, ControllerPageProps, ControllerPageRouteParams, ControllerPageRouteParamsSchemaParams, ControllerPageRouteParamsSchemaQuery, ControllerPageRouteQuery, ControllerPageRouteQueryB, ControllerPageRouteQueryBSchemaParams, ControllerPageRouteQueryBSchemaQuery, ControllerPageRouteQuerySchemaParams, ControllerPageRouteQuerySchemaQuery, ControllerPageState, ControllerPageStyle, ControllerPageTest, ControllerPageTodo, ControllerPageToolOne$1 as ControllerPageToolOne, ControllerPageToolOneSchemaParams, ControllerPageToolOneSchemaQuery, ControllerPageToolTwo, ControllerPageToolTwoSchemaParams, ControllerPageToolTwoSchemaQuery, ControllerTable, ControllerTableCellTest, ControllerTableCellTestProps, ControllerTableProps, ControllerTest, ControllerTest2, ControllerTest2Models, ControllerTest2Props, ControllerTestModels, ControllerTestProps, CssBase, IBehaviorOptionsFormField, IBehaviorOptionsFormFieldLayoutLogin, IBehaviorPropsInputFormField, IBehaviorPropsInputFormFieldLayoutLogin, IBehaviorPropsOutputFormField, IBehaviorPropsOutputFormFieldLayoutLogin, IBehaviorResourceFormFieldLayoutOptions, ICommandOptionsAlert, ICommandOptionsConfirm, ICommandOptionsCopy, ICommandOptionsCreate, ICommandOptionsDelete, ICommandOptionsEdit, ICommandOptionsExpr, ICommandOptionsLog, ICommandOptionsSetValue, ICommandOptionsTest, ICommandOptionsView, ICssOptionsBase, IModelOptionsLayout, IModelOptionsMenu, IModelOptionsPassport, IModelOptionsTest, IModelOptionsTodo, IModuleApiSchema, IResourceFormFieldCaptchaOptions, IResourceFormFieldCurrencyOptions, IResourceFormFieldDateOptions, IResourceFormFieldDateRangeOptions, IResourceFormFieldInputOptions, IServiceSsrLayoutOptions, ITableCellOptionsActionDelete, ITableCellOptionsActionOperationsRow, ITableCellOptionsActionUpdate, ITableCellOptionsActionView, ITableCellOptionsCurrency, ITableCellOptionsDate, ITableCellOptionsTest, IThemeOptionsDefault, IThemeOptionsOrange, Main, MetaThemeHandler, ModelLayout, ModelMenu, ModelPassport, ModelTest, ModelTodo, NSControllerPageAuthCallback, NSControllerPageErrorExpired, NSControllerPageItem, NSControllerPageRouteParams, NSControllerPageRouteQuery, NSControllerPageRouteQueryB, NSControllerPageToolOne, NSControllerPageToolTwo, OpenApiBaseURL, RenderContent, RenderHeader, RenderLayoutTabs, RenderLocale, RenderMenu, RenderPageLogin, RenderPageToolOne, RenderSidebar, RenderTable, RenderTabs, RenderTheme, RenderUser, ScopeModuleBasicAdapter, ScopeModuleBasicCaptcha, ScopeModuleBasicCommands, ScopeModuleBasicCommandssync, ScopeModuleBasicCurrency, ScopeModuleBasicDate, ScopeModuleBasicForm, ScopeModuleBasicInput, ScopeModuleBasicPage, ScopeModuleBasicPageentry, ScopeModuleBasicTable, ScopeModuleDemoBasic, ScopeModuleDemoStudent, ScopeModuleDemoTodo, ScopeModuleDevuiAdapter, ScopeModuleHomeApi, ScopeModuleHomeBase, ScopeModuleHomeIcon, ScopeModuleHomeIndex, ScopeModuleHomeLayoutempty, ScopeModuleHomeLayouttabs, ScopeModuleHomeLogin, ScopeModuleHomePassport, ScopeModuleHomeTheme, ServiceJwtAdapter, ServiceRouterGuards, ServiceSsr, ServiceSsrLayout, StyleLayoutTabs$1 as StyleLayoutTabs, TableCellActionDelete, TableCellActionOperationsRow, TableCellActionUpdate, TableCellActionView, TableCellCurrency, TableCellDate, TableCellTest, ThemeDefault, ThemeOrange, ThemeTokenCustom, TypeCommandAlertResult, TypeCommandConfirmResult, TypeCommandCopyResult, TypeCommandCreateResult, TypeCommandDeleteResult, TypeCommandEditResult, TypeCommandExprResult, TypeCommandLogResult, TypeCommandSetValueResult, TypeCommandTestResult, TypeCommandViewResult, TypeControllerActionBackPublicProps, TypeControllerActionCreatePublicProps, TypeControllerActionSubmitPublicProps, TypeControllerActionViewPublicProps, TypeControllerBlockFilterPublicProps, TypeControllerBlockFormPublicProps, TypeControllerBlockPageEntryPublicProps, TypeControllerBlockPagePublicProps, TypeControllerBlockPagerPublicProps, TypeControllerBlockTablePublicProps, TypeControllerBlockToolbarBulkPublicProps, TypeControllerBlockToolbarRowPublicProps, TypeControllerDateRangePublicProps, TypeControllerFormFieldCaptchaPublicProps, TypeControllerFormFieldCurrencyPublicProps, TypeControllerFormFieldDatePublicProps, TypeControllerFormFieldDateRangePublicProps, TypeControllerFormFieldInputPublicProps, TypeControllerFormFieldTestPublicProps, TypeControllerItemLinkPublicProps, TypeControllerLayoutEmptyPublicProps, TypeControllerLayoutTabsPublicProps, TypeControllerPagePublicProps, TypeControllerTableCellTestPublicProps, TypeControllerTablePublicProps, TypeControllerTest2PublicProps, TypeControllerTestPublicProps, TypeDateFormatPreset, TypeMenuGroup, TypeMenuItem, TypeMenuTree, ZActionBack, ZActionCreate, ZActionSubmit, ZActionView, ZBlockFilter, ZBlockForm, ZBlockPage, ZBlockPageEntry, ZBlockPager, ZBlockTable, ZBlockToolbarBulk, ZBlockToolbarRow, ZDateRange, ZFormFieldCaptcha, ZFormFieldCurrency, ZFormFieldDate, ZFormFieldDateRange, ZFormFieldInput, ZFormFieldTest, ZItemLink, ZLayoutEmpty, ZLayoutTabs, ZPage, ZPageAuthCallback, ZPageComponent, ZPageErrorExpired, ZPageErrorNotFound, ZPageHome, ZPageItem, ZPageLocale, ZPageLogin, ZPageRouteParams, ZPageRouteQuery, ZPageRouteQueryB, ZPageState, ZPageStyle, ZPageTest, ZPageTodo, ZPageToolOne, ZPageToolTwo, ZTable, ZTableCellTest, ZTest, ZTest2, ZovaCommand, ZovaCommands, ZovaComponent, ZovaCssBase, ZovaCssMerge, ZovaEvent, ZovaIconName, ZovaRender, currencyFormat, currencyUpdate, dateFormatUtil, definePropertyScopeBase, icons, operations, paths, webhooks };
