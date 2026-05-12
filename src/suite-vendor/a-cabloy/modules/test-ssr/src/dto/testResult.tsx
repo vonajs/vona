@@ -7,7 +7,7 @@ import { text } from 'vona';
 import { $makeSchema, Api, v } from 'vona-module-a-openapiutils';
 import { Dto } from 'vona-module-a-web';
 import z from 'zod';
-import { Action, Component, render } from 'zova-rest-cabloy-basic-admin';
+import { render, ZovaEvent, ZovaCommand, ZovaComponent } from 'zova-rest-cabloy-basic-admin';
 
 import { $locale } from '../.metadata/locales.ts';
 import { DtoTestDetail } from './testDetail.ts';
@@ -48,18 +48,21 @@ export interface IDtoOptionsTestResult extends IDecoratorDtoOptions<
           <div>{$locale('TestApples_', 0)}</div>
           <div>{text`I have ${$locale('TestApples_', 1)}`}</div>
           <div>{text`cel://name+": ${$locale('TestApples_', 2)}"`}</div>
-          <Component
+          <ZovaComponent
             name="a-icon:icon"
             options={{
               name: '::home',
               width: 24,
             }}
             nativeOnClick={
-              <Event>
-                <Action name="basic-actionssync:log" options={{ message: 'sss' }}></Action>
-              </Event>
+              <ZovaEvent>
+                <ZovaCommand
+                  name="basic-commandssync:log"
+                  options={{ message: 'sss' }}
+                ></ZovaCommand>
+              </ZovaEvent>
             }
-          ></Component>
+          ></ZovaComponent>
         </div>,
       ),
       render.layout({
@@ -92,16 +95,19 @@ export interface IDtoOptionsTestResult extends IDecoratorDtoOptions<
             className="input"
             value={cel('getValue("name")')}
             onInput={
-              <Event>
-                <Action name="basic-actions:setValue" options={{ name: 'name' }}></Action>
-                <Action
-                  name="basic-actions:setValue"
+              <ZovaEvent>
+                <ZovaCommand
+                  name="basic-commands:setValue"
+                  options={{ name: 'name' }}
+                ></ZovaCommand>
+                <ZovaCommand
+                  name="basic-commands:setValue"
                   options={{ name: '_customCopied', value: false, disableNotifyChanged: true }}
-                ></Action>
-              </Event>
+                ></ZovaCommand>
+              </ZovaEvent>
             }
           ></input>
-          <Component
+          <ZovaComponent
             v-if={cel('getValue("_customCopied")==false')}
             name="a-icon:icon"
             style={{ cursor: 'pointer' }}
@@ -109,18 +115,18 @@ export interface IDtoOptionsTestResult extends IDecoratorDtoOptions<
               name: ':outline:copy-outline',
             }}
             nativeOnClick={
-              <Event>
-                <Action
-                  name="basic-actions:copy"
+              <ZovaEvent>
+                <ZovaCommand
+                  name="basic-commands:copy"
                   options={{ text: cel('getValue("name")') }}
-                ></Action>
-                <Action
-                  name="basic-actions:setValue"
+                ></ZovaCommand>
+                <ZovaCommand
+                  name="basic-commands:setValue"
                   options={{ name: '_customCopied', value: true }}
-                ></Action>
-              </Event>
+                ></ZovaCommand>
+              </ZovaEvent>
             }
-          ></Component>
+          ></ZovaComponent>
           <span v-if={cel('getValue("_customCopied")==true')}>Copied!</span>
         </div>,
       ),
