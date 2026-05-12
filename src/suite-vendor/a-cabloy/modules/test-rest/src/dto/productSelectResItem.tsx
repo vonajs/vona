@@ -30,8 +30,8 @@ export class DtoProductSelectResItem extends $Dto.get(() => ModelProduct) {
     render.order(1, 'max'),
     render.cell('basic-table:actionOperationsRow', {
       actions: [
-        render.tableActionRow('basic-table:actionUpdate'),
-        render.tableActionRow('basic-table:actionDelete'),
+        ZovaRender.tableActionRow('basic-table:actionUpdate'),
+        ZovaRender.tableActionRow('basic-table:actionDelete'),
       ],
     }),
   )
