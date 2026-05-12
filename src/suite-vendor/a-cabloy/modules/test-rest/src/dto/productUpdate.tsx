@@ -13,10 +13,10 @@ export interface IDtoOptionsProductUpdate extends IDecoratorDtoOptions {}
   openapi: { title: $locale('UpdateProduct') },
   fields: {},
   blocks: [
-    render.block('basic-pageentry:blockPageEntry', {
+    ZovaRender.block('basic-pageentry:blockPageEntry', {
       blocks: [
-        render.block('basic-pageentry:blockForm'),
-        render.block('basic-pageentry:blockToolbarRow', {
+        ZovaRender.block('basic-pageentry:blockForm'),
+        ZovaRender.block('basic-pageentry:blockToolbarRow', {
           actions: [
             render.formActionRow('basic-form:actionSubmit', {
               permission: { action: 'update', formScene: ['create', 'edit'] },

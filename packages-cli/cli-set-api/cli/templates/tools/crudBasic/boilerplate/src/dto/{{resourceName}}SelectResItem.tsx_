@@ -12,14 +12,14 @@ export interface IDtoOptions<%=argv.resourceNameCapitalize%>SelectResItem extend
 
 @Dto<IDtoOptions<%=argv.resourceNameCapitalize%>SelectResItem>({
   blocks: [
-    render.block('basic-page:blockPage', {
+    ZovaRender.block('basic-page:blockPage', {
       blocks: [
-        render.block('basic-page:blockFilter'),
-        render.block('basic-page:blockToolbarBulk', {
+        ZovaRender.block('basic-page:blockFilter'),
+        ZovaRender.block('basic-page:blockToolbarBulk', {
           actions: [render.tableActionBulk('basic-table:actionCreate')],
         }),
-        render.block('basic-page:blockTable'),
-        render.block('basic-page:blockPager'),
+        ZovaRender.block('basic-page:blockTable'),
+        ZovaRender.block('basic-page:blockPager'),
       ],
     }),
   ],
