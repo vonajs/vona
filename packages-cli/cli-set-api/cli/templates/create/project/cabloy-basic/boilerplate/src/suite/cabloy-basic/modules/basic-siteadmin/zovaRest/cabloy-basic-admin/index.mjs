@@ -45,25 +45,30 @@
 
 
 
-
 //#endregion
 //#region .zova-rest/utils.ts
-function $cssBase(name) {
+function ZovaCssBase(name) {
 	return `cssBase:${name}`;
 }
-function $cssMerge(...classes) {
+function ZovaCssMerge(...classes) {
 	return classes;
 }
-function $iconName(name) {
+function ZovaIconName(name) {
 	return name;
 }
-function Action(options) {
-	if (!options.name) throw new Error("should specify the action name");
-	return options.name.replace(":", ".action.");
-}
-function Component(options) {
+function ZovaComponent(options) {
 	if (!options.name) throw new Error("should specify the component name");
 	return options.name;
+}
+function ZovaCommand(options) {
+	if (!options.name) throw new Error("should specify the command name");
+	return options.name.replace(":", ".command.");
+}
+function ZovaEvent(_options) {
+	return "ZovaEvent";
+}
+function ZovaCommands(_options) {
+	return "ZovaCommands";
 }
 const OrderLevelBaseMap = {
 	core: 100,
@@ -200,7 +205,7 @@ function schemaRenderOrder(order, level, scene) {
 }
 //#endregion
 //#region .zova-rest/render.ts
-const render = {
+const ZovaRender = {
 	layout: schemaRenderLayout,
 	visible: schemaRenderVisible,
 	readonly: schemaRenderReadonly,
@@ -221,4 +226,4 @@ const render = {
 	blockJsx: schemaRenderBlockJsx
 };
 //#endregion
-export { $cssBase, $cssMerge, $iconName, Action, Component, render };
+export { ZovaCommand, ZovaCommands, ZovaComponent, ZovaCssBase, ZovaCssMerge, ZovaEvent, ZovaIconName, ZovaRender };
