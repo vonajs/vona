@@ -7,7 +7,7 @@ import { text } from 'vona';
 import { $makeSchema, Api, v } from 'vona-module-a-openapiutils';
 import { Dto } from 'vona-module-a-web';
 import z from 'zod';
-import { render, ZovaEvent, ZovaCommand, ZovaComponent } from 'zova-rest-cabloy-basic-admin';
+import { ZovaRender, ZovaEvent, ZovaCommand, ZovaComponent } from 'zova-rest-cabloy-basic-admin';
 
 import { $locale } from '../.metadata/locales.ts';
 import { DtoTestDetail } from './testDetail.ts';
@@ -41,7 +41,7 @@ export interface IDtoOptionsTestResult extends IDecoratorDtoOptions<
       z.string(),
     ),
     _custom2: $makeSchema(
-      render.fieldJsx(
+      ZovaRender.fieldJsx(
         <div className="text-center">
           <div>{$locale('ChildOne')}</div>
           <div>{$locale('ChildTwo')}</div>
@@ -76,7 +76,7 @@ export interface IDtoOptionsTestResult extends IDecoratorDtoOptions<
       z.string(),
     ),
     _custom5: $makeSchema(
-      render.fieldJsx(
+      ZovaRender.fieldJsx(
         <div>
           <var name="varTest" value={cel('getValue("name") + "!!"')}></var>
           <div>{cel('"var: " + varTest')}</div>
@@ -89,7 +89,7 @@ export interface IDtoOptionsTestResult extends IDecoratorDtoOptions<
       z.string(),
     ),
     _customCopy: $makeSchema(
-      render.fieldJsx(
+      ZovaRender.fieldJsx(
         <div style={{ display: 'inline-flex', alignItems: 'center' }}>
           <input
             className="input"
@@ -144,7 +144,7 @@ export class DtoTestResult {
 
   @Api.field(
     v.title($locale('Name')),
-    render.fieldJsx(<input className="text-center-2 text-center"></input>),
+    ZovaRender.fieldJsx(<input className="text-center-2 text-center"></input>),
     ZovaRender.layout({ label: cel('name+"!!"'), class: 'test-layout' }),
     v.default('tom'),
     v.min(3),
