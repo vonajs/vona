@@ -34,7 +34,7 @@ export interface IDtoOptionsTestResult extends IDecoratorDtoOptions<
           },
         },
       }),
-      render.layout({ label: 'Custom1' }),
+      ZovaRender.layout({ label: 'Custom1' }),
       v.default('custom'),
       v.optional(),
       v.min(6),
@@ -65,7 +65,7 @@ export interface IDtoOptionsTestResult extends IDecoratorDtoOptions<
           ></ZovaComponent>
         </div>,
       ),
-      render.layout({
+      ZovaRender.layout({
         label: 'Custom2',
         header: <div>{cel('name + ":containerHeader:" + value')}</div>,
         footer: <div>{cel('name + ":containerFooter:" + value')}</div>,
@@ -82,7 +82,7 @@ export interface IDtoOptionsTestResult extends IDecoratorDtoOptions<
           <div>{cel('"var: " + varTest')}</div>
         </div>,
       ),
-      render.layout({ label: 'Custom5' }),
+      ZovaRender.layout({ label: 'Custom5' }),
       v.default('custom'),
       v.optional(),
       v.min(6),
@@ -130,7 +130,7 @@ export interface IDtoOptionsTestResult extends IDecoratorDtoOptions<
           <span v-if={cel('getValue("_customCopied")==true')}>Copied!</span>
         </div>,
       ),
-      render.layout({ label: 'Custom Copy' }),
+      ZovaRender.layout({ label: 'Custom Copy' }),
       v.optional(),
       v.min(6),
       z.string(),
@@ -145,7 +145,7 @@ export class DtoTestResult {
   @Api.field(
     v.title($locale('Name')),
     render.fieldJsx(<input className="text-center-2 text-center"></input>),
-    render.layout({ label: cel('name+"!!"'), class: 'test-layout' }),
+    ZovaRender.layout({ label: cel('name+"!!"'), class: 'test-layout' }),
     v.default('tom'),
     v.min(3),
   )

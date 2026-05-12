@@ -17,7 +17,7 @@ export class DtoLogin {
 
   @Api.field(
     v.required(),
-    render.layout({ iconPrefix: ':editor:code-block' }),
+    ZovaRender.layout({ iconPrefix: ':editor:code-block' }),
     ZovaRender.field('basic-captcha:formFieldCaptcha'),
   )
   captcha: DtoCaptchaVerify;
