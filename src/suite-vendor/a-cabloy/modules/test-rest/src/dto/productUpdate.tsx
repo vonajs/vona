@@ -18,10 +18,10 @@ export interface IDtoOptionsProductUpdate extends IDecoratorDtoOptions {}
         ZovaRender.block('basic-pageentry:blockForm'),
         ZovaRender.block('basic-pageentry:blockToolbarRow', {
           actions: [
-            render.formActionRow('basic-form:actionSubmit', {
+            ZovaRender.formActionRow('basic-form:actionSubmit', {
               permission: { action: 'update', formScene: ['create', 'edit'] },
             }),
-            render.formActionRow('basic-form:actionBack', { permission: { public: true } }),
+            ZovaRender.formActionRow('basic-form:actionBack', { permission: { public: true } }),
           ],
         }),
       ],

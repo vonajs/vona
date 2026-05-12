@@ -16,7 +16,7 @@ export interface IDtoOptionsProductSelectResItem extends IDecoratorDtoOptions {}
       blocks: [
         ZovaRender.block('basic-page:blockFilter'),
         ZovaRender.block('basic-page:blockToolbarBulk', {
-          actions: [render.tableActionBulk('basic-table:actionCreate')],
+          actions: [ZovaRender.tableActionBulk('basic-table:actionCreate')],
         }),
         ZovaRender.block('basic-page:blockTable'),
         ZovaRender.block('basic-page:blockPager'),

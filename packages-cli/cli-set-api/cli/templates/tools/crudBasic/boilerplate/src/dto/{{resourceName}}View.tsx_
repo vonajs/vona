@@ -14,7 +14,7 @@ export interface IDtoOptions<%=argv.resourceNameCapitalize%>View extends IDecora
       blocks: [
         ZovaRender.block('basic-pageentry:blockForm'),
         ZovaRender.block('basic-pageentry:blockToolbarRow', {
-          actions: [render.formActionRow('basic-form:actionBack', { permission: { public: true } })],
+          actions: [ZovaRender.formActionRow('basic-form:actionBack', { permission: { public: true } })],
         }),
       ],
     }),

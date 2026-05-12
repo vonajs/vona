@@ -15,7 +15,7 @@ export interface IDtoOptionsProductView extends IDecoratorDtoOptions {}
         ZovaRender.block('basic-pageentry:blockForm'),
         ZovaRender.block('basic-pageentry:blockToolbarRow', {
           actions: [
-            render.formActionRow('basic-form:actionBack', { permission: { public: true } }),
+            ZovaRender.formActionRow('basic-form:actionBack', { permission: { public: true } }),
           ],
         }),
       ],
