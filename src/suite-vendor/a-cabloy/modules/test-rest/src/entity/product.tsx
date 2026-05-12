@@ -1,6 +1,6 @@
 import type { IDecoratorEntityOptions } from 'vona-module-a-orm';
 
-import { $makeSchema, Api, v } from 'vona-module-a-openapiutils';
+import { $makeMetadata, $makeSchema, Api, v } from 'vona-module-a-openapiutils';
 import { Entity, EntityBase } from 'vona-module-a-orm';
 import z from 'zod';
 import { ZovaRender } from 'zova-rest-cabloy-basic-admin';
@@ -12,6 +12,23 @@ export interface IEntityOptionsProduct extends IDecoratorEntityOptions<'_custom'
 @Entity<IEntityOptionsProduct>('testRestProduct', {
   openapi: { title: $locale('ProductInfo') },
   fields: {
+    id: $makeMetadata(ZovaRender.order(1, 'core')),
+    createdAt: $makeMetadata(
+      ZovaRender.order(-2, 'max'),
+      ZovaRender.field('basic-date:formFieldDate'),
+      ZovaRender.cell('basic-date:date'),
+      ZovaRender.field('basic-date:formFieldDateRange', undefined, 'filter'),
+      v.filterTransform('a-web:dateRange'),
+    ),
+    updatedAt: $makeMetadata(
+      ZovaRender.order(-1, 'max'),
+      ZovaRender.field('basic-date:formFieldDate'),
+      ZovaRender.cell('basic-date:date'),
+      ZovaRender.field('basic-date:formFieldDateRange', undefined, 'filter'),
+      v.filterTransform('a-web:dateRange'),
+    ),
+    deleted: $makeMetadata(ZovaRender.visible(false)),
+    iid: $makeMetadata(ZovaRender.visible(false)),
     _custom: $makeSchema(v.title('Custom'), v.optional(), z.string()),
   },
 })
@@ -25,7 +42,7 @@ export class EntityProduct extends EntityBase {
   )
   name: string;
 
-  @Api.field(v.title($locale('Description')), ZovaRender.order(2), v.optional())
+  @Api.field(v.title($locale('Description')), v.optional(), ZovaRender.order(2))
   description?: string;
 
   @Api.field(
@@ -38,7 +55,7 @@ export class EntityProduct extends EntityBase {
   )
   price: number;
 
-  @Api.field(v.title($locale('Quantity')), ZovaRender.order(4), v.default(0))
+  @Api.field(v.title($locale('Quantity')), v.default(0), ZovaRender.order(4))
   quantity: number;
 
   @Api.field(

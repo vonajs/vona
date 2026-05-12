@@ -1,1 +1,0 @@
-import{n as o,r,t as s}from"./home-icon-DDppZL7_.js";s();export{o as ScopeModuleHomeIcon,r as icons};
