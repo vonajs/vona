@@ -11,7 +11,6 @@ export interface IDtoOptionsProductUpdate extends IDecoratorDtoOptions {}
 
 @Dto<IDtoOptionsProductUpdate>({
   openapi: { title: $locale('UpdateProduct') },
-  fields: {},
   blocks: [
     ZovaRender.block('basic-pageentry:blockPageEntry', {
       blocks: [
