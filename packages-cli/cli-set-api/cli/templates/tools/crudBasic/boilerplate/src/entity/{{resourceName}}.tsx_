@@ -12,6 +12,8 @@ export interface IEntityOptions<%=argv.resourceNameCapitalize%> extends IDecorat
   openapi: { title: $locale('<%=argv.resourceNameCapitalize%>') },
   fields: {
     id: $makeMetadata(ZovaRender.order(1, 'core')),
+    iid: $makeMetadata(ZovaRender.visible(false)),
+    deleted: $makeMetadata(ZovaRender.visible(false)),
     createdAt: $makeMetadata(
       ZovaRender.order(-2, 'max'),
       ZovaRender.field('basic-date:formFieldDate'),
@@ -26,8 +28,6 @@ export interface IEntityOptions<%=argv.resourceNameCapitalize%> extends IDecorat
       ZovaRender.field('basic-date:formFieldDateRange', undefined, 'filter'),
       v.filterTransform('a-web:dateRange'),
     ),
-    deleted: $makeMetadata(ZovaRender.visible(false)),
-    iid: $makeMetadata(ZovaRender.visible(false)),
   },
 })
 export class Entity<%=argv.resourceNameCapitalize%> extends EntityBase {
