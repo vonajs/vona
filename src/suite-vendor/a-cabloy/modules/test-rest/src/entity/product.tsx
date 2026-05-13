@@ -13,6 +13,8 @@ export interface IEntityOptionsProduct extends IDecoratorEntityOptions<'_custom'
   openapi: { title: $locale('ProductInfo') },
   fields: {
     id: $makeMetadata(ZovaRender.order(1, 'core')),
+    iid: $makeMetadata(ZovaRender.visible(false)),
+    deleted: $makeMetadata(ZovaRender.visible(false)),
     createdAt: $makeMetadata(
       ZovaRender.order(-2, 'max'),
       ZovaRender.field('basic-date:formFieldDate'),
@@ -27,8 +29,6 @@ export interface IEntityOptionsProduct extends IDecoratorEntityOptions<'_custom'
       ZovaRender.field('basic-date:formFieldDateRange', undefined, 'filter'),
       v.filterTransform('a-web:dateRange'),
     ),
-    deleted: $makeMetadata(ZovaRender.visible(false)),
-    iid: $makeMetadata(ZovaRender.visible(false)),
     _custom: $makeSchema(v.title('Custom'), v.optional(), z.string()),
   },
 })
