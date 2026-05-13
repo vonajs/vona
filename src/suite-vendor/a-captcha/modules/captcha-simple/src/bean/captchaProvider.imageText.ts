@@ -7,7 +7,7 @@ import type {
 import { getRandomInt } from '@cabloy/utils';
 import svgCaptcha, { ConfigObject } from '@zhennann/svg-captcha';
 import fse from 'fs-extra';
-import * as opentype from 'opentype.js';
+import { parse as opentypeParse } from 'opentype.js/dist/opentype.mjs';
 import svg64 from 'svg64';
 import { BeanBase, cast } from 'vona';
 import { CaptchaProvider } from 'vona-module-a-captcha';
@@ -71,7 +71,7 @@ export class CaptchaProviderImageText
 
 async function _loadFont(fontFile: string) {
   const buffer = await fse.readFile(fontFile);
-  return opentype.parse(_nodeBufferToArrayBuffer(buffer));
+  return opentypeParse(_nodeBufferToArrayBuffer(buffer));
 }
 
 function _nodeBufferToArrayBuffer(buffer) {
