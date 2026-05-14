@@ -3,7 +3,7 @@ import type { IDecoratorDtoOptions } from 'vona-module-a-web';
 import { DtoCaptchaVerify } from 'vona-module-a-captcha';
 import { Api, v } from 'vona-module-a-openapiutils';
 import { Dto } from 'vona-module-a-web';
-import { ZovaRender } from 'zova-rest-cabloy-basic-admin';
+import { ZovaRender } from 'zova-rest-cabloy-start-admin';
 
 export interface IDtoOptionsRegister extends IDecoratorDtoOptions {}
 
@@ -23,6 +23,6 @@ export class DtoRegister {
   @Api.field(v.min(6), v.max(20))
   passwordConfirm: string;
 
-  @Api.field(ZovaRender.field('basic-captcha:formFieldCaptcha'))
+  @Api.field(ZovaRender.field('start-captcha:formFieldCaptcha'))
   captcha: DtoCaptchaVerify;
 }
