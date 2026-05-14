@@ -1,5 +1,5 @@
 import type { IDecoratorSsrSiteOptions } from 'vona-module-a-ssr';
-import type { IPagePathRecord } from 'zova-rest-cabloy-start-admin';
+import type { IIconRecord, IPagePathRecord } from 'zova-rest-cabloy-start-admin';
 
 import { BeanSsrSiteBase, SsrSite } from 'vona-module-a-ssr';
 
@@ -15,7 +15,8 @@ export interface ISsrSiteOptionsAdminPagesData {}
 
 export interface ISsrSiteOptionsAdmin extends IDecoratorSsrSiteOptions<
   ISsrSiteOptionsAdminPages,
-  ISsrSiteOptionsAdminPagesData
+  ISsrSiteOptionsAdminPagesData,
+  IIconRecord
 > {}
 
 @SsrSite<ISsrSiteOptionsAdmin>({
