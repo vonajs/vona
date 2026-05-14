@@ -26,13 +26,12 @@ export class CliToolsCrud extends BeanCliBase {
     // noformat
     // argv.noformat = true;
     // ssrSiteModuleName
-    argv.ssrSiteModuleName = fs.existsSync(path.join(argv.projectPath, 'src/suite/cabloy-start'))
+    const isCabloyStart = fs.existsSync(path.join(argv.projectPath, '__CABLOY_START__'));
+    argv.ssrSiteModuleName = isCabloyStart
       ? 'vona-module-start-siteadmin'
       : 'vona-module-basic-siteadmin';
-    argv.ssrSiteOnionName = fs.existsSync(path.join(argv.projectPath, 'src/suite/cabloy-start'))
-      ? 'start-siteadmin:admin'
-      : 'basic-siteadmin:admin';
-    argv.ssrSiteGroupName = fs.existsSync(path.join(argv.projectPath, 'src/suite/cabloy-start'))
+    argv.ssrSiteOnionName = isCabloyStart ? 'start-siteadmin:admin' : 'basic-siteadmin:admin';
+    argv.ssrSiteGroupName = isCabloyStart
       ? 'start-siteadmin:management'
       : 'basic-siteadmin:management';
     // module name/info
@@ -54,8 +53,9 @@ export class CliToolsCrud extends BeanCliBase {
       throw new Error(`resource exists: ${resourceName}`);
     }
     // tools:crud
+    const commandName = isCabloyStart ? ':tools:crudStart' : ':tools:crudBasic';
     await this.helper.invokeCli(
-      [':tools:crudBasic', resourceName, `--module=${argv.module}`, '--nometadata'],
+      [commandName, resourceName, `--module=${argv.module}`, '--nometadata'],
       { cwd: argv.projectPath },
     );
     // render
