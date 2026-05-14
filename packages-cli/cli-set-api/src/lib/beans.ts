@@ -25,6 +25,7 @@ import { CliInitStatic } from './bean/cli.init.static.ts';
 import { CliInitTypes } from './bean/cli.init.types.ts';
 import { CliToolsCrud } from './bean/cli.tools.crud.ts';
 import { CliToolsCrudBasic } from './bean/cli.tools.crudBasic.ts';
+import { CliToolsCrudStart } from './bean/cli.tools.crudStart.ts';
 import { CliToolsDeps } from './bean/cli.tools.deps.ts';
 import { CliToolsMetadata } from './bean/cli.tools.metadata.ts';
 
@@ -57,5 +58,6 @@ export const beans = {
   'tools.deps': CliToolsDeps,
   'tools.metadata': CliToolsMetadata,
   'tools.crudBasic': CliToolsCrudBasic,
+  'tools.crudStart': CliToolsCrudStart,
   'tools.crud': CliToolsCrud,
 };
