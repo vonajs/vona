@@ -247,7 +247,10 @@ export function forEachSync<T>(arr: T[], order: boolean, fn: (item: T, index: nu
   }
 }
 
-export function pickObject<T extends object | undefined, K extends keyof NonNullable<T>>(obj: T, keys: K[]): T extends undefined ? undefined : Pick<NonNullable<T>, K> {
+export function pickObject<T extends object | undefined, K extends keyof NonNullable<T>>(
+  obj: T,
+  keys: K[],
+): T extends undefined ? undefined : Pick<NonNullable<T>, K> {
   if (!obj) return undefined as T extends undefined ? undefined : Pick<NonNullable<T>, K>;
   const result = {} as Record<string, unknown>;
   for (const key of keys) {
@@ -258,7 +261,10 @@ export function pickObject<T extends object | undefined, K extends keyof NonNull
   return result as unknown as T extends undefined ? undefined : Pick<NonNullable<T>, K>;
 }
 
-export function omitObject<T extends object | undefined, K extends keyof NonNullable<T>>(obj: T, keys: K[]): T extends undefined ? undefined : Omit<NonNullable<T>, K> {
+export function omitObject<T extends object | undefined, K extends keyof NonNullable<T>>(
+  obj: T,
+  keys: K[],
+): T extends undefined ? undefined : Omit<NonNullable<T>, K> {
   if (!obj) return undefined as T extends undefined ? undefined : Omit<NonNullable<T>, K>;
   const result = { ...obj } as NonNullable<T>;
   for (const key of keys) {
