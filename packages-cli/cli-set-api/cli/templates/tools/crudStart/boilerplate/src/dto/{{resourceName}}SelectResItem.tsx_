@@ -19,7 +19,6 @@ export interface IDtoOptions<%=argv.resourceNameCapitalize%>SelectResItem extend
           actions: [ZovaRender.tableActionBulk('start-table:actionCreate')],
         }),
         ZovaRender.block('start-page:blockTable'),
-        ZovaRender.block('start-page:blockPager'),
       ],
     }),
   ],
