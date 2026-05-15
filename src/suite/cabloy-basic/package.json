@@ -1,6 +1,6 @@
 {
   "name": "vona-suite-cabloy-basic",
-  "version": "5.1.32",
+  "version": "5.1.33",
   "gitHead": "a79189b882c17af5911573896a781bbb0046d37d",
   "description": "",
   "author": "",
@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "vona-module-basic-siteadmin": "workspace:^",
-    "vona-suite-a-cabloy": "^5.1.15"
+    "vona-suite-a-cabloy": "^5.1.16"
   },
   "title": "cabloy-basic"
 }
