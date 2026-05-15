@@ -8,8 +8,7 @@
   "type": "module",
   "dependencies": {
     "vona-module-a-captcha": "workspace:^",
-    "vona-module-captcha-simple": "workspace:^",
-    "vona-module-test-captcha": "workspace:^"
+    "vona-module-captcha-simple": "workspace:^"
   },
   "title": "a-captcha"
 }

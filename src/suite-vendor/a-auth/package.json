@@ -10,8 +10,7 @@
     "vona-module-a-auth": "workspace:^",
     "vona-module-auth-github": "workspace:^",
     "vona-module-auth-oauth": "^5.0.2",
-    "vona-module-auth-simple": "workspace:^",
-    "vona-module-test-auth": "workspace:^"
+    "vona-module-auth-simple": "workspace:^"
   },
   "title": "a-auth"
 }
