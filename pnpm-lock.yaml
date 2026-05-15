@@ -1119,9 +1119,6 @@ importers:
       vona-module-auth-simple:
         specifier: workspace:^
         version: link:modules/auth-simple
-      vona-module-test-auth:
-        specifier: workspace:^
-        version: link:modules/test-auth
 
   src/suite-vendor/a-auth/modules/a-auth:
     dependencies:
@@ -1330,9 +1327,6 @@ importers:
       vona-module-captcha-simple:
         specifier: workspace:^
         version: link:modules/captcha-simple
-      vona-module-test-captcha:
-        specifier: workspace:^
-        version: link:modules/test-captcha
 
   src/suite-vendor/a-captcha/modules/a-captcha:
     devDependencies:
