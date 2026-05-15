@@ -1,30 +1,4 @@
 // eslint-disable
-/** startup: begin */
-export * from '../bean/startup.printTip.ts';
-
-import { type IDecoratorStartupOptions } from 'vona-module-a-startup';
-declare module 'vona-module-a-startup' {
-  
-    export interface IStartupRecord {
-      'a-printtip:printTip': IDecoratorStartupOptions;
-    }
-
-  
-}
-declare module 'vona-module-a-printtip' {
-  
-        export interface StartupPrintTip {
-          /** @internal */
-          get scope(): ScopeModuleAPrinttip;
-        }
-
-          export interface StartupPrintTip {
-            get $beanFullName(): 'a-printtip.startup.printTip';
-            get $onionName(): 'a-printtip:printTip';
-            get $onionOptions(): IDecoratorStartupOptions;
-          } 
-}
-/** startup: end */
 /** hmr: begin */
 export * from '../bean/hmr.metaPrintTip.ts';
 
@@ -51,6 +25,32 @@ declare module 'vona-module-a-printtip' {
           } 
 }
 /** hmr: end */
+/** startup: begin */
+export * from '../bean/startup.printTip.ts';
+
+import { type IDecoratorStartupOptions } from 'vona-module-a-startup';
+declare module 'vona-module-a-startup' {
+  
+    export interface IStartupRecord {
+      'a-printtip:printTip': IDecoratorStartupOptions;
+    }
+
+  
+}
+declare module 'vona-module-a-printtip' {
+  
+        export interface StartupPrintTip {
+          /** @internal */
+          get scope(): ScopeModuleAPrinttip;
+        }
+
+          export interface StartupPrintTip {
+            get $beanFullName(): 'a-printtip.startup.printTip';
+            get $onionName(): 'a-printtip:printTip';
+            get $onionOptions(): IDecoratorStartupOptions;
+          } 
+}
+/** startup: end */
 /** config: begin */
 export * from '../config/config.ts';
 import type { config } from '../config/config.ts';

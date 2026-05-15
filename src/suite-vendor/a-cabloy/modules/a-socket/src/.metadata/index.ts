@@ -128,6 +128,45 @@ export interface IModuleBroadcast {
 'send': BroadcastSend;
 }
 /** broadcast: end */
+/** hmr: begin */
+export * from '../bean/hmr.socketConnection.ts';
+export * from '../bean/hmr.socketPacket.ts';
+
+import 'vona';
+declare module 'vona' {
+  
+    export interface IHmrRecord {
+      'a-socket:socketConnection': never;
+'a-socket:socketPacket': never;
+    }
+
+  
+}
+declare module 'vona-module-a-socket' {
+  
+        export interface HmrSocketConnection {
+          /** @internal */
+          get scope(): ScopeModuleASocket;
+        }
+
+          export interface HmrSocketConnection {
+            get $beanFullName(): 'a-socket.hmr.socketConnection';
+            get $onionName(): 'a-socket:socketConnection';
+            
+          }
+
+        export interface HmrSocketPacket {
+          /** @internal */
+          get scope(): ScopeModuleASocket;
+        }
+
+          export interface HmrSocketPacket {
+            get $beanFullName(): 'a-socket.hmr.socketPacket';
+            get $onionName(): 'a-socket:socketPacket';
+            
+          } 
+}
+/** hmr: end */
 /** socketConnection: begin */
 export * from '../bean/socketConnection.alive.ts';
 export * from '../bean/socketConnection.app.ts';
@@ -278,45 +317,6 @@ declare module 'vona-module-a-socket' {
           } 
 }
 /** socketPacket: end */
-/** hmr: begin */
-export * from '../bean/hmr.socketConnection.ts';
-export * from '../bean/hmr.socketPacket.ts';
-
-import 'vona';
-declare module 'vona' {
-  
-    export interface IHmrRecord {
-      'a-socket:socketConnection': never;
-'a-socket:socketPacket': never;
-    }
-
-  
-}
-declare module 'vona-module-a-socket' {
-  
-        export interface HmrSocketConnection {
-          /** @internal */
-          get scope(): ScopeModuleASocket;
-        }
-
-          export interface HmrSocketConnection {
-            get $beanFullName(): 'a-socket.hmr.socketConnection';
-            get $onionName(): 'a-socket:socketConnection';
-            
-          }
-
-        export interface HmrSocketPacket {
-          /** @internal */
-          get scope(): ScopeModuleASocket;
-        }
-
-          export interface HmrSocketPacket {
-            get $beanFullName(): 'a-socket.hmr.socketPacket';
-            get $onionName(): 'a-socket:socketPacket';
-            
-          } 
-}
-/** hmr: end */
 /** config: begin */
 export * from '../config/config.ts';
 import type { config } from '../config/config.ts';

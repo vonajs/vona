@@ -1,30 +1,4 @@
 // eslint-disable
-/** meta: begin */
-export * from '../bean/meta.version.ts';
-
-import 'vona-module-a-meta';
-declare module 'vona-module-a-meta' {
-  
-    export interface IMetaRecord {
-      'a-index:version': never;
-    }
-
-  
-}
-declare module 'vona-module-a-index' {
-  
-        export interface MetaVersion {
-          /** @internal */
-          get scope(): ScopeModuleAIndex;
-        }
-
-          export interface MetaVersion {
-            get $beanFullName(): 'a-index.meta.version';
-            get $onionName(): 'a-index:version';
-            
-          } 
-}
-/** meta: end */
 /** hmr: begin */
 export * from '../bean/hmr.metaIndex.ts';
 
@@ -51,6 +25,32 @@ declare module 'vona-module-a-index' {
           } 
 }
 /** hmr: end */
+/** meta: begin */
+export * from '../bean/meta.version.ts';
+
+import 'vona-module-a-meta';
+declare module 'vona-module-a-meta' {
+  
+    export interface IMetaRecord {
+      'a-index:version': never;
+    }
+
+  
+}
+declare module 'vona-module-a-index' {
+  
+        export interface MetaVersion {
+          /** @internal */
+          get scope(): ScopeModuleAIndex;
+        }
+
+          export interface MetaVersion {
+            get $beanFullName(): 'a-index.meta.version';
+            get $onionName(): 'a-index:version';
+            
+          } 
+}
+/** meta: end */
 /** config: begin */
 export * from '../config/config.ts';
 import type { config } from '../config/config.ts';

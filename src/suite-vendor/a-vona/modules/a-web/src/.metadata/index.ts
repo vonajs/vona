@@ -105,6 +105,45 @@ declare module 'vona' {
   }
 }
 /** service: end */
+/** hmr: begin */
+export * from '../bean/hmr.controller.ts';
+export * from '../bean/hmr.dto.ts';
+
+import 'vona';
+declare module 'vona' {
+  
+    export interface IHmrRecord {
+      'a-web:controller': never;
+'a-web:dto': never;
+    }
+
+  
+}
+declare module 'vona-module-a-web' {
+  
+        export interface HmrController {
+          /** @internal */
+          get scope(): ScopeModuleAWeb;
+        }
+
+          export interface HmrController {
+            get $beanFullName(): 'a-web.hmr.controller';
+            get $onionName(): 'a-web:controller';
+            
+          }
+
+        export interface HmrDto {
+          /** @internal */
+          get scope(): ScopeModuleAWeb;
+        }
+
+          export interface HmrDto {
+            get $beanFullName(): 'a-web.hmr.dto';
+            get $onionName(): 'a-web:dto';
+            
+          } 
+}
+/** hmr: end */
 /** startup: begin */
 export * from '../bean/startup.listen.ts';
 
@@ -171,45 +210,6 @@ declare module 'vona-module-a-web' {
           } 
 }
 /** filterTransform: end */
-/** hmr: begin */
-export * from '../bean/hmr.controller.ts';
-export * from '../bean/hmr.dto.ts';
-
-import 'vona';
-declare module 'vona' {
-  
-    export interface IHmrRecord {
-      'a-web:controller': never;
-'a-web:dto': never;
-    }
-
-  
-}
-declare module 'vona-module-a-web' {
-  
-        export interface HmrController {
-          /** @internal */
-          get scope(): ScopeModuleAWeb;
-        }
-
-          export interface HmrController {
-            get $beanFullName(): 'a-web.hmr.controller';
-            get $onionName(): 'a-web:controller';
-            
-          }
-
-        export interface HmrDto {
-          /** @internal */
-          get scope(): ScopeModuleAWeb;
-        }
-
-          export interface HmrDto {
-            get $beanFullName(): 'a-web.hmr.dto';
-            get $onionName(): 'a-web:dto';
-            
-          } 
-}
-/** hmr: end */
 /** config: begin */
 export * from '../config/config.ts';
 import type { config } from '../config/config.ts';
