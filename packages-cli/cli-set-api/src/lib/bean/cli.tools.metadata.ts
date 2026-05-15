@@ -219,6 +219,7 @@ export class CliToolsMetadata extends BeanCliBase {
     const localesDest = path.join(modulePath, 'src/.metadata/locales.ts');
     // save
     await fse.writeFile(localesDest, contentLocales);
+    await this.helper.formatFile({ fileName: localesDest, logPrefix: 'format: ' });
   }
 
   async _generateThis(moduleName: string, relativeNameCapitalize: string, modulePath: string) {
