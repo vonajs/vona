@@ -54,23 +54,6 @@ src/backend/typing/mine.d.ts
 /src/backend/logs
 /src/backend/run
 
-/src/suite/*
-!/src/suite/.gitkeep
-!/src/suite/a-home
-!/src/suite/cabloy-basic
-!/src/suite/cabloy-start
-
-/src/suite-vendor/*
-!/src/suite-vendor/.gitkeep
-!/src/suite-vendor/a-cabloy
-!/src/suite-vendor/a-vona
-
-/src/module/*
-!/src/module/.gitkeep
-
-/src/module-vendor/*
-!/src/module-vendor/.gitkeep
-
 # package-lock.json
 # yarn.lock
 # pnpm-lock.yaml
