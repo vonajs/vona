@@ -5827,7 +5827,7 @@ declare class CommandCreate extends BeanCommandBulkBase implements ICommandExecu
 }
 //#endregion
 //#region src/suite/cabloy-basic/modules/basic-commands/src/bean/command.delete.d.ts
-type TypeCommandDeleteResult = number;
+type TypeCommandDeleteResult = unknown;
 interface ICommandOptionsDelete extends ICommandRowOptionsBase<TypeCommandDeleteResult> {}
 declare class CommandDelete extends BeanCommandRowBase implements ICommandExecute {
   execute(options: ICommandOptionsDelete, renderContext: IJsxRenderContextBase, next: NextCommandExecute): Promise<any>;
@@ -6688,7 +6688,7 @@ interface ControllerBlockPageProps extends IResourceBlockOptionsBase {
 declare class ControllerBlockPage<TData extends {} = {}> extends BeanControllerBase {
   static $propsDefault: {};
   static $componentOptions: IComponentOptions;
-  tableRef: BeanControllerTableBase;
+  tableRef: BeanControllerTableBase<TData>;
   jsxZova: ZovaJsx;
   jsxCelScope: IPageScope;
   jsxRenderContext: IJsxRenderContextPage<TData>;
@@ -6766,10 +6766,10 @@ declare module 'zova-module-a-openapi' {
   }
 }
 interface ControllerBlockTableProps extends IResourceBlockOptionsBase {}
-declare class ControllerBlockTable extends BeanControllerBase {
+declare class ControllerBlockTable<TData extends {} = {}> extends BeanControllerBase {
   static $propsDefault: {};
   static $componentOptions: IComponentOptions;
-  tableRef: BeanControllerTableBase;
+  tableRef: BeanControllerTableBase<TData>;
   $$renderContext: IJsxRenderContextPage;
   protected __init__(): Promise<void>;
   get permissions(): _$zova_module_a_openapi0.TypeOpenapiPermissions | undefined;
@@ -6985,9 +6985,12 @@ interface ControllerBlockPageEntryProps extends IResourceBlockOptionsBase {
   resource?: string;
   id?: TableIdentity;
   formScene?: TypeFormScene;
+  pageTitleKey?: string;
 }
 declare class ControllerBlockPageEntry<TData extends {} = {}> extends BeanControllerBase {
-  static $propsDefault: {};
+  static $propsDefault: {
+    pageTitleKey: string;
+  };
   static $componentOptions: IComponentOptions;
   entryIdCreated?: TableIdentity;
   formRef: BeanControllerFormBase;
