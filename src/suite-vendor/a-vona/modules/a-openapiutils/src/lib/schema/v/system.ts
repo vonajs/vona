@@ -10,6 +10,7 @@ import type { SchemaLike } from '../../../types/decorator.ts';
 import { $locale } from '../../../.metadata/locales.ts';
 import { normalizeErrorParams } from '../../utils.ts';
 import { $schema, $schemaLazy, makeSchemaLike } from '../makeSchemaLikes.ts';
+import { _generalSchemaRest } from './utils.ts';
 
 export function schemaDefault(defaultValue: any | Function) {
   return function (schema: z.ZodType): z.ZodType {
@@ -19,7 +20,17 @@ export function schemaDefault(defaultValue: any | Function) {
 
 export function schemaOptional() {
   return function (schema: z.ZodType): z.ZodType {
-    return schema.optional();
+    const options = { required: false };
+    return _generalSchemaRest(schema.optional(), options, 'form');
+  };
+}
+
+export function schemaRequired(params?: string | ILocaleMagic | z.core.$ZodStringParams) {
+  const errorDefault = { error: () => $locale('ZodErrorRequired') };
+  return function (schema: z.ZodType): z.ZodType {
+    schema._zod.def.error = normalizeErrorParams(params, errorDefault).error;
+    const options = { required: true };
+    return _generalSchemaRest(schema, options, 'form');
   };
 }
 
@@ -63,13 +74,5 @@ export function schemaStrictObject() {
 export function schemaLooseObject() {
   return function (schema: z.ZodObject): z.ZodObject {
     return z.looseObject(schema.shape);
-  };
-}
-
-export function schemaRequired(params?: string | ILocaleMagic | z.core.$ZodStringParams) {
-  const errorDefault = { error: () => $locale('ZodErrorRequired') };
-  return function (schema: z.ZodType): z.ZodType {
-    schema._zod.def.error = normalizeErrorParams(params, errorDefault).error;
-    return schema;
   };
 }
