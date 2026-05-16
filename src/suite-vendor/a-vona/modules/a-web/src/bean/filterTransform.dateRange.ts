@@ -40,8 +40,14 @@ export class FilterTransformDateRange extends BeanBase implements IFilterTransfo
   private _parseDate(str: string) {
     let date = DateTime.fromISO(str, { zone: this.ctx.tz });
     if (!date.isValid) {
-      date = DateTime.fromFormat(str, 'M/dd/yyyy', { zone: this.ctx.tz });
+      for (const format of ['yyyy/MM/dd', 'yyyy/M/dd', 'M/dd/yyyy']) {
+        date = DateTime.fromFormat(str, format, {
+          zone: this.ctx.tz,
+        });
+        if (date.isValid) break;
+      }
     }
+    if (!date.isValid) throw new Error(`invalid date: ${str}`);
     return date;
   }
 }
