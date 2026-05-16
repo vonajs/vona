@@ -29,6 +29,7 @@ import {
   schemaLazy,
   schemaLooseObject,
   schemaObject,
+  schemaOptional,
   schemaRequired,
   schemaStrictObject,
 } from './v/system.ts';
@@ -36,6 +37,7 @@ import { schemaZodRefine, schemaZodTransform } from './v/zod.ts';
 
 export const v = {
   required: schemaRequired,
+  optional: schemaOptional,
   default: schemaDefault,
   object: schemaObject,
   strictObject: schemaStrictObject,

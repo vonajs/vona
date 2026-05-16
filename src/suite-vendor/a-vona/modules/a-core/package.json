@@ -60,7 +60,7 @@
     "@swc/helpers": "^0.5.21",
     "@types/babel__core": "^7.20.5",
     "@types/babel__traverse": "^7.28.0",
-    "@types/koa": "^2.15.0",
+    "@types/koa": "^3.0.2",
     "@types/luxon": "^3.7.1",
     "@types/node": "^22.19.17",
     "@types/react": "npm:@cabloy/types-react@^19.2.16",

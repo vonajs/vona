@@ -18,6 +18,10 @@ export function schemaDefault(defaultValue: any | Function) {
   };
 }
 
+export function schemaOptional() {
+  return schemaRequired(false);
+}
+
 export function schemaRequired(
   required: boolean = true,
   params?: string | ILocaleMagic | z.core.$ZodStringParams,

@@ -63,7 +63,7 @@
     "zod": "^4.3.6"
   },
   "devDependencies": {
-    "@types/koa": "^2.15.0",
+    "@types/koa": "^3.0.2",
     "@types/retry": "^0.12.5",
     "clean-package": "^2.2.0",
     "rimraf": "^6.1.3"
