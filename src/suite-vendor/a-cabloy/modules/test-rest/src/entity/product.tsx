@@ -55,7 +55,7 @@ export class EntityProduct extends EntityBase {
   )
   price: number;
 
-  @Api.field(v.title($locale('Quantity')), v.default(0), ZovaRender.order(4))
+  @Api.field(v.title($locale('Quantity')), v.required(), ZovaRender.order(4))
   quantity: number;
 
   @Api.field(
