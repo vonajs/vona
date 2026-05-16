@@ -6483,7 +6483,9 @@ interface IBehaviorPropsInputFormFieldLayout extends IFormFieldRenderContext {}
 interface IBehaviorPropsOutputFormFieldLayout extends IBehaviorPropsInputFormFieldLayout {}
 interface IBehaviorOptionsFormFieldLayout extends IDecoratorBehaviorOptions {}
 declare class BehaviorFormFieldLayout extends BeanBehaviorBase<IBehaviorOptionsFormFieldLayout, IBehaviorPropsInputFormFieldLayout, IBehaviorPropsOutputFormFieldLayout> {
+  cFieldRequired: string;
   $$formField: ControllerFormField;
+  protected __init__(): Promise<void>;
   protected render(renderContext: IFormFieldRenderContext, next: NextBehavior<IBehaviorPropsOutputFormFieldLayout>): VNode;
   private _renderInline;
   private _renderBlock;
