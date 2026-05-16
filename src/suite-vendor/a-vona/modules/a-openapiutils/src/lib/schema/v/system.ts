@@ -18,19 +18,19 @@ export function schemaDefault(defaultValue: any | Function) {
   };
 }
 
-export function schemaOptional() {
-  return function (schema: z.ZodType): z.ZodType {
-    const options = { required: false };
-    return _generalSchemaRest(schema.optional(), options, 'form');
-  };
-}
-
-export function schemaRequired(params?: string | ILocaleMagic | z.core.$ZodStringParams) {
+export function schemaRequired(
+  required: boolean = true,
+  params?: string | ILocaleMagic | z.core.$ZodStringParams,
+) {
   const errorDefault = { error: () => $locale('ZodErrorRequired') };
   return function (schema: z.ZodType): z.ZodType {
-    schema._zod.def.error = normalizeErrorParams(params, errorDefault).error;
-    const options = { required: true };
-    return _generalSchemaRest(schema, options, 'form');
+    const options = { required };
+    if (required) {
+      schema._zod.def.error = normalizeErrorParams(params, errorDefault).error;
+      return _generalSchemaRest(schema, options, 'form');
+    } else {
+      return _generalSchemaRest(schema.optional(), options, 'form');
+    }
   };
 }
 
