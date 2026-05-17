@@ -2,6 +2,12 @@
 
 The module `a-datasource` allows dynamic creation of datasources during system runtime, thereby managing third-party database data.
 
+## Installing the module
+
+```bash
+$ pnpm add vona-module-a-datasource -w
+```
+
 ## Create datasource
 
 The module stores the dynamically created datasource in the data table.

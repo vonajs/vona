@@ -2,6 +2,12 @@
 
 模块`a-datasource`允许在系统运行时动态创建数据源，从而管理第三方的数据库数据。
 
+## 安装模块
+
+```bash
+$ pnpm add vona-module-a-datasource -w
+```
+
 ## 创建数据源
 
 模块将动态创建的数据源存储在数据表中。
