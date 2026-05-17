@@ -171,7 +171,8 @@ export type TypeUtilGetEntityByType<
       : Array<TypeModelRelationResult<TRecord, TModel, IncludeWrapper, Columns>>
   : [Depth] extends [never]
     ? undefined
-    : | TypeModelRelationResult<
+    :
+        | TypeModelRelationResult<
             TRecord,
             TModel,
             IncludeWrapper,

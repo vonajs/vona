@@ -76,7 +76,7 @@ export const formatLoggerFilter = Winston.format(((info: any, opts: ILoggerForma
     (opts.silly && info.level === 'silly')
   ) {
     return __formatLoggerFilterCheckInfo(info);
-}
+  }
   return false;
 }) as any);
 

@@ -32,7 +32,7 @@ export default async function (options: IMetadataCustomGenerateOptions): Promise
     contentFields.length === 0
   ) {
     return '';
-}
+  }
   // combine
   const content = `/** ${sceneName}: begin */
 ${contentColumns.join('\n')}

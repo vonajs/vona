@@ -116,7 +116,7 @@ export const contextBase: ContextBase = {
       self.accepts('json') === 'json'
     ) {
       return true;
-}
+    }
     if (self.accepts('html', 'text', 'json') === 'json') return true;
     return false;
   },

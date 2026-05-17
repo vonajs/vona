@@ -1,3 +1,4 @@
+import type { Constructable } from 'vona';
 import type {
   IAuthProviderClientRecord,
   IAuthProviderOauth2ClientOptions,
@@ -6,7 +7,6 @@ import type {
 } from 'vona-module-a-auth';
 
 import StrategyGithub from 'passport-github';
-import type { Constructable } from 'vona';
 import { AuthProvider, BeanAuthProviderOauth2Base } from 'vona-module-a-auth';
 
 export interface IAuthProviderOauthClientOptionsGithub extends IAuthProviderOauthClientOptions {

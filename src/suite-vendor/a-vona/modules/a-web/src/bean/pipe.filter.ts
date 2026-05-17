@@ -50,7 +50,7 @@ export class PipeFilter
       throw new Error(
         `should specify the schema of pipeFilter: ${metadata.controller.name}.${metadata.method}#${metadata.index}`,
       );
-}
+    }
     // validateSchema
     value = (await this.bean.validator.validateSchema(
       options.schema,

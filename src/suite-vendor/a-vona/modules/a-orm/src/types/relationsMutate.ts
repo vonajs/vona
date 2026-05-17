@@ -100,7 +100,8 @@ export type TypeUtilMutateGetEntityByType<
   : TYPE extends 'belongsToMany'
     ? Array<{ id: TableIdentity; deleted?: boolean }> | undefined
     : TYPE extends 'hasMany'
-      ? | Array<TypeModelMutateRelationData<TRecord, TModel, IncludeWrapper, TForInsertResult>>
+      ?
+          | Array<TypeModelMutateRelationData<TRecord, TModel, IncludeWrapper, TForInsertResult>>
           | undefined
       : TypeModelMutateRelationData<TRecord, TModel, IncludeWrapper, TForInsertResult> | undefined;
 

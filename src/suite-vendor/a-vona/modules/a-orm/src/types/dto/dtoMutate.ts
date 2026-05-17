@@ -183,7 +183,8 @@ type TypeUtilGetDtoMutateEntityByType<
   : TYPE extends 'belongsToMany'
     ? Array<{ id: TableIdentity; deleted?: boolean }> | undefined
     : TYPE extends 'hasMany'
-      ? | Array<
+      ?
+          | Array<
               TypeDtoMutateRelationResult<
                 TRecord,
                 TModel,
@@ -196,7 +197,8 @@ type TypeUtilGetDtoMutateEntityByType<
               >
             >
           | undefined
-      : | TypeDtoMutateRelationResult<
+      :
+          | TypeDtoMutateRelationResult<
               TRecord,
               TModel,
               IncludeWrapper,

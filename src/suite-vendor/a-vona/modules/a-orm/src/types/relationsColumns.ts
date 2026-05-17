@@ -123,7 +123,8 @@ export type TypeEntityTableColumnNamesOfGeneral<
   TModel extends BeanModelMeta | undefined,
 > = TModel extends BeanModelMeta
   ? TModelJoins extends TypeModelsClassLikeGeneral
-    ? | TypeEntityTableColumnNamesOfModelJoins<TModelJoins>
+    ?
+        | TypeEntityTableColumnNamesOfModelJoins<TModelJoins>
         | TypeEntityTableColumnNamesOfModelSelf<TModel>
     : TypeEntityTableColumnNamesOfModelClass<TModel> | TypeEntityTableColumnNamesOfModelSelf<TModel>
   : undefined;
