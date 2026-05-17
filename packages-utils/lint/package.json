@@ -21,6 +21,7 @@
     "@stylistic/eslint-plugin": "^5.10.0",
     "@typescript-eslint/parser": "^8.58.1",
     "eslint-plugin-eslint-comments": "^3.2.0",
+    "eslint-plugin-pnpm": "^1.6.0",
     "eslint-plugin-vue": "^10.8.0",
     "globals": "^17.4.0",
     "typescript-eslint": "^8.58.1"

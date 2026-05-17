@@ -308,9 +308,6 @@ importers:
       vona-module-captcha-simple:
         specifier: workspace:^
         version: link:src/suite-vendor/a-captcha/modules/captcha-simple
-      vona-module-demo-student:
-        specifier: workspace:^
-        version: link:src/module/demo-student
       vona-module-home-base:
         specifier: workspace:^
         version: link:src/suite/a-home/modules/home-base
@@ -790,6 +787,9 @@ importers:
       eslint-plugin-eslint-comments:
         specifier: ^3.2.0
         version: 3.2.0(eslint@10.4.0)
+      eslint-plugin-pnpm:
+        specifier: ^1.6.0
+        version: 1.6.0(eslint@10.4.0)
       eslint-plugin-vue:
         specifier: ^10.8.0
         version: 10.9.1(@stylistic/eslint-plugin@5.10.0(eslint@10.4.0))(@typescript-eslint/parser@8.59.3(eslint@10.4.0)(typescript@5.9.3))(eslint@10.4.0)(vue-eslint-parser@10.4.0(eslint@10.4.0))
@@ -1096,15 +1096,6 @@ importers:
         specifier: ^6.1.3
         version: 6.1.3
 
-  src/module/demo-student:
-    devDependencies:
-      clean-package:
-        specifier: ^2.2.0
-        version: 2.2.0
-      rimraf:
-        specifier: ^6.1.3
-        version: 6.1.3
-
   src/suite-vendor/a-auth:
     dependencies:
       vona-module-a-auth:
@@ -1186,12 +1177,6 @@ importers:
       vona-module-a-cabloy:
         specifier: workspace:^
         version: link:modules/a-cabloy
-      vona-module-a-datasharding:
-        specifier: workspace:^
-        version: link:modules/a-datasharding
-      vona-module-a-datasource:
-        specifier: workspace:^
-        version: link:modules/a-datasource
       vona-module-a-socket:
         specifier: workspace:^
         version: link:modules/a-socket
@@ -1201,9 +1186,6 @@ importers:
       vona-module-a-ssrhmr:
         specifier: workspace:^
         version: link:modules/a-ssrhmr
-      vona-module-a-status:
-        specifier: workspace:^
-        version: link:modules/a-status
 
   src/suite-vendor/a-cabloy/modules/a-cabloy:
     devDependencies:
@@ -5599,6 +5581,11 @@ packages:
     peerDependencies:
       eslint: '>=4.19.1'
 
+  eslint-plugin-pnpm@1.6.0:
+    resolution: {integrity: sha512-dxmt9r3zvPaft6IugS4i0k16xag3fTbOvm/road5uV9Y8qUCQT0xzheSh3gMlYAlC6vXRpfArBDsTZ7H7JKCbg==}
+    peerDependencies:
+      eslint: ^9.0.0 || ^10.0.0
+
   eslint-plugin-vue@10.9.1:
     resolution: {integrity: sha512-cHB0Tf4Duvzwecwd/AqWzZvF/QszE13BhjVUpVXWCy9AeMR5GjkAjP3i85vqgLgOuTmkHR1OJ5oMeqLHtuw8zg==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
@@ -6576,6 +6563,10 @@ packages:
     resolution: {integrity: sha512-XmOWe7eyHYH14cLdVPoyg+GOH3rYX++KpzrylJwSW98t3Nk+U8XOl8FWKOgwtzdb8lXGf6zYwDUzeHMWfxasyg==}
     engines: {node: '>=6'}
     hasBin: true
+
+  jsonc-eslint-parser@3.1.0:
+    resolution: {integrity: sha512-75EA7EWZExL/j+MDKQrRbdzcRI2HOkRlmUw8fZJc1ioqFEOvBsq7Rt+A6yCxOt9w/TYNpkt52gC6nm/g5tFIng==}
+    engines: {node: ^20.19.0 || ^22.13.0 || >=24}
 
   jsonc-parser@3.2.0:
     resolution: {integrity: sha512-gfFQZrcTc8CnKXp6Y4/CBT3fTc0OVuDofpre4aEeEpSBPV5X5v4+Vmx+8snU7RLPrNHPKSgLxGo9YuQzz20o+w==}
@@ -7665,6 +7656,9 @@ packages:
     resolution: {integrity: sha512-Vj7sf++t5pBD637NSfkxpHSMfWaeig5+DKWLhcqIYx6mWQz5hdJTGDVMQiJcw1ZYkhs7AazKDGpRVji1LJCZUQ==}
     engines: {node: '>=18'}
 
+  pathe@2.0.3:
+    resolution: {integrity: sha512-WUjGcAqP1gQacoQe+OBJsFA7Ld4DyXuUIjZ5cc75cLHvJ7dtNsTugphxIADwspS+AraAUePCKrSVtPLFj/F88w==}
+
   pause-stream@0.0.11:
     resolution: {integrity: sha512-e3FBlXLmN/D1S+zHzanP4E/4Z60oFAa3O051qt1pxa7DEJWKAyil6upYVXCWadEnuoqa4Pkc9oUx9zsxYeRv8A==}
 
@@ -7751,6 +7745,9 @@ packages:
 
   pluralize@2.0.0:
     resolution: {integrity: sha512-TqNZzQCD4S42De9IfnnBvILN7HAW7riLqsCyp8lgjXeysyPlX5HhqKAcJHHHb9XskE4/a+7VGC9zzx8Ls0jOAw==}
+
+  pnpm-workspace-yaml@1.6.0:
+    resolution: {integrity: sha512-uUy4dK3E11sp7nK+hnT7uAWfkBMe00KaUw8OG3NuNlYQoTk4sc9pcdIy1+XIP85v9Tvr02mK3JPaNNrP0QyRaw==}
 
   possible-typed-array-names@1.1.0:
     resolution: {integrity: sha512-/+5VFTchJDoVj3bhoqi6UeymcD00DAwb1nJwamzPvHEszJ4FpF6SNNbUbOS8yI56qHzdV8eK0qEfOSiodkTdxg==}
@@ -9099,6 +9096,10 @@ packages:
   yallist@5.0.0:
     resolution: {integrity: sha512-YgvUTfwqyc7UXVMrB+SImsVYSmTS8X/tSrtdNZMImM+n7+QTriRXyXim0mBrTXNeqzVF0KWGgHPeiyViFFrNDw==}
     engines: {node: '>=18'}
+
+  yaml-eslint-parser@2.0.0:
+    resolution: {integrity: sha512-h0uDm97wvT2bokfwwTmY6kJ1hp6YDFL0nRHwNKz8s/VD1FH/vvZjAKoMUE+un0eaYBSG7/c6h+lJTP+31tjgTw==}
+    engines: {node: ^20.19.0 || ^22.13.0 || >=24}
 
   yaml@2.8.0:
     resolution: {integrity: sha512-4lLa/EcQCB0cJkyts+FpIRx5G/llPxfP6VQU5KByHEhLxY3IJCH0f0Hy1MHI8sClTvsIb8qwRJ6R/ZdlDJ/leQ==}
@@ -12647,6 +12648,17 @@ snapshots:
       eslint: 10.4.0
       ignore: 5.3.2
 
+  eslint-plugin-pnpm@1.6.0(eslint@10.4.0):
+    dependencies:
+      empathic: 2.0.1
+      eslint: 10.4.0
+      jsonc-eslint-parser: 3.1.0
+      pathe: 2.0.3
+      pnpm-workspace-yaml: 1.6.0
+      tinyglobby: 0.2.16
+      yaml: 2.9.0
+      yaml-eslint-parser: 2.0.0
+
   eslint-plugin-vue@10.9.1(@stylistic/eslint-plugin@5.10.0(eslint@10.4.0))(@typescript-eslint/parser@8.59.3(eslint@10.4.0)(typescript@5.9.3))(eslint@10.4.0)(vue-eslint-parser@10.4.0(eslint@10.4.0)):
     dependencies:
       '@eslint-community/eslint-utils': 4.9.1(eslint@10.4.0)
@@ -13647,6 +13659,12 @@ snapshots:
       minimist: 1.2.8
 
   json5@2.2.3: {}
+
+  jsonc-eslint-parser@3.1.0:
+    dependencies:
+      acorn: 8.16.0
+      eslint-visitor-keys: 5.0.1
+      semver: 7.8.0
 
   jsonc-parser@3.2.0: {}
 
@@ -15319,6 +15337,8 @@ snapshots:
 
   path-type@6.0.0: {}
 
+  pathe@2.0.3: {}
+
   pause-stream@0.0.11:
     dependencies:
       through: 2.3.8
@@ -15395,6 +15415,10 @@ snapshots:
       find-up: 4.1.0
 
   pluralize@2.0.0: {}
+
+  pnpm-workspace-yaml@1.6.0:
+    dependencies:
+      yaml: 2.9.0
 
   possible-typed-array-names@1.1.0: {}
 
@@ -16892,6 +16916,11 @@ snapshots:
   yallist@4.0.0: {}
 
   yallist@5.0.0: {}
+
+  yaml-eslint-parser@2.0.0:
+    dependencies:
+      eslint-visitor-keys: 5.0.1
+      yaml: 2.9.0
 
   yaml@2.8.0: {}
 
