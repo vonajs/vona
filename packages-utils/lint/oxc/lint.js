@@ -1321,7 +1321,6 @@ export const _configDefault = {
           },
         ],
         'prefer-rest-params': 'off',
-        'method-signature-style': 'off',
         'no-redeclare': 'off',
         'consistent-type-imports': [
           'error',
@@ -1373,19 +1372,6 @@ export const _configDefault = {
           'error',
           {
             functions: false,
-          },
-        ],
-        'max-len': [
-          'error',
-          {
-            code: 150,
-            tabWidth: 2,
-            ignoreComments: true,
-            ignoreTrailingComments: true,
-            ignoreUrls: true,
-            ignoreStrings: true,
-            ignoreTemplateLiterals: true,
-            ignoreRegExpLiterals: true,
           },
         ],
       },
