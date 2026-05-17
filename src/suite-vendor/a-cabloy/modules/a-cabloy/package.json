@@ -46,12 +46,9 @@
   "vonaModule": {
     "dependencies": {
       "a-vona": "5.0.0",
-      "a-datasharding": "5.0.0",
-      "a-datasource": "5.0.0",
       "a-socket": "5.0.0",
       "a-ssr": "5.0.0",
-      "a-ssrhmr": "5.0.0",
-      "a-status": "5.0.0"
+      "a-ssrhmr": "5.0.0"
     }
   }
 }

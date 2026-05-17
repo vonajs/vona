@@ -8,12 +8,9 @@
   "type": "module",
   "dependencies": {
     "vona-module-a-cabloy": "workspace:^",
-    "vona-module-a-datasharding": "workspace:^",
-    "vona-module-a-datasource": "workspace:^",
     "vona-module-a-socket": "workspace:^",
     "vona-module-a-ssr": "workspace:^",
-    "vona-module-a-ssrhmr": "workspace:^",
-    "vona-module-a-status": "workspace:^"
+    "vona-module-a-ssrhmr": "workspace:^"
   },
   "title": "a-cabloy"
 }
