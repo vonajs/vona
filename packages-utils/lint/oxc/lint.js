@@ -509,7 +509,6 @@ export const _configDefault = {
       },
     ],
     'antfu/consistent-list-newline': 'off',
-    'antfu/consistent-chaining': 'error',
     'antfu/curly': 'error',
     'antfu/if-newline': 'off',
     'antfu/top-level-function': 'error',
