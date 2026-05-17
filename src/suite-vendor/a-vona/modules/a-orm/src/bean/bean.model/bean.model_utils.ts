@@ -319,7 +319,7 @@ export class BeanModelUtils<TRecord extends {}> extends BeanModelMeta<TRecord> {
   protected _ellipsis‌Logger(str: string) {
     const maxLength = this.scopeOrm.config.logger.maxLength;
     if (str.length > maxLength) {
-      str = `${str.substring(0, maxLength)  } ...`;
+      str = `${str.substring(0, maxLength)} ...`;
     }
     return str;
   }
