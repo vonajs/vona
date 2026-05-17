@@ -315,13 +315,11 @@ export class ServiceOnion<ONIONRECORD> extends BeanBase {
     swapDeps(onions as ISwapDepsItem[], {
       name: 'name',
       dependencies: item => {
-        const onionOptions = cast<IOnionSlice<ONIONRECORD, keyof ONIONRECORD>>(item).beanOptions
-          .options as IOnionOptionsDeps<string>;
+        const onionOptions = cast<IOnionSlice<ONIONRECORD, keyof ONIONRECORD>>(item).beanOptions.options as IOnionOptionsDeps<string>;
         return onionOptions.dependencies as any;
       },
       dependents: item => {
-        const onionOptions = cast<IOnionSlice<ONIONRECORD, keyof ONIONRECORD>>(item).beanOptions
-          .options as IOnionOptionsDeps<string>;
+        const onionOptions = cast<IOnionSlice<ONIONRECORD, keyof ONIONRECORD>>(item).beanOptions.options as IOnionOptionsDeps<string>;
         return onionOptions.dependents as any;
       },
     });

@@ -74,8 +74,9 @@ export const formatLoggerFilter = Winston.format(((info: any, opts: ILoggerForma
   if (
     Winston.config.npm.levels[info.level] <= Winston.config.npm.levels[level] ||
     (opts.silly && info.level === 'silly')
-  )
+  ) {
     return __formatLoggerFilterCheckInfo(info);
+}
   return false;
 }) as any);
 

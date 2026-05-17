@@ -30,8 +30,9 @@ export default async function (options: IMetadataCustomGenerateOptions): Promise
     contentEntityMetas.length === 0 &&
     contentRecords.length === 0 &&
     contentFields.length === 0
-  )
+  ) {
     return '';
+}
   // combine
   const content = `/** ${sceneName}: begin */
 ${contentColumns.join('\n')}

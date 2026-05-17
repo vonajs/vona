@@ -182,7 +182,7 @@ export class BeanPassport extends BeanBase {
 
   public async refreshAuthToken(refreshToken: string) {
     // checkAuthToken by code
-    let checkRes = await this.checkAuthToken(refreshToken, 'refresh');
+    const checkRes = await this.checkAuthToken(refreshToken, 'refresh');
     if (!checkRes) return this.app.throw(401);
     let { payloadData, passport } = checkRes;
     // refreshAuthToken

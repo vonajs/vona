@@ -13,8 +13,8 @@ export default async function (options: IMetadataCustomGenerateOptions): Promise
   for (const globFile of globFiles) {
     const { className, beanName, fileContent, beanNameCapitalize } = globFile;
     const ast = cli.helper.gogocode(fileContent);
-    const astNodes = ast.find(`@Model<$$$0>({$$$1})export class ${className} extends $$$2 {}`).match
-      .$$$1;
+    const _reg = `@Model<$$$0>({$$$1})export class ${className} extends $$$2 {}`;
+    const astNodes = ast.find(_reg).match.$$$1;
     const entityName = __parseEntityName(__getAstNode(astNodes as any, 'entity'));
     const relations = __parseRelations(__getAstNode(astNodes as any, 'relations'));
     const magics = __parseMagics(cli, ast, globFile, entityName);

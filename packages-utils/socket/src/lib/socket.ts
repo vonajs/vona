@@ -20,6 +20,7 @@ const __closeReasonNormal = 'Manual close';
 export class WebSocketClient {
   private [SymbolPerformActionRecord]: Record<string, ISocketEventPerformActionItem | undefined> =
     {};
+
   private _ws?: WebSocket;
   private _timeoutRetry: any;
   private _reconnectDelay: number;
@@ -33,6 +34,7 @@ export class WebSocketClient {
     data: ISocketEventRecord[K],
     event: MessageEvent,
   ) => void;
+
   public onFallback?: (event: MessageEvent) => void;
 
   public onOpen?: (event: Event, reconnectAttempts: number) => void;

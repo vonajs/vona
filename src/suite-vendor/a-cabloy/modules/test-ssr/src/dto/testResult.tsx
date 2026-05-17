@@ -7,7 +7,7 @@ import { text } from 'vona';
 import { $makeSchema, Api, v } from 'vona-module-a-openapiutils';
 import { Dto } from 'vona-module-a-web';
 import z from 'zod';
-import { ZovaRender, ZovaEvent, ZovaCommand, ZovaComponent } from 'zova-rest-cabloy-basic-admin';
+import { ZovaCommand, ZovaComponent, ZovaEvent, ZovaRender } from 'zova-rest-cabloy-basic-admin';
 
 import { $locale } from '../.metadata/locales.ts';
 import { DtoTestDetail } from './testDetail.ts';

@@ -25,8 +25,9 @@ export class ServiceJwtExtract extends BeanBase {
       !auth ||
       auth.scheme.toLocaleLowerCase() !==
         this.scope.config.field.extract.headerAuthScheme.toLocaleLowerCase()
-    )
+    ) {
       return;
+}
     return auth.value;
   }
 

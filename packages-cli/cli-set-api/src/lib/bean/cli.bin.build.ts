@@ -237,8 +237,9 @@ export class CliBinBuild extends BeanCliBase {
         if (
           log.code === 'CIRCULAR_DEPENDENCY' &&
           process.env.BUILD_LOG_CIRCULAR_DEPENDENCY === 'false'
-        )
+        ) {
           return;
+        }
         if (
           log.code === 'THIS_IS_UNDEFINED' &&
           (log.message.includes('ramda/es/partialObject.js') ||
