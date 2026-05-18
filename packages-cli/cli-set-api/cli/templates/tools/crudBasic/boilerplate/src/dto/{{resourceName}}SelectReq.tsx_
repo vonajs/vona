@@ -1,6 +1,5 @@
 import type { IDecoratorDtoOptions } from 'vona-module-a-web';
 
-import { Api, v } from 'vona-module-a-openapiutils';
 import { $Dto } from 'vona-module-a-orm';
 import { Dto } from 'vona-module-a-web';
 import z from 'zod';
@@ -12,10 +11,8 @@ export interface IDtoOptions<%=argv.resourceNameCapitalize%>SelectReq extends ID
 @Dto<IDtoOptions<%=argv.resourceNameCapitalize%>SelectReq>({
   openapi: { filter: { table: '<%=argv.moduleResourceName%>' } },
   fields: {
+    name: z.string().optional(),
     createdAt: z.string().optional(),
   },
 })
-export class Dto<%=argv.resourceNameCapitalize%>SelectReq extends $Dto.queryPage(Entity<%=argv.resourceNameCapitalize%>, ['name', 'createdAt']) {
-  @Api.field(v.optional())
-  name?: string;
-}
+export class Dto<%=argv.resourceNameCapitalize%>SelectReq extends $Dto.queryPage(Entity<%=argv.resourceNameCapitalize%>, ['name', 'createdAt']) {}

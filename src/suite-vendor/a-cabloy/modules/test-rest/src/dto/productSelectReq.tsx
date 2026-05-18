@@ -1,6 +1,5 @@
 import type { IDecoratorDtoOptions } from 'vona-module-a-web';
 
-import { Api, v } from 'vona-module-a-openapiutils';
 import { $Dto } from 'vona-module-a-orm';
 import { Dto } from 'vona-module-a-web';
 import z from 'zod';
@@ -12,11 +11,8 @@ export interface IDtoOptionsProductSelectReq extends IDecoratorDtoOptions {}
 @Dto<IDtoOptionsProductSelectReq>({
   openapi: { filter: { table: 'testRestProduct' } },
   fields: {
+    name: z.string().optional(),
     createdAt: z.string().optional(),
   },
 })
-export class DtoProductSelectReq extends $Dto.queryPage(EntityProduct, ['name', 'createdAt']) {
-  // remove .min(3)
-  @Api.field(v.optional())
-  name?: string;
-}
+export class DtoProductSelectReq extends $Dto.queryPage(EntityProduct, ['name', 'createdAt']) {}
