@@ -13,20 +13,16 @@ export interface IDtoOptionsPostSelectReq extends IDecoratorDtoOptions {}
 @Dto<IDtoOptionsPostSelectReq>({
   openapi: { filter: { table: 'testVonaPost' } },
   fields: {
+    title: $makeSchema(v.optional(), z.string()),
     createdAt: $makeSchema(
-      ZovaRender.order(-2, 'max'),
-      ZovaRender.field('basic-date:formFieldDate'),
-      ZovaRender.cell('basic-date:date'),
-      ZovaRender.field('basic-date:formFieldDateRange', undefined, 'filter'),
+      ZovaRender.field('basic-date:formFieldDateRange'),
       v.filterTransform('a-web:dateRange'),
-      z.string().optional(),
+      v.optional(),
+      z.string(),
     ),
   },
 })
 export class DtoPostSelectReq extends $Dto.queryPage(EntityPost, ['title', 'createdAt']) {
-  // @Api.field(v.optional())
-  // title?: string;
-
   @Api.field(
     v.filter({
       table: 'testVonaUser',
@@ -37,7 +33,4 @@ export class DtoPostSelectReq extends $Dto.queryPage(EntityPost, ['title', 'crea
     v.optional(),
   )
   userName?: string;
-
-  // @Api.field(v.filterTransform('a-web:dateRange', { separator: '~' }), v.optional())
-  // createdAt?: string;
 }
