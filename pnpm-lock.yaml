@@ -9345,8 +9345,8 @@ packages:
   zova-core@5.1.35:
     resolution: {integrity: sha512-XBXCmKkl7odLpatAbJr5lm07m+77tNvPhnjCGR8Ph51mPA+lZ4bnY5RqiDg8S1r2jKGub6UPI/Xj10M49mcvOw==}
 
-  zova-core@5.1.37:
-    resolution: {integrity: sha512-1aJtFXH4bPcKhzOvvhHdJKxl2gz3EYVEQl1sijbLzQlqNLsiU7oEt+T7UW+9h9yxXdeYmZ7ex3leuTYrd8tfpw==}
+  zova-core@5.1.38:
+    resolution: {integrity: sha512-qTr/clkVN5RsccT0J1liSbVDFLeUIFRJPpHX+Tqs8L5iq0mF4Xjox6bYtme+4E2rnX+ddIgCCQSIk7eWxablOg==}
 
   zova-jsx@1.1.40:
     resolution: {integrity: sha512-Cs9ChJ5PR0NgqkWFtwZomy9cZOllIlEdDh8yGuTzVoCbWd5vuolyZbIU4qvPBy7/urXy+vyZ6Pfi1WB8Ex4sXg==}
@@ -9354,8 +9354,8 @@ packages:
   zova-jsx@1.1.41:
     resolution: {integrity: sha512-xBybVfUuVk+oOJmkvWGLtq4kCVu9VLx24mJKvbfcJZT+gcOdLFUdFxQP5mWszf0vYnEMwHSMzUHAevBA8h0f/g==}
 
-  zova-jsx@1.1.43:
-    resolution: {integrity: sha512-bzYh9rITxPcECRGILdtsjb1hlZb0lQ82IK7CafVg4xgM3LxZVg9t2EuzqV4nEG5yyvsZ/Z2pkXvlnuAkG+8D8A==}
+  zova-jsx@1.1.44:
+    resolution: {integrity: sha512-b1XbyiKj+of2nX4RRsYkQwgwvr4dVYkgpqWPVWcKVpKmc8qWkJ76Iq9LdfhBkksC5dNtFoJWFBmuN3fDinTe4g==}
 
   zova-module-a-api@5.1.10:
     resolution: {integrity: sha512-FJPtJsDNhzBIYVMVrouqspYYplAvet6fplcQ0m/I+eeMz5Ewmtfs0e4n9sGEG5n0x4Oktx2QfPCjPDGF6eEQXQ==}
@@ -9504,8 +9504,8 @@ packages:
   zova-module-a-zova@5.1.44:
     resolution: {integrity: sha512-JyRLCz9heBctXi4D9SCEbBGqBxo27hl0Wwo6ljXTafwVuk7eVwoSSZyIwH2C5drPdKjzUDyVT2isrWY2P6HsUQ==}
 
-  zova-module-a-zova@5.1.47:
-    resolution: {integrity: sha512-wXGLFNIWnJr5buNc3VxJsQj24lTJOTVbXFNNFH1Iis5r9xm62ayrPT0+woMK9vQ+td2E2eieS+o9URYhOt2gBw==}
+  zova-module-a-zova@5.1.48:
+    resolution: {integrity: sha512-1bHUMfa+2qndThLDpbihx0W+vZauKn0YQLFTmQbOtOQTPeI8GGzfjhtYqfWF7Bot/Er/u+yO4NFvgCy69xY+Kw==}
 
   zova-module-rest-resource@5.1.20:
     resolution: {integrity: sha512-cABsSo1gW1a4hZdm0viZ9cd93NDSD3RrA6bQJxfavGqKXb7tBZ12hIrPTTqFenEosf02Vr06CweiDK3dJlZH5A==}
@@ -9522,14 +9522,14 @@ packages:
   zova-suite-a-zova@5.1.69:
     resolution: {integrity: sha512-MLJsbmJKbk9GSQ3B/6ucak8iwgpeK3t340ZAM1aLEpHZTDNbyCESX66OBo6qrZAvU5Feoj0sa5cJAg5RHJfPJg==}
 
-  zova-suite-a-zova@5.1.72:
-    resolution: {integrity: sha512-2G2FJY8SX/rLBdirNIAGDluydpfLravM/mC+zGUnJUp9TAgL6VSkx0PkTnYTYr4MKV00RK90/GkAy/Pv4dDLRA==}
+  zova-suite-a-zova@5.1.73:
+    resolution: {integrity: sha512-mHdMCg2jEz3GjuTBwnc0NfA4Y81hAXKMmSOkUtkq04o+2k4xvSG9PxHNs/DpnaOXJ3xIVWyZGY6tb6zSHggMfA==}
 
   zova@5.1.70:
     resolution: {integrity: sha512-R506tsV+MYER1Ut6yR2UKx5juJmS0emtx+SBRU0CgdtNhwfn5HJUaFShBdgu0w/Rtdq0qDbabgk+5O+KOCK9CQ==}
 
-  zova@5.1.73:
-    resolution: {integrity: sha512-k4QNCRNf1aHHlSYT3ve+rh558JOdUvaf7/SsiGOFV1QCdOh1kMfxm2awc0CCnUrzkXXAqXWQLlJxSO5aDIGoRg==}
+  zova@5.1.74:
+    resolution: {integrity: sha512-HXNw5HeqCFbeZHRzDfD5srr9lTXT9otZkIVLaaqxjsR+Ozssv1+mVX9YmLNgBZhXErnzU+eZbOCizeM2/7Rxlg==}
 
   zwitch@1.0.5:
     resolution: {integrity: sha512-V50KMwwzqJV0NpZIZFwfOD5/lyny3WlSzRiXgA0G7VUnRlqttta1L6UQIHzd6EuBY/cHGfwTIck7w1yH6Q5zUw==}
@@ -17456,7 +17456,7 @@ snapshots:
     transitivePeerDependencies:
       - typescript
 
-  zova-core@5.1.37(typescript@5.9.3):
+  zova-core@5.1.38(typescript@5.9.3):
     dependencies:
       '@cabloy/compose': link:packages-utils/compose
       '@cabloy/extend': link:packages-utils/extend
@@ -17507,14 +17507,14 @@ snapshots:
     transitivePeerDependencies:
       - typescript
 
-  zova-jsx@1.1.43(typescript@5.9.3):
+  zova-jsx@1.1.44(typescript@5.9.3):
     dependencies:
       '@cabloy/compose': link:packages-utils/compose
       '@cabloy/utils': link:packages-utils/utils
       '@cabloy/word-utils': 2.1.11
       typestyle: 2.4.0
       vue: 3.5.34(typescript@5.9.3)
-      zova-core: 5.1.37(typescript@5.9.3)
+      zova-core: 5.1.38(typescript@5.9.3)
     transitivePeerDependencies:
       - typescript
 
@@ -17728,7 +17728,7 @@ snapshots:
       - typescript
       - vue
 
-  zova-module-a-zova@5.1.47(typescript@5.9.3)(vue@3.5.34(typescript@5.9.3)):
+  zova-module-a-zova@5.1.48(typescript@5.9.3)(vue@3.5.34(typescript@5.9.3)):
     dependencies:
       '@cabloy/compose': link:packages-utils/compose
       '@cabloy/deps': link:packages-utils/deps
@@ -17739,7 +17739,7 @@ snapshots:
       '@cabloy/word-utils': 2.1.11
       defu: 6.1.7
       luxon: 3.7.2
-      zova-jsx: 1.1.43(typescript@5.9.3)
+      zova-jsx: 1.1.44(typescript@5.9.3)
     transitivePeerDependencies:
       - typescript
       - vue
@@ -17757,8 +17757,8 @@ snapshots:
       typestyle: 2.4.0
       vue: 3.5.34(typescript@5.9.3)
       zod: '@cabloy/zod@4.3.6'
-      zova: 5.1.73(typescript@5.9.3)(vue@3.5.34(typescript@5.9.3))
-      zova-jsx: 1.1.43(typescript@5.9.3)
+      zova: 5.1.74(typescript@5.9.3)(vue@3.5.34(typescript@5.9.3))
+      zova-jsx: 1.1.44(typescript@5.9.3)
       zova-module-a-api: 5.1.12
       zova-module-a-bean: 5.1.20
       zova-module-a-behavior: 5.1.15
@@ -17846,7 +17846,7 @@ snapshots:
       - typescript
       - vue
 
-  zova-suite-a-zova@5.1.72(typescript@5.9.3)(vue@3.5.34(typescript@5.9.3)):
+  zova-suite-a-zova@5.1.73(typescript@5.9.3)(vue@3.5.34(typescript@5.9.3)):
     dependencies:
       zova-module-a-api: 5.1.12
       zova-module-a-app: 5.1.14
@@ -17872,7 +17872,7 @@ snapshots:
       zova-module-a-style: 5.1.22
       zova-module-a-table: 5.1.23(vue@3.5.34(typescript@5.9.3))
       zova-module-a-zod: 5.1.18
-      zova-module-a-zova: 5.1.47(typescript@5.9.3)(vue@3.5.34(typescript@5.9.3))
+      zova-module-a-zova: 5.1.48(typescript@5.9.3)(vue@3.5.34(typescript@5.9.3))
     transitivePeerDependencies:
       - '@vue/composition-api'
       - debug
@@ -17891,10 +17891,10 @@ snapshots:
       - typescript
       - vue
 
-  zova@5.1.73(typescript@5.9.3)(vue@3.5.34(typescript@5.9.3)):
+  zova@5.1.74(typescript@5.9.3)(vue@3.5.34(typescript@5.9.3)):
     dependencies:
-      zova-core: 5.1.37(typescript@5.9.3)
-      zova-suite-a-zova: 5.1.72(typescript@5.9.3)(vue@3.5.34(typescript@5.9.3))
+      zova-core: 5.1.38(typescript@5.9.3)
+      zova-suite-a-zova: 5.1.73(typescript@5.9.3)(vue@3.5.34(typescript@5.9.3))
     transitivePeerDependencies:
       - '@vue/composition-api'
       - debug

@@ -12,16 +12,11 @@ $ cd zova
 ## 2. 初始化并安装依赖
 
 ```bash
+$ cp package.original.json package.json
 $ npm run init
 ```
 
-## 3. 进入zova-dev目录
-
-```bash
-$ cd zova-dev
-```
-
-## 4. 修改.env 文件
+## 3. 修改.env 文件
 
 `env/.env.ssr.cabloyBasicAdmin`:
 
@@ -35,7 +30,7 @@ BUILD_REST_COPY_DIST = /path-to-vona/src/suite/cabloy-basic/modules/basic-sitead
 | BUILD_COPY_RELEASE   | 将构建生成的JS bundle自动拷贝到Vona中 |
 | BUILD_REST_COPY_DIST | 将构建生成的类型文件自动拷贝到Vona中  |
 
-## 5. 构建项目
+## 4. 构建项目
 
 - 构建 JS bundle
 
@@ -49,7 +44,7 @@ $ npm run build:ssr:cabloyBasicAdmin
 $ npm run build:rest:cabloyBasicAdmin
 ```
 
-## 6. 启动开发服务
+## 5. 启动开发服务
 
 可以直接启动 Zova 开发服务，与 Vona 后端进行联调。
 

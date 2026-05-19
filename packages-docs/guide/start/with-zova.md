@@ -12,16 +12,11 @@ $ cd zova
 ## 2. Initialize and install dependencies
 
 ```bash
+$ cp package.original.json package.json
 $ npm run init
 ```
 
-## 3. Enter the zova-dev directory
-
-```bash
-$ cd zova-dev
-```
-
-## 4. Modify the .env file
+## 3. Modify the .env file
 
 `env/.env.ssr.cabloyBasicAdmin`:
 
@@ -35,7 +30,7 @@ BUILD_REST_COPY_DIST = /path-to-vona/src/suite/cabloy-basic/modules/basic-sitead
 | BUILD_COPY_RELEASE   | Automatically copy the built JS bundle to Vona  |
 | BUILD_REST_COPY_DIST | Automatically copy the built type files to Vona |
 
-## 5. Build
+## 4. Build
 
 - Build JS bundle
 
@@ -49,7 +44,7 @@ $ npm run build:ssr:cabloyBasicAdmin
 $ npm run build:rest:cabloyBasicAdmin
 ```
 
-## 6. Start the development server
+## 5. Start the development server
 
 You can directly start the Zova development server and perform joint debugging with the Vona backend.
 
