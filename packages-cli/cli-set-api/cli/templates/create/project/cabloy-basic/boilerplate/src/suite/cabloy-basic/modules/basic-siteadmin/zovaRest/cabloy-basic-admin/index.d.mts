@@ -4434,10 +4434,10 @@ declare const ZPageErrorNotFound: _$vue.DefineSetupFnComponent<Record<string, an
 type TypeControllerItemLinkPublicProps = {
   controllerRef?: (ref: ControllerItemLink) => void;
 } & ControllerItemLinkProps;
-type ControllerInnerProps$21 = TypeControllerInnerProps<ControllerItemLinkProps, keyof typeof ControllerItemLink.$propsDefault>;
+type ControllerInnerProps$23 = TypeControllerInnerProps<ControllerItemLinkProps, keyof typeof ControllerItemLink.$propsDefault>;
 declare module 'zova-module-home-base' {
   interface ControllerItemLink {
-    $props: ControllerInnerProps$21;
+    $props: ControllerInnerProps$23;
   }
 }
 declare const ZItemLink: _$vue.DefineSetupFnComponent<TypeControllerItemLinkPublicProps, _$vue.EmitsOptions, _$vue.SlotsType<Record<string, any>>, {
@@ -4457,10 +4457,10 @@ declare module 'zova-module-a-bean' {
 type TypeControllerPagePublicProps = {
   controllerRef?: (ref: ControllerPage) => void;
 } & ControllerPageProps;
-type ControllerInnerProps$20 = TypeControllerInnerProps<ControllerPageProps, keyof typeof ControllerPage.$propsDefault>;
+type ControllerInnerProps$22 = TypeControllerInnerProps<ControllerPageProps, keyof typeof ControllerPage.$propsDefault>;
 declare module 'zova-module-home-base' {
   interface ControllerPage {
-    $props: ControllerInnerProps$20;
+    $props: ControllerInnerProps$22;
   }
 }
 declare const ZPage: _$vue.DefineSetupFnComponent<TypeControllerPagePublicProps, _$vue.EmitsOptions, _$vue.SlotsType<Record<string, any>>, {
@@ -4947,10 +4947,10 @@ declare class ControllerLayoutEmpty extends BeanControllerBase {
 type TypeControllerLayoutEmptyPublicProps = {
   controllerRef?: (ref: ControllerLayoutEmpty) => void;
 } & ControllerLayoutEmptyProps;
-type ControllerInnerProps$19 = TypeControllerInnerProps<ControllerLayoutEmptyProps, keyof typeof ControllerLayoutEmpty.$propsDefault>;
+type ControllerInnerProps$21 = TypeControllerInnerProps<ControllerLayoutEmptyProps, keyof typeof ControllerLayoutEmpty.$propsDefault>;
 declare module 'zova-module-home-layoutempty' {
   interface ControllerLayoutEmpty {
-    $props: ControllerInnerProps$19;
+    $props: ControllerInnerProps$21;
   }
 }
 declare const ZLayoutEmpty: _$vue.DefineSetupFnComponent<TypeControllerLayoutEmptyPublicProps, _$vue.EmitsOptions, _$vue.SlotsType<Record<string, any>>, {
@@ -5067,10 +5067,10 @@ declare class ControllerLayoutTabs extends BeanControllerBase {
 type TypeControllerLayoutTabsPublicProps = {
   controllerRef?: (ref: ControllerLayoutTabs) => void;
 } & ControllerLayoutTabsProps;
-type ControllerInnerProps$18 = TypeControllerInnerProps<ControllerLayoutTabsProps, keyof typeof ControllerLayoutTabs.$propsDefault>;
+type ControllerInnerProps$20 = TypeControllerInnerProps<ControllerLayoutTabsProps, keyof typeof ControllerLayoutTabs.$propsDefault>;
 declare module 'zova-module-home-layouttabs' {
   interface ControllerLayoutTabs {
-    $props: ControllerInnerProps$18;
+    $props: ControllerInnerProps$20;
   }
 }
 declare module 'zova-module-home-layouttabs' {
@@ -5775,10 +5775,10 @@ declare class ControllerFormFieldCaptcha extends BeanControllerBase {
 type TypeControllerFormFieldCaptchaPublicProps = {
   controllerRef?: (ref: ControllerFormFieldCaptcha) => void;
 } & ControllerFormFieldCaptchaProps;
-type ControllerInnerProps$17 = TypeControllerInnerProps<ControllerFormFieldCaptchaProps, keyof typeof ControllerFormFieldCaptcha.$propsDefault>;
+type ControllerInnerProps$19 = TypeControllerInnerProps<ControllerFormFieldCaptchaProps, keyof typeof ControllerFormFieldCaptcha.$propsDefault>;
 declare module 'zova-module-basic-captcha' {
   interface ControllerFormFieldCaptcha {
-    $props: ControllerInnerProps$17;
+    $props: ControllerInnerProps$19;
   }
 }
 declare const ZFormFieldCaptcha: _$vue.DefineSetupFnComponent<TypeControllerFormFieldCaptchaPublicProps, _$vue.EmitsOptions, _$vue.SlotsType<Record<string, any>>, {
@@ -6088,10 +6088,10 @@ declare class ControllerFormFieldCurrency extends BeanControllerBase {
 type TypeControllerFormFieldCurrencyPublicProps = {
   controllerRef?: (ref: ControllerFormFieldCurrency) => void;
 } & ControllerFormFieldCurrencyProps;
-type ControllerInnerProps$16 = TypeControllerInnerProps<ControllerFormFieldCurrencyProps, keyof typeof ControllerFormFieldCurrency.$propsDefault>;
+type ControllerInnerProps$18 = TypeControllerInnerProps<ControllerFormFieldCurrencyProps, keyof typeof ControllerFormFieldCurrency.$propsDefault>;
 declare module 'zova-module-basic-currency' {
   interface ControllerFormFieldCurrency {
-    $props: ControllerInnerProps$16;
+    $props: ControllerInnerProps$18;
   }
 }
 declare const ZFormFieldCurrency: _$vue.DefineSetupFnComponent<TypeControllerFormFieldCurrencyPublicProps, _$vue.EmitsOptions, _$vue.SlotsType<Record<string, any>>, {
@@ -6267,12 +6267,12 @@ declare class ControllerFormFieldDateRange extends BeanControllerBase {
 type TypeControllerDateRangePublicProps = {
   controllerRef?: (ref: ControllerDateRange) => void;
 } & ControllerDateRangeProps & ControllerDateRangeModels & { [KEY in keyof ControllerDateRangeModels as TypePropValueFromModel<KEY>]: ControllerDateRangeModels[KEY] } & { [KEY in keyof ControllerDateRangeModels as TypePropUpdateFromModel<KEY>]: (value: ControllerDateRangeModels[KEY]) => void };
-type TypeModelArguments = { [KEY in keyof ControllerDateRangeModels as TypePropValueFromModel<KEY>]: ControllerDateRangeModels[KEY] };
-type ControllerInnerProps$15 = TypeControllerInnerProps<ControllerDateRangeProps & { [KEY in keyof ControllerDateRangeModels as TypePropValueFromModel<KEY>]: ControllerDateRangeModels[KEY] }, keyof typeof ControllerDateRange.$propsDefault>;
+type TypeModelArguments$1 = { [KEY in keyof ControllerDateRangeModels as TypePropValueFromModel<KEY>]: ControllerDateRangeModels[KEY] };
+type ControllerInnerProps$17 = TypeControllerInnerProps<ControllerDateRangeProps & { [KEY in keyof ControllerDateRangeModels as TypePropValueFromModel<KEY>]: ControllerDateRangeModels[KEY] }, keyof typeof ControllerDateRange.$propsDefault>;
 declare module 'zova-module-basic-date' {
   interface ControllerDateRange {
-    $props: ControllerInnerProps$15;
-    $useModel<K extends keyof TypeModelArguments>(name: K, options?: DefineModelOptions<TypeModelArguments[K]>): ControllerInnerProps$15[K];
+    $props: ControllerInnerProps$17;
+    $useModel<K extends keyof TypeModelArguments$1>(name: K, options?: DefineModelOptions<TypeModelArguments$1[K]>): ControllerInnerProps$17[K];
   }
 }
 declare const ZDateRange: _$vue.DefineSetupFnComponent<TypeControllerDateRangePublicProps, _$vue.EmitsOptions, _$vue.SlotsType<Record<string, any>>, {
@@ -6296,10 +6296,10 @@ declare module 'zova-module-a-bean' {
 type TypeControllerFormFieldDatePublicProps = {
   controllerRef?: (ref: ControllerFormFieldDate) => void;
 } & ControllerFormFieldDateProps;
-type ControllerInnerProps$14 = TypeControllerInnerProps<ControllerFormFieldDateProps, keyof typeof ControllerFormFieldDate.$propsDefault>;
+type ControllerInnerProps$16 = TypeControllerInnerProps<ControllerFormFieldDateProps, keyof typeof ControllerFormFieldDate.$propsDefault>;
 declare module 'zova-module-basic-date' {
   interface ControllerFormFieldDate {
-    $props: ControllerInnerProps$14;
+    $props: ControllerInnerProps$16;
   }
 }
 declare const ZFormFieldDate: _$vue.DefineSetupFnComponent<TypeControllerFormFieldDatePublicProps, _$vue.EmitsOptions, _$vue.SlotsType<Record<string, any>>, {
@@ -6319,10 +6319,10 @@ declare module 'zova-module-a-bean' {
 type TypeControllerFormFieldDateRangePublicProps = {
   controllerRef?: (ref: ControllerFormFieldDateRange) => void;
 } & ControllerFormFieldDateRangeProps;
-type ControllerInnerProps$13 = TypeControllerInnerProps<ControllerFormFieldDateRangeProps, keyof typeof ControllerFormFieldDateRange.$propsDefault>;
+type ControllerInnerProps$15 = TypeControllerInnerProps<ControllerFormFieldDateRangeProps, keyof typeof ControllerFormFieldDateRange.$propsDefault>;
 declare module 'zova-module-basic-date' {
   interface ControllerFormFieldDateRange {
-    $props: ControllerInnerProps$13;
+    $props: ControllerInnerProps$15;
   }
 }
 declare const ZFormFieldDateRange: _$vue.DefineSetupFnComponent<TypeControllerFormFieldDateRangePublicProps, _$vue.EmitsOptions, _$vue.SlotsType<Record<string, any>>, {
@@ -6454,10 +6454,10 @@ declare class ControllerActionSubmit extends BeanControllerBase {
 type TypeControllerActionBackPublicProps = {
   controllerRef?: (ref: ControllerActionBack) => void;
 } & ControllerActionBackProps;
-type ControllerInnerProps$12 = TypeControllerInnerProps<ControllerActionBackProps, keyof typeof ControllerActionBack.$propsDefault>;
+type ControllerInnerProps$14 = TypeControllerInnerProps<ControllerActionBackProps, keyof typeof ControllerActionBack.$propsDefault>;
 declare module 'zova-module-basic-form' {
   interface ControllerActionBack {
-    $props: ControllerInnerProps$12;
+    $props: ControllerInnerProps$14;
   }
 }
 declare const ZActionBack: _$vue.DefineSetupFnComponent<TypeControllerActionBackPublicProps, _$vue.EmitsOptions, _$vue.SlotsType<Record<string, any>>, {
@@ -6477,10 +6477,10 @@ declare module 'zova-module-a-bean' {
 type TypeControllerActionSubmitPublicProps = {
   controllerRef?: (ref: ControllerActionSubmit) => void;
 } & ControllerActionSubmitProps;
-type ControllerInnerProps$11 = TypeControllerInnerProps<ControllerActionSubmitProps, keyof typeof ControllerActionSubmit.$propsDefault>;
+type ControllerInnerProps$13 = TypeControllerInnerProps<ControllerActionSubmitProps, keyof typeof ControllerActionSubmit.$propsDefault>;
 declare module 'zova-module-basic-form' {
   interface ControllerActionSubmit {
-    $props: ControllerInnerProps$11;
+    $props: ControllerInnerProps$13;
   }
 }
 declare const ZActionSubmit: _$vue.DefineSetupFnComponent<TypeControllerActionSubmitPublicProps, _$vue.EmitsOptions, _$vue.SlotsType<Record<string, any>>, {
@@ -6650,10 +6650,10 @@ declare class ControllerFormFieldInput extends BeanControllerBase {
 type TypeControllerFormFieldInputPublicProps = {
   controllerRef?: (ref: ControllerFormFieldInput) => void;
 } & ControllerFormFieldInputProps;
-type ControllerInnerProps$10 = TypeControllerInnerProps<ControllerFormFieldInputProps, keyof typeof ControllerFormFieldInput.$propsDefault>;
+type ControllerInnerProps$12 = TypeControllerInnerProps<ControllerFormFieldInputProps, keyof typeof ControllerFormFieldInput.$propsDefault>;
 declare module 'zova-module-basic-input' {
   interface ControllerFormFieldInput {
-    $props: ControllerInnerProps$10;
+    $props: ControllerInnerProps$12;
   }
 }
 declare const ZFormFieldInput: _$vue.DefineSetupFnComponent<TypeControllerFormFieldInputPublicProps, _$vue.EmitsOptions, _$vue.SlotsType<Record<string, any>>, {
@@ -6844,10 +6844,10 @@ declare class ControllerBlockToolbarBulk extends BeanControllerBase {
 type TypeControllerBlockFilterPublicProps = {
   controllerRef?: (ref: ControllerBlockFilter) => void;
 } & ControllerBlockFilterProps;
-type ControllerInnerProps$9 = TypeControllerInnerProps<ControllerBlockFilterProps, keyof typeof ControllerBlockFilter.$propsDefault>;
+type ControllerInnerProps$11 = TypeControllerInnerProps<ControllerBlockFilterProps, keyof typeof ControllerBlockFilter.$propsDefault>;
 declare module 'zova-module-basic-page' {
   interface ControllerBlockFilter {
-    $props: ControllerInnerProps$9;
+    $props: ControllerInnerProps$11;
   }
 }
 declare const ZBlockFilter: _$vue.DefineSetupFnComponent<TypeControllerBlockFilterPublicProps, _$vue.EmitsOptions, _$vue.SlotsType<Record<string, any>>, {
@@ -6867,10 +6867,10 @@ declare module 'zova-module-a-bean' {
 type TypeControllerBlockPagePublicProps = {
   controllerRef?: (ref: ControllerBlockPage) => void;
 } & ControllerBlockPageProps;
-type ControllerInnerProps$8 = TypeControllerInnerProps<ControllerBlockPageProps, keyof typeof ControllerBlockPage.$propsDefault>;
+type ControllerInnerProps$10 = TypeControllerInnerProps<ControllerBlockPageProps, keyof typeof ControllerBlockPage.$propsDefault>;
 declare module 'zova-module-basic-page' {
   interface ControllerBlockPage {
-    $props: ControllerInnerProps$8;
+    $props: ControllerInnerProps$10;
   }
 }
 declare const ZBlockPage: _$vue.DefineSetupFnComponent<TypeControllerBlockPagePublicProps, _$vue.EmitsOptions, _$vue.SlotsType<Record<string, any>>, {
@@ -6890,10 +6890,10 @@ declare module 'zova-module-a-bean' {
 type TypeControllerBlockPagerPublicProps = {
   controllerRef?: (ref: ControllerBlockPager) => void;
 } & ControllerBlockPagerProps;
-type ControllerInnerProps$7 = TypeControllerInnerProps<ControllerBlockPagerProps, keyof typeof ControllerBlockPager.$propsDefault>;
+type ControllerInnerProps$9 = TypeControllerInnerProps<ControllerBlockPagerProps, keyof typeof ControllerBlockPager.$propsDefault>;
 declare module 'zova-module-basic-page' {
   interface ControllerBlockPager {
-    $props: ControllerInnerProps$7;
+    $props: ControllerInnerProps$9;
   }
 }
 declare const ZBlockPager: _$vue.DefineSetupFnComponent<TypeControllerBlockPagerPublicProps, _$vue.EmitsOptions, _$vue.SlotsType<Record<string, any>>, {
@@ -6913,10 +6913,10 @@ declare module 'zova-module-a-bean' {
 type TypeControllerBlockTablePublicProps = {
   controllerRef?: (ref: ControllerBlockTable) => void;
 } & ControllerBlockTableProps;
-type ControllerInnerProps$6 = TypeControllerInnerProps<ControllerBlockTableProps, keyof typeof ControllerBlockTable.$propsDefault>;
+type ControllerInnerProps$8 = TypeControllerInnerProps<ControllerBlockTableProps, keyof typeof ControllerBlockTable.$propsDefault>;
 declare module 'zova-module-basic-page' {
   interface ControllerBlockTable {
-    $props: ControllerInnerProps$6;
+    $props: ControllerInnerProps$8;
   }
 }
 declare const ZBlockTable: _$vue.DefineSetupFnComponent<TypeControllerBlockTablePublicProps, _$vue.EmitsOptions, _$vue.SlotsType<Record<string, any>>, {
@@ -6936,10 +6936,10 @@ declare module 'zova-module-a-bean' {
 type TypeControllerBlockToolbarBulkPublicProps = {
   controllerRef?: (ref: ControllerBlockToolbarBulk) => void;
 } & ControllerBlockToolbarBulkProps;
-type ControllerInnerProps$5 = TypeControllerInnerProps<ControllerBlockToolbarBulkProps, keyof typeof ControllerBlockToolbarBulk.$propsDefault>;
+type ControllerInnerProps$7 = TypeControllerInnerProps<ControllerBlockToolbarBulkProps, keyof typeof ControllerBlockToolbarBulk.$propsDefault>;
 declare module 'zova-module-basic-page' {
   interface ControllerBlockToolbarBulk {
-    $props: ControllerInnerProps$5;
+    $props: ControllerInnerProps$7;
   }
 }
 declare const ZBlockToolbarBulk: _$vue.DefineSetupFnComponent<TypeControllerBlockToolbarBulkPublicProps, _$vue.EmitsOptions, _$vue.SlotsType<Record<string, any>>, {
@@ -7252,10 +7252,10 @@ declare class ControllerBlockToolbarRow extends BeanControllerBase {
 type TypeControllerBlockFormPublicProps = {
   controllerRef?: (ref: ControllerBlockForm) => void;
 } & ControllerBlockFormProps;
-type ControllerInnerProps$4 = TypeControllerInnerProps<ControllerBlockFormProps, keyof typeof ControllerBlockForm.$propsDefault>;
+type ControllerInnerProps$6 = TypeControllerInnerProps<ControllerBlockFormProps, keyof typeof ControllerBlockForm.$propsDefault>;
 declare module 'zova-module-basic-pageentry' {
   interface ControllerBlockForm {
-    $props: ControllerInnerProps$4;
+    $props: ControllerInnerProps$6;
   }
 }
 declare const ZBlockForm: _$vue.DefineSetupFnComponent<TypeControllerBlockFormPublicProps, _$vue.EmitsOptions, _$vue.SlotsType<Record<string, any>>, {
@@ -7275,10 +7275,10 @@ declare module 'zova-module-a-bean' {
 type TypeControllerBlockPageEntryPublicProps = {
   controllerRef?: (ref: ControllerBlockPageEntry) => void;
 } & ControllerBlockPageEntryProps;
-type ControllerInnerProps$3 = TypeControllerInnerProps<ControllerBlockPageEntryProps, keyof typeof ControllerBlockPageEntry.$propsDefault>;
+type ControllerInnerProps$5 = TypeControllerInnerProps<ControllerBlockPageEntryProps, keyof typeof ControllerBlockPageEntry.$propsDefault>;
 declare module 'zova-module-basic-pageentry' {
   interface ControllerBlockPageEntry {
-    $props: ControllerInnerProps$3;
+    $props: ControllerInnerProps$5;
   }
 }
 declare const ZBlockPageEntry: _$vue.DefineSetupFnComponent<TypeControllerBlockPageEntryPublicProps, _$vue.EmitsOptions, _$vue.SlotsType<Record<string, any>>, {
@@ -7298,10 +7298,10 @@ declare module 'zova-module-a-bean' {
 type TypeControllerBlockToolbarRowPublicProps = {
   controllerRef?: (ref: ControllerBlockToolbarRow) => void;
 } & ControllerBlockToolbarRowProps;
-type ControllerInnerProps$2 = TypeControllerInnerProps<ControllerBlockToolbarRowProps, keyof typeof ControllerBlockToolbarRow.$propsDefault>;
+type ControllerInnerProps$4 = TypeControllerInnerProps<ControllerBlockToolbarRowProps, keyof typeof ControllerBlockToolbarRow.$propsDefault>;
 declare module 'zova-module-basic-pageentry' {
   interface ControllerBlockToolbarRow {
-    $props: ControllerInnerProps$2;
+    $props: ControllerInnerProps$4;
   }
 }
 declare const ZBlockToolbarRow: _$vue.DefineSetupFnComponent<TypeControllerBlockToolbarRowPublicProps, _$vue.EmitsOptions, _$vue.SlotsType<Record<string, any>>, {
@@ -7362,6 +7362,174 @@ declare module 'zova' {
     'basic-pageentry': (typeof locales$1)[TypeLocaleBase];
   }
 }
+//#endregion
+//#region src/suite/cabloy-basic/modules/basic-select/src/component/select/controller.d.ts
+interface ControllerSelectProps {
+  class?: any;
+  placeholder?: string;
+  items?: any[] | undefined;
+  itemTitle?: string;
+  itemValue?: string;
+}
+interface ControllerSelectModels {
+  vModel?: any;
+}
+declare class ControllerSelect extends BeanControllerBase {
+  static $propsDefault: {
+    itemValue: string;
+    itemTitle: string;
+  };
+  modelValue?: any;
+  protected __init__(): Promise<void>;
+  protected render(): _$vue_jsx_runtime0.JSX.Element;
+}
+//#endregion
+//#region src/suite/cabloy-basic/modules/basic-select/src/.metadata/component/select.d.ts
+type TypeControllerSelectPublicProps = {
+  controllerRef?: (ref: ControllerSelect) => void;
+} & ControllerSelectProps & ControllerSelectModels & { [KEY in keyof ControllerSelectModels as TypePropValueFromModel<KEY>]: ControllerSelectModels[KEY] } & { [KEY in keyof ControllerSelectModels as TypePropUpdateFromModel<KEY>]: (value: ControllerSelectModels[KEY]) => void };
+type TypeModelArguments = { [KEY in keyof ControllerSelectModels as TypePropValueFromModel<KEY>]: ControllerSelectModels[KEY] };
+type ControllerInnerProps$3 = TypeControllerInnerProps<ControllerSelectProps & { [KEY in keyof ControllerSelectModels as TypePropValueFromModel<KEY>]: ControllerSelectModels[KEY] }, keyof typeof ControllerSelect.$propsDefault>;
+declare module 'zova-module-basic-select' {
+  interface ControllerSelect {
+    $props: ControllerInnerProps$3;
+    $useModel<K extends keyof TypeModelArguments>(name: K, options?: DefineModelOptions<TypeModelArguments[K]>): ControllerInnerProps$3[K];
+  }
+}
+declare const ZSelect: _$vue.DefineSetupFnComponent<TypeControllerSelectPublicProps, _$vue.EmitsOptions, _$vue.SlotsType<Record<string, any>>, {
+  controllerRef?: (ref: ControllerSelect) => void;
+} & ControllerSelectProps & ControllerSelectModels & {
+  modelValue?: any;
+} & {
+  "onUpdate:modelValue"?: ((value: any) => void) | undefined;
+} & ({
+  [x: `on${Capitalize<string>}`]: ((...args: any[]) => any) | undefined;
+} | {
+  [x: `on${Capitalize<string>}`]: ((...args: never) => any) | undefined;
+}), _$vue.PublicProps>;
+declare module 'zova-module-a-bean' {
+  interface IVonaComponentRecord {
+    'basic-select:select': ControllerSelectProps & ControllerSelectModels & { [KEY in keyof ControllerSelectModels as TypePropValueFromModel<KEY>]: ControllerSelectModels[KEY] } & { [KEY in keyof ControllerSelectModels as TypePropUpdateFromModel<KEY>]: (value: ControllerSelectModels[KEY]) => void };
+  }
+}
+//#endregion
+//#region src/suite/cabloy-basic/modules/basic-select/src/component/formFieldSelect/controller.d.ts
+declare module 'zova-module-a-openapi' {
+  interface IResourceFormFieldRecord {
+    'basic-select:formFieldSelect'?: IResourceFormFieldSelectOptions;
+  }
+}
+interface IResourceFormFieldSelectOptions extends IResourceFormFieldOptionsBase, TypeControllerSelectPublicProps {}
+interface ControllerFormFieldSelectProps extends IFormFieldComponentOptions {
+  options?: IResourceFormFieldSelectOptions;
+}
+declare class ControllerFormFieldSelect extends BeanControllerBase {
+  static $propsDefault: {
+    options: {
+      itemValue: string;
+      itemTitle: string;
+    };
+  };
+  static $componentOptions: IComponentOptions;
+  protected __init__(): Promise<void>;
+  protected render(): _$vue_jsx_runtime0.JSX.Element;
+  private _getValueByItems;
+}
+//#endregion
+//#region src/suite/cabloy-basic/modules/basic-select/src/.metadata/component/formFieldSelect.d.ts
+type TypeControllerFormFieldSelectPublicProps = {
+  controllerRef?: (ref: ControllerFormFieldSelect) => void;
+} & ControllerFormFieldSelectProps;
+type ControllerInnerProps$2 = TypeControllerInnerProps<ControllerFormFieldSelectProps, keyof typeof ControllerFormFieldSelect.$propsDefault>;
+declare module 'zova-module-basic-select' {
+  interface ControllerFormFieldSelect {
+    $props: ControllerInnerProps$2;
+  }
+}
+declare const ZFormFieldSelect: _$vue.DefineSetupFnComponent<TypeControllerFormFieldSelectPublicProps, _$vue.EmitsOptions, _$vue.SlotsType<Record<string, any>>, {
+  controllerRef?: (ref: ControllerFormFieldSelect) => void;
+} & ControllerFormFieldSelectProps & ({
+  [x: `on${Capitalize<string>}`]: ((...args: any[]) => any) | undefined;
+} | {
+  [x: `on${Capitalize<string>}`]: ((...args: never) => any) | undefined;
+}), _$vue.PublicProps>;
+declare module 'zova-module-a-bean' {
+  interface IVonaComponentRecord {
+    'basic-select:formFieldSelect': ControllerFormFieldSelectProps;
+  }
+}
+//#endregion
+//#region src/suite/cabloy-basic/modules/basic-select/src/bean/tableCell.select.d.ts
+declare module 'zova-module-a-openapi' {
+  interface IResourceTableCellRecord {
+    'basic-select:select'?: ITableCellOptionsSelect;
+  }
+}
+interface ITableCellOptionsSelect extends IResourceTableCellOptionsBase, TypeControllerSelectPublicProps {}
+declare class TableCellSelect extends BeanBase implements ITableCellRender {
+  render(options: ITableCellOptionsSelect, _renderContext: IJsxRenderContextTableCell, next: NextTableCellRender): any;
+}
+//#endregion
+//#region src/suite/cabloy-basic/modules/basic-select/src/.metadata/index.d.ts
+declare module 'zova' {}
+declare module 'zova-module-basic-select' {
+  interface ControllerFormFieldSelect {}
+  interface ControllerSelect {}
+}
+/** controller: end */
+/** controller: begin */
+declare module 'zova' {
+  interface IBeanRecordLocal {
+    'basic-select.controller.formFieldSelect': ControllerFormFieldSelect;
+    'basic-select.controller.select': ControllerSelect;
+  }
+}
+/** controller: end */
+/** components: begin */
+declare module 'zova' {
+  interface IComponentRecord {
+    'basic-select:formFieldSelect': ControllerFormFieldSelect;
+    'basic-select:select': ControllerSelect;
+  }
+  interface IZovaComponentRecord {
+    'basic-select:formFieldSelect': typeof ZFormFieldSelect;
+    'basic-select:select': typeof ZSelect;
+  }
+}
+/** components: end */
+/** tableCell: begin */
+declare module 'zova-module-a-table' {
+  interface ITableCellRecord {
+    'basic-select:select': ITableCellOptionsSelect;
+  }
+}
+declare module 'zova-module-basic-select' {
+  interface TableCellSelect {}
+  interface TableCellSelect {
+    get $beanFullName(): 'basic-select.tableCell.select';
+    get $onionName(): 'basic-select:select';
+    get $onionOptions(): ITableCellOptionsSelect;
+  }
+}
+/** tableCell: end */
+/** tableCell: begin */
+declare module 'zova' {
+  interface IBeanRecordGeneral {
+    'basic-select.tableCell.select': TableCellSelect;
+  }
+}
+/** tableCell: end */
+/** scope: begin */
+declare class ScopeModuleBasicSelect extends BeanScopeBase {}
+interface ScopeModuleBasicSelect {
+  util: BeanScopeUtil;
+}
+declare module 'zova' {
+  interface IBeanScopeRecord {
+    'basic-select': ScopeModuleBasicSelect;
+  }
+}
+/** scope: end */
 //#endregion
 //#region src/suite/cabloy-basic/modules/basic-table/src/component/actionCreate/controller.d.ts
 declare module 'zova-module-a-openapi' {
@@ -7695,7 +7863,7 @@ declare const ZovaRender: {
   blockJsx: typeof schemaRenderBlockJsx;
 };
 declare namespace index_d_exports {
-  export { $defs, ApiApiCaptchacreateMethod, ApiApiCaptchacreatePath, ApiApiCaptchacreateRequestBody, ApiApiCaptchacreateResponseBody, ApiApiCaptcharefreshMethod, ApiApiCaptcharefreshPath, ApiApiCaptcharefreshRequestBody, ApiApiCaptcharefreshResponseBody, ApiApiCaptchaverifyImmediateMethod, ApiApiCaptchaverifyImmediatePath, ApiApiCaptchaverifyImmediateRequestBody, ApiApiCaptchaverifyImmediateResponseBody, ApiApiHomeBaseMenuretrieveMenusMethod, ApiApiHomeBaseMenuretrieveMenusPath, ApiApiHomeBaseMenuretrieveMenusRequestParams, ApiApiHomeBaseMenuretrieveMenusResponseBody, ApiApiHomeBasePermissionretrievePermissionsMethod, ApiApiHomeBasePermissionretrievePermissionsPath, ApiApiHomeBasePermissionretrievePermissionsRequestParams, ApiApiHomeBasePermissionretrievePermissionsResponseBody, ApiApiHomeUserPassportassociateMethod, ApiApiHomeUserPassportassociatePath, ApiApiHomeUserPassportassociateRequestParams, ApiApiHomeUserPassportassociateRequestQuery, ApiApiHomeUserPassportassociateResponseBody, ApiApiHomeUserPassportcreatePassportJwtFromOauthCodeMethod, ApiApiHomeUserPassportcreatePassportJwtFromOauthCodePath, ApiApiHomeUserPassportcreatePassportJwtFromOauthCodeRequestBody, ApiApiHomeUserPassportcreatePassportJwtFromOauthCodeResponseBody, ApiApiHomeUserPassportcreateTempAuthTokenMethod, ApiApiHomeUserPassportcreateTempAuthTokenPath, ApiApiHomeUserPassportcreateTempAuthTokenRequestQuery, ApiApiHomeUserPassportcreateTempAuthTokenResponseBody, ApiApiHomeUserPassportcurrentMethod, ApiApiHomeUserPassportcurrentPath, ApiApiHomeUserPassportcurrentResponseBody, ApiApiHomeUserPassportloginMethod, ApiApiHomeUserPassportloginOauthMethod, ApiApiHomeUserPassportloginOauthPath, ApiApiHomeUserPassportloginOauthRequestParams, ApiApiHomeUserPassportloginOauthRequestQuery, ApiApiHomeUserPassportloginOauthResponseBody, ApiApiHomeUserPassportloginPath, ApiApiHomeUserPassportloginRequestBody, ApiApiHomeUserPassportloginResponseBody, ApiApiHomeUserPassportlogoutMethod, ApiApiHomeUserPassportlogoutPath, ApiApiHomeUserPassportlogoutResponseBody, ApiApiHomeUserPassportmigrateMethod, ApiApiHomeUserPassportmigratePath, ApiApiHomeUserPassportmigrateRequestParams, ApiApiHomeUserPassportmigrateRequestQuery, ApiApiHomeUserPassportmigrateResponseBody, ApiApiHomeUserPassportrefreshAuthTokenMethod, ApiApiHomeUserPassportrefreshAuthTokenPath, ApiApiHomeUserPassportrefreshAuthTokenRequestBody, ApiApiHomeUserPassportrefreshAuthTokenResponseBody, ApiApiHomeUserPassportregisterMethod, ApiApiHomeUserPassportregisterPath, ApiApiHomeUserPassportregisterRequestBody, ApiApiHomeUserPassportregisterResponseBody, ApiApiHomeindexMethod, ApiApiHomeindexPath, ApiApiHomeindexResponseBody, ApiApiTestSsrToolOnetestGetMethod, ApiApiTestSsrToolOnetestGetPath, ApiApiTestSsrToolOnetestGetRequestParams, ApiApiTestSsrToolOnetestGetRequestQuery, ApiApiTestSsrToolOnetestGetResponseBody, ApiApiTestSsrToolOnetestMethod, ApiApiTestSsrToolOnetestPath, ApiApiTestSsrToolOnetestRequestBody, ApiApiTestSsrToolOnetestRequestParams, ApiApiTestSsrToolOnetestRequestQuery, ApiApiTestSsrToolOnetestResponseBody, ApiCaptcha, ApiHome, ApiHomeBaseMenu, ApiHomeBasePermission, ApiHomeUserPassport, ApiSchemaAAuthDtoAuth, ApiSchemaAAuthDtoAuthPartial, ApiSchemaACaptchaDtoCaptchaData, ApiSchemaACaptchaDtoCaptchaDataPartial, ApiSchemaACaptchaDtoCaptchaVerify_c3cd80b1eeafe39bfe4433491bb081d68e84797e, ApiSchemaACaptchaDtoCaptchaVerify_c3cd80b1eeafe39bfe4433491bb081d68e84797ePartial, ApiSchemaACaptchaDtoCaptchaVerify_c3cd80b1eeafe39bfe4433491bb081d68e84797e_3218e7d152830e08f6e764b9e0c3796df929ee2b, ApiSchemaACaptchaDtoCaptchaVerify_c3cd80b1eeafe39bfe4433491bb081d68e84797e_3218e7d152830e08f6e764b9e0c3796df929ee2bPartial, ApiSchemaAJwtDtoJwtToken, ApiSchemaAJwtDtoJwtTokenPartial, ApiSchemaAMenuDtoMenuGroup, ApiSchemaAMenuDtoMenuGroupPartial, ApiSchemaAMenuDtoMenuItem, ApiSchemaAMenuDtoMenuItemMeta, ApiSchemaAMenuDtoMenuItemMetaPartial, ApiSchemaAMenuDtoMenuItemPartial, ApiSchemaAMenuDtoMenus, ApiSchemaAMenuDtoMenusPartial, ApiSchemaAPaypalDtoPaypalOrderRecordOptions, ApiSchemaAPaypalDtoPaypalOrderRecordOptionsPartial, ApiSchemaAPaypalDtoPaypalOrderRecordPayload, ApiSchemaAPaypalDtoPaypalOrderRecordPayloadPartial, ApiSchemaAPaypalEntityPaypalRecord, ApiSchemaAPaypalEntityPaypalRecordPartial, ApiSchemaAPermissionDtoPermissions, ApiSchemaAPermissionDtoPermissionsPartial, ApiSchemaAPlayDtoPlay, ApiSchemaAPlayDtoPlayPartial, ApiSchemaCaptcha, ApiSchemaHome, ApiSchemaHomeBaseMenu, ApiSchemaHomeBasePermission, ApiSchemaHomeUserDtoLogin, ApiSchemaHomeUserDtoLoginPartial, ApiSchemaHomeUserDtoPassport, ApiSchemaHomeUserDtoPassportJwt, ApiSchemaHomeUserDtoPassportJwtPartial, ApiSchemaHomeUserDtoPassportPartial, ApiSchemaHomeUserDtoRegister, ApiSchemaHomeUserDtoRegisterPartial, ApiSchemaHomeUserEntityRole, ApiSchemaHomeUserEntityRolePartial, ApiSchemaHomeUserEntityUser, ApiSchemaHomeUserEntityUserPartial, ApiSchemaHomeUserPassport, ApiSchemaTestCaptchaDtoSignin, ApiSchemaTestCaptchaDtoSigninPartial, ApiSchemaTestRestDtoProductCreate, ApiSchemaTestRestDtoProductCreatePartial, ApiSchemaTestRestDtoProductQueryRes, ApiSchemaTestRestDtoProductQueryResPartial, ApiSchemaTestRestDtoProductUpdate, ApiSchemaTestRestDtoProductUpdatePartial, ApiSchemaTestRestEntityProduct, ApiSchemaTestRestEntityProductPartial, ApiSchemaTestSsrDtoTestBody, ApiSchemaTestSsrDtoTestBodyPartial, ApiSchemaTestSsrDtoTestDetail, ApiSchemaTestSsrDtoTestDetailPartial, ApiSchemaTestSsrDtoTestResult, ApiSchemaTestSsrDtoTestResultPartial, ApiSchemaTestSsrToolOne, ApiSchemaTestVonaDtoCategoryTree, ApiSchemaTestVonaDtoCategoryTreePartial, ApiSchemaTestVonaDtoOrderCreate, ApiSchemaTestVonaDtoOrderCreatePartial, ApiSchemaTestVonaDtoOrderResult, ApiSchemaTestVonaDtoOrderResultPage, ApiSchemaTestVonaDtoOrderResultPagePartial, ApiSchemaTestVonaDtoOrderResultPartial, ApiSchemaTestVonaDtoOrderUpdate, ApiSchemaTestVonaDtoOrderUpdatePartial, ApiSchemaTestVonaDtoPostAggregate, ApiSchemaTestVonaDtoPostAggregatePartial, ApiSchemaTestVonaDtoPostCreate, ApiSchemaTestVonaDtoPostCreatePartial, ApiSchemaTestVonaDtoPostGroup, ApiSchemaTestVonaDtoPostGroupPartial, ApiSchemaTestVonaDtoPostQueryRes, ApiSchemaTestVonaDtoPostQueryResPartial, ApiSchemaTestVonaDtoRoleLazy, ApiSchemaTestVonaDtoRoleLazyPartial, ApiSchemaTestVonaDtoSerializerArray, ApiSchemaTestVonaDtoSerializerArrayPartial, ApiSchemaTestVonaDtoSerializerLazy, ApiSchemaTestVonaDtoSerializerLazyPartial, ApiSchemaTestVonaDtoSerializerSimple, ApiSchemaTestVonaDtoSerializerSimplePartial, ApiSchemaTestVonaDtoSerializerSimple_1c4b95bcfe8fe28a56dbcc7028097cf11836b4fc, ApiSchemaTestVonaDtoSerializerSimple_1c4b95bcfe8fe28a56dbcc7028097cf11836b4fcPartial, ApiSchemaTestVonaDtoSerializerSimple_542f7be0da9b85a67248a6a1a3629e72de5fdb33_cff0ae112a392da58caf5aa905749f3c4444c4ab, ApiSchemaTestVonaDtoSerializerSimple_542f7be0da9b85a67248a6a1a3629e72de5fdb33_cff0ae112a392da58caf5aa905749f3c4444c4abPartial, ApiSchemaTestVonaDtoUser, ApiSchemaTestVonaDtoUserCreate, ApiSchemaTestVonaDtoUserCreatePartial, ApiSchemaTestVonaDtoUserLazy, ApiSchemaTestVonaDtoUserLazyPartial, ApiSchemaTestVonaDtoUserPartial, ApiSchemaTestVonaDtoUserUpdate, ApiSchemaTestVonaDtoUserUpdatePartial, ApiSchemaTestVonaEntityCategory_2c7d642ee581efa300341e343180fbb0ecdc785d, ApiSchemaTestVonaEntityCategory_2c7d642ee581efa300341e343180fbb0ecdc785dPartial, ApiSchemaTestVonaEntityPost_729883d7de16ce4401b26f75bebe618c8948ff64, ApiSchemaTestVonaEntityPost_729883d7de16ce4401b26f75bebe618c8948ff64Partial, ApiSchemaTestVonaEntityPost_a6ba2076b5b70a3c098374cc82d418bd1ab226c3, ApiSchemaTestVonaEntityPost_a6ba2076b5b70a3c098374cc82d418bd1ab226c3Partial, ApiSchemaTestVonaEntityProduct, ApiSchemaTestVonaEntityProductPartial, ApiSchemaTestVonaEntityProduct_29731960f3f38d3572bc2f8a01a7498bfe927055, ApiSchemaTestVonaEntityProduct_29731960f3f38d3572bc2f8a01a7498bfe927055Partial, ApiSchemaTestVonaEntityProduct_9cf2c6bcd41713270c34bcfce21b7b4942e3fbc6, ApiSchemaTestVonaEntityProduct_9cf2c6bcd41713270c34bcfce21b7b4942e3fbc6Partial, ApiSchemaTestVonaEntityProduct_bce173590aaef19772f1ae3a82196493c2633e2e, ApiSchemaTestVonaEntityProduct_bce173590aaef19772f1ae3a82196493c2633e2ePartial, ApiSchemaTestVonaEntityUser_2c7d642ee581efa300341e343180fbb0ecdc785d_1816ff740d81c738ec055c7038bbd93beb9405a7, ApiSchemaTestVonaEntityUser_2c7d642ee581efa300341e343180fbb0ecdc785d_1816ff740d81c738ec055c7038bbd93beb9405a7Partial, ApiTestSsrToolOne, BehaviorFormField, BehaviorFormFieldLayout, BehaviorFormFieldLayoutLogin, CommandAlert, CommandConfirm, CommandCopy, CommandCreate, CommandDelete, CommandEdit, CommandExpr, CommandLog, CommandSetValue, CommandView, ControllerActionBack, ControllerActionBackProps, ControllerActionCreate, ControllerActionCreateProps, ControllerActionSubmit, ControllerActionSubmitProps, ControllerBlockFilter, ControllerBlockFilterProps, ControllerBlockForm, ControllerBlockFormProps, ControllerBlockPage, ControllerBlockPageEntry, ControllerBlockPageEntryProps, ControllerBlockPageProps, ControllerBlockPager, ControllerBlockPagerProps, ControllerBlockTable, ControllerBlockTableProps, ControllerBlockToolbarBulk, ControllerBlockToolbarBulkProps, ControllerBlockToolbarRow, ControllerBlockToolbarRowProps, ControllerDateRange, ControllerDateRangeModels, ControllerDateRangeProps, ControllerFormFieldCaptcha, ControllerFormFieldCaptchaProps, ControllerFormFieldCurrency, ControllerFormFieldCurrencyProps, ControllerFormFieldDate, ControllerFormFieldDateProps, ControllerFormFieldDateRange, ControllerFormFieldDateRangeProps, ControllerFormFieldInput, ControllerFormFieldInputProps, ControllerItemLink, ControllerItemLinkProps, ControllerLayoutEmpty, ControllerLayoutEmptyProps, ControllerLayoutTabs, ControllerLayoutTabsProps, ControllerPage, ControllerPageAuthCallback, ControllerPageAuthCallbackSchemaQuery, ControllerPageErrorExpired, ControllerPageErrorExpiredSchemaQuery, ControllerPageErrorNotFound, ControllerPageHome, ControllerPageLogin$1 as ControllerPageLogin, ControllerPageProps, ControllerPageTest, ControllerTable, ControllerTableProps, CssBase, IBehaviorOptionsFormField, IBehaviorOptionsFormFieldLayout, IBehaviorOptionsFormFieldLayoutLogin, IBehaviorPropsInputFormField, IBehaviorPropsInputFormFieldLayout, IBehaviorPropsInputFormFieldLayoutLogin, IBehaviorPropsOutputFormField, IBehaviorPropsOutputFormFieldLayout, IBehaviorPropsOutputFormFieldLayoutLogin, IBehaviorResourceFormFieldLayoutOptions, ICommandOptionsAlert, ICommandOptionsConfirm, ICommandOptionsCopy, ICommandOptionsCreate, ICommandOptionsDelete, ICommandOptionsEdit, ICommandOptionsExpr, ICommandOptionsLog, ICommandOptionsSetValue, ICommandOptionsView, ICssOptionsBase, IModelOptionsLayout, IModelOptionsMenu, IModelOptionsPassport, IModuleApi, IModuleApiSchema, IResourceFormFieldCaptchaOptions, IResourceFormFieldCurrencyOptions, IResourceFormFieldDateOptions, IResourceFormFieldDateRangeOptions, IResourceFormFieldInputOptions, IServiceSsrLayoutOptions, ITableCellOptionsActionDelete, ITableCellOptionsActionOperationsRow, ITableCellOptionsActionUpdate, ITableCellOptionsActionView, ITableCellOptionsCurrency, ITableCellOptionsDate, IThemeOptionsDefault, IThemeOptionsOrange, Main, MetaThemeHandler, ModelLayout, ModelMenu, ModelPassport, NSControllerPageAuthCallback, NSControllerPageErrorExpired, OpenApiBaseURL, RenderContent, RenderHeader, RenderLayoutTabs, RenderLocale, RenderMenu, RenderPageLogin, RenderSidebar, RenderTable, RenderTabs, RenderTheme, RenderUser, ScopeModuleBasicAdapter, ScopeModuleBasicCaptcha, ScopeModuleBasicCommands, ScopeModuleBasicCommandssync, ScopeModuleBasicCurrency, ScopeModuleBasicDate, ScopeModuleBasicForm, ScopeModuleBasicInput, ScopeModuleBasicPage, ScopeModuleBasicPageentry, ScopeModuleBasicTable, ScopeModuleDemoStudent, ScopeModuleDevuiAdapter, ScopeModuleHomeApi, ScopeModuleHomeBase, ScopeModuleHomeIcon, ScopeModuleHomeIndex, ScopeModuleHomeLayoutempty, ScopeModuleHomeLayouttabs, ScopeModuleHomeLogin, ScopeModuleHomePassport, ScopeModuleHomeTheme, ServiceJwtAdapter, ServiceRouterGuards, ServiceSsr, ServiceSsrLayout, StyleLayoutTabs$1 as StyleLayoutTabs, TableCellActionDelete, TableCellActionOperationsRow, TableCellActionUpdate, TableCellActionView, TableCellCurrency, TableCellDate, ThemeDefault, ThemeOrange, ThemeTokenCustom, TypeCommandAlertResult, TypeCommandConfirmResult, TypeCommandCopyResult, TypeCommandCreateResult, TypeCommandDeleteResult, TypeCommandEditResult, TypeCommandExprResult, TypeCommandLogResult, TypeCommandSetValueResult, TypeCommandViewResult, TypeControllerActionBackPublicProps, TypeControllerActionCreatePublicProps, TypeControllerActionSubmitPublicProps, TypeControllerBlockFilterPublicProps, TypeControllerBlockFormPublicProps, TypeControllerBlockPageEntryPublicProps, TypeControllerBlockPagePublicProps, TypeControllerBlockPagerPublicProps, TypeControllerBlockTablePublicProps, TypeControllerBlockToolbarBulkPublicProps, TypeControllerBlockToolbarRowPublicProps, TypeControllerDateRangePublicProps, TypeControllerFormFieldCaptchaPublicProps, TypeControllerFormFieldCurrencyPublicProps, TypeControllerFormFieldDatePublicProps, TypeControllerFormFieldDateRangePublicProps, TypeControllerFormFieldInputPublicProps, TypeControllerItemLinkPublicProps, TypeControllerLayoutEmptyPublicProps, TypeControllerLayoutTabsPublicProps, TypeControllerPagePublicProps, TypeControllerTablePublicProps, TypeDateFormatPreset, TypeMenuGroup, TypeMenuItem, TypeMenuTree, ZActionBack, ZActionCreate, ZActionSubmit, ZBlockFilter, ZBlockForm, ZBlockPage, ZBlockPageEntry, ZBlockPager, ZBlockTable, ZBlockToolbarBulk, ZBlockToolbarRow, ZDateRange, ZFormFieldCaptcha, ZFormFieldCurrency, ZFormFieldDate, ZFormFieldDateRange, ZFormFieldInput, ZItemLink, ZLayoutEmpty, ZLayoutTabs, ZPage, ZPageAuthCallback, ZPageErrorExpired, ZPageErrorNotFound, ZPageHome, ZPageLogin, ZPageTest, ZTable, ZovaCommand, ZovaCommands, ZovaComponent, ZovaCssBase, ZovaCssMerge, ZovaEvent, ZovaIconName, ZovaRender, currencyFormat, currencyUpdate, dateFormatUtil, definePropertyScopeBase, icons, operations, paths, webhooks };
+  export { $defs, ApiApiCaptchacreateMethod, ApiApiCaptchacreatePath, ApiApiCaptchacreateRequestBody, ApiApiCaptchacreateResponseBody, ApiApiCaptcharefreshMethod, ApiApiCaptcharefreshPath, ApiApiCaptcharefreshRequestBody, ApiApiCaptcharefreshResponseBody, ApiApiCaptchaverifyImmediateMethod, ApiApiCaptchaverifyImmediatePath, ApiApiCaptchaverifyImmediateRequestBody, ApiApiCaptchaverifyImmediateResponseBody, ApiApiHomeBaseMenuretrieveMenusMethod, ApiApiHomeBaseMenuretrieveMenusPath, ApiApiHomeBaseMenuretrieveMenusRequestParams, ApiApiHomeBaseMenuretrieveMenusResponseBody, ApiApiHomeBasePermissionretrievePermissionsMethod, ApiApiHomeBasePermissionretrievePermissionsPath, ApiApiHomeBasePermissionretrievePermissionsRequestParams, ApiApiHomeBasePermissionretrievePermissionsResponseBody, ApiApiHomeUserPassportassociateMethod, ApiApiHomeUserPassportassociatePath, ApiApiHomeUserPassportassociateRequestParams, ApiApiHomeUserPassportassociateRequestQuery, ApiApiHomeUserPassportassociateResponseBody, ApiApiHomeUserPassportcreatePassportJwtFromOauthCodeMethod, ApiApiHomeUserPassportcreatePassportJwtFromOauthCodePath, ApiApiHomeUserPassportcreatePassportJwtFromOauthCodeRequestBody, ApiApiHomeUserPassportcreatePassportJwtFromOauthCodeResponseBody, ApiApiHomeUserPassportcreateTempAuthTokenMethod, ApiApiHomeUserPassportcreateTempAuthTokenPath, ApiApiHomeUserPassportcreateTempAuthTokenRequestQuery, ApiApiHomeUserPassportcreateTempAuthTokenResponseBody, ApiApiHomeUserPassportcurrentMethod, ApiApiHomeUserPassportcurrentPath, ApiApiHomeUserPassportcurrentResponseBody, ApiApiHomeUserPassportloginMethod, ApiApiHomeUserPassportloginOauthMethod, ApiApiHomeUserPassportloginOauthPath, ApiApiHomeUserPassportloginOauthRequestParams, ApiApiHomeUserPassportloginOauthRequestQuery, ApiApiHomeUserPassportloginOauthResponseBody, ApiApiHomeUserPassportloginPath, ApiApiHomeUserPassportloginRequestBody, ApiApiHomeUserPassportloginResponseBody, ApiApiHomeUserPassportlogoutMethod, ApiApiHomeUserPassportlogoutPath, ApiApiHomeUserPassportlogoutResponseBody, ApiApiHomeUserPassportmigrateMethod, ApiApiHomeUserPassportmigratePath, ApiApiHomeUserPassportmigrateRequestParams, ApiApiHomeUserPassportmigrateRequestQuery, ApiApiHomeUserPassportmigrateResponseBody, ApiApiHomeUserPassportrefreshAuthTokenMethod, ApiApiHomeUserPassportrefreshAuthTokenPath, ApiApiHomeUserPassportrefreshAuthTokenRequestBody, ApiApiHomeUserPassportrefreshAuthTokenResponseBody, ApiApiHomeUserPassportregisterMethod, ApiApiHomeUserPassportregisterPath, ApiApiHomeUserPassportregisterRequestBody, ApiApiHomeUserPassportregisterResponseBody, ApiApiHomeindexMethod, ApiApiHomeindexPath, ApiApiHomeindexResponseBody, ApiApiTestSsrToolOnetestGetMethod, ApiApiTestSsrToolOnetestGetPath, ApiApiTestSsrToolOnetestGetRequestParams, ApiApiTestSsrToolOnetestGetRequestQuery, ApiApiTestSsrToolOnetestGetResponseBody, ApiApiTestSsrToolOnetestMethod, ApiApiTestSsrToolOnetestPath, ApiApiTestSsrToolOnetestRequestBody, ApiApiTestSsrToolOnetestRequestParams, ApiApiTestSsrToolOnetestRequestQuery, ApiApiTestSsrToolOnetestResponseBody, ApiCaptcha, ApiHome, ApiHomeBaseMenu, ApiHomeBasePermission, ApiHomeUserPassport, ApiSchemaAAuthDtoAuth, ApiSchemaAAuthDtoAuthPartial, ApiSchemaACaptchaDtoCaptchaData, ApiSchemaACaptchaDtoCaptchaDataPartial, ApiSchemaACaptchaDtoCaptchaVerify_c3cd80b1eeafe39bfe4433491bb081d68e84797e, ApiSchemaACaptchaDtoCaptchaVerify_c3cd80b1eeafe39bfe4433491bb081d68e84797ePartial, ApiSchemaACaptchaDtoCaptchaVerify_c3cd80b1eeafe39bfe4433491bb081d68e84797e_3218e7d152830e08f6e764b9e0c3796df929ee2b, ApiSchemaACaptchaDtoCaptchaVerify_c3cd80b1eeafe39bfe4433491bb081d68e84797e_3218e7d152830e08f6e764b9e0c3796df929ee2bPartial, ApiSchemaAJwtDtoJwtToken, ApiSchemaAJwtDtoJwtTokenPartial, ApiSchemaAMenuDtoMenuGroup, ApiSchemaAMenuDtoMenuGroupPartial, ApiSchemaAMenuDtoMenuItem, ApiSchemaAMenuDtoMenuItemMeta, ApiSchemaAMenuDtoMenuItemMetaPartial, ApiSchemaAMenuDtoMenuItemPartial, ApiSchemaAMenuDtoMenus, ApiSchemaAMenuDtoMenusPartial, ApiSchemaAPaypalDtoPaypalOrderRecordOptions, ApiSchemaAPaypalDtoPaypalOrderRecordOptionsPartial, ApiSchemaAPaypalDtoPaypalOrderRecordPayload, ApiSchemaAPaypalDtoPaypalOrderRecordPayloadPartial, ApiSchemaAPaypalEntityPaypalRecord, ApiSchemaAPaypalEntityPaypalRecordPartial, ApiSchemaAPermissionDtoPermissions, ApiSchemaAPermissionDtoPermissionsPartial, ApiSchemaAPlayDtoPlay, ApiSchemaAPlayDtoPlayPartial, ApiSchemaCaptcha, ApiSchemaHome, ApiSchemaHomeBaseMenu, ApiSchemaHomeBasePermission, ApiSchemaHomeUserDtoLogin, ApiSchemaHomeUserDtoLoginPartial, ApiSchemaHomeUserDtoPassport, ApiSchemaHomeUserDtoPassportJwt, ApiSchemaHomeUserDtoPassportJwtPartial, ApiSchemaHomeUserDtoPassportPartial, ApiSchemaHomeUserDtoRegister, ApiSchemaHomeUserDtoRegisterPartial, ApiSchemaHomeUserEntityRole, ApiSchemaHomeUserEntityRolePartial, ApiSchemaHomeUserEntityUser, ApiSchemaHomeUserEntityUserPartial, ApiSchemaHomeUserPassport, ApiSchemaTestCaptchaDtoSignin, ApiSchemaTestCaptchaDtoSigninPartial, ApiSchemaTestRestDtoProductCreate, ApiSchemaTestRestDtoProductCreatePartial, ApiSchemaTestRestDtoProductQueryRes, ApiSchemaTestRestDtoProductQueryResPartial, ApiSchemaTestRestDtoProductUpdate, ApiSchemaTestRestDtoProductUpdatePartial, ApiSchemaTestRestEntityProduct, ApiSchemaTestRestEntityProductPartial, ApiSchemaTestSsrDtoTestBody, ApiSchemaTestSsrDtoTestBodyPartial, ApiSchemaTestSsrDtoTestDetail, ApiSchemaTestSsrDtoTestDetailPartial, ApiSchemaTestSsrDtoTestResult, ApiSchemaTestSsrDtoTestResultPartial, ApiSchemaTestSsrToolOne, ApiSchemaTestVonaDtoCategoryTree, ApiSchemaTestVonaDtoCategoryTreePartial, ApiSchemaTestVonaDtoOrderCreate, ApiSchemaTestVonaDtoOrderCreatePartial, ApiSchemaTestVonaDtoOrderResult, ApiSchemaTestVonaDtoOrderResultPage, ApiSchemaTestVonaDtoOrderResultPagePartial, ApiSchemaTestVonaDtoOrderResultPartial, ApiSchemaTestVonaDtoOrderUpdate, ApiSchemaTestVonaDtoOrderUpdatePartial, ApiSchemaTestVonaDtoPostAggregate, ApiSchemaTestVonaDtoPostAggregatePartial, ApiSchemaTestVonaDtoPostCreate, ApiSchemaTestVonaDtoPostCreatePartial, ApiSchemaTestVonaDtoPostGroup, ApiSchemaTestVonaDtoPostGroupPartial, ApiSchemaTestVonaDtoPostQueryRes, ApiSchemaTestVonaDtoPostQueryResPartial, ApiSchemaTestVonaDtoRoleLazy, ApiSchemaTestVonaDtoRoleLazyPartial, ApiSchemaTestVonaDtoSerializerArray, ApiSchemaTestVonaDtoSerializerArrayPartial, ApiSchemaTestVonaDtoSerializerLazy, ApiSchemaTestVonaDtoSerializerLazyPartial, ApiSchemaTestVonaDtoSerializerSimple, ApiSchemaTestVonaDtoSerializerSimplePartial, ApiSchemaTestVonaDtoSerializerSimple_1c4b95bcfe8fe28a56dbcc7028097cf11836b4fc, ApiSchemaTestVonaDtoSerializerSimple_1c4b95bcfe8fe28a56dbcc7028097cf11836b4fcPartial, ApiSchemaTestVonaDtoSerializerSimple_542f7be0da9b85a67248a6a1a3629e72de5fdb33_cff0ae112a392da58caf5aa905749f3c4444c4ab, ApiSchemaTestVonaDtoSerializerSimple_542f7be0da9b85a67248a6a1a3629e72de5fdb33_cff0ae112a392da58caf5aa905749f3c4444c4abPartial, ApiSchemaTestVonaDtoUser, ApiSchemaTestVonaDtoUserCreate, ApiSchemaTestVonaDtoUserCreatePartial, ApiSchemaTestVonaDtoUserLazy, ApiSchemaTestVonaDtoUserLazyPartial, ApiSchemaTestVonaDtoUserPartial, ApiSchemaTestVonaDtoUserUpdate, ApiSchemaTestVonaDtoUserUpdatePartial, ApiSchemaTestVonaEntityCategory_2c7d642ee581efa300341e343180fbb0ecdc785d, ApiSchemaTestVonaEntityCategory_2c7d642ee581efa300341e343180fbb0ecdc785dPartial, ApiSchemaTestVonaEntityPost_729883d7de16ce4401b26f75bebe618c8948ff64, ApiSchemaTestVonaEntityPost_729883d7de16ce4401b26f75bebe618c8948ff64Partial, ApiSchemaTestVonaEntityPost_a6ba2076b5b70a3c098374cc82d418bd1ab226c3, ApiSchemaTestVonaEntityPost_a6ba2076b5b70a3c098374cc82d418bd1ab226c3Partial, ApiSchemaTestVonaEntityProduct, ApiSchemaTestVonaEntityProductPartial, ApiSchemaTestVonaEntityProduct_29731960f3f38d3572bc2f8a01a7498bfe927055, ApiSchemaTestVonaEntityProduct_29731960f3f38d3572bc2f8a01a7498bfe927055Partial, ApiSchemaTestVonaEntityProduct_9cf2c6bcd41713270c34bcfce21b7b4942e3fbc6, ApiSchemaTestVonaEntityProduct_9cf2c6bcd41713270c34bcfce21b7b4942e3fbc6Partial, ApiSchemaTestVonaEntityProduct_bce173590aaef19772f1ae3a82196493c2633e2e, ApiSchemaTestVonaEntityProduct_bce173590aaef19772f1ae3a82196493c2633e2ePartial, ApiSchemaTestVonaEntityUser_2c7d642ee581efa300341e343180fbb0ecdc785d_1816ff740d81c738ec055c7038bbd93beb9405a7, ApiSchemaTestVonaEntityUser_2c7d642ee581efa300341e343180fbb0ecdc785d_1816ff740d81c738ec055c7038bbd93beb9405a7Partial, ApiTestSsrToolOne, BehaviorFormField, BehaviorFormFieldLayout, BehaviorFormFieldLayoutLogin, CommandAlert, CommandConfirm, CommandCopy, CommandCreate, CommandDelete, CommandEdit, CommandExpr, CommandLog, CommandSetValue, CommandView, ControllerActionBack, ControllerActionBackProps, ControllerActionCreate, ControllerActionCreateProps, ControllerActionSubmit, ControllerActionSubmitProps, ControllerBlockFilter, ControllerBlockFilterProps, ControllerBlockForm, ControllerBlockFormProps, ControllerBlockPage, ControllerBlockPageEntry, ControllerBlockPageEntryProps, ControllerBlockPageProps, ControllerBlockPager, ControllerBlockPagerProps, ControllerBlockTable, ControllerBlockTableProps, ControllerBlockToolbarBulk, ControllerBlockToolbarBulkProps, ControllerBlockToolbarRow, ControllerBlockToolbarRowProps, ControllerDateRange, ControllerDateRangeModels, ControllerDateRangeProps, ControllerFormFieldCaptcha, ControllerFormFieldCaptchaProps, ControllerFormFieldCurrency, ControllerFormFieldCurrencyProps, ControllerFormFieldDate, ControllerFormFieldDateProps, ControllerFormFieldDateRange, ControllerFormFieldDateRangeProps, ControllerFormFieldInput, ControllerFormFieldInputProps, ControllerFormFieldSelect, ControllerFormFieldSelectProps, ControllerItemLink, ControllerItemLinkProps, ControllerLayoutEmpty, ControllerLayoutEmptyProps, ControllerLayoutTabs, ControllerLayoutTabsProps, ControllerPage, ControllerPageAuthCallback, ControllerPageAuthCallbackSchemaQuery, ControllerPageErrorExpired, ControllerPageErrorExpiredSchemaQuery, ControllerPageErrorNotFound, ControllerPageHome, ControllerPageLogin$1 as ControllerPageLogin, ControllerPageProps, ControllerPageTest, ControllerSelect, ControllerSelectModels, ControllerSelectProps, ControllerTable, ControllerTableProps, CssBase, IBehaviorOptionsFormField, IBehaviorOptionsFormFieldLayout, IBehaviorOptionsFormFieldLayoutLogin, IBehaviorPropsInputFormField, IBehaviorPropsInputFormFieldLayout, IBehaviorPropsInputFormFieldLayoutLogin, IBehaviorPropsOutputFormField, IBehaviorPropsOutputFormFieldLayout, IBehaviorPropsOutputFormFieldLayoutLogin, IBehaviorResourceFormFieldLayoutOptions, ICommandOptionsAlert, ICommandOptionsConfirm, ICommandOptionsCopy, ICommandOptionsCreate, ICommandOptionsDelete, ICommandOptionsEdit, ICommandOptionsExpr, ICommandOptionsLog, ICommandOptionsSetValue, ICommandOptionsView, ICssOptionsBase, IModelOptionsLayout, IModelOptionsMenu, IModelOptionsPassport, IModuleApi, IModuleApiSchema, IResourceFormFieldCaptchaOptions, IResourceFormFieldCurrencyOptions, IResourceFormFieldDateOptions, IResourceFormFieldDateRangeOptions, IResourceFormFieldInputOptions, IResourceFormFieldSelectOptions, IServiceSsrLayoutOptions, ITableCellOptionsActionDelete, ITableCellOptionsActionOperationsRow, ITableCellOptionsActionUpdate, ITableCellOptionsActionView, ITableCellOptionsCurrency, ITableCellOptionsDate, ITableCellOptionsSelect, IThemeOptionsDefault, IThemeOptionsOrange, Main, MetaThemeHandler, ModelLayout, ModelMenu, ModelPassport, NSControllerPageAuthCallback, NSControllerPageErrorExpired, OpenApiBaseURL, RenderContent, RenderHeader, RenderLayoutTabs, RenderLocale, RenderMenu, RenderPageLogin, RenderSidebar, RenderTable, RenderTabs, RenderTheme, RenderUser, ScopeModuleBasicAdapter, ScopeModuleBasicCaptcha, ScopeModuleBasicCommands, ScopeModuleBasicCommandssync, ScopeModuleBasicCurrency, ScopeModuleBasicDate, ScopeModuleBasicForm, ScopeModuleBasicInput, ScopeModuleBasicPage, ScopeModuleBasicPageentry, ScopeModuleBasicSelect, ScopeModuleBasicTable, ScopeModuleDemoStudent, ScopeModuleDevuiAdapter, ScopeModuleHomeApi, ScopeModuleHomeBase, ScopeModuleHomeIcon, ScopeModuleHomeIndex, ScopeModuleHomeLayoutempty, ScopeModuleHomeLayouttabs, ScopeModuleHomeLogin, ScopeModuleHomePassport, ScopeModuleHomeTheme, ServiceJwtAdapter, ServiceRouterGuards, ServiceSsr, ServiceSsrLayout, StyleLayoutTabs$1 as StyleLayoutTabs, TableCellActionDelete, TableCellActionOperationsRow, TableCellActionUpdate, TableCellActionView, TableCellCurrency, TableCellDate, TableCellSelect, ThemeDefault, ThemeOrange, ThemeTokenCustom, TypeCommandAlertResult, TypeCommandConfirmResult, TypeCommandCopyResult, TypeCommandCreateResult, TypeCommandDeleteResult, TypeCommandEditResult, TypeCommandExprResult, TypeCommandLogResult, TypeCommandSetValueResult, TypeCommandViewResult, TypeControllerActionBackPublicProps, TypeControllerActionCreatePublicProps, TypeControllerActionSubmitPublicProps, TypeControllerBlockFilterPublicProps, TypeControllerBlockFormPublicProps, TypeControllerBlockPageEntryPublicProps, TypeControllerBlockPagePublicProps, TypeControllerBlockPagerPublicProps, TypeControllerBlockTablePublicProps, TypeControllerBlockToolbarBulkPublicProps, TypeControllerBlockToolbarRowPublicProps, TypeControllerDateRangePublicProps, TypeControllerFormFieldCaptchaPublicProps, TypeControllerFormFieldCurrencyPublicProps, TypeControllerFormFieldDatePublicProps, TypeControllerFormFieldDateRangePublicProps, TypeControllerFormFieldInputPublicProps, TypeControllerFormFieldSelectPublicProps, TypeControllerItemLinkPublicProps, TypeControllerLayoutEmptyPublicProps, TypeControllerLayoutTabsPublicProps, TypeControllerPagePublicProps, TypeControllerSelectPublicProps, TypeControllerTablePublicProps, TypeDateFormatPreset, TypeMenuGroup, TypeMenuItem, TypeMenuTree, ZActionBack, ZActionCreate, ZActionSubmit, ZBlockFilter, ZBlockForm, ZBlockPage, ZBlockPageEntry, ZBlockPager, ZBlockTable, ZBlockToolbarBulk, ZBlockToolbarRow, ZDateRange, ZFormFieldCaptcha, ZFormFieldCurrency, ZFormFieldDate, ZFormFieldDateRange, ZFormFieldInput, ZFormFieldSelect, ZItemLink, ZLayoutEmpty, ZLayoutTabs, ZPage, ZPageAuthCallback, ZPageErrorExpired, ZPageErrorNotFound, ZPageHome, ZPageLogin, ZPageTest, ZSelect, ZTable, ZovaCommand, ZovaCommands, ZovaComponent, ZovaCssBase, ZovaCssMerge, ZovaEvent, ZovaIconName, ZovaRender, currencyFormat, currencyUpdate, dateFormatUtil, definePropertyScopeBase, icons, operations, paths, webhooks };
 }
 //#endregion
-export { $defs, ApiApiCaptchacreateMethod, ApiApiCaptchacreatePath, ApiApiCaptchacreateRequestBody, ApiApiCaptchacreateResponseBody, ApiApiCaptcharefreshMethod, ApiApiCaptcharefreshPath, ApiApiCaptcharefreshRequestBody, ApiApiCaptcharefreshResponseBody, ApiApiCaptchaverifyImmediateMethod, ApiApiCaptchaverifyImmediatePath, ApiApiCaptchaverifyImmediateRequestBody, ApiApiCaptchaverifyImmediateResponseBody, ApiApiHomeBaseMenuretrieveMenusMethod, ApiApiHomeBaseMenuretrieveMenusPath, ApiApiHomeBaseMenuretrieveMenusRequestParams, ApiApiHomeBaseMenuretrieveMenusResponseBody, ApiApiHomeBasePermissionretrievePermissionsMethod, ApiApiHomeBasePermissionretrievePermissionsPath, ApiApiHomeBasePermissionretrievePermissionsRequestParams, ApiApiHomeBasePermissionretrievePermissionsResponseBody, ApiApiHomeUserPassportassociateMethod, ApiApiHomeUserPassportassociatePath, ApiApiHomeUserPassportassociateRequestParams, ApiApiHomeUserPassportassociateRequestQuery, ApiApiHomeUserPassportassociateResponseBody, ApiApiHomeUserPassportcreatePassportJwtFromOauthCodeMethod, ApiApiHomeUserPassportcreatePassportJwtFromOauthCodePath, ApiApiHomeUserPassportcreatePassportJwtFromOauthCodeRequestBody, ApiApiHomeUserPassportcreatePassportJwtFromOauthCodeResponseBody, ApiApiHomeUserPassportcreateTempAuthTokenMethod, ApiApiHomeUserPassportcreateTempAuthTokenPath, ApiApiHomeUserPassportcreateTempAuthTokenRequestQuery, ApiApiHomeUserPassportcreateTempAuthTokenResponseBody, ApiApiHomeUserPassportcurrentMethod, ApiApiHomeUserPassportcurrentPath, ApiApiHomeUserPassportcurrentResponseBody, ApiApiHomeUserPassportloginMethod, ApiApiHomeUserPassportloginOauthMethod, ApiApiHomeUserPassportloginOauthPath, ApiApiHomeUserPassportloginOauthRequestParams, ApiApiHomeUserPassportloginOauthRequestQuery, ApiApiHomeUserPassportloginOauthResponseBody, ApiApiHomeUserPassportloginPath, ApiApiHomeUserPassportloginRequestBody, ApiApiHomeUserPassportloginResponseBody, ApiApiHomeUserPassportlogoutMethod, ApiApiHomeUserPassportlogoutPath, ApiApiHomeUserPassportlogoutResponseBody, ApiApiHomeUserPassportmigrateMethod, ApiApiHomeUserPassportmigratePath, ApiApiHomeUserPassportmigrateRequestParams, ApiApiHomeUserPassportmigrateRequestQuery, ApiApiHomeUserPassportmigrateResponseBody, ApiApiHomeUserPassportrefreshAuthTokenMethod, ApiApiHomeUserPassportrefreshAuthTokenPath, ApiApiHomeUserPassportrefreshAuthTokenRequestBody, ApiApiHomeUserPassportrefreshAuthTokenResponseBody, ApiApiHomeUserPassportregisterMethod, ApiApiHomeUserPassportregisterPath, ApiApiHomeUserPassportregisterRequestBody, ApiApiHomeUserPassportregisterResponseBody, ApiApiHomeindexMethod, ApiApiHomeindexPath, ApiApiHomeindexResponseBody, ApiApiTestSsrToolOnetestGetMethod, ApiApiTestSsrToolOnetestGetPath, ApiApiTestSsrToolOnetestGetRequestParams, ApiApiTestSsrToolOnetestGetRequestQuery, ApiApiTestSsrToolOnetestGetResponseBody, ApiApiTestSsrToolOnetestMethod, ApiApiTestSsrToolOnetestPath, ApiApiTestSsrToolOnetestRequestBody, ApiApiTestSsrToolOnetestRequestParams, ApiApiTestSsrToolOnetestRequestQuery, ApiApiTestSsrToolOnetestResponseBody, ApiCaptcha, ApiHome, ApiHomeBaseMenu, ApiHomeBasePermission, ApiHomeUserPassport, ApiSchemaAAuthDtoAuth, ApiSchemaAAuthDtoAuthPartial, ApiSchemaACaptchaDtoCaptchaData, ApiSchemaACaptchaDtoCaptchaDataPartial, ApiSchemaACaptchaDtoCaptchaVerify_c3cd80b1eeafe39bfe4433491bb081d68e84797e, ApiSchemaACaptchaDtoCaptchaVerify_c3cd80b1eeafe39bfe4433491bb081d68e84797ePartial, ApiSchemaACaptchaDtoCaptchaVerify_c3cd80b1eeafe39bfe4433491bb081d68e84797e_3218e7d152830e08f6e764b9e0c3796df929ee2b, ApiSchemaACaptchaDtoCaptchaVerify_c3cd80b1eeafe39bfe4433491bb081d68e84797e_3218e7d152830e08f6e764b9e0c3796df929ee2bPartial, ApiSchemaAJwtDtoJwtToken, ApiSchemaAJwtDtoJwtTokenPartial, ApiSchemaAMenuDtoMenuGroup, ApiSchemaAMenuDtoMenuGroupPartial, ApiSchemaAMenuDtoMenuItem, ApiSchemaAMenuDtoMenuItemMeta, ApiSchemaAMenuDtoMenuItemMetaPartial, ApiSchemaAMenuDtoMenuItemPartial, ApiSchemaAMenuDtoMenus, ApiSchemaAMenuDtoMenusPartial, ApiSchemaAPaypalDtoPaypalOrderRecordOptions, ApiSchemaAPaypalDtoPaypalOrderRecordOptionsPartial, ApiSchemaAPaypalDtoPaypalOrderRecordPayload, ApiSchemaAPaypalDtoPaypalOrderRecordPayloadPartial, ApiSchemaAPaypalEntityPaypalRecord, ApiSchemaAPaypalEntityPaypalRecordPartial, ApiSchemaAPermissionDtoPermissions, ApiSchemaAPermissionDtoPermissionsPartial, ApiSchemaAPlayDtoPlay, ApiSchemaAPlayDtoPlayPartial, ApiSchemaCaptcha, ApiSchemaHome, ApiSchemaHomeBaseMenu, ApiSchemaHomeBasePermission, ApiSchemaHomeUserDtoLogin, ApiSchemaHomeUserDtoLoginPartial, ApiSchemaHomeUserDtoPassport, ApiSchemaHomeUserDtoPassportJwt, ApiSchemaHomeUserDtoPassportJwtPartial, ApiSchemaHomeUserDtoPassportPartial, ApiSchemaHomeUserDtoRegister, ApiSchemaHomeUserDtoRegisterPartial, ApiSchemaHomeUserEntityRole, ApiSchemaHomeUserEntityRolePartial, ApiSchemaHomeUserEntityUser, ApiSchemaHomeUserEntityUserPartial, ApiSchemaHomeUserPassport, ApiSchemaTestCaptchaDtoSignin, ApiSchemaTestCaptchaDtoSigninPartial, ApiSchemaTestRestDtoProductCreate, ApiSchemaTestRestDtoProductCreatePartial, ApiSchemaTestRestDtoProductQueryRes, ApiSchemaTestRestDtoProductQueryResPartial, ApiSchemaTestRestDtoProductUpdate, ApiSchemaTestRestDtoProductUpdatePartial, ApiSchemaTestRestEntityProduct, ApiSchemaTestRestEntityProductPartial, ApiSchemaTestSsrDtoTestBody, ApiSchemaTestSsrDtoTestBodyPartial, ApiSchemaTestSsrDtoTestDetail, ApiSchemaTestSsrDtoTestDetailPartial, ApiSchemaTestSsrDtoTestResult, ApiSchemaTestSsrDtoTestResultPartial, ApiSchemaTestSsrToolOne, ApiSchemaTestVonaDtoCategoryTree, ApiSchemaTestVonaDtoCategoryTreePartial, ApiSchemaTestVonaDtoOrderCreate, ApiSchemaTestVonaDtoOrderCreatePartial, ApiSchemaTestVonaDtoOrderResult, ApiSchemaTestVonaDtoOrderResultPage, ApiSchemaTestVonaDtoOrderResultPagePartial, ApiSchemaTestVonaDtoOrderResultPartial, ApiSchemaTestVonaDtoOrderUpdate, ApiSchemaTestVonaDtoOrderUpdatePartial, ApiSchemaTestVonaDtoPostAggregate, ApiSchemaTestVonaDtoPostAggregatePartial, ApiSchemaTestVonaDtoPostCreate, ApiSchemaTestVonaDtoPostCreatePartial, ApiSchemaTestVonaDtoPostGroup, ApiSchemaTestVonaDtoPostGroupPartial, ApiSchemaTestVonaDtoPostQueryRes, ApiSchemaTestVonaDtoPostQueryResPartial, ApiSchemaTestVonaDtoRoleLazy, ApiSchemaTestVonaDtoRoleLazyPartial, ApiSchemaTestVonaDtoSerializerArray, ApiSchemaTestVonaDtoSerializerArrayPartial, ApiSchemaTestVonaDtoSerializerLazy, ApiSchemaTestVonaDtoSerializerLazyPartial, ApiSchemaTestVonaDtoSerializerSimple, ApiSchemaTestVonaDtoSerializerSimplePartial, ApiSchemaTestVonaDtoSerializerSimple_1c4b95bcfe8fe28a56dbcc7028097cf11836b4fc, ApiSchemaTestVonaDtoSerializerSimple_1c4b95bcfe8fe28a56dbcc7028097cf11836b4fcPartial, ApiSchemaTestVonaDtoSerializerSimple_542f7be0da9b85a67248a6a1a3629e72de5fdb33_cff0ae112a392da58caf5aa905749f3c4444c4ab, ApiSchemaTestVonaDtoSerializerSimple_542f7be0da9b85a67248a6a1a3629e72de5fdb33_cff0ae112a392da58caf5aa905749f3c4444c4abPartial, ApiSchemaTestVonaDtoUser, ApiSchemaTestVonaDtoUserCreate, ApiSchemaTestVonaDtoUserCreatePartial, ApiSchemaTestVonaDtoUserLazy, ApiSchemaTestVonaDtoUserLazyPartial, ApiSchemaTestVonaDtoUserPartial, ApiSchemaTestVonaDtoUserUpdate, ApiSchemaTestVonaDtoUserUpdatePartial, ApiSchemaTestVonaEntityCategory_2c7d642ee581efa300341e343180fbb0ecdc785d, ApiSchemaTestVonaEntityCategory_2c7d642ee581efa300341e343180fbb0ecdc785dPartial, ApiSchemaTestVonaEntityPost_729883d7de16ce4401b26f75bebe618c8948ff64, ApiSchemaTestVonaEntityPost_729883d7de16ce4401b26f75bebe618c8948ff64Partial, ApiSchemaTestVonaEntityPost_a6ba2076b5b70a3c098374cc82d418bd1ab226c3, ApiSchemaTestVonaEntityPost_a6ba2076b5b70a3c098374cc82d418bd1ab226c3Partial, ApiSchemaTestVonaEntityProduct, ApiSchemaTestVonaEntityProductPartial, ApiSchemaTestVonaEntityProduct_29731960f3f38d3572bc2f8a01a7498bfe927055, ApiSchemaTestVonaEntityProduct_29731960f3f38d3572bc2f8a01a7498bfe927055Partial, ApiSchemaTestVonaEntityProduct_9cf2c6bcd41713270c34bcfce21b7b4942e3fbc6, ApiSchemaTestVonaEntityProduct_9cf2c6bcd41713270c34bcfce21b7b4942e3fbc6Partial, ApiSchemaTestVonaEntityProduct_bce173590aaef19772f1ae3a82196493c2633e2e, ApiSchemaTestVonaEntityProduct_bce173590aaef19772f1ae3a82196493c2633e2ePartial, ApiSchemaTestVonaEntityUser_2c7d642ee581efa300341e343180fbb0ecdc785d_1816ff740d81c738ec055c7038bbd93beb9405a7, ApiSchemaTestVonaEntityUser_2c7d642ee581efa300341e343180fbb0ecdc785d_1816ff740d81c738ec055c7038bbd93beb9405a7Partial, ApiTestSsrToolOne, BehaviorFormField, BehaviorFormFieldLayout, BehaviorFormFieldLayoutLogin, CommandAlert, CommandConfirm, CommandCopy, CommandCreate, CommandDelete, CommandEdit, CommandExpr, CommandLog, CommandSetValue, CommandView, ControllerActionBack, ControllerActionBackProps, ControllerActionCreate, ControllerActionCreateProps, ControllerActionSubmit, ControllerActionSubmitProps, ControllerBlockFilter, ControllerBlockFilterProps, ControllerBlockForm, ControllerBlockFormProps, ControllerBlockPage, ControllerBlockPageEntry, ControllerBlockPageEntryProps, ControllerBlockPageProps, ControllerBlockPager, ControllerBlockPagerProps, ControllerBlockTable, ControllerBlockTableProps, ControllerBlockToolbarBulk, ControllerBlockToolbarBulkProps, ControllerBlockToolbarRow, ControllerBlockToolbarRowProps, ControllerDateRange, ControllerDateRangeModels, ControllerDateRangeProps, ControllerFormFieldCaptcha, ControllerFormFieldCaptchaProps, ControllerFormFieldCurrency, ControllerFormFieldCurrencyProps, ControllerFormFieldDate, ControllerFormFieldDateProps, ControllerFormFieldDateRange, ControllerFormFieldDateRangeProps, ControllerFormFieldInput, ControllerFormFieldInputProps, ControllerItemLink, ControllerItemLinkProps, ControllerLayoutEmpty, ControllerLayoutEmptyProps, ControllerLayoutTabs, ControllerLayoutTabsProps, ControllerPage, ControllerPageAuthCallback, ControllerPageAuthCallbackSchemaQuery, ControllerPageErrorExpired, ControllerPageErrorExpiredSchemaQuery, ControllerPageErrorNotFound, ControllerPageHome, ControllerPageLogin$1 as ControllerPageLogin, ControllerPageProps, ControllerPageTest, ControllerTable, ControllerTableProps, CssBase, IBehaviorOptionsFormField, IBehaviorOptionsFormFieldLayout, IBehaviorOptionsFormFieldLayoutLogin, IBehaviorPropsInputFormField, IBehaviorPropsInputFormFieldLayout, IBehaviorPropsInputFormFieldLayoutLogin, IBehaviorPropsOutputFormField, IBehaviorPropsOutputFormFieldLayout, IBehaviorPropsOutputFormFieldLayoutLogin, IBehaviorResourceFormFieldLayoutOptions, ICommandOptionsAlert, ICommandOptionsConfirm, ICommandOptionsCopy, ICommandOptionsCreate, ICommandOptionsDelete, ICommandOptionsEdit, ICommandOptionsExpr, ICommandOptionsLog, ICommandOptionsSetValue, ICommandOptionsView, ICssOptionsBase, IModelOptionsLayout, IModelOptionsMenu, IModelOptionsPassport, IModuleApi, IModuleApiSchema, IResourceFormFieldCaptchaOptions, IResourceFormFieldCurrencyOptions, IResourceFormFieldDateOptions, IResourceFormFieldDateRangeOptions, IResourceFormFieldInputOptions, IServiceSsrLayoutOptions, ITableCellOptionsActionDelete, ITableCellOptionsActionOperationsRow, ITableCellOptionsActionUpdate, ITableCellOptionsActionView, ITableCellOptionsCurrency, ITableCellOptionsDate, IThemeOptionsDefault, IThemeOptionsOrange, Main, MetaThemeHandler, ModelLayout, ModelMenu, ModelPassport, NSControllerPageAuthCallback, NSControllerPageErrorExpired, OpenApiBaseURL, RenderContent, RenderHeader, RenderLayoutTabs, RenderLocale, RenderMenu, RenderPageLogin, RenderSidebar, RenderTable, RenderTabs, RenderTheme, RenderUser, ScopeModuleBasicAdapter, ScopeModuleBasicCaptcha, ScopeModuleBasicCommands, ScopeModuleBasicCommandssync, ScopeModuleBasicCurrency, ScopeModuleBasicDate, ScopeModuleBasicForm, ScopeModuleBasicInput, ScopeModuleBasicPage, ScopeModuleBasicPageentry, ScopeModuleBasicTable, ScopeModuleDemoStudent, ScopeModuleDevuiAdapter, ScopeModuleHomeApi, ScopeModuleHomeBase, ScopeModuleHomeIcon, ScopeModuleHomeIndex, ScopeModuleHomeLayoutempty, ScopeModuleHomeLayouttabs, ScopeModuleHomeLogin, ScopeModuleHomePassport, ScopeModuleHomeTheme, ServiceJwtAdapter, ServiceRouterGuards, ServiceSsr, ServiceSsrLayout, StyleLayoutTabs$1 as StyleLayoutTabs, TableCellActionDelete, TableCellActionOperationsRow, TableCellActionUpdate, TableCellActionView, TableCellCurrency, TableCellDate, ThemeDefault, ThemeOrange, ThemeTokenCustom, TypeCommandAlertResult, TypeCommandConfirmResult, TypeCommandCopyResult, TypeCommandCreateResult, TypeCommandDeleteResult, TypeCommandEditResult, TypeCommandExprResult, TypeCommandLogResult, TypeCommandSetValueResult, TypeCommandViewResult, TypeControllerActionBackPublicProps, TypeControllerActionCreatePublicProps, TypeControllerActionSubmitPublicProps, TypeControllerBlockFilterPublicProps, TypeControllerBlockFormPublicProps, TypeControllerBlockPageEntryPublicProps, TypeControllerBlockPagePublicProps, TypeControllerBlockPagerPublicProps, TypeControllerBlockTablePublicProps, TypeControllerBlockToolbarBulkPublicProps, TypeControllerBlockToolbarRowPublicProps, TypeControllerDateRangePublicProps, TypeControllerFormFieldCaptchaPublicProps, TypeControllerFormFieldCurrencyPublicProps, TypeControllerFormFieldDatePublicProps, TypeControllerFormFieldDateRangePublicProps, TypeControllerFormFieldInputPublicProps, TypeControllerItemLinkPublicProps, TypeControllerLayoutEmptyPublicProps, TypeControllerLayoutTabsPublicProps, TypeControllerPagePublicProps, TypeControllerTablePublicProps, TypeDateFormatPreset, TypeMenuGroup, TypeMenuItem, TypeMenuTree, ZActionBack, ZActionCreate, ZActionSubmit, ZBlockFilter, ZBlockForm, ZBlockPage, ZBlockPageEntry, ZBlockPager, ZBlockTable, ZBlockToolbarBulk, ZBlockToolbarRow, ZDateRange, ZFormFieldCaptcha, ZFormFieldCurrency, ZFormFieldDate, ZFormFieldDateRange, ZFormFieldInput, ZItemLink, ZLayoutEmpty, ZLayoutTabs, ZPage, ZPageAuthCallback, ZPageErrorExpired, ZPageErrorNotFound, ZPageHome, ZPageLogin, ZPageTest, ZTable, ZovaCommand, ZovaCommands, ZovaComponent, ZovaCssBase, ZovaCssMerge, ZovaEvent, ZovaIconName, ZovaRender, currencyFormat, currencyUpdate, dateFormatUtil, definePropertyScopeBase, icons, operations, paths, webhooks };
+export { $defs, ApiApiCaptchacreateMethod, ApiApiCaptchacreatePath, ApiApiCaptchacreateRequestBody, ApiApiCaptchacreateResponseBody, ApiApiCaptcharefreshMethod, ApiApiCaptcharefreshPath, ApiApiCaptcharefreshRequestBody, ApiApiCaptcharefreshResponseBody, ApiApiCaptchaverifyImmediateMethod, ApiApiCaptchaverifyImmediatePath, ApiApiCaptchaverifyImmediateRequestBody, ApiApiCaptchaverifyImmediateResponseBody, ApiApiHomeBaseMenuretrieveMenusMethod, ApiApiHomeBaseMenuretrieveMenusPath, ApiApiHomeBaseMenuretrieveMenusRequestParams, ApiApiHomeBaseMenuretrieveMenusResponseBody, ApiApiHomeBasePermissionretrievePermissionsMethod, ApiApiHomeBasePermissionretrievePermissionsPath, ApiApiHomeBasePermissionretrievePermissionsRequestParams, ApiApiHomeBasePermissionretrievePermissionsResponseBody, ApiApiHomeUserPassportassociateMethod, ApiApiHomeUserPassportassociatePath, ApiApiHomeUserPassportassociateRequestParams, ApiApiHomeUserPassportassociateRequestQuery, ApiApiHomeUserPassportassociateResponseBody, ApiApiHomeUserPassportcreatePassportJwtFromOauthCodeMethod, ApiApiHomeUserPassportcreatePassportJwtFromOauthCodePath, ApiApiHomeUserPassportcreatePassportJwtFromOauthCodeRequestBody, ApiApiHomeUserPassportcreatePassportJwtFromOauthCodeResponseBody, ApiApiHomeUserPassportcreateTempAuthTokenMethod, ApiApiHomeUserPassportcreateTempAuthTokenPath, ApiApiHomeUserPassportcreateTempAuthTokenRequestQuery, ApiApiHomeUserPassportcreateTempAuthTokenResponseBody, ApiApiHomeUserPassportcurrentMethod, ApiApiHomeUserPassportcurrentPath, ApiApiHomeUserPassportcurrentResponseBody, ApiApiHomeUserPassportloginMethod, ApiApiHomeUserPassportloginOauthMethod, ApiApiHomeUserPassportloginOauthPath, ApiApiHomeUserPassportloginOauthRequestParams, ApiApiHomeUserPassportloginOauthRequestQuery, ApiApiHomeUserPassportloginOauthResponseBody, ApiApiHomeUserPassportloginPath, ApiApiHomeUserPassportloginRequestBody, ApiApiHomeUserPassportloginResponseBody, ApiApiHomeUserPassportlogoutMethod, ApiApiHomeUserPassportlogoutPath, ApiApiHomeUserPassportlogoutResponseBody, ApiApiHomeUserPassportmigrateMethod, ApiApiHomeUserPassportmigratePath, ApiApiHomeUserPassportmigrateRequestParams, ApiApiHomeUserPassportmigrateRequestQuery, ApiApiHomeUserPassportmigrateResponseBody, ApiApiHomeUserPassportrefreshAuthTokenMethod, ApiApiHomeUserPassportrefreshAuthTokenPath, ApiApiHomeUserPassportrefreshAuthTokenRequestBody, ApiApiHomeUserPassportrefreshAuthTokenResponseBody, ApiApiHomeUserPassportregisterMethod, ApiApiHomeUserPassportregisterPath, ApiApiHomeUserPassportregisterRequestBody, ApiApiHomeUserPassportregisterResponseBody, ApiApiHomeindexMethod, ApiApiHomeindexPath, ApiApiHomeindexResponseBody, ApiApiTestSsrToolOnetestGetMethod, ApiApiTestSsrToolOnetestGetPath, ApiApiTestSsrToolOnetestGetRequestParams, ApiApiTestSsrToolOnetestGetRequestQuery, ApiApiTestSsrToolOnetestGetResponseBody, ApiApiTestSsrToolOnetestMethod, ApiApiTestSsrToolOnetestPath, ApiApiTestSsrToolOnetestRequestBody, ApiApiTestSsrToolOnetestRequestParams, ApiApiTestSsrToolOnetestRequestQuery, ApiApiTestSsrToolOnetestResponseBody, ApiCaptcha, ApiHome, ApiHomeBaseMenu, ApiHomeBasePermission, ApiHomeUserPassport, ApiSchemaAAuthDtoAuth, ApiSchemaAAuthDtoAuthPartial, ApiSchemaACaptchaDtoCaptchaData, ApiSchemaACaptchaDtoCaptchaDataPartial, ApiSchemaACaptchaDtoCaptchaVerify_c3cd80b1eeafe39bfe4433491bb081d68e84797e, ApiSchemaACaptchaDtoCaptchaVerify_c3cd80b1eeafe39bfe4433491bb081d68e84797ePartial, ApiSchemaACaptchaDtoCaptchaVerify_c3cd80b1eeafe39bfe4433491bb081d68e84797e_3218e7d152830e08f6e764b9e0c3796df929ee2b, ApiSchemaACaptchaDtoCaptchaVerify_c3cd80b1eeafe39bfe4433491bb081d68e84797e_3218e7d152830e08f6e764b9e0c3796df929ee2bPartial, ApiSchemaAJwtDtoJwtToken, ApiSchemaAJwtDtoJwtTokenPartial, ApiSchemaAMenuDtoMenuGroup, ApiSchemaAMenuDtoMenuGroupPartial, ApiSchemaAMenuDtoMenuItem, ApiSchemaAMenuDtoMenuItemMeta, ApiSchemaAMenuDtoMenuItemMetaPartial, ApiSchemaAMenuDtoMenuItemPartial, ApiSchemaAMenuDtoMenus, ApiSchemaAMenuDtoMenusPartial, ApiSchemaAPaypalDtoPaypalOrderRecordOptions, ApiSchemaAPaypalDtoPaypalOrderRecordOptionsPartial, ApiSchemaAPaypalDtoPaypalOrderRecordPayload, ApiSchemaAPaypalDtoPaypalOrderRecordPayloadPartial, ApiSchemaAPaypalEntityPaypalRecord, ApiSchemaAPaypalEntityPaypalRecordPartial, ApiSchemaAPermissionDtoPermissions, ApiSchemaAPermissionDtoPermissionsPartial, ApiSchemaAPlayDtoPlay, ApiSchemaAPlayDtoPlayPartial, ApiSchemaCaptcha, ApiSchemaHome, ApiSchemaHomeBaseMenu, ApiSchemaHomeBasePermission, ApiSchemaHomeUserDtoLogin, ApiSchemaHomeUserDtoLoginPartial, ApiSchemaHomeUserDtoPassport, ApiSchemaHomeUserDtoPassportJwt, ApiSchemaHomeUserDtoPassportJwtPartial, ApiSchemaHomeUserDtoPassportPartial, ApiSchemaHomeUserDtoRegister, ApiSchemaHomeUserDtoRegisterPartial, ApiSchemaHomeUserEntityRole, ApiSchemaHomeUserEntityRolePartial, ApiSchemaHomeUserEntityUser, ApiSchemaHomeUserEntityUserPartial, ApiSchemaHomeUserPassport, ApiSchemaTestCaptchaDtoSignin, ApiSchemaTestCaptchaDtoSigninPartial, ApiSchemaTestRestDtoProductCreate, ApiSchemaTestRestDtoProductCreatePartial, ApiSchemaTestRestDtoProductQueryRes, ApiSchemaTestRestDtoProductQueryResPartial, ApiSchemaTestRestDtoProductUpdate, ApiSchemaTestRestDtoProductUpdatePartial, ApiSchemaTestRestEntityProduct, ApiSchemaTestRestEntityProductPartial, ApiSchemaTestSsrDtoTestBody, ApiSchemaTestSsrDtoTestBodyPartial, ApiSchemaTestSsrDtoTestDetail, ApiSchemaTestSsrDtoTestDetailPartial, ApiSchemaTestSsrDtoTestResult, ApiSchemaTestSsrDtoTestResultPartial, ApiSchemaTestSsrToolOne, ApiSchemaTestVonaDtoCategoryTree, ApiSchemaTestVonaDtoCategoryTreePartial, ApiSchemaTestVonaDtoOrderCreate, ApiSchemaTestVonaDtoOrderCreatePartial, ApiSchemaTestVonaDtoOrderResult, ApiSchemaTestVonaDtoOrderResultPage, ApiSchemaTestVonaDtoOrderResultPagePartial, ApiSchemaTestVonaDtoOrderResultPartial, ApiSchemaTestVonaDtoOrderUpdate, ApiSchemaTestVonaDtoOrderUpdatePartial, ApiSchemaTestVonaDtoPostAggregate, ApiSchemaTestVonaDtoPostAggregatePartial, ApiSchemaTestVonaDtoPostCreate, ApiSchemaTestVonaDtoPostCreatePartial, ApiSchemaTestVonaDtoPostGroup, ApiSchemaTestVonaDtoPostGroupPartial, ApiSchemaTestVonaDtoPostQueryRes, ApiSchemaTestVonaDtoPostQueryResPartial, ApiSchemaTestVonaDtoRoleLazy, ApiSchemaTestVonaDtoRoleLazyPartial, ApiSchemaTestVonaDtoSerializerArray, ApiSchemaTestVonaDtoSerializerArrayPartial, ApiSchemaTestVonaDtoSerializerLazy, ApiSchemaTestVonaDtoSerializerLazyPartial, ApiSchemaTestVonaDtoSerializerSimple, ApiSchemaTestVonaDtoSerializerSimplePartial, ApiSchemaTestVonaDtoSerializerSimple_1c4b95bcfe8fe28a56dbcc7028097cf11836b4fc, ApiSchemaTestVonaDtoSerializerSimple_1c4b95bcfe8fe28a56dbcc7028097cf11836b4fcPartial, ApiSchemaTestVonaDtoSerializerSimple_542f7be0da9b85a67248a6a1a3629e72de5fdb33_cff0ae112a392da58caf5aa905749f3c4444c4ab, ApiSchemaTestVonaDtoSerializerSimple_542f7be0da9b85a67248a6a1a3629e72de5fdb33_cff0ae112a392da58caf5aa905749f3c4444c4abPartial, ApiSchemaTestVonaDtoUser, ApiSchemaTestVonaDtoUserCreate, ApiSchemaTestVonaDtoUserCreatePartial, ApiSchemaTestVonaDtoUserLazy, ApiSchemaTestVonaDtoUserLazyPartial, ApiSchemaTestVonaDtoUserPartial, ApiSchemaTestVonaDtoUserUpdate, ApiSchemaTestVonaDtoUserUpdatePartial, ApiSchemaTestVonaEntityCategory_2c7d642ee581efa300341e343180fbb0ecdc785d, ApiSchemaTestVonaEntityCategory_2c7d642ee581efa300341e343180fbb0ecdc785dPartial, ApiSchemaTestVonaEntityPost_729883d7de16ce4401b26f75bebe618c8948ff64, ApiSchemaTestVonaEntityPost_729883d7de16ce4401b26f75bebe618c8948ff64Partial, ApiSchemaTestVonaEntityPost_a6ba2076b5b70a3c098374cc82d418bd1ab226c3, ApiSchemaTestVonaEntityPost_a6ba2076b5b70a3c098374cc82d418bd1ab226c3Partial, ApiSchemaTestVonaEntityProduct, ApiSchemaTestVonaEntityProductPartial, ApiSchemaTestVonaEntityProduct_29731960f3f38d3572bc2f8a01a7498bfe927055, ApiSchemaTestVonaEntityProduct_29731960f3f38d3572bc2f8a01a7498bfe927055Partial, ApiSchemaTestVonaEntityProduct_9cf2c6bcd41713270c34bcfce21b7b4942e3fbc6, ApiSchemaTestVonaEntityProduct_9cf2c6bcd41713270c34bcfce21b7b4942e3fbc6Partial, ApiSchemaTestVonaEntityProduct_bce173590aaef19772f1ae3a82196493c2633e2e, ApiSchemaTestVonaEntityProduct_bce173590aaef19772f1ae3a82196493c2633e2ePartial, ApiSchemaTestVonaEntityUser_2c7d642ee581efa300341e343180fbb0ecdc785d_1816ff740d81c738ec055c7038bbd93beb9405a7, ApiSchemaTestVonaEntityUser_2c7d642ee581efa300341e343180fbb0ecdc785d_1816ff740d81c738ec055c7038bbd93beb9405a7Partial, ApiTestSsrToolOne, BehaviorFormField, BehaviorFormFieldLayout, BehaviorFormFieldLayoutLogin, CommandAlert, CommandConfirm, CommandCopy, CommandCreate, CommandDelete, CommandEdit, CommandExpr, CommandLog, CommandSetValue, CommandView, ControllerActionBack, ControllerActionBackProps, ControllerActionCreate, ControllerActionCreateProps, ControllerActionSubmit, ControllerActionSubmitProps, ControllerBlockFilter, ControllerBlockFilterProps, ControllerBlockForm, ControllerBlockFormProps, ControllerBlockPage, ControllerBlockPageEntry, ControllerBlockPageEntryProps, ControllerBlockPageProps, ControllerBlockPager, ControllerBlockPagerProps, ControllerBlockTable, ControllerBlockTableProps, ControllerBlockToolbarBulk, ControllerBlockToolbarBulkProps, ControllerBlockToolbarRow, ControllerBlockToolbarRowProps, ControllerDateRange, ControllerDateRangeModels, ControllerDateRangeProps, ControllerFormFieldCaptcha, ControllerFormFieldCaptchaProps, ControllerFormFieldCurrency, ControllerFormFieldCurrencyProps, ControllerFormFieldDate, ControllerFormFieldDateProps, ControllerFormFieldDateRange, ControllerFormFieldDateRangeProps, ControllerFormFieldInput, ControllerFormFieldInputProps, ControllerFormFieldSelect, ControllerFormFieldSelectProps, ControllerItemLink, ControllerItemLinkProps, ControllerLayoutEmpty, ControllerLayoutEmptyProps, ControllerLayoutTabs, ControllerLayoutTabsProps, ControllerPage, ControllerPageAuthCallback, ControllerPageAuthCallbackSchemaQuery, ControllerPageErrorExpired, ControllerPageErrorExpiredSchemaQuery, ControllerPageErrorNotFound, ControllerPageHome, ControllerPageLogin$1 as ControllerPageLogin, ControllerPageProps, ControllerPageTest, ControllerSelect, ControllerSelectModels, ControllerSelectProps, ControllerTable, ControllerTableProps, CssBase, IBehaviorOptionsFormField, IBehaviorOptionsFormFieldLayout, IBehaviorOptionsFormFieldLayoutLogin, IBehaviorPropsInputFormField, IBehaviorPropsInputFormFieldLayout, IBehaviorPropsInputFormFieldLayoutLogin, IBehaviorPropsOutputFormField, IBehaviorPropsOutputFormFieldLayout, IBehaviorPropsOutputFormFieldLayoutLogin, IBehaviorResourceFormFieldLayoutOptions, ICommandOptionsAlert, ICommandOptionsConfirm, ICommandOptionsCopy, ICommandOptionsCreate, ICommandOptionsDelete, ICommandOptionsEdit, ICommandOptionsExpr, ICommandOptionsLog, ICommandOptionsSetValue, ICommandOptionsView, ICssOptionsBase, IModelOptionsLayout, IModelOptionsMenu, IModelOptionsPassport, IModuleApi, IModuleApiSchema, IResourceFormFieldCaptchaOptions, IResourceFormFieldCurrencyOptions, IResourceFormFieldDateOptions, IResourceFormFieldDateRangeOptions, IResourceFormFieldInputOptions, IResourceFormFieldSelectOptions, IServiceSsrLayoutOptions, ITableCellOptionsActionDelete, ITableCellOptionsActionOperationsRow, ITableCellOptionsActionUpdate, ITableCellOptionsActionView, ITableCellOptionsCurrency, ITableCellOptionsDate, ITableCellOptionsSelect, IThemeOptionsDefault, IThemeOptionsOrange, Main, MetaThemeHandler, ModelLayout, ModelMenu, ModelPassport, NSControllerPageAuthCallback, NSControllerPageErrorExpired, OpenApiBaseURL, RenderContent, RenderHeader, RenderLayoutTabs, RenderLocale, RenderMenu, RenderPageLogin, RenderSidebar, RenderTable, RenderTabs, RenderTheme, RenderUser, ScopeModuleBasicAdapter, ScopeModuleBasicCaptcha, ScopeModuleBasicCommands, ScopeModuleBasicCommandssync, ScopeModuleBasicCurrency, ScopeModuleBasicDate, ScopeModuleBasicForm, ScopeModuleBasicInput, ScopeModuleBasicPage, ScopeModuleBasicPageentry, ScopeModuleBasicSelect, ScopeModuleBasicTable, ScopeModuleDemoStudent, ScopeModuleDevuiAdapter, ScopeModuleHomeApi, ScopeModuleHomeBase, ScopeModuleHomeIcon, ScopeModuleHomeIndex, ScopeModuleHomeLayoutempty, ScopeModuleHomeLayouttabs, ScopeModuleHomeLogin, ScopeModuleHomePassport, ScopeModuleHomeTheme, ServiceJwtAdapter, ServiceRouterGuards, ServiceSsr, ServiceSsrLayout, StyleLayoutTabs$1 as StyleLayoutTabs, TableCellActionDelete, TableCellActionOperationsRow, TableCellActionUpdate, TableCellActionView, TableCellCurrency, TableCellDate, TableCellSelect, ThemeDefault, ThemeOrange, ThemeTokenCustom, TypeCommandAlertResult, TypeCommandConfirmResult, TypeCommandCopyResult, TypeCommandCreateResult, TypeCommandDeleteResult, TypeCommandEditResult, TypeCommandExprResult, TypeCommandLogResult, TypeCommandSetValueResult, TypeCommandViewResult, TypeControllerActionBackPublicProps, TypeControllerActionCreatePublicProps, TypeControllerActionSubmitPublicProps, TypeControllerBlockFilterPublicProps, TypeControllerBlockFormPublicProps, TypeControllerBlockPageEntryPublicProps, TypeControllerBlockPagePublicProps, TypeControllerBlockPagerPublicProps, TypeControllerBlockTablePublicProps, TypeControllerBlockToolbarBulkPublicProps, TypeControllerBlockToolbarRowPublicProps, TypeControllerDateRangePublicProps, TypeControllerFormFieldCaptchaPublicProps, TypeControllerFormFieldCurrencyPublicProps, TypeControllerFormFieldDatePublicProps, TypeControllerFormFieldDateRangePublicProps, TypeControllerFormFieldInputPublicProps, TypeControllerFormFieldSelectPublicProps, TypeControllerItemLinkPublicProps, TypeControllerLayoutEmptyPublicProps, TypeControllerLayoutTabsPublicProps, TypeControllerPagePublicProps, TypeControllerSelectPublicProps, TypeControllerTablePublicProps, TypeDateFormatPreset, TypeMenuGroup, TypeMenuItem, TypeMenuTree, ZActionBack, ZActionCreate, ZActionSubmit, ZBlockFilter, ZBlockForm, ZBlockPage, ZBlockPageEntry, ZBlockPager, ZBlockTable, ZBlockToolbarBulk, ZBlockToolbarRow, ZDateRange, ZFormFieldCaptcha, ZFormFieldCurrency, ZFormFieldDate, ZFormFieldDateRange, ZFormFieldInput, ZFormFieldSelect, ZItemLink, ZLayoutEmpty, ZLayoutTabs, ZPage, ZPageAuthCallback, ZPageErrorExpired, ZPageErrorNotFound, ZPageHome, ZPageLogin, ZPageTest, ZSelect, ZTable, ZovaCommand, ZovaCommands, ZovaComponent, ZovaCssBase, ZovaCssMerge, ZovaEvent, ZovaIconName, ZovaRender, currencyFormat, currencyUpdate, dateFormatUtil, definePropertyScopeBase, icons, operations, paths, webhooks };
