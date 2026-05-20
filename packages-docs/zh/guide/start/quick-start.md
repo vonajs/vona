@@ -1,9 +1,5 @@
 # 快速上手
 
-::: tip
-直播时间：周一至周五`晚7:30`，欢迎围观：[B站: 濮水代码](https://space.bilibili.com/454737998)
-:::
-
 ## 前置条件
 
 | 名称       | 版本      |
@@ -69,6 +65,10 @@ REDIS_DEFAULT_PASSWORD =
 $ npm run dev
 ```
 
+| URL                   | 说明     |
+| --------------------- | -------- |
+| http://localhost:7102 | Vona后端 |
+
 4. 单元测试
 
 ```bash
@@ -79,6 +79,12 @@ $ npm run test
 
 ```bash
 $ npm run build
+```
+
+6. 启动生产服务
+
+```bash
+$ npm run start
 ```
 
 ## Docker Compose
