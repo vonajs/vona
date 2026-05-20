@@ -6,7 +6,7 @@ import type { IDecoratorSummerCacheOptions, TSummerCachePreset } from '../types/
 export const configMem = {
   mode: 'mem', // only mem
   mem: {
-    max: 500,
+    max: 50,
     broadcastOnSet: 'del',
   },
 } as IDecoratorSummerCacheOptions;
@@ -14,18 +14,18 @@ export const configMem = {
 export const configRedis = {
   mode: 'redis', // only redis
   redis: {
-    ttl: 20 * 60 * 1000, // 20 minutes
+    ttl: 10 * 60 * 1000, // 10 minutes
   },
 } as IDecoratorSummerCacheOptions;
 
 export const configAll = {
   mode: 'all',
   mem: {
-    max: 500,
+    max: 50,
     broadcastOnSet: 'del',
   },
   redis: {
-    ttl: 20 * 60 * 1000, // 20 minutes
+    ttl: 10 * 60 * 1000, // 10 minutes
   },
 } as IDecoratorSummerCacheOptions;
 
