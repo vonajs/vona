@@ -65,9 +65,7 @@ REDIS_DEFAULT_PASSWORD =
 $ npm run dev
 ```
 
-| URL                   | 说明     |
-| --------------------- | -------- |
-| http://localhost:7102 | Vona后端 |
+- http://localhost:7102
 
 4. 单元测试
 
@@ -86,6 +84,8 @@ $ npm run build
 ```bash
 $ npm run start
 ```
+
+- http://localhost:7102
 
 ## Docker Compose
 
