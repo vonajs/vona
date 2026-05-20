@@ -56,7 +56,7 @@
     "istextorbinary": "^3.3.0",
     "semver": "^7.7.4",
     "tmp": "^0.2.5",
-    "urllib": "^3.27.3"
+    "urllib": "^4.9.0"
   },
   "devDependencies": {
     "@types/fs-extra": "^11.0.4",
