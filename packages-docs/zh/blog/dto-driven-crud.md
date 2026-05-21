@@ -78,14 +78,14 @@ export class EntityStudent extends EntityBase {
 
 逐行看关键的渲染配置：
 
-| 配置 | 含义 |
-|------|------|
-| `ZovaRender.order(1)` | 字段排在第 1 位 |
-| `ZovaRender.visible(false)` | 隐藏该字段（不渲染） |
-| `ZovaRender.cell('basic-table:actionView')` | 表格中渲染为可点击查看的链接 |
-| `ZovaRender.cell('basic-date:date')` | 表格中渲染为日期格式 |
+| 配置                                                      | 含义                                   |
+| --------------------------------------------------------- | -------------------------------------- |
+| `ZovaRender.order(1)`                                     | 字段排在第 1 位                        |
+| `ZovaRender.visible(false)`                               | 隐藏该字段（不渲染）                   |
+| `ZovaRender.cell('basic-table:actionView')`               | 表格中渲染为可点击查看的链接           |
+| `ZovaRender.cell('basic-date:date')`                      | 表格中渲染为日期格式                   |
 | `ZovaRender.field('basic-select:formFieldSelect', {...})` | 表单中渲染为下拉选择框，并传入选项数据 |
-| `ZovaRender.field('basic-date:formFieldDate')` | 表单中渲染为日期选择器 |
+| `ZovaRender.field('basic-date:formFieldDate')`            | 表单中渲染为日期选择器                 |
 
 核心思路：**渲染配置紧跟字段定义，改一个字段时校验规则和渲染行为一起调整，不用再去前端组件里翻找对应位置。**
 
@@ -202,14 +202,14 @@ export class DtoStudentView extends $Dto.get(() => ModelStudent) {}
 
 ## 五、与 Django Admin 对比：为什么值得换
 
-| 特性 | VonaJS | Django Admin |
-|------|--------|-------------|
-| 后端技术栈 | NodeJS + TypeScript | Python + 服务端模板语言 |
-| 前端技术栈 | Vue3 + Vite8 + TypeScript | HTML + CSS + JS |
-| 渲染机制 | 同构 SSR | 服务端模板渲染 |
-| 双层页签导航 | 支持 | 不支持 |
-| 界面定制 | 自由定制，组件级可控 | 定制成本高，需覆盖模板 |
-| SSR | 支持（含侧边栏、主题等） | 不支持 |
+| 特性         | VonaJS                    | Django Admin            |
+| ------------ | ------------------------- | ----------------------- |
+| 后端技术栈   | NodeJS + TypeScript       | Python + 服务端模板语言 |
+| 前端技术栈   | Vue3 + Vite8 + TypeScript | HTML + CSS + JS         |
+| 渲染机制     | 同构 SSR                  | 服务端模板渲染          |
+| 双层页签导航 | 支持                      | 不支持                  |
+| 界面定制     | 自由定制，组件级可控      | 定制成本高，需覆盖模板  |
+| SSR          | 支持（含侧边栏、主题等）  | 不支持                  |
 
 Django Admin 的核心问题是：它用服务端模板渲染页面，前端技术栈停留在传统 HTML/CSS/JS 时代。想定制一个下拉框的样式、加一个自定义交互，就得去覆盖模板文件，维护成本随业务复杂度急剧上升。
 
@@ -238,4 +238,4 @@ VonaJS 的核心价值很明确：**用 DTO 驱动 CRUD 动态渲染，把中后
 
 - 在线演示（Web）：https://cabloy.com
 - 在线演示（Admin）：https://cabloy.com/admin
-- GitHub：https://github.com/cabloy/cabloy-basic
+- GitHub：https://github.com/vonajs/vona
