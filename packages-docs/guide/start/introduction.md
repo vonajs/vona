@@ -2,7 +2,7 @@
 
 ## What is Vona?
 
-Vona is a fullstack framework for building SSR/SPA/Website/Admin-Dashboard in one codebase, featuring frontend and backend separation and native type sharing.
+Vona is a fullstack framework for building SSR/SPA/Website/Admin in one codebase, featuring frontend and backend separation and native type sharing.
 
 - Supports dual-layer tabs navigation, enabling efficient page switching while maintaining page state
 - Dynamically render CRUD list pages, entry pages, and search forms, while demonstrating best practices for Tanstack Table, Tanstack Form, and Tanstack Query
@@ -19,10 +19,10 @@ Frontend-backend type sharing mechanism:
 
 ## Demo Online
 
-The Website and Admin-Dashboard of Cabloy Store are built by one codebase.
+The Website and Admin of Cabloy Store are built by one codebase.
 
 - Website: [https://cabloy.com](https://cabloy.com)
-- Admin-Dashboard: [https://cabloy.com/admin](https://cabloy.com/admin)
+- Admin: [https://cabloy.com/admin](https://cabloy.com/admin)
 
 ## GIF Demo
 
@@ -32,8 +32,8 @@ The Website and Admin-Dashboard of Cabloy Store are built by one codebase.
 
 ## Features
 
-- `Fullstack`: Building `SSR/SPA/Website/Admin-Dashboard` in one codebase
-- `Admin-Dashboard Supports SSR`: Provides full SSR support for Admin-Dashboard applications, including sidebar, multilingual support, light/dark themes, and brand color themes. This reduces page flicker on refresh and delivers a smoother user interaction experience
+- `Fullstack`: Building `SSR/SPA/Website/Admin` in one codebase
+- `Admin Supports SSR`: Provides full SSR support for Admin applications, including sidebar, multilingual support, light/dark themes, and brand color themes. This reduces page flicker on refresh and delivers a smoother user interaction experience
 - `CRUD Dynamic Rendering`: Dynamically render CRUD list pages, entry pages, and search forms, while demonstrating best practices for Tanstack Table, Tanstack Form, and Tanstack Query
 - `DTO Infer and Generation`: Dynamically infer and generate DTOs to eliminate redundant type definitions and boost development productivity
 - `Dual-layer Tabs Navigation`: Supports dual-layer tabs navigation, enabling efficient page switching while maintaining page state

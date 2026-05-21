@@ -9,7 +9,7 @@
 
 ## Features
 
-- Building `SSR/SPA/Website/Admin-Dashboard` in one codebase
+- Building `SSR/SPA/Website/Admin` in one codebase
 - Provides full SSR support for Admin-Dashboard applications, including sidebar, multilingual support, light/dark themes, and brand color themes. This reduces page flicker on refresh and delivers a smoother user interaction experience
 - Dynamically render CRUD list pages, entry pages, and search forms, while demonstrating best practices for Tanstack Table, Tanstack Form, and Tanstack Query
 - Supports dual-layer tabs navigation, enabling efficient page switching while maintaining page state

@@ -5,7 +5,7 @@ layout: home
 hero:
   name: 'Vona'
   text: 'A fullstack framework'
-  tagline: Building SSR/SPA/Website/Admin-Dashboard in one codebase
+  tagline: Building SSR/SPA/Website/Admin in one codebase
   actions:
     - theme: brand
       text: Get Started
@@ -19,7 +19,7 @@ hero:
 
 features:
   - title: Fullstack
-    details: Building SSR/SPA/Website/Admin-Dashboard in one codebase
+    details: Building SSR/SPA/Website/Admin in one codebase
   - title: Admin-Dashboard Supports SSR
     details: Provides full SSR support for Admin-Dashboard applications, including sidebar, multilingual support, light/dark themes, and brand color themes. This reduces page flicker on refresh and delivers a smoother user interaction experience
   - title: CRUD Dynamic Rendering
