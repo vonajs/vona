@@ -47,6 +47,9 @@
 
 
 
+
+
+
 //#endregion
 //#region .zova-rest/utils.ts
 function ZovaCssBase(name) {
@@ -179,17 +182,17 @@ function schemaRenderLayout(layoutOptions, scene) {
 		return _generalSchemaRest(schema, { layout: layoutOptions }, scene);
 	};
 }
-function schemaRenderVisible(visible, scene) {
+function schemaRenderVisible(visible = true, scene) {
 	return function(schema) {
 		return _generalSchemaRest(schema, { visible }, scene);
 	};
 }
-function schemaRenderReadonly(readonly, scene) {
+function schemaRenderReadonly(readonly = true, scene) {
 	return function(schema) {
 		return _generalSchemaRest(schema, { readonly }, scene);
 	};
 }
-function schemaRenderDisableNotifyChanged(disableNotifyChanged, scene) {
+function schemaRenderDisableNotifyChanged(disableNotifyChanged = true, scene) {
 	return function(schema) {
 		return _generalSchemaRest(schema, { disableNotifyChanged }, scene);
 	};

@@ -16,7 +16,7 @@ export interface IDtoOptions<%=argv.resourceNameCapitalize%>Update extends IDeco
         ZovaRender.block('start-pageentry:blockToolbarRow', {
           actions: [
             ZovaRender.formActionRow('start-form:actionSubmit', {
-              permission: { action: 'update', formScene: ['create', 'edit'] },
+              permission: { actionInherit: 'update', formScene: ['create', 'edit'] },
             }),
             ZovaRender.formActionRow('start-form:actionBack', { permission: { public: true } }),
           ],

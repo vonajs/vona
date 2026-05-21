@@ -4,7 +4,7 @@ import { VNode } from "vue";
 import { BeanRouter, BeanRouterGuardsBase, IRouteViewRouteItem, TypePagePathSchema } from "zova-module-a-router";
 import { BeanModelBase, IDecoratorModelOptions } from "zova-module-a-model";
 import * as _$zova_module_a_openapi0 from "zova-module-a-openapi";
-import { ICaptchaData, ICaptchaSceneRecord, IFormMeta, IFormProvider, IJsxRenderContextBase, IJsxRenderContextPage, IJsxRenderContextPageEntry, IPageEntryScope, IPageScope, IPermissionHint, IResourceBlockOptionsBase, IResourceBlockRecord, IResourceFormActionRowNameRecord, IResourceFormActionRowOptionsBase, IResourceFormActionRowRecord, IResourceFormFieldLayoutOptions, IResourceFormFieldOptionsBase, IResourceFormFieldRecord, IResourceRenderBlockOptionsBlock, IResourceRenderFormActionRowOptionsAction, IResourceRenderTableActionBulkOptionsAction, IResourceRenderTableActionRowOptionsAction, IResourceTableActionBulkOptionsBase, IResourceTableActionBulkRecord, IResourceTableActionNameRecord, IResourceTableActionRowOptionsBase, IResourceTableActionRowRecord, IResourceTableCellOptionsBase, IResourceTableCellRecord, ISchemaRenderComponentLayoutOptions, ITablePaged, ITableQuery, ITableResPaged, TypeFormScene, TypeFormSchemaScene, TypeOpenapiPermissions, TypeSchemaOrderLevel, TypeSchemaScene } from "zova-module-a-openapi";
+import { ICaptchaData, ICaptchaSceneRecord, IFormMeta, IFormProvider, IJsxRenderContextBase, IJsxRenderContextPage, IJsxRenderContextPageEntry, IPageEntryScope, IPageScope, IPermissionHintGeneral, IResourceBlockOptionsBase, IResourceBlockRecord, IResourceFormActionRowNameRecord, IResourceFormActionRowOptionsBase, IResourceFormActionRowRecord, IResourceFormFieldLayoutOptions, IResourceFormFieldOptionsBase, IResourceFormFieldRecord, IResourceRenderBlockOptionsBlock, IResourceRenderFormActionRowOptionsAction, IResourceRenderTableActionBulkOptionsAction, IResourceRenderTableActionRowOptionsAction, IResourceTableActionBulkOptionsBase, IResourceTableActionBulkRecord, IResourceTableActionNameRecord, IResourceTableActionRowOptionsBase, IResourceTableActionRowRecord, IResourceTableCellOptionsBase, IResourceTableCellRecord, ISchemaRenderComponentLayoutOptions, ITablePaged, ITableQuery, ITableResPaged, TypeFormScene, TypeFormSchemaScene, TypeOpenapiPermissions, TypeSchemaOrderLevel, TypeSchemaScene } from "zova-module-a-openapi";
 import { BeanApiBase, IApiActionOptions, IApiSchemaOptions } from "zova-module-a-api";
 import { IVonaComponentRecord, TypeComponentOptions } from "zova-module-a-bean";
 import { BeanBehaviorBase, IDecoratorBehaviorOptions, NextBehavior } from "zova-module-a-behavior";
@@ -5535,7 +5535,7 @@ declare class ModelPassport extends BeanModelBase {
   private _setPassportJwt;
   private _setPassport;
   private _setJwt;
-  checkPermission(permissions: TypeOpenapiPermissions | undefined, actionName?: keyof (IResourceTableActionNameRecord & IResourceFormActionRowNameRecord), permissionHint?: IPermissionHint): boolean;
+  checkPermission(permissions: TypeOpenapiPermissions | undefined, actionName?: keyof (IResourceTableActionNameRecord & IResourceFormActionRowNameRecord), permissionHint?: IPermissionHintGeneral): boolean;
 }
 //#endregion
 //#region src/suite/a-home/modules/home-passport/src/config/config.d.ts
