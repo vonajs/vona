@@ -37,10 +37,10 @@ Frontend-backend type sharing mechanism:
 
 ## Demo Online
 
-The Website and Admin-Dashboard of Cabloy Store are built by one codebase
+The Website and Admin of Cabloy Store are built by one codebase
 
 - Website: [https://cabloy.com](https://cabloy.com)
-- Admin-Dashboard: [https://cabloy.com/admin](https://cabloy.com/admin)
+- Admin: [https://cabloy.com/admin](https://cabloy.com/admin)
 
 ## GIF Demo
 

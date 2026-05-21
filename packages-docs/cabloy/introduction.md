@@ -27,21 +27,21 @@ This suite includes the following modules:
 
 CabloyJS provides two project templates for different UI libraries.
 
-| Template Name                                   | UI Library            | Description                                             | Demo                                                                       |
-| ----------------------------------------------- | --------------------- | ------------------------------------------------------- | -------------------------------------------------------------------------- |
-| [cabloy-basic](../cabloy-basic/introduction.md) | Daisyui + Tailwindcss | Provides out-of-the-box `Admin-Dashboard`               |                                                                            |
-| [cabloy-start](../cabloy-start/introduction.md) | VuetifyJS             | Provides out-of-the-box `Website` and `Admin-Dashboard` | [Website](https://cabloy.com), [Admin-Dashboard](https://cabloy.com/admin) |
+| Template Name                                   | UI Library            | Description                                   | Demo                                                             |
+| ----------------------------------------------- | --------------------- | --------------------------------------------- | ---------------------------------------------------------------- |
+| [cabloy-basic](../cabloy-basic/introduction.md) | Daisyui + Tailwindcss | Provides out-of-the-box `Admin`               |                                                                  |
+| [cabloy-start](../cabloy-start/introduction.md) | VuetifyJS             | Provides out-of-the-box `Website` and `Admin` | [Website](https://cabloy.com), [Admin](https://cabloy.com/admin) |
 
 ## Template Comparison
 
-|                                                                  | cabloy-basic                                                                                     | cabloy-start                                            |
-| ---------------------------------------------------------------- | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------- |
-| Fullstack Capabilities                                           | Provides out-of-the-box `Admin-Dashboard`. Website capabilities can be added by self-development | Provides out-of-the-box `Website` and `Admin-Dashboard` |
-| UI Library                                                       | Daisyui + Tailwindcss                                                                            | VuetifyJS                                               |
-| Dynamic Form/Table Rendering                                     | Provides UI components based on Daisyui                                                          | Provides UI components based on VuetifyJS               |
-| Admin-Dashboard SSR Support                                      | ✅                                                                                               | ✅                                                      |
-| Dual-layer Tabs Navigation                                       | ✅                                                                                               | ✅                                                      |
-| Best Practices for `Tanstack Table/Tanstack Form/Tanstack Query` | ✅                                                                                               | ✅                                                      |
+|                                                                  | cabloy-basic                                                                           | cabloy-start                                  |
+| ---------------------------------------------------------------- | -------------------------------------------------------------------------------------- | --------------------------------------------- |
+| Fullstack Capabilities                                           | Provides out-of-the-box `Admin`. Website capabilities can be added by self-development | Provides out-of-the-box `Website` and `Admin` |
+| UI Library                                                       | Daisyui + Tailwindcss                                                                  | VuetifyJS                                     |
+| Dynamic Form/Table Rendering                                     | Provides UI components based on Daisyui                                                | Provides UI components based on VuetifyJS     |
+| Admin SSR Support                                                | ✅                                                                                     | ✅                                            |
+| Dual-layer Tabs Navigation                                       | ✅                                                                                     | ✅                                            |
+| Best Practices for `Tanstack Table/Tanstack Form/Tanstack Query` | ✅                                                                                     | ✅                                            |
 
 ## Development History
 

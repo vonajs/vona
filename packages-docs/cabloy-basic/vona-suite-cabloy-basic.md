@@ -2,9 +2,9 @@
 
 This suite includes the following modules:
 
-| Name            | Description                         |
-| --------------- | ----------------------------------- |
-| basic-siteadmin | Used to implement `Admin-Dashboard` |
+| Name            | Description               |
+| --------------- | ------------------------- |
+| basic-siteadmin | Used to implement `Admin` |
 
 ## basic-siteadmin
 

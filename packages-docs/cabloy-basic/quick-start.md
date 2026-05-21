@@ -13,9 +13,9 @@ $ cd projectName
 
 The `cabloy-basic` template has a built-in suite `vona-suite-cabloy-basic`, which contains the following modules:
 
-| name            | description                         |
-| --------------- | ----------------------------------- |
-| basic-siteadmin | Used to implement `Admin-Dashboard` |
+| name            | description               |
+| --------------- | ------------------------- |
+| basic-siteadmin | Used to implement `Admin` |
 
 ## Create a Zova project
 
@@ -74,9 +74,9 @@ $ npm run build:rest:cabloyBasicAdmin
 $ npm run dev
 ```
 
-| URL                   | Description     |
-| --------------------- | --------------- |
-| http://localhost:7102 | Admin-Dashboard |
+| URL                   | Description |
+| --------------------- | ----------- |
+| http://localhost:7102 | Admin       |
 
 ### 2. Start Zova development server
 
@@ -86,6 +86,6 @@ You can directly start Zova development server to debug the frontend code. At th
 $ npm run dev:ssr:cabloyBasicAdmin
 ```
 
-| URL                   | 说明            |
-| --------------------- | --------------- |
-| http://localhost:9000 | Admin-Dashboard |
+| URL                   | 说明  |
+| --------------------- | ----- |
+| http://localhost:9000 | Admin |
