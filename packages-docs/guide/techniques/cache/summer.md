@@ -229,7 +229,7 @@ await this.scope.summerCache.student.get('2', {
 });
 ```
 
-| 名称                         | 类型                      | 说明                                                                                                                              |
+| Name                         | Type                      | Description                                                                                                                       |
 | ---------------------------- | ------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
 | ttl                          | number                    | Cache expiration time                                                                                                             |
 | broadcastOnSet               | boolean \| 'del'          | Whether to broadcast changes to other Workers when setting the cache. Set to `del` to broadcast deletion to other Workers’ caches |

@@ -98,7 +98,7 @@ $ npm run dev:ssr:cabloyStartWeb
 $ npm run dev:ssr:cabloyStartAdmin
 ```
 
-| URL                          | 说明    |
-| ---------------------------- | ------- |
-| http://localhost:9000        | Website |
-| http://localhost:9000/admin/ | Admin   |
+| URL                          | Description |
+| ---------------------------- | ----------- |
+| http://localhost:9000        | Website     |
+| http://localhost:9000/admin/ | Admin       |

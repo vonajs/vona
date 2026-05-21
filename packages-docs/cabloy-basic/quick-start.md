@@ -86,6 +86,6 @@ You can directly start Zova development server to debug the frontend code. At th
 $ npm run dev:ssr:cabloyBasicAdmin
 ```
 
-| URL                   | 说明  |
-| --------------------- | ----- |
-| http://localhost:9000 | Admin |
+| URL                   | Description |
+| --------------------- | ----------- |
+| http://localhost:9000 | Admin       |

@@ -197,7 +197,7 @@ VonaJS puts all the utility methods for extending Zod Schema into the group `v`,
 
 ### 6. Query Filter Tools
 
-| 名称              | 说明                                     |
+| Name              | Description                              |
 | ----------------- | ---------------------------------------- |
 | v.filter          | Set the parameters for the Query Filter  |
 | v.filterTransform | Provides `Filter Transform` capabilities |
