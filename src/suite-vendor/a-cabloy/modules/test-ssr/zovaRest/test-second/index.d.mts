@@ -7829,9 +7829,12 @@ declare module 'zova-module-a-openapi' {
 interface ControllerBlockPageProps extends IResourceBlockOptionsBase {
   blocks?: IResourceRenderBlockOptionsBlock[];
   resource?: string;
+  pageSize?: number;
 }
 declare class ControllerBlockPage<TData extends {} = {}> extends BeanControllerBase {
-  static $propsDefault: {};
+  static $propsDefault: {
+    pageSize: number;
+  };
   static $componentOptions: IComponentOptions;
   tableRef: BeanControllerTableBase<TData>;
   jsxZova: ZovaJsx;
@@ -7850,6 +7853,7 @@ declare class ControllerBlockPage<TData extends {} = {}> extends BeanControllerB
   get schemaRow(): _$zova_module_a_openapi0.ISchemaObjectExtensionField | undefined;
   get permissions(): _$zova_module_a_openapi0.TypeOpenapiPermissions | undefined;
   gotoPage(pageNo: number): void;
+  setPageSize(pageSize: number): void;
   onFilter(data: any): void;
   private _prepareJsx;
   private _prepareJsxCelScope;
