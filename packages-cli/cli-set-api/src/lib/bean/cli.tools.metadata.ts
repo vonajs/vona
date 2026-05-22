@@ -59,12 +59,10 @@ export class CliToolsMetadata extends BeanCliBase {
     const modulePath = module.root;
     const metaDir = path.join(modulePath, 'src/.metadata');
     const metaIndexFile = path.join(metaDir, 'index.ts');
-    if (await fse.pathExists(metaIndexFile) && !force) {
+    if ((await fse.pathExists(metaIndexFile)) && !force) {
       // do nothing
       return;
     }
-    // clean old metadata
-    await fse.remove(metaDir);
     await this.helper.ensureDir(metaDir);
     // relativeNameCapitalize
     const relativeNameCapitalize = this.helper.stringToCapitalize(moduleName, '-');
@@ -241,10 +239,22 @@ export { ScopeModule${relativeNameCapitalize} as ScopeModule } from './index.ts'
     }
     // exports
     jsContent = await this._prependExportIfNeeded(jsContent, [
-      { exportLine: "export * from './types/index.ts';", sourceFile: path.join(modulePath, 'src/types/index.ts') },
-      { exportLine: "export * from './lib/index.ts';", sourceFile: path.join(modulePath, 'src/lib/index.ts') },
-      { exportLine: "export * from './.metadata/locales.ts';", sourceFile: path.join(modulePath, 'src/.metadata/locales.ts') },
-      { exportLine: "export * from './.metadata/index.ts';", sourceFile: path.join(modulePath, 'src/.metadata/index.ts') },
+      {
+        exportLine: "export * from './types/index.ts';",
+        sourceFile: path.join(modulePath, 'src/types/index.ts'),
+      },
+      {
+        exportLine: "export * from './lib/index.ts';",
+        sourceFile: path.join(modulePath, 'src/lib/index.ts'),
+      },
+      {
+        exportLine: "export * from './.metadata/locales.ts';",
+        sourceFile: path.join(modulePath, 'src/.metadata/locales.ts'),
+      },
+      {
+        exportLine: "export * from './.metadata/index.ts';",
+        sourceFile: path.join(modulePath, 'src/.metadata/index.ts'),
+      },
     ]);
     // trim empty
     jsContent = jsContent.replace('export {};\n', '');
@@ -258,7 +268,7 @@ export { ScopeModule${relativeNameCapitalize} as ScopeModule } from './index.ts'
     entries: { exportLine: string; sourceFile: string }[],
   ): Promise<string> {
     for (const { exportLine, sourceFile } of entries) {
-      if (await fse.pathExists(sourceFile) && !jsContent.includes(exportLine)) {
+      if ((await fse.pathExists(sourceFile)) && !jsContent.includes(exportLine)) {
         jsContent = `${exportLine}\n${jsContent}`;
       }
     }
