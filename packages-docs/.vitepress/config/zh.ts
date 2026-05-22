@@ -273,7 +273,7 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
           items: [
             { text: '介绍', link: 'introduction' },
             { text: 'auth-simple', link: 'auth-simple' },
-            { text: 'auth-github', link: 'auth-github' },
+            { text: 'auth-oauth', link: 'auth-oauth' },
           ],
         },
         {

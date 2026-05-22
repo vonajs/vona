@@ -4,7 +4,7 @@
 
 ## 特性
 
-- `Auth Provider`：使用`Auth Provider`支持各种认证方式，如：用户名/密码认证、OAuth 认证（Github），等等
+- `Auth Provider`：使用`Auth Provider`支持各种认证方式，如：用户名/密码认证、OAuth 认证，等等
 - `Clients`：同一个 Provider 可以提供多个凭证
 - `关联认证`：可以为同一个用户关联多个认证方式
 - `迁移认证`：可以将一个用户的认证方式迁移到另一个用户
@@ -41,21 +41,21 @@ class ControllerStudent {
 }
 ```
 
-- 举例：`GitHub`认证
+- 举例：`OAuth`认证
 
 ```typescript
 class ControllerStudent {
   @Web.get('login')
   @Passport.public()
   async login() {
-    await this.bean.auth.authenticate('auth-github:github', { state: { redirect: '/' } });
+    await this.bean.auth.authenticate('auth-oauth:oauth', { clientName: 'github', state: { redirect: '/' } });
   }
 }
 ```
 
 ## 设置OAuth认证凭据
 
-仍以`GitHub`为例，在 App Config 中设置认证凭据。
+以`OAuth`认证为例，在 App Config 中设置认证凭据。
 
 `src/backend/config/config/config.ts`
 
@@ -63,9 +63,9 @@ class ControllerStudent {
 // onions
 config.onions = {
   authProvider: {
-    'auth-github:github': {
+    'auth-oauth:oauth': {
       clients: {
-        default: {
+        github: {
           clientID: 'xxxxxx',
           clientSecret: 'xxxxxxx',
         },
@@ -75,11 +75,19 @@ config.onions = {
 };
 ```
 
-- `clients.default`: 一个 Provider 可以设置多个 Clients，默认是`default`
+- `clients.github`: 一个 Provider 可以设置多个 Clients，当前内置了`github`
 
-### 如何添加更多Client凭据
+### 如何添加新的OAuth Client凭据
 
-- 首先采用接口合并机制添加 Client 类型定义
+以添加`google`为例：
+
+1. 安装对应的 Strategy npm 库
+
+```bash
+$ pnpm add passport-google-oauth20
+```
+
+2. 采用接口合并机制添加 Client 类型定义
 
 在 VSCode 编辑器中，输入代码片段`recordauthclient`，自动生成代码骨架:
 
@@ -94,29 +102,32 @@ declare module 'vona-module-x-x' {
 调整代码:
 
 ```typescript
-declare module 'vona-module-auth-github' {
-  export interface IAuthProviderGithubClientRecord {
-    another: never;
+declare module 'vona-module-auth-oauth' {
+  export interface IAuthProviderOauthClientRecord {
+    google: never;
   }
 }
 ```
 
-- 然后在 App Config 中设置认证凭据
+3. 在 App Config 中设置认证凭据，指定对应的`Strategy`
 
-```diff
+```typescript
+import StrategyGoogle from 'passport-google-oauth20';
+
 // onions
 config.onions = {
   authProvider: {
-    'auth-github:github': {
+    'auth-oauth:oauth': {
       clients: {
-        default: {
+        github: {
           clientID: 'xxxxxx',
           clientSecret: 'xxxxxxx',
         },
-+       another: {
-+         clientID: 'yyyyyy',
-+         clientSecret: 'yyyyyyy',
-+       },
+        google: {
+          Strategy: StrategyGoogle,
+          clientID: 'yyyyyy',
+          clientSecret: 'yyyyyyy',
+        },
       },
     },
   },
