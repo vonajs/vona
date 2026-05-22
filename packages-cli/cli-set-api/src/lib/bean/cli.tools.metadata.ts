@@ -31,8 +31,6 @@ export class CliToolsMetadata extends BeanCliBase {
     const { argv } = this.context;
     // super
     await super.execute();
-    // noformat: src/index.ts need format
-    // argv.noformat = true;
     // moduleNames
     let moduleNames = argv._;
     const force = argv.force ?? moduleNames.length > 0;
@@ -61,10 +59,12 @@ export class CliToolsMetadata extends BeanCliBase {
     const modulePath = module.root;
     const metaDir = path.join(modulePath, 'src/.metadata');
     const metaIndexFile = path.join(metaDir, 'index.ts');
-    if (fse.existsSync(metaIndexFile) && !force) {
+    if (await fse.pathExists(metaIndexFile) && !force) {
       // do nothing
       return;
     }
+    // clean old metadata
+    await fse.remove(metaDir);
     await this.helper.ensureDir(metaDir);
     // relativeNameCapitalize
     const relativeNameCapitalize = this.helper.stringToCapitalize(moduleName, '-');
@@ -203,14 +203,15 @@ export class CliToolsMetadata extends BeanCliBase {
     content: string,
     packageName: string,
     resources: string[],
-    type: boolean,
+    isTypeImport: boolean,
   ) {
     const items = resources.filter(item => {
-      const regexp = new RegExp(`${item}[\\[\\]<,;?:\\s]`);
+      const escaped = item.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+      const regexp = new RegExp(`${escaped}[\\[\\]<,;?:\\s]`);
       return !!regexp.exec(content);
     });
     if (items.length === 0) return content;
-    const importContent = `import ${type ? 'type ' : ''}{ ${items.join(',')} } from '${packageName}';`;
+    const importContent = `import ${isTypeImport ? 'type ' : ''}{ ${items.join(',')} } from '${packageName}';`;
     return `${importContent}\n${content}`;
   }
 
@@ -224,7 +225,7 @@ export class CliToolsMetadata extends BeanCliBase {
 
   async _generateThis(moduleName: string, relativeNameCapitalize: string, modulePath: string) {
     const thisDest = path.join(modulePath, 'src/.metadata/this.ts');
-    if (fse.existsSync(thisDest)) return;
+    if (await fse.pathExists(thisDest)) return;
     const content = `export const __ThisModule__ = '${moduleName}';
 export { ScopeModule${relativeNameCapitalize} as ScopeModule } from './index.ts';
 `;
@@ -235,38 +236,33 @@ export { ScopeModule${relativeNameCapitalize} as ScopeModule } from './index.ts'
   async _generateIndex(modulePath: string) {
     let jsContent = '';
     const jsFile = path.join(modulePath, 'src/index.ts');
-    if (fse.existsSync(jsFile)) {
+    if (await fse.pathExists(jsFile)) {
       jsContent = (await fse.readFile(jsFile)).toString();
     }
-    // jsTypes
-    const jsTypes = "export * from './types/index.ts';";
-    const jsTypesFile = path.join(modulePath, 'src/types/index.ts');
-    if (fse.existsSync(jsTypesFile) && !jsContent.includes(jsTypes)) {
-      jsContent = `${jsTypes}\n${jsContent}`;
-    }
-    // jsLib
-    const jsLib = "export * from './lib/index.ts';";
-    const jsLibFile = path.join(modulePath, 'src/lib/index.ts');
-    if (fse.existsSync(jsLibFile) && !jsContent.includes(jsLib)) {
-      jsContent = `${jsLib}\n${jsContent}`;
-    }
-    // jsLocales
-    const jsLocales = "export * from './.metadata/locales.ts';";
-    const jsLocalesFile = path.join(modulePath, 'src/.metadata/locales.ts');
-    if (fse.existsSync(jsLocalesFile) && !jsContent.includes(jsLocales)) {
-      jsContent = `${jsLocales}\n${jsContent}`;
-    }
-    // jsMetadata
-    const jsMetadata = "export * from './.metadata/index.ts';";
-    const jsMetadataFile = path.join(modulePath, 'src/.metadata/index.ts');
-    if (fse.existsSync(jsMetadataFile) && !jsContent.includes(jsMetadata)) {
-      jsContent = `${jsMetadata}\n${jsContent}`;
-    }
+    // exports
+    jsContent = await this._prependExportIfNeeded(jsContent, [
+      { exportLine: "export * from './types/index.ts';", sourceFile: path.join(modulePath, 'src/types/index.ts') },
+      { exportLine: "export * from './lib/index.ts';", sourceFile: path.join(modulePath, 'src/lib/index.ts') },
+      { exportLine: "export * from './.metadata/locales.ts';", sourceFile: path.join(modulePath, 'src/.metadata/locales.ts') },
+      { exportLine: "export * from './.metadata/index.ts';", sourceFile: path.join(modulePath, 'src/.metadata/index.ts') },
+    ]);
     // trim empty
     jsContent = jsContent.replace('export {};\n', '');
     // write
     await fse.writeFile(jsFile, jsContent);
     await this.helper.formatFile({ fileName: jsFile, logPrefix: 'format: ' });
+  }
+
+  async _prependExportIfNeeded(
+    jsContent: string,
+    entries: { exportLine: string; sourceFile: string }[],
+  ): Promise<string> {
+    for (const { exportLine, sourceFile } of entries) {
+      if (await fse.pathExists(sourceFile) && !jsContent.includes(exportLine)) {
+        jsContent = `${exportLine}\n${jsContent}`;
+      }
+    }
+    return jsContent;
   }
 
   async _generatePackage(modulePath: string) {
@@ -283,8 +279,9 @@ export { ScopeModule${relativeNameCapitalize} as ScopeModule } from './index.ts'
     // cli
     for (const name of ['cli', 'zovaRest']) {
       const pathCheck = path.join(modulePath, name);
-      if (!fse.existsSync(pathCheck)) continue;
+      if (!(await fse.pathExists(pathCheck))) continue;
       pkg = await _loadPkg();
+      pkg.files ??= [];
       const index = pkg.files.indexOf(name);
       if (index === -1) {
         changed = true;

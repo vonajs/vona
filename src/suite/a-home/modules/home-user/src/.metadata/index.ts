@@ -511,8 +511,8 @@ export interface IApiPathPostRecord{
         '/home/user/passport/logout': undefined;
 '/home/user/passport/register': undefined;
 '/home/user/passport/login': undefined;
-'/home/user/passport/refreshAuthToken': undefined;
 '/home/user/passport/createPassportJwtFromOauthCode': undefined;
+'/home/user/passport/refreshAuthToken': undefined;
 '/home/user/passport/createTempAuthToken': undefined;
     }
 
