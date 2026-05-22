@@ -34,7 +34,7 @@ export function getLoggerPathPhysicalRoot(app: VonaApplication) {
   if (mode === 'test' || mode === 'dev') {
     loggerDir = path.join(app.projectPath, '.app/logs');
   } else {
-    loggerDir = path.join(os.homedir(), 'vona', app.name, 'logs');
+    loggerDir = path.join(getHomeVonaAppDir(app), 'logs');
   }
   fse.ensureDirSync(loggerDir);
   return loggerDir;
@@ -46,7 +46,7 @@ export function getPublicPathPhysicalRoot(app: VonaApplication) {
   if (mode === 'test' || mode === 'dev') {
     publicDir = path.join(app.projectPath, '.app/public');
   } else {
-    publicDir = path.join(os.homedir(), 'vona', app.name, 'public');
+    publicDir = path.join(getHomeVonaAppDir(app), 'public');
   }
   fse.ensureDirSync(publicDir);
   return publicDir;
@@ -58,8 +58,12 @@ export function getRuntimePathPhysicalRoot(app: VonaApplication) {
   if (mode === 'test' || mode === 'dev') {
     runtimeDir = path.join(app.options.projectPath, '.app/runtime');
   } else {
-    runtimeDir = path.join(os.homedir(), 'vona', app.options.name, 'runtime');
+    runtimeDir = path.join(getHomeVonaAppDir(app), 'runtime');
   }
   fse.ensureDirSync(runtimeDir);
   return runtimeDir;
+}
+
+export function getHomeVonaAppDir(app: VonaApplication) {
+  return path.join(os.homedir(), '.vona', app.name);
 }

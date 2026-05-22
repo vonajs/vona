@@ -1,16 +1,16 @@
 import fse from 'fs-extra';
 import { createRequire } from 'node:module';
-import os from 'node:os';
 import path from 'node:path';
 
 import type { VonaApplication } from '../core/application.ts';
 
+import { getHomeVonaAppDir } from '../core/config.ts';
 import { pathToHref } from './util.ts';
 
 export function getSqlite3DatabaseNameDefault(app: VonaApplication) {
   const mode = app.meta.env.META_MODE;
   if (mode !== 'prod') return '';
-  const dbPath = path.join(os.homedir(), 'vona', app.name, 'sqlite3');
+  const dbPath = path.join(getHomeVonaAppDir(app), 'sqlite3');
   fse.ensureDirSync(dbPath);
   return path.join(dbPath, `${app.name}.db`);
 }
