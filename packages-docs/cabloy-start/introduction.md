@@ -10,7 +10,7 @@
 ## Features
 
 - Building `SSR/SPA/Website/Admin` in one codebase
-- Provides full SSR support for Admin applications, including sidebar, multilingual support, light/dark themes, and brand color themes. This reduces page flicker on refresh and delivers a smoother user interaction experience
+- Provides full SSR support for Admin applications, preventing sidebar flickering on page refresh
 - Dynamically render CRUD list pages, entry pages, and search forms, while demonstrating best practices for Tanstack Table, Tanstack Form, and Tanstack Query
 - Supports dual-layer tabs navigation, enabling efficient page switching while maintaining page state
 - UI library uses the latest version of `VuetifyJS`

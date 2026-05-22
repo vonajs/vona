@@ -10,7 +10,7 @@
 ## 特性
 
 - 可在同一个代码库中实现`SSR/SPA/Web网站/Admin中后台`
-- 为`Admin中后台`应用提供完整的 SSR 支持，侧边栏、多语言、明暗主题、品牌色主题等界面元素均支持 SSR。这样在刷新页面时可显著减少界面跳动，提升用户交互体验
+- 为`Admin中后台`提供完整的 SSR 支持，刷新页面时侧边栏不会闪烁跳动
 - 提供了全新的 CRUD 开发范式，沉淀出`Tanstack Table`/`Tanstack Form`/`Tanstack Query`的最佳实践
 - 支持双层页签导航，实现高效页面切换，并保持页面状态
 - UI 库采用最新版 Daisyui + Tailwindcss

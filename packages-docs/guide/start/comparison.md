@@ -15,7 +15,7 @@ This document compares VonaJS with other mainstream frameworks (such as Next.js,
   - The backend generates Swagger/OpenAPI Schema for generating API SDK on the frontend
   - The frontend generates types for icons, routes, and components for providing type hints on the backend
 - **Backend Capability**: VonaJS provides more powerful and complete backend capabilities, easily handling the development of large business systems, including `multi-tenancy`, `multi-database`, `multi-datasource`, `two-layer cache`, `queues`, `broadcast`, `scheduled tasks`, `distributed locks`, `DTO dynamic inference and generation`, and more
-- **Admin Dashboard Supports SSR**: VonaJS provides complete SSR support for `Admin Dashboard` applications, with sidebar, multilingual support, light/dark themes, and brand color themes all supporting SSR. This significantly reduces page flicker on refresh and enhances user interaction experience
+- **Admin Dashboard Supports SSR**: VonaJS provides full SSR support for Admin applications, preventing sidebar flickering on page refresh
 - **Dual-layer Tabs Navigation**: VonaJS supports dual-layer tabs navigation, enabling efficient page switching while maintaining page state
 
 ## Comparison with NestJS
