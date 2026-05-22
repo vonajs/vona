@@ -73,7 +73,6 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
         { text: 'Scripts', link: 'start/scripts' },
         { text: 'Playground', link: 'start/play' },
         { text: 'Update', link: 'start/update' },
-        { text: 'Test Module', link: 'start/test-vona' },
       ],
     },
     {
