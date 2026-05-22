@@ -210,17 +210,21 @@ Automatically create the `admin` user in the `meta.version` of the module `home-
 async init(options) {
   if (options.version === 1) {
     // user: admin
-    await this.bean.authSimple.authenticate({
-      username: 'admin',
-      password: options.password || this.scope.config.passwordDefault.admin,
-      avatar: ':emoji:flower',
-      confirmed: true,
-    }, 'register', 'default');
+    await this.bean.auth.authenticate('auth-simple:simple', {
+      clientOptions: {
+        username: 'admin',
+        password: options.password || this.scope.config.passwordDefault.admin,
+        avatar: ':emoji:flower',
+        confirmed: true,
+      },
+      state: { intention: 'register' },
+      clientName: 'default',
+    });
   }
 }
 ```
 
-- `bean.authSimple`: This is the `username/password` authentication service
+- `bean.auth.authenticate`: This is the unified authentication method provided by module `a-auth`
 
 - `authenticate`: This method calls `bean.user.register` to register a new user
 

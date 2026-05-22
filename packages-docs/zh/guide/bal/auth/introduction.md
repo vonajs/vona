@@ -28,19 +28,6 @@ class ControllerStudent {
 }
 ```
 
-- 简化方式：
-
-```typescript
-class ControllerStudent {
-  @Web.get('login')
-  @Passport.public()
-  async login() {
-    const jwt = await this.bean.authSimple.authenticate({ username: 'admin', password: '123456' });
-    return jwt;
-  }
-}
-```
-
 - 举例：`OAuth`认证
 
 ```typescript
@@ -201,12 +188,15 @@ async authenticate<T extends keyof IAuthProviderRecord>(
 
 `src/suite/a-home/modules/home-user/src/controller/passport.ts`
 
-| 名称       | 说明             |
-| ---------- | ---------------- |
-| current    | 获取当前Passport |
-| logout     | 退出登录         |
-| register   | 注册新用户       |
-| login      | 登录             |
-| loginOauth | OAuth认证        |
-| associate  | 关联认证         |
-| migrate    | 迁移认证         |
+| 名称                          | 说明                                                |
+| ----------------------------- | --------------------------------------------------- |
+| current                       | 获取当前Passport                                    |
+| logout                        | 退出登录                                            |
+| register                      | 注册新用户                                          |
+| login                         | 登录                                                |
+| loginOauth                    | OAuth认证                                           |
+| associate                     | 关联认证                                            |
+| migrate                       | 迁移认证                                            |
+| createPassportJwtFromOauthCode | 使用 OAuth 认证返回的 code 换取 jwt token 和 Passport |
+| refreshAuthToken              | 使用 refreshToken 刷新 authToken                    |
+| createTempAuthToken           | 创建临时 authToken                                  |

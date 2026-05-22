@@ -39,7 +39,7 @@ export class ControllerPassport extends BeanBase {
   @Core.captchaVerify({ scene: 'captcha-simple:simple' })
   @Api.body(v.object(DtoPassportJwt))
   async register(@Arg.body() data: DtoRegister) {
-    const jwt = await this.bean.authSimple.authenticate(data, 'register', 'default');
+    const jwt = await this.bean.auth.authenticate('auth-simple:simple', { clientOptions: data, state: { intention: 'register' }, clientName: 'default' });
     return this._combineDtoPassportJwt(jwt);
   }
 
@@ -48,7 +48,7 @@ export class ControllerPassport extends BeanBase {
   @Core.captchaVerify({ scene: 'captcha-simple:simple' })
   @Api.body(v.object(DtoPassportJwt))
   async login(@Arg.body() data: DtoLogin): Promise<DtoPassportJwt> {
-    const jwt = await this.bean.authSimple.authenticate(data, 'login', 'default');
+    const jwt = await this.bean.auth.authenticate('auth-simple:simple', { clientOptions: data, state: { intention: 'login' }, clientName: 'default' });
     return this._combineDtoPassportJwt(jwt);
   }
 

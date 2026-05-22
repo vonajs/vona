@@ -41,11 +41,11 @@ describe('authSimple.test.ts', () => {
       });
       assert.equal(isAuthenticated, true);
       // login again
-      const jwt2 = await app.bean.authSimple.authenticate(
-        { username: 'admin', password },
-        'login',
-        'default',
-      );
+      const jwt2 = await app.bean.auth.authenticate('auth-simple:simple', {
+        clientOptions: { username: 'admin', password },
+        state: { intention: 'login' },
+        clientName: 'default',
+      });
       assert.equal(!!jwt2?.accessToken, true);
     });
   });

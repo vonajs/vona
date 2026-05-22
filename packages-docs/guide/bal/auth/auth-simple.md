@@ -23,21 +23,6 @@ const jwt = await this.bean.auth.authenticate('auth-simple:simple', {
 
 `confirmed`: If `true`, it means the user has already confirmed and no further `activation` operation is needed.
 
-- Shorthand:
-
-```typescript
-const jwt = await this.bean.authSimple.authenticate(
-  {
-    username: 'tom',
-    password: '123456',
-    email: 'xxx@xxx.com',
-    avatar: ':emoji:flower',
-    confirmed: true,
-  },
-  'register',
-);
-```
-
 ### 2. Login
 
 ```typescript
@@ -50,18 +35,6 @@ const jwt = await this.bean.auth.authenticate('auth-simple:simple', {
     intention: 'login',
   },
 });
-```
-
-- Shorthand:
-
-```typescript
-const jwt = await this.bean.authSimple.authenticate(
-  {
-    username: 'tom',
-    password: '123456',
-  },
-  'login',
-);
 ```
 
 ### 3. Logout

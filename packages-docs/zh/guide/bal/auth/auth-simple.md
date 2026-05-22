@@ -23,21 +23,6 @@ const jwt = await this.bean.auth.authenticate('auth-simple:simple', {
 
 `confirmed`: 如果为`true`，意味着用户已经确认，不需要后续的`激活`操作。
 
-- 简写方式：
-
-```typescript
-const jwt = await this.bean.authSimple.authenticate(
-  {
-    username: 'tom',
-    password: '123456',
-    email: 'xxx@xxx.com',
-    avatar: ':emoji:flower',
-    confirmed: true,
-  },
-  'register',
-);
-```
-
 ### 2. 登录
 
 ```typescript
@@ -50,18 +35,6 @@ const jwt = await this.bean.auth.authenticate('auth-simple:simple', {
     intention: 'login',
   },
 });
-```
-
-- 简写方式：
-
-```typescript
-const jwt = await this.bean.authSimple.authenticate(
-  {
-    username: 'tom',
-    password: '123456',
-  },
-  'login',
-);
 ```
 
 ### 3. 退出登录

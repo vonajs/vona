@@ -149,31 +149,6 @@ export interface IModuleAuthProvider {
   'simple': AuthProviderSimple;
 }
 /** authProvider: end */
-/** bean: begin */
-export * from '../bean/bean.authSimple.ts';
-
-import 'vona';
-declare module 'vona' {
-  
-  
-}
-declare module 'vona-module-auth-simple' {
-  
-        export interface BeanAuthSimple {
-          /** @internal */
-          get scope(): ScopeModuleAuthSimple;
-        } 
-}
-/** bean: end */
-/** bean: begin */
-import type { BeanAuthSimple } from '../bean/bean.authSimple.ts';
-import 'vona';  
-declare module 'vona' {
-  export interface IBeanRecordGlobal {
-    'authSimple': BeanAuthSimple;
-  }
-}
-/** bean: end */
 /** service: begin */
 export * from '../service/authSimple.ts';
 

@@ -207,17 +207,21 @@ config.modules = {
 async init(options) {
   if (options.version === 1) {
     // user: admin
-    await this.bean.authSimple.authenticate({
-      username: 'admin',
-      password: options.password || this.scope.config.passwordDefault.admin,
-      avatar: ':emoji:flower',
-      confirmed: true,
-    }, 'register', 'default');
+    await this.bean.auth.authenticate('auth-simple:simple', {
+      clientOptions: {
+        username: 'admin',
+        password: options.password || this.scope.config.passwordDefault.admin,
+        avatar: ':emoji:flower',
+        confirmed: true,
+      },
+      state: { intention: 'register' },
+      clientName: 'default',
+    });
   }
 }
 ```
 
-- `bean.authSimple`: 是`用户名/密码`认证服务
+- `bean.auth.authenticate`: 是模块`a-auth`提供的统一认证方法
 - `authenticate`: 该方法会调用`bean.user.register`注册一个新用户
 
 ## 默认密码
