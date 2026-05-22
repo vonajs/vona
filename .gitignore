@@ -10,7 +10,6 @@ miniprogram_npm
 /run
 
 .claude/settings.local.json
-remotion-video
 
 .idea
 .DS_Store
