@@ -36,7 +36,8 @@
     "format": "oxfmt --check",
     "format:fix": "oxfmt --write",
     "lint": "oxlint",
-    "lint:fix": "oxlint --fix"
+    "lint:fix": "oxlint --fix",
+    "update": "pnpm update && vona :tools:deps"
   },
   "dependencies": {
     "vona": "^5.1.34"
