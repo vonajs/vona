@@ -53,7 +53,7 @@ Taking `google` as an example:
 1. Install the corresponding Strategy npm package
 
 ```bash
-$ pnpm add passport-google-oauth20
+$ pnpm add passport-google-oauth20 -w
 ```
 
 2. Add Client type definitions using the interface merging mechanism
@@ -205,7 +205,7 @@ The module `auth-oauth` uses the `Strategy` field to specify the OAuth authentic
 1. Install the corresponding Strategy npm package
 
 ```bash
-$ pnpm add passport-google-oauth20
+$ pnpm add passport-google-oauth20 -w
 ```
 
 2. Add a new Client type definition using the interface merging mechanism

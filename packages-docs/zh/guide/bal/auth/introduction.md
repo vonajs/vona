@@ -71,7 +71,7 @@ config.onions = {
 1. 安装对应的 Strategy npm 库
 
 ```bash
-$ pnpm add passport-google-oauth20
+$ pnpm add passport-google-oauth20 -w
 ```
 
 2. 采用接口合并机制添加 Client 类型定义
