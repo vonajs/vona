@@ -273,7 +273,7 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
           items: [
             { text: 'Introduction', link: 'introduction' },
             { text: 'auth-simple', link: 'auth-simple' },
-            { text: 'auth-github', link: 'auth-github' },
+            { text: 'auth-oauth', link: 'auth-oauth' },
           ],
         },
         {

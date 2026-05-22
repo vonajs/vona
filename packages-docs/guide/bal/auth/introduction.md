@@ -4,7 +4,7 @@ The module `a-auth` provides a general authentication system, using `Auth Provid
 
 ## Features
 
-- `Auth Provider`: Supports various authentication methods, such as username/password authentication, OAuth authentication (GitHub), etc
+- `Auth Provider`: Supports various authentication methods, such as username/password authentication, OAuth authentication, etc
 
 - `Clients`: A single provider can provide multiple credentials
 
@@ -44,21 +44,21 @@ class ControllerStudent {
 }
 ```
 
-- Example: `GitHub` Authentication
+- Example: `OAuth` Authentication
 
 ```typescript
 class ControllerStudent {
   @Web.get('login')
   @Passport.public()
   async login() {
-    await this.bean.auth.authenticate('auth-github:github', { state: { redirect: '/' } });
+    await this.bean.auth.authenticate('auth-oauth:oauth', { clientName: 'github', state: { redirect: '/' } });
   }
 }
 ```
 
 ## OAuth Credentials
 
-Using `GitHub` as an example, set the authentication credentials in the App Config.
+Using `OAuth` authentication as an example, set the authentication credentials in the App Config.
 
 `src/backend/config/config/config.ts`
 
@@ -66,9 +66,9 @@ Using `GitHub` as an example, set the authentication credentials in the App Conf
 // onions
 config.onions = {
   authProvider: {
-    'auth-github:github': {
+    'auth-oauth:oauth': {
       clients: {
-        default: {
+        github: {
           clientID: 'xxxxxx',
           clientSecret: 'xxxxxxx',
         },
@@ -78,13 +78,21 @@ config.onions = {
 };
 ```
 
-- `clients.default`: A Provider can set multiple Clients; the default is `default`
+- `clients.github`: A Provider can set multiple Clients, currently built-in with `github`
 
-### How to Add More Client Credentials
+### How to Add New OAuth Client Credentials
 
-- First, add Client type definitions using the interface merging mechanism
+Taking `google` as an example:
 
-In VSCode In the editor, enter the code snippet `recordauthclient` to automatically generate the code skeleton:
+1. Install the corresponding Strategy npm package
+
+```bash
+$ pnpm add passport-google-oauth20
+```
+
+2. Add Client type definitions using the interface merging mechanism
+
+In VSCode editor, enter the code snippet `recordauthclient` to automatically generate the code skeleton:
 
 ```typescript
 declare module 'vona-module-x-x' {
@@ -97,29 +105,32 @@ declare module 'vona-module-x-x' {
 Adjust the code:
 
 ```typescript
-declare module 'vona-module-auth-github' {
-  export interface IAuthProviderGithubClientRecord {
-    another: never;
+declare module 'vona-module-auth-oauth' {
+  export interface IAuthProviderOauthClientRecord {
+    google: never;
   }
 }
 ```
 
-- Then set the authentication credentials in App Config
+3. Set the authentication credentials in App Config and specify the corresponding `Strategy`
 
-```diff
+```typescript
+import StrategyGoogle from 'passport-google-oauth20';
+
 // onions
 config.onions = {
   authProvider: {
-    'auth-github:github': {
+    'auth-oauth:oauth': {
       clients: {
-        default: {
+        github: {
           clientID: 'xxxxxx',
           clientSecret: 'xxxxxxx',
         },
-+       another: {
-+         clientID: 'yyyyyy',
-+         clientSecret: 'yyyyyyy',
-+       },
+        google: {
+          Strategy: StrategyGoogle,
+          clientID: 'yyyyyy',
+          clientSecret: 'yyyyyyy',
+        },
       },
     },
   },
