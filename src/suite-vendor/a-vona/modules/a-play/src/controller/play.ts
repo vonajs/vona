@@ -20,7 +20,10 @@ export async function main(app: VonaApplication, _argv: IArgv) {
 
 export interface IControllerOptionsPlay extends IDecoratorControllerOptions {}
 
-@Controller<IControllerOptionsPlay>('play')
+@Controller<IControllerOptionsPlay>('play', {
+  meta: { mode: ['test', 'dev'] },
+  exclude: true,
+})
 export class ControllerPlay extends BeanBase {
   @Web.post()
   async index(@Arg.body() play: DtoPlay) {
