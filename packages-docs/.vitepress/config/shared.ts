@@ -31,18 +31,6 @@ export const shared = defineConfig({
       })();
         `,
     ],
-    [
-      'script',
-      {
-        async: '',
-        src: 'https://www.googletagmanager.com/gtag/js?id=G-2NYR9RGRL4',
-      },
-    ],
-    [
-      'script',
-      {},
-      "window.dataLayer = window.dataLayer || [];\nfunction gtag(){dataLayer.push(arguments);}\ngtag('js', new Date());\ngtag('config', 'G-2NYR9RGRL4');",
-    ],
   ],
   ignoreDeadLinks: [/^https?:\/\/localhost/],
 });
