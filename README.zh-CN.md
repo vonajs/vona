@@ -2,6 +2,11 @@
 
 # Vona 是什么
 
+> [!WARNING]
+> This Vona site is now a **historical archive**, not the current documentation source of truth.
+>
+> Use [https://docs.cabloy.com](https://docs.cabloy.com) for current public documentation, monorepo workflows, edition-aware guidance, and AI-development guidance.
+
 Vona 是一款全栈框架，支持单代码库构建`SSR/SPA/Web网站/Admin中后台`，采用前后端分离架构，并内置前后端类型共享能力
 
 - 提供 DTO 动态推断与生成能力，减少重复的类型定义工作，提升开发效率
