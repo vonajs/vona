@@ -3,9 +3,9 @@ English | [简体中文](./README.zh-CN.md)
 # Vona
 
 > [!WARNING]
-> This Vona site is now a **historical archive**, not the current documentation source of truth.
+> This Vona site is now a **historical archive**, not the current source of truth.
 >
-> Use [https://docs.cabloy.com](https://docs.cabloy.com) for current public documentation, monorepo workflows, edition-aware guidance, and AI-development guidance.
+> For the latest project source, ongoing development updates, and related guidance, visit [https://github.com/cabloy/cabloy](https://github.com/cabloy/cabloy).
 
 Vona is a fullstack framework for building SSR/SPA/Website/Admin in one codebase, featuring frontend and backend separation and native type sharing
 
